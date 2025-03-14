@@ -1,0 +1,11 @@
+syntax = "proto2";
+
+package deeproute.canbus;
+
+import "canbus/byd_tang_adas_detail.proto";
+import "canbus/byd_tang_chassis_detail.proto";
+
+message BydTangDetail {
+    optional BydTangAdasDetail adas = 1;
+    optional BydTangChassisDetail chassis = 2;
+}

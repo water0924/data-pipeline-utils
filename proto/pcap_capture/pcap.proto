@@ -1,0 +1,14 @@
+syntax = "proto2";
+
+package deeproute.pcap_capture;
+
+message Packet {
+    optional uint64 timestamp=1;
+    optional uint32 data_length=2;
+    optional bytes data=3;
+    optional uint32 raw_length=4;
+}
+
+message PacketArray{
+    repeated Packet packets = 1;
+}

@@ -1,0 +1,203 @@
+syntax = "proto3";
+
+import "app/deeproute_app_access.proto";
+import "planning/planning_business_interface.proto";
+import "routing/routing.proto";
+import "drdtu/dtu_command.proto";
+import "common/vehicle_state/vehicle_state.proto";
+import "drivers/gnss/ins.proto";
+import "planning/planning.proto";
+import "control/control_cmd.proto";
+import "canbus/car_info.proto";
+import "perception/deeproute_perception_obstacle.proto";
+import "perception/traffic_light_detection.proto";
+import "remote_takeover/mode_state.proto";
+import "perception/deeproute_perception_rear_warning.proto";
+import "drapi/command.proto";
+import "drapi/operation_status.proto";
+import "map/routing.proto";
+import "aeb/aeb_state.proto";
+import "lock_on_road/lock_on_road.proto";
+import "map/deeproute_map_ras_map_plus.proto";
+import "perception/perception_dtu_interface.proto";
+import "localization/localization_external_command.proto";
+import "smart/smart_business.proto";
+import "google/protobuf/any.proto";
+
+package deeproute.grpc.dtu;
+
+service DtuService {
+  rpc SendCommand(SendCommandRequest) returns (SendCommandResponse);
+  rpc UpdateCommandExecStatus(UpdateCommandExecStatusRequest)
+      returns (UpdateCommandExecStatusResponse);
+  rpc ReportEvent(ReportEventRequest) returns (ReportEventResponse);
+  rpc UpdateRealTimeData(UpdateRealTimeDataRequest)
+      returns (UpdateRealTimeDataResponse);
+  rpc GetDtuCommand(GetDtuCommandRequest) returns (GetDtuCommandResponse);
+  rpc SendApiCommand(SendApiCommandRequest) returns (SendApiCommandResponse);
+  rpc GetOperationStatus(GetOperationStatusRequest)
+      returns (GetOperationStatusResponse);
+  rpc GetSmartBusinessData(GetSmartBusinessRequest)
+      returns (GetSmartBusinessResponse);
+  rpc GetRearWarningCommand(GetRearWarningCommandRequest)
+      returns (GetRearWarningCommandResponse);
+  rpc GetRoutingResponse(GetRoutingResponseRequest)
+      returns (GetRoutingResponseResponse);
+  rpc GetRunTimeData(GetRunTimeDataRequest) returns (GetRunTimeDataResponse);
+  rpc GetLasInternalState(GetLasInternalStateRequest)
+      returns (GetLasInternalStateResponse);
+
+  rpc ProcGrpc(ProcReceive) returns (ProcPublish);
+}
+
+message SendCommandRequest {
+  deeproute.app.access.AppInfo app_info = 1;
+}
+
+message SendCommandResponse {
+}
+
+message UpdateCommandExecStatusRequest {
+  oneof response {
+    deeproute.dtu.command.DTUCMDRP dtu_cmd_rp = 1;
+    deeproute.planning.interface.PlanningResponse planning_response = 2;
+    deeproute.routing.RoutingCMDRP routing_cmd_rp = 3;
+    deeproute.map.RoutingResponse routing_response = 4;
+    deeproute.perception.PerceptionResponse perception_response = 5;
+    deeproute.localization.command.LocalizationResponse localization_response =
+        6;
+    deeproute.planning.interface.PlanningResponses planning_responses = 7;
+  }
+}
+
+message UpdateCommandExecStatusResponse {
+}
+
+message ReportEventRequest {
+  deeproute.planning.interface.PlanningEvent planning_event = 1;
+}
+
+message ReportEventResponse {
+}
+
+message UpdateRealTimeDataRequest {
+  deeproute.common.VehicleState vehicle_state = 1;
+
+  deeproute.drivers.gnss.Ins ins = 2;
+
+  deeproute.planning.ADCTrajectory adc_trajectory = 3;
+
+  deeproute.control.ControlCommand control_command = 4;
+
+  deeproute.canbus.CarInfo car_info = 5;
+
+  deeproute.perception.PerceptionObstacles obstacles = 6;
+  deeproute.perception.TrafficLightResponse traffic_lights = 7;
+
+  deeproute.remote_takeover.ModeState take_over_state = 8;
+
+  deeproute.perception.RearWarningStatus rear_warning_status = 9;
+  deeproute.aeb.StateWrapper state_wrapper = 10;  // AEB FWS 状态机同步包
+  deeproute.localization.LockOnRoadResult lock_on_road = 11;
+  deeproute.map.RASMapPlus ros_map_plus = 12;
+  deeproute.planning.PlanningSemanticInfo planning_semantic_info = 13;
+}
+
+message UpdateRealTimeDataResponse {
+}
+
+message GetDtuCommandRequest {
+}
+
+message GetDtuCommandResponse {
+  oneof requests {
+    deeproute.planning.interface.PlanningRequest planning_request = 1;
+    deeproute.routing.RoutingCMD routing_cmd = 2;
+    deeproute.map.RoutingRequest routing_request = 4;
+    deeproute.perception.PerceptionRequest perception_request = 5;
+    deeproute.localization.command.LocalizationCommand localization_command = 6;
+  }
+  string task_id = 3;
+}
+
+message SendApiCommandRequest {
+  dr.command.Command cmd = 1;
+}
+
+message SendApiCommandResponse {
+  dr.command.CommandRP cmd_rp = 1;
+}
+
+message GetOperationStatusRequest {
+}
+
+message GetOperationStatusResponse {
+  dr.operationstatus.OperationStatus status = 1;
+}
+
+message GetSmartBusinessRequest {
+}
+
+message GetSmartBusinessResponse {
+  smart.SmartBusinessData smart_business_data = 1;
+}
+
+message GetRearWarningCommandRequest {
+}
+message GetRearWarningCommandResponse {
+  deeproute.dtu.command.RearWarningCommand command = 1;
+}
+
+message GetRoutingResponseRequest {
+}
+message GetRoutingResponseResponse {
+  deeproute.map.RoutingResponse command = 1;
+  int32 current_path_id = 2;
+}
+
+enum RunTimeDataType {
+  UNKNOWN = 0;
+  SPEED_LIMIT = 1;
+}
+
+message SpeedLimitData {
+  int32 speed_limit = 1;  // km/h
+}
+
+message GetRunTimeDataRequest {
+  RunTimeDataType type = 1;
+}
+
+message GetRunTimeDataResponse {
+  oneof data {
+    SpeedLimitData speed_limit = 1;
+  }
+}
+
+message GetLasInternalStateRequest {
+}
+message GetLasInternalStateResponse {
+  dr.operationstatus.ELKStatus left_elk = 1;
+  dr.operationstatus.ELKStatus right_elk = 2;
+  dr.operationstatus.RDPStatus left_rdp = 3;
+  dr.operationstatus.RDPStatus right_rdp = 4;
+  dr.operationstatus.LDWStatus left_ldw = 5;
+  dr.operationstatus.LDWStatus right_ldw = 6;
+  dr.operationstatus.ELKPassiveReason elk_passive_reason = 7;
+  dr.operationstatus.RDPPassiveReason rdp_passive_reason = 8;
+  dr.operationstatus.LDWPassiveReason ldw_passive_reason = 9;
+}
+
+message GrpcMsg {
+  string pb_name = 1;
+  google.protobuf.Any pb_data = 2;
+}
+
+message ProcReceive {
+  int64 timestamp_ns = 1;
+  repeated GrpcMsg msgs = 2;
+}
+
+message ProcPublish {
+  repeated GrpcMsg msgs = 2;
+}

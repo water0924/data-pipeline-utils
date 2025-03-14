@@ -1,0 +1,1109 @@
+syntax = "proto2";
+
+package deeproute.canbus;
+
+message SmartHy11ChassisDetail {
+  enum OnOff1 {
+    OnOff1_Off = 0;
+    OnOff1_On = 1;
+  }
+  enum NoYes1 {
+    NoYes1_No = 0;
+    NoYes1_Yes = 1;
+  }
+  enum Flg1 {
+    Flg1_Rst = 0;
+    Flg1_Set = 1;
+  }
+  enum WhlRotlDirStd1 {
+    WhlRotlDirStd1_Undefd = 0;
+    WhlRotlDirStd1_StandStill = 1;
+    WhlRotlDirStd1_Fwd = 2;
+    WhlRotlDirStd1_Backw = 3;
+  }
+  enum GenQf1 {
+    GenQf1_UndefindDataAccur = 0;
+    GenQf1_TmpUndefdData = 1;
+    GenQf1_DataAccurNotWithinSpcn = 2;
+    GenQf1_AccurData = 3;
+  }
+  enum CtrlStatus{
+    Primary = 0;
+    Secondary = 1;
+  }
+  enum LgtDegrad1 {
+    LgtDegrad1_NoDegradation_Green = 0;
+    LgtDegrad1_LgtFailr_Red = 1;
+    LgtDegrad1_AbsEscTemporarilyOff_Yellow = 2;
+    LgtDegrad1_EscServiceRequired_Yellow = 3;
+    LgtDegrad1_EscTemporarilyOff_Yellow = 4;
+    LgtDegrad1_StcTemporarilyOff_Yellow = 5;
+    LgtDegrad1_EpbFailr_Yellow = 6;
+    LgtDegrad1_VdswNOK_Yellow = 7;
+    LgtDegrad1_PropADModCtrlInhbn_Yellow = 8;
+    LgtDegrad1_PropTrqLimitation_Yellow = 9;
+    LgtDegrad1_PropTotallyFault_Yellow = 10;
+    LgtDegrad1_GeneralBrakeFailure_Yellow = 11;
+    LgtDegrad1_Reserved4 = 12;
+    LgtDegrad1_Reserved5 = 13;
+    LgtDegrad1_Reserved6 = 14;
+    LgtDegrad1_Reserved7 = 15;
+  }
+  enum StandStillMgrStsForHld1 {
+    StandStillMgrStsForHld1_StandStillMgrStsForHldVal0 = 0;
+    StandStillMgrStsForHld1_StandStillMgrStsForHldVal1 = 1;
+    StandStillMgrStsForHld1_StandStillMgrStsForHldVal2 = 2;
+    StandStillMgrStsForHld1_StandStillMgrStsForHldVal3 = 3;
+    StandStillMgrStsForHld1_StandStillMgrStsForHldVal4 = 4;
+    StandStillMgrStsForHld1_StandStillMgrStsForHldVal5 = 5;
+    StandStillMgrStsForHld1_StandStillMgrStsForHldVal6 = 6;
+    StandStillMgrStsForHld1_StandStillMgrStsForHldVal7 = 7;
+  }
+  enum DoorSts2 {
+    DoorSts2_Ukwn = 0;
+    DoorSts2_Opend = 1;
+    DoorSts2_Clsd = 2;
+  }
+  enum DevSts4 {
+    DevSts4_Off = 0;
+    DevSts4_On = 1;
+    DevSts4_Err = 2;
+    DevSts4_Resd = 3;
+  }
+  enum NoYesCrit1 {
+    NoYesCrit1_NotVld1 = 0;
+    NoYesCrit1_No = 1;
+    NoYesCrit1_Yes = 2;
+    NoYesCrit1_NotVld2 = 3;
+  }
+  enum Qf1 {
+    Qf1_DevOfDataUndefd = 0;
+    Qf1_DataTmpUndefdAndEvlnInProgs = 1;
+    Qf1_DevOfDataNotWithinRngAllwd = 2;
+    Qf1_DataCalcdWithDevDefd = 3;
+  }
+  enum ColorSts {
+    ColorSts_Red = 0;
+    ColorSts_Yellow = 1;
+    ColorSts_Green = 2;
+    ColorSts_Reserved = 3;
+  }
+  enum LatCtrlMod1 {
+    LatCtrlMod1_NoReq = 0;
+    LatCtrlMod1_HighWayAssist = 1;
+    LatCtrlMod1_EmgyLaneKeepAidForObjRe = 2;
+    LatCtrlMod1_EmgyLaneKeepAidForStat = 3;
+    LatCtrlMod1_SftyLaneKeepAid = 4;
+    LatCtrlMod1_SteerAssc = 5;
+    LatCtrlMod1_DsrOversteer = 6;
+    LatCtrlMod1_DsrMueSplit = 7;
+    LatCtrlMod1_DsrTrlrStaby = 8;
+    LatCtrlMod1_EmgyManvAssi = 9;
+    LatCtrlMod1_Reserved1 = 10;
+    LatCtrlMod1_Reserved2 = 11;
+    LatCtrlMod1_SHWA = 12;
+    LatCtrlMod1_APA = 13;
+    LatCtrlMod1_RPA = 14;
+    LatCtrlMod1_HPA = 15;
+  }
+
+  optional OnOff1 hmi_lcc_nzp_swtch_req = 1;
+  optional OnOff1 hmi_sho_cut_set_spd_req = 2;
+  enum AsyAutDrvActvReq {
+    AsyAutDrvActvReq_NoRequest = 0;
+    AsyAutDrvActvReq_ActiveACC = 1;
+    AsyAutDrvActvReq_ActivePilot = 2;
+    AsyAutDrvActvReq_ResumeACC = 3;
+    AsyAutDrvActvReq_ResumePilot = 4;
+    AsyAutDrvActvReq_CTP = 5;
+  }
+  optional AsyAutDrvActvReq asy_aut_drv_ctrl_typ_dim_req = 3;
+  enum DrvrCrsCtrlFctActvReq {
+    DrvrCrsCtrlFctActvReq_Inactive = 0;
+    DrvrCrsCtrlFctActvReq_Activatedbyonoffbutton = 1;
+    DrvrCrsCtrlFctActvReq_Activatedbyresumebutton = 2;
+    DrvrCrsCtrlFctActvReq_Reserved = 3;
+  }
+  optional DrvrCrsCtrlFctActvReq drvr_crs_ctrl_fct_actv_req = 4;
+  enum TiGapSetForLgtCtrl {
+    TiGapSetForLgtCtrl_None = 0;
+    TiGapSetForLgtCtrl_TimeGap1 = 1;
+    TiGapSetForLgtCtrl_TimeGap2 = 2;
+    TiGapSetForLgtCtrl_TimeGap3 = 3;
+    TiGapSetForLgtCtrl_TimeGap4 = 4;
+    TiGapSetForLgtCtrl_TimeGap5 = 5;
+  }
+  optional TiGapSetForLgtCtrl crs_ctrl_ti_gap_adj_req = 5;
+  optional int32 drvr_assc_sys_btn_push = 6;
+  optional int32 prkg_fct_swt = 7;
+  enum DrvrCrsAModReq {
+    DrvrCrsAModReq_Neutral = 0;
+    DrvrCrsAModReq_APosReqMod1 = 1;
+    DrvrCrsAModReq_APosReqMod2 = 2;
+    DrvrCrsAModReq_ANegReqMod1 = 3;
+    DrvrCrsAModReq_ANegReqMod2 = 4;
+  }
+  optional DrvrCrsAModReq drvr_acc_rs_set_spd_req = 8;
+  optional OnOff1 deactive_tjp_req = 9;
+  enum EpbLampReqType1 {
+    EpbLampReqType1_On = 0;
+    EpbLampReqType1_Off = 1;
+    EpbLampReqType1_Flash2 = 2;
+    EpbLampReqType1_Flash3 = 3;
+  }
+  optional EpbLampReqType1 ad_confirm_form_dhu_epb_lamp_req = 10;
+  optional int32 aut_valt_prkg_experience_resp = 11;
+  optional int32 aut_valt_prkg_ins_btn_req = 12;
+  optional int32 aut_valt_prkg_intr_btn_req = 13;
+  optional int32 aut_valt_prkg_map_mag_swt_req = 14;
+  optional int32 aut_valt_prkg_map_src_req = 15;
+  optional int32 aut_valt_prkg_swt_req = 16;
+  optional int32 d_i_m_sts_distbn = 17;
+  optional int32 drvr_assc_sys_park_mod = 18;
+  optional int32 drvr_dec_sts_from_d_h_u = 19;
+  optional int32 drvr_entry_lo_req = 20;
+  optional int32 drvr_fati_lvl_from_d_h_u = 21;
+  optional int32 drvr_monr_alrm_req_from_d_h_u = 22;
+  optional int32 epb_soft_swt_ctrl_st = 23;
+  optional int32 fender_lamp_hmi_ena = 24;
+  optional int32 hmi_cmptmt_air_distbn_frnt_le = 25;
+  optional int32 hmi_cmptmt_air_distbn_frnt_ri = 26;
+  optional int32 hzn_sply_electc_sts = 27;
+  optional int32 lo_spd_drvg_assi_sho_push_resp = 28;
+  optional int32 prkg_emg_brk_sys_swt = 29;
+  optional int32 prkg_typ_aut_btn = 30;
+  optional int32 h_m_i_susp_easy_loading_on_off_setting = 31;
+  optional int32 road_misc_sgn_info_for_road_sgn_info_sts = 32;
+  optional int32 vstd_mode_sts = 33;
+  optional int32 bkp_of_dst_trvld = 34;
+  optional float tot_dst_trvld = 35;
+  optional float spd_cam_from_nav_map = 36;
+  optional int32 ad_sys_rstrt_deactive_t_j_p_req = 37;
+
+  optional int32 aut_valt_prkg_map_oper_req_map_name = 38;
+  optional int32 aut_valt_prkg_map_oper_req_map_type = 39;
+  optional int32 aut_valt_prkg_map_oper_req_select_map = 40;
+
+  optional int32 cam_flts_sts_from_dhu_eyes_on_road = 41;
+  optional float eye_gaze_dir_vec_from_dhu_x = 42;
+  optional float eye_gaze_dir_vec_from_dhu_y = 43;
+  optional float eye_gaze_dir_vec_from_dhu_z = 44;
+
+  optional int32 eye_gaze_from_dhu_eye_gaze_zone = 45;
+  optional int32 eye_gaze_from_dhu_eye_gaze_zone_time = 46;
+
+  optional float eye_gzae_dir_ori_from_dhu_x = 47;
+  optional float eye_gzae_dir_ori_from_dhu_y = 48;
+  optional float eye_gzae_dir_ori_from_dhu_z = 49;
+
+  optional int32 eye_open_from_dhu_eye_open_le = 50;
+  optional int32 eye_open_from_dhu_eye_open_ri = 51;
+  optional int32 eye_open_from_dhu_eye_visible_le = 52;
+  optional int32 eye_open_from_dhu_eye_visible_ri = 53;
+  optional int32 eye_open_from_dhu_face_visible = 54;
+  optional float eye_open_from_dhu_eye_open_deg_le = 55;
+  optional float eye_open_from_dhu_eye_open_deg_ri = 56;
+
+  optional float hd_posn_valid_sig_from_dhu_x = 57;
+  optional float hd_posn_valid_sig_from_dhu_y = 58;
+  optional float hd_posn_valid_sig_from_dhu_z = 59;
+
+  optional float hd_rotate_ag_from_dhu_hd_pitch_ag = 60;
+  optional float hd_rotate_ag_from_dhu_hd_roll_ag = 61;
+  optional float hd_rotate_ag_from_dhu_hd_yaw_ag = 62;
+
+  optional float head_gaze_dir_ori_from_dhu_x = 63;
+  optional float head_gaze_dir_ori_from_dhu_y = 64;
+  optional float head_gaze_dir_ori_from_dhu_z = 65;
+
+  optional float head_gaze_dir_vec_from_dhu_x = 66;
+  optional float head_gaze_dir_vec_from_dhu_y = 67;
+  optional float head_gaze_dir_vec_from_dhu_z = 68;
+
+  optional int32 pt_drvr_setg_drv_mod_req_type2 = 69;
+  optional int32 pt_drvr_setg_id_pen = 70;
+
+  optional int32 hmi_l_c_c_n_z_p_swtch_req = 71;
+  enum SteerServoSts1 {
+    SteerServoSts1_SteerPwrAssidElecFullFct = 0;
+    SteerServoSts1_SteerPwrAssidElecCritErr = 1;
+  }
+  optional SteerServoSts1 steer_servo_sts = 72;
+  enum FctCfmdReq {
+    NoRequest = 0;
+    PolitActive = 1;
+    ACCActive = 2;
+    SETCruiseSpdAsCurrVehSpd = 3;
+    AutoLaneChangeConfirm = 4;
+  }
+  optional FctCfmdReq asy_sys_fct_cfmd_req = 73;
+  optional float steer_whl_tq_addl = 74;
+  optional float tq_ass_addl = 75;
+
+  optional int32 abs_ctrl_actv_for_whl_frnt_le = 76;
+  optional int32 abs_ctrl_actv_for_whl_frnt_ri = 77;
+  optional int32 abs_ctrl_actv_for_whl_re_le = 78;
+  optional int32 abs_ctrl_actv_for_whl_re_ri = 79;
+
+  optional float brk_pedlr_rat_perc = 80;
+  optional GenQf1 brk_pedlr_rat_qf = 81;
+
+  optional int32 eye_on_road_from_dhu_eyes_on_road = 82;
+  optional int32 flc_work_sts_f_c_front_camera_calibration_status = 83;
+  enum FailureStatus {
+    FailureStatus_initialization = 0;
+    FailureStatus_Normal = 1;
+    FailureStatus_Block = 2;
+    FailureStatus_OtherTemporaryError = 3;
+    FailureStatus_PermanentError = 4;
+  }
+  optional FailureStatus flc_work_sts_f_c_front_camera_failure_status = 84;
+  optional int32 flc_work_sts_f_c_light = 85;
+  optional int32 flc_work_sts_f_c_scene_type = 86;
+  optional int32 flc_work_sts_f_c_weather_type = 87;
+  enum ErrorSts {
+    ErrorSts_Init_Diag = 0;
+    ErrorSts_Reserved1 = 1;
+    ErrorSts_HOSWD_Ready = 2;
+    ErrorSts_HOSWD_CUFault = 3;
+    ErrorSts_HOSWD_SMFault = 4;
+    ErrorSts_HOSWD_SVFault = 5;
+    ErrorSts_Reserved2 = 6;
+    ErrorSts_Reserved3 = 7;
+  }
+  optional ErrorSts hands_on_detection_error_status = 88;
+  enum HandsOnSts1 {
+    Init_Class = 0;
+    Hands_ON = 1;
+    Hands_OFF = 2;
+    Undetermined_Class = 3;
+  }
+  optional HandsOnSts1 hands_on_detection_hands_on_status = 89;
+
+  optional int32 hands_on_detection_multi_zone_error_status = 90;
+  enum HandsOnSts2 {
+    HandsOnSts2_InitClass = 0;
+    HandsOnSts2_Grasp = 1;
+    HandsOnSts2_Touch = 2;
+    HandsOnSts2_Free = 3;
+    HandsOnSts2_UndeterminedClass = 4;
+    HandsOnSts2_Reserved1 = 5;
+    HandsOnSts2_Reserved2 = 6;
+    HandsOnSts2_Reserved3 = 7;
+  }
+  optional HandsOnSts2 hands_on_detection_multi_zone_hands_on_status = 91;
+  optional int32 hands_on_detection_multi_zone_touch_intensity1 = 92;
+  optional int32 hands_on_detection_multi_zone_touch_intensity2 = 93;
+  optional int32 hands_on_detection_multi_zone_touch_intensity3 = 94;
+
+  optional LatCtrlMod1 lat_ctrl_mod_cfmd_lat_ctrl_mod = 95;
+  optional Qf1 pt_brk_tq_act_tot_qf = 96;
+  optional int32 pt_brk_tq_act_tot_i16 = 97;
+  optional Qf1 pt_brk_tq_qf = 98;
+  optional int32 pt_brk_tq_req_for_brk_sys_i16 = 99;
+  optional int32 pt_brk_tq_rgn_at_axle_re_act_i16 = 100;
+
+  optional bool steer_ext_fct_sts_drvr_steer_ovrd = 101;
+  optional bool steer_ext_fct_sts_ext_fct_lower_lim_active = 102;
+  optional bool steer_ext_fct_sts_ext_safe_lim_active = 103;
+  optional bool steer_ext_fct_sts_lat_ag_req_not_in_range = 104;
+  optional bool steer_ext_fct_sts_ext_fct_rate_lim_active = 105;
+  optional bool steer_ext_fct_sts_ext_fct_upper_lim_active = 106;
+  optional bool steer_ext_fct_sts_lat_ctrl_req_not_in_range = 107;
+
+  optional int32 pwr_saving_mod = 108;
+  enum ADMod {
+    ADMod_NAD_Mod = 0;
+    ADMod_TJP_HWC = 1;
+    ADMod_NOP = 2;
+    ADMod_E2E = 3;
+  }
+  optional ADMod a_d_l3_lat_ctrl_sts_a_d_mod = 109;
+  optional CtrlStatus a_d_l3_lat_ctrl_sts_ctrl_sts = 110;
+  enum LatDegrad {
+    LatDegrad_NoDegradation_Green = 0;
+    LatDegrad_Red_fault1 = 1;
+    LatDegrad_Yellow_fault2 = 2;
+    LatDegrad_Yellow_fault3 = 3;
+    LatDegrad_Yellow_fault4 = 4;
+    LatDegrad_Yellow_fault5 = 5;
+    LatDegrad_Yellow_fault6 = 6;
+    LatDegrad_Yellow_fault7 = 7;
+    LatDegrad_Yellow_fault8 = 8;
+    LatDegrad_Yellow_fault9 = 9;
+    LatDegrad_Yellow_fault10 = 10;
+    LatDegrad_Reserved1 = 11;
+  }
+  optional LatDegrad a_d_l3_lat_ctrl_sts_degraded = 111;
+  optional GenQf1 a_d_l3_lat_ctrl_sts_qf = 112;
+  optional ColorSts a_d_l3_lat_ctrl_sts_sts = 113;
+
+  optional ADMod a_d_l3_lat_ctrl_sts_for_bkp_a_d_mod = 114;
+  optional int32 a_d_l3_lat_ctrl_sts_for_bkp_ctrl_sts = 115;
+  optional int32 a_d_l3_lat_ctrl_sts_for_bkp_degraded = 116;
+  optional int32 a_d_l3_lat_ctrl_sts_for_bkp_qf = 117;
+  optional int32 a_d_l3_lat_ctrl_sts_for_bkp_sts = 118;
+  
+  optional ADMod a_d_l3_lgt_ctrl_sts_a_d_mode = 119;
+  optional CtrlStatus a_d_l3_lgt_ctrl_sts_ctrl_status = 120;
+  optional LgtDegrad1 a_d_l3_lgt_ctrl_sts_degraded = 121;
+  optional GenQf1 a_d_l3_lgt_ctrl_sts_qf = 122;
+  optional ColorSts a_d_l3_lgt_ctrl_sts_sts = 123;
+
+  optional ADMod a_d_l3_lgt_ctrl_sts_for_bkp_a_d_mode = 124;
+  optional int32 a_d_l3_lgt_ctrl_sts_for_bkp_ctrl_status = 125;
+  optional int32 a_d_l3_lgt_ctrl_sts_for_bkp_degraded = 126;
+  optional int32 a_d_l3_lgt_ctrl_sts_for_bkp_qf = 127;
+  optional int32 a_d_l3_lgt_ctrl_sts_for_bkp_sts = 128;
+
+  optional float pinion_steer_ag_group_for_bkp_pinion_steer_ag_for_bkp = 129;
+  optional int32 pinion_steer_ag_group_for_bkp_pinion_steer_ag_qf_for_bkp = 130;
+  optional float pinion_steer_ag_group_for_bkp_pinion_steer_ag_spd_for_bkp =
+      131;
+  optional int32 pinion_steer_ag_group_for_bkp_pinion_steer_ag_spd_qf_for_bkp =
+      132;
+  optional float pinion_steer_ag_group_for_bkp_steer_whl_tq_for_bkp = 133;
+  optional int32 pinion_steer_ag_group_for_bkp_steer_whl_tq_qf_for_bkp = 134;
+  enum DevSts1 {
+    DevSts1_On = 0;
+    DevSts1_Off = 1;
+    DevSts1_Flt = 2;
+  }
+  enum MirrFoldStsTyp {
+    MirrFoldStsTyp_MirrFoldPosnUndefd = 0;
+    MirrFoldStsTyp_MirrNotFoldPosn = 1;
+    MirrFoldStsTyp_MirrFoldPosn = 2;
+    MirrFoldStsTyp_MirrMovgToNotFold = 3;
+    MirrFoldStsTyp_MirrMovgToFold = 4;
+  }
+  optional DevSts1 esc_ctrl_indcn = 135;
+  optional int32 steer_sts_to_park_assi = 136;
+  enum MirroSize {
+    MirroSize_Init = 0;
+    MirroSize_LeftAndRight = 2;
+  }
+  optional MirrFoldStsTyp mirr_fold_sts_at_pass = 137;
+  optional MirrFoldStsTyp mirr_fold_sts_at_drvr = 138;
+  enum PatSeld {
+    PatSeld_NoSeld = 0;
+    PatSeld_RefrshPatSeld = 1;
+    PatSeld_ParentchildPatSeld = 2;
+    PatSeld_Restpatseld = 3;
+    PatSeld_RomanticPatseld = 4;
+    PatSeld_StrangerPatseld = 5;
+    PatSeld_TheaterPatseld = 6;
+    PatSeld_PetPatseld = 7;
+    PatSeld_BiochalPatseld = 8;
+    PatSeld_CarWashPatseld = 9;
+    PatSeld_EcoPatseld = 10;
+    PatSeld_KingPatseld = 11;
+    PatSeld_CustomizationPatseld = 12;
+    PatSeld_MeetingPatseld = 13;
+    PatSeld_CombatCockPatseld = 14;
+    PatSeld_MaquillagePatseld = 15;
+  }
+  optional PatSeld scene_mod_seld = 139;
+  enum MsgReqByHillDwnCtrl1 {
+    MsgReqByHillDwnCtrl1_MsgForHillDwnCtrlNotReqd = 0;
+    MsgReqByHillDwnCtrl1_MsgForHillDwnCtrlOnReqd = 1;
+    MsgReqByHillDwnCtrl1_MsgForHillDwnCtrlReqdForBrkg = 2;
+    MsgReqByHillDwnCtrl1_MsgForHillDwnCtrlTmpOffReqd = 3;
+    MsgReqByHillDwnCtrl1_Resd4 = 4;
+    MsgReqByHillDwnCtrl1_Resd5 = 5;
+    MsgReqByHillDwnCtrl1_Resd6 = 6;
+    MsgReqByHillDwnCtrl1_Resd7 = 7;
+  }
+  optional MsgReqByHillDwnCtrl1 msg_req_byhill_dwnctrl = 140;
+  enum AmntSnsr {
+    AmntSnsr_Amnt_Level_0 = 0;
+    AmntSnsr_Amnt_Level_1 = 1;
+    AmntSnsr_Amnt_Level_2 = 2;
+    AmntSnsr_Amnt_Level_3 = 3;
+    AmntSnsr_Amnt_Level_4 = 4;
+    AmntSnsr_Amnt_Level_5 = 5;
+    AmntSnsr_Amnt_Level_6 = 6;
+    AmntSnsr_Amnt_Level_7 = 7;
+    AmntSnsr_Amnt_Level_8 = 8;
+    AmntSnsr_Amnt_Level_9 = 9;
+    AmntSnsr_Amnt_Level_10 = 10;
+    AmntSnsr_Amnt_Level_11 = 11;
+    AmntSnsr_Amnt_Level_12 = 12;
+    AmntSnsr_Amnt_Level_13 = 13;
+    AmntSnsr_InitValue = 14;
+    AmntSnsr_Error = 15;
+  }
+  optional AmntSnsr rain_fall_amnt = 141;
+  optional int32 ihu_fail = 142;
+  optional DoorSts2 tr_sts = 143;
+  optional DoorSts2 hood_sts = 144;
+  enum TrlrPrsntSts {
+    TrlrPrsntSts_TrlrNotPrsnt = 0;
+    TrlrPrsntSts_TrlrPrsnt = 1;
+  }
+  optional TrlrPrsntSts trlr_prsnt = 145;
+  optional DoorSts2 door_drvr_sts = 146;
+  optional DoorSts2 door_pass_sts = 147;
+  optional DoorSts2 door_lere_sts = 148;
+  optional DoorSts2 door_rire_sts = 149;
+  optional int32 door_drvr_lock_sts = 150;
+  enum GearLvrIndcn2 {
+    GearLvrIndcn2_ParkIndcn = 0;
+    GearLvrIndcn2_RvsIndcn = 1;
+    GearLvrIndcn2_NeutIndcn = 2;
+    GearLvrIndcn2_DrvIndcn = 3;
+    GearLvrIndcn2_ManModeIndcn = 4;
+    GearLvrIndcn2_Resd1 = 5;
+    GearLvrIndcn2_Resd2 = 6;
+    GearLvrIndcn2_Undefd = 7;
+  }
+  optional GearLvrIndcn2 gear_lvr_indcn = 151;
+  enum NoYesUnknownYes {
+    NoYesUnknownYes_No = 0;
+    NoYesUnknownYes_YesNo = 1;
+    NoYesUnknownYes_Unknown = 2;
+    NoYesUnknownYes_YesYes = 3;
+  }
+  optional NoYesUnknownYes gear_mov = 152;
+  enum DrvModReqType1 {
+    DrvModReqType1_Undefd = 0;
+    DrvModReqType1_ECO = 1;
+    DrvModReqType1_Comfort_Normal = 2;
+    DrvModReqType1_Dynamic_Sport = 3;
+    DrvModReqType1_Individual = 4;
+    DrvModReqType1_Offroad_CrossTerrain = 5;
+    DrvModReqType1_Adaptive = 6;
+    DrvModReqType1_Race = 7;
+    DrvModReqType1_Pure_EV = 8;
+    DrvModReqType1_Hybrid = 9;
+    DrvModReqType1_Power = 10;
+    DrvModReqType1_Snow = 11;
+    DrvModReqType1_Sand = 12;
+    DrvModReqType1_Mud = 13;
+    DrvModReqType1_Rock = 14;
+    DrvModReqType1_Err = 15;
+  }
+  optional DrvModReqType1 drv_mod_req = 153;
+  enum IndcrSts1 {
+    IndcrSts1_Off = 0;
+    IndcrSts1_LeOn = 1;
+    IndcrSts1_RiOn = 2;
+    IndcrSts1_LeAndRiOn = 3;
+  }
+  optional IndcrSts1 indcr_sts = 154;
+  enum TwbrLockdPosn {
+    TwbrLockdPosn_Ukwn = 0;
+    TwbrLockdPosn_Unlckd = 1;
+    TwbrLockdPosn_Insdlockd = 2;
+    TwbrLockdPosn_Outdlockd = 3;
+  }
+  optional TwbrLockdPosn twbr_lockd_posn = 155;
+  optional int32 dcdc_actvd = 156;
+  optional int32 susp_hei_lvl_indcn = 157;
+  optional int32 lvlg_dir_movmt_indcr = 158;
+  optional GenQf1 whl_fast_spd_safe_qf = 159;
+  optional int32 monr_sys_sts1 = 160;
+  optional DoorSts2 ajar_chrg_lid_rear_switch = 161;
+  optional int32 tr_lock_sts = 162;
+  optional int32 door_rire_lock_sts = 163;
+  optional int32 door_lere_lock_sts = 164;
+  optional int32 door_pass_lock_sts = 165;
+  enum ActrActvForLgtCtrl {
+    ActrActvForLgtCtrl_ActrNotEnadForCmft = 0;
+    ActrActvForLgtCtrl_PrpsnActrEnadForCmft = 1;
+    ActrActvForLgtCtrl_BrkActrEnadForCmft = 2;
+  }
+  optional ActrActvForLgtCtrl asy_actr_actv_for_lgt_ctrl = 166;
+  optional double whl_fast_spd_safe_a = 167;
+  optional OnOff1 asy_sfty_ena_decel_ackd = 168;
+  optional OnOff1 crs_ctrl_ovrdn = 169;
+  optional int32 whl_rot_tooth_cntr_re_ri = 170;
+  optional int32 whl_rot_tooth_cntr_re_le = 171;
+  optional DevSts4 lamp_req_by_veh_hld = 172;
+  optional int32 asy_sfty_decel_enad_by_veh_dyn = 173;
+  optional int32 whl_rot_tooth_cntr_frnt_ri = 174;
+  optional GenQf1 veh_spd_indcd_qly = 175;
+  enum FullElecTwbrPosn {
+    FullElecTwbrPosn_Unknow = 0;
+    FullElecTwbrPosn_Infolded = 1;
+    FullElecTwbrPosn_Outfolded = 2;
+    FullElecTwbrPosn_MovingOut = 3;
+    FullElecTwbrPosn_MovingIn = 4;
+    FullElecTwbrPosn_reserved1 = 5;
+    FullElecTwbrPosn_reserved2 = 6;
+    FullElecTwbrPosn_reserved3 = 7;
+  }
+  optional FullElecTwbrPosn full_elec_twbr_posn = 176;
+  optional float body_hei = 177;
+  optional int32 car_ti_glb = 178;
+  optional double asy_a_lgt_actv_aft_lim = 179;
+  optional int32 whl_rot_tooth_cntr_frnt_le = 180;
+  optional LgtDegrad1 brk_sys_sts_brk_degradation = 181;
+  enum ModCfmd {
+    ModCfmd_NoReq = 0;
+    ModCfmd_CTP = 1;
+    ModCfmd_Reserved2 = 2;
+    ModCfmd_Reserved3 = 3;
+    ModCfmd_Reserved4 = 4;
+    ModCfmd_Reserved5 = 5;
+    ModCfmd_Reserved6 = 6;
+    ModCfmd_Reserved7 = 7;
+    ModCfmd_Reserved8 = 8;
+    ModCfmd_ACC_HWA = 9;
+    ModCfmd_PEB = 10;
+    ModCfmd_APA = 11;
+    ModCfmd_RPA = 12;
+    ModCfmd_HPA = 13;
+    ModCfmd_TJP_HWC = 14;
+    ModCfmd_NOP = 15;
+  }
+  optional ModCfmd brk_sys_sts_brk_sys_mod_cfmd = 182;
+  enum SysCapability {
+    NotInitialized = 0;
+    Full = 1;
+    TestPending = 2;
+    Fault = 3;
+  }
+  optional SysCapability brk_sys_sts_brk_sys_capability = 183;
+  optional CtrlStatus brk_sys_sts_a_d_l3_brk_fall_bck = 184;
+  enum WipgSpdInfo {
+    WipgSpdInfo_Off = 0;
+    WipgSpdInfo_IntlLo = 1;
+    WipgSpdInfo_IntlHi = 2;
+    WipgSpdInfo_WipgSpd4045 = 3;
+    WipgSpdInfo_WipgSpd4650 = 4;
+    WipgSpdInfo_WipgSpd5155 = 5;
+    WipgSpdInfo_WipgSpd5660 = 6;
+    WipgSpdInfo_WiprErr = 7;
+  }
+  optional WipgSpdInfo wipg_info_wipg_spd_info = 185;
+  optional OnOff1 wipg_info_wipr_actv = 186;
+  optional OnOff1 wipg_info_wipr_in_wipg_ar = 187;
+  optional GenQf1 turn_indcr_mono_stable_qf = 188;
+  enum Dir10 {
+    Dir10_Idle = 0;
+    Dir10_Leftflash = 1;
+    Dir10_Left = 2;
+    Dir10_Rightflash = 3;
+    Dir10_Right = 4;
+  }
+  optional Dir10 turn_indcr_mono_stable_dir = 189;
+  optional NoYesCrit1 sfty_sig_group_from_hmi_safe1_sfty_hmi_dend = 190;
+  optional NoYesCrit1 sfty_sig_group_from_hmi_safe1_sfty_hmi_ena = 191;
+  optional NoYesCrit1 sfty_sig_group_from_hmi_safe1_sfty_sig_faild_detd_by_hmi = 192;
+  enum EscWarnIndcnReq {
+    EscWarnIndcnReq_EscWarnIndcnOnReq = 0;
+    EscWarnIndcnReq_EscWarnIndcnFlsgReq = 1;
+    EscWarnIndcnReq_Resd2 = 2;
+    EscWarnIndcnReq_EscWarnIndcnOffReq = 3;
+  }
+  optional EscWarnIndcnReq esc_warn_indcn_req_esc_warn_indcn_req = 193;
+  enum DstUnit {
+    DstUnit_km = 0;
+    DstUnit_miles = 1;
+  }
+  optional DstUnit dst_estimd_to_empty_for_drvg_elec_indcd_dst_unit = 194;
+  optional float dst_estimd_to_empty_for_drvg_elec_indcd_dst_to_empty = 195;
+  enum DrvrDesDir1 {
+    DrvrDesDir1_Undefd = 0;
+    DrvrDesDir1_Fwd = 1;
+    DrvrDesDir1_Rvs = 2;
+    DrvrDesDir1_Neut = 3;
+    DrvrDesDir1_Resd0 = 4;
+    DrvrDesDir1_Resd1 = 5;
+    DrvrDesDir1_Resd2 = 6;
+    DrvrDesDir1_Resd3 = 7;
+  }
+  optional DrvrDesDir1 drvr_des_dir_drvr_des_dir = 196;
+
+  optional Qf1 ag_data_raw_2safe_pitch_rate_qf = 197;
+  optional double ag_data_raw_2safe_pitch_rate = 198;
+
+  optional WhlRotlDirStd1 whl_dir_rotl_re_le = 199;
+
+  optional float susp_posn_vert_le1_frnt = 200;
+  optional int32 susp_posn_vert_le1_frnt_qf = 201;
+  optional float susp_posn_vert_le1_re = 202;
+  optional int32 susp_posn_vert_le1_re_qf = 203;
+
+  optional float _susp_posn_vert_ri1_susp_posn_vert_ri_frnt = 204;
+  optional int32 _susp_posn_vert_ri1_susp_posn_vert_ri_frnt_qf = 205;
+  optional float _susp_posn_vert_ri1_susp_posn_vert_ri_re = 206;
+  optional int32 _susp_posn_vert_ri1_susp_posn_vert_ri_re_qf = 207;
+  optional int32 extr_ltg_sts_reverse_li = 208;
+  optional DevSts4 extr_ltg_sts_stop_li = 209;
+  optional DevSts4 extr_ltg_sts_turn_indr_le = 210;
+  optional DevSts4 extr_ltg_sts_turn_indr_ri = 211;
+  optional int32 extr_ltg_sts_a_f_s = 212;
+  optional int32 extr_ltg_sts_a_h_b_c = 213;
+  optional int32 extr_ltg_sts_a_h_l = 214;
+  optional int32 extr_ltg_sts_all_w_l = 215;
+  optional int32 extr_ltg_sts_approach = 216;
+  optional int32 extr_ltg_sts_cornrg_li = 217;
+  optional int32 extr_ltg_sts_d_b_l = 218;
+  optional int32 extr_ltg_sts_d_r_l = 219;
+  optional int32 extr_ltg_sts_flash = 220;
+  optional int32 extr_ltg_sts_frnt_fog = 221;
+  optional int32 extr_ltg_sts_goodbye = 222;
+  optional int32 extr_ltg_sts_h_w_l = 223;
+  optional int32 extr_ltg_sts_hi_beam = 224;
+  optional int32 extr_ltg_sts_home_safe = 225;
+  optional int32 extr_ltg_sts_lo_beam = 226;
+  optional int32 extr_ltg_sts_ltg_show = 227;
+  optional int32 extr_ltg_sts_pos_li_frnt = 228;
+  optional int32 extr_ltg_sts_pos_li_re = 229;
+  optional int32 extr_ltg_sts_re_fog = 230;
+  optional int32 extr_ltg_sts_welcome = 231;
+  enum CrashSts2 {
+    CrashSts2_NoCrash = 0;
+    CrashSts2_Crash = 1;
+  }
+  optional CrashSts2 crash_sts_safe_sts = 232;
+  optional int32 call_type_and_sts_call_type = 233;
+  optional int32 call_type_and_sts_ecall_status = 234;
+  enum ULoWarn {
+    ULoWarn_UOk = 0;
+    ULoWarn_ULoTmp = 1;
+    ULoWarn_ULoPrmnt = 2;
+  }
+  optional ULoWarn ulo_warn = 235;
+  optional int32 ri_re_tire_msg_msg_old_flg = 236;
+  optional int32 ri_re_tire_msg_batt_lo_st = 237;
+  optional int32 ri_re_tire_msg_p_warn_flg = 238;
+  optional int32 ri_re_tire_msg_t_warn_flg = 239;
+  optional int32 ri_re_tire_msg_sys_warn_flg = 240;
+  optional int32 ri_re_tire_msg_fast_lose_warn_flg = 241;
+  optional int32 ri_re_tire_msg_tire_fillg_assi_p_sts = 242;
+  optional float ri_re_tire_msg_t = 243;
+  optional float ri_re_tire_msg_p = 244;
+  optional int32 ri_frnt_tire_msg_msg_old_flg = 245;
+  optional int32 ri_frnt_tire_msg_batt_lo_st = 246;
+  optional int32 ri_frnt_tire_msg_p_warn_flg = 247;
+  optional int32 ri_frnt_tire_msg_sys_warn_flg = 248;
+  optional int32 ri_frnt_tire_msg_t_warn_flg = 249;
+  optional int32 ri_frnt_tire_msg_fast_lose_warn_flg = 250;
+  optional int32 ri_frnt_tire_msg_tire_fillg_assi_p_sts = 251;
+  optional float ri_frnt_tire_msg_p = 252;
+  optional float ri_frnt_tire_msg_t = 253;
+  optional int32 le_frnt_tire_msg_msg_old_flg = 254;
+  optional int32 le_frnt_tire_msg_batt_lo_st = 255;
+  optional int32 le_frnt_tire_msg_p_warn_flg = 256;
+  optional int32 le_frnt_tire_msg_sys_warn_flg = 257;
+  optional int32 le_frnt_tire_msg_t_warn_flg = 258;
+  optional int32 le_frnt_tire_msg_fast_lose_warn_flg = 259;
+  optional int32 le_frnt_tire_msg_tire_fillg_assi_p_sts = 260;
+  optional float le_frnt_tire_msg_p = 261;
+  optional float le_frnt_tire_msg_t = 262;
+  optional int32 le_re_tire_msg_msg_old_flg = 263;
+  optional int32 le_re_tire_msg_batt_lo_st = 264;
+  optional int32 le_re_tire_msg_p_warn_flg = 265;
+  optional int32 le_re_tire_msg_sys_warn_flg = 266;
+  optional int32 le_re_tire_msg_t_warn_flg = 267;
+  optional int32 le_re_tire_msg_fast_lose_warn_flg = 268;
+  optional int32 le_re_tire_msg_tire_fillg_assi_p_sts = 269;
+  optional float le_re_tire_msg_p = 270;
+  optional float le_re_tire_msg_t = 271;
+  enum EpbSts {
+    EpbSts_Resd0 = 0;
+    EpbSts_Resd1 = 1;
+    EpbSts_Resd2 = 2;
+    EpbSts_AllAppld = 3;
+    EpbSts_Resd4 = 4;
+    EpbSts_AllInTran = 5;
+    EpbSts_BrkgDynByActr = 6;
+    EpbSts_Resd7 = 7;
+    EpbSts_Resd8 = 8;
+    EpbSts_ActrAllReld = 9;
+    EpbSts_BrkgDynDegraded = 10;
+    EpbSts_Resd11 = 11;
+    EpbSts_BrkgDyn = 12;
+    EpbSts_Resd13 = 13;
+    EpbSts_Resd14 = 14;
+    EpbSts_Err = 15;
+  }
+  optional EpbSts epb_sts_epb_sts = 272;
+  enum CtrlSts1 {
+    CtrlSts1_NoCtrl = 0;
+    CtrlSts1_InCtrl = 1;
+  }
+  optional CtrlSts1 abs_ctrl_actv_ctrl_sts1 = 273;
+  enum EscSt1 {
+    EscSt1_Inin = 0;
+    EscSt1_Ok = 1;
+    EscSt1_TmpErr = 2;
+    EscSt1_PrmntErr = 3;
+    EscSt1_UsrOff = 4;
+  }
+  optional EscSt1 esc_st_esc_st = 274;
+  optional float amb_t_raw_ambt_val = 275;
+  optional int32 amb_t_raw_qly = 276;
+  optional int32 veh_batt_u_sys_u_qf = 277;
+  optional float veh_batt_u_sys_u = 278;
+  enum IndcrTypExt1 {
+    IndcrTypExt1_Off = 0;
+    IndcrTypExt1_Le = 1;
+    IndcrTypExt1_Ri = 2;
+  }
+  optional IndcrTypExt1 swt_indcr_indcr_typ_ext_req = 279;
+  optional int32 swt_indcr_indcr_typ_ext_req_to_upd_qf = 280;
+  enum PrkLatLgtFail {
+    PrkLatLgtFail_NoFailure = 0;
+    PrkLatLgtFail_SteeringFailure = 1;
+    PrkLatLgtFail_BrakeFailure = 2;
+    PrkLatLgtFail_PropulsionFailure = 3;
+    PrkLatLgtFail_RBUFailure = 4;
+    PrkLatLgtFail_CommunicationFailure = 5;
+    PrkLatLgtFail_VDSWInternalFailure = 6;
+    PrkLatLgtFail_RWSFailure = 7;
+  }
+  optional PrkLatLgtFail prk_lat_lgt_failr_prk_lat_lgt_failr = 281;
+  optional NoYes1 accr_pedl_psd_sts = 282;
+  optional NoYes1 accr_pedl_psd_accr_pedl_psd = 283;
+  optional GenQf1 brk_pedl_psd_qf = 284;
+  optional NoYes1 brk_pedl_psd_brk_pedl_psd = 285;
+  optional NoYes1 brk_pedl_psd_brk_pedl_not_psd_safe = 286;
+  enum VehMtnSt2 {
+    VehMtnSt2_Ukwn = 0;
+    VehMtnSt2_StandStillVal1 = 1;
+    VehMtnSt2_StandStillVal2 = 2;
+    VehMtnSt2_StandStillVal3 = 3;
+    VehMtnSt2_RollgFwdVal1 = 4;
+    VehMtnSt2_RollgFwdVal2 = 5;
+    VehMtnSt2_RollgBackwVal1 = 6;
+    VehMtnSt2_RollgBackwVal2 = 7;
+  }
+  optional VehMtnSt2 veh_mtn_st_veh_mtn_st = 287;
+  enum EngSt1 {
+    EngSt1_Ini = 0;
+    EngSt1_Awake = 1;
+    EngSt1_Rdy = 2;
+    EngSt1_PreStrtg = 3;
+    EngSt1_StrtgInProgs = 4;
+    EngSt1_RunngRunng = 5;
+    EngSt1_RunngStb = 6;
+    EngSt1_RunngStrtgInProgs = 7;
+    EngSt1_RunngRemStrtd = 8;
+    EngSt1_AftRun = 9;
+  }
+  optional EngSt1 eng_st1wd_sts_eng_st1wd_sts = 288;
+  enum CtrlInhbn {
+    NoInhb = 0;
+    L12LgtCtrlModInhb = 1;
+    AutoParkingModInhb = 2;
+    L12AndAutoParkingModInhb = 3;
+    L3ADModInhb = 4;
+    L3ADAndL12LgtCtrlModInhb = 5;
+    L3ADAndAutoParkingModInhb = 6;
+    L3ADAndAutoParkingAndL12LgtCtrlModInhb = 7;
+  }
+  optional CtrlInhbn ad_mod_ctrl_inhbn_ad_mod_ctrl_inhbn = 289;
+  enum VehSpdIndcdUnit {
+    VehSpdIndcdUnit_Kmph = 0;
+    VehSpdIndcdUnit_Mph = 1;
+    VehSpdIndcdUnit_UkwnUnit = 2;
+  }
+  optional VehSpdIndcdUnit veh_spd_indcd_ve_spd_indcd_unit = 290;
+  optional double veh_spd_indcd_veh_spd_indcd = 291;
+  optional StandStillMgrStsForHld1 stand_still_mgr_sts_for_hld_stand_still_mgr_sts_for_hld1 = 292;
+  enum AsyALgtCtrlMod {
+    AsyALgtCtrlMod_NoReq = 0;
+    AsyALgtCtrlMod_PEB = 10;
+    AsyALgtCtrlMod_APA = 11;
+    AsyALgtCtrlMod_RPA = 12;
+    AsyALgtCtrlMod_HPA = 13;
+  }
+  optional AsyALgtCtrlMod asy_algt_ctrl_mod_cfmd_asy_algt_ctrl_mod1 = 293;
+  optional LatCtrlMod1 asy_lat_ctrl_mod_req_group_cfmd_lat_ctrl_mod = 294;
+  optional int32 drvr_steer_whl_hld_group_drvr_steer_whlhld = 295;
+  optional int32 drvr_steer_whl_hld_group_drvr_steer_whlhld_qly = 296;
+  enum BltLockSt1 {
+    BltLockSt1_Unlock = 0;
+    BltLockSt1_Lock = 1;
+  }
+  optional BltLockSt1 blt_lock_st_safe_at_drvr_blt_lock_st1 = 297;
+  enum DevErrSts2 {
+    DevErrSts2_NoFlt = 0;
+    DevErrSts2_Flt = 1;
+  }
+  optional DevErrSts2 blt_lock_st_safe_at_drvr_blt_lock_sterr_sts = 298;
+  optional Flg1 veh_dyn_ctrl_sts_for_a_lgt_cmft_veh_dyn_ctrl_sts_for_brk_actv = 299;
+  optional Flg1 veh_dyn_ctrl_sts_for_a_lgt_cmft_veh_dyn_ctrl_sts_dend = 300;
+  optional Flg1 veh_dyn_ctrl_sts_for_a_lgt_cmft_veh_dyn_ctrl_sts_for_brk_prec_actv = 301;
+  enum StandStillMgrStsForPark2 {
+    StandStillMgrStsForPark2_ParkNotReqd = 0;
+    StandStillMgrStsForPark2_ParkReqdByDrvr = 1;
+    StandStillMgrStsForPark2_ParkReqdAutByHldTiExcd = 2;
+    StandStillMgrStsForPark2_ParkReqdAut = 3;
+    StandStillMgrStsForPark2_ParkNotAvl = 4;
+  }
+  optional StandStillMgrStsForPark2 veh_dyn_ctrl_sts_for_a_lgt_cmft_veh_dyn_ctrl_sts_for_stand_still_mgr_for_park = 302;
+  optional Flg1 veh_dyn_ctrl_sts_for_a_lgt_cmft_veh_dyn_ctrl_sts_for_whl_brk_wrm = 303;
+  optional Flg1 veh_dyn_ctrl_sts_for_a_lgt_cmft_veh_dyn_ctrl_sts_not_ena = 304;
+  enum FltEgyCns1 {
+    FltEgyCns1_NoFlt = 0;
+    FltEgyCns1_Flt = 1;
+  }
+  optional FltEgyCns1 veh_mod_mngt_glb_safe1_flt_egy_cns_wd_sts = 305;
+  optional int32 veh_mod_mngt_glb_safe1_egy_lvl_elec_mai = 306;
+  optional int32 veh_mod_mngt_glb_safe1_egy_lvl_elec_sub_typ = 307;
+  optional int32 veh_mod_mngt_glb_safe1_pwr_lvl_elec_mai = 308;
+  optional int32 veh_mod_mngt_glb_safe1_pwr_lvl_elec_sub_typ = 309;
+  enum CarModSts1 {
+    CarModSts1_CarModNorm = 0;
+    CarModSts1_CarModTrnsp = 1;
+    CarModSts1_CarModFcy = 2;
+    CarModSts1_CarModCrash = 3;
+    CarModSts1_CarModDyno = 5;
+  }
+  optional CarModSts1 veh_mod_mngt_glb_safe1_car_mod_sts1 = 310;
+  optional int32 veh_mod_mngt_glb_safe1_car_mod_subtypwd_carmod_subtyp = 311;
+  enum UsgModSts1 {
+    UsgModSts1_UsgModAbdnd = 0;
+    UsgModSts1_UsgModInActv = 1;
+    UsgModSts1_UsgModCnvinc = 2;
+    UsgModSts1_UsgModActv = 11;
+    UsgModSts1_UsgModDrvg = 13;
+  }
+  optional UsgModSts1 veh_mod_mngt_glb_safe1_usg_mod_sts = 312;
+  optional GenQf1 veh_spd_lgt_veh_spd_lgt_qf = 313;
+  optional double veh_spd_lgt_veh_spd_lgt_a = 314;
+  optional GenQf1 a_lgt_std_from_whl_spd_qf = 315;
+  optional double a_lgt_std_from_whl_spd_algt_std_from_whl_spd = 316;
+  optional Qf1 a_data_raw_safe_a_lat1_qf = 317;
+  optional double a_data_raw_safe_a_lat = 318;
+  optional Qf1 a_data_raw_safe_a_lgt1_qf = 319;
+  optional double a_data_raw_safe_a_lgt = 320;
+  optional Qf1 a_data_raw_safe_a_vert_qf = 321;
+  optional double a_data_raw_safe_a_vert = 322;
+  optional Qf1 ag_data_raw_safe_yaw_rate_qf = 323;
+  optional double ag_data_raw_safe_yaw_rate = 324;
+  optional Qf1 ag_data_raw_safe_roll_rate_qf = 325;
+  optional float ag_data_raw_safe_roll_rate = 326;
+  optional GenQf1 pinion_steer_ag_group_steer_whl_tq_qf = 327;
+  optional double pinion_steer_ag_group_steer_whl_tq = 328;
+  optional GenQf1 pinion_steer_ag_group_pinion_steer_ag1_qf = 329;
+  optional double pinion_steer_ag_group_pinion_steer_ag1 = 330;
+  optional GenQf1 pinion_steer_ag_group_pinion_steer_ag_spd1_qf = 331;
+  optional double pinion_steer_ag_group_pinion_steer_ag_spd1 = 332;
+  optional NoYesCrit1 drvr_prsnt_sts_drvr_prsnt = 333;
+  optional Qf1 drvr_prsnt_sts_drvr_prsnt_qf = 334;
+  enum Qly2 {
+    Qly2_Flt = 0;
+    Qly2_NoInfo = 1;
+    Qly2_Vld = 2;
+  }
+  optional Qly2 road_incln_qly = 335;
+  optional double road_incln_road_incln = 336;
+  optional GenQf1 steer_whl_snsr_qf = 337;
+  optional float steer_whl_snsr_ag = 338;
+  optional float steer_whl_snsr_ag_spd = 339;
+  optional int32 pt_tq_at_whl_frnt_act_pt_tq_at_whls_frnt_qly = 340;
+  optional double pt_tq_at_whl_frnt_act_pt_tq_at_axle_frnt_act = 341;
+  optional int32 pt_tq_at_whl_frnt_act_pt_tq_at_whl_frnt_le_act_i16 = 342;
+  optional int32 pt_tq_at_whl_frnt_act_pt_tq_at_whl_frnt_ri_act_i16 = 343;
+  optional double accr_pedl_rat_accr_pedl_rat = 344;  
+  optional int32 veh_m_nom_trlr_m = 345;
+  optional int32 veh_m_nom_veh_m = 346;
+  optional int32 veh_m_nom_veh_m_qly = 347;
+  optional Qf1 asy_data_with_cmp_safe_a_lat1_qf = 348;
+  optional double asy_data_with_cmp_safe_a_lat_with_cmp = 349;
+  optional Qf1 asy_data_with_cmp_safe_a_lgt1_qf = 350;
+  optional double asy_data_with_cmp_safe_grdt_of_a_lgt = 351;
+  optional Qf1 asy_data_with_cmp_safe_yaw_rate_qf = 352;
+  optional double asy_data_with_cmp_safe_yaw_rate_with_cmp = 353;
+  optional int32 brk_sys_cyl_p_mst_act_qf = 354;
+  optional double brk_sys_cyl_p_mst_act = 355;
+  optional int32 brk_sys_cyl_p_mst_virt_qf = 356;
+  optional float brk_sys_cyl_p_mst_virt = 357;
+  optional float brk_sys_cyl_p_mst_tar = 358;
+  optional int32 prkg_blk_sts = 359;
+  optional int32 drvr_seat_sts = 360;
+  optional int32 brk_trac_ctrl_actv = 361;
+  optional int32 crash_stat_lo = 362;
+  optional int32 d_c_chrg_st = 363;
+  optional int32 d_c_chrgn_hndl_sts = 364;
+  optional int32 ezy_load_sts = 365;
+  optional int32 f_r_network_status = 366;
+  optional int32 flt_elec_dc_dc = 367;
+  optional int32 flt_t_dc_dc = 368;
+  optional int32 on_bd_chrgr_st = 369;
+  optional int32 pass_seat_sts = 370;
+  optional int32 prk_excd_spd_lim = 371;
+  optional int32 prof_pen_sts1 = 372;
+  optional int32 rcta_brk_actvd = 373;
+  optional int32 rcwm_brk_actvd = 374;
+  optional int32 rcwm_li_actvd = 375;
+  optional int32 sun_roof_posn_sts = 376;
+  optional int32 twli_bri_sts = 377;
+  optional int32 v_f_c_info_ena = 378;
+  optional int32 win_posn_sts_at_drvr = 379;
+  optional int32 win_posn_sts_at_pass = 380;
+  optional int32 win_posn_sts_at_re_le = 381;
+  optional int32 win_posn_sts_at_re_ri = 382;
+  optional int32 lcma_led_sts_drvr_side = 383;
+  optional int32 lcma_led_sts_pass_side = 384;
+  optional int32 on_bd_chrgr_hndl_sts1 = 385;
+  optional int32 brk_prec_actv_for_a_c_b = 386;
+  optional DoorSts2 chrg_lid_d_cor_ac_dc_sts = 387;
+
+  optional int32 inhb_of_asy_sfty_decel_by_veh_dyn = 388;
+  optional int32 mob_dev_dist_sts1 = 389;
+  optional int32 dst_estimd_to_empty_for_drvg_elec = 390;
+  optional float t_dc_dc_coolt = 391;
+  optional float tire_rd_estimd = 392;
+  optional float brk_tq_at_whls_req = 393;
+  optional float coolt_t_sig_for_dt_elec = 394;
+  optional float disp_hv_batt_lvl_of_chrg = 395;
+  optional int32 accrpedl_sts_flt_sts = 396;
+  optional int32 actvn_of_indcr_indcr_out = 397;
+  optional int32 adas_lo_pwr_cns_mod_lo_pwr_cns_mod = 398;
+
+  optional float biased_posn_from_satlt1_posn_lat = 399;
+  optional float biased_posn_from_satlt1_posn_lgt = 400;
+  optional int32 blt_lock_st_at_pass_blt_lock_st1 = 401;
+  optional int32 blt_lock_st_at_pass_blt_lock_sts = 402;
+  optional int32 blt_lock_st_at_row_sec_le_blt_lock_equid = 403;
+  optional int32 blt_lock_st_at_row_sec_le_blt_lock_st1 = 404;
+  optional int32 blt_lock_st_at_row_sec_le_blt_lock_sts = 405;
+  optional int32 blt_lock_st_at_row_sec_mid_blt_lock_equid = 406;
+  optional int32 blt_lock_st_at_row_sec_mid_blt_lock_st1 = 407;
+  optional int32 blt_lock_st_at_row_sec_mid_blt_lock_sts = 408;
+  optional int32 blt_lock_st_at_row_sec_ri_blt_lock_equid = 409;
+  optional int32 blt_lock_st_at_row_sec_ri_blt_lock_st1 = 410;
+  optional int32 blt_lock_st_at_row_sec_ri_blt_lock_sts = 411;
+  optional int32 brk_fric_tq_at_whl_act_brk_fric_tq_at_whl_frnt_le_act = 412;
+  optional int32 brk_fric_tq_at_whl_act_brk_fric_tq_at_whl_frnt_ri_act = 413;
+  optional int32 brk_fric_tq_at_whl_act_brk_fric_tq_at_whl_re_le_act = 414;
+  optional int32 brk_fric_tq_at_whl_act_brk_fric_tq_at_whl_re_ri_act = 415;
+  optional int32 brk_fric_tq_tot_at_whls_act_brk_fric_tq_tot_at_whls_act = 416;
+  optional int32 brk_pedl_psd_qly_brk_pedl_psd_qly = 417;
+  optional float brk_pedl_trvl_act = 418;
+  optional int32 brk_pedl_trvl_qf = 419;
+  optional int32 brk_pedl_trvl_st = 420;
+  optional int32 brk_pedl_trvl_st_qf = 421;
+  optional float brk_pedl_trvl_tar = 422;
+
+  optional int32 door_drvr_sts_with_fac_qly_door_sts = 423;
+  optional int32 door_drvr_sts_with_fac_qly_fac_qly = 424;
+  optional float drvr_decel_req_float8 = 425;
+  optional int32 drvr_gear_shift_dir_req2_dwn_dwn_tip_aut = 426;
+  optional int32 drvr_gear_shift_dir_req2_dwn_tip_aut = 427;
+  optional int32 drvr_gear_shift_dir_req2_posn_aut = 428;
+  optional int32 drvr_gear_shift_dir_req2_up_tip_aut = 429;
+  optional int32 drvr_gear_shift_dir_req2_up_up_tip_aut = 430;
+  optional int32 drvr_steer_actv_drvr_steer_actv = 431;
+  optional float fric_estimn_from_veh_dyn_fric_estimn_from_veh_dyn = 432;
+  optional int32 _fric_estimn_from_veh_dyn_qly = 433;
+  optional int32 lockg_cen_sts_lock_st = 434;
+  optional int32 lockg_cen_sts_trig_src = 435;
+  optional bool lockg_cen_sts_upd_eve = 436;
+  optional int32 lvpwr_sply_err_sts_lvpwr_splyerr_sts1 = 437;
+  optional float posn_from_satlt1_posn_lat = 438;
+  optional float posn_from_satlt1_posn_lgt = 439;
+  optional int32 pt_tq_at_whl_re_act_pt_tq_at_axle_re_act_i16 = 440;
+  optional int32 pt_tq_at_whl_re_act_pt_tq_at_whl_re_le_act_i16 = 441;
+  optional int32 pt_tq_at_whl_re_act_pt_tq_at_whl_re_ri_act_i16 = 442;
+  optional int32 pt_tq_at_whl_re_act_pt_tq_at_whls_re_qly = 443;
+  optional float pt_tq_set_safe_grdt_neg = 444;
+  optional float pt_tq_set_safe_grdt_pos = 445;
+  optional float pt_tq_set_safe_req = 446;
+  optional float pt_tq_soft_max_genn2_allwd = 447;
+  
+  optional StandStillMgrStsForHld1 stand_still_mgr_sts_for_hld_by_brk_stand_still_mgr_sts_for_hld1 = 448;
+  optional int32 susp_failr_sts_susp_failr_sts = 449;
+  optional int32 susp_failr_sts_typ_qf = 450;
+  optional float susp_posn_vert_le1_with_e2e_frnt = 451;
+  optional int32 susp_posn_vert_le1_with_e2e_frnt_qf = 452;
+  optional float susp_posn_vert_le1_with_e2e_re = 453;
+  optional int32 susp_posn_vert_le1_with_e2e_re_qf = 454;
+  optional float susp_posn_vert_ri1_with_e2e_frnt = 455;
+  optional int32 susp_posn_vert_ri1_with_e2e_frnt_qf = 456;
+  optional float susp_posn_vert_ri1_with_e2e_re = 457;
+  optional int32 susp_posn_vert_ri1_with_e2e_re_qf = 458;
+  optional int32 twli_bri_raw_qf = 459;
+  optional int32 twli_bri_raw_twli_bri_raw = 460;
+  optional float whl_spd_calc_a_lgt_a_lgt = 461;
+  optional float whl_v_agr_frnt_le = 462;
+  optional int32 whl_v_agr_frnt_le_qf = 463;
+  optional float whl_v_agr_frnt_ri = 464;
+  optional int32 whl_v_agr_frnt_ri_qf = 465;
+  optional float whl_v_agr_frnt_for_bkp_whl_v_agr_frnt_le = 466;
+  optional int32 whl_v_agr_frnt_for_bkp_whl_v_agr_frnt_le_qf = 467;
+  optional float whl_v_agr_frnt_for_bkp_whl_v_agr_frnt_ri = 468;
+  optional int32 whl_v_agr_frnt_for_bkp_whl_v_agr_frnt_ri_qf = 469;
+  optional float whl_v_agr_re_le = 470;
+  optional int32 whl_v_agr_re_le_qf = 471;
+  optional float whl_v_agr_re_ri = 472;
+  optional int32 whl_v_agr_re_ri_qf = 473;
+
+  optional float whl_v_agr_re_for_bkp_whl_v_agr_re_le = 474;
+  optional int32 whl_v_agr_re_for_bkp_whl_v_agr_re_le_qf = 475;
+  optional float whl_v_agr_re_for_bkp_whl_v_agr_re_ri = 476;
+  optional int32 whl_v_agr_re_for_bkp_whl_v_agr_re_ri_qf = 477;
+  optional int32 horn_warn_req = 478;
+  optional int32 snsr_flt_frnt_sts = 479;
+  optional int32 alrm_sts_alrm_failr = 480;
+  optional int32 alrm_sts_alrm_st = 481;
+  optional int32 alrm_sts_alrm_trg_src = 482;
+  optional int32 alrm_sts_snsr_incln_failr = 483;
+  optional int32 alrm_sts_snsr_intr_scanr_failr = 484;
+  optional int32 ble_key_button_sts2_action = 485;
+  optional int32 ble_key_button_sts2_i_d = 486;
+  optional int32 ble_key_button_sts2_n_o = 487;
+  
+  optional int32 whl_spd_circuml_frnt_le_qf = 488;
+  optional double whl_spd_circuml_frnt_le = 489;
+  optional int32 whl_spd_circuml_frnt_ri_qf = 490;
+  optional double whl_spd_circuml_frnt_whl_spd_circuml_frnt_ri = 491;
+  
+  optional int32 whl_spd_circuml_re_le_qf = 492;
+  optional double whl_spd_circuml_re_le = 493;
+  optional int32 whl_spd_circuml_re_ri_qf = 494;
+  optional double whl_spd_circuml_re_ri = 495;
+  optional WhlRotlDirStd1 whl_dir_rotl_frnt_ri = 496;
+  optional WhlRotlDirStd1 whl_dir_rotl_frnt_le = 497;
+  
+  optional WhlRotlDirStd1 whl_dir_rotl_re_ri = 498;
+  optional int32 fa_status = 499;
+
+  /* dowmstream signals 1000~1200*/
+  // parking
+  optional int32 p_a_s_electc_staby_prog_ctrl_mod_req = 1000;
+  optional int32 asy_lat_ctrl_mod_req = 1001;
+  optional int32 asy_a_lgt_ctrl_mod1 = 1002;
+  optional double park_assi_pinion_ag_req = 1003;
+  optional int32 prkg_pinion_ag_req_group_qf = 1004;
+  optional int32 prkg_standstill_req = 1005;
+  optional int32 gear_prkg_assi_req1 = 1006;
+  optional double prkg_assi_a_req1 = 1007;
+  optional int32 drvr_assc_sys_brk_fct_mod = 1008;
+  optional int32 prkg_brk_electc_ctrl_req = 1009;
+  optional double prkg_assi_a_lowr_lim = 1010;
+  optional double prkg_assi_a_lowr_slop = 1011;
+  optional double prkg_assi_a_uppr_lim = 1012;
+  optional double prkg_assi_a_uppr_slop = 1013;
+  optional int32 drvr_assc_sys_indcr_req = 1014;
+  optional int32 drvr_assc_sys_indcr_req_1 = 1015;
+  // driving
+  optional double asy_pinion_ag_req = 1100;
+  optional int32 asy_lat_ovrd_req = 1101;
+  optional int32 asy_lat_ovrd_req_bkp = 1102;
+  optional int32 a_d_active_req = 1103;
+  optional int32 a_d_active_req_bkp = 1104;
+  optional int32 a_d_deactive_req = 1105;
+  optional int32 a_d_deactive_req_bkp = 1106;
+  optional int32 a_d_mode = 1107;
+  optional int32 a_d_mode_bkp = 1108;
+  optional int32 ctrl_sts = 1109;
+  optional int32 ctrl_sts_bkp = 1110;
+  optional int32 a_lgt_ctrl_mod_asy_a_lgt_ctrl_mod1 = 1111;
+  optional int32 ad_l3_func_ctrl_sts = 1112;
+  optional int32 ad_l3_func_ctrl_sts_bkp = 1113;
+  optional int32 ad_l3_func_ctrl_sts_qf = 1114;
+  optional int32 ad_l3_func_ctrl_sts_qf_bkp = 1115;
+  optional double asy_a_lgt_req_rng_for_safe_max = 1116;
+  optional double asy_a_lgt_req_rng_for_safe_min = 1117;
+  optional double asy_a_lgt_req_rng_for_safe_max_bkp = 1118;
+  optional double asy_a_lgt_req_rng_for_safe_min_bkp = 1119;
+  optional int32 z_i_d_turn_indic_req = 1120;
+  optional bool adas_active_flag = 1121;
+}

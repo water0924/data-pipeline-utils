@@ -1,0 +1,12 @@
+//@F_Mark@ignore@;
+syntax = "proto3";
+
+package deeproute.common.report_event;
+
+import "google/protobuf/any.proto";
+/***************************事件通知**********************************************/
+
+message DataConfigErrorEventInfo {
+  string config_id = 1;
+  map <string, google.protobuf.Any> fields = 2;
+}

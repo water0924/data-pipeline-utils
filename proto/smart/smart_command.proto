@@ -1,0 +1,42 @@
+syntax = "proto3";
+package smart;
+import "smart/smart_common.proto";
+
+message SmartCommandReq{
+  oneof Command{
+    // LpConfirmTriggerInf =0x01
+    bool lp_function_confirm = 1;
+    // LpExitTriggerInf = 0x01
+    bool lp_function_exit = 2;
+    // LpCancelTriggerInf = 0x01
+    bool lp_function_cancel = 3;
+    // LpLearningTriggerInf = 0x01
+    bool lp_learning_start = 4;
+    // LpReturnTriggerInf = 0x01
+    bool lp_function_return = 5;
+    // LpPathManageTriggerInf = 0x01
+    bool lp_path_manage = 6;
+    // SelectedSlotIdInf
+    int32 lp_selected_slot_id = 7;   
+    // LpCompleteLearnTriggerInf. Trigger1=0x01
+    bool lp_learning_complete = 8;
+    // LpTryItNowTriggerInf = 0x01
+    bool lp_parking_try = 9;
+    // LpParkTriggerInf =0x01
+    bool lp_function_park = 10;
+    // 地图管理中删除地图数据
+    ParkingMapInfo delete_map = 11;
+  }
+}
+
+message ParkingMapInfo {
+  int32 id = 1;
+}
+
+message HmiInfoFromBackbone {
+  int32 drvr_assc_sys_btn_push = 1;
+}
+
+message HmiSoftButtonSettingInfo {
+  int32 popup_button_data_collect_trigger = 1;
+}

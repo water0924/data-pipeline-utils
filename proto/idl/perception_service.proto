@@ -1,0 +1,146 @@
+syntax = "proto2";
+
+package deeproute.idl.perception_service;
+
+import "canbus/car_info.proto";
+import "common/module_status.proto";
+import "common/vehicle_state/vehicle_state.proto";
+import "drivers/pointcloud2.proto";
+import "drivers/sensor_image.proto";
+import "drivers/ultrasonic/ultrasonic.proto";
+import "drivers/radar/radar.proto";
+import "map/deeproute_map_ras_map_plus.proto";
+import "perception/deeproute_perception_obstacle.proto";
+import "perception/perception_dtu_interface.proto";
+import "perception/deeproute_perception_camera.proto";
+import "perception/traffic_light_detection.proto";
+import "perception/deeproute_perception_ras_map.proto";
+import "perception/deeproute_perception_rear_warning.proto";
+
+service PerceptionService {
+  rpc Init(PerceptionInitRequest) returns (PerceptionInitResponse) {
+  }
+  rpc Proc(PerceptionProcRequest) returns (PerceptionProcResponse) {
+  }
+}
+
+service PredictionService {
+  rpc Init(PredictionInitRequest) returns (PredictionInitResponse) {
+  }
+  rpc Proc(PredictionProcRequest) returns (PredictionProcResponse) {
+  }
+}
+
+message PerceptionInitRequest {
+  optional string car_config_path = 1;
+  optional string map_path = 2;
+}
+
+message PerceptionInitResponse {
+}
+
+message PerceptionProcRequest {
+  // canbus/car_state
+  optional deeproute.common.VehicleState vehicle_state = 1;
+
+  // pcd data
+  optional deeproute.drivers.PointCloud2 point_cloud = 2;
+
+  // compressed camera data
+  optional deeproute.drivers.CompressedImage camera_1 = 3;
+  optional deeproute.drivers.CompressedImage traffic_2 = 4;
+  optional deeproute.drivers.CompressedImage camera_2 = 5;
+  optional deeproute.drivers.CompressedImage camera_3 = 6;
+  optional deeproute.drivers.CompressedImage camera_4 = 7;
+  optional deeproute.drivers.CompressedImage camera_5 = 8;
+  optional deeproute.drivers.CompressedImage camera_6 = 9;
+  optional deeproute.drivers.CompressedImage traffic_1 = 10;
+
+  // ras map
+  optional deeproute.map.RASMapPlus ras_map_plus = 11;
+
+  // radar
+  optional deeproute.drivers.radar.Radar mrr = 12;
+  optional deeproute.drivers.radar.Radar srr_1 = 13;
+  optional deeproute.drivers.radar.Radar srr_2 = 14;
+
+  // parking
+  optional deeproute.drivers.CompressedImage panoramic_1 = 15;
+  optional deeproute.drivers.CompressedImage panoramic_2 = 16;
+  optional deeproute.drivers.CompressedImage panoramic_3 = 17;
+  optional deeproute.drivers.CompressedImage panoramic_4 = 18;
+  optional deeproute.drivers.CompressedImage bird_eye_view = 19;
+  optional deeproute.canbus.CarInfo car_info = 20;
+  optional deeproute.drivers.ultrasonic.Ultrasonic ultrasonic = 21;
+  optional deeproute.perception.PerceptionRequest dtu_request = 22;
+
+  // raw camera data
+  optional deeproute.drivers.Image camera_raw_1 = 31;
+  optional deeproute.drivers.Image camera_raw_2 = 32;
+  optional deeproute.drivers.Image camera_raw_3 = 33;
+  optional deeproute.drivers.Image camera_raw_4 = 34;
+  optional deeproute.drivers.Image camera_raw_5 = 35;
+  optional deeproute.drivers.Image camera_raw_6 = 36;
+  optional deeproute.drivers.Image traffic_raw_1 = 37;
+  optional deeproute.drivers.Image traffic_raw_2 = 38;
+}
+
+message PerceptionProcResponse {
+  // has_point_cloud() ==> return perception_obstacles
+  // has_camera_1() && has_traffic_2() ==> return traffic_light
+
+  // object-tracking results
+  optional deeproute.perception.PerceptionObstacles
+      perception_obstacles_intermediate = 1;
+
+  // Camera detection results
+  // topic: /perception/signals_response
+  optional deeproute.perception.TrafficLight traffic_light = 2;
+
+  // topic: /perception/traffic_lights_status
+  optional deeproute.perception.TrafficLightResponse traffic_light_response = 3;
+
+  // topic: /perception/camera_obstacle
+  optional deeproute.perception.CameraObstacles camera_obstacles = 4;
+
+  // topic: /common/modulestatus
+  optional deeproute.proto.ModuleStatus module_status = 5;
+
+  // topic: /perception/objects_vis_objects
+  optional deeproute.perception.PerceptionObstacles objects_vis_objects = 6;
+
+  // topic: /perception/objects_vis_pointcloud
+  optional deeproute.perception.PerceptionObstacles objects_vis_pointcloud = 7;
+
+  // topic: /perception/ras_map
+  optional deeproute.perception.RASMap ras_map = 8;
+
+  // topic: /perception/rearwarning
+  optional deeproute.perception.RearWarningStatus rear_warning = 9;
+
+  // topic: /perception/adas
+  optional deeproute.perception.CameraStatus camera_status = 10;
+
+  // topic: /perception/camera_quality
+  optional deeproute.perception.CameraQuality camera_qualitys = 11;
+}
+
+message PredictionInitRequest {
+}
+
+message PredictionInitResponse {
+}
+
+message PredictionProcRequest {
+  repeated deeproute.common.VehicleState vehicle_state = 1;
+  optional deeproute.perception.PerceptionObstacles
+      perception_obstacles_intermediate = 2;
+}
+
+message PredictionProcResponse {
+  // prediction final results
+  optional deeproute.perception.PerceptionObstacles perception_obstacles = 1;
+
+  // topic: /common/modulestatus
+  optional deeproute.proto.ModuleStatus module_status = 2;
+}

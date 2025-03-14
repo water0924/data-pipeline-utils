@@ -1,0 +1,179 @@
+syntax = "proto3";
+package smart;
+import "smart/smart_common.proto";
+
+message EgoVeh{
+  //时间戳 --todo 单位
+  uint64 time_stamp = 1;
+  //自车位姿
+  Vehicle_Pos vehicle_pos = 2;
+  //NOH引导线+HWA变道时候的引导线
+  Guide_Line guide_line = 3;
+  //感知物体
+  Obj_Disp objs = 4;
+  //PlanningTrajectoryInf(PlanningTrajectory). PathTypeSeN(PathType)
+  //0     Initial
+  //1     BackArrow（显示反向箭头）
+  Guide_Line decelerate_line = 6;
+  // repeated CriticalObject  critical_object = 5;
+}
+
+//自车坐标无
+message Vehicle_Pos{
+  // float qx = 1[deprecated = true];
+  // float qy = 2[deprecated = true];
+  // float qz = 3[deprecated = true];
+  // float qw = 4[deprecated = true];
+  //自车经度
+  float longitude = 5;
+  //自车纬度
+  float latitude = 6;
+  //自车海拔高度
+  float height = 7;
+  //自车速度
+  float speed = 8;
+  //odometry 坐标
+  Pnt3D pos = 9;
+  //航向角
+  double yaw = 10;
+  //俯仰角
+  double pitch = 11;
+  //旋转角
+  double roll = 12;
+}
+
+message Guide_Line{
+  //PathPoint. PositionYSeN(VehiclePosition)
+  repeated Pnt3D pnt = 1;
+  //=======加减速
+}
+
+message Obj_Disp{
+  //GnssTimeStampSeN 为时间戳
+  uint64 time_stamp = 1;
+  repeated Obj_Info obj_info = 2;
+}
+
+message Obj_Info{
+  //TargetIDSeN 为识别到目标的 id
+  int32 id = 1;
+  //CenterPositionXSeN 和 CenterPositionYSeN 为目标的中心坐标，坐标均为自车坐标系下的坐标，单位为 m
+  Pnt3D pos = 2;
+  //VelocitySeN 为目标的速度 --todo 单位
+  float speed = 3;
+  //HeadingSeN 为目标的朝向角，显示目标的朝向角 -- todo 单位 规则
+  float heading = 4;
+  //ObjectTypeSeN 为目标类型
+  //=======
+  //"障碍物类型
+  enum Obj_Type{
+    //0.未知障碍物;
+    OBJ_TYPE_UNKNOWN = 0;
+    //1.轿车;
+    OBJ_TYPE_PASSENGER_CAR = 1;
+    //2.货车（卡车）厢式;
+    OBJ_TYPE_TRUCK_BOX = 2;
+    //3.大巴车;
+    OBJ_TYPE_BUS = 3;
+    //4.自行车（骑车）;
+    OBJ_TYPE_BICYCLE = 4;
+    //5.摩托车（预留）;
+    OBJ_TYPE_MOTORCYCLE = 5;
+    //6.三轮车;
+    OBJ_TYPE_TRICYCLE = 6;
+    //7.成人;
+    OBJ_TYPE_PEDESTRIAN = 7;
+    //8.儿童（预留）;
+    OBJ_TYPE_CHILD = 8;
+    //9.锥桶;
+    OBJ_TYPE_CONE = 9;
+    //10.SUV（预留）：
+    OBJ_TYPE_SUV = 10;
+    //11.面包车（预留）;
+    OBJ_TYPE_MINIBUS = 11;
+    //12.电动自行车（预留）;
+    OBJ_TYPE_ELETIRC_BICYCLE = 12;
+    //13.警察（预留）;
+    OBJ_TYPE_POLICE = 13;
+    //14.防撞桶/水桶;
+    OBJ_TYPE_BUCKET = 14;
+    //15.三脚架;
+    OBJ_TYPE_TRIPOD = 15;
+    //16.水马;
+    OBJ_TYPE_WATER_FILLED_BARRIER = 16;
+    //17.皮卡（作为预留）;
+    OBJ_TYPE_PICKUP = 17;
+    //18.货车（卡车）平板;
+    OBJ_TYPE_TRUCK_FLAT = 18;
+    //19.特殊车辆 （作为预留OTA，会拆分警车救护车消防车等）
+    OBJ_TYPE_SPECIAL_VEHICLES = 19;
+    //20.施工架
+    OBJ_TYPE_SCAFFOLD = 20;
+    //21.立柱
+    OBJ_TYPE_PILLAR = 21;
+    //22.减速带
+    OBJ_TYPE_SPEEDBUMP = 22;
+    //23.限位器
+    OBJ_TYPE_CHOCK = 23;
+    //24.地锁"
+    OBJ_TYPE_LOCK = 24;
+  };
+  Obj_Type type = 5;
+  //todo 单位
+  float length = 6;
+  float width = 7;
+  float height = 8;
+  //TurningLightSeN 为目标的转向灯状态，
+  repeated LightStatus light_status = 9;
+  enum AttributeType {
+    NORMAL_TYPE = 0;
+    LEFT_DOOR_OPEN = 1;
+    RIGHT_DOOR_OPEN = 2;
+    TRUNK_OPEN = 3;
+  };
+  repeated AttributeType attribute_type = 10;
+  //=======
+  enum ObjectType {
+    //默认发送 DangerLevelSeN==0 将目标物显示为浅灰色
+    DEFAULT_ALARM_OBJ = 0;
+    //需发送 DangerLevelSeN==1 将目标物显示为深灰色
+    GRAY_ALARM_OBJ = 1;
+    //需发送 DangerLevelSeN==2 将目标物显示为蓝色
+    BLUE_ALARM_OBJ = 2;
+    //需发送 DangerLevelSeN==3 将目标物显示为红色
+    RED_ALARM_OBJ = 3;
+
+  }
+  ObjectType object_type = 11;
+  float distance = 12;
+}
+
+message LightStatus {
+  //BrakeLightSeN 为制动灯
+  bool brake_switch_on = 1;
+  //TurningLightSeN ==1 为左转向灯点亮；
+  bool left_turn_switch_on = 2;
+  //TurningLightSeN ==2 为右转向灯点亮
+  bool right_turn_switch_on = 3;
+  //TurningLightSeN ==3 左右转向同时亮起
+  bool left_right_turn_switch_on = 4;
+  //TurningLightSeN ==0 为无效，不做显示；
+  bool brake_switch_unknown = 5;
+}
+
+message CriticalObject {
+  int32 id = 1;
+  enum ObjectType {
+    //需发送 DangerLevelSeN==1 将目标物显示为深灰色
+    GRAY_ALARM_OBJ = 0;
+    //需发送 DangerLevelSeN==2 将目标物显示为蓝色
+    BLUE_ALARM_OBJ = 1;
+    //需发送 DangerLevelSeN==3 将目标物显示为红色
+    RED_ALARM_OBJ = 2;
+    //默认发送 DangerLevelSeN==0 将目标物显示为浅灰色
+    DEFAULT_ALARM_OBJ = 3;
+  }
+  ObjectType object_type = 2;
+  float distance = 3;
+}
+

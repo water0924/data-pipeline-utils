@@ -1,0 +1,44 @@
+syntax = "proto2";
+
+package deeproute.idl.local_routing_service;
+
+import "common/vehicle_state/vehicle_state.proto";
+import "routing/local_routing.proto";
+import "routing/routing.proto";
+import "drivers/gnss/ins.proto";
+import "routing/navinfo_routing.proto";
+import "lock_on_road/lock_on_road.proto";
+import "lock_on_road/lock_on_road_debug.proto";
+import "perception/deeproute_perception_ras_map.proto";
+import "map/deeproute_map_ras_map_plus.proto";
+
+service LocalRoutingService {
+  rpc Init(LocalRoutingInitRequest) returns (LocalRoutingInitResponse) {}
+  rpc Proc(LocalRoutingProcRequest) returns (LocalRoutingProcResponse) {}
+}
+
+message LocalRoutingInitRequest {
+  optional string semantic_lmdb_path = 1;
+}
+
+message LocalRoutingInitResponse {}
+
+message LocalRoutingProcRequest {
+  // L4 & L2 VPA
+  optional deeproute.common.VehicleState vehicle_state = 1;
+  optional deeproute.routing.RoutingResponse routing_response = 2;
+
+  // NCA
+  optional drivers.gnss.Ins ins = 3;
+  optional deeproute.localization.LaneIndexEstimationResult lane_index = 4;
+  optional deeproute.localization.LockOnRoadResult lock_on_road = 5;
+  optional deeproute.perception.RASMap ras_map = 6;
+  optional deeproute.map.RASMapPlus ras_map_plus = 7;
+  optional deeproute.navinfo.SDRoutingResponse routing = 8;
+  optional deeproute.localization.LockOnRoadDebugInfo lock_on_road_debug_info =
+      9;
+}
+
+message LocalRoutingProcResponse {
+  optional deeproute.routing.LocalRouting local_routing_info = 1;
+}

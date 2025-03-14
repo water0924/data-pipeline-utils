@@ -1,0 +1,45 @@
+syntax = "proto2";
+
+package deeproute.idl.map_engine_service;
+
+import "common/vehicle_state/vehicle_state.proto";
+import "map/deeproute_map_ras_map_plus.proto";
+import "drivers/gnss/ins.proto";
+import "routing/navinfo_routing.proto";
+import "lock_on_road/lock_on_road.proto";
+import "lock_on_road/lock_on_road_debug.proto";
+import "map/vis_map.proto";
+import "routing/routing.proto";
+import "perception/deeproute_perception_ras_map.proto";
+import "drdtu/dtu_command.proto";
+
+service MapEngineService {
+  rpc Init(MapEngineInitRequest) returns (MapEngineInitResponse) {}
+  rpc Proc(MapEngineProcRequest) returns (MapEngineProcResponse) {}
+}
+
+message MapEngineInitRequest {}
+
+message MapEngineInitResponse {}
+
+message MapEngineProcRequest {
+  // l4
+  optional deeproute.common.VehicleState vehicle_state = 1;
+  optional deeproute.routing.RoutingResponse routing_response = 8;
+  optional deeproute.dtu.command.DTUCMD dtu_command = 10;
+
+  // l2
+  optional drivers.gnss.SensorsIns gnss = 2;
+  optional drivers.gnss.Ins ins = 3;
+  optional deeproute.localization.LaneIndexEstimationResult lane_index = 4;
+  optional deeproute.localization.LockOnRoadResult lock_on_road = 5;
+  optional deeproute.perception.RASMap ras_map = 6;
+  optional deeproute.navinfo.SDRoutingResponse routing = 7;
+  optional deeproute.localization.LockOnRoadDebugInfo lock_on_road_debug_info = 9;
+}
+
+message MapEngineProcResponse {
+  optional deeproute.map.RASMapPlus ras_map_plus = 1;
+  optional deeproute.map.VisMap vis_map = 2;
+  optional deeproute.dtu.command.DTUCMDRP dtu_res = 3;
+}

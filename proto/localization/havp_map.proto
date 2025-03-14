@@ -1,0 +1,87 @@
+syntax = "proto2";
+
+package deeproute.localization.havp_map;
+
+import "perception/deeproute_perception_ras_map.proto";
+import "perception/deeproute_perception_obstacle.proto";
+import "common/geometry.proto";
+
+enum ParkingSpaceTag {
+  PARK_SPACE_TAG_UNKNOW = 0;                    // 未知
+  PARK_SPACE_TAG_CHARGE = 1;                    // 充电桩
+  PARK_SPACE_TAG_ELEVATOR = 2;                  // 电梯
+	PARK_SPACE_TAG_FLOOR = 3;                     // 楼层
+	PARK_SPACE_TAG_PASSAGEWAY = 4;                // 出入口
+}
+
+message ParkingSpaceUsrInfo {
+  // map related information
+  optional int32 parking_space_id = 1;
+  optional int32 floor = 2;
+  optional int32 map_id = 3;
+  
+  // user-define information
+  optional string parking_space_name = 11;
+  optional ParkingSpaceTag parking_space_tag = 12;
+  optional bool is_favorite = 13;
+
+  optional int64 favorite_time = 20; // latest time added to favorite list
+}
+
+message HAVPParkingSpace {
+  optional ParkingSpaceUsrInfo parking_space_usr_info = 1;
+  optional perception.ParkingSpace parking_space = 2;
+}
+
+message HAVPObstacle {
+  optional perception.PerceptionObstacle obstacle = 1;
+  optional int32 floor = 2;
+}
+
+// TODO: Use better type
+enum TrajectoryType {
+  FLAT = 0;
+  DOWNHILL = 1;
+  UPHILL = 2;
+}
+message HAVPTrajectory {
+  optional int32 id = 1;              // if the trajectory is flat, id means which floor it belongs to. 
+                                      // e.g. id = 0 means this trajectory is belongs to 0th floor.
+                                      // if the trajectory is on uphill or down hill, id only means a unique idx for this
+                                      // trajectory. Now it's a more than 1000 number for distinguishing from flat
+  optional TrajectoryType type = 2;
+  optional int32 from_floor = 3;      // only donwhill or uphill trajectory may have it
+  optional int32 to_floor = 4;        // only donwhill or uphill trajectory may have it
+  repeated common.Point3D trajectory_point = 5;
+}
+
+message FloorIdSet {
+  repeated int32 floor_id = 1;
+}
+
+message HAVPMapMetaData {
+  // basic map information
+  optional int32 map_id = 1;
+  optional common.Point3D map_origin = 2; // in LLH?
+  optional sfixed64 create_timestamp = 3;
+
+  // user-define information
+  optional string map_name = 11;
+  repeated ParkingSpaceUsrInfo favorite_parking_space_infos = 12; // put it here or in parking space info?
+  optional int32 default_parking_space_id = 13;
+
+  // statistics information
+  optional float map_length = 21;
+  optional int32 num_parking_spaces = 22;
+  optional int32 num_speedbumps = 23;
+  optional FloorIdSet floor_set = 24;
+}
+
+message HAVPMap {
+  optional HAVPMapMetaData map_meta_data = 1;
+  
+  // map structure
+  repeated HAVPTrajectory map_trajectory = 11; // Better structure maybe need a more complicate structure for slope and multi floor?
+  repeated HAVPParkingSpace map_parking_space = 12;
+  repeated HAVPObstacle map_obstacle = 13;
+}

@@ -1,0 +1,24 @@
+syntax = "proto2";
+
+package deeproute.idl.routing_service;
+
+import "routing/routing.proto";
+
+service RoutingService {
+  rpc Init(RoutingInitRequest) returns (RoutingInitResponse);
+  rpc Proc(RoutingProcRequest) returns (RoutingProcResponse);
+}
+
+message RoutingProcRequest {
+  optional deeproute.routing.RoutingCMD routing_request = 1;
+}
+
+message RoutingProcResponse {
+  optional deeproute.routing.RoutingCMDRP routing_response = 1;
+}
+
+message RoutingInitRequest {
+  optional string semantic_lmdb_path = 1;
+}
+
+message RoutingInitResponse {}

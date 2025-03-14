@@ -1,0 +1,3126 @@
+syntax = "proto2";
+
+package deeproute.canbus;
+
+message DISUS_0X109 {
+// Report Message
+  // Checksum=CRC16(x16 + x12 + x5  + 1)Polynomial:0x1021initial value：0xFFFFXOR value：0x0000 [] [0E-008|65535.00000000]
+  optional int32 checksum_109_s = 1;
+  // Alive_Counter_109_S [] [0E-008|65535.00000000]
+  optional int32 counter_109_s = 2;
+  // 左前悬架实际高度无效 [] [0E-008|1.00000000]
+  optional bool di_sus_actual_height_invalid_fl_s = 3;
+  // 右前悬架实际高度无效 [] [0E-008|1.00000000]
+  optional bool di_sus_actual_height_invalid_fr_s = 4;
+  // 左后悬架实际高度无效 [] [0E-008|1.00000000]
+  optional bool di_sus_actual_height_invalid_rl_s = 5;
+  // 右后悬架实际高度无效 [] [0E-008|1.00000000]
+  optional bool di_sus_actual_height_invalid_rr_s = 6;
+  // 悬架可调节状态 [] [0E-008|1.00000000]
+  optional bool di_sus_mode_adjust_status_s = 7;
+  // 左前悬架实际高度 [mm] [-1000.00000000|64535.00000000]
+  optional double di_sus_actual_height_fl_s = 8;
+  // 右前悬架实际高度 [mm] [-1000.00000000|64535.00000000]
+  optional double di_sus_actual_height_fr_s = 9;
+  // 左后悬架实际高度 [mm] [-1000.00000000|64535.00000000]
+  optional double di_sus_actual_height_rl_s = 10;
+  // 右后悬架实际高度 [mm] [-1000.00000000|64535.00000000]
+  optional double di_sus_actual_height_rr_s = 11;
+}
+
+message VCU_0X10B {
+// Report Message
+  enum VCUFLwhldrvdirSType {
+    VCU_FL_WHL_DRV_DIR_S_INVALID = 0;
+    VCU_FL_WHL_DRV_DIR_S_FORWARD = 1;
+    VCU_FL_WHL_DRV_DIR_S_BACKWARD = 2;
+    VCU_FL_WHL_DRV_DIR_S_STOP = 3;
+  }
+  enum VCUFRwhldrvdirSType {
+    VCU_FR_WHL_DRV_DIR_S_INVALID = 0;
+    VCU_FR_WHL_DRV_DIR_S_FORWARD = 1;
+    VCU_FR_WHL_DRV_DIR_S_BACKWARD = 2;
+    VCU_FR_WHL_DRV_DIR_S_STOP = 3;
+  }
+  enum VCURLwhldrvdirSType {
+    VCU_RL_WHL_DRV_DIR_S_INVALID = 0;
+    VCU_RL_WHL_DRV_DIR_S_FORWARD = 1;
+    VCU_RL_WHL_DRV_DIR_S_BACKWARD = 2;
+    VCU_RL_WHL_DRV_DIR_S_STOP = 3;
+  }
+  enum VCURRwhldrvdirSType {
+    VCU_RR_WHL_DRV_DIR_S_INVALID = 0;
+    VCU_RR_WHL_DRV_DIR_S_FORWARD = 1;
+    VCU_RR_WHL_DRV_DIR_S_BACKWARD = 2;
+    VCU_RR_WHL_DRV_DIR_S_STOP = 3;
+  }
+  enum BrakeswtsatSType {
+    BRAKE_SWT_SAT_S_NOT_PRESSED = 0;
+    BRAKE_SWT_SAT_S_PRESSED = 1;
+    BRAKE_SWT_SAT_S_RESERVED_2 = 2;
+    BRAKE_SWT_SAT_S_ERROR = 3;
+  }
+  enum FdiflocksatType {
+    F_DIFLOCK_SAT_LOCKED = 0;
+    F_DIFLOCK_SAT_LOCKING = 1;
+    F_DIFLOCK_SAT_UNLOCKED = 2;
+    F_DIFLOCK_SAT_UNLOCKING = 3;
+    F_DIFLOCK_SAT_INVALID = 4;
+  }
+  enum RdiflocksatType {
+    R_DIFLOCK_SAT_LOCKED = 0;
+    R_DIFLOCK_SAT_LOCKING = 1;
+    R_DIFLOCK_SAT_UNLOCKED = 2;
+    R_DIFLOCK_SAT_UNLOCKING = 3;
+    R_DIFLOCK_SAT_INVALID = 4;
+  }
+  // Checksum=CRC16(x16 + x12 + x5  + 1)Polynomial:0x1021initial value：0xFFFFXOR value：0x0000校验范围：byte3-byte64 [] [0E-008|65535.00000000]
+  optional int32 checksum_10_b_s = 1;
+  // Alive_counter_10B [] [0E-008|65535.00000000]
+  optional int32 counter_10_b_s = 2;
+  // 惯导X轴加速度 [] [-8.00000000|8.00000000]
+  optional double imu_x_axis_acce_s = 3;
+  // 惯导X轴加速度偏移值 [] [-8.00000000|8.00000000]
+  optional double imu_x_axis_acce_ofs_s = 4;
+  // 惯导X轴角速度 [] [-500.00000000|500.00000000]
+  optional double imu_x_axis_ag_acce_s = 5;
+  // 惯导X轴角速度偏移值 [] [-500.00000000|500.00000000]
+  optional double imu_x_axis_ag_acce_ofs_s = 6;
+  // 惯导Y轴加速度 [] [-8.00000000|8.00000000]
+  optional double imu_y_axis_acce_s = 7;
+  // 惯导Y轴加速度偏移值 [] [-8.00000000|8.00000000]
+  optional double imu_y_axis_acce_ofs_s = 8;
+  // 惯导Y轴角速度 [] [-500.00000000|500.00000000]
+  optional double imu_y_axis_ag_acce_s = 9;
+  // 惯导Y轴角速度偏移值 [] [-500.00000000|500.00000000]
+  optional double imu_y_axis_ag_acce_ofs_s = 10;
+  // 惯导Z轴加速度 [] [-8.00000000|8.00000000]
+  optional double imu_z_axis_acce_s = 11;
+  // 惯导Z轴加速度偏移值 [] [-8.00000000|8.00000000]
+  optional double imu_z_axis_acce_ofs_s = 12;
+  // 惯导Z轴角速度 [] [-500.00000000|500.00000000]
+  optional double imu_z_axis_ag_acce_s = 13;
+  // 惯导Z轴角速度偏移值 [] [-500.00000000|500.00000000]
+  optional double imu_z_axis_ag_acce_ofs_s = 14;
+  // 惯导X轴加速度有效标志 [] [0E-008|1.00000000]
+  optional bool imu_x_axis_acce_flag_s = 15;
+  // 惯导X轴加速度偏移值有效标志 [] [0E-008|1.00000000]
+  optional bool imu_x_axis_acce_ofs_flag_s = 16;
+  // 惯导X轴角速度有效标志 [] [0E-008|1.00000000]
+  optional bool imu_x_axis_ag_acce_flag_s = 17;
+  // 惯导X轴角速度偏移值有效标志 [] [0E-008|1.00000000]
+  optional bool imu_x_axis_ag_acce_ofs_flag_s = 18;
+  // 惯导Y轴加速度有效标志 [] [0E-008|1.00000000]
+  optional bool imu_y_axis_acce_flag_s = 19;
+  // 惯导Y轴加速度偏移值有效标志 [] [0E-008|1.00000000]
+  optional bool imu_y_axis_acce_ofs_flag_s = 20;
+  // 惯导Y轴角速度有效标志 [] [0E-008|1.00000000]
+  optional bool imu_y_axis_ag_acce_flag_s = 21;
+  // 惯导Y轴角速度偏移值有效标志 [] [0E-008|1.00000000]
+  optional bool imu_y_axis_ag_acce_ofs_flag_s = 22;
+  // 惯导Z轴加速度有效标志 [] [0E-008|1.00000000]
+  optional bool imu_z_axis_acce_flag_s = 23;
+  // 惯导Z轴加速度偏移值有效标志 [] [0E-008|1.00000000]
+  optional bool imu_z_axis_acce_ofs_flag_s = 24;
+  // 惯导Z轴角速度有效标志 [] [0E-008|1.00000000]
+  optional bool imu_z_axis_ag_acce_flag_s = 25;
+  // 惯导Z轴角速度偏移值有效标志 [] [0E-008|1.00000000]
+  optional bool imu_z_axis_ag_acce_ofs_flag_s = 26;
+  // 左前轮速脉冲计数 [] [0E-008|1022.00000000]
+  optional double vcu_fl_whl_pulse_cnt_s = 27;
+  // 右前轮速脉冲计数 [] [0E-008|1022.00000000]
+  optional double vcu_fr_whl_pulse_cnt_s = 28;
+  // 左后轮速脉冲计数 [] [0E-008|1022.00000000]
+  optional double vcu_rl_whl_pulse_cnt_s = 29;
+  // 右后轮速脉冲计数 [] [0E-008|1022.00000000]
+  optional double vcu_rr_whl_pulse_cnt_s = 30;
+  // 左前轮速脉冲计数有效标志 [] [0E-008|1.00000000]
+  optional bool vcu_fl_whl_pulse_cnt_efc_flg_s = 31;
+  // 右前轮速脉冲计数有效标志 [] [0E-008|1.00000000]
+  optional bool vcu_fr_whl_pulse_cnt_efc_flg_s = 32;
+  // 左后轮速脉冲计数有效标志 [] [0E-008|1.00000000]
+  optional bool vcu_rl_whl_pulse_cnt_efc_flg_s = 33;
+  // 右后轮速脉冲计数有效标志 [] [0E-008|1.00000000]
+  optional bool vcu_rr_whl_pulse_cnt_efc_flg_s = 34;
+  // 左前轮行驶方向 [] [0E-008|3.00000000]
+  optional VCUFLwhldrvdirSType vcu_fl_whl_drv_dir_s = 35;
+  // 右前轮行驶方向 [] [0E-008|3.00000000]
+  optional VCUFRwhldrvdirSType vcu_fr_whl_drv_dir_s = 36;
+  // 左后轮行驶方向 [] [0E-008|3.00000000]
+  optional VCURLwhldrvdirSType vcu_rl_whl_drv_dir_s = 37;
+  // 右后轮行驶方向 [] [0E-008|3.00000000]
+  optional VCURRwhldrvdirSType vcu_rr_whl_drv_dir_s = 38;
+  // 左前轮行驶方向有效标志 [] [0E-008|1.00000000]
+  optional bool vcu_fl_whl_drv_dir_efc_flg_s = 39;
+  // 右前轮行驶方向有效标志 [] [0E-008|1.00000000]
+  optional bool vcu_fr_whl_drv_dir_efc_flg_s = 40;
+  // 左后轮行驶方向有效标志 [] [0E-008|1.00000000]
+  optional bool vcu_rl_whl_drv_dir_efc_flg_s = 41;
+  // 右后轮行驶方向有效标志 [] [0E-008|1.00000000]
+  optional bool vcu_rr_whl_drv_dir_efc_flg_s = 42;
+  // 制动踏板开关状态 [] [0E-008|3.00000000]
+  optional BrakeswtsatSType brake_swt_sat_s = 43;
+  // 实际油门深度有效标志 [] [0E-008|1.00000000]
+  optional bool act_acce_pedl_perc_efc_flg_s = 44;
+  // 实际油门深度 [%] [0E-008|100.00000000]
+  optional double act_acce_pedl_perc_s = 45;
+  // VCU驱动系统状态 [] [0E-008|1.00000000]
+  optional bool vcu_torque_status = 46;
+  // 液压制动有效标志 [] [0E-008|1.00000000]
+  optional bool hydrabrake_valid = 47;
+  // 前差速锁状态 [] [0E-008|7.00000000]
+  optional FdiflocksatType f_diflock_sat = 48;
+  // 后差速锁状态 [] [0E-008|7.00000000]
+  optional RdiflocksatType r_diflock_sat = 49;
+  // 左前轮速 [] [0E-008|281.46250000]
+  optional double vcu_fl_wheel_spd_10_b = 50;
+  // 右前轮速 [] [0E-008|281.46250000]
+  optional double vcu_fr_wheel_spd_10_b = 51;
+  // 左后轮速 [] [0E-008|281.46250000]
+  optional double vcu_rl_wheel_spd_10_b = 52;
+  // 右后轮速 [] [0E-008|281.46250000]
+  optional double vcu_rr_wheel_spd_10_b = 53;
+}
+
+message IDCS_0X112 {
+// Report Message
+  enum DiSteerAControllerStatusADASSType {
+    DISTEER_A_CONTROLLER_STATUS_ADAS_S_TEMPORARY_INHIBITED = 0;
+    DISTEER_A_CONTROLLER_STATUS_ADAS_S_ACTIVE = 1;
+    DISTEER_A_CONTROLLER_STATUS_ADAS_S_AVAILABLE_FOR_CONTROL = 2;
+    DISTEER_A_CONTROLLER_STATUS_ADAS_S_PERMANENT_INHIBITED = 3;
+    DISTEER_A_CONTROLLER_STATUS_ADAS_S_DSR_CONTROL = 4;
+  }
+  // Checksum=CRC16(x16 + x12 + x5  + 1)Polynomial:0x1021initial value：0xFFFFXOR value：0x0000 [] [0E-008|65535.00000000]
+  optional int32 crc_checknum_112_s = 1;
+  // 滚动循环计数器112 [] [0E-008|65535.00000000]
+  optional int32 alive_counter_112_s = 2;
+  // 后轮实际转动角度 [] [-20.00000000|20.00000000]
+  optional double di_steer_a_angle_s = 3;
+  // 后轮实际转动角度有效性 [] [0E-008|1.00000000]
+  optional bool di_steer_a_angle_vd_s = 4;
+  // 后轮转动角速度 [] [0E-008|15.00000000]
+  optional double di_steer_a_angular_velocity_s = 5;
+  // DiSteer-A控制器状态 [] [0E-008|7.00000000]
+  optional DiSteerAControllerStatusADASSType di_steer_a_controller_status_adas_s = 6;
+  // DiSteer-A控制器状态有效性 [] [0E-008|1.00000000]
+  optional bool di_steer_a_controller_status_vd_adas_s = 7;
+  // 后轮锁止状态 [] [0E-008|1.00000000]
+  optional bool di_steer_a_lock_condition_s = 8;
+}
+
+message EPS_0X11F {
+// Report Message
+  // 方向盘角度Steering wheel angle [度] [-780.00000000|779.90000000]
+  optional double steering_wheel_angle_s = 1;
+  // 方向盘旋转速度Steering wheel rotation speed [°/s] [0E-008|1016.00000000]
+  optional double steering_wheel_rotation_speed_s = 2;
+  // Failure_Status OK [] [0E-008|1.00000000]
+  optional bool failure_stats_ok_s = 3;
+  // 传感器校准状态Calibration Status [] [0E-008|1.00000000]
+  optional bool sensor_calibration_stats_s = 4;
+  // 传感器平衡状态Trimming Status [] [0E-008|1.00000000]
+  optional bool trim_trimming_stats_s = 5;
+  // 滚动循环计数器11F [] [0E-008|15.00000000]
+  optional int32 counter_11_f_s = 6;
+  // temp_result=Byte1 XOR Byte2 XOR Byte3 XOR Byte4Checksum=highter nibble（temp_result）XOR lower nibble（temp_result）XOR Msg_Cnt [] [0E-008|15.00000000]
+  optional int32 checksum_11_f_s = 7;
+}
+
+message IPB_0X121 {
+// Report Message
+  // IPB_Vehicle_speed [km/h] [0E-008|281.46250000]
+  optional double ipb_vehicle_speed_s = 1;
+  // 整车速度状态 [] [0E-008|1.00000000]
+  optional bool vehicle_speed_stats_s = 2;
+  // 自动车轮制动可用性 [] [0E-008|1.00000000]
+  optional bool awb_available_s = 3;
+  // 自动制动警告AWBactive [] [0E-008|1.00000000]
+  optional bool awb_active_brake_warning_s = 4;
+  // AEBdecActive [] [0E-008|1.00000000]
+  optional bool aeb_dec_active_s = 5;
+  // 自动紧急制动有效状态AEBnotAvailable [] [0E-008|1.00000000]
+  optional bool aeb_not_available_s = 6;
+  // 预填充可行性 [] [0E-008|1.00000000]
+  optional bool prefill_available_s = 7;
+  // 预填充正常 [] [0E-008|1.00000000]
+  optional bool prefill_active_s = 8;
+  // 主动制动辅助可行性 [] [0E-008|1.00000000]
+  optional bool ab_aavailable_s = 9;
+  // 主动制动辅助功能工作 [] [0E-008|1.00000000]
+  optional bool aba_active_s = 10;
+  // Counter_121 [] [0E-008|15.00000000]
+  optional int32 counter_121_s = 11;
+  // 校验码121 [] [0E-008|255.00000000]
+  optional int32 checknum_121_s = 12;
+}
+
+message IPB_0X122 {
+// Report Message
+  enum AWDTrqReqMethodSType {
+    AWD_TRQ_REQ_METHOD_S_PASSIVE = 0;
+    AWD_TRQ_REQ_METHOD_S_FASTOPEN = 1;
+    AWD_TRQ_REQ_METHOD_S_TORQUEMAXLIMIT = 2;
+    AWD_TRQ_REQ_METHOD_S_ERROR = 3;
+  }
+  enum AVHCtrlStatusSType {
+    AVH_CTRLSTATUS_S_AVHOFF_OFF = 0;
+    AVH_CTRLSTATUS_S_AVHONWITHOUTACTIVEBRAKING = 1;
+    AVH_CTRLSTATUS_S_AVHONWITHACTIVEBRAKING = 2;
+    AVH_CTRLSTATUS_S_AVHONNOREADY_OPEN_DISSATISFIED = 3;
+  }
+  // WheelSpeed_FL_122 [] [0E-008|281.46250000]
+  optional double wheel_speed_fl_122_s = 1;
+  // WheelSpeed_FR_Status_122 [] [0E-008|1.00000000]
+  optional bool wheel_speed_fr_stats_122_s = 2;
+  // WheelSpeed_FL_Status_122 [] [0E-008|1.00000000]
+  optional bool wheel_speed_fl_stats_122_s = 3;
+  // WheelSpeed_RR_Status_122 [] [0E-008|1.00000000]
+  optional bool wheel_speed_rr_stats_122_s = 4;
+  // WheelSpeed_RL_Status_122 [] [0E-008|1.00000000]
+  optional bool wheel_speed_rl_status_122_s = 5;
+  // WheelSpeed_FR_122 [] [0E-008|281.46250000]
+  optional double wheel_speed_fr_122_s = 6;
+  // EBD_Active_122 [] [0E-008|1.00000000]
+  optional bool ebd_active_122_s = 7;
+  // ABS_Active_122 [] [0E-008|1.00000000]
+  optional bool abs_active_122_s = 8;
+  // EBD_Fault_122 [] [0E-008|1.00000000]
+  optional bool ebd_fault_122_s = 9;
+  // ABS_Fault_122 [] [0E-008|1.00000000]
+  optional bool abs_fault_122_s = 10;
+  // WheelSpeed_RL_122 [] [0E-008|281.46250000]
+  optional double wheel_speed_rl_122_s = 11;
+  // AWDTrqReqMethod [] [0E-008|3.00000000]
+  optional AWDTrqReqMethodSType awd_trq_req_method_s = 12;
+  // TCSActive_122 [] [0E-008|1.00000000]
+  optional bool tcs_active_122_s = 13;
+  // DTCActive_122 [] [0E-008|1.00000000]
+  optional bool dtc_active_122_s = 14;
+  // WheelSpeed_RR_122 [] [0E-008|281.46250000]
+  optional double wheel_speed_rr_122_s = 15;
+  // VDCActive_122 [] [0E-008|1.00000000]
+  optional bool vdc_active_122_s = 16;
+  // AVH_Failure [] [0E-008|1.00000000]
+  optional bool avh_failure_s = 17;
+  // AVH_CtrlStatus（ST车型） [] [0E-008|3.00000000]
+  optional AVHCtrlStatusSType avh_ctrl_status_s = 18;
+}
+
+message IPB_0X123 {
+// Report Message
+  enum HDCCtrlStatusSType {
+    HDC_CTRLSTATUS_S_HDCOFF_NOLAMP = 0;
+    HDC_CTRLSTATUS_S_HDCONWITHOUTACTIVEBRAKING = 1;
+    HDC_CTRLSTATUS_S_HDCONWITHACTIVEBRAKING = 2;
+    HDC_CTRLSTATUS_S_IPBWITHOUTHDC = 3;
+  }
+  enum BrakePedalStatusSType {
+    BRAKE_PEDAL_STATUS_S_NOT_PRESSED = 0;
+    BRAKE_PEDAL_STATUS_S_PRESSED = 1;
+    BRAKE_PEDAL_STATUS_S_RESERVED_2 = 2;
+    BRAKE_PEDAL_STATUS_S_ERROR = 3;
+  }
+  // 堵坡缓降控制状态 [] [0E-008|3.00000000]
+  optional HDCCtrlStatusSType hdc_ctrl_status_s = 1;
+  // 制动踏板状态 [] [0E-008|3.00000000]
+  optional BrakePedalStatusSType brake_pedal_status_s = 2;
+  // Counter123 [] [0E-008|15.00000000]
+  optional int32 counter123_s = 3;
+  // ESP_OFF [] [0E-008|1.00000000]
+  optional bool esp_off_s = 4;
+  // ESP_Active [] [0E-008|1.00000000]
+  optional bool esp_active_s = 5;
+  // TCS_Fault [] [0E-008|1.00000000]
+  optional bool tcs_fault_s = 6;
+  // VDC_Fault [] [0E-008|1.00000000]
+  optional bool vdc_fault_s = 7;
+  // Checksum123 [] [0E-008|255.00000000]
+  optional int32 checksum123_s = 8;
+}
+
+message VCU_0X12C {
+// Report Message
+  enum CrawlingstateType {
+    CRAWLING_STATE_INHIBITED = 0;
+    CRAWLING_STATE_OFF = 1;
+    CRAWLING_STATE_STANDBY = 2;
+    CRAWLING_STATE_ACT = 3;
+  }
+  // Crawling_state [] [0E-008|3.00000000]
+  optional CrawlingstateType crawling_state = 1;
+  // Counter_12C_S [] [0E-008|15.00000000]
+  optional int32 counter_12_c_s = 2;
+  // CheckSum_12C_S [] [0E-008|255.00000000]
+  optional int32 check_sum_12_c_s = 3;
+}
+
+message ADS_0X134_CHASSIS {
+// Control Message
+  enum APAAutoParkingStatusSType {
+    APA_AUTO_PARKING_STATUS_S_PASSIVESTANDBY = 0;
+    APA_AUTO_PARKING_STATUS_S_SEARCHING = 1;
+    APA_AUTO_PARKING_STATUS_S_GUIDANCEACT = 2;
+    APA_AUTO_PARKING_STATUS_S_GUIDANCESUSPEND = 3;
+    APA_AUTO_PARKING_STATUS_S_GUIDANCETERMINATED = 4;
+    APA_AUTO_PARKING_STATUS_S_GUIDANCECPLD = 5;
+    APA_AUTO_PARKING_STATUS_S_AUTOPARISNOTAVAILABLE = 6;
+    APA_AUTO_PARKING_STATUS_S_PKASSISTSTANDBY = 7;
+  }
+  enum APAFailureBrakeModeSType {
+    APA_FAILUREBRAKEMODE_S_IDLENOBRAKING = 0;
+    APA_FAILUREBRAKEMODE_S_COMFORTCOMFORTABLEBRAKING = 1;
+    APA_FAILUREBRAKEMODE_S_EMERGENCYEMERGENCYBRAKING = 2;
+    APA_FAILUREBRAKEMODE_S_RESERVED_3 = 3;
+  }
+  enum APAParkModeSType {
+    APA_PARK_MODE_S_IDLE = 0;
+    APA_PARK_MODE_S_APA = 1;
+    APA_PARK_MODE_S_RPA = 2;
+    APA_PARK_MODE_S_AVP = 3;
+  }
+  // APA_自动泊车状态 [] [0E-008|7.00000000]
+  optional APAAutoParkingStatusSType apa_auto_parking_status_s = 1;
+  // APA_SteeringCtrlReqForEPS [] [0E-008|1.00000000]
+  optional bool apa_steering_ctrl_req_for_eps_s = 2;
+  // APA_SteeringCtrlReqForEPSVD [] [0E-008|1.00000000]
+  optional bool apa_steering_ctrl_req_for_epsvd_s = 3;
+  // APA_FailureBrakeMode [] [0E-008|3.00000000]
+  optional APAFailureBrakeModeSType apa_failure_brake_mode_s = 4;
+  // 目标方向盘角度 [度] [-780.00000000|779.90000000]
+  optional double apa_target_steering_angle_s = 5;
+  // APA_泊车模式 [] [0E-008|3.00000000]
+  optional APAParkModeSType apa_park_mode_s = 6;
+  // Alive Rolling counter134 [] [0E-008|15.00000000]
+  optional int32 counter_134_s = 7;
+  // Checksum=(Byte1+byte2…+Byte7)XOR0xFF [] [0E-008|255.00000000]
+  optional int32 checksum_134_s = 8;
+}
+
+message EPS_0X135 {
+// Report Message
+  enum EPSAPACtrlStasSType {
+    EPS_APA_CTRLSTAS_S_TEMPORARY_INHIBITED = 0;
+    EPS_APA_CTRLSTAS_S_AVAILABLE_FOR_CONTROL = 1;
+    EPS_APA_CTRLSTAS_S_ACTIVE = 2;
+    EPS_APA_CTRLSTAS_S_PERMANENT_INHIBITED = 3;
+    EPS_APA_CTRLSTAS_S_RESERVED_4 = 4;
+    EPS_APA_CTRLSTAS_S_RESERVED_5 = 5;
+    EPS_APA_CTRLSTAS_S_RESERVED_6 = 6;
+    EPS_APA_CTRLSTAS_S_RESERVED_7 = 7;
+  }
+  enum EPSAPACtrlAbortFeedSType {
+    EPS_APA_CTRLABORTFEED_S_NO_INTERRUPTION = 0;
+    EPS_APA_CTRLABORTFEED_S_DRIVER_INTERRUPTION = 1;
+    EPS_APA_CTRLABORTFEED_S_EPS_TEMPORARY_ERROR = 2;
+    EPS_APA_CTRLABORTFEED_S_EPS_PERMANENT_ERROR = 3;
+    EPS_APA_CTRLABORTFEED_S_APA_SINGLE_ABSENT_RESERVED_4 = 4;
+    EPS_APA_CTRLABORTFEED_S_APA_TARGET_ANGLE_OVER_LIMIT = 5;
+    EPS_APA_CTRLABORTFEED_S_APATARGETANGLE_V_OVERLIMIT = 6;
+    EPS_APA_CTRLABORTFEED_S_APA_SIGNAL_ERROR = 7;
+    EPS_APA_CTRLABORTFEED_S_VEHICLE_SPEED_OVER_LIMIT = 8;
+    EPS_APA_CTRLABORTFEED_S_VEHICLE_SPEED_SIGNAL_ERROR = 9;
+    EPS_APA_CTRLABORTFEED_S_VEHICLESPEEDSIGNABSENTRESERV = 10;
+    EPS_APA_CTRLABORTFEED_S_TAS_ANGLE_ERROR = 11;
+    EPS_APA_CTRLABORTFEED_S_INCORRECT_HANDSHAKING = 12;
+    EPS_APA_CTRLABORTFEED_S_OVER_ANGLE_MAX_VALUE = 13;
+    EPS_APA_CTRLABORTFEED_S_OVER_ANGLE_VELOCITY = 14;
+    EPS_APA_CTRLABORTFEED_S_OTHER_FAULTS = 15;
+  }
+  // EPS_StrWhlTorqVD(EPS Steering Wheel Torque Valid State) [] [0E-008|1.00000000]
+  optional bool eps_str_whl_torq_vd_s = 1;
+  // EPS_StrWhlTorqVal(EPS Steering Wheel Torque Value) [Nm] [-12.50000000|12.50000000]
+  optional double eps_str_whl_torq_val_s = 2;
+  // EPS_APA_CtrlStas(EPS APA Control status) [] [0E-008|7.00000000]
+  optional EPSAPACtrlStasSType eps_apa_ctrl_stas_s = 3;
+  // EPS_APA_CtrlAbortFeed_S [] [0E-008|15.00000000]
+  optional EPSAPACtrlAbortFeedSType eps_apa_ctrl_abort_feed_s = 4;
+  // MsgCounter135 [度] [0E-008|15.00000000]
+  optional int32 counter_135_s = 5;
+  // Checksum=(Byte1Byte2……Byte7)XOR0xFF [Nm] [0E-008|255.00000000]
+  optional int32 checksum135_s = 6;
+}
+
+message ADS_0X139 {
+// Control Message
+  enum ACCModeSType {
+    ACC_MODE_S_OFF = 0;
+    ACC_MODE_S_PASSIVEMODE = 1;
+    ACC_MODE_S_STANDBYMODE = 2;
+    ACC_MODE_S_ACTIVECONTROLMODE = 3;
+    ACC_MODE_S_BRAKEONLYMODE = 4;
+    ACC_MODE_S_OVERRIDE = 5;
+    ACC_MODE_S_STANDSTILL = 6;
+    ACC_MODE_S_FAILUREMODE = 7;
+  }
+  enum ESPVLCShutDownRequestSType {
+    ESP_VLC_SHUT_DOWN_REQUEST_S_SOFTOFF = 0;
+    ESP_VLC_SHUT_DOWN_REQUEST_S_FASTOFF = 1;
+    ESP_VLC_SHUT_DOWN_REQUEST_S_IMMEDIATEOFF = 2;
+    ESP_VLC_SHUT_DOWN_REQUEST_S_INITIAL = 3;
+  }
+  enum ADSPkgFunctionsSType {
+    ADS_PKGFUNCTIONS_S_NONE = 0;
+    ADS_PKGFUNCTIONS_S_APA = 1;
+    ADS_PKGFUNCTIONS_S_RPA = 2;
+    ADS_PKGFUNCTIONS_S_AVP = 3;
+  }
+  enum ADSPkgDirSType {
+    ADS_PKGDIR_S_NONE = 0;
+    ADS_PKGDIR_S_FORWARD = 1;
+    ADS_PKGDIR_S_BACKWARD = 2;
+    ADS_PKGDIR_S_RESERVED_3 = 3;
+  }
+  enum ADSPkgMotiontypemodeSType {
+    ADS_PKGMOTION_TYPE_MODE_S_INITIAL = 0;
+    ADS_PKGMOTION_TYPE_MODE_S_COMFORTABLE = 1;
+    ADS_PKGMOTION_TYPE_MODE_S_EMERGENCY = 2;
+    ADS_PKGMOTION_TYPE_MODE_S_RESERVED_3 = 3;
+  }
+  enum ADSMEBStatusSType {
+    ADS_MEB_STATUS_S_OFF = 0;
+    ADS_MEB_STATUS_S_INACTIVE = 1;
+    ADS_MEB_STATUS_S_READY = 2;
+    ADS_MEB_STATUS_S_PREFILL = 3;
+    ADS_MEB_STATUS_S_ACTIVE = 4;
+    ADS_MEB_STATUS_S_STANDSTILL = 5;
+    ADS_MEB_STATUS_S_ERROR = 6;
+    ADS_MEB_STATUS_S_RESERVED_7 = 7;
+  }
+  enum PaveIdResultsType {
+    PAVE_ID_RESULTS_OFF = 0;
+    PAVE_ID_RESULTS_ORDINARY_ROAD = 1;
+    PAVE_ID_RESULTS_SNOW_GRASSLAND = 2;
+    PAVE_ID_RESULTS_SANDY = 3;
+    PAVE_ID_RESULTS_MUDDY_ROAD = 4;
+  }
+  enum Park2RWSFunctionType {
+    PARK2RWS_FUNCTION_INIT_DEFAULT = 0;
+    PARK2RWS_FUNCTION_APA = 1;
+    PARK2RWS_FUNCTION_RPA = 2;
+    PARK2RWS_FUNCTION_HPA = 3;
+    PARK2RWS_FUNCTION_AVP = 4;
+  }
+  enum ADS2RWSrequesttypeType {
+    ADS2RWS_REQUEST_TYPE_INITIAL = 0;
+    ADS2RWS_REQUEST_TYPE_MIDDLE_LOCKED = 1;
+    ADS2RWS_REQUEST_TYPE_RWS_SELF_CONTROL = 2;
+    ADS2RWS_REQUEST_TYPE_RWS_ANGLE_CONTROL = 3;
+  }
+  enum Pkg2VOTDirrotationReqType {
+    PKG2VOT_DIR_ROTATION_REQ_INITIAL = 0;
+    PKG2VOT_DIR_ROTATION_REQ_MASS_CENTER_COUNTERCLOCKWISE = 1;
+    PKG2VOT_DIR_ROTATION_REQ_MASS_CENTER_CLOCKWISE = 2;
+    PKG2VOT_DIR_ROTATION_REQ_REAR_AXLE_CENTER_COUNTERCLOCKWISE = 3;
+    PKG2VOT_DIR_ROTATION_REQ_REAR_AXLE_CENTER_CLOCKWISE = 4;
+    PKG2VOT_DIR_ROTATION_REQ_FL_COUNTERCLOCKWISE = 5;
+    PKG2VOT_DIR_ROTATION_REQ_FL_CLOCKWISE = 6;
+    PKG2VOT_DIR_ROTATION_REQ_FR_COUNTERCLOCKWISE = 7;
+    PKG2VOT_DIR_ROTATION_REQ_FR_CLOCKWISE = 8;
+    PKG2VOT_DIR_ROTATION_REQ_RL_COUNTERCLOCKWISE = 9;
+    PKG2VOT_DIR_ROTATION_REQ_RL_CLOCKWISE = 10;
+    PKG2VOT_DIR_ROTATION_REQ_RR_COUNTERCLOCKWISE = 11;
+    PKG2VOT_DIR_ROTATION_REQ_RR_CLOCKWISE = 12;
+  }
+  enum IDPTargetTypeType {
+    IDPTARGET_TYPE_INVALID = 0;
+    IDPTARGET_TYPE_FOURWHEELEDVEHICLE = 1;
+    IDPTARGET_TYPE_LARGEVEHICLE = 2;
+    IDPTARGET_TYPE_TWOWHEELEDVEHICLE_BICYCLE = 3;
+    IDPTARGET_TYPE_PEDESTRIAN = 4;
+    IDPTARGET_TYPE_TROLLEY = 5;
+    IDPTARGET_TYPE_THREEWHEELEDVEHICLE = 6;
+    IDPTARGET_TYPE_CONEBARREL = 7;
+    IDPTARGET_TYPE_ANIMAL = 8;
+    IDPTARGET_TYPE_BUS = 9;
+  }
+  // Checksum=CRC16(x16 + x12 + x5  + 1)Polynomial:0x1021initial value：0xFFFFXOR value：0x0000 [] [0E-008|65535.00000000]
+  optional int32 checksum_139_s = 1;
+  // Alive_Counter_139_S [] [0E-008|65535.00000000]
+  optional int32 counter_139_s = 2;
+  // ACC目标加速度axvCvAim [m/s2] [-5.00000000|7.75000000]
+  optional double acc_axv_cv_aim_s = 3;
+  // 加速度上限值xvCvComfortBandUpperValue [m/s2] [-5.00000000|7.75000000]
+  optional double axv_cv_coft_band_upper_val_s = 4;
+  // 加速度下限值axvCvComfortBandLowerValue [m/s2] [-5.00000000|7.75000000]
+  optional double axv_cv_coft_band_lower_val_s = 5;
+  // 最大允许目标加速度变化率DtUpperLimitAxvCv [m/s3] [0E-008|16.00000000]
+  optional double a_dt_upper_limit_axv_cv_s = 6;
+  // 抑制悬架请求 [] [0E-008|1.00000000]
+  optional bool ads_susp_inhibit_req_s = 7;
+  // 最小允许目标加速度变化率aDtLowerLimitAxvCv [m/s3] [-16.00000000|0E-008]
+  optional double adt_lower_limit_axv_cv_s = 8;
+  // ACC驶离请求ACC_DriveOffReq [] [0E-008|1.00000000]
+  optional bool acc_drive_off_req_s = 9;
+  // ACC停车请求ACC_DecToStopReq [] [0E-008|1.00000000]
+  optional bool acc_dec_to_stop_req_s = 10;
+  // ACC最小制动请求ACC_Minimum_Braking [] [0E-008|1.00000000]
+  optional bool acc_minimum_braking_s = 11;
+  // 预制动请求BrakePreferred [] [0E-008|1.00000000]
+  optional bool brake_preferred_s = 12;
+  // ACCModeACC模式 [] [0E-008|7.00000000]
+  optional ACCModeSType acc_mode_s = 13;
+  // ESP_VLC模式关闭请求ShutdownMode [] [0E-008|3.00000000]
+  optional ESPVLCShutDownRequestSType esp_vlc_shut_down_request_s = 14;
+  // 泊车功能握手请求 [] [0E-008|1.00000000]
+  optional bool ads_pkg_request_s = 15;
+  // 当前请求的功能 [] [0E-008|3.00000000]
+  optional ADSPkgFunctionsSType ads_pkg_functions_s = 16;
+  // 前进后退方向请求，用于控制换挡 [] [0E-008|3.00000000]
+  optional ADSPkgDirSType ads_pkg_dir_s = 17;
+  // 起步请求 [] [0E-008|1.00000000]
+  optional bool ads_pkg_drive_off_req_s = 18;
+  // 舒适模式/紧急模式 [] [0E-008|3.00000000]
+  optional ADSPkgMotiontypemodeSType ads_pkg_motion_type_mode_s = 19;
+  // 请求ESC保压来保持车辆静止 [] [0E-008|1.00000000]
+  optional bool ads_pkg_standstill_req_s = 20;
+  // 紧急制动请求(预留) [] [0E-008|1.00000000]
+  optional bool ads_pkg_emerg_brake_req_s = 21;
+  // 安全模式请求（P+EPB） [] [0E-008|1.00000000]
+  optional bool ads_pkg_safety_mode_req_s = 22;
+  // EPB释放请求 [] [0E-008|1.00000000]
+  optional bool ads_pkg_epb_release_req_s = 23;
+  // MEB保压请求用 [] [0E-008|1.00000000]
+  optional bool ads_meb_standstill_req_s = 24;
+  // MEB使用驾驶员请求接管标志位 [] [0E-008|1.00000000]
+  optional bool ads_safe_drvr_handover_req_s = 25;
+  // 加速度请求值 [m/s2] [-6.40000000|6.30000000]
+  optional double ads_pkg_target_ax_s = 26;
+  // 加速度请求值上限 [m/s2] [-10.00000000|3.00000000]
+  optional double ads_pkg_ax_upper_limit_s = 27;
+  // 加速度请求值下限 [m/s2] [-10.00000000|3.00000000]
+  optional double ads_pkg_ax_lower_limit_s = 28;
+  // 加速度梯度请求值上限 [m/s2] [0E-008|10.00000000]
+  optional double ads_pkg_jerk_upper_limit_s = 29;
+  // MEB紧急制动请求 [] [0E-008|1.00000000]
+  optional bool ads_meb_brake_emgcy_s = 30;
+  // 加速度梯度请求值下限 [] [-10.00000000|0E-008]
+  optional double ads_pkg_jerk_lower_limit_s = 31;
+  // MEB使用，预制动是否需要预制动消除制动系统间隙 [] [0E-008|1.00000000]
+  optional bool ads_meb_brake_emgcy_prep_s = 32;
+  // MEB状态信号 [] [0E-008|7.00000000]
+  optional ADSMEBStatusSType ads_meb_status_s = 33;
+  // ADS_ActiveSuspModeReq_S [] [0E-008|1.00000000]
+  optional bool ads_active_susp_mode_req_s = 34;
+  // ADS_ActiveSuspModeReq_Valid_S [] [0E-008|1.00000000]
+  optional bool ads_active_susp_mode_req_valid_s = 35;
+  // 交互握手控制请求 [] [0E-008|1.00000000]
+  optional bool ads2_rws_rear_steering_ctrl_req_s = 36;
+  // 控制信号后轮转角请求目标值 [°] [-20.00000000|20.00000000]
+  optional double ads2_rws_target_r_wheel_angle_s = 37;
+  // 交互握手控制请求有效位 [] [0E-008|1.00000000]
+  optional bool ads2_rws_rear_steering_ctrl_req_vd_s = 38;
+  // 加速度安全上限值 [m/s2] [-5.00000000|7.75000000]
+  optional double axv_cv_upper_limit_s = 39;
+  // 加速度安全下限值 [m/s2] [-5.00000000|7.75000000]
+  optional double axv_cv_lower_limit_value = 40;
+  // 泊车驾驶模式抑制 [] [0E-008|1.00000000]
+  optional bool ads_pkg_drive_mode_susp_req = 41;
+  // 泊车驾驶模式抑制有效位 [] [0E-008|1.00000000]
+  optional bool ads_pkg_drive_mode_susp_req_valid = 42;
+  // Pave_Id_Results [] [0E-008|7.00000000]
+  optional PaveIdResultsType pave_id_results = 43;
+  // Pave_Id_Results_Valid [] [0E-008|1.00000000]
+  optional bool pave_id_results_valid = 44;
+  // 请求控制后轮的泊车功能 [] [0E-008|7.00000000]
+  optional Park2RWSFunctionType park2_rws_function = 45;
+  // 表征当前请求的控制方式 [] [0E-008|3.00000000]
+  optional ADS2RWSrequesttypeType ads2_rws_request_type = 46;
+  // 当前请求控制后轮的行车功能与握手请求信号同时发出 [] [0E-008|7.00000000]
+  optional int32 driving2_rws_function_s = 47;
+  // 泊车对VOT握手请求 [] [0E-008|1.00000000]
+  optional bool pkg2_vot_function_req = 48;
+  // VOT转速请求 [°/s] [0E-008|12.60000000]
+  optional double pkg2_vot_speed = 49;
+  // 泊车对VOT角度请求 [] [0E-008|180.00000000]
+  optional double pkg2_vot_angle_rotation_req = 50;
+  // 泊车对VOT方向请求 [] [0E-008|15.00000000]
+  optional Pkg2VOTDirrotationReqType pkg2_vot_dir_rotation_req = 51;
+  // 泊车对VOT停止旋转请求 [] [0E-008|1.00000000]
+  optional bool pkg2_vot_stop = 52;
+  // 泊车对敏捷转向抑制 [] [0E-008|1.00000000]
+  optional bool pkg2_asa_suspend = 53;
+  // 泊车纵向控制模式 [] [0E-008|7.00000000]
+  optional int32 apa2_vcur_control_mode = 54;
+  // 已转过的角度 [] [0E-008|255.00000000]
+  optional int32 pkg2_vot_ya_wangle = 55;
+  // X方向平移量(VOT) [cm] [-128.00000000|127.00000000]
+  optional double pkg2_vot_xdisplacement = 56;
+  // Y方向平移量(VOT) [cm] [-128.00000000|127.00000000]
+  optional double pkg2_vot_ydisplacement = 57;
+  // 位移信号有效性 [] [0E-008|1.00000000]
+  optional bool pkg2_vot_displacement_vd = 58;
+  // IDP目标类型 [] [0E-008|15.00000000]
+  optional IDPTargetTypeType idp_target_type = 59;
+  // 自车道正前方目标1TTC [] [0E-008|40.95000000]
+  optional double ttc_front_obj1_s = 60;
+}
+
+message ADS_0X13F {
+// Control Message
+  enum APALSMSubMTReqSType {
+    APA_LSMSUBMTREQ_S_NONE = 0;
+    APA_LSMSUBMTREQ_S_DRIVE = 1;
+    APA_LSMSUBMTREQ_S_LSM = 2;
+    APA_LSMSUBMTREQ_S_RESERVED_3 = 3;
+  }
+  enum APALSMSubMTLevelSType {
+    APA_LSMSUBMTLEVEL_S_NONE = 0;
+    APA_LSMSUBMTLEVEL_S_LEVEL12_APA = 1;
+    APA_LSMSUBMTLEVEL_S_LEVEL23_RPA = 2;
+    APA_LSMSUBMTLEVEL_S_AVP = 3;
+  }
+  enum APALSMVehDirRqSType {
+    APA_LSMVEHDIRRQ_S_DIRREQ_NONE = 0;
+    APA_LSMVEHDIRRQ_S_DIRREQ_FORWARD = 1;
+    APA_LSMVEHDIRRQ_S_DIRREQ_BACKWARD = 2;
+    APA_LSMVEHDIRRQ_S_RESERVED_3 = 3;
+  }
+  enum APALSMComfBrakeReqSType {
+    APA_LSMCOMFBRAKEREQ_S_COMFBRAKEREQ_NOREQ = 0;
+    APA_LSMCOMFBRAKEREQ_S_COMFBRAKEREQ_TYPE1 = 1;
+    APA_LSMCOMFBRAKEREQ_S_COMFBRAKEREQ_TYPE2 = 2;
+    APA_LSMCOMFBRAKEREQ_S_RESERVED_3 = 3;
+  }
+  enum APAMEBStatesSType {
+    APA_MEB_STATES_S_OFF = 0;
+    APA_MEB_STATES_S_INACT = 1;
+    APA_MEB_STATES_S_READY = 2;
+    APA_MEB_STATES_S_PREFILL = 3;
+    APA_MEB_STATES_S_ACT = 4;
+    APA_MEB_STATES_S_STANDSTILL = 5;
+    APA_MEB_STATES_S_RESERVED_6 = 6;
+    APA_MEB_STATES_S_RESERVED_7 = 7;
+    APA_MEB_STATES_S_RESERVED_8 = 8;
+    APA_MEB_STATES_S_ERROR = 9;
+    APA_MEB_STATES_S_RESERVED_10 = 10;
+    APA_MEB_STATES_S_RESERVED_11 = 11;
+    APA_MEB_STATES_S_RESERVED_12 = 12;
+    APA_MEB_STATES_S_RESERVED_13 = 13;
+    APA_MEB_STATES_S_RESERVED_14 = 14;
+    APA_MEB_STATES_S_RESERVED_15 = 15;
+  }
+  enum APARMEBStatesSType {
+    APA_RMEB_STATES_S_OFF = 0;
+    APA_RMEB_STATES_S_INACT = 1;
+    APA_RMEB_STATES_S_READY = 2;
+    APA_RMEB_STATES_S_PREFILL = 3;
+    APA_RMEB_STATES_S_ACT = 4;
+    APA_RMEB_STATES_S_STANDSTILL = 5;
+    APA_RMEB_STATES_S_RESERVED_6 = 6;
+    APA_RMEB_STATES_S_RESERVED_7 = 7;
+    APA_RMEB_STATES_S_RESERVED_8 = 8;
+    APA_RMEB_STATES_S_ERROR = 9;
+    APA_RMEB_STATES_S_RESERVED_10 = 10;
+    APA_RMEB_STATES_S_RESERVED_11 = 11;
+    APA_RMEB_STATES_S_RESERVED_12 = 12;
+    APA_RMEB_STATES_S_RESERVED_13 = 13;
+    APA_RMEB_STATES_S_RESERVED_14 = 14;
+    APA_RMEB_STATES_S_RESERVED_15 = 15;
+  }
+  enum APALSMSubMTLongSType {
+    APA_LSMSUBMTLONG_S_NONE = 0;
+    APA_LSMSUBMTLONG_S_COMFORT = 1;
+    APA_LSMSUBMTLONG_S_EMERGENCY = 2;
+    APA_LSMSUBMTLONG_S_RESERVED_3 = 3;
+  }
+  // 是否需要预制动消除制动系统间隙 [] [0E-008|1.00000000]
+  optional bool apa_lsm_brake_emgcy_prep_s = 1;
+  // 实现动态功能 [] [0E-008|3.00000000]
+  optional APALSMSubMTReqSType apa_lsm_sub_mt_req_s = 2;
+  // 实现泊车功能类型 [] [0E-008|3.00000000]
+  optional APALSMSubMTLevelSType apa_lsm_sub_mt_level_s = 3;
+  // 车辆窜动控制(预留） [] [0E-008|1.00000000]
+  optional bool apa_lsm_nudge_req_s = 4;
+  // 安全模式请求 [] [0E-008|1.00000000]
+  optional bool apa_lsm_veh_sec_req_s = 5;
+  // 上层系统发给LSM车辆方向 [] [0E-008|3.00000000]
+  optional APALSMVehDirRqSType apa_lsm_veh_dir_rq_s = 6;
+  // 舒适制动要求 [] [0E-008|3.00000000]
+  optional APALSMComfBrakeReqSType apa_lsm_comf_brake_req_s = 7;
+  // 上层发给LSM模块当前的停车距离 [] [0E-008|4095.00000000]
+  optional int32 apa_lsm_dist_to_stop_s = 8;
+  // 驾驶员请求接管标志位 [] [0E-008|1.00000000]
+  optional bool apa_safe_drvr_handover_req_s = 9;
+  // 低速辅助制动系统状态信号 [] [0E-008|15.00000000]
+  optional APAMEBStatesSType apa_meb_states_s = 10;
+  // 后低速辅助制动系统状态信号 [] [0E-008|15.00000000]
+  optional APARMEBStatesSType apa_rmeb_states_s = 11;
+  // 实现纵向控制制动类型 [] [0E-008|3.00000000]
+  optional APALSMSubMTLongSType apa_lsm_sub_mt_long_s = 12;
+  // 当前最大车速 [] [0E-008|25.50000000]
+  optional double apa_ls_mv_max_rq_s = 13;
+  // Alive Rolling counter13F [] [0E-008|15.00000000]
+  optional int32 counter_13_f_s = 14;
+  // Checksum=(Byte1+byte2…+Byte7)XOR0xFF [] [0E-008|255.00000000]
+  optional int32 checksum_13_f_s = 15;
+}
+
+message IPB_0X147 {
+// Report Message
+  enum IPBTABStateSType {
+    IPB_TAB_STATE_S_TAB_OFF_NO_LAMP = 0;
+    IPB_TAB_STATE_S_TABONWITHOUTACTIVEBRAK = 1;
+    IPB_TAB_STATE_S_TABONWITHACTIVEBRAK = 2;
+    IPB_TAB_STATE_S_RESERVED_3 = 3;
+  }
+  // 极致转向状态 [] [0E-008|3.00000000]
+  optional IPBTABStateSType ipb_tab_state_s = 1;
+  // RollingCounter_147_S [] [0E-008|15.00000000]
+  optional int32 counter_147_s = 2;
+  // CheckSum_147_S_Checksum=（Byte1+Byte2+…+Byte7)XOR0xFF [] [0E-008|255.00000000]
+  optional int32 check_sum_147_s = 3;
+}
+
+message IPB_0X173 {
+// Report Message
+  enum IPB2Park1LSMPosLongACapblSType {
+    IPB2PARK1_LSMPOSLONGACAPBL_S_AXCAPBL_FULL = 0;
+    IPB2PARK1_LSMPOSLONGACAPBL_S_UNEXPECTED_GEAR = 1;
+    IPB2PARK1_LSMPOSLONGACAPBL_S_AXCAPBL_VEHBLOCKED = 2;
+    IPB2PARK1_LSMPOSLONGACAPBL_S_P_EPB_TIMEOUTOVERRIDE = 3;
+  }
+  enum IPB2Park1LSMSubMTLevelEchoSType {
+    IPB2PARK1_LSMSUBMTLEVELECHO_S_MTLEVEL_NONE = 0;
+    IPB2PARK1_LSMSUBMTLEVELECHO_S_MTLEVEL_12 = 1;
+    IPB2PARK1_LSMSUBMTLEVELECHO_S_MTLEVEL_23 = 2;
+    IPB2PARK1_LSMSUBMTLEVELECHO_S_MTLEVEL_RESERVED_3 = 3;
+  }
+  enum IPB2Park1LSMSubMTLongEchoSType {
+    IPB2PARK1_LSMSUBMTLONGECHO_S_MTLONG_NONE = 0;
+    IPB2PARK1_LSMSUBMTLONGECHO_S_MTLONG_COMFORT = 1;
+    IPB2PARK1_LSMSUBMTLONGECHO_S_MTLONG_EMERGENCY = 2;
+    IPB2PARK1_LSMSUBMTLONGECHO_S_MTLONG_RESERVED_3 = 3;
+  }
+  enum IPB2Park1LSMSubMTReqEchoSType {
+    IPB2PARK1_LSMSUBMTREQECHO_S_MTLONG_NONE = 0;
+    IPB2PARK1_LSMSUBMTREQECHO_S_MTLONG_DRIVE = 1;
+    IPB2PARK1_LSMSUBMTREQECHO_S_MTLONG_LSM = 2;
+    IPB2PARK1_LSMSUBMTREQECHO_S_REVERSED = 3;
+  }
+  enum IPB2Park1Lsm12ComfortAvlSType {
+    IPB2PARK1_LSM12COMFORTAVL_S_NOTAVAILABLE = 0;
+    IPB2PARK1_LSM12COMFORTAVL_S_FAILUREDETECTEDREDUCEDAVL = 1;
+    IPB2PARK1_LSM12COMFORTAVL_S_FAILUREDETECTEDFULLYAVL = 2;
+    IPB2PARK1_LSM12COMFORTAVL_S_AVAILABLE = 3;
+  }
+  enum IPB2Park1Lsm12EmergencyAvlSType {
+    IPB2PARK1_LSM12EMERGENCYAVL_S_NOTAVAILABLE = 0;
+    IPB2PARK1_LSM12EMERGENCYAVL_S_FAILUREDETECTEDREDUCEDAVL = 1;
+    IPB2PARK1_LSM12EMERGENCYAVL_S_FAILUREDETECTEDFULLYAVL = 2;
+    IPB2PARK1_LSM12EMERGENCYAVL_S_AVAILABLE = 3;
+  }
+  enum IPB2Park1Lsm23AvlSType {
+    IPB2PARK1_LSM23AVL_S_NOTAVAILABLE = 0;
+    IPB2PARK1_LSM23AVL_S_FAILUREDETECTEDREDUCEDAVL = 1;
+    IPB2PARK1_LSM23AVL_S_FAILUREDETECTEDFULLYAVL = 2;
+    IPB2PARK1_LSM23AVL_S_AVAILABLE = 3;
+  }
+  // IPB2Park1_LSMPosLongACapbl [] [0E-008|3.00000000]
+  optional IPB2Park1LSMPosLongACapblSType ipb2_park1_lsm_pos_long_a_capbl_s = 1;
+  // IPB2Park1_LSMSubMTLevelEcho [] [0E-008|3.00000000]
+  optional IPB2Park1LSMSubMTLevelEchoSType ipb2_park1_lsm_sub_mt_level_echo_s = 2;
+  // IPB2Park1_LSMSubMTLongEcho [] [0E-008|3.00000000]
+  optional IPB2Park1LSMSubMTLongEchoSType ipb2_park1_lsm_sub_mt_long_echo_s = 3;
+  // IPB2Park1_LSMSubMTReqEcho [] [0E-008|3.00000000]
+  optional IPB2Park1LSMSubMTReqEchoSType ipb2_park1_lsm_sub_mt_req_echo_s = 4;
+  // IPB2Park1_Lsm12ComfortAvl [] [0E-008|3.00000000]
+  optional IPB2Park1Lsm12ComfortAvlSType ipb2_park1_lsm12_comfort_avl_s = 5;
+  // IPB2Park1_Lsm12EmergencyAvl [] [0E-008|3.00000000]
+  optional IPB2Park1Lsm12EmergencyAvlSType ipb2_park1_lsm12_emergency_avl_s = 6;
+  // IPB2Park1_Lsm23Avl [] [0E-008|3.00000000]
+  optional IPB2Park1Lsm23AvlSType ipb2_park1_lsm23_avl_s = 7;
+  // IPB2EPB_RPABackupStrategyRequest [] [0E-008|1.00000000]
+  optional bool ipb2_epb_rpa_backup_s_req_s = 8;
+  // IPB2EPB_StopMain2BackupEmegReq [] [0E-008|1.00000000]
+  optional bool ipb2_epb_stop_m2_b_emeg_req_s = 9;
+  // IPB_BrakeOverride [] [0E-008|1.00000000]
+  optional bool ipb_brake_override = 10;
+  // Message counter_173 [] [0E-008|15.00000000]
+  optional int32 counter173_s = 11;
+  // CheckSum_173 [] [0E-008|255.00000000]
+  optional int32 check_sum_173_s = 12;
+}
+
+message ADS_0X1D1 {
+// Control Message
+  enum AVMAPASuspendedReasonSType {
+    AVM_APA_SUSPENDEDREASON_S_NOTSUSPENDEDNOPROMPT = 0;
+    AVM_APA_SUSPENDEDREASON_S_AUTOPARPAUSECOMMANDISENABLED = 1;
+    AVM_APA_SUSPENDEDREASON_S_OBSTACLEONPATH = 2;
+    AVM_APA_SUSPENDEDREASON_S_ANYDOOROPENDOORISNOTCLOSED = 3;
+    AVM_APA_SUSPENDEDREASON_S_BRAKEPEDALDEPRESSED = 4;
+    AVM_APA_SUSPENDEDREASON_S_MIRRORFOLD = 5;
+    AVM_APA_SUSPENDEDREASON_S_SEATBELTRELEASED = 6;
+    AVM_APA_SUSPENDEDREASON_S_BTCONNECTIONISDISCONNECTED = 7;
+    AVM_APA_SUSPENDEDREASON_S_HOODOPEN = 8;
+    AVM_APA_SUSPENDEDREASON_S_TRUNCKOPEN = 9;
+    AVM_APA_SUSPENDEDREASON_S_REARSIDECOMMINGCAR = 10;
+    AVM_APA_SUSPENDEDREASON_S_FRONTSIDECOMMINGCAR = 11;
+    AVM_APA_SUSPENDEDREASON_S_RESERVED_12 = 12;
+    AVM_APA_SUSPENDEDREASON_S_RESERVED_13 = 13;
+    AVM_APA_SUSPENDEDREASON_S_RESERVED_14 = 14;
+    AVM_APA_SUSPENDEDREASON_S_RESERVED_15 = 15;
+  }
+  enum OtherHintWithParkingSType {
+    OTHER_HINT_WITH_PARKING_S_NOPROMPT = 0;
+    OTHER_HINT_WITH_PARKING_S_PKPAYATTENTIONTOSURENV = 1;
+    OTHER_HINT_WITH_PARKING_S_PKHASBEENCPLD = 2;
+    OTHER_HINT_WITH_PARKING_S_CONFPKDIRECTION = 3;
+    OTHER_HINT_WITH_PARKING_S_PKOUTPAYATTENTIONTOSURENV = 4;
+    OTHER_HINT_WITH_PARKING_S_FRONTISCLEARPKBYYOURSELFOUT = 5;
+    OTHER_HINT_WITH_PARKING_S_RESERVED_6 = 6;
+    OTHER_HINT_WITH_PARKING_S_SELPKMODEPKINPKOUT = 7;
+    OTHER_HINT_WITH_PARKING_S_CONNECTTOBTFORREMOTEPK = 8;
+    OTHER_HINT_WITH_PARKING_S_CLEANCAMERA = 9;
+    OTHER_HINT_WITH_PARKING_S_RESERVED_10 = 10;
+    OTHER_HINT_WITH_PARKING_S_RESERVED_11 = 11;
+    OTHER_HINT_WITH_PARKING_S_RESERVED_12 = 12;
+    OTHER_HINT_WITH_PARKING_S_RESERVED_13 = 13;
+    OTHER_HINT_WITH_PARKING_S_RESERVED_14 = 14;
+    OTHER_HINT_WITH_PARKING_S_RESERVED_15 = 15;
+  }
+  enum AVMAPAAutoSearchStsSType {
+    AVM_APA_AUTOSEARCHSTS_S_NOTINSEARCHMODENOPROMPT = 0;
+    AVM_APA_AUTOSEARCHSTS_S_SLOTSEARCHING = 1;
+    AVM_APA_AUTOSEARCHSTS_S_WAITFORVEHICLESTOP = 2;
+    AVM_APA_AUTOSEARCHSTS_S_WAITFORVEHICLESLOWDOWN = 3;
+    AVM_APA_AUTOSEARCHSTS_S_WAITFORDRIVEROPERATEGEAR = 4;
+    AVM_APA_AUTOSEARCHSTS_S_WAITFORVEHICLEDRIVERCONFPK = 5;
+    AVM_APA_AUTOSEARCHSTS_S_RESERVED_6 = 6;
+    AVM_APA_AUTOSEARCHSTS_S_RESERVED_7 = 7;
+  }
+  enum AVP10supportedSType {
+    AVP10_SUPPORTED_S_INVALID = 0;
+    AVP10_SUPPORTED_S_NOTSUPPORTED = 1;
+    AVP10_SUPPORTED_S_SUPPORTED = 2;
+    AVP10_SUPPORTED_S_RESERVED_3 = 3;
+  }
+  enum AVP20supportedSType {
+    AVP20_SUPPORTED_S_INVALID = 0;
+    AVP20_SUPPORTED_S_NOTSUPPORTED = 1;
+    AVP20_SUPPORTED_S_SUPPORTED = 2;
+    AVP20_SUPPORTED_S_RESERVED_3 = 3;
+  }
+  enum AVMAPAActiveSType {
+    AVM_APA_ACTIVE_S_NOTREADY = 0;
+    AVM_APA_ACTIVE_S_READYTOCONFAUTOPARINTRFAOUTPUT = 1;
+    AVM_APA_ACTIVE_S_RESERVED_2 = 2;
+    AVM_APA_ACTIVE_S_RESERVED_3 = 3;
+  }
+  enum APAParkingTypeSType {
+    APA_PARKING_TYPE_S_INVALID = 0;
+    APA_PARKING_TYPE_S_VERTICALPKATRREAR = 1;
+    APA_PARKING_TYPE_S_VERTICALPKATLREAR = 2;
+    APA_PARKING_TYPE_S_PKATRREARDIAGONAL = 3;
+    APA_PARKING_TYPE_S_PKATLREARDIAGONAL = 4;
+    APA_PARKING_TYPE_S_RREARPKHORIZONTALLY = 5;
+    APA_PARKING_TYPE_S_LREARPKHORIZONTALLY = 6;
+    APA_PARKING_TYPE_S_RFRONTPKHORIZONTALLY = 7;
+    APA_PARKING_TYPE_S_LFRONTPKHORIZONTALLY = 8;
+    APA_PARKING_TYPE_S_RVERTICALPKRESERVED = 9;
+    APA_PARKING_TYPE_S_LVERTICALPKPKEDRESERVED = 10;
+    APA_PARKING_TYPE_S_RFRONTOFCARISPKEDVERT = 11;
+    APA_PARKING_TYPE_S_LFRONTOFCARISPKEDVERT = 12;
+    APA_PARKING_TYPE_S_RESERVED_13 = 13;
+    APA_PARKING_TYPE_S_RESERVED_14 = 14;
+    APA_PARKING_TYPE_S_RESERVED_15 = 15;
+  }
+  enum APAFunctionSwitchStateSType {
+    APA_FUNCTION_SWITCH_STATE_S_INVALID = 0;
+    APA_FUNCTION_SWITCH_STATE_S_OFF = 1;
+    APA_FUNCTION_SWITCH_STATE_S_ON = 2;
+    APA_FUNCTION_SWITCH_STATE_S_RESERVED_3 = 3;
+  }
+  enum RPASupportedSType {
+    RPA_SUPPORTED_S_INVALID = 0;
+    RPA_SUPPORTED_S_NOTSUPPORT = 1;
+    RPA_SUPPORTED_S_SUPPORT = 2;
+    RPA_SUPPORTED_S_RESERVED_3 = 3;
+  }
+  enum ParkInParkOutSupportedSType {
+    PARKIN_PARKOUT_SUPPORTED_S_PKIN = 0;
+    PARKIN_PARKOUT_SUPPORTED_S_PKOUT = 1;
+    PARKIN_PARKOUT_SUPPORTED_S_PKINPKOUT = 2;
+    PARKIN_PARKOUT_SUPPORTED_S_RESERVED_3 = 3;
+  }
+  enum APASupportedSType {
+    APA_SUPPORTED_S_INVALID = 0;
+    APA_SUPPORTED_S_NOTSUPPORT = 1;
+    APA_SUPPORTED_S_SUPPORT = 2;
+    APA_SUPPORTED_S_REVERSE = 3;
+  }
+  enum MEBSupportedSType {
+    MEB_SUPPORTED_S_INVALID = 0;
+    MEB_SUPPORTED_S_NOTSUPPORT = 1;
+    MEB_SUPPORTED_S_SUPPORT = 2;
+    MEB_SUPPORTED_S_REVERSE = 3;
+  }
+  // 主动泊车暂停/激活条件提示 [] [0E-008|15.00000000]
+  optional AVMAPASuspendedReasonSType avm_apa_suspended_reason_s = 1;
+  // 泊车过程其他交互信息提示 [] [0E-008|15.00000000]
+  optional OtherHintWithParkingSType other_hint_with_parking_s = 2;
+  // 自动泊车车位搜寻状态提示 [] [0E-008|7.00000000]
+  optional AVMAPAAutoSearchStsSType avm_apa_auto_search_sts_s = 3;
+  // 配置AVP1.0功能 [] [0E-008|3.00000000]
+  optional AVP10supportedSType avp10_supported_s = 4;
+  // 配置AVP2.0功能 [] [0E-008|3.00000000]
+  optional AVP20supportedSType avp20_supported_s = 5;
+  // 请求进入APA界面 [] [0E-008|3.00000000]
+  optional AVMAPAActiveSType avm_apa_active_s = 6;
+  // APA_泊车类型 [] [0E-008|15.00000000]
+  optional APAParkingTypeSType apa_parking_type_s = 7;
+  // 自动泊车功能开关状态 [] [0E-008|3.00000000]
+  optional APAFunctionSwitchStateSType apa_function_switch_state_s = 8;
+  // 是否配置RPA功能 [] [0E-008|3.00000000]
+  optional RPASupportedSType rpa_supported_s = 9;
+  // 是否支持泊入泊出功能 [] [0E-008|3.00000000]
+  optional ParkInParkOutSupportedSType park_in_park_out_supported_s = 10;
+  // 是否配置APA功能 [] [0E-008|3.00000000]
+  optional APASupportedSType apa_supported_s = 11;
+  // 是否配置MEB功 [] [0E-008|3.00000000]
+  optional MEBSupportedSType meb_supported_s = 12;
+  // Alive Rolling counter1D1 [] [0E-008|15.00000000]
+  optional int32 counter_1_d1_s = 13;
+  // Checksum=(Byte1+byte2…+Byte7)XOR0xFF [] [0E-008|255.00000000]
+  optional int32 checksum_1_d1_s = 14;
+}
+
+message ADS_0X1E2 {
+// Control Message
+  enum ADASAngleReqStSType {
+    ADAS_ANGLEREQ_ST_S_INHIBITED = 0;
+    ADAS_ANGLEREQ_ST_S_READY = 1;
+    ADAS_ANGLEREQ_ST_S_ACT = 2;
+    ADAS_ANGLEREQ_ST_S_RESERVED_3 = 3;
+  }
+  enum SuspInhibitReq1E2SType {
+    SUSPINHIBITREQ1E2_S_NOREQUEST = 0;
+    SUSPINHIBITREQ1E2_S_APAREQUEST = 1;
+    SUSPINHIBITREQ1E2_S_RPAREQUEST = 2;
+    SUSPINHIBITREQ1E2_S_HPAREQUEST = 3;
+    SUSPINHIBITREQ1E2_S_AVPREQUEST = 4;
+    SUSPINHIBITREQ1E2_S_MEBREQUEST = 5;
+    SUSPINHIBITREQ1E2_S_RESERVED_6 = 6;
+    SUSPINHIBITREQ1E2_S_RESERVED_7 = 7;
+  }
+  // MotorTorqueU pperLimit(Mot orTorque Limitationof AngleControl) [] [0E-008|5.00000000]
+  optional double motor_torque_upper_limit_s = 1;
+  // MotorTorqueL owerLimit(Mot orTorque Limitationof AngleControl) [] [-5.00000000|0E-008]
+  optional double motor_torque_lower_limit_s = 2;
+  // ADAS ECU_AngleReq St（ Angle RequestState） [] [0E-008|3.00000000]
+  optional ADASAngleReqStSType adas_angle_req_st_s = 3;
+  // 握手前，自动入 P 请求 [] [0E-008|1.00000000]
+  optional bool ads_auto_p_request = 4;
+  // 有效性 [] [0E-008|1.00000000]
+  optional bool ads_auto_p_request_valid = 5;
+  // ADAS ECU_AngleReq （Angle Request Requirement value） [度] [-780.00000000|779.90000000]
+  optional double adas_angle_req_s = 6;
+  // ADAS_PrecisionRequest [%] [0E-008|255.00000000]
+  optional int32 adas_precision_request = 7;
+  // 抑制悬架请求 [] [0E-008|7.00000000]
+  optional SuspInhibitReq1E2SType susp_inhibit_req1_e2_s = 8;
+  // 抑制悬架请求有效位 [] [0E-008|1.00000000]
+  optional bool susp_inhibit_req1_e2_valid_s = 9;
+  // MsgCounter1E2 [] [0E-008|15.00000000]
+  optional int32 counter1_e2_s = 10;
+  // Checksum = （Byte1+Byte2+……+Byt e7)XOR 0xFF [] [0E-008|255.00000000]
+  optional int32 checksum1_e2_s = 11;
+}
+
+message IPB_0X1F0 {
+// Report Message
+  // WheelSpeed_FL_1F0 [km/h] [0E-008|281.46250000]
+  optional double wheel_speed_fl_1_f0_s = 1;
+  // WheelSpeed_FR_Status_1F0 [] [0E-008|1.00000000]
+  optional bool wheel_speed_fr_stats_1_f0_s = 2;
+  // WheelSpeed_FL_Status_1F0 [] [0E-008|1.00000000]
+  optional bool wheel_speed_fl_stats_1_f0_s = 3;
+  // WheelSpeed_RR_Status_1F0 [] [0E-008|1.00000000]
+  optional bool wheel_speed_rr_stats_1_f0_s = 4;
+  // WheelSpeed_RL_Status_1F0 [] [0E-008|1.00000000]
+  optional bool wheel_speed_rl_status_1_f0_s = 5;
+  // WheelSpeed_FR_1F0 [km/h] [0E-008|281.46250000]
+  optional double wheel_speed_fr_1_f0_s = 6;
+  // WheelSpeed_RL_1F0 [km/h] [0E-008|281.46250000]
+  optional double wheel_speed_rl_1_f0_s = 7;
+  // WheelSpeed_RR_1F0 [km/h] [0E-008|281.46250000]
+  optional double wheel_speed_rr_1_f0_s = 8;
+  // Message counter_1F0 [] [0E-008|15.00000000]
+  optional int32 counter_1_f0_s = 9;
+  // Checksum=(Byte1Byte2?Byte7)XOR0xFF [] [0E-008|255.00000000]
+  optional int32 checksum_1_f0_s = 10;
+}
+
+message EPS_0X1FC {
+// Report Message
+  enum EPSAngleCtrlStSType {
+    EPSANGLECTRLST_S_NOTREADY = 0;
+    EPSANGLECTRLST_S_READY = 1;
+    EPSANGLECTRLST_S_ACTIVE = 2;
+    EPSANGLECTRLST_S_TEMPORARY_FAILED = 3;
+    EPSANGLECTRLST_S_PERMANENTLYFAILED = 4;
+    EPSANGLECTRLST_S_RESERVED_5 = 5;
+    EPSANGLECTRLST_S_RESERVED_6 = 6;
+    EPSANGLECTRLST_S_RESERVED_7 = 7;
+  }
+  enum EPSAngleCtrlAbortFeedbackSType {
+    EPSANGLECTRLABORTFEEDBACK_S_NO_INTERRUPTION = 0;
+    EPSANGLECTRLABORTFEEDBACK_S_DRIVER_HANDS_OFF = 1;
+    EPSANGLECTRLABORTFEEDBACK_S_DRIVER_OVERRIDE = 2;
+    EPSANGLECTRLABORTFEEDBACK_S_VEHICLE_SPEED_INVALID = 3;
+    EPSANGLECTRLABORTFEEDBACK_S_ECUACTIVATIONREQUEST_ERROR = 4;
+    EPSANGLECTRLABORTFEEDBACK_S_ADAS_ECU_SIGNAL_ERROR = 5;
+    EPSANGLECTRLABORTFEEDBACK_S_EPS_TEMPORARY_ERROR = 6;
+    EPSANGLECTRLABORTFEEDBACK_S_EPS_PERMANENTLY_ERROR = 7;
+    EPSANGLECTRLABORTFEEDBACK_S_LKAANGLEVALUELIMITATION = 8;
+    EPSANGLECTRLABORTFEEDBACK_S_LKAANGLESLOPELIMITATION = 9;
+    EPSANGLECTRLABORTFEEDBACK_S_ACTIVECURPINANGLEDEVIAANGLEERR = 10;
+  }
+  // 表示当前EPS角度 控制功能的状态. [] [0E-008|7.00000000]
+  optional EPSAngleCtrlStSType eps_angle_ctrl_st_s = 1;
+  // 表示EPS的方向盘 扭矩传感器的有效 [] [0E-008|1.00000000]
+  optional bool strng_whl_torq_vd_s = 2;
+  // 表示EPS的方向盘 扭矩传感器当前测得的扭矩值 [Nm] [-12.50000000|12.50000000]
+  optional double strng_whl_torq_s = 3;
+  // 表示 EPS 执行的 ADAS ECU 请求目 标角度值（经过安全门限后的值） [度] [-780.00000000|779.90000000]
+  optional double eps_angle_ctrl_dl_vd_value_s = 4;
+  // EPS 执行角度跟随 所输出的扭杆扭矩 [Nm] [-5.00000000|5.00000000]
+  optional double eps_angle_ctrl_dlvd_t_bar_torque_v_s = 5;
+  // 表示EPS接收到的 角度值超限 [] [0E-008|1.00000000]
+  optional bool request_angle_over_range_s = 6;
+  // 表示EPS接收到的 角速度值超限 [] [0E-008|1.00000000]
+  optional bool request_angle_speed_over_range_s = 7;
+  // EPSAngleCtrlAbortFeedback （EPS Angle Control Abort Feedback） [] [0E-008|15.00000000]
+  optional EPSAngleCtrlAbortFeedbackSType eps_angle_ctrl_abort_feedback_s = 8;
+  // Counter_1FC_S [] [0E-008|15.00000000]
+  optional int32 counter_1_fc_s = 9;
+  // Checksum=(Byte1+Byte2+Byte3…+Byte7)XOR0xFF [] [0E-008|255.00000000]
+  optional int32 checksum_1_fc_s = 10;
+}
+
+message ADS_0X217 {
+// Control Message
+  // 子ID_217 [] [0E-008|255.00000000]
+  optional int32 child_id_217_s = 1;
+  // 左高程曲线数据点0 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_0_s = 2;
+  // 左高程曲线数据点1 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_1_s = 3;
+  // 左高程曲线数据点2 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_2_s = 4;
+  // 左高程曲线数据点3 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_3_s = 5;
+  // 左高程曲线数据点4 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_4_s = 6;
+  // 左高程曲线数据点5 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_5_s = 7;
+  // 左高程曲线数据点6 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_6_s = 8;
+  // 左高程曲线数据点7 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_7_s = 9;
+  // 左高程曲线数据点8 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_8_s = 10;
+  // 左高程曲线数据点9 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_9_s = 11;
+  // 左高程曲线数据点10 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_10_s = 12;
+  // 左高程曲线数据点11 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_11_s = 13;
+  // 左高程曲线数据点12 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_12_s = 14;
+  // 左高程曲线数据点13 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_13_s = 15;
+  // 左高程曲线数据点14 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_14_s = 16;
+  // 左高程曲线数据点15 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_15_s = 17;
+  // 左高程曲线数据点16 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_16_s = 18;
+  // 左高程曲线数据点17 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_17_s = 19;
+  // 左高程曲线数据点18 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_18_s = 20;
+  // 左高程曲线数据点19 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_19_s = 21;
+  // 左高程曲线数据点20 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_20_s = 22;
+  // 左高程曲线数据点21 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_21_s = 23;
+  // 左高程曲线数据点22 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_22_s = 24;
+  // 左高程曲线数据点23 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_23_s = 25;
+  // 左高程曲线数据点24 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_24_s = 26;
+  // 左高程曲线数据点25 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_25_s = 27;
+  // 左高程曲线数据点26 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_26_s = 28;
+  // 左高程曲线数据点27 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_27_s = 29;
+  // 左高程曲线数据点28 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_28_s = 30;
+  // 左高程曲线数据点29 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_29_s = 31;
+  // 左高程曲线数据点30 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_30_s = 32;
+  // 左高程曲线数据点31 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_31_s = 33;
+  // 左高程曲线数据点32 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_32_s = 34;
+  // 左高程曲线数据点33 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_33_s = 35;
+  // 左高程曲线数据点34 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_34_s = 36;
+  // 左高程曲线数据点35 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_35_s = 37;
+  // 左高程曲线数据点36 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_36_s = 38;
+  // 左高程曲线数据点37 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_37_s = 39;
+  // 左高程曲线数据点38 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_38_s = 40;
+  // 左高程曲线数据点39 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_39_s = 41;
+  // 左高程曲线数据点40 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_40_s = 42;
+  // 左高程曲线数据点41 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_41_s = 43;
+  // 左高程曲线数据点42 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_42_s = 44;
+  // 左高程曲线数据点43 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_43_s = 45;
+  // 左高程曲线数据点44 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_44_s = 46;
+  // 左高程曲线数据点45 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_45_s = 47;
+  // 左高程曲线数据点46 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_46_s = 48;
+  // 左高程曲线数据点47 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_47_s = 49;
+  // 左高程曲线数据点48 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_48_s = 50;
+  // 左高程曲线数据点49 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_49_s = 51;
+  // 左高程曲线数据点50 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_50_s = 52;
+  // 左高程曲线数据点51 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_51_s = 53;
+  // 生命帧 [] [0E-008|65535.00000000]
+  optional int32 counter_217_01_s = 54;
+  // Checksum=CRC16(x16 + x12 + x5  + 1)Polynomial:0x1021initial value：0xFFFFXOR value：0x0000 [] [0E-008|65535.00000000]
+  optional int32 checksum_217_01_s = 55;
+  // 左高程曲线数据点52 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_52_s = 56;
+  // 左高程曲线数据点53 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_53_s = 57;
+  // 左高程曲线数据点54 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_54_s = 58;
+  // 左高程曲线数据点55 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_55_s = 59;
+  // 左高程曲线数据点56 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_56_s = 60;
+  // 左高程曲线数据点57 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_57_s = 61;
+  // 左高程曲线数据点58 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_58_s = 62;
+  // 左高程曲线数据点59 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_59_s = 63;
+  // 左高程曲线数据点60 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_60_s = 64;
+  // 左高程曲线数据点61 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_61_s = 65;
+  // 左高程曲线数据点62 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_62_s = 66;
+  // 左高程曲线数据点63 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_63_s = 67;
+  // 左高程曲线数据点64 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_64_s = 68;
+  // 左高程曲线数据点65 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_65_s = 69;
+  // 左高程曲线数据点66 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_66_s = 70;
+  // 左高程曲线数据点67 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_67_s = 71;
+  // 左高程曲线数据点68 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_68_s = 72;
+  // 左高程曲线数据点69 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_69_s = 73;
+  // 左高程曲线数据点70 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_70_s = 74;
+  // 左高程曲线数据点71 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_71_s = 75;
+  // 左高程曲线数据点72 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_72_s = 76;
+  // 左高程曲线数据点73 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_73_s = 77;
+  // 左高程曲线数据点74 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_74_s = 78;
+  // 左高程曲线数据点75 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_75_s = 79;
+  // 左高程曲线数据点76 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_76_s = 80;
+  // 左高程曲线数据点77 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_77_s = 81;
+  // 左高程曲线数据点78 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_78_s = 82;
+  // 左高程曲线数据点79 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_79_s = 83;
+  // 左高程曲线数据点80 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_80_s = 84;
+  // 左高程曲线数据点81 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_81_s = 85;
+  // 左高程曲线数据点82 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_82_s = 86;
+  // 左高程曲线数据点83 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_83_s = 87;
+  // 左高程曲线数据点84 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_84_s = 88;
+  // 左高程曲线数据点85 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_85_s = 89;
+  // 左高程曲线数据点86 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_86_s = 90;
+  // 左高程曲线数据点87 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_87_s = 91;
+  // 左高程曲线数据点88 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_88_s = 92;
+  // 左高程曲线数据点89 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_89_s = 93;
+  // 左高程曲线数据点90 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_90_s = 94;
+  // 左高程曲线数据点91 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_91_s = 95;
+  // 左高程曲线数据点92 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_92_s = 96;
+  // 左高程曲线数据点93 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_93_s = 97;
+  // 左高程曲线数据点94 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_94_s = 98;
+  // 左高程曲线数据点95 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_95_s = 99;
+  // 左高程曲线数据点96 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_96_s = 100;
+  // 左高程曲线数据点97 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_97_s = 101;
+  // 左高程曲线数据点98 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_98_s = 102;
+  // 左高程曲线数据点99 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_99_s = 103;
+  // 左高程曲线数据点100 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_100_s = 104;
+  // 左高程曲线数据点101 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_101_s = 105;
+  // 左高程曲线数据点102 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_102_s = 106;
+  // 左高程曲线数据点103 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_103_s = 107;
+  // 生命帧 [] [0E-008|65535.00000000]
+  optional int32 counter_217_02_s = 108;
+  // Checksum=CRC16(x16 + x12 + x5  + 1)Polynomial:0x1021initial value：0xFFFFXOR value：0x0000 [] [0E-008|65535.00000000]
+  optional int32 checksum_217_02_s = 109;
+  // 左高程曲线数据点104 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_104_s = 110;
+  // 左高程曲线数据点105 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_105_s = 111;
+  // 左高程曲线数据点106 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_106_s = 112;
+  // 左高程曲线数据点107 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_107_s = 113;
+  // 左高程曲线数据点108 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_108_s = 114;
+  // 左高程曲线数据点109 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_109_s = 115;
+  // 左高程曲线数据点110 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_110_s = 116;
+  // 左高程曲线数据点111 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_111_s = 117;
+  // 左高程曲线数据点112 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_112_s = 118;
+  // 左高程曲线数据点113 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_113_s = 119;
+  // 左高程曲线数据点114 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_114_s = 120;
+  // 左高程曲线数据点115 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_115_s = 121;
+  // 左高程曲线数据点116 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_116_s = 122;
+  // 左高程曲线数据点117 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_117_s = 123;
+  // 左高程曲线数据点118 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_118_s = 124;
+  // 左高程曲线数据点119 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_119_s = 125;
+  // 左高程曲线数据点120 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_120_s = 126;
+  // 左高程曲线数据点121 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_121_s = 127;
+  // 左高程曲线数据点122 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_122_s = 128;
+  // 左高程曲线数据点123 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_123_s = 129;
+  // 左高程曲线数据点124 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_124_s = 130;
+  // 左高程曲线数据点125 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_125_s = 131;
+  // 左高程曲线数据点126 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_126_s = 132;
+  // 左高程曲线数据点127 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_127_s = 133;
+  // 左高程曲线数据点128 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_128_s = 134;
+  // 左高程曲线数据点129 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_129_s = 135;
+  // 左高程曲线数据点130 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_130_s = 136;
+  // 左高程曲线数据点131 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_131_s = 137;
+  // 左高程曲线数据点132 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_132_s = 138;
+  // 左高程曲线数据点133 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_133_s = 139;
+  // 左高程曲线数据点134 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_134_s = 140;
+  // 左高程曲线数据点135 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_135_s = 141;
+  // 左高程曲线数据点136 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_136_s = 142;
+  // 左高程曲线数据点137 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_137_s = 143;
+  // 左高程曲线数据点138 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_138_s = 144;
+  // 左高程曲线数据点139 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_139_s = 145;
+  // 左高程曲线数据点140 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_140_s = 146;
+  // 左高程曲线数据点141 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_141_s = 147;
+  // 左高程曲线数据点142 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_142_s = 148;
+  // 左高程曲线数据点143 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_143_s = 149;
+  // 左高程曲线数据点144 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_144_s = 150;
+  // 左高程曲线数据点145 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_145_s = 151;
+  // 左高程曲线数据点146 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_146_s = 152;
+  // 左高程曲线数据点147 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_147_s = 153;
+  // 左高程曲线数据点148 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_148_s = 154;
+  // 左高程曲线数据点149 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_left_elevation_line_149_s = 155;
+  // 生命帧 [] [0E-008|65535.00000000]
+  optional int32 counter_217_03_s = 156;
+  // Checksum=CRC16(x16 + x12 + x5  + 1)Polynomial:0x1021initial value：0xFFFFXOR value：0x0000 [] [0E-008|65535.00000000]
+  optional int32 checksum_217_03_s = 157;
+}
+
+message REAR_BCM_0X218 {
+// Report Message
+  enum EleParkBrakeSwitchStatusSType {
+    ELE_PARK_BRAKE_SWITCH_STATUS_S_NOTACT = 0;
+    ELE_PARK_BRAKE_SWITCH_STATUS_S_RELEASE = 1;
+    ELE_PARK_BRAKE_SWITCH_STATUS_S_APPLY = 2;
+    ELE_PARK_BRAKE_SWITCH_STATUS_S_RESERVED_3 = 3;
+  }
+  enum EPBStatusSType {
+    EPB_STATUS_S_RELEASING = 0;
+    EPB_STATUS_S_RELEASED = 1;
+    EPB_STATUS_S_APPLYING = 2;
+    EPB_STATUS_S_APPLIED = 3;
+    EPB_STATUS_S_FAULTPROHIBITIONOFREMOTEDRIVING = 4;
+    EPB_STATUS_S_MAINTENANCERELEASESTATUS = 5;
+    EPB_STATUS_S_RESERVED_6 = 6;
+    EPB_STATUS_S_RESERVED_7 = 7;
+  }
+  // Ele_Park_Brake_Switch_Status_S [] [0E-008|3.00000000]
+  optional EleParkBrakeSwitchStatusSType ele_park_brake_switch_status_s = 1;
+  // EPB_Status_S [] [0E-008|7.00000000]
+  optional EPBStatusSType epb_status_s = 2;
+  // Brake_backup_availability [] [0E-008|1.00000000]
+  optional bool brake_backup_availability = 3;
+  // Driver_OrFuncReqEPB_Flag_S [] [0E-008|1.00000000]
+  optional bool driver_or_func_req_epb_flag_s = 4;
+  // Counter_218_S [] [0E-008|15.00000000]
+  optional int32 counter_218_s = 5;
+  // Checksum_218_S [] [0E-008|255.00000000]
+  optional int32 checksum_218_s = 6;
+}
+
+message ADS_0X21B {
+// Control Message
+  // 子ID_21B [] [0E-008|255.00000000]
+  optional int32 child_id_21_b_s = 1;
+  // 右高程曲线数据点0 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_0_s = 2;
+  // 右高程曲线数据点1 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_1_s = 3;
+  // 右高程曲线数据点2 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_2_s = 4;
+  // 右高程曲线数据点3 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_3_s = 5;
+  // 右高程曲线数据点4 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_4_s = 6;
+  // 右高程曲线数据点5 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_5_s = 7;
+  // 右高程曲线数据点6 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_6_s = 8;
+  // 右高程曲线数据点7 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_7_s = 9;
+  // 右高程曲线数据点8 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_8_s = 10;
+  // 右高程曲线数据点9 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_9_s = 11;
+  // 右高程曲线数据点10 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_10_s = 12;
+  // 右高程曲线数据点11 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_11_s = 13;
+  // 右高程曲线数据点12 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_12_s = 14;
+  // 右高程曲线数据点13 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_13_s = 15;
+  // 右高程曲线数据点14 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_14_s = 16;
+  // 右高程曲线数据点15 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_15_s = 17;
+  // 右高程曲线数据点16 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_16_s = 18;
+  // 右高程曲线数据点17 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_17_s = 19;
+  // 右高程曲线数据点18 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_18_s = 20;
+  // 右高程曲线数据点19 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_19_s = 21;
+  // 右高程曲线数据点20 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_20_s = 22;
+  // 右高程曲线数据点21 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_21_s = 23;
+  // 右高程曲线数据点22 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_22_s = 24;
+  // 右高程曲线数据点23 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_23_s = 25;
+  // 右高程曲线数据点24 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_24_s = 26;
+  // 右高程曲线数据点25 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_25_s = 27;
+  // 右高程曲线数据点26 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_26_s = 28;
+  // 右高程曲线数据点27 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_27_s = 29;
+  // 右高程曲线数据点28 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_28_s = 30;
+  // 右高程曲线数据点29 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_29_s = 31;
+  // 右高程曲线数据点30 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_30_s = 32;
+  // 右高程曲线数据点31 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_31_s = 33;
+  // 右高程曲线数据点32 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_32_s = 34;
+  // 右高程曲线数据点33 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_33_s = 35;
+  // 右高程曲线数据点34 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_34_s = 36;
+  // 右高程曲线数据点35 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_35_s = 37;
+  // 右高程曲线数据点36 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_36_s = 38;
+  // 右高程曲线数据点37 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_37_s = 39;
+  // 右高程曲线数据点38 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_38_s = 40;
+  // 右高程曲线数据点39 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_39_s = 41;
+  // 右高程曲线数据点40 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_40_s = 42;
+  // 右高程曲线数据点41 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_41_s = 43;
+  // 右高程曲线数据点42 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_42_s = 44;
+  // 右高程曲线数据点43 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_43_s = 45;
+  // 右高程曲线数据点44 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_44_s = 46;
+  // 右高程曲线数据点45 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_45_s = 47;
+  // 右高程曲线数据点46 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_46_s = 48;
+  // 右高程曲线数据点47 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_47_s = 49;
+  // 右高程曲线数据点48 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_48_s = 50;
+  // 右高程曲线数据点49 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_49_s = 51;
+  // 右高程曲线数据点50 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_50_s = 52;
+  // 右高程曲线数据点51 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_51_s = 53;
+  // 生命帧 [] [0E-008|65535.00000000]
+  optional int32 counter_21_b_01_s = 54;
+  // Checksum=CRC16(x16 + x12 + x5  + 1)Polynomial:0x1021initial value：0xFFFFXOR value：0x0000 [] [0E-008|65535.00000000]
+  optional int32 checksum_21_b_01_s = 55;
+  // 右高程曲线数据点52 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_52_s = 56;
+  // 右高程曲线数据点53 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_53_s = 57;
+  // 右高程曲线数据点54 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_54_s = 58;
+  // 右高程曲线数据点55 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_55_s = 59;
+  // 右高程曲线数据点56 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_56_s = 60;
+  // 右高程曲线数据点57 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_57_s = 61;
+  // 右高程曲线数据点58 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_58_s = 62;
+  // 右高程曲线数据点59 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_59_s = 63;
+  // 右高程曲线数据点60 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_60_s = 64;
+  // 右高程曲线数据点61 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_61_s = 65;
+  // 右高程曲线数据点62 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_62_s = 66;
+  // 右高程曲线数据点63 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_63_s = 67;
+  // 右高程曲线数据点64 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_64_s = 68;
+  // 右高程曲线数据点65 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_65_s = 69;
+  // 右高程曲线数据点66 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_66_s = 70;
+  // 右高程曲线数据点67 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_67_s = 71;
+  // 右高程曲线数据点68 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_68_s = 72;
+  // 右高程曲线数据点69 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_69_s = 73;
+  // 右高程曲线数据点70 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_70_s = 74;
+  // 右高程曲线数据点71 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_71_s = 75;
+  // 右高程曲线数据点72 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_72_s = 76;
+  // 右高程曲线数据点73 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_73_s = 77;
+  // 右高程曲线数据点74 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_74_s = 78;
+  // 右高程曲线数据点75 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_75_s = 79;
+  // 右高程曲线数据点76 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_76_s = 80;
+  // 右高程曲线数据点77 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_77_s = 81;
+  // 右高程曲线数据点78 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_78_s = 82;
+  // 右高程曲线数据点79 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_79_s = 83;
+  // 右高程曲线数据点80 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_80_s = 84;
+  // 右高程曲线数据点81 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_81_s = 85;
+  // 右高程曲线数据点82 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_82_s = 86;
+  // 右高程曲线数据点83 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_83_s = 87;
+  // 右高程曲线数据点84 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_84_s = 88;
+  // 右高程曲线数据点85 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_85_s = 89;
+  // 右高程曲线数据点86 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_86_s = 90;
+  // 右高程曲线数据点87 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_87_s = 91;
+  // 右高程曲线数据点88 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_88_s = 92;
+  // 右高程曲线数据点89 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_89_s = 93;
+  // 右高程曲线数据点90 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_90_s = 94;
+  // 右高程曲线数据点91 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_91_s = 95;
+  // 右高程曲线数据点92 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_92_s = 96;
+  // 右高程曲线数据点93 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_93_s = 97;
+  // 右高程曲线数据点94 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_94_s = 98;
+  // 右高程曲线数据点95 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_95_s = 99;
+  // 右高程曲线数据点96 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_96_s = 100;
+  // 右高程曲线数据点97 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_97_s = 101;
+  // 右高程曲线数据点98 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_98_s = 102;
+  // 右高程曲线数据点99 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_99_s = 103;
+  // 右高程曲线数据点100 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_100_s = 104;
+  // 右高程曲线数据点101 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_101_s = 105;
+  // 右高程曲线数据点102 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_102_s = 106;
+  // 右高程曲线数据点103 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_103_s = 107;
+  // 生命帧 [] [0E-008|65535.00000000]
+  optional int32 counter_21_b_02_s = 108;
+  // Checksum=CRC16(x16 + x12 + x5  + 1)Polynomial:0x1021initial value：0xFFFFXOR value：0x0000 [] [0E-008|65535.00000000]
+  optional int32 checksum_21_b_02_s = 109;
+  // 右高程曲线数据点104 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_104_s = 110;
+  // 右高程曲线数据点105 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_105_s = 111;
+  // 右高程曲线数据点106 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_106_s = 112;
+  // 右高程曲线数据点107 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_107_s = 113;
+  // 右高程曲线数据点108 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_108_s = 114;
+  // 右高程曲线数据点109 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_109_s = 115;
+  // 右高程曲线数据点110 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_110_s = 116;
+  // 右高程曲线数据点111 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_111_s = 117;
+  // 右高程曲线数据点112 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_112_s = 118;
+  // 右高程曲线数据点113 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_113_s = 119;
+  // 右高程曲线数据点114 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_114_s = 120;
+  // 右高程曲线数据点115 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_115_s = 121;
+  // 右高程曲线数据点116 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_116_s = 122;
+  // 右高程曲线数据点117 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_117_s = 123;
+  // 右高程曲线数据点118 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_118_s = 124;
+  // 右高程曲线数据点119 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_119_s = 125;
+  // 右高程曲线数据点120 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_120_s = 126;
+  // 右高程曲线数据点121 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_121_s = 127;
+  // 右高程曲线数据点122 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_122_s = 128;
+  // 右高程曲线数据点123 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_123_s = 129;
+  // 右高程曲线数据点124 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_124_s = 130;
+  // 右高程曲线数据点125 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_125_s = 131;
+  // 右高程曲线数据点126 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_126_s = 132;
+  // 右高程曲线数据点127 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_127_s = 133;
+  // 右高程曲线数据点128 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_128_s = 134;
+  // 右高程曲线数据点129 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_129_s = 135;
+  // 右高程曲线数据点130 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_130_s = 136;
+  // 右高程曲线数据点131 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_131_s = 137;
+  // 右高程曲线数据点132 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_132_s = 138;
+  // 右高程曲线数据点133 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_133_s = 139;
+  // 右高程曲线数据点134 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_134_s = 140;
+  // 右高程曲线数据点135 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_135_s = 141;
+  // 右高程曲线数据点136 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_136_s = 142;
+  // 右高程曲线数据点137 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_137_s = 143;
+  // 右高程曲线数据点138 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_138_s = 144;
+  // 右高程曲线数据点139 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_139_s = 145;
+  // 右高程曲线数据点140 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_140_s = 146;
+  // 右高程曲线数据点141 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_141_s = 147;
+  // 右高程曲线数据点142 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_142_s = 148;
+  // 右高程曲线数据点143 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_143_s = 149;
+  // 右高程曲线数据点144 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_144_s = 150;
+  // 右高程曲线数据点145 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_145_s = 151;
+  // 右高程曲线数据点146 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_146_s = 152;
+  // 右高程曲线数据点147 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_147_s = 153;
+  // 右高程曲线数据点148 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_148_s = 154;
+  // 右高程曲线数据点149 [mm] [-150.00000000|150.00000000]
+  optional double di_eye_right_elevation_line_149_s = 155;
+  // 生命帧 [] [0E-008|65535.00000000]
+  optional int32 counter_21_b_03_s = 156;
+  // Checksum=CRC16(x16 + x12 + x5  + 1)Polynomial:0x1021initial value：0xFFFFXOR value：0x0000 [] [0E-008|65535.00000000]
+  optional int32 checksum_21_b_03_s = 157;
+}
+
+message IPB_0X220 {
+// Report Message
+  enum RRWheelDriveDirectionSType {
+    RR_WHEEL_DRIVE_DIRECTION_S_INVALID_UNDEFINABLE = 0;
+    RR_WHEEL_DRIVE_DIRECTION_S_FORWARD = 1;
+    RR_WHEEL_DRIVE_DIRECTION_S_BACKWARD = 2;
+    RR_WHEEL_DRIVE_DIRECTION_S_STOP = 3;
+  }
+  enum RLWheelDriveDirectionSType {
+    RL_WHEEL_DRIVE_DIRECTION_S_INVALID_UNDEFINABLE = 0;
+    RL_WHEEL_DRIVE_DIRECTION_S_FORWARD = 1;
+    RL_WHEEL_DRIVE_DIRECTION_S_BACKWARD = 2;
+    RL_WHEEL_DRIVE_DIRECTION_S_STOP = 3;
+  }
+  enum FRWheelDriveDirectionSType {
+    FR_WHEEL_DRIVE_DIRECTION_S_INVALID_UNDEFINABLE = 0;
+    FR_WHEEL_DRIVE_DIRECTION_S_FORWARD = 1;
+    FR_WHEEL_DRIVE_DIRECTION_S_BACKWARD = 2;
+    FR_WHEEL_DRIVE_DIRECTION_S_STOP = 3;
+  }
+  enum FLWheelDriveDirectionSType {
+    FL_WHEEL_DRIVE_DIRECTION_S_INVALID_UNDEFINABLE = 0;
+    FL_WHEEL_DRIVE_DIRECTION_S_FORWARD = 1;
+    FL_WHEEL_DRIVE_DIRECTION_S_BACKWARD = 2;
+    FL_WHEEL_DRIVE_DIRECTION_S_STOP = 3;
+  }
+  enum VehicleStandStillSType {
+    VEHICLE_STAND_STILL_S_NOT_STANDSTILL = 0;
+    VEHICLE_STAND_STILL_S_STANDSTILL = 1;
+    VEHICLE_STAND_STILL_S_INVALID = 2;
+    VEHICLE_STAND_STILL_S_RESERVED_3 = 3;
+  }
+  // 右后轮行驶方向RRWheelDriveDirection [] [0E-008|3.00000000]
+  optional RRWheelDriveDirectionSType rr_wheel_drive_direction_s = 1;
+  // 左后轮行驶方向RLWheelDriveDirection [] [0E-008|3.00000000]
+  optional RLWheelDriveDirectionSType rl_wheel_drive_direction_s = 2;
+  // 右前轮行驶方向FRWheelDriveDirection [] [0E-008|3.00000000]
+  optional FRWheelDriveDirectionSType fr_wheel_drive_direction_s = 3;
+  // 左前轮行驶方向FLWheelDriveDirection [] [0E-008|3.00000000]
+  optional FLWheelDriveDirectionSType fl_wheel_drive_direction_s = 4;
+  // ActiveVehicleHold [] [0E-008|1.00000000]
+  optional bool active_vehicle_hold_s = 5;
+  // VLC_Available [] [0E-008|1.00000000]
+  optional bool vlc_available_s = 6;
+  // 车辆纵向控制状态VLC_Active [] [0E-008|1.00000000]
+  optional bool vlc_active_s = 7;
+  // VLCfail [] [0E-008|1.00000000]
+  optional bool vlc_fail_s = 8;
+  // NoBrakeForce [] [0E-008|1.00000000]
+  optional bool no_brake_force_s = 9;
+  // QDCACC [] [0E-008|1.00000000]
+  optional bool qdc_acc_s = 10;
+  // ECDTempOff [] [0E-008|1.00000000]
+  optional bool ecd_temp_off_s = 11;
+  // 车辆静止标记位VehicleStandstill [] [0E-008|3.00000000]
+  optional VehicleStandStillSType vehicle_stand_still_s = 12;
+  // 左前轮行驶方向状态FLWheelDriveDirectionStatus [] [0E-008|1.00000000]
+  optional bool fl_wheel_drive_direct_stat_s = 13;
+  // 右前轮行驶方向状态FRWheelDriveDirection  Status [] [0E-008|1.00000000]
+  optional bool fr_wheel_drive_direct_stat_s = 14;
+  // 左后轮行驶方向状态RLWheelDriveDirection  Status [] [0E-008|1.00000000]
+  optional bool rl_wheel_drive_direct_stat_s = 15;
+  // 右后轮行驶方向状态RRWheelDriveDirection  Status [] [0E-008|1.00000000]
+  optional bool rr_wheel_drive_direct_stat_s = 16;
+  // VLC_InternalTargetACCeleration [m/s2] [-7.00000000|5.75000000]
+  optional double vlc_internal_targ_accel_s = 17;
+  // Message counter 220 [] [0E-008|15.00000000]
+  optional int32 counter220_s = 18;
+  // CDD_Available [] [0E-008|1.00000000]
+  optional bool cdd_available_s = 19;
+  // CDD_Active [] [0E-008|1.00000000]
+  optional bool cdd_active_s = 20;
+  // CDD_Fail [] [0E-008|1.00000000]
+  optional bool cdd_fail_s = 21;
+  // CheckSum220 [] [0E-008|255.00000000]
+  optional int32 check_sum220_s = 22;
+}
+
+message IPB_0X222 {
+// Report Message
+  // Yaw Rate Signal [rad/s] [-2.09430000|2.09430000]
+  optional double yaw_rate_signal_s = 1;
+  // Yaw rate offset [rad/s] [-0.13000000|0.13000000]
+  optional double yaw_rate_offset_s = 2;
+  // EBD_Active_222 [] [0E-008|1.00000000]
+  optional bool ebd_active_222_s = 3;
+  // ABS_Active_222 [] [0E-008|1.00000000]
+  optional bool abs_active_222_s = 4;
+  // 电子制动力分配失效 [] [0E-008|1.00000000]
+  optional bool ebd_fault_222_s = 5;
+  // ABS_Fault_222 [] [0E-008|1.00000000]
+  optional bool abs_fault_222_s = 6;
+  // TCSActive_222 [] [0E-008|1.00000000]
+  optional bool tcs_active_222_s = 7;
+  // DWT_B_Active_222_S [] [0E-008|1.00000000]
+  optional bool dwt_b_active_222_s = 8;
+  // VDCActive_222 [] [0E-008|1.00000000]
+  optional bool vdc_active_222_s = 9;
+  // Yaw rate status [] [0E-008|1.00000000]
+  optional bool yaw_rate_status_s = 10;
+  // Message counter222 [] [0E-008|15.00000000]
+  optional int32 counter222_s = 11;
+  // Checksum222 [] [0E-008|255.00000000]
+  optional int32 checksum222_s = 12;
+}
+
+message IPB_0X223 {
+// Report Message
+  // IPB_AX [m/s??] [-21.59300000|21.59300000]
+  optional double ipb_ax_s = 1;
+  // IPB_AX offset [m/s??] [-21.59300000|21.59300000]
+  optional double ipb_ax_offset_s = 2;
+  // IPB_AY [m/s??] [-21.59300000|21.59300000]
+  optional double ipb_ay_s = 3;
+  // IPB_AY Offset [m/s??] [-21.59300000|21.59300000]
+  optional double ipb_ay_offset_s = 4;
+  // Message counter 223 [] [0E-008|15.00000000]
+  optional int32 counter223_s = 5;
+  // IPB_AY status [] [0E-008|1.00000000]
+  optional bool ipb_ay_status_s = 6;
+  // IPB_AX status [] [0E-008|1.00000000]
+  optional bool ipb_ax_status_s = 7;
+  // Checksum223 [] [0E-008|255.00000000]
+  optional int32 checksum223_s = 8;
+}
+
+message EPS_0X24C {
+// Report Message
+  enum SteeringModeStatusSType {
+    STEERING_MODE_STATUS_S_INVALID = 0;
+    STEERING_MODE_STATUS_S_COMFORTABLE = 1;
+    STEERING_MODE_STATUS_S_COMFORTABLEPLUS = 2;
+    STEERING_MODE_STATUS_S_SPORTS = 3;
+    STEERING_MODE_STATUS_S_SPORTSPLUS = 4;
+    STEERING_MODE_STATUS_S_LANEKEEPINGMODE = 5;
+    STEERING_MODE_STATUS_S_RESERVED_6 = 6;
+    STEERING_MODE_STATUS_S_RESERVED_7 = 7;
+  }
+  // 转向模式状态 [] [0E-008|7.00000000]
+  optional SteeringModeStatusSType steering_mode_status_s = 1;
+  // Counter_24C [] [0E-008|15.00000000]
+  optional int32 counter_24_c_s = 2;
+  // Checksum=(Byte1byte2…Byte7)XOR0xFF [] [0E-008|255.00000000]
+  optional int32 check_sum_24_c_s = 3;
+}
+
+message DISUS_0X258 {
+// Report Message
+  enum DiSusHeightAdjustProcessSType {
+    DISUS_HEIGHT_ADJUST_PROCESS_S_INVALID = 0;
+    DISUS_HEIGHT_ADJUST_PROCESS_S_THEBODYISRISING = 1;
+    DISUS_HEIGHT_ADJUST_PROCESS_S_THEBODYISFALLING = 2;
+    DISUS_HEIGHT_ADJUST_PROCESS_S_ADJUSTMENTCOMPLETED = 3;
+    DISUS_HEIGHT_ADJUST_PROCESS_S_ADJUSTMENTINTERRUPT = 4;
+    DISUS_HEIGHT_ADJUST_PROCESS_S_RESERVED_5 = 5;
+    DISUS_HEIGHT_ADJUST_PROCESS_S_RESERVED_6 = 6;
+    DISUS_HEIGHT_ADJUST_PROCESS_S_RESERVED_7 = 7;
+  }
+  enum ActualDiSusHeightModeSType {
+    ACTUAL_DISUS_HEIGHT_MODE_S_INVALID = 0;
+    ACTUAL_DISUS_HEIGHT_MODE_S_LO = 1;
+    ACTUAL_DISUS_HEIGHT_MODE_S_N = 2;
+    ACTUAL_DISUS_HEIGHT_MODE_S_HI = 3;
+    ACTUAL_DISUS_HEIGHT_MODE_S_EXHI = 4;
+    ACTUAL_DISUS_HEIGHT_MODE_S_EXTRALOW = 5;
+  }
+  enum GoalDiSusHeightModeSType {
+    GOAL_DISUS_HEIGHT_MODE_S_INVALID = 0;
+    GOAL_DISUS_HEIGHT_MODE_S_LO = 1;
+    GOAL_DISUS_HEIGHT_MODE_S_N = 2;
+    GOAL_DISUS_HEIGHT_MODE_S_HI = 3;
+    GOAL_DISUS_HEIGHT_MODE_S_EXHI = 4;
+    GOAL_DISUS_HEIGHT_MODE_S_EXTRALOW = 5;
+    GOAL_DISUS_HEIGHT_MODE_S_RESERVED_6 = 6;
+    GOAL_DISUS_HEIGHT_MODE_S_RESERVED_7 = 7;
+  }
+  // Checksum=CRC16(x16 + x12 + x5  + 1)Polynomial:0x1021initial value：0xFFFFXOR value：0x0000 [] [0E-008|65535.00000000]
+  optional int32 checksum_258_s = 1;
+  // Alive_Counter_258_S [] [0E-008|65535.00000000]
+  optional int32 counter_258_s = 2;
+  // 悬架高度调节过程 [] [0E-008|7.00000000]
+  optional DiSusHeightAdjustProcessSType di_sus_height_adjust_process_s = 3;
+  // 用户自定义悬架软硬调节挡位 [] [0E-008|15.00000000]
+  optional int32 di_sus_customize_sh_adjust_gear_s = 4;
+  // 实际悬架软硬调节挡位 [] [0E-008|15.00000000]
+  optional int32 actual_di_sus_sh_adjust_gear_s = 5;
+  // 实际悬架高度模式 [] [0E-008|7.00000000]
+  optional ActualDiSusHeightModeSType actual_di_sus_height_mode_s = 6;
+  // 目标悬架高度模式 [] [0E-008|7.00000000]
+  optional GoalDiSusHeightModeSType goal_di_sus_height_mode_s = 7;
+  // 高度未标定 [] [0E-008|1.00000000]
+  optional bool di_sus_height_not_calibration_s = 8;
+}
+
+message PAS_0X267_CHASSIS {
+// Control Message
+  // 倒车雷达左前区距离显示 [cm] [0E-008|150.00000000]
+  optional double pdc_distance_fl_267_s = 1;
+  // 倒车雷达左中前区距离显示 [cm] [0E-008|150.00000000]
+  optional double pdc_distance_fml_267_s = 2;
+  // 倒车雷达右中前区距离显示 [cm] [0E-008|150.00000000]
+  optional double pdc_distance_fmr_267_s = 3;
+  // 倒车雷达右前区距离显示 [cm] [0E-008|150.00000000]
+  optional double pdc_distance_fr_267_s = 4;
+  // 倒车雷达左后区距离显示 [cm] [0E-008|150.00000000]
+  optional double pdc_distance_rl_267_s = 5;
+  // 倒车雷达左中后区距离显示 [cm] [0E-008|150.00000000]
+  optional double pdc_distance_rml_267_s = 6;
+  // 倒车雷达右中后区距离显示 [cm] [0E-008|150.00000000]
+  optional double pdc_distance_rmr_267_s = 7;
+  // 倒车雷达右后区距离显示 [cm] [0E-008|150.00000000]
+  optional double pdc_distance_rr_267_s = 8;
+  // 驻车辅助系统状态 [] [0E-008|1.00000000]
+  optional bool pas_status_267_s = 9;
+  // 倒车雷达报警声状态 [] [0E-008|3.00000000]
+  optional int32 pas_alarm_status_267_s = 10;
+}
+
+message EPS_0X2E1 {
+// Report Message
+  // 人为干预方向盘标志 [] [0E-008|1.00000000]
+  optional bool human_intervention_sws_flag_s = 1;
+}
+
+message ADS_0X316 {
+// Control Message
+  enum LeftLineTrackingStatusSType {
+    LEFT_LINE_TRACKING_STATUS_S_NODISPLAY = 0;
+    LEFT_LINE_TRACKING_STATUS_S_LINETRACKING = 1;
+    LEFT_LINE_TRACKING_STATUS_S_INTERVENTION_RESERVE = 2;
+    LEFT_LINE_TRACKING_STATUS_S_WARNING = 3;
+  }
+  enum LaneAssistantModeStatusSType {
+    LANE_ASSISTANT_MODE_STATUS_S_DISABLE = 0;
+    LANE_ASSISTANT_MODE_STATUS_S_LANEDEPARTURE = 1;
+    LANE_ASSISTANT_MODE_STATUS_S_LKSORLDP = 2;
+    LANE_ASSISTANT_MODE_STATUS_S_FULLFUNCT = 3;
+  }
+  enum LKSSensitivitySType {
+    LKS_SENSITIVITY_S_LOWSENSITIVITY = 0;
+    LKS_SENSITIVITY_S_HIGHSENSITIVITY = 1;
+    LKS_SENSITIVITY_S_RESERVED_2 = 2;
+    LKS_SENSITIVITY_S_RESERVED_3 = 3;
+  }
+  enum LKStorquerequeststausSType {
+    LKS_TORQUE_REQUEST_STAUS_S_INHIBITED = 0;
+    LKS_TORQUE_REQUEST_STAUS_S_READY = 1;
+    LKS_TORQUE_REQUEST_STAUS_S_ACTIVE = 2;
+    LKS_TORQUE_REQUEST_STAUS_S_RESERVED_3 = 3;
+  }
+  enum RightLineTrackingStatsSType {
+    RIGHT_LINE_TRACKING_STATS_S_NODISPLAY = 0;
+    RIGHT_LINE_TRACKING_STATS_S_LINETRACKING = 1;
+    RIGHT_LINE_TRACKING_STATS_S_INTERVENTION_RESERVE = 2;
+    RIGHT_LINE_TRACKING_STATS_S_WARNING = 3;
+  }
+  enum TJAICAfunctionstatusSType {
+    TJA_ICA_FUNCTION_STATUS_S_OFF = 0;
+    TJA_ICA_FUNCTION_STATUS_S_PASSIVE = 1;
+    TJA_ICA_FUNCTION_STATUS_S_ACT1 = 2;
+    TJA_ICA_FUNCTION_STATUS_S_ACT2 = 3;
+    TJA_ICA_FUNCTION_STATUS_S_FAULT = 4;
+    TJA_ICA_FUNCTION_STATUS_S_STANDBY = 5;
+    TJA_ICA_FUNCTION_STATUS_S_RESERVED_6 = 6;
+    TJA_ICA_FUNCTION_STATUS_S_RESERVED_7 = 7;
+  }
+  enum LDWWarningModeStatsSType {
+    LDW_WARNING_MODE_STATS_S_VIBRATIONONLY = 0;
+    LDW_WARNING_MODE_STATS_S_SOUNDONLY = 1;
+    LDW_WARNING_MODE_STATS_S_VIBRATIONSOUND = 2;
+    LDW_WARNING_MODE_STATS_S_CLOSE = 3;
+  }
+  enum MPCTakeOverReq1SType {
+    MPC_TAKE_OVER_REQ1_S_INACT = 0;
+    MPC_TAKE_OVER_REQ1_S_WARNINGLEVEL1 = 1;
+    MPC_TAKE_OVER_REQ1_S_WARNINGLEVEL2 = 2;
+    MPC_TAKE_OVER_REQ1_S_WARNINGLEVEL3 = 3;
+  }
+  // Left line tracking status（13）左车道跟踪状态 [] [0E-008|3.00000000]
+  optional LeftLineTrackingStatusSType left_line_tracking_status_s = 1;
+  // 车道辅助模式状态 [] [0E-008|3.00000000]
+  optional LaneAssistantModeStatusSType lane_assistant_mode_status_s = 2;
+  // LKS sensitivity车道保持辅助灵敏度 [] [0E-008|3.00000000]
+  optional LKSSensitivitySType lks_sensitivity_s = 3;
+  // LKS（LDP）&LDW Camera blocked [] [0E-008|1.00000000]
+  optional bool ldp_ldw_camera_blocked_s = 4;
+  // LKS（LDP）fault [] [0E-008|1.00000000]
+  optional bool ldp_fault_s = 5;
+  // LDW fault [] [0E-008|1.00000000]
+  optional bool ldw_fault1_s = 6;
+  // ACC/AEB camera blocked infro [] [0E-008|1.00000000]
+  optional bool acc_aeb_camera_blocked_infro_s = 7;
+  // Over_Temperature [] [0E-008|1.00000000]
+  optional bool over_temperature = 8;
+  // Output LKS torque request [Nm] [-10.24000000|10.23000000]
+  optional double output_lks_torque_request_s = 9;
+  // LKS torque request staus [] [0E-008|3.00000000]
+  optional LKStorquerequeststausSType lks_torque_request_staus_s = 10;
+  // Right line tracking status右车道跟踪状态 [] [0E-008|3.00000000]
+  optional RightLineTrackingStatsSType right_line_tracking_stats_s = 11;
+  // TJA/ICA function status [] [0E-008|7.00000000]
+  optional TJAICAfunctionstatusSType tja_ica_function_status_s = 12;
+  // ALL function camera blocked Infro [] [0E-008|1.00000000]
+  optional bool all_function_camera_bloc_infro_s = 13;
+  // 车道偏离报警方式状态 [] [0E-008|3.00000000]
+  optional LDWWarningModeStatsSType ldw_warning_mode_stats_s = 14;
+  // 驾驶员接管请求1 [] [0E-008|3.00000000]
+  optional MPCTakeOverReq1SType mpc_take_over_req1_s = 15;
+  // Message alive counter316 [] [0E-008|15.00000000]
+  optional int32 counter_316_s = 16;
+  // Checksum=(Byte1+Byte2…+Byte7)XOR0xFF [] [0E-008|255.00000000]
+  optional int32 checksum_316_s = 17;
+}
+
+message ADS_0X31A {
+// Control Message
+  enum SDWstatusSType {
+    SDW_STATUS_S_OFF = 0;
+    SDW_STATUS_S_STANDBY = 1;
+    SDW_STATUS_S_ACT = 2;
+    SDW_STATUS_S_FAILURE = 3;
+  }
+  enum PASstatusSType {
+    PAS_STATUS_S_OFF = 0;
+    PAS_STATUS_S_STANDBY = 1;
+    PAS_STATUS_S_FRONTREARACT = 2;
+    PAS_STATUS_S_FRONTACTANDREARFAILURE = 3;
+    PAS_STATUS_S_REARACTANDFRONTFAILURE = 4;
+    PAS_STATUS_S_SYSTEMFAILURE = 5;
+    PAS_STATUS_S_FRONTACTREAROFF = 6;
+    PAS_STATUS_S_FRONTFAILUREREAROFF = 7;
+  }
+  enum APAMEBSettingStatesSType {
+    APA_MEB_SETTINGSTATES_S_OFF = 0;
+    APA_MEB_SETTINGSTATES_S_ON = 1;
+    APA_MEB_SETTINGSTATES_S_RESERVED_2 = 2;
+    APA_MEB_SETTINGSTATES_S_RESERVED_3 = 3;
+  }
+  enum OrHintWithParkingBSSType {
+    OR_HINT_WITH_PARKING_BS_S_NOREQUEST = 0;
+    OR_HINT_WITH_PARKING_BS_S_REQ_EXPANDED_MIRROR = 1;
+    OR_HINT_WITH_PARKING_BS_S_REQ_GEAR_D = 2;
+    OR_HINT_WITH_PARKING_BS_S_REQ_SLOW_DOWN = 3;
+    OR_HINT_WITH_PARKING_BS_S_REQ_SEARCHINGPROCESS = 4;
+    OR_HINT_WITH_PARKING_BS_S_REQ_STOP = 5;
+    OR_HINT_WITH_PARKING_BS_S_REQ_CONNECT_PHONE = 6;
+    OR_HINT_WITH_PARKING_BS_S_REQEPB_APPLIED = 7;
+    OR_HINT_WITH_PARKING_BS_S_REQ_LEAVE_CAR = 8;
+    OR_HINT_WITH_PARKING_BS_S_REQ_CLOSETRUNK_RESERVED_9 = 9;
+    OR_HINT_WITH_PARKING_BS_S_SUGGESTTOUSERPA = 10;
+    OR_HINT_WITH_PARKING_BS_S_REQ_CLOSEDOOR_ALLDOORS = 11;
+    OR_HINT_WITH_PARKING_BS_S_REQ_BUCKLESEATBELT = 12;
+    OR_HINT_WITH_PARKING_BS_S_REQ_SURROUND_VIEW = 13;
+    OR_HINT_WITH_PARKING_BS_S_REQ_PRESSBRAKEPEDAL = 14;
+    OR_HINT_WITH_PARKING_BS_S_REQ_CONF_PRESSDMSWITCH = 15;
+    OR_HINT_WITH_PARKING_BS_S_REQ_RELEASEBRAKE = 16;
+    OR_HINT_WITH_PARKING_BS_S_REQ_PROCESSBAR = 17;
+    OR_HINT_WITH_PARKING_BS_S_REQ_FUNCTOFF = 18;
+    OR_HINT_WITH_PARKING_BS_S_REQ_POCDIRECTIONSEL = 19;
+    OR_HINT_WITH_PARKING_BS_S_NO_FRONT_OBJECT_DETECTED = 20;
+    OR_HINT_WITH_PARKING_BS_S_REQ_PS_SELION = 21;
+    OR_HINT_WITH_PARKING_BS_S_REQ_RESPONSETIMEOUT = 22;
+    OR_HINT_WITH_PARKING_BS_S_REQ_EXTRECUERROR = 23;
+    OR_HINT_WITH_PARKING_BS_S_REQ_CLOSEHOOD = 24;
+    OR_HINT_WITH_PARKING_BS_S_RESERVED_25 = 25;
+    OR_HINT_WITH_PARKING_BS_S_RESERVED_26 = 26;
+    OR_HINT_WITH_PARKING_BS_S_RESERVED_27 = 27;
+    OR_HINT_WITH_PARKING_BS_S_RESERVED_28 = 28;
+    OR_HINT_WITH_PARKING_BS_S_RESERVED_29 = 29;
+    OR_HINT_WITH_PARKING_BS_S_RESERVED_30 = 30;
+    OR_HINT_WITH_PARKING_BS_S_RESERVED_31 = 31;
+  }
+  enum APAPOCDirSelResSType {
+    APA_POCDIRSELRES_S_NONE = 0;
+    APA_POCDIRSELRES_S_FRONTLCROSS = 1;
+    APA_POCDIRSELRES_S_FRONTLPARALLEL = 2;
+    APA_POCDIRSELRES_S_FRONTOUT = 3;
+    APA_POCDIRSELRES_S_FRONTRCROSS = 4;
+    APA_POCDIRSELRES_S_FRONTRPARALLEL = 5;
+    APA_POCDIRSELRES_S_BACKOUT = 6;
+    APA_POCDIRSELRES_S_BACKLCROSS = 7;
+    APA_POCDIRSELRES_S_BACKRCROSS = 8;
+    APA_POCDIRSELRES_S_RESERVED_9 = 9;
+    APA_POCDIRSELRES_S_RESERVED_10 = 10;
+    APA_POCDIRSELRES_S_RESERVED_11 = 11;
+    APA_POCDIRSELRES_S_RESERVED_12 = 12;
+    APA_POCDIRSELRES_S_RESERVED_13 = 13;
+    APA_POCDIRSELRES_S_RESERVED_14 = 14;
+    APA_POCDIRSELRES_S_RESERVED_15 = 15;
+  }
+  enum ModuleManufacturer31ASType {
+    MODULE_MANUFACTURER_31A_S_BOSCH = 0;
+    MODULE_MANUFACTURER_31A_S_VALEO = 1;
+    MODULE_MANUFACTURER_31A_S_DESAY = 2;
+    MODULE_MANUFACTURER_31A_S_SHIWU = 3;
+    MODULE_MANUFACTURER_31A_S_INVALID = 15;
+  }
+  enum MEBWarnSType {
+    MEBWARN_S_OFF = 0;
+    MEBWARN_S_ON_NOTACT = 1;
+    MEBWARN_S_FAULT = 2;
+    MEBWARN_S_MEB_ACTIVATE = 3;
+    MEBWARN_S_RESERVED_4 = 4;
+    MEBWARN_S_LARGERAINWARNING = 5;
+    MEBWARN_S_DRIVINGMODEWARNING = 6;
+    MEBWARN_S_RESERVED_7 = 7;
+  }
+  enum SDWSupportedSType {
+    SDW_SUPPORTED_S_INVALID = 0;
+    SDW_SUPPORTED_S_NOTSUPPORTED = 1;
+    SDW_SUPPORTED_S_SUPPORT = 2;
+    SDW_SUPPORTED_S_RESERVED_3 = 3;
+  }
+  enum APAFrontParkInSupportedSType {
+    APA_FRONT_PARK_IN_SUPPORTED_S_INVALID = 0;
+    APA_FRONT_PARK_IN_SUPPORTED_S_NOTSUPPORT = 1;
+    APA_FRONT_PARK_IN_SUPPORTED_S_SUPPORT = 2;
+    APA_FRONT_PARK_IN_SUPPORTED_S_REVERSE = 3;
+  }
+  enum APAFrontPkgStateFBSType {
+    APA_FRONTPKG_STATE_FB_S_INVALID = 0;
+    APA_FRONTPKG_STATE_FB_S_OFF = 1;
+    APA_FRONTPKG_STATE_FB_S_ON = 2;
+    APA_FRONTPKG_STATE_FB_S_RESERVED_3 = 3;
+  }
+  enum APAPkgDisableDispType {
+    APA_PKGDISABLEDISP_NONE = 0;
+    APA_PKGDISABLEDISP_VEHICLEPOWERMODEISINPOWEROFF = 1;
+    APA_PKGDISABLEDISP_SPEEDEXCEEDED = 2;
+    APA_PKGDISABLEDISP_UNPLUGCHARGGUN = 3;
+    APA_PKGDISABLEDISP_EXITTRAILERMODE = 4;
+    APA_PKGDISABLEDISP_EXITCARWASH = 5;
+    APA_PKGDISABLEDISP_PKSYSTEMFAILURE = 6;
+    APA_PKGDISABLEDISP_ASSOCIATEDSYSTEMFAILURE = 7;
+    APA_PKGDISABLEDISP_ACTSAFETYFUNCTACT = 8;
+    APA_PKGDISABLEDISP_EGOCOLLIDED = 9;
+    APA_PKGDISABLEDISP_EPSFAILURE = 10;
+    APA_PKGDISABLEDISP_IPBFAILURE = 11;
+    APA_PKGDISABLEDISP_SCUFAILURE = 12;
+    APA_PKGDISABLEDISP_INVALIDBRAKEPEDALSWITCHSTATE = 13;
+    APA_PKGDISABLEDISP_EPBFAILURE = 14;
+    APA_PKGDISABLEDISP_DISUSFAILURE_ACTIVE_SUSPENSION_SYSTEM_MALFUNCTION = 15;
+    APA_PKGDISABLEDISP_NONECOORCOMFORTORSPORTMODEACT = 16;
+    APA_PKGDISABLEDISP_CCUFAILURE = 17;
+    APA_PKGDISABLEDISP_NOFRONTOBJECTDETECTED = 18;
+    APA_PKGDISABLEDISP_DISUSHEIGHTADJUST = 19;
+    APA_PKGDISABLEDISP_CURRENTDISUSHEIGHTNOTSUPPORT = 20;
+    APA_PKGDISABLEDISP_TRAILERHITCHCONNECTED = 21;
+    APA_PKGDISABLEDISP_AVMCALIBRATIONFAIL = 22;
+    APA_PKGDISABLEDISP_CREEPMODEISON = 23;
+    APA_PKGDISABLEDISP_SENSORNOTCALIBRATED = 24;
+    APA_PKGDISABLEDISP_CHASSISACTSAFETYFUNCTACT = 25;
+    APA_PKGDISABLEDISP_ADASACTIVATED = 26;
+    APA_PKGDISABLEDISP_PARKING_PREPARATION_IN_PROGRESS = 27;
+    APA_PKGDISABLEDISP_RESERVED_28 = 28;
+    APA_PKGDISABLEDISP_RESERVED_29 = 29;
+    APA_PKGDISABLEDISP_RESERVED_30 = 30;
+    APA_PKGDISABLEDISP_RESERVED_31 = 31;
+  }
+  enum QuickEntrySupportedSType {
+    QUICKENTRY_SUPPORTED_S_INVALID = 0;
+    QUICKENTRY_SUPPORTED_S_NOTSUPPORT = 1;
+    QUICKENTRY_SUPPORTED_S_SUPPORT = 2;
+    QUICKENTRY_SUPPORTED_S_RESERVED_3 = 3;
+  }
+  enum SelectedParkingSupportedSType {
+    SELECTEDPARKING_SUPPORTED_S_INVALID = 0;
+    SELECTEDPARKING_SUPPORTED_S_NOTSUPPORT = 1;
+    SELECTEDPARKING_SUPPORTED_S_SUPPORT = 2;
+    SELECTEDPARKING_SUPPORTED_S_RESERVED_3 = 3;
+  }
+  enum PMAFeedbackSType {
+    PMA_FEEDBACK_S_OFF = 0;
+    PMA_FEEDBACK_S_NORMAL = 1;
+    PMA_FEEDBACK_S_RESETTING = 2;
+    PMA_FEEDBACK_S_WAIT = 3;
+  }
+  enum PDCSpeakerPositionSType {
+    PDC_SPEAKERPOSITION_S_OFF = 0;
+    PDC_SPEAKERPOSITION_S_LF = 1;
+    PDC_SPEAKERPOSITION_S_RF = 2;
+    PDC_SPEAKERPOSITION_S_LR = 3;
+    PDC_SPEAKERPOSITION_S_RR = 4;
+    PDC_SPEAKERPOSITION_S_RESERVED_5 = 5;
+    PDC_SPEAKERPOSITION_S_RESERVED_6 = 6;
+    PDC_SPEAKERPOSITION_S_RESERVED_7 = 7;
+  }
+  enum PDCAlarmToneSType {
+    PDC_ALARMTONE_S_NOALARMTONE = 0;
+    PDC_ALARMTONE_S_TWOHZ = 1;
+    PDC_ALARMTONE_S_FOURHZ = 2;
+    PDC_ALARMTONE_S_ALWAY = 3;
+  }
+  enum HPACrosslayerparklotSupedSType {
+    HPA_CROSSLAYERPARKLOT_SUPED_S_INVALID = 0;
+    HPA_CROSSLAYERPARKLOT_SUPED_S_NOTSUPPORT = 1;
+    HPA_CROSSLAYERPARKLOT_SUPED_S_SUPPORT = 2;
+    HPA_CROSSLAYERPARKLOT_SUPED_S_RESERVED_3 = 3;
+  }
+  enum HPAOutdoorparklotSupportedSType {
+    HPA_OUTDOORPARKLOT_SUPPORTED_S_INVALID = 0;
+    HPA_OUTDOORPARKLOT_SUPPORTED_S_NOTSUPPORT = 1;
+    HPA_OUTDOORPARKLOT_SUPPORTED_S_SUPPORT = 2;
+    HPA_OUTDOORPARKLOT_SUPPORTED_S_RESERVED_3 = 3;
+  }
+  enum HPAParkinOnAPPSupportedSType {
+    HPA_PARKINONAPP_SUPPORTED_S_INVALID = 0;
+    HPA_PARKINONAPP_SUPPORTED_S_NOTSUPPORT = 1;
+    HPA_PARKINONAPP_SUPPORTED_S_SUPPORT = 2;
+    HPA_PARKINONAPP_SUPPORTED_S_RESERVED_3 = 3;
+  }
+  enum HPAParkoutOnPADSupportedSType {
+    HPA_PARKOUTONPAD_SUPPORTED_S_INVALID = 0;
+    HPA_PARKOUTONPAD_SUPPORTED_S_NOTSUPPORT = 1;
+    HPA_PARKOUTONPAD_SUPPORTED_S_SUPPORT = 2;
+    HPA_PARKOUTONPAD_SUPPORTED_S_RESERVED_3 = 3;
+  }
+  enum HPAParkoutOnAPPSupportedSType {
+    HPA_PARKOUTONAPP_SUPPORTED_S_INVALID = 0;
+    HPA_PARKOUTONAPP_SUPPORTED_S_NOTSUPPORT = 1;
+    HPA_PARKOUTONAPP_SUPPORTED_S_SUPPORT = 2;
+    HPA_PARKOUTONAPP_SUPPORTED_S_RESERVED_3 = 3;
+  }
+  enum APAParkingOutOrInType {
+    APA_PARKING_OUT_OR_IN_WAIT = 0;
+    APA_PARKING_OUT_OR_IN_PKIN = 1;
+    APA_PARKING_OUT_OR_IN_PKOUT = 2;
+    APA_PARKING_OUT_OR_IN_PKNOTSEL = 3;
+    APA_PARKING_OUT_OR_IN_PKISUNDERWAY = 4;
+    APA_PARKING_OUT_OR_IN_RESERVED_5 = 5;
+    APA_PARKING_OUT_OR_IN_RESERVED_6 = 6;
+    APA_PARKING_OUT_OR_IN_RESERVED_7 = 7;
+  }
+  enum APAresulutionType {
+    APA_RESULUTION_RESERVED_0 = 0;
+    APA_RESULUTION_1280_720 = 1;
+    APA_RESULUTION_1728_1080 = 2;
+    APA_RESULUTION_1920_1080 = 3;
+    APA_RESULUTION_INVALID = 15;
+  }
+  enum PKGVOT2PADSupportedSType {
+    PKGVOT2PAD_SUPPORTED_S_INVALID = 0;
+    PKGVOT2PAD_SUPPORTED_S_NOTSUPPORTED = 1;
+    PKGVOT2PAD_SUPPORTED_S_SUPPORT = 2;
+    PKGVOT2PAD_SUPPORTED_S_RESERVED_3 = 3;
+  }
+  enum APAFRParkStsType {
+    APA_FR_PARK_STS_INVALID = 0;
+    APA_FR_PARK_STS_FRONT_PARKING = 1;
+    APA_FR_PARK_STS_REAR_PARKING = 2;
+    APA_FR_PARK_STS_FRONT_REARPARKHIGHLIGHTTHEFRONT = 3;
+    APA_FR_PARK_STS_FRONT_REARPARKHIGHLIGHTTHEREAR = 4;
+  }
+  enum PkgSpdRankSupportedSType {
+    PKGSPDRANK_SUPPORTED_S_INVALID = 0;
+    PKGSPDRANK_SUPPORTED_S_NOTSUPPORTED = 1;
+    PKGSPDRANK_SUPPORTED_S_SUPPORT = 2;
+    PKGSPDRANK_SUPPORTED_S_RESERVED_3 = 3;
+  }
+  enum BackgroundSearchingStatsSType {
+    BACKGROUND_SEARCHING_STATS_S_INVALID = 0;
+    BACKGROUND_SEARCHING_STATS_S_NOT_READY = 1;
+    BACKGROUND_SEARCHING_STATS_S_READY = 2;
+    BACKGROUND_SEARCHING_STATS_S_RESERVED_3 = 3;
+  }
+  enum APAPowerModeReqSType {
+    APA_POWERMODE_REQ_S_INVALID = 0;
+    APA_POWERMODE_REQ_S_NO_REQUEST = 1;
+    APA_POWERMODE_REQ_S_REQUEST_TO_POWEROFF = 2;
+    APA_POWERMODE_REQ_S_RESERVED_3 = 3;
+  }
+  enum SPS360AssembleStatusSType {
+    SPS360_ASSEMBLE_STATUS_S_INVALID = 0;
+    SPS360_ASSEMBLE_STATUS_S_NO = 1;
+    SPS360_ASSEMBLE_STATUS_S_YES = 2;
+    SPS360_ASSEMBLE_STATUS_S_RESERVED_3 = 3;
+  }
+  // 子ID [] [0E-008|255.00000000]
+  optional int32 apa_child_id_31_a_s = 1;
+  // 车位提示音 [] [0E-008|1.00000000]
+  optional double apa_parking_space_beep_s = 2;
+  // SDW状态 [] [0E-008|3.00000000]
+  optional SDWstatusSType sdw_status_s = 3;
+  // 倒车雷达系统状态 [] [0E-008|7.00000000]
+  optional PASstatusSType pas_status_s = 4;
+  // 低速辅助制动开启状态信号 [] [0E-008|3.00000000]
+  optional APAMEBSettingStatesSType apa_meb_setting_states_s = 5;
+  // 泊车过程其他交互信息提示 [] [0E-008|31.00000000]
+  optional OrHintWithParkingBSSType or_hint_with_parking_bs_s = 6;
+  // RPA请求解锁，发固定值0x0，左域接收 [] [0E-008|1.00000000]
+  optional bool apa_pas_command_doors_unlock_s = 7;
+  // RPA可用状态（默认发0x1,适用于遥控泊?耄盧PA不可用时，提醒用户使用APA进行泊入） [] [0E-008|1.00000000]
+  optional bool apa_rpa_avail_sts_s = 8;
+  // SDW功能状态反馈 [] [0E-008|1.00000000]
+  optional bool sdw_function_state_fb_s = 9;
+  // POC Front Left Parallel status [] [0E-008|1.00000000]
+  optional bool apa_poc_frnt_le_parallel_sts_s = 10;
+  // 垂直车头向左泊出可用性 [] [0E-008|1.00000000]
+  optional bool apa_poc_frnt_le_corss_sts_s = 11;
+  // 水平向右泊出可用性 [] [0E-008|1.00000000]
+  optional bool apa_poc_frnt_ri_parallel_sts_s = 12;
+  // 垂直车头向右泊出可用性 [] [0E-008|1.00000000]
+  optional bool apa_poc_frnt_ri_corss_sts_s = 13;
+  // 向前泊出可用性 [] [0E-008|1.00000000]
+  optional bool apa_poc_frnt_corss_sts_s = 14;
+  // 向后泊出可用性 [] [0E-008|1.00000000]
+  optional bool apa_poc_back_corss_sts_s = 15;
+  // 垂直车尾向左 [] [0E-008|1.00000000]
+  optional bool apa_poc_back_le_corss_sts_s = 16;
+  // 垂直车尾向右 [] [0E-008|1.00000000]
+  optional bool apa_poc_back_ri_corss_sts_s = 17;
+  // POC Back Right Corss status [] [0E-008|15.00000000]
+  optional APAPOCDirSelResSType apa_poc_dir_sel_res_s = 18;
+  // 模块厂家 [] [0E-008|15.00000000]
+  optional ModuleManufacturer31ASType module_manufacturer_31_a_s = 19;
+  // Keep vehicle standstill [] [0E-008|1.00000000]
+  optional bool meb_stand_still_req_s = 20;
+  // MEB warning info [] [0E-008|7.00000000]
+  optional MEBWarnSType meb_warn_s = 21;
+  // 是否配置SDW功能 [] [0E-008|3.00000000]
+  optional SDWSupportedSType sdw_supported_s = 22;
+  // 车头泊入配置状态 [] [0E-008|3.00000000]
+  optional APAFrontParkInSupportedSType apa_front_park_in_supported_s = 23;
+  // APA_FrontPkg_State_FB_S [] [0E-008|3.00000000]
+  optional APAFrontPkgStateFBSType apa_front_pkg_state_fb_s = 24;
+  // APA功能不可用提示 [] [0E-008|31.00000000]
+  optional APAPkgDisableDispType apa_pkg_disable_disp = 25;
+  // 倒挡联动自学习报文 [] [0E-008|3.00000000]
+  optional QuickEntrySupportedSType quick_entry_supported_s = 26;
+  // 自选车位自学习报文 [] [0E-008|3.00000000]
+  optional SelectedParkingSupportedSType selected_parking_supported_s = 27;
+  // PMA反馈 [] [0E-008|3.00000000]
+  optional PMAFeedbackSType pma_feedback_s = 28;
+  // PDC_SpeakerPosition_S [] [0E-008|7.00000000]
+  optional PDCSpeakerPositionSType pdc_speaker_position_s = 29;
+  // PDC_AlarmTone_S [] [0E-008|3.00000000]
+  optional PDCAlarmToneSType pdc_alarm_tone_s = 30;
+  // HPA_Crosslayerparklot_Supported_S [] [0E-008|3.00000000]
+  optional HPACrosslayerparklotSupedSType hpa_crosslayerparklot_suped_s = 31;
+  // HPA_Outdoorparklot_Supported_S [] [0E-008|3.00000000]
+  optional HPAOutdoorparklotSupportedSType hpa_outdoorparklot_supported_s = 32;
+  // HPA_ParkinOnAPP_Supported_S [] [0E-008|3.00000000]
+  optional HPAParkinOnAPPSupportedSType hpa_parkin_on_app_supported_s = 33;
+  // HPA_ParkoutOnPAD_Supported_S [] [0E-008|3.00000000]
+  optional HPAParkoutOnPADSupportedSType hpa_parkout_on_pad_supported_s = 34;
+  // HPA_ParkoutOnAPP_Supported_S [] [0E-008|3.00000000]
+  optional HPAParkoutOnAPPSupportedSType hpa_parkout_on_app_supported_s = 35;
+  // APA_Parking_Out_Or_In [] [0E-008|7.00000000]
+  optional APAParkingOutOrInType apa_parking_out_or_in = 36;
+  // APA屏幕分辨率 [] [0E-008|15.00000000]
+  optional APAresulutionType apa_resulution = 37;
+  // Rpa_Information_s [] [0E-008|2097151.00000000]
+  optional int32 rpa_information_s = 38;
+  // 是否配置e4 APA [] [0E-008|3.00000000]
+  optional PKGVOT2PADSupportedSType pkgvot2_pad_supported_s = 39;
+  // 选中（高亮）车位车头/车尾泊入状态 [] [0E-008|7.00000000]
+  optional APAFRParkStsType apa_fr_park_sts = 40;
+  // 泊车速度等级自学习报文 [] [0E-008|3.00000000]
+  optional PkgSpdRankSupportedSType pkg_spd_rank_supported_s = 41;
+  // 后台搜车位状态 [] [0E-008|3.00000000]
+  optional BackgroundSearchingStatsSType background_searching_stats_s = 42;
+  // APA请求车辆熄火 [] [0E-008|3.00000000]
+  optional APAPowerModeReqSType apa_power_mode_req_s = 43;
+  // 是否支持360°自选车位功能 [] [0E-008|3.00000000]
+  optional SPS360AssembleStatusSType sps360_assemble_status_s = 44;
+}
+
+message IPB_0X321 {
+// Report Message
+  // IPB_SimulatorPressureSimulator压力 [bar] [-5.00000000|301.60000000]
+  optional double ipb_simulator_pressure_s = 1;
+  // IPB_SimulatorPressure_StsSimulator压力状态 [] [0E-008|1.00000000]
+  optional bool ipb_simulator_pressure_sts_s = 2;
+  // IPB_PlungerPressure_status [] [0E-008|1.00000000]
+  optional bool ipb_plunger_pres_status_s = 3;
+  // IPB_PlungerPressurePlunger压力 [bar] [-5.00000000|301.60000000]
+  optional double ipb_plunger_pressure_s = 4;
+  // Message counter 321 [] [0E-008|15.00000000]
+  optional int32 counter_321_s = 5;
+  // 校验码321 [] [0E-008|255.00000000]
+  optional int32 checksum_321_s = 6;
+}
+
+message IPB_0X322 {
+// Report Message
+  // CDP功能有效位 [] [0E-008|1.00000000]
+  optional bool automatic_braking_available = 1;
+  // CDP功能激活状态 [] [0E-008|1.00000000]
+  optional bool automatic_braking_active_sts = 2;
+  // RCTB_active（10V注释，13无） [] [0E-008|1.00000000]
+  optional bool rctb_active = 3;
+  // RCTB_Available（10V注释，13无） [] [0E-008|1.00000000]
+  optional bool rctb_available = 4;
+}
+
+message VCU_0X343 {
+// Report Message
+  // 极致续航开启状态 [] [0E-008|1.00000000]
+  optional bool ext_mode_open_sts = 1;
+}
+
+message MEDIA_0X3B7 {
+// Report Message
+  enum DataUpLoadModeSettingSType {
+    DATA_UP_LOAD_MODE_SETTING_S_INVALID = 0;
+    DATA_UP_LOAD_MODE_SETTING_S_OPEN = 1;
+    DATA_UP_LOAD_MODE_SETTING_S_CLOSE = 2;
+    DATA_UP_LOAD_MODE_SETTING_S_RESERVED_3 = 3;
+  }
+  // 由GPS得出的车速 [] [0E-008|240.00000000]
+  optional double media_speed_is_obtained_by_gps_s = 1;
+  // 远程唤醒开启或关闭数据上传模式 [] [0E-008|3.00000000]
+  optional DataUpLoadModeSettingSType data_up_load_mode_setting_s = 2;
+  // 循环计数器 [] [0E-008|15.00000000]
+  optional int32 counter_3_b7_s = 3;
+  // Checksum=(Byte1+Byte2…+Byte7)XOR0xFF [] [0E-008|255.00000000]
+  optional int32 checksum_3_b7_s = 4;
+}
+
+message IPB_0X422 {
+// Report Message
+  // 左前轮轮速脉冲计数器 [] [0E-008|1022.00000000]
+  optional double fl_wheel_pulse_counter_422_s = 1;
+  // RR Wheel Pulse Counter Validity_422 [] [0E-008|1.00000000]
+  optional bool rr_wheel_puls_count_valid_422_s = 2;
+  // RL Wheel Pulse Counter Validity_422 [] [0E-008|1.00000000]
+  optional bool rl_wheel_puls_count_valid_422_s = 3;
+  // FR Wheel Pulse Counter Validity_422 [] [0E-008|1.00000000]
+  optional bool fr_wheel_puls_count_valid_422_s = 4;
+  // FL Wheel Pulse Counter Validity_422 [] [0E-008|1.00000000]
+  optional bool fl_wheel_puls_count_valid_422_s = 5;
+  // FR Wheel Pulse Counter_422 [] [0E-008|1022.00000000]
+  optional double fr_wheel_pulse_counter_422_s = 6;
+  // RL Wheel Pulse Counter_422 [] [0E-008|1022.00000000]
+  optional double rl_wheel_pulse_counter_422_s = 7;
+  // RR Wheel Pulse Counter_422 [] [0E-008|1022.00000000]
+  optional double rr_wheel_pulse_counter_422_s = 8;
+  // Message counter 422 [] [0E-008|15.00000000]
+  optional int32 counter_422_s = 9;
+  // CheckSum422 [] [0E-008|255.00000000]
+  optional int32 check_sum_422_s = 10;
+}
+
+message ADS_0X432 {
+// Control Message
+  enum ModuleManufacturerSType {
+    MODULE_MANUFACTURER_S_FIFTEEN = 0;
+    MODULE_MANUFACTURER_S_BOSCH = 1;
+    MODULE_MANUFACTURER_S_VEONEER = 2;
+    MODULE_MANUFACTURER_S_CONTI = 3;
+    MODULE_MANUFACTURER_S_ZF = 4;
+    MODULE_MANUFACTURER_S_BAIDU = 5;
+    MODULE_MANUFACTURER_S_HUAWEI = 6;
+    MODULE_MANUFACTURER_S_HORIZONROBOTICS = 7;
+    MODULE_MANUFACTURER_S_REACH = 8;
+    MODULE_MANUFACTURER_S_RESERVED_9 = 9;
+    MODULE_MANUFACTURER_S_RESERVED_10 = 10;
+    MODULE_MANUFACTURER_S_RESERVED_11 = 11;
+    MODULE_MANUFACTURER_S_RESERVED_12 = 12;
+    MODULE_MANUFACTURER_S_RESERVED_13 = 13;
+    MODULE_MANUFACTURER_S_RESERVED_14 = 14;
+    MODULE_MANUFACTURER_S_RESERVED_15 = 15;
+  }
+  enum IOAValidPeriodSType {
+    IOA_VALIDPERIOD_S_INVALID = 0;
+    IOA_VALIDPERIOD_S_NO = 1;
+    IOA_VALIDPERIOD_S_YES = 2;
+    IOA_VALIDPERIOD_S_RESERVED_3 = 3;
+  }
+  enum IOAAssembleStatusSType {
+    IOA_ASSEMBLE_STATUS_S_INVALID = 0;
+    IOA_ASSEMBLE_STATUS_S_NOTSUPPORTED = 1;
+    IOA_ASSEMBLE_STATUS_S_SUPPORT = 2;
+    IOA_ASSEMBLE_STATUS_S_REVERSE = 3;
+  }
+  enum LKCAssembleStatusSType {
+    LKC_ASSEMBLE_STATUS_S_INVALID = 0;
+    LKC_ASSEMBLE_STATUS_S_NOTSUPPORT = 1;
+    LKC_ASSEMBLE_STATUS_S_SUPPORT = 2;
+    LKC_ASSEMBLE_STATUS_S_RESERVED_3 = 3;
+  }
+  enum ISLAUIAssembleStatusSType {
+    ISLA_UI_ASSEMBLE_STATUS_S_INVAILD = 0;
+    ISLA_UI_ASSEMBLE_STATUS_S_NEW = 1;
+    ISLA_UI_ASSEMBLE_STATUS_S_OLD = 2;
+    ISLA_UI_ASSEMBLE_STATUS_S_RESERVED_3 = 3;
+  }
+  enum ISLAoffsetmodeAssembleSType {
+    ISLA_OFFSET_MODE_ASSEMBLE_S_INVAILD = 0;
+    ISLA_OFFSET_MODE_ASSEMBLE_S_YES = 1;
+    ISLA_OFFSET_MODE_ASSEMBLE_S_NO = 2;
+    ISLA_OFFSET_MODE_ASSEMBLE_S_RESERVED_3 = 3;
+  }
+  enum ILCAActivateModeStatusType {
+    ILCA_ACTIVATE_MODE_STATUS_INVALID = 0;
+    ILCA_ACTIVATE_MODE_STATUS_NOTSUPPORT = 1;
+    ILCA_ACTIVATE_MODE_STATUS_SUPPORT = 2;
+    ILCA_ACTIVATE_MODE_STATUS_RESERVED_3 = 3;
+  }
+  enum IASAssembleStatusSType {
+    IAS_ASSEMBLE_STATUS_S_INVALID = 0;
+    IAS_ASSEMBLE_STATUS_S_NOTSUPPORT = 1;
+    IAS_ASSEMBLE_STATUS_S_SUPPORT = 2;
+    IAS_ASSEMBLE_STATUS_S_RESERVED_3 = 3;
+  }
+  enum LCStyleAssembleStsSType {
+    LCSTYLE_ASSEMBLE_STS_S_INVALID = 0;
+    LCSTYLE_ASSEMBLE_STS_S_NOT_SUPPORT = 1;
+    LCSTYLE_ASSEMBLE_STS_S_SUPPORT = 2;
+    LCSTYLE_ASSEMBLE_STS_S_RESERVED_3 = 3;
+  }
+  enum AdsModeUIStatusType {
+    ADSMODE_UI_STATUS_INVALID = 0;
+    ADSMODE_UI_STATUS_OLD_UI = 1;
+    ADSMODE_UI_STATUS_NEW_UI = 2;
+    ADSMODE_UI_STATUS_RESERVED_3 = 3;
+  }
+  enum ILCASwitchDisplayType {
+    ILCA_SWITCH_DISPLAY_INVALID = 0;
+    ILCA_SWITCH_DISPLAY_NOT_DISPLAY = 1;
+    ILCA_SWITCH_DISPLAY_DISPLAY = 2;
+    ILCA_SWITCH_DISPLAY_REVERSED = 3;
+  }
+  enum BrakeNoExitAdsAssembleType {
+    BRAKENOEXITADS_ASSEMBLE_INVALID = 0;
+    BRAKENOEXITADS_ASSEMBLE_NOT_SUPPORT = 1;
+    BRAKENOEXITADS_ASSEMBLE_SUPPORT = 2;
+    BRAKENOEXITADS_ASSEMBLE_RESERVED_3 = 3;
+  }
+  enum ADASAlgorithmSupplierType {
+    ADAS_ALGORITHM_SUPPLIER_INVALID = 0;
+    ADAS_ALGORITHM_SUPPLIER_MMT = 1;
+    ADAS_ALGORITHM_SUPPLIER_DJI = 2;
+    ADAS_ALGORITHM_SUPPLIER_DEEPROUTE_AI = 3;
+    ADAS_ALGORITHM_SUPPLIER_HORIZENTAL = 4;
+    ADAS_ALGORITHM_SUPPLIER_RENCHAUTO = 5;
+    ADAS_ALGORITHM_SUPPLIER_BYD_IDA = 6;
+  }
+  // 是否配备ACC [] [0E-008|1.00000000]
+  optional bool acc_assemble_status_s = 1;
+  // 是否配备AEB [] [0E-008|1.00000000]
+  optional bool aeb_assemble_status_2_s = 2;
+  // 是否配备FCW [] [0E-008|1.00000000]
+  optional bool fcw_assemble_status_2_s = 3;
+  // 是否配备HMA [] [0E-008|1.00000000]
+  optional bool hma_assemble_status_2_s = 4;
+  // 是否配备LDW [] [0E-008|1.00000000]
+  optional bool ldw_assemble_status_s = 5;
+  // 是否配备LKS [] [0E-008|1.00000000]
+  optional bool lks_assemble_status_s = 6;
+  // 是否配备交通标志识别 [] [0E-008|1.00000000]
+  optional bool tsr_assemble_status_s = 7;
+  // 是否配备TJA/ICA [] [0E-008|1.00000000]
+  optional bool tja_ica_assemble_status_s = 8;
+  // 模块厂家 [] [0E-008|15.00000000]
+  optional ModuleManufacturerSType module_manufacturer_s = 9;
+  // LDW是否配备报警方式选择 [] [0E-008|1.00000000]
+  optional bool ldw_warning_conf_exchange_s = 10;
+  // 是否TJA/ICA软开关 [] [0E-008|1.00000000]
+  optional bool tja_ica_soft_key_status_s = 11;
+  // 是否配备LDP [] [0E-008|1.00000000]
+  optional bool ldp_assemble_status_s = 12;
+  // 是否配备ELK [] [0E-008|1.00000000]
+  optional bool elk_assemble_status_2_s = 13;
+  // 是否配备前方穿行预警 [] [0E-008|1.00000000]
+  optional bool fcta_assemble_status_2_s = 14;
+  // 是否配备前方穿行制动 [] [0E-008|1.00000000]
+  optional bool fctb_assemble_status_3_s = 15;
+  // 是否配备ISLI超速报警 [] [0E-008|1.00000000]
+  optional bool isli_assemble_statue_s = 16;
+  // 是否配备高速领航 [] [0E-008|1.00000000]
+  optional bool hnp_assemble_status_s = 17;
+  // 是否配备手动变道辅助 [] [0E-008|1.00000000]
+  optional bool ilca_assemble_status_s = 18;
+  // 是否配备交通灯识别功能 [] [0E-008|1.00000000]
+  optional bool tla_assemble_status_s = 19;
+  // 是否配备智能限速控制 [] [0E-008|1.00000000]
+  optional bool islc_assemble_status_s = 20;
+  // 是否配备ESA功能 [] [0E-008|1.00000000]
+  optional bool esa_assemble_status_s = 21;
+  // FCW UI界面显示 [] [0E-008|1.00000000]
+  optional bool fcw_ui_assemble_status_2_s = 22;
+  // 仪表界面显示 [] [0E-008|1.00000000]
+  optional bool meter_display_mode_s = 23;
+  // IOA是否在有效期 [] [0E-008|3.00000000]
+  optional IOAValidPeriodSType ioa_valid_period_s = 24;
+  // 是否配置IOA功能 [] [0E-008|3.00000000]
+  optional IOAAssembleStatusSType ioa_assemble_status_s = 25;
+  // 是否配置LKC功能 [] [0E-008|3.00000000]
+  optional LKCAssembleStatusSType lkc_assemble_status_s = 26;
+  // ISLA_UI设置状态 [] [0E-008|3.00000000]
+  optional ISLAUIAssembleStatusSType isla_ui_assemble_status_s = 27;
+  // 限速偏移模式配置 [] [0E-008|3.00000000]
+  optional ISLAoffsetmodeAssembleSType isla_offset_mode_assemble_s = 28;
+  // ILCA长短拨激活方式自学习 [] [0E-008|3.00000000]
+  optional ILCAActivateModeStatusType ilca_activate_mode_status = 29;
+  // 是否配备智能防加塞功能 [] [0E-008|3.00000000]
+  optional IASAssembleStatusSType ias_assemble_status_s = 30;
+  // 变道风格设置项自学习报文 [] [0E-008|3.00000000]
+  optional LCStyleAssembleStsSType lc_style_assemble_sts_s = 31;
+  // 驾驶辅助界面新旧UI自学习信号 [] [0E-008|3.00000000]
+  optional AdsModeUIStatusType ads_mode_ui_status = 32;
+  // 拨杆变道开关显示 [] [0E-008|3.00000000]
+  optional ILCASwitchDisplayType ilca_switch_display = 33;
+  // 刹车不退功能配置 [] [0E-008|3.00000000]
+  optional BrakeNoExitAdsAssembleType brake_no_exit_ads_assemble = 34;
+  // ADAS应用功能算法供应商 [] [0E-008|15.00000000]
+  optional ADASAlgorithmSupplierType adas_algorithm_supplier = 35;
+  // 摄像头厂家信息 [] [0E-008|7.00000000]
+  optional int32 avm_video_manufacture_s = 36;
+}
+
+message VCU_0X48B {
+// Report Message
+  enum ExtmodecfgselfstudyType {
+    EXT_MODE_CFG_SELF_STUDY_INVALID = 0;
+    EXT_MODE_CFG_SELF_STUDY_NOCONFIGURATION = 1;
+    EXT_MODE_CFG_SELF_STUDY_WITHCONFIGURATION = 2;
+    EXT_MODE_CFG_SELF_STUDY_RESERVED_3 = 3;
+  }
+  // 48B子ID:0x04 [] [0E-008|255.00000000]
+  optional int32 child_id_48_bs = 1;
+  // 极致续航配置自学习 [] [0E-008|3.00000000]
+  optional ExtmodecfgselfstudyType ext_mode_cfg_self_study = 2;
+}
+
+message MEDIA_0X4DE {
+// Report Message
+  enum SwitchDisplayModeSType {
+    SWITCH_DISPLAY_MODE_S_INVALID_RESERVED_0 = 0;
+    SWITCH_DISPLAY_MODE_S_TURNOFFTHEDISPLAY = 1;
+    SWITCH_DISPLAY_MODE_S_FRONTVIEW = 2;
+    SWITCH_DISPLAY_MODE_S_BACKVIEW = 3;
+    SWITCH_DISPLAY_MODE_S_LEFTVIEW = 4;
+    SWITCH_DISPLAY_MODE_S_RIGHTVIEW = 5;
+    SWITCH_DISPLAY_MODE_S_LOOKDOWN_RESERVED_6 = 6;
+    SWITCH_DISPLAY_MODE_S_STARTMATCHING_RESERVED_7 = 7;
+    SWITCH_DISPLAY_MODE_S_FRONTLEFT = 8;
+    SWITCH_DISPLAY_MODE_S_FRONTRIGHT = 9;
+    SWITCH_DISPLAY_MODE_S_BACKLEFT = 10;
+    SWITCH_DISPLAY_MODE_S_BACKRIGHT = 11;
+    SWITCH_DISPLAY_MODE_S_FRONTWIDE = 12;
+    SWITCH_DISPLAY_MODE_S_BACKWIDE = 13;
+    SWITCH_DISPLAY_MODE_S_WIDTHLIMIT = 14;
+    SWITCH_DISPLAY_MODE_S_RESERVED_15 = 15;
+  }
+  enum PanoramicImageWrkMod4DESType {
+    PANORAMIC_IMAGE_WRK_MOD_4DE_S_2DPANORAMICMODE = 0;
+    PANORAMIC_IMAGE_WRK_MOD_4DE_S_LARGEIMAGEMODEFULLSCREEN = 1;
+    PANORAMIC_IMAGE_WRK_MOD_4DE_S_RESERVED_2 = 2;
+    PANORAMIC_IMAGE_WRK_MOD_4DE_S_SMALLWINDOWMODEWIDGET = 3;
+    PANORAMIC_IMAGE_WRK_MOD_4DE_S_REVERSEFRONTRIGHTMODE = 4;
+    PANORAMIC_IMAGE_WRK_MOD_4DE_S_REVERSEPANORAMICMODE = 5;
+    PANORAMIC_IMAGE_WRK_MOD_4DE_S_3DPANORAMICMODE = 6;
+    PANORAMIC_IMAGE_WRK_MOD_4DE_S_RESERVED_7 = 7;
+    PANORAMIC_IMAGE_WRK_MOD_4DE_S_RESERVED_8 = 8;
+    PANORAMIC_IMAGE_WRK_MOD_4DE_S_RESERVED_9 = 9;
+    PANORAMIC_IMAGE_WRK_MOD_4DE_S_RESERVED_10 = 10;
+    PANORAMIC_IMAGE_WRK_MOD_4DE_S_RESERVED_11 = 11;
+    PANORAMIC_IMAGE_WRK_MOD_4DE_S_RESERVED_12 = 12;
+    PANORAMIC_IMAGE_WRK_MOD_4DE_S_RESERVED_13 = 13;
+    PANORAMIC_IMAGE_WRK_MOD_4DE_S_RESERVED_14 = 14;
+    PANORAMIC_IMAGE_WRK_MOD_4DE_S_INVALID = 15;
+  }
+  enum RoatePadStatus4DESType {
+    ROATE_PAD_STATUS_4DE_S_INVALID = 0;
+    ROATE_PAD_STATUS_4DE_S_HORIZONTALSCREEN = 1;
+    ROATE_PAD_STATUS_4DE_S_VERTICALSCREEN = 2;
+    ROATE_PAD_STATUS_4DE_S_RESERVED_3 = 3;
+  }
+  enum SwitchDisplayMode1SType {
+    SWITCH_DISPLAY_MODE1_S_INVALID = 0;
+    SWITCH_DISPLAY_MODE1_S_2DFRONTWIDELEFT = 1;
+    SWITCH_DISPLAY_MODE1_S_2DFRONTWIDERIGHT = 2;
+    SWITCH_DISPLAY_MODE1_S_2DREARWIDELEFT = 3;
+    SWITCH_DISPLAY_MODE1_S_2DREARWIDERIGHT = 4;
+    SWITCH_DISPLAY_MODE1_S_2DLIMITEDWIDTHLEFT = 5;
+    SWITCH_DISPLAY_MODE1_S_2DLIMITEDWIDTHRIGHT = 6;
+    SWITCH_DISPLAY_MODE1_S_LOOKINGDOWNLEFT = 7;
+    SWITCH_DISPLAY_MODE1_S_LOOKINGDOWNRIGHT = 8;
+    SWITCH_DISPLAY_MODE1_S_3DLEFTAND2DLEFT = 9;
+    SWITCH_DISPLAY_MODE1_S_3DLEFTAND2DRIGHT = 10;
+    SWITCH_DISPLAY_MODE1_S_3DRIGHTAND2DLEFT = 11;
+    SWITCH_DISPLAY_MODE1_S_3DRIGHTAND2DRIGHT = 12;
+    SWITCH_DISPLAY_MODE1_S_LEFTANDFRONT = 13;
+    SWITCH_DISPLAY_MODE1_S_RIGHTANDRIGHT = 14;
+    SWITCH_DISPLAY_MODE1_S_RESERVED_15 = 15;
+  }
+  enum SwitchDisplayMode2SType {
+    SWITCH_DISPLAY_MODE2_S_INVALID = 0;
+    SWITCH_DISPLAY_MODE2_S_3DLEFTFRONT2DLEFT = 1;
+    SWITCH_DISPLAY_MODE2_S_3DLEFTFRONT2DRIGHT = 2;
+    SWITCH_DISPLAY_MODE2_S_3DRIGHTFRONT2DLEFT = 3;
+    SWITCH_DISPLAY_MODE2_S_3DRIGHTFRONT2DRIGHT = 4;
+    SWITCH_DISPLAY_MODE2_S_RESERVED_5 = 5;
+    SWITCH_DISPLAY_MODE2_S_RESERVED_6 = 6;
+    SWITCH_DISPLAY_MODE2_S_RESERVED_7 = 7;
+    SWITCH_DISPLAY_MODE2_S_RESERVED_8 = 8;
+    SWITCH_DISPLAY_MODE2_S_RESERVED_9 = 9;
+    SWITCH_DISPLAY_MODE2_S_RESERVED_10 = 10;
+    SWITCH_DISPLAY_MODE2_S_RESERVED_11 = 11;
+    SWITCH_DISPLAY_MODE2_S_RESERVED_12 = 12;
+    SWITCH_DISPLAY_MODE2_S_RESERVED_13 = 13;
+    SWITCH_DISPLAY_MODE2_S_RESERVED_14 = 14;
+    SWITCH_DISPLAY_MODE2_S_RESERVED_15 = 15;
+  }
+  enum APAModeSType {
+    APA_MODE_S_INVALID = 0;
+    APA_MODE_S_ENTERAUTOMATICPARKINGMODE = 1;
+    APA_MODE_S_EXITAUTOMATICPARKINGMODE = 2;
+    APA_MODE_S_RESERVED_3 = 3;
+  }
+  // 子ID_4DE [] [0E-008|255.00000000]
+  optional int32 child_id_4_de_s = 1;
+  // 切换显示模式 [] [0E-008|15.00000000]
+  optional SwitchDisplayModeSType switch_display_mode_s = 2;
+  // 全景工作模式 [] [0E-008|15.00000000]
+  optional PanoramicImageWrkMod4DESType panoramic_image_wrk_mod_4_de_s = 3;
+  // 旋转屏状态 [] [0E-008|3.00000000]
+  optional RoatePadStatus4DESType roate_pad_status_4_de_s = 4;
+  // 切换显示模式(扩展)1 [] [0E-008|15.00000000]
+  optional SwitchDisplayMode1SType switch_display_mode1_s = 5;
+  // 切换显示模式(扩展)2 [] [0E-008|15.00000000]
+  optional SwitchDisplayMode2SType switch_display_mode2_s = 6;
+  // 全景透明/非透明切换动作 [] [0E-008|1.00000000]
+  optional bool panrm_transparnt_swch_s = 7;
+  // 全景透明/非透明切换动作计数器 [] [0E-008|1.00000000]
+  optional bool panrm_transprnt_swch_cnt_s = 8;
+  // 远程调用全景影像 [] [0E-008|1.00000000]
+  optional bool rmt_call_panoramic_img_s = 9;
+  // 自动泊车模式 [] [0E-008|3.00000000]
+  optional APAModeSType apa_mode_s = 10;
+}
+
+message ADS_0X4F4 {
+// Control Message
+  // 子ID_4F4 [] [0E-008|255.00000000]
+  optional int32 child_id_4_f4_s = 1;
+  // APA_旋转屏状态 [] [0E-008|3.00000000]
+  optional double apa_roate_pad_status_s = 2;
+  // RPA协议版本状态 [] [0E-008|15.00000000]
+  optional int32 rpa_system_status_s = 3;
+  // 滚动循环计数器4F4 [] [0E-008|15.00000000]
+  optional int32 counter_4_f4_s = 4;
+  // Checksum=(Byte1+byte2…+Byte7)XOR0xFF [] [0E-008|255.00000000]
+  optional int32 checksum_4_f4_s = 5;
+}
+
+message MEDIA_0X4F5 {
+// Report Message
+  // 驻车辅助开关软按键 [] [0E-008|1.00000000]
+  optional bool park_auxi_swch_soft_key_4_f5_s = 1;
+  // 事件编号 [] [0E-008|1.00000000]
+  optional bool event_number_4_f5_s = 2;
+}
+
+message SRS_0X08C {
+// Report Message
+  // SRS_碰撞信号 [] [0E-008|255.00000000]
+  optional int32 srs_collosion_signal_s = 1;
+  // 碰撞信号校验码 [] [0E-008|255.00000000]
+  optional int32 checksum_08_c_s = 2;
+  // SRS故障指示灯 [] [0E-008|1.00000000]
+  optional bool srs_srs_fault_indicator_s = 3;
+  // 循环计数器 [] [0E-008|15.00000000]
+  optional int32 counter_08_c_s = 4;
+}
+
+message IPB_0X0D5 {
+// Report Message
+  // IPB_InputRodStroke踏板行程 [mm] [-5.00000000|46.10000000]
+  optional double ipb_input_rod_stroke_s = 1;
+  // IPB_InputRodStroke_Status踏板行程状态 [] [0E-008|1.00000000]
+  optional bool ipb_input_rod_stroke_state_s = 2;
+  // Message counter_0D5 [] [0E-008|15.00000000]
+  optional int32 counter0_d5_s = 3;
+  // CheckSum_0D5 [] [0E-008|255.00000000]
+  optional int32 check_sum_0_d5_s = 4;
+}
+
+message VCU_0X0FC {
+// Report Message
+  enum VCUIPBBrakePedaltatusSType {
+    VCU_IPB_BRAKE_PEDALTATUS_S_NOTPRESSED = 0;
+    VCU_IPB_BRAKE_PEDALTATUS_S_PRESSED = 1;
+    VCU_IPB_BRAKE_PEDALTATUS_S_RESERVED_2 = 2;
+    VCU_IPB_BRAKE_PEDALTATUS_S_ERROR = 3;
+  }
+  enum VCUIPBystemtatusSType {
+    VCU_IPBYSTEMTATUS_S_BBF_FULLSYS = 0;
+    VCU_IPBYSTEMTATUS_S_BBF_DEGRADEDPEDALFEEL = 1;
+    VCU_IPBYSTEMTATUS_S_BBF_CIRCUITSPERATION = 2;
+    VCU_IPBYSTEMTATUS_S_BBF_C12BOOSTONLY = 3;
+    VCU_IPBYSTEMTATUS_S_HYDBWACTHYDBWOACT = 4;
+    VCU_IPBYSTEMTATUS_S_RESERVED_5 = 5;
+  }
+  enum VCUIPBHDCActiveSType {
+    VCU_IPB_HDC_ACTIVE_S_CLOSE = 0;
+    VCU_IPB_HDC_ACTIVE_S_STANDBY = 1;
+    VCU_IPB_HDC_ACTIVE_S_ACTIVE = 2;
+    VCU_IPB_HDC_ACTIVE_S_FORBIDDEN = 3;
+  }
+  enum VCUEPBSystemStatusSType {
+    VCU_EPB_SYSTEM_STATUS_S_RELEASING = 0;
+    VCU_EPB_SYSTEM_STATUS_S_RELEASED = 1;
+    VCU_EPB_SYSTEM_STATUS_S_APPLYING = 2;
+    VCU_EPB_SYSTEM_STATUS_S_APPLIED = 3;
+    VCU_EPB_SYSTEM_STATUS_S_FAULTREMOTEDP = 4;
+    VCU_EPB_SYSTEM_STATUS_S_RESERVED_5 = 5;
+  }
+  enum pbswtsatType {
+    PB_SWT_SAT_NOTACTIVE = 0;
+    PB_SWT_SAT_RELEASE = 1;
+    PB_SWT_SAT_APPLY = 2;
+    PB_SWT_SAT_RESERVED_3 = 3;
+  }
+  // Checksum=CRC16(x16 + x12 + x5  + 1)Polynomial:0x1021initial value：0xFFFFXOR value：0x0000校验范围：byte3-byte64 [] [0E-008|65535.00000000]
+  optional int32 checksum_0_fc_s = 1;
+  // Alive_counter_0FC [] [0E-008|65535.00000000]
+  optional int32 counter_0_fc_s = 2;
+  // 左前电机轮端目标扭矩 [Nm] [-32768.00000000|32767.00000000]
+  optional double fl_mot_whl_tar_tq_s = 3;
+  // 右前电机轮端目标扭矩 [Nm] [-32768.00000000|32767.00000000]
+  optional double fr_mot_whl_tar_tq_s = 4;
+  // 左后电机轮端目标扭矩 [Nm] [-32768.00000000|32767.00000000]
+  optional double rl_mot_whl_tar_tq_s = 5;
+  // 右后电机轮端目标扭矩 [Nm] [-32768.00000000|32767.00000000]
+  optional double rr_mot_whl_tar_tq_s = 6;
+  // 左前电机轮端实际扭矩 [Nm] [-32768.00000000|32767.00000000]
+  optional double fl_mot_whl_act_tq_s = 7;
+  // 右前电机轮端实际扭矩 [Nm] [-32768.00000000|32767.00000000]
+  optional double fr_mot_whl_act_tq_s = 8;
+  // 左后电机轮端实际扭矩 [Nm] [-32768.00000000|32767.00000000]
+  optional double rl_mot_whl_act_tq_s = 9;
+  // 右后电机轮端实际扭矩 [Nm] [-32768.00000000|32767.00000000]
+  optional double rr_mot_whl_act_tq_s = 10;
+  // 左前电机轮端目标扭矩有效标志 [] [0E-008|1.00000000]
+  optional bool fl_mot_whl_tar_tq_efc_flg_s = 11;
+  // 右前电机轮端目标扭矩有效标志 [] [0E-008|1.00000000]
+  optional bool fr_mot_whl_tar_tq_efc_flg_s = 12;
+  // 左后电机轮端目标扭矩有效标志 [] [0E-008|1.00000000]
+  optional bool lr_mot_whl_tar_tq_efc_flg_s = 13;
+  // 右后电机轮端目标扭矩有效标志 [] [0E-008|1.00000000]
+  optional bool rr_mot_whl_tar_tq_efc_flg_s = 14;
+  // 左前电机轮端实际扭矩有效标志 [] [0E-008|1.00000000]
+  optional bool fl_mot_whl_act_tq_efc_flg_s = 15;
+  // 右前电机轮端实际扭矩有效标志 [] [0E-008|1.00000000]
+  optional bool fr_mot_whl_act_tq_efc_flg_s = 16;
+  // 左后电机轮端实际扭矩有效标志 [] [0E-008|1.00000000]
+  optional bool lr_mot_whl_act_tq_efc_flg_s = 17;
+  // 右后电机轮端实际扭矩有效标志 [] [0E-008|1.00000000]
+  optional bool rr_mot_whl_act_tq_efc_flg_s = 18;
+  // 左前电机转速 [Nm] [-32768.00000000|32767.00000000]
+  optional double fl_mot_spd_s = 19;
+  // 右前电机转速 [Nm] [-32768.00000000|32767.00000000]
+  optional double fr_mot_spd_s = 20;
+  // 左后电机转速 [Nm] [-32768.00000000|32767.00000000]
+  optional double rl_mot_spd_s = 21;
+  // 右后电机转速 [Nm] [-32768.00000000|32767.00000000]
+  optional double rr_mot_spd_s = 22;
+  // 左前电机转速有效标志 [] [0E-008|1.00000000]
+  optional bool fl_mot_spd_efc_flg_s = 23;
+  // 右前电机转速有效标志 [] [0E-008|1.00000000]
+  optional bool fr_mot_spd_efc_flg_s = 24;
+  // 左后电机转速有效标志 [] [0E-008|1.00000000]
+  optional bool rl_mot_spd_efc_flg_s = 25;
+  // 右后电机转速有效标志 [] [0E-008|1.00000000]
+  optional bool rr_mot_spd_efc_flg_s = 26;
+  // IPB左前轮速 [] [0E-008|281.46250000]
+  optional double ipb_whl_spd_fl_s = 27;
+  // IPB右前轮速 [] [0E-008|281.46250000]
+  optional double ipb_whl_spd_fr_s = 28;
+  // IPB左后轮速 [] [0E-008|281.46250000]
+  optional double ipb_whl_spd_rl_s = 29;
+  // IPB右后轮速 [] [0E-008|281.46250000]
+  optional double ipb_whl_spd_rr_s = 30;
+  // IPB左前轮速有效标志 [] [0E-008|1.00000000]
+  optional bool ipb_fl_whl_spd_efc_flg_s = 31;
+  // IPB右前轮速有效标志 [] [0E-008|1.00000000]
+  optional bool ipb_fr_whl_spd_efc_flg_s = 32;
+  // IPB左后轮速有效标志 [] [0E-008|1.00000000]
+  optional bool ipb_rl_whl_spd_efc_flg_s = 33;
+  // IPB右后轮速有效标志 [] [0E-008|1.00000000]
+  optional bool ipb_rr_whl_spd_efc_flg_s = 34;
+  // IPB车速 [] [0E-008|281.46250000]
+  optional double veh_spd_s = 35;
+  // IPB车速有效标志 [] [0E-008|1.00000000]
+  optional bool veh_spd_efc_flg_s = 36;
+  // IPB制动踏板状态 [] [0E-008|3.00000000]
+  optional VCUIPBBrakePedaltatusSType vcu_ipb_brake_pedaltatus_s = 37;
+  // IPB制动踏板状态有效标志 [] [0E-008|1.00000000]
+  optional bool ipb_brk_pedl_sat_s = 38;
+  // IPB制动力状态判断信号 [] [0E-008|1.00000000]
+  optional bool vcu_ipb_no_brake_force_s = 39;
+  // IPB制动力状态判断信号有效标志 [] [0E-008|1.00000000]
+  optional bool vcu_ipb_no_brake_force_fault_s = 40;
+  // IPB电子卡钳高温状态信号 [] [0E-008|1.00000000]
+  optional bool vcu_ipb_ecd_temp_off_s = 41;
+  // IPB电子卡钳高温状态信号有标志 [] [0E-008|1.00000000]
+  optional bool vcu_ipb_ecd_temp_off_fault_s = 42;
+  // IPB系统状态 [] [0E-008|7.00000000]
+  optional VCUIPBystemtatusSType vcu_ip_bystemtatus_s = 43;
+  // IPB系统状态有效标志 [] [0E-008|1.00000000]
+  optional bool vcu_ip_bystemtatus_efc_flg_s = 44;
+  // IPBBrkDrvOverride [] [0E-008|1.00000000]
+  optional bool vcu_ipb_brk_drv_override_s = 45;
+  // IPBBrkDrvOverride有效标志 [] [0E-008|1.00000000]
+  optional bool vcu_ipb_brk_drv_override_fault_s = 46;
+  // IPBEBDActive [] [0E-008|1.00000000]
+  optional bool vcu_ipb_ebd_active_s = 47;
+  // IPBEBDfault [] [0E-008|1.00000000]
+  optional bool vcu_ipb_ebd_fault_s = 48;
+  // IPBESP激活状态 [] [0E-008|1.00000000]
+  optional bool vcu_ipb_esp_active_s = 49;
+  // IPBESP激活有效标志 [] [0E-008|1.00000000]
+  optional bool vcu_ipb_esp_active_valid_flag_s = 50;
+  // IPBESP开关信号 [] [0E-008|1.00000000]
+  optional bool vcu_ipb_esp_off_s = 51;
+  // IPBESP开关信号有效标志 [] [0E-008|1.00000000]
+  optional bool vcu_ipb_esp_off_valid_flag_s = 52;
+  // IPBABSactive [] [0E-008|1.00000000]
+  optional bool vcu_ipb_abs_active_s = 53;
+  // IPBABSfault [] [0E-008|1.00000000]
+  optional bool vcu_ipb_abs_fault_s = 54;
+  // IPBHDCActive [] [0E-008|3.00000000]
+  optional VCUIPBHDCActiveSType vcu_ipb_hdc_active_s = 55;
+  // IPBHDCfault [] [0E-008|1.00000000]
+  optional bool vcu_ipb_hdc_fault_s = 56;
+  // IPBVDCActive [] [0E-008|1.00000000]
+  optional bool vcu_ipb_vdc_active_s = 57;
+  // IPBVDCFault [] [0E-008|1.00000000]
+  optional bool vcu_ipb_vdc_fault_s = 58;
+  // EPB系统状态有效标志 [] [0E-008|1.00000000]
+  optional bool vcu_epb_sys_s_valid_f_s = 59;
+  // EPB系统状态 [] [0E-008|7.00000000]
+  optional VCUEPBSystemStatusSType vcu_epb_system_status_s = 60;
+  // IPB主动制动辅助可行性信号 [] [0E-008|1.00000000]
+  optional bool vcu_ipb_aba_available_s = 61;
+  // 方向盘实际扭矩有效标志 [] [0E-008|1.00000000]
+  optional bool vcu_steering_strng_whl_torq_vd_s = 62;
+  // IPB主动制动辅助功能激活状态 [] [0E-008|1.00000000]
+  optional bool vcu_ipb_aba_active_s = 63;
+  // IPBPrefillActive [] [0E-008|1.00000000]
+  optional bool vcu_ipb_prefill_active_s = 64;
+  // IPBPrefillAvailable [] [0E-008|1.00000000]
+  optional bool vcu_ipb_prefill_available_s = 65;
+  // 车轮卡住 [] [0E-008|1.00000000]
+  optional bool vehicle_block_s = 66;
+  // 电控水泵状态 [] [0E-008|1.00000000]
+  optional bool ecp_sat_s = 67;
+  // 电控水泵占空比 [%] [0E-008|100.00000000]
+  optional double ecp_fb_duty_s = 68;
+  // 方向盘实际扭矩 [Nm] [-12.50000000|12.50000000]
+  optional double vcu_s_strng_whl_torq_vd_s1 = 69;
+  // 传感器失效状态 [] [0E-008|1.00000000]
+  optional bool vcu_sas_failure_stats_ok = 70;
+  // 传感器校准状态 [] [0E-008|1.00000000]
+  optional bool vcu_sas_sensor_calibration_stats = 71;
+  // 传感器平衡状态 [] [0E-008|1.00000000]
+  optional bool vcu_sas_trim_trimming_stats = 72;
+  // 电控水泵2状态 [] [0E-008|1.00000000]
+  optional bool cp_2st_sat_s = 73;
+  // 电控水泵2控制占空比 [] [0E-008|100.00000000]
+  optional double ecp_2st_ctrl_duty_s = 74;
+  // EPB开关状态 [] [0E-008|3.00000000]
+  optional pbswtsatType pb_swt_sat = 75;
+  // EPB开关状态有效位 [] [0E-008|1.00000000]
+  optional bool epb_swt_sat_efc_flg = 76;
+  // CDP功能激活 [] [0E-008|1.00000000]
+  optional bool ipb_cdp_fcn_atv = 77;
+  // CDP功能激活有效位 [] [0E-008|1.00000000]
+  optional bool pb_cdp_fcn_atv_eff_flg = 78;
+}
+
+message IDCS_0X0FE {
+// Report Message
+  enum EPSAWorkSignalSType {
+    EPSA_WORK_SIGNAL_S_INVALID = 0;
+    EPSA_WORK_SIGNAL_S_OFF = 1;
+    EPSA_WORK_SIGNAL_S_ON = 2;
+    EPSA_WORK_SIGNAL_S_RESERVE = 3;
+  }
+  // Checksum=CRC16(x16 + x12 + x5  + 1)Polynomial:0x1021initial value：0xFFFFXOR value：0x0000 [] [0E-008|65535.00000000]
+  optional int32 crc_checknum_0_fe_s = 1;
+  // 滚动循环计数器0FE [] [0E-008|65535.00000000]
+  optional int32 alive_counter_0_fe_s = 2;
+  // 后轮转向控制开关配置 [] [0E-008|1.00000000]
+  optional bool epsa_work_configuration_s = 3;
+  // 后轮转向控制开关信号 [] [0E-008|3.00000000]
+  optional EPSAWorkSignalSType epsa_work_signal_s = 4;
+}
+
+message VCU_0X1EA {
+// Report Message
+  enum PSScontrstatusType {
+    PSS_CONTR_STATUS_OFF = 0;
+    PSS_CONTR_STATUS_STAND = 1;
+    PSS_CONTR_STATUS_READY = 2;
+    PSS_CONTR_STATUS_ON = 3;
+    PSS_CONTR_STATUS_PAKING = 4;
+    PSS_CONTR_STATUS_RESERVED_5 = 5;
+    PSS_CONTR_STATUS_RESERVED_6 = 6;
+    PSS_CONTR_STATUS_INVALID = 7;
+  }
+  // VCU_0x1EA_ChilD_ID_S [] [0E-008|255.00000000]
+  optional int32 vcu_0x1_ea_chil_d_id_s = 1;
+  // PSS控制状态 [] [0E-008|7.00000000]
+  optional PSScontrstatusType pss_contr_status = 2;
+}
+
+message BydTangChassisDetail {
+  optional DISUS_0X109 disus_0x109 = 1; // report message
+  optional VCU_0X10B vcu_0x10b = 2; // report message
+  optional IDCS_0X112 idcs_0x112 = 3; // report message
+  optional EPS_0X11F eps_0x11f = 4; // report message
+  optional IPB_0X121 ipb_0x121 = 5; // report message
+  optional IPB_0X122 ipb_0x122 = 6; // report message
+  optional IPB_0X123 ipb_0x123 = 7; // report message
+  optional VCU_0X12C vcu_0x12c = 8; // report message
+  optional ADS_0X134_CHASSIS ads_0x134 = 9; // control message
+  optional EPS_0X135 eps_0x135 = 10; // report message
+  optional ADS_0X139 ads_0x139 = 11; // control message
+  optional ADS_0X13F ads_0x13f = 12; // control message
+  optional IPB_0X147 ipb_0x147 = 13; // report message
+  optional IPB_0X173 ipb_0x173 = 14; // report message
+  optional ADS_0X1D1 ads_0x1d1 = 15; // control message
+  optional ADS_0X1E2 ads_0x1e2 = 16; // control message
+  optional IPB_0X1F0 ipb_0x1f0 = 17; // report message
+  optional EPS_0X1FC eps_0x1fc = 18; // report message
+  optional ADS_0X217 ads_0x217 = 19; // control message
+  optional REAR_BCM_0X218 rear_bcm_0x218 = 20; // report message
+  optional ADS_0X21B ads_0x21b = 21; // control message
+  optional IPB_0X220 ipb_0x220 = 22; // report message
+  optional IPB_0X222 ipb_0x222 = 23; // report message
+  optional IPB_0X223 ipb_0x223 = 24; // report message
+  optional EPS_0X24C eps_0x24c = 25; // report message
+  optional DISUS_0X258 disus_0x258 = 26; // report message
+  optional PAS_0X267_CHASSIS pas_0x267 = 27; // control message
+  optional EPS_0X2E1 eps_0x2e1 = 28; // report message
+  optional ADS_0X316 ads_0x316 = 29; // control message
+  optional ADS_0X31A ads_0x31a = 30; // control message
+  optional IPB_0X321 ipb_0x321 = 31; // report message
+  optional IPB_0X322 ipb_0x322 = 32; // report message
+  optional VCU_0X343 vcu_0x343 = 33; // report message
+  optional MEDIA_0X3B7 media_0x3b7 = 34; // report message
+  optional IPB_0X422 ipb_0x422 = 35; // report message
+  optional ADS_0X432 ads_0x432 = 36; // control message
+  optional VCU_0X48B vcu_0x48b = 37; // report message
+  optional MEDIA_0X4DE media_0x4de = 38; // report message
+  optional ADS_0X4F4 ads_0x4f4 = 39; // control message
+  optional MEDIA_0X4F5 media_0x4f5 = 40; // report message
+  optional SRS_0X08C srs_0x08c = 41; // report message
+  optional IPB_0X0D5 ipb_0x0d5 = 42; // report message
+  optional VCU_0X0FC vcu_0x0fc = 43; // report message
+  optional IDCS_0X0FE idcs_0x0fe = 44; // report message
+  optional VCU_0X1EA vcu_0x1ea = 45; // report message
+}

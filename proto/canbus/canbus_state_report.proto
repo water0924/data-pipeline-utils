@@ -1,0 +1,76 @@
+syntax = "proto2";
+package deeproute.canbus.proto;
+import "common/header.proto";
+import "canbus/car_info.proto";
+
+message CanbusStateReport {
+  optional deeproute.common.Header header = 1;
+  optional VcuStateMachine vcu_state_machine = 2;
+  optional VehicleStatus vehicle_status = 3;
+  optional CtrlValue ctrl_value = 4;
+  optional DebugInfo debug_info = 5;
+  optional deeproute.canbus.ChassisDetails chassis_details = 6;
+}
+
+enum VcuState {
+  PASSIVE = 0;
+  STANDBY = 1;
+  HANDSHAKE = 2;
+  TIMEOUT = 3;
+  OVERRIDE = 4;
+  ACTIVE = 5;
+  ACTIVE_ESA = 6;
+  ACTIVE_STANDSTILL = 7;
+}
+
+message VcuStateMachine {
+  optional VcuState driving_lon_state = 1;
+  optional VcuState driving_lat_state = 2;
+  optional VcuState parking_lon_state = 3;
+  optional VcuState parking_lat_state = 4;
+  optional VcuState aeb_state = 5;
+  optional VcuState esa_state = 6;
+}
+
+message VehicleStatus {
+  optional bool is_driving_lon_available = 1;
+  optional bool is_driving_lat_available = 2;
+  optional bool is_parking_lon_available = 3;
+  optional bool is_parking_lat_available = 4;
+  optional bool is_driving_lon_active = 5;
+  optional bool is_driving_lat_active = 6;
+  optional bool is_parking_lon_active = 7;
+  optional bool is_parking_lat_active = 8;
+  optional bool is_adas_active = 9;
+  optional bool is_steer_override = 10;
+  optional bool is_brake_override = 11;
+  optional bool is_throttle_override = 12;
+  optional bool is_esa_override = 13;
+  optional bool is_stand_still = 14;
+  optional bool is_pressurize = 15;
+  optional int32 actual_gear = 16;
+  optional double actual_torque = 17;
+  optional double actual_wheel_angle = 18;
+  optional bool is_shift_override = 19;
+}
+
+message CtrlValue {
+  optional bool is_driving_lon_enable = 1;
+  optional bool is_driving_lat_enable = 2;
+  optional bool is_parking_lon_enable = 3;
+  optional bool is_parking_lat_enable = 4;
+  optional int32 turn_signal = 5;
+  optional int32 target_gear = 6;
+  optional double steering_wheel_rad = 7;
+  optional double steering_wheel_rad_filter = 8;
+  optional double longitudinal_cmd = 9;
+  optional double longitudinal_cmd_distance = 10;
+  optional bool parking_emergency_brake = 11;
+}
+
+message DebugInfo {
+  optional bool is_ctrl_timeout = 1;
+  optional bool is_blc_timeout = 2;
+  optional double steer_ratio = 3;
+  optional double eps_offset = 4;
+}
