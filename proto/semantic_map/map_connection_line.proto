@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+package deeproute.hdmap;
+
+import "common/geometry.proto";
+import "semantic_map/map_overlap.proto";
+// 连接线，表示lane之间的连接关系
+message ConnectionLine {
+  optional int32 id = 1;
+  optional common.Polyline polyline = 2;
+  //下一条lane的id
+  optional int32 next_lane_id = 3;   
+  //上一条lane的id
+  optional int32 last_lane_id = 4;   
+  optional int32 layer = 5;
+  repeated Overlap overlaps = 6;   
+}

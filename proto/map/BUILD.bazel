@@ -1,0 +1,362 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "amap_drive_route_planning_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["amap_drive_route_planning.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/drapi:gwm_navigation_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "amap_drive_route_planning_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":amap_drive_route_planning_proto",
+    ],
+)
+
+python_proto_library(
+    name = "amap_drive_route_planning_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":amap_drive_route_planning_proto",
+    ],
+)
+
+proto_library(
+    name = "sd_map_type_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["sd_map_type.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "sd_map_type_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":sd_map_type_proto",
+    ],
+)
+
+python_proto_library(
+    name = "sd_map_type_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":sd_map_type_proto",
+    ],
+)
+
+proto_library(
+    name = "map_common_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_common.proto"],
+    deps = [
+        "//proto/map:common_type_proto",
+        "//proto/map:sd_map_proto",
+        "//proto/lock_on_road:lock_on_road_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_common_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_common_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_common_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_common_proto",
+    ],
+)
+
+proto_library(
+    name = "common_type_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["common_type.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "common_type_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":common_type_proto",
+    ],
+)
+
+python_proto_library(
+    name = "common_type_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":common_type_proto",
+    ],
+)
+
+proto_library(
+    name = "sd_horizon_provider_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["sd_horizon_provider.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/map:sd_map_proto",
+        "//proto/map:map_common_proto",
+        "//proto/routing:navinfo_routing_proto",
+        "//proto/drapi:gwm_navigation_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "sd_horizon_provider_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":sd_horizon_provider_proto",
+    ],
+)
+
+python_proto_library(
+    name = "sd_horizon_provider_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":sd_horizon_provider_proto",
+    ],
+)
+
+proto_library(
+    name = "projection_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["projection.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "projection_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":projection_proto",
+    ],
+)
+
+python_proto_library(
+    name = "projection_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":projection_proto",
+    ],
+)
+
+proto_library(
+    name = "deeproute_map_guidance_action_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["deeproute_map_guidance_action.proto"],
+    deps = [
+        "//proto/map:common_type_proto",
+        "//proto/map:sd_map_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "deeproute_map_guidance_action_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":deeproute_map_guidance_action_proto",
+    ],
+)
+
+python_proto_library(
+    name = "deeproute_map_guidance_action_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":deeproute_map_guidance_action_proto",
+    ],
+)
+
+proto_library(
+    name = "deeproute_map_ras_map_plus_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["deeproute_map_ras_map_plus.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/map:common_type_proto",
+        "//proto/routing:local_routing_proto",
+        "//proto/map:projection_proto",
+        "//proto/perception:deeproute_perception_ras_map_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "deeproute_map_ras_map_plus_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":deeproute_map_ras_map_plus_proto",
+    ],
+)
+
+python_proto_library(
+    name = "deeproute_map_ras_map_plus_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":deeproute_map_ras_map_plus_proto",
+    ],
+)
+
+proto_library(
+    name = "vis_map_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["vis_map.proto"],
+    deps = [
+        "//proto/map:common_type_proto",
+        "//proto/map:deeproute_map_ras_map_plus_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "vis_map_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":vis_map_proto",
+    ],
+)
+
+python_proto_library(
+    name = "vis_map_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":vis_map_proto",
+    ],
+)
+
+proto_library(
+    name = "sd_map_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["sd_map.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/map:common_type_proto",
+        "//proto/map:sd_map_type_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "sd_map_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":sd_map_proto",
+    ],
+)
+
+python_proto_library(
+    name = "sd_map_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":sd_map_proto",
+    ],
+)
+
+proto_library(
+    name = "sd_map_debug_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["sd_map_debug.proto"],
+    deps = [
+        ":sd_map_proto",
+        "//proto/routing:navinfo_routing_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "sd_map_debug_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":sd_map_debug_proto",
+    ],
+)
+
+python_proto_library(
+    name = "sd_map_debug_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":sd_map_debug_proto",
+    ],
+)
+
+proto_library(
+    name = "routing_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["routing.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/map:common_type_proto",
+        "//proto/map:amap_drive_route_planning_proto",
+        "//proto/graph_match:graph_matching_proto",
+        "//proto/odd:odd_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "routing_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":routing_proto",
+    ],
+)
+
+python_proto_library(
+    name = "routing_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":routing_proto",
+    ],
+)
+
+proto_library(
+    name = "ivi_data_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["ivi_data.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "ivi_data_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":ivi_data_proto",
+    ],
+)
+
+python_proto_library(
+    name = "ivi_data_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":ivi_data_proto",
+    ],
+)
+

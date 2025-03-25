@@ -1,0 +1,50 @@
+syntax = "proto2";
+
+import "common/module_event.proto";
+
+package deeproute.grading_onboard;
+
+message EventInfo {
+  optional dr.common.Event event_type = 1;
+  optional bool result = 2;
+}
+
+message DtaInfo {
+  repeated EventInfo event_info = 1;
+}
+
+message CountInfo {
+  optional int32 yield_vru_count = 1;
+  optional int32 cutin_count = 2;
+  optional int32 detour_count = 3;
+  optional int32 lane_change_count = 4;
+  optional int32 inbound_or_outbound_count = 5;
+  optional int32 junction_count = 6;
+  optional int32 roundabout_count = 7;
+  optional int32 u_turn_count = 8;
+}
+
+message HDSingleEvent {
+  optional bool active = 1;
+  optional int32 count = 2;
+}
+
+message HDEventInfo {
+  optional HDSingleEvent sudden_brake_event = 1;          // 点刹
+  optional HDSingleEvent hard_brake_event = 2;            // 急刹
+  optional HDSingleEvent not_center_event = 3;            // 不居中
+  optional HDSingleEvent wiggle_event = 4;                // 画龙
+  optional HDSingleEvent on_boundary_long_time_event = 5; // 长时间压线
+  optional HDSingleEvent uncrossable_boundary_event = 6;  // 压实线
+}
+
+message VisInfo {
+  optional CountInfo count_info = 1;
+  optional HDEventInfo hd_event_info = 2;
+}
+
+// Topic: /grading_onboard/output_info
+message GradingOnboardOutputInfo {
+  optional DtaInfo dta_info = 1;
+  optional VisInfo vis_info = 2;
+}

@@ -1,0 +1,49 @@
+syntax = "proto3";
+package havp;
+
+import "drapi/gwm/havp/havp_common.proto";
+
+message AVPMapData {
+  string id = 1;                          // ID 唯一标识符，可不可修改。例如 ONTFB1239797 或者 长泰广场-记忆泊车-泊入-20221012
+  string name = 2;                        // name 路线名，是客户可修改的名字 
+  double longitude = 3;                   // 地图的经度  
+  double latitude = 4;                    // 地图的纬度
+  repeated Point route = 5;               // 总路径, 一系列坐标点。一般是0.1米一个。直线道路会进行抽稀。
+  repeated Point floor_entrance = 6;      // 楼层入口集合
+  repeated Point floor_exit = 7;          // 楼层出口集合
+  repeated ParkingSpace parking_spaces = 8; // 地图中存储的停车位，全局坐标系。
+  repeated MapObstacle map_obstacles = 9; // 地图中存储的障碍物，全局坐标系
+  //  int32 mapping_process = 10;         // 地图创建进度。 ** 有专门的SOMEIP接口传这个值
+  int32 length = 11;                      // 地图的总长度
+  int32 creation_time = 12;               // 地图的创建时间(秒时间戳)
+  int32 renewal_time =13;                 // 地图的更新时间(秒时间戳)
+  repeated Point global_planning_trajectory = 14; // 全局规划路径
+  AVPMap map = 15;                        // 总地图
+};
+
+message AVPMapManage{
+  OperationType opt_type=1;               //操作类型
+  string id=2;                            //地图唯一ID，来源于AVPMapData中的id
+  string map_name=3;                      //重命名的地图名称
+  ParkingSpace parking_space=4;           //编辑的车位信息
+
+  enum OperationType
+  {
+      OPERATION_TYPE_NONE=0; //无操作
+      OPERATION_TYPE_EDITMAP=1; //编辑地图（含重命名）
+      OPERATION_TYPE_DELETEMAP=2;//删除地图
+      OPERATION_TYPE_EDITPARKINGSPACE=3;//编辑车位（含收藏/取消收藏、默认/取消默认、修改标签、重命名）
+      //OPERATION_TYPE_SELECTPARKINGSPACE=4;//选择车位   注：弃用，选择车位由SlotID（SOME/IP)信号替代
+      OPERATION_TYPE_REQMAP=5;//请求地图
+  }
+}
+
+/*
+SOME/IP
+  ServiceInterfaceName:HAVPandAVPFunctions
+  ElementName:HAVPPathInfo
+  DatatypeReference:HAVPLearningWorldArray
+*/
+message AVPNaviMapData{
+  repeated AVPMapPin pins = 1;  
+}

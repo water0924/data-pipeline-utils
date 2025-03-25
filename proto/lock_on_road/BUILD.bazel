@@ -1,0 +1,62 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "lock_on_road_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["lock_on_road.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/drivers/gnss:ins_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "lock_on_road_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":lock_on_road_proto",
+    ],
+)
+
+python_proto_library(
+    name = "lock_on_road_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":lock_on_road_proto",
+    ],
+)
+
+proto_library(
+    name = "lock_on_road_debug_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["lock_on_road_debug.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/lock_on_road:lock_on_road_proto",
+        "//proto/map:sd_map_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "lock_on_road_debug_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":lock_on_road_debug_proto",
+    ],
+)
+
+python_proto_library(
+    name = "lock_on_road_debug_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":lock_on_road_debug_proto",
+    ],
+)
+

@@ -1,0 +1,83 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "dsm_event_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["dsm_event.proto"],
+    deps = [
+        "//proto/dsm:dsm_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "dsm_event_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":dsm_event_proto",
+    ],
+)
+
+python_proto_library(
+    name = "dsm_event_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":dsm_event_proto",
+    ],
+)
+
+proto_library(
+    name = "dsm_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["dsm.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "dsm_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":dsm_proto",
+    ],
+)
+
+python_proto_library(
+    name = "dsm_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":dsm_proto",
+    ],
+)
+
+proto_library(
+    name = "dsm_supervison_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["dsm_supervison.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "dsm_supervison_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":dsm_supervison_proto",
+    ],
+)
+
+python_proto_library(
+    name = "dsm_supervison_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":dsm_supervison_proto",
+    ],
+)
+

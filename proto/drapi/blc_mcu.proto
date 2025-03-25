@@ -1,0 +1,73 @@
+syntax = "proto2";
+import "drapi/gl_p177_downstream_chassis.proto";
+
+package dr.blc.mcu;
+
+message CanRaw {
+  optional int64 timestamp_pub = 1;
+  optional int64 timestamp_meas = 2;
+  optional bool is_ext = 3;
+  optional bool is_canfd = 4;
+  optional int32 channel_id = 5;
+  optional int32 can_id = 6;
+  optional int32 len = 7;  // The valid byte length of data.
+  //@C_Mark@64@;
+  optional bytes data = 8;
+}
+
+// topic: /mcu_blc/canraw_array_upstream
+// topic: /blc/canraw_array_downstream
+message CanRawArray {
+  optional int64 timestamp_pub = 1; // us
+  optional int64 count = 2;
+  optional int32 len = 3;  // CanRaw actual quantity.
+  //@C_Mark@36@;
+  repeated CanRaw can_raw = 4;
+}
+
+
+
+// topic: /blc/mcu_operation_status
+message MCUOperationStatus {
+   // common 1~10
+   optional uint64 timestamp = 1;  // ms
+   // status 11
+   optional int32 acc_status = 11;
+   optional int32 ica_status = 12;
+   optional int32 nca_status = 13;
+   optional int32 hma_status = 14;
+   optional int32 bsd_status = 15;
+   optional int32 lca_status = 16;
+   optional int32 dow_status = 17;
+   optional int32 rcta_status = 18;
+   optional int32 rcw_status = 19;
+   optional int32 ldw_status = 20;
+   optional int32 rdp_status = 21;
+   optional int32 rctb_status = 22;
+   optional int32 avm_status = 23;
+   optional int32 apa_status = 24;
+   optional int32 vpa_routing_status = 25;
+   optional int32 vpa_learning_status = 26;
+   optional int32 pdc_status = 27;
+   optional int32 elk_status = 28;
+   optional int32 rpa_status = 29;
+   optional int32 tjp_status = 30;
+   optional int32 rads_status = 31;
+   optional int32 sentry_mode_info = 32;
+   optional int32 ilc_status = 33;
+   optional int32 tsr_status = 34;
+   optional int32 dw_status = 35;
+   optional int32 dvr_status = 36;
+   optional int32 sentinel_status = 37;
+ 
+   // aeb迁移
+   optional int32 fcw_status = 50;
+   optional int32 fcta_status = 51;
+   optional int32 fctb_status = 52;
+   optional int32 meb_status = 53;
+   optional int32 esa_status = 54;
+   optional int32 awb_status = 55;
+   optional int32 abp_status = 56;
+   optional int32 aeb_status = 57;
+
+}

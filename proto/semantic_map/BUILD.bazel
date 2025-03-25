@@ -1,0 +1,724 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "map_connection_line_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_connection_line.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/semantic_map:map_overlap_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_connection_line_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_connection_line_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_connection_line_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_connection_line_proto",
+    ],
+)
+
+proto_library(
+    name = "map_clear_area_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_clear_area.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/semantic_map:map_overlap_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_clear_area_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_clear_area_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_clear_area_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_clear_area_proto",
+    ],
+)
+
+proto_library(
+    name = "map_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map.proto"],
+    deps = [
+        "//proto/semantic_map:map_clear_area_proto",
+        "//proto/semantic_map:map_crosswalk_proto",
+        "//proto/semantic_map:map_diversion_area_proto",
+        "//proto/semantic_map:map_junction_proto",
+        "//proto/semantic_map:map_lane_proto",
+        "//proto/semantic_map:map_overlap_proto",
+        "//proto/semantic_map:map_signal_proto",
+        "//proto/semantic_map:map_speed_bump_proto",
+        "//proto/semantic_map:map_stop_sign_proto",
+        "//proto/semantic_map:map_yield_sign_proto",
+        "//proto/semantic_map:map_road_proto",
+        "//proto/semantic_map:map_parking_space_proto",
+        "//proto/semantic_map:map_pnc_junction_proto",
+        "//proto/semantic_map:map_trafficlight_proto",
+        "//proto/semantic_map:map_bus_station_proto",
+        "//proto/semantic_map:map_toll_station_proto",
+        "//proto/semantic_map:map_standby_area_proto",
+        "//proto/semantic_map:map_object_model_proto",
+        "//proto/semantic_map:map_invalid_area_proto",
+        "//proto/semantic_map:map_road_mask_proto",
+        "//proto/semantic_map:map_road_mask_plus_proto",
+        "//proto/semantic_map:map_line_sign_proto",
+        "//proto/semantic_map:map_connection_line_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_proto",
+    ],
+)
+
+proto_library(
+    name = "map_toll_station_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_toll_station.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/semantic_map:map_overlap_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_toll_station_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_toll_station_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_toll_station_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_toll_station_proto",
+    ],
+)
+
+proto_library(
+    name = "map_stop_sign_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_stop_sign.proto"],
+    deps = [
+        "//proto/semantic_map:map_geometry_proto",
+        "//proto/common:geometry_proto",
+        "//proto/semantic_map:map_overlap_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_stop_sign_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_stop_sign_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_stop_sign_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_stop_sign_proto",
+    ],
+)
+
+proto_library(
+    name = "map_speed_bump_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_speed_bump.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/semantic_map:map_overlap_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_speed_bump_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_speed_bump_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_speed_bump_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_speed_bump_proto",
+    ],
+)
+
+proto_library(
+    name = "map_road_mask_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_road_mask.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/semantic_map:map_overlap_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_road_mask_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_road_mask_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_road_mask_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_road_mask_proto",
+    ],
+)
+
+proto_library(
+    name = "map_crosswalk_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_crosswalk.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/semantic_map:map_overlap_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_crosswalk_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_crosswalk_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_crosswalk_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_crosswalk_proto",
+    ],
+)
+
+proto_library(
+    name = "map_trafficlight_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_trafficlight.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_trafficlight_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_trafficlight_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_trafficlight_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_trafficlight_proto",
+    ],
+)
+
+proto_library(
+    name = "map_diversion_area_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_diversion_area.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/semantic_map:map_overlap_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_diversion_area_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_diversion_area_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_diversion_area_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_diversion_area_proto",
+    ],
+)
+
+proto_library(
+    name = "map_line_sign_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_line_sign.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/semantic_map:map_overlap_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_line_sign_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_line_sign_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_line_sign_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_line_sign_proto",
+    ],
+)
+
+proto_library(
+    name = "map_geometry_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_geometry.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_geometry_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_geometry_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_geometry_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_geometry_proto",
+    ],
+)
+
+proto_library(
+    name = "map_road_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_road.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_road_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_road_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_road_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_road_proto",
+    ],
+)
+
+proto_library(
+    name = "map_yield_sign_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_yield_sign.proto"],
+    deps = [
+        "//proto/semantic_map:map_geometry_proto",
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_yield_sign_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_yield_sign_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_yield_sign_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_yield_sign_proto",
+    ],
+)
+
+proto_library(
+    name = "map_road_mask_plus_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_road_mask_plus.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/semantic_map:map_overlap_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_road_mask_plus_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_road_mask_plus_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_road_mask_plus_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_road_mask_plus_proto",
+    ],
+)
+
+proto_library(
+    name = "map_bus_station_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_bus_station.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/semantic_map:map_overlap_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_bus_station_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_bus_station_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_bus_station_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_bus_station_proto",
+    ],
+)
+
+proto_library(
+    name = "map_signal_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_signal.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/semantic_map:map_geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_signal_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_signal_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_signal_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_signal_proto",
+    ],
+)
+
+proto_library(
+    name = "map_parking_space_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_parking_space.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_parking_space_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_parking_space_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_parking_space_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_parking_space_proto",
+    ],
+)
+
+proto_library(
+    name = "map_invalid_area_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_invalid_area.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/semantic_map:map_overlap_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_invalid_area_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_invalid_area_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_invalid_area_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_invalid_area_proto",
+    ],
+)
+
+proto_library(
+    name = "map_lane_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_lane.proto"],
+    deps = [
+        "//proto/semantic_map:map_geometry_proto",
+        "//proto/semantic_map:map_overlap_proto",
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_lane_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_lane_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_lane_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_lane_proto",
+    ],
+)
+
+proto_library(
+    name = "map_pnc_junction_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_pnc_junction.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_pnc_junction_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_pnc_junction_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_pnc_junction_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_pnc_junction_proto",
+    ],
+)
+
+proto_library(
+    name = "map_overlap_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_overlap.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_overlap_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_overlap_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_overlap_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_overlap_proto",
+    ],
+)
+
+proto_library(
+    name = "map_junction_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_junction.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/semantic_map:map_overlap_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_junction_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_junction_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_junction_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_junction_proto",
+    ],
+)
+
+proto_library(
+    name = "map_object_model_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_object_model.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/semantic_map:map_overlap_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_object_model_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_object_model_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_object_model_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_object_model_proto",
+    ],
+)
+
+proto_library(
+    name = "map_standby_area_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_standby_area.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/semantic_map:map_overlap_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_standby_area_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_standby_area_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_standby_area_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_standby_area_proto",
+    ],
+)
+
+proto_library(
+    name = "map_id_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_id.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_id_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_id_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_id_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_id_proto",
+    ],
+)
+

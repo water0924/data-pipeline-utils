@@ -1,0 +1,1063 @@
+syntax = "proto3";
+package gl.driving;
+
+message Point {
+  double x = 1; // 横向距离 [adaptor] uint16  offset:-300  factor:0.01
+  double y = 2; // 纵向距离 
+}
+
+message Obstacle {
+  enum HmiObjType {
+    OBJ_TYPE_NO_DISPLAY = 0; // Nodisplay
+    CAR = 1; // 四轮轿车
+    NA1 = 2; // NA1
+    CYCLIST = 3; // 自行车骑行者
+    NA2 = 4; // NA2
+    MOTORCYCLIST = 5; // 摩托车骑行者
+    BUS = 6; // 公交车，城市大巴
+    TRUCK = 7; // 大卡车，大货车
+    TRICYCLIST_WITH_BUCKET = 8; // 带斗三轮车骑行者
+    TANKER = 9; // 特种车: 油罐车，气罐车
+    BUCKET_TRUCK = 10; // 带斗小货车
+    VAN = 11; // 面包车
+    MPV_SUV = 12; // 商务车等
+    PICKUP_TRUCK = 13; // 带斗皮卡车
+    TRICYCLIST_WITH_BOX = 14; // 带箱三轮车骑行者
+    UNKNOWN = 15; // Unknown
+    POLICE_CAR = 16; // 警车
+    AMBULANCE = 17; // 救护车
+    WRECKING_TRUCK = 18; // 高速救险车
+    EXTENDED_TRUCK = 19; // 加长货车，挂车
+    FORKLIFT_TRUCK = 20; // 小型特种车，叉车
+    PEDESTRIAN = 21; // 成人
+    CHILDREN = 22; // 儿童
+    POLICE = 23; // 交警
+    PEOPLE_WITH_CART1 = 24; // 行人推不带人的小车
+    PEOPLE_WITH_CART2 = 25; // 行人推带人的小车
+    SMALL_ANIMAL = 26; // 小型动物
+    LARGE_ANIMAL = 27; // 大型动物
+    RESERVED6 = 28; // reserved6
+    RESERVED7 = 29; // reserved7
+    RESERVED8 = 30; // reserved8
+    CONE = 31; // 锥桶
+    POLE = 32; // 弹性反光柱
+    REFLECTOR = 33; // 三角牌
+    SIGN = 34; // 施工牌
+    BARREL = 35; // 防撞桶
+    TRASH_CAN = 36; // 垃圾桶
+    STROLLER = 37; // 婴儿车
+    TRICYCLE_WITH_BOX = 38; // 带箱三轮车(无人)
+    TRICYCLE_WITH_BUCKET = 39; // 带斗三轮车()无人
+    BICYCLE = 40; // 自行车 (无人)
+    MOTOCYCLE = 41; // 摩托车 (无人)
+    OTHER = 42; // 低矮障碍物
+    WATER_BARRIER = 43; // 水马
+    RESERVED9 = 44; // reserved9
+    RESERVED10 = 45; // reserved10
+    RESERVED11 = 46; // reserved11
+    RESERVED12 = 47; // reserved12
+    RESERVED13 = 48; // reserved13
+    RESERVED14 = 49; // reserved14
+    RESERVED15 = 50; // reserved15
+  };
+  HmiObjType obj_type = 1; // 障碍物类型
+  Point point = 2;
+  double dir = 3; // 障碍物航向角: 0~360  [adaptor] uint16_t  range:0~3600  factor:0.1
+  enum SpdOfMovgObj {
+    DEFAULT = 0;
+    LOW_SPEED = 1; // 
+    MEDIUM_SPEED = 2; //
+    HIGHT_SPEED = 3; //
+    RESERVED1 = 4; //
+  };
+  SpdOfMovgObj spd_of_move_obj = 4;
+  enum ColorOfObj {
+    WHITE = 0;            // White
+    BLUE = 1;             // Blue
+    YELLOW = 2;           // Yellow
+    RED = 3;              // Red
+    GREY = 4;             // Grey
+    TRANSPARENT = 5;      // Transparent
+    RED_OBJECT_LEFT = 6;  // Red: object + left marker line
+    RED_OBJECT_RIGHT = 7; // Red: object + right marker line
+  };
+  ColorOfObj color_of_obj = 5;
+  enum HmiObjLight{
+    OBJ_LIGHT_NO_DISPLAY = 0; // No display
+    LEFT = 1;                 // Left
+    RIGHT = 2;                // Right
+    BRAKE = 3;                // Brake
+    LEFT_AND_RIGHT = 4;       // Left and Right
+    LEFT_AND_BRAKE = 5;       // Left and Brake
+    RIGHT_AND_BRAKE = 6;      // Right and Brake
+    LEFT_RIGHT_AND_BRAKE = 7; // Left, Right, and Brake
+  };
+  HmiObjLight obj_light = 6;
+  int32 id = 7;
+}
+
+message PlanningLine {
+  enum HmiStatus {
+    NOT_VALID = 0;
+    VALID = 1;
+  };
+  HmiStatus hmi_status = 1;
+  message HmiPoints {
+    repeated Point points = 1;
+    // double param_a = 2; // 暂时不用
+    // double param_b = 3; // 暂时不用
+    // double param_c = 4; // 暂时不用
+    // double param_d = 5; // 暂时不用
+    // double start_point = 6; // 暂时不用: 纵坐标
+    // double end_point = 7; // 暂时不用: 纵坐标
+  }
+  HmiPoints points = 2;
+}
+
+enum EthAsyLanChgMesg {
+  LAN_CHG_NO = 0;                          // 默认值
+  LAN_CHG_NO_AVAL = 1;                     // 不可变道: 原因未知
+  LAN_CHG_NO_AVAL_OF_HANDS_OFF = 2;        // 不可变道: 脱手
+  LAN_CHG_NO_AVAL_OF_LOW_SPED = 3;         // 不可变道: 低速
+  LAN_CHG_CANCEL = 4;                      // 变道取消: 原因未知
+  LAN_CHG_CANCEL_OF_SOLID_LINE = 5;        // 变道取消: 实线
+  LAN_CHG_CANCEL_OF_ROAD_ENVIRONMENT = 6;  // 变道取消: 环境
+  LAN_CHG_OF_LEFT_OVERTAKING = 7;          // 左侧超车时变更
+  LAN_CHG_OF_RIGHT_OVERTAKING = 8;         // 右侧超车时变更
+  LAN_CHG_OF_JOIN_MAIN_ROAD = 9;           // 变更以加入主干道
+  LAN_CHG_OF_DRIV_FAST_LANE = 10;          // 变更到快车道
+  LAN_CHG_OF_DRIV_RAMP = 11;               // 变更到匝道
+  LAN_CHG_OF_LEFT = 12;                    // 向左变更
+  LAN_CHG_OF_RIGHT = 13;                   // 向右变更
+  LAN_CHG_NO_AVAL_OF_LOW_SPED_1 = 14;      // 由于低速无法变更（变种1）
+  LAN_CHG_NO_AVAL_OF_HIGH_SPED = 15;       // 由于高速无法变更
+  LAN_CHG_NO_RE_RIGHT_VEH = 16;            // 由于右侧后方有车辆无法变更
+  LAN_CHG_NO_FRNT_RIGHT_VEH = 17;          // 由于右侧前方有车辆无法变更
+  LAN_CHG_NO_RE_LEFT_VEH = 18;             // 由于左侧后方有车辆无法变更
+  LAN_CHG_NO_FRNT_LEFT_VEH = 19;           // 由于左侧前方有车辆无法变更
+  LAN_CHG_NO_FAST_VEH_APPROACHING = 20;    // 由于快速行驶的车辆接近无法变更
+  LAN_CHG_NO_OVRD = 21;                    // 由于正在超车无法变更
+  LAN_CHG_NO_INDCR = 22;                   // 由于未开启转向灯无法变更
+  LAN_CHG_CANCEL_LINE_TYPE = 23;           // 由于车道线类型变更被取消
+  LAN_CHG_CANCEL_ROAD_WITH_VALUE_DESCRIPTION = 24; // 由于具有值描述的道路变更被取消
+  LAN_CHG_CANCEL_LINE_COLOR = 25;          // 由于车道线颜色变更被取消
+  LAN_CHG_NO_BARRIER = 26;                 // 由于障碍物无法变更
+  LAN_CHG_NO_TOO_LONG = 27;                // 由于车长过长无法变更
+};
+
+message EthHWALeadingPoint {
+  enum HWALeadingStatus {
+    NOT_VALID = 0;
+    VALID = 1;
+  };
+  HWALeadingStatus hwa_leading_status = 1;
+  double center_x = 2; // 横向位置 [adaptor] uint16_t  range:0~500  factor:0.1  offset:-25
+  double center_y = 3; // 纵向位置 [adaptor] uint16_t  range:0~1500  factor:0.1  offset:0
+  double dir = 4; // 旋转角度 [adaptor] uint16_t  range:0~3600  factor:0.1  offset:0
+}
+
+enum EthAsyLanChgColorDsp {
+  CHG_COLOR_DEFAULT = 0;
+  CHG_COLOR_GREY = 1; // 灰色车位
+  CHG_COLOR_BLUE = 2; // 蓝色车位
+  CHG_COLOR_BLUE1 = 3; // 蓝色车位+渐变效果
+}
+
+enum EthADCtrlMode {
+  CTRL_MODE_DEFAULT = 0;
+  CTRL_MODE_HWA = 1; // lcc
+  CTRL_MODE_NOA = 2; // nca
+  CTRL_MODE_CNOA = 3; // 暂时不用
+}
+
+enum EthAsyALgtIndcr {
+  LGT_NO_DISP = 0;
+  LGT_OFF_DISP = 1;
+  LGT_STANDBY_DISP = 2;
+  LGT_ACTIVE_DISP = 3;
+  LGT_OVERRIDE_DISP = 4;
+  LGT_FAILUER_DISP = 5;
+  LGT_PASSIVE = 6;
+};
+
+enum EthAsyALgtSts {
+  LGT_STS_RESERVE1 = 0;
+  LGT_STS_STANDBY = 1;
+  LGT_STS_ACTIVE = 2;
+  LGT_STS_RESERVE2 = 3;
+  LGT_STS_OVERRIDE = 4;
+  LGT_STS_STAND_ACTIVE = 5;
+  LGT_STS_STAND_WAIT = 6;
+  LGT_STS_TEMPORARY_FAILURE = 7;
+  LGT_STS_PERMANENT_FAILURE = 8;
+  LGT_STS_RESERVE3 = 9;
+};
+
+enum EthAsyALatIndcr {
+  LAT_NO_DISP = 0;
+  LAT_OFF_DISP = 1;
+  LAT_STANDBY_DISP = 2;
+  LAT_ACTIVE_DISP = 3;
+  LAT_OVERRIDE_DISP = 4;
+  LAT_FAILUER_DISP = 5;
+  LAT_PASSIVE = 6;
+};
+
+enum EthDispTSIInfoForLgtCtrl {
+  LGT_CTRL_NODISPLAY = 0;
+  LGT_CTRL_YES = 1;
+  LGT_CTRL_NO = 2;
+};
+
+message EthDispSpdSetForLgtCtrl {
+  double speed = 1; // 车速图标  [adaptor] uint16_t  range:0~4000  factor:0.03125  offset:0
+}
+
+enum EthAsyLatOffstSts {
+  NO_OFFSET = 0;
+  LEFT_OFFSET_FOR_VEHICLE = 1;
+  RIGHT_OFFSET_FOR_VEHICLE = 2;
+  LEFT_OFFSET_FOR_ROADEDGE = 3;
+  RIGHT_OFFSET_FOR_ROADEDGE = 4;
+  LEFT_OFFSET_FOR_LANECHANGE = 5;
+  RIGHT_OFFSET_FOR_LANECHANGE = 6;
+}
+
+enum EthAsyInformForDrvr {
+  DRVR_NO_MESSAGE = 0;
+  DRVR_JOIN_MAIN_ROAD_FAILD = 1;         // 无法汇入主路提醒接管
+  DRVR_DRIV_RAMP_FAILD = 2;              // 无法下匝道提醒接管
+  DRVR_CAREFUL_CONSTRUCTION = 3;         // 小心施工
+  DRVR_CAREFUL_SHARP_TURN = 4;           // 小心急弯
+  DRVR_OTHER_TAKE_OVER_MSG = 5;          // 其他接管提醒
+  DRVR_CAREFUL_TRUCKS = 6;               // 货车较多，请小心驾驶
+  DRVR_NOTI_ROA_CONDI = 7;               // 注意道路状况
+};
+
+enum EthAsyNoaDistanMsg {
+  NOA_DISTANCE_NO_MESSAGE = 0;        // 默认发0
+  NOA_DISTANCE_END_OF_ODD_2000 = 1;   // 距离终点2000m发送
+  NOA_DISTANCE_END_OF_ODD_500 = 2;    // 距离终点500m
+  NOA_DISTANCE_END_OF_ODD_200 = 3;    // 距离终点200m
+  NOA_DISTANCE_END_OF_ODD = 4;        // NOA退出
+  NOA_DISTANCE_START_OF_ODD = 5;      // NOA启用
+  NOA_DISTANCE_QUIT_OF_NOA = 6;       // NOA/UNP完全退出
+  NOA_DISTANCE_RESERVED3 = 7;         // 保留
+};
+
+message EthOffsEndOfODD {
+  uint32 odd = 1; // 0~2500 m
+}
+
+message EthHmiCtl {
+  uint64 timestamp = 1;
+  // uint32 state = 2;
+  // uint32 frame_id = 3;
+}
+
+enum EthSlowDownSts {
+  SLOW_DOWN_NOT_VALID = 0;
+  SLOW_DOWN_VALID = 1;
+}
+
+message EthStopPoint {
+  bool valid = 1; // 是否有效  [adaptor] 转化为uint8(0->无效， 1->有效)
+  double lat_distance = 2; // 横向距离
+  double lgt_distance = 3; // 纵向距离
+}
+
+message EthNarrow {
+  enum NarrowStatus {
+    DEFAULT = 0;
+    BEFORE_PASSED = 1;
+    PASSED = 2;
+  }
+  NarrowStatus status = 1;
+  double distance = 2; // 窄道宽度 [adaptor] unit8  factor:0.1
+  double lat_distance = 3; // 横向距离 [adaptor] unit16 TODO: factor  offset
+  double lgt_distance = 4; // 纵向距离 [adaptor] unit16 TODO: factor  offset
+}
+
+message EthCrossPlanningLine {
+  bool valid = 1;
+  message CrossPlanLinPoint {
+    repeated Point points = 1;
+    // double param_a = 2; // 暂时不用
+    // double param_b = 3; // 暂时不用
+    // double param_c = 4; // 暂时不用
+    // double param_d = 5; // 暂时不用
+    // double start_point = 6; // 暂时不用: 纵坐标
+    // double end_point = 7; // 暂时不用: 纵坐标
+  };
+  CrossPlanLinPoint cross_plan_lin_point = 2;
+  double width = 3; // 线宽 [adaptor] unit8  range:0~255  factor:0.1
+}
+
+enum EthLcmaIndcnLe {
+  LE_LCMA_NO_WARN = 0;
+  LE_LCMA_WARN_LVL1 = 1;
+  LE_LCMA_WARN_LVL2_NO_AUDIO = 2;
+  LE_LCMA_WARN_LVL2_AUDIO = 3; 
+}
+
+enum EthLcmaIndcnRi {
+  RI_LCMA_NO_WARN = 0;
+  RI_LCMA_WARN_LVL1 = 1;
+  RI_LCMA_WARN_LVL2_NO_AUDIO = 2;
+  RI_LCMA_WARN_LVL2_AUDIO = 3; 
+}
+
+enum EthFctaIndcnLe {
+  LE_FCTA_LCMA_NO_WARN = 0;
+  LE_FCTA_LCMA_WARN_LVL1 = 1;
+  LE_FCTA_NOT_USED = 2;
+  LE_FCTA_LCMA_WARN_LVL2 = 3; 
+}
+
+enum EthFctaIndcnRi {
+  RI_FCTA_LCMA_NO_WARN = 0;
+  RI_FCTA_LCMA_WARN_LVL1 = 1;
+  RI_FCTA_NOT_USED = 2;
+  RI_FCTA_LCMA_WARN_LVL2 = 3; 
+}
+
+enum EthCllsnWarnReIndcn {
+  RCW_LCMA_NO_WARN = 0;
+  RCW_LCMA_WARN_LVL1 = 1;
+  RCW_NOT_USED = 2;
+  RCW_LCMA_WARN_LVL2 = 3; 
+}
+
+enum EthDrvOffWarn {
+  DRV_OFF_LVL_WARN_NOWARN = 0;  // 无警告
+  DRV_OFF_LVL_WARN_LVL1 = 1;    // 警告等级1
+  DRV_OFF_LVL_WARN_LVL2 = 2;    // 警告等级2
+  DRV_OFF_LVL_WARN_LVL3 = 3;    // 警告等级3
+};
+
+enum EthAsyLgtCtrlTakeOverReq {
+  LGT_TAKEOVER_NONE = 0;
+  LGT_TAKEOVER_YES = 1;
+}
+
+enum EthOvrdWrnForFstActv {
+  FIRST_ACTIVE_NONE = 0;
+  FIRST_ACTIVE_YES = 1;
+}
+
+enum EthCnclWarnLgtForAutDrv {
+  LGT_AUTO_DRV_NOT_VLD1 = 0;
+  LGT_AUTO_DRV_NO = 1;
+  LGT_AUTO_DRV_YES_ACC_IS_OFF = 2;
+  LGT_AUTO_DRV_NOT_VLD2 = 3;
+}
+
+enum EthAvlStsForLongAutDrv {
+  AUTO_AVL_NO_MESSAGE = 0;
+  AUTO_AVL_LGT_CTRL_NOT_AVL1 = 1;
+  AUTO_AVL_LGT_CTRL_NOT_AVL2 = 2;
+  AUTO_AVL_LGT_CTRL_NOT_AVL3 = 3;
+  AUTO_AVL_DRVR_BUCD_RQRD = 4;
+  AUTO_AVL_DRVR_DOOR_NOT_CLSD = 5;
+  AUTO_AVL_GEAR_NOT_IN_DRV = 6;
+  AUTO_AVL_LGT_CTRL_NOT_AVL4 = 7;
+  AUTO_AVL_LGT_CTRL_NOT_AVL5 = 8;
+  AUTO_AVL_LGT_CTRL_NOT_AVL6 = 9;
+  AUTO_AVL_LGT_CTRL_NOT_AVL7 = 10;
+  AUTO_AVL_SPD_LOW_LIM_EXCD = 11;
+  AUTO_AVL_DRV_MOD_SELD_NOT_OK = 12;
+  AUTO_AVL_EPB_APPLD = 13;
+  AUTO_AVL_ESC_OFF = 14;
+  AUTO_AVL_HDC_ON = 15;
+}
+
+enum EthAsySteerApplyRqrd {
+  STEER_APPLY_NO_WARN = 0;
+  STEER_APPLY_LVL1 = 1;
+  STEER_APPLY_LVL2 = 2;
+  STEER_APPLY_LVL3 = 3;
+}
+
+enum EthAsyWarnForSteerCncl {
+  WARN_OF_STEER_CNCL_OFF = 0;
+  WARN_OF_STEER_CNCL_ON = 1;
+}
+
+enum EthWarnForAsyEmgyLaneKeepAid {
+  EMGY_LANE_KEEP_AID_OFF = 0;
+  EMGY_LANE_KEEP_AID_ON = 1;
+}
+
+enum EthCllsnAidPostEMA {
+  AID_POST_EMA_OFF = 0;
+  AID_POST_EMA_ON = 1;
+}
+
+enum EthRcwmBrkReq {
+  RCWM_BRK_OFF = 0;
+  RCWM_BRK_ON = 1;
+}
+
+enum EthCllsnFwdWarn {
+  FWD_WARN_NO_WARNING = 0;
+  FWD_WARN_WARNING_ACTIVE = 1;
+  FWD_WARN_LATENT_WARNING = 2;
+}
+
+enum EthCllsnAidPost {
+  AID_POST_OFF = 0;
+  AID_POST_ON = 1;
+}
+
+enum EthDoorOpenwarnLeIndcn {
+  DOOR_OPEN_LE_NO_WARN = 0;
+  DOOR_OPEN_LE_WARN_LVL1 = 1;
+  DOOR_OPEN_LE_NOT_USED = 2;
+  DOOR_OPEN_LE_WARN_LVL2 = 3;
+}
+
+enum EthDoorOpenwarnRiIndcn {
+  DOOR_OPEN_RI_NO_WARN = 0;
+  DOOR_OPEN_RI_WARN_LVL1 = 1;
+  DOOR_OPEN_RI_NOT_USED = 2;
+  DOOR_OPEN_RI_WARN_LVL2 = 3;
+}
+
+enum EthAsySafeStopSts {
+  SAFE_STOP_INACTIVE = 0;
+  SAFE_STOP_ACTIVE = 1;
+}
+
+enum EthAsyEyesOffWarnRqrd {
+  EYES_OFF_NO_WARN = 0;
+  EYES_OFF_WARN_LVL1 = 1;
+  EYES_OFF_WARN_LVL2 = 2;
+}
+
+enum EthAsyNoaRemindMesg {
+  NOA_REMIND_DEFAULT = 0;
+  NOA_REMIND_ROAD_ENTRANCE = 1;
+  NOA_REMIND_PARALLEL_VEHICLE = 2;
+  NOA_REMIND_TRUCKS_NEARBY = 3;
+  NOA_REMIND_HEAVY_RAIN = 4;
+  NOA_REMIND_DENSE_FOG = 5;
+  NOA_REMIND_BIG_SNOW = 6;
+  NOA_REMIND_NIGHT = 7;
+  NOA_REMIND_TUNNEL = 8;
+  NOA_REMIND_CONTINUOUS_TUNNELS = 9;
+  NOA_REMIND_SEA_CROSSING_BRIDGE = 10;
+  NOA_REMIND_ROADWORK = 11;
+  NOA_REMIND_TRAFFIC_ACCIDENT = 12;
+  NOA_REMIND_RAMP_NOT_SUPPORT = 13;
+  NOA_REMIND_ROAD_NOT_SUPPORT = 14;
+  NOA_REMIND_CURVE_ROAD = 15;
+  NOA_REMIND_WAIT_IN_PROGRESS = 16;
+  NOA_REMIND_WAIT_TOO_LONG = 17;
+  NOA_REMIND_TRUCK_OFFSET_TO_LEFT = 18;
+  NOA_REMIND_TRUCK_OFFSET_TO_RIGHT = 19;
+  NOA_REMIND_TRUCK_OFFSET_ROADEDGE_TO_LEFT = 20;
+  NOA_REMIND_TRUCK_OFFSET_ROADEDGE_TO_RIGHT = 21;
+  NOA_REMIND_TUNNEL2 = 22;
+  NOA_REMIND_TUNNEL3 = 23;
+  NOA_REMIND_LOCATION_FAIL = 24;
+  NOA_REMIND_CUTIN_VEHICLE = 25;
+  NOA_REMIND_RESET_NAVIGATION = 26;
+  NOA_REMIND_SPEED_LIMIT_ALERT = 27;
+  NOA_REMIND_MAN_LAN_CHG_FOR_TURNROAD = 28;
+  NOA_REMIND_RESERVED_1 = 29;
+  NOA_REMIND_RESERVED_2 = 30;
+  NOA_REMIND_RESERVED_3 = 31;
+}
+
+enum EthAsyNoaTakeoverMesg {
+  NOA_TK_DEFAULT = 0;
+  NOA_TK_FM1_CLOSE = 1;
+  NOA_TK_CUTIN_WINDOW_SHORT = 2;
+  NOA_TK_RAMP_ROAD_SHORT = 3;
+  NOA_TK_THREATEN_OBJECT = 4;
+  NOA_TK_RAMP_ROAD_MERGE = 5;
+  NOA_TK_RESEARCH_WINDOW_FAIL = 6;
+  NOA_TK_X_RAMP = 7;
+  NOA_TK_Y_RAMP = 8;
+  NOA_TK_THROUGH_RAMP_1KM = 9;
+  NOA_TK_ORDINARY_RAMP_1KM = 10;
+  NOA_TK_TOLLGATE = 11;
+  NOA_TK_NOA_QUIT_REMIND = 12;
+}
+
+enum EthAsyNoaDeactvdReasnMesg {
+  NOA_DEACT_REASON_DEFAULT = 0;
+  NOA_DEACT_REASON_LOCATION_FAIL = 1;
+  NOA_DEACT_REASON_NAVIGATION_STATUS_INVALID = 2;
+  NOA_DEACT_REASON_CURT_LANE_NUMBER = 3;
+  NOA_DEACT_REASON_LANE_NUMBER = 4;
+  NOA_DEACT_REASON_HD_MAP_INFO = 5;
+  NOA_DEACT_REASON_REFERENCE_LINE = 6;
+  NOA_DEACT_REASON_OUT_OF_ODD = 7;
+  NOA_DEACT_REASON_OUT_OF_ODD_FRONT = 8;
+  NOA_DEACT_REASON_LONGITUDINAL_SUPPRESSION = 9;
+  NOA_DEACT_REASON_DRIVE_MODE_NOT_SUPPORT = 10;
+  NOA_DEACT_REASON_HANDS_OFF_PUNISH = 11;
+  NOA_DEACT_REASON_TIME_SYNC = 12;
+  NOA_DEACT_REASON_CURVATURE_BEYOND_THRESHOLD = 13;
+  NOA_DEACT_REASON_WIPERS_SUPPRESSION = 14;
+  NOA_DEACT_REASON_VEHICLE_SPEED_OUT_OF_RANGE = 15;
+  NOA_DEACT_REASON_GEOFENCE_DISTANCE = 16;
+}
+
+enum EthAsyAutDrvgAvl {
+  ASY_AUT_DRVG_AVL_NO_MSG = 0;
+  ASY_AUT_DRVG_AVL_LAT_CTRL_NOT_AVL = 1;
+  ASY_AUT_DRVG_AVL_HI_SPD = 2;
+  ASY_AUT_DRVG_AVL_VEH_TO_FOLW_MISS = 3;
+  ASY_AUT_DRVG_AVL_OVRD_TI_MAX_EXCDD = 4;
+  ASY_AUT_DRVG_AVL_DRVR_NOT_IN_LOOP_DETD = 5;
+  ASY_AUT_DRVG_AVL_DRVR_BUCD_RQRD = 6;
+  ASY_AUT_DRVG_AVL_DRVR_DOOR_NOT_CLSD = 7;
+  ASY_AUT_DRVG_AVL_GEAR_NOT_IN_DRV = 8;
+  ASY_AUT_DRVG_AVL_SNSR_BLKD = 9;
+  ASY_AUT_DRVG_AVL_HLD_TI_MAX_EXCDD = 10;
+  ASY_AUT_DRVG_AVL_DRV_MOD_SELD_NOT_OK = 11;
+  ASY_AUT_DRVG_AVL_EPB_APPLD = 12;
+  ASY_AUT_DRVG_AVL_SPD_LOW_LIM_EXCDD = 13;
+  ASY_AUT_DRVG_AVL_TRLR_PRSNT = 14;
+  ASY_AUT_DRVG_AVL_MLTPL_MON_ROAD_REQ = 15;
+  ASY_AUT_DRVG_AVL_END_OF_HANDS_OFF_ALLWD_AREA = 16;
+  ASY_AUT_DRVG_AVL_ROAD_MON_WM = 17;
+  ASY_AUT_DRVG_AVL_CANNOT_REACTIVATE = 18;
+  ASY_AUT_DRVG_AVL_NOT_IN_USE1 = 19;
+  ASY_AUT_DRVG_AVL_ESC_OFF = 20;
+  ASY_AUT_DRVG_AVL_HDC_ON = 21;
+  END_OF_HANDS_OFF_ALLWD_AREA_MINUS_2MIN = 22;
+  END_OF_HANDS_OFF_ALLWD_AREA_MINUS_1MIN = 23;
+  ASY_AUT_DRVG_AVL_RESERVED5 = 24;
+  ASY_AUT_DRVG_AVL_RESERVED6 = 25;
+  ASY_AUT_DRVG_AVL_RESERVED7 = 26;
+  ASY_AUT_DRVG_AVL_RESERVED8 = 27;
+  ASY_AUT_DRVG_AVL_RESERVED9 = 28;
+  ASY_AUT_DRVG_AVL_RESERVED10 = 29;
+  ASY_AUT_DRVG_AVL_RESERVED11 = 30;
+  ASY_AUT_DRVG_AVL_RESERVED12 = 31;
+}
+
+enum EthAsyNoaActvSuggest {
+  NOA_ACT_SUGGEST_OFF = 0;
+  NOA_ACT_SUGGEST_ON = 1;
+}
+
+enum EthCnclWarnForAutDrv {
+  CNCL_FOR_AUTO_DRV_NO_WARN = 0;
+  CNCL_FOR_AUTO_DRV_LVL1 = 1;
+  CNCL_FOR_AUTO_DRV_LVL2 = 2;
+  CNCL_FOR_AUTO_DRV_LVL3 = 3;
+}
+
+enum EthAsyLatDegSts {
+  LAT_DEG_STS_NO = 0;
+  LAT_DEG_STS_YES = 1;
+}
+
+enum EthAsyIccMaxWarnMsg {
+  LCC_MAX_WARN_NO_MESSAGE = 0;
+  LCC_MAX_WARN_ANTI_CONGESTION_PROMPT = 1;
+  LCC_MAX_WARN_ANTI_CONGESTION_ENTERED = 2;
+  LCC_MAX_WARN_AUTOMATIC_LANE_SELECTION = 3;
+  LCC_MAX_WARN_AUTOMATICALLY_MERGE = 4;
+  LCC_MAX_WARN_RED_LIGHT_WAIT = 5;
+  LCC_MAX_WARN_GREEN_LIGHT_PASS = 6;
+  LCC_MAX_WARN_YELLOW_LIGHT_SLOW_PASS = 7;
+  LCC_MAX_WARN_AVOID_OBJ = 8;
+  LCC_MAX_WARN_AVOID_VEH = 9;
+  LCC_MAX_WARN_AVOID_CONSTRU = 10;
+  LCC_MAX_WARN_DETOUR = 11;
+}
+
+enum EthAsyCnoaCrsActvMsg {
+  CNOA_CRS_ACTV_DEFAULT = 0;
+  CNOA_CRS_ACTV_CRUISE_ACTIVE = 1;
+  CNOA_CRS_ACTV_CRUISE_INACTIVE = 2;
+  CNOA_CRS_ACTV_END_OF_ODD_200M = 3;
+  CNOA_CRS_ACTV_END_OF_ODD_100M = 4;
+  CNOA_CRS_ACTV_END_OF_ODD_50M = 5;
+  CNOA_CRS_ACTV_RESERVED = 6;
+}
+
+enum EthAsyCnoaCrsActvFaildMsg {
+  CNOA_CRS_ACT_FAIL_DEFAULT = 0;
+  CNOA_CRS_ACT_FAIL_CNOA_CRS_NOT_AVAILABLE = 1;
+  CNOA_CRS_ACT_FAIL_SYSTEM_FAULT = 2;
+  CNOA_CRS_ACT_FAIL_RELEVANT_SYSTEM_FAULT = 3;
+  CNOA_CRS_ACT_FAIL_LIGHTING_CONDITION = 4;
+  CNOA_CRS_ACT_FAIL_LIMIT_DRIVING_AREA = 5;
+  CNOA_CRS_ACT_FAIL_ROAD_CONDITION_NOT_AVAILABLE = 6;
+  CNOA_CRS_ACT_FAIL_NOT_IN_RANGE_OF_ROUTE = 7;
+  CNOA_CRS_ACT_FAIL_WEAK_LOCATION_SIGNAL = 8;
+  CNOA_CRS_ACT_FAIL_OUT_OF_ODD = 9;
+  CNOA_CRS_ACT_FAIL_DRVR_NOT_IN_LOOP_DETD = 10;
+  CNOA_CRS_ACT_FAIL_CURVE_NOT_IN_RANGE = 11;
+  CNOA_CRS_ACT_FAIL_WEATHER_CONDITION_LIMIT = 12;
+  CNOA_CRS_ACT_FAIL_DRV_MOD_SELD_NOT_OK = 13;
+  CNOA_CRS_ACT_FAIL_TRLR_PRSNT = 14;
+  CNOA_CRS_ACT_FAIL_DRVR_BUCD_RQRD = 15;
+  CNOA_CRS_ACT_FAIL_DOOR_NOT_CLSD = 16;
+  CNOA_CRS_ACT_FAIL_GEAR_NOT_IN_DRV = 17;
+  CNOA_CRS_ACT_FAIL_EPB_APPLIED = 18;
+  CNOA_CRS_ACT_FAIL_END_OF_HANDS_OFF_ALLOWED_AREA = 19;
+  CNOA_CRS_ACT_FAIL_ESC_OFF = 20;
+  CNOA_CRS_ACT_FAIL_HDC_ON = 21;
+  CNOA_CRS_ACT_FAIL_RESERVED = 22;
+}
+
+enum EthAsyCnoaCrsDeactvdMsg {
+  CNOA_CRS_DEACTVD_DEFAULT = 0;
+  CNOA_CRS_DEACTVD_SYSTEM_FAULT = 1;
+  CNOA_CRS_DEACTVD_RELEVANT_SYSTEM_FAULT = 2;
+  CNOA_CRS_DEACTVD_LIGHTING_CONDITION = 3;
+  CNOA_CRS_DEACTVD_CAM_BLK = 4;
+  CNOA_CRS_DEACTVD_CONTROL_PAUSE = 5;
+  CNOA_CRS_DEACTVD_RECOGNIZED_LANE_FAILED = 6;
+  CNOA_CRS_DEACTVD_NOT_IN_RANGE = 7;
+  CNOA_CRS_DEACTVD_CNCL_WARN_FOR_OTHER_REASON = 8;
+  CNOA_CRS_DEACTVD_FOLLOW_STOP_OVER_TIME = 9;
+  CNOA_CRS_DEACTVD_DRIVER_OVERRIDDEN_STEER = 10;
+  CNOA_CRS_DEACTVD_RESERVED = 11;
+}
+
+enum EthAsyCNoaCrsLanChgMsg {
+  CNOA_CRS_LANCHG_DEFAULT = 0;
+  CNOA_CRS_LANCHG_LAN_CHG_OF_LE = 1;
+  CNOA_CRS_LANCHG_LAN_CHG_OF_RI = 2;
+  CNOA_CRS_LANCHG_MAN_LAN_CHG_FOR_JAM = 3;
+  CNOA_CRS_LANCHG_MAN_LAN_CHG_FOR_LINE_TYP = 4;
+  CNOA_CRS_LANCHG_LAN_CHG_OF_LE_OVERTAKING = 5;
+  CNOA_CRS_LANCHG_LAN_CHG_OF_RI_OVERTAKING = 6;
+  CNOA_CRS_LANCHG_LAN_CHG_PROC_LE = 7;
+  CNOA_CRS_LANCHG_LAN_CHG_PROC_RI = 8;
+  CNOA_CRS_LANCHG_WAIT_FOR_LANE_OCCUPY = 9;
+  CNOA_CRS_LANCHG_WAIT_FOR_LE_LINE_TYP = 10;
+  CNOA_CRS_LANCHG_WAIT_FOR_RI_LINE_TYP = 11;
+  CNOA_CRS_LANCHG_LAN_CHG_CANCEL = 12;
+  CNOA_CRS_LANCHG_LAN_CHG_OF_DRIV_RAMP = 13;
+  CNOA_CRS_LANCHG_LAN_CHG_OF_JOIN_MAIN_ROAD = 14;
+  CNOA_CRS_LANCHG_TURN_INDICATOR_NOT_CLOSED_FOR_LONG_TIME = 15;
+  CNOA_CRS_LANCHG_LAN_CHG_CNCL_RE_RIGHT_VEH = 16;
+  CNOA_CRS_LANCHG_LAN_CHG_CNCL_FRNT_RIGHT_VEH = 17;
+  CNOA_CRS_LANCHG_LAN_CHG_CNCL_RE_LEFT_VEH = 18;
+  CNOA_CRS_LANCHG_LAN_CHG_CNCL_FRNT_LEFT_VEH = 19;
+  CNOA_CRS_LANCHG_LAN_CHG_NOT_AVL_LANE_WIDTH = 20;
+  CNOA_CRS_LANCHG_LAN_CHG_CNCL_WAIT_TOO_LONG = 21;
+  CNOA_CRS_LANCHG_WAIT_TO_LAN_CHG = 22;
+  CNOA_CRS_LANCHG_LAN_CHG_CNCL_FOR_OCCUPY = 23;
+  CNOA_CRS_LANCHG_EXTREME_CHG = 24;
+  CNOA_CRS_LANCHG_NAVI_LAN_CHG_OF_LE = 25;
+  CNOA_CRS_LANCHG_NAVI_LAN_CHG_OF_RI = 26;
+  CNOA_CRS_LANCHG_RESERVED = 27;
+}
+
+enum EthAsyCnoaCrsOffsMsg {
+  CNOA_CRS_OFFS_DEFAULT = 0;
+  CNOA_CRS_OFFS_OBSTCL_OFFS = 1;
+  CNOA_CRS_OFFS_TRUCK_OFFS = 2;
+  CNOA_CRS_OFFS_CAR_OFFS = 3;
+  CNOA_CRS_OFFS_CONSTRUCTION_OFFS = 4;
+  CNOA_CRS_OFFS_OFFS_CROSS_LINE = 5;
+  CNOA_CRS_OFFS_RESERVED = 6;
+  CNOA_CRS_OFFS_RESERVED_2 = 7;
+}
+
+enum EthAsyCnoaTakeoverWarnMsg {
+  CNOA_TK_DEFAULT = 0;
+  CNOA_TK_AWARE_VRU_PED = 1;
+  CNOA_TK_AWARE_VRU_CYCLIST = 2;
+  CNOA_TK_CAREFUL_OF_SHARP_TURN = 3;
+  CNOA_TK_CAREFUL_OF_CONSTRUCTION = 4;
+  CNOA_TK_CAREFUL_OF_ACCIDENTS = 5;
+  CNOA_TK_CAREFUL_OF_CUT_IN_VEH = 6;
+  CNOA_TK_AWARE_VRU = 7;
+  CNOA_TK_RESERVED = 8;
+}
+
+enum EthAsyCnoaCrsCrossIntsecMsg {
+  CNOA_CRS_CROSS_INTSEC_DEFAULT = 0;
+  CNOA_CRS_CROSS_INTSEC_INTERSECTION_COMING = 1;
+  CNOA_CRS_CROSS_INTSEC_GOING_STRAIGHT = 2;
+  CNOA_CRS_CROSS_INTSEC_TURNING_LEFT = 3;
+  CNOA_CRS_CROSS_INTSEC_TURNING_RIGHT = 4;
+  CNOA_CRS_CROSS_INTSEC_TURNING_ROUND = 5;
+  CNOA_CRS_CROSS_INTSEC_ENTERING_ROUNDABOUT = 6;
+  CNOA_CRS_CROSS_INTSEC_LEAVING_ROUNDABOUT = 7;
+  CNOA_CRS_CROSS_INTSEC_NO_DISPLAY = 8;
+  CNOA_CRS_CROSS_INTSEC_WAITING_RED_LIGHT = 9;
+  CNOA_CRS_CROSS_INTSEC_GREEN_LIGHT = 10;
+  CNOA_CRS_CROSS_INTSEC_YELLOW_LIGHT_CAUTION = 11;
+  CNOA_CRS_CROSS_INTSEC_CHANGING_TO_RED = 12;
+  CNOA_CRS_CROSS_INTSEC_CHANGING_TO_GREEN = 13;
+  CNOA_CRS_CROSS_INTSEC_RESUME_CONFIRMATION = 14;
+  CNOA_CRS_CROSS_INTSEC_ENTER_WAITING_AREA = 15;
+  CNOA_CRS_CROSS_INTSEC_TRAFFIC_LIGHT = 16;
+  CNOA_CRS_CROSS_INTSEC_RESERVED = 17;
+}
+
+enum EthAsyCnoaCrsRmnMsg {
+  CNOA_CRS_RMM_DEFAULT = 0;
+  CNOA_CRS_RMM_HEAVY_FOG = 1;
+  CNOA_CRS_RMM_HEAVY_SNOW = 2;
+  CNOA_CRS_RMM_HEAVY_RAIN = 3;
+  CNOA_CRS_RMM_DARK_NIGHT = 4;
+  CNOA_CRS_RMM_TRAFFIC_CONTROL = 5;
+  CNOA_CRS_RMM_NARROW_ROAD = 6;
+  CNOA_CRS_RMM_RESERVED = 7;
+}
+
+/****************************************以下为环境再现proto定义****************************************/
+message StopLine {
+  uint32 id = 1;
+  enum Color {
+    WHITE = 0;
+    RED = 1;
+  }
+  Color color = 2;
+  Point start_point = 3;
+  Point end_point = 4;
+}
+
+message RoadArrow {
+  uint32 id = 1;
+  enum Color {
+    NONE = 0;
+    WHITE = 1;
+    YELLOW = 2;
+  }
+  Color color = 2;
+  double dir = 3;
+  Point point = 4;
+  enum Type {
+    UNKNOWN = 0;              // 未知
+    LEFT_FORWARD = 1;         // 左前方
+    LEFT_RIGHT = 2;           // 左右
+    RIGHT_FORWARD = 3;        // 右前方
+    LEFT_RIGHT_FORWARD = 4;   // 左右前方
+    DIAMOND = 5;              // 菱形
+    LEFT = 6;                 // 左转
+    RIGHT = 7;                // 右转
+    FORWARD = 8;              // 直行
+    U_TURN = 9;               // 掉头
+    U_TURN_FORWARD = 10;      // 掉头并直行
+    NO_DISPLAY = 11;          // 不显示
+    LEFT_U_TURN = 12;         // 左转掉头
+    RIGHT_U_TURN = 13;        // 右转掉头
+    NO_U_TURN = 14;           // 禁止掉头
+    TRIANGLE = 15;            // 三角形
+  }
+  Type type = 5;
+  enum RoadIndex {
+    UNASSIGNED = 0;        // 未分配
+    CURRENT = 1;           // 当前道路
+    FIRST_LEFT = 2;        // 第一条左侧道路
+    FIRST_RIGHT = 3;       // 第一条右侧道路
+    SECOND_LEFT = 4;       // 第二条左侧道路
+    SECOND_RIGHT = 5;      // 第二条右侧道路
+    THIRD_LEFT = 6;        // 第三条左侧道路
+    THIRD_RIGHT = 7;       // 第三条右侧道路
+  }
+  RoadIndex road_index = 6;
+}
+
+message SpeedBump {
+  uint32 id = 1;
+  Point start_point = 2;
+  Point end_point = 3;
+}
+
+message CrossWalk {
+  uint32 id = 1;
+  Point point_1 = 2;
+  Point point_2 = 3;
+  Point point_3 = 4;
+  Point point_4 = 5;
+}
+
+// TODO: 绿化带,视角，栅栏
+
+message LaneEdge {
+  uint32 id = 1;
+  repeated Point points = 2;
+}
+
+message TrafficLight {
+  uint32 id = 1; // TODO: 这个id咋是uint8
+  enum Type {
+    TYPE_OF_TRFC_LIGHT_NO_DISPLAY = 0;          // 无显示的交通灯
+    TYPE_OF_TRFC_LIGHT_VERTICAL = 1;            // 垂直方向交通灯
+    TYPE_OF_TRFC_LIGHT_LATERAL = 2;             // 水平方向交通灯
+    TYPE_OF_TRFC_LIGHT_ON_GROUND = 3;           // 地面交通灯
+    TYPE_OF_TRFC_LIGHT_VERTICAL_WITH_COUNTDOWN = 4;  // 带倒计时的垂直交通灯
+    TYPE_OF_TRFC_LIGHT_LATERAL_WITH_COUNTDOWN = 5;   // 带倒计时的水平交通灯
+    TYPE_OF_TRFC_LIGHT_ON_GROUND_WITH_COUNTDOWN = 6; // 带倒计时的地面交通灯
+    TYPE_OF_TRFC_LIGHT_RESERVED1 = 7;           // 保留1
+  }
+  Type type = 2;
+  double dir = 3;
+  double lat = 4;
+  double lgt = 5;
+  double height = 6;
+  enum Color {
+    DEFAULT = 0;              // 默认
+    RED = 1;                  // 红灯
+    YELLOW = 2;               // 黄灯
+    GREEN = 3;                // 绿灯
+    LEFT_RED = 4;             // 左转红灯
+    LEFT_YELLOW = 5;          // 左转黄灯
+    LEFT_GREEN = 6;           // 左转绿灯
+    RIGHT_RED = 7;            // 右转红灯
+    RIGHT_YELLOW = 8;         // 右转黄灯
+    RIGHT_GREEN = 9;          // 右转绿灯
+    FORWARD_RED = 10;         // 直行红灯
+    FORWARD_YELLOW = 11;      // 直行黄灯
+    FORWARD_GREEN = 12;       // 直行绿灯
+    U_TURN_RED = 13;          // 掉头红灯
+    U_TURN_YELLOW = 14;       // 掉头黄灯
+    U_TURN_GREEN = 15;        // 掉头绿灯
+  }
+  Color color = 7;
+}
+
+message TrafficSign {
+  uint32 id = 1;
+  enum Type {
+    NODISPLAY = 0;                                  // 无显示
+    SPEED_LIMIT_5 = 1;                              // 限速5
+    SPEED_LIMIT_10 = 2;                             // 限速10
+    SPEED_LIMIT_15 = 3;                             // 限速15
+    SPEED_LIMIT_20 = 4;                             // 限速20
+    SPEED_LIMIT_25 = 5;                             // 限速25
+    SPEED_LIMIT_30 = 6;                             // 限速30
+    SPEED_LIMIT_35 = 7;                             // 限速35
+    SPEED_LIMIT_40 = 8;                             // 限速40
+    SPEED_LIMIT_45 = 9;                             // 限速45
+    SPEED_LIMIT_50 = 10;                            // 限速50
+    SPEED_LIMIT_55 = 11;                            // 限速55
+    SPEED_LIMIT_60 = 12;                            // 限速60
+    SPEED_LIMIT_65 = 13;                            // 限速65
+    SPEED_LIMIT_70 = 14;                            // 限速70
+    SPEED_LIMIT_75 = 15;                            // 限速75
+    SPEED_LIMIT_80 = 16;                            // 限速80
+    SPEED_LIMIT_85 = 17;                            // 限速85
+    SPEED_LIMIT_90 = 18;                            // 限速90
+    SPEED_LIMIT_95 = 19;                            // 限速95
+    SPEED_LIMIT_100 = 20;                           // 限速100
+    SPEED_LIMIT_105 = 21;                           // 限速105
+    SPEED_LIMIT_110 = 22;                           // 限速110
+    SPEED_LIMIT_115 = 23;                           // 限速115
+    SPEED_LIMIT_120 = 24;                           // 限速120
+    SPEED_LIMIT_125 = 25;                           // 限速125
+    SPEED_LIMIT_130 = 26;                           // 限速130
+    SPEED_LIMIT_135 = 27;                           // 限速135
+    SPEED_LIMIT_140 = 28;                           // 限速140
+    SPEED_LIMIT_145 = 29;                           // 限速145
+    SPEED_LIMIT_150 = 30;                           // 限速150
+    SPEED_LIMIT_155 = 31;                           // 限速155
+    SPEED_LIMIT_160 = 32;                           // 限速160
+    NO_ENTRANCE_SIGN = 33;                          // 禁止进入标志
+    VEHICLE_PASSING_NOT_ALLOWED_SIGN = 34;          // 禁止通行标志
+    END_OF_VEHICLE_PASSING_NOT_ALLOWED_SIGN = 35;   // 禁止通行标志结束
+    STOP_SIGN = 36;                                 // 停止标志
+    SPEED_LIMIT_CONTROL = 37;                       // 限速控制
+    NIGHT_SPEED_LIMIT_SIGN_IN_US = 38;              // 夜间限速标志（美国）
+    SCHOOL_AND_CHILDREN_AREA_SIGN = 39;             // 学校和儿童区域标志
+    ROAD_WORK_SIGN = 40;                            // 道路施工标志
+    LEFT_CURVE_SIGN = 41;                           // 左转弯标志
+    RIGHT_CURVE_SIGN = 42;                          // 右转弯标志
+    SERIES_CURVES_SIGN = 43;                        // 连续弯道标志
+    END_OF_ALL_LIMIT = 44;                          // 所有限制结束
+    HIGHWAY_SIGN_1 = 45;                            // 高速公路标志1
+    HIGHWAY_SIGN_2 = 46;                            // 高速公路标志2
+    END_OF_HIGHWAY_SIGN_1 = 47;                     // 高速公路结束标志1
+    END_OF_HIGHWAY_SIGN_2 = 48;                     // 高速公路结束标志2
+    FREEWAY_SIGN_1 = 49;                            // 免费公路标志1
+    FREEWAY_SIGN_2 = 50;                            // 免费公路标志2
+    END_OF_FREEWAY_SIGN_1 = 51;                     // 免费公路结束标志1
+    END_OF_FREEWAY_SIGN_2 = 52;                     // 免费公路结束标志2
+    START_OF_CITY = 53;                             // 城市起点
+    END_OF_CITY = 54;                               // 城市终点
+    START_OF_TOWN = 55;                             // 镇起点
+    END_OF_TOWN = 56;                               // 镇终点
+    START_OF_SPEED_ARLO = 57;                       // 限速区域起点
+    END_OF_SPEED_ARLO = 58;                         // 限速区域终点
+    END_OF_SPEED_LIMIT = 59;                        // 限速结束
+    UPCOMING_START_OF_CITY_SIGN_WITH_CITY_NAME = 60;// 即将到达城市起点（带城市名称）
+    UPCOMING_END_OF_CITY_SIGN_WITH_CITY_NAME = 61;  // 即将到达城市终点（带城市名称）
+  }
+  Type type = 2;
+  double angle = 3;
+  double lat = 4;
+  double lgt = 5;
+  double height = 6;
+}
+
+message SelfLane {
+  enum Type {
+    OFF = 0;
+    LOW_LIGHT = 1;
+    HIGH_LIGHT = 2;
+    SUPER_HIGH_LIGHT = 3;
+  }
+  Type type = 1;
+}
+
+message ADTheme {
+  enum Type {
+    DEFAULT = 0;
+    CLEAR = 1;
+    CLOUDY = 2;
+    RAIN = 3;
+    SNOW = 4;
+  }
+  Type type = 1;
+}
+
+message LaneBoundary {
+  uint32 id = 1;
+  enum Type {
+    NODISPLAY = 0;                                     // 无显示
+    SOLID_LINE = 1;                                    // 实线
+    DASH_LINE = 2;                                     // 虚线
+    DOUBLE_SOLID_LINE = 3;                             // 双实线
+    DOUBLE_DASH_LINE = 4;                              // 双虚线
+    INTERNAL_SOLID_EXTERNAL_DASH = 5;                  // 内部实线外部虚线
+    INTERNAL_DASH_EXTERNAL_SOLID = 6;                  // 内部虚线外部实线
+    LEFT_DASHED_RIGHT_DASHED = 7;             // 左虚右虚（预留）
+    LEFT_SOLID_RIGHT_SOLID = 8;               // 左实右实（预留）
+    ZIG_ZAG = 9;                              // 锯齿线（预留）
+    BOTTS_DOTS = 10;                          // Botts点线（预留）
+    CHANGEABLE_LANE_MARK = 11;                // 可变车道标记（预留）
+    LOGICAL = 12;                             // 逻辑标记（预留）
+    PHYSICAL = 13;                            // 物理标记（预留）
+    VIRTUAL = 14;                             // 虚拟标记（预留）
+    SHORT_DASHED_LINE = 15;                            // 短虚线
+    SHADE_AREA = 16;                          // 阴影区域（预留）
+    LANE_VIRTUAL_MARKING = 17;                // 车道虚拟标记（预留）
+    INTERSECTION_VIRTUAL_MARKING = 18;        // 路口虚拟标记（预留）
+    CURB_VIRTUAL_MARKING = 19;                // 路缘虚拟标记（预留）
+    UNCLOSED_ROAD = 20;                       // 未封闭道路（预留）
+    ROAD_VIRTUAL_LINE = 21;                   // 道路虚拟线（预留）
+  }
+  Type type = 2;
+  repeated Point points = 3;
+  enum Color {
+    NONE = 0;       // 无显示
+    WHITE = 1;      // 白色
+    GREY = 2;       // 灰色
+    BLUE = 3;       // 蓝色
+    RED = 4;        // 红色
+    YELLOW = 5;     // 黄色
+    ORANGE = 6;     // 橙色
+  }
+  Color color = 4;
+}
+
+message HmiBoundary {
+  repeated LaneBoundary lane_boundary = 1;
+  // 下面结构仅填充id字段，le1和ri1是egolane的左右，le2和le3是向左变道，ri2和ri3是向右变道
+  LaneBoundary le1 = 2;
+  LaneBoundary le2 = 3;
+  LaneBoundary le3 = 4;
+  LaneBoundary ri1 = 5;
+  LaneBoundary ri2 = 6;
+  LaneBoundary ri3 = 7;
+}
+
+message MiniAdasObject {
+  enum Type {
+    NODISPLAY = 0;                   // 无显示
+    CAR = 1;                         // 轿车
+    NA1 = 2;                         // 未定义1
+    CYCLIST = 3;                     // 自行车骑行者
+    NA2 = 4;                         // 未定义2
+    MOTORCYCLIST = 5;                // 摩托车骑行者
+    BUS = 6;                         // 公交车
+    TRUCK = 7;                       // 卡车
+    TRICYCLIST_WITH_BUCKET = 8;      // 带桶三轮车骑行者
+    TANKER = 9;                      // 油罐车
+    BUCKET_TRUCK = 10;               // 吊桶车
+    VAN = 11;                        // 厢式车
+    MPV_SUV = 12;                    // MPV/SUV
+    PICKUP_TRUCK = 13;               // 皮卡
+    TRICYCLIST_WITH_BOX = 14;        // 带箱三轮车骑行者
+    UNKNOWN = 15;                    // 未知
+    POLICE_CAR = 16;                 // 警车
+    AMBULANCE = 17;                  // 救护车
+    WRECKING_TRUCK = 18;             // 拖车
+    EXTENDED_TRUCK = 19;             // 加长卡车
+    FORKLIFT_TRUCK = 20;             // 叉车
+    PEDESTRIAN = 21;                 // 行人
+    CHILDREN = 22;                   // 儿童
+    POLICE = 23;                     // 警察
+    PEOPLE_WITH_CART1 = 24;          // 推车的人1
+    PEOPLE_WITH_CART2 = 25;          // 推车的人2
+    SMALL_ANIMAL = 26;               // 小动物
+    LARGE_ANIMAL = 27;               // 大动物
+    RESERVED6 = 28;                  // 保留6
+    RESERVED7 = 29;                  // 保留7
+    RESERVED8 = 30;                  // 保留8
+    CONE = 31;                       // 锥形标志
+    POLE = 32;                       // 杆
+    REFLECTOR = 33;                  // 反光板
+    SIGN = 34;                       // 标志牌
+    BARREL = 35;                     // 桶
+    TRASH_CAN = 36;                  // 垃圾桶
+    STROLLER = 37;                   // 婴儿车
+    TRICYCLE_WITH_BOX = 38;          // 带箱三轮车
+    TRICYCLE_WITH_BUCKET = 39;       // 带桶三轮车
+    BICYCLE = 40;                    // 自行车（无人）
+    MOTORCYCLE = 41;                 // 摩托车（无人）
+    OTHER = 42;                      // 其他（低障碍物）
+    WATER_BARRIER = 43;              // 防水障碍物
+  }
+  Type type = 1;
+  enum Color {
+    WHITE = 0;                            // 白色
+    BLUE = 1;                             // 蓝色
+    YELLOW = 2;                           // 黄色
+    RED = 3;                              // 红色
+    GREY = 4;                             // 灰色
+    TRANSPARENT = 5;                      // 透明
+    RED_OBJECT_LEFT_MARKER_LINE = 6;      // 红色（物体 + 左侧标记线）
+    RED_OBJECT_RIGHT_MARKER_LINE = 7;     // 红色（物体 + 右侧标记线）
+  }
+  Color color = 2;
+}
+
+message DrivingArea {
+  repeated Point points = 1;
+}
+
+enum EthDoorOpenWarnRiIndcn {
+  DOW_RI_LCMA_NO_WARN = 0;        // 无警告
+  DOW_RI_LCMA_WARN_LVL1 = 1;      // 警告等级1
+  DOW_RI_NOT_USED = 2;            // 未使用
+  DOW_RI_LCMA_WARN_LVL2 = 3;      // 警告等级2
+}
+
+enum EthDoorOpenWarnLeIndcn {
+  DOW_LE_LCMA_NO_WARN = 0;        // 无警告
+  DOW_LE_LCMA_WARN_LVL1 = 1;      // 警告等级1
+  DOW_LE_NOT_USED = 2;            // 未使用
+  DOW_LE_LCMA_WARN_LVL2 = 3;      // 警告等级2
+}
+
+enum EthTrfcLiChg {
+  TRFC_LI_CHG_NO_REQUEST = 0;       // 无请求
+  TRFC_LI_CHG_CHANGE_TO_TIME_TO_GO = 1;  // 转换到倒计时时间
+  TRFC_LI_CHG_RED_LIGHT = 2;        // 红灯
+  TRFC_LI_CHG_GREEN_LIGHT = 3;      // 绿灯
+  TRFC_LI_CHG_RESERVED1 = 4;        // 预留1
+  TRFC_LI_CHG_RESERVED2 = 5;        // 预留2
+}
+
+enum EthTiGapSetForLgtCtrl {
+  TI_GAP_SET_FOR_LGT_CTRL_NONE = 0;      // 无时间间隔设置
+  TI_GAP_SET_FOR_LGT_CTRL_TIME_GAP_1 = 1; // 时间间隔 1
+  TI_GAP_SET_FOR_LGT_CTRL_TIME_GAP_2 = 2; // 时间间隔 2
+  TI_GAP_SET_FOR_LGT_CTRL_TIME_GAP_3 = 3; // 时间间隔 3
+}

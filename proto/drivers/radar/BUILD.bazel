@@ -1,0 +1,84 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "radar_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["radar.proto"],
+    deps = [
+        "//proto/common:header_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "radar_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":radar_proto",
+    ],
+)
+
+python_proto_library(
+    name = "radar_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":radar_proto",
+    ],
+)
+
+proto_library(
+    name = "config_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["config.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "config_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":config_proto",
+    ],
+)
+
+python_proto_library(
+    name = "config_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":config_proto",
+    ],
+)
+
+proto_library(
+    name = "gm_radar_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gm_radar.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gm_radar_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gm_radar_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gm_radar_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gm_radar_proto",
+    ],
+)
+

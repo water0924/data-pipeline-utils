@@ -1,0 +1,244 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "safety_real_time_event_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["safety_real_time_event.proto"],
+    deps = [
+        "//proto/common:module_event_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "safety_real_time_event_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":safety_real_time_event_proto",
+    ],
+)
+
+python_proto_library(
+    name = "safety_real_time_event_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":safety_real_time_event_proto",
+    ],
+)
+
+proto_library(
+    name = "dtc_info_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["dtc_info.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "dtc_info_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":dtc_info_proto",
+    ],
+)
+
+python_proto_library(
+    name = "dtc_info_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":dtc_info_proto",
+    ],
+)
+
+proto_library(
+    name = "safety_analysis_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["safety_analysis.proto"],
+    deps = [
+        "//proto/common:module_event_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "safety_analysis_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":safety_analysis_proto",
+    ],
+)
+
+python_proto_library(
+    name = "safety_analysis_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":safety_analysis_proto",
+    ],
+)
+
+proto_library(
+    name = "safety_interface_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["safety_interface.proto"],
+    deps = [
+        "//proto/safety:safety_event_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "safety_interface_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":safety_interface_proto",
+    ],
+)
+
+python_proto_library(
+    name = "safety_interface_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":safety_interface_proto",
+    ],
+)
+
+proto_library(
+    name = "did_data_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["did_data.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "did_data_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":did_data_proto",
+    ],
+)
+
+python_proto_library(
+    name = "did_data_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":did_data_proto",
+    ],
+)
+
+proto_library(
+    name = "safety_event_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["safety_event.proto"],
+    deps = [
+        "//proto/common:module_event_proto",
+        "//proto/drapi:operation_status_proto",
+        "//proto/vhr:event_extra_info_proto",
+        "//proto/safety:vehicle_info_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "safety_event_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":safety_event_proto",
+    ],
+)
+
+python_proto_library(
+    name = "safety_event_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":safety_event_proto",
+    ],
+)
+
+proto_library(
+    name = "vehicle_info_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["vehicle_info.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "vehicle_info_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":vehicle_info_proto",
+    ],
+)
+
+python_proto_library(
+    name = "vehicle_info_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":vehicle_info_proto",
+    ],
+)
+
+proto_library(
+    name = "state_exchange_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["state_exchange.proto"],
+    deps = [
+        "//proto/common:module_event_proto",
+        "//proto/safety:safety_event_proto",
+        "//proto/safety:safety_analysis_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "state_exchange_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":state_exchange_proto",
+    ],
+)
+
+python_proto_library(
+    name = "state_exchange_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":state_exchange_proto",
+    ],
+)
+
+proto_library(
+    name = "uds_interface_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["uds_interface.proto"],
+    deps = [
+        "//proto/safety:dtc_info_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "uds_interface_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":uds_interface_proto",
+    ],
+)
+
+python_proto_library(
+    name = "uds_interface_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":uds_interface_proto",
+    ],
+)
+

@@ -1,0 +1,158 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "sensor_image_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["sensor_image.proto"],
+    deps = [
+        "//proto/common:header_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "sensor_image_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":sensor_image_proto",
+    ],
+)
+
+python_proto_library(
+    name = "sensor_image_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":sensor_image_proto",
+    ],
+)
+
+proto_library(
+    name = "calibration_type_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["calibration_type.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "calibration_type_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":calibration_type_proto",
+    ],
+)
+
+python_proto_library(
+    name = "calibration_type_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":calibration_type_proto",
+    ],
+)
+
+proto_library(
+    name = "pointcloud2_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["pointcloud2.proto"],
+    deps = [
+        "//proto/common:header_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "pointcloud2_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":pointcloud2_proto",
+    ],
+)
+
+python_proto_library(
+    name = "pointcloud2_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":pointcloud2_proto",
+    ],
+)
+
+proto_library(
+    name = "sensor_can_msg_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["sensor_can_msg.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "sensor_can_msg_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":sensor_can_msg_proto",
+    ],
+)
+
+python_proto_library(
+    name = "sensor_can_msg_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":sensor_can_msg_proto",
+    ],
+)
+
+proto_library(
+    name = "orincam_image_info_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["orincam_image_info.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "orincam_image_info_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":orincam_image_info_proto",
+    ],
+)
+
+python_proto_library(
+    name = "orincam_image_info_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":orincam_image_info_proto",
+    ],
+)
+
+proto_library(
+    name = "mcu_log_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["mcu_log.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "mcu_log_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":mcu_log_proto",
+    ],
+)
+
+python_proto_library(
+    name = "mcu_log_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":mcu_log_proto",
+    ],
+)

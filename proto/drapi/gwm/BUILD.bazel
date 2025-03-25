@@ -1,0 +1,83 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "gwmm_hmi_common_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["GWM-HMI-common.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gwmm_hmi_common_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gwmm_hmi_common_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gwmm_hmi_common_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gwmm_hmi_common_proto",
+    ],
+)
+
+proto_library(
+    name = "gwmm_hmi_object_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["GWM-HMI-object.proto"],
+    deps = [
+        "//proto/drapi/gwm:gwmm_hmi_common_proto"
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gwmm_hmi_object_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gwmm_hmi_object_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gwmm_hmi_object_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gwmm_hmi_object_proto",
+    ],
+)
+
+proto_library(
+    name = "gwmm_hmi_rasmap_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["GWM-HMI-rasmap.proto"],
+    deps = [
+        "//proto/drapi/gwm:gwmm_hmi_common_proto"
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gwmm_hmi_rasmap_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gwmm_hmi_rasmap_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gwmm_hmi_rasmap_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gwmm_hmi_rasmap_proto",
+    ],
+)

@@ -1,0 +1,82 @@
+syntax = "proto2";
+
+package deeproute.cloud_cfgs;
+
+
+message FunctionsConfig {
+  // GWM prefix
+  optional string config_id = 4;
+  optional string update_time = 5;
+  optional string version = 6;
+
+  // functions mode/gear
+  optional ActiveSafetyCloudConfig active_safety = 1;
+  optional ParkingCloudConfig parking = 2;
+  optional CalibrationCloudConfig calibration = 3;
+  optional DrivingCloudConfig driving = 7;
+}
+
+enum ActiveSafetyGear {
+  ActiveSafety_OFF = 0;              // close this function
+  ActiveSafety_LOW = 1;              // low level
+  ActiveSafety_MIDDLE = 2;           // middle level
+  ActiveSafety_HIGH = 3;             // high level
+  ActiveSafety_DEFAULT = 4;          // default level for CNCAP testing
+}
+
+message ActiveSafetyCloudConfig {
+  optional ActiveSafetyGear aeb_gear = 1 [ default = ActiveSafety_MIDDLE ];
+  optional ActiveSafetyGear front_meb_gear = 2 [ default = ActiveSafety_MIDDLE ];
+  optional ActiveSafetyGear rear_meb_gear = 3 [ default = ActiveSafety_MIDDLE ];
+  optional ActiveSafetyGear rctb_gear = 4 [ default = ActiveSafety_MIDDLE ];
+}
+
+enum ParkingMode {
+  PARKING_OFF = 0;                      // close this function
+  PARKING_AGGRESIVE = 1;                // aggresive level
+  PARKING_STANDARD = 2;                 // standard level
+  PARKING_CONSERVATIVE = 3;             // conservative level
+  PARKING_DEMO = 4;                     // 不开放给任何用户，仅用于内部测试
+}
+
+message APACloudConfig {
+  optional ParkingMode safety_mode = 1 [ default = PARKING_STANDARD ];
+  optional ParkingMode speed_mode  = 2 [ default = PARKING_STANDARD ];
+}
+
+message HAVPCloudConfig {
+  optional ParkingMode driving_style = 1 [ default = PARKING_STANDARD ];
+  optional bool active_notification = 2 [ default = true ];
+  optional bool barrier_gate_access = 3 [ default = false ];
+  optional bool enable_outdoor_parking_lot_routing = 4 [ default = true ];
+  optional bool enable_expand_map = 5 [ default = false ];
+  optional bool enable_detour = 6 [ default = true ];
+  optional bool enable_reverse_slope_search = 7 [ default = true ];
+}
+
+message RADSCloudConfig {
+  optional ParkingMode safety_mode = 1 [ default = PARKING_STANDARD ];
+}
+
+message ParkingCloudConfig {
+  optional APACloudConfig apa_cloud_config = 1;
+  optional HAVPCloudConfig havp_cloud_config = 2;
+  optional RADSCloudConfig rads_cloud_config = 3;
+}
+
+message CalibMonitorCloudConfig {
+  optional bool update_local_file = 1 [deprecated = true];
+  optional bool avm_update_local_file = 2 ;
+  optional bool svm_update_local_file = 3 ;
+  optional bool lidar_update_local_file = 4 ;
+  optional bool ins_update_local_file = 5 ;
+}
+  
+message CalibrationCloudConfig {
+  optional CalibMonitorCloudConfig calib_monitor_config = 1;
+}
+
+message DrivingCloudConfig {
+  optional bool exam_mode = 1;
+  optional bool enable_waiting_area = 2 [ default = false ];
+}

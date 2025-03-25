@@ -1,0 +1,1022 @@
+syntax = "proto3";
+package gl.sr;
+
+message SelfPosn {
+  uint32 self_posn_x = 1; // 自车X坐标，单位: cm，范围: -2,147,483,648 ~ 2,147,483,647，偏移量: -2,147,483,648，因子: 1
+  uint32 self_posn_y = 2; // 自车Y坐标，单位: cm，范围: -2,147,483,648 ~ 2,147,483,647，偏移量: -2,147,483,648，因子: 1
+  uint32 self_posn_z = 3; // 自车Z坐标，单位: cm，范围: -32,768 ~ 32,767，偏移量: -32,768，因子: 1
+  uint32 self_posn_sts = 4; // 自车坐标状态（原 uint8）
+}
+
+message SelfHeadingAg {
+  uint32 self_roll = 1; // 自车横滚角(原 Uint16)，Range: 0~36000，Offset: 0，Factor: 0.01，Unit: °，逆时针为正
+  uint32 self_pitch = 2; // 自车俯仰角(原 Uint16)，Range: 0~36000，Offset: 0，Factor: 0.01，Unit: °，逆时针为正
+  uint32 self_yaw = 3; // 自车偏航角(原 Uint16)，Range: 0~36000，Offset: 0，Factor: 0.01，Unit: °，逆时针为正
+}
+
+message DisplayDynamicEffect {
+  uint32 self_radar_ripple = 1; // 自车雷达波纹 (原 Uint8)
+  uint32 self_arrow = 2; // 泊车箭头/巡航箭头 (原 Uint8)
+  enum EthAsyLanChgColorDsp {
+    CHG_COLOR_DEFAULT = 0;
+    CHG_COLOR_GREY = 1; // 灰色车位
+    CHG_COLOR_BLUE = 2; // 蓝色车位
+    CHG_COLOR_BLUE1 = 3; // 蓝色车位+渐变效果
+  }
+  EthAsyLanChgColorDsp eth_asy_lan_chg_color_dsp = 3; // 变道动态 (原 Uint8)
+  uint32 eth_slow_down_sts = 4; // 减速动态 (原 Uint8)  1-valid  0-invalid
+  EthStopPoints1 eth_stop_points1 = 5; // 刹停点动画1 (自定义类型)
+  EthNarrow eth_narrow = 6; // 窄道通行动画 (自定义类型)
+  EthCrossPlanningLine1 eth_cross_planning_line1 = 7; // 过路口选道动画 (自定义类型)
+  uint32 eth_lcma_indcn_le = 8; // LCA报警动画 (原 Uint8)
+  uint32 eth_lcma_indcn_ri = 9; // LCA报警动画 (原 Uint8)
+  uint32 eth_fcta_indcn_le = 10; // FCTA报警动画 (原 Uint8)
+  uint32 eth_fcta_indcn_ri = 11; // FCTA报警动画 (原 Uint8)
+  uint32 eth_cllsn_warn_re_indcn = 12; // RCW报警动画 (原 Uint8)
+  uint32 eth_drv_off_warn = 13; // 前车驶离动画 (原 Uint8)
+  uint32 eth_door_open_warn_le_indcn = 14; // DOW报警动画 (原 Uint8)
+  uint32 eth_door_open_warn_ri_indcn = 15; // DOW报警动画 (原 Uint8)
+  uint32 eth_asy_lat_offst_sts = 16; // 横向偏移动态 (原 Uint8)
+  uint32 eth_trfc_li_chg = 17; // 交通灯变化提醒 (原 Uint8)
+  uint32 eth_offs_end_of_odd = 18; // 高精地图终点距离 (原 Uint16，需限制0~65535)
+  repeated EthBoundaryColor eth_boundary_color = 19; // 路沿边界渲染 (自定义类型)
+  enum EthSelfLaneColor {
+    OFF = 0;
+    LOW_LIGHT = 1;
+    HIGH_LIGHT = 2;
+    SUPER_HIGH_LIGHT = 3;
+  }
+  EthSelfLaneColor eth_self_lane_color = 20; // 自车道底纹颜色 (原 Uint8)
+  uint32 eth_asy_a_lat_indcr = 21; // 自车光圈和横向干预动态 (原 Uint8)
+  uint32 eth_asy_a_lgt_sts = 22; // 纵向Override动态 (原 Uint8)
+}
+
+message EthNarrow {
+  uint32 narrow_sts = 1; // (原Uint8) 0x0:Default,0x1:BeforePassed,0x2:Passed
+  uint32 narrow_ist = 2; // (原Uint8) Range:0~255,unit:m(前正后负),factor:0.1,offset:0
+  uint32 narrow_point_dst_lat = 3; // (原Uint16) Range:0~65535,unit:m(左正右负),factor:0.002,offset:-65.535
+  uint32 narrow_point_dst_lgt = 4; // (原Uint16) Range:0~65535,unit:m(前正后负),factor:0.004,offset:-30
+}
+
+message Point {
+  uint32 dst_lat = 1; // 横向距离 (原Uint16)，单位: cm，范围: -32768 ~ 32767，偏移量: -32768，因子: 1
+  uint32 dst_lgt = 2; // 纵向距离 (原Uint16)，单位: cm，范围: -32768 ~ 32767，偏移量: -32768，因子: 1
+}
+
+message EthStopPoints1 {
+  uint32 stop_point_valid1 = 1; // 刹停点有效值 (原Uint8) 1-有效  0-无效
+  Point stop_start_point1 = 2; // 刹停点开始点
+  Point stop_end_point1 = 3; // 刹停点结束点
+}
+
+message LanlinEquation {
+  uint32 prmA = 1; // A (原Uint16)，offset:65.635，factor:0.002
+  uint32 prmB = 2; // B (原Uint16)，offset:-1.6，  factor:0.001
+  uint32 prmC = 3; // C (原Uint16)，offset:-1.6，  factor:0.0001
+  uint32 prmD = 4; // D (原Uint16)，offset:-0.001，factor:0.000001
+  uint32 start_point = 5; // 轨迹线起点 (原Uint16)，单位:m(纵坐标,前正后负)，offset:-30, factor:0.004
+  uint32 end_point = 6; // 轨迹线终点 (原Uint16)，单位:m(纵坐标,前正后负)，offset:-30, factor:0.004
+}
+
+message EthCrossPlanningLine1 {
+  uint32 cross_valid = 1; // 过路口有效值 (原Uint8)
+  repeated Point cross_plan_lin_point1 = 2;
+  LanlinEquation lanlin_equation = 3; // 车道线方程
+  uint32 cross_plan_lane_wdt = 4; // 过路口车道宽度 (原Uint8)
+}
+
+message EthBoundaryColor {
+  uint32 eth_boundary_space_color = 1; // 路边边界区域颜色渲染 (原Uint8)  1=可行驶区域，  2=不可行驶区域
+  repeated Point eth_boundary_space_line = 2;
+}
+
+message SelfVisualAngle {
+  uint32 prkg_perspective = 1; // 泊车视角 (原 Uint8)
+  DrvgPerspective drvg_perspective = 2; // 行车视角 (结构)
+}
+
+message DrvgPerspective {
+  uint32 hmi_cam_view_z = 1; // 行车视角 (原 Uint8)
+  uint32 hmi_cam_view_y1 = 2; // 行车视角 (原 Uint8)
+}
+
+message LaneLine {
+  enum TypOfAsyLine {
+    NODISPLAY = 0;                            // 无显示
+    SOLID_LINE = 1;                           // 实线
+    DASH_LINE = 2;                            // 虚线
+    DOUBLE_SOLID_LINE = 3;                    // 双实线
+    DOUBLE_DASH_LINE = 4;                     // 双虚线
+    INTERNAL_SOLID_EXTERNAL_DASH = 5;         // 内部实线外部虚线
+    INTERNAL_DASH_EXTERNAL_SOLID = 6;         // 内部虚线外部实线
+    LEFT_DASHED_RIGHT_DASHED = 7;             // 左虚右虚（预留）
+    LEFT_SOLID_RIGHT_SOLID = 8;               // 左实右实（预留）
+    ZIG_ZAG = 9;                              // 锯齿线（预留）
+    BOTTS_DOTS = 10;                          // Botts点线（预留）
+    CHANGEABLE_LANE_MARK = 11;                // 可变车道标记（预留）
+    LOGICAL = 12;                             // 逻辑标记（预留）
+    PHYSICAL = 13;                            // 物理标记（预留）
+    VIRTUAL = 14;                             // 虚拟标记（预留）
+    SHORT_DASHED_LINE = 15;                   // 短虚线
+    SHADE_AREA = 16;                          // 阴影区域（预留）
+    LANE_VIRTUAL_MARKING = 17;                // 车道虚拟标记（预留）
+    INTERSECTION_VIRTUAL_MARKING = 18;        // 路口虚拟标记（预留）
+    CURB_VIRTUAL_MARKING = 19;                // 路缘虚拟标记（预留）
+    UNCLOSED_ROAD = 20;                       // 未封闭道路（预留）
+    ROAD_VIRTUAL_LINE = 21;                   // 道路虚拟线（预留）
+  }
+  TypOfAsyLine typ_of_asy_line = 1; // 车道线类型 (原 Uint8)
+  repeated Point line_point = 2; // 点组成的线 (动态数组)
+  LanlinEquation lane_line_equation = 3; // 车道线方程
+  uint32 start_point = 4; // 起点 (原 Uint16)
+  uint32 end_point = 5; // 终点 (原 Uint16)
+  uint32 typ_of_fish_bone = 6; // 鱼骨线类型 (原 Uint8)
+  enum ColorOfAsyLine {
+    NONE = 0;       // 无显示
+    WHITE = 1;      // 白色
+    GREY = 2;       // 灰色
+    BLUE = 3;       // 蓝色
+    RED = 4;        // 红色
+    YELLOW = 5;     // 黄色
+    ORANGE = 6;     // 橙色
+  }
+  ColorOfAsyLine color_of_asy_line = 7; // 车道线颜色 (原 Uint8)
+  uint32 track_id = 8; // ID (原 Uint32)
+  uint32 count = 9; // 数量 (原 Uint8)
+  uint32 link_id = 10; // LinkId (原 Uint8)
+}
+
+message EthBoundary {
+  repeated Point line_point = 1; // 点组成的路沿线(原Uint16数组)
+  uint32 prmA = 2; // A(原Uint16)
+  uint32 prmB = 3; // B(原Uint16)
+  uint32 prmC = 4; // C(原Uint16)
+  uint32 prmD = 5; // D(原Uint16)
+  uint32 start_point = 6; // 轨迹线起点(原Uint16)
+  uint32 end_point = 7; // 轨迹线终点(原Uint16)
+  uint32 track_id = 8; // ID(原Uint32)
+}
+
+message EthHmiGreenBelt {
+  repeated Point point = 1; // 点组成的绿化带线(原Uint16数组)
+  uint32 track_id = 2; // ID(原Uint32)
+}
+
+message EthHmiCrosswalk {
+  uint32 track_id = 1; // ID(原Uint32)
+  Point piont1 = 2; // 人行道角点1
+  Point piont2 = 3; // 人行道角点2
+  Point piont3 = 4; // 人行道角点3
+  Point piont4 = 5; // 人行道角点4
+}
+
+message EthHmiSpeedBump {
+  uint32 track_id = 1; // ID(原Uint32)
+  Point start_point = 2; // 起点
+  Point end_point = 3; // 终点
+}
+
+message EthHmiRoadarrow {
+  enum ColorOfRoadArrow {
+    NONE = 0;
+    WHITE = 1;
+    YELLOW = 2;
+  }
+  ColorOfRoadArrow color_of_road_arrow = 1; // 道路箭头颜色(原Uint8)
+  uint32 hd_dir_of_road_arrow = 2; // 箭头朝向角度(原Uint16)
+  Point road_arrow_point = 3; // 自车箭头外框矩形中心点距离(原Uint16)
+  enum TypOfRoadArrow {
+    UNKNOWN = 0;              // 未知
+    LEFT_FORWARD = 1;         // 左前方
+    LEFT_RIGHT = 2;           // 左右
+    RIGHT_FORWARD = 3;        // 右前方
+    LEFT_RIGHT_FORWARD = 4;   // 左右前方
+    DIAMOND = 5;              // 菱形
+    LEFT = 6;                 // 左转
+    RIGHT = 7;                // 右转
+    FORWARD = 8;              // 直行
+    U_TURN = 9;               // 掉头
+    U_TURN_FORWARD = 10;      // 掉头并直行
+    NO_DISPLAY = 11;          // 不显示
+    LEFT_U_TURN = 12;         // 左转掉头
+    RIGHT_U_TURN = 13;        // 右转掉头
+    NO_U_TURN = 14;           // 禁止掉头
+    TRIANGLE = 15;            // 三角形
+  }
+  TypOfRoadArrow typ_of_road_arrow = 4; // 道路箭头类型(原Uint8)
+  uint32 hmi_road_arrow_lane = 5; // 道路箭头所在车道(原Uint8)
+  uint32 id = 6; // ID(原Uint32)
+  Point road_arrow_point0 = 7; // 道路箭头四个角点
+  Point road_arrow_point1 = 8;
+  Point road_arrow_point2 = 9;
+  Point road_arrow_point3 = 10;
+}
+
+message EthHmiStopLine {
+  uint32 track_id = 1; // ID(原Uint32)
+  uint32 color = 2; // 颜色(原Uint8)
+  Point start_point = 3; // 起点
+  Point end_point = 4; // 终点
+}
+
+message EthHmiFence {
+  uint32 height_of_fence = 1; // 栏杆高度(原Uint8)
+  repeated Point line_point = 2; // 点组成的栅栏线(原Uint16数组)
+  uint32 type_of_fence = 3; // 护栏类型(原Uint8)
+}
+
+message LaneElement {
+  LaneLine eth_line_le1 = 1; // 左一车道线
+  LaneLine eth_line_le2 = 2; // 左二车道线
+  LaneLine eth_line_le3 = 3; // 左三车道线
+  LaneLine eth_line_ri1 = 4; // 右一车道线
+  LaneLine eth_line_ri2 = 5; // 右二车道线
+  LaneLine eth_line_ri3 = 6; // 右三车道线
+  repeated LaneLine eth_line1 = 7; // 车道线(动态数组)
+  repeated EthBoundary eth_hmi_boundary_array1 = 8; // 路沿线(动态数组)
+  repeated EthHmiGreenBelt eth_hmi_green_belt_array = 9; // 绿化带(动态数组)
+  repeated EthHmiCrosswalk eth_hmi_crosswalk_array = 10; // 斑马线(动态数组)
+  repeated EthHmiSpeedBump eth_hmi_speed_bump_array = 11; // 减速带(动态数组)
+  repeated EthHmiRoadarrow eth_hmi_roadarrow_array = 12; // 道路箭头(动态数组)
+  repeated EthHmiStopLine eth_hmi_stop_line_array = 13; // 停止线(动态数组)
+  repeated EthHmiFence eth_hmi_fence_array = 14; // 护栏(动态数组)
+}
+
+message GeneralPosn {
+  uint32 general_posn_x = 1; // 目标坐标横向位置(原 Uint32)，Unit:cm，Offset:-2147483648，Factor:1
+  uint32 general_posn_y = 2; // 目标坐标纵向位置(原 Uint32)，Unit:cm，Offset:-2147483648，Factor:1
+  uint32 general_posn_z = 3; // 目标坐标Z向位置(原 Uint16)，Unit:dm，Range:-32768..32767，Offset:-32768，Factor:1
+}
+
+message MeyPrkgSpe {
+  GeneralPosn mey_slot_start = 1; // 记忆车位四顶点
+  GeneralPosn mey_slot_end = 2; // 记忆车位四顶点
+  GeneralPosn mey_slot_start_rear = 3; // 记忆车位四顶点
+  GeneralPosn mey_slot_end_rear = 4; // 记忆车位四顶点
+  uint32 mey_slot_sts = 5; // 记忆车位状态(原 Uint8)
+}
+
+message DestPosn {
+  uint32 dest_posn_x = 1; // 目的地坐标(原 Uint16)，Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
+  uint32 dest_posn_y = 2; // 目的地坐标(原 Uint16)，Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
+  uint32 dest_posn_z = 3; // 目的地坐标(原 Uint16)，Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
+}
+
+message EthMiniADASObj {
+  uint32 hmi_obj_typ = 1; // 前1目标类型(原Uint8)
+  uint32 color_of_objtyp = 2; // 前1目标颜色(原Uint8)
+}
+
+message EthHmiTrfcSign {
+  enum Type {
+    NODISPLAY = 0;                                  // 无显示
+    SPEED_LIMIT_5 = 1;                              // 限速5
+    SPEED_LIMIT_10 = 2;                             // 限速10
+    SPEED_LIMIT_15 = 3;                             // 限速15
+    SPEED_LIMIT_20 = 4;                             // 限速20
+    SPEED_LIMIT_25 = 5;                             // 限速25
+    SPEED_LIMIT_30 = 6;                             // 限速30
+    SPEED_LIMIT_35 = 7;                             // 限速35
+    SPEED_LIMIT_40 = 8;                             // 限速40
+    SPEED_LIMIT_45 = 9;                             // 限速45
+    SPEED_LIMIT_50 = 10;                            // 限速50
+    SPEED_LIMIT_55 = 11;                            // 限速55
+    SPEED_LIMIT_60 = 12;                            // 限速60
+    SPEED_LIMIT_65 = 13;                            // 限速65
+    SPEED_LIMIT_70 = 14;                            // 限速70
+    SPEED_LIMIT_75 = 15;                            // 限速75
+    SPEED_LIMIT_80 = 16;                            // 限速80
+    SPEED_LIMIT_85 = 17;                            // 限速85
+    SPEED_LIMIT_90 = 18;                            // 限速90
+    SPEED_LIMIT_95 = 19;                            // 限速95
+    SPEED_LIMIT_100 = 20;                           // 限速100
+    SPEED_LIMIT_105 = 21;                           // 限速105
+    SPEED_LIMIT_110 = 22;                           // 限速110
+    SPEED_LIMIT_115 = 23;                           // 限速115
+    SPEED_LIMIT_120 = 24;                           // 限速120
+    SPEED_LIMIT_125 = 25;                           // 限速125
+    SPEED_LIMIT_130 = 26;                           // 限速130
+    SPEED_LIMIT_135 = 27;                           // 限速135
+    SPEED_LIMIT_140 = 28;                           // 限速140
+    SPEED_LIMIT_145 = 29;                           // 限速145
+    SPEED_LIMIT_150 = 30;                           // 限速150
+    SPEED_LIMIT_155 = 31;                           // 限速155
+    SPEED_LIMIT_160 = 32;                           // 限速160
+    NO_ENTRANCE_SIGN = 33;                          // 禁止进入标志
+    VEHICLE_PASSING_NOT_ALLOWED_SIGN = 34;          // 禁止通行标志
+    END_OF_VEHICLE_PASSING_NOT_ALLOWED_SIGN = 35;   // 禁止通行标志结束
+    STOP_SIGN = 36;                                 // 停止标志
+    SPEED_LIMIT_CONTROL = 37;                       // 限速控制
+    NIGHT_SPEED_LIMIT_SIGN_IN_US = 38;              // 夜间限速标志（美国）
+    SCHOOL_AND_CHILDREN_AREA_SIGN = 39;             // 学校和儿童区域标志
+    ROAD_WORK_SIGN = 40;                            // 道路施工标志
+    LEFT_CURVE_SIGN = 41;                           // 左转弯标志
+    RIGHT_CURVE_SIGN = 42;                          // 右转弯标志
+    SERIES_CURVES_SIGN = 43;                        // 连续弯道标志
+    END_OF_ALL_LIMIT = 44;                          // 所有限制结束
+    HIGHWAY_SIGN_1 = 45;                            // 高速公路标志1
+    HIGHWAY_SIGN_2 = 46;                            // 高速公路标志2
+    END_OF_HIGHWAY_SIGN_1 = 47;                     // 高速公路结束标志1
+    END_OF_HIGHWAY_SIGN_2 = 48;                     // 高速公路结束标志2
+    FREEWAY_SIGN_1 = 49;                            // 免费公路标志1
+    FREEWAY_SIGN_2 = 50;                            // 免费公路标志2
+    END_OF_FREEWAY_SIGN_1 = 51;                     // 免费公路结束标志1
+    END_OF_FREEWAY_SIGN_2 = 52;                     // 免费公路结束标志2
+    START_OF_CITY = 53;                             // 城市起点
+    END_OF_CITY = 54;                               // 城市终点
+    START_OF_TOWN = 55;                             // 镇起点
+    END_OF_TOWN = 56;                               // 镇终点
+    START_OF_SPEED_ARLO = 57;                       // 限速区域起点
+    END_OF_SPEED_ARLO = 58;                         // 限速区域终点
+    END_OF_SPEED_LIMIT = 59;                        // 限速结束
+    UPCOMING_START_OF_CITY_SIGN_WITH_CITY_NAME = 60;// 即将到达城市起点（带城市名称）
+    UPCOMING_END_OF_CITY_SIGN_WITH_CITY_NAME = 61;  // 即将到达城市终点（带城市名称）
+  }
+  Type type = 1; // 交通标志类型(原Uint8)
+  uint32 heading_angle = 2; // 航向角(原Uint16) 0~3600，Offset: 0，Factor: 0.1
+  uint32 sign_dst_lat = 3; // 横向坐标(原Uint16) Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
+  uint32 sign_dst_lgt = 4; // 纵向坐标(原Uint16) Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
+  uint32 sign_dst_height = 5; // 高度(原Uint16) Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
+  uint32 id = 6; // 标志ID(原Uint8)
+}
+
+message EthHmiTrfcLight {
+  enum TypeOfTrfcLight {
+    TYPE_OF_TRFC_LIGHT_NO_DISPLAY = 0;          // 无显示的交通灯
+    TYPE_OF_TRFC_LIGHT_VERTICAL = 1;            // 垂直方向交通灯
+    TYPE_OF_TRFC_LIGHT_LATERAL = 2;             // 水平方向交通灯
+    TYPE_OF_TRFC_LIGHT_ON_GROUND = 3;           // 地面交通灯
+    TYPE_OF_TRFC_LIGHT_VERTICAL_WITH_COUNTDOWN = 4;  // 带倒计时的垂直交通灯
+    TYPE_OF_TRFC_LIGHT_LATERAL_WITH_COUNTDOWN = 5;   // 带倒计时的水平交通灯
+    TYPE_OF_TRFC_LIGHT_ON_GROUND_WITH_COUNTDOWN = 6; // 带倒计时的地面交通灯
+    TYPE_OF_TRFC_LIGHT_RESERVED1 = 7;           // 保留1
+  }
+  TypeOfTrfcLight type_of_trfc_light = 1; // 红绿灯类型(原Uint8)
+  uint32 heading_angle = 2; // 航向角(原Uint16) 0~3600，Offset: 0，Factor: 0.1
+  uint32 light_dst_lat = 3; // 横向坐标(原Uint16) Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
+  uint32 light_dst_lgt = 4; // 纵向坐标(原Uint16) Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
+  uint32 light_dst_height = 5; // 高度(原Uint16) Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
+  enum Color {
+    DEFAULT = 0;              // 默认
+    RED = 1;                  // 红灯
+    YELLOW = 2;               // 黄灯
+    GREEN = 3;                // 绿灯
+    LEFT_RED = 4;             // 左转红灯
+    LEFT_YELLOW = 5;          // 左转黄灯
+    LEFT_GREEN = 6;           // 左转绿灯
+    RIGHT_RED = 7;            // 右转红灯
+    RIGHT_YELLOW = 8;         // 右转黄灯
+    RIGHT_GREEN = 9;          // 右转绿灯
+    FORWARD_RED = 10;         // 直行红灯
+    FORWARD_YELLOW = 11;      // 直行黄灯
+    FORWARD_GREEN = 12;       // 直行绿灯
+    U_TURN_RED = 13;          // 掉头红灯
+    U_TURN_YELLOW = 14;       // 掉头黄灯
+    U_TURN_GREEN = 15;        // 掉头绿灯
+  }
+  Color color = 6; // 红绿灯颜色(原Uint8)
+  uint32 id = 7; // ID(原Uint8)
+  uint32 countdown = 8; // 红绿灯倒计时(原Uint8)
+}
+
+message FunctionStsLight {
+  uint32 eth_asy_a_lgt_indcr = 1; // 仰向状态灯(原Uint8)
+  uint32 eth_disp_tsi_info_for_lgt_ctrl = 2; // 限速融合图标(原Uint8)
+  uint32 eth_disp_spd_set_for_lgt_ctrl = 3; // 设置车速图标(原Uint16)
+  uint32 eth_ti_gap_set_for_lgt_ctrl = 4; // Time gap图标(原Uint8)
+}
+
+message EthForHumaMach {
+  uint32 eth_hum_mach_fct_avl = 1; // (原Uint8) 人车共驾功能可用有效位
+  uint32 eth_hum_mach_fct_inhbn_reason = 2; // (原Uint8) 人车共驾功能抑制原因
+  uint32 eth_hum_mach_fct_excu_sts = 3; // (原Uint8) 人车共驾功能执行状态
+  uint32 eth_hum_mach_lane_chg_req_resp = 4; // (原Uint8) 人车共驾接收车道变道请求指令反馈
+  uint32 eth_hum_mach_prio_lane_req_resp = 5; // (原Uint8) 人车共驾接收优先车道请求指令反馈
+}
+
+message EthHWALeadingPoint {
+  uint32 eth_leading_point_valid = 1; // (原Uint8) 落位框有效位  0-无效  1-有效
+  uint32 center_x = 2; // (原Uint16) 落位框中心点坐标x
+  uint32 center_y = 3; // (原Uint16) 落位框中心点坐标y
+  uint32 hd_dir_of_ld_pt = 4; // (原Uint16) 落位框朝向角
+}
+
+message Other {
+  uint32 weather = 1; // 智驾主题(原Uint8)
+  ethHmiCtl eth_hmi_ctl = 2; // 时间戳(自定义类型)
+}
+
+message ethHmiCtl {
+  uint64 time_stamp = 1; // 时间戳(原Uint64)
+  uint32 state = 2; // 状态(原Uint8)
+  uint32 frame_id = 3; // 帧ID(原Uint32)
+}
+
+message ClassicalChinese {
+  // 行车文言(原Uint16)，可选值: (无明确取值，保留)
+  uint32 adas_msg = 1;
+
+  // 泊车文言(原Uint16)，可选值: (无明确取值，保留)
+  uint32 prkg_msg = 2;
+
+  // 预留文言(原Uint16)，可选值: (无明确取值，保留)
+  uint32 reserved_msg = 3;
+
+  // 0x1 => “前车过近,请接管车辆”
+  uint32 eth_asy_lgt_ctrl_take_over_req = 4;
+
+  // 0x01 => “LvlWarn2_Lvl1: 前方车辆已驶离”
+  uint32 eth_drv_off_warn = 5;
+
+  // 0x1 => “您正在控制车辆”
+  uint32 eth_ovrd_wrn_for_fst_actv = 6;
+
+  // 0x1 => “无法并入主路,请立即接管”
+  // 0x2 => “无法驶入匝道,请立即接管”
+  // 0x3 => “小心施工”
+  // 0x4 => “小心急弯”
+  // 0x5 => “请立即接管车辆”
+  // 0x7 => “请注意路况”
+  uint32 eth_asy_inform_for_drvr = 7;
+
+  // 0x2 => “自适应巡航已退出”
+  uint32 eth_cncl_warn_lgt_for_aut_drv = 8;
+
+  // 0x1||0x2||0x3||0x7||0x8||0x9||0xA => “自适应巡航无法激活”
+  // 0x4 => “请系好安全带后重试”
+  // 0x5 => “请关闭车门/前舱盖/后舱门后重试”
+  // 0x6 => “请切换至D挡后重试”
+  // 0x0B => “车速大于15km/h后重试”
+  // 0x0C => “请切换驾驶模式后重试”
+  // 0x0D => “请松开电子手刹后重试”
+  // 0x0E => “请开启ESC后重试”
+  // 0x0F => “请关闭HDC陡坡缓降后重试”
+  uint32 eth_avl_sts_for_long_aut_drv = 9;
+
+  // 0x2 => “请接管"
+  // 0x1 => "请轻转方向盘"
+  // 0x3 => “请手握方向盘”
+  uint32 eth_asy_steer_apply_rqrd = 10;
+
+  // 0x1 => “车道保持辅助已退出”
+  uint32 eth_asy_warn_for_steer_cncl = 11;
+
+  // 0x1 => “紧急车道保持已激活”
+  uint32 eth_warn_for_asy_emgy_lane_keep_aid = 12;
+
+  // 0x1 => “紧急制动已激活”
+  uint32 eth_cllsn_aid_poset_ema = 13;
+
+  // 0x01 => “后方有碰撞风险,已紧急制动”
+  uint32 eth_rcwm_brk_req = 14;
+
+  // 0x2 => “请保持安全距离”
+  // 0x1 => “请刹车”
+  uint32 eth_cllsn_fwd_warn = 15;
+
+  // 0x1 => “前方有碰撞风险,已减速”
+  uint32 eth_cllsn_aid_post = 16;
+
+  // 0x1 => “注意左侧来车”
+  // 0x3 => “前方有碰撞风险,因你减缓碰撞”
+  uint32 eth_fctalndcn_le = 17;
+
+  // 0x1 => “注意右侧来车”
+  // 0x3 => “前方有碰撞风险,因你减缓碰撞”
+  uint32 eth_fctalndcn_ri = 18;
+
+  // 0x01 => “开门!请注意侧后方”
+  uint32 eth_door_openwarn_le_indcn = 19;
+
+  // 0x01 => “开门!请注意侧后方”
+  uint32 eth_door_openwarn_ri_indcn = 20;
+
+  // 0x1 => “前方2公里退出领航驾驶辅助”
+  // 0x2 => “前方500m退出领航驾驶辅助”
+  // 0x3 => “前方200m退出领航驾驶辅助”
+  // 0x4 => “领航驾驶辅助已退出\n车辆将保持在车道内行驶”
+  // 0x5 => “领航驾驶辅助已激活”
+  // 0x6 => “领航驾驶辅助已退出”
+  uint32 eth_asy_noa_distan_msg = 21;
+
+  // 0x1  => “不适合变道”
+  // 0x2  => “请手握方向盘后重试”
+  // 0x4  => “变道取消”
+  // 0x5  => “实线不允许变道”
+  // 0x6  => “环境复杂,变道取消”
+  // 0x7  => “向左超车”
+  // 0x8  => “向右超车”
+  // 0x9  => “汇入主路”
+  // 0xA  => “驶入快车道”
+  // 0xB  => “驶入匝道”
+  // 0xC  => “向左变道”
+  // 0xD  => “向右变道”
+  // 0xE  => “车速过低,无法变道”
+  // 0xF  => “车速过高,无法变道”
+  // 0x10 => “右后方有车,变道取消”
+  // 0x11 => “右前方有车,变道取消”
+  // 0x12 => “左后方有车,变道取消”
+  // 0x13 => “左前方有车,变道取消”
+  // 0x14 => “有车快速接近,变道取消”
+  // 0x15 => “驾驶员接管中,变道已取消”
+  // 0x16 => “反向转向灯已开启,变道取消”
+  // 0x17 => “当前车道线类型不支持变道”
+  // 0x18 => “当前道路宽度不支持变道”
+  // 0x19 => “当前车道线颜色不支持变道”
+  // 0x1A => “前方障碍物,变道已取消”
+  // 0x1B => “等待时间过长,变道已取消”
+  uint32 eth_asy_lan_chg_mesg = 22;
+
+  // 0x1 => “请立即接管”
+  uint32 eth_asy_safe_stop_sts = 23;
+
+  // 0x1 => “请注意前方道路”
+  // 0x2 => “请注视前方道路,关注路况”
+  uint32 eth_asy_eyes_off_warn_rqrd = 24;
+
+  // 0x01 => “前方车辆汇入，请谨慎驾驶”
+  // 0x02 => “请注意并行车辆”
+  // 0x03 => “请注意周边车”
+  // 0x04 => “天气条件受限\n领航驾驶辅助已退出\n车辆将保持在当前行驶车道”
+  // 0x05 => “大雾天气，请谨慎驾驶”
+  // 0x06 => “大雪天气，请谨慎驾驶”
+  // 0x07 => “夜晚行车，请谨慎驾驶”
+  // 0x08 => “前方300米后高清地图未覆盖\n请准备接管”
+  // 0x09 => “前方连续隧道/高精地图受限\n请准备接管”
+  // 0x0A => “跨海桥梁/隧道\n高精地图受限\n请准备接管”
+  // 0x0B => “前方施工，请谨慎驾驶”
+  // 0x0C => “前方事故，请谨慎驾驶”
+  // 0x0D => “前方匝道，领航驾驶辅助将退出\n请准备接管”
+  // 0x0E => “前方道路无法支持领航驾驶辅助\n请准备接管”
+  // 0x0F => “前方急弯，请谨慎驾驶”
+  // 0x12 => “正在避让邻车道卡车”
+  // 0x13 => “正在避让邻车道汽车”
+  // 0x14 => “路况避让已激活”
+  // 0x15 => “路况避让已激活”
+  // 0x16 => “定位信号弱，请准备接管”
+  // 0x17 => “出隧道临近左出口\n请自行变到最右侧车道”
+  // 0x18 => “定位信号弱\n领航驾驶辅助即将退出\n车辆将保持在车道内行驶”
+  // 0x19 => “请注意前方并线车辆”
+  // 0x1A => “导航已重新规划\n领航驾驶辅助已退出\n车辆将保持在车道内行驶”
+  // 0x1B => “前方电子眼测速\n已降低设定车速”
+  // 0x1C => “前方转向\n请准备接管车辆”
+  // 0x1D => “随车流速度调整车速\n请注意道路限速”
+  uint32 eth_asy_noa_remind_mesg = 25;
+
+  // 0x01 => “前车距离过近\n请接管”
+  // 0x02 => “变道窗口较短\n请接管”
+  // 0x03 => “匝道较窄\n请谨慎驾驶”
+  // 0x04 => “邻车道有车\n请谨慎驾驶”
+  // 0x05 => “前方匝道交汇\n请谨慎驾驶”
+  // 0x07 => “前方车道变窄\n请谨慎驾驶”
+  // 0x08 => “前方分岔口\n请谨慎驾驶”
+  // 0x09 => “当前道路复杂\n请准备接管”
+  // 0x0A => “当前道路复杂\n请准备接管”
+  // 0x0B => “前方收费站\n请谨慎驾驶”
+  // 0x0C => “前方300米后高清地图未覆盖\n请准备接管”
+  uint32 eth_asy_noa_takeover_mesg = 26;
+
+  // 0x01 => “定位信号弱\n领航驾驶辅助无法激活”
+  // 0x02 => “导航状态不支持\n领航驾驶辅助无法激活”
+  // 0x07 => “当前高精地图未覆盖\n领航驾驶辅助无法激活”
+  // 0x08 => “前方可行驶距离过短\n领航驾驶辅助无法激活”
+  // 0x0C => “时间未同步\n领航驾驶辅助无法激活”
+  // 0x0D => “前方急弯\n领航驾驶辅助无法激活”
+  // 0x0E => “天气条件受限\n领航驾驶辅助不可用(一个点火周期只报一次)”
+  // 0x10 => “前方可行驶距离过短\n领航驾驶辅助无法激活”
+  uint32 eth_asy_noa_deactvd_reason_mesg = 27;
+
+  // 0x01 => “智能巡航辅助可激活”
+  // 0x02 => “HiSpd: 车速过高无法激活”
+  // 0x03 => “VehToFollwMiss: 前方目标车丢失，无法激活”
+  // 0x04 => “OvrdTiMaxExccd: 长时间超时，无法激活”
+  // 0x05 => “DrvrNotInLoopDetd: 检测到驾驶员未介入”
+  // 0x06 => “请系好安全带后重试”
+  // 0x07 => “请关闭车门/前舱盖/后舱门后重试”
+  // 0x08 => “请切换至D挡后重试”
+  // 0x09 => “SnSrBlkId: 传感器阻塞，无法激活”
+  // 0x0A => “HldTiMaxExccd: 持续时间超时，无法激活”
+  // 0x0C => “请松开电子手刹后重试”
+  // 0x0D => “车速大于15km/h后重试”
+  // 0x10 => “长时间未接管\n当前驾驶周期3分钟内无法激活”
+  // 0x14 => “请开启ESC后重试”
+  // 0x15 => “请关闭HDC陡坡缓降后重试”
+  // 0x16 => “长时间未接管\n当前驾驶周期2分钟内无法激活”(保留值3)
+  // 0x17 => “长时间未接管\n当前驾驶周期1分钟内无法激活”(保留值4)
+  uint32 eth_asy_aut_drv_avl = 28;
+
+  // 0x1 => “智能巡航辅助可以激活”
+  uint32 eth_asy_noa_actv_suggest = 29;
+
+  // 0x1 => “智能巡航辅助已退出”
+  // 0x2 => "未及时接管\n智能巡航辅助已退出"
+  uint32 eth_cncl_warn_for_aut_drv = 30;
+
+  // 0x1 => “车道居中辅助已暂停/停用”
+  uint32 eth_asy_lat_deg_sts = 31;
+
+  // 0x1 => “当前可能为拥堵路段,建议减速，距离1档开启拥堵跟车”
+  // 0x2 => “已进入拥堵区，点按加距距离可退出该模式”
+  // 0x3 => “前方道路分岔，拔杆/转向杆切换行驶线路”
+  // 0x4 => “即将合流，请注意”
+  // 0x5 => “红灯等待”
+  // 0x6 => “绿灯通行”
+  // 0x7 => “黄灯慢行”
+  // 0x8 => “正在避让障碍物”
+  // 0x9 => “正在避让车辆”
+  // 0xA => “正在避让施工”
+  // 0xB => “即将转行”
+  uint32 eth_asy_icc_max_warn_msg = 32;
+
+  // 0x01 => “通勤领航辅助已激活”
+  // 0x02 => “已降级为智能巡航辅助”
+  // 0x03 => “前方200米即将退出通勤领航辅助”
+  // 0x04 => “前方100米(200米开始提示，数值以1米递减)，即将退出通勤领航辅助”
+  // 0x05 => “前方50米(200米开始提示，数值以1米递减)，即将退出通勤领航辅助”
+  uint32 eth_asy_cnoa_crs_actv_msg = 33;
+
+  // 0x01 => “通勤领航辅助无法激活”
+  // 0x02 => “系统异常，通勤领航辅助无法激活”
+  // 0x03 => “系统异常，通勤领航辅助无法激活”
+  // 0x04 => “通勤领航辅助无法激活，请行驶到光线良好的环境”
+  // 0x05 => “通勤领航辅助无法激活，请行驶到可通行区域”
+  // 0x06 => “通勤领航辅助无法激活，请行驶到车道清晰处激活”
+  // 0x07 => “通勤领航辅助无法激活，请行驶到通勤领航辅助路线范围内”
+  // 0x08 => “定位信号弱\n通勤领航辅助无法激活”
+  // 0x09 => “前方可行驶距离过短\n通勤领航辅助无法激活”
+  // 0x0A => “长时间未接管车辆\n当前驾驶周期内不可用”
+  // 0x0B => “前方急弯\n通勤领航辅助无法激活”
+  // 0x0C => “天气原因\n通勤领航辅助暂不可用(一个点火周期只报一次)”
+  // 0x0D => “请切换驾驶模式后重试”
+  // 0x0E => “请关闭车门/前舱盖/后舱门后重试”
+  // 0x0F => “请系好安全带后重试”
+  // 0x10 => “请关闭车门\前舱盖\后背门后重试”
+  // 0x11 => “请切换至D挡后重试”
+  // 0x12 => “请松开电子手刹后重试”
+  // 0x13 => “本次驾驶周期内,不可再次激活”
+  // 0x14 => “请开启ESC后重试”
+  // 0x15 => “请关闭HDC陡坡缓降后重试”
+  uint32 eth_asy_cnoa_crs_actv_faild_msg = 34;
+
+  // 0x01 => “系统异常, 通勤领航辅助已退出\n请立即接管”
+  // 0x02 => “系统异常, 通勤领航辅助已退出\n请立即接管”
+  // 0x03 => “通勤领航辅助已退出\n请行驶到光线良好的环境下”
+  // 0x07 => “已降级为智能巡航辅助”
+  // 0x08 => “通勤领航辅助已退出\n请接管”
+  // 0x09 => “通勤领航辅助已退出\n请接管”
+  // 0x0A => “通勤领航辅助已退出\n请接管”
+  // 0x0B => “通勤领航辅助已暂停\n请控制方向”
+  uint32 eth_asy_cnoa_crs_deactvd_msg = 35;
+
+  // 0x01 => “即将向左变道”
+  // 0x02 => “即将向右变道”
+  // 0x03 => “前方拥堵，建议手动变道”
+  // 0x04 => “前方实线，建议手动变道”
+  // 0x05 => “即将向左超车”
+  // 0x06 => “即将向右超车”
+  // 0x09 => “旁侧有车，变道等待中”
+  // 0x0A => “左侧实线，变道等待中”
+  // 0x0B => “右侧实线，变道等待中”
+  // 0x0C => “变道取消”
+  // 0x0D => “即将驶离主路”
+  // 0x0E => “即将驶入主路”
+  // 0x0F => “请关闭转向灯”
+  // 0x10 => “右后方有车，变道取消”
+  // 0x11 => “右前方有车，变道取消”
+  // 0x12 => “左后方有车，变道取消”
+  // 0x13 => “左前方有车，变道取消”
+  // 0x14 => “车道过窄，无法变道”
+  // 0x15 => “变道取消”
+  // 0x16 => “变道等待中”
+  // 0x17 => “后方车辆靠近，变道取消”
+  // 0x18 => “正在尝试极限变道”
+  // 0x19 => “按导航路线，向左变道”
+  // 0x1A => “按导航路线，向右变道”
+  uint32 eth_asy_cnoa_crs_lan_chg_msg = 36;
+
+  // 0x01 => “正在避让障碍物”
+  // 0x02 => “正在避让大车”
+  // 0x03 => “正在避让车辆”
+  // 0x04 => “正在避让施工”
+  // 0x05 => “即将绕行”
+  uint32 eth_asy_cnoa_crs_offs_msg = 37;
+
+  // 0x01 => “注意行人”
+  // 0x02 => “注意骑行者”
+  // 0x03 => “小心急弯”
+  // 0x04 => “小心施工”
+  // 0x05 => “小心事故”
+  // 0x06 => “请注意前方并线车辆”
+  // 0x07 => “AwareVRU: 请注意行人和非机动车”
+  // 0x08 => “ETC故障，请等待工人/作业员处理”
+  // 0x09 => “环境复杂，请接管”
+  uint32 eth_asy_cnoa_takeover_warn_msg = 38;
+
+  // 0x01  => “前方即将通过路口”
+  // 0x02  => “正在通过路口”
+  // 0x03  => “即将左转”
+  // 0x04  => “即将右转”
+  // 0x05  => “即将掉头”
+  // 0x06  => “即将驶入环岛”
+  // 0x07  => “即将驶离环岛”
+  // 0x09  => “红灯等待”
+  // 0x0A  => “绿灯通行”
+  // 0x0B  => “黄灯慢行”
+  // 0x0C  => “即将红灯”
+  // 0x0D  => “即将绿灯”
+  // 0x0E  => “按 'res' 或踩下加速踏板确认起步”
+  // 0x0F  => “驶入待行区”
+  // 0x10 => “Trafficlight: 请注意红绿灯”
+  uint32 eth_asy_cnoa_crs_cross_intsec_msg = 39;
+
+  // 0x01 => “大雾天气，请谨慎驾驶”
+  // 0x02 => “大雪天气，请谨慎驾驶”
+  // 0x03 => “大雨天气，请谨慎驾驶\n雨水天气，请谨慎驾驶”
+  // 0x04 => “夜晚行车，请谨慎驾驶”
+  // 0x05 => “注意限行”
+  // 0x06 => “请注意，即将通过窄路”
+  // 0x07 => “雨量较大\n建议接管车辆”
+  uint32 eth_asy_cnoa_crs_rmn_msg = 40;
+
+  // 0x01 => “领航驾驶辅助可用,通过方向盘按键激活”
+  uint32 eth_asy_noa_avl_rmn = 41;
+
+  // 0x1 => “全场景领航驾驶辅助可用了,通过方向盘激活”
+  // 0x2 => “请先行驶至开放道路后,便可使用全场景领航驾驶辅助”
+  uint32 eth_asy_d2d_avl_rmn = 42;
+
+  // 0x1 => “前方2km退出全场景领航驾驶辅助”
+  // 0x2 => “前方500m退出全场景领航驾驶辅助”
+  // 0x3 => “前方200m退出全场景领航驾驶辅助”
+  // 0x4 => “全场景领航驾驶辅助已退出\n车辆保持在车道内行驶”
+  // 0x5 => “全场景领航驾驶辅助已激活”
+  // 0x6 => “全场景领航驾驶辅助已退出”
+  uint32 eth_asy_d2d_distan_msg = 43;
+
+  // 0x1 => “正在前往目的地”
+  // 0x2 => “未识别到泊入路线,即将靠边停车”
+  // 0x3 => “匹配到目的地存在可停车位,将为你泊入”
+  // 0x4 => “到达目的地附近,即将靠边停车”
+  uint32 eth_asy_d2d_str_to_end = 44;
+
+  // 0x1 => “全场景领航驾驶辅助无法激活”
+  // 0x2 => “定位信号弱\n全场景领航驾驶辅助无法激活”
+  // 0x3 => “导航状态不支持\n全场景领航驾驶辅助无法激活”
+  // 0x4 => “前方可行驶距离过短\n全场景领航驾驶辅助无法激活”
+  // 0x5 => “时间未同步\n全场景领航驾驶辅助无法激活”
+  // 0x6 => “前方急弯\n全场景领航驾驶辅助无法激活”
+  // 0x7 => “天气条件受限\n全场景领航驾驶辅助不可用\n(一个点火周期内只提醒一次)”
+  uint32 eth_asy_d2d_deactvd_reason_mesg = 45;
+
+  // 0x1 => “自动紧急转向已激活”
+  uint32 eth_asy_aut_emgy_steer_actv = 46;
+
+  // 0x1 => “2公里后即将到达收费站”
+  // 0x2 => “1公里后即将到达收费站”
+  // 0x3 => “500米后即将到达收费站”
+  // 0x4 => “车辆即将驶入收费站，请确认ETC状态”
+  uint32 eth_asy_d2d_etc_distan_msg = 47;
+
+  // 0x1 => “前方施工,即将向左变道”
+  // 0x2 => “前方施工,即将向右变道”
+  // 0x3 => “前方障碍车辆,即将向左变道”
+  // 0x4 => “前方障碍车辆,即将向右变道”
+  // 0x5 => “前方合流路段,即将向左变道”
+  // 0x6 => “前方合流路段,即将向右变道”
+  // 0x7 => “前方大车,即将向左变道”
+  // 0x8 => “前方大车,即将向右变道”
+  // 0x9 => “即将向左避让特殊车辆车辆”
+  // 0xA => “即将向右避让特殊车辆车辆”
+  uint32 eth_asy_d2d_remind_msg = 48;
+}
+
+message PerceptualObstacle {
+  uint32 obs_id = 1; // (原Uint32) 障碍物ID
+  enum ObsType {
+    NO_DISPLAY = 0;
+    CAR = 1;  // 四轮轿车
+    MICROCAR = 2;  // 微型车
+    SUV = 3;
+    MPV = 4;
+    VAN = 5;  // 面包车
+    PICKUP = 6;  // 皮卡
+    POLICE_CAR = 7;  // 警车
+    AMBULANCE = 8;  // 救护车
+    HIGHWAY_RESCUE = 9;  // 高速救险车
+    FORKLIFT = 10;  // 小型货种车（叉车）
+    ROAD_ROLLER = 11;  // 地辗车
+    TRAILER = 12;  // 挂车
+    BOX_TRUCK_SMALL = 13;  // 箱式卡车-小（< 6M）
+    BOX_TRUCK_MEDIUM = 14;  // 箱式卡车-中（6M-10M）
+    BOX_TRUCK_LARGE = 15;  // 箱式卡车-大（> 10M）
+    FLAT_TRUCK_SMALL = 16;  // 板式货车-小（< 6M）
+    FLAT_TRUCK_MEDIUM = 17;  // 板式货车-中（6M-10M）
+    FLAT_TRUCK_LARGE = 18;  // 板式货车-大（> 10M）
+    MINIBUS = 19;  // 公交（小巴）
+    BIGBUS = 20;  // 大巴
+    SCHOOL_BUS = 21;  // 校车
+    SPECIAL_VEHICLE = 22;  // 特种车
+    TANKER_TRUCK = 23;  // 油罐车
+    FIRE_TRUCK = 24;  // 消防车
+    GARBAGE_TRUCK = 25;  // 垃圾清运车
+    SPRINKLER_TRUCK = 26;  // 洒水车
+    ROAD_SWEEPER = 27;  // 清扫车
+    UNKNOWN_SIDE_CAR = 28;  // 未知侧翻车辆、异形车等
+    ADULT = 29;  // 成人
+    CHILD = 30;  // 儿童
+    POLICE = 31;  // 穿警服的人
+    STROLLER = 32;  // 人推婴儿车
+    SHOPPING_CART = 33;  // 人推购物车
+    WHEELCHAIR = 34;  // 人坐轮椅
+    BIKE_RIDER = 35;  // 人骑滑板车
+    CYCLIST = 36;  // 人骑自行车
+    MOTORCYCLIST = 37;  // 人骑摩托车
+    POLICE_SCOOTER = 38;  // 警用摩托
+    DELIVERY_RIDER = 39;  // 外卖员
+    TRICYCLE_RIDER = 40;  // 人骑带斗三轮车
+    TRICYCLE_BOX_RIDER = 41;  // 人骑带箱三轮车
+    CAT = 42;  // 猫
+    DOG = 43;  // 狗
+    COW = 44;  // 牛
+    SHEEP = 45;  // 羊
+    HORSE = 46;  // 马
+    NORMAL_CONE = 47;  // 锥桶
+    PILLAR_CONE = 48;  // 防撞桶
+    BUCKET = 49;  // 圆桩桶
+    WATER_BARRIER = 50;  // 水马
+    SPEEDBUMP = 51;  // 减速带
+    STONE_CONE = 52;  // 水泥墩
+    RAILING = 53;  // 护栏
+    WELL_COVER = 54;  // 井盖
+    STREET_LAMP = 55;  // 路灯
+    CONSTRUCTION_SIGN = 56;  // 施工牌
+    TRICONE = 57;  // 三角牌
+    PARK_WARNING_SIGN = 58;  // 禁停牌
+    TRAFFIC_LIGHT = 59;  // 红绿灯（灯头）（颜色和形状）
+    TRASH_BIN = 60;  // 垃圾桶
+    BABY_CAR = 61;  // 婴儿车BOX
+    SHOPPING_CAR = 62;  // 购物车
+    BICYCLE = 63;  // 自行车
+    SCOOTER = 64;  // 摩托车
+    BOX_TRICYCLE = 65;  // 带箱三轮车
+    SEMI_TRICYCLE = 66;  // 带斗三轮车
+    BARRIER_GATE_CLOSE = 67;  // 打开的收费杆
+    BARRIER_GATE_OPEN = 68;  // 关闭的收费杆
+    ETC = 69;
+    LOW_OBSTACLE_BOX = 70;  // 低矮障碍物-箱子
+    LOSE_TIRE = 71;  // 掉落的轮胎
+    FERRIS_WHEEL = 72;  // 摩天轮
+    SAME_BRAND_CAR = 73;  // 同品牌车
+    GENERAL_OBSTACLE = 74;  // 通用障碍物
+    SQUARE_PILLAR = 75;  // 方柱（方柱圆柱）
+    WALL = 76;
+    POTHOLE = 77;  // 坑洼
+    CHARGING_PILE = 78;  // 充电桩
+    STANDARD_POLE = 79;  // 标准杆
+    CAR_PARKED = 80;  // 四轮轿车 - 在车位
+    MICROCAR_PARKED = 81;  // 微型车 - 在车位
+    SUV_PARKED = 82;
+    MPV_PARKED = 83;
+    VAN_PARKED = 84;
+    PICKUP_PARKED = 85;
+    SPEEDBUMP_PARKED = 86;
+    POLICE_CAR_PARKED = 87;
+    AMBULANCE_PARKED = 88;
+    HIGHWAY_RESCUE_PARKED = 89;
+    FORKLIFT_PARKED = 90;
+    ROAD_ROLLER_PARKED = 91;
+    TRAILER_PARKED = 92;
+    BOX_TRUCK_SMALL_PARKED = 93;
+    BOX_TRUCK_MEDIUM_PARKED = 94;
+    BOX_TRUCK_LARGE_PARKED = 95;
+    FLAT_TRUCK_SMALL_PARKED = 96;
+    FLAT_TRUCK_MEDIUM_PARKED = 97;
+    FLAT_TRUCK_LARGE_PARKED = 98;
+    MINIBUS_PARKED = 99;
+    BIGBUS_PARKED = 100;
+    SCHOOL_BUS_PARKED = 101;
+    SPECIAL_VEHICLE_PARKED = 102;
+    TANKER_PARKED = 103;
+    FIRE_TRUCK_PARKED = 104;
+    GARBAGE_TRUCK_PARKED = 105;
+    SPRINKLER_TRUCK_PARKED = 106;
+    ROAD_SWEEPER_PARKED = 107;
+    UNKNOWN_SIDE_CAR_PARKED = 108;
+  }
+  ObsType obs_type = 2; // (原Uint8) 障碍物类型
+  GeneralPosn obs_posn = 3; // (原GeneralPosn) 障碍物坐标
+  SelfHeadingAg obs_heading = 4; // (原SelfHeadingAg) 航向
+  enum ObsLi {
+    OBJ_LIGHT_NO_DISPLAY = 0; // No display
+    LEFT = 1;                 // Left
+    RIGHT = 2;                // Right
+    BRAKE = 3;                // Brake
+    LEFT_AND_RIGHT = 4;       // Left and Right
+    LEFT_AND_BRAKE = 5;       // Left and Brake
+    RIGHT_AND_BRAKE = 6;      // Right and Brake
+    LEFT_RIGHT_AND_BRAKE = 7; // Left, Right, and Brake
+  };
+  ObsLi obs_li = 5; // (原Uint8) 他车车灯状态
+  uint32 obs_door = 6; // (原Uint8) 他车车门状态
+  enum ObsColor {
+    WHITE = 0;            // White
+    BLUE = 1;             // Blue
+    YELLOW = 2;           // Yellow
+    RED = 3;              // Red
+    GREY = 4;             // Grey
+    TRANSPARENT = 5;      // Transparent
+    RED_OBJECT_LEFT = 6;  // Red: object + left marker line
+    RED_OBJECT_RIGHT = 7; // Red: object + right marker line
+  };
+  ObsColor obs_color = 7; // (原Uint8) 车颜色
+  enum ObsSpdOfPed {
+    DEFAULT = 0;
+    LOW_SPEED = 1; // 
+    MEDIUM_SPEED = 2; //
+    HIGHT_SPEED = 3; //
+    RESERVED1 = 4; //
+  };
+  ObsSpdOfPed obs_spd_of_ped = 8; // (原Uint8) 行人/摩托车速度档位
+  ObsSize obs_size = 9; // (原ObsSize) 目标宽高
+  ObsSpd obs_spd = 10; // (原ObsSpd) 目标运动速度
+  ObsAcce obs_acce = 11; // (原ObsAcce) 目标加速度
+  uint32 ti_stamp = 12; // (原Uint32) 时间戳(UTC)
+  uint32 class_confidence = 13; // (原Uint8) 分类置信度
+}
+
+// 预留: 数据定义暂时比较混乱，无法实现
+message ObsSize {
+  uint32 height = 1;  // 物体高度
+  uint32 length = 2;  // 物体长度
+  uint32 length_std_dev = 3;  // 长度标准差
+  uint32 width = 4;  // 物体宽度（最近朝向一侧的宽度）
+  uint32 width_std_dev = 5;  // 物体宽度的标准差
+}
+// 预留: 数据定义暂时比较混乱，无法实现
+message ObsSpd {
+  uint32 lat_velocity = 1;  // 物体在参考坐标系中的横向速度
+  uint32 lat_velocity_std_dev = 2;  // 横向速度标准差
+  uint32 long_velocity = 3;  // 物体在参考坐标系中的纵向速度
+  uint32 long_velocity_std_dev = 4;  // 纵向速度标准差
+}
+// 预留: 数据定义暂时比较混乱，无法实现
+message ObsAcce {
+  uint32 long_acceleration = 1;  // 物体在参考坐标系中的纵向加速度
+  uint32 long_acceleration_std_dev = 2;  // 纵向加速度标准差
+}
+
+message PerceptualSlot {
+  uint32 prkg_slot_id = 1;  // 车位ID
+  PrkgSlotTyp prkg_slot_typ = 2;  // 车位类型
+  PrkgSlotBounding prkg_slot_bounding = 3;  // 车位四个顶点坐标
+  PrkgSlotSt prkg_slot_st = 4;  // 车位状态
+  SlotCod prkg_slot_cod = 5;  // 停车车位编号
+}
+
+message PrkgSlotTyp {
+  uint32 prkg_slot_typ_info = 1;  // 车位类型
+  uint32 prkg_slot_yaw_ag = 2;  // 车位相对车角角度（偏航）
+  uint32 prkg_slot_roll_ag = 3;  // 车位相对车角角度（横滚）
+  uint32 prkg_slot_pitch_ag = 4;  // 车位相对车角角度（俯仰）
+  uint32 prkg_slot_typ_element = 5;  // 车位固定元素
+}
+
+message PrkgSlotBounding {
+  GeneralPosn prkg_slot_start = 1;  // 车位四个顶点坐标起点
+  GeneralPosn prkg_slot_end = 2;  // 车位四个顶点坐标终点
+  GeneralPosn prkg_slot_start_rear = 3;  // 车位后部起点
+  GeneralPosn prkg_slot_end_rear = 4;  // 车位后部终点
+}
+
+message PrkgSlotSt {
+  uint32 prkg_slot_sts = 1;  // 车位状态
+  uint32 prkg_slot_number = 2;  // 车位推荐等级编号
+}
+
+message SlotCod {
+  uint32 slot_cod_1 = 1;
+  uint32 slot_cod_2 = 2;
+  uint32 slot_cod_3 = 3;
+  uint32 slot_cod_4 = 4;
+  uint32 slot_cod_5 = 5;
+}
+
+message PrkgLaneMarking {
+  uint32 prkg_lane_sts = 1;  // 当前点标记状态
+  uint32 prkg_lane_x = 2;  // 点位坐标 X
+  uint32 prkg_lane_y = 3;  // 点位坐标 Y
+  uint32 prkg_lane_z = 4;  // 点位坐标 Z
+}
+
+message PrkgTraceDot {
+  uint32 prkg_trace_dot_sts = 1;  // 点位状态
+  uint32 prkg_trace_dot_x = 2;  // 点位坐标 X
+  uint32 prkg_trace_dot_y = 3;  // 点位坐标 Y
+}
+
+enum EthADCtrlMode {
+  CTRL_MODE_DEFAULT = 0;
+  CTRL_MODE_HWA = 1; // lcc
+  CTRL_MODE_NOA = 2; // nca
+  CTRL_MODE_CNOA = 3; // 暂时不用
+}

@@ -1,0 +1,246 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "pd_report_info_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["pd_report_info.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "pd_report_info_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":pd_report_info_proto",
+    ],
+)
+
+python_proto_library(
+    name = "pd_report_info_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":pd_report_info_proto",
+    ],
+)
+
+proto_library(
+    name = "system_checklist_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["system_checklist.proto"],
+    deps = [
+        "//proto/common:module_status_proto",
+        "//proto/common:error_code_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "system_checklist_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":system_checklist_proto",
+    ],
+)
+
+python_proto_library(
+    name = "system_checklist_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":system_checklist_proto",
+    ],
+)
+
+proto_library(
+    name = "dtu_data_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["dtu_data.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "dtu_data_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":dtu_data_proto",
+    ],
+)
+
+python_proto_library(
+    name = "dtu_data_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":dtu_data_proto",
+    ],
+)
+
+proto_library(
+    name = "debug_info_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["debug_info.proto"],
+    deps = [
+        "//proto/drapi:operation_status_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "debug_info_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":debug_info_proto",
+    ],
+)
+
+python_proto_library(
+    name = "debug_info_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":debug_info_proto",
+    ],
+)
+
+proto_library(
+    name = "report_event_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["report_event.proto"],
+    deps = [
+        "//proto/drapi:operation_status_proto",
+        "//proto/drapi:base_proto",
+        "//proto/safety:safety_analysis_proto",
+        "//proto/planning:planning_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "report_event_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":report_event_proto",
+    ],
+)
+
+python_proto_library(
+    name = "report_event_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":report_event_proto",
+    ],
+)
+
+proto_library(
+    name = "dtu_event_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["dtu_event.proto"],
+    deps = [
+        "//proto/drdtu:dtu_data_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "dtu_event_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":dtu_event_proto",
+    ],
+)
+
+python_proto_library(
+    name = "dtu_event_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":dtu_event_proto",
+    ],
+)
+
+proto_library(
+    name = "navigation_data_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["navigation_data.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "navigation_data_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":navigation_data_proto",
+    ],
+)
+
+python_proto_library(
+    name = "navigation_data_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":navigation_data_proto",
+    ],
+)
+
+proto_library(
+    name = "dtu_command_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["dtu_command.proto"],
+    deps = [
+        "//proto/drdtu:dtu_data_proto",
+        "//proto/routing:routing_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "dtu_command_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":dtu_command_proto",
+    ],
+)
+
+python_proto_library(
+    name = "dtu_command_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":dtu_command_proto",
+    ],
+)
+
+proto_library(
+    name = "amap_display_route_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["amap_display_route.proto"],
+    deps = [
+        "//proto/map:amap_drive_route_planning_proto",
+        "//proto/common:geometry_proto",
+        "//proto/drapi:business_info_proto",
+        "//proto/drapi:command_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "amap_display_route_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":amap_display_route_proto",
+    ],
+)
+
+python_proto_library(
+    name = "amap_display_route_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":amap_display_route_proto",
+    ],
+)
+

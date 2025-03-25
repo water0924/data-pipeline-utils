@@ -1,0 +1,97 @@
+syntax = "proto3";
+package havp;
+
+import "drapi/gwm/havp/havp_common.proto";
+
+// 具体车辆处于哪个阶段，需要通过SOMEIP接口获取
+message AVPVehicleData {
+  double timestamp = 1; // 微秒时间戳 (1587364593.061575)
+  APA apa = 2; // APA过程中的还原世界
+  HAVPMapping havp_mapping = 3; // HAVP建图（记忆泊车建图）过程中的还原世界
+  HAVPCruise havp_cruise = 4; // HAVP巡航（记忆泊车建图）过程中的还原世界
+  RADS rads = 5; // RADS（倒车循迹）过程中的还原世界
+  SVPCruise svp_cruise = 6; // SVP巡航过程中的还原世界
+  HAVPNavi havp_navi = 7; // HAVP导航数据
+}
+
+message APA {
+  float left_path_distance = 1; // 剩余泊车距离 (单位m,精确到小数点后1位), 支持 APA
+  PAS pas = 2; // 雷达障碍物位置
+  repeated ParkingSpace parking_space = 3; // 停车位（局部坐标）
+  repeated ObjectDetectionObstacle obstacles = 4; // 障碍物识别
+  repeated Point planning_trajectory = 5; // 规划轨迹 (自车坐标 轨迹点集)
+  Location location = 6; // 车辆所在的位置（在全局路径上的位置）
+  repeated WallElement wall_element = 7; // 墙壁点集显示
+  repeated SignlineVertical sign_line_vertical = 8; // 纵向标线集合
+  repeated SignPolygon sign_polygon = 9; // 面状标识集合
+}
+
+message HAVPMapping {
+  Location location = 1; // 车辆所在的位置（在全局路径上的位置）
+  PAS pas = 2; // 雷达障碍物位置
+  int32 total_learn_distance = 3; // 建图阶段，已学习的距离 (单位m，精确到整数位)
+  int32 road_bump_times = 4; // 通过减速带次数
+  repeated ParkingSpace parking_space = 5; // 车位的占用状态
+  repeated ObjectDetectionObstacle obstacles = 6; // 障碍物识别
+  repeated Point mapping_trajectory = 7; // 建图过程中，车走过的轨迹
+  float left_path_distance = 8; // 剩余泊车距离 (单位m,精确到小数点后1位), APA建图
+  repeated Point planning_trajectory = 9; // APA泊车过程中，规划的泊车轨迹 (轨迹点集)
+  repeated WallElement wall_element = 10; // 墙壁点集显示
+  repeated SignlineVertical sign_line_vertical = 11; // 纵向标线集合
+  repeated SignPolygon sign_polygon = 12; // 面状标识集合
+}
+
+message HAVPCruise {
+  Location location = 1; // 车辆所在的位置（在全局路径上的位置）
+  PAS pas = 2; // 雷达障碍物位置
+  int32 distance_left = 3; // 巡航阶段剩余距离 0-3.40E+38(单位m，精确到整数位)
+  int32 odm = 4; // 巡航阶段，本次使用过程中已经走过的距离
+  int32 around_person_times = 5; // 巡航阶段，本次使用过程中避让行人次数
+  int32 around_obstacle_times = 6; // 巡航阶段，本次使用过程中绕障次数
+  repeated ObjectDetectionObstacle obstacles = 7; // 障碍物信息
+  repeated Point planning_trajectory = 8; // 局部规划轨迹 (轨迹点集)
+  int32 is_display_the_Upstairs_and_Downstairs_page = 9; // 0代表平地 1代表上坡 2代表下坡
+  repeated ParkingSpace parking_space = 10; // 巡航和泊车阶段使用信息不同
+  int32 road_bump_times = 11; // 通过减速带次数
+  float left_path_distance = 13; // 剩余泊车距离 (单位m,精确到小数点后1位), APA建图
+  repeated WallElement wall_element =14 ;//墙壁点集显示
+  repeated SignlineVertical sign_line_vertical = 15;//纵向标线集合
+  repeated SignPolygon sign_polygon = 16;// 面状标识集合
+}
+
+message SVPCruise {
+  Location location = 1; // 车辆所在的位置（在全局路径上的位置）
+  PAS pas = 2; // 雷达障碍物位置
+  int32 distance_left = 3; // 巡航阶段剩余距离 0-3.40E+38(单位m，精确到整数位)
+  int32 odm = 4; // 巡航阶段，本次使用过程中已经走过的距离
+  int32 around_person_times = 5; // 巡航阶段，本次使用过程中避让行人次数
+  int32 around_obstacle_times = 6; // 巡航阶段，本次使用过程中绕障次数
+  repeated ObjectDetectionObstacle obstacles = 7; // 障碍物信息
+  repeated Point planning_trajectory = 8; // 规划轨迹 (轨迹点集)
+  int32 is_display_the_Upstairs_and_Downstairs_page = 9; // 0代表平地 1代表上坡 2代表下坡
+  repeated ParkingSpace parking_space = 10; // 巡航和泊车阶段使用信息不同
+  int32 road_bump_times = 11; // 通过减速带次数
+  float left_path_distance = 13; // 剩余泊车距离 (单位m,精确到小数点后1位), APA建图
+  repeated WallElement wall_element = 14 ;//墙壁点集显示
+  repeated SignlineVertical sign_line_vertical = 15;//纵向标线集合
+  repeated SignPolygon sign_polygon = 16;// 面状标识集合
+}
+
+message RADS {
+  Location location = 1; // 车辆所在停车场信息（在全局路径上的位置）
+  PAS pas = 2; // 雷达障碍物位置
+  float distance_left = 3; // 循迹倒车剩余距离 (单位m)
+  repeated Point planning_trajectory = 4; // 规划轨迹 (轨迹点集)
+  repeated ParkingSpace parking_space = 5; // 停车位
+  repeated ObjectDetectionObstacle obstacles = 6; // 障碍物识别
+  repeated WallElement wall_element = 7; // 墙壁点集显示
+  repeated SignlineVertical sign_line_vertical = 8; // 纵向标线集合
+  repeated SignPolygon sign_polygon = 9; // 面状标识集合
+}
+
+message HAVPNavi {
+  Location location = 1; // 车辆所在的位置（在全局路径上的位置）
+  int32 distance_left = 2; // 剩余距离(单位m，精确到整数位)
+  int32 odm = 3; // 本次使用过程中已经走过的距离
+  HAVPNaviTips tips = 4; // 导航提示
+}
