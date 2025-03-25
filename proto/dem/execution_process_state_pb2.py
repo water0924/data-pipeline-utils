@@ -15,13 +15,22 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!dem/execution_process_state.proto\x12\rdeeproute.dem\"c\n\x15\x45xecutionProcessState\x12\x16\n\x0e\x65xecution_name\x18\x01 \x01(\t\x12\x32\n\rprocess_state\x18\x02 \x01(\x0e\x32\x1b.deeproute.dem.ProcessState*4\n\x0cProcessState\x12\t\n\x05START\x10\x00\x12\x0c\n\x08SHUTDOWN\x10\x01\x12\x0b\n\x07RESTART\x10\x02')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!dem/execution_process_state.proto\x12\rdeeproute.dem\"c\n\x15\x45xecutionProcessState\x12\x16\n\x0e\x65xecution_name\x18\x01 \x01(\t\x12\x32\n\rprocess_state\x18\x02 \x01(\x0e\x32\x1b.deeproute.dem.ProcessState*4\n\x0cProcessState\x12\t\n\x05START\x10\x00\x12\x0c\n\x08SHUTDOWN\x10\x01\x12\x0b\n\x07RESTART\x10\x02*\x8f\x01\n\x0e\x45xecutionState\x12\x08\n\x04kOff\x10\x00\x12\x11\n\rkInitializing\x10\x01\x12\x0f\n\x0bkInitFailed\x10\x02\x12\x0c\n\x08kRunning\x10\x03\x12\x11\n\rkAbnormalExit\x10\x04\x12\x0f\n\x0bkNormalExit\x10\x05\x12\x1d\n\x19kAbnormalExitWhenShutdown\x10\x06')
 
 _PROCESSSTATE = DESCRIPTOR.enum_types_by_name['ProcessState']
 ProcessState = enum_type_wrapper.EnumTypeWrapper(_PROCESSSTATE)
+_EXECUTIONSTATE = DESCRIPTOR.enum_types_by_name['ExecutionState']
+ExecutionState = enum_type_wrapper.EnumTypeWrapper(_EXECUTIONSTATE)
 START = 0
 SHUTDOWN = 1
 RESTART = 2
+kOff = 0
+kInitializing = 1
+kInitFailed = 2
+kRunning = 3
+kAbnormalExit = 4
+kNormalExit = 5
+kAbnormalExitWhenShutdown = 6
 
 
 _EXECUTIONPROCESSSTATE = DESCRIPTOR.message_types_by_name['ExecutionProcessState']
@@ -37,6 +46,8 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _PROCESSSTATE._serialized_start=153
   _PROCESSSTATE._serialized_end=205
+  _EXECUTIONSTATE._serialized_start=208
+  _EXECUTIONSTATE._serialized_end=351
   _EXECUTIONPROCESSSTATE._serialized_start=52
   _EXECUTIONPROCESSSTATE._serialized_end=151
 # @@protoc_insertion_point(module_scope)

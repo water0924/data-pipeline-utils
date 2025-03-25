@@ -14,7 +14,7 @@ message ODDSection {
 
 //一条路线上的ODD匹配信息
 message ODDPathInfo {
-  int32 path_id = 1;
+  uint64 path_id = 1;
   int32 match_status = 2;  //匹配状态，0 成功， 其他 不成功
   repeated ODDSection odd_sections = 3;
 }

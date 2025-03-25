@@ -15,12 +15,14 @@ _sym_db = _symbol_database.Default()
 from proto.drapi import operation_status_pb2 as drapi_dot_operation__status__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16\x64rdtu/debug_info.proto\x12\x06\x64r.blc\x1a\x1c\x64rapi/operation_status.proto\"n\n\x0c\x42lcDebugInfo\x12,\n\nnavigation\x18\x01 \x01(\x0b\x32\x18.dr.blc.NavigationNotify\x12\x30\n\x10speed_limit_info\x18\x02 \x01(\x0b\x32\x16.dr.blc.SpeedLimitInfo\")\n\x0eSpeedLimitInfo\x12\x17\n\x0fuse_model_speed\x18\x01 \x01(\x08\"\xd6\x02\n\x10NavigationNotify\x12\x14\n\x0ctimestamp_ms\x18\x01 \x01(\x04\x12@\n\x12nca_passive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.NCAPassiveReason\x12/\n\x0bpreview_cmd\x18\x03 \x01(\x0b\x32\x1a.dr.blc.PreviewCommandInfo\x12/\n\x0b\x65xecute_cmd\x18\x04 \x01(\x0b\x32\x1a.dr.blc.ExecuteCommandInfo\x12\x37\n\rrealtime_navi\x18\x05 \x01(\x0b\x32 .dr.blc.RealTimeNavigationStatus\x12,\n\nlor_status\x18\x06 \x01(\x0b\x32\x18.dr.blc.LockOnRoadStatus\x12!\n\x08odd_info\x18\x07 \x01(\x0b\x32\x0f.dr.blc.OddInfo\"x\n\x12PreviewCommandInfo\x12\x34\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32%.dr.blc.PreviewCommandInfo.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"x\n\x12\x45xecuteCommandInfo\x12\x34\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32%.dr.blc.ExecuteCommandInfo.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x84\x01\n\x18RealTimeNavigationStatus\x12:\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32+.dr.blc.RealTimeNavigationStatus.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"t\n\x10LockOnRoadStatus\x12\x32\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32#.dr.blc.LockOnRoadStatus.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"b\n\x07OddInfo\x12)\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32\x1a.dr.blc.OddInfo.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16\x64rdtu/debug_info.proto\x12\x06\x64r.blc\x1a\x1c\x64rapi/operation_status.proto\"\xc3\x01\n\x0c\x42lcDebugInfo\x12,\n\nnavigation\x18\x01 \x01(\x0b\x32\x18.dr.blc.NavigationNotify\x12\x30\n\x10speed_limit_info\x18\x02 \x01(\x0b\x32\x16.dr.blc.SpeedLimitInfo\x12\'\n\x0blane_change\x18\x03 \x01(\x0b\x32\x12.dr.blc.Lanechange\x12*\n\x08snow_day\x18\x04 \x01(\x0b\x32\x18.dr.blc.SnowyDayModeInfo\")\n\x0eSpeedLimitInfo\x12\x17\n\x0fuse_model_speed\x18\x01 \x01(\x08\"\'\n\nLanechange\x12\x19\n\x11\x66orce_lane_change\x18\x01 \x01(\x08\"6\n\x10SnowyDayModeInfo\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x0f\n\x07is_snow\x18\x02 \x01(\x08\"\xd6\x02\n\x10NavigationNotify\x12\x14\n\x0ctimestamp_ms\x18\x01 \x01(\x04\x12@\n\x12nca_passive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.NCAPassiveReason\x12/\n\x0bpreview_cmd\x18\x03 \x01(\x0b\x32\x1a.dr.blc.PreviewCommandInfo\x12/\n\x0b\x65xecute_cmd\x18\x04 \x01(\x0b\x32\x1a.dr.blc.ExecuteCommandInfo\x12\x37\n\rrealtime_navi\x18\x05 \x01(\x0b\x32 .dr.blc.RealTimeNavigationStatus\x12,\n\nlor_status\x18\x06 \x01(\x0b\x32\x18.dr.blc.LockOnRoadStatus\x12!\n\x08odd_info\x18\x07 \x01(\x0b\x32\x0f.dr.blc.OddInfo\"x\n\x12PreviewCommandInfo\x12\x34\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32%.dr.blc.PreviewCommandInfo.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"x\n\x12\x45xecuteCommandInfo\x12\x34\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32%.dr.blc.ExecuteCommandInfo.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x84\x01\n\x18RealTimeNavigationStatus\x12:\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32+.dr.blc.RealTimeNavigationStatus.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"t\n\x10LockOnRoadStatus\x12\x32\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32#.dr.blc.LockOnRoadStatus.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"b\n\x07OddInfo\x12)\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32\x1a.dr.blc.OddInfo.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x62\x06proto3')
 
 
 
 _BLCDEBUGINFO = DESCRIPTOR.message_types_by_name['BlcDebugInfo']
 _SPEEDLIMITINFO = DESCRIPTOR.message_types_by_name['SpeedLimitInfo']
+_LANECHANGE = DESCRIPTOR.message_types_by_name['Lanechange']
+_SNOWYDAYMODEINFO = DESCRIPTOR.message_types_by_name['SnowyDayModeInfo']
 _NAVIGATIONNOTIFY = DESCRIPTOR.message_types_by_name['NavigationNotify']
 _PREVIEWCOMMANDINFO = DESCRIPTOR.message_types_by_name['PreviewCommandInfo']
 _PREVIEWCOMMANDINFO_ATTRSENTRY = _PREVIEWCOMMANDINFO.nested_types_by_name['AttrsEntry']
@@ -45,6 +47,20 @@ SpeedLimitInfo = _reflection.GeneratedProtocolMessageType('SpeedLimitInfo', (_me
   # @@protoc_insertion_point(class_scope:dr.blc.SpeedLimitInfo)
   })
 _sym_db.RegisterMessage(SpeedLimitInfo)
+
+Lanechange = _reflection.GeneratedProtocolMessageType('Lanechange', (_message.Message,), {
+  'DESCRIPTOR' : _LANECHANGE,
+  '__module__' : 'drdtu.debug_info_pb2'
+  # @@protoc_insertion_point(class_scope:dr.blc.Lanechange)
+  })
+_sym_db.RegisterMessage(Lanechange)
+
+SnowyDayModeInfo = _reflection.GeneratedProtocolMessageType('SnowyDayModeInfo', (_message.Message,), {
+  'DESCRIPTOR' : _SNOWYDAYMODEINFO,
+  '__module__' : 'drdtu.debug_info_pb2'
+  # @@protoc_insertion_point(class_scope:dr.blc.SnowyDayModeInfo)
+  })
+_sym_db.RegisterMessage(SnowyDayModeInfo)
 
 NavigationNotify = _reflection.GeneratedProtocolMessageType('NavigationNotify', (_message.Message,), {
   'DESCRIPTOR' : _NAVIGATIONNOTIFY,
@@ -141,30 +157,34 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _LOCKONROADSTATUS_ATTRSENTRY._serialized_options = b'8\001'
   _ODDINFO_ATTRSENTRY._options = None
   _ODDINFO_ATTRSENTRY._serialized_options = b'8\001'
-  _BLCDEBUGINFO._serialized_start=64
-  _BLCDEBUGINFO._serialized_end=174
-  _SPEEDLIMITINFO._serialized_start=176
-  _SPEEDLIMITINFO._serialized_end=217
-  _NAVIGATIONNOTIFY._serialized_start=220
-  _NAVIGATIONNOTIFY._serialized_end=562
-  _PREVIEWCOMMANDINFO._serialized_start=564
-  _PREVIEWCOMMANDINFO._serialized_end=684
-  _PREVIEWCOMMANDINFO_ATTRSENTRY._serialized_start=640
-  _PREVIEWCOMMANDINFO_ATTRSENTRY._serialized_end=684
-  _EXECUTECOMMANDINFO._serialized_start=686
-  _EXECUTECOMMANDINFO._serialized_end=806
-  _EXECUTECOMMANDINFO_ATTRSENTRY._serialized_start=640
-  _EXECUTECOMMANDINFO_ATTRSENTRY._serialized_end=684
-  _REALTIMENAVIGATIONSTATUS._serialized_start=809
-  _REALTIMENAVIGATIONSTATUS._serialized_end=941
-  _REALTIMENAVIGATIONSTATUS_ATTRSENTRY._serialized_start=640
-  _REALTIMENAVIGATIONSTATUS_ATTRSENTRY._serialized_end=684
-  _LOCKONROADSTATUS._serialized_start=943
-  _LOCKONROADSTATUS._serialized_end=1059
-  _LOCKONROADSTATUS_ATTRSENTRY._serialized_start=640
-  _LOCKONROADSTATUS_ATTRSENTRY._serialized_end=684
-  _ODDINFO._serialized_start=1061
-  _ODDINFO._serialized_end=1159
-  _ODDINFO_ATTRSENTRY._serialized_start=640
-  _ODDINFO_ATTRSENTRY._serialized_end=684
+  _BLCDEBUGINFO._serialized_start=65
+  _BLCDEBUGINFO._serialized_end=260
+  _SPEEDLIMITINFO._serialized_start=262
+  _SPEEDLIMITINFO._serialized_end=303
+  _LANECHANGE._serialized_start=305
+  _LANECHANGE._serialized_end=344
+  _SNOWYDAYMODEINFO._serialized_start=346
+  _SNOWYDAYMODEINFO._serialized_end=400
+  _NAVIGATIONNOTIFY._serialized_start=403
+  _NAVIGATIONNOTIFY._serialized_end=745
+  _PREVIEWCOMMANDINFO._serialized_start=747
+  _PREVIEWCOMMANDINFO._serialized_end=867
+  _PREVIEWCOMMANDINFO_ATTRSENTRY._serialized_start=823
+  _PREVIEWCOMMANDINFO_ATTRSENTRY._serialized_end=867
+  _EXECUTECOMMANDINFO._serialized_start=869
+  _EXECUTECOMMANDINFO._serialized_end=989
+  _EXECUTECOMMANDINFO_ATTRSENTRY._serialized_start=823
+  _EXECUTECOMMANDINFO_ATTRSENTRY._serialized_end=867
+  _REALTIMENAVIGATIONSTATUS._serialized_start=992
+  _REALTIMENAVIGATIONSTATUS._serialized_end=1124
+  _REALTIMENAVIGATIONSTATUS_ATTRSENTRY._serialized_start=823
+  _REALTIMENAVIGATIONSTATUS_ATTRSENTRY._serialized_end=867
+  _LOCKONROADSTATUS._serialized_start=1126
+  _LOCKONROADSTATUS._serialized_end=1242
+  _LOCKONROADSTATUS_ATTRSENTRY._serialized_start=823
+  _LOCKONROADSTATUS_ATTRSENTRY._serialized_end=867
+  _ODDINFO._serialized_start=1244
+  _ODDINFO._serialized_end=1342
+  _ODDINFO_ATTRSENTRY._serialized_start=823
+  _ODDINFO_ATTRSENTRY._serialized_end=867
 # @@protoc_insertion_point(module_scope)

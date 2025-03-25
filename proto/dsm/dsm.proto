@@ -272,3 +272,9 @@ enum SmartSMStates {
 message SmartSM { // topic: /dsm/smart_sm_state
   SmartSMStates state = 1;
 }
+
+// topic: /dsm/topic_supervison_status, 1Hz
+message TopicSupervisionStatus {
+  int64 state_change_time_ms = 1; // 最近状态变化的管理面时间ms
+  map<string, bool> module_topic_ready_status = 2;  // key: module_name, value: is_ready
+}

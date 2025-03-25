@@ -14,10 +14,21 @@ import "drapi/operation_status.proto";
 message BlcDebugInfo {
   NavigationNotify navigation = 1;      //导航相关信息
   SpeedLimitInfo speed_limit_info = 2;  //限速相关信息
+  Lanechange lane_change = 3; //变道相关信息  
+  SnowyDayModeInfo snow_day= 4; //雪天模式
 }
 
 message SpeedLimitInfo {
   bool use_model_speed = 1;  //是否使用模型限速
+}
+
+message Lanechange {
+  bool force_lane_change = 1;  //是否允许非强制变道，true, 允许非强制变道，false 不允许非强制变道
+}
+
+message SnowyDayModeInfo {
+  bool is_active = 1; //雪天模式是否生效，true, 雪天模式生效中，false, 不处于雪天模式
+  bool is_snow = 2; //是否道路积雪
 }
 
 // blc接收map/hut导航相关信息的所有业务逻辑处理的关联数据

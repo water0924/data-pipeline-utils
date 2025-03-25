@@ -220,4 +220,7 @@ message Ins {
 
   // When collecting maps, the state type is not considered.
   optional bool map_collection = 18;
+
+  // If wheel is slipping, the flag is set to true.
+  optional bool is_wheel_slipping = 19;
 }

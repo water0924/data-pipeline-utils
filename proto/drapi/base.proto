@@ -13,6 +13,7 @@ enum ErrorCode {
   PLANNING_FAILURE = 7;
   DSM_FAILURE = 8;
   AD_ACTIVED = 9;
+  VIS_NAVIGATION_NOT_ALLOWED = 10;
 }
 
 enum CoorSys {

@@ -47,6 +47,8 @@ enum Model {
 
   HS_ATX_BYD = 31;
   HS_ATX_SOLID = 32;
+  RS_MX_SOLID = 33;
+  PANDAR_QT_128 = 34;
 }
 
 enum Mode {

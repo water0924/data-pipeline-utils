@@ -12,3 +12,42 @@ message ImageCollectEvent {
   optional double link_offset_start = 6; // Use 0 if not set.
   optional double link_offset_end = 7;   // Use link length if not set.
 }
+
+message DataCollectionTriggerEvent {
+  // Optional parameters
+  optional double link_offset_start = 1; // Use 0 if not set.
+  optional double link_offset_end = 2;   // Use link length if not set.
+
+  // begin--endtime gap
+  message TimePoint {
+    optional uint32 hour = 1;
+    optional uint32 min = 2;
+    optional uint32 seconds = 3;
+  }
+  message TimePhase {
+    optional TimePoint begin = 1;
+    optional TimePoint end = 2;
+  }
+  repeated TimePhase time_phase = 3;     // if empty, data collection behavior will be triggered at any time
+}
+
+message SampleParameters {
+  // Channel names must have at least one element that need to be stitched.
+  repeated string channel_names = 1;
+
+  // Collect data only when distance to link start is between [link_offset_start, link_offset_end]
+  optional double link_offset_start = 2;
+  optional double link_offset_end = 3;
+
+  // Stitch hz control parameter. 
+  optional int64 min_interval_frame = 4;
+  optional double min_move_dist_meter = 5;
+  // When the angle between two intervals is greater than this angle(radians), 
+  // data collection is required even if the move distance does not meet the min_move_dist_meter
+  optional double min_uturn_angle = 6;
+}
+
+message NNFeatureCollectEvent {
+  // Frame sampling parameters
+  optional SampleParameters sample_parameters = 1;
+}

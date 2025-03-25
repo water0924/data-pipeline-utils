@@ -5,8 +5,13 @@ package deeproute.canbus;
 import "common/configs/vehicle_config.proto";
 import "canbus/byd_chassis_detail.proto";
 import "canbus/gwm_chassis_detail.proto";
+import "canbus/gwm_d03_chassis_detail.proto";
+import "canbus/gwm_p03_chassis_detail.proto";
+import "canbus/gwm_de09_chassis_detail.proto";
 import "canbus/byd_tang_adas_detail.proto";
 import "canbus/byd_tang_chassis_detail.proto";
+import "canbus/hy11_chassis_detail.proto";
+import "canbus/gl_p177_chassis_detail.proto";
 
 // topic: /dtu/dtu_hmi_to_canbus_request
 message DtuHmiToCanbusRequest {
@@ -26,6 +31,10 @@ message HmiChassisDetails {
     GwmHmi gwm = 6;
     BydTangHmi byd_tang = 7;
     Hy11Hmi hy11 = 8;
+    GwmD03Hmi gwm_d03 = 9;
+    GwmP03Hmi gwm_p03 = 10;
+    GLP177Hmi gl_p177 = 11;
+    GwmDe09Hmi gwm_de09 = 12;
   }
 }
 
@@ -97,5 +106,179 @@ message BydTangHmi {
 
 }
 
-message  Hy11Hmi {
+message Hy11Hmi {
+  optional HomePrkgSysSts veh_home_prkg_sys_sts_home_prkg_sys_sts = 1;
+}
+
+message GwmD03Hmi {
+  optional deeproute.canbus.gwm.d03.HAP_FD1_15B hap_fd1_15b = 1;
+  optional deeproute.canbus.gwm.d03.HAP_FD2_274 hap_fd2_274 = 2;
+  optional deeproute.canbus.gwm.d03.HAP_FD6_289 hap_fd6_289 = 3;
+  optional deeproute.canbus.gwm.d03.HAP_FD3_298 hap_fd3_298 = 4;
+  optional deeproute.canbus.gwm.d03.HAP_FD7_29B hap_fd7_29b = 5;
+
+  optional deeproute.canbus.gwm.d03.ACC_FD1_143 acc_fd1_143 = 6;
+  optional deeproute.canbus.gwm.d03.ACC_FD2_2AB acc_fd2_2ab = 7;
+  optional deeproute.canbus.gwm.d03.ACC_FD3_2B4 acc_fd3_2b4 = 8;
+  optional deeproute.canbus.gwm.d03.ACC_FD4_2B8 acc_fd4_2b8 = 9;
+
+  optional deeproute.canbus.gwm.d03.IFC_FD1_12B ifc_fd1_12b = 10;
+  optional deeproute.canbus.gwm.d03.IFC_FD5_19F ifc_fd5_19f = 11;
+  optional deeproute.canbus.gwm.d03.IFC_FD6_222 ifc_fd6_222 = 12;
+  optional deeproute.canbus.gwm.d03.IFC_FD2_23D ifc_fd2_23d = 13;
+  optional deeproute.canbus.gwm.d03.IFC_FD4_240 ifc_fd4_240 = 14;
+  optional deeproute.canbus.gwm.d03.IFC_FD7_2A2 ifc_fd7_2a2 = 15;
+  optional deeproute.canbus.gwm.d03.IFC_FD3_2CF ifc_fd3_2cf = 16;
+
+  optional deeproute.canbus.gwm.d03.AEB_FD1_18B aeb_fd1_18b = 17;
+  optional deeproute.canbus.gwm.d03.AEB_FD2_227 aeb_fd2_227 = 18;
+
+  optional deeproute.canbus.gwm.d03.MDC_FD1_312 mdc_fd1_312 = 19;
+  optional deeproute.canbus.gwm.d03.CR_FD1_15E cr_fd1_15e = 20;
+  optional deeproute.canbus.gwm.d03.ADAS_AD1_470 adas_ad1_470 = 21;
+  optional deeproute.canbus.gwm.d03.RSDS_FD1_16F rsds_fd1_16f = 22;
+  optional deeproute.canbus.gwm.d03.RSDS_FD2_30A rsds_fd2_30a = 23;
+}
+
+message GwmP03Hmi {
+  optional deeproute.canbus.gwm.p03.HAP_FD1_15B hap_fd1_15b = 1;
+  optional deeproute.canbus.gwm.p03.HAP_FD2_274 hap_fd2_274 = 2;
+  optional deeproute.canbus.gwm.p03.HAP_FD6_289 hap_fd6_289 = 3;
+  optional deeproute.canbus.gwm.p03.HAP_FD3_298 hap_fd3_298 = 4;
+  optional deeproute.canbus.gwm.p03.HAP_FD7_29B hap_fd7_29b = 5;
+
+  optional deeproute.canbus.gwm.p03.ACC_FD1_143 acc_fd1_143 = 6;
+  optional deeproute.canbus.gwm.p03.ACC_FD2_2AB acc_fd2_2ab = 7;
+  optional deeproute.canbus.gwm.p03.ACC_FD3_2B4 acc_fd3_2b4 = 8;
+  optional deeproute.canbus.gwm.p03.ACC_FD4_2B8 acc_fd4_2b8 = 9;
+
+  optional deeproute.canbus.gwm.p03.IFC_FD1_12B ifc_fd1_12b = 10;
+  optional deeproute.canbus.gwm.p03.IFC_FD5_19F ifc_fd5_19f = 11;
+  optional deeproute.canbus.gwm.p03.IFC_FD6_222 ifc_fd6_222 = 12;
+  optional deeproute.canbus.gwm.p03.IFC_FD2_23D ifc_fd2_23d = 13;
+  // optional deeproute.canbus.gwm.p03.IFC_FD4_240 ifc_fd4_240 = 14;
+  optional deeproute.canbus.gwm.p03.IFC_FD7_2A2 ifc_fd7_2a2 = 15;
+  optional deeproute.canbus.gwm.p03.IFC_FD3_2CF ifc_fd3_2cf = 16;
+
+  optional deeproute.canbus.gwm.p03.AEB_FD1_18B aeb_fd1_18b = 17;
+  optional deeproute.canbus.gwm.p03.AEB_FD2_227 aeb_fd2_227 = 18;
+
+  optional deeproute.canbus.gwm.p03.MDC_FD1_312 mdc_fd1_312 = 19;
+  optional deeproute.canbus.gwm.p03.CR_FD1_15E cr_fd1_15e = 20;
+  optional deeproute.canbus.gwm.p03.ADAS_AD1_470 adas_ad1_470 = 21;
+  optional deeproute.canbus.gwm.p03.RSDS_FD1_16F rsds_fd1_16f = 22;
+  optional deeproute.canbus.gwm.p03.RSDS_FD2_30A rsds_fd2_30a = 23;
+}
+
+message GwmDe09Hmi {
+  optional deeproute.canbus.gwm.de09.HAP_FD1_15B hap_fd1_15b = 1;
+  optional deeproute.canbus.gwm.de09.HAP_FD2_274 hap_fd2_274 = 2;
+  optional deeproute.canbus.gwm.de09.HAP_FD6_289 hap_fd6_289 = 3;
+  optional deeproute.canbus.gwm.de09.HAP_FD3_298 hap_fd3_298 = 4;
+  optional deeproute.canbus.gwm.de09.HAP_FD7_29B hap_fd7_29b = 5;
+
+  optional deeproute.canbus.gwm.de09.ACC_FD1_143 acc_fd1_143 = 6;
+  optional deeproute.canbus.gwm.de09.ACC_FD2_2AB acc_fd2_2ab = 7;
+  optional deeproute.canbus.gwm.de09.ACC_FD3_2B4 acc_fd3_2b4 = 8;
+  optional deeproute.canbus.gwm.de09.ACC_FD4_2B8 acc_fd4_2b8 = 9;
+
+  optional deeproute.canbus.gwm.de09.IFC_FD1_12B ifc_fd1_12b = 10;
+  optional deeproute.canbus.gwm.de09.IFC_FD5_19F ifc_fd5_19f = 11;
+  optional deeproute.canbus.gwm.de09.IFC_FD6_222 ifc_fd6_222 = 12;
+  optional deeproute.canbus.gwm.de09.IFC_FD2_23D ifc_fd2_23d = 13;
+  optional deeproute.canbus.gwm.de09.IFC_FD4_240 ifc_fd4_240 = 14;
+  optional deeproute.canbus.gwm.de09.IFC_FD7_2A2 ifc_fd7_2a2 = 15;
+  optional deeproute.canbus.gwm.de09.IFC_FD3_2CF ifc_fd3_2cf = 16;
+  optional deeproute.canbus.gwm.de09.IFC_FD10_266 ifc_fd10_266 = 17;
+  
+  optional deeproute.canbus.gwm.de09.AEB_FD1_18B aeb_fd1_18b = 18;
+  optional deeproute.canbus.gwm.de09.AEB_FD2_227 aeb_fd2_227 = 19;
+
+  optional deeproute.canbus.gwm.de09.MDC_FD1_312 mdc_fd1_312 = 20;
+  optional deeproute.canbus.gwm.de09.CR_FD1_15E cr_fd1_15e = 21;
+  optional deeproute.canbus.gwm.de09.ADAS_AD1_470 adas_ad1_470 = 22;
+  optional deeproute.canbus.gwm.de09.RSDS_FD1_16F rsds_fd1_16f = 23;
+  optional deeproute.canbus.gwm.de09.RSDS_FD2_30A rsds_fd2_30a = 24;
+}
+
+message GLP177Hmi {
+  optional deeproute.canbus.gl.p177.ADPU_AD_REDUNDANCY_CAN_FR09_101 adpu_ad_redundancy_can_fr09_101 = 1; // control message
+  optional deeproute.canbus.gl.p177.ADPU_AD_REDUNDANCY_CAN_FR08_102 adpu_ad_redundancy_can_fr08_102 = 2; // control message
+  optional deeproute.canbus.gl.p177.ADPU_AD_REDUNDANCY_CAN_FR07_103 adpu_ad_redundancy_can_fr07_103 = 3; // control message
+  optional deeproute.canbus.gl.p177.ADPU_AD_REDUNDANCY_CAN_FR06_105 adpu_ad_redundancy_can_fr06_105 = 4; // control message
+  optional deeproute.canbus.gl.p177.ADPU_AD_REDUNDANCY_CAN_FR03_108 adpu_ad_redundancy_can_fr03_108 = 5; // control message
+  optional deeproute.canbus.gl.p177.ADPU_AD_REDUNDANCY_CAN_FR02_109 adpu_ad_redundancy_can_fr02_109 = 6; // control message
+  optional deeproute.canbus.gl.p177.ADPU_AD_REDUNDANCY_CAN_FR01_110 adpu_ad_redundancy_can_fr01_110 = 7; // control message
+  optional deeproute.canbus.gl.p177.ADSC_AD_REDUNDANCY_FR05_115 adsc_ad_redundancy_fr05_115 = 8; // control message
+  optional deeproute.canbus.gl.p177.ADSC_AD_REDUNDANCY_FR04_126 adsc_ad_redundancy_fr04_126 = 9; // control message
+  optional deeproute.canbus.gl.p177.RBCM_AD_REDUNDANCY_FR09_158 rbcm_ad_redundancy_fr09_158 = 10; // control message
+  optional deeproute.canbus.gl.p177.ADCU_AD_REDUNDANCY_FR02_160 adcu_ad_redundancy_fr02_160 = 11; // control message
+  optional deeproute.canbus.gl.p177.ADSC_AD_REDUNDANCY_FR01_177 adsc_ad_redundancy_fr01_177 = 12; // control message
+  optional deeproute.canbus.gl.p177.ADSC_AD_REDUNDANCY_FR02_178 adsc_ad_redundancy_fr02_178 = 13; // control message
+  optional deeproute.canbus.gl.p177.ADSC_AD_REDUNDANCY_FR03_179 adsc_ad_redundancy_fr03_179 = 14; // control message
+  optional deeproute.canbus.gl.p177.RBCM_AD_REDUNDANCY_FR10_219 rbcm_ad_redundancy_fr10_219 = 15; // control message
+  optional deeproute.canbus.gl.p177.RBCM_AD_REDUNDANCY_FR11_220 rbcm_ad_redundancy_fr11_220 = 16; // control message
+  optional deeproute.canbus.gl.p177.RBCM_AD_REDUNDANCY_FR07_23A rbcm_ad_redundancy_fr07_23a = 17; // control message
+  optional deeproute.canbus.gl.p177.ADCU_AD_REDUNDANCY_FR03_23B adcu_ad_redundancy_fr03_23b = 18; // control message
+  optional deeproute.canbus.gl.p177.RBCM_AD_REDUNDANCY_FR06_241 rbcm_ad_redundancy_fr06_241 = 19; // control message
+  optional deeproute.canbus.gl.p177.ADCU_AD_REDUNDANCY_CAN_NM_FR01_506 adcu_ad_redundancy_can_nm_fr01_506 = 20; // control message
+  optional deeproute.canbus.gl.p177.ADCU_AD_REDUNDANCY_CANVFC_VECT_FR_546 adcu_ad_redundancy_canvfc_vect_fr_546 = 21; // control message
+  optional deeproute.canbus.gl.p177.ADCU_AD_REDUNDANCY_FR01_80 adcu_ad_redundancy_fr01_80 = 22; // control message
+  optional deeproute.canbus.gl.p177.ASDM_CHAS1_FR07_117 asdm_chas1_fr07_117 = 23; // control message
+  optional deeproute.canbus.gl.p177.ASDM_CHAS1_FR06_131 asdm_chas1_fr06_131 = 24; // control message
+  optional deeproute.canbus.gl.p177.ASDM_CHAS1_FR05_165 asdm_chas1_fr05_165 = 25; // control message
+  optional deeproute.canbus.gl.p177.ASDM_CHAS1_FR11_176 asdm_chas1_fr11_176 = 26; // control message
+  optional deeproute.canbus.gl.p177.ASDM_CHAS1_FR08_199 asdm_chas1_fr08_199 = 27; // control message
+  optional deeproute.canbus.gl.p177.ASDM_CHAS1_FR03_33 asdm_chas1_fr03_33 = 28; // control message
+  optional deeproute.canbus.gl.p177.ASDM_CHAS1_FR09_379 asdm_chas1_fr09_379 = 29; // control message
+  optional deeproute.canbus.gl.p177.ASDM_CHAS1_NM_FR_529 asdm_chas1_nm_fr_529 = 30; // control message
+  optional deeproute.canbus.gl.p177.ADCU_CHAS1_VFC_VECTOR_FR_569 adcu_chas1_vfc_vector_fr_569 = 31; // control message
+  optional deeproute.canbus.gl.p177.ASDM_CHAS1_FR01_93 asdm_chas1_fr01_93 = 32; // control message
+  optional deeproute.canbus.gl.p177.PAS_CHAS1_FR04_95 pas_chas1_fr04_95 = 33; // control message
+  optional deeproute.canbus.gl.p177.PAS_CHAS1_FR02_EB pas_chas1_fr02_eb = 34; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR33_100 adcu_zcucanfd1_fr33_100 = 35; // control message
+  optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR20_112 paszcucanfd1_fr20_112 = 36; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR23_116 adcu_zcucanfd1_fr23_116 = 37; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR08_120 adcu_zcucanfd1_fr08_120 = 38; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_RESD_FR01_131 adcu_zcucanfd1_resd_fr01_131 = 39; // control message
+  optional deeproute.canbus.gl.p177.ADCU_TO_DHU_SEC_OC_FR01_132 adcu_to_dhu_sec_oc_fr01_132 = 40; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUDCANFD1_SYCN_REQ_FR_155 adcu_zcudcanfd1_sycn_req_fr_155 = 41; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR13_190 adcu_zcucanfd1_fr13_190 = 42; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR04_1A0 adcu_zcucanfd1_fr04_1a0 = 43; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR10_1B5 adcu_zcucanfd1_fr10_1b5 = 44; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR01_1C0 adcu_zcucanfd1_fr01_1c0 = 45; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR21_1C6 adcu_zcucanfd1_fr21_1c6 = 46; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR22_1CA adcu_zcucanfd1_fr22_1ca = 47; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR11_1E0 adcu_zcucanfd1_fr11_1e0 = 48; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR02_1F0 adcu_zcucanfd1_fr02_1f0 = 49; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR06_1FF adcu_zcucanfd1_fr06_1ff = 50; // control message
+  optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR06_210 paszcucanfd1_fr06_210 = 51; // control message
+  optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR04_211 paszcucanfd1_fr04_211 = 52; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR14_220 adcu_zcucanfd1_fr14_220 = 53; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR19_226 adcu_zcucanfd1_fr19_226 = 54; // control message
+  optional deeproute.canbus.gl.p177.BCM_ZCUCANFD1_FR11_240 bcm_zcucanfd1_fr11_240 = 55; // control message
+  optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR15_24B paszcucanfd1_fr15_24b = 56; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR07_280 adcu_zcucanfd1_fr07_280 = 57; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR03_2F0 adcu_zcucanfd1_fr03_2f0 = 58; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR24_300 adcu_zcucanfd1_fr24_300 = 59; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR25_301 adcu_zcucanfd1_fr25_301 = 60; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR26_302 adcu_zcucanfd1_fr26_302 = 61; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR27_303 adcu_zcucanfd1_fr27_303 = 62; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR28_304 adcu_zcucanfd1_fr28_304 = 63; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR29_305 adcu_zcucanfd1_fr29_305 = 64; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR30_306 adcu_zcucanfd1_fr30_306 = 65; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR20_30A adcu_zcucanfd1_fr20_30a = 66; // control message
+  optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR18_310 paszcucanfd1_fr18_310 = 67; // control message
+  optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR02_311 paszcucanfd1_fr02_311 = 68; // control message
+  optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR05_335 paszcucanfd1_fr05_335 = 69; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR09_360 adcu_zcucanfd1_fr09_360 = 70; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR12_370 adcu_zcucanfd1_fr12_370 = 71; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR31_371 adcu_zcucanfd1_fr31_371 = 72; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR32_372 adcu_zcucanfd1_fr32_372 = 73; // control message
+  optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR19_451 paszcucanfd1_fr19_451 = 74; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR15_469 adcu_zcucanfd1_fr15_469 = 75; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR05_480 adcu_zcucanfd1_fr05_480 = 76; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUDCANFD1_NM_FR_501 adcu_zcudcanfd1_nm_fr_501 = 77; // control message
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_VFC_VECT_FR_541 adcu_zcucanfd1_vfc_vect_fr_541 = 78; // control message
+  optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR07_60 paszcucanfd1_fr07_60 = 79; // control message
 }

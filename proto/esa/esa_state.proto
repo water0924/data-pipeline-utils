@@ -27,4 +27,6 @@ message StateWrapper {
   optional deeproute.common.Header header = 1;
   optional StateInfo state_info = 2;
   optional int32 blc_msg_id = 3;  // for safety policy
+  // publish time (us)
+  optional int64 time_measurement = 4; 
 }

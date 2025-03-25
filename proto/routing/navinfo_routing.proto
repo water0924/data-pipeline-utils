@@ -7,8 +7,9 @@ import "map/routing.proto";
 import "map/sd_map.proto";
 import "graph_match/graph_matching.proto";
 import "routing/local_routing.proto";
-
 import "routing/cloud_task.proto";
+import "odd/odd.proto";
+import "map/map_common.proto";
 
 message SDRoutingResponse {
   optional deeproute.map.RoutePlanningType route_planning_type = 1000;
@@ -170,22 +171,41 @@ enum SceneType {
 message SpeedLimitInfo {
   repeated int32 spd_limit_dis = 1;
   repeated int32 spd_limit_spl = 2;
-  repeated deeproute.routing.NavigationInfoForVisualize.SpeedLimitType spd_limit_type = 3;
+  repeated deeproute.routing.NavigationInfoForVisualize.SpeedLimitType
+      spd_limit_type = 3;
   optional float spl_ratio = 4;
   optional int32 min_spl = 5;
   optional SceneType scene_type = 6;
   optional bool is_map_spl_limit = 7;
+  optional int32 exp_spd_limit = 8;
+}
+
+message StaticRoutingInfo {
+  optional int32 priority_lane_index = 1;
+  // lane from left to right
+  repeated int32 crs = 2;
 }
 message DataCollectSingleTask {
   optional int64 task_id = 1;
 
   oneof CollectEvent {
     deeproute.cloud_task.ImageCollectEvent image_collect_event = 10;
+    // There can be at most one nnfeature_collect_event task on a link
+    deeproute.cloud_task.NNFeatureCollectEvent nnfeature_collect_event = 11;
+    deeproute.cloud_task.DataCollectionTriggerEvent data_trigger_event = 12;
   }
 }
 
 message DataCollectTask {
   repeated DataCollectSingleTask tasks = 1;
+}
+
+message SegmAction {
+  optional deeproute.map.MainAction main_action = 1;
+  optional deeproute.map.AssistantAction assistant_action = 2;
+  optional deeproute.map.LaneActions lane_actions = 3;
+  optional deeproute.map.MainAction step_main_action = 4;
+  optional deeproute.map.AssistantAction step_assistant_action = 5;
 }
 
 message Segment {
@@ -201,6 +221,10 @@ message Segment {
   optional bool virtual_link = 100;
 
   optional bool is_odd_limit = 33;
+
+  repeated odd.OddLimitType odd_limit_types = 40;
+
+  repeated odd.OddTypeInfo odd_type_infos = 41;
 
   // dr link id
   // Its meaning is consistent with sd_map.dr_link_id
@@ -347,9 +371,12 @@ message Segment {
   repeated deeproute.sd_map.Camera cameras = 38;
 
   optional SpeedLimitInfo spd_limit_info = 39;
+
+  optional StaticRoutingInfo static_routing_info = 42;
+  optional SegmAction segm_action = 50;
 }
 
-message SpeedLimitConfig{
+message SpeedLimitConfig {
   // use static spl result from the server
   optional bool enable_server_spl = 1;
   // use amap spd limit on highway
@@ -383,6 +410,7 @@ message Route {
   repeated deeproute.graph_match.MismatchSegmIndex mismatch_indexes = 7;
 
   optional SpeedLimitConfig speed_limit_config = 10;
+  optional deeproute.sd_map.SDMapVersionOnboard.LocalRoutingConfig local_routing_cloud_config = 11;
 
   // for gwm odd
   repeated graph_match.AmapLinkMatchInfo mismatch_amap_link_range = 28;

@@ -18,14 +18,14 @@ from proto.perception import deeproute_perception_obstacle_pb2 as perception_dot
 from proto.common import geometry_pb2 as common_dot_geometry__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1blocalization/havp_map.proto\x12\x1f\x64\x65\x65proute.localization.havp_map\x1a-perception/deeproute_perception_ras_map.proto\x1a.perception/deeproute_perception_obstacle.proto\x1a\x15\x63ommon/geometry.proto\"\xe3\x01\n\x13ParkingSpaceUsrInfo\x12\x18\n\x10parking_space_id\x18\x01 \x01(\x05\x12\r\n\x05\x66loor\x18\x02 \x01(\x05\x12\x0e\n\x06map_id\x18\x03 \x01(\x05\x12\x1a\n\x12parking_space_name\x18\x0b \x01(\t\x12K\n\x11parking_space_tag\x18\x0c \x01(\x0e\x32\x30.deeproute.localization.havp_map.ParkingSpaceTag\x12\x13\n\x0bis_favorite\x18\r \x01(\x08\x12\x15\n\rfavorite_time\x18\x14 \x01(\x03\"\xa3\x01\n\x10HAVPParkingSpace\x12T\n\x16parking_space_usr_info\x18\x01 \x01(\x0b\x32\x34.deeproute.localization.havp_map.ParkingSpaceUsrInfo\x12\x39\n\rparking_space\x18\x02 \x01(\x0b\x32\".deeproute.perception.ParkingSpace\"Y\n\x0cHAVPObstacle\x12:\n\x08obstacle\x18\x01 \x01(\x0b\x32(.deeproute.perception.PerceptionObstacle\x12\r\n\x05\x66loor\x18\x02 \x01(\x05\"\xb6\x01\n\x0eHAVPTrajectory\x12\n\n\x02id\x18\x01 \x01(\x05\x12=\n\x04type\x18\x02 \x01(\x0e\x32/.deeproute.localization.havp_map.TrajectoryType\x12\x12\n\nfrom_floor\x18\x03 \x01(\x05\x12\x10\n\x08to_floor\x18\x04 \x01(\x05\x12\x33\n\x10trajectory_point\x18\x05 \x03(\x0b\x32\x19.deeproute.common.Point3D\"\x1e\n\nFloorIdSet\x12\x10\n\x08\x66loor_id\x18\x01 \x03(\x05\"\x82\x03\n\x0fHAVPMapMetaData\x12\x0e\n\x06map_id\x18\x01 \x01(\x05\x12-\n\nmap_origin\x18\x02 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x18\n\x10\x63reate_timestamp\x18\x03 \x01(\x10\x12\x10\n\x08map_name\x18\x0b \x01(\t\x12Z\n\x1c\x66\x61vorite_parking_space_infos\x18\x0c \x03(\x0b\x32\x34.deeproute.localization.havp_map.ParkingSpaceUsrInfo\x12 \n\x18\x64\x65\x66\x61ult_parking_space_id\x18\r \x01(\x05\x12\x12\n\nmap_length\x18\x15 \x01(\x02\x12\x1a\n\x12num_parking_spaces\x18\x16 \x01(\x05\x12\x16\n\x0enum_speedbumps\x18\x17 \x01(\x05\x12>\n\tfloor_set\x18\x18 \x01(\x0b\x32+.deeproute.localization.havp_map.FloorIdSet\"\xae\x02\n\x07HAVPMap\x12G\n\rmap_meta_data\x18\x01 \x01(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\x12G\n\x0emap_trajectory\x18\x0b \x03(\x0b\x32/.deeproute.localization.havp_map.HAVPTrajectory\x12L\n\x11map_parking_space\x18\x0c \x03(\x0b\x32\x31.deeproute.localization.havp_map.HAVPParkingSpace\x12\x43\n\x0cmap_obstacle\x18\r \x03(\x0b\x32-.deeproute.localization.havp_map.HAVPObstacle*\x9d\x01\n\x0fParkingSpaceTag\x12\x19\n\x15PARK_SPACE_TAG_UNKNOW\x10\x00\x12\x19\n\x15PARK_SPACE_TAG_CHARGE\x10\x01\x12\x1b\n\x17PARK_SPACE_TAG_ELEVATOR\x10\x02\x12\x18\n\x14PARK_SPACE_TAG_FLOOR\x10\x03\x12\x1d\n\x19PARK_SPACE_TAG_PASSAGEWAY\x10\x04*4\n\x0eTrajectoryType\x12\x08\n\x04\x46LAT\x10\x00\x12\x0c\n\x08\x44OWNHILL\x10\x01\x12\n\n\x06UPHILL\x10\x02')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1blocalization/havp_map.proto\x12\x1f\x64\x65\x65proute.localization.havp_map\x1a-perception/deeproute_perception_ras_map.proto\x1a.perception/deeproute_perception_obstacle.proto\x1a\x15\x63ommon/geometry.proto\"\xe3\x01\n\x13ParkingSpaceUsrInfo\x12\x18\n\x10parking_space_id\x18\x01 \x01(\x05\x12\r\n\x05\x66loor\x18\x02 \x01(\x05\x12\x0e\n\x06map_id\x18\x03 \x01(\x05\x12\x1a\n\x12parking_space_name\x18\x0b \x01(\t\x12K\n\x11parking_space_tag\x18\x0c \x01(\x0e\x32\x30.deeproute.localization.havp_map.ParkingSpaceTag\x12\x13\n\x0bis_favorite\x18\r \x01(\x08\x12\x15\n\rfavorite_time\x18\x14 \x01(\x03\"\xa3\x01\n\x10HAVPParkingSpace\x12T\n\x16parking_space_usr_info\x18\x01 \x01(\x0b\x32\x34.deeproute.localization.havp_map.ParkingSpaceUsrInfo\x12\x39\n\rparking_space\x18\x02 \x01(\x0b\x32\".deeproute.perception.ParkingSpace\"Y\n\x0cHAVPObstacle\x12:\n\x08obstacle\x18\x01 \x01(\x0b\x32(.deeproute.perception.PerceptionObstacle\x12\r\n\x05\x66loor\x18\x02 \x01(\x05\"\xc8\x01\n\x0eHAVPTrajectory\x12\n\n\x02id\x18\x01 \x01(\x05\x12=\n\x04type\x18\x02 \x01(\x0e\x32/.deeproute.localization.havp_map.TrajectoryType\x12\x12\n\nfrom_floor\x18\x03 \x01(\x05\x12\x10\n\x08to_floor\x18\x04 \x01(\x05\x12\x33\n\x10trajectory_point\x18\x05 \x03(\x0b\x32\x19.deeproute.common.Point3D\x12\x10\n\x08\x66loor_id\x18\x06 \x01(\x05\"\x1e\n\nFloorIdSet\x12\x10\n\x08\x66loor_id\x18\x01 \x03(\x05\"\x82\x03\n\x0fHAVPMapMetaData\x12\x0e\n\x06map_id\x18\x01 \x01(\x05\x12-\n\nmap_origin\x18\x02 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x18\n\x10\x63reate_timestamp\x18\x03 \x01(\x10\x12\x10\n\x08map_name\x18\x0b \x01(\t\x12Z\n\x1c\x66\x61vorite_parking_space_infos\x18\x0c \x03(\x0b\x32\x34.deeproute.localization.havp_map.ParkingSpaceUsrInfo\x12 \n\x18\x64\x65\x66\x61ult_parking_space_id\x18\r \x01(\x05\x12\x12\n\nmap_length\x18\x15 \x01(\x02\x12\x1a\n\x12num_parking_spaces\x18\x16 \x01(\x05\x12\x16\n\x0enum_speedbumps\x18\x17 \x01(\x05\x12>\n\tfloor_set\x18\x18 \x01(\x0b\x32+.deeproute.localization.havp_map.FloorIdSet\"\xae\x02\n\x07HAVPMap\x12G\n\rmap_meta_data\x18\x01 \x01(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\x12G\n\x0emap_trajectory\x18\x0b \x03(\x0b\x32/.deeproute.localization.havp_map.HAVPTrajectory\x12L\n\x11map_parking_space\x18\x0c \x03(\x0b\x32\x31.deeproute.localization.havp_map.HAVPParkingSpace\x12\x43\n\x0cmap_obstacle\x18\r \x03(\x0b\x32-.deeproute.localization.havp_map.HAVPObstacle*\xa8\x01\n\x0fParkingSpaceTag\x12\x1a\n\x16PARK_SPACE_TAG_UNKNOWN\x10\x00\x12#\n\x1fPARK_SPACE_TAG_CHARGING_STATION\x10\x01\x12\x1b\n\x17PARK_SPACE_TAG_ELEVATOR\x10\x02\x12\x18\n\x14PARK_SPACE_TAG_FLOOR\x10\x03\x12\x1d\n\x19PARK_SPACE_TAG_PASSAGEWAY\x10\x04*4\n\x0eTrajectoryType\x12\x08\n\x04\x46LAT\x10\x00\x12\x0c\n\x08\x44OWNHILL\x10\x01\x12\n\n\x06UPHILL\x10\x02')
 
 _PARKINGSPACETAG = DESCRIPTOR.enum_types_by_name['ParkingSpaceTag']
 ParkingSpaceTag = enum_type_wrapper.EnumTypeWrapper(_PARKINGSPACETAG)
 _TRAJECTORYTYPE = DESCRIPTOR.enum_types_by_name['TrajectoryType']
 TrajectoryType = enum_type_wrapper.EnumTypeWrapper(_TRAJECTORYTYPE)
-PARK_SPACE_TAG_UNKNOW = 0
-PARK_SPACE_TAG_CHARGE = 1
+PARK_SPACE_TAG_UNKNOWN = 0
+PARK_SPACE_TAG_CHARGING_STATION = 1
 PARK_SPACE_TAG_ELEVATOR = 2
 PARK_SPACE_TAG_FLOOR = 3
 PARK_SPACE_TAG_PASSAGEWAY = 4
@@ -93,10 +93,10 @@ _sym_db.RegisterMessage(HAVPMap)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _PARKINGSPACETAG._serialized_start=1581
-  _PARKINGSPACETAG._serialized_end=1738
-  _TRAJECTORYTYPE._serialized_start=1740
-  _TRAJECTORYTYPE._serialized_end=1792
+  _PARKINGSPACETAG._serialized_start=1599
+  _PARKINGSPACETAG._serialized_end=1767
+  _TRAJECTORYTYPE._serialized_start=1769
+  _TRAJECTORYTYPE._serialized_end=1821
   _PARKINGSPACEUSRINFO._serialized_start=183
   _PARKINGSPACEUSRINFO._serialized_end=410
   _HAVPPARKINGSPACE._serialized_start=413
@@ -104,11 +104,11 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _HAVPOBSTACLE._serialized_start=578
   _HAVPOBSTACLE._serialized_end=667
   _HAVPTRAJECTORY._serialized_start=670
-  _HAVPTRAJECTORY._serialized_end=852
-  _FLOORIDSET._serialized_start=854
-  _FLOORIDSET._serialized_end=884
-  _HAVPMAPMETADATA._serialized_start=887
-  _HAVPMAPMETADATA._serialized_end=1273
-  _HAVPMAP._serialized_start=1276
-  _HAVPMAP._serialized_end=1578
+  _HAVPTRAJECTORY._serialized_end=870
+  _FLOORIDSET._serialized_start=872
+  _FLOORIDSET._serialized_end=902
+  _HAVPMAPMETADATA._serialized_start=905
+  _HAVPMAPMETADATA._serialized_end=1291
+  _HAVPMAP._serialized_start=1294
+  _HAVPMAP._serialized_end=1596
 # @@protoc_insertion_point(module_scope)

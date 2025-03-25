@@ -16,7 +16,7 @@ from proto.common import geometry_pb2 as common_dot_geometry__pb2
 from proto.drivers.gnss import ins_pb2 as drivers_dot_gnss_dot_ins__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1flock_on_road/lock_on_road.proto\x12\x16\x64\x65\x65proute.localization\x1a\x15\x63ommon/geometry.proto\x1a\x16\x64rivers/gnss/ins.proto\"\x85\x0c\n\x10LockOnRoadResult\x12\x0f\n\x07time_us\x18\x01 \x01(\x03\x12\x12\n\nsd_link_id\x18\x02 \x01(\t\x12\x12\n\ndr_link_id\x18\x0f \x01(\x04\x12\x15\n\rsd_link_index\x18\t \x01(\x05\x12!\n\x19sd_distance_to_link_start\x18\x03 \x01(\x01\x12\x1f\n\x17sd_distance_to_link_end\x18\x04 \x01(\x01\x12?\n\x06status\x18\x05 \x01(\x0e\x32/.deeproute.localization.LockOnRoadResult.Status\x12\x12\n\nrequest_id\x18\x06 \x01(\t\x12\x39\n\x16matched_position_wgs84\x18\x07 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x39\n\x16matched_position_gcj02\x18\x0c \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x17\n\x0fmatched_heading\x18\x08 \x01(\x01\x12O\n\x12shadow_mode_result\x18\n \x01(\x0b\x32\x33.deeproute.localization.LockOnRoadResult.ShadowMode\x12:\n\tgnss_type\x18\x0b \x01(\x0e\x32\'.deeproute.drivers.gnss.SensorsIns.Type\x12P\n\x0flink_properties\x18\r \x01(\x0b\x32\x37.deeproute.localization.LockOnRoadResult.LinkProperties\x12\x15\n\rroute_seg_idx\x18\x0e \x01(\r\x12Q\n\x14navi_status_internal\x18\x10 \x03(\x0b\x32\x33.deeproute.localization.LockOnRoadResult.NaviStatus\x1a\xe9\x01\n\nShadowMode\x12J\n\x06status\x18\x01 \x01(\x0e\x32:.deeproute.localization.LockOnRoadResult.ShadowMode.Status\x12\x1c\n\x14lock_on_road_link_id\x18\x02 \x01(\t\x12\x1f\n\x17lock_on_road_dr_link_id\x18\x04 \x01(\x04\x12\x14\n\x0c\x64\x64mm_link_id\x18\x03 \x01(\t\x12\x17\n\x0f\x64\x64mm_dr_link_id\x18\x05 \x01(\x04\"!\n\x06Status\x12\t\n\x05MATCH\x10\x00\x12\x0c\n\x08MISMATCH\x10\x01\x1a\xa2\x02\n\x0eLinkProperties\x12\x10\n\x08priority\x18\x01 \x01(\r\x12\x0e\n\x06tunnel\x18\x02 \x01(\x08\x12\x10\n\x08\x65levated\x18\x03 \x01(\x08\x12\x15\n\rsdmap_version\x18\x04 \x01(\t\x12\x10\n\x08sdmap_id\x18\x05 \x01(\t\x12\x12\n\ndr_link_id\x18\x06 \x01(\x04\x12\x62\n\x11sdmap_source_type\x18\x07 \x01(\x0e\x32G.deeproute.localization.LockOnRoadResult.LinkProperties.SdMapSourceType\";\n\x0fSdMapSourceType\x12\x0b\n\x07TENCENT\x10\x00\x12\t\n\x05\x42\x41IDU\x10\x01\x12\x10\n\x0cTENCENT_PLUS\x10\x02\x1a\xc8\x01\n\nNaviStatus\x12?\n\x06status\x18\x01 \x01(\x0e\x32/.deeproute.localization.LockOnRoadResult.Status\x12J\n\x06source\x18\x02 \x01(\x0e\x32:.deeproute.localization.LockOnRoadResult.NaviStatus.Source\"-\n\x06Source\x12\x10\n\x0cLOCK_ON_ROAD\x10\x00\x12\x11\n\rLOCAL_ROUTING\x10\x01\"T\n\x06Status\x12\x0e\n\nNO_ROUTING\x10\x00\x12\n\n\x06NORMAL\x10\x01\x12\t\n\x05YAWED\x10\x02\x12\x0c\n\x08PASSOVER\x10\x03\x12\x15\n\x11GNSS_POSE_INVALID\x10\x04\"\xff\x02\n\x19LaneIndexEstimationResult\x12\x14\n\x0cras_map_time\x18\x01 \x01(\x03\x12\x15\n\rsd_lane_index\x18\x02 \x01(\x05\x12\x13\n\x0bsd_lane_sum\x18\x03 \x01(\x05\x12\x44\n\x04type\x18\x04 \x01(\x0e\x32\x36.deeproute.localization.LaneIndexEstimationResult.Type\x12\x13\n\x0b\x65go_lane_id\x18\x05 \x01(\x05\x12S\n\x0c\x63losest_curb\x18\x06 \x01(\x0e\x32=.deeproute.localization.LaneIndexEstimationResult.ClosestCurb\"?\n\x04Type\x12\x0b\n\x07INVALID\x10\x00\x12\x10\n\x0cINITIALIZING\x10\x01\x12\x0e\n\nUNRELIABLE\x10\x02\x12\x08\n\x04GOOD\x10\x03\"/\n\x0b\x43losestCurb\x12\x08\n\x04LEFT\x10\x00\x12\t\n\x05RIGHT\x10\x01\x12\x0b\n\x07NO_CURB\x10\x02')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1flock_on_road/lock_on_road.proto\x12\x16\x64\x65\x65proute.localization\x1a\x15\x63ommon/geometry.proto\x1a\x16\x64rivers/gnss/ins.proto\"\xc7\x12\n\x10LockOnRoadResult\x12\x0f\n\x07time_us\x18\x01 \x01(\x03\x12\x12\n\nsd_link_id\x18\x02 \x01(\t\x12\x12\n\ndr_link_id\x18\x0f \x01(\x04\x12\x15\n\rsd_link_index\x18\t \x01(\x05\x12!\n\x19sd_distance_to_link_start\x18\x03 \x01(\x01\x12\x1f\n\x17sd_distance_to_link_end\x18\x04 \x01(\x01\x12?\n\x06status\x18\x05 \x01(\x0e\x32/.deeproute.localization.LockOnRoadResult.Status\x12\x12\n\nrequest_id\x18\x06 \x01(\t\x12\x39\n\x16matched_position_wgs84\x18\x07 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x39\n\x16matched_position_gcj02\x18\x0c \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x17\n\x0fmatched_heading\x18\x08 \x01(\x01\x12O\n\x12shadow_mode_result\x18\n \x01(\x0b\x32\x33.deeproute.localization.LockOnRoadResult.ShadowMode\x12:\n\tgnss_type\x18\x0b \x01(\x0e\x32\'.deeproute.drivers.gnss.SensorsIns.Type\x12P\n\x0flink_properties\x18\r \x01(\x0b\x32\x37.deeproute.localization.LockOnRoadResult.LinkProperties\x12\x15\n\rroute_seg_idx\x18\x0e \x01(\r\x12Q\n\x14navi_status_internal\x18\x10 \x03(\x0b\x32\x33.deeproute.localization.LockOnRoadResult.NaviStatus\x12]\n\x16sd_localization_status\x18\x11 \x01(\x0b\x32=.deeproute.localization.LockOnRoadResult.SdLocalizationStatus\x12M\n\x0eyaw_scene_type\x18\x12 \x01(\x0e\x32\x35.deeproute.localization.LockOnRoadResult.YawSceneType\x1a\xe9\x01\n\nShadowMode\x12J\n\x06status\x18\x01 \x01(\x0e\x32:.deeproute.localization.LockOnRoadResult.ShadowMode.Status\x12\x1c\n\x14lock_on_road_link_id\x18\x02 \x01(\t\x12\x1f\n\x17lock_on_road_dr_link_id\x18\x04 \x01(\x04\x12\x14\n\x0c\x64\x64mm_link_id\x18\x03 \x01(\t\x12\x17\n\x0f\x64\x64mm_dr_link_id\x18\x05 \x01(\x04\"!\n\x06Status\x12\t\n\x05MATCH\x10\x00\x12\x0c\n\x08MISMATCH\x10\x01\x1a\xa2\x02\n\x0eLinkProperties\x12\x10\n\x08priority\x18\x01 \x01(\r\x12\x0e\n\x06tunnel\x18\x02 \x01(\x08\x12\x10\n\x08\x65levated\x18\x03 \x01(\x08\x12\x15\n\rsdmap_version\x18\x04 \x01(\t\x12\x10\n\x08sdmap_id\x18\x05 \x01(\t\x12\x12\n\ndr_link_id\x18\x06 \x01(\x04\x12\x62\n\x11sdmap_source_type\x18\x07 \x01(\x0e\x32G.deeproute.localization.LockOnRoadResult.LinkProperties.SdMapSourceType\";\n\x0fSdMapSourceType\x12\x0b\n\x07TENCENT\x10\x00\x12\t\n\x05\x42\x41IDU\x10\x01\x12\x10\n\x0cTENCENT_PLUS\x10\x02\x1a\xc8\x01\n\nNaviStatus\x12?\n\x06status\x18\x01 \x01(\x0e\x32/.deeproute.localization.LockOnRoadResult.Status\x12J\n\x06source\x18\x02 \x01(\x0e\x32:.deeproute.localization.LockOnRoadResult.NaviStatus.Source\"-\n\x06Source\x12\x10\n\x0cLOCK_ON_ROAD\x10\x00\x12\x11\n\rLOCAL_ROUTING\x10\x01\x1a\x98\x04\n\x14SdLocalizationStatus\x12\x62\n\nconfidence\x18\x01 \x01(\x0e\x32N.deeproute.localization.LockOnRoadResult.SdLocalizationStatus.ConfidenceStatus\x12m\n\x1blateral_position_confidence\x18\x02 \x01(\x0b\x32H.deeproute.localization.LockOnRoadResult.SdLocalizationStatus.Confidence\x12r\n longitudinal_position_confidence\x18\x03 \x01(\x0b\x32H.deeproute.localization.LockOnRoadResult.SdLocalizationStatus.Confidence\x1a\x91\x01\n\nConfidence\x12\x18\n\x10\x63onfidence_value\x18\x01 \x01(\x01\x12i\n\x11\x63onfidence_status\x18\x02 \x01(\x0e\x32N.deeproute.localization.LockOnRoadResult.SdLocalizationStatus.ConfidenceStatus\"%\n\x10\x43onfidenceStatus\x12\x07\n\x03LOW\x10\x00\x12\x08\n\x04HIGH\x10\x01\"T\n\x06Status\x12\x0e\n\nNO_ROUTING\x10\x00\x12\n\n\x06NORMAL\x10\x01\x12\t\n\x05YAWED\x10\x02\x12\x0c\n\x08PASSOVER\x10\x03\x12\x15\n\x11GNSS_POSE_INVALID\x10\x04\"w\n\x0cYawSceneType\x12\x0b\n\x07UNKNOWN\x10\x00\x12,\n(ROUTING_MAIN_ROAD_VEHICLE_SECONDARY_ROAD\x10\x01\x12,\n(ROUTING_SECONDARY_ROAD_VEHICLE_MAIN_ROAD\x10\x02\"\xff\x02\n\x19LaneIndexEstimationResult\x12\x14\n\x0cras_map_time\x18\x01 \x01(\x03\x12\x15\n\rsd_lane_index\x18\x02 \x01(\x05\x12\x13\n\x0bsd_lane_sum\x18\x03 \x01(\x05\x12\x44\n\x04type\x18\x04 \x01(\x0e\x32\x36.deeproute.localization.LaneIndexEstimationResult.Type\x12\x13\n\x0b\x65go_lane_id\x18\x05 \x01(\x05\x12S\n\x0c\x63losest_curb\x18\x06 \x01(\x0e\x32=.deeproute.localization.LaneIndexEstimationResult.ClosestCurb\"?\n\x04Type\x12\x0b\n\x07INVALID\x10\x00\x12\x10\n\x0cINITIALIZING\x10\x01\x12\x0e\n\nUNRELIABLE\x10\x02\x12\x08\n\x04GOOD\x10\x03\"/\n\x0b\x43losestCurb\x12\x08\n\x04LEFT\x10\x00\x12\t\n\x05RIGHT\x10\x01\x12\x0b\n\x07NO_CURB\x10\x02')
 
 
 
@@ -24,11 +24,15 @@ _LOCKONROADRESULT = DESCRIPTOR.message_types_by_name['LockOnRoadResult']
 _LOCKONROADRESULT_SHADOWMODE = _LOCKONROADRESULT.nested_types_by_name['ShadowMode']
 _LOCKONROADRESULT_LINKPROPERTIES = _LOCKONROADRESULT.nested_types_by_name['LinkProperties']
 _LOCKONROADRESULT_NAVISTATUS = _LOCKONROADRESULT.nested_types_by_name['NaviStatus']
+_LOCKONROADRESULT_SDLOCALIZATIONSTATUS = _LOCKONROADRESULT.nested_types_by_name['SdLocalizationStatus']
+_LOCKONROADRESULT_SDLOCALIZATIONSTATUS_CONFIDENCE = _LOCKONROADRESULT_SDLOCALIZATIONSTATUS.nested_types_by_name['Confidence']
 _LANEINDEXESTIMATIONRESULT = DESCRIPTOR.message_types_by_name['LaneIndexEstimationResult']
 _LOCKONROADRESULT_SHADOWMODE_STATUS = _LOCKONROADRESULT_SHADOWMODE.enum_types_by_name['Status']
 _LOCKONROADRESULT_LINKPROPERTIES_SDMAPSOURCETYPE = _LOCKONROADRESULT_LINKPROPERTIES.enum_types_by_name['SdMapSourceType']
 _LOCKONROADRESULT_NAVISTATUS_SOURCE = _LOCKONROADRESULT_NAVISTATUS.enum_types_by_name['Source']
+_LOCKONROADRESULT_SDLOCALIZATIONSTATUS_CONFIDENCESTATUS = _LOCKONROADRESULT_SDLOCALIZATIONSTATUS.enum_types_by_name['ConfidenceStatus']
 _LOCKONROADRESULT_STATUS = _LOCKONROADRESULT.enum_types_by_name['Status']
+_LOCKONROADRESULT_YAWSCENETYPE = _LOCKONROADRESULT.enum_types_by_name['YawSceneType']
 _LANEINDEXESTIMATIONRESULT_TYPE = _LANEINDEXESTIMATIONRESULT.enum_types_by_name['Type']
 _LANEINDEXESTIMATIONRESULT_CLOSESTCURB = _LANEINDEXESTIMATIONRESULT.enum_types_by_name['ClosestCurb']
 LockOnRoadResult = _reflection.GeneratedProtocolMessageType('LockOnRoadResult', (_message.Message,), {
@@ -53,6 +57,20 @@ LockOnRoadResult = _reflection.GeneratedProtocolMessageType('LockOnRoadResult', 
     # @@protoc_insertion_point(class_scope:deeproute.localization.LockOnRoadResult.NaviStatus)
     })
   ,
+
+  'SdLocalizationStatus' : _reflection.GeneratedProtocolMessageType('SdLocalizationStatus', (_message.Message,), {
+
+    'Confidence' : _reflection.GeneratedProtocolMessageType('Confidence', (_message.Message,), {
+      'DESCRIPTOR' : _LOCKONROADRESULT_SDLOCALIZATIONSTATUS_CONFIDENCE,
+      '__module__' : 'lock_on_road.lock_on_road_pb2'
+      # @@protoc_insertion_point(class_scope:deeproute.localization.LockOnRoadResult.SdLocalizationStatus.Confidence)
+      })
+    ,
+    'DESCRIPTOR' : _LOCKONROADRESULT_SDLOCALIZATIONSTATUS,
+    '__module__' : 'lock_on_road.lock_on_road_pb2'
+    # @@protoc_insertion_point(class_scope:deeproute.localization.LockOnRoadResult.SdLocalizationStatus)
+    })
+  ,
   'DESCRIPTOR' : _LOCKONROADRESULT,
   '__module__' : 'lock_on_road.lock_on_road_pb2'
   # @@protoc_insertion_point(class_scope:deeproute.localization.LockOnRoadResult)
@@ -61,6 +79,8 @@ _sym_db.RegisterMessage(LockOnRoadResult)
 _sym_db.RegisterMessage(LockOnRoadResult.ShadowMode)
 _sym_db.RegisterMessage(LockOnRoadResult.LinkProperties)
 _sym_db.RegisterMessage(LockOnRoadResult.NaviStatus)
+_sym_db.RegisterMessage(LockOnRoadResult.SdLocalizationStatus)
+_sym_db.RegisterMessage(LockOnRoadResult.SdLocalizationStatus.Confidence)
 
 LaneIndexEstimationResult = _reflection.GeneratedProtocolMessageType('LaneIndexEstimationResult', (_message.Message,), {
   'DESCRIPTOR' : _LANEINDEXESTIMATIONRESULT,
@@ -73,25 +93,33 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _LOCKONROADRESULT._serialized_start=107
-  _LOCKONROADRESULT._serialized_end=1648
-  _LOCKONROADRESULT_SHADOWMODE._serialized_start=833
-  _LOCKONROADRESULT_SHADOWMODE._serialized_end=1066
-  _LOCKONROADRESULT_SHADOWMODE_STATUS._serialized_start=1033
-  _LOCKONROADRESULT_SHADOWMODE_STATUS._serialized_end=1066
-  _LOCKONROADRESULT_LINKPROPERTIES._serialized_start=1069
-  _LOCKONROADRESULT_LINKPROPERTIES._serialized_end=1359
-  _LOCKONROADRESULT_LINKPROPERTIES_SDMAPSOURCETYPE._serialized_start=1300
-  _LOCKONROADRESULT_LINKPROPERTIES_SDMAPSOURCETYPE._serialized_end=1359
-  _LOCKONROADRESULT_NAVISTATUS._serialized_start=1362
-  _LOCKONROADRESULT_NAVISTATUS._serialized_end=1562
-  _LOCKONROADRESULT_NAVISTATUS_SOURCE._serialized_start=1517
-  _LOCKONROADRESULT_NAVISTATUS_SOURCE._serialized_end=1562
-  _LOCKONROADRESULT_STATUS._serialized_start=1564
-  _LOCKONROADRESULT_STATUS._serialized_end=1648
-  _LANEINDEXESTIMATIONRESULT._serialized_start=1651
-  _LANEINDEXESTIMATIONRESULT._serialized_end=2034
-  _LANEINDEXESTIMATIONRESULT_TYPE._serialized_start=1922
-  _LANEINDEXESTIMATIONRESULT_TYPE._serialized_end=1985
-  _LANEINDEXESTIMATIONRESULT_CLOSESTCURB._serialized_start=1987
-  _LANEINDEXESTIMATIONRESULT_CLOSESTCURB._serialized_end=2034
+  _LOCKONROADRESULT._serialized_end=2482
+  _LOCKONROADRESULT_SHADOWMODE._serialized_start=1007
+  _LOCKONROADRESULT_SHADOWMODE._serialized_end=1240
+  _LOCKONROADRESULT_SHADOWMODE_STATUS._serialized_start=1207
+  _LOCKONROADRESULT_SHADOWMODE_STATUS._serialized_end=1240
+  _LOCKONROADRESULT_LINKPROPERTIES._serialized_start=1243
+  _LOCKONROADRESULT_LINKPROPERTIES._serialized_end=1533
+  _LOCKONROADRESULT_LINKPROPERTIES_SDMAPSOURCETYPE._serialized_start=1474
+  _LOCKONROADRESULT_LINKPROPERTIES_SDMAPSOURCETYPE._serialized_end=1533
+  _LOCKONROADRESULT_NAVISTATUS._serialized_start=1536
+  _LOCKONROADRESULT_NAVISTATUS._serialized_end=1736
+  _LOCKONROADRESULT_NAVISTATUS_SOURCE._serialized_start=1691
+  _LOCKONROADRESULT_NAVISTATUS_SOURCE._serialized_end=1736
+  _LOCKONROADRESULT_SDLOCALIZATIONSTATUS._serialized_start=1739
+  _LOCKONROADRESULT_SDLOCALIZATIONSTATUS._serialized_end=2275
+  _LOCKONROADRESULT_SDLOCALIZATIONSTATUS_CONFIDENCE._serialized_start=2091
+  _LOCKONROADRESULT_SDLOCALIZATIONSTATUS_CONFIDENCE._serialized_end=2236
+  _LOCKONROADRESULT_SDLOCALIZATIONSTATUS_CONFIDENCESTATUS._serialized_start=2238
+  _LOCKONROADRESULT_SDLOCALIZATIONSTATUS_CONFIDENCESTATUS._serialized_end=2275
+  _LOCKONROADRESULT_STATUS._serialized_start=2277
+  _LOCKONROADRESULT_STATUS._serialized_end=2361
+  _LOCKONROADRESULT_YAWSCENETYPE._serialized_start=2363
+  _LOCKONROADRESULT_YAWSCENETYPE._serialized_end=2482
+  _LANEINDEXESTIMATIONRESULT._serialized_start=2485
+  _LANEINDEXESTIMATIONRESULT._serialized_end=2868
+  _LANEINDEXESTIMATIONRESULT_TYPE._serialized_start=2756
+  _LANEINDEXESTIMATIONRESULT_TYPE._serialized_end=2819
+  _LANEINDEXESTIMATIONRESULT_CLOSESTCURB._serialized_start=2821
+  _LANEINDEXESTIMATIONRESULT_CLOSESTCURB._serialized_end=2868
 # @@protoc_insertion_point(module_scope)

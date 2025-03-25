@@ -37,11 +37,17 @@ message GetEventsRp {
 }
 
 message SetSafetyPolicy {
-  bool enable_policy = 1;
+  bool enable_policy = 1; // enable/disable general safety policies
+  // about `enable_critical_policy`:
+  // if true, enable CRITICAL safety policies even if enable_policy is false;
+  // if false, follow enable_policy.
+  // CRITICAL safety policies are defined by config file.
+  bool enable_critical_policy = 2;
 }
 
 message SetSafetyPolicyRp {
-  bool policy_enabled = 1;
+  bool policy_enabled = 1; // is general safety policy enabled
+  bool critical_policy_enabled = 2; // is critical safety policy enabled. when policy_enabled is true, critical_policy_enabled will also be set to true.
 }
 
 message ManageSafetyEventRequest {

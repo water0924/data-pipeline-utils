@@ -73,6 +73,9 @@ enum ParkingDwmUID {
   PARKING_DWM_POP_ID_60044 = 60044;//距离超限，路线学习失败
   PARKING_DWM_POP_ID_60022 = 60022;//路线学习失败
   PARKING_DWM_POP_ID_60021 = 60021;//路线生成失败
+  PARKING_DWM_POP_ID_60138 = 60138;//倒车距离过远，路线学习失败
+  PARKING_DWM_POP_ID_60046 = 60046;//行驶路线重叠，路线学习失败
+  PARKING_DWM_POP_ID_60213 = 60213;//行驶距离过短，创建路线失败
 
   PARKING_DWM_POP_ID_60158 = 60158;//记忆泊车暂停，请关闭充电枪盖
   PARKING_DWM_POP_ID_60163 = 60163;//记忆泊车暂停，请解除拖车模式
@@ -112,12 +115,15 @@ enum ParkingDwmUID {
   PARKING_DWM_POP_ID_60067 = 60067;//请开往路线起点
   PARKING_DWM_POP_ID_60026 = 60026;//请重新回到起点
   PARKING_DWM_POP_ID_60027 = 60027;//记忆泊车可用
+  PARKING_DWM_POP_ID_24228 = 24228;//请回正方向盘
 
   PARKING_DWM_POP_ID_60072 = 60072;//请降低车速
   PARKING_DWM_POP_ID_24220 = 24220;//显示“去记忆泊车”按键，语音播报”已到达记忆泊车路线附近“
   PARKING_DWM_POP_ID_60019 = 60019;//请行驶至你的车位后停车
   PARKING_DWM_POP_ID_60042 = 60042;//请选择你的车位或倒车入库
   PARKING_DWM_POP_ID_60069 = 60069;//泊车完成后请挂 P 挡
+  PARKING_DWM_POP_ID_60070 = 60070;//车速过高，请减速
+  PARKING_DWM_POP_ID_24230 = 24230;//点击完成学习即可保存路线
   PARKING_DWM_POP_ID_24222 = 24222;//可直接完成学习或自动泊车
   PARKING_DWM_POP_ID_60214 = 60214;//路线学习距离剩余不足 100m
   PARKING_DWM_POP_ID_60215 = 60215;//剩余学习距离即将不足（≤60m）
@@ -126,6 +132,7 @@ enum ParkingDwmUID {
   PARKING_DWM_POP_ID_60036 = 60036;//即将泊入你的车位
   PARKING_DWM_POP_ID_60037 = 60037;//请选择可用车位
   PARKING_DWM_POP_ID_24226 = 24226;//点击自动泊车进行泊入
+  PARKING_DWM_POP_ID_60016 = 60016;//开始学习路线了，请保持车速在25km/h以下
 
   PARKING_DWM_POP_ID_61006 = 61006;//泊车中，请注意周围环境安全
   PARKING_DWM_POP_ID_61007 = 61007;//泊车已完成
@@ -143,6 +150,8 @@ enum ParkingDwmUID {
   PARKING_DWM_POP_ID_61044 = 61044;//揉库次数超限，泊车功能退出
   PARKING_DWM_POP_ID_61064 = 61064;//空间不足，泊车功能退出
   PARKING_DWM_POP_ID_61045 = 61045;//路径规划失败，泊车功能退出
+  PARKING_DWM_POP_ID_61009 = 61009;//当前条件不满足，泊车已终止
+
   PARKING_DWM_POP_ID_24227 = 24227;//如需泊入沿途车位，请选择       ->MapLearningAPA/ParkingInProcess/LpCruisingPark状态下的引导文言
 
 
@@ -170,12 +179,16 @@ enum ParkingDwmPopUID {
   PARKING_DWM_POP_ID_70060 = 70060;//存储空间已满，请先删除路线
   PARKING_DWM_POP_ID_74225 = 74225;//暂未定位到路线
   PARKING_DWM_POP_ID_70004 = 70004;//请松开方向盘
+  PARKING_DWM_POP_ID_74228 = 74228;//方向盘转角过大，请回正
+
   PARKING_DWM_POP_ID_70041 = 70041;//前视摄像头故障
   PARKING_DWM_POP_ID_70056 = 70056;//前视摄像头被遮挡
   PARKING_DWM_POP_ID_70047 = 70047;//智驾功能冲突
   PARKING_DWM_POP_ID_74214 = 74214;//激光雷达故障
   PARKING_DWM_POP_ID_74213 = 74213;//激光雷达被遮挡
+  PARKING_DWM_POP_ID_71000 = 71000;//当前条件不满足，功能暂无法使用
 
+  PARKING_DWM_POP_ID_70172 = 70172;//该停车场路线已替换为新路线
 
 }
 

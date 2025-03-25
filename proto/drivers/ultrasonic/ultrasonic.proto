@@ -33,6 +33,7 @@ message UltrasonicState {
   repeated uint32 object_detect_area_list = 1;
   optional bool fpas_dispcmd = 2;
   optional WorkStsType apasys_workstatus = 3;
+  repeated uint32 probe_fault_status = 4;
 }
 
 message UltrasonicObject {
@@ -53,6 +54,9 @@ message UltrasonicObject {
   optional uint32 ringing_time = 15;
   optional EmitStatus emit_status = 16;
   optional uint32 id = 17;
+  optional uint32 echo_tof = 18;
+  optional uint32 echo_width = 19;
+  optional uint32 echo_peak = 20;
 }
 
 message UltrasonicObstacle {
@@ -61,6 +65,7 @@ message UltrasonicObstacle {
     HEIGHT_TYPE_HIGHT = 1;
     HEIGHT_TYPE_TRAVERSIBLE = 2;
     HEIGHT_TYPE_UNKNOWN = 3;
+    HEIGHT_TYPE_SPECIAL1 = 4;//同致的特殊属性
   }
 
   enum ObstacleType {

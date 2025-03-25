@@ -60,6 +60,10 @@ enum VehicleBrand {
   HY11 = 30;
   BYD_TANG = 31;
   GWM_M8 = 32;
+  GWM_D03 = 33;
+  GWM_P03 = 34;
+  GL_P177 = 35;
+  GWM_DE09 = 36;
 }
 
 message VehicleID {
@@ -164,10 +168,18 @@ message VehicleConfig {
   optional SensorsParameters sensors_parameters = 4;
 }
 
+message SpeedometerMapParam {
+  optional double speedometer_map_ratio = 1 [default = 1.03];
+  optional double speedometer_low_speed_map_ratio = 2 [default = 1.03];
+  optional double speedometer_map_offset = 3 [default = 1.3];
+  optional double speedometer_map_low_speed = 4 [default = 40.0];
+  optional bool use_round_method = 5 [default = true];
+}
+
 message PncVehicleParam {
   optional double stitch_time_offset = 1;              // [s]
-  optional double max_lateral_acceleration = 2;        // [m/s^2]
-  optional double max_lateral_jerk = 3;                // [m/s^3]
+  optional double max_lateral_acceleration = 2[deprecated = true];        // [m/s^2]
+  optional double max_lateral_jerk = 3[deprecated = true];                // [m/s^3]
   optional double max_steer_angle_rate = 4 [deprecated = true];            // steering wheel [deg/s]
   optional double max_steer_angle_rate_low_speed = 5 [deprecated = true];  // steering wheel [deg/s]
   optional double max_steer_acceleration = 6;    // steering wheel [deg/s^2]
@@ -197,10 +209,21 @@ message PncVehicleParam {
   optional double reinit_lateral_thres_stop = 27 [default = 0.1];
   optional double reinit_lon_thres_stop = 28 [default = 1.0];
   repeated Pair vx_stwl_rate_deg_pts = 29;
-  optional double max_steer_angle_rate_osp = 30 [default = 360.0];
+  optional double max_steer_angle_rate_osp = 30 [deprecated = true];
+  repeated Pair vx_stwl_rate_deg_osp_pts = 31;
+  repeated Pair vx_lat_acc_pts = 32;
+  repeated Pair vx_lat_jerk_pts = 33;
+  repeated Pair vx_min_lon_acc_pts = 34;
+  repeated Pair vx_max_lon_acc_pts = 35;
+  repeated Pair vx_min_lon_jerk_pts = 36;
+  repeated Pair vx_max_lon_jerk_pts = 37;
+  optional SpeedometerMapParam speedometer_map_param = 38;
+  repeated Pair vx_max_stwl_deg_pts = 39;
 
   // active-safety pnc vehicle param from 100-150
-  optional double ess_lat_iter_delay = 100 [default = 14];
+  optional double ess_lat_iter_delay = 100 [default = 14.0];
+  optional double ess_max_lateral_acceleration = 101 [default = 5.0];
+  optional double ess_max_steer_angle_rate = 102 [default = 450.0];
 
   message ModelParam {
     optional double distance_center_to_front_alxe = 1;  // [m]

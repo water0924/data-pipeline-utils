@@ -221,8 +221,14 @@ message ADCTrajectory {
     DEFAULT = 0;
     HAVP = 1;
     LSS = 2;
+    HAVP_DETOUR = 3;
   }
   optional PlannerTaskType planner_task_type = 50;
+
+  optional double init_curvature_adjustment_start_time = 51 [default = 0.0];
+  optional double init_curvature_adjustment_end_time = 52 [default = 5.0];
+  optional bool start_open_space_replan = 53 [default = false];
+  optional int64 trajectory_start_point_time = 54;  // trajectory start point time(us)
 }
 
 // geometry center
@@ -280,6 +286,9 @@ message LaneChangeRelated {
     MERGE_IN_LANE = 12;
     MERGE_OUT_LANE = 13;
     PARALLEL_TRUCK = 14;
+    // model reference line
+    MODEL_REFLINE_INTENTION = 15;
+    AVOID_MERGE_LANE = 16;
   }
   optional LaneChangeReason lane_change_reason = 4;
 
@@ -295,6 +304,7 @@ message LaneChangeRelated {
     RECOVERING = 8;
     FRONT_CENTER_CROSSED = 9;
     LANE_CHANGE_HOLD = 10;
+    ASKING_FOR_CONFIRMATION = 11;
   }
   optional LaneChangeStatus lane_change_status = 5;
   optional LaneChangeStatus lane_change_status_action = 17;
@@ -344,6 +354,14 @@ message LaneChangeRelated {
   optional int32 ilc_critical_object_id = 11;
   optional double ilc_execution_time = 12;
   optional double front_center_crossed_time_ms = 18;
+  repeated int32 abn_static_ids = 19;
+
+  message ConfirmationInfo {
+    optional LaneChangeReason reason = 1;
+    optional TargetLane direction = 2;
+    // ToDo: target lane ids?
+  }
+  optional ConfirmationInfo confirmation_info = 20;
 }
 
 message LaneWidth {
@@ -557,6 +575,7 @@ message VisualTrajectoryPoint {
 
 message VisualTrajectory {
   repeated VisualTrajectoryPoint trajectory_points = 1;
+  repeated VisualTrajectoryPoint original_trajectory_points = 2;
 }
 
 message BlindArea {
@@ -632,6 +651,58 @@ message CollisionTriggerInfo {
   optional int32 collision_obs_percep_id = 2;
 }
 
+message ObjInteractionCount {
+  optional int32 vru_count = 1;
+  optional int32 cutin_count = 2;
+  optional int32 vehicle_count = 3;
+}
+
+enum AStarSearchNoResultReason {
+  HAS_RESULT = 0;  // has result
+  INIT_COLLISION = 1;
+  TARGET_COLLISION = 2;
+  COMPLEX_SCENE = 3;
+};
+
+enum SCENE_TYPE {
+  NORMAL_SCENE = 0;
+  SHORT_PASSAGE_SCENE = 1;
+  DEAD_END_SCENE = 2;
+}
+
+enum ParkingSpotShape {
+  NONE_SHAPE = 0;
+  VERTICAL_SHAPE = 1;
+  PARALLEL_SHAPE = 2;
+  DIAGONAL_SHAPE = 3;
+}
+
+message VpaSemanticInfo {
+  enum ObjAlarmLevel {
+    OBJ_ALARM_LEVEL_NONE = 0;
+    OBJ_ALARM_LEVEL_GREEN = 1;
+    OBJ_ALARM_LEVEL_YELLOW = 2;
+    OBJ_ALARM_LEVEL_RED = 3;
+  }
+  message VpaObjAlarmInfo {
+    optional int32 obj_id = 1;
+    optional ObjAlarmLevel alarm_level = 2;
+  }
+
+  repeated VpaObjAlarmInfo vpa_obj_alarm_info = 1;
+};
+
+message AStarSearchResultAnalysisInfo {
+  optional ParkingSpotShape spot_type = 1;
+  optional bool search_has_result = 2;
+  optional SCENE_TYPE scene_type = 3;
+  optional int64 gear_num = 4;
+  optional bool is_replan_with_same_gear = 5;
+  optional AStarSearchNoResultReason no_result_reason = 6;
+  //[ms]
+  optional double search_time = 7;
+};
+
 message PlanningSemanticInfo {
   enum TrafficCondition {
     UNKNOWN = 0;
@@ -674,6 +745,10 @@ message PlanningSemanticInfo {
   optional DynamicFollowInfo dynamic_follow_info = 30;
   optional ModelSpeedLimitInfo model_speed_limit_info = 31;
   optional CollisionTriggerInfo collision_trigger_info = 32;
+  optional bool is_close_to_junction = 33 [deprecated = false];
+  optional ObjInteractionCount obj_interaction_count = 34;
+  optional AStarSearchResultAnalysisInfo a_star_result_analysis_info = 35;
+  optional VpaSemanticInfo vpa_semantic_info = 36;
 }
 
 message DynamicFollowInfo {
@@ -697,6 +772,7 @@ message TrafficLightInfo {
   optional TrafficLightState tl_state = 7;
   optional deeproute.perception.TrafficLight.Shape shape = 8;
   optional deeproute.common.PointENU stop_line_center_point = 9;
+  optional bool failed_to_stop_at_red_light = 10;  // 闯红灯
 }
 
 message SingleLaneBehavior {

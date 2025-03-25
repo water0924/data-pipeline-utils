@@ -19,9 +19,11 @@ from proto.map import sd_map_pb2 as map_dot_sd__map__pb2
 from proto.graph_match import graph_matching_pb2 as graph__match_dot_graph__matching__pb2
 from proto.routing import local_routing_pb2 as routing_dot_local__routing__pb2
 from proto.routing import cloud_task_pb2 as routing_dot_cloud__task__pb2
+from proto.odd import odd_pb2 as odd_dot_odd__pb2
+from proto.map import map_common_pb2 as map_dot_map__common__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1drouting/navinfo_routing.proto\x12\x11\x64\x65\x65proute.navinfo\x1a\x15\x63ommon/geometry.proto\x1a\x11map/routing.proto\x1a\x10map/sd_map.proto\x1a graph_match/graph_matching.proto\x1a\x1brouting/local_routing.proto\x1a\x18routing/cloud_task.proto\"\xc8\x02\n\x11SDRoutingResponse\x12>\n\x13route_planning_type\x18\xe8\x07 \x01(\x0e\x32 .deeproute.map.RoutePlanningType\x12(\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x1a.deeproute.map.RoutingCode\x12)\n\x06result\x18\x02 \x03(\x0b\x32\x19.deeproute.navinfo.Result\x12\x12\n\nrequest_id\x18\x03 \x01(\t\x12\x13\n\x0bresponse_id\x18\x08 \x01(\x05\x12.\n\x07request\x18\x04 \x01(\x0b\x32\x1d.deeproute.map.RoutingRequest\x12\x1b\n\x13segmented_route_num\x18\x05 \x01(\x05\x12\x16\n\x0esd_map_version\x18\x06 \x01(\t\x12\x10\n\x08route_id\x18\x07 \x01(\x04\"%\n\x08NaviHead\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0b\n\x03ver\x18\x02 \x01(\t\"\x9d\x01\n\x08LaneInfo\x12\x0b\n\x03\x61rr\x18\x01 \x01(\x05\x12\n\n\x02la\x18\x02 \x01(\x05\x12\n\n\x02ra\x18\x03 \x01(\x05\x12\n\n\x02\x62m\x18\x04 \x01(\x05\x12\x0e\n\x06\x62us_bm\x18\x05 \x01(\x05\x12\n\n\x02ln\x18\x06 \x01(\x05\x12\x14\n\x0cout_link_ids\x18\x07 \x03(\x04\x12.\n\nlane_conds\x18\x08 \x03(\x0b\x32\x1a.deeproute.sd_map.LaneCond\"\xa1\x04\n\x08LinkAttr\x12\x12\n\ndr_link_id\x18\x13 \x01(\x04\x12\r\n\x05ni_id\x18\x06 \x01(\t\x12\x0b\n\x03\x64is\x18\x07 \x01(\x05\x12\x15\n\rtraffic_light\x18\x08 \x01(\x05\x12\x0b\n\x03spl\x18\t \x01(\x05\x12\x0e\n\x06tunnel\x18\n \x01(\x05\x12\x10\n\x08lane_num\x18\x0b \x01(\x05\x12*\n\x05lanes\x18\x0c \x03(\x0b\x32\x1b.deeproute.navinfo.LaneInfo\x12\x10\n\x08\x65levated\x18\r \x01(\x08\x12\x0e\n\x06sh_pos\x18\x01 \x01(\t\x12\x12\n\nf_lane_num\x18\x02 \x01(\x05\x12\n\n\x02pr\x18\x03 \x01(\x05\x12\r\n\x05usage\x18\x04 \x01(\x05\x12\x30\n\x0cshape_points\x18\x05 \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x32\n\x0fshape_points_2d\x18\x0e \x03(\x0b\x32\x19.deeproute.common.Point2D\x12\x34\n\x08\x66ormways\x18\x0f \x03(\x0e\x32\".deeproute.sd_map.LinkData.FormWay\x12.\n\nlane_attrs\x18\x10 \x03(\x0b\x32\x1a.deeproute.sd_map.LaneAttr\x12\x36\n\x0elane_info_data\x18\x12 \x03(\x0b\x32\x1e.deeproute.sd_map.LaneInfoData\x12\x1e\n\x16\x65xperience_speed_limit\x18\x11 \x01(\r\"r\n\x04Link\x12.\n\tlink_attr\x18\x01 \x01(\x0b\x32\x1b.deeproute.navinfo.LinkAttr\x12\x0b\n\x03psn\x18\x02 \x01(\x05\x12-\n\x08ps_infos\x18\x03 \x03(\x0b\x32\x1b.deeproute.navinfo.LinkAttr\"\x84\x02\n\x0eSpeedLimitInfo\x12\x15\n\rspd_limit_dis\x18\x01 \x03(\x05\x12\x15\n\rspd_limit_spl\x18\x02 \x03(\x05\x12T\n\x0espd_limit_type\x18\x03 \x03(\x0e\x32<.deeproute.routing.NavigationInfoForVisualize.SpeedLimitType\x12\x11\n\tspl_ratio\x18\x04 \x01(\x02\x12\x0f\n\x07min_spl\x18\x05 \x01(\x05\x12\x30\n\nscene_type\x18\x06 \x01(\x0e\x32\x1c.deeproute.navinfo.SceneType\x12\x18\n\x10is_map_spl_limit\x18\x07 \x01(\x08\"\x80\x01\n\x15\x44\x61taCollectSingleTask\x12\x0f\n\x07task_id\x18\x01 \x01(\x03\x12\x46\n\x13image_collect_event\x18\n \x01(\x0b\x32\'.deeproute.cloud_task.ImageCollectEventH\x00\x42\x0e\n\x0c\x43ollectEvent\"J\n\x0f\x44\x61taCollectTask\x12\x37\n\x05tasks\x18\x01 \x03(\x0b\x32(.deeproute.navinfo.DataCollectSingleTask\"\x94\t\n\x07Segment\x12=\n\x11\x64\x61ta_collect_task\x18\x65 \x01(\x0b\x32\".deeproute.navinfo.DataCollectTask\x12\x14\n\x0cvirtual_link\x18\x64 \x01(\x08\x12\x14\n\x0cis_odd_limit\x18! \x01(\x08\x12\x12\n\ndr_link_id\x18% \x01(\x04\x12\x0b\n\x03\x64is\x18\x01 \x01(\x05\x12\x0f\n\x07\x61\x62s_dis\x18\x02 \x01(\x05\x12\r\n\x05ni_id\x18\x03 \x01(\t\x12\x0e\n\x06sh_pos\x18\x04 \x01(\t\x12\x15\n\rtraffic_light\x18\x05 \x01(\x05\x12\x0b\n\x03spl\x18\x06 \x01(\x05\x12\x12\n\nf_lane_num\x18\x07 \x01(\x05\x12\x10\n\x08\x63rossing\x18\x08 \x01(\x05\x12\n\n\x02\x62m\x18\t \x01(\x05\x12\x0b\n\x03\x61rr\x18\n \x01(\x05\x12\x30\n\x0cshape_points\x18\x0b \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x32\n\x0fshape_points_2d\x18\x1b \x03(\x0b\x32\x19.deeproute.common.Point2D\x12\n\n\x02pr\x18\x0c \x01(\x05\x12\x0e\n\x06tunnel\x18\r \x01(\x05\x12\x10\n\x08lane_num\x18\x0e \x01(\x05\x12*\n\x05lanes\x18\x0f \x03(\x0b\x32\x1b.deeproute.navinfo.LaneInfo\x12\r\n\x05usage\x18\x10 \x01(\x05\x12\x34\n\x08\x66ormways\x18\x1d \x03(\x0e\x32\".deeproute.sd_map.LinkData.FormWay\x12.\n\nlane_attrs\x18\x1e \x03(\x0b\x32\x1a.deeproute.sd_map.LaneAttr\x12\x0e\n\x06tmc_lv\x18\x14 \x01(\x05\x12\x0c\n\x04r_bm\x18\x15 \x01(\x05\x12\x0c\n\x04v_bm\x18\x16 \x01(\x05\x12\x0e\n\x06\x63_b_bm\x18\x17 \x01(\x05\x12.\n\rin_link_infos\x18\x11 \x03(\x0b\x32\x17.deeproute.navinfo.Link\x12/\n\x0eout_link_infos\x18\x12 \x03(\x0b\x32\x17.deeproute.navinfo.Link\x12\x10\n\x08\x65levated\x18\x13 \x01(\x08\x12\x14\n\x0ctoll_station\x18\x1a \x01(\x05\x12\x45\n\x0f\x61map_link_range\x18\x1c \x03(\x0b\x32(.deeproute.graph_match.AmapLinkMatchInfoB\x02\x18\x01\x12<\n\namap_range\x18\x1f \x01(\x0b\x32(.deeproute.graph_match.AmapLinkMatchInfo\x12\x1e\n\x16\x65xperience_speed_limit\x18  \x01(\r\x12\x36\n\x0elane_info_data\x18# \x03(\x0b\x32\x1e.deeproute.sd_map.LaneInfoData\x12\x12\n\nadmin_code\x18\" \x01(\x05\x12\x19\n\x11\x65xact_speed_limit\x18$ \x01(\r\x12)\n\x07\x63\x61meras\x18& \x03(\x0b\x32\x18.deeproute.sd_map.Camera\x12\x39\n\x0espd_limit_info\x18\' \x01(\x0b\x32!.deeproute.navinfo.SpeedLimitInfo\"\xbf\x01\n\x10SpeedLimitConfig\x12\x19\n\x11\x65nable_server_spl\x18\x01 \x01(\x08\x12\x1f\n\x17\x65nable_highway_amap_spl\x18\x02 \x01(\x08\x12\x1f\n\x17\x65nable_express_amap_spl\x18\x03 \x01(\x08\x12&\n\x1e\x65nable_highway_amap_camera_spl\x18\x04 \x01(\x08\x12&\n\x1e\x65nable_express_amap_camera_spl\x18\x05 \x01(\x08\"\xb4\x04\n\x05Route\x12\x14\n\x0c\x61map_path_id\x18\x64 \x01(\x05\x12\x17\n\x0f\x61map_path_id_64\x18\x65 \x01(\x04\x12.\n\tnavi_head\x18\x01 \x01(\x0b\x32\x1b.deeproute.navinfo.NaviHead\x12\x0b\n\x03\x64is\x18\x02 \x01(\x05\x12\x0b\n\x03\x64ur\x18\x03 \x01(\x05\x12(\n\x04segm\x18\x04 \x03(\x0b\x32\x1a.deeproute.navinfo.Segment\x12<\n\x0bnid_to_segm\x18\x05 \x03(\x0b\x32\'.deeproute.navinfo.Route.NidToSegmEntry\x12+\n\x08sd_links\x18\x06 \x01(\x0b\x32\x19.deeproute.sd_map.SdLinks\x12\x42\n\x10mismatch_indexes\x18\x07 \x03(\x0b\x32(.deeproute.graph_match.MismatchSegmIndex\x12?\n\x12speed_limit_config\x18\n \x01(\x0b\x32#.deeproute.navinfo.SpeedLimitConfig\x12J\n\x18mismatch_amap_link_range\x18\x1c \x03(\x0b\x32(.deeproute.graph_match.AmapLinkMatchInfo\x1aL\n\x0eNidToSegmEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12)\n\x05value\x18\x02 \x01(\x0b\x32\x1a.deeproute.navinfo.Segment:\x02\x38\x01\"1\n\x06Result\x12\'\n\x05route\x18\x01 \x01(\x0b\x32\x18.deeproute.navinfo.Route*\x83\x02\n\tSceneType\x12\x0b\n\x07INVALID\x10\x00\x12\x17\n\x13RAMP_EXIT_SPD_LIMIT\x10\x01\x12\x13\n\x0fMERGE_SPD_LIMIT\x10\x02\x12\x1a\n\x16HIGHWAY_EXIT_SPD_LIMIT\x10\x03\x12\x1a\n\x16\x45XPRESS_EXIT_SPD_LIMIT\x10\x04\x12\x12\n\x0eJUNC_SPD_LIMIT\x10\x05\x12!\n\x1dMAIN_AUXILIARY_ROAD_SPD_LIMIT\x10\x06\x12\x12\n\x0eTOLL_SPD_LIMIT\x10\x07\x12\x1a\n\x16\x45NTER_TUNNEL_SPD_LIMIT\x10\x08\x12\x1c\n\x18TRAFFIC_CAMERA_SPD_LIMIT\x10\t')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1drouting/navinfo_routing.proto\x12\x11\x64\x65\x65proute.navinfo\x1a\x15\x63ommon/geometry.proto\x1a\x11map/routing.proto\x1a\x10map/sd_map.proto\x1a graph_match/graph_matching.proto\x1a\x1brouting/local_routing.proto\x1a\x18routing/cloud_task.proto\x1a\rodd/odd.proto\x1a\x14map/map_common.proto\"\xc8\x02\n\x11SDRoutingResponse\x12>\n\x13route_planning_type\x18\xe8\x07 \x01(\x0e\x32 .deeproute.map.RoutePlanningType\x12(\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x1a.deeproute.map.RoutingCode\x12)\n\x06result\x18\x02 \x03(\x0b\x32\x19.deeproute.navinfo.Result\x12\x12\n\nrequest_id\x18\x03 \x01(\t\x12\x13\n\x0bresponse_id\x18\x08 \x01(\x05\x12.\n\x07request\x18\x04 \x01(\x0b\x32\x1d.deeproute.map.RoutingRequest\x12\x1b\n\x13segmented_route_num\x18\x05 \x01(\x05\x12\x16\n\x0esd_map_version\x18\x06 \x01(\t\x12\x10\n\x08route_id\x18\x07 \x01(\x04\"%\n\x08NaviHead\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0b\n\x03ver\x18\x02 \x01(\t\"\x9d\x01\n\x08LaneInfo\x12\x0b\n\x03\x61rr\x18\x01 \x01(\x05\x12\n\n\x02la\x18\x02 \x01(\x05\x12\n\n\x02ra\x18\x03 \x01(\x05\x12\n\n\x02\x62m\x18\x04 \x01(\x05\x12\x0e\n\x06\x62us_bm\x18\x05 \x01(\x05\x12\n\n\x02ln\x18\x06 \x01(\x05\x12\x14\n\x0cout_link_ids\x18\x07 \x03(\x04\x12.\n\nlane_conds\x18\x08 \x03(\x0b\x32\x1a.deeproute.sd_map.LaneCond\"\xa1\x04\n\x08LinkAttr\x12\x12\n\ndr_link_id\x18\x13 \x01(\x04\x12\r\n\x05ni_id\x18\x06 \x01(\t\x12\x0b\n\x03\x64is\x18\x07 \x01(\x05\x12\x15\n\rtraffic_light\x18\x08 \x01(\x05\x12\x0b\n\x03spl\x18\t \x01(\x05\x12\x0e\n\x06tunnel\x18\n \x01(\x05\x12\x10\n\x08lane_num\x18\x0b \x01(\x05\x12*\n\x05lanes\x18\x0c \x03(\x0b\x32\x1b.deeproute.navinfo.LaneInfo\x12\x10\n\x08\x65levated\x18\r \x01(\x08\x12\x0e\n\x06sh_pos\x18\x01 \x01(\t\x12\x12\n\nf_lane_num\x18\x02 \x01(\x05\x12\n\n\x02pr\x18\x03 \x01(\x05\x12\r\n\x05usage\x18\x04 \x01(\x05\x12\x30\n\x0cshape_points\x18\x05 \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x32\n\x0fshape_points_2d\x18\x0e \x03(\x0b\x32\x19.deeproute.common.Point2D\x12\x34\n\x08\x66ormways\x18\x0f \x03(\x0e\x32\".deeproute.sd_map.LinkData.FormWay\x12.\n\nlane_attrs\x18\x10 \x03(\x0b\x32\x1a.deeproute.sd_map.LaneAttr\x12\x36\n\x0elane_info_data\x18\x12 \x03(\x0b\x32\x1e.deeproute.sd_map.LaneInfoData\x12\x1e\n\x16\x65xperience_speed_limit\x18\x11 \x01(\r\"r\n\x04Link\x12.\n\tlink_attr\x18\x01 \x01(\x0b\x32\x1b.deeproute.navinfo.LinkAttr\x12\x0b\n\x03psn\x18\x02 \x01(\x05\x12-\n\x08ps_infos\x18\x03 \x03(\x0b\x32\x1b.deeproute.navinfo.LinkAttr\"\x9b\x02\n\x0eSpeedLimitInfo\x12\x15\n\rspd_limit_dis\x18\x01 \x03(\x05\x12\x15\n\rspd_limit_spl\x18\x02 \x03(\x05\x12T\n\x0espd_limit_type\x18\x03 \x03(\x0e\x32<.deeproute.routing.NavigationInfoForVisualize.SpeedLimitType\x12\x11\n\tspl_ratio\x18\x04 \x01(\x02\x12\x0f\n\x07min_spl\x18\x05 \x01(\x05\x12\x30\n\nscene_type\x18\x06 \x01(\x0e\x32\x1c.deeproute.navinfo.SceneType\x12\x18\n\x10is_map_spl_limit\x18\x07 \x01(\x08\x12\x15\n\rexp_spd_limit\x18\x08 \x01(\x05\"=\n\x11StaticRoutingInfo\x12\x1b\n\x13priority_lane_index\x18\x01 \x01(\x05\x12\x0b\n\x03\x63rs\x18\x02 \x03(\x05\"\xa0\x02\n\x15\x44\x61taCollectSingleTask\x12\x0f\n\x07task_id\x18\x01 \x01(\x03\x12\x46\n\x13image_collect_event\x18\n \x01(\x0b\x32\'.deeproute.cloud_task.ImageCollectEventH\x00\x12N\n\x17nnfeature_collect_event\x18\x0b \x01(\x0b\x32+.deeproute.cloud_task.NNFeatureCollectEventH\x00\x12N\n\x12\x64\x61ta_trigger_event\x18\x0c \x01(\x0b\x32\x30.deeproute.cloud_task.DataCollectionTriggerEventH\x00\x42\x0e\n\x0c\x43ollectEvent\"J\n\x0f\x44\x61taCollectTask\x12\x37\n\x05tasks\x18\x01 \x03(\x0b\x32(.deeproute.navinfo.DataCollectSingleTask\"\x9c\x02\n\nSegmAction\x12.\n\x0bmain_action\x18\x01 \x01(\x0e\x32\x19.deeproute.map.MainAction\x12\x38\n\x10\x61ssistant_action\x18\x02 \x01(\x0e\x32\x1e.deeproute.map.AssistantAction\x12\x30\n\x0clane_actions\x18\x03 \x01(\x0b\x32\x1a.deeproute.map.LaneActions\x12\x33\n\x10step_main_action\x18\x04 \x01(\x0e\x32\x19.deeproute.map.MainAction\x12=\n\x15step_assistant_action\x18\x05 \x01(\x0e\x32\x1e.deeproute.map.AssistantAction\"\xf5\n\n\x07Segment\x12=\n\x11\x64\x61ta_collect_task\x18\x65 \x01(\x0b\x32\".deeproute.navinfo.DataCollectTask\x12\x14\n\x0cvirtual_link\x18\x64 \x01(\x08\x12\x14\n\x0cis_odd_limit\x18! \x01(\x08\x12\x34\n\x0fodd_limit_types\x18( \x03(\x0e\x32\x1b.deeproute.odd.OddLimitType\x12\x32\n\x0eodd_type_infos\x18) \x03(\x0b\x32\x1a.deeproute.odd.OddTypeInfo\x12\x12\n\ndr_link_id\x18% \x01(\x04\x12\x0b\n\x03\x64is\x18\x01 \x01(\x05\x12\x0f\n\x07\x61\x62s_dis\x18\x02 \x01(\x05\x12\r\n\x05ni_id\x18\x03 \x01(\t\x12\x0e\n\x06sh_pos\x18\x04 \x01(\t\x12\x15\n\rtraffic_light\x18\x05 \x01(\x05\x12\x0b\n\x03spl\x18\x06 \x01(\x05\x12\x12\n\nf_lane_num\x18\x07 \x01(\x05\x12\x10\n\x08\x63rossing\x18\x08 \x01(\x05\x12\n\n\x02\x62m\x18\t \x01(\x05\x12\x0b\n\x03\x61rr\x18\n \x01(\x05\x12\x30\n\x0cshape_points\x18\x0b \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x32\n\x0fshape_points_2d\x18\x1b \x03(\x0b\x32\x19.deeproute.common.Point2D\x12\n\n\x02pr\x18\x0c \x01(\x05\x12\x0e\n\x06tunnel\x18\r \x01(\x05\x12\x10\n\x08lane_num\x18\x0e \x01(\x05\x12*\n\x05lanes\x18\x0f \x03(\x0b\x32\x1b.deeproute.navinfo.LaneInfo\x12\r\n\x05usage\x18\x10 \x01(\x05\x12\x34\n\x08\x66ormways\x18\x1d \x03(\x0e\x32\".deeproute.sd_map.LinkData.FormWay\x12.\n\nlane_attrs\x18\x1e \x03(\x0b\x32\x1a.deeproute.sd_map.LaneAttr\x12\x0e\n\x06tmc_lv\x18\x14 \x01(\x05\x12\x0c\n\x04r_bm\x18\x15 \x01(\x05\x12\x0c\n\x04v_bm\x18\x16 \x01(\x05\x12\x0e\n\x06\x63_b_bm\x18\x17 \x01(\x05\x12.\n\rin_link_infos\x18\x11 \x03(\x0b\x32\x17.deeproute.navinfo.Link\x12/\n\x0eout_link_infos\x18\x12 \x03(\x0b\x32\x17.deeproute.navinfo.Link\x12\x10\n\x08\x65levated\x18\x13 \x01(\x08\x12\x14\n\x0ctoll_station\x18\x1a \x01(\x05\x12\x45\n\x0f\x61map_link_range\x18\x1c \x03(\x0b\x32(.deeproute.graph_match.AmapLinkMatchInfoB\x02\x18\x01\x12<\n\namap_range\x18\x1f \x01(\x0b\x32(.deeproute.graph_match.AmapLinkMatchInfo\x12\x1e\n\x16\x65xperience_speed_limit\x18  \x01(\r\x12\x36\n\x0elane_info_data\x18# \x03(\x0b\x32\x1e.deeproute.sd_map.LaneInfoData\x12\x12\n\nadmin_code\x18\" \x01(\x05\x12\x19\n\x11\x65xact_speed_limit\x18$ \x01(\r\x12)\n\x07\x63\x61meras\x18& \x03(\x0b\x32\x18.deeproute.sd_map.Camera\x12\x39\n\x0espd_limit_info\x18\' \x01(\x0b\x32!.deeproute.navinfo.SpeedLimitInfo\x12\x41\n\x13static_routing_info\x18* \x01(\x0b\x32$.deeproute.navinfo.StaticRoutingInfo\x12\x32\n\x0bsegm_action\x18\x32 \x01(\x0b\x32\x1d.deeproute.navinfo.SegmAction\"\xbf\x01\n\x10SpeedLimitConfig\x12\x19\n\x11\x65nable_server_spl\x18\x01 \x01(\x08\x12\x1f\n\x17\x65nable_highway_amap_spl\x18\x02 \x01(\x08\x12\x1f\n\x17\x65nable_express_amap_spl\x18\x03 \x01(\x08\x12&\n\x1e\x65nable_highway_amap_camera_spl\x18\x04 \x01(\x08\x12&\n\x1e\x65nable_express_amap_camera_spl\x18\x05 \x01(\x08\"\x92\x05\n\x05Route\x12\x14\n\x0c\x61map_path_id\x18\x64 \x01(\x05\x12\x17\n\x0f\x61map_path_id_64\x18\x65 \x01(\x04\x12.\n\tnavi_head\x18\x01 \x01(\x0b\x32\x1b.deeproute.navinfo.NaviHead\x12\x0b\n\x03\x64is\x18\x02 \x01(\x05\x12\x0b\n\x03\x64ur\x18\x03 \x01(\x05\x12(\n\x04segm\x18\x04 \x03(\x0b\x32\x1a.deeproute.navinfo.Segment\x12<\n\x0bnid_to_segm\x18\x05 \x03(\x0b\x32\'.deeproute.navinfo.Route.NidToSegmEntry\x12+\n\x08sd_links\x18\x06 \x01(\x0b\x32\x19.deeproute.sd_map.SdLinks\x12\x42\n\x10mismatch_indexes\x18\x07 \x03(\x0b\x32(.deeproute.graph_match.MismatchSegmIndex\x12?\n\x12speed_limit_config\x18\n \x01(\x0b\x32#.deeproute.navinfo.SpeedLimitConfig\x12\\\n\x1alocal_routing_cloud_config\x18\x0b \x01(\x0b\x32\x38.deeproute.sd_map.SDMapVersionOnboard.LocalRoutingConfig\x12J\n\x18mismatch_amap_link_range\x18\x1c \x03(\x0b\x32(.deeproute.graph_match.AmapLinkMatchInfo\x1aL\n\x0eNidToSegmEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12)\n\x05value\x18\x02 \x01(\x0b\x32\x1a.deeproute.navinfo.Segment:\x02\x38\x01\"1\n\x06Result\x12\'\n\x05route\x18\x01 \x01(\x0b\x32\x18.deeproute.navinfo.Route*\x83\x02\n\tSceneType\x12\x0b\n\x07INVALID\x10\x00\x12\x17\n\x13RAMP_EXIT_SPD_LIMIT\x10\x01\x12\x13\n\x0fMERGE_SPD_LIMIT\x10\x02\x12\x1a\n\x16HIGHWAY_EXIT_SPD_LIMIT\x10\x03\x12\x1a\n\x16\x45XPRESS_EXIT_SPD_LIMIT\x10\x04\x12\x12\n\x0eJUNC_SPD_LIMIT\x10\x05\x12!\n\x1dMAIN_AUXILIARY_ROAD_SPD_LIMIT\x10\x06\x12\x12\n\x0eTOLL_SPD_LIMIT\x10\x07\x12\x1a\n\x16\x45NTER_TUNNEL_SPD_LIMIT\x10\x08\x12\x1c\n\x18TRAFFIC_CAMERA_SPD_LIMIT\x10\t')
 
 _SCENETYPE = DESCRIPTOR.enum_types_by_name['SceneType']
 SceneType = enum_type_wrapper.EnumTypeWrapper(_SCENETYPE)
@@ -43,8 +45,10 @@ _LANEINFO = DESCRIPTOR.message_types_by_name['LaneInfo']
 _LINKATTR = DESCRIPTOR.message_types_by_name['LinkAttr']
 _LINK = DESCRIPTOR.message_types_by_name['Link']
 _SPEEDLIMITINFO = DESCRIPTOR.message_types_by_name['SpeedLimitInfo']
+_STATICROUTINGINFO = DESCRIPTOR.message_types_by_name['StaticRoutingInfo']
 _DATACOLLECTSINGLETASK = DESCRIPTOR.message_types_by_name['DataCollectSingleTask']
 _DATACOLLECTTASK = DESCRIPTOR.message_types_by_name['DataCollectTask']
+_SEGMACTION = DESCRIPTOR.message_types_by_name['SegmAction']
 _SEGMENT = DESCRIPTOR.message_types_by_name['Segment']
 _SPEEDLIMITCONFIG = DESCRIPTOR.message_types_by_name['SpeedLimitConfig']
 _ROUTE = DESCRIPTOR.message_types_by_name['Route']
@@ -92,6 +96,13 @@ SpeedLimitInfo = _reflection.GeneratedProtocolMessageType('SpeedLimitInfo', (_me
   })
 _sym_db.RegisterMessage(SpeedLimitInfo)
 
+StaticRoutingInfo = _reflection.GeneratedProtocolMessageType('StaticRoutingInfo', (_message.Message,), {
+  'DESCRIPTOR' : _STATICROUTINGINFO,
+  '__module__' : 'routing.navinfo_routing_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.navinfo.StaticRoutingInfo)
+  })
+_sym_db.RegisterMessage(StaticRoutingInfo)
+
 DataCollectSingleTask = _reflection.GeneratedProtocolMessageType('DataCollectSingleTask', (_message.Message,), {
   'DESCRIPTOR' : _DATACOLLECTSINGLETASK,
   '__module__' : 'routing.navinfo_routing_pb2'
@@ -105,6 +116,13 @@ DataCollectTask = _reflection.GeneratedProtocolMessageType('DataCollectTask', (_
   # @@protoc_insertion_point(class_scope:deeproute.navinfo.DataCollectTask)
   })
 _sym_db.RegisterMessage(DataCollectTask)
+
+SegmAction = _reflection.GeneratedProtocolMessageType('SegmAction', (_message.Message,), {
+  'DESCRIPTOR' : _SEGMACTION,
+  '__module__' : 'routing.navinfo_routing_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.navinfo.SegmAction)
+  })
+_sym_db.RegisterMessage(SegmAction)
 
 Segment = _reflection.GeneratedProtocolMessageType('Segment', (_message.Message,), {
   'DESCRIPTOR' : _SEGMENT,
@@ -149,32 +167,36 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _SEGMENT.fields_by_name['amap_link_range']._serialized_options = b'\030\001'
   _ROUTE_NIDTOSEGMENTRY._options = None
   _ROUTE_NIDTOSEGMENTRY._serialized_options = b'8\001'
-  _SCENETYPE._serialized_start=3853
-  _SCENETYPE._serialized_end=4112
-  _SDROUTINGRESPONSE._serialized_start=202
-  _SDROUTINGRESPONSE._serialized_end=530
-  _NAVIHEAD._serialized_start=532
-  _NAVIHEAD._serialized_end=569
-  _LANEINFO._serialized_start=572
-  _LANEINFO._serialized_end=729
-  _LINKATTR._serialized_start=732
-  _LINKATTR._serialized_end=1277
-  _LINK._serialized_start=1279
-  _LINK._serialized_end=1393
-  _SPEEDLIMITINFO._serialized_start=1396
-  _SPEEDLIMITINFO._serialized_end=1656
-  _DATACOLLECTSINGLETASK._serialized_start=1659
-  _DATACOLLECTSINGLETASK._serialized_end=1787
-  _DATACOLLECTTASK._serialized_start=1789
-  _DATACOLLECTTASK._serialized_end=1863
-  _SEGMENT._serialized_start=1866
-  _SEGMENT._serialized_end=3038
-  _SPEEDLIMITCONFIG._serialized_start=3041
-  _SPEEDLIMITCONFIG._serialized_end=3232
-  _ROUTE._serialized_start=3235
-  _ROUTE._serialized_end=3799
-  _ROUTE_NIDTOSEGMENTRY._serialized_start=3723
-  _ROUTE_NIDTOSEGMENTRY._serialized_end=3799
-  _RESULT._serialized_start=3801
-  _RESULT._serialized_end=3850
+  _SCENETYPE._serialized_start=4742
+  _SCENETYPE._serialized_end=5001
+  _SDROUTINGRESPONSE._serialized_start=239
+  _SDROUTINGRESPONSE._serialized_end=567
+  _NAVIHEAD._serialized_start=569
+  _NAVIHEAD._serialized_end=606
+  _LANEINFO._serialized_start=609
+  _LANEINFO._serialized_end=766
+  _LINKATTR._serialized_start=769
+  _LINKATTR._serialized_end=1314
+  _LINK._serialized_start=1316
+  _LINK._serialized_end=1430
+  _SPEEDLIMITINFO._serialized_start=1433
+  _SPEEDLIMITINFO._serialized_end=1716
+  _STATICROUTINGINFO._serialized_start=1718
+  _STATICROUTINGINFO._serialized_end=1779
+  _DATACOLLECTSINGLETASK._serialized_start=1782
+  _DATACOLLECTSINGLETASK._serialized_end=2070
+  _DATACOLLECTTASK._serialized_start=2072
+  _DATACOLLECTTASK._serialized_end=2146
+  _SEGMACTION._serialized_start=2149
+  _SEGMACTION._serialized_end=2433
+  _SEGMENT._serialized_start=2436
+  _SEGMENT._serialized_end=3833
+  _SPEEDLIMITCONFIG._serialized_start=3836
+  _SPEEDLIMITCONFIG._serialized_end=4027
+  _ROUTE._serialized_start=4030
+  _ROUTE._serialized_end=4688
+  _ROUTE_NIDTOSEGMENTRY._serialized_start=4612
+  _ROUTE_NIDTOSEGMENTRY._serialized_end=4688
+  _RESULT._serialized_start=4690
+  _RESULT._serialized_end=4739
 # @@protoc_insertion_point(module_scope)

@@ -224,6 +224,7 @@ message Lane {
     WIDE_LANE = 19;      //超宽道
     TIDAL_LANE = 20;     //潮汐车道
     TRANSFER_LANE = 21;  //中转车道
+    PASSABLE_LANE = 22;  //可通行车道
   };
   optional LaneType type = 12;
 
@@ -355,4 +356,14 @@ message Lane {
   optional int32 link_index = 57;
   //岔口处lane的group组id
   optional int32 turns_from_group_id = 58;
+  //sd map version
+  optional string sd_version = 59;
+  //sd link id 
+  optional uint64 sd_link_align = 60;
+  //是否为导航截止点
+  optional bool navi_cut_point = 61;
+  //退出lane的连接线id
+  repeated int32 next_line_ids = 62;
+  //进入lane的连接线id
+  repeated int32 last_line_ids = 63;  
 }

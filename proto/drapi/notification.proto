@@ -1,3 +1,4 @@
+//@F_Mark@ignore@;
 syntax = "proto3";
 
 import "drapi/operation_status.proto";
@@ -7,6 +8,7 @@ import "dsm/dsm.proto";
 import "drapi/gwm_hut_notification.proto";
 import "drapi/route_planning.proto";
 import "localization/havp_map.proto";
+import "google/protobuf/any.proto";
 
 package dr.notification;
 
@@ -51,6 +53,7 @@ message EventInfo {
     NCAStatusChange nca_status_change = 2002;
     NCAOutODD nca_out_odd = 2003;
     TurnArround trun_arround = 2004;  //掉头状态
+    OddNotification odd_notification = 2005; // odd提示(仅提示)
 
     // NCA internal 2400~2499
     dr.business_info.CurNaviPointIndex cur_navi_point_index = 2400;
@@ -106,6 +109,8 @@ message EventInfo {
                // https://rqk9rsooi4.feishu.cn/docx/XFwIdTouoopjwrxV0s0cOfwOnyb
     dr.notification.gwmhut.GWMParkingHUTNotification gwm_hut_data = 5402;
 
+    GLParkingVizNotification gl_viz_data = 5403;
+
     // DSM 6000~6099 -- Use DSMEvent in drapi/dsm_event.proto instead.
     DSMStart dsm_start = 6000 [deprecated = true];
 
@@ -140,6 +145,9 @@ enum TakeOverRequest {
   DRIVER_SEATBELT_NOT_BUCKLED = 10;  // 安全带未系
   DOOR_OPENED = 11;                  // 四门两盖未关
   WIPER_HIGH = 12;                   // 雨刮高速
+
+  // nca odd
+  INVALID_ODD = 20; // 进入了人工设置的请求接管的区域
 
   ACC_TAKEOVER_BY_FAULT = 300;
 }
@@ -180,6 +188,7 @@ enum RemindInfo {
   REACH_SPEED_LOWER_LIMIT = 32;              //到达限速下限
   EPB_REQUEST_TIME_OUT = 33;                 //请求epb超时
   GEAR_P_REQUEST_TIME_OUT = 34;              //请求p档位超时
+  SHARP_BEND = 35;                           //前方急弯
 
   // acc 100~400
   CAN_NOT_ACTIVE_ACC = 100;
@@ -366,6 +375,7 @@ message DecelerationInfo {
     OTHER_OBSTACLES = 6;         //其他障碍物
     CROSS_LINE = 7;              //超过停止线
     OBSTACLE_COLLISION = 8;      //碰撞风险
+    RUN_RED_LIGHT = 9;           // 闯红灯
   }
   Reason reason = 1;
 }
@@ -443,8 +453,10 @@ message DriverTakeOver {
     SCENE_UNKNOWN = 0;
     TRAFFICLIGHT_RESULT_IS_NOT_TRUSTWORTHY = 1;  //红绿灯识别异常时，驾驶员接管
     EOP = 2;                                     // EOP时驾驶员接管
-    CROSS_LINE = 3;  //闯红灯时，驾驶员接管
-    UTURN_FAILED = 4;  // 掉头失败,驾驶员接管
+    CROSS_LINE = 3;     //越线，驾驶员接管
+    UTURN_FAILED = 4;   // 掉头失败，驾驶员接管
+    INVALID_ODD = 5;    // 无效odd，驾驶员接管
+    RUN_RED_LIGHT = 6;  // 闯红灯，驾驶员接管
   }
   Scene scene = 1;
 }
@@ -550,9 +562,33 @@ message NCAOutODD {
     ARRIVING_FINAL_DESTINATION = 1;  //即将到达终点
     UNABLE_TURN_ARROUND = 2;         //前方无法掉头
   }
+  enum OddLimitType {
+    ODD_UNKNOWN = 0;                // 未知
+    ODD_REST_AREA = 1;              // 服务区
+    ODD_TOLL = 2;                   // 收费站
+    ODD_GRAPH_MATCH_FAILED = 3;     // 异端图匹配失败
+    ODD_U_TURN = 4;                 // 掉头
+    ODD_ROUNDABOUT = 5;             // 环岛
+    ODD_SHARP_CORNER_JUNCTION = 6;  // 锐角路口
+    ODD_FIVE_FORKED_JUNCTION = 7;   // 五岔路口
+    ODD_SIX_FORKED_JUNCTION = 8;    // 六岔路口
+    ODD_TEMPORARY = 9;              // 临时ODD
+    ODD_ROI_REGION = 10;            // ROI ODD
+    ODD_CITY_AND_ROAD_CLASS = 11;   // 城市和道路等级
+    ODD_U_TURN_SINGLE_MOVE = 12;    // 一把掉头
+    ODD_U_TURN_MULTI_MOVE = 13;     // 多把掉头
+    ODD_CITY = 14;                  // 城市
+    ODD_ROAD_CLASS = 15;            // 道路等级
+    ODD_MAIN_SECONDARY_ROAD = 16;   // 主辅路切换
+  }
   bool need_remind = 1;    //是否需要声音提示
   double remaining_s = 2;  //剩余距离 m
   Type type = 3;
+  OddLimitType odd_type = 4;  // odd类型
+}
+
+message OddNotification {
+  NCAOutODD.OddLimitType odd_type = 1;
 }
 
 // APA
@@ -563,8 +599,15 @@ message APAStatusChange {
 }
 
 message APASelectParkingSpace {
+  enum PrkModType {
+    PRKMOD_NO_ACTION = 0;
+    PRKMOD_HEAD_PARKING_IN = 1;
+    PRKMOD_TAIL_PARKING_IN = 2;
+    PRKMOD_RESERVED_3 = 3;
+  }
   dr.base.ParkingSpace parkingspace = 1;
   bool show = 2;  // 是否显示选择车位
+  PrkModType park_in_type = 3;
 }
 
 message APAParkOutParkingSpace {
@@ -622,7 +665,7 @@ message VPARoutingGetTargetParkingSpace {
 message VPALearingCompletedInfo {
   uint32 vpa_learning_distance = 1;  //学习距离
   uint32 vpa_speed_bumps = 2;        //减速带数量
-  bytes semantic_map = 3;            //语义地图 deeproute.map.RASMapPlus
+  bytes semantic_map = 3;            //语义地图 deeproute.map.
   int32 target_parking_space_id = 4;
   deeproute.localization.havp_map.HAVPMapMetaData map_info = 5;
 }
@@ -772,7 +815,70 @@ message TrafficSignInfo {
     SIGN_WARN_TWO_TURN_2 = 44;
     SIGN_WARN_VILLAGE = 45;
     SIGN_WARN_WEATHER = 46;
-  };
+    SIGN_WARN_UPHILL = 47;
+    SIGN_WARN_DOWNHILL = 48;
+    SIGN_WARN_MORE_DOWNHILL = 49;
+    SIGN_WARN_WIND = 50;
+    SIGN_WARN_SLIPPERY = 51;
+    SIGN_WARN_TUNNEL = 52;
+    SIGN_WARN_BUMPY = 53;
+    SIGN_WARN_WATER = 54;
+    SIGN_WARN_DETOUR = 55;
+    SIGN_WARN_LEFT_DETOUR = 56;
+    SIGN_WARN_RIGHT_DETOUR = 57;
+    SIGN_WARN_MERGE = 58;
+    SIGN_WARN_NARROW = 59;
+    SIGN_WARN_ACCIDENT_MANA = 60;
+    SIGN_WARN_BUMP = 61;
+    SIGN_WARN_TWO_WAY = 62;
+    SIGN_WARN_RIGHT_MOUNTAIN = 63;
+    SIGN_WARN_RIGHT_NARROW = 64;
+    SIGN_WARN_EMBANKMENT = 65;
+    SIGN_WARN_RAILWAY = 66;
+    SIGN_WARN_GUARD_RAILWAY = 67;
+    SIGN_WARN_DISTANCE = 68;
+    SIGN_WARN_TRAFFIC_LIGHT = 69;
+    SIGN_WARN_QUEUE = 70;
+    SIGN_WARN_DANGER = 71;
+    SIGN_WARN_RIGHT_ROCK = 72;
+    SIGN_WARN_LEFT_ROCK = 73;
+    SIGN_WARN_TIDAL_LANE = 74;
+    SIGN_WARN_NARROW_BRIDGE = 75;
+    SIGN_WARN_HUMP_BRIDGE = 76;
+    SIGN_BAN_WAIT_MEETING = 77;
+    SIGN_BAN_TRUCK_TRAILER = 78;
+    SIGN_BAN_HORN = 79;
+    SIGN_BAN_LONG_STOP = 80;
+    SIGN_ASS_LEFT_RAMP = 81;
+    SIGN_ASS_CAR = 82;
+    SIGN_ASS_CAR_TRUCK = 83;
+    SIGN_ASS_TRUCK = 84;
+    SIGN_ASS_BUS = 85;
+    SIGN_ASS_DIRECTION = 86;
+    SIGN_ASS_FRONT = 87;
+    SIGN_ASS_RIGHT = 88;
+    SIGN_ASS_LEFT = 89;
+    SIGN_ASS_LEFT_RIGHT = 90;
+    SIGN_ASS_TIME = 91;
+    SIGN_INS_MEET = 92;
+    SIGN_INS_LEFT_LANE = 93;
+    SIGN_INS_RIGHT_LANE = 94;
+    SIGN_INS_LEFT_U_TURN_LANE = 95;
+    SIGN_INS_U_TURN_LANE = 96;
+    SIGN_INS_STRA_RIGHT_LANE = 97;
+    SIGN_INS_STRA_LEFT_LANE = 98;
+    SIGN_INS_STRA_LANE = 99;
+    SIGN_INS_RIGHT = 100;
+    SIGN_INS_LEFT = 101;
+    SIGN_INS_STRA_RIGHT = 102;
+    SIGN_INS_STRA_LEFT = 103;
+    SIGN_INS_STRA = 104;
+    SIGN_INS_LEFT_RIGHT = 105;
+    SIGN_INS_U_TURN = 106;
+    SIGN_INS_SEP_LEFT = 107;
+    SIGN_INS_SEP_RIGHT = 108;
+    SIGN_INS_BAN_PASS = 109;
+  };  
   SignType sign_type = 1;
   float limit_value = 2;
 }
@@ -781,4 +887,8 @@ message TSRSign {
   TrafficSignInfo speed_limit_sign = 1;
   TrafficSignInfo no_speed_limit_sign = 2;
   float maintain_distance = 3;  // m
+}
+
+message GLParkingVizNotification {
+  google.protobuf.Any gl_p177_chassis_detail_resp = 1; // GlP177ChassisDetail
 }

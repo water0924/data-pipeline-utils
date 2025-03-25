@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "drapi/operation_status.proto";
+
 package dr.blc;
 
 enum PolicyResult {
@@ -22,4 +24,142 @@ message PolicyResultsToAeb {
   PolicyResult abp_result = 10;
   PolicyResult awb_result = 11;
   PolicyResult aba_result = 12;
+}
+
+message AEBStateCondition { // 进入standstill 需要blc作为条件么？
+    bool  is_off = 1;
+    bool  is_failure = 2;
+    bool  is_aeb_passive = 3; // standby -> passive ? 是否需要区分
+    bool  is_aeb_active_exit = 4; // active -> passive
+    bool  is_eba_passive = 5;
+    bool  is_eba_active_exit = 6;
+    bool  is_standstill_exit = 7;
+    bool  is_standstill_enter = 8;
+    bool  is_eba_active = 9;
+
+    dr.operationstatus.ReasonInfo reason_info = 20; // passive或者退出或者failure都会有对应reason，便于debug
+}
+
+message AWBStateCondition {
+    bool  is_off = 1;
+    bool  is_failure = 2;
+    bool  is_passive = 3;
+    bool  is_active_exit = 4;
+
+    dr.operationstatus.ReasonInfo reason_info = 20;
+}
+
+message ABPStateCondition {
+    bool  is_off = 1;
+    bool  is_failure = 2;
+    bool  is_passive = 3;
+    bool  is_active_exit = 4;
+
+    dr.operationstatus.ReasonInfo reason_info = 20;
+}
+
+message MEBStateCondition {
+    bool  is_off = 1;
+    bool  is_failure = 2;
+    bool  is_passive = 3;
+    bool  is_active_exit = 4;
+    bool  is_standstill_exit = 5;
+    bool  is_standstill_enter = 6;
+    dr.operationstatus.ReasonInfo reason_info = 20;
+}
+
+message FCWStateCondition {
+    bool  is_off = 1;
+    bool  is_failure = 2;
+    bool  is_passive = 3;
+    bool  is_active_exit = 4;
+
+    dr.operationstatus.ReasonInfo reason_info = 20;
+}
+
+message RCTBStateCondition {
+    bool  is_off = 1;
+    bool  is_failure = 2;
+    bool  is_passive = 3;
+    bool  is_active_exit = 4;
+    bool  is_standstill_exit = 5;
+    bool  is_standstill_enter = 6;
+
+    dr.operationstatus.ReasonInfo reason_info = 20;
+}
+
+message FCTBStateCondition {
+    bool  is_off = 1;
+    bool  is_failure = 2;
+    bool  is_passive = 3;
+    bool  is_active_exit = 4;
+    bool  is_standstill_exit = 5;
+    bool  is_standstill_enter = 6;
+    dr.operationstatus.ReasonInfo reason_info = 20;
+}
+
+message FCTAStateCondition {
+    bool  is_off = 1;
+    bool  is_failure = 2;
+    bool  is_passive = 3;
+    bool  is_active_exit = 4;
+
+    dr.operationstatus.ReasonInfo reason_info = 20;
+}
+
+message ESAStateCondition {
+    bool  is_off = 1;
+    bool  is_failure = 2;
+    bool  is_passive = 3;
+    bool  is_active_exit = 4;
+
+    dr.operationstatus.ReasonInfo reason_info = 20;
+}
+
+enum SensitivityLevel {
+    MIDDLE = 0;
+    HIGH = 1;
+    LOW = 2;
+}
+
+enum MAIState {
+    MAI_OFF = 0;
+    MAI_FAILURE = 1;
+    MAI_PASSIVE = 2;
+    MAI_STANDBY = 3;
+    MAI_ACTIVE = 4;
+}
+
+message SensitivityLevelSet {
+    SensitivityLevel  aeb_level = 1;
+    SensitivityLevel  abp_level = 2;
+    SensitivityLevel  awb_level = 3;
+    SensitivityLevel  fcw_level = 4;
+    SensitivityLevel  fcta_level = 5;
+    SensitivityLevel  fctb_level = 6;
+    SensitivityLevel  rctb_level = 7;
+    SensitivityLevel  esa_level = 8;
+    SensitivityLevel  meb_level = 9; 
+}
+
+message ODDFlags {
+    bool is_snow_mode = 1;
+    bool is_nca_in_control = 2;
+}
+
+// topic : /blc/aeb_state_conditions
+message StateConditions {
+    AEBStateCondition aeb_condition = 1;
+    AWBStateCondition awb_condition = 2;
+    ABPStateCondition abp_condition = 3;
+    FCWStateCondition fcw_condition = 4;
+    FCTBStateCondition fctb_condition = 5;
+    FCTAStateCondition fcta_condition = 6;
+    RCTBStateCondition rctb_condition = 7;
+    ESAStateCondition esa_condition = 8;
+    MEBStateCondition meb_condition = 9;
+    MAIState mai_state = 10;
+
+    ODDFlags odd_flags = 20;
+    SensitivityLevelSet sensitivity_level_set = 21;
 }

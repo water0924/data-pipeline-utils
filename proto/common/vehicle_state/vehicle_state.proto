@@ -77,4 +77,14 @@ message VehicleState {
     optional double front_wheel_angle_offset = 37;      // in used, in rad
     optional bool enable_offset_observer = 38;
     optional double observer_yaw_rate = 39;
+    optional double act_driving_torque = 40;   //Driving Torque，Uint Nm， 0 to 16380
+    optional double act_brake_torque = 41;   //Brake Torque uint Nm, -32768 to 32764
+    enum EpbStatus {
+        DEFAULT = 0;
+        PARKED = 1;
+        RELEASED = 2;
+        PARKING = 3;
+        RELEASING = 4;
+    }
+    optional EpbStatus epb_sts = 43;
 }

@@ -21,6 +21,7 @@ enum VcuState {
   ACTIVE = 5;
   ACTIVE_ESA = 6;
   ACTIVE_STANDSTILL = 7;
+  EXIT = 8;
 }
 
 message VcuStateMachine {
@@ -30,6 +31,12 @@ message VcuStateMachine {
   optional VcuState parking_lat_state = 4;
   optional VcuState aeb_state = 5;
   optional VcuState esa_state = 6;
+  optional VcuState eba_state = 7;
+  optional VcuState awb_state = 8;
+  optional VcuState aba_state = 9;
+  optional VcuState abp_state = 10;
+  optional VcuState rctb_state = 11;
+  optional VcuState meb_state = 12;
 }
 
 message VehicleStatus {
@@ -52,6 +59,19 @@ message VehicleStatus {
   optional double actual_torque = 17;
   optional double actual_wheel_angle = 18;
   optional bool is_shift_override = 19;
+  optional int32 actual_turn_signal = 20;
+  optional bool actual_emergency_light = 21;
+  optional int32 aeb_status = 22;
+  optional int32 eba_status = 23;
+  optional int32 awb_status = 24;
+  optional int32 aba_status = 25;
+  optional int32 abp_status = 26;
+  optional int32 rctb_status = 27;
+  optional int32 meb_status = 28;
+  optional int32 esa_status = 29;
+  optional bool prepare_to_shift = 30;
+  optional double vehicle_speed_mps = 31;
+  optional int32 epb_sts = 32;
 }
 
 message CtrlValue {
@@ -66,6 +86,44 @@ message CtrlValue {
   optional double longitudinal_cmd = 9;
   optional double longitudinal_cmd_distance = 10;
   optional bool parking_emergency_brake = 11;
+  optional bool ctrl_emergency_light = 12;
+  optional bool blc_emergency_light = 13;
+  optional bool is_turn_signal_req = 14;
+  optional bool is_emergency_light_req = 15;
+  optional int32 parking_function_type = 16;
+  optional int32 blc_driving_lon_state_machine = 17;
+  optional bool throttle_cmd_enable = 18;
+  optional double throttle_cmd = 19;
+  optional bool brake_cmd_enable = 20;
+  optional double brake_cmd = 21;
+  optional int32 driving_function_mode = 22;
+  optional int32 parking_function_mode = 23;
+  optional bool low_beam_request = 24;
+  optional bool high_beam_request = 25;
+  /* ADAS */
+  optional bool esa_enable = 26;
+  optional bool adas_interface_enable = 27;
+  optional bool abp_enable = 28;
+  optional int32 abp_request_level = 29;
+  optional double abp_request_value = 30;
+  optional bool aeb_enable = 31;
+  optional int32 aeb_request_level = 32;
+  optional double aeb_request_value = 33;
+  optional bool awb_enable = 34;
+  optional int32 awb_request_level = 35;
+  optional double awb_request_value = 36;
+  optional bool aba_enable = 37;
+  optional int32 aba_request_level = 38;
+  optional double aba_request_value = 39;
+  optional bool eba_enable = 40;
+  optional int32 eba_request_level = 41;
+  optional double eba_request_value = 42;
+  optional bool rctb_enable = 43;
+  optional int32 rctb_request_level = 44;
+  optional double rctb_request_value = 45;
+  optional bool meb_enable = 46;
+  optional int32 meb_request_level = 47;
+  optional double meb_request_value = 48;
 }
 
 message DebugInfo {
@@ -73,4 +131,18 @@ message DebugInfo {
   optional bool is_blc_timeout = 2;
   optional double steer_ratio = 3;
   optional double eps_offset = 4;
+  optional bool is_send_to_chassis = 5;
+  optional bool is_aeb_cmd_timeout = 6;
+  optional bool is_esa_cmd_timeout = 7;
+  optional bool mcu_vehicle_status_timeout = 8;
+  optional bool mcu_vehicle_status_crc_error = 9;
+  optional int32 driving_lon_passive_reason = 10;
+  optional int32 driving_lat_passive_reason = 11;
+  optional int32 parking_lon_passive_reason = 12;
+  optional int32 parking_lat_passive_reason = 13;
+  optional int32 adas_passive_reason = 14;
+  optional bool ssm_exit_auto_req = 15;
+  optional bool downstream_mcu_timeout = 16;
+  optional bool can_raw_array_timeout = 17;
+  optional int32 mcu_transmit_mode = 18;
 }

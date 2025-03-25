@@ -76,6 +76,7 @@ message SafetyEvent {
   optional dr.operationstatus.Feature task = 15;
   optional dr.vhr.EventExtraInfo extra_info = 16;
   optional dr.safety.vehicle_info.DrivingMode mode = 17 [default = MODE_UNKNOWN]; //车辆驾驶模式
+  optional uint32 delay_time = 18; // 延迟时间 sec
 
   optional ControlMsg ctr_msg = 100 [deprecated = true];
 }

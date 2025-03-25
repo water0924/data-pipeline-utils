@@ -18,6 +18,10 @@ message RWTriggerInfo {
     L_RCTB = 9;
     R_RCTB = 10;
   };
+  enum TriggerWarningLevel {
+    WARNING_LEVEL_1 = 0;
+    WARNING_LEVEL_2 = 1;
+  };
   optional RearWarningType type = 1;
   optional float curvature_radius = 2;
   optional common.Point3D obj_velocity = 3;
@@ -30,6 +34,7 @@ message RWTriggerInfo {
 
   optional int32 obj_id = 5;
   optional float ttc = 6;
+  optional TriggerWarningLevel warning_level = 12;
 }
 
 message RearWarningStatus {

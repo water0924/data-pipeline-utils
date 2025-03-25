@@ -26,8 +26,14 @@ message PointField {
 }
 
 message PointCloud2 {
+  enum DataStorage {
+    DATA_STORAGE_RAW = 1; // data is stored in the 'data' field.
+    DATA_STORAGE_SHM = 2; // data is stored in shm pool, and the 'data' field stores the index of the shm block.
+    DATA_STORAGE_POINTER = 3; // data is represented by a pointer (stored in the 'data' field). The size should be calculated.
+  }
+
   optional deeproute.common.Header header = 1;
-  
+
   // 2D structure of the point cloud. If the cloud is unordered, height
   // is 1 and width is the length of the point cloud.
   optional uint32 width = 2;
@@ -41,4 +47,6 @@ message PointCloud2 {
   // Actual point data, size is (row_step*height)
   optional bytes data = 8;
   optional bool is_dense = 9;
+  //   optional bool is_shm = 10 [default = false];
+  optional DataStorage data_storage = 10 [default = DATA_STORAGE_RAW];
 }

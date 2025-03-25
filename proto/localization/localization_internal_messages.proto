@@ -6,6 +6,10 @@ import "common/geometry.proto";
 
 import "drivers/pointcloud2.proto";
 
+import "perception/deeproute_perception_ras_map.proto";
+
+import "localization/havp_map.proto";
+
 enum OdometryMode {
   ODOMETRY = 1;
   LIO = 2;
@@ -27,6 +31,9 @@ message LidarMatchingMessage {
   optional deeproute.common.Transformation3 map_pose = 10;
   optional deeproute.common.Transformation3 reference_pose = 11;
   optional int64 lidar_mapping_init_time = 12;
+  optional double matching_mean_error = 13;
+  optional bool is_converged = 14;
+  optional bool is_available_for_odom = 15;
 }
 
 message KeyframeUpdateStatus {
@@ -41,6 +48,7 @@ message MapMatchingStatus {
       [deprecated = true];
   optional deeproute.common.Transformation3 map_to_vehicle_transformation = 3;
   optional int64 ego_lane_id = 4;
+  optional int64 ego_floor_id = 5;
 }
 
 message LidarMappingInfo {
@@ -48,4 +56,14 @@ message LidarMappingInfo {
   optional deeproute.drivers.PointCloud2 local_map = 2;
   optional deeproute.common.Transformation3 transformation_map_to_sensing = 3;
   optional int64 lidar_mapping_init_time = 4;
+}
+
+message GlobalRoutingInfo {
+  optional int64 measurement_time = 1;
+  repeated deeproute.common.Point3D global_path = 2;
+  optional double speed_limit_current = 3;
+  optional double route_remaining_length = 4;
+  optional deeproute.common.Point3D destination_point = 5;
+  optional deeproute.perception.ParkingSpace target_parking_space = 6;
+  repeated localization.havp_map.HAVPTrajectory map_trajectories = 7;
 }

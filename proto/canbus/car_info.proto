@@ -9,8 +9,12 @@ import "canbus/mar_chassis_detail.proto";
 import "canbus/m7_chassis_detail.proto";
 import "canbus/byd_chassis_detail.proto";
 import "canbus/gwm_chassis_detail.proto";
+import "canbus/gwm_d03_chassis_detail.proto";
+import "canbus/gwm_p03_chassis_detail.proto";
+import "canbus/gwm_de09_chassis_detail.proto";
 import "canbus/byd_tang_detail.proto";
 import "canbus/hy11_chassis_detail.proto";
+import "canbus/gl_p177_chassis_detail.proto";
 import "common/vehicle_signal.proto";
 
 message CarInfo {
@@ -295,6 +299,10 @@ message ChassisDetails {
     GwmChassisDetail gwm = 6;
     SmartHy11ChassisDetail smart_hy11 = 7;
     BydTangDetail byd_tang = 8;
+    deeproute.canbus.gwm.d03.GwmD03ChassisDetail gwm_d03 = 9;
+    deeproute.canbus.gwm.p03.GwmP03ChassisDetail gwm_p03 = 10;
+    deeproute.canbus.gl.p177.GlP177ChassisDetail gl_p177 = 11;
+    deeproute.canbus.gwm.de09.GwmDe09ChassisDetail gwm_de09 = 12;
   }
 }
 
@@ -459,6 +467,7 @@ message Misc {
 
   //control request trun signal
   optional deeproute.common.VehicleSignal.TurnSignal request_turn_signal = 40;
+  optional PositionLightReport position_light_report = 41;
 }
 
 message TirePressure {
@@ -616,4 +625,14 @@ message BeamReport {
     RIGHT = 2;
   }
   optional TurnSignal turn_signal = 4;
+  optional bool emergency_light = 5;
+}
+
+message PositionLightReport {
+  enum PositionLight {
+    OFF = 0;
+    ON = 1;
+  }
+
+  optional PositionLight position_light = 1;
 }

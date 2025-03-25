@@ -74,6 +74,7 @@ message APASetting {
   optional bool parking_space_enable = 1;
   optional bool planning_trajectory_enable = 2;
   optional bool open_visualizer_image = 3;
+  optional bool enable_ego_parking_space = 4 [default = false];
 }
 
 message DebugSetting {

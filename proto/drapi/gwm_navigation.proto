@@ -7,6 +7,8 @@
 // v3.3 (3)实时信息中的all_length移动到路径消息中，避免重复发送
 // v3.3 (4)路径link中删除curr_is_builtup_area,curr_lane_num_opposite和Curvature
 // v3.4_gwm_20240522新增int32 light_count_down=7;  //红绿灯倒计时，单位秒
+// v3.5_gwm_20240718新增LightStateType light_type = 8; // 红绿灯颜色状态
+// v3.6_gwm_20241231新增repeated NaviGreenWaveCarSpeed  navi_green_wave = 43;//绿波路段信息
 syntax = "proto3";
 package dr.gwm.navigation;
 
@@ -66,6 +68,7 @@ message RealTimeData {
   repeated int32 reserves_int = 40;      // 实时信息预留变量,整数
   repeated double reserves_double = 41;  // 实时信息预留变量,浮点数
   uint64 check_code = 42;  // 按本协议发送时请填1234, 用于校验proto内容
+  repeated NaviGreenWaveCarSpeed navi_green_wave = 43;
 }
 
 /**
@@ -750,4 +753,15 @@ enum OccupiedLaneType {
   OCCUPIED_LANE_TYPE_BOTH_SIDE = 3;   // 占用两侧车道
   OCCUPIED_LANE_TYPE_MIDDLE = 4;      // 占用中间车道
   OCCUPIED_LANE_TYPE_ALL = 5;         // 占用全部车道
+}
+
+/**
+ * 绿波车速
+ */
+message NaviGreenWaveCarSpeed {
+  uint64 path_id = 1; //路线ID
+  int32 type = 2; //绿灯数量类型：0无效类型；1多灯类型；2单灯类型
+  uint64 maxSpeed = 3; //最大建议车速，单位：km/h
+  uint64 minSpeed = 4; //最小建议车速，单位：km/h
+  uint64 lightCount = 5; //剩余绿灯数量，单位：个
 }

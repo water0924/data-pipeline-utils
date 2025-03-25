@@ -15,6 +15,7 @@ message CameraDebugInfo {
   optional common.Point3D position = 5;
   optional MapElement map_element = 6;
   optional int32 count_down_number = 7;
+  optional int32 is_traffic_light = 8 [default = 0];
 }
 
 message TrafficSignInfo {
@@ -129,10 +130,26 @@ message TrafficSignInfo {
     SIGN_INS_SEP_LEFT = 107;
     SIGN_INS_SEP_RIGHT = 108;
     SIGN_INS_BAN_PASS = 109;
+    SIGN_NON_SPEED_GENERAL = 110;
   };
   optional SignType sign_type = 1;
   optional float limit_value = 2;
   repeated int32 matched_lane_ids = 3;
+  repeated uint64 matched_link_ids = 4;
+  optional float heading = 5;
+  optional bool is_ego_sign = 6 [default=false];
+  optional bool is_on_vehicle = 7 [default=false];
+  optional common.Point3D pos_from_lidar = 8;
+  optional bool is_from_cache = 9 [default = false];
+}
+
+message BeamInfo {
+  enum BeamType{
+    FRONT_LIGHT = 0;
+    UNCERTAIN = 1;
+    BACK_LIGHT = 2;
+  };
+  optional BeamType beam_type = 1;
 }
 
 message CameraObstacle {
@@ -150,12 +167,14 @@ message CameraObstacle {
     UNKNOWN_MOVABLE = 6;
     UNKNOWN_UNMOVABLE = 7;
     LANEMARK = 8;
+    BEAM = 9;
   };
   optional Type type = 4;  // obstacle type
   optional int64 timestamp = 5;
   optional TrafficLight.Color tl_color = 6 [deprecated = true];
   optional CameraDebugInfo debug_info = 7;
   optional TrafficSignInfo traffic_sign_info = 8;
+  optional BeamInfo beam_info = 9;
 }
 
 // cubic polynomial y = a*x^3 + b*x^2 + c*x + d
@@ -237,6 +256,9 @@ message CameraQualityInfo {
   optional string sensor_name = 2;
   optional CamereQualityLevel quality_level = 3;
   optional int32 keep_time_in_second = 4;
+  optional float blur_area_ratio = 5;
+  optional float occ_area_ratio = 6;
+  optional float blur_score = 7;
 }
 
 message CameraQuality {
@@ -292,15 +314,29 @@ message CameraRoadCondition {
 }
 
 // 光照分类
+message ImageLighting {
+  optional string camera = 1;
+  optional float bright = 2;
+  optional CameraLightingStatus.CameraLightingType light_type = 3;
+}
+
+message HmaDebugInfo {
+  repeated ImageLighting image_lightings = 1;
+  repeated int32 valid_obstacle_ids = 2;
+  repeated int32 outside_rail_obstacle_ids = 3;
+}
+
 message CameraLightingStatus {
   enum CameraLightingType {
-    DUSK = 0;    // 昏暗
-    DARK = 1;    // 基本全黑
-    BRIGHT = 2;  // 明亮良好
+    DUSK = 0;         // 废弃
+    DARK = 1;         // 基本全黑
+    BRIGHT = 2;       // 夜晚，但道路明亮良好(路灯)
+    DAY_TIME = 3;     // 白天
   };
   optional CameraLightingType light_type = 1;
   optional float light_prob = 2;
   optional bool has_vehicle_ahead = 3;
+  optional HmaDebugInfo hma_debug_info = 4;
 }
 
 // 时间分类

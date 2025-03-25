@@ -21,28 +21,46 @@ message MapMatchingStatusEvent {
   string map_id = 1;
   MatchingStatus status = 2;
 
-  deeproute.hdmap.StandbyArea parking_space = 3; // in odometry frame   // GWM SOP+3 deprecated
+  deeproute.hdmap.StandbyArea parking_space = 3; // in odometry frame
 
   deeproute.common.Transformation3 odometry_to_map_transformation = 4;
   int32 current_floor_id = 5;
   repeated string nearby_map_id = 6;
+  bool has_default_parking_space = 7;  // 匹配到的地图中有默认车位则为true，如果没有默认车位则是false
+  bool is_expand_map_available = 8; // 匹配到的是否是可扩建
+  string map_name_debug = 9; // 用于诊断时地图查找
 }
 
 message NavigationStatusEvent {
   enum NavigationStatus {
-    NAVIGATION_READY = 0;
+    NAVIGATION_READY = 0;                     // deprecated
     NAVIGATION_ONGOING = 1;
-    NAVIGATION_YAWED = 2;
-    NAVIGATION_FINISHED = 3;
-    NAVIGATION_PASSIVE = 4;
+    NAVIGATION_FINISHED = 2;
+    NAVIGATION_PASSIVE = 3;
+    NAVIGATION_YAWED_U_TURN = 4;
+    NAVIGATION_YAWED_AWAY_FROM_ROAD = 5;
+    NAVIGATION_UNEXPECTED = 6;
   }
-  NavigationStatus status = 1;
-  int32 target_parking_space_id = 2;
-  repeated havp_map.HAVPTrajectory global_path = 3; // 导航界面和巡航过程中的全局路径规划 // TODO define lane-like structure
-  float route_length = 4;
-  float route_remaining_length = 5;
-  float current_speed_limit = 6;
-  float next_speed_limit = 7;
+
+  enum RoutingStatus {
+    ROUTING_READY = 0;
+    ROUTING_ONGOING = 1;
+    ROUTING_PASSIVE_OUT_OF_NAVIGATION = 2; // not in navigation
+    ROUTING_PASSIVE_U_TURN = 3; // vehicle heading and path heading has large diff
+    ROUTING_PASSIVE_AWAY_FROM_ROAD = 4; // vehicle is away from centerline
+  }
+
+  NavigationStatus navigation_status = 1;
+  RoutingStatus routing_status = 2;
+  int32 target_parking_space_id = 3;
+  repeated havp_map.HAVPTrajectory global_path = 4; // 导航界面和巡航过程中的全局路径规划 // TODO define lane-like structure
+  float route_length = 5;
+  float route_remaining_length = 6;
+  float current_speed_limit = 7;
+  float next_speed_limit = 8;
+  double lost_distance_with_target_parking_space = 9;
+  bool navigation_ready = 10;
+  float next_speed_limit_remaining_s = 11;
 }
 
 enum MappingStatus {
@@ -51,7 +69,7 @@ enum MappingStatus {
   FAIL = 1;                    // Mapping in abnormal state, should be turned off
 
   // Standby Status
-  READY = 10;                 // Currently not in mapping or routing mode
+  READY = 10;                 // Currently not in mapping or routing mode(deprecated for light map)
   PRE_MAPPING = 11;           // pre mapping is ongoing
 
   // Not Ready Status
@@ -60,6 +78,8 @@ enum MappingStatus {
   ROAD_LEVEL_OUT_OF_ODD = 22;  // Current road level is out of odd, e.g freeway
   GNSS_SIGNAL_LOST = 23;       // Currently no gnss signal
   MAP_NUMBER_REACH_MAX = 24;     // Map number over the threshold for SMART
+  REACH_MAX_EXPANSION_DISTANCE = 25; // Matched map is over max distance, can't be expanded
+  NEED_REENTER_PARKING_ODD = 26; // need to re-enter parking odd (in parking odd but not in pre-mapping)
 }
 
 enum MappingErrorCode {
@@ -73,10 +93,12 @@ enum MappingErrorCode {
 message MappingStatusEvent {
   MappingStatus status = 1;
   double mapping_distance = 2;
-  MappingErrorCode error_code = 3; // deprecated
+  MappingErrorCode error_code = 3;                   // deprecated
   int32 passed_speedbump_count = 4;
-  repeated common.Point3D vehicle_trajectory = 5;   // recent vehicle trajectory in fixed distance interval // do we still need this?
+  repeated common.Point3D vehicle_trajectory = 5;    // deprecated
   double reverse_distance = 6;
+
+  repeated int32 matched_map_ids = 7;
 }
 
 // report current nearby environment status event
@@ -90,6 +112,7 @@ message EnvironmentStatusEvent {
 
     VEHICLE_PASSING_SPEEDBUMP = 3;
     VEHICLE_REVERSING = 4; // deprecated
+    VEHICLE_IN_PARKING_SPACE = 5;
 
     VEHICLE_INDOOR = 10;
     VEHICLE_OUTDOOR = 11;
@@ -102,7 +125,6 @@ message EnvironmentStatusEvent {
     LEFT_TURN_AHEAD = 53;
     RIGHT_TURN_AHEAD = 54;
     STRAIGHT_AHEAD = 55;
-    UTURN_AHEAD = 56;
   }
   repeated EnvironmentInfo environment_info = 1;
 }

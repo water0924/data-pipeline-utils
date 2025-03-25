@@ -8,6 +8,17 @@ enum ProcessState {
   RESTART = 2;
 }
 
+// dem维护的模块进程状态
+enum ExecutionState {
+  kOff = 0;            // 未启动
+  kInitializing = 1;   // 启动中
+  kInitFailed = 2;     // 启动失败
+  kRunning = 3;        // 启动成功，运行中
+  kAbnormalExit = 4;   // 异常退出
+  kNormalExit = 5;     // 正常退出
+  kAbnormalExitWhenShutdown = 6;   // 在shutdown阶段模块异常退出
+}
+
 message ExecutionProcessState {
   optional string execution_name = 1; // node_name in driver/config/dem/xxx.jsonnet
   optional ProcessState process_state = 2;

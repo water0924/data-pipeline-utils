@@ -54,6 +54,7 @@ GWMParkingHUTNotification {  // https://rqk9rsooi4.feishu.cn/file/IK15bClQYo79cX
   MapInfoUpdate map_info_update = 66; // 地图信息更新后通知
   ParkingSpaceInfoUpdate slot_update = 67;  // 车位信息更新后通知
   FloorInfo floor_info = 68;  // 楼层
+  VISBtnSts go_to_here_btn_sts = 69;  // 导航状态选定车位【去这里】按钮状态，5hz
 }
 
 message Signal_Indnc {
@@ -124,6 +125,7 @@ message FunctBtnDisp {
     TRY = 6;
     SEARCH_SLOT_ALONG_WAY = 7;
     APA_CONTINUESEARCHSLOT = 8;
+    START_LEARNING = 9;
   }
   Disp disp = 1;
 }
@@ -304,8 +306,34 @@ message HAVPFunctTextDisp {
     CRUSING_CHARGEING_CAP_OPENED = 0x86;
     CRUSING_FUEL_CAP_OPENED = 0x87;
     THROTTLE_INTERVENE = 0x88;  //巡航中油门接管
+    TRYING_TO_PASS_BE_READY_TO_BRAKE = 0x89;
+    COLLECTION_SUCCESSFUL = 0x8A;
+    MODIFY_SUCCESSFUL = 0x8B;
+    LEARNING_VEHICLE_NOT_READY = 0x8C;
+    CRUISING_VEHICLE_NOT_READY = 0x8D;
+    LEARNING_LIDAR_FAILURE = 0x8E;
+    CRUISING_LIDAR_FAILURE = 0x8F;
+    LEARNING_LIDAR_OBSTRUCTION = 0x90;
+    CRUISING_LIDAR_OBSTRUCTION = 0x91;
+    DISTANCE_TOO_LONG_MAP_TO_BE_SAVED = 0x92;
+    PASS_GATE = 0x93;
+    PASS_GATE_BY_YOURSELF = 0x94;
+    PLEASE_EXIT_THE_PARKING_SPACE = 0x95;
+    TRAJECTORY_PLANNING_FAILED = 0x96;
+    PARKING_QUIT_AUTO_SAVE_MAP = 0x97;
+    DISTANCE_TOO_LONG_AUTO_SAVE_MAP = 0x98;
+    ROUTE_UPDATED = 0x99;
+    MAP_AUTO_EXTENDED_TO_PARKING_ENTRANCE = 0x9A;
+    NAVIGATION_COMPLETE = 0x9B;
+    OFF_COURSE_ROUTE_UPDATED = 0x9C;
+    PLEASE_SELECT_SUITABLE_PARKING_SLOT_ICON = 0x9D;
+    PLEASE_FOLLOW_NAVIGATION_TIPS_TURN_ON_FUNCTION = 0x9E;
     GO_STRAIGHT = 0x111;        //直行（导航界面）
-    TURN_AROUND = 0x112;        //掉头（导航界面）
+    TURN_AROUND = 0x112;        //掉头（导航、巡航界面）
+    ROUTE_REPLANNING = 0x113;   //路径重规划（导航、巡航界面）
+
+    LEARNING_TOO_LONG_SAVE_MAP = 0x114;       // 学习距离过长，即将自动存图
+    LEARNING_PARKING_FAILED_SAVE_MAP = 0x115; // 泊车失败，即将自动存图
   }
   Disp disp = 1;
 }
@@ -371,6 +399,17 @@ message PopupDisp {
     MAP_UPDATE_SUCCESS = 0x38;
     MAP_UPDATE_FAIL = 0x39;
     SVP_TURN_ON_BACKGROUND_FUNCTIONS = 0x3A;
+    HAVP_DRIVING_MODE_NOT_SUPPORTED = 0x3B;
+    SVP_DRIVING_MODE_NOT_SUPPORTED = 0x3C;
+    HAVP_REARVIEW_MIRROR_FOLDED = 0x3D;
+    ADDTOFAVORITES = 0x3E;
+    HAVPPUSHREQUEST_MAPBACKSTAGEBUILDING = 0x3F;
+    PLEASE_EXIT_PARKSPACE = 0x40;
+    HAVP_LIDAR_OBSTRUCTION = 0x41;
+    OTHER_AUXILIARY_DRIVING_ACTIVATED = 0x42;
+    SUSPENSION_MODE_NOT_SUPPORTED = 0x43;
+    AVM_NOT_CALIBRATED = 0x44;
+    VEHICLE_NOT_READY = 0x45;
 
     // for deeproute internal debug
     PRE_MAPPING_CHECK_CANCEL = 0xA0;
@@ -547,7 +586,7 @@ message VPARoutingNavigationInfo {
 }
 
 message RoutingGlobalPath {
-  repeated deeproute.common.Point3D global_path_points = 1;
+  repeated deeproute.localization.havp_map.HAVPTrajectory global_path_points = 1;
 }
 
 message RoutingParkingFinishInfo {

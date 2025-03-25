@@ -103,6 +103,10 @@ enum BehaviorReason {
   MERGE_IN_LANE = 143;
   MERGE_OUT_LANE = 144;
   PARALLEL_TRUCK = 145;
+  // model reference line
+  MODEL_REFLINE_INTENTION = 146;
+  AVOID_MERGE_LANE = 147;
+  
   // nudge 200~300
   STATIC_OBJECT = 200;
   LARGE_VEHICLE = 201;

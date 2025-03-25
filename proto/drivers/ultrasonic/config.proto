@@ -7,6 +7,7 @@ message Config {
   optional string frame_id = 1;
   optional uint32 fov = 2;
   optional deeproute.common.Transformation3 sensor_to_ultrasonic = 3;
+  optional uint32 id = 4;
 }
 
 message UltrasonicConfig {

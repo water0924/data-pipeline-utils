@@ -4,6 +4,8 @@ import "common/geometry.proto";
 import "map/common_type.proto";
 import "map/map_common.proto";
 import "odd/odd.proto";
+import "map/deeproute_map_guidance_action.proto";
+import "localization/localization_internal_messages.proto";
 
 message LaneRoutingInfo {
   repeated int32 lane_id = 1;
@@ -36,60 +38,64 @@ message NavigationInfoForVisualize {
   // next next turn remaining s
   optional double next2_turn_remaining_s = 4;
 
+  // 当前地图限速
   optional double map_speed_limit = 5;
-
+  // 当前地图策略限速
   optional double strategy_speed_limit = 6;
 
   enum SpeedLimitType {
-    // no limit for map speed
+    // no limit for map speed 无策略（腾讯地图限速）
     INVALID = 0;
-    // fix abnormal speed limit for map 
+    // fix abnormal speed limit for map 修复地图限速
     GLOBAL_SPEED_LIMIT = 1;
-    // speed limit when on ramp
+    // speed limit when on ramp 匝道限速
     RAMP_SPEED_LIMIT = 2;
-    // speed limit before junction
+    // speed limit before junction 路口前限速
     JUNCTION_SPEED_LIMIT = 3;
-    // speed limit when merge in the highway
+    // speed limit when merge in the highway 高速路汇入限速
     MERGE_SPEED_LIMIT = 4;
-    // speed limit when exit off the highway
+    // speed limit when exit off the highway 高速路汇出限速
     EXIT_SPEED_LIMIT = 5;
-    // speed limit when exit the ramp
+    // speed limit when exit the ramp 匝道内道路汇出限速
     EXIT_RAMP_SPEED_LIMIT = 6;
-    // speed limit when merge in the express
+    // speed limit when merge in the express 快速路汇入限速
     MERGE_SPEED_LIMIT_EXPRESS = 7;
-    // speed limit in junction
+    // speed limit in junction 路口内限速
     IN_JUNCTION_SPEED_LIMIT = 8;
-    // speed limit when exit off the express
+    // speed limit when exit off the express 快速路汇出限速
     EXIT_SPEED_LIMIT_EXPRESS = 9;    
-    // speed limit when entering the tunnel
+    // speed limit when entering the tunnel 隧道前限速
     ENTER_TUNNEL_SPEED_LIMIT = 10;
-    // speed limit when leaving the tunnel
+    // speed limit when leaving the tunnel 出隧道限速
     LEAVE_TUNNEL_SPEED_LIMIT = 11;
-    // speed limit when secondary to main road
+    // speed limit when secondary to main road 辅路到主路限速
     SECONDARY_TO_MAIN_SPEED_LIMIT = 12;
-    // speed limit when secondary to main road
+    // speed limit when secondary to main road 主路到辅路限速
     MAIN_TO_SECONDARY_SPEED_LIMIT = 13;
-    // speed limit on entrance(between main and secondary road)
+    // speed limit on entrance(between main and secondary road) 出入口限速（主辅路之间）
     ENTRANCE_SPEED_LIMIT = 14;
-    // speed limit before the toll
+    // speed limit before the toll 收费站前限速
     TOLL_SPEED_LIMIT = 15;
-    // speed limit before the rest area
+    // speed limit before the rest area 服务区限速
     REST_AREA_SPEED_LIMIT = 16;
-    // speed limit before roadside camera
+    // speed limit before roadside camera 电子眼限速
     CAMERA_SPEED_LIMIT = 17;
-    // speed limit in the tunnel
+    // speed limit in the tunnel 隧道内限速
     IN_TUNNEL_SPEED_LIMIT = 18;
-    // forced speed limit by manual setting
+    // forced speed limit by manual setting 强制限速
     FORCED_SPEED_LIMIT = 19;
-    // amap speed limit in highway
+    // amap speed limit in highway 高德高速限速
     AMAP_HIGHWAY_SPEED_LIMIT = 20;
-    // amap speed limit in express
+    // amap speed limit in express 高德快速路限速
     AMAP_EXPRESS_SPEED_LIMIT = 21;
   }
+  // 限速类型
   optional SpeedLimitType speed_limit_type = 7;
 
+  // 下一组地图策略限速
   optional double next_strategy_speed_limit = 8;
   optional double next_strategy_speed_limit_remaining_s = 9;
+
   optional deeproute.map.RoadClass current_road_class = 10;
   optional deeproute.map.RoadClass next_road_class = 11;
   optional double next_road_class_remaining_s = 12;
@@ -97,21 +103,24 @@ message NavigationInfoForVisualize {
   enum SpeedLimitStatus{
     // abnormal state
     NONE = 0;
-    // current\next spd limit and rs by the online data(amap or others)
+    // current\next spd limit and rs by the online data(amap or others) 都来自高德
     ONLINE_CURRENT_ONLINE_NEXT_ONLINE_RS = 1;
-    // current spd limit by online; next spd and rs by the nav map
+    // current spd limit by online; next spd and rs by the nav map 当前地图，下一个高德
     ONLINE_CURRENT_MAP_NEXT_MAP_RS = 2;
     // current\next spd limit and rs by the nav map(tencent or others)
     MAP_CURRENT_MAP_NEXT_MAP_RS = 3;
   }
   optional SpeedLimitStatus speed_limit_status = 13;
-  // real time speed limit, such as amap spd info
+
+  // 内部debug用的状态量
+  // real time speed limit, such as amap spd info。最新的高德限速
   optional int32 real_time_speed_limit = 14;
-  // valid real time speed limit for recovering the scene
+  // valid real time speed limit for recovering the scene。过滤无效值后的，最新高德限速值。
   optional int32 valid_real_time_speed_limit = 15;
   // invalid real time speed limit for recovering the scene
   optional int32 invalid_real_time_speed_limit = 16;
 
+  // 路口场景下，提供降速比例和一个最低限速保护值
   message JunctionSplInfo{
     // junction speed limit ratio
     optional double spl_ratio = 1;
@@ -120,6 +129,9 @@ message NavigationInfoForVisualize {
   }
   // junction spd limit info for blc
   optional JunctionSplInfo junction_spl_info = 17;
+
+  // 经验限速是否生效
+  optional bool exp_spl_enable = 18;
 }
 
 message LocalRouting {
@@ -140,10 +152,9 @@ message LocalRouting {
   // next next turn remaining s
   optional double next2_turn_remaining_s = 9;
 
-  // m/s
+  // 当前地图策略限速 m/s
   optional double current_speed_limit = 10;
-
-  // m/s
+  // 下一组地图策略限速 m/s
   optional double next_speed_limit = 11;
   optional double next_speed_limit_remaining_s = 12;
 
@@ -167,6 +178,7 @@ message LocalRouting {
   optional string junction_link_ni_id = 20;
 
   optional RoutingMask routing_mask = 21;
+  optional RoutingMask impassable_mask = 29;
 
   optional odd.OddLimitInfo odd_limit_info = 22;
 
@@ -177,6 +189,12 @@ message LocalRouting {
 
   // temp use for demo 20240404
   optional bool is_big_right_turn = 27;
+  repeated string crowd_source_events = 28; //Only used in crowdsourcing offline benchmarks
+
+  // 导航动作真值
+  optional deeproute.map.GuidanceActionList passable_junction_list = 30;
+  // vpa localrouting info
+  optional deeproute.localization.message.GlobalRoutingInfo vpa_local_routing = 31;
 }
 
 message SingleGroupLaneIDs {
@@ -191,6 +209,7 @@ message DebugInfo {
   repeated string pgp = 4; // 全局车道规划  2s发一次 发全局所有
   repeated SingleGroupLaneIDs lane_groups = 5;
   optional bool is_yawed = 6;  // 是否偏航
+  repeated string routing_input_debug_info = 7;  // routing输入调试信息
 }
 
 message LaneSegmentInfo {

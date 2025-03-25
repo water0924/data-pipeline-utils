@@ -12,6 +12,9 @@ message UserConfig {
                                  //nca, 开关关闭，不产生快捷激活信号
 
   // common internal use
+  SwitchStatus ilqr_lon_safety_cost = 23;//planning 变道debug开关
+  SwitchStatus ilqr_lat_safety_cost = 24;//planning 变道debug开关    
+  SwitchStatus wait_area_enable = 25;  //是否开启待转区功能
   SwitchStatus obstacle_collision_check =
       26;  //碰撞风险检测，开关打开，正常上报碰撞风险，开关关闭，不再检测碰撞风险
   SwitchStatus no_front_vehicle_speed_check =
@@ -52,6 +55,8 @@ message UserConfig {
   SwitchStatus lane_narrow_latem = 45;  //车道狭窄是否临退，默认关
   SwitchStatus turnarround_roundabout_downgrade =
       46;  //掉头-环岛是否降级开关,默认关(不降级)
+  SwitchStatus force_lane_change_check = 47; //黑夜，车道线不清晰时，只允许强制变道，开关开：检测黑夜条件，开关关，不检测，默认关闭
+  SwitchStatus snowy_day_check = 48; //雪天检测开关，开关开：检测雪天条件，执行雪天相关的变道抑制逻辑等，开关关，不检测雪天条件，雪天不影响变道
 
   ACCConfig acc_config = 51;
   ICAConfig ica_config = 52;

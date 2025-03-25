@@ -2,6 +2,12 @@ syntax = "proto2";
 
 package deeproute.church;
 
+// Simulation fields.
+message Simulation {
+  optional bool from_cache = 501 [default = false];
+  optional string msg_type = 502;
+}
+
 message OnboardHeader {
   // Message publishing time (as control plane time) in nano-seconds
   optional uint64 timestamp = 1 [ default = 0 ];
@@ -23,4 +29,6 @@ message OnboardHeader {
 
   // Message publishing time (as data plane time) in nano-seconds
   optional uint64 dataplane_timestamp = 7;
+
+  optional Simulation simulation = 8;
 }

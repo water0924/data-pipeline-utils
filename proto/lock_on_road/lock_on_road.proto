@@ -74,6 +74,31 @@ message LockOnRoadResult {
   }
 
   repeated NaviStatus navi_status_internal = 16;
+
+  message SdLocalizationStatus {
+    enum ConfidenceStatus {
+      LOW = 0;
+      HIGH = 1;
+    }
+
+    message Confidence {
+      optional double confidence_value = 1;
+      optional ConfidenceStatus confidence_status = 2;
+    }
+
+    optional ConfidenceStatus confidence = 1;
+    optional Confidence lateral_position_confidence = 2;
+    optional Confidence longitudinal_position_confidence = 3;
+  }
+
+  optional SdLocalizationStatus sd_localization_status = 17;
+
+  enum YawSceneType {
+    UNKNOWN = 0;                                  // 偏航, 但是场景未知
+    ROUTING_MAIN_ROAD_VEHICLE_SECONDARY_ROAD = 1; // 导航为主路，自车在辅路
+    ROUTING_SECONDARY_ROAD_VEHICLE_MAIN_ROAD = 2; // 导航为辅路，自车在主路
+  }
+  optional YawSceneType yaw_scene_type = 18;
 }
 
 message LaneIndexEstimationResult{

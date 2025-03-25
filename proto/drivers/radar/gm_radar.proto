@@ -96,55 +96,50 @@ message RadarObs {
 
   optional uint64 timestamp = 1;  
   // object id
-  optional int32 id = 2;             // Y
+  optional int32 id = 2;
   // object life cycles
-  optional int32 age = 3;            // Y
+  optional int32 age = 3;
   // object longitude distance  (+) = forward; (unit m)
-  optional float longitude_dist = 4;// Y
+  optional float longitude_dist = 4;
   // object lateral distance    (+) = left; (unit m)
-  optional float lateral_dist = 5;  // Y
+  optional float lateral_dist = 5;
   // object longitude velocity  (+) = forward; (unit m/s)
-  optional float longitude_vel = 6; // Y
+  optional float longitude_vel = 6;
   // object lateral velocity  (+) = left; (unit m/s)
-  optional float lateral_vel = 7;   // Y
-  optional float longitude_acc = 8; // Y
-  optional float lateral_acc = 9;   // Y
-  // optional float lon_dist_std = 10; // Y
-  // optional float lat_dist_std = 11; // Y
-  // optional float lon_vel_std = 12;  // Y
-  // optional float lat_vel_std = 13;  // Y
-  // optional float lon_acc_std = 14;  // Y
-  // optional float lat_acc_std = 15;  // Y
+  optional float lateral_vel = 7;
+  optional float longitude_acc = 8;
+  optional float lateral_acc = 9;
+  optional float lon_dist_std = 10;
+  optional float lat_dist_std = 11;
+  optional float lon_vel_std = 12;
+  optional float lat_vel_std = 13;
+  optional float lon_acc_std = 14;
+  optional float lat_acc_std = 15;
 
-  // optional float oritation_angle = 16;  // Y
+  // optional float oritation_angle = 16;
   // optional float oritation_angle_std = 17;
 
-  optional float length = 18; // Y
-  optional float width = 19;  // Y
-  optional float height = 20; // Y
+  optional float length = 18;
+  optional float width = 19;
+  optional float height = 20;
 
-  // optional float length_std = 21;
-  // optional float width_std = 22;
-  // optional float height_std = 23;
+  optional float length_std = 21;
+  optional float width_std = 22;
+  optional float height_std = 23;
 
-  optional float rcs = 24;    // Y 
+  optional float rcs = 24;
   // The probability of an object being an obstacle
-  optional float obstacle_prob = 25;  // Y
+  optional float obstacle_prob = 25;
   // Existence probability of object
-  optional int32 confidence = 26;      // Y
+  optional int32 confidence = 26;
   // optional int32 latency = 27;
-  optional DynProp dynprop = 28;       // Y
-  optional MeasState meas_state = 29;  // Y
-  optional ObstacleClass obstacle_class = 30; // Y
+  optional DynProp dynprop = 28;
+  optional MeasState meas_state = 29;
+  optional ObstacleClass obstacle_class = 30;
   // relative or absolute >> true rel  ||  false abs
   // optional bool is_rel_speed = 31 [default = true];
-  // 这个不确定是不是可以用16替代
-  optional float heading = 32;  // 新增
-  // optional float yaw_rate = 33; // 新增
-  // 这个不明白什么意思
-  // optional bool is_hwa_target = 34 [default = false]; // 新增
-  // optional MotionDirection motion_direction = 35; // 新增
-  // optional ReferencePoint ref_point = 36; // 新增
+  optional float heading = 32;
+  // optional float yaw_rate = 33;
 }
 
 message RadarObstacleArray {

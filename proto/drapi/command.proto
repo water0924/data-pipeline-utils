@@ -24,6 +24,7 @@ message Command {  // topic: (to blc)/blc/command (to dsm)/dsm/command
     EnableACC enable_acc = 1000;
     GetACCTTC get_acc_tcc = 1001;
     GetACCSpeedLimit get_acc_speed_limit = 1002;
+    DrivingActiveExit driving_active_exit = 1003;
     // acc internal
     SetACCTTC set_ttc = 1100;
 
@@ -73,6 +74,7 @@ message Command {  // topic: (to blc)/blc/command (to dsm)/dsm/command
 
     GWParkingCommand gw_parking_command = 5101;  // GWM APA
     SmartLPCommand smart_lp_command = 5102; // SMART VPA
+    GLParkingCommand gl_parking_command = 5103; // GL Command
     // vpa 6000~6999
     VPARouting vpa_routing = 6001;
     VPALearning vpa_learning = 6002;
@@ -236,7 +238,7 @@ message CommandRP {  // topic: /blc/command_response  topic: /dsm/command_respon
     VPALearningRP vpa_learning_rp =
         6005;  //结束学习成功时返回语义地图信息给到vis
     BtnEnaReqRP btn_ena_req_rp = 6006;  // GWM VPA
-        // hma 7000-7099
+    // hma 7000-7099
     // GetHMAStateMachineStatusRP hma_status = 7000;
 
     // bsd 7100-7199
@@ -440,6 +442,7 @@ message APARealtimeParkingSpaceRP {
 
 message APAAPPSelectParkingSpace {
   dr.base.ParkingSpace parking_space = 1;
+  bool non_empty_parking_space = 2;
 }
 
 message APASuggestOutParking {
@@ -1004,6 +1007,21 @@ message SmartLPCommand {
   }
 }
 
+message GLParkingCommand {
+  oneof Command {
+    // GlP177ChassisDetail.DHU_ZCUCANFD1_FR02_307
+    google.protobuf.Any drvr_assc_sys_btn_push = 1; 
+    // GlP177ChassisDetail.DHU_ZCUCANFD1_FR13_367
+    google.protobuf.Any prkg_intrpt_reld_btn = 2;  
+    // GlP177ChassisDetail.DHU_ZCUCANFD1_FR13_367
+    google.protobuf.Any drvr_assc_sys_park_mod = 3; 
+    // GlP177ChassisDetail.DHU_ZCUCANFD1_FR13_367
+    google.protobuf.Any prkg_in_or_out_and_cncl = 4; 
+    // GlP177ChassisDetail.DHU_ZCUCANFD1_FR06_340
+    google.protobuf.Any aut_prkg_slot_nr_req = 5;   
+  }
+}
+
 message ParkingMapInfo {
   int32 id = 1;
 }
@@ -1027,3 +1045,9 @@ message EnableTSR {
 message EnableSLW {
   bool enable = 1;
 }
+
+message DrivingActiveExit {
+  bool driving_on = 1;
+  bool driving_off = 2;
+  dr.operationstatus.Feature target_feature = 3;
+};

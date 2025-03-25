@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 from proto.common import geometry_pb2 as common_dot_geometry__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1f\x64rivers/ultrasonic/config.proto\x12\x1c\x64\x65\x65proute.drivers.ultrasonic\x1a\x15\x63ommon/geometry.proto\"h\n\x06\x43onfig\x12\x10\n\x08\x66rame_id\x18\x01 \x01(\t\x12\x0b\n\x03\x66ov\x18\x02 \x01(\r\x12?\n\x14sensor_to_ultrasonic\x18\x03 \x01(\x0b\x32!.deeproute.common.Transformation3\"H\n\x10UltrasonicConfig\x12\x34\n\x06\x63onfig\x18\x01 \x03(\x0b\x32$.deeproute.drivers.ultrasonic.Config')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1f\x64rivers/ultrasonic/config.proto\x12\x1c\x64\x65\x65proute.drivers.ultrasonic\x1a\x15\x63ommon/geometry.proto\"t\n\x06\x43onfig\x12\x10\n\x08\x66rame_id\x18\x01 \x01(\t\x12\x0b\n\x03\x66ov\x18\x02 \x01(\r\x12?\n\x14sensor_to_ultrasonic\x18\x03 \x01(\x0b\x32!.deeproute.common.Transformation3\x12\n\n\x02id\x18\x04 \x01(\r\"H\n\x10UltrasonicConfig\x12\x34\n\x06\x63onfig\x18\x01 \x03(\x0b\x32$.deeproute.drivers.ultrasonic.Config')
 
 
 
@@ -39,7 +39,7 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _CONFIG._serialized_start=88
-  _CONFIG._serialized_end=192
-  _ULTRASONICCONFIG._serialized_start=194
-  _ULTRASONICCONFIG._serialized_end=266
+  _CONFIG._serialized_end=204
+  _ULTRASONICCONFIG._serialized_start=206
+  _ULTRASONICCONFIG._serialized_end=278
 # @@protoc_insertion_point(module_scope)

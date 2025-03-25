@@ -71,6 +71,32 @@ message VCU_FD2_11B {
     PTDRVMOD_POWER_SPLIT = 6;
     PTDRVMOD_POWER_SPLIT_AWD = 7;
   }
+  enum ActDrvModType {
+    ACTDRVMOD_NORMAL_MODE = 0;
+    ACTDRVMOD_SPORT_MODE = 1;
+    ACTDRVMOD_ECO_MODE = 2;
+    ACTDRVMOD_OPD_MODE = 3;
+    ACTDRVMOD_ECOPLUS_MODE = 4;
+    ACTDRVMOD_SNOW_MODE = 5;
+    ACTDRVMOD_RESERVED_6 = 6;
+    ACTDRVMOD_RESERVED_7 = 7;
+    ACTDRVMOD_MUD_MODE = 8;
+    ACTDRVMOD_SAND_MODE = 9;
+    ACTDRVMOD_SPORTPLUS_MODE = 10;
+    ACTDRVMOD_LADY = 11;
+    ACTDRVMOD_RESERVED_12 = 12;
+  }
+  enum DrvgPrkgTrqAvailStsType {
+    DRVGPRKGTRQAVAILSTS_INITIAL_VALUE = 0;
+    DRVGPRKGTRQAVAILSTS_NOT_AVAILABLE = 1;
+    DRVGPRKGTRQAVAILSTS_AVAILABLE = 2;
+    DRVGPRKGTRQAVAILSTS_AVAILABLE_DEGRADED = 3;
+  }
+  enum DrvgPrkgTrqRespFlgType {
+    DRVGPRKGTRQRESPFLG_INITIAL_VALUE = 0;
+    DRVGPRKGTRQRESPFLG_NOT_RESPONSE = 1;
+    DRVGPRKGTRQRESPFLG_RESPONSED = 2;
+  }
   //  [Nm] [-20475|20475]
   optional double act_tot_wheel_trq = 1;
   //  [NoUnit] [0|31]
@@ -97,6 +123,20 @@ message VCU_FD2_11B {
   optional int32 checksum_vcu26 = 12;
   //  [NoUnit] [0|15]
   optional int32 rolling_counter_vcu26 = 13;
+  //  [NoUnit] [0|31]
+  optional ActDrvModType act_drv_mod = 14;
+  //  [NoUnit] [0|255]
+  optional int32 checksum_vcu21 = 15;
+  //  [NoUnit] [0|3]
+  optional DrvgPrkgTrqAvailStsType drvg_prkg_trq_avail_sts = 16;
+  //  [NoUnit] [0|1]
+  optional bool drv_trq_req_ovrdvld = 17;
+  //  [Nm] [-6000|14470] [initial_value:1200]
+  optional double vcu_drv_req_tq_whl = 18;
+  //  [NoUnit] [0|3]
+  optional DrvgPrkgTrqRespFlgType drvg_prkg_trq_resp_flg = 19;
+  //  [NoUnit] [0|15]
+  optional int32 rolling_counter_vcu21 = 20;
 }
 
 message RBC_FD1_11F {
@@ -112,9 +152,15 @@ message RBC_FD1_11F {
     RBC_HADERROR_REASON_ADCM_MAIN_COMMUNICATION_ERROR = 1;
     RBC_HADERROR_REASON_ADCM_BACKUP_COMMUNICATION_ERROR = 2;
     RBC_HADERROR_REASON_IDC_L2_COMMUNICATION_ERROR = 3;
-    RBC_HADERROR_REASON_IBC_INTERNAL_ERROR = 4;
-    RBC_HADERROR_REASON_RBC_INTERNAL_ERROR = 5;
-    RBC_HADERROR_REASON_RESERVED_6 = 6;
+    RBC_HADERROR_REASON_RBC_INTERNAL_ERROR = 4;
+    RBC_HADERROR_REASON_WHEEL_SPEED_ERROR = 5;
+    RBC_HADERROR_REASON_PT_ERROR = 6;
+    RBC_HADERROR_REASON_ADS_REQUESTED_AX_IS_ABOVE_THE_LIMIT = 7;
+    RBC_HADERROR_REASON_CHANGE_RATE_OF_ADS_REQUESTED_AX_IS_ABOVE_THE_LIMIT = 8;
+    RBC_HADERROR_REASON_DRIVER_NOT_AVAILABLE = 9;
+    RBC_HADERROR_REASON_INITIALIZING = 10;
+    RBC_HADERROR_REASON_ADCM_MAIN_AND_BACKUP_COMMUNICATION_ERROR = 11;
+    RBC_HADERROR_REASON_RESERVED_12 = 12;
   }
   enum L3ADCBrkActiveBackupType {
     L3_ADCBRKACTIVE_BACKUP_NOT_ACTIVE = 0;
@@ -279,6 +325,110 @@ message IFC_FD1_12B {
     IFCFUNCANGCMDREQFLAG_ESS_REQ = 2;
     IFCFUNCANGCMDREQFLAG_RESERVED_3 = 3;
   }
+  enum ESSStateType {
+    ESS_STATE_INITIAL_VALUE = 0;
+    ESS_STATE_OFF = 1;
+    ESS_STATE_STANDBY = 2;
+    ESS_STATE_ACTIVE = 3;
+    ESS_STATE_PASSIVE = 4;
+    ESS_STATE_FAULT = 5;
+    ESS_STATE_RESERVED_6 = 6;
+  }
+  enum AESStateType {
+    AES_STATE_INITIAL_VALUE = 0;
+    AES_STATE_OFF = 1;
+    AES_STATE_STANDBY = 2;
+    AES_STATE_ACTIVE = 3;
+    AES_STATE_PASSIVE = 4;
+    AES_STATE_FAULT = 5;
+    AES_STATE_RESERVED_6 = 6;
+  }
+  enum LDWStateType {
+    LDW_STATE_INITIAL_VALUE = 0;
+    LDW_STATE_OFF = 1;
+    LDW_STATE_STANDBY = 2;
+    LDW_STATE_ACTIVE = 3;
+    LDW_STATE_PASSIVE = 4;
+    LDW_STATE_FAULT = 5;
+    LDW_STATE_RESERVED_6 = 6;
+  }
+  enum LKAStateType {
+    LKA_STATE_INITIAL_VALUE = 0;
+    LKA_STATE_OFF = 1;
+    LKA_STATE_STANDBY = 2;
+    LKA_STATE_ACTIVE = 3;
+    LKA_STATE_PASSIVE = 4;
+    LKA_STATE_FAULT = 5;
+    LKA_STATE_RESERVED_6 = 6;
+  }
+  enum VisOptSpdLimType {
+    VISOPTSPDLIM_NO_DISPLAY = 0;
+    VISOPTSPDLIM_SPL_5 = 1;
+    VISOPTSPDLIM_SPL_10 = 2;
+    VISOPTSPDLIM_SPL_15 = 3;
+    VISOPTSPDLIM_SPL_20 = 4;
+    VISOPTSPDLIM_SPL_25 = 5;
+    VISOPTSPDLIM_SPL_30 = 6;
+    VISOPTSPDLIM_SPL_35 = 7;
+    VISOPTSPDLIM_SPL_40 = 8;
+    VISOPTSPDLIM_SPL_45 = 9;
+    VISOPTSPDLIM_SPL_50 = 10;
+    VISOPTSPDLIM_SPL_55 = 11;
+    VISOPTSPDLIM_SPL_60 = 12;
+    VISOPTSPDLIM_SPL_65 = 13;
+    VISOPTSPDLIM_SPL_70 = 14;
+    VISOPTSPDLIM_SPL_75 = 15;
+    VISOPTSPDLIM_SPL_80 = 16;
+    VISOPTSPDLIM_SPL_85 = 17;
+    VISOPTSPDLIM_SPL_90 = 18;
+    VISOPTSPDLIM_SPL_95 = 19;
+    VISOPTSPDLIM_SPL_100 = 20;
+    VISOPTSPDLIM_SPL_105 = 21;
+    VISOPTSPDLIM_SPL_110 = 22;
+    VISOPTSPDLIM_SPL_115 = 23;
+    VISOPTSPDLIM_SPL_120 = 24;
+    VISOPTSPDLIM_SPL_125 = 25;
+    VISOPTSPDLIM_SPL_130 = 26;
+    VISOPTSPDLIM_SPL_135 = 27;
+    VISOPTSPDLIM_SPL_140 = 28;
+    VISOPTSPDLIM_SPL_145 = 29;
+    VISOPTSPDLIM_SPL_150 = 30;
+    VISOPTSPDLIM_INVALID = 31;
+  }
+  enum NavOptSpdLimType {
+    NAVOPTSPDLIM_NO_DISPLAY = 0;
+    NAVOPTSPDLIM_SPL_5 = 1;
+    NAVOPTSPDLIM_SPL_10 = 2;
+    NAVOPTSPDLIM_SPL_15 = 3;
+    NAVOPTSPDLIM_SPL_20 = 4;
+    NAVOPTSPDLIM_SPL_25 = 5;
+    NAVOPTSPDLIM_SPL_30 = 6;
+    NAVOPTSPDLIM_SPL_35 = 7;
+    NAVOPTSPDLIM_SPL_40 = 8;
+    NAVOPTSPDLIM_SPL_45 = 9;
+    NAVOPTSPDLIM_SPL_50 = 10;
+    NAVOPTSPDLIM_SPL_55 = 11;
+    NAVOPTSPDLIM_SPL_60 = 12;
+    NAVOPTSPDLIM_SPL_65 = 13;
+    NAVOPTSPDLIM_SPL_70 = 14;
+    NAVOPTSPDLIM_SPL_75 = 15;
+    NAVOPTSPDLIM_SPL_80 = 16;
+    NAVOPTSPDLIM_SPL_85 = 17;
+    NAVOPTSPDLIM_SPL_90 = 18;
+    NAVOPTSPDLIM_SPL_95 = 19;
+    NAVOPTSPDLIM_SPL_100 = 20;
+    NAVOPTSPDLIM_SPL_105 = 21;
+    NAVOPTSPDLIM_SPL_110 = 22;
+    NAVOPTSPDLIM_SPL_115 = 23;
+    NAVOPTSPDLIM_SPL_120 = 24;
+    NAVOPTSPDLIM_SPL_125 = 25;
+    NAVOPTSPDLIM_SPL_130 = 26;
+    NAVOPTSPDLIM_SPL_135 = 27;
+    NAVOPTSPDLIM_SPL_140 = 28;
+    NAVOPTSPDLIM_SPL_145 = 29;
+    NAVOPTSPDLIM_SPL_150 = 30;
+    NAVOPTSPDLIM_INVALID = 31;
+  }
   //  [NoUnit] [0|255]
   optional int32 checksum_ifc1 = 1;
   //  [NoUnit] [0|16383]
@@ -303,6 +453,18 @@ message IFC_FD1_12B {
   optional IFCFuncAngCmdReqFlagType ifc_func_ang_cmd_req_flag = 11;
   //  [NoUnit] [0|65535]
   optional int32 freshness_value_ifc_fd1 = 12;
+  //  [NoUnit] [0|7]
+  optional ESSStateType ess_state = 13;
+  //  [NoUnit] [0|7]
+  optional AESStateType aes_state = 14;
+  //  [NoUnit] [0|7]
+  optional LDWStateType ldw_state = 15;
+  //  [NoUnit] [0|7]
+  optional LKAStateType lka_state = 16;
+  //  [NoUnit] [0|31]
+  optional VisOptSpdLimType vis_opt_spd_lim = 17;
+  //  [NoUnit] [0|31]
+  optional NavOptSpdLimType nav_opt_spd_lim = 18;
 }
 
 message IBC_FD1_12E {
@@ -331,7 +493,8 @@ message IBC_FD1_12E {
   enum RPAavailabilityType {
     RPAAVAILABILITY_NOTAVAILABLE = 0;
     RPAAVAILABILITY_AVAILABLE = 1;
-    RPAAVAILABILITY_RESERVED_2 = 2;
+    RPAAVAILABILITY_TESTPENDING = 2;
+    RPAAVAILABILITY_RESERVED_3 = 3;
   }
   enum APCStsType {
     APCSTS_STANDBY = 0;
@@ -346,6 +509,31 @@ message IBC_FD1_12E {
     PUSHRODSTAUTS_PRESSED = 1;
     PUSHRODSTAUTS_RESERVED_2 = 2;
     PUSHRODSTAUTS_ERROR = 3;
+  }
+  enum BrkgTrqModRespType {
+    BRKGTRQMODRESP_INITIAL_VALUE = 0;
+    BRKGTRQMODRESP_NOTACTIVE = 1;
+    BRKGTRQMODRESP_APA_ACTIVE = 2;
+    BRKGTRQMODRESP_ACC_ACTIVE = 3;
+  }
+  enum BrkHldAvailStsType {
+    BRKHLDAVAILSTS_INITIAL_VALUE = 0;
+    BRKHLDAVAILSTS_NOT_AVAILABLE = 1;
+    BRKHLDAVAILSTS_AVAILABLE = 2;
+  }
+  enum DrvgBrkgTrqAvailStsType {
+    DRVGBRKGTRQAVAILSTS_INITIAL_VALUE = 0;
+    DRVGBRKGTRQAVAILSTS_NOT_AVAILABLE = 1;
+    DRVGBRKGTRQAVAILSTS_AVAILABLE = 2;
+    DRVGBRKGTRQAVAILSTS_DEGRADED1 = 3;
+    DRVGBRKGTRQAVAILSTS_DEGRADED2 = 4;
+  }
+  enum PrkgBrkgTrqAvailStsType {
+    PRKGBRKGTRQAVAILSTS_INITIAL_VALUE = 0;
+    PRKGBRKGTRQAVAILSTS_NOT_AVAILABLE = 1;
+    PRKGBRKGTRQAVAILSTS_AVAILABLE = 2;
+    PRKGBRKGTRQAVAILSTS_DEGRADED1 = 3;
+    PRKGBRKGTRQAVAILSTS_DEGRADED2 = 4;
   }
   //  [NoUnit] [0|1]
   optional bool ap_aavailability = 1;
@@ -377,6 +565,30 @@ message IBC_FD1_12E {
   optional int32 checksum_ibc_fd1_1 = 14;
   //  [NoUnit] [0|15]
   optional int32 rolling_counter_ibc_fd1_1 = 15;
+  //  [NoUnit] [0|3]
+  optional BrkgTrqModRespType brkg_trq_mod_resp = 16;
+  //  [NoUnit] [0|15]
+  optional int32 rolling_counter_ibc_fd1_2 = 17;
+  //  [Nm] [0|16383]
+  optional int32 hyd_brkg_act_trq = 18;
+  //  [NoUnit] [0|3]
+  optional BrkHldAvailStsType brk_hld_avail_sts = 19;
+  //  [NoUnit] [0|255]
+  optional int32 checksum_ibc_fd1_2 = 20;
+  //  [Nm] [0|16383]
+  optional int32 drv_brkg_trq_req = 21;
+  //  [NoUnit] [0|1]
+  optional bool plunger_press_sts = 22;
+  //  [NoUnit] [0|7]
+  optional DrvgBrkgTrqAvailStsType drvg_brkg_trq_avail_sts = 23;
+  //  [Nm] [0|16383]
+  optional int32 hyd_brkg_trq_req = 24;
+  //  [NoUnit] [0|7]
+  optional PrkgBrkgTrqAvailStsType prkg_brkg_trq_avail_sts = 25;
+  //  [Bar] [-5|301.9]
+  optional double plunger_press = 26;
+  //  [NoUnit] [0|1]
+  optional bool brkg_ovrd_vld = 27;
 }
 
 message ESP_FD2_137 {
@@ -488,13 +700,13 @@ message ESP_FD2_137 {
   //  [NoUnit] [0|1]
   optional bool aps_eng_trq_req_ena = 36;
   //  [NoUnit] [0|255]
-  optional int32 checksum_esp_fd2_1 = 37;
+  optional int32 checksum_esp_fd2_1 = 37 [deprecated = true];
   //  [NoUnit] [0|15]
-  optional int32 rolling_counter_esp_fd2_1 = 38;
+  optional int32 rolling_counter_esp_fd2_1 = 38 [deprecated = true];
   //  [NoUnit] [0|1]
-  optional bool l12_vlca_dactive = 39;
+  optional bool l12_vlca_dactive = 39 [deprecated = true];
   //  [NoUnit] [0|1]
-  optional bool l12main_vm_cavailiable = 40;
+  optional bool l12main_vm_cavailiable = 40 [deprecated = true];
   //  [NoUnit] [0|1]
   optional bool aeb_available = 41;
   //  [NoUnit] [0|1]
@@ -523,6 +735,18 @@ message ESP_FD2_137 {
   optional bool abp_available = 53;
   //  [NoUnit] [0|1]
   optional bool cta_brk_available = 54;
+  //  [NoUnit] [0|1]
+  optional bool ebd_actv = 55;
+  //  [NoUnit] [0|1]
+  optional bool hhc_sts = 56;
+  //  [NoUnit] [0|1]
+  optional bool drv_trq_red_req_actv_fa = 57;
+  //  [NM] [-3000|5000]
+  optional int32 drv_trq_inc_req_fa = 58;
+  //  [NoUnit] [0|1]
+  optional bool drv_trq_inc_req_actv_fa = 59;
+  //  [NM] [-3000|5000]
+  optional int32 drv_trq_red_fast_req_fa = 60;
 }
 
 message ESP_FD3_13B {
@@ -646,13 +870,21 @@ message ESP_FD3_13B {
   //  [NoUnit] [0|65535]
   optional int32 freshness_value_esp_fd3 = 32;
   //  [NoUnit] [0|255]
-  optional int32 checksum_esp_fd3_7 = 33;
+  optional int32 checksum_esp_fd3_7 = 33 [deprecated = true];
   //  [NoUnit] [0|15]
-  optional int32 rolling_counter_esp_fd3_7 = 34;
+  optional int32 rolling_counter_esp_fd3_7 = 34 [deprecated = true];
   //  [NoUnit] [0|1]
-  optional bool l3_vlca_dactive = 35;
+  optional bool l3_vlca_dactive = 35 [deprecated = true];
   //  [NoUnit] [0|3]
-  optional L3mainVMCavailiableType l3main_vm_cavailiable = 36;
+  optional L3mainVMCavailiableType l3main_vm_cavailiable = 36 [deprecated = true];
+  //  [NoUnit] [0|1]
+  optional bool drv_trq_red_req_actv_ra = 37;
+  //  [NoUnit] [0|1]
+  optional bool drv_trq_inc_req_actv_ra = 38;
+  //  [Nm] [-6000|14475]
+  optional int32 drv_trq_inc_req_ra = 39;
+  //  [Nm] [-6000|14475]
+  optional int32 drv_trq_red_req_ra = 40;
 }
 
 message ACC_FD1_143 {
@@ -693,6 +925,33 @@ message ACC_FD1_143 {
     IDC_L2_HADFUNCCMDREQFLAG_OVERRIDE = 5;
     IDC_L2_HADFUNCCMDREQFLAG_FAILURE = 6;
     IDC_L2_HADFUNCCMDREQFLAG_RESERVED_7 = 7;
+  }
+  enum DrvgPrkgFuncActvnStsType {
+    DRVGPRKGFUNCACTVNSTS_INITIAL_VALUE = 0;
+    DRVGPRKGFUNCACTVNSTS_OFF = 1;
+    DRVGPRKGFUNCACTVNSTS_ON = 2;
+  }
+  enum FxTgtTrqEnaType {
+    FXTGTTRQENA_INITIAL_VALUE = 0;
+    FXTGTTRQENA_DISABLE = 1;
+    FXTGTTRQENA_ENABLE = 2;
+  }
+  enum FxTgtGearReqType {
+    FXTGTGEARREQ_NO_REQUEST = 0;
+    FXTGTGEARREQ_P = 1;
+    FXTGTGEARREQ_R = 2;
+    FXTGTGEARREQ_N = 3;
+    FXTGTGEARREQ_D = 4;
+  }
+  enum FxTgtTrqModType {
+    FXTGTTRQMOD_INITIAL_VALUE = 0;
+    FXTGTTRQMOD_THROTTLE_OVERRIDE_MODE = 1;
+    FXTGTTRQMOD_THROTTLE_INHIBITE_MODE = 2;
+  }
+  enum FxTgtGearEnaType {
+    FXTGTGEARENA_INITIAL_VALUE = 0;
+    FXTGTGEARENA_DISABLE = 1;
+    FXTGTGEARENA_ENABLE = 2;
   }
   //  [NoUnit] [0|7]
   optional LongctrlTgtGearReqType longctrl_tgt_gear_req = 1;
@@ -746,6 +1005,28 @@ message ACC_FD1_143 {
   optional int32 rolling_counter_acc11 = 25;
   //  [NoUint] [0|65535]
   optional int32  mcu_soc_to_mcu_time_delay = 26;
+  //  [NoUnit] [0|3]
+  optional DrvgPrkgFuncActvnStsType drvg_prkg_func_actvn_sts = 27;
+  //  [NoUnit] [0|255]
+  optional int32 checksum_acc12 = 28;
+  //  [NoUnit] [0|3]
+  optional FxTgtTrqEnaType fx_tgt_trq_ena = 29;
+  //  [NoUnit] [0|1]
+  optional bool fx_tgt_gear_req_vld = 30;
+  //  [NoUnit] [0|1]
+  optional bool fx_tgt_trq_vld = 31;
+  //  [NoUnit] [0|7]
+    optional FxTgtGearReqType fx_tgt_gear_req = 32;
+  //  [Nm] [-32768|32766]
+  optional int32 tot_ref_trq = 33;
+  //  [Nm] [-32768|32766]
+  optional int32 fx_tgt_trq = 34;
+  //  [NoUnit] [0|15]
+  optional int32 rolling_counter_acc12 = 35;
+  //  [NoUnit] [0|3]
+  optional FxTgtTrqModType fx_tgt_trq_mod = 36;
+  //  [NoUnit] [0|3]
+  optional FxTgtGearEnaType fx_tgt_gear_ena = 37;
 }
 
 message VDC_FD1_146 {
@@ -1134,7 +1415,7 @@ message HAP_FD1_15B {
     APS_TEXTDISP_DOOR_OPEN_RADS_SYS_SUSPEND = 180;
     APS_TEXTDISP_SEAT_BELT_DROP_RADS_SYS_SUSPEND = 181;
     APS_TEXTDISP_MIRROR_FOLD_RADS_SYS_SUSPEND = 182;
-    // APS_TEXTDISP_OBSTACLES_DETECTED = 183;
+    APS_TEXTDISP_OBSTACLES_DETECTED_A = 183;
     APS_TEXTDISP_DETECTED_OBSTACLES = 184;
     APS_TEXTDISP_AVOID_NEARBY_OBSTACLES = 185;
     APS_TEXTDISP_RADS_EXIT = 186;
@@ -1159,6 +1440,7 @@ message HAP_FD1_15B {
     APS_TEXTDISP_ENCOUNTER_OBSTACLES_LATERALLY_PARKING_SUSPENSION = 205;
     APS_TEXTDISP_PARKING_SYSTEM_FAILURE__PLEASE_TAKE_OVER_THE_VEHICLE_IN_TIME = 206;
     APS_TEXTDISP_TRUNK_OPEN_FADS_SYS_SUSPEND = 207;
+    APS_TEXTDISP_SYSTEM_EXIT_PLEASE_TAKE_OVER_THE_VEHICLE = 208;
     APS_TEXTDISP_DOOR_OPEN_FADS_SYS_SUSPEND = 209;
     APS_TEXTDISP_SEAT_BELT_DROP_FADS_SYS_SUSPEND = 210;
     APS_TEXTDISP_MIRROR_FOLD_FADS_SYS_SUSPEND = 211;
@@ -1167,7 +1449,7 @@ message HAP_FD1_15B {
     APS_TEXTDISP_SPEED_TOO_HIGH_FADS_EXITS = 214;
     APS_TEXTDISP_SLOPE_EXCEEDING_LIMIT_PLEASE_LEAVE_THE_RAMP = 215;
     APS_TEXTDISP_VEHICLE_NOT_READY_PARKING_SYSTEM_EXIT = 216;
-    APS_TEXTDISP_RESERVED_217 = 217;
+    APS_TEXTDISP_SUSPENSION_MODE_NOT_SUPPORTED_SYS_UNAVAILABLE = 217;
     APS_TEXTDISP_SYS_UNAVAILABLE = 218;
     APS_TEXTDISP_PARKING_HAS_NOT_STARTED_PLEASE_BE_AWARE_OF_THE_SLIP_DRIVE = 219;
     APS_TEXTDISP_TRAJECTORY_PLANNING = 220;
@@ -1180,7 +1462,7 @@ message HAP_FD1_15B {
     APS_TEXTDISP_THE_REAR_OF_THE_CAR_IS_PARKED_AND_SLOT_SMALL_USE_RPA = 227;
     APS_TEXTDISP_THE_FRONT_OF_THE_CAR_IS_PARKED_AND_SLOT_SMALL_USE_RPA = 228;
     APS_TEXTDISP_THE_MIRRORS_ARE_FOLDED_BE_AWARE_OF_YOUR_SURROUNDINGS = 229;
-    APS_TEXTDISP_SUSPENSION_MODE_NOT_SUPPORTED_SYS_UNAVAILABLE = 230;
+    APS_TEXTDISP_SUSPENSION_MODE_NOT_SUPPORTED_SYS_UNAVAILABLE_A = 230;
     APS_TEXTDISP_NO_DRIVING_TRAJECTORY_THE_SYSTEM_IS_TEMPORARILY_UNAVAILABLE = 231;
     APS_TEXTDISP_LIDAR_FAILURE_SYS_UNAVAILABLE = 232;
     APS_TEXTDISP_LIDAR_OBSTRUCTION_SYS_UNAVAILABLE = 233;
@@ -1189,13 +1471,12 @@ message HAP_FD1_15B {
     APS_TEXTDISP_USS_FAILURE_SYS_EXITS = 236;
     APS_TEXTDISP_UNABLE_PARK_OUT_SYS_EXIT = 237;
     APS_TEXTDISP_PLEASE_PRESS_THE_BRAKE_AND_SELECT_THE_PARKING_DIRECTION = 238;
-    APS_TEXTDISP_UNMANNED_PARKING_PROCESS = 239;
+    APS_TEXTDISP_RESERVED_239 = 239;
     APS_TEXTDISP_UNMANNED_PARKING_IS_SUSPENDED = 240;
     APS_TEXTDISP_PRESS_THE_BRAKES_AND_ADJUST_THE_PARKING_POSITION = 241;
     APS_TEXTDISP_THE_REARVIEW_MIRROR_IS_ABOUT_TO_BE_FOLDED = 242;
     APS_TEXTDISP_UNMANNED_PARKING_IS_SUCCESS = 243;
     APS_TEXTDISP_UNMANNED_PARKING_ABNORMAL_SYS_EXIT = 244;
-    APS_TEXTDISP_RESERVED = 245;
   }
   enum APSESPTgtGearReqType {
     APS_ESP_TGTGEARREQ_NO_REQUEST = 0;
@@ -1454,7 +1735,13 @@ message HAP_FD1_15B {
     PAVP_TEXTDIS2_NO_TEX = 0;
     PAVP_TEXTDIS2_DROP_OFF_AREA_PICTURE_REQUEST = 1;
     PAVP_TEXTDIS2_PATH_LIST_SHOWING_REQUEST = 2;
-    PAVP_TEXTDIS2_RESERVED_3 = 3;
+    PAVP_TEXTDIS2_FIND_A_SLOT_DO_YOU_WANT_TO_START_PARKING_OR_RPA = 3;
+    PAVP_TEXTDIS2_DO_YOU_WANT_TO_START_PARKING = 4;
+    PAVP_TEXTDIS2_WHICH_SLOTS_DO_YOU_WANT_TO_PARK_AND_START_PARKING = 5;
+    PAVP_TEXTDIS2_WHICH_SLOTS_DO_YOU_WANT_TO_PARK_AND_START_PARKING_NO_RPA = 6;
+    PAVP_TEXTDIS2_WHICH_SLOTS_DO_YOU_WANT_TO_PARK = 7;
+    PAVP_TEXTDIS2_DO_YOU_WANT_TO_START_PARKING_OR_RPA = 8;
+    PAVP_TEXTDIS2_RESERVED = 9;
   }
   enum APABrkFctnModType {
     APA_BRKFCTNMOD_NONE = 0;
@@ -1462,7 +1749,9 @@ message HAP_FD1_15B {
     APA_BRKFCTNMOD_RPA = 2;
     APA_BRKFCTNMOD_AVP = 3;
     APA_BRKFCTNMOD_MEB = 4;
-    APA_BRKFCTNMOD_RESERVED_5 = 5;
+    APA_BRKFCTNMOD_REQUEST_BRAKE_COMPENSATION = 5;
+    APA_BRKFCTNMOD_REQUEST_HOLD_BRAKE = 6;
+    APA_BRKFCTNMOD_RESERVED = 7;
   }
   enum APAApbReqType {
     APA_APBREQ_NONE = 0;
@@ -1784,6 +2073,25 @@ message CR_FD1_15E {
     FCTB_ABA_LEVEL_LEVEL_2 = 2;
     FCTB_ABA_LEVEL_LEVEL_3 = 3;
   }
+  enum FCTAStateType {
+    FCTA_STATE_INITIAL_VALUE = 0;
+    FCTA_STATE_OFF = 1;
+    FCTA_STATE_STANDBY = 2;
+    FCTA_STATE_ACTIVE = 3;
+    FCTA_STATE_PASSIVE = 4;
+    FCTA_STATE_FAULT = 5;
+    FCTA_STATE_RESERVED_6 = 6;
+  }
+  enum FCTBStateType {
+    FCTB_STATE_INITIAL_VALUE = 0;
+    FCTB_STATE_OFF = 1;
+    FCTB_STATE_STANDBY = 2;
+    FCTB_STATE_ACTIVE = 3;
+    FCTB_STATE_PASSIVE = 4;
+    FCTB_STATE_FAULT = 5;
+    FCTB_STATE_HOLD = 6;
+    FCTB_STATE_RESERVED_7 = 7;
+  }
   //  [NoUnit] [0|1]
   optional bool cr_fcta_resp = 1;
   //  [NoUnit] [0|1]
@@ -1810,6 +2118,10 @@ message CR_FD1_15E {
   optional double cr_brkg_req_val = 12;
   //  [NoUnit] [0|1]
   optional bool cr_brkg_req = 13;
+  //  [NoUnit] [0|7]
+  optional FCTAStateType fcta_state = 14;
+  //  [NoUnit] [0|7]
+  optional FCTBStateType fctb_state = 15;
 }
 
 message CSA1_165 {
@@ -1891,6 +2203,93 @@ message AEB_FD1_18B {
     ADAS_ERRSTS_FAILURE = 4;
     ADAS_ERRSTS_RESERVED_5 = 5;
   }
+  enum DWStateType {
+    DW_STATE_INITIAL_VALUE = 0;
+    DW_STATE_OFF = 1;
+    DW_STATE_STANDBY = 2;
+    DW_STATE_ACTIVE = 3;
+    DW_STATE_PASSIVE = 4;
+    DW_STATE_FAULT = 5;
+    DW_STATE_RESERVED_6 = 6;
+  }
+  enum FCWStateType {
+    FCW_STATE_INITIAL_VALUE = 0;
+    FCW_STATE_OFF = 1;
+    FCW_STATE_STANDBY = 2;
+    FCW_STATE_ACTIVE = 3;
+    FCW_STATE_PASSIVE = 4;
+    FCW_STATE_FAULT = 5;
+    FCW_STATE_RESERVED_6 = 6;
+  }
+  enum AWBStateType {
+    AWB_STATE_INITIAL_VALUE = 0;
+    AWB_STATE_OFF = 1;
+    AWB_STATE_STANDBY = 2;
+    AWB_STATE_ACTIVE = 3;
+    AWB_STATE_PASSIVE = 4;
+    AWB_STATE_FAULT = 5;
+    AWB_STATE_RESERVED_6 = 6;
+  }
+  enum AEBStateType {
+    AEB_STATE_INITIAL_VALUE = 0;
+    AEB_STATE_OFF = 1;
+    AEB_STATE_STANDBY = 2;
+    AEB_STATE_ACTIVE = 3;
+    AEB_STATE_PASSIVE = 4;
+    AEB_STATE_FAULT = 5;
+    AEB_STATE_HOLD = 6;
+    AEB_STATE_EBA_ACTIVE = 7;
+  }
+  enum EBAStateType {
+    EBA_STATE_INITIAL_VALUE = 0;
+    EBA_STATE_OFF = 1;
+    EBA_STATE_STANDBY = 2;
+    EBA_STATE_ACTIVE = 3;
+    EBA_STATE_PASSIVE = 4;
+    EBA_STATE_FAULT = 5;
+    EBA_STATE_RESERVED_6 = 6;
+  }
+  enum BrkgHldReqType {
+    BRKGHLDREQ_NO_REQUEST = 0;
+    BRKGHLDREQ_AVH_OFF = 1;
+    BRKGHLDREQ_AVH_ACTIVE = 2;
+    BRKGHLDREQ_AVH_STANDY = 3;
+  }
+  enum EPBModReqType {
+    EPBMODREQ_NO_REQUEST = 0;
+    EPBMODREQ_LOCK = 1;
+    EPBMODREQ_RELEASE = 2;
+  }
+  enum BrkgTgtTypType {
+    BRKGTGTTYP_INITIAL_VALUE = 0;
+    BRKGTGTTYP_COMFORT = 1;
+    BRKGTGTTYP_EMERGENCY = 2;
+  }
+  enum BrkgTgtTrqEnaType {
+    BRKGTGTTRQENA_INITIAL_VALUE = 0;
+    BRKGTGTTRQENA_DISABLE = 1;
+    BRKGTGTTRQENA_ENABLE = 2;
+  }
+  enum EPBModEnaType {
+    EPBMODENA_INITIAL_VALUE = 0;
+    EPBMODENA_DISABLE = 1;
+    EPBMODENA_ENABLE = 2;
+  }
+  enum BrkgTgtTrqModType {
+    BRKGTGTTRQMOD_NO_REQUEST = 0;
+    BRKGTGTTRQMOD_ACC = 1;
+    BRKGTGTTRQMOD_APA = 2;
+  }
+  enum DrvPrsntType {
+    DRVPRSNT_INITIAL_VALUE = 0;
+    DRVPRSNT_WITH_DRIVER = 1;
+    DRVPRSNT_WITHOUT_DRIVER = 2;
+  }
+  enum BrkgSwtReqType {
+    BRKGSWTREQ_INITIAL_VALUE = 0;
+    BRKGSWTREQ_ON = 1;
+    BRKGSWTREQ_OFF = 2;
+  }
   //  [NoUnit] [0|255]
   optional int32 checksum_aeb1 = 1;
   //  [NoUnit] [0|3]
@@ -1925,6 +2324,42 @@ message AEB_FD1_18B {
   optional double rel_tgt_obj_vel_x = 16;
   //  [NoUnit] [0|7]
   optional ADASErrStsType adas_err_sts = 17;
+  //  [NoUnit] [0|7]
+  optional DWStateType dw_state = 18;
+  //  [NoUnit] [0|7]
+  optional FCWStateType fcw_state = 19;
+  //  [NoUnit] [0|7]
+  optional AWBStateType awb_state = 20;
+  //  [NoUnit] [0|7]
+  optional AEBStateType aeb_state = 21;
+  //  [NoUnit] [0|7]
+  optional EBAStateType eba_state = 22;
+  //  [NoUnit] [0|1]
+  optional bool brkg_tgt_trq_vld = 23;
+  //  [NoUnit] [0|3]
+  optional BrkgHldReqType brkg_hld_req = 24;
+  //  [NoUnit] [0|3]
+  optional EPBModReqType epb_mod_req = 25;
+  //  [Nm] [0|65534]
+  optional int32 brkg_tgt_trq = 26;
+  //  [NoUnit] [0|3]
+  optional BrkgTgtTypType brkg_tgt_typ = 27;
+  //  [NoUnit] [0|15]
+  optional int32 rolling_counter_aeb6 = 28;
+  //  [NoUnit] [0|3]
+  optional BrkgTgtTrqEnaType brkg_tgt_trq_ena = 29;
+  //  [NoUnit] [0|3]
+  optional EPBModEnaType epb_mod_ena = 30;
+  //  [NoUnit] [0|3]
+  optional BrkgTgtTrqModType brkg_tgt_trq_mod = 31;
+  //  [NoUnit] [0|1]
+  optional bool epb_mod_req_vld = 32;
+  //  [NoUnit] [0|255]
+  optional int32 checksum_aeb6 = 33;
+  //  [NoUnit] [0|3]
+  optional DrvPrsntType drv_prsnt = 34;
+  //  [NoUnit] [0|3]
+  optional BrkgSwtReqType brkg_swt_req = 35;
 }
 
 message F_PBOX1_19B {
@@ -2485,6 +2920,8 @@ message DCT5_221 {
   optional int32 checksum_dct5 = 3;
   //  [NoUnit] [0|15]
   optional int32 rolling_counter_dct5 = 4;
+  //  [NoUnit] [0|1]
+  optional bool tgs_lever_valid = 5;
 }
 
 message IFC_FD6_222 {
@@ -3034,7 +3471,35 @@ message IFC_FD2_23D {
     HWA_TEXT_LIB_SPEEDING = 32;
     HWA_TEXT_LIB_TJA_IS_SUSPEND = 33;
     HWA_TEXT_LIB_EXITING_SOON = 34;
-    HWA_TEXT_LIB_RESERVED_35 = 35;
+    HWA_TEXT_LIB_NAVIGATION_LEFT_LANE_CHANGE = 35;
+    HWA_TEXT_LIB_NAVIGATION_RIGHT_LANE_CHANGE = 36;
+    HWA_TEXT_LIB_TRANSIT_LANE = 37;
+    HWA_TEXT_LIB_LEFT_LANE_CHANGE_DUE_BARRIER = 38;
+    HWA_TEXT_LIB_RIGHT_LANE_CHANGE_DUE_BARRIER = 39;
+    HWA_TEXT_LIB_STAY_AWAY_FROM_THE_CART = 40;
+    HWA_TEXT_LIB_ABOUCHEMENT = 41;
+    HWA_TEXT_LIB_FUNCTION_ABOUT_TO_EXIT = 42;
+    HWA_TEXT_LIB_PASSING_DIRECTION = 43;
+    HWA_TEXT_LIB_RED_LIGHT_RUNNING_RISK = 44;
+    HWA_TEXT_LIB_ROAD_PATTERN_LEFT_CHANGE = 45;
+    HWA_TEXT_LIB_ROAD_PATTERN_RIGHT_CHANGE = 46;
+    HWA_TEXT_LIB_DEPARTING_PEDESTRIAN = 47;
+    HWA_TEXT_LIB_AVOID_BIG_CARS = 48;
+    HWA_TEXT_LIB_CUT_IN_CAR = 49;
+    HWA_TEXT_LIB_EXTREMITY_LAND_CHANGE = 50;
+    HWA_TEXT_LIB_LAND_CHANGE_DUE_TO_SPECIAL_LANE = 51;
+    HWA_TEXT_LIB_SPECIAL_LANE = 52;
+    HWA_TEXT_LIB_TJA_ICA_RESUMED = 53;
+    HWA_TEXT_LIB_CHANGE_LANES_ON_SOLID_LINES = 54;
+    HWA_TEXT_LIB_UNABLE_TO_TURN = 55;
+    HWA_TEXT_LIB_ATTENTION_ELECTRONIC_EYE = 56;
+    HWA_TEXT_LIB_ATTENTION_TO_ROAD_SWITCHING = 57;
+    HWA_TEXT_LIB_SHORT_DISTANCE = 58;
+    HWA_TEXT_LIB_DRIVING_MODE = 59;
+    HWA_TEXT_LIB_SAFETY_BELT = 60;
+    HWA_TEXT_LIB_GO_PARKING_SPACE = 61;
+    HWA_TEXT_LIB_THROUGH_GATE = 62;
+    HWA_TEXT_LIB_URBAN_ACCESS_ROAD = 63;
   }
   enum RoadMarkTypType {
     ROAD_MARK_TYP_DEFAULT = 0;
@@ -3592,6 +4057,12 @@ message HUT_FD3_243 {
     PRKAREASTS_UNKNOWN = 2;
     PRKAREASTS_RESERVED_3 = 3;
   }
+  enum DeviateSpdModSwtReqType {
+    DEVIATESPDMODSWTREQ_INITIAL_VALUE = 0;
+    DEVIATESPDMODSWTREQ_FIXED_VALUE = 1;
+    DEVIATESPDMODSWTREQ_PERCENTAGE = 2;
+    DEVIATESPDMODSWTREQ_RESVERED = 3;
+  }
   enum HWAFaststSwtReqType {
     HWA_FASTSTSWTREQ_INITIAL_VALUE = 0;
     HWA_FASTSTSWTREQ_OFF = 1;
@@ -3669,7 +4140,15 @@ message HUT_FD3_243 {
   //  [NoUnit] [0|3]
   optional PrkAreaStsType prk_area_sts = 34;
   //  [NoUnit] [0|3]
-  optional HWAFaststSwtReqType hwa_fastst_swt_req = 35;
+  optional DeviateSpdModSwtReqType deviate_spd_mod_swt_req = 35;
+  //  [NoUnit] [0|63]
+  optional int32 deviate_spd_fixd_val_req = 36;
+  //  [Perc] [0|63]
+  optional int32 deviate_spd_pre_req = 37;
+  //  [NoUnit] [0|3]
+  optional HWAFaststSwtReqType hwa_fastst_swt_req = 38;
+  //  [NoUnit] [0|1]
+  optional bool one_click_aut_drvg_sts = 39;
 }
 
 message CSA3_244 {
@@ -3812,6 +4291,25 @@ message BLE1_25C {
     PRKOUTMODSEL_RMT1_VERTICAL_REAR_RIGHT_BERTHING = 4;
     PRKOUTMODSEL_RMT1_RESERVED_5 = 5;
   }
+  enum SmtPhoneLocnType {
+    SMTPHONELOCN_INITIAL_VALUE = 0;
+    SMTPHONELOCN_SMARTPHONE_IN_CAR = 1;
+    SMTPHONELOCN_SMARTPHONE_IN_PASSIVE_ENTRY_EXIT_RANGE = 2;
+    SMTPHONELOCN_RESERVED_3 = 3;
+  }
+  enum MplSmtPhoneLocnType {
+    MPLSMTPHONELOCN_INITIAL_VALUE = 0;
+    MPLSMTPHONELOCN_SMARTPHONE_IN_CAR = 1;
+    MPLSMTPHONELOCN_SMARTPHONE_IN_DRIVER_DOOR_PASSIVE_ENTRY_EXIT_RANGE = 2;
+    MPLSMTPHONELOCN_SMARTPHONE_IN_PASSENGER_DOOR_PASSIVE_ENTRY_EXIT_RANGE = 3;
+    MPLSMTPHONELOCN_SMARTPHONE_IN_DRIVER_DOOR_AUTO_LOCK_RANGE = 4;
+    MPLSMTPHONELOCN_SMARTPHONE_IN_PASSENGER_DOOR_AUTO_LOCK_RANGE = 5;
+    MPLSMTPHONELOCN_SMARTPHONE_IN_TRUNK_PASSIVE_ENTRY_EXIT_RANGE = 6;
+    MPLSMTPHONELOCN_SMARTPHONE_IN_PASSIVE_ENTRY_EXIT_RANGE = 7;
+    MPLSMTPHONELOCN_SMARTPHONE_IN_TRUNK_RANGE = 8;
+    MPLSMTPHONELOCN_SMARTPHONE_IN_WELCOME_AREA_RANGE = 9;
+    MPLSMTPHONELOCN_RESERVED_10 = 10;
+  }
   //  [NoUnit] [0|255]
   optional int32 checksum_ble1 = 1;
   //  [NoUnit] [0|1]
@@ -3838,6 +4336,10 @@ message BLE1_25C {
   optional bool park_choke_req_rmt = 12;
   //  [NoUnit] [0|7]
   optional PrkOutModSelRmt1Type prk_out_mod_sel_rmt1 = 13;
+  //  [NoUnit] [0|7]
+  optional SmtPhoneLocnType smt_phone_locn = 14;
+  //  [NoUnit] [0|15]
+  optional MplSmtPhoneLocnType mpl_smt_phone_locn = 15;
 }
 
 message HUT32_26F {
@@ -3882,6 +4384,12 @@ message HUT32_26F {
   optional int32 rolling_counter_hut32 = 10;
 }
 
+message TRAILER1_273 {
+  // Report Message
+    // description  [NoUnit] [0|1] [initial_value:0]
+    optional bool trailer_sts = 1;
+  }
+
 message HAP_FD2_274 {
 // Control Message
   enum AVMCurrStsType {
@@ -3921,7 +4429,7 @@ message HAP_FD2_274 {
     CARMDLTRSPRCYSTS_OPAQUE = 0;
     CARMDLTRSPRCYSTS_TRANSLUCENT = 1;
     CARMDLTRSPRCYSTS_COMPLETELY_TRANSPARENT = 2;
-    CARMDLTRSPRCYSTS_RESERVED_3 = 3;
+    CARMDLTRSPRCYSTS_FAILURE = 3;
   }
   enum MdlColrStsType {
     MDLCOLRSTS_SILVERY = 0;
@@ -4852,6 +5360,10 @@ message HAP_FD3_298 {
   optional bool auto_prk_out_swt_sts = 75;
   //  [NoUnit] [0|1]
   optional bool rcta_disp_swt_sts = 76;
+  //  [NoUnit] [0|1]
+  optional bool shld_key_door_hndl_req_vld = 77;
+  //  [NoUnit] [0|3]
+  optional int32 shld_key_door_hndl_req = 78;
 }
 
 message HAP_FD7_29B {
@@ -4938,6 +5450,18 @@ message AC1_29D {
 // Report Message
   //  [DegCgrd] [-40|86.5]
   optional double in_car_temp = 1;
+}
+
+message BMS_FD2_29E {
+// Report Message
+  enum BMSCC2LineStsType {
+    BMS_CC2LINESTS_NOT_CONNECT = 0;
+    BMS_CC2LINESTS_CONNECT = 1;
+    BMS_CC2LINESTS_ERROR = 2;
+    BMS_CC2LINESTS_RESERVED_3 = 3;
+  }
+  //  [NoUnit] [0|3]
+  optional BMSCC2LineStsType bms_cc2_line_sts = 1;
 }
 
 message BCM8_29F {
@@ -5156,7 +5680,22 @@ message ACC_FD2_2AB {
     ACC_INTERSYSINFODISP_SETSPEDD_REACH_LOWER_LIMIT = 13;
     ACC_INTERSYSINFODISP_UNABLE_TO_ACTIVATE_TJA_ICA_DUE_TO_DMS_UNA = 14;
     ACC_INTERSYSINFODISP_UNABLE_TO_ACTIVATE_ACC_DUE_TO_LOWPOWER = 15;
-    ACC_INTERSYSINFODISP_RESERVED_16 = 16;
+    ACC_INTERSYSINFODISP_SENSOR_OCCLUSION = 16;
+    ACC_INTERSYSINFODISP_HIGH_SPEED = 17;
+    ACC_INTERSYSINFODISP_CLOSE_PARK = 18;
+    ACC_INTERSYSINFODISP_BAD_WEATHER = 19;
+    ACC_INTERSYSINFODISP_SWITCHING_ACC = 20;
+    ACC_INTERSYSINFODISP_LIDAR_OCCLUSION = 21;
+    ACC_INTERSYSINFODISP_ENGINE_ROOMCOVER = 22;
+    ACC_INTERSYSINFODISP_TRUNK = 23;
+    ACC_INTERSYSINFODISP_ESP_SWITCH = 24;
+    ACC_INTERSYSINFODISP_HAZARD_WARNING_LIGHT = 25;
+    ACC_INTERSYSINFODISP_TRAILER_MODE = 26;
+    ACC_INTERSYSINFODISP_SNOW_PATTERN = 27;
+    ACC_INTERSYSINFODISP_MUD_MODEL = 28;
+    ACC_INTERSYSINFODISP_SANDY_LAND_MODEL = 29;
+    ACC_INTERSYSINFODISP_NOA_SWITCH = 30;
+    ACC_INTERSYSINFODISP_NAVIGATION_ROUTE = 31;
   }
   enum ACCModDispType {
     ACC_MODDISP_OFF_MODE = 0;
@@ -5303,7 +5842,8 @@ message ACC_FD2_2AB {
     REQUEST_DRIVEOFF_THE_FRONT_CAR_HAS_STARTED_PLEASE_KEEP_YOUR_ATTENTION = 3;
     REQUEST_DRIVEOFF_THE_FRONT_CAR_HAS_STARTED_PLEASE_TAKE_OVER_THE_CAR = 4;
     REQUEST_DRIVEOFF_PLEASE_PRESSED_THE_ACCELERATOR = 5;
-    REQUEST_DRIVEOFF_RESERVED_6 = 6;
+    REQUEST_DRIVEOFF_SLOW_TO_A_STOP = 6;
+    REQUEST_DRIVEOFF_SLOW_DOWN_FOLLOWING_CAR = 7;
   }
   enum ACCLeTgtTypType {
     ACC_LETGTTYP_UNKOWN = 0;
@@ -5346,6 +5886,12 @@ message ACC_FD2_2AB {
     HAVP_RECREQ_EVENT_TYPE_MEB = 5;
     HAVP_RECREQ_RESERVED_6 = 6;
   }
+  enum DeviateSpdModSwtRespType {
+    DEVIATESPDMODSWTRESP_INITIAL_VALUE = 0;
+    DEVIATESPDMODSWTRESP_FIXED_VALUE = 1;
+    DEVIATESPDMODSWTRESP_PERCENTAGE = 2;
+    DEVIATESPDMODSWTRESP_RESVERED = 3;
+  }
   enum HWAFaststSwtRespType {
     HWA_FASTSTSWTRESP_INITIAL_VALUE = 0;
     HWA_FASTSTSWTRESP_OFF = 1;
@@ -5377,27 +5923,27 @@ message ACC_FD2_2AB {
   //  [NoUnit] [0|1]
   optional bool isl_resp = 12;
   //  [NoUnit] [0|1]
-  optional bool ica_hands_off_resp = 13;
+  optional bool ica_hands_off_resp = 13 [deprecated = true];
   //  [NoUnit] [0|1]
-  optional bool longctrl_veh_hld_req_dvr = 14;
+  optional bool longctrl_veh_hld_req_dvr = 14 [deprecated = true];
   //  [NoUnit] [0|1]
-  optional bool longctrl_drv_off_req_dvr = 15;
+  optional bool longctrl_drv_off_req_dvr = 15 [deprecated = true];
   //  [NoUnit] [0|15]
-  optional LongctrlModStsDVRType longctrl_mod_sts_dvr = 16;
+  optional LongctrlModStsDVRType longctrl_mod_sts_dvr = 16 [deprecated = true];
   //  [NoUnit] [0|1]
-  optional bool longctrl_decel_req_dvr = 17;
+  optional bool longctrl_decel_req_dvr = 17 [deprecated = true];
   //  [Perc] [-100|99.999713]
-  optional double longctrl_eng_trq_req_dvr = 18;
+  optional double longctrl_eng_trq_req_dvr = 18 [deprecated = true];
   //  [NoUnit] [0|1]
-  optional bool longctrl_eng_trq_req_active_dvr = 19;
+  optional bool longctrl_eng_trq_req_active_dvr = 19 [deprecated = true];
   //  [NoUnit] [0|1]
-  optional bool longctrl_decel_to_stop_req_dvr = 20;
+  optional bool longctrl_decel_to_stop_req_dvr = 20 [deprecated = true];
   //  [NoUnit] [0|1]
-  optional bool longctrl_wheel_trq_req_active_dvr = 21;
+  optional bool longctrl_wheel_trq_req_active_dvr = 21 [deprecated = true];
   //  [NoUnit] [0|3]
-  optional LongctrlParkShiftReqDVRType longctrl_park_shift_req_dvr = 22;
+  optional LongctrlParkShiftReqDVRType longctrl_park_shift_req_dvr = 22 [deprecated = true];
   //  [MtrPerSecSq] [-7|5.75]
-  optional double longctrl_decel_req_value_dvr = 23;
+  optional double longctrl_decel_req_value_dvr = 23 [deprecated = true];
   //  [NoUnit] [0|3]
   optional HWASnvtySetRespType hwa_snvty_set_resp = 24;
   //  [NoUnit] [0|1]
@@ -5415,7 +5961,7 @@ message ACC_FD2_2AB {
   //  [NoUnit] [0|15]
   optional HWAModDispType hwa_mod_disp = 31;
   //  [NM] [-16384|16383.5]
-  optional double longctrl_wheel_trq_req_dvr = 32;
+  optional double longctrl_wheel_trq_req_dvr = 32 [deprecated = true];
   //  [NoUnit] [0|15]
   optional HWAInterSysInfoDispType hwa_inter_sys_info_disp = 33;
   //  [NoUnit] [0|7]
@@ -5535,7 +6081,13 @@ message ACC_FD2_2AB {
   //  [NoUnit] [0|7]
   optional HAVPRecReqType havp_rec_req = 91;
   //  [NoUnit] [0|3]
-  optional HWAFaststSwtRespType hwa_fastst_swt_resp = 92;
+  optional DeviateSpdModSwtRespType deviate_spd_mod_swt_resp = 92;
+  //  [NoUnit] [0|63]
+  optional int32 deviate_spd_fixd_val_resp = 93;
+  //  [Perc] [0|63]
+  optional int32 deviate_spd_pre_resp = 94;
+  //  [NoUnit] [0|3]
+  optional HWAFaststSwtRespType hwa_fastst_swt_resp = 95;
 }
 
 message DRDCM1_2B0 {
@@ -6275,7 +6827,7 @@ message HUT_FD1_2C3 {
     ADAS_POSN_CURLANE_INVALID_DATA = 7;
   }
   //  [NoUnit] [0|1]
-  optional bool ica_hands_off_swt_req = 1;
+  optional bool ica_hands_off_swt_req = 1 [deprecated = true];
   //  [NoUnit] [0|3]
   optional IFCSnvtySetType ifc_snvty_set = 2;
   //  [NoUnit] [0|1]
@@ -6590,7 +7142,16 @@ message IFC_FD3_2CF {
     TSRTRFCSIGNVAL_RESIDENTIAL_ZONES_ENTRY = 67;
     TSRTRFCSIGNVAL_RESIDENTIAL_ZONES_EXIT = 68;
     TSRTRFCSIGNVAL_TRAILER = 69;
-    TSRTRFCSIGNVAL_RESERVED_70 = 70;
+    TSRTRFCSIGNVAL_GIVEWAY_TO_ONCOMING_VEHICLES = 70;
+    TSRTRFCSIGNVAL_NO_STOPPING = 71;
+    TSRTRFCSIGNVAL_NO_PARKING = 72;
+    TSRTRFCSIGNVAL_DRIVE_WITH_CAUTION = 73;
+    TSRTRFCSIGNVAL_ROAD_NARROW = 74;
+    TSRTRFCSIGNVAL_BEWARE_OF_CROSSWIND = 75;
+    TSRTRFCSIGNVAL_SLIPPERY_SURFACE = 76;
+    TSRTRFCSIGNVAL_BUMPY_ROAD_AHEAD = 77;
+    TSRTRFCSIGNVAL_LOW_WATER_CROSSING = 78;
+    TSRTRFCSIGNVAL_RESERVED_79 = 79;
     TSRTRFCSIGNVAL_INVALID = 255;
   }
   enum HMAStsType {
@@ -6952,7 +7513,12 @@ message IFC_FD3_2CF {
     TRALIGHTWARNINFODISP_RIGHT_TURN = 3;
     TRALIGHTWARNINFODISP_WARNING = 4;
     TRALIGHTWARNINFODISP_TURN_ROUND_WARNING = 5;
-    TRALIGHTWARNINFODISP_RESERVED_6 = 6;
+    TRALIGHTWARNINFODISP_RUN_ARED_LIGHT = 6;
+    TRALIGHTWARNINFODISP_STOP_ABOUT_TO_CROSS_THE_LINE = 7;
+    TRALIGHTWARNINFODISP_SLOW_DOWN_THE_YELLOW_LIGHT = 8;
+    TRALIGHTWARNINFODISP_ATTENTION_YELLOW_LIGHT = 9;
+    TRALIGHTWARNINFODISP_TRAFFIC_LIGHT_OBSERVATION_LIMITED = 10;
+    TRALIGHTWARNINFODISP_ROUNDABOUT = 11;
   }
   enum TraLightRmdInfoDispType {
     TRALIGHTRMDINFODISP_NO_DISPLAY = 0;
@@ -7028,6 +7594,18 @@ message IFC_FD3_2CF {
     TRALIGHTCTRLSTS_ACTIVE = 4;
     TRALIGHTCTRLSTS_FAULT = 5;
     TRALIGHTCTRLSTS_RESERVED_6 = 6;
+  }
+  enum LRSideCamaErrStsType {
+    LR_SIDECAMAERRSTS_NO_ERROR = 0;
+    LR_SIDECAMAERRSTS_ERROR = 1;
+    LR_SIDECAMAERRSTS_BLINDNESS = 2;
+    LR_SIDECAMAERRSTS_RESERVED_3 = 3;
+  }
+  enum RRSideCamaErrStsType {
+    RR_SIDECAMAERRSTS_NO_ERROR = 0;
+    RR_SIDECAMAERRSTS_ERROR = 1;
+    RR_SIDECAMAERRSTS_BLINDNESS = 2;
+    RR_SIDECAMAERRSTS_RESERVED_3 = 3;
   }
   //  [NoUnit] [0|255]
   optional int32 checksum_ifc7 = 1;
@@ -7199,6 +7777,10 @@ message IFC_FD3_2CF {
   optional TSRSpdLimType tsr_spd_lim_to_fr = 78;
   //  [NoUnit] [0|63]
   optional TSRConSpdLimType tsr_con_spd_lim_to_fr = 79;
+  //  [NoUnit] [0|7]
+  optional LRSideCamaErrStsType lr_side_cama_err_sts = 80;
+  //  [NoUnit] [0|7]
+  optional RRSideCamaErrStsType rr_side_cama_err_sts = 81;
 }
 
 message PRDCM1_2D5 {
@@ -7256,6 +7838,8 @@ message VCU_FD4_2D6 {
   optional int32 checksum_vcu13 = 7;
   //  [NoUnit] [0|15]
   optional int32 rolling_counter_vcu13 = 8;
+  //  [km] [0|999]
+  optional int32 vcu_resr_drv_rng = 9;
 }
 
 message HUT23_2D8 {
@@ -7623,7 +8207,7 @@ message HUT20_2DE {
   //  [NoUnit] [0|1]
   optional bool adas_prof_long_update = 8;
   //  [NoUnit] [0|4294967295]
-  optional int32 adas_prof_long_value = 9;
+  optional uint32 adas_prof_long_value = 9;
 }
 
 message DVR_FD1_2EC {
@@ -7711,6 +8295,10 @@ message BCM1_319 {
   optional int32 freshness_value_bcm1 = 7;
   //  [NoUnit] [0|1]
   optional bool rls_fail_sts = 8;
+  //  [NoUnit] [0|255]
+  optional int32 checksum_bcm1 = 9;
+  //  [NoUnit] [0|15]
+  optional int32 rolling_counter_bcm1 = 10;
 }
 
 message VCU5_31B {
@@ -7742,6 +8330,18 @@ message PIS1_320 {
   optional PISIntFltStsType pis_int_flt_sts = 2;
   //  [NoUnit] [0|15]
   optional int32 rolling_counter_pis1 = 3;
+}
+
+message OBC_FD2_31F {
+// Report Message
+  enum OBCCCLineStsType {
+    OBC_CCLINESTS_NOT_CONNECTED = 0;
+    OBC_CCLINESTS_CONNECTED = 1;
+    OBC_CCLINESTS_HALF_CONNECTION = 2;
+    OBC_CCLINESTS_ERROR = 3;
+  }
+  //  [NoUnit] [0|3]
+  optional OBCCCLineStsType obc_cc_line_sts = 1;
 }
 
 message RFCM_L1_332 {
@@ -8326,7 +8926,7 @@ message HCU_FD1_60 {
   //  [NoUnit] [0|65535]
   optional int32 freshness_value_hcu_fd1 = 5;
   // / [NoUnit] [0|3]
-  optional ACUShiftInProgressType acu_shift_in_progress = 6;
+  optional ACUShiftInProgressType acu_shift_in_progress = 6 [deprecated = true];
   //  [NoUnit] [0|255]
   optional int32 checksum_hcu_hp10 = 7;
   //  [NoUnit] [0|15]
@@ -8382,6 +8982,8 @@ message CSA2_A1 {
   optional ManualShiftReqType manual_shift_req = 15;
   // B [NoUnit] [0|1]
   optional bool hwa_ok_off_swt = 16;
+  //  [NoUnit] [0|1]
+  optional bool acc_time_gap_set_swt = 17;
 }
 
 message VCU_FD1_B5 {
@@ -8441,6 +9043,8 @@ message VCU_FD1_B5 {
   optional int32 checksum_vcu15 = 14;
   //  [NoUnit] [0|15]
   optional int32 rolling_counter_vcu15 = 15;
+  //  [NoUnit] [0|1]
+  optional bool vcu_accel_pedal_posn_valid = 16;
 }
 
 message RWS1_BC {
@@ -8463,12 +9067,24 @@ message ESP_FD1_BD {
     DRVPRESSBRKPEDALAVL_SIGNALAVAILABILITY_FULL = 2;
     DRVPRESSBRKPEDALAVL_RESERVED_3 = 3;
   }
+  enum TgtRcprtnTrqStsType {
+    TGTRCPRTNTRQSTS_NOT_INITIALIZED = 0;
+    TGTRCPRTNTRQSTS_NORMAL = 1;
+    TGTRCPRTNTRQSTS_FAULTY = 2;
+    TGTRCPRTNTRQSTS_RESERVED_3 = 3;
+  }
   //  [NoUnit] [0|255]
   optional int32 checksum_esp12 = 1;
   //  [NoUnit] [0|15]
   optional int32 rolling_counter_esp12 = 2;
   //  [NoUnit] [0|3]
   optional DrvPressBrkPedalAvlType drv_press_brk_pedal_avl = 3;
+  // [NoUnit] [0|0]
+  optional bool esp_veh_hld_sts = 4;
+  //  [Nm] [-16383|0]
+  optional int32 tgt_rcprtn_trq_req = 5;
+  //  [NoUnit] [0|3]
+  optional TgtRcprtnTrqStsType tgt_rcprtn_trq_sts = 6;
 }
 
 message SBWM1_C7 {
@@ -8486,8 +9102,23 @@ message SBWM1_C7 {
     DRV_RQ_SHFT_RESERVED_9 = 9;
     DRV_RQ_SHFT_SIGNAL_NOT_AVAILABLE_SNA_DOUBLE_FAULT_SHIFTER_SENSOR = 15;
   }
+  enum DrvReqParkType {
+    DRVREQPARK_NO_REQUEST = 0;
+    DRVREQPARK_DRIVER_REQUEST_PARK_BUTTON = 1;
+    DRVREQPARK_PARK_BUTTON_FAULT = 2;
+    DRVREQPARK_RESERVED_3 = 3;
+  }
+  enum EShiftFaultType {
+    E_SHIFTFAULT_E_SHIFT_NORMAL = 0;
+    E_SHIFTFAULT_E_SHIFT_FAULT = 1;
+    E_SHIFTFAULT_RESERVED_2 = 2;
+  }
   //  [NoUnit] [0|15]
   optional DRVRQSHFTType drv_rq_shft = 1;
+  //  [NoUnit] [0|3]
+  optional DrvReqParkType drv_req_park = 2;
+  //  [NoUnit] [0|3]
+  optional EShiftFaultType e_shift_fault = 3;
 }
 
 message IBOOSTER1_D1 {
@@ -8594,6 +9225,61 @@ message RSDS_FD1_16F {
     RITARSTS_TARGET_VALID = 1;
     RITARSTS_NO_TARGET = 2;
     RITARSTS_RESERVED_3 = 3;
+  }
+  enum BSDStateType {
+    BSD_STATE_INITIAL_VALUE = 0;
+    BSD_STATE_OFF = 1;
+    BSD_STATE_STANDBY = 2;
+    BSD_STATE_ACTIVE = 3;
+    BSD_STATE_PASSIVE = 4;
+    BSD_STATE_FAULT = 5;
+    BSD_STATE_RESERVED_6 = 6;
+  }
+  enum LCAStateType {
+    LCA_STATE_INITIAL_VALUE = 0;
+    LCA_STATE_OFF = 1;
+    LCA_STATE_STANDBY = 2;
+    LCA_STATE_ACTIVE = 3;
+    LCA_STATE_PASSIVE = 4;
+    LCA_STATE_FAULT = 5;
+    LCA_STATE_RESERVED_6 = 6;
+  }
+  enum DOWStateType {
+    DOW_STATE_INITIAL_VALUE = 0;
+    DOW_STATE_OFF = 1;
+    DOW_STATE_STANDBY = 2;
+    DOW_STATE_ACTIVE = 3;
+    DOW_STATE_PASSIVE = 4;
+    DOW_STATE_FAULT = 5;
+    DOW_STATE_RESERVED_6 = 6;
+  }
+  enum RCWStateType {
+    RCW_STATE_INITIAL_VALUE = 0;
+    RCW_STATE_OFF = 1;
+    RCW_STATE_STANDBY = 2;
+    RCW_STATE_ACTIVE = 3;
+    RCW_STATE_PASSIVE = 4;
+    RCW_STATE_FAULT = 5;
+    RCW_STATE_RESERVED_6 = 6;
+  }
+  enum RCTAStateType {
+    RCTA_STATE_INITIAL_VALUE = 0;
+    RCTA_STATE_OFF = 1;
+    RCTA_STATE_STANDBY = 2;
+    RCTA_STATE_ACTIVE = 3;
+    RCTA_STATE_PASSIVE = 4;
+    RCTA_STATE_FAULT = 5;
+    RCTA_STATE_RESERVED_6 = 6;
+  }
+  enum RCTBStateType {
+    RCTB_STATE_INITIAL_VALUE = 0;
+    RCTB_STATE_OFF = 1;
+    RCTB_STATE_STANDBY = 2;
+    RCTB_STATE_ACTIVE = 3;
+    RCTB_STATE_PASSIVE = 4;
+    RCTB_STATE_FAULT = 5;
+    RCTB_STATE_HOLD = 6;
+    RCTB_STATE_RESERVED_7 = 7;
   }
   //  [MtrPerSecSq] [-16|15.9688]
   optional double rsds_obj_rel_accel_y_le = 1;
@@ -8737,6 +9423,18 @@ message RSDS_FD1_16F {
   optional double rsds_obj_rel_accel_x_ri = 70;
   //  [MtrPerSecSq] [-16|15.9688]
   optional double rsds_obj_rel_accel_y_ri = 71;
+  //  [NoUnit] [0|7]
+  optional BSDStateType bsd_state = 72;
+  //  [NoUnit] [0|7]
+  optional LCAStateType lca_state = 73;
+  //  [NoUnit] [0|7]
+  optional DOWStateType dow_state = 74;
+  //  [NoUnit] [0|7]
+  optional RCWStateType rcw_state = 75;
+  //  [NoUnit] [0|7]
+  optional RCTAStateType rcta_state = 76;
+  //  [NoUnit] [0|7]
+  optional RCTBStateType rctb_state = 77;
 }
 
 message DCDC6_218 {
@@ -12803,6 +13501,60 @@ message FMCU_FD1_AE {
   optional int32 fmcu_act_rot_spd = 1;
 }
 
+/* DBCV3.4.1 additional message */
+// ADAS1
+message ACU1_F0 {
+// Report Message
+  enum ACUShiftInProgressType {
+    ACU_SHIFTINPROGRESS_NOT_IN_PROGRESS = 0;
+    ACU_SHIFTINPROGRESS_IN_PROGRESS = 1;
+    ACU_SHIFTINPROGRESS_RESERVED_2 = 2;
+    ACU_SHIFTINPROGRESS_INVALID = 3;
+  }
+  //  [NoUnit] [0|3]
+  optional ACUShiftInProgressType acu_shift_in_progress = 1;
+}
+
+message CSA5_23A {
+// Report Message
+  enum CustomSwtStsParkType {
+    CUSTOMSWTSTS_PARK_RELEASED = 0;
+    CUSTOMSWTSTS_PARK_PRESSED = 1;
+    CUSTOMSWTSTS_PARK_ERROR = 2;
+    CUSTOMSWTSTS_PARK_INVALIDATION = 3;
+  }
+  //  [NoUnit] [0|3]
+  optional CustomSwtStsParkType custom_swt_sts_park = 1;
+}
+
+message PEPS1_A5 {
+  // Report Message
+  enum PhyKeyPosnStsType {
+    PHYKEYPOSNSTS_NO_ACTION = 0;
+    PHYKEYPOSNSTS_INSIDE = 1;
+    PHYKEYPOSNSTS_OUTSIDE = 2;
+  }
+  enum DoorHndlBtnActnType {
+    DOORHNDLBTNACTN_NO_ACTION = 0;
+    DOORHNDLBTNACTN_MAIN_DOOR_HANDLE_CLICK = 1;
+    DOORHNDLBTNACTN_MAIN_DOOR_HANDLE_TAP_AND_HOLD = 2;
+    DOORHNDLBTNACTN_PASSENGER_DOOR_HANDLE_CLICK = 3;
+    DOORHNDLBTNACTN_PASSENGER_DOOR_HANDLE_TAP_AND_HOLD = 4;
+  }
+  enum PhyKeyPressActnType {
+    PHYKEYPRESSACTN_NO_ACTION = 0;
+    PHYKEYPRESSACTN_KEY_UNLOCK_TAP_AND_HOLD = 1;
+    PHYKEYPRESSACTN_CLICK_ANY_KEY = 2;
+    PHYKEYPRESSACTN_BLOCK_KEYTAP_AND_HOLD = 3;
+  }
+  //  [NoUnit] [0|3]
+  optional PhyKeyPosnStsType phy_key_posn_sts = 1;
+  //  [NoUnit] [0|15]
+  optional DoorHndlBtnActnType door_hndl_btn_actn = 2;
+  //  [NoUnit] [0|7]
+  optional PhyKeyPressActnType phy_key_press_actn = 3;
+}
+
 message GwmChassisDetail {
 // ADAS1
   optional ECM_FD2_103 ecm_fd2_103 = 1; // report message
@@ -12933,4 +13685,15 @@ message GwmChassisDetail {
   optional RSDS_L_SGU_HEAD_5CE rsds_l_sgu_head_5ce = 124; // report message
   optional RSDS_R_SGU_HEAD_5CF rsds_r_sgu_head_5cf = 125; // report message
   optional FMCU_FD1_AE fmcu_fd1_ae = 126; // report message
+
+/* DBCV3.4.1 */
+// ADAS1
+  optional ACU1_F0 acu1_f0 = 127; // report message
+  optional OBC_FD2_31F obc_fd2_31f = 128; // report message
+  optional BMS_FD2_29E bms_fd2_29e = 129; // report message
+/* DBCV3.8 */
+// ADAS1
+  optional CSA5_23A csa5_23a = 130; // report message
+  optional PEPS1_A5 peps1_a5 = 131; // report message
+  optional TRAILER1_273 trailer1_273 = 132; // report message
 }

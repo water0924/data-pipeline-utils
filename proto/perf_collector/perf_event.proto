@@ -169,6 +169,8 @@ message SysTrace {
   optional uint64 pgscan_kswapd = 37;
   optional uint64 oom_kill = 38;
   optional uint64 pgfree = 39;
+  optional uint32 mem_anon = 40;
+  optional uint32 mem_file = 41;
 }
 
 // 对应于Event id PERF_TRACE_TASK
@@ -288,4 +290,49 @@ message CpuCoreTrace {
       1;  // 会记录下告警发生的时间，格式：2023-03-03-07:18:56.312
   optional uint32 total_num = 2;  // total number of cpu cores
   repeated CpuCoreInfo cores_info = 3;
+}
+
+// 单个block设备的资源占用信息
+message DiskStat {
+  optional string device_name = 1;  // block device name in /dev/,such as vblkdev0
+  optional uint32 rps = 2;          // read requests per second of the block device
+  optional uint32 read_kb = 3;      // read bytes per second of the block device
+  optional uint32 rrqm = 4;         // read requests merged or combined per second of the block device
+  optional uint32 r_await = 5;      // read average wait time for I/O operations
+  optional uint32 wps = 6;          // write requests per second of the block device 
+  optional uint32 write_kb = 7;     // write bytes per second of the block device
+  optional uint32 wrqm = 8;         // write requests merged or combined per second of the block device
+  optional uint32 w_await = 9;      // write average wait time for I/O operations
+  optional uint32 avgrq = 10;       // the average size of each I/O request in sectors.
+  optional uint32 avgqu = 11;       // the average number of requests waiting in the queue for processing.
+  optional uint32 await = 12;       // average wait time for I/O operations
+  optional float svctm = 13;        // service time for one I/O operation
+  optional float util = 14;         // the percentage of time that a block device (like a disk) is busy processing I/O requests.
+}
+
+// 对应于Event id PERF_TRACE_CPUCORES,用来上报每个core的资源占用信息
+message BlkIOTrace {
+  optional string time = 1;  // 会记录下告警发生的时间，格式：2023-03-03-07:18:56.312
+  optional uint32 total_num = 2;  // total number of blocks
+  repeated DiskStat disks = 3;
+}
+
+// 硬件中断数据
+message HardwareInterruptTrace {
+  optional uint32 irq_number = 1;          // 中断号
+  repeated uint64 cpu_counts = 2; // 各CPU核心中断计数
+  optional string interrupt_info = 3;      //中断信息
+}
+
+// 软中断数据
+message SoftInterruptTrace {
+  optional string name = 1;                // 软中断名称 (如TIMER)
+  repeated uint64 cpu_counts = 2;   // 各CPU核心软中断计数
+}
+
+// 完整系统中断数据包
+message SystemInterruptsTrace {
+  optional uint64 timestamp = 1;        // 时间戳 (Unix毫秒)
+  repeated HardwareInterruptTrace hw_interrupts = 2;
+  repeated SoftInterruptTrace soft_irqs = 3;
 }

@@ -42,6 +42,8 @@ message LaneBoundary {
   optional float width = 13;
 
   optional int32 tracking_count = 14;
+  repeated float point_uncertainty = 15;
+  optional bool is_leftturn = 16 [default = false];
 }
 
 message LaneInstance {
@@ -141,6 +143,8 @@ message Lane {
   optional TopoInfo right_topo = 33;
   repeated float left_width_list = 34;
   repeated float right_width_list = 35;
+  repeated float sigma_list = 36;
+  repeated int32 association_cnt_list = 37;
 }
 
 message RoadEdge {
@@ -170,6 +174,7 @@ message StopLine {
     STOP = 2;
     YIELD = 3;
     UNKNOWN = 4;
+    LEFTTURN = 5;
   }
   optional Type type = 4;
 }
@@ -198,12 +203,20 @@ message MapElement {
     LANE_TEXT = 13;
     GROUND_SPEED_LIMIT = 14;
     TRAFFIC_SIGN_SPEED_LIMIT = 15;
+    LANE_MARKER_STRAIGHT_LEFT_RIGHT = 16;
+    LANE_MARKER_STRAIGHT_LEFT_UTURN = 17;
+    LANE_MARKER_RIGHT_UTURN = 18;
+    LANE_MARKER_LEFT_RIGHT_UTURN = 19;
+    LANE_MARKER_STRAIGHT_RIGHT_UTURN = 20;
+    LANE_MARKER_LEFT_MERGE = 21;
+    LANE_MARKER_RIGHT_MERGE = 22;
   }
   optional Type type = 2;
   optional common.Point3D position = 3;
   optional PerceptionInfo perception_info = 4;
   optional string text_string = 5;
   optional float theta = 6;
+  optional float score = 7;
 }
 
 message ParkingSpace {
@@ -256,6 +269,16 @@ message ParkingSpace {
     LESS_SPACE = 14;
     TURN = 15;
     JOINT_EGO = 16;
+    LOCK_OFF = 17;
+    PILLAR = 18;
+    BUSH = 19;
+    TREE = 20;
+    DARK_SCENE = 21;
+    FAR_AWAY = 22;
+    NARROW_ROAD = 23;
+    FIRE_HYDRANT = 24;
+    CHARGING_STATION = 25;
+    BARRIER_GATE = 26;
   }
   optional ShapeType shape_type = 7;
   optional BoundaryType boundary_type = 14;
@@ -266,6 +289,9 @@ message ParkingSpace {
   repeated common.Point3D parking_space_vertex_vis = 11;
   optional common.Point3D parking_space_center_pt_vis = 12;
   optional int32 layer = 13 [default = 0];
+  optional uint64 timestamp = 15;  // us, timestamp of current frame running
+  optional bool head_parking_available = 16 [default = false];
+  optional bool tail_parking_available = 17 [default = true];
 }
 
 message Road {
@@ -291,6 +317,10 @@ message Road {
   // normal lane confidence map
   // 0~255, 255 for confident, 0 for not confident
   optional bytes lane_confidence_map = 10;
+
+  //visible mask
+  //0~1, 0 for visible, 1 for not visible
+  repeated float visibility = 11;
 }
 
 message RoadPolygon {
@@ -363,6 +393,7 @@ message RASMap {
   repeated LaneInstance lane_instances = 21;
 
   optional float heading_angle = 22; // rad
+  optional bool is_uncertain = 23;
 }
 
 message Extrinsic {

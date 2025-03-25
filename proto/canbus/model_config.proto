@@ -16,4 +16,9 @@ message ModelConfig {
     optional double ts = 12;
     optional double minimum_speed_protection = 13;
     optional double enable_observer_min_speed = 14 [default = 1.0];
+    optional double cutoff_steer_wheel_rate_cmd_filter= 15;
+    optional double observer_lat_acc_thre = 16;
+    optional double observer_vy_thre = 17;
+    optional double observer_steer_thre = 18;
+    optional double observer_steer_rate_thre = 19;
 }

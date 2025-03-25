@@ -10,7 +10,7 @@ import "safety/safety_analysis.proto";
 message TriggeredEvent {
   optional dr.common.Event event = 1;
   optional dr.safety.EventType type = 2;
-  //@C_Mark@30@;
+  //@C_Mark@35@;
   repeated uint32 task_failure_policy = 3; //第一个字节表示FailurePolicy，第二个字节表示TaskType
   optional int32 dtc_index = 4; //dtc对应的写入数组的index，无dtc则为-1
 }
@@ -57,7 +57,7 @@ message SSMState { // topic: "/safety/mcu_status"
   //@C_Mark@10@;
   repeated SSMEvent ssm_events = 3;
   optional int32 event_config_sequence_num = 4; //默认值为-1
-  //@C_Mark@30@;
+  //@C_Mark@35@;
   repeated SSMPolicyEvent ssm_policy_events = 5;
 }
 
@@ -69,7 +69,7 @@ message TaskFailurePolicy {
 //ssm直接获得的事件，需要ssm主动查询配置
 message EventPolicyConfig {
   optional dr.common.Event event = 1;
-  //@C_Mark@30@;
+  //@C_Mark@35@;
   repeated uint32 task_failure_policy = 2; ////第一个字节表示FailurePolicy，第二个字节表示TaskType
 }
 
@@ -95,4 +95,43 @@ message SafetyMcuConfig { // topic: "/safety/mcu_config"
 message BlcStatus { // topic: "/safety/blc_status"
   //@C_Mark@30@;
   repeated BlcState blc_status = 1;
+}
+
+/***** new SOC-MCU arch, for P03-ET, D03-ET, P177-ET etc. *****/
+// See also: https://rqk9rsooi4.feishu.cn/wiki/FK0lwBM5Si37wYkOcEKcU8SjnUb?sheet=3heIBz
+
+// SOC->MCU, topic="/safety/soc_dtcs", max_serialized_size=160 bytes
+message SocDtcs {
+  //@C_Mark@36@;
+  repeated uint32 soc_dtc_indics = 1;
+}
+
+enum SocFailureInfo {
+  NO_FAILURE = 0;
+  DEM_HEARTBEAT_TIMEOUT = 1; // DEM (on SOC) heartbeat timeout
+}
+
+// SOC->MCU, topic="/safety/soc_state", max_serialized_size=1024 bytes
+message SocSafetyState {
+  optional uint64 timestamp_ms = 1; // required. timestamp in milliseconds
+  optional uint32 soc_timeout_ms = 2; // required. SOC timeout value in milliseconds
+  optional SocFailureInfo soc_failure_info = 3; // required. current SOC failure info, failures should be reported continuously until recovery
+  optional bool full_detect_enabled = 4; // required. current SOC full_detect status
+}
+
+// MCU->SOC, topic="/safety/mcu_state", max_serialized_size=1024 bytes
+message McuSafetyState {
+  optional uint64 timestamp_ms = 1; // required. timestamp in milliseconds
+}
+
+message McuEventInfo {
+  optional dr.common.Event event = 1; // required. event id
+  optional dr.common.Module module = 2; // required. event source module
+}
+
+// MCU->SOC, adapter receive McuEventInfo and call `deeproute::common::ReportEvent`
+// topic="/common/serialized_module_events", max_serialized_size=512 bytes
+message McuEventsInfo {
+  //@C_Mark@55@;
+  repeated McuEventInfo mcu_event_info = 1; // required. event info from MCU
 }

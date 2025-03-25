@@ -16,7 +16,7 @@ _sym_db = _symbol_database.Default()
 from proto.common import header_pb2 as common_dot_header__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19\x64rivers/pointcloud2.proto\x12\x11\x64\x65\x65proute.drivers\x1a\x13\x63ommon/header.proto\"h\n\nPointField\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06offset\x18\x02 \x01(\r\x12-\n\x08\x64\x61tatype\x18\x03 \x01(\x0e\x32\x1b.deeproute.drivers.DataType\x12\r\n\x05\x63ount\x18\x04 \x01(\r\"\xe1\x01\n\x0bPointCloud2\x12(\n\x06header\x18\x01 \x01(\x0b\x32\x18.deeproute.common.Header\x12\r\n\x05width\x18\x02 \x01(\r\x12\x0e\n\x06height\x18\x03 \x01(\r\x12-\n\x06\x66ields\x18\x04 \x03(\x0b\x32\x1d.deeproute.drivers.PointField\x12\x14\n\x0cis_bigendian\x18\x05 \x01(\x08\x12\x12\n\npoint_step\x18\x06 \x01(\r\x12\x10\n\x08row_step\x18\x07 \x01(\r\x12\x0c\n\x04\x64\x61ta\x18\x08 \x01(\x0c\x12\x10\n\x08is_dense\x18\t \x01(\x08*g\n\x08\x44\x61taType\x12\x08\n\x04INT8\x10\x01\x12\t\n\x05UINT8\x10\x02\x12\t\n\x05INT16\x10\x03\x12\n\n\x06UINT16\x10\x04\x12\t\n\x05INT32\x10\x05\x12\n\n\x06UINT32\x10\x06\x12\x0b\n\x07\x46LOAT32\x10\x07\x12\x0b\n\x07\x46LOAT64\x10\x08')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19\x64rivers/pointcloud2.proto\x12\x11\x64\x65\x65proute.drivers\x1a\x13\x63ommon/header.proto\"h\n\nPointField\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06offset\x18\x02 \x01(\r\x12-\n\x08\x64\x61tatype\x18\x03 \x01(\x0e\x32\x1b.deeproute.drivers.DataType\x12\r\n\x05\x63ount\x18\x04 \x01(\r\"\x8a\x03\n\x0bPointCloud2\x12(\n\x06header\x18\x01 \x01(\x0b\x32\x18.deeproute.common.Header\x12\r\n\x05width\x18\x02 \x01(\r\x12\x0e\n\x06height\x18\x03 \x01(\r\x12-\n\x06\x66ields\x18\x04 \x03(\x0b\x32\x1d.deeproute.drivers.PointField\x12\x14\n\x0cis_bigendian\x18\x05 \x01(\x08\x12\x12\n\npoint_step\x18\x06 \x01(\r\x12\x10\n\x08row_step\x18\x07 \x01(\r\x12\x0c\n\x04\x64\x61ta\x18\x08 \x01(\x0c\x12\x10\n\x08is_dense\x18\t \x01(\x08\x12R\n\x0c\x64\x61ta_storage\x18\n \x01(\x0e\x32*.deeproute.drivers.PointCloud2.DataStorage:\x10\x44\x41TA_STORAGE_RAW\"S\n\x0b\x44\x61taStorage\x12\x14\n\x10\x44\x41TA_STORAGE_RAW\x10\x01\x12\x14\n\x10\x44\x41TA_STORAGE_SHM\x10\x02\x12\x18\n\x14\x44\x41TA_STORAGE_POINTER\x10\x03*g\n\x08\x44\x61taType\x12\x08\n\x04INT8\x10\x01\x12\t\n\x05UINT8\x10\x02\x12\t\n\x05INT16\x10\x03\x12\n\n\x06UINT16\x10\x04\x12\t\n\x05INT32\x10\x05\x12\n\n\x06UINT32\x10\x06\x12\x0b\n\x07\x46LOAT32\x10\x07\x12\x0b\n\x07\x46LOAT64\x10\x08')
 
 _DATATYPE = DESCRIPTOR.enum_types_by_name['DataType']
 DataType = enum_type_wrapper.EnumTypeWrapper(_DATATYPE)
@@ -32,6 +32,7 @@ FLOAT64 = 8
 
 _POINTFIELD = DESCRIPTOR.message_types_by_name['PointField']
 _POINTCLOUD2 = DESCRIPTOR.message_types_by_name['PointCloud2']
+_POINTCLOUD2_DATASTORAGE = _POINTCLOUD2.enum_types_by_name['DataStorage']
 PointField = _reflection.GeneratedProtocolMessageType('PointField', (_message.Message,), {
   'DESCRIPTOR' : _POINTFIELD,
   '__module__' : 'drivers.pointcloud2_pb2'
@@ -49,10 +50,12 @@ _sym_db.RegisterMessage(PointCloud2)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _DATATYPE._serialized_start=403
-  _DATATYPE._serialized_end=506
+  _DATATYPE._serialized_start=572
+  _DATATYPE._serialized_end=675
   _POINTFIELD._serialized_start=69
   _POINTFIELD._serialized_end=173
   _POINTCLOUD2._serialized_start=176
-  _POINTCLOUD2._serialized_end=401
+  _POINTCLOUD2._serialized_end=570
+  _POINTCLOUD2_DATASTORAGE._serialized_start=487
+  _POINTCLOUD2_DATASTORAGE._serialized_end=570
 # @@protoc_insertion_point(module_scope)

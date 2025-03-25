@@ -119,3 +119,10 @@ message PlaneCoeffs {
   optional double c = 3 [default = nan];
   optional double d = 4 [default = nan];
 }
+
+message Box2d {
+  optional double length = 1;
+  optional double width = 2;
+  optional Point2D center = 3;
+  optional double heading = 4 [default = 0.0];
+}

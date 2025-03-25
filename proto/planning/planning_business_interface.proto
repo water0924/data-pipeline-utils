@@ -6,6 +6,7 @@ import "common/pnc_point.proto";
 import "common/vehicle_state/vehicle_state.proto";
 import "drdtu/dtu_command.proto";
 import "canbus/chassis.proto";
+import "planning/planning.proto";
 
 message EmergencyStopRequest {
   enum EmergencyStopType {
@@ -14,8 +15,15 @@ message EmergencyStopRequest {
     DOUBLE_FLASH_ON = 2;
     VPA_STOP_FORCE = 3;
     VPA_STOP_COMFORTABLE = 4;
+    VPA_STOP_HOLD = 5;
+  }
+  enum EmergencyStopScope {
+    ALL = 0;
+    LATERAL = 1;
+    LONGITUDINAL = 2;
   }
   optional EmergencyStopType estop_type = 1;
+  optional EmergencyStopScope estop_scope = 2;
 }
 
 message CountdownRequest {
@@ -27,12 +35,16 @@ message CountdownRequest {
   optional Status status = 1;
 }
 
-message PullOverRequest {}
+message PullOverRequest {
+}
 
-message StopRemoveRequest {}
+message StopRemoveRequest {
+}
 
 message DrivingModeRequest {
   optional deeproute.dtu.command.DrivingMode driving_mode = 1;
+  optional deeproute.dtu.command.DrivingMode routing_driving_mode = 2;
+  optional deeproute.dtu.command.DrivingMode efficiency_driving_mode = 3;
 }
 
 message DynamicSpeedLimitRequest {
@@ -61,11 +73,12 @@ message ReverseTrackingRequest {
   repeated deeproute.common.VehicleState vehicle_state = 2;  // deprecated
   optional bool cancel_tracking = 3 [default = false];
   optional bool directly_quit = 4 [default = false];
-  optional bool stop_comfortable = 5 [default = false];     // deprecated
+  optional bool stop_comfortable = 5 [default = false];  // deprecated
   // directly_quit has higher priority
   optional bool directly_quit_lateral = 6 [default = false];
   optional bool directly_quit_longitudinal = 7 [default = false];
   optional CancelParkingType cancel_parking_type = 8;
+  optional deeproute.canbus.Chassis.DrivingMode driving_mode = 9;
 }
 
 // report to dtu with planner/event when reverse tracking active
@@ -79,6 +92,9 @@ message ReverseTrackingInfo {
 enum ParkingRequestReason {
   REASON_APA = 0;
   REASON_RPA = 1;
+  REASON_VPA_LEARNING = 2;
+  REASON_VPA_ROUTING = 3;
+  REASON_VPA_OUTPARKING = 4;
 }
 
 enum ParkingMod {
@@ -93,8 +109,7 @@ enum CancelParkingType {
   EMERGENCY_BRAKE = 2;
 }
 
-
-message ParkingRequest { 
+message ParkingRequest {
   optional int32 parking_space_id = 1;
   optional deeproute.dtu.command.Point parking_space_direct_point = 2;
   repeated deeproute.dtu.command.Point parking_space_vertex = 3;
@@ -102,11 +117,13 @@ message ParkingRequest {
   optional bool fast_parking = 5;
   optional ParkingRequestReason request_reason = 6;
   optional ParkingMod parking_mod = 7;
+  optional deeproute.canbus.Chassis.DrivingMode driving_mode = 8;
 }
 
 message PrePlanParkingReuqest {
   repeated ParkingRequest parking_requests = 1;
   optional SuggestOutParkingInfo suggest_out_parking_info = 2;
+  optional ParkingRequestReason request_reason = 3;
 }
 
 // deprecated
@@ -115,6 +132,11 @@ enum OutParkingDirection {
   LEFT = 1;
   RIGHT = 2;
   UNKNOWN = 3;
+}
+
+enum OutParkingScenario {
+  APA_PARKOUT = 0;
+  VPA_PARKOUT = 1;
 }
 
 enum APAOutParkingDirection {
@@ -140,6 +162,7 @@ message OutParkingRequest {
   optional OutParkingDirection direction = 2;  // deprecated
   optional APAOutParkingDirection apa_out_parking_direction = 3;
   optional ParkingRequestReason request_reason = 4;
+  optional deeproute.canbus.Chassis.DrivingMode driving_mode = 5;
 }
 
 message DirectInOutParkingRequest {
@@ -152,12 +175,17 @@ message DirectInOutParkingRequest {
   optional bool ignore_side_obstacle = 2;
   optional ParkingRequestReason request_reason = 3;
   optional bool use_auto_driving_mode = 4;
+  optional deeproute.canbus.Chassis.DrivingMode driving_mode = 5;
 }
 
-message SuggestOutParkingRequest {}
+message SuggestOutParkingRequest {
+  optional OutParkingScenario outparking_type  = 1;
+}
 
 message TrafficRuleRequest {
-  optional bool enable_traffic_light = 1 [default = false];
+  optional bool enable_traffic_light = 1;
+  optional bool has_waiting_area_switch = 2;
+  optional bool waiting_area_switch_result = 3;
 }
 
 message SuggestOutParkingInfo {
@@ -180,6 +208,8 @@ message SuggestOutParkingInfo {
   optional FailedReason failed_reason = 5;  // when no any suggest
   repeated APAOutParkingDirection unavailable_out_directions = 6;
   repeated ParkingOutSuggestPose unavailable_suggest_poses = 7;
+  optional int32 planning_request_id = 8;
+  optional int32 target_parking_space_id = 9;
 }
 
 message VpaDrivingInfo {
@@ -241,7 +271,8 @@ message AutoLevelRequest {
   optional deeproute.dtu.command.AutoLevelCMD.Level level = 1;
 }
 
-message ResetRequest {}
+message ResetRequest {
+}
 
 message VpaParkingRequest {  // deprecated
   optional ParkingRequest parking_request = 1;
@@ -289,10 +320,12 @@ message CancelParkingRequest {
   optional CancelParkingType cancel_parking_type = 5;
 }
 
-message VpaDrivingRequest {}
+message VpaDrivingRequest {
+}
 
 message GearRequest {
   required deeproute.canbus.Chassis.GearPosition gear = 1;
+  optional deeproute.canbus.Chassis.DrivingMode driving_mode = 2;
 }
 
 enum SwitchStatus {
@@ -304,11 +337,18 @@ enum SwitchStatus {
 message LaneChangeFeatureSwitch {
   optional SwitchStatus enable_lane_change = 1;
   optional SwitchStatus enable_efficiency_lane_change = 2;
+  optional SwitchStatus enable_empirical_lane_change = 3;  // highway lane
+  optional SwitchStatus enable_road_type_lane_change = 4;  // merge lane
+  optional SwitchStatus enable_low_risk_avoidance_lane_change =
+      5;  // parallel truck
+  optional SwitchStatus enable_confirmation_lane_change = 6;
 }
 
 message SingleLaneFeatureSwitch {
   optional SwitchStatus out_of_lane_nudge = 1;
   optional SwitchStatus enable_model_speed_limit = 2;
+  optional SwitchStatus disable_ilqr_lon_safety_cost = 3 [default = NOT_SET];
+  optional SwitchStatus disable_ilqr_lat_safety_cost = 4 [default = NOT_SET];
 }
 
 message AuxiliaryModeRequest {
@@ -329,6 +369,12 @@ message LSSSwitchRequest {
 message ControlModeRequest {
   optional bool lon_override = 1;
   optional bool lat_override = 2;
+}
+
+message LaneChangeConfirmationRequest {
+  optional deeproute.dtu.command.ILCCMD.Behavior behavior = 1;
+  optional deeproute.planning.LaneChangeRelated.LaneChangeReason reason = 2;
+  optional bool cancel_lane_change = 3;
 }
 
 // topic: /planner/request
@@ -364,6 +410,7 @@ message PlanningRequest {
     LSSSwitchRequest lss_switch_request = 28;
     ControlModeRequest control_mode_request = 30;
     APADrivingModeRequest apa_driving_mode_request = 31;
+    LaneChangeConfirmationRequest lane_change_confirmation_request = 32;
   }
 }
 
@@ -403,6 +450,7 @@ message TaskResponse {
     ILC_SPLIT = 26;
     LSS_SWITCH = 27;
     APA_DRIVING_MODE = 28;
+    LANE_CHANGE_CONFIRMATION = 29;
   }
   optional bool succeeded = 1 [default = false];
   optional TaskType task_type = 2;
@@ -489,10 +537,12 @@ message PlanningEvent {
     ELK_REQUEST_LEFT_RE = 45;
     ELK_REQUEST_LEFT_O = 46;
     ELK_REQUEST_LEFT_ICS = 47;
+    ELK_REQUEST_LEFT_GO = 60;
     ELK_REQUEST_RIGHT_S = 48;
     ELK_REQUEST_RIGHT_RE = 49;
     ELK_REQUEST_RIGHT_O = 50;
     ELK_REQUEST_RIGHT_ICS = 51;
+    ELK_REQUEST_RIGHT_GO = 61;
 
     // TJP request
     TJP_WARNING_LAT_CAR_FOLLOWING = 52;
@@ -567,8 +617,17 @@ message PlanningEvent {
 
     VPA_DRIVING_BARRIER_GATE_BLOCK = 143;
     VPA_DRIVING_PLAN_FAILED = 144;
+
+    APA_FRONT_COLLISION_WARNING = 145;
+    APA_BACK_COLLISION_WARNING = 146;
+    APA_LEFT_COLLISION_WARNING = 147;
+    APA_RIGHT_COLLISION_WARNING = 148;
+
+    VPA_DRIVING_PASSING_BARRIER_GATE = 149;
+    VPA_DRIVING_DETOUR_START = 150;
+    VPA_DRIVING_DETOUR_FINISH = 151;
   }
-  
+
   optional PlanningStatus planning_status = 2;
   optional deeproute.common.Point3D dest_pose = 3;
   repeated PlanningStatus planning_statuses = 4;

@@ -358,6 +358,16 @@ message RadarObs {
   optional RadarType radar_type = 32;
 }
 
+message GMState {
+  optional string radar = 1;
+  optional uint32 obs_num = 2;
+  optional uint32 block_counter = 3;
+  optional uint32 error_state = 4;
+  optional uint32 blind_state = 5;
+  optional uint64 as_timestamp = 6;
+  optional uint32 hdr_timestamp = 7;
+}
+
 message Radar {
   optional deeproute.common.Header header = 1;
   //@C_Mark@1@;
@@ -370,4 +380,5 @@ message Radar {
   //@C_Mark@1@;
   repeated HwRadarRoads hwroads = 7;
   repeated RadarObs radar_obs = 8;
+  repeated GMState gm_state = 9;
 }

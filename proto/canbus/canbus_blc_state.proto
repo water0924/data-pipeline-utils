@@ -2,7 +2,9 @@ syntax = "proto2";
 
 package deeproute.canbus;
 
+import "common/vehicle_signal.proto";
 import "common/configs/vehicle_config.proto";
+import "canbus/chassis.proto";
 
 // topic: blc/can_state_machine
 message CanStateMachine {
@@ -14,7 +16,7 @@ message CanStateMachine {
   optional CanStateLong longitude = 6;
   optional CanStateLat lat = 7;
   optional ApaCanState apa_can_state = 8;
-
+  optional BlcCommand blc_command = 9;
   // Special wire control interface
   optional SpecialCanState special_can_state = 100;
 }
@@ -44,6 +46,7 @@ message CanStateLong {
     ACTIVE_OVERRIDE = 5;
     ACTIVE_STANDSTILL = 6;
     BRAKE_ONLY = 7;
+    ACTIVE_STANDWAIT = 8;
   }
   optional StateType state = 1;
 }
@@ -86,12 +89,15 @@ message ApaCanState {
   enum FunctionType {
     APA = 0;
     RPA = 1;
-    AVP_HIC = 2;   //human in car
-    AVP_HOC = 3;   //human outside car
+    AVP_HIC = 2;  // human in car
+    AVP_HOC = 3;  // human outside car
     HPA = 4;
+    VPA_PARKOUT = 5;
   }
   optional ApaStateType state = 1;
   optional FunctionType function_type = 2;
+  optional CanStateLong longitude = 3;
+  optional CanStateLat lat = 4;
 }
 
 message ApaCanStateReport {
@@ -193,5 +199,15 @@ message GwmStateMachine {
   optional StateMachineType esa = 10;
   optional StateMachineType meb = 11;
   optional StateMachineType rctb = 12;
+}
 
+message BlcCommand {
+  // BLC 请求控车时下发的档位和减速度，需要判断 has_xxx,
+  // 没有则不传到控制指令到底盘
+  optional bool control_by_blc = 1;  // 由BLC 控车
+  optional deeproute.canbus.Chassis.GearPosition blc_gear_request = 2;
+  optional double blc_longitudinal_cmd = 3;
+  optional deeproute.common.VehicleSignal.TurnSignal blc_turn_signal = 4;
+  optional bool blc_emergency_light = 5;
+  optional bool emergency_brake = 6;
 }

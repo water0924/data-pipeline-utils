@@ -3,6 +3,8 @@ syntax = "proto2";
 package deeproute.aeb;
 import "aeb/visualizer_aeb_command.proto";
 import "esa/esa_state.proto";
+import "prediction/trajectory.proto";
+import "common/geometry.proto";
 
 enum FCWState {
   FCW_OFF = 0;
@@ -110,6 +112,108 @@ message StateInfo {
   optional deeproute.esa.ESAState esa_state = 10;
 }
 
+message ObjectInfo{
+  enum Direction {
+    UNKNOWN = 0;
+    STATIC = 1;
+    PARALLEL = 2;
+    CROSSING = 3;
+    OPPOSITE = 4;
+  };
+  optional int32 id = 1 [default = -1];
+  optional int32 type = 2 [default = 0];
+  optional double speed = 3 [default = 0.0];
+  optional double accel = 4 [default = 0.0];
+  optional double rel_heading = 5 [default = 0.0];
+  optional double dist = 6 [default = 0.0];
+  optional double confidence_score = 7 [default = 0.0];
+  optional double tracking_time = 8 [default = 0.0];
+  optional double overlap = 9 [default = 0.0];
+  optional Direction direction = 10 [default = UNKNOWN];
+  optional double x = 11 [default = 0.0];
+  optional double y = 12 [default = 0.0];
+  optional double collision_rel_speed = 13 [ default = 0.0 ];
+  optional double collision_rel_heading = 14 [ default = 0.0 ];
+}
+
+message IntentionInfo {
+  enum AEBLonIntention {
+    LON_DEFAULT_INTENTION = 0;
+    LON_SPEED_KEEP = 1;
+    LON_OVERTAKE = 2;
+    LON_YIELD = 3;
+  }
+  enum AEBLatIntention {
+    LAT_DEFAULT_INTENTION = 0;
+    LAT_STRAIGHT = 1;
+    // NOTE(@shenqiren, @linchuan):
+    // 这里的AVOIDANCE的含义是包含了变道和nudge的,同时也包含了借道nudge的场景,建议AEB代码内部先区分开变道和nudge,但是后续可以进行区分输出
+    LAT_LEFT_AVOIDANCE = 2;
+    LAT_RIGHT_AVOIDANCE = 3;
+    LAT_LEFT_TURN = 4;
+    LAT_RIGHT_TURN = 5;
+  }
+  optional AEBLonIntention aeb_lon_intention = 1
+      [default = LON_DEFAULT_INTENTION];
+  optional AEBLatIntention aeb_lat_intention = 2
+      [default = LAT_DEFAULT_INTENTION];
+}
+
+message Object {
+  optional int32 perception_id = 1;
+  repeated deeproute.prediction.Trajectory trajectory = 2;
+  optional double speed = 3;
+  optional double x = 4;
+  optional double y = 5;
+  optional double heading = 6;
+  optional double length = 7;
+  optional double width = 8;
+  // duration of an obstacle since detection in us.
+  optional int64 tracking_time = 9;
+  // detection score from deeplearning module
+  optional double confidence_score = 10;
+  // obstacle velocity uncertainty.
+  optional common.Point3D velocity_uncertainty = 11;
+  optional double accel = 12;
+  optional double accel_rel_angle = 13;
+  // percep_aeb: is object on drivable roadmask or not
+  // you can use 0.5 as a threshold value
+  optional float on_roadmask_score = 14 [default = 1.0];
+  optional int32 detection_id = 15;
+}
+
+message FeatureInfo {
+  enum FeatureType {
+    UNKNOWN = 0;
+    AEB = 1;
+    SHADOW = 2;
+    FCW = 3;
+    MAI = 4;
+  }
+  optional string name = 1 [default = ""];
+  optional double ttc = 2 [default = 100.0];
+  optional double ttc_thres = 3 [default = 100.0];
+  optional int32 counter = 4 [default = 0];
+  // shadow trigger or onboard trigger
+  optional bool is_triggered = 5 [default = false];
+  optional double triggered_time = 6 [default = 0.0];
+  optional int32 closest_obj_id = 7[default = -1];
+  repeated int32 critical_obj_ids = 8; 
+  optional IntentionInfo adc_intention = 9;
+  optional IntentionInfo closest_obj_intention = 10;
+  repeated IntentionInfo critical_objs_intention = 11;
+  optional ObjectInfo closest_obj = 12;
+  optional FeatureType type = 13;
+  optional string closest_obj_data_source = 14;
+  optional Object collide_adc = 15;
+  optional Object collide_obj = 16;
+}
+enum ThreatLevel {
+  THREAT_NONE = 0;
+  THREAT_LOW = 1;
+  THREAT_MEDIUM = 2;
+  THREAT_HIGH = 3;
+ }
 message StateWrapper {
   enum CrossingWarningStatus {
     NONE = 0;
@@ -157,6 +261,10 @@ message StateWrapper {
   optional double closest_obj_tracking_time = 38;
   optional double closest_obj_overlap = 39;
   optional int32 blc_msg_id = 40;
+  // publish time (us)
+  optional int64 time_measurement = 41;
+  optional string shadow_reasons = 42;
+  repeated FeatureInfo features_info = 43;
   optional string display_reason = 100;
   optional bool enable_cruise_speed_mode = 101 [default = false];
   optional double cruise_speed_cmd = 102 [default = 5.56];
@@ -168,4 +276,6 @@ message StateWrapper {
   optional double lat_accel = 108;
   optional double front_wheel_angle = 109;
   optional double front_wheel_rate = 110;
+  optional int32 closest_obj_num_id_radar = 111 [deprecated = true];
+  optional ThreatLevel threat_level = 112;
 }

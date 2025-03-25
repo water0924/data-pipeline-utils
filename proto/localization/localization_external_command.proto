@@ -46,6 +46,13 @@ enum ErrorCode {
   VPA_END_MAPPING_MAPPING_SAVE_FAILURE = 117;
   VPA_END_MAPPING_NOT_ENOUGH_DISK_FREE_SPACE = 118;
   VPA_END_MAPPING_INPUT_DATA_INVALID = 119;
+  VPA_END_MAPPING_INDOOR_TO_OUTDOOR_MAPPING = 120;                      // mapping from indoor to outdoor
+  VPA_END_MAPPING_GNSS_POSE_JUMP = 121;                                  // gnss yaw jump check failed
+  VPA_END_MAPPING_MOVE_BACK_TO_START = 122;                             // move to start again
+  VPA_END_MAPPING_NO_DESTINATION_CANDIDATES = 123;                      // neither have given parking space, nor have destination candidates like reverse_time_pose or apa_start_time_pose
+  VPA_END_MAPPING_NO_VALID_DESTINATION_IN_CANDIDATES = 124;             // all destination candidates are invalid after check
+  VPA_END_MAPPING_OUT_OF_PARKING_ODD = 125[deprecated=true];
+  VPA_END_MAPPING_UNCONFIRM_OUTDOOR_TO_OUT_OF_PARKING = 126;
 
   VPA_END_MAPPING_UNKNOWN_REASON_FAILURE = 199;
 
@@ -56,6 +63,8 @@ enum ErrorCode {
 
   // VPA start routing related error code (300 ~ 349)
   VPA_START_ROUTING_NOT_MATCHED = 301;
+  VPA_START_ROUTING_NEAR_DESTINATION = 302;
+  VPA_START_ROUTING_ABNORMAL = 303;
 
   // VPA end routing related error code (350 ~ 399)
 }
@@ -83,6 +92,7 @@ message EndMapLocalizationCMDRP {               // GWM SOP+3 deprecated
 }
 
 message StartMappingCMD {
+  bool expand_map = 1;
 }
 message StartMappingCMDRP {
 }
@@ -118,6 +128,8 @@ message ChangedMapStatusList {
 
 message EndMappingCMD {
   perception.ParkingSpace parking_space = 1; // it's optional
+  string map_name = 2;
+  string target_parking_space_name = 3;
 }
 message EndMappingCMDRP {
   bool success = 1;
@@ -151,6 +163,7 @@ message ParkingSpaceInfoUpdateCMD {
 message ParkingSpaceInfoUpdateCMDRP {
   havp_map.ParkingSpaceUsrInfo parking_spaces_info = 1;
   bool is_default_parking_space = 2;
+  OperatingType real_operation_type = 3;
 }
 
 message MapInfoUpdateCMD {
@@ -175,10 +188,10 @@ message GetAllHavpMapMetaDataCMDRP {
   repeated havp_map.HAVPMapMetaData havp_map_meta_data = 1; // only get light-weighted usr data, not include map structure information
 }
 
-message SaveMapCMD {
+message SaveMapCMD {                            // deprecated
   bool save_map = 1;
 }
-message SaveMapCMDRP {
+message SaveMapCMDRP {                          // deprecated
 }
 
 message GetMapTargetParkingSpaceCMD {
@@ -211,12 +224,21 @@ message GetMapCMDRP {
   havp_map.HAVPMap havp_map = 5; // do we still need information above?
 }
 
+enum StartNavigationRequestReason {
+  REASON_PREPLAN = 0;  // 预规划导航路线
+  REASON_VPA_NAVIGATION = 1; // 进导航
+  REASON_VPA_ROUTING = 2;  // 进巡航
+}
+
 message StartNavigationCMD {
   int32 target_parking_space_id = 1; // 导航目标车位
+  StartNavigationRequestReason reason = 2;  // 请求原因
 }
 
 message StartNavigationCMDRP {
   double route_total_distance = 1;  // 导航总距离
+  ErrorCode error_code = 2;
+  int32 target_parking_space_id = 3;
 }
 
 message EndNavigationCMD {
@@ -257,6 +279,23 @@ message DrivingModeChangeCMD {
 message DrivingModeChangeCMDRP {
 }
 
+message ParkingSpaceNameDuplicationCheckCMD {
+    int32 map_id = 1;
+    int32 target_parking_space_id = 2;
+    string name = 3;
+}
+message ParkingSpaceNameDuplicationCheckCMDRP {
+    bool name_repeated = 1;     // return true if repeated
+}
+
+message MapNameDuplicationCheckCMD {
+    int32 map_id = 1;
+    string name = 2;
+}
+message MapNameNameDuplicationCheckCMDRP {
+    bool name_repeated = 1;     // return true if repeated
+}
+
 message LocalizationCommand {  // external users send commands in
                                // '/localization/command' topic to
                                // localization modules
@@ -283,6 +322,8 @@ message LocalizationCommand {  // external users send commands in
     GetTargetParkingSpaceInMapCMD get_target_parking_space_in_map_cmd = 19;
     SetNavigationTargetParkingSpaceCMD set_navigation_target_parking_space_cmd = 20;  // GWM SOP+3 deprecated
     GetNearbyMapCMD get_nearby_map_cmd = 21;
+    ParkingSpaceNameDuplicationCheckCMD parking_space_name_duplication_check_cmd = 22;
+    MapNameDuplicationCheckCMD map_name_duplication_check_cmd = 23;
   }
 }
 
@@ -312,5 +353,7 @@ message LocalizationResponse {  // external users receive 'LocalizationResponse'
     GetTargetParkingSpaceInMapCMDRP get_target_parking_space_in_map = 20;
     SetNavigationTargetParkingSpaceCMDRP set_navigation_target_parking_space = 21;    // deprecated
     GetNearbyMapCMDRP get_nearby_map = 22;
+    ParkingSpaceNameDuplicationCheckCMDRP parking_space_name_duplication_check = 23;
+    MapNameNameDuplicationCheckCMDRP map_name_duplication_check = 24;
   }
 }

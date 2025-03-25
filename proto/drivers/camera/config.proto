@@ -60,7 +60,8 @@ message Config {
   message Parameters {
     message Extrinsic {
       // https://confluence.deeproute.ai/pages/viewpage.action?pageId=70684860
-      optional deeproute.common.Transformation3 sensor_to_camera = 1;
+      optional deeproute.common.Transformation3 sensor_to_camera = 1
+          [deprecated = true];
       optional deeproute.common.Transformation3 sensor_to_cam = 2;
     }
 

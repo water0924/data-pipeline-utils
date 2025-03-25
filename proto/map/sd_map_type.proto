@@ -95,3 +95,15 @@ enum SpecialTimeType {
   SPECIAL_TIME_TYPE_SUMMER = 33;               // 夏季
   SPECIAL_TIME_TYPE_SPRING = 34;               // 春季
 }
+
+enum SpeedInfoType {
+  SPEED_INFO_TYPE_UNKNOW = 0;                  // 无
+  SPEED_INFO_TYPE_DR_EXPERIENCE_SPL_COUNT = 1; // 经验限速速度样本数量
+  SPEED_INFO_TYPE_GAODE_LEGAL = 2;             // 高德限速
+  SPEED_INFO_TYPE_MANUAL_REGULATION = 3;       // 人工拨杆调速
+}
+
+message SpeedLimitInfo {
+  optional SpeedInfoType type = 1;             // 速度相关类型，使用 SpeedInfoType 枚举
+  optional int32 value = 2;                    // 速度相关数值
+}

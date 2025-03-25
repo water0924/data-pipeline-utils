@@ -30,3 +30,11 @@ message CanRawArray2K {
   //@C_Mark@18@;
   repeated CanRaw can_raw = 4;
 }
+
+message CanbusMcuSerializeValue {
+  optional int64 timestamp_pub = 1;  // us
+  optional int64 counter = 2;
+  optional int32 data_len = 3;      // actual size of data
+  //@C_Mark@512@;
+  optional bytes data = 8;
+}

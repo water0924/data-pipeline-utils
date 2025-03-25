@@ -11,4 +11,5 @@ message TripStartEvent {
   optional string soc_version = 6;
   optional string cam_version = 7;
   optional string package_version = 8;
+  optional string driver_short_version = 9; //driver short name版本号: C01-PT.1.1230003
 }

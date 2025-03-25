@@ -25,6 +25,7 @@ message UltrasonicObstacle {
     HEIGHT_TYPE_HIGHT = 1;
     HEIGHT_TYPE_TRAVERSIBLE = 2;
     HEIGHT_TYPE_UNKNOWN = 3;
+    HEIGHT_TYPE_SPECIAL1 = 4;
   }
 
   enum ObstacleType {
@@ -153,7 +154,7 @@ message UltrasonicState {
   optional RPASWorkSts rpas_worksts = 2;
   optional APASysWorkSts apasys_worksts = 3;
   optional PDCTimeStampStatus pdc_timestamp_status = 4;
-  // @C_Mark@26@;
+  // @C_Mark@28@;
   repeated uint32 object_detect_area_list = 5; 
   optional bool fpas_dispcmd = 6;
   optional bool FPAS_FLCornrSnsrFailSts = 7;

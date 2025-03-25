@@ -33,7 +33,7 @@ from aeb import aeb_state_pb2
 from common import module_event_pb2
 from someip_adapter import avp_pb2
 from safety import safety_analysis_pb2,state_exchange_pb2
-from gwm.havp import havp_vehicle_pb2,havp_map_pb2
+from drapi.gwm.havp import havp_vehicle_pb2,havp_map_pb2
 from smart import smart_business_pb2,smart_command_pb2
 from smart.parking import smart_parking_frame_data_pb2,smart_lp_parking_map_pb2
 

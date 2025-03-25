@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13trip/trip_end.proto\x12\x0e\x64\x65\x65proute.trip\"S\n\x0cTripEndEvent\x12\x11\n\ttrip_name\x18\x01 \x01(\t\x12\x16\n\x0e\x64river_version\x18\x02 \x01(\t\x12\x18\n\x10\x65nd_timestamp_ns\x18\x03 \x01(\t')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13trip/trip_end.proto\x12\x0e\x64\x65\x65proute.trip\"q\n\x0cTripEndEvent\x12\x11\n\ttrip_name\x18\x01 \x01(\t\x12\x16\n\x0e\x64river_version\x18\x02 \x01(\t\x12\x18\n\x10\x65nd_timestamp_ns\x18\x03 \x01(\t\x12\x1c\n\x14\x64river_short_version\x18\x04 \x01(\t')
 
 
 
@@ -30,5 +30,5 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _TRIPENDEVENT._serialized_start=39
-  _TRIPENDEVENT._serialized_end=122
+  _TRIPENDEVENT._serialized_end=152
 # @@protoc_insertion_point(module_scope)

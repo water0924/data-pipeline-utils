@@ -16,7 +16,7 @@ _sym_db = _symbol_database.Default()
 from proto.safety import safety_event_pb2 as safety_dot_safety__event__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1dsafety/safety_interface.proto\x12\tdr.safety\x1a\x19safety/safety_event.proto\"\x1a\n\tBoolValue\x12\r\n\x05value\x18\x01 \x01(\x08\"\xd9\x01\n\tGetEvents\x12\x14\n\x0cstart_tm_sec\x18\x01 \x01(\x05\x12\x12\n\nend_tm_sec\x18\x02 \x01(\x05\x12!\n\x03\x64tc\x18\x03 \x01(\x0b\x32\x14.dr.safety.BoolValue\x12\'\n\ttrace_log\x18\x04 \x01(\x0b\x32\x14.dr.safety.BoolValue\x12+\n\x0f\x63hoosed_modules\x18\x05 \x01(\x0b\x32\x12.dr.safety.Modules\x12)\n\x0e\x63hoosed_events\x18\x06 \x01(\x0b\x32\x11.dr.safety.Events\"c\n\x0bGetEventsRp\x12\x12\n\ntotal_nums\x18\x01 \x01(\r\x12\x13\n\x0bstart_index\x18\x02 \x01(\r\x12+\n\x0b\x65vent_infos\x18\x03 \x03(\x0b\x32\x16.dr.safety.SafetyEvent\"(\n\x0fSetSafetyPolicy\x12\x15\n\renable_policy\x18\x01 \x01(\x08\"+\n\x11SetSafetyPolicyRp\x12\x16\n\x0epolicy_enabled\x18\x01 \x01(\x08\"7\n\x18ManageSafetyEventRequest\x12\x1b\n\x13\x65nable_safety_event\x18\x01 \x01(\x08\"8\n\x19ManageSafetyEventResponse\x12\x1b\n\x13safety_event_status\x18\x01 \x01(\x08\"\xdf\x01\n\x07Request\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\x12*\n\nget_events\x18\x03 \x01(\x0b\x32\x14.dr.safety.GetEventsH\x00\x12\x37\n\x11set_safety_policy\x18\x04 \x01(\x0b\x32\x1a.dr.safety.SetSafetyPolicyH\x00\x12J\n\x1bmanage_safety_event_request\x18\x05 \x01(\x0b\x32#.dr.safety.ManageSafetyEventRequestH\x00\x42\x04\n\x02rq\"\xfd\x01\n\x08Response\x12\n\n\x02id\x18\x01 \x01(\t\x12\"\n\x04\x63ode\x18\x02 \x01(\x0e\x32\x14.dr.safety.ErrorCode\x12/\n\rget_events_rp\x18\x03 \x01(\x0b\x32\x16.dr.safety.GetEventsRpH\x00\x12<\n\x14set_safety_policy_rp\x18\x04 \x01(\x0b\x32\x1c.dr.safety.SetSafetyPolicyRpH\x00\x12L\n\x1cmanage_safety_event_response\x18\x05 \x01(\x0b\x32$.dr.safety.ManageSafetyEventResponseH\x00\x42\x04\n\x02rp\"$\n\rTrackingChain\x12\x13\n\x0b\x65vent_index\x18\x01 \x03(\x05\"}\n\x0b\x45ventStatus\x12\x11\n\ttimestamp\x18\x01 \x01(\x03\x12+\n\x0b\x65vent_infos\x18\x02 \x03(\x0b\x32\x16.dr.safety.SafetyEvent\x12.\n\x0c\x65vent_chains\x18\x03 \x03(\x0b\x32\x18.dr.safety.TrackingChain*\x91\x01\n\tErrorCode\x12\x0b\n\x07SUCCESS\x10\x00\x12\x16\n\x0eINTERNEL_ERROR\x10\x01\x1a\x02\x08\x01\x12\x1a\n\x16METHOD_NOT_FOUND_ERROR\x10\x02\x12\x13\n\x0fPARAMETER_ERROR\x10\x03\x12\x1a\n\x16\x45VENTS_NOT_EXIST_ERROR\x10\x04\x12\x12\n\x0eINTERNAL_ERROR\x10\x05\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1dsafety/safety_interface.proto\x12\tdr.safety\x1a\x19safety/safety_event.proto\"\x1a\n\tBoolValue\x12\r\n\x05value\x18\x01 \x01(\x08\"\xd9\x01\n\tGetEvents\x12\x14\n\x0cstart_tm_sec\x18\x01 \x01(\x05\x12\x12\n\nend_tm_sec\x18\x02 \x01(\x05\x12!\n\x03\x64tc\x18\x03 \x01(\x0b\x32\x14.dr.safety.BoolValue\x12\'\n\ttrace_log\x18\x04 \x01(\x0b\x32\x14.dr.safety.BoolValue\x12+\n\x0f\x63hoosed_modules\x18\x05 \x01(\x0b\x32\x12.dr.safety.Modules\x12)\n\x0e\x63hoosed_events\x18\x06 \x01(\x0b\x32\x11.dr.safety.Events\"c\n\x0bGetEventsRp\x12\x12\n\ntotal_nums\x18\x01 \x01(\r\x12\x13\n\x0bstart_index\x18\x02 \x01(\r\x12+\n\x0b\x65vent_infos\x18\x03 \x03(\x0b\x32\x16.dr.safety.SafetyEvent\"H\n\x0fSetSafetyPolicy\x12\x15\n\renable_policy\x18\x01 \x01(\x08\x12\x1e\n\x16\x65nable_critical_policy\x18\x02 \x01(\x08\"L\n\x11SetSafetyPolicyRp\x12\x16\n\x0epolicy_enabled\x18\x01 \x01(\x08\x12\x1f\n\x17\x63ritical_policy_enabled\x18\x02 \x01(\x08\"7\n\x18ManageSafetyEventRequest\x12\x1b\n\x13\x65nable_safety_event\x18\x01 \x01(\x08\"8\n\x19ManageSafetyEventResponse\x12\x1b\n\x13safety_event_status\x18\x01 \x01(\x08\"\xdf\x01\n\x07Request\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\x12*\n\nget_events\x18\x03 \x01(\x0b\x32\x14.dr.safety.GetEventsH\x00\x12\x37\n\x11set_safety_policy\x18\x04 \x01(\x0b\x32\x1a.dr.safety.SetSafetyPolicyH\x00\x12J\n\x1bmanage_safety_event_request\x18\x05 \x01(\x0b\x32#.dr.safety.ManageSafetyEventRequestH\x00\x42\x04\n\x02rq\"\xfd\x01\n\x08Response\x12\n\n\x02id\x18\x01 \x01(\t\x12\"\n\x04\x63ode\x18\x02 \x01(\x0e\x32\x14.dr.safety.ErrorCode\x12/\n\rget_events_rp\x18\x03 \x01(\x0b\x32\x16.dr.safety.GetEventsRpH\x00\x12<\n\x14set_safety_policy_rp\x18\x04 \x01(\x0b\x32\x1c.dr.safety.SetSafetyPolicyRpH\x00\x12L\n\x1cmanage_safety_event_response\x18\x05 \x01(\x0b\x32$.dr.safety.ManageSafetyEventResponseH\x00\x42\x04\n\x02rp\"$\n\rTrackingChain\x12\x13\n\x0b\x65vent_index\x18\x01 \x03(\x05\"}\n\x0b\x45ventStatus\x12\x11\n\ttimestamp\x18\x01 \x01(\x03\x12+\n\x0b\x65vent_infos\x18\x02 \x03(\x0b\x32\x16.dr.safety.SafetyEvent\x12.\n\x0c\x65vent_chains\x18\x03 \x03(\x0b\x32\x18.dr.safety.TrackingChain*\x91\x01\n\tErrorCode\x12\x0b\n\x07SUCCESS\x10\x00\x12\x16\n\x0eINTERNEL_ERROR\x10\x01\x1a\x02\x08\x01\x12\x1a\n\x16METHOD_NOT_FOUND_ERROR\x10\x02\x12\x13\n\x0fPARAMETER_ERROR\x10\x03\x12\x1a\n\x16\x45VENTS_NOT_EXIST_ERROR\x10\x04\x12\x12\n\x0eINTERNAL_ERROR\x10\x05\x62\x06proto3')
 
 _ERRORCODE = DESCRIPTOR.enum_types_by_name['ErrorCode']
 ErrorCode = enum_type_wrapper.EnumTypeWrapper(_ERRORCODE)
@@ -121,8 +121,8 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _ERRORCODE.values_by_name["INTERNEL_ERROR"]._options = None
   _ERRORCODE.values_by_name["INTERNEL_ERROR"]._serialized_options = b'\010\001'
-  _ERRORCODE._serialized_start=1270
-  _ERRORCODE._serialized_end=1415
+  _ERRORCODE._serialized_start=1335
+  _ERRORCODE._serialized_end=1480
   _BOOLVALUE._serialized_start=71
   _BOOLVALUE._serialized_end=97
   _GETEVENTS._serialized_start=100
@@ -130,19 +130,19 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _GETEVENTSRP._serialized_start=319
   _GETEVENTSRP._serialized_end=418
   _SETSAFETYPOLICY._serialized_start=420
-  _SETSAFETYPOLICY._serialized_end=460
-  _SETSAFETYPOLICYRP._serialized_start=462
-  _SETSAFETYPOLICYRP._serialized_end=505
-  _MANAGESAFETYEVENTREQUEST._serialized_start=507
-  _MANAGESAFETYEVENTREQUEST._serialized_end=562
-  _MANAGESAFETYEVENTRESPONSE._serialized_start=564
-  _MANAGESAFETYEVENTRESPONSE._serialized_end=620
-  _REQUEST._serialized_start=623
-  _REQUEST._serialized_end=846
-  _RESPONSE._serialized_start=849
-  _RESPONSE._serialized_end=1102
-  _TRACKINGCHAIN._serialized_start=1104
-  _TRACKINGCHAIN._serialized_end=1140
-  _EVENTSTATUS._serialized_start=1142
-  _EVENTSTATUS._serialized_end=1267
+  _SETSAFETYPOLICY._serialized_end=492
+  _SETSAFETYPOLICYRP._serialized_start=494
+  _SETSAFETYPOLICYRP._serialized_end=570
+  _MANAGESAFETYEVENTREQUEST._serialized_start=572
+  _MANAGESAFETYEVENTREQUEST._serialized_end=627
+  _MANAGESAFETYEVENTRESPONSE._serialized_start=629
+  _MANAGESAFETYEVENTRESPONSE._serialized_end=685
+  _REQUEST._serialized_start=688
+  _REQUEST._serialized_end=911
+  _RESPONSE._serialized_start=914
+  _RESPONSE._serialized_end=1167
+  _TRACKINGCHAIN._serialized_start=1169
+  _TRACKINGCHAIN._serialized_end=1205
+  _EVENTSTATUS._serialized_start=1207
+  _EVENTSTATUS._serialized_end=1332
 # @@protoc_insertion_point(module_scope)

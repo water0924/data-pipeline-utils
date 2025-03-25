@@ -42,6 +42,8 @@ message AEBCommand {
   optional AEBMode rctb = 8;
   optional AEBMode meb = 9;
   optional bool aeb_interface_enable = 7;
+  // publish time (us)
+  optional int64 time_measurement = 10;
 }
 
 // next id : 27
@@ -55,7 +57,7 @@ message ControlCommand {
 
   // target non-directional front steering rate in rad/s
   optional double steering_rate = 6;
-
+  
   // target front steering angle in radian
   optional double steering_target = 7;
 
@@ -134,6 +136,9 @@ message ControlCommand {
   optional bool decelerate_to_stop = 53 [default = false];
   optional bool slope_decelerate_to_stop = 54 [default = false];
   optional bool apa_emergency_brake = 55 [default = false];
+  optional bool use_full_feedback_controller = 56 [deprecated = true];
+  optional bool standstill = 57 [default = false];
+  optional bool driveoff = 58 [default = false];
 
 }
 
@@ -157,6 +162,8 @@ message ESACommand {
 
   // for simulation
   optional deeproute.canbus.Chassis.GearPosition gear_location = 7;
+  // publish time (us)
+  optional int64 time_measurement = 8; 
 
   // TMP: for low-level control
   optional double throttle = 101;

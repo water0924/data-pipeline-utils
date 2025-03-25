@@ -11,4 +11,6 @@ message RoadMaskPlus {
   optional common.Polygon polygon = 2;
   optional int32 layer = 3;
   repeated Overlap overlaps = 4;
+  //是否为lane_close场景
+  optional bool is_lane_close = 5;
 }

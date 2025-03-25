@@ -79,6 +79,7 @@ message TrafficLight {
   optional common.Point3D amap_traffic_light_position = 18; // amap红绿灯坐标
   optional bool odd = 19;
   optional bool amap_count_downs = 20; // 融合后的读秒来自高德
+  optional bool has_arrow_vote = 21; // 当前状态是否存在箭头灯投票
 
 }
 
@@ -125,4 +126,7 @@ message TrafficLightResponse {
   // Note that traffic_light_3d is a field for HMI. It has all lights that
   // perception perceive and has the 3d infromation for better HMI.
   repeated TrafficLight3D traffic_light_3d = 3;
+  // virtual signal stand as current junction for pnc cache logic
+  // start from 0
+  optional int64 virtual_traffic_lights_id = 4;
 }

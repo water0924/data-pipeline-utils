@@ -3,6 +3,7 @@ syntax = "proto3";
 import "drapi/operation_status.proto";
 import "drapi/base.proto";
 import "safety/safety_analysis.proto";
+import "planning/planning.proto";
 
 package deeproute.dtu.report_event;
 /***************************事件通知**********************************************/
@@ -413,8 +414,75 @@ message RADSStatusUpdateInfo {
 
 // AEB状态变更, event : BLC_STATE_AEB_STATUS_UPDATE_EVENT
 message AEBStatusUpdateInfo {
-  AEBState from = 1;
-  AEBState to = 2;
+  dr.operationstatus.AEBStatus from = 1;
+  dr.operationstatus.AEBStatus to = 2;
+  dr.operationstatus.ReasonInfo reasoninfo = 3;
+}
+
+// AWB状态变更, event : BLC_STATE_AWB_STATUS_UPDATE_EVENT
+message AWBStatusUpdateInfo {
+  dr.operationstatus.AWBStatus from = 1;
+  dr.operationstatus.AWBStatus to = 2;
+  dr.operationstatus.ReasonInfo reasoninfo = 3;
+}
+
+// MAI状态变更, event : BLC_STATE_MAI_STATUS_UPDATE_EVENT
+message MAIStatusUpdateInfo {
+  dr.operationstatus.MAIStatus from = 1;
+  dr.operationstatus.MAIStatus to = 2;
+  dr.operationstatus.ReasonInfo reasoninfo = 3;
+}
+
+// ABP状态变更, event : BLC_STATE_ABP_STATUS_UPDATE_EVENT
+message ABPStatusUpdateInfo {
+  dr.operationstatus.ABPStatus from = 1;
+  dr.operationstatus.ABPStatus to = 2;
+  dr.operationstatus.ReasonInfo reasoninfo = 3;
+}
+
+// ESA状态变更, event : BLC_STATE_ESA_STATUS_UPDATE_EVENT
+message ESAStatusUpdateInfo {
+  dr.operationstatus.ESAStatus from = 1;
+  dr.operationstatus.ESAStatus to = 2;
+  dr.operationstatus.ReasonInfo reasoninfo = 3;
+}
+
+// FCTA状态变更, event : BLC_STATE_FTCA_STATUS_UPDATE_EVENT
+message FCTAStatusUpdateInfo {
+  dr.operationstatus.FCTAStatus from = 1;
+  dr.operationstatus.FCTAStatus to = 2;
+  dr.operationstatus.ReasonInfo reasoninfo = 3;
+}
+
+// FCTB状态变更, event : BLC_STATE_FCTB_STATUS_UPDATE_EVENT
+message FCTBStatusUpdateInfo {
+  dr.operationstatus.FCTBStatus from = 1;
+  dr.operationstatus.FCTBStatus to = 2;
+  dr.operationstatus.ReasonInfo reasoninfo = 3;
+}
+
+// FCW状态变更, event : BLC_STATE_FCW_STATUS_UPDATE_EVENT
+message FCWStatusUpdateInfo {
+  
+  enum LevelType {
+    LEVEL_UNKNOWN = 0;
+    EARLY = 1;
+    MIDDLE = 2;
+    LATE = 3;
+    CUSTOM = 4;
+  }
+
+  dr.operationstatus.FCWStatus from = 1;
+  dr.operationstatus.FCWStatus to = 2;
+  dr.operationstatus.ReasonInfo reasoninfo = 3;
+  LevelType fcw_level = 4;
+}
+
+// MEB状态变更, event : BLC_STATE_MEB_STATUS_UPDATE_EVENT
+message MEBStatusUpdateInfo {
+  dr.operationstatus.MEBStatus from = 1;
+  dr.operationstatus.MEBStatus to = 2;
+  dr.operationstatus.ReasonInfo reasoninfo = 3;
 }
 
 // HMA状态变更, event : BLC_STATE_HMA_STATUS_UPDATE_EVENT
@@ -470,6 +538,7 @@ message RCTBStatusUpdateInfo {
   dr.operationstatus.RCTBStatus to = 2;
   bool left_warning = 3;
   bool right_warning = 4;
+  dr.operationstatus.ReasonInfo reasoninfo = 5;
 }
 
 // AVM 状态变更, event : BLC_STATE_AVM_STATUS_UPDATE_EVENT
@@ -498,6 +567,20 @@ message RDPStatusUpdateInfo {
   dr.operationstatus.RDPStatus to = 2;
   repeated PassiveCondition passive_reason = 3 [deprecated = true];
   dr.operationstatus.ReasonInfo reasoninfo = 4;
+}
+
+// 定时发送状态, event : BLC_STATE_SCHEDULED_UPDATE_EVENT
+message BLCStateScheduledUpdate {
+  dr.operationstatus.AEBStatusInfo aeb_status_info = 1;
+  dr.operationstatus.FCWStatusInfo fcw_status_info = 2;
+  dr.operationstatus.AWBStatusInfo awb_status_info = 3;
+  dr.operationstatus.ABPStatusInfo abp_status_info = 4;
+  dr.operationstatus.FCTAStatusInfo fcta_status_info = 5;
+  dr.operationstatus.FCTBStatusInfo fctb_status_info = 6;
+  dr.operationstatus.ESAStatusInfo esa_status_info = 7;
+  dr.operationstatus.RCTBStatusInfo rctb_status_info = 8;
+  dr.operationstatus.MEBStatusInfo meb_status_info = 9;
+  dr.operationstatus.MAIStatusInfo mai_status_info = 10;
 }
 
 // *******************告警事件**********************************
@@ -668,6 +751,15 @@ message BLCBusinessInfo {
 }
 
 message AEBStatusInfo {
+
+  enum LevelType {
+    LEVEL_UNKNOWN = 0;
+    EARLY = 1;
+    MIDDLE = 2;
+    LATE = 3;
+    CUSTOM = 4;
+  }
+
   enum AEBState {
     AEB_OFF = 0;
     AEB_FAILURE = 1;
@@ -684,13 +776,7 @@ message AEBStatusInfo {
     FCW_PASSIVE = 2;
     FCW_ACTIVE = 3;
   }
-  enum LevelType {
-    LEVEL_UNKNOWN = 0;
-    EARLY = 1;
-    MIDDLE = 2;
-    LATE = 3;
-    CUSTOM = 4;
-  }
+
   enum PowerState {
     POWER_UNKNOWN = 0;
     /* 1~99 for WORKING */
@@ -719,18 +805,23 @@ message BlcProcTimeWarnInfo {
   uint64 duration_ms = 4;
 }
 
-// apa泊车， event:BLC_APA_PARKING_REPORT
+// apa/rpa 泊车， event:BLC_APA_PARKING_REPORT
 message APAReport {
   enum Result {
     RESULT_UNKNOWN = 0;
-    SUCCESS = 1;
-    FAILED = 2;
-    CANCELED = 3;
+    SUCCESS = 1;    // 功能完成
+    FAILED = 2;     // 功能失败(from ACTIVED)
+    CANCELED = 3;   // 用户退出功能（from ACTIVED）
+    SEARCH = 4;     // 功能开启（search阶段）
+    SEARCH_QUIT = 5;  // search 阶段特殊原因失败
+    ACTIVED = 6;    // 功能激活
+    SUSPEND = 7;    // 功能暂停
   }
   enum Mode {
     MODE_UNKNOWN = 0;
     PARKING_IN = 1;   //泊入
     PARKING_OUT = 2;  //泊出
+    STRAIGHT_IN_OUT = 3;  //直进直出
   }
   enum ParkingSpaceType {
     UNKNOWN = 0;
@@ -745,9 +836,8 @@ message APAReport {
     VPA_ROUTING = 3;
     RPA = 4;
   }
-  Result result = 2;                        // 泊车结果
+  Result result = 2;                        // 泊车阶段
   Mode mode = 3;                            // 泊车模式
-  repeated PassiveCondition reason = 4 [deprecated = true];  // 失败原因
   int32 gear_change_times = 5;              // 档位切换次数
   int64 begin_time_ms = 6;                  // 泊车开始时间
   int64 planning_plan_time_ms = 7;          // planning 规划时间
@@ -757,7 +847,52 @@ message APAReport {
   double begin_latitude = 11;               // 开始纬度
   ActiveReason active_reason = 12;          // 激活原因
   int64 perception_resp_time_ms = 13;       // perception 返回耗时
-  dr.operationstatus.ReasonInfo reasoninfo = 14;  //失败原因
+  dr.operationstatus.ReasonInfo reasoninfo = 14;  //失败/暂停原因
+  deeproute.planning.AStarSearchResultAnalysisInfo analysis_info = 15;  // SUCCESS/FAILED/CANCELED
+}
+
+// rads 倒车循迹， event:BLC_RADS_REPORT
+message RADSReport {
+  enum Result {
+    RESULT_UNKNOWN = 0;
+    SUCCESS = 1;    // 功能完成
+    FAILED = 2;     // 功能失败(from ACTIVED)
+    CANCELED = 3;   // 用户退出功能（from ACTIVED）
+    SEARCH = 4;     // 功能开启（search阶段）
+    SEARCH_QUIT = 5;  // search 阶段特殊原因失败
+    ACTIVED = 6;    // 功能激活
+    SUSPEND = 7;    // 功能暂停
+  }
+  Result result = 1;       // 泊车阶段
+  dr.operationstatus.ReasonInfo reasoninfo = 2;  //失败/暂停原因
+}
+
+// vpa-learning 记忆泊车建图， event:BLC_VPA_LEARNING_REPORT
+message VPALearningReport {
+  enum Result {
+    RESULT_UNKNOWN = 0;
+    SUCCESS = 1;    // 功能完成
+    FAILED = 2;     // 功能失败(from ACTIVED)
+    CANCELED = 3;   // 用户退出功能（from ACTIVED）
+    ACTIVED = 4;    // 功能激活
+  }
+  Result result = 1;       // 泊车阶段
+  dr.operationstatus.ReasonInfo reasoninfo = 2;  //失败原因
+  bool study_finish = 3;   // 是否用户完成学习
+}
+
+// vpa-routing 记忆泊车巡航， event:BLC_VPA_ROUTING_REPORT
+message VPARoutingReport {
+  enum Result {
+    RESULT_UNKNOWN = 0;
+    SUCCESS = 1;    // 功能完成
+    FAILED = 2;     // 功能失败(from ACTIVED)
+    CANCELED = 3;   // 用户退出功能（from ACTIVED）
+    ACTIVED = 4;    // 功能激活
+  }
+  Result result = 1;       // 泊车阶段
+  dr.operationstatus.ReasonInfo reasoninfo = 2;  //失败原因
+  bool cruise_switch_apa = 3;      // 巡航是否切APA成功
 }
 
 // 场景触发导致泊车功能退出 , event  :  BLC_PARKING_FAILURE_BUSINESS_REPORT
@@ -817,6 +952,15 @@ enum LaneChangeFailReason {
 message LaneChangeInfo {
   LaneChagneResult lane_change_result = 1;
   LaneChangeFailReason fail_reason = 2;
+}
+
+// 变道开关
+message LaneChangeSwitch {
+  bool enable_lane_change = 1; //变道总开关
+  bool enable_efficiency_lane_change = 2; //效率变道开关
+  bool enable_empirical_lane_change = 3;  // 远离最右边车道开关
+  bool enable_road_type_lane_change = 4;  // 远离汇入口变道开关
+  bool enable_low_risk_avoidance_lane_change = 5; //远离大车变道开关
 }
 
 // 全链路预览成功事件

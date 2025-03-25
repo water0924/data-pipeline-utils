@@ -7,8 +7,8 @@ import "perception/deeproute_perception_obstacle.proto";
 import "common/geometry.proto";
 
 enum ParkingSpaceTag {
-  PARK_SPACE_TAG_UNKNOW = 0;                    // 未知
-  PARK_SPACE_TAG_CHARGE = 1;                    // 充电桩
+  PARK_SPACE_TAG_UNKNOWN = 0;                   // 未知
+  PARK_SPACE_TAG_CHARGING_STATION = 1;          // 充电桩
   PARK_SPACE_TAG_ELEVATOR = 2;                  // 电梯
 	PARK_SPACE_TAG_FLOOR = 3;                     // 楼层
 	PARK_SPACE_TAG_PASSAGEWAY = 4;                // 出入口
@@ -45,14 +45,15 @@ enum TrajectoryType {
   UPHILL = 2;
 }
 message HAVPTrajectory {
-  optional int32 id = 1;              // if the trajectory is flat, id means which floor it belongs to. 
-                                      // e.g. id = 0 means this trajectory is belongs to 0th floor.
-                                      // if the trajectory is on uphill or down hill, id only means a unique idx for this
-                                      // trajectory. Now it's a more than 1000 number for distinguishing from flat
+  optional int32 id = 1;              // trajectory id, each trajectory has an unique id from 0 to positive infinite
   optional TrajectoryType type = 2;
   optional int32 from_floor = 3;      // only donwhill or uphill trajectory may have it
   optional int32 to_floor = 4;        // only donwhill or uphill trajectory may have it
   repeated common.Point3D trajectory_point = 5;
+  optional int32 floor_id = 6;        // if the trajectory is flat, floor_id means which floor it belongs to. 
+                                      // e.g. floor_id = 0 means this trajectory is belongs to 0th floor.
+                                      // if the trajectory is on uphill or down hill, floor_id only means a unique idx for this
+                                      // trajectory. Now it's a more than 1000 number for distinguishing from flat
 }
 
 message FloorIdSet {

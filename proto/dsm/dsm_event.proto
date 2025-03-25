@@ -45,3 +45,11 @@ message Recovery {
 message DSMResetEvent {
   bool total_reset = 1;
 }
+
+message EntityAbnormalNotify {
+  repeated EntityAbnormalInfo abnormal_infos = 1;
+}
+
+message EntityAbnormalInfo {
+  string entity_name = 1;  // 引发事件的模块名或事件名
+}

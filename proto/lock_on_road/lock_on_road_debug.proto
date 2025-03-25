@@ -16,6 +16,7 @@ message LockOnRoadSinglePoseDebugInfo{
   optional int64 ras_lane_id = 7;                 // given by RAS map, the lane on which vehicle is on
   optional int64 time = 8;                        // time of input pose
   optional LockOnRoadResult.Status status = 9;
+  optional string sd_link_id = 10;                // link id of each single pose point
 }
 
 message LockOnRoadDdmmDebugInfo {
@@ -45,4 +46,13 @@ message LockOnRoadDdmmDebugInfo {
 message LockOnRoadDebugInfo{
   // debug info for all poses of a single trajectory.
   repeated LockOnRoadSinglePoseDebugInfo pose_debug_info = 1;
+}
+
+message NavigationSourceReadyTime {
+  optional string source_name = 1;      // AMAP, DR etc 
+  optional uint64 ready_time = 2;   // unix time
+}
+
+message NavigationSourceReadyTimeComparison {
+  repeated NavigationSourceReadyTime ready_times = 1;
 }
