@@ -96,6 +96,8 @@ message Lane {
     TIDAL_LANE = 10;
     LEFT_TURN_WAITING_AREA = 11;
     DECELERATION_LANE = 12;
+    RIGHT_TURN_WAITING_AREA = 13;
+    STRAIGHT_WAITING_AREA = 14;
   };
   optional Attribute attribute = 14;
 
@@ -292,6 +294,7 @@ message ParkingSpace {
   optional uint64 timestamp = 15;  // us, timestamp of current frame running
   optional bool head_parking_available = 16 [default = false];
   optional bool tail_parking_available = 17 [default = true];
+  optional int32 request_id = 18;  // for user define parkspace, other parkspace don't have this field
 }
 
 message Road {
@@ -350,6 +353,7 @@ message MPPInfo {
   // pose from mp to global
   optional common.Point3D position = 3;
   optional common.Point3D roll_pitch_yaw = 4;
+  optional bool is_parking = 5;
 }
 
 message RASMap {

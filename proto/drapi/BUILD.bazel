@@ -566,29 +566,29 @@ python_proto_library(
 
 
 proto_library(
-    name = "gwm_p03_downstream_chassis_proto",
+    name = "gwm_tank_downstream_chassis_proto",
     visibility = ["//visibility:public"],
-    srcs = ["gwm_p03_downstream_chassis.proto"],
+    srcs = ["gwm_tank_downstream_chassis.proto"],
     deps = [
         ":base_proto",
-        "//proto/canbus:gwm_p03_chassis_detail_proto",
+        "//proto/canbus:gwm_tank_chassis_detail_proto",
     ],
     strip_import_prefix = "/proto/",
 )
 
 cc_proto_library(
-    name = "gwm_p03_downstream_chassis_proto_cc",
+    name = "gwm_tank_downstream_chassis_proto_cc",
     visibility = ["//visibility:public"],
     deps = [
-        ":gwm_p03_downstream_chassis_proto",
+        ":gwm_tank_downstream_chassis_proto",
     ],
 )
 
 python_proto_library(
-    name = "gwm_p03_downstream_chassis_proto_py",
+    name = "gwm_tank_downstream_chassis_proto_py",
     visibility = ["//visibility:public"],
     protos = [
-        ":gwm_p03_downstream_chassis_proto",
+        ":gwm_tank_downstream_chassis_proto",
     ],
 )
 

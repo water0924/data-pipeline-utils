@@ -91,10 +91,18 @@ message EndMapLocalizationCMD {                 // GWM SOP+3 deprecated
 message EndMapLocalizationCMDRP {               // GWM SOP+3 deprecated
 }
 
+enum StartMappingRequestReason {
+  REASON_CREATE_NEW_MAP = 0;  // 创建新地图
+  REASON_EXPAND_MAP = 1;      // 扩建地图
+  REASON_EXPAND_OUT_MAP = 2;  // 创建泊出地图
+}
+
 message StartMappingCMD {
-  bool expand_map = 1;
+  bool expand_map = 1;  // deprecated
+  StartMappingRequestReason reason = 2; // 建图类型
 }
 message StartMappingCMDRP {
+  deeproute.common.PointLLH mapping_origin = 1;
 }
 
 enum CancelMappingType {
@@ -130,6 +138,7 @@ message EndMappingCMD {
   perception.ParkingSpace parking_space = 1; // it's optional
   string map_name = 2;
   string target_parking_space_name = 3;
+  int32 map_id = 4;         // for Geely
 }
 message EndMappingCMDRP {
   bool success = 1;
@@ -145,6 +154,25 @@ message EndMappingCMDRP {
   int32 ego_floor_id = 9;
   int32 recommended_favorite_parking_space_id = 10;
   ChangedMapStatusList changed_map_status_list = 11;
+}
+
+// for gleey
+message SetRegionalParkingSpaceCMD {
+  int32 map_id = 1;
+  bool is_regional_parking_space = 2;
+}
+
+message SetRegionalParkingSpaceCMDRP {
+  bool success = 1;
+}
+
+message EndToEndMapCheckCMD {
+  bool front_check = 1;
+  bool back_check = 2;
+}
+
+message EndToEndMapCheckCMDRP {
+  bool success = 1;
 }
 
 enum OperatingType {
@@ -172,6 +200,25 @@ message MapInfoUpdateCMD {
 }
 message MapInfoUpdateCMDRP {
   havp_map.HAVPMapMetaData map_info = 1;
+}
+
+message BatchMapsDeleteCMD {
+  repeated int32 delete_map_ids = 1;
+}
+message BatchMapsDeleteCMDRP {
+  bool success = 1;
+}
+
+message MapPoiInfoUpdateCMD {
+  int32 map_id = 1;
+  havp_map.MapPoiInfo map_poi_info = 2;
+  bool is_default = 3;
+}
+
+message MapPoiInfoUpdateCMDRP {
+  havp_map.MapPoiInfo map_poi_info = 1;
+  bool is_default = 2;
+  OperatingType real_operation_type = 3;
 }
 
 message GetTargetHavpMapMetaDataCMD {
@@ -228,17 +275,31 @@ enum StartNavigationRequestReason {
   REASON_PREPLAN = 0;  // 预规划导航路线
   REASON_VPA_NAVIGATION = 1; // 进导航
   REASON_VPA_ROUTING = 2;  // 进巡航
+  REASON_E2E_PARKING_OUT = 3; // 点到点泊出规划
+  REASON_E2E_PARKING_IN = 4; // 点到点泊入规划
+}
+
+enum PoiType {
+  PARKING_SPACE = 0;
+  ODD_START = 1;
+  ODD_END = 2;
+  USER_DEFINE = 3; // defined by user
+  MAPPING_END = 4; // for gleey. when endmapping with no target parking space
 }
 
 message StartNavigationCMD {
   int32 target_parking_space_id = 1; // 导航目标车位
   StartNavigationRequestReason reason = 2;  // 请求原因
+  PoiType poi_type = 3;
 }
 
 message StartNavigationCMDRP {
   double route_total_distance = 1;  // 导航总距离
   ErrorCode error_code = 2;
   int32 target_parking_space_id = 3;
+  double remaining_s_after_slope = 4;
+  bool routing_ready = 5;
+  double left_routing_time = 6;
 }
 
 message EndNavigationCMD {
@@ -296,6 +357,24 @@ message MapNameNameDuplicationCheckCMDRP {
     bool name_repeated = 1;     // return true if repeated
 }
 
+message SetFreeParkingSpaceAsRouteDestinationCMD {
+  perception.ParkingSpace parking_space = 1;
+}
+
+// for gleey
+message SetFreeParkingSpaceAsRouteDestinationCMDRP {
+  bool set_destination_success = 1;
+}
+
+// for gleey
+message SetStraightLinkSpeedLimitCMD {
+  double straight_link_speed_limit = 1;
+}
+
+message SetStraightLinkSpeedLimitCMDRP {
+  bool set_speed_limit_success = 1;
+}
+
 message LocalizationCommand {  // external users send commands in
                                // '/localization/command' topic to
                                // localization modules
@@ -324,6 +403,12 @@ message LocalizationCommand {  // external users send commands in
     GetNearbyMapCMD get_nearby_map_cmd = 21;
     ParkingSpaceNameDuplicationCheckCMD parking_space_name_duplication_check_cmd = 22;
     MapNameDuplicationCheckCMD map_name_duplication_check_cmd = 23;
+    EndToEndMapCheckCMD end_to_end_map_check_cmd = 24;
+    MapPoiInfoUpdateCMD map_poi_info_update_cmd = 25;
+    SetFreeParkingSpaceAsRouteDestinationCMD set_free_parking_space_as_route_destination_cmd = 26;
+    SetStraightLinkSpeedLimitCMD set_straight_link_speed_limit_cmd = 27;
+    SetRegionalParkingSpaceCMD set_regional_parking_space_cmd = 28;
+    BatchMapsDeleteCMD batch_maps_delete_cmd = 29;
   }
 }
 
@@ -355,5 +440,11 @@ message LocalizationResponse {  // external users receive 'LocalizationResponse'
     GetNearbyMapCMDRP get_nearby_map = 22;
     ParkingSpaceNameDuplicationCheckCMDRP parking_space_name_duplication_check = 23;
     MapNameNameDuplicationCheckCMDRP map_name_duplication_check = 24;
+    EndToEndMapCheckCMDRP end_to_end_map_check = 25;
+    MapPoiInfoUpdateCMDRP map_poi_info_update = 26;
+    SetFreeParkingSpaceAsRouteDestinationCMDRP set_free_parking_space_as_route_destination = 27;
+    SetStraightLinkSpeedLimitCMDRP set_straight_link_speed_limit = 28;
+    SetRegionalParkingSpaceCMDRP set_regional_parking_space = 29;
+    BatchMapsDeleteCMDRP batch_maps_delete = 30;
   }
 }

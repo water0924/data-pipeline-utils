@@ -63,6 +63,7 @@ message ParkingSpace {// 车位信息
   bool is_last_destination = 14;                    // 是否为上次目标车位
   ParkingSpaceSizeType size_type = 15;              // 车位空间大小类型
   ParkingDir dir = 16;                              // 泊入方向
+  ParkingPosType setting_pos=17;                    // 当前设置的泊入姿态（泊入偏移、停靠偏好） 
 
   // ParkSpaceBoundingBox 是车位上的障碍物的物理大小, 可用于确定车位上如何放置模型
   message ParkSpaceBoundingBox {                    // 车位轮廓描述(全局坐标系)
@@ -121,7 +122,7 @@ message ParkingSpace {// 车位信息
     PARK_SPACE_OBSTACLE_TYPE_SMALL = 8;             // 窄空间
     // PARK_SPACE_OBSTACLE_TYPE_ROADDELIMIRER = 8;  // 道路定界符
   }
-  
+
   enum ParkingSpaceTag {                          // 车位标签
     PARK_SPACE_TAG_NONE = 0;                      // 无标签
     PARK_SPACE_TAG_CHARGE = 1;                    // 充电桩
@@ -136,13 +137,47 @@ message ParkingSpace {// 车位信息
     PARK_SPACE_SIZE_TYPE_NARROW = 2;                   // 狭小空间车位
     PARK_SPACE_SIZE_TYPE_WIDE = 3;                     // 宽敞空间车位
   }
-
+  
   enum ParkingDir {                                 // 泊入方向类型
     PARK_DIR_NONE = 0;                              // 无效值
     PARK_DIR_HEAD_FIXED = 1;                        // 车头泊入，不可切换
     PARK_DIR_TAIL_FIXED = 2;                        // 车尾泊入，不可切换
     PARK_DIR_HEAD_SWITCHABLE = 3;                   // 车头泊入，可切换
     PARK_DIR_TAIL_SWITCHABLE = 4;                   // 车尾泊入，可切换  
+  }
+
+  enum ParkingPosType{
+    PARKING_POS_NONE    =0; //无效值
+    PARKING_POS_CENTER  =1; //居中
+    PARKING_POS_LEFT    =2; //靠左
+    PARKING_POS_RIGHT   =3; //靠右
+  }
+}
+
+message ParkingPoi {// POI点信息
+  string id = 1;                                // POI id
+  string name = 2;                              // POI名称
+  Point position =3;                            // POI位置
+  ParkingPoiStatus status = 4;                  // POI状态
+  ParkingPoiTag tag = 5;                        // 标签（充电桩、电梯、楼梯、出入口等）,
+                                                    // 系统识别的园区入口、园区出口、停车场入口、停车场出口POI点赋值
+                                                    // PARK_POI_TAG_PASSAGEWAY,用户点选POI点赋值PARK_POI_TAG_NONE；
+  bool favorite = 6;                            // 收藏
+  int32 favorite_time = 7;                      // 收藏时间
+  bool is_default = 8;                          // 是否为默认, 与车位的默认互斥
+
+  enum ParkingPoiStatus {                       // POI状态
+    PARK_POI_STATUS_FREE = 0;                   // 不可选
+    PARK_POI_STATUS_SELECTABLE = 1;             // 可选
+    PARK_POI_STATUS_SELECTED = 2;               // 选中，但非目标点
+    PARK_POI_STATUS_DESTINATION = 3;            // 目标点
+  }
+  enum ParkingPoiTag {                          // POI标签
+    PARK_POI_TAG_NONE = 0;                      // 无标签
+    PARK_POI_TAG_CHARGE = 1;                    // 充电桩
+    PARK_POI_TAG_ELEVATOR = 2;                  // 电梯
+    PARK_POI_TAG_STAIRCASE = 3;                 // 楼梯
+    PARK_POI_TAG_PASSAGEWAY = 4;                // 出入口
   }
 }
 
@@ -166,7 +201,6 @@ message MapObstacle {                           // 障碍物信息
 message ObjectDetectionObstacle {               // 障碍物信息
   int32 id = 1;                                 // 障碍物id 障碍物的唯一ID
   ObjectDetectionObstacleType type = 2;         // 障碍物类型
-  //  ObstaclePose pose = 3;                    // 障碍物朝向
   BoundingBox position_info = 3;                // 地图中存储在识别物使用特征坐标点表示。例如减速带是2个点，而立柱是4个点。
   bool is_moving = 4;                           // 目标是否在移动（目前主要用于行人）
   ObjAlarmLevel obj_alarm_level=5;              // 障碍物告警等级，HUT根据等级渲染颜色
@@ -200,7 +234,9 @@ message ObjectDetectionObstacle {               // 障碍物信息
     OBSTACLE_TYPE_PARKING_LIMITER = 25;         // 一体限位器
     OBSTACLE_TYPE_PARKING_LIMITER_SEPARATE = 26;// 分离限位器
     OBSTACLE_TYPE_VAN = 27;                     // 厢式货车
-    OBSTACLE_TYPE_CHILD = 28;                   // 儿童 
+    OBSTACLE_TYPE_CHILD = 28;                   // 儿童
+    OBSTACLE_TYPE_BARRIERGATE_OPEN = 29;        // 打开的闸机，对于同一个闸机，如果开关状态变化时，障碍物ID不能变，只改变类型
+    OBSTACLE_TYPE_BARRIERGATE_CLOSE = 30;       // 关闭的闸机
 
     // TRAFFIC_SIGN 交通标志箭头
     OBSTACLE_TYPE_ARROW_TS_STRAIGHT = 100;    // 直行
@@ -216,14 +252,6 @@ message ObjectDetectionObstacle {               // 障碍物信息
     OBSTACLE_TYPE_ARROW_TS_RIGHT_BACK = 124;      // 右转+掉头
     OBSTACLE_TYPE_ARROW_TS_STRAIGHT_LEFT_RIGHT = 125; // 直行+左转+右转
 
-    //    OBSTACLE_TYPE_TRUCK = 1; // 卡车，箱式卡车，皮卡车，大篷车，洒水车大型车辆，且后部/装载区域与驾驶室物理分离
-    //    OBSTACLE_TYPE_BUS = 3; // 公交车、客车
-    //    OBSTACLE_TYPE_TRAFFIC_SIGN_ARROW = 7; // 交通标志箭头
-    //    OBSTACLE_TYPE_ULTRASONIC = 8; // 超声波识别障碍物
-    //    OBSTACLE_TYPE_BAN = 9; // 禁停牌
-    //    OBSTACLE_TYPE_GENERAL_OBJECT = 10; // freespace识别障碍物
-    //    OBSTACLE_TYPE_UNKNOWN = 11; // 其他未知障碍物
-    //    OBSTACLE_TYPE_CYCLIST = 5; // 摩托车、自行车、电动车等
   }
 
   enum ObjAlarmLevel { //定义中的颜色只代表等级，和HUT实际渲染颜色无关
@@ -339,7 +367,7 @@ message SignPolygon  {
 }
 
 message AVPMapPin {
-  int32 id = 1;                                 // 唯一id
+  int32 id = 1;                                 // 唯一id,即地图ID
   string name = 2;                              // 名称
   double longitude = 3;                         // 地图经度，单位度 GCJ02坐标 
   double latitude = 4;                          // 地图纬度，单位度 GCJ02坐标

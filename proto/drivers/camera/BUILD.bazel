@@ -32,3 +32,27 @@ python_proto_library(
     ],
 )
 
+proto_library(
+    name = "camera_command_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["camera_command.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "camera_command_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":camera_command_proto",
+    ],
+)
+
+python_proto_library(
+    name = "camera_command_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":camera_command_proto",
+    ],
+)

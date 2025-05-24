@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17\x61\x65\x62/trigger_event.proto\x12\rdeeproute.aeb\"\x87\x01\n\x10TriggerEventInfo\x12\x37\n\x04type\x18\x01 \x01(\x0e\x32).deeproute.aeb.TriggerEventInfo.EventType\x12\x0f\n\x07reasons\x18\x02 \x03(\t\")\n\tEventType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x06\n\x02\x46S\x10\x01\x12\x07\n\x03STM\x10\x02')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17\x61\x65\x62/trigger_event.proto\x12\rdeeproute.aeb\"\x95\x01\n\x10TriggerEventInfo\x12\x37\n\x04type\x18\x01 \x01(\x0e\x32).deeproute.aeb.TriggerEventInfo.EventType\x12\x0f\n\x07reasons\x18\x02 \x03(\t\x12\x0c\n\x04\x64\x61ta\x18\x03 \x03(\t\")\n\tEventType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x06\n\x02\x46S\x10\x01\x12\x07\n\x03STM\x10\x02')
 
 
 
@@ -31,7 +31,7 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _TRIGGEREVENTINFO._serialized_start=43
-  _TRIGGEREVENTINFO._serialized_end=178
-  _TRIGGEREVENTINFO_EVENTTYPE._serialized_start=137
-  _TRIGGEREVENTINFO_EVENTTYPE._serialized_end=178
+  _TRIGGEREVENTINFO._serialized_end=192
+  _TRIGGEREVENTINFO_EVENTTYPE._serialized_start=151
+  _TRIGGEREVENTINFO_EVENTTYPE._serialized_end=192
 # @@protoc_insertion_point(module_scope)

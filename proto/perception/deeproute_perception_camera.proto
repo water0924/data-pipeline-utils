@@ -259,6 +259,9 @@ message CameraQualityInfo {
   optional float blur_area_ratio = 5;
   optional float occ_area_ratio = 6;
   optional float blur_score = 7;
+  optional int64 start_timestamp = 8;
+  optional bool is_face_wall = 9;
+  optional int64 wall_timestamp = 10;
 }
 
 message CameraQuality {
@@ -293,6 +296,9 @@ message CameraRegion {
     TOLL_STATION = 5;             // 收费站
     CONSTRUCTION_AREA = 6;        // 施工区域
     BUS_PARKING_AREA = 7;         // 公交停车区域
+    HIGHWAY = 8;                  // 高速
+    RURAL_ROAD = 9;               // 乡村道路
+    GAS_STATION = 10;            // 加油站
   };
   optional CameraRegionType camera_region = 1;
   optional float camera_region_prob = 2;
@@ -305,9 +311,12 @@ message CameraRoadCondition {
     DUST = 1;      // 沙石道路
     SLIPERRY = 2;  // 滑溜道路
     PONDING = 3;   // 有积水的道路
-    PATHHOLE = 4;  // 有坑的路
-    ICING = 5;     // 结冰道路
-    UNKNOWN = 6;   // 未知
+    PATHHOLE = 4;  // 有坑的路 deprecated
+    ICING = 5;     // 结冰道路 deprecated
+    UNKNOWN = 6;   // 未知 deprecated
+    POTHOLE = 7;  // 有坑的路
+    SNOW_COVER = 8;  // 雪覆盖的路
+    FREEZE = 9;     // 结冰道路
   };
   optional CameraRoadConditionType camera_road_condition = 1;
   optional float camera_road_condition_prob = 2;
@@ -328,9 +337,9 @@ message HmaDebugInfo {
 
 message CameraLightingStatus {
   enum CameraLightingType {
-    DUSK = 0;         // 废弃
+    DUSK = 0;         // 夜晚，但道路明亮良好(路灯)
     DARK = 1;         // 基本全黑
-    BRIGHT = 2;       // 夜晚，但道路明亮良好(路灯)
+    BRIGHT = 2;       // 废弃
     DAY_TIME = 3;     // 白天
   };
   optional CameraLightingType light_type = 1;
@@ -350,6 +359,19 @@ message CameraTimeStatus {
   optional float camera_time_prob = 2;
 }
 
+// camera status for camera all
+message CameraPhysicStatus {
+  enum CameraPhysicStatusType {
+    CLEAR = 0;  // 正常
+    BLUR = 1;  // 模糊
+    DIRTY = 2;  // 脏污
+    FLARE = 3;  // 炫光
+    FAILURE = 4;  // 摄像头故障
+  };
+  optional CameraPhysicStatusType camera_physic_status = 1;
+  optional float camera_physic_status_prob = 2;
+}
+
 message CameraStatus {
   optional int64 time_measurement = 1;
   optional string sensor_name = 2;
@@ -362,9 +384,11 @@ message CameraStatus {
 message CameraInfo {
   optional int64 time_measurement = 1;
   optional string sensor_name = 2;
-  optional CameraScheme camera_scheme = 3;
-  optional CameraRegion camera_region = 4;
-  optional CameraRoadCondition camera_road_condition = 5;
-  optional CameraLightingStatus camera_scene = 6;
-  optional CameraTimeStatus camera_time = 7;
+  optional CameraScheme camera_scheme = 3; // weather
+  optional CameraRegion camera_region = 4; // region
+  optional CameraRoadCondition camera_road_condition = 5; //road surface
+  optional CameraLightingStatus camera_lighting = 6; // lighting
+  optional CameraPhysicStatus camera_physic_status = 7; // camera physic status
+  optional CameraTimeStatus camera_time = 8;
+  optional CameraLightingStatus camera_scene = 9; // deprecated
 }

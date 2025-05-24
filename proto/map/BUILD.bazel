@@ -318,6 +318,22 @@ proto_library(
     strip_import_prefix = "/proto/",
 )
 
+proto_library(
+    name = "vpa_mapping_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["vpa_mapping.proto"],
+    deps = [
+        "//proto/map:sd_map_proto",
+        "//proto/map:projection_proto",
+        "//proto/common:geometry_proto",
+        "//proto/drivers/gnss:ins_proto",
+        "//proto/drivers:pointcloud2_proto",
+        "//proto/localization:havp_map_proto",
+        "//proto/perception:deeproute_perception_ras_map_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
 cc_proto_library(
     name = "routing_proto_cc",
     visibility = ["//visibility:public"],
@@ -360,3 +376,18 @@ python_proto_library(
     ],
 )
 
+cc_proto_library(
+    name = "vpa_mapping_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":vpa_mapping_proto",
+    ],
+)
+
+python_proto_library(
+    name = "vpa_mapping_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":vpa_mapping_proto",
+    ],
+)

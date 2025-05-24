@@ -228,7 +228,9 @@ message ADCTrajectory {
   optional double init_curvature_adjustment_start_time = 51 [default = 0.0];
   optional double init_curvature_adjustment_end_time = 52 [default = 5.0];
   optional bool start_open_space_replan = 53 [default = false];
-  optional int64 trajectory_start_point_time = 54;  // trajectory start point time(us)
+  optional int64 trajectory_start_point_time =
+      54;  // trajectory start point time(us)
+  optional bool current_stage_is_early_gear_change = 55 [default = false];
 }
 
 // geometry center
@@ -251,6 +253,29 @@ message LaneProperty {
 message SideLaneInfos {
   optional LaneProperty left_lane_property = 1;
   optional LaneProperty right_lane_property = 2;
+}
+
+message NavigationSuppressionReason {
+  enum Reason {
+    UNKNOWN_REASON = 0;
+    NAVIGATION_FREE = 1;
+    NAVIGATION_SUPPRESSION = 2;
+  }
+  optional int32 lane_id = 1;
+  optional Reason reason = 2;
+  optional string description = 3;  // 详细描述,用于展示
+}
+
+message LaneChangeMode {
+  enum DrivingMode {
+    UNKNOWN = 0;
+    CASUAL_MODE = 1;
+    STANDARD_MODE = 2;
+    SPORT_MODE = 3;
+  }
+
+  optional DrivingMode routing_driving_mode = 1;
+  optional DrivingMode efficiency_driving_mode = 2;
 }
 
 message LaneChangeRelated {
@@ -362,6 +387,8 @@ message LaneChangeRelated {
     // ToDo: target lane ids?
   }
   optional ConfirmationInfo confirmation_info = 20;
+  repeated NavigationSuppressionReason navigation_suppression_reason = 21;
+  optional LaneChangeMode lane_change_mode = 22;
 }
 
 message LaneWidth {
@@ -382,6 +409,8 @@ message VehiclePose {
   repeated LaneWidth lane_widths = 10;
   optional bool is_on_rightmost_lane = 11;
   optional bool is_first_after_stopline = 12;
+  optional double dist_to_left_curb = 13;
+  optional double dist_to_right_curb = 14;
 }
 
 message DisengagementWarning {
@@ -411,6 +440,7 @@ message DisengagementWarning {
     EXTRICATION = 1;
     WRONG_WAY = 2;
     EOP_NO_GAP = 3;
+    NARROW_ROAD_IMPASSIBLE = 4;  //狭窄道路无法通过
   }
   optional HumanInterferenceRelatedWarning human_interference_related_warning =
       3;  // This may not be output of planning.
@@ -530,6 +560,14 @@ message ElkInfo {
   optional double ttl = 5;
   optional double ttc_o = 6;
   optional double ttc_ics = 7;
+  optional double ttc = 8;
+  optional double lon_dist_to_obj = 9;
+  optional double lat_dist_to_obj = 10;
+  optional double obj_lon_v = 11;
+  optional double obj_lat_v = 12;
+  optional deeproute.perception.PerceptionObstacle.Type obj_type = 13;
+  optional deeproute.perception.PerceptionObstacle.SensorType sensor_type = 14;
+  optional double obj_confidence_score = 15;
 }
 
 message VehicleStateInfo {
@@ -620,6 +658,7 @@ message ConstructionZoneInfo {
   };
   optional ConstructionZoneExplanability construction_zone_explanability = 1;
   repeated deeproute.common.Polyline guideline = 2;
+  repeated deeproute.common.Polygon construction_zone_area = 3;
 }
 
 message TrafficLightWarning {
@@ -677,6 +716,12 @@ enum ParkingSpotShape {
   DIAGONAL_SHAPE = 3;
 }
 
+enum ParkingSpotBoundedType {
+  ZERO_BOUNDED = 0;
+  SINGLE_BOUNDED = 1;
+  DOUBLE_BOUNDED = 2;
+}
+
 message VpaSemanticInfo {
   enum ObjAlarmLevel {
     OBJ_ALARM_LEVEL_NONE = 0;
@@ -701,6 +746,7 @@ message AStarSearchResultAnalysisInfo {
   optional AStarSearchNoResultReason no_result_reason = 6;
   //[ms]
   optional double search_time = 7;
+  optional ParkingSpotBoundedType parking_spot_bounded_type = 8;
 };
 
 message PlanningSemanticInfo {
@@ -711,6 +757,13 @@ message PlanningSemanticInfo {
     HEAVY = 3;
     SLOW = 4;
     JAM = 5;
+  }
+
+  enum DrivingStyle {
+    NOT_SET = 0;
+    STANDARD = 1;
+    CONSERVATIVE = 2;
+    AGGRESSIVE = 3;
   }
 
   optional LaneChangeRelated lane_change_related = 1;
@@ -749,6 +802,8 @@ message PlanningSemanticInfo {
   optional ObjInteractionCount obj_interaction_count = 34;
   optional AStarSearchResultAnalysisInfo a_star_result_analysis_info = 35;
   optional VpaSemanticInfo vpa_semantic_info = 36;
+  optional double near_barrier_gate_dist = 37;
+  optional DrivingStyle driving_style = 38;
 }
 
 message DynamicFollowInfo {
@@ -763,6 +818,15 @@ message TrafficLightInfo {
     BLOCKED = 3;
     UNABLE_TO_LINK_LANE = 4;
   }
+  enum TrafficLightStopReason {
+    NO_STOP_LINE = 0;
+    RED = 1;
+    YELLOW = 2;
+    GREEN_BLINK = 3;
+    GREEN_TO_YELLOW = 4;
+    COUNTDOWNS = 5;
+    FOLLOW_START = 6;
+  };
   optional int32 stop_line_id = 1;
   optional deeproute.perception.TrafficLight.Color color = 2;
   optional double adc_to_stop_line_distance = 3;
@@ -773,6 +837,10 @@ message TrafficLightInfo {
   optional deeproute.perception.TrafficLight.Shape shape = 8;
   optional deeproute.common.PointENU stop_line_center_point = 9;
   optional bool failed_to_stop_at_red_light = 10;  // 闯红灯
+  optional TrafficLightStopReason stop_reason = 11;
+  optional bool build_stop_decision = 12;
+  optional bool arrived_waiting_area_ignore_tl = 13;
+  optional bool enable_waiting_area = 14;
 }
 
 message SingleLaneBehavior {

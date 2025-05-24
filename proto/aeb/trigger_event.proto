@@ -2,7 +2,6 @@ syntax = "proto2";
 
 package deeproute.aeb;
 
-
 message TriggerEventInfo {
     enum EventType{
         UNKNOWN = 0;
@@ -12,4 +11,5 @@ message TriggerEventInfo {
     }
     optional EventType type = 1;
     repeated string reasons = 2;
+    repeated string data = 3;
 }

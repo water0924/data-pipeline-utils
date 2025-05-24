@@ -1,6 +1,4 @@
 syntax = "proto2";
-import "drapi/gl_p177_downstream_chassis.proto";
-
 package dr.blc.mcu;
 
 message CanRaw {
@@ -26,11 +24,22 @@ message CanRawArray {
 }
 
 
+message SOCRPABusiness {
+  message RPAHandShakeStatus {
+    optional int64 transtion_number = 1;
+    optional int32 rpa_status = 29;
+  } 
+  optional RPAHandShakeStatus handshake_status = 1; 
+  optional bool soc_rpa_ready = 2;  // 后续可能需要支持SOC 上电走SOC 的直线召唤，先预留
+  optional bool other_function_actived = 3;  // 其他功能激活
+  optional bool vfc_request = 4;
+}
 
-// topic: /blc/mcu_operation_status
-message MCUOperationStatus {
+// topic: /blc/to_mcu_business
+message SOCBusiness {
    // common 1~10
    optional uint64 timestamp = 1;  // ms
+   optional uint64 sequence_number = 2; // soc 心跳检测
    // status 11
    optional int32 acc_status = 11;
    optional int32 ica_status = 12;
@@ -50,7 +59,7 @@ message MCUOperationStatus {
    optional int32 vpa_learning_status = 26;
    optional int32 pdc_status = 27;
    optional int32 elk_status = 28;
-   optional int32 rpa_status = 29;
+   optional SOCRPABusiness rpa_status = 29;
    optional int32 tjp_status = 30;
    optional int32 rads_status = 31;
    optional int32 sentry_mode_info = 32;
@@ -69,5 +78,24 @@ message MCUOperationStatus {
    optional int32 awb_status = 55;
    optional int32 abp_status = 56;
    optional int32 aeb_status = 57;
+   optional int32 aes_status = 58;
 
+}
+
+
+message MCURPAHandShakeInfo {
+  enum RPAHandShakeType {
+    HANDSHAKE_UNKNOWN = 0;
+    HANDSHAKE_OUTPARKING = 1;
+    HANDSHAKE_STRAIGHT_IN_OUT = 2; // 后续可能需要支持SOC 上电走SOC 的直线召唤，先预留
+  }
+  optional int64 transtion_number = 1;
+  optional RPAHandShakeType handshake_type = 2;
+}
+
+// topic: /mcu_blc/to_soc_business
+message MCUBusiness {
+  optional uint64 timestamp = 1;  // ms
+  optional int32 rpa_status = 2;
+  optional MCURPAHandShakeInfo handshake_info = 3;
 }

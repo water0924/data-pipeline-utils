@@ -99,6 +99,24 @@ message LockOnRoadResult {
     ROUTING_SECONDARY_ROAD_VEHICLE_MAIN_ROAD = 2; // 导航为辅路，自车在主路
   }
   optional YawSceneType yaw_scene_type = 18;
+
+  // a more confident status focus on precision for lock on road navigation status
+  enum StrictStatus{
+    NAVI_NORMAL = 1;
+    NAVI_ABNORMAL = 2;
+  }
+  optional StrictStatus strict_status = 19;
+
+  optional uint32 route_seg_size = 20;  // total size of route segments
+
+  optional double avp_remaining_s = 21; // distance to intersection pt along sdroute between sdrote and mapping traj.
+
+  optional bool passed_avp_overlap_start_point = 22; // check if the vehicle has passed the start point of the overlap 
+                                                     //segment between navigation route and avp trajectory.
+  optional double avp_turn_point_remaining_s = 23; // distance that ego to avp traj turn point
+  optional double avp_turn_point_spl = 24; // speed limit at avp traj turn point
+
+  optional int64 map_id = 25; // avp target map id
 }
 
 message LaneIndexEstimationResult{

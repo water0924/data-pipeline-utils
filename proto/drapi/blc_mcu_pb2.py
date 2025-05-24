@@ -12,16 +12,20 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
-from proto.drapi import gl_p177_downstream_chassis_pb2 as drapi_dot_gl__p177__downstream__chassis__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13\x64rapi/blc_mcu.proto\x12\ndr.blc.mcu\x1a&drapi/gl_p177_downstream_chassis.proto\"\x98\x01\n\x06\x43\x61nRaw\x12\x15\n\rtimestamp_pub\x18\x01 \x01(\x03\x12\x16\n\x0etimestamp_meas\x18\x02 \x01(\x03\x12\x0e\n\x06is_ext\x18\x03 \x01(\x08\x12\x10\n\x08is_canfd\x18\x04 \x01(\x08\x12\x12\n\nchannel_id\x18\x05 \x01(\x05\x12\x0e\n\x06\x63\x61n_id\x18\x06 \x01(\x05\x12\x0b\n\x03len\x18\x07 \x01(\x05\x12\x0c\n\x04\x64\x61ta\x18\x08 \x01(\x0c\"e\n\x0b\x43\x61nRawArray\x12\x15\n\rtimestamp_pub\x18\x01 \x01(\x03\x12\r\n\x05\x63ount\x18\x02 \x01(\x03\x12\x0b\n\x03len\x18\x03 \x01(\x05\x12#\n\x07\x63\x61n_raw\x18\x04 \x03(\x0b\x32\x12.dr.blc.mcu.CanRaw\"\x83\x06\n\x12MCUOperationStatus\x12\x11\n\ttimestamp\x18\x01 \x01(\x04\x12\x12\n\nacc_status\x18\x0b \x01(\x05\x12\x12\n\nica_status\x18\x0c \x01(\x05\x12\x12\n\nnca_status\x18\r \x01(\x05\x12\x12\n\nhma_status\x18\x0e \x01(\x05\x12\x12\n\nbsd_status\x18\x0f \x01(\x05\x12\x12\n\nlca_status\x18\x10 \x01(\x05\x12\x12\n\ndow_status\x18\x11 \x01(\x05\x12\x13\n\x0brcta_status\x18\x12 \x01(\x05\x12\x12\n\nrcw_status\x18\x13 \x01(\x05\x12\x12\n\nldw_status\x18\x14 \x01(\x05\x12\x12\n\nrdp_status\x18\x15 \x01(\x05\x12\x13\n\x0brctb_status\x18\x16 \x01(\x05\x12\x12\n\navm_status\x18\x17 \x01(\x05\x12\x12\n\napa_status\x18\x18 \x01(\x05\x12\x1a\n\x12vpa_routing_status\x18\x19 \x01(\x05\x12\x1b\n\x13vpa_learning_status\x18\x1a \x01(\x05\x12\x12\n\npdc_status\x18\x1b \x01(\x05\x12\x12\n\nelk_status\x18\x1c \x01(\x05\x12\x12\n\nrpa_status\x18\x1d \x01(\x05\x12\x12\n\ntjp_status\x18\x1e \x01(\x05\x12\x13\n\x0brads_status\x18\x1f \x01(\x05\x12\x18\n\x10sentry_mode_info\x18  \x01(\x05\x12\x12\n\nilc_status\x18! \x01(\x05\x12\x12\n\ntsr_status\x18\" \x01(\x05\x12\x11\n\tdw_status\x18# \x01(\x05\x12\x12\n\ndvr_status\x18$ \x01(\x05\x12\x17\n\x0fsentinel_status\x18% \x01(\x05\x12\x12\n\nfcw_status\x18\x32 \x01(\x05\x12\x13\n\x0b\x66\x63ta_status\x18\x33 \x01(\x05\x12\x13\n\x0b\x66\x63tb_status\x18\x34 \x01(\x05\x12\x12\n\nmeb_status\x18\x35 \x01(\x05\x12\x12\n\nesa_status\x18\x36 \x01(\x05\x12\x12\n\nawb_status\x18\x37 \x01(\x05\x12\x12\n\nabp_status\x18\x38 \x01(\x05\x12\x12\n\naeb_status\x18\x39 \x01(\x05')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13\x64rapi/blc_mcu.proto\x12\ndr.blc.mcu\"\x98\x01\n\x06\x43\x61nRaw\x12\x15\n\rtimestamp_pub\x18\x01 \x01(\x03\x12\x16\n\x0etimestamp_meas\x18\x02 \x01(\x03\x12\x0e\n\x06is_ext\x18\x03 \x01(\x08\x12\x10\n\x08is_canfd\x18\x04 \x01(\x08\x12\x12\n\nchannel_id\x18\x05 \x01(\x05\x12\x0e\n\x06\x63\x61n_id\x18\x06 \x01(\x05\x12\x0b\n\x03len\x18\x07 \x01(\x05\x12\x0c\n\x04\x64\x61ta\x18\x08 \x01(\x0c\"e\n\x0b\x43\x61nRawArray\x12\x15\n\rtimestamp_pub\x18\x01 \x01(\x03\x12\r\n\x05\x63ount\x18\x02 \x01(\x03\x12\x0b\n\x03len\x18\x03 \x01(\x05\x12#\n\x07\x63\x61n_raw\x18\x04 \x03(\x0b\x32\x12.dr.blc.mcu.CanRaw\"\xe9\x01\n\x0eSOCRPABusiness\x12G\n\x10handshake_status\x18\x01 \x01(\x0b\x32-.dr.blc.mcu.SOCRPABusiness.RPAHandShakeStatus\x12\x15\n\rsoc_rpa_ready\x18\x02 \x01(\x08\x12\x1e\n\x16other_function_actived\x18\x03 \x01(\x08\x12\x13\n\x0bvfc_request\x18\x04 \x01(\x08\x1a\x42\n\x12RPAHandShakeStatus\x12\x18\n\x10transtion_number\x18\x01 \x01(\x03\x12\x12\n\nrpa_status\x18\x1d \x01(\x05\"\xc5\x06\n\x0bSOCBusiness\x12\x11\n\ttimestamp\x18\x01 \x01(\x04\x12\x17\n\x0fsequence_number\x18\x02 \x01(\x04\x12\x12\n\nacc_status\x18\x0b \x01(\x05\x12\x12\n\nica_status\x18\x0c \x01(\x05\x12\x12\n\nnca_status\x18\r \x01(\x05\x12\x12\n\nhma_status\x18\x0e \x01(\x05\x12\x12\n\nbsd_status\x18\x0f \x01(\x05\x12\x12\n\nlca_status\x18\x10 \x01(\x05\x12\x12\n\ndow_status\x18\x11 \x01(\x05\x12\x13\n\x0brcta_status\x18\x12 \x01(\x05\x12\x12\n\nrcw_status\x18\x13 \x01(\x05\x12\x12\n\nldw_status\x18\x14 \x01(\x05\x12\x12\n\nrdp_status\x18\x15 \x01(\x05\x12\x13\n\x0brctb_status\x18\x16 \x01(\x05\x12\x12\n\navm_status\x18\x17 \x01(\x05\x12\x12\n\napa_status\x18\x18 \x01(\x05\x12\x1a\n\x12vpa_routing_status\x18\x19 \x01(\x05\x12\x1b\n\x13vpa_learning_status\x18\x1a \x01(\x05\x12\x12\n\npdc_status\x18\x1b \x01(\x05\x12\x12\n\nelk_status\x18\x1c \x01(\x05\x12.\n\nrpa_status\x18\x1d \x01(\x0b\x32\x1a.dr.blc.mcu.SOCRPABusiness\x12\x12\n\ntjp_status\x18\x1e \x01(\x05\x12\x13\n\x0brads_status\x18\x1f \x01(\x05\x12\x18\n\x10sentry_mode_info\x18  \x01(\x05\x12\x12\n\nilc_status\x18! \x01(\x05\x12\x12\n\ntsr_status\x18\" \x01(\x05\x12\x11\n\tdw_status\x18# \x01(\x05\x12\x12\n\ndvr_status\x18$ \x01(\x05\x12\x17\n\x0fsentinel_status\x18% \x01(\x05\x12\x12\n\nfcw_status\x18\x32 \x01(\x05\x12\x13\n\x0b\x66\x63ta_status\x18\x33 \x01(\x05\x12\x13\n\x0b\x66\x63tb_status\x18\x34 \x01(\x05\x12\x12\n\nmeb_status\x18\x35 \x01(\x05\x12\x12\n\nesa_status\x18\x36 \x01(\x05\x12\x12\n\nawb_status\x18\x37 \x01(\x05\x12\x12\n\nabp_status\x18\x38 \x01(\x05\x12\x12\n\naeb_status\x18\x39 \x01(\x05\x12\x12\n\naes_status\x18: \x01(\x05\"\xdd\x01\n\x13MCURPAHandShakeInfo\x12\x18\n\x10transtion_number\x18\x01 \x01(\x03\x12H\n\x0ehandshake_type\x18\x02 \x01(\x0e\x32\x30.dr.blc.mcu.MCURPAHandShakeInfo.RPAHandShakeType\"b\n\x10RPAHandShakeType\x12\x15\n\x11HANDSHAKE_UNKNOWN\x10\x00\x12\x18\n\x14HANDSHAKE_OUTPARKING\x10\x01\x12\x1d\n\x19HANDSHAKE_STRAIGHT_IN_OUT\x10\x02\"m\n\x0bMCUBusiness\x12\x11\n\ttimestamp\x18\x01 \x01(\x04\x12\x12\n\nrpa_status\x18\x02 \x01(\x05\x12\x37\n\x0ehandshake_info\x18\x03 \x01(\x0b\x32\x1f.dr.blc.mcu.MCURPAHandShakeInfo')
 
 
 
 _CANRAW = DESCRIPTOR.message_types_by_name['CanRaw']
 _CANRAWARRAY = DESCRIPTOR.message_types_by_name['CanRawArray']
-_MCUOPERATIONSTATUS = DESCRIPTOR.message_types_by_name['MCUOperationStatus']
+_SOCRPABUSINESS = DESCRIPTOR.message_types_by_name['SOCRPABusiness']
+_SOCRPABUSINESS_RPAHANDSHAKESTATUS = _SOCRPABUSINESS.nested_types_by_name['RPAHandShakeStatus']
+_SOCBUSINESS = DESCRIPTOR.message_types_by_name['SOCBusiness']
+_MCURPAHANDSHAKEINFO = DESCRIPTOR.message_types_by_name['MCURPAHandShakeInfo']
+_MCUBUSINESS = DESCRIPTOR.message_types_by_name['MCUBusiness']
+_MCURPAHANDSHAKEINFO_RPAHANDSHAKETYPE = _MCURPAHANDSHAKEINFO.enum_types_by_name['RPAHandShakeType']
 CanRaw = _reflection.GeneratedProtocolMessageType('CanRaw', (_message.Message,), {
   'DESCRIPTOR' : _CANRAW,
   '__module__' : 'drapi.blc_mcu_pb2'
@@ -36,20 +40,59 @@ CanRawArray = _reflection.GeneratedProtocolMessageType('CanRawArray', (_message.
   })
 _sym_db.RegisterMessage(CanRawArray)
 
-MCUOperationStatus = _reflection.GeneratedProtocolMessageType('MCUOperationStatus', (_message.Message,), {
-  'DESCRIPTOR' : _MCUOPERATIONSTATUS,
+SOCRPABusiness = _reflection.GeneratedProtocolMessageType('SOCRPABusiness', (_message.Message,), {
+
+  'RPAHandShakeStatus' : _reflection.GeneratedProtocolMessageType('RPAHandShakeStatus', (_message.Message,), {
+    'DESCRIPTOR' : _SOCRPABUSINESS_RPAHANDSHAKESTATUS,
+    '__module__' : 'drapi.blc_mcu_pb2'
+    # @@protoc_insertion_point(class_scope:dr.blc.mcu.SOCRPABusiness.RPAHandShakeStatus)
+    })
+  ,
+  'DESCRIPTOR' : _SOCRPABUSINESS,
   '__module__' : 'drapi.blc_mcu_pb2'
-  # @@protoc_insertion_point(class_scope:dr.blc.mcu.MCUOperationStatus)
+  # @@protoc_insertion_point(class_scope:dr.blc.mcu.SOCRPABusiness)
   })
-_sym_db.RegisterMessage(MCUOperationStatus)
+_sym_db.RegisterMessage(SOCRPABusiness)
+_sym_db.RegisterMessage(SOCRPABusiness.RPAHandShakeStatus)
+
+SOCBusiness = _reflection.GeneratedProtocolMessageType('SOCBusiness', (_message.Message,), {
+  'DESCRIPTOR' : _SOCBUSINESS,
+  '__module__' : 'drapi.blc_mcu_pb2'
+  # @@protoc_insertion_point(class_scope:dr.blc.mcu.SOCBusiness)
+  })
+_sym_db.RegisterMessage(SOCBusiness)
+
+MCURPAHandShakeInfo = _reflection.GeneratedProtocolMessageType('MCURPAHandShakeInfo', (_message.Message,), {
+  'DESCRIPTOR' : _MCURPAHANDSHAKEINFO,
+  '__module__' : 'drapi.blc_mcu_pb2'
+  # @@protoc_insertion_point(class_scope:dr.blc.mcu.MCURPAHandShakeInfo)
+  })
+_sym_db.RegisterMessage(MCURPAHandShakeInfo)
+
+MCUBusiness = _reflection.GeneratedProtocolMessageType('MCUBusiness', (_message.Message,), {
+  'DESCRIPTOR' : _MCUBUSINESS,
+  '__module__' : 'drapi.blc_mcu_pb2'
+  # @@protoc_insertion_point(class_scope:dr.blc.mcu.MCUBusiness)
+  })
+_sym_db.RegisterMessage(MCUBusiness)
 
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _CANRAW._serialized_start=76
-  _CANRAW._serialized_end=228
-  _CANRAWARRAY._serialized_start=230
-  _CANRAWARRAY._serialized_end=331
-  _MCUOPERATIONSTATUS._serialized_start=334
-  _MCUOPERATIONSTATUS._serialized_end=1105
+  _CANRAW._serialized_start=36
+  _CANRAW._serialized_end=188
+  _CANRAWARRAY._serialized_start=190
+  _CANRAWARRAY._serialized_end=291
+  _SOCRPABUSINESS._serialized_start=294
+  _SOCRPABUSINESS._serialized_end=527
+  _SOCRPABUSINESS_RPAHANDSHAKESTATUS._serialized_start=461
+  _SOCRPABUSINESS_RPAHANDSHAKESTATUS._serialized_end=527
+  _SOCBUSINESS._serialized_start=530
+  _SOCBUSINESS._serialized_end=1367
+  _MCURPAHANDSHAKEINFO._serialized_start=1370
+  _MCURPAHANDSHAKEINFO._serialized_end=1591
+  _MCURPAHANDSHAKEINFO_RPAHANDSHAKETYPE._serialized_start=1493
+  _MCURPAHANDSHAKEINFO_RPAHANDSHAKETYPE._serialized_end=1591
+  _MCUBUSINESS._serialized_start=1593
+  _MCUBUSINESS._serialized_end=1702
 # @@protoc_insertion_point(module_scope)

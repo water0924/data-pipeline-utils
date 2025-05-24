@@ -113,3 +113,25 @@ python_proto_library(
     ],
 )
 
+proto_library(
+    name = "m20_ins_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["m20_ins.proto"],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "m20_ins_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":m20_ins_proto",
+    ],
+)
+
+python_proto_library(
+    name = "m20_ins_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":m20_ins_proto",
+    ],
+)

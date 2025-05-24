@@ -47,6 +47,8 @@ enum TaskType {
   SENTINEL = 32;
   VPA_APA = 100;  // VPA 的APA阶段
   VPA_MAP_SAVING = 101;  // VPA 的存图阶段
+  MAI = 1003;
+  TLA = 1004;
 }
 
 enum FailurePolicy {

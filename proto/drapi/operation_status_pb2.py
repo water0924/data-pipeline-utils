@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1c\x64rapi/operation_status.proto\x12\x12\x64r.operationstatus\"\xe4\x12\n\x0fOperationStatus\x12\x11\n\ttimestamp\x18\x01 \x01(\x04\x12\x35\n\nacc_status\x18\x0b \x01(\x0b\x32!.dr.operationstatus.ACCStatusInfo\x12\x35\n\nica_status\x18\x0c \x01(\x0b\x32!.dr.operationstatus.ICAStatusInfo\x12\x35\n\nnca_status\x18\r \x01(\x0b\x32!.dr.operationstatus.NCAStatusInfo\x12\x35\n\nhma_status\x18\x0e \x01(\x0b\x32!.dr.operationstatus.HMAStatusInfo\x12\x35\n\nbsd_status\x18\x0f \x01(\x0b\x32!.dr.operationstatus.BSDStatusInfo\x12\x35\n\nlca_status\x18\x10 \x01(\x0b\x32!.dr.operationstatus.LCAStatusInfo\x12\x35\n\ndow_status\x18\x11 \x01(\x0b\x32!.dr.operationstatus.DOWStatusInfo\x12\x37\n\x0brcta_status\x18\x12 \x01(\x0b\x32\".dr.operationstatus.RCTAStatusInfo\x12\x35\n\nrcw_status\x18\x13 \x01(\x0b\x32!.dr.operationstatus.RCWStatusInfo\x12\x35\n\nldw_status\x18\x14 \x01(\x0b\x32!.dr.operationstatus.LDWStatusInfo\x12\x35\n\nrdp_status\x18\x15 \x01(\x0b\x32!.dr.operationstatus.RDPStatusInfo\x12\x37\n\x0brctb_status\x18\x16 \x01(\x0b\x32\".dr.operationstatus.RCTBStatusInfo\x12\x35\n\navm_status\x18\x17 \x01(\x0b\x32!.dr.operationstatus.AVMStatusInfo\x12\x35\n\napa_status\x18\x18 \x01(\x0b\x32!.dr.operationstatus.APAStatusInfo\x12\x44\n\x12vpa_routing_status\x18\x19 \x01(\x0b\x32(.dr.operationstatus.VPARoutingStatusInfo\x12\x46\n\x13vpa_learning_status\x18\x1a \x01(\x0b\x32).dr.operationstatus.VPALearningStatusInfo\x12\x35\n\npdc_status\x18\x1b \x01(\x0b\x32!.dr.operationstatus.PDCStatusInfo\x12\x35\n\nelk_status\x18\x1c \x01(\x0b\x32!.dr.operationstatus.ELKStatusInfo\x12\x35\n\nrpa_status\x18\x1d \x01(\x0b\x32!.dr.operationstatus.RPAStatusInfo\x12\x35\n\ntjp_status\x18\x1e \x01(\x0b\x32!.dr.operationstatus.TJPStatusInfo\x12\x37\n\x0brads_status\x18\x1f \x01(\x0b\x32\".dr.operationstatus.RADSStatusInfo\x12<\n\x10sentry_mode_info\x18  \x01(\x0b\x32\".dr.operationstatus.SentryModeInfo\x12\x35\n\nilc_status\x18! \x01(\x0b\x32!.dr.operationstatus.ILCStatusInfo\x12\x35\n\ntsr_status\x18\" \x01(\x0b\x32!.dr.operationstatus.TSRStatusInfo\x12\x33\n\tdw_status\x18# \x01(\x0b\x32 .dr.operationstatus.DWStatusInfo\x12\x35\n\ndvr_status\x18$ \x01(\x0b\x32!.dr.operationstatus.DVRStatusInfo\x12?\n\x0fsentinel_status\x18% \x01(\x0b\x32&.dr.operationstatus.SentinelStatusInfo\x12:\n\x10manual_lc_status\x18& \x01(\x0b\x32 .dr.operationstatus.LCStatusInfo\x12\x38\n\x0e\x61uto_lc_status\x18\' \x01(\x0b\x32 .dr.operationstatus.LCStatusInfo\x12U\n\x1etraffic_light_attention_status\x18( \x01(\x0b\x32-.dr.operationstatus.TrafficLightAttentionInfo\x12\x35\n\nfcw_status\x18\x32 \x01(\x0b\x32!.dr.operationstatus.FCWStatusInfo\x12\x37\n\x0b\x66\x63ta_status\x18\x33 \x01(\x0b\x32\".dr.operationstatus.FCTAStatusInfo\x12\x37\n\x0b\x66\x63tb_status\x18\x34 \x01(\x0b\x32\".dr.operationstatus.FCTBStatusInfo\x12\x35\n\nmeb_status\x18\x35 \x01(\x0b\x32!.dr.operationstatus.MEBStatusInfo\x12\x35\n\nesa_status\x18\x36 \x01(\x0b\x32!.dr.operationstatus.ESAStatusInfo\x12\x35\n\nawb_status\x18\x37 \x01(\x0b\x32!.dr.operationstatus.AWBStatusInfo\x12\x35\n\nabp_status\x18\x38 \x01(\x0b\x32!.dr.operationstatus.ABPStatusInfo\x12\x35\n\naeb_status\x18\x39 \x01(\x0b\x32!.dr.operationstatus.AEBStatusInfo\x12\x35\n\nmai_status\x18: \x01(\x0b\x32!.dr.operationstatus.MAIStatusInfo\x12=\n\x10\x61\x63tived_features\x18\x64 \x01(\x0b\x32#.dr.operationstatus.ActivedFeatures\x12=\n\x0e\x64riving_status\x18\x65 \x01(\x0b\x32%.dr.operationstatus.DrivingStatusInfo\"\xb3\x19\n\x0f\x44\x65viceCheckInfo\x12\x43\n\x0b\x64\x65vice_info\x18\x01 \x03(\x0e\x32..dr.operationstatus.DeviceCheckInfo.DeviceInfo\"\xda\x18\n\nDeviceInfo\x12\x11\n\rDEVICE_UNKNOW\x10\x00\x12\x1f\n\x1b\x44RIVER_SEATBELT_NOT_BUCKLED\x10\x01\x12\x0e\n\nEPB_PARKED\x10\x02\x12\x11\n\rGEAR_NOT_IN_D\x10\x03\x12\x0f\n\x0b\x44OOR_OPENED\x10\x04\x12\x11\n\rBRAKE_APPLIED\x10\x05\x12\x0e\n\nWIPER_HIGH\x10\x06\x12\x19\n\x15\x43RUISE_CANCEL_PRESSED\x10\x07\x12\x15\n\x11THROTTLE_OVERRIDE\x10\x08\x12\x1f\n\x1b\x41\x43TUAL_ANGLE_OVER_THRESHOLD\x10\t\x12\x17\n\x13LEFT_TURN_SIGNAL_ON\x10\n\x12\x18\n\x14RIGHT_TURN_SIGNAL_ON\x10\x0b\x12\x12\n\x0eNO_TURN_SIGNAL\x10\x0c\x12\r\n\tGEER_IN_R\x10\r\x12\r\n\tGEER_IN_D\x10\x0e\x12\r\n\tGEER_IN_N\x10\x0f\x12\r\n\tGEER_IN_P\x10\x10\x12\x11\n\rGEAR_OVERRIDE\x10\x11\x12\x1b\n\x17STEERING_WHEEL_OVERRIDE\x10\x12\x12\x10\n\x0cTRUNK_OPENED\x10\x13\x12\x1b\n\x17REAR_VIEW_MIRROR_CLOSED\x10\x14\x12\x12\n\x0eSTEER_OVERRIDE\x10\x15\x12\x1d\n\x19STEER_WHEEL_SPEED_TO_HIGH\x10\x16\x12\x13\n\x0f\x44OUBLE_FLASH_ON\x10\x17\x12\x11\n\rFOG_LIGHTS_ON\x10\x18\x12\x0f\n\x0bHOOD_OPENED\x10\x19\x12\x1d\n\x19\x45PS_TORSIONTORQUE_INVALID\x10\x1a\x12\x1f\n\x1bHOD_HANDOFF_MONITOR_INVALID\x10\x1b\x12\x16\n\x12\x44RIVER_DOOR_OPENED\x10\x1c\x12\x11\n\rGEAR_NOT_IN_P\x10\x1d\x12\x13\n\x0f\x42LUE_TOOTH_LOST\x10\x1e\x12\x12\n\x0e\x42REAK_OVERRIDE\x10\x1f\x12\x13\n\x0f\x46UEL_CAP_OPENED\x10 \x12\x18\n\x14\x43HARGEING_CAP_OPENED\x10!\x12\x10\n\x0c\x43\x41MERA_ERROR\x10\"\x12\x11\n\rNO_DISK_SPACE\x10#\x12\x0f\n\x0b\x42\x41TTERY_LOW\x10$\x12\x16\n\x12PASSEN_DOOR_OPENED\x10%\x12\x12\n\x0eLR_DOOR_OPENED\x10&\x12\x12\n\x0eRR_DOOR_OPENED\x10\'\x12\x17\n\x13SAS_STATUS_ABNORMAL\x10(\x12\x0c\n\x08IP_ERROR\x10)\x12\x0e\n\nAIRB_CRUSH\x10*\x12\x14\n\x10\x42RAKE_LIGHT_FAIL\x10+\x12\x14\n\x10\x44RVRQ_SHFT_ERROR\x10,\x12\x14\n\x10INR_MALFCT_ERROR\x10-\x12\x13\n\x0f\x43\x43\x41\x43\x43_SWT_ERROR\x10.\x12\x1e\n\x1aWIDE_FOV_FRONT_CAMERA_BLUR\x10/\x12 \n\x1cNARROW_FOV_FRONT_CAMERA_BLUR\x10\x30\x12\x1a\n\x16LEFT_FRONT_CAMERA_BLUR\x10\x31\x12\x1b\n\x17RIGHT_FRONT_CAMERA_BLUR\x10\x32\x12\x19\n\x15LIFT_REAR_CAMERA_BLUR\x10\x33\x12\x1a\n\x16RIGHT_REAR_CAMERA_BLUR\x10\x34\x12\x14\n\x10REAR_CAMERA_BLUR\x10\x35\x12\x1b\n\x17\x41ROUND_VIEW_CAMERA_BLUR\x10\x36\x12\x16\n\x12SLOPE_EXCEED_LIMIT\x10\x37\x12\x17\n\x13\x44RV_MOD_NOT_SUPPORT\x10\x38\x12\x15\n\x11\x44_GEAR_TIME_LIMIT\x10\x39\x12&\n\"SLOPE_EXCEED_LIMIT_SYS_UNAVAILABLE\x10:\x12\x1f\n\x1bSLOPE_EXCEED_LIMIT_SYS_EXIT\x10;\x12,\n(SLOPE_EXCEED_LIMIT_PLEASE_LEAVE_THE_RAMP\x10<\x12\'\n#DRV_MOD_NOT_SUPPORT_SYS_UNAVAILABLE\x10=\x12 \n\x1c\x44RV_MOD_NOT_SUPPORT_SYS_EXIT\x10>\x12!\n\x1d\x43\x41R_NOT_READY_SYS_UNAVAILABLE\x10?\x12\x1a\n\x16\x43\x41R_NOT_READY_SYS_EXIT\x10@\x12\x1d\n\x19USS_FAILURE_SYS_AVAILABLE\x10\x41\x12\x18\n\x14USS_FAILURE_SYS_EXIT\x10\x42\x12$\n AVM_NOT_CALIBRATED_SYS_AVAILABLE\x10\x43\x12\x1f\n\x1b\x41VM_NOT_CALIBRATED_SYS_EXIT\x10\x44\x12 \n\x1c\x43\x41MERA_FAILURE_SYS_AVAILABLE\x10\x45\x12\x1b\n\x17\x43\x41MERA_FAILURE_SYS_EXIT\x10\x46\x12\x1e\n\x1a\x43\x41MERA_DIRTY_SYS_AVAILABLE\x10G\x12\x19\n\x15\x43\x41MERA_DIRTY_SYS_EXIT\x10H\x12 \n\x1c\x43\x41MERA_BLOCKED_SYS_AVAILABLE\x10I\x12\x1b\n\x17\x43\x41MERA_BLOCKED_SYS_EXIT\x10J\x12\'\n#TIRE_PRESSURE_TOO_LOW_SYS_AVAILABLE\x10K\x12\"\n\x1eTIRE_PRESSURE_TOO_LOW_SYS_EXIT\x10L\x12\x15\n\x11\x42RAKE_NOT_APPLIED\x10M\x12%\n!LIDAR_BLIND_FAULT_SYS_UNAVAILABLE\x10N\x12\x1e\n\x1aLIDAR_BLIND_FAULT_SYS_EXIT\x10O\x12\x1f\n\x1bLIDAR_FAULT_SYS_UNAVAILABLE\x10P\x12\x18\n\x14LIDAR_FAULT_SYS_EXIT\x10Q\x12\x15\n\x11\x43HARGE_GUN_IN_USE\x10R\x12\x1a\n\x16TIRE_PRESSURE_ABNORMAL\x10S\x12\x0f\n\x0bLIDAR_ERROR\x10T\x12\x0f\n\x0bLIDAR_BLOCK\x10U\x12\x1a\n\x16ULTRASONIC_RADAR_ERROR\x10V\x12\x1a\n\x16ULTRASONIC_RADAR_BLOCK\x10W\x12 \n\x1c\x46RONT_ULTRASONIC_RADAR_ERROR\x10X\x12 \n\x1c\x46RONT_ULTRASONIC_RADAR_BLOCK\x10Y\x12\x1f\n\x1bREAR_ULTRASONIC_RADAR_ERROR\x10Z\x12\x1f\n\x1bREAR_ULTRASONIC_RADAR_BLOCK\x10[\x12\x1c\n\x18\x41ROUND_VIEW_CAMERA_ERROR\x10\\\x12\x1c\n\x18\x41ROUND_VIEW_CAMERA_BLOCK\x10]\x12\"\n\x1e\x46RONT_AROUND_VIEW_CAMERA_ERROR\x10^\x12\"\n\x1e\x46RONT_AROUND_VIEW_CAMERA_BLOCK\x10_\x12&\n\"REAR_REAR_AROUND_VIEW_CAMERA_ERROR\x10`\x12!\n\x1dREAR_AROUND_VIEW_CAMERA_BLOCK\x10\x61\x12!\n\x1dLEFT_AROUND_VIEW_CAMERA_ERROR\x10\x62\x12!\n\x1dLEFT_AROUND_VIEW_CAMERA_BLOCK\x10\x63\x12\"\n\x1eRIGHT_AROUND_VIEW_CAMERA_ERROR\x10\x64\x12\"\n\x1eRIGHT_AROUND_VIEW_CAMERA_BLOCK\x10\x65\x12\x1b\n\x17\x46RONT_VIEW_CAMERA_ERROR\x10\x66\x12\x1b\n\x17\x46RONT_VIEW_CAMERA_BLOCK\x10g\x12\x12\n\x0eGEAR_P_TIMEOUT\x10h\x12\x16\n\x12\x45PB_PARKED_TIMEOUT\x10i\x12\x11\n\rGEAR_NOT_IN_R\x10j\x12\x10\n\x0cVMM_ABNORMAL\x10k\x12\x1c\n\x18IHU_ADCU_LOST_CONNECTION\x10l\x12\x12\n\x0ePAS_ADCU_ERROR\x10m\x12\x1d\n\x19SUPER_ENDURANCE_MODE_OPEN\x10n\x12\x16\n\x12TANK_TUN_MODE_OPEN\x10o\x12\x16\n\x12\x43RAB_MOV_MODE_OPEN\x10p\x12\x15\n\x11OFFROAD_MODE_OPEN\x10q\x12\r\n\tGEAR_IN_M\x10r\x12\x0e\n\tUSS_BLIND\x10\x91\x01\x12\x14\n\x0f\x46RONT_USS_BLIND\x10\x92\x01\x12\x13\n\x0e\x42\x41\x43K_USS_BLIND\x10\x93\x01\x12\x11\n\x0c\x43\x41MERA_DIRTY\x10\x94\x01\x12\x1c\n\x17REAR_VIEW_MIRROR_OPENED\x10\x95\x01\"\xb2k\n\x11\x42usinessCheckInfo\x12<\n\x06status\x18\x01 \x03(\x0e\x32,.dr.operationstatus.BusinessCheckInfo.Status\"\xdej\n\x06Status\x12\x11\n\rSTATUS_UNKNOW\x10\x00\x12\x11\n\rICA_ACTIVATED\x10\x01\x12\x11\n\rNCA_ACTIVATED\x10\x02\x12\x11\n\rAEB_ACTIVATED\x10\x03\x12\n\n\x06\x41PA_ON\x10\x04\x12\x0b\n\x07\x45SC_OFF\x10\x05\x12\x0f\n\x0b\x41\x42S_ACTIVED\x10\x06\x12\x0f\n\x0bHDC_ACTIVED\x10\x07\x12\x0f\n\x0bTCS_ACTIVED\x10\x08\x12\x0f\n\x0bVDC_ACTIVED\x10\t\x12\x11\n\rVCU_NOT_READY\x10\n\x12\x0f\n\x0b\x43\x44P_ACTIVED\x10\x0b\x12\x0f\n\x0b\x41VH_ACTIVED\x10\x0c\x12\x0f\n\x0b\x45SC_ACTIVED\x10\r\x12\x14\n\x10VCU_LIMPHOME_TCM\x10\x0e\x12\x12\n\x0e\x45PS_NOT_READEY\x10\x0f\x12\x0f\n\x0b\x45SP_ACTIVED\x10\x10\x12\x0f\n\x0b\x44TC_ACTIVED\x10\x11\x12\x0f\n\x0b\x45\x42P_ACTIVED\x10\x12\x12\x0f\n\x0b\x45\x42\x44_ACTIVED\x10\x13\x12\x0f\n\x0b\x41\x43\x43_ACTIVED\x10\x14\x12\x12\n\x0eODD_UNAVLIABLE\x10\x15\x12\x15\n\x11\x45SC_SYSTEM_FAILED\x10\x16\x12\x15\n\x11\x45PS_SYSTEM_FAILED\x10\x17\x12\x15\n\x11VCU_SYSTEM_FAILED\x10\x18\x12\x15\n\x11\x45PB_SYSTEM_FAILED\x10\x19\x12\x11\n\rLDW_ACTIVATED\x10\x1a\x12\x11\n\rRDP_ACTIVATED\x10\x1b\x12\x0f\n\x0b\x41PA_ACTIVED\x10\x1c\x12\x0f\n\x0bVPA_ACTIVED\x10\x1d\x12\x19\n\x15\x43URRENT_LANE_TOO_WIDE\x10\x1e\x12 \n\x1cLONGITUDINAL_CONTROL_TIMEOUT\x10\x1f\x12\x0f\n\x0b\x45LK_ACTIVED\x10 \x12\x18\n\x14\x45SC_HANDSHAKE_FAILED\x10!\x12!\n\x1dVCU_NO_RESPONSE_P_GEAR_SWITCH\x10\"\x12\r\n\tESC_ERROR\x10#\x12\x10\n\x0cVLC_ABNORMAL\x10$\x12\x10\n\x0c\x43\x44\x44_ABNORMAL\x10%\x12\x16\n\x12LOCALIZATION_ERROR\x10&\x12\x15\n\x11\x46RAME_RATIO_ERROR\x10\'\x12\x18\n\x14STARTER_REPORT_ERROR\x10(\x12\x18\n\x14\x43ONTROL_REPORT_ERROR\x10)\x12\x10\n\x0c\x41\x43\x43_IN_FAULT\x10*\x12\x0e\n\nACC_IN_OFF\x10+\x12\x10\n\x0cICA_IN_FAULT\x10,\x12\x11\n\rICA_FORBIDDEN\x10-\x12\x10\n\x0cNCA_IN_FAULT\x10.\x12\x16\n\x12SAFETY_FATAL_EVENT\x10/\x12\x10\n\x0cRADS_ACTIVED\x10\x30\x12\x17\n\x13IN_CALIBRATION_MODE\x10\x31\x12\x15\n\x11IN_UPGRADING_MODE\x10\x32\x12\x1f\n\x1bOTHER_STATE_MACHINE_ACTIVED\x10\x33\x12\x0f\n\x0bMSR_ACTIVED\x10\x34\x12\x0b\n\x07\x45SP_OFF\x10\x35\x12\x1b\n\x17\x43URRENT_LANE_TOO_NARROW\x10\x36\x12\x16\n\x12PARKING_ACTIVATING\x10\x37\x12\r\n\tESP_FAULT\x10\x38\x12\r\n\tABS_FUALT\x10\x39\x12\x1d\n\x19\x45PS_LKA_ANGDLVD_STS_ERROR\x10:\x12\r\n\tEBD_FAULT\x10;\x12\x18\n\x14VCU_ACC_COM_IF_ERROR\x10<\x12\r\n\tVCU_ERROR\x10=\x12\r\n\tAIRB_FAIL\x10>\x12\x11\n\rTURN_LMP_FAIL\x10?\x12\x0f\n\x0bPTC_ACTIVED\x10@\x12\x0f\n\x0b\x42TC_ACTIVED\x10\x41\x12\x11\n\rBTC_ACTIVE_RA\x10\x42\x12\x11\n\rPTC_ACTIVE_RA\x10\x43\x12\x11\n\rMSR_ACTIVE_RA\x10\x44\x12\x12\n\x0eIN_TRAILERMODE\x10\x45\x12\x1a\n\x16\x44RIVING_MODE_ABLNORMAL\x10\x46\x12\x1e\n\x1aSAFETY_RELATED_FATAL_EVENT\x10G\x12\x19\n\x15PLANNING_FAILED_EVENT\x10H\x12\x10\n\x0c\x46\x43TB_ACTIVED\x10I\x12\x10\n\x0cRCTB_ACTIVED\x10J\x12$\n SECURITY_ACTIVED_SYS_UNAVAILABLE\x10K\x12\x1d\n\x19SECURITY_ACTIVED_SYS_EXIT\x10L\x12\x0f\n\x0bRPA_ACTIVED\x10M\x12 \n\x1cSAFETY_FATAL_SYS_UNAVAILABLE\x10N\x12(\n$SAFETY_RELATED_FATAL_SYS_UNAVAILABLE\x10O\x12\x0f\n\x0b\x44ST_ACTIVED\x10P\x12\x12\n\x0e\x41VM_VEDIO_LOST\x10Q\x12\x12\n\x0eSAFETY_INHIBIT\x10R\x12(\n$CANBUS_REPORT_CONTROL_LOST_HEARTBEAT\x10S\x12\x1f\n\x1b\x41LL_FUNCTION_MODE_NOT_READY\x10T\x12\"\n\x1eSAFETY_INHIBIT_SYS_UNAVAILABLE\x10U\x12\x16\n\x12POLICY_21_RECEIVED\x10V\x12&\n\"POLICY_21_RECEIVED_SYS_UNAVAILABLE\x10W\x12\x15\n\x11\x43\x41R_MODE_ABNORMAL\x10X\x12\x17\n\x13USAGE_MODE_ABNORMAL\x10Y\x12\x11\n\rTOO_MUCH_RAIN\x10Z\x12\x16\n\x12PSCM_SYSTEM_FAILED\x10[\x12\x16\n\x12PCMU_SYSTEM_FAILED\x10\\\x12\x15\n\x11\x42\x43M_SYSTEM_FAILED\x10]\x12\x13\n\x0fTOW_HOOK_OPENED\x10^\x12\x10\n\x0c\x46\x43TA_ACTIVED\x10_\x12\x10\n\x0cRCTA_ACTIVED\x10`\x12\x13\n\x0f\x42RIGHT_ABNORMAL\x10\x61\x12\x16\n\x12\x43\x41R_WASH_MODE_OPEN\x10\x62\x12\x11\n\rECALL_ACTIVED\x10\x63\x12\x1e\n\x1aSUSPENSION_HEIGHT_ABNORMAL\x10\x64\x12\x18\n\x14VEHICLE_SLIP_IN_SNOW\x10\x65\x12#\n\x1fVEHICLE_SLIP_IN_SNOW_TIME_LIMIT\x10\x66\x12\x1e\n\x1a\x45SP_DIAGNOSTIC_MODE_ACTIVE\x10g\x12\x14\n\x10\x43\x41NBUS_EXIT_AUTO\x10h\x12 \n\x1c\x41\x43\x43_DRIVING_MODE_NOT_ALLOWED\x10i\x12 \n\x1cICA_DRIVING_MODE_NOT_ALLOWED\x10j\x12\x16\n\x12\x45\x43M_ACC_INHIBITION\x10k\x12\'\n#ACC_CONFIGURATION_CONDITION_NOT_MET\x10l\x12\'\n#ICA_CONFIGURATION_CONDITION_NOT_MET\x10m\x12\'\n#NCA_CONFIGURATION_CONDITION_NOT_MET\x10n\x12\x1a\n\x16TURN_SIGNAL_INHIBITION\x10o\x12\x16\n\x12STAND_WAIT_TIMEOUT\x10p\x12\x13\n\x0fSTANDSTILL_HOLD\x10q\x12\r\n\tAUTO_HOLD\x10r\x12\x16\n\x12POLICY_41_RECEIVED\x10s\x12\x16\n\x12POLICY_42_RECEIVED\x10t\x12\x16\n\x12POLICY_43_RECEIVED\x10u\x12\x1a\n\x16\x44RIVING_MODE_SNOW_MODE\x10v\x12\x1b\n\x17\x44RIVING_MODE_MUDDY_MODE\x10w\x12\x1a\n\x16\x44RIVING_MODE_SAND_MODE\x10x\x12\x1d\n\x19\x44RIVING_MODE_TRAILER_MODE\x10y\x12\x13\n\x0eTOO_SLOW_SPEED\x10\xa0\x1f\x12\x13\n\x0eTOO_FAST_SPEED\x10\xa1\x1f\x12\x12\n\rHIGH_YAW_RATE\x10\xa2\x1f\x12\x1b\n\x16MISSING_LEFT_LANE_LINE\x10\xa3\x1f\x12\x1c\n\x17MISSING_RIGHT_LANE_LINE\x10\xa4\x1f\x12\x13\n\x0eOVER_WIDE_LANE\x10\xa5\x1f\x12\x15\n\x10OVER_NARROW_LANE\x10\xa6\x1f\x12\x1d\n\x18\x45XCESSIVE_CURVATURE_LANE\x10\xa7\x1f\x12\x19\n\x14HEAVY_BRAKE_PRESSURE\x10\xa8\x1f\x12#\n\x1e\x45XCESSIVE_STEERING_LEFT_TORQUE\x10\xa9\x1f\x12$\n\x1f\x45XCESSIVE_STEERING_RIGHT_TORQUE\x10\xaa\x1f\x12\x1d\n\x18\x45XCESSIVE_STEERING_ANGLE\x10\xab\x1f\x12\"\n\x1d\x45XCESSIVE_STEERING_ANGLE_RATE\x10\xac\x1f\x12\x18\n\x13HIGH_ACC_PEDAL_RATE\x10\xad\x1f\x12\x1f\n\x1a\x45XCESSIVE_WARNING_DURATION\x10\xae\x1f\x12\x1f\n\x1aTOO_SHORT_WARNING_INTERVAL\x10\xaf\x1f\x12$\n\x1f\x46RONT_WHEEL_EXCEED_WARNING_LINE\x10\xb0\x1f\x12\x0f\n\nLANE_CLOSE\x10\xb1\x1f\x12\x18\n\x13LDW_DRIVING_ON_LINE\x10\xb2\x1f\x12\x18\n\x13RDP_DRIVING_ON_LINE\x10\xb3\x1f\x12\x18\n\x13\x45LK_DRIVING_ON_LINE\x10\xb4\x1f\x12\x1c\n\x17LDW_WARNING_EXCEED_TIME\x10\xb5\x1f\x12\x1c\n\x17LSS_ACTIVE_NUDGING_LEFT\x10\xb6\x1f\x12\x1d\n\x18LSS_ACTIVE_NUDGING_RIGHT\x10\xb7\x1f\x12\'\n\"LSS_EXCESSIVE_SAME_DIR_LEFT_TORQUE\x10\xb8\x1f\x12(\n#LSS_EXCESSIVE_SAME_DIR_RIGHT_TORQUE\x10\xb9\x1f\x12*\n%LSS_EXCESSIVE_REVERSE_DIR_LEFT_TORQUE\x10\xba\x1f\x12+\n&LSS_EXCESSIVE_REVERSE_DIR_RIGHT_TORQUE\x10\xbb\x1f\x12\x14\n\x0fRDP_EXCEED_TIME\x10\xbc\x1f\x12\x14\n\x0f\x45LK_EXCEED_TIME\x10\xbd\x1f\x12#\n\x1e\x41NGLE_DEVIATION_OVER_THRESHOLD\x10\xcc!\x12$\n\x1fLATERAL_DISTANCE_OVER_THRESHOLD\x10\xcd!\x12!\n\x1cMISSING_LEFT_RIGHT_LANE_LINE\x10\xce!\x12\x15\n\x10IN_SHOULDER_LANE\x10\xcf!\x12\x18\n\x13LATEM_EXIT_TIME_OUT\x10\xd0!\x12\x13\n\x0e\x44MS_NOT_ACTIVE\x10\xd1!\x12(\n#ICA_ON_CROSSROADS_NON_STRAIGHT_LANE\x10\xd2!\x12(\n#CURRENT_LANE_TRAFFIC_LIGHT_ABNORMAL\x10\xd3!\x12\x0f\n\nCROSS_LINE\x10\xd4!\x12\x0f\n\nEOP_NO_GAP\x10\xd5!\x12\x1b\n\x16LANE_CHANGE_SWITCH_OFF\x10\xb0\"\x12\x14\n\x0f\x44RIVER_TAKE_OFF\x10\xb1\"\x12 \n\x1bICA_IN_LATERAL_CONTROL_EXIT\x10\xb2\"\x12\x0f\n\nACC_IN_BOM\x10\xb3\"\x12\x13\n\x0eICA_NOT_ACTIVE\x10\xb4\"\x12\x17\n\x12LANE_LINE_IS_SOLID\x10\xb5\"\x12\x1b\n\x16TARGET_LANE_TOO_NARROW\x10\xb6\"\x12!\n\x1cTARGET_LANE_IS_SHOULDER_LANE\x10\xb7\"\x12(\n#TARGET_LANE_NON_MOTOR_VEHICLE_LANES\x10\xb8\"\x12\x18\n\x13TARGET_LANE_REVERSE\x10\xb9\"\x12\x16\n\x11TARGET_LANE_CLOSE\x10\xba\"\x12\x11\n\x0cILC_IN_FAULT\x10\xbb\"\x12\x1e\n\x19LANE_CHANGE_WAIT_TIME_OUT\x10\xbc\"\x12\x13\n\x0eLANE_LINE_CURB\x10\xbd\"\x12\x14\n\x0fTURN_SIGNAL_OFF\x10\xbe\"\x12\x18\n\x13TURN_SIGNAL_REVERSE\x10\xbf\"\x12\x14\n\x0fILC_CCP_INVALID\x10\xc0\"\x12\x1b\n\x16ILC_PILOT_NOT_SELECTED\x10\xc1\"\x12\x17\n\x12ILC_NCA_SWITCH_OFF\x10\xc2\"\x12 \n\x1bPLANNING_LANE_CHANGE_FAILED\x10\xce\"\x12-\n(PLANNING_LANE_CHANGE_FAILED_NONCROSSABLE\x10\xcf\"\x12\x33\n.PLANNING_LANE_CHANGE_FAILED_UNSAFE_LANE_CHANGE\x10\xd0\"\x12(\n#PLANNING_LANE_CHANGE_FAILED_NO_ROOM\x10\xd1\"\x12,\n\'PLANNING_LANE_CHANGE_FAILED_ILC_TIMEOUT\x10\xd2\"\x12:\n5PLANNING_LANE_CHANGE_FAILED_SURROUNDING_CAR_TOO_CLOSE\x10\xd3\"\x12.\n)PLANNING_LANE_CHANGE_FAILED_HEAVY_TRAFFIC\x10\xd4\"\x12\x34\n/PLANNING_LANE_CHANGE_FAILED_BLIND_SPOT_OCCUPIED\x10\xd5\"\x12\x30\n+PLANNING_LANE_CHANGE_FAILED_STATIC_OBSTACLE\x10\xd6\"\x12\x33\n.PLANNING_LANE_CHANGE_FAILED_REAR_CAR_TOO_CLOSE\x10\xd7\"\x12\x17\n\x12NO_NAVIGATION_INFO\x10\x94#\x12\x18\n\x13NAVIGATION_ABNORMAL\x10\x95#\x12\x11\n\x0cOUT_ODD_ROAD\x10\x96#\x12\x1c\n\x17NAVIGATION_ID_NOT_MATCH\x10\x97#\x12\x16\n\x11WILL_OUT_ODD_ROAD\x10\x98#\x12\x12\n\rGNSS_NOT_GOOD\x10\x99#\x12\x1b\n\x16\x41MAP_NOT_IN_NAVIGATION\x10\x9a#\x12\x1a\n\x15\x41MPA_NAVIGATION_YAWED\x10\x9b#\x12 \n\x1b\x41MAP_NAVIGATION_SIGNAL_LOST\x10\x9c#\x12\x18\n\x13TURN_ARROUND_FAILED\x10\x9d#\x12\"\n\x1dNAVIGATION_ARRIVE_DESTINATION\x10\x9e#\x12\x1b\n\x16NAVIGATION_ARRIVE_TOLL\x10\x9f#\x12 \n\x1bNAVIGATION_ARRIVE_REST_AREA\x10\xa0#\x12\x16\n\x11ICA_IN_COUNTDOWN2\x10\xa1#\x12\x0f\n\nICA_IN_MRM\x10\xa2#\x12\'\n\"NAVIGATION_ARRIVE_DESTINATION_SOON\x10\xa3#\x12\x19\n\x14\x44OWN_TO_ICA_IS_CLICK\x10\xa4#\x12!\n\x1c\x41MAP_NAVIGATION_ID_NOT_MATCH\x10\xa5#\x12\x17\n\x12\x41MAP_LOR_NOT_MATCH\x10\xa6#\x12\x18\n\x13ROADCLASS_NOT_MATCH\x10\xa7#\x12\x1f\n\x1a\x41MAP_NAVIGATION_REPLANNING\x10\xa8#\x12\'\n\"AMAP_NAVIGATION_REPLANNING_EXPIRED\x10\xa9#\x12\x11\n\x0cUTURN_FAILED\x10\xaa#\x12\x1c\n\x17NAVIGATION_ARRIVE_UTURN\x10\xab#\x12!\n\x1cNAVIGATION_ARRIVE_ROUNDABOUT\x10\xac#\x12!\n\x1cNAVIGATION_ARRIVE_ROI_REGION\x10\xad#\x12*\n%NAVIGATION_ARRIVE_CITY_AND_ROAD_CLASS\x10\xae#\x12 \n\x1b\x41MAP_TOO_CLOSE_TO_NEXT_STEP\x10\xaf#\x12\x1b\n\x16\x41MAP_NEXT_STEP_PENALTY\x10\xb0#\x12\x0f\n\nEOP_ACTIVE\x10\xb1#\x12\x15\n\x10PLANNING_BLOCKED\x10\xb2#\x12\x1b\n\x16NAVIGATION_ARRIVE_CITY\x10\xb3#\x12!\n\x1cNAVIGATION_ARRIVE_ROAD_CLASS\x10\xb4#\x12-\n(ROUTING_MAIN_ROAD_VEHICLE_SECONDARY_ROAD\x10\xb5#\x12-\n(ROUTING_SECONDARY_ROAD_VEHICLE_MAIN_ROAD\x10\xb6#\x12\x18\n\x13NCA_SOFT_SWITCH_OFF\x10\xb7#\x12*\n%VPA_LEARNING_NEED_REENTER_PARKING_ODD\x10\xb8#\x12\x1e\n\x19NO_FRONT_VEHICLE_DETECTED\x10\xf8#\x12\x11\n\x0c\x43\x41MERA_SMEAR\x10\xf9#\x12\x19\n\x14INVALID_CURVE_RADIUS\x10\xfa#\x12\x1c\n\x17INVALID_VEHICLE_HEADING\x10\xfb#\x12\'\n\"INVALID_LATERAL_REMAINING_DISTANCE\x10\xfc#\x12\x16\n\x11LANE_LINE_MISSING\x10\xfd#\x12\x17\n\x12INVALID_LANE_WIDTH\x10\xfe#\x12\x13\n\x0e\x44RIVER_REQUEST\x10\x88\'\x12\x1c\n\x17\x44RIVER_REQUEST_LOW_BEAM\x10\x89\'\x12\x12\n\rAUTO_LAMP_OFF\x10\x8a\'\x12 \n\x1b\x44\x45LAYED_TRANSITION_DETECTED\x10\x8b\'\x12\x0e\n\tIN_TUNNEL\x10\x8c\'\x12\x10\n\x0bIN_CROSSING\x10\x8d\'\x12\x11\n\x0cWEATHER_RAIN\x10\x8e\'\x12\x12\n\rWEATHER_FOGGY\x10\x8f\'\x12\x18\n\x13LIGHTING_INTERFERED\x10\x90\'\x12\x18\n\x13\x41VM_MANUALLY_OPENED\x10\xda\x36\x12\x18\n\x13\x41VM_MANUALLY_CLOSED\x10\xdb\x36\x12\x0f\n\nAVM_FAILED\x10\xdc\x36\x12\x17\n\x12\x41VM_ACTIVED_BY_PDC\x10\xdd\x36\x12\x1e\n\x19\x41VM_OPEN_BY_TURN_DISABLED\x10\xde\x36\x12\x18\n\x13\x41PA_MANUALLY_OPENED\x10\xcd:\x12\x16\n\x11\x41PA_MANUALLY_EXIT\x10\xce:\x12\x1e\n\x19\x41PA_MANUALLY_START_PARKIN\x10\xcf:\x12\x1d\n\x18\x41PA_MANUALLY_STOP_PARKIN\x10\xd0:\x12\x1f\n\x1a\x41PA_MANUALLY_START_PARKOUT\x10\xd1:\x12\x1e\n\x19\x41PA_MANUALLY_STOP_PARKOUT\x10\xd2:\x12\x1e\n\x19\x41PA_ROUTE_PLANNING_FAILED\x10\xd3:\x12\x1c\n\x17\x41PA_STANDBYAREA_LIMITED\x10\xd4:\x12\x1d\n\x18\x41PA_INTERRUPPTED_TOOMUCH\x10\xd5:\x12\x1f\n\x1a\x41PA_CAR_MOVED_TOOMUCH_TIME\x10\xd6:\x12\x1e\n\x19\x41PA_PARKING_SPEED_TOOHIGH\x10\xd7:\x12\x14\n\x0f\x41PA_CAR_BLOCKED\x10\xd8:\x12\x18\n\x13\x41PA_PARKING_SUCCESS\x10\xd9:\x12\x17\n\x12\x41PA_PARKING_FAILED\x10\xda:\x12\x18\n\x13\x41PA_PARKING_TIMEOUT\x10\xdb:\x12\x1c\n\x17\x41PA_GEAR_SWITCH_TOOMUCH\x10\xdc:\x12\x16\n\x11\x41PA_ACTIVE_BY_VPA\x10\xdd:\x12\x19\n\x14\x41PA_HW_NOT_AVALIABLE\x10\xde:\x12\x1b\n\x16\x41PA_HW_ACTIVATE_FAILED\x10\xdf:\x12*\n%APA_SET_PERCEPTION_PARKINGMODE_FAILED\x10\xe0:\x12,\n\'APA_SET_LOCALIZATION_PARKINGMODE_FAILED\x10\xe1:\x12\x1d\n\x18\x41PA_PARKINGSPACE_INVALID\x10\xe2:\x12$\n\x1f\x41PA_VPA_ROUTING_PARKING_SUCCESS\x10\xe3:\x12#\n\x1e\x41PA_VPA_ROUTING_PARKING_FAILED\x10\xe4:\x12\x1d\n\x18\x41PA_CAR_BLOCK_DISAPPERED\x10\xe5:\x12%\n APA_VPA_LEARNING_PARKING_SUCCESS\x10\xe6:\x12$\n\x1f\x41PA_VPA_LEARNING_PARKING_FAILED\x10\xe7:\x12\x16\n\x11\x41PA_PAUSE_TIMEOUT\x10\xe8:\x12\x11\n\x0c\x41PA_DISABLED\x10\xe9:\x12\x1e\n\x19\x41PA_CANBUS_REPORT_PASSIVE\x10\xea:\x12&\n!APA_SPEED_IS_TOO_HIGH_NEED_23KM_H\x10\xeb:\x12*\n%APA_SPEED_IS_TOO_HIGH_SYS_UNAVAILABLE\x10\xec:\x12$\n\x1f\x41PA_SPEED_IS_TOO_HIGH_SYS_EXITS\x10\xed:\x12 \n\x1b\x41PA_CAR_MOVED_IN_OUTPARKING\x10\xee:\x12\x12\n\rAPA_USER_EXIT\x10\xef:\x12\x1d\n\x18\x41PA_BLOCK_BY_DYNAMIC_CAR\x10\xf0:\x12$\n\x1f\x41PA_BLOCK_BY_DYNAMIC_PEDESTRIAN\x10\xf1:\x12\x1c\n\x17\x41PA_BLOCK_BY_STATIC_OBS\x10\xf2:\x12\'\n\"SLOPE_EXCEED_LIMIT_SYS_UNAVAILABLE\x10\xf3:\x12,\n\'APA_DRV_MOD_NOT_SUPPORT_SYS_UNAVAILABLE\x10\xf4:\x12\x17\n\x12\x41PA_PAUSED_BY_USER\x10\xf5:\x12\x1d\n\x18\x41PA_PARKOUT_NO_VALID_DIR\x10\xf6:\x12\x18\n\x13\x41PA_VEHICLE_BLOCKED\x10\xf7:\x12\x1c\n\x17\x41PA_PARKING_IN_FINISHED\x10\xf8:\x12\x1d\n\x18\x41PA_PARKING_OUT_FINISHED\x10\xf9:\x12\x1b\n\x16\x41PA_LONGITUDINAL_ERROR\x10\xfa:\x12\x16\n\x11\x41PA_LATERAL_ERROR\x10\xfb:\x12\x1f\n\x1a\x41PA_RESUME_CONFIRM_TIMEOUT\x10\xfc:\x12)\n$APA_TO_STANDBY_BY_RPA_STRAIGHT_INOUT\x10\xfd:\x12*\n%APA_LONGITUDINAL_ERROR_SYS_UNAVAIABLE\x10\xfe:\x12%\n APA_LATERAL_ERROR_SYS_UNAVAIABLE\x10\xff:\x12\x14\n\x0f\x41PA_CANBUS_LOST\x10\x80;\x12\"\n\x1d\x41PA_CANBUS_ENTER_AUTO_TIMEOUT\x10\x81;\x12#\n\x1e\x41PA_CONTROL_ENTER_AUTO_TIMEOUT\x10\x82;\x12\x1a\n\x15\x41PA_OUTPARKING_FAILED\x10\x83;\x12\x1e\n\x19\x41PA_LAT_HANDSHAKE_TIMEOUT\x10\x84;\x12(\n#APA_CONFIGURATION_CONDITION_NOT_MET\x10\x85;\x12 \n\x1b\x41PA_BRAKE_OVERRIDE_TOO_LONE\x10\x86;\x12 \n\x1b\x41PA_HANDSHAKE_POWER_INVALID\x10\x87;\x12\x1b\n\x16VPA_APP_ACTIVE_ROUTING\x10\xc1>\x12\x19\n\x14VPA_APP_EXIT_ROUTING\x10\xc2>\x12\x1a\n\x15VPA_APP_START_ROUTING\x10\xc3>\x12\x19\n\x14VPA_APP_STOP_ROUTING\x10\xc4>\x12\x1c\n\x17VPA_APP_ACTIVE_LEARNING\x10\xc5>\x12\x1a\n\x15VPA_APP_EXIT_LEARNING\x10\xc6>\x12\x1b\n\x16VPA_APP_START_LEARNING\x10\xc7>\x12\x19\n\x14VPA_APP_END_LEARNING\x10\xc8>\x12\x1c\n\x17VPA_APP_CANCEL_LEARNING\x10\xc9>\x12\x14\n\x0fVPA_MAP_MATCHED\x10\xca>\x12\x15\n\x10VPA_MAP_MISMATCH\x10\xcb>\x12\x18\n\x13VPA_LEARNING_FAILED\x10\xcc>\x12\x19\n\x14VPA_LEARNING_SUCCESS\x10\xcd>\x12\x15\n\x10GNSS_SIGNAL_LOSS\x10\xce>\x12\x13\n\x0eGNSS_SINGAL_OK\x10\xcf>\x12\x1b\n\x16VPA_LOCALIZATION_ERROR\x10\xd0>\x12 \n\x1bVPA_NOTIFY_OVERRIDE_TIMEOUT\x10\xd1>\x12\x14\n\x0fVPA_ROUTING_END\x10\xd2>\x12%\n VPA_ROUTING_START_PARKIN_TIMEOUT\x10\xd3>\x12\x18\n\x13VPA_ROUTING_BLOCKED\x10\xd4>\x12\x0f\n\nVPA_NO_MAP\x10\xd5>\x12%\n VPA_ROUTING_END_NO_PARKING_SPACE\x10\xd6>\x12\x1a\n\x15VPA_LEARNING_TOO_LONG\x10\xd7>\x12 \n\x1bVPA_LEARNING_SPEED_TOO_HIGH\x10\xd8>\x12\x1f\n\x1aVPA_ROUTING_SPEED_TOO_HIGH\x10\xd9>\x12\x1e\n\x19VPA_SYSTEM_ERROR_DETECTED\x10\xde>\x12!\n\x1cVPA_ROUTING_COLLIDE_OVERRIDE\x10\xdf>\x12\x1e\n\x19VPA_CANBUS_REPORT_PASSIVE\x10\xe0>\x12\x1a\n\x15VPA_NOT_FIRST_ROUTING\x10\xe1>\x12\x1b\n\x16VPA_LEARNING_USER_EXIT\x10\xe2>\x12\x1a\n\x15VPA_ROUTING_USER_EXIT\x10\xe3>\x12%\n VPA_ROUTING_BLOCKED_TIMEOUT_EXIT\x10\xe4>\x12,\n\'VPA_ROUTING_STATIC_BLOCKED_TIMEOUT_EXIT\x10\xe5>\x12-\n(VPA_ROUTING_DYNAMIC_BLOCKED_TIMEOUT_EXIT\x10\xe6>\x12\x11\n\x0cVPA_TURN_OFF\x10\xe7>\x12\x1f\n\x1aVPA_LOCALIZATION_NOT_READY\x10\xe8>\x12$\n\x1fVPA_ROUTING_DVR_MOD_NOT_SUPPORT\x10\xe9>\x12!\n\x1cVPA_LOCALIZATION_IS_MATCHING\x10\xea>\x12\"\n\x1dVPA_LOCALIZATION_UNSUCCESSFUL\x10\xeb>\x12)\n$VPA_DRIVING_REFLINE_CURVATURE_EXCEED\x10\xec>\x12-\n(VPA_ROUTING_CONTROL_DRIVING_MODE_TIMEOUT\x10\xed>\x12%\n VPA_ROUTING_SUSPEND_TIMEOUT_EXIT\x10\xee>\x12#\n\x1eVPA_DRIVING_BARRIER_GATE_BLOCK\x10\xef>\x12\x1c\n\x17VPA_DRIVING_PLAN_FAILED\x10\xf0>\x12 \n\x1bVPA_LEARNING_MAP_OVER_LIMIT\x10\xf1>\x12\x18\n\x13VPA_ROUTING_TIMEOUT\x10\xf2>\x12%\n VPA_ROUTING_INTERRUPPTED_TOOMUCH\x10\xf3>\x12\x1f\n\x1aVPA_LEARNING_MAP_SAVE_FAIL\x10\xf4>\x12 \n\x1bVPA_LEARNING_MAP_LEARN_FAIL\x10\xf5>\x12 \n\x1bVPA_LEARNING_ODD_UNAVLIABLE\x10\xf6>\x12-\n(VPA_END_MAPPING_ADC_NOT_IN_PARKING_SPACE\x10\xf7>\x12\x30\n+VPA_END_MAPPING_LEARNED_TRAJECORY_TOO_SHORT\x10\xf8>\x12,\n\'VPA_END_MAPPING_NO_PARKING_SPACE_NEARBY\x10\xf9>\x12/\n*VPA_END_MAPPING_LEARNED_TRAJECORY_TOO_LONG\x10\xfa>\x12\x38\n3VPA_END_MAPPING_LEARNED_TRAJECTORY_REACH_MAX_LIMITS\x10\xfb>\x12)\n$VPA_END_MAPPING_TRAJECTORY_TOO_STEEP\x10\xfc>\x12\x36\n1VPA_END_MAPPING_TRAJECTORY_ENVIRONMENT_TOO_SPARSE\x10\xfd>\x12/\n*VPA_END_MAPPING_TRAJECTORY_REVERSE_TOO_FAR\x10\xfe>\x12\x37\n2VPA_END_MAPPING_TRAJECTORY_NOT_REACH_PARKING_SPACE\x10\xff>\x12:\n5VPA_END_MAPPING_TRAJECTORY_CROSS_TARGET_PARKING_SPACE\x10\x80?\x12-\n(VPA_END_MAPPING_TRAJECTORY_LOOP_DETECTED\x10\x81?\x12*\n%VPA_END_MAPPING_MAPPING_TIME_TOO_LONG\x10\x82?\x12)\n$VPA_END_MAPPING_MAPPING_SAVE_FAILURE\x10\x83?\x12/\n*VPA_END_MAPPING_NOT_ENOUGH_DISK_FREE_SPACE\x10\x84?\x12\'\n\"VPA_END_MAPPING_INPUT_DATA_INVALID\x10\x85?\x12+\n&VPA_END_MAPPING_UNKNOWN_REASON_FAILURE\x10\x86?\x12\x1d\n\x18VPA_CMD_STATUS_NOT_MATCH\x10\x87?\x12:\n5VPA_ROUTING_NAVIGATION_PASSIVE_LOST_DISTANCE_OVERRIDE\x10\x88?\x12!\n\x1cVPA_ROUTING_NAVIGATION_YAWED\x10\x89?\x12\x11\n\x0cVPA_OUT_DOOR\x10\x8a?\x12.\n)VPA_END_MAPPING_INDOOR_TO_OUTDOOR_MAPPING\x10\x8b?\x12#\n\x1eVPA_END_MAPPING_GNSS_POSE_JUMP\x10\x8c?\x12\'\n\"VPA_END_MAPPING_MOVE_BACK_TO_START\x10\x8d?\x12.\n)VPA_END_MAPPING_NO_DESTINATION_CANDIDATES\x10\x8e?\x12\x37\n2VPA_END_MAPPING_NO_VALID_DESTINATION_IN_CANDIDATES\x10\x8f?\x12#\n\x1eVPA_LEARNING_TOO_LONG_SAVE_MAP\x10\x90?\x12)\n$VPA_LEARNING_PARKING_FAILED_SAVE_MAP\x10\x91?\x12+\n&VPA_DRIVING_BARRIER_GATE_BLOCK_TIMEOUT\x10\x92?\x12\x1f\n\x1aVPA_OUT_OF_ODD_AUTO_SAVING\x10\x93?\x12\x15\n\x10RPA_WAIT_TIMEOUT\x10\xa9\x46\x12\x1d\n\x18PARKING_SPACE_UNSELECTED\x10\xaa\x46\x12\x1d\n\x18RPA_OUTSIDE_PARKINGSPACE\x10\xab\x46\x12\x1d\n\x18RPA_NO_PARKOUT_DIRECTION\x10\xac\x46\x12\x17\n\x12RPA_LOST_HEARTBEAT\x10\xad\x46\x12/\n*RPA_STRAIGHT_IN_OUT_BLOCK_BY_SIDE_OBSTACLE\x10\xae\x46\x12\x1d\n\x18RPA_STRAIGHT_IN_OUT_DONE\x10\xaf\x46\x12\x1e\n\x19RPA_STRAIGHT_IN_OUT_BLOCK\x10\xb0\x46\x12%\n RPA_STRAIGHT_IN_OUT_USER_SUSPEND\x10\xb1\x46\x12$\n\x1fRPA_STRAIGHT_INOUT_NO_VALID_DIR\x10\xb2\x46\x12\x1f\n\x1aRPA_PARKING_SYSTEM_FAILURE\x10\xb3\x46\x12\x1e\n\x19RPA_EPB_ERR_STSTE_TIMEOUT\x10\xb4\x46\x12\x34\n/RPA_UNMANNED_PARKING_WAIT_DYNAMIC_BLOCK_TIMEOUT\x10\xb5\x46\x12\x1c\n\x17RPA_KEY_SUSPEND_PARKING\x10\xb6\x46\x12\"\n\x1dRPA_UNMANNED_PARKING_FINISHED\x10\xb7\x46\x12\x1d\n\x18RPA_START_PARKIN_TIMEOUT\x10\xb8\x46\x12\x1d\n\x18RPA_PARKIN_PGEAR_TIMEOUT\x10\xb9\x46\x12\x19\n\x14RPA_USER_STS_INVALID\x10\xba\x46\x12\x19\n\x14RADS_SUSPEND_TIMEOUT\x10\x9cJ\x12 \n\x1bRADS_RESUME_CONFIRM_TIMEOUT\x10\x9dJ\x12\x1e\n\x19RADS_ACTIVE_TOTAL_TIMEOUT\x10\x9eJ\x12\x15\n\x10RADS_CAR_BLOCKED\x10\x9fJ\x12\x1a\n\x15RADS_NO_SAVE_DISTANCE\x10\xa0J\x12\x13\n\x0eRADS_USER_EXIT\x10\xa1J\x12+\n&RADS_SPEED_IS_TOO_HIGH_SYS_UNAVAILABLE\x10\xa2J\x12\x18\n\x13RADS_PLANNING_ABORT\x10\xa3J\x12\x1a\n\x15RADS_PARKING_FINISHED\x10\xa4J\x12\x1e\n\x19SENTRY_MODE_VEHICLE_CRASH\x10\x91N\x12\x1e\n\x19SENTRY_MODE_VEHICLE_THEFT\x10\x92N\x12\x1f\n\x1aSENTRY_MODE_VEHICLE_DANGER\x10\x93N\x12\x1f\n\x1aSENTRY_MODE_SWITCH_TIMEOUT\x10\x94N\x12\x19\n\x14SENTRY_MODE_TIME_END\x10\x95N\x12\x1e\n\x19SENTRY_MODE_OTHER_MODE_ON\x10\x96N\x12 \n\x1bSENTRY_MODE_MCD_NOT_SUPPORT\x10\x97N\x12&\n!FRONT_VEHICLE_RELATIVE_SPEED_HIGH\x10\xf4N\x12\'\n\"FRONT_VEHICLE_SPEED_OVER_THRESHOLD\x10\xf5N\x12\x0e\n\tPOWER_OUT\x10\xf6N\x12\x16\n\x11HIGH_ACTUAL_PEDAL\x10\xf7N\x12\x13\n\x0eINHIBIT_POLICY\x10\xf8N\x12\x10\n\x0b\x45RRO_POLICY\x10\xf9N\x12\x16\n\x11\x46RONT_MEB_DISABLE\x10\xd8O\x12\x15\n\x10REAR_MEB_DISABLE\x10\xd9O\x12\x18\n\x13WHEEL_SPEED_INVALID\x10\xdaO\x12\x0c\n\x07\x41VM_OFF\x10\xdbO\x12\x11\n\x0c\x46PAS_ACTIVED\x10\xdcO\x12\x1d\n\x18MEB_CAR_INFO_UNAVAILABLE\x10\xddO\x12\x1b\n\x16HIGH_VOLTAGE_NOT_READY\x10\xdeO\x12\x18\n\x13\x45SA_PARAMETER_ERROR\x10\xbcP\x12\x14\n\x0fTORQUE_OVERRIDE\x10\xbdP\x12\x18\n\x13LEFT_BSD_LCA_ACTIVE\x10\xbeP\x12\x19\n\x14RIGHT_BSD_LCA_ACTIVE\x10\xbfP\x12\x14\n\x0f\x41\x45\x42_UNAVAILABLE\x10\xa0Q\x12\x18\n\x13\x43TA_BRK_UNAVAILABLE\x10\xa1Q\x12\x14\n\x0f\x41WB_UNAVAILABLE\x10\xa2Q\x12\x14\n\x0f\x41\x42P_UNAVAILABLE\x10\xa3Q\x12\x12\n\rESA_ACTIVATED\x10\xa4Q\x12\x13\n\x0e\x46\x43TB_ACTIVATED\x10\xa5Q\x12\x12\n\rMEB_ACTIVATED\x10\xa6Q\x12\x13\n\x0e\x46\x43TA_ACTIVATED\x10\xa7Q\x12\x13\n\x0eRCTA_ACTIVATED\x10\xa8Q\x12\x15\n\x10\x41\x43TIVED_TOO_LOOG\x10\xa9Q\x12\x19\n\x14STAND_STILL_TOO_LOOG\x10\xaaQ\x12\x0f\n\nGEAR_SHIFT\x10\xabQ\x12\x0f\n\nEBP_CLOSED\x10\xacQ\x12\x1b\n\x16TO_LONG_NO_RCTB_ACTIVE\x10\xadQ\x12!\n\x1c\x45XCESSIVE_REDUCTION_IN_SPEED\x10\xaeQ\x12\x16\n\x11\x41PCSTS_ACTIVE_MEB\x10\xafQ\x12\x12\n\rAVHSTS_ACTIVE\x10\xb0Q\x12\x14\n\x0f\x41\x45\x42_LAST_ACTIVE\x10\xb1Q\x12\x19\n\x14\x43\x41NBUS_EBA_ACTIVATED\x10\xb2Q\x12%\n EXCESSIVE_ACTUAL_PEDAL_INCREMENT\x10\xb3Q\x12$\n\x1fSPEED_TOO_LOW_WHEN_NOT_STARTING\x10\xb4Q\x12!\n\x1cMASTER_CYL_PRESSURE_TOO_HIGH\x10\xb5Q\x12\x13\n\x0e\x43OOL_DOWM_TIME\x10\xb6Q\x12\x1b\n\x16\x42RAKE_SYSTEM_NOT_ALLOW\x10\xb7Q\x12\x1c\n\x17\x42RAKE_PADEL_NOT_APPLIED\x10\xb8Q\x12\x0f\n\nTBA_ACTIVE\x10\xb9Q\x12\x0f\n\nHPA_ACTIVE\x10\xbaQ\x12\x0f\n\nRSA_ACTIVE\x10\xbbQ\x12\x0f\n\nRVM_ACTIVE\x10\xbcQ\"\xfa\x03\n\x16VehicleStatusCheckInfo\x12\x41\n\x06status\x18\x01 \x03(\x0e\x32\x31.dr.operationstatus.VehicleStatusCheckInfo.Status\"\x9c\x03\n\x06Status\x12\x11\n\rSTATUS_UNKNOW\x10\x00\x12\x10\n\x0cVEHICLE_SLIP\x10\x01\x12 \n\x1cVEHICLE_SPEED_OVER_THRESHOLD\x10\x02\x12$\n CURVE_RADIUS_LESS_THAN_THRESHOLD\x10\x03\x12 \n\x1cLATERAL_ACCELERATION_TO_HIGH\x10\x04\x12\x18\n\x14VEHICLE_SPEED_TO_LOW\x10\x05\x12\x12\n\x0eNOT_STANDSTILL\x10\x06\x12%\n!LONGITUDINAL_ACCELERATION_TO_HIGH\x10\x07\x12\x0f\n\x0bNOT_FORWARD\x10\x08\x12\x1b\n\x17REMAINING_RANGE_TOO_LOW\x10\t\x12\x0c\n\x08IN_CRASH\x10\n\x12\x1e\n\x1aVEHICLE_ARBITER_INHIBITION\x10\x0b\x12\x15\n\x11\x44IRECTION_INVALID\x10\x0c\x12\x10\n\x0cNOT_BACKWARD\x10\r\x12\x0b\n\x07\x46ORWARD\x10\x0e\x12\x0c\n\x08\x42\x41\x43KWARD\x10\x0f\x12\x0e\n\nSTANDSTILL\x10\x10\"\xa9\x01\n\x13\x41mbientEnvCheckInfo\x12>\n\x06status\x18\x01 \x03(\x0e\x32..dr.operationstatus.AmbientEnvCheckInfo.Status\"R\n\x06Status\x12\x11\n\rSTATUS_UNKNOW\x10\x00\x12\x1e\n\x1a\x41MBIENT_BRIGHTNESS_TO_HIGH\x10\x01\x12\x15\n\x11HAS_VEHICLE_AHEAD\x10\x02\"Z\n\tFaultInfo\x12\x15\n\rsafety_policy\x18\x01 \x01(\x05\x12\x36\n\nevent_info\x18\x02 \x03(\x0b\x32\".dr.operationstatus.FaultEventInfo\"a\n\x0e\x46\x61ultEventInfo\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\x05\x12\x12\n\nalert_info\x18\x02 \x01(\t\x12\x19\n\x11suggestion_prompt\x18\x03 \x01(\t\x12\x0e\n\x06module\x18\x04 \x01(\x05\"\xbb\x02\n\nReasonInfo\x12\x38\n\x0b\x64\x65vice_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12<\n\rbusiness_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12G\n\x13vehicle_status_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12\x39\n\x08\x65nv_info\x18\x04 \x01(\x0b\x32\'.dr.operationstatus.AmbientEnvCheckInfo\x12\x31\n\nfault_info\x18\x05 \x01(\x0b\x32\x1d.dr.operationstatus.FaultInfo\"\xe5\x01\n\x10HMAPassiveReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\xa6\x02\n\x10HMALowBeamReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12?\n\x0e\x65nv_check_info\x18\x04 \x01(\x0b\x32\'.dr.operationstatus.AmbientEnvCheckInfo\"\xc9\x01\n\rHMAStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.HMAStatus\x12>\n\x0epassive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.HMAPassiveReasonH\x00\x12?\n\x0flow_beam_reason\x18\x03 \x01(\x0b\x32$.dr.operationstatus.HMALowBeamReasonH\x00\x42\x08\n\x06reason\"\xf0\x01\n\x0f\x42SDActiveReason\x12\x14\n\x0cleft_warning\x18\x01 \x01(\x08\x12\x15\n\rright_warning\x18\x02 \x01(\x08\x12\x0e\n\x06obj_id\x18\x03 \x03(\x05\x12\x10\n\x08left_ttc\x18\x04 \x03(\x02\x12\x11\n\tright_ttc\x18\x05 \x03(\x02\x12<\n\x12left_warning_level\x18\x06 \x01(\x0e\x32 .dr.operationstatus.WarningLevel\x12=\n\x13right_warning_level\x18\x07 \x01(\x0e\x32 .dr.operationstatus.WarningLevel\"\x86\x01\n\rBSDStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.BSDStatus\x12<\n\ractive_reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.BSDActiveReasonH\x00\x42\x08\n\x06reason\"\xf0\x01\n\x0fLCAActiveReason\x12\x14\n\x0cleft_warning\x18\x01 \x01(\x08\x12\x15\n\rright_warning\x18\x02 \x01(\x08\x12\x0e\n\x06obj_id\x18\x03 \x03(\x05\x12\x10\n\x08left_ttc\x18\x04 \x03(\x02\x12\x11\n\tright_ttc\x18\x05 \x03(\x02\x12<\n\x12left_warning_level\x18\x06 \x01(\x0e\x32 .dr.operationstatus.WarningLevel\x12=\n\x13right_warning_level\x18\x07 \x01(\x0e\x32 .dr.operationstatus.WarningLevel\"\x86\x01\n\rLCAStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.LCAStatus\x12<\n\ractive_reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.LCAActiveReasonH\x00\x42\x08\n\x06reason\"\x97\x03\n\x0f\x44OWActiveReason\x12\x14\n\x0cleft_warning\x18\x01 \x01(\x08\x12\x15\n\rright_warning\x18\x02 \x01(\x08\x12\x0e\n\x06obj_id\x18\x03 \x03(\x05\x12\x10\n\x08left_ttc\x18\x04 \x03(\x02\x12\x11\n\tright_ttc\x18\x05 \x03(\x02\x12G\n\x1d\x66ront_left_door_warning_level\x18\x06 \x01(\x0e\x32 .dr.operationstatus.WarningLevel\x12H\n\x1e\x66ront_right_door_warning_level\x18\x07 \x01(\x0e\x32 .dr.operationstatus.WarningLevel\x12\x46\n\x1crear_left_door_warning_level\x18\x08 \x01(\x0e\x32 .dr.operationstatus.WarningLevel\x12G\n\x1drear_right_door_warning_level\x18\t \x01(\x0e\x32 .dr.operationstatus.WarningLevel\"\x86\x01\n\rDOWStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.DOWStatus\x12<\n\ractive_reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DOWActiveReasonH\x00\x42\x08\n\x06reason\"t\n\x10RCTAActiveReason\x12\x14\n\x0cleft_warning\x18\x01 \x01(\x08\x12\x15\n\rright_warning\x18\x02 \x01(\x08\x12\x0e\n\x06obj_id\x18\x03 \x03(\x05\x12\x10\n\x08left_ttc\x18\x04 \x03(\x02\x12\x11\n\tright_ttc\x18\x05 \x03(\x02\"\x89\x01\n\x0eRCTAStatusInfo\x12.\n\x06status\x18\x01 \x01(\x0e\x32\x1e.dr.operationstatus.RCTAStatus\x12=\n\ractive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.RCTAActiveReasonH\x00\x42\x08\n\x06reason\"C\n\x0fRCWActiveReason\x12\x13\n\x0brcw_warning\x18\x01 \x01(\x08\x12\x0e\n\x06obj_id\x18\x02 \x03(\x05\x12\x0b\n\x03ttc\x18\x03 \x03(\x02\"\x86\x01\n\rRCWStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.RCWStatus\x12<\n\ractive_reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.RCWActiveReasonH\x00\x42\x08\n\x06reason\"t\n\x10RCTBActiveReason\x12\x14\n\x0cleft_warning\x18\x01 \x01(\x08\x12\x15\n\rright_warning\x18\x02 \x01(\x08\x12\x0e\n\x06obj_id\x18\x03 \x03(\x05\x12\x10\n\x08left_ttc\x18\x04 \x03(\x02\x12\x11\n\tright_ttc\x18\x05 \x03(\x02\"\xba\x01\n\x0eRCTBStatusInfo\x12.\n\x06status\x18\x01 \x01(\x0e\x32\x1e.dr.operationstatus.RCTBStatus\x12=\n\ractive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.RCTBActiveReasonH\x00\x12/\n\x07reasons\x18\x03 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfoB\x08\n\x06reason\"\x9b\x01\n\x15\x41PAStatusChangeReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\"\x98\x02\n\x10\x41\x43\x43PassiveReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12\x31\n\nfault_info\x18\x04 \x01(\x0b\x32\x1d.dr.operationstatus.FaultInfo\"\xc5\x01\n\rACCStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.ACCStatus\x12>\n\x0epassive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.ACCPassiveReasonH\x00\x12;\n\x0e\x66\x61ilure_reason\x18\x03 \x01(\x0b\x32!.dr.operationstatus.FailureReasonH\x00\x42\x08\n\x06reason\"\xa4\x01\n\x0f\x41VMActiveReason\x12M\n\x19vehicle_status_check_info\x18\x01 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\"\xa1\x01\n\x0c\x41VMOffReason\x12M\n\x19vehicle_status_check_info\x18\x01 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\"\x11\n\x0f\x41VMFailedReason\"\xe4\x01\n\x0f\x41VMChangeReason\x12M\n\x19vehicle_status_check_info\x18\x01 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x03 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\"\xfb\x02\n\rAVMStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.AVMStatus\x12\x36\n\noff_reason\x18\x02 \x01(\x0b\x32 .dr.operationstatus.AVMOffReasonH\x00\x12<\n\ractive_reason\x18\x03 \x01(\x0b\x32#.dr.operationstatus.AVMActiveReasonH\x00\x12<\n\rfailed_reason\x18\x04 \x01(\x0b\x32#.dr.operationstatus.AVMFailedReasonH\x00\x12\x45\n\x11\x64riving_avm_style\x18\x05 \x01(\x0e\x32*.dr.operationstatus.AVMStatusInfo.AVMStyle\"6\n\x08\x41VMStyle\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0f\n\x0b\x46ULL_SCREEN\x10\x01\x12\x0c\n\x08\x46LOATING\x10\x02\x42\x08\n\x06reason\"\x12\n\x10ICAFailureReason\"\x98\x02\n\x10ICAPassiveReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12\x31\n\nfault_info\x18\x04 \x01(\x0b\x32\x1d.dr.operationstatus.FaultInfo\"\x9e\x01\n\rICAStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.ICAStatus\x12>\n\x0epassive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.ICAPassiveReasonH\x00\x12\x14\n\x0c\x61uto_upgrade\x18\x03 \x01(\x08\x42\x08\n\x06reason\"\xb4\x02\n\rILCStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.ILCStatus\x12+\n\x04left\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.ILCStatus\x12,\n\x05right\x18\x03 \x01(\x0e\x32\x1d.dr.operationstatus.ILCStatus\x12.\n\x06reason\x18\x04 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\x12\x33\n\x0bleft_reason\x18\x05 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\x12\x34\n\x0cright_reason\x18\x06 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"l\n\x0cLCStatusInfo\x12,\n\x06status\x18\x01 \x01(\x0e\x32\x1c.dr.operationstatus.LCStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"\x8c\x01\n\x19TrafficLightAttentionInfo\x12?\n\x06status\x18\x01 \x01(\x0e\x32/.dr.operationstatus.TrafficLightAttentionStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"\x98\x02\n\x10NCAPassiveReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12\x31\n\nfault_info\x18\x04 \x01(\x0b\x32\x1d.dr.operationstatus.FaultInfo\"\x88\x01\n\rNCAStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.NCAStatus\x12>\n\x0epassive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.NCAPassiveReasonH\x00\x42\x08\n\x06reason\"F\n\x11\x44rivingStatusInfo\x12\x31\n\x06status\x18\x01 \x01(\x0e\x32!.dr.operationstatus.DrivingStatus\"\xeb\x01\n\x16\x43ommonStatusFailReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\xe4\x01\n\x0f\x41PAStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\xeb\x01\n\x16SentryModeStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\x89\x01\n\rAPAStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.APAStatus\x12\x33\n\x06reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.APAStatusReason\x12\x14\n\x0cis_low_speed\x18\n \x01(\x08\"\xe4\x01\n\x0fVPAStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\xb1\x01\n\x14VPARoutingStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.VPAStatus\x12\x33\n\x06reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.VPAStatusReason\x12\x35\n\x0cparking_type\x18\x03 \x01(\x0e\x32\x1f.dr.operationstatus.ParkingType\"{\n\x15VPALearningStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.VPAStatus\x12\x33\n\x06reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.VPAStatusReason\"\xe4\x01\n\x0fRPAStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"s\n\rRPAStatusInfo\x12-\n\x06stauts\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.RPAStatus\x12\x33\n\x06reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.RPAStatusReason\"\xe5\x01\n\x10LDWPassiveReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\x88\x01\n\rLDWStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.LDWStatus\x12>\n\x0epassive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.LDWPassiveReasonH\x00\x42\x08\n\x06reason\"\xe5\x01\n\x10RDPPassiveReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\x88\x01\n\rRDPStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.RDPStatus\x12>\n\x0epassive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.RDPPassiveReasonH\x00\x42\x08\n\x06reason\"\x8f\x02\n\rPDCStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.PDCStatus\x12@\n\x11pdc_active_reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.PDCStatusReasonH\x00\x12\x41\n\x12pdc_standby_reason\x18\x03 \x01(\x0b\x32#.dr.operationstatus.PDCStatusReasonH\x00\x12@\n\x11pdc_failed_reason\x18\x04 \x01(\x0b\x32#.dr.operationstatus.PDCStatusReasonH\x00\x42\x08\n\x06reason\"\xe4\x01\n\x0fPDCStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\xe4\x01\n\x0fTJPStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"s\n\rTJPStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.TJPStatus\x12\x33\n\x06reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.TJPStatusReason\"\xe5\x01\n\x10RADSStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"v\n\x0eRADSStatusInfo\x12.\n\x06status\x18\x01 \x01(\x0e\x32\x1e.dr.operationstatus.RADSStatus\x12\x34\n\x06reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.RADSStatusReason\"\xe4\x01\n\x0f\x44VRStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"s\n\rDVRStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.DVRStatus\x12\x33\n\x06reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DVRStatusReason\"\xe9\x01\n\x14SentinelStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\x82\x01\n\x12SentinelStatusInfo\x12\x32\n\x06status\x18\x01 \x01(\x0e\x32\".dr.operationstatus.SentinelStatus\x12\x38\n\x06reason\x18\x02 \x01(\x0b\x32(.dr.operationstatus.SentinelStatusReason\"\x82\x01\n\x0eSentryModeInfo\x12\x34\n\x06status\x18\x01 \x01(\x0e\x32$.dr.operationstatus.SentryModeStatus\x12:\n\x06reason\x18\x02 \x01(\x0b\x32*.dr.operationstatus.SentryModeStatusReason\"L\n\x11StartFailedReason\x12\x37\n\x13start_failed_module\x18\x65 \x03(\x0e\x32\x1a.dr.operationstatus.Module\"?\n\x0b\x43rushReason\x12\x30\n\x0c\x63rush_module\x18\x65 \x03(\x0e\x32\x1a.dr.operationstatus.Module\"\x8a\x01\n\rFailureReason\x12\x42\n\x13start_failed_reason\x18\x65 \x01(\x0b\x32%.dr.operationstatus.StartFailedReason\x12\x35\n\x0c\x63rush_reason\x18\x66 \x01(\x0b\x32\x1f.dr.operationstatus.CrushReason\"@\n\x0f\x41\x63tivedFeatures\x12-\n\x08\x66\x65\x61tures\x18\x01 \x03(\x0e\x32\x1b.dr.operationstatus.Feature\"\xe5\x01\n\x10\x45LKPassiveReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\xcb\x01\n\rELKStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.ELKStatus\x12>\n\x0epassive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.ELKPassiveReasonH\x00\x12\x1f\n\x17is_elk_left_vru_standby\x18\x03 \x01(\x08\x12 \n\x18is_elk_right_vru_standby\x18\x04 \x01(\x08\x42\x08\n\x06reason\">\n\rTSRStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.TSRStatus\"\xa5\x01\n\x0c\x44WStatusInfo\x12,\n\x06status\x18\x01 \x01(\x0e\x32\x1c.dr.operationstatus.DWStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\x12\x37\n\x0b\x61\x63tive_info\x18\x03 \x01(\x0b\x32\".dr.operationstatus.DWFrontCarInfo\"e\n\x0e\x44WFrontCarInfo\x12\x0e\n\x06obj_id\x18\x01 \x01(\x05\x12\x10\n\x08time_gap\x18\x02 \x01(\x01\x12\x10\n\x08\x64istance\x18\x03 \x01(\x01\x12\r\n\x05snvty\x18\x04 \x01(\x01\x12\x10\n\x08\x64uration\x18\x05 \x01(\x03\"n\n\rAEBStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.AEBStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"p\n\x0e\x46\x43TBStatusInfo\x12.\n\x06status\x18\x01 \x01(\x0e\x32\x1e.dr.operationstatus.FCTBStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"n\n\rMEBStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.MEBStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"n\n\rFCWStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.FCWStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"p\n\x0e\x46\x43TAStatusInfo\x12.\n\x06status\x18\x01 \x01(\x0e\x32\x1e.dr.operationstatus.FCTAStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"n\n\rESAStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.ESAStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"n\n\rAWBStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.AWBStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"n\n\rABPStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.ABPStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"n\n\rMAIStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.MAIStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo*\xa2\x01\n\tACCStatus\x12\x0b\n\x07\x41\x43\x43_OFF\x10\x00\x12\x0f\n\x0b\x41\x43\x43_PASSIVE\x10\x01\x12\x0f\n\x0b\x41\x43\x43_STANDBY\x10\x02\x12\x0e\n\nACC_NORMAL\x10\x03\x12\x14\n\x10\x41\x43\x43_STAND_ACTIVE\x10\x04\x12\x12\n\x0e\x41\x43\x43_STAND_WAIT\x10\x05\x12\x10\n\x0c\x41\x43\x43_OVERRIDE\x10\x06\x12\r\n\tACC_FAULT\x10\x07\x12\x0b\n\x07\x41\x43\x43_BOM\x10\x08*\xcb\x01\n\tICAStatus\x12\x0b\n\x07ICA_OFF\x10\x00\x12\x0f\n\x0bICA_FAILURE\x10\x01\x12\x0f\n\x0bICA_PASSIVE\x10\x02\x12\x0f\n\x0bICA_STANDBY\x10\x03\x12\x0e\n\nICA_NORMAL\x10\x04\x12\x1c\n\x18ICA_LATERAL_CONTROL_EXIT\x10\x05\x12\x11\n\rICA_FORBIDDEN\x10\x06\x12\x16\n\x12ICA_DRIVER_TAKEOFF\x10\x07\x12\x18\n\x14ICA_LOW_RISK_FAILURE\x10\x08\x12\x0b\n\x07ICA_MRM\x10\t*m\n\tILCStatus\x12\x0b\n\x07ILC_OFF\x10\x00\x12\r\n\tILC_FAULT\x10\x01\x12\x0f\n\x0bILC_PASSIVE\x10\x02\x12\x0f\n\x0bILC_STANDBY\x10\x03\x12\x0e\n\nILC_ACTIVE\x10\x04\x12\x12\n\x0eILC_CONFIRMING\x10\x05*\xe7\x01\n\x08LCStatus\x12\n\n\x06LC_OFF\x10\x00\x12\x0c\n\x08LC_FAULT\x10\x01\x12\x12\n\x0eLC_UNAVAILABLE\x10\x02\x12\x10\n\x0cLC_AVAILABLE\x10\x03\x12\x10\n\x0cLC_REQUESTED\x10\x04\x12\r\n\tLC_REJECT\x10\x05\x12\x0b\n\x07LC_WAIT\x10\x06\x12\x1f\n\x1bLC_LATERAL_MOVEMENT_STARTED\x10\x07\x12\x1b\n\x17LC_IN_LATERAL_MANOEUVRE\x10\x08\x12\x0f\n\x0bLC_FINISHED\x10\t\x12\x0f\n\x0bLC_ABORTING\x10\n\x12\r\n\tLC_FAILED\x10\x0b*\xb7\x01\n\tNCAStatus\x12\x0b\n\x07NCA_OFF\x10\x00\x12\x0f\n\x0bNCA_PASSIVE\x10\x01\x12\x0f\n\x0bNCA_STANDBY\x10\x02\x12\x0e\n\nNCA_NORMAL\x10\x03\x12\x13\n\x0fNCA_COUNT_DOWN1\x10\x04\x12\x13\n\x0fNCA_COUNT_DOWN2\x10\x05\x12\x0b\n\x07NCA_MRM\x10\x06\x12\x12\n\x0eNCA_LATEM_EXIT\x10\x07\x12\x11\n\rNCA_FORBIDDEN\x10\x08\x12\r\n\tNCA_FAULT\x10\t*\xa3\x01\n\rDrivingStatus\x12\x12\n\x0e\x44RIVING_MANUAL\x10\x00\x12\x16\n\x12\x44RIVING_ACC_ACTIVE\x10\x01\x12\x16\n\x12\x44RIVING_ICA_ACTIVE\x10\x02\x12\x16\n\x12\x44RIVING_NCA_ACTIVE\x10\x03\x12\x1a\n\x16\x44RIVING_ICA_LATEM_EXIT\x10\x04\x12\x1a\n\x16\x44RIVING_NCA_LATEM_EXIT\x10\x05*\xb9\x01\n\tHMAStatus\x12\x0b\n\x07HMA_OFF\x10\x00\x12\x0f\n\x0bHMA_FAILURE\x10\x01\x12\x0f\n\x0bHMA_PASSIVE\x10\x02\x12\x10\n\x0cHMA_LOW_BEAM\x10\x03\x12\x11\n\rHMA_HIGH_BEAM\x10\x04\x12\x13\n\x0fHMA_SUPPRESSION\x10\x05\x12\x16\n\x12HMA_NO_SUPPRESSION\x10\x06\x12\x14\n\x10HMA_LOW_PRIORITY\x10\x07\x12\x15\n\x11HMA_HIGH_PRIORITY\x10\x08*\xaa\x03\n\tAVMStatus\x12\x12\n\x0eSTATUS_UNKNOWN\x10\x00\x12\x17\n\x13STATUS_TURNING_MODE\x10\x01\x12\x16\n\x12STATUS_NORMAL_MODE\x10\x02\x12\x16\n\x12STATUS_GEAR_R_MODE\x10\x03\x12\x1b\n\x17STATUS_GEAR_R_TO_D_MODE\x10\x04\x12\x13\n\x0fSTATUS_PDC_MODE\x10\x05\x12\x0e\n\nSTATUS_OFF\x10\x06\x12\x10\n\x0cSTATUS_ERROR\x10\x07\x12\x12\n\x0eSTATUS_STANDBY\x10\x08\x12\x12\n\x0eSTATUS_SUSPEND\x10\t\x12\x11\n\rSTATUS_FAILED\x10\n\x12\x11\n\rSTATUS_ACTIVE\x10\x0b\x12\x13\n\x0fSTATUS_INACTIVE\x10\x0c\x12\r\n\tSTATUS_ON\x10\r\x12\x12\n\x0eSTATUS_WORKING\x10\x0e\x12\x0e\n\nSTATUS_GWM\x10\x0f\x12\x16\n\x12STATUS_CALIBRATION\x10\x10\x12\x1f\n\x1bSTATUS_CALIBRATION_FINISHED\x10\x11\x12\x1d\n\x19STATUS_CALIBRATION_FAILED\x10\x12*\x85\x04\n\tRPAStatus\x12\x0b\n\x07RPA_OFF\x10\x00\x12\x0f\n\x0bRPA_STANDBY\x10\x01\x12\x12\n\x0eRPA_PARKING_IN\x10\x02\x12\x13\n\x0fRPA_PARKING_OUT\x10\x03\x12\x17\n\x13RPA_STRAIGHT_IN_OUT\x10\x04\x12\x1e\n\x1aRPA_STRAIGHT_IN_OUT_ACTIVE\x10\x05\x12\x1f\n\x1bRPA_STRAIGHT_IN_OUT_SUSPEND\x10\x06\x12\x16\n\x12RPA_PARKING_ACTIVE\x10\x07\x12\x17\n\x13RPA_PARKING_SUSPEND\x10\x08\x12\x11\n\rRPA_COMPLETED\x10\t\x12\x0f\n\x0bRPA_FAILURE\x10\n\x12\"\n\x1eRPA_PRE_STRAIGHT_IN_OUT_ACTIVE\x10\x0b\x12\'\n#RPA_PARKING_IN_OUT_ACTIVE_EPB_ERROR\x10\x0c\x12(\n$RPA_STRAIGHT_IN_OUT_ACTIVE_EPB_ERROR\x10\r\x12\x16\n\x12RPA_SYSTEM_FAILURE\x10\x0e\x12\x17\n\x13RPA_FAILURE_DISABLE\x10\x0f\x12\x15\n\x11RPA_PARKIN_SEARCH\x10i\x12\r\n\tRPA_ABORT\x10j\x12\x0e\n\nRPA_CANCEL\x10k\x12\x0c\n\x08RPA_QUIT\x10l\x12\x16\n\x12RPA_SEARCH_FAILURE\x10m*\xb2\x02\n\x1bTrafficLightAttentionStatus\x12*\n&TRAFFIC_LIGHT_ATTENTION_STATUS_UNKNOWN\x10\x00\x12&\n\"TRAFFIC_LIGHT_ATTENTION_STATUS_OFF\x10\x01\x12*\n&TRAFFIC_LIGHT_ATTENTION_STATUS_STANDBY\x10\x02\x12\x31\n-TRAFFIC_LIGHT_ATTENTION_STATUS_VERSION_ACTIVE\x10\x03\x12\x34\n0TRAFFIC_LIGHT_ATTENTION_STATUS_NAVIGATION_ACTIVE\x10\x04\x12*\n&TRAFFIC_LIGHT_ATTENTION_STATUS_FAILURE\x10\x05*F\n\x0cWarningLevel\x12\x0e\n\nNO_WARNING\x10\x00\x12\x12\n\x0eWARNING_LEVEL1\x10\x01\x12\x12\n\x0eWARNING_LEVEL2\x10\x02*[\n\tBSDStatus\x12\x0b\n\x07\x42SD_OFF\x10\x00\x12\x0f\n\x0b\x42SD_FAILURE\x10\x01\x12\x0f\n\x0b\x42SD_PASSIVE\x10\x02\x12\x0f\n\x0b\x42SD_STANDBY\x10\x03\x12\x0e\n\nBSD_ACTIVE\x10\x04*[\n\tLCAStatus\x12\x0b\n\x07LCA_OFF\x10\x00\x12\x0f\n\x0bLCA_FAILURE\x10\x01\x12\x0f\n\x0bLCA_PASSIVE\x10\x02\x12\x0f\n\x0bLCA_STANDBY\x10\x03\x12\x0e\n\nLCA_ACTIVE\x10\x04*[\n\tDOWStatus\x12\x0b\n\x07\x44OW_OFF\x10\x00\x12\x0f\n\x0b\x44OW_FAILURE\x10\x01\x12\x0f\n\x0b\x44OW_PASSIVE\x10\x02\x12\x0f\n\x0b\x44OW_STANDBY\x10\x03\x12\x0e\n\nDOW_ACTIVE\x10\x04*a\n\nRCTAStatus\x12\x0c\n\x08RCTA_OFF\x10\x00\x12\x10\n\x0cRCTA_FAILURE\x10\x01\x12\x10\n\x0cRCTA_PASSIVE\x10\x02\x12\x10\n\x0cRCTA_STANDBY\x10\x03\x12\x0f\n\x0bRCTA_ACTIVE\x10\x04*[\n\tRCWStatus\x12\x0b\n\x07RCW_OFF\x10\x00\x12\x0f\n\x0bRCW_FAILURE\x10\x01\x12\x0f\n\x0bRCW_PASSIVE\x10\x02\x12\x0f\n\x0bRCW_STANDBY\x10\x03\x12\x0e\n\nRCW_ACTIVE\x10\x04*w\n\nRCTBStatus\x12\x0c\n\x08RCTB_OFF\x10\x00\x12\x10\n\x0cRCTB_FAILURE\x10\x01\x12\x10\n\x0cRCTB_PASSIVE\x10\x02\x12\x10\n\x0cRCTB_STANDBY\x10\x03\x12\x0f\n\x0bRCTB_ACTIVE\x10\x04\x12\x14\n\x10RCTB_STAND_STILL\x10\x05*\x82\x04\n\tAPAStatus\x12\x0b\n\x07\x41PA_OFF\x10\x00\x12\x0f\n\x0b\x41PA_STANDBY\x10\x01\x12\x19\n\x15\x41PA_PARKING_SEARCHING\x10\x02\x12\x12\n\x0e\x41PA_PARKING_IN\x10\x03\x12\x13\n\x0f\x41PA_PARKING_OUT\x10\x04\x12\x16\n\x12\x41PA_PARKING_ACTIVE\x10\x05\x12\x16\n\x12\x41PA_PARKING_PAUSED\x10\x06\x12\x18\n\x14\x41PA_PARKING_FINISHED\x10\x07\x12\x16\n\x12\x41PA_SYSTEM_FAILURE\x10\x08\x12\x17\n\x13\x41PA_PARKING_FAILURE\x10\t\x12\x17\n\x13\x41PA_FAILURE_DISABLE\x10\n\x12\x16\n\x12\x41PA_PRE_OUTPARKING\x10\x0b\x12\x18\n\x14\x41PA_PRE_PARKINACTIVE\x10\x14\x12\x1d\n\x19\x41PA_PRE_PARKINGOUT_ACTIVE\x10\x15\x12&\n\"APA_PRE_PARKINGACTIVE_FROM_STANDBY\x10\x16\x12\x0e\n\nAPA_ACTIVE\x10\x17\x12\x15\n\x11\x41PA_RPA_EPB_ERROR\x10\x18\x12*\n&APA_PRE_PARKINGOUT_ACTIVE_FROM_STANDBY\x10\x19\x12\x18\n\x14\x41PA_SEARCHING_PAUSED\x10\x1a\x12\x19\n\x15\x41PA_SEARCHING_FAILURE\x10\x1b*8\n\x0bParkingType\x12\x13\n\x0fTYPE_PARKING_IN\x10\x00\x12\x14\n\x10TYPE_PARKING_OUT\x10\x01*\x90\t\n\tVPAStatus\x12\x16\n\x12VPA_STATUS_UNKNOWN\x10\x00\x12\x1b\n\x17VPA_MAP_LARNING_PASSIVE\x10\x01\x12\x1c\n\x18VPA_MAP_LEARNING_STANDBY\x10\x02\x12\x1d\n\x19VPA_MAP_LEARNING_LEARNING\x10\x03\x12\x1e\n\x1aVPA_MAP_LEARNING_COMPLETED\x10\x04\x12\x1c\n\x18VPA_MAP_LEARNING_FAILURE\x10\x05\x12\x18\n\x14VPA_MAP_LEARNING_OFF\x10\x06\x12\x1c\n\x18VPA_MAP_LEARNING_PARKING\x10\x07\x12\x17\n\x13VPA_ROUTING_PASSIVE\x10\x08\x12\x17\n\x13VPA_ROUTING_STANDBY\x10\t\x12\x16\n\x12VPA_ROUTING_ACTIVE\x10\n\x12\x19\n\x15VPA_ROUTING_SEARCHING\x10\x0b\x12\x17\n\x13VPA_ROUTING_FAILURE\x10\x0c\x12\x18\n\x14VPA_ROUTING_FINISHED\x10\r\x12\x13\n\x0fVPA_ROUTING_OFF\x10\x0e\x12\x17\n\x13VPA_ROUTING_PARKING\x10\x0f\x12\x1e\n\x1aVPA_ROUTING_SYSTEM_FAILURE\x10\x10\x12\x13\n\x0fVPA_ROUTING_MRM\x10\x11\x12\x1f\n\x1bVPA_ROUTING_FAILURE_DISABLE\x10\x12\x12\x19\n\x15VPA_ROUTING_PREACTIVE\x10\x13\x12#\n\x1fVPA_MAP_LEARNING_PARKING_ACTIVE\x10\x15\x12#\n\x1fVPA_MAP_LEARNING_PARKING_PAUSED\x10\x16\x12%\n!VPA_MAP_LEARNING_PARKING_FINISHED\x10\x17\x12$\n VPA_MAP_LEARNING_PARKING_FAILURE\x10\x18\x12\x18\n\x14VPA_MAP_END_LEARNING\x10\x19\x12#\n\x1fVPA_MAP_LEARNING_SYSTEM_FAILURE\x10\x1a\x12\x1f\n\x1bVPA_MAP_LEARNING_SAVING_MAP\x10\x1b\x12\x14\n\x10VPA_MAP_GUIDANCE\x10\x1c\x12$\n VPA_MAP_LEARNING_FAILURE_DISABLE\x10\x1d\x12\x1e\n\x1aVPA_ROUTING_PARKING_ACTIVE\x10)\x12\x1e\n\x1aVPA_ROUTING_PARKING_PAUSED\x10*\x12 \n\x1cVPA_ROUTING_PARKING_FINISHED\x10+\x12\x1f\n\x1bVPA_ROUTING_PARKING_FAILURE\x10,\x12\x17\n\x13VPA_ROUTING_BLOCKED\x10-\x12\x1b\n\x17VPA_ROUTING_SELECT_SLOT\x10.\x12\x1a\n\x16VPA_ROUTING_NAVIGATION\x10/\x12\x17\n\x13VPA_ROUTING_SUSPEND\x10\x30\x12!\n\x1dVPA_ROUTING_PARKING_ALONG_WAY\x10\x31\x12 \n\x1cVPA_ROUTING_PARKING_OUT_HOLD\x10\x32*\x8d\x01\n\tLDWStatus\x12\x0b\n\x07LDW_OFF\x10\x00\x12\x0f\n\x0bLDW_PASSIVE\x10\x01\x12\x0f\n\x0bLDW_STANDBY\x10\x02\x12\x13\n\x0fLDW_LEFT_ACTIVE\x10\x03\x12\x14\n\x10LDW_RIGHT_ACTIVE\x10\x04\x12\x0f\n\x0bLDW_FAILURE\x10\x05\x12\x15\n\x11LDW_AUTOMATIC_OFF\x10\x06*\x8d\x01\n\tRDPStatus\x12\x0b\n\x07RDP_OFF\x10\x00\x12\x0f\n\x0bRDP_PASSIVE\x10\x01\x12\x0f\n\x0bRDP_STANDBY\x10\x02\x12\x13\n\x0fRDP_LEFT_ACTIVE\x10\x03\x12\x14\n\x10RDP_RIGHT_ACTIVE\x10\x04\x12\x0f\n\x0bRDP_FAILURE\x10\x05\x12\x15\n\x11RDP_AUTOMATIC_OFF\x10\x06*o\n\tPDCStatus\x12\x0b\n\x07PDC_OFF\x10\x00\x12\x0f\n\x0bPDC_FAILURE\x10\x01\x12\x0f\n\x0bPDC_STANDBY\x10\x02\x12\x1d\n\x19PDC_FRONT_AND_REAR_ACTIVE\x10\x03\x12\x14\n\x10PDC_FRONT_ACTIVE\x10\x04*\x8f\x01\n\tTJPStatus\x12\x0b\n\x07TJP_OFF\x10\x00\x12\x0f\n\x0bTJP_FAILURE\x10\x01\x12\x0f\n\x0bTJP_STANDBY\x10\x02\x12\x0f\n\x0bTJP_PASSIVE\x10\x03\x12\x0e\n\nTJP_NORMAL\x10\x04\x12\x12\n\x0eTJP_COUNT_DOWN\x10\x05\x12\x0b\n\x07TJP_MRM\x10\x06\x12\x11\n\rTJP_FORBIDDEN\x10\x07*\x9c\x03\n\nRADSStatus\x12\x0c\n\x08RADS_OFF\x10\x00\x12\x0f\n\x0bRADS_FAILED\x10\x01\x12\x10\n\x0cRADS_STANDBY\x10\x02\x12\x10\n\x0cRADS_DISABLE\x10\x03\x12\x0f\n\x0bRADS_SEARCH\x10\x04\x12\x17\n\x13RADS_SEARCH_SUSPEND\x10\x05\x12\x0f\n\x0bRADS_ACTIVE\x10\x06\x12\x17\n\x13RADS_ACTIVE_SUSPEND\x10\x07\x12\x17\n\x13RADS_RESUME_CONFIRM\x10\x08\x12\x0f\n\x0bRADS_FINISH\x10\t\x12\x18\n\x14RADS_PARKING_FAILURE\x10\n\x12\x17\n\x13RADS_SEARCH_FAILURE\x10\x0b\x12\x14\n\x10RADS_LSDA_SEARCH\x10\x0c\x12\x1c\n\x18RADS_LSDA_SEARCH_SUSPEND\x10\r\x12\x14\n\x10RADS_LSDA_ACTIVE\x10\x0e\x12\x1c\n\x18RADS_LSDA_ACTIVE_SUSPEND\x10\x0f\x12\x1c\n\x18RADS_LSDA_RESUME_CONFIRM\x10\x10\x12\x14\n\x10RADS_LSDA_FINISH\x10\x11*]\n\tDVRStatus\x12\x0f\n\x0b\x44VR_STANDBY\x10\x00\x12\x0e\n\nDVR_ACTIVE\x10\x01\x12\x16\n\x12\x44VR_CONNECT_FAILED\x10\x02\x12\x17\n\x13\x44VR_INTERNAL_FAILED\x10\x03*r\n\x0eSentinelStatus\x12\x14\n\x10SENTINEL_STANDBY\x10\x00\x12\x13\n\x0fSENTINEL_ACTIVE\x10\x01\x12\x1c\n\x18SENTINEL_INTERNAL_FAILED\x10\x02\x12\x17\n\x13SENTINEL_NET_FAILED\x10\x03*\xfe\x01\n\x10SentryModeStatus\x12\x1b\n\x17SENTINEL_STATUS_UNKNOWN\x10\x00\x12\x17\n\x13SENTINEL_STATUS_OFF\x10\x01\x12 \n\x18SENTINEL_STATUS_STARTING\x10\x02\x1a\x02\x08\x01\x12\x1e\n\x16SENTINEL_STATUS_FAILED\x10\x03\x1a\x02\x08\x01\x12\x1b\n\x17SENTINEL_STATUS_WORKING\x10\x04\x12\x1b\n\x17SENTINEL_STATUS_WARNING\x10\x05\x12\x1b\n\x17SENTINEL_STATUS_STANDBY\x10\x06\x12\x1b\n\x17SENTINEL_STATUS_PASSIVE\x10\x07*\xe9\x01\n\x06Module\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x10\n\x0cSENSOR_LIDAR\x10\x01\x12\x0e\n\nSENSOR_USS\x10\x02\x12\x0e\n\nSENSOR_INS\x10\x03\x12\x10\n\x0cSENSOR_RADAR\x10\x04\x12\x0e\n\nMAP_ENGINE\x10\x05\x12\x10\n\x0cLOCK_ON_ROAD\x10\x06\x12\x0e\n\nINS_ONLINE\x10\x07\x12\x10\n\x0cLOCALIZATION\x10\x08\x12\x0e\n\nPERCEPTION\x10\t\x12\x0c\n\x08PLANNING\x10\n\x12\n\n\x06\x43\x41NBUS\x10\x0b\x12\x07\n\x03\x42LC\x10\x0c\x12\n\n\x06SAFETY\x10\r\x12\x0b\n\x07STARTER\x10\x0e*\x8d\x03\n\x07\x46\x65\x61ture\x12\x13\n\x0fUNKNOWN_FEATURE\x10\x00\x12\x07\n\x03\x41\x43\x43\x10\x01\x12\x07\n\x03ICA\x10\x02\x12\x07\n\x03NCA\x10\x03\x12\x07\n\x03LDW\x10\x04\x12\x07\n\x03RDP\x10\x05\x12\x07\n\x03HMA\x10\x06\x12\x07\n\x03\x42SD\x10\x07\x12\x07\n\x03LCA\x10\x08\x12\x07\n\x03\x44OW\x10\t\x12\x08\n\x04RCTA\x10\n\x12\x07\n\x03RCW\x10\x0b\x12\x08\n\x04RCTB\x10\x0c\x12\x07\n\x03\x41VM\x10\r\x12\x07\n\x03\x41PA\x10\x0e\x12\x0f\n\x0bVPA_ROUTING\x10\x0f\x12\x10\n\x0cVPA_LEARNING\x10\x10\x12\x07\n\x03PDC\x10\x11\x12\x07\n\x03\x41\x45\x42\x10\x12\x12\x07\n\x03\x45LK\x10\x13\x12\x08\n\x04RADS\x10\x14\x12\x07\n\x03MEB\x10\x15\x12\x08\n\x04\x46\x43TA\x10\x16\x12\x08\n\x04\x46\x43TB\x10\x17\x12\x07\n\x03\x46\x43W\x10\x18\x12\x07\n\x03\x45SA\x10\x19\x12\x07\n\x03TSR\x10\x1a\x12\x07\n\x03RPA\x10\x1b\x12\x07\n\x03ILC\x10\x1c\x12\x07\n\x03\x41\x42P\x10\x1d\x12\x07\n\x03\x41WB\x10\x1e\x12\x06\n\x02\x44W\x10\x1f\x12\x0c\n\x08SENTINEL\x10 \x12\x0b\n\x07VPA_APA\x10\x64\x12\x12\n\x0eVPA_MAP_SAVING\x10\x65\x12\x08\n\x03HUT\x10\xe9\x07\x12\x08\n\x03VIZ\x10\xea\x07*\x8d\x01\n\tELKStatus\x12\x0b\n\x07\x45LK_OFF\x10\x00\x12\x0f\n\x0b\x45LK_PASSIVE\x10\x01\x12\x0f\n\x0b\x45LK_STANDBY\x10\x02\x12\x13\n\x0f\x45LK_LEFT_ACTIVE\x10\x03\x12\x14\n\x10\x45LK_RIGHT_ACTIVE\x10\x04\x12\x0f\n\x0b\x45LK_FAILURE\x10\x05\x12\x15\n\x11\x45LK_AUTOMATIC_OFF\x10\x06*^\n\tTSRStatus\x12\x0b\n\x07TSR_OFF\x10\x00\x12\x0f\n\x0bTSR_STANDBY\x10\x01\x12\x0e\n\nTSR_FUSION\x10\x02\x12\x12\n\x0eTSR_NAVIGATION\x10\x03\x12\x0f\n\x0bTSR_FAILURE\x10\x04*G\n\tSLWStatus\x12\x0b\n\x07SLW_OFF\x10\x00\x12\x0f\n\x0bSLW_PASSIVE\x10\x01\x12\x0e\n\nSLW_ACTIVE\x10\x02\x12\x0c\n\x08SLW_HOLD\x10\x03*\x19\n\nNSLSStatus\x12\x0b\n\x07NSLS_ON\x10\x00*U\n\x08\x44WStatus\x12\n\n\x06\x44W_OFF\x10\x00\x12\x0e\n\nDW_FAILURE\x10\x01\x12\x0e\n\nDW_PASSIVE\x10\x02\x12\x0e\n\nDW_STANDBY\x10\x03\x12\r\n\tDW_ACTIVE\x10\x04*\x80\x01\n\tAEBStatus\x12\x0b\n\x07\x41\x45\x42_OFF\x10\x00\x12\x0f\n\x0b\x41\x45\x42_FAILURE\x10\x01\x12\x0f\n\x0b\x41\x45\x42_PASSIVE\x10\x02\x12\x0f\n\x0b\x41\x45\x42_STANDBY\x10\x03\x12\x0e\n\nAEB_ACTIVE\x10\x04\x12\x0e\n\nEBA_ACTIVE\x10\x05\x12\x13\n\x0f\x41\x45\x42_STAND_STILL\x10\x06*w\n\nFCTBStatus\x12\x0c\n\x08\x46\x43TB_OFF\x10\x00\x12\x10\n\x0c\x46\x43TB_FAILURE\x10\x01\x12\x10\n\x0c\x46\x43TB_PASSIVE\x10\x02\x12\x10\n\x0c\x46\x43TB_STANDBY\x10\x03\x12\x0f\n\x0b\x46\x43TB_ACTIVE\x10\x04\x12\x14\n\x10\x46\x43TB_STAND_STILL\x10\x05*p\n\tMEBStatus\x12\x0b\n\x07MEB_OFF\x10\x00\x12\x0f\n\x0bMEB_FAILURE\x10\x01\x12\x0f\n\x0bMEB_PASSIVE\x10\x02\x12\x0f\n\x0bMEB_STANDBY\x10\x03\x12\x0e\n\nMEB_ACTIVE\x10\x04\x12\x13\n\x0fMEB_STAND_STILL\x10\x05*[\n\tFCWStatus\x12\x0b\n\x07\x46\x43W_OFF\x10\x00\x12\x0f\n\x0b\x46\x43W_FAILURE\x10\x01\x12\x0f\n\x0b\x46\x43W_PASSIVE\x10\x02\x12\x0f\n\x0b\x46\x43W_STANDBY\x10\x03\x12\x0e\n\nFCW_ACTIVE\x10\x04*a\n\nFCTAStatus\x12\x0c\n\x08\x46\x43TA_OFF\x10\x00\x12\x10\n\x0c\x46\x43TA_FAILURE\x10\x01\x12\x10\n\x0c\x46\x43TA_PASSIVE\x10\x02\x12\x10\n\x0c\x46\x43TA_STANDBY\x10\x03\x12\x0f\n\x0b\x46\x43TA_ACTIVE\x10\x04*[\n\tESAStatus\x12\x0b\n\x07\x45SA_OFF\x10\x00\x12\x0f\n\x0b\x45SA_FAILURE\x10\x01\x12\x0f\n\x0b\x45SA_PASSIVE\x10\x02\x12\x0f\n\x0b\x45SA_STANDBY\x10\x03\x12\x0e\n\nESA_ACTIVE\x10\x04*[\n\tAWBStatus\x12\x0b\n\x07\x41WB_OFF\x10\x00\x12\x0f\n\x0b\x41WB_FAILURE\x10\x01\x12\x0f\n\x0b\x41WB_PASSIVE\x10\x02\x12\x0f\n\x0b\x41WB_STANDBY\x10\x03\x12\x0e\n\nAWB_ACTIVE\x10\x04*[\n\tABPStatus\x12\x0b\n\x07\x41\x42P_OFF\x10\x00\x12\x0f\n\x0b\x41\x42P_FAILURE\x10\x01\x12\x0f\n\x0b\x41\x42P_PASSIVE\x10\x02\x12\x0f\n\x0b\x41\x42P_STANDBY\x10\x03\x12\x0e\n\nABP_ACTIVE\x10\x04*[\n\tMAIStatus\x12\x0b\n\x07MAI_OFF\x10\x00\x12\x0f\n\x0bMAI_FAILURE\x10\x01\x12\x0f\n\x0bMAI_PASSIVE\x10\x02\x12\x0f\n\x0bMAI_STANDBY\x10\x03\x12\x0e\n\nMAI_ACTIVE\x10\x04\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1c\x64rapi/operation_status.proto\x12\x12\x64r.operationstatus\"\xd4\x13\n\x0fOperationStatus\x12\x11\n\ttimestamp\x18\x01 \x01(\x04\x12\x35\n\nacc_status\x18\x0b \x01(\x0b\x32!.dr.operationstatus.ACCStatusInfo\x12\x35\n\nica_status\x18\x0c \x01(\x0b\x32!.dr.operationstatus.ICAStatusInfo\x12\x35\n\nnca_status\x18\r \x01(\x0b\x32!.dr.operationstatus.NCAStatusInfo\x12\x35\n\nhma_status\x18\x0e \x01(\x0b\x32!.dr.operationstatus.HMAStatusInfo\x12\x35\n\nbsd_status\x18\x0f \x01(\x0b\x32!.dr.operationstatus.BSDStatusInfo\x12\x35\n\nlca_status\x18\x10 \x01(\x0b\x32!.dr.operationstatus.LCAStatusInfo\x12\x35\n\ndow_status\x18\x11 \x01(\x0b\x32!.dr.operationstatus.DOWStatusInfo\x12\x37\n\x0brcta_status\x18\x12 \x01(\x0b\x32\".dr.operationstatus.RCTAStatusInfo\x12\x35\n\nrcw_status\x18\x13 \x01(\x0b\x32!.dr.operationstatus.RCWStatusInfo\x12\x35\n\nldw_status\x18\x14 \x01(\x0b\x32!.dr.operationstatus.LDWStatusInfo\x12\x35\n\nrdp_status\x18\x15 \x01(\x0b\x32!.dr.operationstatus.RDPStatusInfo\x12\x37\n\x0brctb_status\x18\x16 \x01(\x0b\x32\".dr.operationstatus.RCTBStatusInfo\x12\x35\n\navm_status\x18\x17 \x01(\x0b\x32!.dr.operationstatus.AVMStatusInfo\x12\x35\n\napa_status\x18\x18 \x01(\x0b\x32!.dr.operationstatus.APAStatusInfo\x12\x44\n\x12vpa_routing_status\x18\x19 \x01(\x0b\x32(.dr.operationstatus.VPARoutingStatusInfo\x12\x46\n\x13vpa_learning_status\x18\x1a \x01(\x0b\x32).dr.operationstatus.VPALearningStatusInfo\x12\x35\n\npdc_status\x18\x1b \x01(\x0b\x32!.dr.operationstatus.PDCStatusInfo\x12\x35\n\nelk_status\x18\x1c \x01(\x0b\x32!.dr.operationstatus.ELKStatusInfo\x12\x35\n\nrpa_status\x18\x1d \x01(\x0b\x32!.dr.operationstatus.RPAStatusInfo\x12\x35\n\ntjp_status\x18\x1e \x01(\x0b\x32!.dr.operationstatus.TJPStatusInfo\x12\x37\n\x0brads_status\x18\x1f \x01(\x0b\x32\".dr.operationstatus.RADSStatusInfo\x12<\n\x10sentry_mode_info\x18  \x01(\x0b\x32\".dr.operationstatus.SentryModeInfo\x12\x35\n\nilc_status\x18! \x01(\x0b\x32!.dr.operationstatus.ILCStatusInfo\x12\x35\n\ntsr_status\x18\" \x01(\x0b\x32!.dr.operationstatus.TSRStatusInfo\x12\x33\n\tdw_status\x18# \x01(\x0b\x32 .dr.operationstatus.DWStatusInfo\x12\x35\n\ndvr_status\x18$ \x01(\x0b\x32!.dr.operationstatus.DVRStatusInfo\x12?\n\x0fsentinel_status\x18% \x01(\x0b\x32&.dr.operationstatus.SentinelStatusInfo\x12:\n\x10manual_lc_status\x18& \x01(\x0b\x32 .dr.operationstatus.LCStatusInfo\x12\x38\n\x0e\x61uto_lc_status\x18\' \x01(\x0b\x32 .dr.operationstatus.LCStatusInfo\x12U\n\x1etraffic_light_attention_status\x18( \x01(\x0b\x32-.dr.operationstatus.TrafficLightAttentionInfo\x12\x37\n\x0e\x65nd2end_status\x18- \x01(\x0b\x32\x1f.dr.operationstatus.End2EndInfo\x12\x35\n\nfcw_status\x18\x32 \x01(\x0b\x32!.dr.operationstatus.FCWStatusInfo\x12\x37\n\x0b\x66\x63ta_status\x18\x33 \x01(\x0b\x32\".dr.operationstatus.FCTAStatusInfo\x12\x37\n\x0b\x66\x63tb_status\x18\x34 \x01(\x0b\x32\".dr.operationstatus.FCTBStatusInfo\x12\x35\n\nmeb_status\x18\x35 \x01(\x0b\x32!.dr.operationstatus.MEBStatusInfo\x12\x35\n\nesa_status\x18\x36 \x01(\x0b\x32!.dr.operationstatus.ESAStatusInfo\x12\x35\n\nawb_status\x18\x37 \x01(\x0b\x32!.dr.operationstatus.AWBStatusInfo\x12\x35\n\nabp_status\x18\x38 \x01(\x0b\x32!.dr.operationstatus.ABPStatusInfo\x12\x35\n\naeb_status\x18\x39 \x01(\x0b\x32!.dr.operationstatus.AEBStatusInfo\x12\x35\n\nmai_status\x18: \x01(\x0b\x32!.dr.operationstatus.MAIStatusInfo\x12\x35\n\naes_status\x18; \x01(\x0b\x32!.dr.operationstatus.AESStatusInfo\x12=\n\x10\x61\x63tived_features\x18\x64 \x01(\x0b\x32#.dr.operationstatus.ActivedFeatures\x12=\n\x0e\x64riving_status\x18\x65 \x01(\x0b\x32%.dr.operationstatus.DrivingStatusInfo\"\xc8\x1d\n\x0f\x44\x65viceCheckInfo\x12\x43\n\x0b\x64\x65vice_info\x18\x01 \x03(\x0e\x32..dr.operationstatus.DeviceCheckInfo.DeviceInfo\"\xef\x1c\n\nDeviceInfo\x12\x11\n\rDEVICE_UNKNOW\x10\x00\x12\x1f\n\x1b\x44RIVER_SEATBELT_NOT_BUCKLED\x10\x01\x12\x0e\n\nEPB_PARKED\x10\x02\x12\x11\n\rGEAR_NOT_IN_D\x10\x03\x12\x0f\n\x0b\x44OOR_OPENED\x10\x04\x12\x11\n\rBRAKE_APPLIED\x10\x05\x12\x0e\n\nWIPER_HIGH\x10\x06\x12\x19\n\x15\x43RUISE_CANCEL_PRESSED\x10\x07\x12\x15\n\x11THROTTLE_OVERRIDE\x10\x08\x12\x1f\n\x1b\x41\x43TUAL_ANGLE_OVER_THRESHOLD\x10\t\x12\x17\n\x13LEFT_TURN_SIGNAL_ON\x10\n\x12\x18\n\x14RIGHT_TURN_SIGNAL_ON\x10\x0b\x12\x12\n\x0eNO_TURN_SIGNAL\x10\x0c\x12\r\n\tGEER_IN_R\x10\r\x12\r\n\tGEER_IN_D\x10\x0e\x12\r\n\tGEER_IN_N\x10\x0f\x12\r\n\tGEER_IN_P\x10\x10\x12\x11\n\rGEAR_OVERRIDE\x10\x11\x12\x1b\n\x17STEERING_WHEEL_OVERRIDE\x10\x12\x12\x10\n\x0cTRUNK_OPENED\x10\x13\x12\x1b\n\x17REAR_VIEW_MIRROR_CLOSED\x10\x14\x12\x12\n\x0eSTEER_OVERRIDE\x10\x15\x12\x1d\n\x19STEER_WHEEL_SPEED_TO_HIGH\x10\x16\x12\x13\n\x0f\x44OUBLE_FLASH_ON\x10\x17\x12\x11\n\rFOG_LIGHTS_ON\x10\x18\x12\x0f\n\x0bHOOD_OPENED\x10\x19\x12\x1d\n\x19\x45PS_TORSIONTORQUE_INVALID\x10\x1a\x12\x1f\n\x1bHOD_HANDOFF_MONITOR_INVALID\x10\x1b\x12\x16\n\x12\x44RIVER_DOOR_OPENED\x10\x1c\x12\x11\n\rGEAR_NOT_IN_P\x10\x1d\x12\x13\n\x0f\x42LUE_TOOTH_LOST\x10\x1e\x12\x12\n\x0e\x42REAK_OVERRIDE\x10\x1f\x12\x13\n\x0f\x46UEL_CAP_OPENED\x10 \x12\x18\n\x14\x43HARGEING_CAP_OPENED\x10!\x12\x10\n\x0c\x43\x41MERA_ERROR\x10\"\x12\x11\n\rNO_DISK_SPACE\x10#\x12\x0f\n\x0b\x42\x41TTERY_LOW\x10$\x12\x16\n\x12PASSEN_DOOR_OPENED\x10%\x12\x12\n\x0eLR_DOOR_OPENED\x10&\x12\x12\n\x0eRR_DOOR_OPENED\x10\'\x12\x17\n\x13SAS_STATUS_ABNORMAL\x10(\x12\x0c\n\x08IP_ERROR\x10)\x12\x0e\n\nAIRB_CRUSH\x10*\x12\x14\n\x10\x42RAKE_LIGHT_FAIL\x10+\x12\x14\n\x10\x44RVRQ_SHFT_ERROR\x10,\x12\x14\n\x10INR_MALFCT_ERROR\x10-\x12\x13\n\x0f\x43\x43\x41\x43\x43_SWT_ERROR\x10.\x12\x1e\n\x1aWIDE_FOV_FRONT_CAMERA_BLUR\x10/\x12 \n\x1cNARROW_FOV_FRONT_CAMERA_BLUR\x10\x30\x12\x1a\n\x16LEFT_FRONT_CAMERA_BLUR\x10\x31\x12\x1b\n\x17RIGHT_FRONT_CAMERA_BLUR\x10\x32\x12\x19\n\x15LIFT_REAR_CAMERA_BLUR\x10\x33\x12\x1a\n\x16RIGHT_REAR_CAMERA_BLUR\x10\x34\x12\x14\n\x10REAR_CAMERA_BLUR\x10\x35\x12\x1b\n\x17\x41ROUND_VIEW_CAMERA_BLUR\x10\x36\x12\x16\n\x12SLOPE_EXCEED_LIMIT\x10\x37\x12\x17\n\x13\x44RV_MOD_NOT_SUPPORT\x10\x38\x12\x15\n\x11\x44_GEAR_TIME_LIMIT\x10\x39\x12&\n\"SLOPE_EXCEED_LIMIT_SYS_UNAVAILABLE\x10:\x12\x1f\n\x1bSLOPE_EXCEED_LIMIT_SYS_EXIT\x10;\x12,\n(SLOPE_EXCEED_LIMIT_PLEASE_LEAVE_THE_RAMP\x10<\x12\'\n#DRV_MOD_NOT_SUPPORT_SYS_UNAVAILABLE\x10=\x12 \n\x1c\x44RV_MOD_NOT_SUPPORT_SYS_EXIT\x10>\x12!\n\x1d\x43\x41R_NOT_READY_SYS_UNAVAILABLE\x10?\x12\x1a\n\x16\x43\x41R_NOT_READY_SYS_EXIT\x10@\x12\x1d\n\x19USS_FAILURE_SYS_AVAILABLE\x10\x41\x12\x18\n\x14USS_FAILURE_SYS_EXIT\x10\x42\x12$\n AVM_NOT_CALIBRATED_SYS_AVAILABLE\x10\x43\x12\x1f\n\x1b\x41VM_NOT_CALIBRATED_SYS_EXIT\x10\x44\x12 \n\x1c\x43\x41MERA_FAILURE_SYS_AVAILABLE\x10\x45\x12\x1b\n\x17\x43\x41MERA_FAILURE_SYS_EXIT\x10\x46\x12\x1e\n\x1a\x43\x41MERA_DIRTY_SYS_AVAILABLE\x10G\x12\x19\n\x15\x43\x41MERA_DIRTY_SYS_EXIT\x10H\x12 \n\x1c\x43\x41MERA_BLOCKED_SYS_AVAILABLE\x10I\x12\x1b\n\x17\x43\x41MERA_BLOCKED_SYS_EXIT\x10J\x12\'\n#TIRE_PRESSURE_TOO_LOW_SYS_AVAILABLE\x10K\x12\"\n\x1eTIRE_PRESSURE_TOO_LOW_SYS_EXIT\x10L\x12\x15\n\x11\x42RAKE_NOT_APPLIED\x10M\x12%\n!LIDAR_BLIND_FAULT_SYS_UNAVAILABLE\x10N\x12\x1e\n\x1aLIDAR_BLIND_FAULT_SYS_EXIT\x10O\x12\x1f\n\x1bLIDAR_FAULT_SYS_UNAVAILABLE\x10P\x12\x18\n\x14LIDAR_FAULT_SYS_EXIT\x10Q\x12\x15\n\x11\x43HARGE_GUN_IN_USE\x10R\x12\x1a\n\x16TIRE_PRESSURE_ABNORMAL\x10S\x12\x0f\n\x0bLIDAR_ERROR\x10T\x12\x0f\n\x0bLIDAR_BLOCK\x10U\x12\x1a\n\x16ULTRASONIC_RADAR_ERROR\x10V\x12\x1a\n\x16ULTRASONIC_RADAR_BLOCK\x10W\x12 \n\x1c\x46RONT_ULTRASONIC_RADAR_ERROR\x10X\x12 \n\x1c\x46RONT_ULTRASONIC_RADAR_BLOCK\x10Y\x12\x1f\n\x1bREAR_ULTRASONIC_RADAR_ERROR\x10Z\x12\x1f\n\x1bREAR_ULTRASONIC_RADAR_BLOCK\x10[\x12\x1c\n\x18\x41ROUND_VIEW_CAMERA_ERROR\x10\\\x12\x1c\n\x18\x41ROUND_VIEW_CAMERA_BLOCK\x10]\x12\"\n\x1e\x46RONT_AROUND_VIEW_CAMERA_ERROR\x10^\x12\"\n\x1e\x46RONT_AROUND_VIEW_CAMERA_BLOCK\x10_\x12&\n\"REAR_REAR_AROUND_VIEW_CAMERA_ERROR\x10`\x12!\n\x1dREAR_AROUND_VIEW_CAMERA_BLOCK\x10\x61\x12!\n\x1dLEFT_AROUND_VIEW_CAMERA_ERROR\x10\x62\x12!\n\x1dLEFT_AROUND_VIEW_CAMERA_BLOCK\x10\x63\x12\"\n\x1eRIGHT_AROUND_VIEW_CAMERA_ERROR\x10\x64\x12\"\n\x1eRIGHT_AROUND_VIEW_CAMERA_BLOCK\x10\x65\x12\x1b\n\x17\x46RONT_VIEW_CAMERA_ERROR\x10\x66\x12\x1b\n\x17\x46RONT_VIEW_CAMERA_BLOCK\x10g\x12\x12\n\x0eGEAR_P_TIMEOUT\x10h\x12\x16\n\x12\x45PB_PARKED_TIMEOUT\x10i\x12\x11\n\rGEAR_NOT_IN_R\x10j\x12\x10\n\x0cVMM_ABNORMAL\x10k\x12\x1c\n\x18IHU_ADCU_LOST_CONNECTION\x10l\x12\x12\n\x0ePAS_ADCU_ERROR\x10m\x12\x1d\n\x19SUPER_ENDURANCE_MODE_OPEN\x10n\x12\x16\n\x12TANK_TUN_MODE_OPEN\x10o\x12\x16\n\x12\x43RAB_MOV_MODE_OPEN\x10p\x12\x15\n\x11OFFROAD_MODE_OPEN\x10q\x12\r\n\tGEAR_IN_M\x10r\x12\x0e\n\tUSS_BLIND\x10\x91\x01\x12\x14\n\x0f\x46RONT_USS_BLIND\x10\x92\x01\x12\x13\n\x0e\x42\x41\x43K_USS_BLIND\x10\x93\x01\x12\x11\n\x0c\x43\x41MERA_DIRTY\x10\x94\x01\x12\x1c\n\x17REAR_VIEW_MIRROR_OPENED\x10\x95\x01\x12\x0e\n\tECU_FAULT\x10\x96\x01\x12\x15\n\x10P_OR_EPB_NOT_SET\x10\x97\x01\x12\x14\n\x0fUSS_INTERFENCED\x10\x98\x01\x12\x16\n\x11\x41PP_IN_PHONE_CALL\x10\x99\x01\x12\x1e\n\x19\x41PP_IN_PHONE_CALL_TIMEOUT\x10\x9a\x01\x12\x16\n\x11\x41PP_IN_BACKGROUND\x10\x9b\x01\x12\x1a\n\x15\x42LE_VALIDATION_FAILED\x10\x9c\x01\x12\x11\n\x0c\x45PB_OVERRIDE\x10\x9d\x01\x12\x10\n\x0bWHEEL_BLOCK\x10\x9e\x01\x12 \n\x1bMILLIMETER_WAVE_LIDAR_ERROR\x10\x9f\x01\x12 \n\x1bMILLIMETER_WAVE_LIDAR_BLOCK\x10\xa0\x01\x12\x1b\n\x16REAR_VIEW_CAMERA_ERROR\x10\xa1\x01\x12\x1b\n\x16REAR_VIEW_CAMERA_BLOCK\x10\xa2\x01\x12\x1b\n\x16SIDE_VIEW_CAMERA_ERROR\x10\xa3\x01\x12\x1b\n\x16SIDE_VIEW_CAMERA_BLOCK\x10\xa4\x01\x12\x17\n\x12GEAR_NOT_IN_D_OR_N\x10\xa5\x01\x12\x1a\n\x15INVALID_GEAR_OVERRIDE\x10\xa6\x01\x12\x1d\n\x18\x45PB_NOT_PARKED_IN_P_GEAR\x10\xa7\x01\x12\x1f\n\x1a\x45PB_NOT_RELEASED_IN_D_GEAR\x10\xa8\x01\x12\x18\n\x13REAR_ELD_LCK_LOCKED\x10\xa9\x01\"\xf8w\n\x11\x42usinessCheckInfo\x12<\n\x06status\x18\x01 \x03(\x0e\x32,.dr.operationstatus.BusinessCheckInfo.Status\"\xa4w\n\x06Status\x12\x11\n\rSTATUS_UNKNOW\x10\x00\x12\x11\n\rICA_ACTIVATED\x10\x01\x12\x11\n\rNCA_ACTIVATED\x10\x02\x12\x11\n\rAEB_ACTIVATED\x10\x03\x12\n\n\x06\x41PA_ON\x10\x04\x12\x0b\n\x07\x45SC_OFF\x10\x05\x12\x0f\n\x0b\x41\x42S_ACTIVED\x10\x06\x12\x0f\n\x0bHDC_ACTIVED\x10\x07\x12\x0f\n\x0bTCS_ACTIVED\x10\x08\x12\x0f\n\x0bVDC_ACTIVED\x10\t\x12\x11\n\rVCU_NOT_READY\x10\n\x12\x0f\n\x0b\x43\x44P_ACTIVED\x10\x0b\x12\x0f\n\x0b\x41VH_ACTIVED\x10\x0c\x12\x0f\n\x0b\x45SC_ACTIVED\x10\r\x12\x14\n\x10VCU_LIMPHOME_TCM\x10\x0e\x12\x12\n\x0e\x45PS_NOT_READEY\x10\x0f\x12\x0f\n\x0b\x45SP_ACTIVED\x10\x10\x12\x0f\n\x0b\x44TC_ACTIVED\x10\x11\x12\x0f\n\x0b\x45\x42P_ACTIVED\x10\x12\x12\x0f\n\x0b\x45\x42\x44_ACTIVED\x10\x13\x12\x0f\n\x0b\x41\x43\x43_ACTIVED\x10\x14\x12\x12\n\x0eODD_UNAVLIABLE\x10\x15\x12\x15\n\x11\x45SC_SYSTEM_FAILED\x10\x16\x12\x15\n\x11\x45PS_SYSTEM_FAILED\x10\x17\x12\x15\n\x11VCU_SYSTEM_FAILED\x10\x18\x12\x15\n\x11\x45PB_SYSTEM_FAILED\x10\x19\x12\x11\n\rLDW_ACTIVATED\x10\x1a\x12\x11\n\rRDP_ACTIVATED\x10\x1b\x12\x0f\n\x0b\x41PA_ACTIVED\x10\x1c\x12\x0f\n\x0bVPA_ACTIVED\x10\x1d\x12\x19\n\x15\x43URRENT_LANE_TOO_WIDE\x10\x1e\x12 \n\x1cLONGITUDINAL_CONTROL_TIMEOUT\x10\x1f\x12\x0f\n\x0b\x45LK_ACTIVED\x10 \x12\x18\n\x14\x45SC_HANDSHAKE_FAILED\x10!\x12!\n\x1dVCU_NO_RESPONSE_P_GEAR_SWITCH\x10\"\x12\r\n\tESC_ERROR\x10#\x12\x10\n\x0cVLC_ABNORMAL\x10$\x12\x10\n\x0c\x43\x44\x44_ABNORMAL\x10%\x12\x16\n\x12LOCALIZATION_ERROR\x10&\x12\x15\n\x11\x46RAME_RATIO_ERROR\x10\'\x12\x18\n\x14STARTER_REPORT_ERROR\x10(\x12\x18\n\x14\x43ONTROL_REPORT_ERROR\x10)\x12\x10\n\x0c\x41\x43\x43_IN_FAULT\x10*\x12\x0e\n\nACC_IN_OFF\x10+\x12\x10\n\x0cICA_IN_FAULT\x10,\x12\x11\n\rICA_FORBIDDEN\x10-\x12\x10\n\x0cNCA_IN_FAULT\x10.\x12\x16\n\x12SAFETY_FATAL_EVENT\x10/\x12\x10\n\x0cRADS_ACTIVED\x10\x30\x12\x17\n\x13IN_CALIBRATION_MODE\x10\x31\x12\x15\n\x11IN_UPGRADING_MODE\x10\x32\x12\x1f\n\x1bOTHER_STATE_MACHINE_ACTIVED\x10\x33\x12\x0f\n\x0bMSR_ACTIVED\x10\x34\x12\x0b\n\x07\x45SP_OFF\x10\x35\x12\x1b\n\x17\x43URRENT_LANE_TOO_NARROW\x10\x36\x12\x16\n\x12PARKING_ACTIVATING\x10\x37\x12\r\n\tESP_FAULT\x10\x38\x12\r\n\tABS_FUALT\x10\x39\x12\x1d\n\x19\x45PS_LKA_ANGDLVD_STS_ERROR\x10:\x12\r\n\tEBD_FAULT\x10;\x12\x18\n\x14VCU_ACC_COM_IF_ERROR\x10<\x12\r\n\tVCU_ERROR\x10=\x12\r\n\tAIRB_FAIL\x10>\x12\x11\n\rTURN_LMP_FAIL\x10?\x12\x0f\n\x0bPTC_ACTIVED\x10@\x12\x0f\n\x0b\x42TC_ACTIVED\x10\x41\x12\x11\n\rBTC_ACTIVE_RA\x10\x42\x12\x11\n\rPTC_ACTIVE_RA\x10\x43\x12\x11\n\rMSR_ACTIVE_RA\x10\x44\x12\x12\n\x0eIN_TRAILERMODE\x10\x45\x12\x1a\n\x16\x44RIVING_MODE_ABLNORMAL\x10\x46\x12\x1e\n\x1aSAFETY_RELATED_FATAL_EVENT\x10G\x12\x19\n\x15PLANNING_FAILED_EVENT\x10H\x12\x10\n\x0c\x46\x43TB_ACTIVED\x10I\x12\x10\n\x0cRCTB_ACTIVED\x10J\x12$\n SECURITY_ACTIVED_SYS_UNAVAILABLE\x10K\x12\x1d\n\x19SECURITY_ACTIVED_SYS_EXIT\x10L\x12\x0f\n\x0bRPA_ACTIVED\x10M\x12 \n\x1cSAFETY_FATAL_SYS_UNAVAILABLE\x10N\x12(\n$SAFETY_RELATED_FATAL_SYS_UNAVAILABLE\x10O\x12\x0f\n\x0b\x44ST_ACTIVED\x10P\x12\x12\n\x0e\x41VM_VEDIO_LOST\x10Q\x12\x12\n\x0eSAFETY_INHIBIT\x10R\x12(\n$CANBUS_REPORT_CONTROL_LOST_HEARTBEAT\x10S\x12\x1f\n\x1b\x41LL_FUNCTION_MODE_NOT_READY\x10T\x12\"\n\x1eSAFETY_INHIBIT_SYS_UNAVAILABLE\x10U\x12\x16\n\x12POLICY_21_RECEIVED\x10V\x12&\n\"POLICY_21_RECEIVED_SYS_UNAVAILABLE\x10W\x12\x15\n\x11\x43\x41R_MODE_ABNORMAL\x10X\x12\x17\n\x13USAGE_MODE_ABNORMAL\x10Y\x12\x11\n\rTOO_MUCH_RAIN\x10Z\x12\x16\n\x12PSCM_SYSTEM_FAILED\x10[\x12\x16\n\x12PCMU_SYSTEM_FAILED\x10\\\x12\x15\n\x11\x42\x43M_SYSTEM_FAILED\x10]\x12\x13\n\x0fTOW_HOOK_OPENED\x10^\x12\x10\n\x0c\x46\x43TA_ACTIVED\x10_\x12\x10\n\x0cRCTA_ACTIVED\x10`\x12\x13\n\x0f\x42RIGHT_ABNORMAL\x10\x61\x12\x16\n\x12\x43\x41R_WASH_MODE_OPEN\x10\x62\x12\x11\n\rECALL_ACTIVED\x10\x63\x12\x1e\n\x1aSUSPENSION_HEIGHT_ABNORMAL\x10\x64\x12\x18\n\x14VEHICLE_SLIP_IN_SNOW\x10\x65\x12#\n\x1fVEHICLE_SLIP_IN_SNOW_TIME_LIMIT\x10\x66\x12\x1e\n\x1a\x45SP_DIAGNOSTIC_MODE_ACTIVE\x10g\x12\x14\n\x10\x43\x41NBUS_EXIT_AUTO\x10h\x12 \n\x1c\x41\x43\x43_DRIVING_MODE_NOT_ALLOWED\x10i\x12 \n\x1cICA_DRIVING_MODE_NOT_ALLOWED\x10j\x12\x16\n\x12\x45\x43M_ACC_INHIBITION\x10k\x12\'\n#ACC_CONFIGURATION_CONDITION_NOT_MET\x10l\x12\'\n#ICA_CONFIGURATION_CONDITION_NOT_MET\x10m\x12\'\n#NCA_CONFIGURATION_CONDITION_NOT_MET\x10n\x12\x1a\n\x16TURN_SIGNAL_INHIBITION\x10o\x12\x16\n\x12STAND_WAIT_TIMEOUT\x10p\x12\x13\n\x0fSTANDSTILL_HOLD\x10q\x12\r\n\tAUTO_HOLD\x10r\x12\x16\n\x12POLICY_41_RECEIVED\x10s\x12\x16\n\x12POLICY_42_RECEIVED\x10t\x12\x16\n\x12POLICY_43_RECEIVED\x10u\x12\x1a\n\x16\x44RIVING_MODE_SNOW_MODE\x10v\x12\x1b\n\x17\x44RIVING_MODE_MUDDY_MODE\x10w\x12\x1a\n\x16\x44RIVING_MODE_SAND_MODE\x10x\x12\x1d\n\x19\x44RIVING_MODE_TRAILER_MODE\x10y\x12 \n\x1cNCA_DRIVING_MODE_NOT_ALLOWED\x10z\x12\x0f\n\x0bRCW_ACTIVED\x10{\x12\x0f\n\x0b\x45MA_ACTIVED\x10|\x12\x0f\n\x0bMAI_ACTIVED\x10}\x12\x1d\n\x19\x43\x41NBUS_ENTER_AUTO_TIMEOUT\x10~\x12\x0f\n\x0b\x41\x45S_ACTIVED\x10\x7f\x12\x15\n\x10\x41\x43TIVED_TOO_SOON\x10\x80\x01\x12\x19\n\x14\x44RIVER_IN_OVERTAKING\x10\x81\x01\x12#\n\x1e\x45XCESSIVE_CURV_RAD_AND_LAT_ACC\x10\x82\x01\x12\x13\n\x0eTOO_SLOW_SPEED\x10\xa0\x1f\x12\x13\n\x0eTOO_FAST_SPEED\x10\xa1\x1f\x12\x12\n\rHIGH_YAW_RATE\x10\xa2\x1f\x12\x1b\n\x16MISSING_LEFT_LANE_LINE\x10\xa3\x1f\x12\x1c\n\x17MISSING_RIGHT_LANE_LINE\x10\xa4\x1f\x12\x13\n\x0eOVER_WIDE_LANE\x10\xa5\x1f\x12\x15\n\x10OVER_NARROW_LANE\x10\xa6\x1f\x12\x1d\n\x18\x45XCESSIVE_CURVATURE_LANE\x10\xa7\x1f\x12\x19\n\x14HEAVY_BRAKE_PRESSURE\x10\xa8\x1f\x12#\n\x1e\x45XCESSIVE_STEERING_LEFT_TORQUE\x10\xa9\x1f\x12$\n\x1f\x45XCESSIVE_STEERING_RIGHT_TORQUE\x10\xaa\x1f\x12\x1d\n\x18\x45XCESSIVE_STEERING_ANGLE\x10\xab\x1f\x12\"\n\x1d\x45XCESSIVE_STEERING_ANGLE_RATE\x10\xac\x1f\x12\x18\n\x13HIGH_ACC_PEDAL_RATE\x10\xad\x1f\x12\x1f\n\x1a\x45XCESSIVE_WARNING_DURATION\x10\xae\x1f\x12\x1f\n\x1aTOO_SHORT_WARNING_INTERVAL\x10\xaf\x1f\x12$\n\x1f\x46RONT_WHEEL_EXCEED_WARNING_LINE\x10\xb0\x1f\x12\x0f\n\nLANE_CLOSE\x10\xb1\x1f\x12\x18\n\x13LDW_DRIVING_ON_LINE\x10\xb2\x1f\x12\x18\n\x13RDP_DRIVING_ON_LINE\x10\xb3\x1f\x12\x18\n\x13\x45LK_DRIVING_ON_LINE\x10\xb4\x1f\x12\x1c\n\x17LDW_WARNING_EXCEED_TIME\x10\xb5\x1f\x12\x1c\n\x17LSS_ACTIVE_NUDGING_LEFT\x10\xb6\x1f\x12\x1d\n\x18LSS_ACTIVE_NUDGING_RIGHT\x10\xb7\x1f\x12\'\n\"LSS_EXCESSIVE_SAME_DIR_LEFT_TORQUE\x10\xb8\x1f\x12(\n#LSS_EXCESSIVE_SAME_DIR_RIGHT_TORQUE\x10\xb9\x1f\x12*\n%LSS_EXCESSIVE_REVERSE_DIR_LEFT_TORQUE\x10\xba\x1f\x12+\n&LSS_EXCESSIVE_REVERSE_DIR_RIGHT_TORQUE\x10\xbb\x1f\x12\x14\n\x0fRDP_EXCEED_TIME\x10\xbc\x1f\x12\x14\n\x0f\x45LK_EXCEED_TIME\x10\xbd\x1f\x12#\n\x1e\x41NGLE_DEVIATION_OVER_THRESHOLD\x10\xcc!\x12$\n\x1fLATERAL_DISTANCE_OVER_THRESHOLD\x10\xcd!\x12!\n\x1cMISSING_LEFT_RIGHT_LANE_LINE\x10\xce!\x12\x15\n\x10IN_SHOULDER_LANE\x10\xcf!\x12\x18\n\x13LATEM_EXIT_TIME_OUT\x10\xd0!\x12\x13\n\x0e\x44MS_NOT_ACTIVE\x10\xd1!\x12(\n#ICA_ON_CROSSROADS_NON_STRAIGHT_LANE\x10\xd2!\x12(\n#CURRENT_LANE_TRAFFIC_LIGHT_ABNORMAL\x10\xd3!\x12\x0f\n\nCROSS_LINE\x10\xd4!\x12\x0f\n\nEOP_NO_GAP\x10\xd5!\x12\x1b\n\x16NARROW_ROAD_IMPASSIBLE\x10\xd6!\x12\x1b\n\x16LANE_CHANGE_SWITCH_OFF\x10\xb0\"\x12\x14\n\x0f\x44RIVER_TAKE_OFF\x10\xb1\"\x12 \n\x1bICA_IN_LATERAL_CONTROL_EXIT\x10\xb2\"\x12\x0f\n\nACC_IN_BOM\x10\xb3\"\x12\x13\n\x0eICA_NOT_ACTIVE\x10\xb4\"\x12\x17\n\x12LANE_LINE_IS_SOLID\x10\xb5\"\x12\x1b\n\x16TARGET_LANE_TOO_NARROW\x10\xb6\"\x12!\n\x1cTARGET_LANE_IS_SHOULDER_LANE\x10\xb7\"\x12(\n#TARGET_LANE_NON_MOTOR_VEHICLE_LANES\x10\xb8\"\x12\x18\n\x13TARGET_LANE_REVERSE\x10\xb9\"\x12\x16\n\x11TARGET_LANE_CLOSE\x10\xba\"\x12\x11\n\x0cILC_IN_FAULT\x10\xbb\"\x12\x1e\n\x19LANE_CHANGE_WAIT_TIME_OUT\x10\xbc\"\x12\x13\n\x0eLANE_LINE_CURB\x10\xbd\"\x12\x14\n\x0fTURN_SIGNAL_OFF\x10\xbe\"\x12\x18\n\x13TURN_SIGNAL_REVERSE\x10\xbf\"\x12\x14\n\x0fILC_CCP_INVALID\x10\xc0\"\x12\x1b\n\x16ILC_PILOT_NOT_SELECTED\x10\xc1\"\x12\x17\n\x12ILC_NCA_SWITCH_OFF\x10\xc2\"\x12 \n\x1bPLANNING_LANE_CHANGE_FAILED\x10\xce\"\x12-\n(PLANNING_LANE_CHANGE_FAILED_NONCROSSABLE\x10\xcf\"\x12\x33\n.PLANNING_LANE_CHANGE_FAILED_UNSAFE_LANE_CHANGE\x10\xd0\"\x12(\n#PLANNING_LANE_CHANGE_FAILED_NO_ROOM\x10\xd1\"\x12,\n\'PLANNING_LANE_CHANGE_FAILED_ILC_TIMEOUT\x10\xd2\"\x12:\n5PLANNING_LANE_CHANGE_FAILED_SURROUNDING_CAR_TOO_CLOSE\x10\xd3\"\x12.\n)PLANNING_LANE_CHANGE_FAILED_HEAVY_TRAFFIC\x10\xd4\"\x12\x34\n/PLANNING_LANE_CHANGE_FAILED_BLIND_SPOT_OCCUPIED\x10\xd5\"\x12\x30\n+PLANNING_LANE_CHANGE_FAILED_STATIC_OBSTACLE\x10\xd6\"\x12\x33\n.PLANNING_LANE_CHANGE_FAILED_REAR_CAR_TOO_CLOSE\x10\xd7\"\x12\x17\n\x12NO_NAVIGATION_INFO\x10\x94#\x12\x18\n\x13NAVIGATION_ABNORMAL\x10\x95#\x12\x11\n\x0cOUT_ODD_ROAD\x10\x96#\x12\x1c\n\x17NAVIGATION_ID_NOT_MATCH\x10\x97#\x12\x16\n\x11WILL_OUT_ODD_ROAD\x10\x98#\x12\x12\n\rGNSS_NOT_GOOD\x10\x99#\x12\x1b\n\x16\x41MAP_NOT_IN_NAVIGATION\x10\x9a#\x12\x1a\n\x15\x41MPA_NAVIGATION_YAWED\x10\x9b#\x12 \n\x1b\x41MAP_NAVIGATION_SIGNAL_LOST\x10\x9c#\x12\x18\n\x13TURN_ARROUND_FAILED\x10\x9d#\x12\"\n\x1dNAVIGATION_ARRIVE_DESTINATION\x10\x9e#\x12\x1b\n\x16NAVIGATION_ARRIVE_TOLL\x10\x9f#\x12 \n\x1bNAVIGATION_ARRIVE_REST_AREA\x10\xa0#\x12\x16\n\x11ICA_IN_COUNTDOWN2\x10\xa1#\x12\x0f\n\nICA_IN_MRM\x10\xa2#\x12\'\n\"NAVIGATION_ARRIVE_DESTINATION_SOON\x10\xa3#\x12\x19\n\x14\x44OWN_TO_ICA_IS_CLICK\x10\xa4#\x12!\n\x1c\x41MAP_NAVIGATION_ID_NOT_MATCH\x10\xa5#\x12\x17\n\x12\x41MAP_LOR_NOT_MATCH\x10\xa6#\x12\x18\n\x13ROADCLASS_NOT_MATCH\x10\xa7#\x12\x1f\n\x1a\x41MAP_NAVIGATION_REPLANNING\x10\xa8#\x12\'\n\"AMAP_NAVIGATION_REPLANNING_EXPIRED\x10\xa9#\x12\x11\n\x0cUTURN_FAILED\x10\xaa#\x12\x1c\n\x17NAVIGATION_ARRIVE_UTURN\x10\xab#\x12!\n\x1cNAVIGATION_ARRIVE_ROUNDABOUT\x10\xac#\x12!\n\x1cNAVIGATION_ARRIVE_ROI_REGION\x10\xad#\x12*\n%NAVIGATION_ARRIVE_CITY_AND_ROAD_CLASS\x10\xae#\x12 \n\x1b\x41MAP_TOO_CLOSE_TO_NEXT_STEP\x10\xaf#\x12\x1b\n\x16\x41MAP_NEXT_STEP_PENALTY\x10\xb0#\x12\x0f\n\nEOP_ACTIVE\x10\xb1#\x12\x15\n\x10PLANNING_BLOCKED\x10\xb2#\x12\x1b\n\x16NAVIGATION_ARRIVE_CITY\x10\xb3#\x12!\n\x1cNAVIGATION_ARRIVE_ROAD_CLASS\x10\xb4#\x12-\n(ROUTING_MAIN_ROAD_VEHICLE_SECONDARY_ROAD\x10\xb5#\x12-\n(ROUTING_SECONDARY_ROAD_VEHICLE_MAIN_ROAD\x10\xb6#\x12\x18\n\x13NCA_SOFT_SWITCH_OFF\x10\xb7#\x12*\n%VPA_LEARNING_NEED_REENTER_PARKING_ODD\x10\xb8#\x12\x17\n\x12\x45\x32\x45_SWITCH_TO_MNCA\x10\xc6#\x12\x1e\n\x19NO_FRONT_VEHICLE_DETECTED\x10\xf8#\x12\x11\n\x0c\x43\x41MERA_SMEAR\x10\xf9#\x12\x19\n\x14INVALID_CURVE_RADIUS\x10\xfa#\x12\x1c\n\x17INVALID_VEHICLE_HEADING\x10\xfb#\x12\'\n\"INVALID_LATERAL_REMAINING_DISTANCE\x10\xfc#\x12\x16\n\x11LANE_LINE_MISSING\x10\xfd#\x12\x17\n\x12INVALID_LANE_WIDTH\x10\xfe#\x12\x13\n\x0e\x44RIVER_REQUEST\x10\x88\'\x12\x1c\n\x17\x44RIVER_REQUEST_LOW_BEAM\x10\x89\'\x12\x12\n\rAUTO_LAMP_OFF\x10\x8a\'\x12 \n\x1b\x44\x45LAYED_TRANSITION_DETECTED\x10\x8b\'\x12\x0e\n\tIN_TUNNEL\x10\x8c\'\x12\x10\n\x0bIN_CROSSING\x10\x8d\'\x12\x11\n\x0cWEATHER_RAIN\x10\x8e\'\x12\x12\n\rWEATHER_FOGGY\x10\x8f\'\x12\x18\n\x13LIGHTING_INTERFERED\x10\x90\'\x12\x18\n\x13\x41VM_MANUALLY_OPENED\x10\xda\x36\x12\x18\n\x13\x41VM_MANUALLY_CLOSED\x10\xdb\x36\x12\x0f\n\nAVM_FAILED\x10\xdc\x36\x12\x17\n\x12\x41VM_ACTIVED_BY_PDC\x10\xdd\x36\x12\x1e\n\x19\x41VM_OPEN_BY_TURN_DISABLED\x10\xde\x36\x12\x18\n\x13\x41PA_MANUALLY_OPENED\x10\xcd:\x12\x16\n\x11\x41PA_MANUALLY_EXIT\x10\xce:\x12\x1e\n\x19\x41PA_MANUALLY_START_PARKIN\x10\xcf:\x12\x1d\n\x18\x41PA_MANUALLY_STOP_PARKIN\x10\xd0:\x12\x1f\n\x1a\x41PA_MANUALLY_START_PARKOUT\x10\xd1:\x12\x1e\n\x19\x41PA_MANUALLY_STOP_PARKOUT\x10\xd2:\x12\x1e\n\x19\x41PA_ROUTE_PLANNING_FAILED\x10\xd3:\x12\x1c\n\x17\x41PA_STANDBYAREA_LIMITED\x10\xd4:\x12\x1d\n\x18\x41PA_INTERRUPPTED_TOOMUCH\x10\xd5:\x12\x1f\n\x1a\x41PA_CAR_MOVED_TOOMUCH_TIME\x10\xd6:\x12\x1e\n\x19\x41PA_PARKING_SPEED_TOOHIGH\x10\xd7:\x12\x14\n\x0f\x41PA_CAR_BLOCKED\x10\xd8:\x12\x18\n\x13\x41PA_PARKING_SUCCESS\x10\xd9:\x12\x17\n\x12\x41PA_PARKING_FAILED\x10\xda:\x12\x18\n\x13\x41PA_PARKING_TIMEOUT\x10\xdb:\x12\x1c\n\x17\x41PA_GEAR_SWITCH_TOOMUCH\x10\xdc:\x12\x16\n\x11\x41PA_ACTIVE_BY_VPA\x10\xdd:\x12\x19\n\x14\x41PA_HW_NOT_AVALIABLE\x10\xde:\x12\x1b\n\x16\x41PA_HW_ACTIVATE_FAILED\x10\xdf:\x12*\n%APA_SET_PERCEPTION_PARKINGMODE_FAILED\x10\xe0:\x12,\n\'APA_SET_LOCALIZATION_PARKINGMODE_FAILED\x10\xe1:\x12\x1d\n\x18\x41PA_PARKINGSPACE_INVALID\x10\xe2:\x12$\n\x1f\x41PA_VPA_ROUTING_PARKING_SUCCESS\x10\xe3:\x12#\n\x1e\x41PA_VPA_ROUTING_PARKING_FAILED\x10\xe4:\x12\x1d\n\x18\x41PA_CAR_BLOCK_DISAPPERED\x10\xe5:\x12%\n APA_VPA_LEARNING_PARKING_SUCCESS\x10\xe6:\x12$\n\x1f\x41PA_VPA_LEARNING_PARKING_FAILED\x10\xe7:\x12\x16\n\x11\x41PA_PAUSE_TIMEOUT\x10\xe8:\x12\x11\n\x0c\x41PA_DISABLED\x10\xe9:\x12\x1e\n\x19\x41PA_CANBUS_REPORT_PASSIVE\x10\xea:\x12&\n!APA_SPEED_IS_TOO_HIGH_NEED_23KM_H\x10\xeb:\x12*\n%APA_SPEED_IS_TOO_HIGH_SYS_UNAVAILABLE\x10\xec:\x12$\n\x1f\x41PA_SPEED_IS_TOO_HIGH_SYS_EXITS\x10\xed:\x12 \n\x1b\x41PA_CAR_MOVED_IN_OUTPARKING\x10\xee:\x12\x12\n\rAPA_USER_EXIT\x10\xef:\x12\x1d\n\x18\x41PA_BLOCK_BY_DYNAMIC_CAR\x10\xf0:\x12$\n\x1f\x41PA_BLOCK_BY_DYNAMIC_PEDESTRIAN\x10\xf1:\x12\x1c\n\x17\x41PA_BLOCK_BY_STATIC_OBS\x10\xf2:\x12\'\n\"SLOPE_EXCEED_LIMIT_SYS_UNAVAILABLE\x10\xf3:\x12,\n\'APA_DRV_MOD_NOT_SUPPORT_SYS_UNAVAILABLE\x10\xf4:\x12\x17\n\x12\x41PA_PAUSED_BY_USER\x10\xf5:\x12\x1d\n\x18\x41PA_PARKOUT_NO_VALID_DIR\x10\xf6:\x12\x18\n\x13\x41PA_VEHICLE_BLOCKED\x10\xf7:\x12\x1c\n\x17\x41PA_PARKING_IN_FINISHED\x10\xf8:\x12\x1d\n\x18\x41PA_PARKING_OUT_FINISHED\x10\xf9:\x12\x1b\n\x16\x41PA_LONGITUDINAL_ERROR\x10\xfa:\x12\x16\n\x11\x41PA_LATERAL_ERROR\x10\xfb:\x12\x1f\n\x1a\x41PA_RESUME_CONFIRM_TIMEOUT\x10\xfc:\x12)\n$APA_TO_STANDBY_BY_RPA_STRAIGHT_INOUT\x10\xfd:\x12*\n%APA_LONGITUDINAL_ERROR_SYS_UNAVAIABLE\x10\xfe:\x12%\n APA_LATERAL_ERROR_SYS_UNAVAIABLE\x10\xff:\x12\x14\n\x0f\x41PA_CANBUS_LOST\x10\x80;\x12\"\n\x1d\x41PA_CANBUS_ENTER_AUTO_TIMEOUT\x10\x81;\x12#\n\x1e\x41PA_CONTROL_ENTER_AUTO_TIMEOUT\x10\x82;\x12\x1a\n\x15\x41PA_OUTPARKING_FAILED\x10\x83;\x12\x1e\n\x19\x41PA_LAT_HANDSHAKE_TIMEOUT\x10\x84;\x12(\n#APA_CONFIGURATION_CONDITION_NOT_MET\x10\x85;\x12 \n\x1b\x41PA_BRAKE_OVERRIDE_TOO_LONE\x10\x86;\x12 \n\x1b\x41PA_HANDSHAKE_POWER_INVALID\x10\x87;\x12&\n!APA_HANDSHAKE_STEER_ANGEL_INVALID\x10\x88;\x12\x14\n\x0f\x41PA_SWITCH_RADS\x10\x89;\x12%\n APA_OUTPARKING_SPACE_ENOUTH_QUIT\x10\x8a;\x12\x1f\n\x1a\x41PA_LONG_HANDSHAKE_TIMEOUT\x10\x8b;\x12\x1b\n\x16VPA_APP_ACTIVE_ROUTING\x10\xc1>\x12\x19\n\x14VPA_APP_EXIT_ROUTING\x10\xc2>\x12\x1a\n\x15VPA_APP_START_ROUTING\x10\xc3>\x12\x19\n\x14VPA_APP_STOP_ROUTING\x10\xc4>\x12\x1c\n\x17VPA_APP_ACTIVE_LEARNING\x10\xc5>\x12\x1a\n\x15VPA_APP_EXIT_LEARNING\x10\xc6>\x12\x1b\n\x16VPA_APP_START_LEARNING\x10\xc7>\x12\x19\n\x14VPA_APP_END_LEARNING\x10\xc8>\x12\x1c\n\x17VPA_APP_CANCEL_LEARNING\x10\xc9>\x12\x14\n\x0fVPA_MAP_MATCHED\x10\xca>\x12\x15\n\x10VPA_MAP_MISMATCH\x10\xcb>\x12\x18\n\x13VPA_LEARNING_FAILED\x10\xcc>\x12\x19\n\x14VPA_LEARNING_SUCCESS\x10\xcd>\x12\x15\n\x10GNSS_SIGNAL_LOSS\x10\xce>\x12\x13\n\x0eGNSS_SINGAL_OK\x10\xcf>\x12\x1b\n\x16VPA_LOCALIZATION_ERROR\x10\xd0>\x12 \n\x1bVPA_NOTIFY_OVERRIDE_TIMEOUT\x10\xd1>\x12\x14\n\x0fVPA_ROUTING_END\x10\xd2>\x12%\n VPA_ROUTING_START_PARKIN_TIMEOUT\x10\xd3>\x12\x18\n\x13VPA_ROUTING_BLOCKED\x10\xd4>\x12\x0f\n\nVPA_NO_MAP\x10\xd5>\x12%\n VPA_ROUTING_END_NO_PARKING_SPACE\x10\xd6>\x12\x1a\n\x15VPA_LEARNING_TOO_LONG\x10\xd7>\x12 \n\x1bVPA_LEARNING_SPEED_TOO_HIGH\x10\xd8>\x12\x1f\n\x1aVPA_ROUTING_SPEED_TOO_HIGH\x10\xd9>\x12\x1e\n\x19VPA_SYSTEM_ERROR_DETECTED\x10\xde>\x12!\n\x1cVPA_ROUTING_COLLIDE_OVERRIDE\x10\xdf>\x12\x1e\n\x19VPA_CANBUS_REPORT_PASSIVE\x10\xe0>\x12\x1a\n\x15VPA_NOT_FIRST_ROUTING\x10\xe1>\x12\x1b\n\x16VPA_LEARNING_USER_EXIT\x10\xe2>\x12\x1a\n\x15VPA_ROUTING_USER_EXIT\x10\xe3>\x12%\n VPA_ROUTING_BLOCKED_TIMEOUT_EXIT\x10\xe4>\x12,\n\'VPA_ROUTING_STATIC_BLOCKED_TIMEOUT_EXIT\x10\xe5>\x12-\n(VPA_ROUTING_DYNAMIC_BLOCKED_TIMEOUT_EXIT\x10\xe6>\x12\x11\n\x0cVPA_TURN_OFF\x10\xe7>\x12\x1f\n\x1aVPA_LOCALIZATION_NOT_READY\x10\xe8>\x12$\n\x1fVPA_ROUTING_DVR_MOD_NOT_SUPPORT\x10\xe9>\x12!\n\x1cVPA_LOCALIZATION_IS_MATCHING\x10\xea>\x12\"\n\x1dVPA_LOCALIZATION_UNSUCCESSFUL\x10\xeb>\x12)\n$VPA_DRIVING_REFLINE_CURVATURE_EXCEED\x10\xec>\x12-\n(VPA_ROUTING_CONTROL_DRIVING_MODE_TIMEOUT\x10\xed>\x12%\n VPA_ROUTING_SUSPEND_TIMEOUT_EXIT\x10\xee>\x12#\n\x1eVPA_DRIVING_BARRIER_GATE_BLOCK\x10\xef>\x12\x1c\n\x17VPA_DRIVING_PLAN_FAILED\x10\xf0>\x12 \n\x1bVPA_LEARNING_MAP_OVER_LIMIT\x10\xf1>\x12\x18\n\x13VPA_ROUTING_TIMEOUT\x10\xf2>\x12%\n VPA_ROUTING_INTERRUPPTED_TOOMUCH\x10\xf3>\x12\x1f\n\x1aVPA_LEARNING_MAP_SAVE_FAIL\x10\xf4>\x12 \n\x1bVPA_LEARNING_MAP_LEARN_FAIL\x10\xf5>\x12 \n\x1bVPA_LEARNING_ODD_UNAVLIABLE\x10\xf6>\x12-\n(VPA_END_MAPPING_ADC_NOT_IN_PARKING_SPACE\x10\xf7>\x12\x30\n+VPA_END_MAPPING_LEARNED_TRAJECORY_TOO_SHORT\x10\xf8>\x12,\n\'VPA_END_MAPPING_NO_PARKING_SPACE_NEARBY\x10\xf9>\x12/\n*VPA_END_MAPPING_LEARNED_TRAJECORY_TOO_LONG\x10\xfa>\x12\x38\n3VPA_END_MAPPING_LEARNED_TRAJECTORY_REACH_MAX_LIMITS\x10\xfb>\x12)\n$VPA_END_MAPPING_TRAJECTORY_TOO_STEEP\x10\xfc>\x12\x36\n1VPA_END_MAPPING_TRAJECTORY_ENVIRONMENT_TOO_SPARSE\x10\xfd>\x12/\n*VPA_END_MAPPING_TRAJECTORY_REVERSE_TOO_FAR\x10\xfe>\x12\x37\n2VPA_END_MAPPING_TRAJECTORY_NOT_REACH_PARKING_SPACE\x10\xff>\x12:\n5VPA_END_MAPPING_TRAJECTORY_CROSS_TARGET_PARKING_SPACE\x10\x80?\x12-\n(VPA_END_MAPPING_TRAJECTORY_LOOP_DETECTED\x10\x81?\x12*\n%VPA_END_MAPPING_MAPPING_TIME_TOO_LONG\x10\x82?\x12)\n$VPA_END_MAPPING_MAPPING_SAVE_FAILURE\x10\x83?\x12/\n*VPA_END_MAPPING_NOT_ENOUGH_DISK_FREE_SPACE\x10\x84?\x12\'\n\"VPA_END_MAPPING_INPUT_DATA_INVALID\x10\x85?\x12+\n&VPA_END_MAPPING_UNKNOWN_REASON_FAILURE\x10\x86?\x12\x1d\n\x18VPA_CMD_STATUS_NOT_MATCH\x10\x87?\x12:\n5VPA_ROUTING_NAVIGATION_PASSIVE_LOST_DISTANCE_OVERRIDE\x10\x88?\x12!\n\x1cVPA_ROUTING_NAVIGATION_YAWED\x10\x89?\x12\x11\n\x0cVPA_OUT_DOOR\x10\x8a?\x12.\n)VPA_END_MAPPING_INDOOR_TO_OUTDOOR_MAPPING\x10\x8b?\x12#\n\x1eVPA_END_MAPPING_GNSS_POSE_JUMP\x10\x8c?\x12\'\n\"VPA_END_MAPPING_MOVE_BACK_TO_START\x10\x8d?\x12.\n)VPA_END_MAPPING_NO_DESTINATION_CANDIDATES\x10\x8e?\x12\x37\n2VPA_END_MAPPING_NO_VALID_DESTINATION_IN_CANDIDATES\x10\x8f?\x12#\n\x1eVPA_LEARNING_TOO_LONG_SAVE_MAP\x10\x90?\x12)\n$VPA_LEARNING_PARKING_FAILED_SAVE_MAP\x10\x91?\x12+\n&VPA_DRIVING_BARRIER_GATE_BLOCK_TIMEOUT\x10\x92?\x12\x1f\n\x1aVPA_OUT_OF_ODD_AUTO_SAVING\x10\x93?\x12)\n$VPA_HAS_MAP_NEARBY_CREATE_MAP_FAILED\x10\x94?\x12\'\n\"VPA_ROUTING_NOT_SELECT_DESTINATION\x10\x95?\x12)\n$VPA_ROUTING_PARKING_WAIT_APA_TIMEOUT\x10\x96?\x12\'\n\"VPA_NOT_NEAR_DEFAULT_PARKING_SPACE\x10\x9a?\x12\x19\n\x14VPA_HAS_PARK_OUT_MAP\x10\x9b?\x12\x15\n\x10RPA_WAIT_TIMEOUT\x10\xa9\x46\x12\x1d\n\x18PARKING_SPACE_UNSELECTED\x10\xaa\x46\x12\x1d\n\x18RPA_OUTSIDE_PARKINGSPACE\x10\xab\x46\x12\x1d\n\x18RPA_NO_PARKOUT_DIRECTION\x10\xac\x46\x12\x17\n\x12RPA_LOST_HEARTBEAT\x10\xad\x46\x12/\n*RPA_STRAIGHT_IN_OUT_BLOCK_BY_SIDE_OBSTACLE\x10\xae\x46\x12\x1d\n\x18RPA_STRAIGHT_IN_OUT_DONE\x10\xaf\x46\x12\x1e\n\x19RPA_STRAIGHT_IN_OUT_BLOCK\x10\xb0\x46\x12%\n RPA_STRAIGHT_IN_OUT_USER_SUSPEND\x10\xb1\x46\x12$\n\x1fRPA_STRAIGHT_INOUT_NO_VALID_DIR\x10\xb2\x46\x12\x1f\n\x1aRPA_PARKING_SYSTEM_FAILURE\x10\xb3\x46\x12\x1e\n\x19RPA_EPB_ERR_STSTE_TIMEOUT\x10\xb4\x46\x12\x34\n/RPA_UNMANNED_PARKING_WAIT_DYNAMIC_BLOCK_TIMEOUT\x10\xb5\x46\x12\x1c\n\x17RPA_KEY_SUSPEND_PARKING\x10\xb6\x46\x12\"\n\x1dRPA_UNMANNED_PARKING_FINISHED\x10\xb7\x46\x12\x1d\n\x18RPA_START_PARKIN_TIMEOUT\x10\xb8\x46\x12\x1d\n\x18RPA_PARKIN_PGEAR_TIMEOUT\x10\xb9\x46\x12\x19\n\x14RPA_USER_STS_INVALID\x10\xba\x46\x12\x16\n\x11RPP_BLOCK_SUSPEND\x10\xbb\x46\x12\'\n\"RPA_STRAIGHT_IN_OUT_PAUSED_BY_USER\x10\xbc\x46\x12\x19\n\x14RADS_SUSPEND_TIMEOUT\x10\x9cJ\x12 \n\x1bRADS_RESUME_CONFIRM_TIMEOUT\x10\x9dJ\x12\x1e\n\x19RADS_ACTIVE_TOTAL_TIMEOUT\x10\x9eJ\x12\x15\n\x10RADS_CAR_BLOCKED\x10\x9fJ\x12\x1a\n\x15RADS_NO_SAVE_DISTANCE\x10\xa0J\x12\x13\n\x0eRADS_USER_EXIT\x10\xa1J\x12+\n&RADS_SPEED_IS_TOO_HIGH_SYS_UNAVAILABLE\x10\xa2J\x12\x18\n\x13RADS_PLANNING_ABORT\x10\xa3J\x12\x1a\n\x15RADS_PARKING_FINISHED\x10\xa4J\x12\x14\n\x0fRADS_SWITCH_APA\x10\xa5J\x12\x1e\n\x19SENTRY_MODE_VEHICLE_CRASH\x10\x91N\x12\x1e\n\x19SENTRY_MODE_VEHICLE_THEFT\x10\x92N\x12\x1f\n\x1aSENTRY_MODE_VEHICLE_DANGER\x10\x93N\x12\x1f\n\x1aSENTRY_MODE_SWITCH_TIMEOUT\x10\x94N\x12\x19\n\x14SENTRY_MODE_TIME_END\x10\x95N\x12\x1e\n\x19SENTRY_MODE_OTHER_MODE_ON\x10\x96N\x12 \n\x1bSENTRY_MODE_MCD_NOT_SUPPORT\x10\x97N\x12&\n!FRONT_VEHICLE_RELATIVE_SPEED_HIGH\x10\xf4N\x12\'\n\"FRONT_VEHICLE_SPEED_OVER_THRESHOLD\x10\xf5N\x12\x0e\n\tPOWER_OUT\x10\xf6N\x12\x16\n\x11HIGH_ACTUAL_PEDAL\x10\xf7N\x12\x13\n\x0eINHIBIT_POLICY\x10\xf8N\x12\x10\n\x0b\x45RRO_POLICY\x10\xf9N\x12\x16\n\x11\x46RONT_MEB_DISABLE\x10\xd8O\x12\x15\n\x10REAR_MEB_DISABLE\x10\xd9O\x12\x18\n\x13WHEEL_SPEED_INVALID\x10\xdaO\x12\x0c\n\x07\x41VM_OFF\x10\xdbO\x12\x11\n\x0c\x46PAS_ACTIVED\x10\xdcO\x12\x1d\n\x18MEB_CAR_INFO_UNAVAILABLE\x10\xddO\x12\x1b\n\x16HIGH_VOLTAGE_NOT_READY\x10\xdeO\x12\x18\n\x13\x45SA_PARAMETER_ERROR\x10\xbcP\x12\x14\n\x0fTORQUE_OVERRIDE\x10\xbdP\x12\x18\n\x13LEFT_BSD_LCA_ACTIVE\x10\xbeP\x12\x19\n\x14RIGHT_BSD_LCA_ACTIVE\x10\xbfP\x12\x0f\n\nAES_ACTIVE\x10\xc0P\x12\x0f\n\nESA_ACTIVE\x10\xc1P\x12\x1e\n\x19LEFT_RIGHT_BSD_LCA_ACTIVE\x10\xc2P\x12\x14\n\x0f\x41\x45\x42_UNAVAILABLE\x10\xa0Q\x12\x18\n\x13\x43TA_BRK_UNAVAILABLE\x10\xa1Q\x12\x14\n\x0f\x41WB_UNAVAILABLE\x10\xa2Q\x12\x14\n\x0f\x41\x42P_UNAVAILABLE\x10\xa3Q\x12\x12\n\rESA_ACTIVATED\x10\xa4Q\x12\x13\n\x0e\x46\x43TB_ACTIVATED\x10\xa5Q\x12\x12\n\rMEB_ACTIVATED\x10\xa6Q\x12\x13\n\x0e\x46\x43TA_ACTIVATED\x10\xa7Q\x12\x13\n\x0eRCTA_ACTIVATED\x10\xa8Q\x12\x15\n\x10\x41\x43TIVED_TOO_LOOG\x10\xa9Q\x12\x19\n\x14STAND_STILL_TOO_LOOG\x10\xaaQ\x12\x0f\n\nGEAR_SHIFT\x10\xabQ\x12\x0f\n\nEBP_CLOSED\x10\xacQ\x12\x1b\n\x16TO_LONG_NO_RCTB_ACTIVE\x10\xadQ\x12!\n\x1c\x45XCESSIVE_REDUCTION_IN_SPEED\x10\xaeQ\x12\x16\n\x11\x41PCSTS_ACTIVE_MEB\x10\xafQ\x12\x12\n\rAVHSTS_ACTIVE\x10\xb0Q\x12\x14\n\x0f\x41\x45\x42_LAST_ACTIVE\x10\xb1Q\x12\x19\n\x14\x43\x41NBUS_EBA_ACTIVATED\x10\xb2Q\x12%\n EXCESSIVE_ACTUAL_PEDAL_INCREMENT\x10\xb3Q\x12$\n\x1fSPEED_TOO_LOW_WHEN_NOT_STARTING\x10\xb4Q\x12!\n\x1cMASTER_CYL_PRESSURE_TOO_HIGH\x10\xb5Q\x12\x13\n\x0e\x43OOL_DOWM_TIME\x10\xb6Q\x12\x1b\n\x16\x42RAKE_SYSTEM_NOT_ALLOW\x10\xb7Q\x12\x1c\n\x17\x42RAKE_PADEL_NOT_APPLIED\x10\xb8Q\x12\x0f\n\nTBA_ACTIVE\x10\xb9Q\x12\x0f\n\nHPA_ACTIVE\x10\xbaQ\x12\x0f\n\nRSA_ACTIVE\x10\xbbQ\x12\x0f\n\nRVM_ACTIVE\x10\xbcQ\x12\x11\n\x0c\x43_NOA_ACTIVE\x10\xbdQ\x12\x17\n\x12\x41PA_AND_RPA_ACTIVE\x10\xbeQ\x12,\n\'PEB_INHIBITED_BY_HIGH_PRIORITY_FUNCTION\x10\xbfQ\x12\x1c\n\x17MEB_STAND_STILL_INVALID\x10\xc0Q\x12$\n\x1fMEB_STAND_STILL_REQUEST_TIMEOUT\x10\xc1Q\x12\x1d\n\x18REMOTE_MODE_START_FAILED\x10\xc2Q\x12\x1c\n\x17SPACE_OPEN_SELF_PARKOUT\x10\xc3Q\x12\x14\n\x0fSUSPEND_TIMEOUT\x10\xc4Q\x12 \n\x1bUSER_LONG_TIME_NO_OPERATION\x10\xc5Q\x12\x12\n\rQUIT_FROM_HMI\x10\xc6Q\x12\x12\n\rBACK_FROM_HMI\x10\xc7Q\x12\x12\n\rQUIT_FROM_APP\x10\xc8Q\x12\'\n\"ESA_ACTIVE_TIME_INTERVAL_TOO_SHORT\x10\xc9Q\x12!\n\x1cLATERAL_ACCELERATION_TO_HIGH\x10\xcaQ\x12\x13\n\x0eRAIN_TOO_LARGE\x10\xcbQ\x12\x1f\n\x1aVEHICLE_ARBITER_INHIBITION\x10\xccQ\x12\x15\n\x10VPA_FUNCTION_OFF\x10\xf8U\x12\x15\n\x10NCA_FUNCTION_OFF\x10\xf9U\x12\x15\n\x10\x44\x32\x44_FUNCTION_OFF\x10\xfaU\x12\x1e\n\x19\x44\x32\x44_PASSIVE_BY_NO_OVERLAP\x10\xfbU\x12)\n$D2D_PASSIVE_BY_NO_OUT_PARK_DIRECTION\x10\xfcU\x12\"\n\x1d\x44\x32\x44_PASSIVE_BY_NCA_NAVIGATION\x10\xfdU\x12\x1f\n\x1a\x44\x32\x44_PASSIVE_BY_NCA_PASSIVE\x10\xfeU\x12#\n\x1e\x44\x32\x44_PASSIVE_BY_OUT_VPA_PASSIVE\x10\xffU\x12\"\n\x1d\x44\x32\x44_PASSIVE_BY_IN_VPA_PASSIVE\x10\x80V\x12\x14\n\x0f\x44\x32\x44_NCA_STANDBY\x10\x81V\x12\x18\n\x13\x44\x32\x44_OUT_VPA_STANDBY\x10\x82V\x12\x17\n\x12\x44\x32\x44_IN_VPA_STANDBY\x10\x83V\x12\x18\n\x13\x44\x32\x44_IN_MNPA_STANDBY\x10\x84V\"\xa1\x04\n\x16VehicleStatusCheckInfo\x12\x41\n\x06status\x18\x01 \x03(\x0e\x32\x31.dr.operationstatus.VehicleStatusCheckInfo.Status\"\xc3\x03\n\x06Status\x12\x11\n\rSTATUS_UNKNOW\x10\x00\x12\x10\n\x0cVEHICLE_SLIP\x10\x01\x12 \n\x1cVEHICLE_SPEED_OVER_THRESHOLD\x10\x02\x12$\n CURVE_RADIUS_LESS_THAN_THRESHOLD\x10\x03\x12 \n\x1cLATERAL_ACCELERATION_TO_HIGH\x10\x04\x12\x18\n\x14VEHICLE_SPEED_TO_LOW\x10\x05\x12\x12\n\x0eNOT_STANDSTILL\x10\x06\x12%\n!LONGITUDINAL_ACCELERATION_TO_HIGH\x10\x07\x12\x0f\n\x0bNOT_FORWARD\x10\x08\x12\x1b\n\x17REMAINING_RANGE_TOO_LOW\x10\t\x12\x0c\n\x08IN_CRASH\x10\n\x12\x1e\n\x1aVEHICLE_ARBITER_INHIBITION\x10\x0b\x12\x15\n\x11\x44IRECTION_INVALID\x10\x0c\x12\x10\n\x0cNOT_BACKWARD\x10\r\x12\x0b\n\x07\x46ORWARD\x10\x0e\x12\x0c\n\x08\x42\x41\x43KWARD\x10\x0f\x12\x0e\n\nSTANDSTILL\x10\x10\x12%\n!LONGITUDINAL_DECELERATION_TO_HIGH\x10\x11\"\xa9\x01\n\x13\x41mbientEnvCheckInfo\x12>\n\x06status\x18\x01 \x03(\x0e\x32..dr.operationstatus.AmbientEnvCheckInfo.Status\"R\n\x06Status\x12\x11\n\rSTATUS_UNKNOW\x10\x00\x12\x1e\n\x1a\x41MBIENT_BRIGHTNESS_TO_HIGH\x10\x01\x12\x15\n\x11HAS_VEHICLE_AHEAD\x10\x02\"Z\n\tFaultInfo\x12\x15\n\rsafety_policy\x18\x01 \x01(\x05\x12\x36\n\nevent_info\x18\x02 \x03(\x0b\x32\".dr.operationstatus.FaultEventInfo\"a\n\x0e\x46\x61ultEventInfo\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\x05\x12\x12\n\nalert_info\x18\x02 \x01(\t\x12\x19\n\x11suggestion_prompt\x18\x03 \x01(\t\x12\x0e\n\x06module\x18\x04 \x01(\x05\"\xbb\x02\n\nReasonInfo\x12\x38\n\x0b\x64\x65vice_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12<\n\rbusiness_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12G\n\x13vehicle_status_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12\x39\n\x08\x65nv_info\x18\x04 \x01(\x0b\x32\'.dr.operationstatus.AmbientEnvCheckInfo\x12\x31\n\nfault_info\x18\x05 \x01(\x0b\x32\x1d.dr.operationstatus.FaultInfo\"\xe5\x01\n\x10HMAPassiveReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\xa6\x02\n\x10HMALowBeamReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12?\n\x0e\x65nv_check_info\x18\x04 \x01(\x0b\x32\'.dr.operationstatus.AmbientEnvCheckInfo\"\xc9\x01\n\rHMAStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.HMAStatus\x12>\n\x0epassive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.HMAPassiveReasonH\x00\x12?\n\x0flow_beam_reason\x18\x03 \x01(\x0b\x32$.dr.operationstatus.HMALowBeamReasonH\x00\x42\x08\n\x06reason\"\xf0\x01\n\x0f\x42SDActiveReason\x12\x14\n\x0cleft_warning\x18\x01 \x01(\x08\x12\x15\n\rright_warning\x18\x02 \x01(\x08\x12\x0e\n\x06obj_id\x18\x03 \x03(\x05\x12\x10\n\x08left_ttc\x18\x04 \x03(\x02\x12\x11\n\tright_ttc\x18\x05 \x03(\x02\x12<\n\x12left_warning_level\x18\x06 \x01(\x0e\x32 .dr.operationstatus.WarningLevel\x12=\n\x13right_warning_level\x18\x07 \x01(\x0e\x32 .dr.operationstatus.WarningLevel\"\x98\x02\n\x10\x42SDPassiveReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12\x31\n\nfault_info\x18\x04 \x01(\x0b\x32\x1d.dr.operationstatus.FaultInfo\"\xc6\x01\n\rBSDStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.BSDStatus\x12<\n\ractive_reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.BSDActiveReasonH\x00\x12>\n\x0epassive_reason\x18\x03 \x01(\x0b\x32$.dr.operationstatus.BSDPassiveReasonH\x00\x42\x08\n\x06reason\"\xf0\x01\n\x0fLCAActiveReason\x12\x14\n\x0cleft_warning\x18\x01 \x01(\x08\x12\x15\n\rright_warning\x18\x02 \x01(\x08\x12\x0e\n\x06obj_id\x18\x03 \x03(\x05\x12\x10\n\x08left_ttc\x18\x04 \x03(\x02\x12\x11\n\tright_ttc\x18\x05 \x03(\x02\x12<\n\x12left_warning_level\x18\x06 \x01(\x0e\x32 .dr.operationstatus.WarningLevel\x12=\n\x13right_warning_level\x18\x07 \x01(\x0e\x32 .dr.operationstatus.WarningLevel\"\xc6\x01\n\rLCAStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.LCAStatus\x12<\n\ractive_reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.LCAActiveReasonH\x00\x12>\n\x0epassive_reason\x18\x03 \x01(\x0b\x32$.dr.operationstatus.BSDPassiveReasonH\x00\x42\x08\n\x06reason\"\x97\x03\n\x0f\x44OWActiveReason\x12\x14\n\x0cleft_warning\x18\x01 \x01(\x08\x12\x15\n\rright_warning\x18\x02 \x01(\x08\x12\x0e\n\x06obj_id\x18\x03 \x03(\x05\x12\x10\n\x08left_ttc\x18\x04 \x03(\x02\x12\x11\n\tright_ttc\x18\x05 \x03(\x02\x12G\n\x1d\x66ront_left_door_warning_level\x18\x06 \x01(\x0e\x32 .dr.operationstatus.WarningLevel\x12H\n\x1e\x66ront_right_door_warning_level\x18\x07 \x01(\x0e\x32 .dr.operationstatus.WarningLevel\x12\x46\n\x1crear_left_door_warning_level\x18\x08 \x01(\x0e\x32 .dr.operationstatus.WarningLevel\x12G\n\x1drear_right_door_warning_level\x18\t \x01(\x0e\x32 .dr.operationstatus.WarningLevel\"\x98\x02\n\x10\x44OWPassiveReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12\x31\n\nfault_info\x18\x04 \x01(\x0b\x32\x1d.dr.operationstatus.FaultInfo\"\xc6\x01\n\rDOWStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.DOWStatus\x12<\n\ractive_reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DOWActiveReasonH\x00\x12>\n\x0epassive_reason\x18\x03 \x01(\x0b\x32$.dr.operationstatus.DOWPassiveReasonH\x00\x42\x08\n\x06reason\"t\n\x10RCTAActiveReason\x12\x14\n\x0cleft_warning\x18\x01 \x01(\x08\x12\x15\n\rright_warning\x18\x02 \x01(\x08\x12\x0e\n\x06obj_id\x18\x03 \x03(\x05\x12\x10\n\x08left_ttc\x18\x04 \x03(\x02\x12\x11\n\tright_ttc\x18\x05 \x03(\x02\"\x99\x02\n\x11RCTAPassiveReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12\x31\n\nfault_info\x18\x04 \x01(\x0b\x32\x1d.dr.operationstatus.FaultInfo\"\xca\x01\n\x0eRCTAStatusInfo\x12.\n\x06status\x18\x01 \x01(\x0e\x32\x1e.dr.operationstatus.RCTAStatus\x12=\n\ractive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.RCTAActiveReasonH\x00\x12?\n\x0epassive_reason\x18\x03 \x01(\x0b\x32%.dr.operationstatus.RCTAPassiveReasonH\x00\x42\x08\n\x06reason\"C\n\x0fRCWActiveReason\x12\x13\n\x0brcw_warning\x18\x01 \x01(\x08\x12\x0e\n\x06obj_id\x18\x02 \x03(\x05\x12\x0b\n\x03ttc\x18\x03 \x03(\x02\"\x98\x02\n\x10RCWPassiveReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12\x31\n\nfault_info\x18\x04 \x01(\x0b\x32\x1d.dr.operationstatus.FaultInfo\"\xc6\x01\n\rRCWStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.RCWStatus\x12<\n\ractive_reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.RCWActiveReasonH\x00\x12>\n\x0epassive_reason\x18\x03 \x01(\x0b\x32$.dr.operationstatus.RCWPassiveReasonH\x00\x42\x08\n\x06reason\"t\n\x10RCTBActiveReason\x12\x14\n\x0cleft_warning\x18\x01 \x01(\x08\x12\x15\n\rright_warning\x18\x02 \x01(\x08\x12\x0e\n\x06obj_id\x18\x03 \x03(\x05\x12\x10\n\x08left_ttc\x18\x04 \x03(\x02\x12\x11\n\tright_ttc\x18\x05 \x03(\x02\"\xba\x01\n\x0eRCTBStatusInfo\x12.\n\x06status\x18\x01 \x01(\x0e\x32\x1e.dr.operationstatus.RCTBStatus\x12=\n\ractive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.RCTBActiveReasonH\x00\x12/\n\x07reasons\x18\x03 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfoB\x08\n\x06reason\"\x9b\x01\n\x15\x41PAStatusChangeReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\"\x98\x02\n\x10\x41\x43\x43PassiveReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12\x31\n\nfault_info\x18\x04 \x01(\x0b\x32\x1d.dr.operationstatus.FaultInfo\"\xc5\x01\n\rACCStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.ACCStatus\x12>\n\x0epassive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.ACCPassiveReasonH\x00\x12;\n\x0e\x66\x61ilure_reason\x18\x03 \x01(\x0b\x32!.dr.operationstatus.FailureReasonH\x00\x42\x08\n\x06reason\"\xa4\x01\n\x0f\x41VMActiveReason\x12M\n\x19vehicle_status_check_info\x18\x01 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\"\xa1\x01\n\x0c\x41VMOffReason\x12M\n\x19vehicle_status_check_info\x18\x01 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\"\x11\n\x0f\x41VMFailedReason\"\xe4\x01\n\x0f\x41VMChangeReason\x12M\n\x19vehicle_status_check_info\x18\x01 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x03 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\"\xfb\x02\n\rAVMStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.AVMStatus\x12\x36\n\noff_reason\x18\x02 \x01(\x0b\x32 .dr.operationstatus.AVMOffReasonH\x00\x12<\n\ractive_reason\x18\x03 \x01(\x0b\x32#.dr.operationstatus.AVMActiveReasonH\x00\x12<\n\rfailed_reason\x18\x04 \x01(\x0b\x32#.dr.operationstatus.AVMFailedReasonH\x00\x12\x45\n\x11\x64riving_avm_style\x18\x05 \x01(\x0e\x32*.dr.operationstatus.AVMStatusInfo.AVMStyle\"6\n\x08\x41VMStyle\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0f\n\x0b\x46ULL_SCREEN\x10\x01\x12\x0c\n\x08\x46LOATING\x10\x02\x42\x08\n\x06reason\"\x12\n\x10ICAFailureReason\"\x98\x02\n\x10ICAPassiveReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12\x31\n\nfault_info\x18\x04 \x01(\x0b\x32\x1d.dr.operationstatus.FaultInfo\"\x9e\x01\n\rICAStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.ICAStatus\x12>\n\x0epassive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.ICAPassiveReasonH\x00\x12\x14\n\x0c\x61uto_upgrade\x18\x03 \x01(\x08\x42\x08\n\x06reason\"\xb4\x02\n\rILCStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.ILCStatus\x12+\n\x04left\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.ILCStatus\x12,\n\x05right\x18\x03 \x01(\x0e\x32\x1d.dr.operationstatus.ILCStatus\x12.\n\x06reason\x18\x04 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\x12\x33\n\x0bleft_reason\x18\x05 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\x12\x34\n\x0cright_reason\x18\x06 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"l\n\x0cLCStatusInfo\x12,\n\x06status\x18\x01 \x01(\x0e\x32\x1c.dr.operationstatus.LCStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"\x8c\x01\n\x19TrafficLightAttentionInfo\x12?\n\x06status\x18\x01 \x01(\x0e\x32/.dr.operationstatus.TrafficLightAttentionStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"\x98\x02\n\x10NCAPassiveReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\x12\x31\n\nfault_info\x18\x04 \x01(\x0b\x32\x1d.dr.operationstatus.FaultInfo\"\x88\x01\n\rNCAStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.NCAStatus\x12>\n\x0epassive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.NCAPassiveReasonH\x00\x42\x08\n\x06reason\"F\n\x11\x44rivingStatusInfo\x12\x31\n\x06status\x18\x01 \x01(\x0e\x32!.dr.operationstatus.DrivingStatus\"\xeb\x01\n\x16\x43ommonStatusFailReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\xe4\x01\n\x0f\x41PAStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\xeb\x01\n\x16SentryModeStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\xa0\x01\n\rAPAStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.APAStatus\x12\x33\n\x06reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.APAStatusReason\x12\x14\n\x0cis_low_speed\x18\n \x01(\x08\x12\x15\n\ris_dpa_active\x18\x0b \x01(\x08\"\xe4\x01\n\x0fVPAStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\xe2\x01\n\x14VPARoutingStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.VPAStatus\x12\x33\n\x06reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.VPAStatusReason\x12\x35\n\x0cparking_type\x18\x03 \x01(\x0e\x32\x1f.dr.operationstatus.ParkingType\x12/\n\x04type\x18\x04 \x01(\x0e\x32!.dr.operationstatus.VPAStatusType\"\xac\x01\n\x15VPALearningStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.VPAStatus\x12\x33\n\x06reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.VPAStatusReason\x12/\n\x04type\x18\x03 \x01(\x0e\x32!.dr.operationstatus.VPAStatusType\"\xe4\x01\n\x0fRPAStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\x8b\x01\n\rRPAStatusInfo\x12-\n\x06stauts\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.RPAStatus\x12\x33\n\x06reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.RPAStatusReason\x12\x16\n\x0emcu_rpa_status\x18\x03 \x01(\r\"\xe5\x01\n\x10LDWPassiveReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\x88\x01\n\rLDWStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.LDWStatus\x12>\n\x0epassive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.LDWPassiveReasonH\x00\x42\x08\n\x06reason\"\xe5\x01\n\x10RDPPassiveReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\x88\x01\n\rRDPStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.RDPStatus\x12>\n\x0epassive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.RDPPassiveReasonH\x00\x42\x08\n\x06reason\"\x8f\x02\n\rPDCStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.PDCStatus\x12@\n\x11pdc_active_reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.PDCStatusReasonH\x00\x12\x41\n\x12pdc_standby_reason\x18\x03 \x01(\x0b\x32#.dr.operationstatus.PDCStatusReasonH\x00\x12@\n\x11pdc_failed_reason\x18\x04 \x01(\x0b\x32#.dr.operationstatus.PDCStatusReasonH\x00\x42\x08\n\x06reason\"\xe4\x01\n\x0fPDCStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\xe4\x01\n\x0fTJPStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"s\n\rTJPStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.TJPStatus\x12\x33\n\x06reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.TJPStatusReason\"\xe5\x01\n\x10RADSStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"v\n\x0eRADSStatusInfo\x12.\n\x06status\x18\x01 \x01(\x0e\x32\x1e.dr.operationstatus.RADSStatus\x12\x34\n\x06reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.RADSStatusReason\"\xe4\x01\n\x0f\x44VRStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"s\n\rDVRStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.DVRStatus\x12\x33\n\x06reason\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DVRStatusReason\"\xe9\x01\n\x14SentinelStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\x82\x01\n\x12SentinelStatusInfo\x12\x32\n\x06status\x18\x01 \x01(\x0e\x32\".dr.operationstatus.SentinelStatus\x12\x38\n\x06reason\x18\x02 \x01(\x0b\x32(.dr.operationstatus.SentinelStatusReason\"\x82\x01\n\x0eSentryModeInfo\x12\x34\n\x06status\x18\x01 \x01(\x0e\x32$.dr.operationstatus.SentryModeStatus\x12:\n\x06reason\x18\x02 \x01(\x0b\x32*.dr.operationstatus.SentryModeStatusReason\"\xe8\x01\n\x13\x45nd2EndStatusReason\x12\x42\n\x13\x62usiness_check_info\x18\x01 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12>\n\x11\x64\x65vice_check_info\x18\x02 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"y\n\x0b\x45nd2EndInfo\x12\x31\n\x06status\x18\x01 \x01(\x0e\x32!.dr.operationstatus.End2EndStatus\x12\x37\n\x06reason\x18\x02 \x01(\x0b\x32\'.dr.operationstatus.End2EndStatusReason\"L\n\x11StartFailedReason\x12\x37\n\x13start_failed_module\x18\x65 \x03(\x0e\x32\x1a.dr.operationstatus.Module\"?\n\x0b\x43rushReason\x12\x30\n\x0c\x63rush_module\x18\x65 \x03(\x0e\x32\x1a.dr.operationstatus.Module\"\x8a\x01\n\rFailureReason\x12\x42\n\x13start_failed_reason\x18\x65 \x01(\x0b\x32%.dr.operationstatus.StartFailedReason\x12\x35\n\x0c\x63rush_reason\x18\x66 \x01(\x0b\x32\x1f.dr.operationstatus.CrushReason\"@\n\x0f\x41\x63tivedFeatures\x12-\n\x08\x66\x65\x61tures\x18\x01 \x03(\x0e\x32\x1b.dr.operationstatus.Feature\"\xe5\x01\n\x10\x45LKPassiveReason\x12>\n\x11\x64\x65vice_check_info\x18\x01 \x01(\x0b\x32#.dr.operationstatus.DeviceCheckInfo\x12\x42\n\x13\x62usiness_check_info\x18\x02 \x01(\x0b\x32%.dr.operationstatus.BusinessCheckInfo\x12M\n\x19vehicle_status_check_info\x18\x03 \x01(\x0b\x32*.dr.operationstatus.VehicleStatusCheckInfo\"\xcb\x01\n\rELKStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.ELKStatus\x12>\n\x0epassive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.ELKPassiveReasonH\x00\x12\x1f\n\x17is_elk_left_vru_standby\x18\x03 \x01(\x08\x12 \n\x18is_elk_right_vru_standby\x18\x04 \x01(\x08\x42\x08\n\x06reason\"\xbe\x07\n\rTSRStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.TSRStatus\x12\x41\n\x0btsr_context\x18\x02 \x01(\x0b\x32,.dr.operationstatus.TSRStatusInfo.TSRContext\x1a\x1c\n\x04Pose\x12\t\n\x01x\x18\x01 \x01(\x01\x12\t\n\x01y\x18\x02 \x01(\x01\x1a\xbc\x02\n\x0eTSRStandbySign\x12\x0f\n\x07sign_id\x18\x01 \x01(\x05\x12\x42\n\tsign_type\x18\x02 \x01(\x0e\x32/.dr.operationstatus.TSRStatusInfo.SpeedSignType\x12\x12\n\nsign_value\x18\x03 \x01(\x01\x12:\n\nlocal_pose\x18\x04 \x01(\x0b\x32&.dr.operationstatus.TSRStatusInfo.Pose\x12\x34\n\x04pose\x18\x05 \x01(\x0b\x32&.dr.operationstatus.TSRStatusInfo.Pose\x12\x0f\n\x07heading\x18\x06 \x01(\x01\x12\x12\n\nconfidence\x18\x07 \x01(\x01\x12\x15\n\ris_on_vehicle\x18\x08 \x01(\x08\x12\x13\n\x0bis_ego_sign\x18\t \x01(\x08\x1a\xd6\x01\n\rTSRFusionSign\x12\x0f\n\x07sign_id\x18\x01 \x01(\x05\x12\x42\n\tsign_type\x18\x02 \x01(\x0e\x32/.dr.operationstatus.TSRStatusInfo.SpeedSignType\x12\x12\n\nsign_value\x18\x03 \x01(\x01\x12\x19\n\x11maintain_distance\x18\x04 \x01(\x03\x12\x15\n\rmaintain_time\x18\x05 \x01(\x03\x12\x16\n\x0e\x63ur_ignore_ids\x18\x06 \x01(\t\x12\x12\n\nconfidence\x18\x07 \x01(\x01\x1a\xbc\x01\n\nTSRContext\x12\x1b\n\x13\x63ur_map_speed_limit\x18\x01 \x01(\x01\x12\x44\n\x0b\x66usion_sign\x18\x02 \x01(\x0b\x32/.dr.operationstatus.TSRStatusInfo.TSRFusionSign\x12K\n\x11top_priority_sign\x18\x03 \x01(\x0b\x32\x30.dr.operationstatus.TSRStatusInfo.TSRStandbySign\"F\n\rSpeedSignType\x12\x0e\n\nSLS_UNKNOW\x10\x00\x12\x0b\n\x07SLS_NON\x10\x01\x12\x0b\n\x07SLS_MIN\x10\x02\x12\x0b\n\x07SLS_MAX\x10\x03\"\xa5\x01\n\x0c\x44WStatusInfo\x12,\n\x06status\x18\x01 \x01(\x0e\x32\x1c.dr.operationstatus.DWStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\x12\x37\n\x0b\x61\x63tive_info\x18\x03 \x01(\x0b\x32\".dr.operationstatus.DWFrontCarInfo\"e\n\x0e\x44WFrontCarInfo\x12\x0e\n\x06obj_id\x18\x01 \x01(\x05\x12\x10\n\x08time_gap\x18\x02 \x01(\x01\x12\x10\n\x08\x64istance\x18\x03 \x01(\x01\x12\r\n\x05snvty\x18\x04 \x01(\x01\x12\x10\n\x08\x64uration\x18\x05 \x01(\x03\"n\n\rAEBStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.AEBStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"p\n\x0e\x46\x43TBStatusInfo\x12.\n\x06status\x18\x01 \x01(\x0e\x32\x1e.dr.operationstatus.FCTBStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"n\n\rMEBStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.MEBStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"n\n\rFCWStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.FCWStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"p\n\x0e\x46\x43TAStatusInfo\x12.\n\x06status\x18\x01 \x01(\x0e\x32\x1e.dr.operationstatus.FCTAStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"n\n\rESAStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.ESAStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"n\n\rAESStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.AESStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"n\n\rAWBStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.AWBStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"n\n\rABPStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.ABPStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"n\n\rMAIStatusInfo\x12-\n\x06status\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.MAIStatus\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo*\xa2\x01\n\tACCStatus\x12\x0b\n\x07\x41\x43\x43_OFF\x10\x00\x12\x0f\n\x0b\x41\x43\x43_PASSIVE\x10\x01\x12\x0f\n\x0b\x41\x43\x43_STANDBY\x10\x02\x12\x0e\n\nACC_NORMAL\x10\x03\x12\x14\n\x10\x41\x43\x43_STAND_ACTIVE\x10\x04\x12\x12\n\x0e\x41\x43\x43_STAND_WAIT\x10\x05\x12\x10\n\x0c\x41\x43\x43_OVERRIDE\x10\x06\x12\r\n\tACC_FAULT\x10\x07\x12\x0b\n\x07\x41\x43\x43_BOM\x10\x08*\xcb\x01\n\tICAStatus\x12\x0b\n\x07ICA_OFF\x10\x00\x12\x0f\n\x0bICA_FAILURE\x10\x01\x12\x0f\n\x0bICA_PASSIVE\x10\x02\x12\x0f\n\x0bICA_STANDBY\x10\x03\x12\x0e\n\nICA_NORMAL\x10\x04\x12\x1c\n\x18ICA_LATERAL_CONTROL_EXIT\x10\x05\x12\x11\n\rICA_FORBIDDEN\x10\x06\x12\x16\n\x12ICA_DRIVER_TAKEOFF\x10\x07\x12\x18\n\x14ICA_LOW_RISK_FAILURE\x10\x08\x12\x0b\n\x07ICA_MRM\x10\t*m\n\tILCStatus\x12\x0b\n\x07ILC_OFF\x10\x00\x12\r\n\tILC_FAULT\x10\x01\x12\x0f\n\x0bILC_PASSIVE\x10\x02\x12\x0f\n\x0bILC_STANDBY\x10\x03\x12\x0e\n\nILC_ACTIVE\x10\x04\x12\x12\n\x0eILC_CONFIRMING\x10\x05*\xe7\x01\n\x08LCStatus\x12\n\n\x06LC_OFF\x10\x00\x12\x0c\n\x08LC_FAULT\x10\x01\x12\x12\n\x0eLC_UNAVAILABLE\x10\x02\x12\x10\n\x0cLC_AVAILABLE\x10\x03\x12\x10\n\x0cLC_REQUESTED\x10\x04\x12\r\n\tLC_REJECT\x10\x05\x12\x0b\n\x07LC_WAIT\x10\x06\x12\x1f\n\x1bLC_LATERAL_MOVEMENT_STARTED\x10\x07\x12\x1b\n\x17LC_IN_LATERAL_MANOEUVRE\x10\x08\x12\x0f\n\x0bLC_FINISHED\x10\t\x12\x0f\n\x0bLC_ABORTING\x10\n\x12\r\n\tLC_FAILED\x10\x0b*\xb7\x01\n\tNCAStatus\x12\x0b\n\x07NCA_OFF\x10\x00\x12\x0f\n\x0bNCA_PASSIVE\x10\x01\x12\x0f\n\x0bNCA_STANDBY\x10\x02\x12\x0e\n\nNCA_NORMAL\x10\x03\x12\x13\n\x0fNCA_COUNT_DOWN1\x10\x04\x12\x13\n\x0fNCA_COUNT_DOWN2\x10\x05\x12\x0b\n\x07NCA_MRM\x10\x06\x12\x12\n\x0eNCA_LATEM_EXIT\x10\x07\x12\x11\n\rNCA_FORBIDDEN\x10\x08\x12\r\n\tNCA_FAULT\x10\t*\xa3\x01\n\rDrivingStatus\x12\x12\n\x0e\x44RIVING_MANUAL\x10\x00\x12\x16\n\x12\x44RIVING_ACC_ACTIVE\x10\x01\x12\x16\n\x12\x44RIVING_ICA_ACTIVE\x10\x02\x12\x16\n\x12\x44RIVING_NCA_ACTIVE\x10\x03\x12\x1a\n\x16\x44RIVING_ICA_LATEM_EXIT\x10\x04\x12\x1a\n\x16\x44RIVING_NCA_LATEM_EXIT\x10\x05*\xb9\x01\n\tHMAStatus\x12\x0b\n\x07HMA_OFF\x10\x00\x12\x0f\n\x0bHMA_FAILURE\x10\x01\x12\x0f\n\x0bHMA_PASSIVE\x10\x02\x12\x10\n\x0cHMA_LOW_BEAM\x10\x03\x12\x11\n\rHMA_HIGH_BEAM\x10\x04\x12\x13\n\x0fHMA_SUPPRESSION\x10\x05\x12\x16\n\x12HMA_NO_SUPPRESSION\x10\x06\x12\x14\n\x10HMA_LOW_PRIORITY\x10\x07\x12\x15\n\x11HMA_HIGH_PRIORITY\x10\x08*\xaa\x03\n\tAVMStatus\x12\x12\n\x0eSTATUS_UNKNOWN\x10\x00\x12\x17\n\x13STATUS_TURNING_MODE\x10\x01\x12\x16\n\x12STATUS_NORMAL_MODE\x10\x02\x12\x16\n\x12STATUS_GEAR_R_MODE\x10\x03\x12\x1b\n\x17STATUS_GEAR_R_TO_D_MODE\x10\x04\x12\x13\n\x0fSTATUS_PDC_MODE\x10\x05\x12\x0e\n\nSTATUS_OFF\x10\x06\x12\x10\n\x0cSTATUS_ERROR\x10\x07\x12\x12\n\x0eSTATUS_STANDBY\x10\x08\x12\x12\n\x0eSTATUS_SUSPEND\x10\t\x12\x11\n\rSTATUS_FAILED\x10\n\x12\x11\n\rSTATUS_ACTIVE\x10\x0b\x12\x13\n\x0fSTATUS_INACTIVE\x10\x0c\x12\r\n\tSTATUS_ON\x10\r\x12\x12\n\x0eSTATUS_WORKING\x10\x0e\x12\x0e\n\nSTATUS_GWM\x10\x0f\x12\x16\n\x12STATUS_CALIBRATION\x10\x10\x12\x1f\n\x1bSTATUS_CALIBRATION_FINISHED\x10\x11\x12\x1d\n\x19STATUS_CALIBRATION_FAILED\x10\x12*\x85\x04\n\tRPAStatus\x12\x0b\n\x07RPA_OFF\x10\x00\x12\x0f\n\x0bRPA_STANDBY\x10\x01\x12\x12\n\x0eRPA_PARKING_IN\x10\x02\x12\x13\n\x0fRPA_PARKING_OUT\x10\x03\x12\x17\n\x13RPA_STRAIGHT_IN_OUT\x10\x04\x12\x1e\n\x1aRPA_STRAIGHT_IN_OUT_ACTIVE\x10\x05\x12\x1f\n\x1bRPA_STRAIGHT_IN_OUT_SUSPEND\x10\x06\x12\x16\n\x12RPA_PARKING_ACTIVE\x10\x07\x12\x17\n\x13RPA_PARKING_SUSPEND\x10\x08\x12\x11\n\rRPA_COMPLETED\x10\t\x12\x0f\n\x0bRPA_FAILURE\x10\n\x12\"\n\x1eRPA_PRE_STRAIGHT_IN_OUT_ACTIVE\x10\x0b\x12\'\n#RPA_PARKING_IN_OUT_ACTIVE_EPB_ERROR\x10\x0c\x12(\n$RPA_STRAIGHT_IN_OUT_ACTIVE_EPB_ERROR\x10\r\x12\x16\n\x12RPA_SYSTEM_FAILURE\x10\x0e\x12\x17\n\x13RPA_FAILURE_DISABLE\x10\x0f\x12\x15\n\x11RPA_PARKIN_SEARCH\x10\x10\x12\r\n\tRPA_ABORT\x10\x11\x12\x0e\n\nRPA_CANCEL\x10\x12\x12\x0c\n\x08RPA_QUIT\x10\x13\x12\x16\n\x12RPA_SEARCH_FAILURE\x10\x14*\xb2\x02\n\x1bTrafficLightAttentionStatus\x12*\n&TRAFFIC_LIGHT_ATTENTION_STATUS_UNKNOWN\x10\x00\x12&\n\"TRAFFIC_LIGHT_ATTENTION_STATUS_OFF\x10\x01\x12*\n&TRAFFIC_LIGHT_ATTENTION_STATUS_STANDBY\x10\x02\x12\x31\n-TRAFFIC_LIGHT_ATTENTION_STATUS_VERSION_ACTIVE\x10\x03\x12\x34\n0TRAFFIC_LIGHT_ATTENTION_STATUS_NAVIGATION_ACTIVE\x10\x04\x12*\n&TRAFFIC_LIGHT_ATTENTION_STATUS_FAILURE\x10\x05*F\n\x0cWarningLevel\x12\x0e\n\nNO_WARNING\x10\x00\x12\x12\n\x0eWARNING_LEVEL1\x10\x01\x12\x12\n\x0eWARNING_LEVEL2\x10\x02*[\n\tBSDStatus\x12\x0b\n\x07\x42SD_OFF\x10\x00\x12\x0f\n\x0b\x42SD_FAILURE\x10\x01\x12\x0f\n\x0b\x42SD_PASSIVE\x10\x02\x12\x0f\n\x0b\x42SD_STANDBY\x10\x03\x12\x0e\n\nBSD_ACTIVE\x10\x04*[\n\tLCAStatus\x12\x0b\n\x07LCA_OFF\x10\x00\x12\x0f\n\x0bLCA_FAILURE\x10\x01\x12\x0f\n\x0bLCA_PASSIVE\x10\x02\x12\x0f\n\x0bLCA_STANDBY\x10\x03\x12\x0e\n\nLCA_ACTIVE\x10\x04*[\n\tDOWStatus\x12\x0b\n\x07\x44OW_OFF\x10\x00\x12\x0f\n\x0b\x44OW_FAILURE\x10\x01\x12\x0f\n\x0b\x44OW_PASSIVE\x10\x02\x12\x0f\n\x0b\x44OW_STANDBY\x10\x03\x12\x0e\n\nDOW_ACTIVE\x10\x04*a\n\nRCTAStatus\x12\x0c\n\x08RCTA_OFF\x10\x00\x12\x10\n\x0cRCTA_FAILURE\x10\x01\x12\x10\n\x0cRCTA_PASSIVE\x10\x02\x12\x10\n\x0cRCTA_STANDBY\x10\x03\x12\x0f\n\x0bRCTA_ACTIVE\x10\x04*[\n\tRCWStatus\x12\x0b\n\x07RCW_OFF\x10\x00\x12\x0f\n\x0bRCW_FAILURE\x10\x01\x12\x0f\n\x0bRCW_PASSIVE\x10\x02\x12\x0f\n\x0bRCW_STANDBY\x10\x03\x12\x0e\n\nRCW_ACTIVE\x10\x04*w\n\nRCTBStatus\x12\x0c\n\x08RCTB_OFF\x10\x00\x12\x10\n\x0cRCTB_FAILURE\x10\x01\x12\x10\n\x0cRCTB_PASSIVE\x10\x02\x12\x10\n\x0cRCTB_STANDBY\x10\x03\x12\x0f\n\x0bRCTB_ACTIVE\x10\x04\x12\x14\n\x10RCTB_STAND_STILL\x10\x05*\x82\x04\n\tAPAStatus\x12\x0b\n\x07\x41PA_OFF\x10\x00\x12\x0f\n\x0b\x41PA_STANDBY\x10\x01\x12\x19\n\x15\x41PA_PARKING_SEARCHING\x10\x02\x12\x12\n\x0e\x41PA_PARKING_IN\x10\x03\x12\x13\n\x0f\x41PA_PARKING_OUT\x10\x04\x12\x16\n\x12\x41PA_PARKING_ACTIVE\x10\x05\x12\x16\n\x12\x41PA_PARKING_PAUSED\x10\x06\x12\x18\n\x14\x41PA_PARKING_FINISHED\x10\x07\x12\x16\n\x12\x41PA_SYSTEM_FAILURE\x10\x08\x12\x17\n\x13\x41PA_PARKING_FAILURE\x10\t\x12\x17\n\x13\x41PA_FAILURE_DISABLE\x10\n\x12\x16\n\x12\x41PA_PRE_OUTPARKING\x10\x0b\x12\x18\n\x14\x41PA_PRE_PARKINACTIVE\x10\x14\x12\x1d\n\x19\x41PA_PRE_PARKINGOUT_ACTIVE\x10\x15\x12&\n\"APA_PRE_PARKINGACTIVE_FROM_STANDBY\x10\x16\x12\x0e\n\nAPA_ACTIVE\x10\x17\x12\x15\n\x11\x41PA_RPA_EPB_ERROR\x10\x18\x12*\n&APA_PRE_PARKINGOUT_ACTIVE_FROM_STANDBY\x10\x19\x12\x18\n\x14\x41PA_SEARCHING_PAUSED\x10\x1a\x12\x19\n\x15\x41PA_SEARCHING_FAILURE\x10\x1b*X\n\rVPAStatusType\x12\x16\n\x12STATUS_TYPE_NORMAL\x10\x00\x12\x16\n\x12STATUS_TYPE_E2E_IN\x10\x01\x12\x17\n\x13STATUS_TYPE_E2E_OUT\x10\x02*8\n\x0bParkingType\x12\x13\n\x0fTYPE_PARKING_IN\x10\x00\x12\x14\n\x10TYPE_PARKING_OUT\x10\x01*\xd3\n\n\tVPAStatus\x12\x16\n\x12VPA_STATUS_UNKNOWN\x10\x00\x12\x1b\n\x17VPA_MAP_LARNING_PASSIVE\x10\x01\x12\x1c\n\x18VPA_MAP_LEARNING_STANDBY\x10\x02\x12\x1d\n\x19VPA_MAP_LEARNING_LEARNING\x10\x03\x12\x1e\n\x1aVPA_MAP_LEARNING_COMPLETED\x10\x04\x12\x1c\n\x18VPA_MAP_LEARNING_FAILURE\x10\x05\x12\x18\n\x14VPA_MAP_LEARNING_OFF\x10\x06\x12\x1c\n\x18VPA_MAP_LEARNING_PARKING\x10\x07\x12\x17\n\x13VPA_ROUTING_PASSIVE\x10\x08\x12\x17\n\x13VPA_ROUTING_STANDBY\x10\t\x12\x16\n\x12VPA_ROUTING_ACTIVE\x10\n\x12\x19\n\x15VPA_ROUTING_SEARCHING\x10\x0b\x12\x17\n\x13VPA_ROUTING_FAILURE\x10\x0c\x12\x18\n\x14VPA_ROUTING_FINISHED\x10\r\x12\x13\n\x0fVPA_ROUTING_OFF\x10\x0e\x12\x17\n\x13VPA_ROUTING_PARKING\x10\x0f\x12\x1e\n\x1aVPA_ROUTING_SYSTEM_FAILURE\x10\x10\x12\x13\n\x0fVPA_ROUTING_MRM\x10\x11\x12\x1f\n\x1bVPA_ROUTING_FAILURE_DISABLE\x10\x12\x12\x19\n\x15VPA_ROUTING_PREACTIVE\x10\x13\x12\x1e\n\x1aVPA_ROUTING_PREACTIVE_EXIT\x10\x14\x12#\n\x1fVPA_MAP_LEARNING_PARKING_ACTIVE\x10\x15\x12#\n\x1fVPA_MAP_LEARNING_PARKING_PAUSED\x10\x16\x12%\n!VPA_MAP_LEARNING_PARKING_FINISHED\x10\x17\x12$\n VPA_MAP_LEARNING_PARKING_FAILURE\x10\x18\x12\x18\n\x14VPA_MAP_END_LEARNING\x10\x19\x12#\n\x1fVPA_MAP_LEARNING_SYSTEM_FAILURE\x10\x1a\x12\x1f\n\x1bVPA_MAP_LEARNING_SAVING_MAP\x10\x1b\x12\x14\n\x10VPA_MAP_GUIDANCE\x10\x1c\x12$\n VPA_MAP_LEARNING_FAILURE_DISABLE\x10\x1d\x12\x1c\n\x18VPA_MAP_LEARNING_SUSPEND\x10\x1e\x12 \n\x1cVPA_MAP_IN_LEARNING_NO_SENSE\x10\x1f\x12!\n\x1dVPA_MAP_OUT_LEARNING_NO_SENSE\x10 \x12\x1e\n\x1aVPA_ROUTING_PARKING_ACTIVE\x10)\x12\x1e\n\x1aVPA_ROUTING_PARKING_PAUSED\x10*\x12 \n\x1cVPA_ROUTING_PARKING_FINISHED\x10+\x12\x1f\n\x1bVPA_ROUTING_PARKING_FAILURE\x10,\x12\x17\n\x13VPA_ROUTING_BLOCKED\x10-\x12\x1b\n\x17VPA_ROUTING_SELECT_SLOT\x10.\x12\x1a\n\x16VPA_ROUTING_NAVIGATION\x10/\x12\x17\n\x13VPA_ROUTING_SUSPEND\x10\x30\x12!\n\x1dVPA_ROUTING_PARKING_ALONG_WAY\x10\x31\x12 \n\x1cVPA_ROUTING_PARKING_OUT_HOLD\x10\x32\x12\x17\n\x13VPA_ROUTING_ROAMING\x10\x33\x12%\n!VPA_ROUTING_OUT_PARKING_PREACTIVE\x10\x34*\x8d\x01\n\tLDWStatus\x12\x0b\n\x07LDW_OFF\x10\x00\x12\x0f\n\x0bLDW_PASSIVE\x10\x01\x12\x0f\n\x0bLDW_STANDBY\x10\x02\x12\x13\n\x0fLDW_LEFT_ACTIVE\x10\x03\x12\x14\n\x10LDW_RIGHT_ACTIVE\x10\x04\x12\x0f\n\x0bLDW_FAILURE\x10\x05\x12\x15\n\x11LDW_AUTOMATIC_OFF\x10\x06*\x8d\x01\n\tRDPStatus\x12\x0b\n\x07RDP_OFF\x10\x00\x12\x0f\n\x0bRDP_PASSIVE\x10\x01\x12\x0f\n\x0bRDP_STANDBY\x10\x02\x12\x13\n\x0fRDP_LEFT_ACTIVE\x10\x03\x12\x14\n\x10RDP_RIGHT_ACTIVE\x10\x04\x12\x0f\n\x0bRDP_FAILURE\x10\x05\x12\x15\n\x11RDP_AUTOMATIC_OFF\x10\x06*o\n\tPDCStatus\x12\x0b\n\x07PDC_OFF\x10\x00\x12\x0f\n\x0bPDC_FAILURE\x10\x01\x12\x0f\n\x0bPDC_STANDBY\x10\x02\x12\x1d\n\x19PDC_FRONT_AND_REAR_ACTIVE\x10\x03\x12\x14\n\x10PDC_FRONT_ACTIVE\x10\x04*\x8f\x01\n\tTJPStatus\x12\x0b\n\x07TJP_OFF\x10\x00\x12\x0f\n\x0bTJP_FAILURE\x10\x01\x12\x0f\n\x0bTJP_STANDBY\x10\x02\x12\x0f\n\x0bTJP_PASSIVE\x10\x03\x12\x0e\n\nTJP_NORMAL\x10\x04\x12\x12\n\x0eTJP_COUNT_DOWN\x10\x05\x12\x0b\n\x07TJP_MRM\x10\x06\x12\x11\n\rTJP_FORBIDDEN\x10\x07*\xc9\x02\n\nRADSStatus\x12\x0c\n\x08RADS_OFF\x10\x00\x12\x0f\n\x0bRADS_FAILED\x10\x01\x12\x10\n\x0cRADS_STANDBY\x10\x02\x12\x10\n\x0cRADS_DISABLE\x10\x03\x12\x0f\n\x0bRADS_SEARCH\x10\x04\x12\x17\n\x13RADS_SEARCH_SUSPEND\x10\x05\x12\x0f\n\x0bRADS_ACTIVE\x10\x06\x12\x17\n\x13RADS_ACTIVE_SUSPEND\x10\x07\x12\x17\n\x13RADS_RESUME_CONFIRM\x10\x08\x12\x0f\n\x0bRADS_FINISH\x10\t\x12\x18\n\x14RADS_PARKING_FAILURE\x10\n\x12\x17\n\x13RADS_SEARCH_FAILURE\x10\x0b\x12\x13\n\x0fRADS_PRE_ACTIVE\x10\x0c\x12\x14\n\x10RADS_LSDA_ACTIVE\x10\x64\x12\x1c\n\x18RADS_LSDA_ACTIVE_SUSPEND\x10\x65*]\n\tDVRStatus\x12\x0f\n\x0b\x44VR_STANDBY\x10\x00\x12\x0e\n\nDVR_ACTIVE\x10\x01\x12\x16\n\x12\x44VR_CONNECT_FAILED\x10\x02\x12\x17\n\x13\x44VR_INTERNAL_FAILED\x10\x03*r\n\x0eSentinelStatus\x12\x14\n\x10SENTINEL_STANDBY\x10\x00\x12\x13\n\x0fSENTINEL_ACTIVE\x10\x01\x12\x1c\n\x18SENTINEL_INTERNAL_FAILED\x10\x02\x12\x17\n\x13SENTINEL_NET_FAILED\x10\x03*\xfe\x01\n\x10SentryModeStatus\x12\x1b\n\x17SENTINEL_STATUS_UNKNOWN\x10\x00\x12\x17\n\x13SENTINEL_STATUS_OFF\x10\x01\x12 \n\x18SENTINEL_STATUS_STARTING\x10\x02\x1a\x02\x08\x01\x12\x1e\n\x16SENTINEL_STATUS_FAILED\x10\x03\x1a\x02\x08\x01\x12\x1b\n\x17SENTINEL_STATUS_WORKING\x10\x04\x12\x1b\n\x17SENTINEL_STATUS_WARNING\x10\x05\x12\x1b\n\x17SENTINEL_STATUS_STANDBY\x10\x06\x12\x1b\n\x17SENTINEL_STATUS_PASSIVE\x10\x07*\xec\x01\n\rEnd2EndStatus\x12\r\n\tSTATE_OFF\x10\x00\x12\x11\n\rSTATE_STANDBY\x10\x01\x12\x12\n\x0eSTATE_OUT_HAVP\x10\x02\x12#\n\x1fSTATE_OUT_HAVP_TO_NCA_SWITCHING\x10\x03\x12\r\n\tSTATE_NCA\x10\x04\x12\"\n\x1eSTATE_IN_NCA_TO_HAVP_SWITCHING\x10\x05\x12\x11\n\rSTATE_IN_HAVP\x10\x06\x12\x12\n\x0eSTATE_IN_M_NCA\x10\x07\x12\x13\n\x0fSTATE_OUT_M_NCA\x10\x08\x12\x11\n\rSTATE_PASSIVE\x10\t*\xe9\x01\n\x06Module\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x10\n\x0cSENSOR_LIDAR\x10\x01\x12\x0e\n\nSENSOR_USS\x10\x02\x12\x0e\n\nSENSOR_INS\x10\x03\x12\x10\n\x0cSENSOR_RADAR\x10\x04\x12\x0e\n\nMAP_ENGINE\x10\x05\x12\x10\n\x0cLOCK_ON_ROAD\x10\x06\x12\x0e\n\nINS_ONLINE\x10\x07\x12\x10\n\x0cLOCALIZATION\x10\x08\x12\x0e\n\nPERCEPTION\x10\t\x12\x0c\n\x08PLANNING\x10\n\x12\n\n\x06\x43\x41NBUS\x10\x0b\x12\x07\n\x03\x42LC\x10\x0c\x12\n\n\x06SAFETY\x10\r\x12\x0b\n\x07STARTER\x10\x0e*\xa0\x03\n\x07\x46\x65\x61ture\x12\x13\n\x0fUNKNOWN_FEATURE\x10\x00\x12\x07\n\x03\x41\x43\x43\x10\x01\x12\x07\n\x03ICA\x10\x02\x12\x07\n\x03NCA\x10\x03\x12\x07\n\x03LDW\x10\x04\x12\x07\n\x03RDP\x10\x05\x12\x07\n\x03HMA\x10\x06\x12\x07\n\x03\x42SD\x10\x07\x12\x07\n\x03LCA\x10\x08\x12\x07\n\x03\x44OW\x10\t\x12\x08\n\x04RCTA\x10\n\x12\x07\n\x03RCW\x10\x0b\x12\x08\n\x04RCTB\x10\x0c\x12\x07\n\x03\x41VM\x10\r\x12\x07\n\x03\x41PA\x10\x0e\x12\x0f\n\x0bVPA_ROUTING\x10\x0f\x12\x10\n\x0cVPA_LEARNING\x10\x10\x12\x07\n\x03PDC\x10\x11\x12\x07\n\x03\x41\x45\x42\x10\x12\x12\x07\n\x03\x45LK\x10\x13\x12\x08\n\x04RADS\x10\x14\x12\x07\n\x03MEB\x10\x15\x12\x08\n\x04\x46\x43TA\x10\x16\x12\x08\n\x04\x46\x43TB\x10\x17\x12\x07\n\x03\x46\x43W\x10\x18\x12\x07\n\x03\x45SA\x10\x19\x12\x07\n\x03TSR\x10\x1a\x12\x07\n\x03RPA\x10\x1b\x12\x07\n\x03ILC\x10\x1c\x12\x07\n\x03\x41\x42P\x10\x1d\x12\x07\n\x03\x41WB\x10\x1e\x12\x06\n\x02\x44W\x10\x1f\x12\x0c\n\x08SENTINEL\x10 \x12\x07\n\x03\x41\x45S\x10!\x12\x0b\n\x07VPA_APA\x10\x64\x12\x12\n\x0eVPA_MAP_SAVING\x10\x65\x12\x08\n\x03HUT\x10\xe9\x07\x12\x08\n\x03VIZ\x10\xea\x07\x12\x08\n\x03MAI\x10\xeb\x07*\x8d\x01\n\tELKStatus\x12\x0b\n\x07\x45LK_OFF\x10\x00\x12\x0f\n\x0b\x45LK_PASSIVE\x10\x01\x12\x0f\n\x0b\x45LK_STANDBY\x10\x02\x12\x13\n\x0f\x45LK_LEFT_ACTIVE\x10\x03\x12\x14\n\x10\x45LK_RIGHT_ACTIVE\x10\x04\x12\x0f\n\x0b\x45LK_FAILURE\x10\x05\x12\x15\n\x11\x45LK_AUTOMATIC_OFF\x10\x06*^\n\tTSRStatus\x12\x0b\n\x07TSR_OFF\x10\x00\x12\x0f\n\x0bTSR_STANDBY\x10\x01\x12\x0e\n\nTSR_FUSION\x10\x02\x12\x12\n\x0eTSR_NAVIGATION\x10\x03\x12\x0f\n\x0bTSR_FAILURE\x10\x04*G\n\tSLWStatus\x12\x0b\n\x07SLW_OFF\x10\x00\x12\x0f\n\x0bSLW_PASSIVE\x10\x01\x12\x0e\n\nSLW_ACTIVE\x10\x02\x12\x0c\n\x08SLW_HOLD\x10\x03*\x19\n\nNSLSStatus\x12\x0b\n\x07NSLS_ON\x10\x00*U\n\x08\x44WStatus\x12\n\n\x06\x44W_OFF\x10\x00\x12\x0e\n\nDW_FAILURE\x10\x01\x12\x0e\n\nDW_PASSIVE\x10\x02\x12\x0e\n\nDW_STANDBY\x10\x03\x12\r\n\tDW_ACTIVE\x10\x04*\x80\x01\n\tAEBStatus\x12\x0b\n\x07\x41\x45\x42_OFF\x10\x00\x12\x0f\n\x0b\x41\x45\x42_FAILURE\x10\x01\x12\x0f\n\x0b\x41\x45\x42_PASSIVE\x10\x02\x12\x0f\n\x0b\x41\x45\x42_STANDBY\x10\x03\x12\x0e\n\nAEB_ACTIVE\x10\x04\x12\x0e\n\nEBA_ACTIVE\x10\x05\x12\x13\n\x0f\x41\x45\x42_STAND_STILL\x10\x06*w\n\nFCTBStatus\x12\x0c\n\x08\x46\x43TB_OFF\x10\x00\x12\x10\n\x0c\x46\x43TB_FAILURE\x10\x01\x12\x10\n\x0c\x46\x43TB_PASSIVE\x10\x02\x12\x10\n\x0c\x46\x43TB_STANDBY\x10\x03\x12\x0f\n\x0b\x46\x43TB_ACTIVE\x10\x04\x12\x14\n\x10\x46\x43TB_STAND_STILL\x10\x05*p\n\tMEBStatus\x12\x0b\n\x07MEB_OFF\x10\x00\x12\x0f\n\x0bMEB_FAILURE\x10\x01\x12\x0f\n\x0bMEB_PASSIVE\x10\x02\x12\x0f\n\x0bMEB_STANDBY\x10\x03\x12\x0e\n\nMEB_ACTIVE\x10\x04\x12\x13\n\x0fMEB_STAND_STILL\x10\x05*[\n\tFCWStatus\x12\x0b\n\x07\x46\x43W_OFF\x10\x00\x12\x0f\n\x0b\x46\x43W_FAILURE\x10\x01\x12\x0f\n\x0b\x46\x43W_PASSIVE\x10\x02\x12\x0f\n\x0b\x46\x43W_STANDBY\x10\x03\x12\x0e\n\nFCW_ACTIVE\x10\x04*a\n\nFCTAStatus\x12\x0c\n\x08\x46\x43TA_OFF\x10\x00\x12\x10\n\x0c\x46\x43TA_FAILURE\x10\x01\x12\x10\n\x0c\x46\x43TA_PASSIVE\x10\x02\x12\x10\n\x0c\x46\x43TA_STANDBY\x10\x03\x12\x0f\n\x0b\x46\x43TA_ACTIVE\x10\x04*[\n\tESAStatus\x12\x0b\n\x07\x45SA_OFF\x10\x00\x12\x0f\n\x0b\x45SA_FAILURE\x10\x01\x12\x0f\n\x0b\x45SA_PASSIVE\x10\x02\x12\x0f\n\x0b\x45SA_STANDBY\x10\x03\x12\x0e\n\nESA_ACTIVE\x10\x04*[\n\tAESStatus\x12\x0b\n\x07\x41\x45S_OFF\x10\x00\x12\x0f\n\x0b\x41\x45S_FAILURE\x10\x01\x12\x0f\n\x0b\x41\x45S_PASSIVE\x10\x02\x12\x0f\n\x0b\x41\x45S_STANDBY\x10\x03\x12\x0e\n\nAES_ACTIVE\x10\x04*[\n\tAWBStatus\x12\x0b\n\x07\x41WB_OFF\x10\x00\x12\x0f\n\x0b\x41WB_FAILURE\x10\x01\x12\x0f\n\x0b\x41WB_PASSIVE\x10\x02\x12\x0f\n\x0b\x41WB_STANDBY\x10\x03\x12\x0e\n\nAWB_ACTIVE\x10\x04*[\n\tABPStatus\x12\x0b\n\x07\x41\x42P_OFF\x10\x00\x12\x0f\n\x0b\x41\x42P_FAILURE\x10\x01\x12\x0f\n\x0b\x41\x42P_PASSIVE\x10\x02\x12\x0f\n\x0b\x41\x42P_STANDBY\x10\x03\x12\x0e\n\nABP_ACTIVE\x10\x04*[\n\tMAIStatus\x12\x0b\n\x07MAI_OFF\x10\x00\x12\x0f\n\x0bMAI_FAILURE\x10\x01\x12\x0f\n\x0bMAI_PASSIVE\x10\x02\x12\x0f\n\x0bMAI_STANDBY\x10\x03\x12\x0e\n\nMAI_ACTIVE\x10\x04\x62\x06proto3')
 
 _ACCSTATUS = DESCRIPTOR.enum_types_by_name['ACCStatus']
 ACCStatus = enum_type_wrapper.EnumTypeWrapper(_ACCSTATUS)
@@ -53,6 +53,8 @@ _RCTBSTATUS = DESCRIPTOR.enum_types_by_name['RCTBStatus']
 RCTBStatus = enum_type_wrapper.EnumTypeWrapper(_RCTBSTATUS)
 _APASTATUS = DESCRIPTOR.enum_types_by_name['APAStatus']
 APAStatus = enum_type_wrapper.EnumTypeWrapper(_APASTATUS)
+_VPASTATUSTYPE = DESCRIPTOR.enum_types_by_name['VPAStatusType']
+VPAStatusType = enum_type_wrapper.EnumTypeWrapper(_VPASTATUSTYPE)
 _PARKINGTYPE = DESCRIPTOR.enum_types_by_name['ParkingType']
 ParkingType = enum_type_wrapper.EnumTypeWrapper(_PARKINGTYPE)
 _VPASTATUS = DESCRIPTOR.enum_types_by_name['VPAStatus']
@@ -73,6 +75,8 @@ _SENTINELSTATUS = DESCRIPTOR.enum_types_by_name['SentinelStatus']
 SentinelStatus = enum_type_wrapper.EnumTypeWrapper(_SENTINELSTATUS)
 _SENTRYMODESTATUS = DESCRIPTOR.enum_types_by_name['SentryModeStatus']
 SentryModeStatus = enum_type_wrapper.EnumTypeWrapper(_SENTRYMODESTATUS)
+_END2ENDSTATUS = DESCRIPTOR.enum_types_by_name['End2EndStatus']
+End2EndStatus = enum_type_wrapper.EnumTypeWrapper(_END2ENDSTATUS)
 _MODULE = DESCRIPTOR.enum_types_by_name['Module']
 Module = enum_type_wrapper.EnumTypeWrapper(_MODULE)
 _FEATURE = DESCRIPTOR.enum_types_by_name['Feature']
@@ -99,6 +103,8 @@ _FCTASTATUS = DESCRIPTOR.enum_types_by_name['FCTAStatus']
 FCTAStatus = enum_type_wrapper.EnumTypeWrapper(_FCTASTATUS)
 _ESASTATUS = DESCRIPTOR.enum_types_by_name['ESAStatus']
 ESAStatus = enum_type_wrapper.EnumTypeWrapper(_ESASTATUS)
+_AESSTATUS = DESCRIPTOR.enum_types_by_name['AESStatus']
+AESStatus = enum_type_wrapper.EnumTypeWrapper(_AESSTATUS)
 _AWBSTATUS = DESCRIPTOR.enum_types_by_name['AWBStatus']
 AWBStatus = enum_type_wrapper.EnumTypeWrapper(_AWBSTATUS)
 _ABPSTATUS = DESCRIPTOR.enum_types_by_name['ABPStatus']
@@ -202,11 +208,11 @@ RPA_PARKING_IN_OUT_ACTIVE_EPB_ERROR = 12
 RPA_STRAIGHT_IN_OUT_ACTIVE_EPB_ERROR = 13
 RPA_SYSTEM_FAILURE = 14
 RPA_FAILURE_DISABLE = 15
-RPA_PARKIN_SEARCH = 105
-RPA_ABORT = 106
-RPA_CANCEL = 107
-RPA_QUIT = 108
-RPA_SEARCH_FAILURE = 109
+RPA_PARKIN_SEARCH = 16
+RPA_ABORT = 17
+RPA_CANCEL = 18
+RPA_QUIT = 19
+RPA_SEARCH_FAILURE = 20
 TRAFFIC_LIGHT_ATTENTION_STATUS_UNKNOWN = 0
 TRAFFIC_LIGHT_ATTENTION_STATUS_OFF = 1
 TRAFFIC_LIGHT_ATTENTION_STATUS_STANDBY = 2
@@ -267,6 +273,9 @@ APA_RPA_EPB_ERROR = 24
 APA_PRE_PARKINGOUT_ACTIVE_FROM_STANDBY = 25
 APA_SEARCHING_PAUSED = 26
 APA_SEARCHING_FAILURE = 27
+STATUS_TYPE_NORMAL = 0
+STATUS_TYPE_E2E_IN = 1
+STATUS_TYPE_E2E_OUT = 2
 TYPE_PARKING_IN = 0
 TYPE_PARKING_OUT = 1
 VPA_STATUS_UNKNOWN = 0
@@ -289,6 +298,7 @@ VPA_ROUTING_SYSTEM_FAILURE = 16
 VPA_ROUTING_MRM = 17
 VPA_ROUTING_FAILURE_DISABLE = 18
 VPA_ROUTING_PREACTIVE = 19
+VPA_ROUTING_PREACTIVE_EXIT = 20
 VPA_MAP_LEARNING_PARKING_ACTIVE = 21
 VPA_MAP_LEARNING_PARKING_PAUSED = 22
 VPA_MAP_LEARNING_PARKING_FINISHED = 23
@@ -298,6 +308,9 @@ VPA_MAP_LEARNING_SYSTEM_FAILURE = 26
 VPA_MAP_LEARNING_SAVING_MAP = 27
 VPA_MAP_GUIDANCE = 28
 VPA_MAP_LEARNING_FAILURE_DISABLE = 29
+VPA_MAP_LEARNING_SUSPEND = 30
+VPA_MAP_IN_LEARNING_NO_SENSE = 31
+VPA_MAP_OUT_LEARNING_NO_SENSE = 32
 VPA_ROUTING_PARKING_ACTIVE = 41
 VPA_ROUTING_PARKING_PAUSED = 42
 VPA_ROUTING_PARKING_FINISHED = 43
@@ -308,6 +321,8 @@ VPA_ROUTING_NAVIGATION = 47
 VPA_ROUTING_SUSPEND = 48
 VPA_ROUTING_PARKING_ALONG_WAY = 49
 VPA_ROUTING_PARKING_OUT_HOLD = 50
+VPA_ROUTING_ROAMING = 51
+VPA_ROUTING_OUT_PARKING_PREACTIVE = 52
 LDW_OFF = 0
 LDW_PASSIVE = 1
 LDW_STANDBY = 2
@@ -347,12 +362,9 @@ RADS_RESUME_CONFIRM = 8
 RADS_FINISH = 9
 RADS_PARKING_FAILURE = 10
 RADS_SEARCH_FAILURE = 11
-RADS_LSDA_SEARCH = 12
-RADS_LSDA_SEARCH_SUSPEND = 13
-RADS_LSDA_ACTIVE = 14
-RADS_LSDA_ACTIVE_SUSPEND = 15
-RADS_LSDA_RESUME_CONFIRM = 16
-RADS_LSDA_FINISH = 17
+RADS_PRE_ACTIVE = 12
+RADS_LSDA_ACTIVE = 100
+RADS_LSDA_ACTIVE_SUSPEND = 101
 DVR_STANDBY = 0
 DVR_ACTIVE = 1
 DVR_CONNECT_FAILED = 2
@@ -369,6 +381,16 @@ SENTINEL_STATUS_WORKING = 4
 SENTINEL_STATUS_WARNING = 5
 SENTINEL_STATUS_STANDBY = 6
 SENTINEL_STATUS_PASSIVE = 7
+STATE_OFF = 0
+STATE_STANDBY = 1
+STATE_OUT_HAVP = 2
+STATE_OUT_HAVP_TO_NCA_SWITCHING = 3
+STATE_NCA = 4
+STATE_IN_NCA_TO_HAVP_SWITCHING = 5
+STATE_IN_HAVP = 6
+STATE_IN_M_NCA = 7
+STATE_OUT_M_NCA = 8
+STATE_PASSIVE = 9
 UNKNOWN = 0
 SENSOR_LIDAR = 1
 SENSOR_USS = 2
@@ -417,10 +439,12 @@ ABP = 29
 AWB = 30
 DW = 31
 SENTINEL = 32
+AES = 33
 VPA_APA = 100
 VPA_MAP_SAVING = 101
 HUT = 1001
 VIZ = 1002
+MAI = 1003
 ELK_OFF = 0
 ELK_PASSIVE = 1
 ELK_STANDBY = 2
@@ -477,6 +501,11 @@ ESA_FAILURE = 1
 ESA_PASSIVE = 2
 ESA_STANDBY = 3
 ESA_ACTIVE = 4
+AES_OFF = 0
+AES_FAILURE = 1
+AES_PASSIVE = 2
+AES_STANDBY = 3
+AES_ACTIVE = 4
 AWB_OFF = 0
 AWB_FAILURE = 1
 AWB_PASSIVE = 2
@@ -506,14 +535,18 @@ _HMAPASSIVEREASON = DESCRIPTOR.message_types_by_name['HMAPassiveReason']
 _HMALOWBEAMREASON = DESCRIPTOR.message_types_by_name['HMALowBeamReason']
 _HMASTATUSINFO = DESCRIPTOR.message_types_by_name['HMAStatusInfo']
 _BSDACTIVEREASON = DESCRIPTOR.message_types_by_name['BSDActiveReason']
+_BSDPASSIVEREASON = DESCRIPTOR.message_types_by_name['BSDPassiveReason']
 _BSDSTATUSINFO = DESCRIPTOR.message_types_by_name['BSDStatusInfo']
 _LCAACTIVEREASON = DESCRIPTOR.message_types_by_name['LCAActiveReason']
 _LCASTATUSINFO = DESCRIPTOR.message_types_by_name['LCAStatusInfo']
 _DOWACTIVEREASON = DESCRIPTOR.message_types_by_name['DOWActiveReason']
+_DOWPASSIVEREASON = DESCRIPTOR.message_types_by_name['DOWPassiveReason']
 _DOWSTATUSINFO = DESCRIPTOR.message_types_by_name['DOWStatusInfo']
 _RCTAACTIVEREASON = DESCRIPTOR.message_types_by_name['RCTAActiveReason']
+_RCTAPASSIVEREASON = DESCRIPTOR.message_types_by_name['RCTAPassiveReason']
 _RCTASTATUSINFO = DESCRIPTOR.message_types_by_name['RCTAStatusInfo']
 _RCWACTIVEREASON = DESCRIPTOR.message_types_by_name['RCWActiveReason']
+_RCWPASSIVEREASON = DESCRIPTOR.message_types_by_name['RCWPassiveReason']
 _RCWSTATUSINFO = DESCRIPTOR.message_types_by_name['RCWStatusInfo']
 _RCTBACTIVEREASON = DESCRIPTOR.message_types_by_name['RCTBActiveReason']
 _RCTBSTATUSINFO = DESCRIPTOR.message_types_by_name['RCTBStatusInfo']
@@ -558,6 +591,8 @@ _DVRSTATUSINFO = DESCRIPTOR.message_types_by_name['DVRStatusInfo']
 _SENTINELSTATUSREASON = DESCRIPTOR.message_types_by_name['SentinelStatusReason']
 _SENTINELSTATUSINFO = DESCRIPTOR.message_types_by_name['SentinelStatusInfo']
 _SENTRYMODEINFO = DESCRIPTOR.message_types_by_name['SentryModeInfo']
+_END2ENDSTATUSREASON = DESCRIPTOR.message_types_by_name['End2EndStatusReason']
+_END2ENDINFO = DESCRIPTOR.message_types_by_name['End2EndInfo']
 _STARTFAILEDREASON = DESCRIPTOR.message_types_by_name['StartFailedReason']
 _CRUSHREASON = DESCRIPTOR.message_types_by_name['CrushReason']
 _FAILUREREASON = DESCRIPTOR.message_types_by_name['FailureReason']
@@ -565,6 +600,10 @@ _ACTIVEDFEATURES = DESCRIPTOR.message_types_by_name['ActivedFeatures']
 _ELKPASSIVEREASON = DESCRIPTOR.message_types_by_name['ELKPassiveReason']
 _ELKSTATUSINFO = DESCRIPTOR.message_types_by_name['ELKStatusInfo']
 _TSRSTATUSINFO = DESCRIPTOR.message_types_by_name['TSRStatusInfo']
+_TSRSTATUSINFO_POSE = _TSRSTATUSINFO.nested_types_by_name['Pose']
+_TSRSTATUSINFO_TSRSTANDBYSIGN = _TSRSTATUSINFO.nested_types_by_name['TSRStandbySign']
+_TSRSTATUSINFO_TSRFUSIONSIGN = _TSRSTATUSINFO.nested_types_by_name['TSRFusionSign']
+_TSRSTATUSINFO_TSRCONTEXT = _TSRSTATUSINFO.nested_types_by_name['TSRContext']
 _DWSTATUSINFO = DESCRIPTOR.message_types_by_name['DWStatusInfo']
 _DWFRONTCARINFO = DESCRIPTOR.message_types_by_name['DWFrontCarInfo']
 _AEBSTATUSINFO = DESCRIPTOR.message_types_by_name['AEBStatusInfo']
@@ -573,6 +612,7 @@ _MEBSTATUSINFO = DESCRIPTOR.message_types_by_name['MEBStatusInfo']
 _FCWSTATUSINFO = DESCRIPTOR.message_types_by_name['FCWStatusInfo']
 _FCTASTATUSINFO = DESCRIPTOR.message_types_by_name['FCTAStatusInfo']
 _ESASTATUSINFO = DESCRIPTOR.message_types_by_name['ESAStatusInfo']
+_AESSTATUSINFO = DESCRIPTOR.message_types_by_name['AESStatusInfo']
 _AWBSTATUSINFO = DESCRIPTOR.message_types_by_name['AWBStatusInfo']
 _ABPSTATUSINFO = DESCRIPTOR.message_types_by_name['ABPStatusInfo']
 _MAISTATUSINFO = DESCRIPTOR.message_types_by_name['MAIStatusInfo']
@@ -581,6 +621,7 @@ _BUSINESSCHECKINFO_STATUS = _BUSINESSCHECKINFO.enum_types_by_name['Status']
 _VEHICLESTATUSCHECKINFO_STATUS = _VEHICLESTATUSCHECKINFO.enum_types_by_name['Status']
 _AMBIENTENVCHECKINFO_STATUS = _AMBIENTENVCHECKINFO.enum_types_by_name['Status']
 _AVMSTATUSINFO_AVMSTYLE = _AVMSTATUSINFO.enum_types_by_name['AVMStyle']
+_TSRSTATUSINFO_SPEEDSIGNTYPE = _TSRSTATUSINFO.enum_types_by_name['SpeedSignType']
 OperationStatus = _reflection.GeneratedProtocolMessageType('OperationStatus', (_message.Message,), {
   'DESCRIPTOR' : _OPERATIONSTATUS,
   '__module__' : 'drapi.operation_status_pb2'
@@ -665,6 +706,13 @@ BSDActiveReason = _reflection.GeneratedProtocolMessageType('BSDActiveReason', (_
   })
 _sym_db.RegisterMessage(BSDActiveReason)
 
+BSDPassiveReason = _reflection.GeneratedProtocolMessageType('BSDPassiveReason', (_message.Message,), {
+  'DESCRIPTOR' : _BSDPASSIVEREASON,
+  '__module__' : 'drapi.operation_status_pb2'
+  # @@protoc_insertion_point(class_scope:dr.operationstatus.BSDPassiveReason)
+  })
+_sym_db.RegisterMessage(BSDPassiveReason)
+
 BSDStatusInfo = _reflection.GeneratedProtocolMessageType('BSDStatusInfo', (_message.Message,), {
   'DESCRIPTOR' : _BSDSTATUSINFO,
   '__module__' : 'drapi.operation_status_pb2'
@@ -693,6 +741,13 @@ DOWActiveReason = _reflection.GeneratedProtocolMessageType('DOWActiveReason', (_
   })
 _sym_db.RegisterMessage(DOWActiveReason)
 
+DOWPassiveReason = _reflection.GeneratedProtocolMessageType('DOWPassiveReason', (_message.Message,), {
+  'DESCRIPTOR' : _DOWPASSIVEREASON,
+  '__module__' : 'drapi.operation_status_pb2'
+  # @@protoc_insertion_point(class_scope:dr.operationstatus.DOWPassiveReason)
+  })
+_sym_db.RegisterMessage(DOWPassiveReason)
+
 DOWStatusInfo = _reflection.GeneratedProtocolMessageType('DOWStatusInfo', (_message.Message,), {
   'DESCRIPTOR' : _DOWSTATUSINFO,
   '__module__' : 'drapi.operation_status_pb2'
@@ -707,6 +762,13 @@ RCTAActiveReason = _reflection.GeneratedProtocolMessageType('RCTAActiveReason', 
   })
 _sym_db.RegisterMessage(RCTAActiveReason)
 
+RCTAPassiveReason = _reflection.GeneratedProtocolMessageType('RCTAPassiveReason', (_message.Message,), {
+  'DESCRIPTOR' : _RCTAPASSIVEREASON,
+  '__module__' : 'drapi.operation_status_pb2'
+  # @@protoc_insertion_point(class_scope:dr.operationstatus.RCTAPassiveReason)
+  })
+_sym_db.RegisterMessage(RCTAPassiveReason)
+
 RCTAStatusInfo = _reflection.GeneratedProtocolMessageType('RCTAStatusInfo', (_message.Message,), {
   'DESCRIPTOR' : _RCTASTATUSINFO,
   '__module__' : 'drapi.operation_status_pb2'
@@ -720,6 +782,13 @@ RCWActiveReason = _reflection.GeneratedProtocolMessageType('RCWActiveReason', (_
   # @@protoc_insertion_point(class_scope:dr.operationstatus.RCWActiveReason)
   })
 _sym_db.RegisterMessage(RCWActiveReason)
+
+RCWPassiveReason = _reflection.GeneratedProtocolMessageType('RCWPassiveReason', (_message.Message,), {
+  'DESCRIPTOR' : _RCWPASSIVEREASON,
+  '__module__' : 'drapi.operation_status_pb2'
+  # @@protoc_insertion_point(class_scope:dr.operationstatus.RCWPassiveReason)
+  })
+_sym_db.RegisterMessage(RCWPassiveReason)
 
 RCWStatusInfo = _reflection.GeneratedProtocolMessageType('RCWStatusInfo', (_message.Message,), {
   'DESCRIPTOR' : _RCWSTATUSINFO,
@@ -1029,6 +1098,20 @@ SentryModeInfo = _reflection.GeneratedProtocolMessageType('SentryModeInfo', (_me
   })
 _sym_db.RegisterMessage(SentryModeInfo)
 
+End2EndStatusReason = _reflection.GeneratedProtocolMessageType('End2EndStatusReason', (_message.Message,), {
+  'DESCRIPTOR' : _END2ENDSTATUSREASON,
+  '__module__' : 'drapi.operation_status_pb2'
+  # @@protoc_insertion_point(class_scope:dr.operationstatus.End2EndStatusReason)
+  })
+_sym_db.RegisterMessage(End2EndStatusReason)
+
+End2EndInfo = _reflection.GeneratedProtocolMessageType('End2EndInfo', (_message.Message,), {
+  'DESCRIPTOR' : _END2ENDINFO,
+  '__module__' : 'drapi.operation_status_pb2'
+  # @@protoc_insertion_point(class_scope:dr.operationstatus.End2EndInfo)
+  })
+_sym_db.RegisterMessage(End2EndInfo)
+
 StartFailedReason = _reflection.GeneratedProtocolMessageType('StartFailedReason', (_message.Message,), {
   'DESCRIPTOR' : _STARTFAILEDREASON,
   '__module__' : 'drapi.operation_status_pb2'
@@ -1072,11 +1155,43 @@ ELKStatusInfo = _reflection.GeneratedProtocolMessageType('ELKStatusInfo', (_mess
 _sym_db.RegisterMessage(ELKStatusInfo)
 
 TSRStatusInfo = _reflection.GeneratedProtocolMessageType('TSRStatusInfo', (_message.Message,), {
+
+  'Pose' : _reflection.GeneratedProtocolMessageType('Pose', (_message.Message,), {
+    'DESCRIPTOR' : _TSRSTATUSINFO_POSE,
+    '__module__' : 'drapi.operation_status_pb2'
+    # @@protoc_insertion_point(class_scope:dr.operationstatus.TSRStatusInfo.Pose)
+    })
+  ,
+
+  'TSRStandbySign' : _reflection.GeneratedProtocolMessageType('TSRStandbySign', (_message.Message,), {
+    'DESCRIPTOR' : _TSRSTATUSINFO_TSRSTANDBYSIGN,
+    '__module__' : 'drapi.operation_status_pb2'
+    # @@protoc_insertion_point(class_scope:dr.operationstatus.TSRStatusInfo.TSRStandbySign)
+    })
+  ,
+
+  'TSRFusionSign' : _reflection.GeneratedProtocolMessageType('TSRFusionSign', (_message.Message,), {
+    'DESCRIPTOR' : _TSRSTATUSINFO_TSRFUSIONSIGN,
+    '__module__' : 'drapi.operation_status_pb2'
+    # @@protoc_insertion_point(class_scope:dr.operationstatus.TSRStatusInfo.TSRFusionSign)
+    })
+  ,
+
+  'TSRContext' : _reflection.GeneratedProtocolMessageType('TSRContext', (_message.Message,), {
+    'DESCRIPTOR' : _TSRSTATUSINFO_TSRCONTEXT,
+    '__module__' : 'drapi.operation_status_pb2'
+    # @@protoc_insertion_point(class_scope:dr.operationstatus.TSRStatusInfo.TSRContext)
+    })
+  ,
   'DESCRIPTOR' : _TSRSTATUSINFO,
   '__module__' : 'drapi.operation_status_pb2'
   # @@protoc_insertion_point(class_scope:dr.operationstatus.TSRStatusInfo)
   })
 _sym_db.RegisterMessage(TSRStatusInfo)
+_sym_db.RegisterMessage(TSRStatusInfo.Pose)
+_sym_db.RegisterMessage(TSRStatusInfo.TSRStandbySign)
+_sym_db.RegisterMessage(TSRStatusInfo.TSRFusionSign)
+_sym_db.RegisterMessage(TSRStatusInfo.TSRContext)
 
 DWStatusInfo = _reflection.GeneratedProtocolMessageType('DWStatusInfo', (_message.Message,), {
   'DESCRIPTOR' : _DWSTATUSINFO,
@@ -1134,6 +1249,13 @@ ESAStatusInfo = _reflection.GeneratedProtocolMessageType('ESAStatusInfo', (_mess
   })
 _sym_db.RegisterMessage(ESAStatusInfo)
 
+AESStatusInfo = _reflection.GeneratedProtocolMessageType('AESStatusInfo', (_message.Message,), {
+  'DESCRIPTOR' : _AESSTATUSINFO,
+  '__module__' : 'drapi.operation_status_pb2'
+  # @@protoc_insertion_point(class_scope:dr.operationstatus.AESStatusInfo)
+  })
+_sym_db.RegisterMessage(AESStatusInfo)
+
 AWBStatusInfo = _reflection.GeneratedProtocolMessageType('AWBStatusInfo', (_message.Message,), {
   'DESCRIPTOR' : _AWBSTATUSINFO,
   '__module__' : 'drapi.operation_status_pb2'
@@ -1162,266 +1284,296 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _SENTRYMODESTATUS.values_by_name["SENTINEL_STATUS_STARTING"]._serialized_options = b'\010\001'
   _SENTRYMODESTATUS.values_by_name["SENTINEL_STATUS_FAILED"]._options = None
   _SENTRYMODESTATUS.values_by_name["SENTINEL_STATUS_FAILED"]._serialized_options = b'\010\001'
-  _ACCSTATUS._serialized_start=33253
-  _ACCSTATUS._serialized_end=33415
-  _ICASTATUS._serialized_start=33418
-  _ICASTATUS._serialized_end=33621
-  _ILCSTATUS._serialized_start=33623
-  _ILCSTATUS._serialized_end=33732
-  _LCSTATUS._serialized_start=33735
-  _LCSTATUS._serialized_end=33966
-  _NCASTATUS._serialized_start=33969
-  _NCASTATUS._serialized_end=34152
-  _DRIVINGSTATUS._serialized_start=34155
-  _DRIVINGSTATUS._serialized_end=34318
-  _HMASTATUS._serialized_start=34321
-  _HMASTATUS._serialized_end=34506
-  _AVMSTATUS._serialized_start=34509
-  _AVMSTATUS._serialized_end=34935
-  _RPASTATUS._serialized_start=34938
-  _RPASTATUS._serialized_end=35455
-  _TRAFFICLIGHTATTENTIONSTATUS._serialized_start=35458
-  _TRAFFICLIGHTATTENTIONSTATUS._serialized_end=35764
-  _WARNINGLEVEL._serialized_start=35766
-  _WARNINGLEVEL._serialized_end=35836
-  _BSDSTATUS._serialized_start=35838
-  _BSDSTATUS._serialized_end=35929
-  _LCASTATUS._serialized_start=35931
-  _LCASTATUS._serialized_end=36022
-  _DOWSTATUS._serialized_start=36024
-  _DOWSTATUS._serialized_end=36115
-  _RCTASTATUS._serialized_start=36117
-  _RCTASTATUS._serialized_end=36214
-  _RCWSTATUS._serialized_start=36216
-  _RCWSTATUS._serialized_end=36307
-  _RCTBSTATUS._serialized_start=36309
-  _RCTBSTATUS._serialized_end=36428
-  _APASTATUS._serialized_start=36431
-  _APASTATUS._serialized_end=36945
-  _PARKINGTYPE._serialized_start=36947
-  _PARKINGTYPE._serialized_end=37003
-  _VPASTATUS._serialized_start=37006
-  _VPASTATUS._serialized_end=38174
-  _LDWSTATUS._serialized_start=38177
-  _LDWSTATUS._serialized_end=38318
-  _RDPSTATUS._serialized_start=38321
-  _RDPSTATUS._serialized_end=38462
-  _PDCSTATUS._serialized_start=38464
-  _PDCSTATUS._serialized_end=38575
-  _TJPSTATUS._serialized_start=38578
-  _TJPSTATUS._serialized_end=38721
-  _RADSSTATUS._serialized_start=38724
-  _RADSSTATUS._serialized_end=39136
-  _DVRSTATUS._serialized_start=39138
-  _DVRSTATUS._serialized_end=39231
-  _SENTINELSTATUS._serialized_start=39233
-  _SENTINELSTATUS._serialized_end=39347
-  _SENTRYMODESTATUS._serialized_start=39350
-  _SENTRYMODESTATUS._serialized_end=39604
-  _MODULE._serialized_start=39607
-  _MODULE._serialized_end=39840
-  _FEATURE._serialized_start=39843
-  _FEATURE._serialized_end=40240
-  _ELKSTATUS._serialized_start=40243
-  _ELKSTATUS._serialized_end=40384
-  _TSRSTATUS._serialized_start=40386
-  _TSRSTATUS._serialized_end=40480
-  _SLWSTATUS._serialized_start=40482
-  _SLWSTATUS._serialized_end=40553
-  _NSLSSTATUS._serialized_start=40555
-  _NSLSSTATUS._serialized_end=40580
-  _DWSTATUS._serialized_start=40582
-  _DWSTATUS._serialized_end=40667
-  _AEBSTATUS._serialized_start=40670
-  _AEBSTATUS._serialized_end=40798
-  _FCTBSTATUS._serialized_start=40800
-  _FCTBSTATUS._serialized_end=40919
-  _MEBSTATUS._serialized_start=40921
-  _MEBSTATUS._serialized_end=41033
-  _FCWSTATUS._serialized_start=41035
-  _FCWSTATUS._serialized_end=41126
-  _FCTASTATUS._serialized_start=41128
-  _FCTASTATUS._serialized_end=41225
-  _ESASTATUS._serialized_start=41227
-  _ESASTATUS._serialized_end=41318
-  _AWBSTATUS._serialized_start=41320
-  _AWBSTATUS._serialized_end=41411
-  _ABPSTATUS._serialized_start=41413
-  _ABPSTATUS._serialized_end=41504
-  _MAISTATUS._serialized_start=41506
-  _MAISTATUS._serialized_end=41597
+  _ACCSTATUS._serialized_start=38511
+  _ACCSTATUS._serialized_end=38673
+  _ICASTATUS._serialized_start=38676
+  _ICASTATUS._serialized_end=38879
+  _ILCSTATUS._serialized_start=38881
+  _ILCSTATUS._serialized_end=38990
+  _LCSTATUS._serialized_start=38993
+  _LCSTATUS._serialized_end=39224
+  _NCASTATUS._serialized_start=39227
+  _NCASTATUS._serialized_end=39410
+  _DRIVINGSTATUS._serialized_start=39413
+  _DRIVINGSTATUS._serialized_end=39576
+  _HMASTATUS._serialized_start=39579
+  _HMASTATUS._serialized_end=39764
+  _AVMSTATUS._serialized_start=39767
+  _AVMSTATUS._serialized_end=40193
+  _RPASTATUS._serialized_start=40196
+  _RPASTATUS._serialized_end=40713
+  _TRAFFICLIGHTATTENTIONSTATUS._serialized_start=40716
+  _TRAFFICLIGHTATTENTIONSTATUS._serialized_end=41022
+  _WARNINGLEVEL._serialized_start=41024
+  _WARNINGLEVEL._serialized_end=41094
+  _BSDSTATUS._serialized_start=41096
+  _BSDSTATUS._serialized_end=41187
+  _LCASTATUS._serialized_start=41189
+  _LCASTATUS._serialized_end=41280
+  _DOWSTATUS._serialized_start=41282
+  _DOWSTATUS._serialized_end=41373
+  _RCTASTATUS._serialized_start=41375
+  _RCTASTATUS._serialized_end=41472
+  _RCWSTATUS._serialized_start=41474
+  _RCWSTATUS._serialized_end=41565
+  _RCTBSTATUS._serialized_start=41567
+  _RCTBSTATUS._serialized_end=41686
+  _APASTATUS._serialized_start=41689
+  _APASTATUS._serialized_end=42203
+  _VPASTATUSTYPE._serialized_start=42205
+  _VPASTATUSTYPE._serialized_end=42293
+  _PARKINGTYPE._serialized_start=42295
+  _PARKINGTYPE._serialized_end=42351
+  _VPASTATUS._serialized_start=42354
+  _VPASTATUS._serialized_end=43717
+  _LDWSTATUS._serialized_start=43720
+  _LDWSTATUS._serialized_end=43861
+  _RDPSTATUS._serialized_start=43864
+  _RDPSTATUS._serialized_end=44005
+  _PDCSTATUS._serialized_start=44007
+  _PDCSTATUS._serialized_end=44118
+  _TJPSTATUS._serialized_start=44121
+  _TJPSTATUS._serialized_end=44264
+  _RADSSTATUS._serialized_start=44267
+  _RADSSTATUS._serialized_end=44596
+  _DVRSTATUS._serialized_start=44598
+  _DVRSTATUS._serialized_end=44691
+  _SENTINELSTATUS._serialized_start=44693
+  _SENTINELSTATUS._serialized_end=44807
+  _SENTRYMODESTATUS._serialized_start=44810
+  _SENTRYMODESTATUS._serialized_end=45064
+  _END2ENDSTATUS._serialized_start=45067
+  _END2ENDSTATUS._serialized_end=45303
+  _MODULE._serialized_start=45306
+  _MODULE._serialized_end=45539
+  _FEATURE._serialized_start=45542
+  _FEATURE._serialized_end=45958
+  _ELKSTATUS._serialized_start=45961
+  _ELKSTATUS._serialized_end=46102
+  _TSRSTATUS._serialized_start=46104
+  _TSRSTATUS._serialized_end=46198
+  _SLWSTATUS._serialized_start=46200
+  _SLWSTATUS._serialized_end=46271
+  _NSLSSTATUS._serialized_start=46273
+  _NSLSSTATUS._serialized_end=46298
+  _DWSTATUS._serialized_start=46300
+  _DWSTATUS._serialized_end=46385
+  _AEBSTATUS._serialized_start=46388
+  _AEBSTATUS._serialized_end=46516
+  _FCTBSTATUS._serialized_start=46518
+  _FCTBSTATUS._serialized_end=46637
+  _MEBSTATUS._serialized_start=46639
+  _MEBSTATUS._serialized_end=46751
+  _FCWSTATUS._serialized_start=46753
+  _FCWSTATUS._serialized_end=46844
+  _FCTASTATUS._serialized_start=46846
+  _FCTASTATUS._serialized_end=46943
+  _ESASTATUS._serialized_start=46945
+  _ESASTATUS._serialized_end=47036
+  _AESSTATUS._serialized_start=47038
+  _AESSTATUS._serialized_end=47129
+  _AWBSTATUS._serialized_start=47131
+  _AWBSTATUS._serialized_end=47222
+  _ABPSTATUS._serialized_start=47224
+  _ABPSTATUS._serialized_end=47315
+  _MAISTATUS._serialized_start=47317
+  _MAISTATUS._serialized_end=47408
   _OPERATIONSTATUS._serialized_start=53
-  _OPERATIONSTATUS._serialized_end=2457
-  _DEVICECHECKINFO._serialized_start=2460
-  _DEVICECHECKINFO._serialized_end=5711
-  _DEVICECHECKINFO_DEVICEINFO._serialized_start=2549
-  _DEVICECHECKINFO_DEVICEINFO._serialized_end=5711
-  _BUSINESSCHECKINFO._serialized_start=5714
-  _BUSINESSCHECKINFO._serialized_end=19460
-  _BUSINESSCHECKINFO_STATUS._serialized_start=5798
-  _BUSINESSCHECKINFO_STATUS._serialized_end=19460
-  _VEHICLESTATUSCHECKINFO._serialized_start=19463
-  _VEHICLESTATUSCHECKINFO._serialized_end=19969
-  _VEHICLESTATUSCHECKINFO_STATUS._serialized_start=19557
-  _VEHICLESTATUSCHECKINFO_STATUS._serialized_end=19969
-  _AMBIENTENVCHECKINFO._serialized_start=19972
-  _AMBIENTENVCHECKINFO._serialized_end=20141
-  _AMBIENTENVCHECKINFO_STATUS._serialized_start=20059
-  _AMBIENTENVCHECKINFO_STATUS._serialized_end=20141
-  _FAULTINFO._serialized_start=20143
-  _FAULTINFO._serialized_end=20233
-  _FAULTEVENTINFO._serialized_start=20235
-  _FAULTEVENTINFO._serialized_end=20332
-  _REASONINFO._serialized_start=20335
-  _REASONINFO._serialized_end=20650
-  _HMAPASSIVEREASON._serialized_start=20653
-  _HMAPASSIVEREASON._serialized_end=20882
-  _HMALOWBEAMREASON._serialized_start=20885
-  _HMALOWBEAMREASON._serialized_end=21179
-  _HMASTATUSINFO._serialized_start=21182
-  _HMASTATUSINFO._serialized_end=21383
-  _BSDACTIVEREASON._serialized_start=21386
-  _BSDACTIVEREASON._serialized_end=21626
-  _BSDSTATUSINFO._serialized_start=21629
-  _BSDSTATUSINFO._serialized_end=21763
-  _LCAACTIVEREASON._serialized_start=21766
-  _LCAACTIVEREASON._serialized_end=22006
-  _LCASTATUSINFO._serialized_start=22009
-  _LCASTATUSINFO._serialized_end=22143
-  _DOWACTIVEREASON._serialized_start=22146
-  _DOWACTIVEREASON._serialized_end=22553
-  _DOWSTATUSINFO._serialized_start=22556
-  _DOWSTATUSINFO._serialized_end=22690
-  _RCTAACTIVEREASON._serialized_start=22692
-  _RCTAACTIVEREASON._serialized_end=22808
-  _RCTASTATUSINFO._serialized_start=22811
-  _RCTASTATUSINFO._serialized_end=22948
-  _RCWACTIVEREASON._serialized_start=22950
-  _RCWACTIVEREASON._serialized_end=23017
-  _RCWSTATUSINFO._serialized_start=23020
-  _RCWSTATUSINFO._serialized_end=23154
-  _RCTBACTIVEREASON._serialized_start=23156
-  _RCTBACTIVEREASON._serialized_end=23272
-  _RCTBSTATUSINFO._serialized_start=23275
-  _RCTBSTATUSINFO._serialized_end=23461
-  _APASTATUSCHANGEREASON._serialized_start=23464
-  _APASTATUSCHANGEREASON._serialized_end=23619
-  _ACCPASSIVEREASON._serialized_start=23622
-  _ACCPASSIVEREASON._serialized_end=23902
-  _ACCSTATUSINFO._serialized_start=23905
-  _ACCSTATUSINFO._serialized_end=24102
-  _AVMACTIVEREASON._serialized_start=24105
-  _AVMACTIVEREASON._serialized_end=24269
-  _AVMOFFREASON._serialized_start=24272
-  _AVMOFFREASON._serialized_end=24433
-  _AVMFAILEDREASON._serialized_start=24435
-  _AVMFAILEDREASON._serialized_end=24452
-  _AVMCHANGEREASON._serialized_start=24455
-  _AVMCHANGEREASON._serialized_end=24683
-  _AVMSTATUSINFO._serialized_start=24686
-  _AVMSTATUSINFO._serialized_end=25065
-  _AVMSTATUSINFO_AVMSTYLE._serialized_start=25001
-  _AVMSTATUSINFO_AVMSTYLE._serialized_end=25055
-  _ICAFAILUREREASON._serialized_start=25067
-  _ICAFAILUREREASON._serialized_end=25085
-  _ICAPASSIVEREASON._serialized_start=25088
-  _ICAPASSIVEREASON._serialized_end=25368
-  _ICASTATUSINFO._serialized_start=25371
-  _ICASTATUSINFO._serialized_end=25529
-  _ILCSTATUSINFO._serialized_start=25532
-  _ILCSTATUSINFO._serialized_end=25840
-  _LCSTATUSINFO._serialized_start=25842
-  _LCSTATUSINFO._serialized_end=25950
-  _TRAFFICLIGHTATTENTIONINFO._serialized_start=25953
-  _TRAFFICLIGHTATTENTIONINFO._serialized_end=26093
-  _NCAPASSIVEREASON._serialized_start=26096
-  _NCAPASSIVEREASON._serialized_end=26376
-  _NCASTATUSINFO._serialized_start=26379
-  _NCASTATUSINFO._serialized_end=26515
-  _DRIVINGSTATUSINFO._serialized_start=26517
-  _DRIVINGSTATUSINFO._serialized_end=26587
-  _COMMONSTATUSFAILREASON._serialized_start=26590
-  _COMMONSTATUSFAILREASON._serialized_end=26825
-  _APASTATUSREASON._serialized_start=26828
-  _APASTATUSREASON._serialized_end=27056
-  _SENTRYMODESTATUSREASON._serialized_start=27059
-  _SENTRYMODESTATUSREASON._serialized_end=27294
-  _APASTATUSINFO._serialized_start=27297
-  _APASTATUSINFO._serialized_end=27434
-  _VPASTATUSREASON._serialized_start=27437
-  _VPASTATUSREASON._serialized_end=27665
-  _VPAROUTINGSTATUSINFO._serialized_start=27668
-  _VPAROUTINGSTATUSINFO._serialized_end=27845
-  _VPALEARNINGSTATUSINFO._serialized_start=27847
-  _VPALEARNINGSTATUSINFO._serialized_end=27970
-  _RPASTATUSREASON._serialized_start=27973
-  _RPASTATUSREASON._serialized_end=28201
-  _RPASTATUSINFO._serialized_start=28203
-  _RPASTATUSINFO._serialized_end=28318
-  _LDWPASSIVEREASON._serialized_start=28321
-  _LDWPASSIVEREASON._serialized_end=28550
-  _LDWSTATUSINFO._serialized_start=28553
-  _LDWSTATUSINFO._serialized_end=28689
-  _RDPPASSIVEREASON._serialized_start=28692
-  _RDPPASSIVEREASON._serialized_end=28921
-  _RDPSTATUSINFO._serialized_start=28924
-  _RDPSTATUSINFO._serialized_end=29060
-  _PDCSTATUSINFO._serialized_start=29063
-  _PDCSTATUSINFO._serialized_end=29334
-  _PDCSTATUSREASON._serialized_start=29337
-  _PDCSTATUSREASON._serialized_end=29565
-  _TJPSTATUSREASON._serialized_start=29568
-  _TJPSTATUSREASON._serialized_end=29796
-  _TJPSTATUSINFO._serialized_start=29798
-  _TJPSTATUSINFO._serialized_end=29913
-  _RADSSTATUSREASON._serialized_start=29916
-  _RADSSTATUSREASON._serialized_end=30145
-  _RADSSTATUSINFO._serialized_start=30147
-  _RADSSTATUSINFO._serialized_end=30265
-  _DVRSTATUSREASON._serialized_start=30268
-  _DVRSTATUSREASON._serialized_end=30496
-  _DVRSTATUSINFO._serialized_start=30498
-  _DVRSTATUSINFO._serialized_end=30613
-  _SENTINELSTATUSREASON._serialized_start=30616
-  _SENTINELSTATUSREASON._serialized_end=30849
-  _SENTINELSTATUSINFO._serialized_start=30852
-  _SENTINELSTATUSINFO._serialized_end=30982
-  _SENTRYMODEINFO._serialized_start=30985
-  _SENTRYMODEINFO._serialized_end=31115
-  _STARTFAILEDREASON._serialized_start=31117
-  _STARTFAILEDREASON._serialized_end=31193
-  _CRUSHREASON._serialized_start=31195
-  _CRUSHREASON._serialized_end=31258
-  _FAILUREREASON._serialized_start=31261
-  _FAILUREREASON._serialized_end=31399
-  _ACTIVEDFEATURES._serialized_start=31401
-  _ACTIVEDFEATURES._serialized_end=31465
-  _ELKPASSIVEREASON._serialized_start=31468
-  _ELKPASSIVEREASON._serialized_end=31697
-  _ELKSTATUSINFO._serialized_start=31700
-  _ELKSTATUSINFO._serialized_end=31903
-  _TSRSTATUSINFO._serialized_start=31905
-  _TSRSTATUSINFO._serialized_end=31967
-  _DWSTATUSINFO._serialized_start=31970
-  _DWSTATUSINFO._serialized_end=32135
-  _DWFRONTCARINFO._serialized_start=32137
-  _DWFRONTCARINFO._serialized_end=32238
-  _AEBSTATUSINFO._serialized_start=32240
-  _AEBSTATUSINFO._serialized_end=32350
-  _FCTBSTATUSINFO._serialized_start=32352
-  _FCTBSTATUSINFO._serialized_end=32464
-  _MEBSTATUSINFO._serialized_start=32466
-  _MEBSTATUSINFO._serialized_end=32576
-  _FCWSTATUSINFO._serialized_start=32578
-  _FCWSTATUSINFO._serialized_end=32688
-  _FCTASTATUSINFO._serialized_start=32690
-  _FCTASTATUSINFO._serialized_end=32802
-  _ESASTATUSINFO._serialized_start=32804
-  _ESASTATUSINFO._serialized_end=32914
-  _AWBSTATUSINFO._serialized_start=32916
-  _AWBSTATUSINFO._serialized_end=33026
-  _ABPSTATUSINFO._serialized_start=33028
-  _ABPSTATUSINFO._serialized_end=33138
-  _MAISTATUSINFO._serialized_start=33140
-  _MAISTATUSINFO._serialized_end=33250
+  _OPERATIONSTATUS._serialized_end=2569
+  _DEVICECHECKINFO._serialized_start=2572
+  _DEVICECHECKINFO._serialized_end=6356
+  _DEVICECHECKINFO_DEVICEINFO._serialized_start=2661
+  _DEVICECHECKINFO_DEVICEINFO._serialized_end=6356
+  _BUSINESSCHECKINFO._serialized_start=6359
+  _BUSINESSCHECKINFO._serialized_end=21711
+  _BUSINESSCHECKINFO_STATUS._serialized_start=6443
+  _BUSINESSCHECKINFO_STATUS._serialized_end=21711
+  _VEHICLESTATUSCHECKINFO._serialized_start=21714
+  _VEHICLESTATUSCHECKINFO._serialized_end=22259
+  _VEHICLESTATUSCHECKINFO_STATUS._serialized_start=21808
+  _VEHICLESTATUSCHECKINFO_STATUS._serialized_end=22259
+  _AMBIENTENVCHECKINFO._serialized_start=22262
+  _AMBIENTENVCHECKINFO._serialized_end=22431
+  _AMBIENTENVCHECKINFO_STATUS._serialized_start=22349
+  _AMBIENTENVCHECKINFO_STATUS._serialized_end=22431
+  _FAULTINFO._serialized_start=22433
+  _FAULTINFO._serialized_end=22523
+  _FAULTEVENTINFO._serialized_start=22525
+  _FAULTEVENTINFO._serialized_end=22622
+  _REASONINFO._serialized_start=22625
+  _REASONINFO._serialized_end=22940
+  _HMAPASSIVEREASON._serialized_start=22943
+  _HMAPASSIVEREASON._serialized_end=23172
+  _HMALOWBEAMREASON._serialized_start=23175
+  _HMALOWBEAMREASON._serialized_end=23469
+  _HMASTATUSINFO._serialized_start=23472
+  _HMASTATUSINFO._serialized_end=23673
+  _BSDACTIVEREASON._serialized_start=23676
+  _BSDACTIVEREASON._serialized_end=23916
+  _BSDPASSIVEREASON._serialized_start=23919
+  _BSDPASSIVEREASON._serialized_end=24199
+  _BSDSTATUSINFO._serialized_start=24202
+  _BSDSTATUSINFO._serialized_end=24400
+  _LCAACTIVEREASON._serialized_start=24403
+  _LCAACTIVEREASON._serialized_end=24643
+  _LCASTATUSINFO._serialized_start=24646
+  _LCASTATUSINFO._serialized_end=24844
+  _DOWACTIVEREASON._serialized_start=24847
+  _DOWACTIVEREASON._serialized_end=25254
+  _DOWPASSIVEREASON._serialized_start=25257
+  _DOWPASSIVEREASON._serialized_end=25537
+  _DOWSTATUSINFO._serialized_start=25540
+  _DOWSTATUSINFO._serialized_end=25738
+  _RCTAACTIVEREASON._serialized_start=25740
+  _RCTAACTIVEREASON._serialized_end=25856
+  _RCTAPASSIVEREASON._serialized_start=25859
+  _RCTAPASSIVEREASON._serialized_end=26140
+  _RCTASTATUSINFO._serialized_start=26143
+  _RCTASTATUSINFO._serialized_end=26345
+  _RCWACTIVEREASON._serialized_start=26347
+  _RCWACTIVEREASON._serialized_end=26414
+  _RCWPASSIVEREASON._serialized_start=26417
+  _RCWPASSIVEREASON._serialized_end=26697
+  _RCWSTATUSINFO._serialized_start=26700
+  _RCWSTATUSINFO._serialized_end=26898
+  _RCTBACTIVEREASON._serialized_start=26900
+  _RCTBACTIVEREASON._serialized_end=27016
+  _RCTBSTATUSINFO._serialized_start=27019
+  _RCTBSTATUSINFO._serialized_end=27205
+  _APASTATUSCHANGEREASON._serialized_start=27208
+  _APASTATUSCHANGEREASON._serialized_end=27363
+  _ACCPASSIVEREASON._serialized_start=27366
+  _ACCPASSIVEREASON._serialized_end=27646
+  _ACCSTATUSINFO._serialized_start=27649
+  _ACCSTATUSINFO._serialized_end=27846
+  _AVMACTIVEREASON._serialized_start=27849
+  _AVMACTIVEREASON._serialized_end=28013
+  _AVMOFFREASON._serialized_start=28016
+  _AVMOFFREASON._serialized_end=28177
+  _AVMFAILEDREASON._serialized_start=28179
+  _AVMFAILEDREASON._serialized_end=28196
+  _AVMCHANGEREASON._serialized_start=28199
+  _AVMCHANGEREASON._serialized_end=28427
+  _AVMSTATUSINFO._serialized_start=28430
+  _AVMSTATUSINFO._serialized_end=28809
+  _AVMSTATUSINFO_AVMSTYLE._serialized_start=28745
+  _AVMSTATUSINFO_AVMSTYLE._serialized_end=28799
+  _ICAFAILUREREASON._serialized_start=28811
+  _ICAFAILUREREASON._serialized_end=28829
+  _ICAPASSIVEREASON._serialized_start=28832
+  _ICAPASSIVEREASON._serialized_end=29112
+  _ICASTATUSINFO._serialized_start=29115
+  _ICASTATUSINFO._serialized_end=29273
+  _ILCSTATUSINFO._serialized_start=29276
+  _ILCSTATUSINFO._serialized_end=29584
+  _LCSTATUSINFO._serialized_start=29586
+  _LCSTATUSINFO._serialized_end=29694
+  _TRAFFICLIGHTATTENTIONINFO._serialized_start=29697
+  _TRAFFICLIGHTATTENTIONINFO._serialized_end=29837
+  _NCAPASSIVEREASON._serialized_start=29840
+  _NCAPASSIVEREASON._serialized_end=30120
+  _NCASTATUSINFO._serialized_start=30123
+  _NCASTATUSINFO._serialized_end=30259
+  _DRIVINGSTATUSINFO._serialized_start=30261
+  _DRIVINGSTATUSINFO._serialized_end=30331
+  _COMMONSTATUSFAILREASON._serialized_start=30334
+  _COMMONSTATUSFAILREASON._serialized_end=30569
+  _APASTATUSREASON._serialized_start=30572
+  _APASTATUSREASON._serialized_end=30800
+  _SENTRYMODESTATUSREASON._serialized_start=30803
+  _SENTRYMODESTATUSREASON._serialized_end=31038
+  _APASTATUSINFO._serialized_start=31041
+  _APASTATUSINFO._serialized_end=31201
+  _VPASTATUSREASON._serialized_start=31204
+  _VPASTATUSREASON._serialized_end=31432
+  _VPAROUTINGSTATUSINFO._serialized_start=31435
+  _VPAROUTINGSTATUSINFO._serialized_end=31661
+  _VPALEARNINGSTATUSINFO._serialized_start=31664
+  _VPALEARNINGSTATUSINFO._serialized_end=31836
+  _RPASTATUSREASON._serialized_start=31839
+  _RPASTATUSREASON._serialized_end=32067
+  _RPASTATUSINFO._serialized_start=32070
+  _RPASTATUSINFO._serialized_end=32209
+  _LDWPASSIVEREASON._serialized_start=32212
+  _LDWPASSIVEREASON._serialized_end=32441
+  _LDWSTATUSINFO._serialized_start=32444
+  _LDWSTATUSINFO._serialized_end=32580
+  _RDPPASSIVEREASON._serialized_start=32583
+  _RDPPASSIVEREASON._serialized_end=32812
+  _RDPSTATUSINFO._serialized_start=32815
+  _RDPSTATUSINFO._serialized_end=32951
+  _PDCSTATUSINFO._serialized_start=32954
+  _PDCSTATUSINFO._serialized_end=33225
+  _PDCSTATUSREASON._serialized_start=33228
+  _PDCSTATUSREASON._serialized_end=33456
+  _TJPSTATUSREASON._serialized_start=33459
+  _TJPSTATUSREASON._serialized_end=33687
+  _TJPSTATUSINFO._serialized_start=33689
+  _TJPSTATUSINFO._serialized_end=33804
+  _RADSSTATUSREASON._serialized_start=33807
+  _RADSSTATUSREASON._serialized_end=34036
+  _RADSSTATUSINFO._serialized_start=34038
+  _RADSSTATUSINFO._serialized_end=34156
+  _DVRSTATUSREASON._serialized_start=34159
+  _DVRSTATUSREASON._serialized_end=34387
+  _DVRSTATUSINFO._serialized_start=34389
+  _DVRSTATUSINFO._serialized_end=34504
+  _SENTINELSTATUSREASON._serialized_start=34507
+  _SENTINELSTATUSREASON._serialized_end=34740
+  _SENTINELSTATUSINFO._serialized_start=34743
+  _SENTINELSTATUSINFO._serialized_end=34873
+  _SENTRYMODEINFO._serialized_start=34876
+  _SENTRYMODEINFO._serialized_end=35006
+  _END2ENDSTATUSREASON._serialized_start=35009
+  _END2ENDSTATUSREASON._serialized_end=35241
+  _END2ENDINFO._serialized_start=35243
+  _END2ENDINFO._serialized_end=35364
+  _STARTFAILEDREASON._serialized_start=35366
+  _STARTFAILEDREASON._serialized_end=35442
+  _CRUSHREASON._serialized_start=35444
+  _CRUSHREASON._serialized_end=35507
+  _FAILUREREASON._serialized_start=35510
+  _FAILUREREASON._serialized_end=35648
+  _ACTIVEDFEATURES._serialized_start=35650
+  _ACTIVEDFEATURES._serialized_end=35714
+  _ELKPASSIVEREASON._serialized_start=35717
+  _ELKPASSIVEREASON._serialized_end=35946
+  _ELKSTATUSINFO._serialized_start=35949
+  _ELKSTATUSINFO._serialized_end=36152
+  _TSRSTATUSINFO._serialized_start=36155
+  _TSRSTATUSINFO._serialized_end=37113
+  _TSRSTATUSINFO_POSE._serialized_start=36286
+  _TSRSTATUSINFO_POSE._serialized_end=36314
+  _TSRSTATUSINFO_TSRSTANDBYSIGN._serialized_start=36317
+  _TSRSTATUSINFO_TSRSTANDBYSIGN._serialized_end=36633
+  _TSRSTATUSINFO_TSRFUSIONSIGN._serialized_start=36636
+  _TSRSTATUSINFO_TSRFUSIONSIGN._serialized_end=36850
+  _TSRSTATUSINFO_TSRCONTEXT._serialized_start=36853
+  _TSRSTATUSINFO_TSRCONTEXT._serialized_end=37041
+  _TSRSTATUSINFO_SPEEDSIGNTYPE._serialized_start=37043
+  _TSRSTATUSINFO_SPEEDSIGNTYPE._serialized_end=37113
+  _DWSTATUSINFO._serialized_start=37116
+  _DWSTATUSINFO._serialized_end=37281
+  _DWFRONTCARINFO._serialized_start=37283
+  _DWFRONTCARINFO._serialized_end=37384
+  _AEBSTATUSINFO._serialized_start=37386
+  _AEBSTATUSINFO._serialized_end=37496
+  _FCTBSTATUSINFO._serialized_start=37498
+  _FCTBSTATUSINFO._serialized_end=37610
+  _MEBSTATUSINFO._serialized_start=37612
+  _MEBSTATUSINFO._serialized_end=37722
+  _FCWSTATUSINFO._serialized_start=37724
+  _FCWSTATUSINFO._serialized_end=37834
+  _FCTASTATUSINFO._serialized_start=37836
+  _FCTASTATUSINFO._serialized_end=37948
+  _ESASTATUSINFO._serialized_start=37950
+  _ESASTATUSINFO._serialized_end=38060
+  _AESSTATUSINFO._serialized_start=38062
+  _AESSTATUSINFO._serialized_end=38172
+  _AWBSTATUSINFO._serialized_start=38174
+  _AWBSTATUSINFO._serialized_end=38284
+  _ABPSTATUSINFO._serialized_start=38286
+  _ABPSTATUSINFO._serialized_end=38396
+  _MAISTATUSINFO._serialized_start=38398
+  _MAISTATUSINFO._serialized_end=38508
 # @@protoc_insertion_point(module_scope)

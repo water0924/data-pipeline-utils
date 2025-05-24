@@ -38,16 +38,17 @@ enum LinkUsage {
 
 enum CrossingType {
   INVALID_CROSSING = 0;
-  MERGING_CROSSING = 1;  // 汇入路口
-  T_CROSSING = 2;        // T字路口
-  Y_CROSSING = 3;        // Y字路口
-  X_CROSSING = 4;        // 十字路口
-  TUNNEL_ENTRANCE = 5;   // 隧道入口
-  TRAFFIC_LIGHTS = 6;    // 交通灯
+  MERGING_CROSSING = 1;            // 汇入路口
+  T_CROSSING = 2;                  // T字路口
+  Y_CROSSING = 3;                  // Y字路口
+  X_CROSSING = 4;                  // 十字路口
+  TUNNEL_ENTRANCE = 5;             // 隧道入口
+  TRAFFIC_LIGHTS = 6;              // 交通灯
   PARALLEL_ENTRANCE_AND_EXIT = 7;  // 平行入口出口
-  Y_CROSSING_WITH_TURN_RIGHT = 8; // 右转专用路口
-  WAY_POINT_CROSSING = 9;   // 导航点路口
-  THREE_WAY_CROSSING = 10;  // 三岔路口
+  Y_CROSSING_WITH_TURN_RIGHT = 8;  // 右转专用路口
+  WAY_POINT_CROSSING = 9;          // 导航点路口
+  THREE_WAY_CROSSING = 10;         // 三岔路口
+
   OTHER_CROSSING = 99;
 }
 

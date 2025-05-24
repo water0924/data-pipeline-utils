@@ -58,7 +58,7 @@ message VehicleStatus {
   optional int32 actual_gear = 16;
   optional double actual_torque = 17;
   optional double actual_wheel_angle = 18;
-  optional bool is_shift_override = 19;
+  optional int32 shift_override = 19;
   optional int32 actual_turn_signal = 20;
   optional bool actual_emergency_light = 21;
   optional int32 aeb_status = 22;
@@ -124,6 +124,14 @@ message CtrlValue {
   optional bool meb_enable = 46;
   optional int32 meb_request_level = 47;
   optional double meb_request_value = 48;
+  optional int32 avh_request = 49;
+  optional int32 blc_epb_request = 50;
+  optional bool is_planning_driving_lat_enable = 51;
+  optional bool is_planning_driving_lon_enable = 52;
+  optional bool is_planning_parking_lat_enable = 53;
+  optional bool is_planning_parking_lon_enable = 54;
+  optional bool blc_emergency_brake = 55;
+  optional bool is_driving_e2e_enable = 56;
 }
 
 message DebugInfo {

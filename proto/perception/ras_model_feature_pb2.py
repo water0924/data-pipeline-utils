@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\"perception/ras_model_feature.proto\x12\x14\x64\x65\x65proute.perception\"\x1f\n\x0fRasModelFeature\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\"perception/ras_model_feature.proto\x12\x14\x64\x65\x65proute.perception\";\n\x0fRasModelFeature\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x12\x1a\n\x0b\x66or_parking\x18\x02 \x01(\x08:\x05\x66\x61lse')
 
 
 
@@ -30,5 +30,5 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _RASMODELFEATURE._serialized_start=60
-  _RASMODELFEATURE._serialized_end=91
+  _RASMODELFEATURE._serialized_end=119
 # @@protoc_insertion_point(module_scope)

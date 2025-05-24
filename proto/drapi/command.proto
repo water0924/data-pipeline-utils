@@ -75,6 +75,7 @@ message Command {  // topic: (to blc)/blc/command (to dsm)/dsm/command
     GWParkingCommand gw_parking_command = 5101;  // GWM APA
     SmartLPCommand smart_lp_command = 5102; // SMART VPA
     GLParkingCommand gl_parking_command = 5103; // GL Command
+    GLHPACommand gl_hpa_command = 5104; // GL HPA Command
     // vpa 6000~6999
     VPARouting vpa_routing = 6001;
     VPALearning vpa_learning = 6002;
@@ -474,6 +475,7 @@ message VPALearning {
     START_ROUTE_LEARNING = 1;  // 开始路线学习
     SAVE_ROUTE = 2;            // 保存路线
     DROP_ROUTE = 3;            //丢弃路线
+    E2E_START_LEARNING = 4;    // 端到端开始路线学习
   }
   LearningOpType operation_type = 1;
 }
@@ -492,6 +494,7 @@ message VPARouting {
     UNKNOWN = 0;
     START_ROUTING = 1;   //开始巡航
     CANCEL_ROUTING = 2;  //结束巡航,预留
+    E2E_START_ROUTING = 3;  // 端到端开始导航
   }
 
   RougintOpType operation_type = 1;
@@ -801,6 +804,8 @@ message BtnEnaReq {
     LEARNING_COMPLETED = 10;      //点击学习完成按键
     CONTINUE_LEARN = 11;          //点击继续学习按键
     START_SVP_VR = 12;            //主动推送后激活SVP
+    CREAT_MOORINGOUT_MAP = 13;   //建图完成界面泊出建图按钮
+    START_E2E = 14;
     CANCEL_PRE_MAPPING = 0xa1;    //取消预建图
     CONTINUE_PRE_MAPPING = 0xa2;  //继续预建图
   }
@@ -1019,6 +1024,153 @@ message GLParkingCommand {
     google.protobuf.Any prkg_in_or_out_and_cncl = 4; 
     // GlP177ChassisDetail.DHU_ZCUCANFD1_FR06_340
     google.protobuf.Any aut_prkg_slot_nr_req = 5;   
+    // GlP177ChassisDetail.DHU_ZCUCANFD1_FR02_307
+    google.protobuf.Any lo_spd_drvg_assi_swt = 6;
+    // GlP177ChassisDetail.DHU_ZCUCANFD1_FR02_307
+    google.protobuf.Any prkg_frnt_or_re_select = 7;
+    // GlP177ChassisDetail.DHU_ZCUCANFD1_FR04_175
+    google.protobuf.Any mob_dev_rpa_req1_rpa_req = 8;
+    // GlP177ChassisDetail.DHU_ZCUCANFD1_FR08_2EF
+    google.protobuf.Any aut_prkg_hand_slot_nr_req = 9;
+    // GlP177ChassisDetail.dhu_zcucanfd1_fr06_340
+    google.protobuf.Any aut_valt_prkg_swt = 10;
+    // GlP177ChassisDetail.dhu_zcucanfd1_fr01_1e8
+    google.protobuf.Any aut_valt_prkg_experience_resp = 11;
+    // GlP177ChassisDetail.DHU_ZCUCANFD1_FR06_340
+    google.protobuf.Any aut_valt_prkg_l1_btn_req = 12;
+    // GlP177ChassisDetail.DHU_ZCUCANFD1_FR08_2EF
+    google.protobuf.Any aut_prkg_hand_slot_nr_req_topo_slot_id = 13;
+    // GlP177ChassisDetail.DHU_ZCUCANFD1_FR04_175
+    google.protobuf.Any mob_dev_rpa_req1_rpa_out_mode_sub_t = 14;
+  }
+}
+
+message GLHPACommand {
+  enum AutValtPrkgSwtType {
+    ONOFFNOREQ_NOREQ = 0;
+    ONOFFNOREQ_ON = 1;
+    ONOFFNOREQ_OFF = 2;
+  }
+  enum AutValtPrkgExperienceRespType {
+    CMDTYPE1_IDLE = 0;
+    CMDTYPE1_CONFIRM = 1;
+    CMDTYPE1_CANCEL = 2;
+    CMDTYPE1_NOMOREREMINDER = 3;
+  }
+  enum PrkgIntrptReldBtnType {
+    BTNREQ_NOREQ = 0;
+    BTNREQ_CONTINUE = 1;
+    BTNREQ_NOTCONTINUE = 2;
+    BTNREQ_BACKTOSTARTPOINT = 3;
+  }
+  enum AutValtPrkgL2PopBtnReqType {
+    AUTVALTPRKGL2POPBTNREQ_DEFAULT = 0;
+    AUTVALTPRKGL2POPBTNREQ_TUTORIALSTRTREQ = 1;
+    AUTVALTPRKGL2POPBTNREQ_TUTORIALCNCLREQ = 2;
+    AUTVALTPRKGL2POPBTNREQ_RESERVED = 3;
+    AUTVALTPRKGL2POPBTNREQ_COVERROUTECNCLREQ = 4;
+    AUTVALTPRKGL2POPBTNREQ_NAMEROUTECONFIRMREQ = 5;
+    AUTVALTPRKGL2POPBTNREQ_SETTINGFCTREQ = 6;
+    AUTVALTPRKGL2POPBTNREQ_SETTINGHELPREQ = 7;
+    AUTVALTPRKGL2POPBTNREQ_SETTINGROUTEREQ = 8;
+    AUTVALTPRKGL2POPBTNREQ_SETTINGPRKGINROUTEREQ = 9;
+    AUTVALTPRKGL2POPBTNREQ_SETTINGPRKGOUTROUTEREQ = 10;
+  }
+  enum AutValtPrkgMapOperReq2MapType2Type {
+    MAPTYPE2_DEFAULT = 0;
+    MAPTYPE2_PRKGINCREATE = 1;
+    MAPTYPE2_PRKGOUTCREATE = 2;
+    MAPTYPE2_PRKGCNCLLOCATD = 3;
+    MAPTYPE2_PRKGINDELETE = 4;
+    MAPTYPE2_PRKGOUTDELETE = 5;
+    MAPTYPE2_PRKGINSELECT = 6;
+    MAPTYPE2_PRKGOUTSELECT = 7;
+    MAPTYPE2_PRKGINSELECT_NOLONGER = 8;
+    MAPTYPE2_PRKGOUTSELECT_NOLONGER = 9;
+    MAPTYPE2_PRKGINCOVER = 10;
+    MAPTYPE2_PRKGOUTCOVER = 11;
+    MAPTYPE2_SYNC = 12;
+    MAPTYPE2_RESERVED1 = 13;
+    MAPTYPE2_RESERVED2 = 14;
+  }
+  enum MapBuildStsType {
+    MAPBUILDSTS_DEFAULT = 0;
+    MAPBUILDSTS_STORSUCCEED = 1;
+    MAPBUILDSTS_STORFAIL = 2;
+    MAPBUILDSTS_STORSUCDADBULDSUCD = 3;
+    MAPBUILDSTS_STORSUCDADBULDFAIL = 4;
+  }
+  enum AutValtPrkgL1BtnReqType {
+    AUTVALTPRKGL1BTNREQ_DEFAULT = 0;
+    AUTVALTPRKGL1BTNREQ_SETTINGREQ = 1;
+    AUTVALTPRKGL1BTNREQ_EXITREQ = 2;
+    AUTVALTPRKGL1BTNREQ_REACHDESTINATIONREQ = 3;
+    AUTVALTPRKGL1BTNREQ_GLBVIRTVIEWREQ = 4;
+    AUTVALTPRKGL1BTNREQ_PTLVIRTVIEWREQ = 5;
+    AUTVALTPRKGL1BTNREQ_6 = 6;
+    AUTVALTPRKGL1BTNREQ_7 = 7;
+    AUTVALTPRKGL1BTNREQ_8 = 8;
+  }
+  enum PrkgSlotTypSelectType {
+    PRKGSLOTTYPSELECT_DEFAULT = 0;
+    PRKGSLOTTYPSELECT_TERMIANLSLOT = 1;
+    PRKGSLOTTYPSELECT_AREASLOT = 2;
+    PRKGSLOTTYPSELECT_RESERVED = 3;
+  }
+  enum AutPrkgSelectEntranceType {
+    AUTPRKGSELECTENTRANCE_IDLE = 0;
+    AUTPRKGSELECTENTRANCE_TARGETPRKG = 1;
+    AUTPRKGSELECTENTRANCE_PARKENTRANCE = 2;
+    AUTPRKGSELECTENTRANCE_BASEMENTENTRANCE = 3;
+    AUTPRKGSELECTENTRANCE_PARKEXIT = 4;
+    AUTPRKGSELECTENTRANCE_BASEMENTEXIT = 5;
+    AUTPRKGSELECTENTRANCE_RESERVED = 6;
+  }
+  enum CrsCtrlTiGapAdjReqType {
+    TIGAPSETFORLGTCTRL_NONE = 0;
+    TIGAPSETFORLGTCTRL_TIMEGAP_1 = 1;
+    TIGAPSETFORLGTCTRL_TIMEGAP_2 = 2;
+    TIGAPSETFORLGTCTRL_TIMEGAP_3 = 3;
+  }
+  enum DrvrACCrsSetSpdReqDrvrCrsSetSpdReqType {
+    DRVRCRSAMODREQ_NEUTRAL = 0;
+    DRVRCRSAMODREQ_APOSREQMOD1 = 1; // +1
+    DRVRCRSAMODREQ_APOSREQMOD2 = 2; // +5
+    DRVRCRSAMODREQ_ANEGREQMOD1 = 3; // -1
+    DRVRCRSAMODREQ_ANEGREQMOD2 = 4; // -5
+  }
+  enum AutValtPrkgL2BtnReqSettingFctPushBtnReqType {
+    AUTVALTPRKGL2BTNREQSETTINGFCTPUSHBTNREQ_BTNREQ1_DEFAULT = 0;
+    AUTVALTPRKGL2BTNREQSETTINGFCTPUSHBTNREQ_BTNREQ1_OPENREQ = 1;
+    AUTVALTPRKGL2BTNREQSETTINGFCTPUSHBTNREQ_BTNREQ1_OFFREQ = 2;
+  }
+  enum AutValtPrkgL2BtnReqSettingNoSenceBtnReqType {
+    AUTVALTPRKGL2BTNREQSETTINGNOSENCEBTNREQ_BTNREQ1_DEFAULT = 0;
+    AUTVALTPRKGL2BTNREQSETTINGNOSENCEBTNREQ_BTNREQ1_OPENREQ = 1;
+    AUTVALTPRKGL2BTNREQSETTINGNOSENCEBTNREQ_BTNREQ1_OFFREQ = 2;
+  }
+  enum AutValtPrkgL2BtnReqSettingVoiceBtnReqType {
+    AUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQ_SETTINGVOICEBTNREQ_DEFAULT = 0;
+    AUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQ_SETTINGVOICEBTNREQ_DETAILMODEREQ = 1; // 详细版
+    AUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQ_SETTINGVOICEBTNREQ_SIMPLEMODEREQ = 2; // 简洁版
+    AUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQ_SETTINGVOICEBTNREQ_ALLOFFREQ = 3; // 无语音
+  }
+  int32 req_map_id = 1;
+  oneof Command {
+    AutValtPrkgSwtType aut_valt_prkg_swt = 2;
+    AutValtPrkgExperienceRespType aut_valt_prkg_experience_resp = 3;
+    PrkgIntrptReldBtnType prkg_intrpt_reld_btn = 4;
+    AutValtPrkgL2PopBtnReqType aut_valt_prkg_l2_pop_btn_req = 5;
+    AutValtPrkgMapOperReq2MapType2Type aut_valt_prkg_map_oper_req2_map_type2 = 6;
+    MapBuildStsType map_build_sts = 7;
+    AutValtPrkgL1BtnReqType aut_valt_prkg_l1_btn_req = 8;
+    PrkgSlotTypSelectType prkg_slot_typ_select = 9;
+    AutPrkgSelectEntranceType aut_prkg_select_entrance = 10;
+    CrsCtrlTiGapAdjReqType crs_ctrl_ti_gap_adj_req = 11;  // 时距
+    DrvrACCrsSetSpdReqDrvrCrsSetSpdReqType drvr_ac_crs_set_spd_req_drvr_crs_set_spd_req = 12; // 限速
+    AutValtPrkgL2BtnReqSettingFctPushBtnReqType aut_valt_prkg_l2_btn_req_setting_fct_push_btn_req = 13; // 推送开关
+    AutValtPrkgL2BtnReqSettingNoSenceBtnReqType aut_valt_prkg_l2_btn_req_setting_no_sence_btn_req = 14; // 无感建图开关
+    AutValtPrkgL2BtnReqSettingVoiceBtnReqType aut_valt_prkg_l2_btn_req_setting_voice_btn_req = 15;  // 语音类型开关
   }
 }
 

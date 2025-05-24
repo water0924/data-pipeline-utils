@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 from proto.semantic_map import map_standby_area_pb2 as semantic__map_dot_map__standby__area__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)perception/perception_dtu_interface.proto\x12\x14\x64\x65\x65proute.perception\x1a#semantic_map/map_standby_area.proto\"t\n\x0b\x44rivingMode\x12\x34\n\x04mode\x18\x01 \x01(\x0e\x32&.deeproute.perception.DrivingMode.Mode\"/\n\x04Mode\x12\x0b\n\x07\x44RIVING\x10\x00\x12\x0b\n\x07PARKING\x10\x01\x12\r\n\tLOW_SPEED\x10\x02\"F\n\x13StartParkingRequest\x12/\n\tparkspace\x18\x01 \x01(\x0b\x32\x1c.deeproute.hdmap.StandbyArea\"\x14\n\x12StopParkingRequest\"\x18\n\x16StartOutParkingRequest\"\x17\n\x15StopOutParkingRequest\"\x19\n\x17StartVPALearningRequest\"\x18\n\x16StopVPALearningRequest\"\x19\n\x17StartVPACruisingRequest\"\x18\n\x16StopVPACruisingRequest\"\"\n StartRPAStraightFrontBackRequest\"!\n\x1fStopRPAStraightFrontBackRequest\"\x12\n\x10StartRADSRequest\"\x11\n\x0fStopRADSRequest\"\xca\x08\n\x11PerceptionRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12J\n\x15start_parking_request\x18\x02 \x01(\x0b\x32).deeproute.perception.StartParkingRequestH\x00\x12H\n\x14stop_parking_request\x18\x03 \x01(\x0b\x32(.deeproute.perception.StopParkingRequestH\x00\x12Q\n\x19start_out_parking_request\x18\x04 \x01(\x0b\x32,.deeproute.perception.StartOutParkingRequestH\x00\x12O\n\x18stop_out_parking_request\x18\x05 \x01(\x0b\x32+.deeproute.perception.StopOutParkingRequestH\x00\x12=\n\x10set_driving_mode\x18\x06 \x01(\x0b\x32!.deeproute.perception.DrivingModeH\x00\x12S\n\x1astart_vpa_learning_request\x18\x07 \x01(\x0b\x32-.deeproute.perception.StartVPALearningRequestH\x00\x12Q\n\x19stop_vpa_learning_request\x18\x08 \x01(\x0b\x32,.deeproute.perception.StopVPALearningRequestH\x00\x12S\n\x1astart_vpa_cruising_request\x18\t \x01(\x0b\x32-.deeproute.perception.StartVPACruisingRequestH\x00\x12Q\n\x19stop_vpa_cruising_request\x18\n \x01(\x0b\x32,.deeproute.perception.StopVPACruisingRequestH\x00\x12g\n%start_rpa_straight_front_back_request\x18\x0b \x01(\x0b\x32\x36.deeproute.perception.StartRPAStraightFrontBackRequestH\x00\x12\x65\n$stop_rpa_straight_front_back_request\x18\x0c \x01(\x0b\x32\x35.deeproute.perception.StopRPAStraightFrontBackRequestH\x00\x12\x44\n\x12start_rads_request\x18\r \x01(\x0b\x32&.deeproute.perception.StartRADSRequestH\x00\x12\x42\n\x11stop_rads_request\x18\x0e \x01(\x0b\x32%.deeproute.perception.StopRADSRequestH\x00\x42\x06\n\x04Task\":\n\x12PerceptionResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x18\n\tsucceeded\x18\x02 \x01(\x08:\x05\x66\x61lse')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)perception/perception_dtu_interface.proto\x12\x14\x64\x65\x65proute.perception\x1a#semantic_map/map_standby_area.proto\"t\n\x0b\x44rivingMode\x12\x34\n\x04mode\x18\x01 \x01(\x0e\x32&.deeproute.perception.DrivingMode.Mode\"/\n\x04Mode\x12\x0b\n\x07\x44RIVING\x10\x00\x12\x0b\n\x07PARKING\x10\x01\x12\r\n\tLOW_SPEED\x10\x02\"F\n\x13StartParkingRequest\x12/\n\tparkspace\x18\x01 \x01(\x0b\x32\x1c.deeproute.hdmap.StandbyArea\"\x14\n\x12StopParkingRequest\"\x18\n\x16StartOutParkingRequest\"\x17\n\x15StopOutParkingRequest\"\x19\n\x17StartVPALearningRequest\"\x18\n\x16StopVPALearningRequest\"\x19\n\x17StartVPACruisingRequest\"\x18\n\x16StopVPACruisingRequest\"\"\n StartRPAStraightFrontBackRequest\"!\n\x1fStopRPAStraightFrontBackRequest\"\x12\n\x10StartRADSRequest\"\x11\n\x0fStopRADSRequest\"P\n\x1dStartUserDefineParkingRequest\x12/\n\tparkspace\x18\x01 \x01(\x0b\x32\x1c.deeproute.hdmap.StandbyArea\"\x1e\n\x1cStopUserDefineParkingRequest\"\x8c\n\n\x11PerceptionRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12J\n\x15start_parking_request\x18\x02 \x01(\x0b\x32).deeproute.perception.StartParkingRequestH\x00\x12H\n\x14stop_parking_request\x18\x03 \x01(\x0b\x32(.deeproute.perception.StopParkingRequestH\x00\x12Q\n\x19start_out_parking_request\x18\x04 \x01(\x0b\x32,.deeproute.perception.StartOutParkingRequestH\x00\x12O\n\x18stop_out_parking_request\x18\x05 \x01(\x0b\x32+.deeproute.perception.StopOutParkingRequestH\x00\x12=\n\x10set_driving_mode\x18\x06 \x01(\x0b\x32!.deeproute.perception.DrivingModeH\x00\x12S\n\x1astart_vpa_learning_request\x18\x07 \x01(\x0b\x32-.deeproute.perception.StartVPALearningRequestH\x00\x12Q\n\x19stop_vpa_learning_request\x18\x08 \x01(\x0b\x32,.deeproute.perception.StopVPALearningRequestH\x00\x12S\n\x1astart_vpa_cruising_request\x18\t \x01(\x0b\x32-.deeproute.perception.StartVPACruisingRequestH\x00\x12Q\n\x19stop_vpa_cruising_request\x18\n \x01(\x0b\x32,.deeproute.perception.StopVPACruisingRequestH\x00\x12g\n%start_rpa_straight_front_back_request\x18\x0b \x01(\x0b\x32\x36.deeproute.perception.StartRPAStraightFrontBackRequestH\x00\x12\x65\n$stop_rpa_straight_front_back_request\x18\x0c \x01(\x0b\x32\x35.deeproute.perception.StopRPAStraightFrontBackRequestH\x00\x12\x44\n\x12start_rads_request\x18\r \x01(\x0b\x32&.deeproute.perception.StartRADSRequestH\x00\x12\x42\n\x11stop_rads_request\x18\x0e \x01(\x0b\x32%.deeproute.perception.StopRADSRequestH\x00\x12`\n!start_user_define_parking_request\x18\x0f \x01(\x0b\x32\x33.deeproute.perception.StartUserDefineParkingRequestH\x00\x12^\n stop_user_define_parking_request\x18\x10 \x01(\x0b\x32\x32.deeproute.perception.StopUserDefineParkingRequestH\x00\x42\x06\n\x04Task\":\n\x12PerceptionResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x18\n\tsucceeded\x18\x02 \x01(\x08:\x05\x66\x61lse')
 
 
 
@@ -32,6 +32,8 @@ _STARTRPASTRAIGHTFRONTBACKREQUEST = DESCRIPTOR.message_types_by_name['StartRPASt
 _STOPRPASTRAIGHTFRONTBACKREQUEST = DESCRIPTOR.message_types_by_name['StopRPAStraightFrontBackRequest']
 _STARTRADSREQUEST = DESCRIPTOR.message_types_by_name['StartRADSRequest']
 _STOPRADSREQUEST = DESCRIPTOR.message_types_by_name['StopRADSRequest']
+_STARTUSERDEFINEPARKINGREQUEST = DESCRIPTOR.message_types_by_name['StartUserDefineParkingRequest']
+_STOPUSERDEFINEPARKINGREQUEST = DESCRIPTOR.message_types_by_name['StopUserDefineParkingRequest']
 _PERCEPTIONREQUEST = DESCRIPTOR.message_types_by_name['PerceptionRequest']
 _PERCEPTIONRESPONSE = DESCRIPTOR.message_types_by_name['PerceptionResponse']
 _DRIVINGMODE_MODE = _DRIVINGMODE.enum_types_by_name['Mode']
@@ -126,6 +128,20 @@ StopRADSRequest = _reflection.GeneratedProtocolMessageType('StopRADSRequest', (_
   })
 _sym_db.RegisterMessage(StopRADSRequest)
 
+StartUserDefineParkingRequest = _reflection.GeneratedProtocolMessageType('StartUserDefineParkingRequest', (_message.Message,), {
+  'DESCRIPTOR' : _STARTUSERDEFINEPARKINGREQUEST,
+  '__module__' : 'perception.perception_dtu_interface_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.perception.StartUserDefineParkingRequest)
+  })
+_sym_db.RegisterMessage(StartUserDefineParkingRequest)
+
+StopUserDefineParkingRequest = _reflection.GeneratedProtocolMessageType('StopUserDefineParkingRequest', (_message.Message,), {
+  'DESCRIPTOR' : _STOPUSERDEFINEPARKINGREQUEST,
+  '__module__' : 'perception.perception_dtu_interface_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.perception.StopUserDefineParkingRequest)
+  })
+_sym_db.RegisterMessage(StopUserDefineParkingRequest)
+
 PerceptionRequest = _reflection.GeneratedProtocolMessageType('PerceptionRequest', (_message.Message,), {
   'DESCRIPTOR' : _PERCEPTIONREQUEST,
   '__module__' : 'perception.perception_dtu_interface_pb2'
@@ -171,8 +187,12 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _STARTRADSREQUEST._serialized_end=562
   _STOPRADSREQUEST._serialized_start=564
   _STOPRADSREQUEST._serialized_end=581
-  _PERCEPTIONREQUEST._serialized_start=584
-  _PERCEPTIONREQUEST._serialized_end=1682
-  _PERCEPTIONRESPONSE._serialized_start=1684
-  _PERCEPTIONRESPONSE._serialized_end=1742
+  _STARTUSERDEFINEPARKINGREQUEST._serialized_start=583
+  _STARTUSERDEFINEPARKINGREQUEST._serialized_end=663
+  _STOPUSERDEFINEPARKINGREQUEST._serialized_start=665
+  _STOPUSERDEFINEPARKINGREQUEST._serialized_end=695
+  _PERCEPTIONREQUEST._serialized_start=698
+  _PERCEPTIONREQUEST._serialized_end=1990
+  _PERCEPTIONRESPONSE._serialized_start=1992
+  _PERCEPTIONRESPONSE._serialized_end=2050
 # @@protoc_insertion_point(module_scope)

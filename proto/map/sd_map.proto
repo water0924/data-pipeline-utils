@@ -433,6 +433,10 @@ message SDMapVersionOnboard {
     
     optional bool enable_p0_from_server = 8;
     optional bool enable_crs_from_server = 9;
+
+    optional bool use_scene_from_server = 10;
+
+    optional bool enable_output_lane_topo_debug_info = 11;
   }
   message LocalRoutingConfig {
     // 显式定义功能是否生效，保证即使在使用json格式proto时，功能也无异常

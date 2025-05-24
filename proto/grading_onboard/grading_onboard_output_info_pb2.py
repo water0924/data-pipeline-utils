@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 from proto.common import module_event_pb2 as common_dot_module__event__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n1grading_onboard/grading_onboard_output_info.proto\x12\x19\x64\x65\x65proute.grading_onboard\x1a\x19\x63ommon/module_event.proto\"A\n\tEventInfo\x12$\n\nevent_type\x18\x01 \x01(\x0e\x32\x10.dr.common.Event\x12\x0e\n\x06result\x18\x02 \x01(\x08\"C\n\x07\x44taInfo\x12\x38\n\nevent_info\x18\x01 \x03(\x0b\x32$.deeproute.grading_onboard.EventInfo\"\xd5\x01\n\tCountInfo\x12\x17\n\x0fyield_vru_count\x18\x01 \x01(\x05\x12\x13\n\x0b\x63utin_count\x18\x02 \x01(\x05\x12\x14\n\x0c\x64\x65tour_count\x18\x03 \x01(\x05\x12\x19\n\x11lane_change_count\x18\x04 \x01(\x05\x12!\n\x19inbound_or_outbound_count\x18\x05 \x01(\x05\x12\x16\n\x0ejunction_count\x18\x06 \x01(\x05\x12\x18\n\x10roundabout_count\x18\x07 \x01(\x05\x12\x14\n\x0cu_turn_count\x18\x08 \x01(\x05\".\n\rHDSingleEvent\x12\x0e\n\x06\x61\x63tive\x18\x01 \x01(\x08\x12\r\n\x05\x63ount\x18\x02 \x01(\x05\"\xb8\x03\n\x0bHDEventInfo\x12\x44\n\x12sudden_brake_event\x18\x01 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12\x42\n\x10hard_brake_event\x18\x02 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12\x42\n\x10not_center_event\x18\x03 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12>\n\x0cwiggle_event\x18\x04 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12M\n\x1bon_boundary_long_time_event\x18\x05 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12L\n\x1auncrossable_boundary_event\x18\x06 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\"\x82\x01\n\x07VisInfo\x12\x38\n\ncount_info\x18\x01 \x01(\x0b\x32$.deeproute.grading_onboard.CountInfo\x12=\n\rhd_event_info\x18\x02 \x01(\x0b\x32&.deeproute.grading_onboard.HDEventInfo\"\x86\x01\n\x18GradingOnboardOutputInfo\x12\x34\n\x08\x64ta_info\x18\x01 \x01(\x0b\x32\".deeproute.grading_onboard.DtaInfo\x12\x34\n\x08vis_info\x18\x02 \x01(\x0b\x32\".deeproute.grading_onboard.VisInfo')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n1grading_onboard/grading_onboard_output_info.proto\x12\x19\x64\x65\x65proute.grading_onboard\x1a\x19\x63ommon/module_event.proto\"A\n\tEventInfo\x12$\n\nevent_type\x18\x01 \x01(\x0e\x32\x10.dr.common.Event\x12\x0e\n\x06result\x18\x02 \x01(\x08\"C\n\x07\x44taInfo\x12\x38\n\nevent_info\x18\x01 \x03(\x0b\x32$.deeproute.grading_onboard.EventInfo\"\xd5\x01\n\tCountInfo\x12\x17\n\x0fyield_vru_count\x18\x01 \x01(\x05\x12\x13\n\x0b\x63utin_count\x18\x02 \x01(\x05\x12\x14\n\x0c\x64\x65tour_count\x18\x03 \x01(\x05\x12\x19\n\x11lane_change_count\x18\x04 \x01(\x05\x12!\n\x19inbound_or_outbound_count\x18\x05 \x01(\x05\x12\x16\n\x0ejunction_count\x18\x06 \x01(\x05\x12\x18\n\x10roundabout_count\x18\x07 \x01(\x05\x12\x14\n\x0cu_turn_count\x18\x08 \x01(\x05\".\n\rHDSingleEvent\x12\x0e\n\x06\x61\x63tive\x18\x01 \x01(\x08\x12\r\n\x05\x63ount\x18\x02 \x01(\x05\"\x8a\x03\n\x0c\x41utoTagEvent\x12\x14\n\x0c\x64isplay_text\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\x12\x45\n\nevent_type\x18\x03 \x01(\x0e\x32\x31.deeproute.grading_onboard.AutoTagEvent.EventType\"\x89\x02\n\tEventType\x12\x10\n\x0cSUDDEN_BRAKE\x10\x01\x12\x0e\n\nHARD_BRAKE\x10\x02\x12\x10\n\x0cINBOUND_RAMP\x10\x03\x12\x11\n\rOUTBOUND_RAMP\x10\x04\x12\n\n\x06\x43UT_IN\x10\x05\x12\x0f\n\x0bLANE_CHANGE\x10\x06\x12\x0e\n\nOFF_CENTER\x10\x07\x12\x13\n\x0fPASS_ROUNDABOUT\x10\x08\x12\x0f\n\x0bPASS_U_TURN\x10\t\x12\x1a\n\x16PASS_LEFT_WAITING_AREA\x10\n\x12\x18\n\x14PASS_RIGHT_ONLY_LANE\x10\x0b\x12\x10\n\x0cWRONG_BRANCH\x10\x0c\x12\x1a\n\x16PASS_CONSTRUCTION_ZONE\x10\r\"\xb8\x03\n\x0bHDEventInfo\x12\x44\n\x12sudden_brake_event\x18\x01 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12\x42\n\x10hard_brake_event\x18\x02 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12\x42\n\x10not_center_event\x18\x03 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12>\n\x0cwiggle_event\x18\x04 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12M\n\x1bon_boundary_long_time_event\x18\x05 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12L\n\x1auncrossable_boundary_event\x18\x06 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\"\x82\x01\n\x07VisInfo\x12\x38\n\ncount_info\x18\x01 \x01(\x0b\x32$.deeproute.grading_onboard.CountInfo\x12=\n\rhd_event_info\x18\x02 \x01(\x0b\x32&.deeproute.grading_onboard.HDEventInfo\"\xc7\x01\n\x18GradingOnboardOutputInfo\x12\x34\n\x08\x64ta_info\x18\x01 \x01(\x0b\x32\".deeproute.grading_onboard.DtaInfo\x12\x34\n\x08vis_info\x18\x02 \x01(\x0b\x32\".deeproute.grading_onboard.VisInfo\x12?\n\x0e\x61utotag_events\x18\x03 \x03(\x0b\x32\'.deeproute.grading_onboard.AutoTagEvent')
 
 
 
@@ -23,9 +23,11 @@ _EVENTINFO = DESCRIPTOR.message_types_by_name['EventInfo']
 _DTAINFO = DESCRIPTOR.message_types_by_name['DtaInfo']
 _COUNTINFO = DESCRIPTOR.message_types_by_name['CountInfo']
 _HDSINGLEEVENT = DESCRIPTOR.message_types_by_name['HDSingleEvent']
+_AUTOTAGEVENT = DESCRIPTOR.message_types_by_name['AutoTagEvent']
 _HDEVENTINFO = DESCRIPTOR.message_types_by_name['HDEventInfo']
 _VISINFO = DESCRIPTOR.message_types_by_name['VisInfo']
 _GRADINGONBOARDOUTPUTINFO = DESCRIPTOR.message_types_by_name['GradingOnboardOutputInfo']
+_AUTOTAGEVENT_EVENTTYPE = _AUTOTAGEVENT.enum_types_by_name['EventType']
 EventInfo = _reflection.GeneratedProtocolMessageType('EventInfo', (_message.Message,), {
   'DESCRIPTOR' : _EVENTINFO,
   '__module__' : 'grading_onboard.grading_onboard_output_info_pb2'
@@ -53,6 +55,13 @@ HDSingleEvent = _reflection.GeneratedProtocolMessageType('HDSingleEvent', (_mess
   # @@protoc_insertion_point(class_scope:deeproute.grading_onboard.HDSingleEvent)
   })
 _sym_db.RegisterMessage(HDSingleEvent)
+
+AutoTagEvent = _reflection.GeneratedProtocolMessageType('AutoTagEvent', (_message.Message,), {
+  'DESCRIPTOR' : _AUTOTAGEVENT,
+  '__module__' : 'grading_onboard.grading_onboard_output_info_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.grading_onboard.AutoTagEvent)
+  })
+_sym_db.RegisterMessage(AutoTagEvent)
 
 HDEventInfo = _reflection.GeneratedProtocolMessageType('HDEventInfo', (_message.Message,), {
   'DESCRIPTOR' : _HDEVENTINFO,
@@ -86,10 +95,14 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _COUNTINFO._serialized_end=457
   _HDSINGLEEVENT._serialized_start=459
   _HDSINGLEEVENT._serialized_end=505
-  _HDEVENTINFO._serialized_start=508
-  _HDEVENTINFO._serialized_end=948
-  _VISINFO._serialized_start=951
-  _VISINFO._serialized_end=1081
-  _GRADINGONBOARDOUTPUTINFO._serialized_start=1084
-  _GRADINGONBOARDOUTPUTINFO._serialized_end=1218
+  _AUTOTAGEVENT._serialized_start=508
+  _AUTOTAGEVENT._serialized_end=902
+  _AUTOTAGEVENT_EVENTTYPE._serialized_start=637
+  _AUTOTAGEVENT_EVENTTYPE._serialized_end=902
+  _HDEVENTINFO._serialized_start=905
+  _HDEVENTINFO._serialized_end=1345
+  _VISINFO._serialized_start=1348
+  _VISINFO._serialized_end=1478
+  _GRADINGONBOARDOUTPUTINFO._serialized_start=1481
+  _GRADINGONBOARDOUTPUTINFO._serialized_end=1680
 # @@protoc_insertion_point(module_scope)

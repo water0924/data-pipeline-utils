@@ -180,6 +180,10 @@ message LocalRouting {
   optional RoutingMask routing_mask = 21;
   optional RoutingMask impassable_mask = 29;
 
+  optional RoutingMask e2e_passable_mask = 32;
+  optional RoutingMask e2e_impassable_mask = 33;
+  optional RoutingMask e2e_white_mask = 34;
+
   optional odd.OddLimitInfo odd_limit_info = 22;
 
   optional bool is_routing_mask_valid = 23[default=true];
@@ -195,10 +199,33 @@ message LocalRouting {
   optional deeproute.map.GuidanceActionList passable_junction_list = 30;
   // vpa localrouting info
   optional deeproute.localization.message.GlobalRoutingInfo vpa_local_routing = 31;
+  
+  // 红绿灯路口信息
+  optional deeproute.map.TrafficLightCrossingInfo traffic_light_crossing_info = 35;
+
+  repeated deeproute.map.LaneTurn ego_lane_turn_type = 40;
 }
 
 message SingleGroupLaneIDs {
   repeated int32 lane_id = 1;
+}
+
+message ColoredPolyline {
+  // 每条折线
+  optional deeproute.common.Polyline polyline = 1;
+  // 折线对应的颜色
+  enum Color {
+    YELLOW = 1;
+    WHITE = 2;
+    GREEN = 3;
+    RED = 4;
+    BLUE = 5;
+  };
+  optional Color color = 2;
+}
+
+message LaneTopoDebugInfo {     
+  repeated ColoredPolyline colored_polylines = 1;
 }
 
 message DebugInfo {
@@ -210,6 +237,8 @@ message DebugInfo {
   repeated SingleGroupLaneIDs lane_groups = 5;
   optional bool is_yawed = 6;  // 是否偏航
   repeated string routing_input_debug_info = 7;  // routing输入调试信息
+  optional TrackingState tracking_state = 8;
+  optional LaneTopoDebugInfo lane_topo_debug_info = 9;
 }
 
 message LaneSegmentInfo {
@@ -373,4 +402,43 @@ message SceneStrategyDebugInfo {
 message SdCrossingNaviInfo {
   optional double crossing_distance = 1; // 当前到路口的距离
   optional deeproute.map.LaneTurn crossing_turn = 2; // 路口通行方向
+}
+
+message TrackingState {
+  repeated RoutingInfo his_routing_infos = 1;
+  repeated RoutingInfo new_routing_infos = 2;
+}
+
+message TrackingLaneInfo {
+  // 基础属性
+  optional int32 id = 1 [default = -1];
+  optional int32 lane_index = 2 [default = -1];
+  optional int32 pre_id = 3 [default = -1];
+  optional int32 priority = 4 [default = -1];
+  optional double crs = 5 [default = -1.0];
+  optional double score = 6 [default = 0.0];  // 评估得分  滑窗投票时使用
+
+  optional LaneRoutingInfo.PassableLaneType passable_type = 7
+      [default = UNKNOWN];
+
+  // 布尔状态标记
+  optional bool is_pre_p0 = 8 [default = false];
+  optional bool is_ego_lane = 9 [default = false];
+  optional bool has_right_edge = 10 [default = false];
+  optional bool has_left_edge = 11 [default = false];
+  optional bool has_left_split = 12 [default = false];
+  optional bool has_right_split = 13 [default = false];
+
+  // 车道类型 如公交车道 或者是自行车道
+  repeated deeproute.map.LaneType lane_types = 14 [packed = true];
+
+  // lane_mark转向， 这些信息是后续的 actura turn process才赋值的，需要专门赋值
+  repeated deeproute.map.LaneTurn lane_turns = 15 [packed = true];
+}
+
+message RoutingInfo {
+  repeated TrackingLaneInfo lane_infos = 1;
+  // std::pair<std::string, double> link_proj_pos;
+  optional string lane_id = 2;
+  optional double projection_position = 3;
 }

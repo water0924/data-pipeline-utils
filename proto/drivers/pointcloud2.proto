@@ -2,6 +2,7 @@ syntax = "proto2";
 package deeproute.drivers;
 
 import "common/header.proto";
+import "drivers/lidar/config.proto";
 
 enum DataType {
   INT8 = 1;
@@ -49,4 +50,6 @@ message PointCloud2 {
   optional bool is_dense = 9;
   //   optional bool is_shm = 10 [default = false];
   optional DataStorage data_storage = 10 [default = DATA_STORAGE_RAW];
+  optional uint64 shm_msg_seq = 11;
+  optional deeproute.drivers.lidar.LidarConfig lidar_configs = 12;
 }

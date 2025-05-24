@@ -9,8 +9,7 @@ import "canbus/mar_chassis_detail.proto";
 import "canbus/m7_chassis_detail.proto";
 import "canbus/byd_chassis_detail.proto";
 import "canbus/gwm_chassis_detail.proto";
-import "canbus/gwm_d03_chassis_detail.proto";
-import "canbus/gwm_p03_chassis_detail.proto";
+import "canbus/gwm_tank_chassis_detail.proto";
 import "canbus/gwm_de09_chassis_detail.proto";
 import "canbus/byd_tang_detail.proto";
 import "canbus/hy11_chassis_detail.proto";
@@ -180,7 +179,12 @@ message ShiftReport {
   optional deeproute.canbus.Chassis.GearPosition actual_gear = 1;
   optional deeproute.canbus.Chassis.GearPosition requested_gear = 2;
   
-  optional bool shift_override = 3;
+  enum ShiftOverrideType {
+    NO_OVERRIDE = 0;
+    VALID_OVERRIDE = 1;
+    INVALID_OVERRIDE= 2;
+  }
+  optional ShiftOverrideType shift_override = 3;
   optional bool prepare_to_shift = 4 [default = false];
 }
 
@@ -235,6 +239,8 @@ message BrakeReport {
   optional double master_cylinder_pressure = 11;
 
   optional bool active = 12; // interface is executing(1), or not(0)
+
+  optional double  drvr_decel_req = 13; //Driver deacceleration request
 }
 
 message BrakeInfo {
@@ -299,8 +305,7 @@ message ChassisDetails {
     GwmChassisDetail gwm = 6;
     SmartHy11ChassisDetail smart_hy11 = 7;
     BydTangDetail byd_tang = 8;
-    deeproute.canbus.gwm.d03.GwmD03ChassisDetail gwm_d03 = 9;
-    deeproute.canbus.gwm.p03.GwmP03ChassisDetail gwm_p03 = 10;
+    deeproute.canbus.gwm.tank.GwmTankChassisDetail gwm_tank = 9;
     deeproute.canbus.gl.p177.GlP177ChassisDetail gl_p177 = 11;
     deeproute.canbus.gwm.de09.GwmDe09ChassisDetail gwm_de09 = 12;
   }

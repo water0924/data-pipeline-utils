@@ -79,7 +79,7 @@ message EventInfo {
         3007;  //巡航过程中输出目标车位
     VPALearingCompletedInfo vpa_learning_completed_info =
         3008;  // 地图保存完成后上报信息
-
+    VPAMapMatchStatusChange vpa_map_match_status_change = 3009; // 地图匹配状态变化
     // AVM 3500 ~ 3600
     AVMStatusChange avm_status_change = 3500;
     AVMSettings avm_settings = 3501;
@@ -457,6 +457,7 @@ message DriverTakeOver {
     UTURN_FAILED = 4;   // 掉头失败，驾驶员接管
     INVALID_ODD = 5;    // 无效odd，驾驶员接管
     RUN_RED_LIGHT = 6;  // 闯红灯，驾驶员接管
+    NARROW_ROAD_IMPASSIBLE = 7; //窄路驾驶员接管
   }
   Scene scene = 1;
 }
@@ -530,6 +531,7 @@ message LaneChangeWarning {
     EXTRICATION = 1;   //导航，路型，避险变道困难
     WRONG_WAY = 2;     //汇出变道困难
     EOP_NO_GAP = 3;    // EOP接管提醒
+    NARROW_ROAD_IMPASSIBLE = 4;  //狭窄道路无法通过
   }
   Type type = 1;
 }
@@ -562,6 +564,10 @@ message NCAOutODD {
     ARRIVING_FINAL_DESTINATION = 1;  //即将到达终点
     UNABLE_TURN_ARROUND = 2;         //前方无法掉头
   }
+  enum RoadClass {
+    HIGHWAY = 0;  // 高速
+    CITY_ROAD = 1; // 城区
+  }
   enum OddLimitType {
     ODD_UNKNOWN = 0;                // 未知
     ODD_REST_AREA = 1;              // 服务区
@@ -585,6 +591,7 @@ message NCAOutODD {
   double remaining_s = 2;  //剩余距离 m
   Type type = 3;
   OddLimitType odd_type = 4;  // odd类型
+  RoadClass road_class = 5;  // 当前道路类型: 城区/高快
 }
 
 message OddNotification {
@@ -637,11 +644,19 @@ message VPAStatusChange {
   dr.operationstatus.VPAStatus to = 2;
 }
 
+enum VPAE2EStage {
+  VPA_STAGE_NONE = 0;
+  VPA_STAGE_1 = 1;
+  VPA_STAGE_2 = 2;
+  VPA_STAGE_3 = 3;
+}
+
 message VPALearingProgress {
   double distance = 1;               // 距离，单位米
   int32 map_saving_progress = 2;     // 进度 0-100
   int32 passed_speedbump_count = 3;  // 减速带数量
   bool need_map_fusion = 4;          // 需要地图融合
+  VPAE2EStage e2e_stage = 5;         // e2e阶段 (入库：前往车位-选择车位-完成学习；出库：驶出车位-驶入公共道路-完成学习)
 }
 
 message VPARoutingProgress {
@@ -668,6 +683,17 @@ message VPALearingCompletedInfo {
   bytes semantic_map = 3;            //语义地图 deeproute.map.
   int32 target_parking_space_id = 4;
   deeproute.localization.havp_map.HAVPMapMetaData map_info = 5;
+}
+
+message VPAMapMatchStatusChange {
+  enum MapMatchStatus {
+    MTACH_STATUS_NONE = 0;
+    MISMATCH_TO_MATCHED = 1;  // 附带 semantic_map 和 map_info
+    MACTHED_TO_MIS_MATCH = 2; // vis收到后关闭地图
+  }
+  MapMatchStatus status = 1;  // 只在select_slot状态下发送（for GL），vis收到后只在select_slot状态下处理
+  bytes semantic_map = 2;     //语义地图 deeproute.localization.havp_map.HAVPMap
+  deeproute.localization.havp_map.HAVPMapMetaData map_info = 3;
 }
 
 // 被动触发AVM, AVM 向CDC\VIS 发送通知

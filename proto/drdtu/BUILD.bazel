@@ -88,6 +88,8 @@ proto_library(
     srcs = ["debug_info.proto"],
     deps = [
         "//proto/drapi:operation_status_proto",
+        "//proto/lock_on_road:lock_on_road_proto",
+        "//proto/drapi:gwm_hut_notification_proto",
     ],
     strip_import_prefix = "/proto/",
 )

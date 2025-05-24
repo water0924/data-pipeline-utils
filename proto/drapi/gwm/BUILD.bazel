@@ -81,3 +81,53 @@ python_proto_library(
         ":gwmm_hmi_rasmap_proto",
     ],
 )
+
+proto_library(
+    name = "gwm_summary_report_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gwm_summary_report.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gwm_summary_report_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gwm_summary_report_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gwm_summary_report_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gwm_summary_report_proto",
+    ],
+)
+
+proto_library(
+    name = "gwm_version_info_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gwm_version_info.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gwm_version_info_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gwm_version_info_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gwm_version_info_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gwm_version_info_proto",
+    ],
+)

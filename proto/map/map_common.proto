@@ -216,6 +216,14 @@ message SdRoadInfo {
   optional deeproute.localization.LockOnRoadResult.Status lock_on_road_status = 7;
 }
 
+message TrafficLightCrossingInfo {
+  optional double dist_to_traffic_light_start = 1;
+  optional double dist_to_traffic_light_end = 2;
+  optional string traffic_light_crossing_start_link_id = 3;
+  optional string traffic_light_crossing_end_link_id = 4;
+  optional deeproute.map.LaneTurn traffic_light_turn_type = 5;
+}
+
 message AreaInfo {
   enum AreaType {
     UNKNOWN = 0;

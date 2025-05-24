@@ -80,6 +80,7 @@ message Obj_Info{
     OBJ_TYPE_OIL_CAR = 26;
     OBJ_TYPE_AMBULANCE = 27;
     OBJ_TYPE_FIRE_ENGINE = 28;
+    OBJ_TYPE_GATE = 29;
   };
   Obj_Type type = 5; 
   float length = 6; 
@@ -93,6 +94,16 @@ message Obj_Info{
     TRUNK_OPEN = 3;
   };
   repeated AttributeType attribute_type =10;
+  enum GateStatus {
+    UNKNOWN = 0;
+    OPEN = 1;
+    CLOSE = 2;
+  }
+  message GateInfo {
+    GateStatus status = 1;
+    float put_up_angle=2;
+  }
+  GateInfo gate_info = 11;
 }
 
 message LightStatus {

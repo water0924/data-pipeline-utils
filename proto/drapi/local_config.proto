@@ -12,6 +12,9 @@ message UserConfig {
                                  //nca, 开关关闭，不产生快捷激活信号
 
   // common internal use
+  AccelerationStyle acceleration_style = 20; //加速风格
+  SwitchStatus pure_model_path = 21; //planning轨迹规划是否使用纯模型debug开关，开关开，使用纯模型
+  SwitchStatus pure_model_speed = 22; //planning速度规划是否使用纯模型debug开关，开关开，使用纯模型
   SwitchStatus ilqr_lon_safety_cost = 23;//planning 变道debug开关
   SwitchStatus ilqr_lat_safety_cost = 24;//planning 变道debug开关    
   SwitchStatus wait_area_enable = 25;  //是否开启待转区功能
@@ -67,6 +70,7 @@ message UserConfig {
   APAConfig apa_config = 57;
   RPAConfig rpa_config = 58;
   HUTConfig hut_config = 59;
+  E2EConfig e2e_config = 60;
 
   SwitchStatus brake_light_fault_check =
       100;  // 刹车灯故障时，开关打开，退出行车，开关关闭，不影响行车
@@ -105,6 +109,13 @@ enum DrivingStyle {
   SPORT_MODE = 3;
 }
 
+enum AccelerationStyle {
+  UNKNOWN_ACCELERATION = 0;
+  STANDARD_ACCELERATION = 1;
+  CONSERVATIVE_ACCELERATION = 2;
+  AGGRESSIVE_ACCELERATION = 3;
+}
+
 enum NavigationMode {
   UNKNOWN_NAVI_MODE = 0;
   DR_NAVIMODE = 1;
@@ -122,6 +133,13 @@ enum HandsOffTimeSet {
   HANDSOFF_UNKNOWN = 0;
   HANDSOFF_NORMAL = 1;
   HANDSOFF_LONG = 2;
+}
+
+enum WheelVieStsType {
+  WHEELVIESTS_INITIAL_VALUE = 0;
+  WHEELVIESTS_TWO_WHEEL_MODE = 1;
+  WHEELVIESTS_FOUR_WHEEL_MODE = 2;
+  WHEELVIESTS_REVERSED = 3;
 }
 
 // ACC config
@@ -226,6 +244,8 @@ message AVMConfig {
   AvmTurnMode avm_turn_mode = 1004;
   SwitchStatus fpas_auto_mod = 1005;
   SwitchStatus open_visualizer_image = 1006;
+  SwitchStatus wheel_view_mode = 1007;
+  WheelVieStsType wheel_vie_sts = 1008;
 }
 
 // 行车AVM设置
@@ -246,10 +266,16 @@ message TJPConfig {
 
 // APA config
 message APAConfig {
+  // 泊入速度
+  enum APAParkingSpeed {
+    Low = 0;
+    Medium = 1;
+    High = 2;
+  }
   SwitchStatus fast_parking = 1;  // 快速泊车开关
   SwitchStatus enable_apa = 2;    // APA开启开关，上电默认打开
-  SwitchStatus auto_parkout =
-      3;  // 自动泊出开关, GWM AutoPrkOutSwtSts, 默认打卡
+  SwitchStatus auto_parkout = 3;  // 自动泊出开关, GWM AutoPrkOutSwtSts, 默认打卡
+  APAParkingSpeed apa_parking_speed = 4;  // APA 泊入速度
 }
 
 // RPA config
@@ -262,6 +288,9 @@ message HUTConfig {
   SwitchStatus enable_viz = 2;
 }
 
+message E2EConfig {
+  SwitchStatus enable_e2e = 1;
+}
 // 侧盲区
 message CMSConfig {
   SwitchStatus side_bsd_disp_sts = 1;

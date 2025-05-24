@@ -85,6 +85,7 @@ proto_library(
     visibility = ["//visibility:public"],
     srcs = ["function_group_state.proto"],
     deps = [
+        ":execution_process_state_proto",
     ],
     strip_import_prefix = "/proto/",
 )

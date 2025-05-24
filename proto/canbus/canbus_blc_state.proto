@@ -5,6 +5,7 @@ package deeproute.canbus;
 import "common/vehicle_signal.proto";
 import "common/configs/vehicle_config.proto";
 import "canbus/chassis.proto";
+import "canbus/chassis_control_interface_type.proto";
 
 // topic: blc/can_state_machine
 message CanStateMachine {
@@ -17,6 +18,8 @@ message CanStateMachine {
   optional CanStateLat lat = 7;
   optional ApaCanState apa_can_state = 8;
   optional BlcCommand blc_command = 9;
+  optional LSSCanState lss = 10;
+  optional CanStateE2e e2e = 11;
   // Special wire control interface
   optional SpecialCanState special_can_state = 100;
 }
@@ -98,6 +101,38 @@ message ApaCanState {
   optional FunctionType function_type = 2;
   optional CanStateLong longitude = 3;
   optional CanStateLat lat = 4;
+}
+message LSSCanState {
+  enum StateType {
+    PASSIVE = 0;
+    STANDBY = 1;
+    TIMEOUT = 2;
+    HANDSHAKE = 3;
+    ACTIVE = 4;
+    EXIT = 5;
+  }
+  enum ELKStateMachineType {
+    ELK_PASSIVE = 0;
+    ELK_S_ACTIVE = 1;
+    ELK_RE_ACTIVE = 2;
+    ELK_GO_ACTIVE = 3;
+    ELK_ICS_ACTIVE = 4;
+    ELK_O_ACTIVE = 5;
+    ELK_VRU_ACTIVE = 6;
+  }
+  optional StateType rdp = 1;   // same as lka
+  optional ELKStateMachineType elk = 2;
+}
+
+message CanStateE2e {
+  enum StateType {
+    PASSIVE_OFF = 0;
+    PASSIVE_FAILURE = 1;
+    PASSIVE = 2;
+    STANDBY = 3;
+    ACTIVE = 4;
+  }
+  optional StateType state = 1;
 }
 
 message ApaCanStateReport {
@@ -202,12 +237,29 @@ message GwmStateMachine {
 }
 
 message BlcCommand {
-  // BLC 请求控车时下发的档位和减速度，需要判断 has_xxx,
-  // 没有则不传到控制指令到底盘
-  optional bool control_by_blc = 1;  // 由BLC 控车
-  optional deeproute.canbus.Chassis.GearPosition blc_gear_request = 2;
-  optional double blc_longitudinal_cmd = 3;
-  optional deeproute.common.VehicleSignal.TurnSignal blc_turn_signal = 4;
-  optional bool blc_emergency_light = 5;
-  optional bool emergency_brake = 6;
+  optional bool control_by_blc = 1;  // 泊车快速握手请求
+  optional deeproute.canbus.Chassis.GearPosition blc_gear_request = 2;  // 档位请求
+  optional bool blc_gear_request_valid = 3;  // 档位请求是否有效
+  optional double blc_longitudinal_cmd = 4;  // 加速度请求
+  optional bool blc_longitudinal_cmd_valid = 5;  // 加速度请求是否有效
+  optional deeproute.common.VehicleSignal.TurnSignal blc_turn_signal = 6;  // 转向灯请求
+  optional bool blc_turn_signal_valid = 7;  // 转向灯请求是否有效
+  optional bool blc_emergency_light = 8;  // 双闪请求
+  optional bool emergency_brake = 9;  // 紧急制动请求
+  optional EpbRequest epb_request = 10;  // EPB请求
+  optional bool epb_request_valid = 11;  // EPB请求是否有效
+  optional double brake_torque = 12;  // 制动扭矩请求
+  optional bool brake_torque_valid = 13;  // 制动扭矩请求是否有效
+  enum AvhRequest {
+    NO_REQUEST = 0;
+    AVH_OFF = 1;
+    AVH_ACTIVE = 2;
+    AVH_STANDBY = 3;
+  }
+  optional AvhRequest avh_req = 14;  // AVH请求
+  optional bool avh_req_valid = 15;  // AVH请求是否有效
+  optional double throttle_torque = 16;  // 驱动扭矩
+  optional bool throttle_torque_valid = 17;  // 驱动扭矩请求是否有效
+  optional bool low_beam = 18;  // 近光灯请求
+  optional bool high_beam = 19;  // 远光灯请求
 }

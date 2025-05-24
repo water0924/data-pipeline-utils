@@ -187,6 +187,9 @@ message PerceptionObstacle {
     BARRIER_ARM = 62;           // 道闸杆  行车输出
     // update 0522
     PARK_WARNING_SIGN = 63;  // 禁停牌
+    // update 250423
+    FLAT_TRICYCLE = 64;  // 平板三轮车
+    BOX_TRICYCLE = 65;   // 箱式三轮车
   };
 
   optional Type type = 12;  // obstacle type
@@ -263,6 +266,9 @@ message PerceptionObstacle {
     // lock on or off
     LOCK_ON = 18;   // 打开的地锁
     LOCK_OFF = 19;  // 关闭的地锁
+    // reai_mirror open or fold
+    REAR_MIRROR_ON = 20; // 后视镜打开
+    REAR_MIRROR_OFF = 21; // 后视镜折叠
   }
 
   // agent attribute (eg. open_doors)

@@ -93,6 +93,7 @@ enum SubState {
   /* 600~649 for DATA_COLLECTOR*/
   DATA_COLLECTOR_PARKING = 600;      // 泊车采集
   DATA_COLLECTOR_FACTORY_CALIB = 601;  // 生产标定采集
+  DATA_COLLECTOR_DRIVING = 602;  // 行车数采
   /* 650 ~ 699 for IMU */
   IMU_CALIBRATION_MODE = 650; // 惯性导航动态标定
 }
@@ -207,6 +208,7 @@ message DSMRequest { // topic : /dsm/request
     AdapterCommand adapter_command = 1008;
     SetRecordMode set_record_mode = 1009;
     SetMode set_mode = 1010;
+    bool reset_dem_command = 1011; // 重启DEM指令
   }
 }
 

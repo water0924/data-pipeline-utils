@@ -13,37 +13,58 @@ message AVPMapData {
   repeated Point floor_exit = 7;          // 楼层出口集合
   repeated ParkingSpace parking_spaces = 8; // 地图中存储的停车位，全局坐标系。
   repeated MapObstacle map_obstacles = 9; // 地图中存储的障碍物，全局坐标系
+  repeated ParkingPoi parking_pois = 10;  // 地图中存储的POI点
   //  int32 mapping_process = 10;         // 地图创建进度。 ** 有专门的SOMEIP接口传这个值
   int32 length = 11;                      // 地图的总长度
   int32 creation_time = 12;               // 地图的创建时间(秒时间戳)
-  int32 renewal_time =13;                 // 地图的更新时间(秒时间戳)
+  int32 renewal_time = 13;                 // 地图的更新时间(秒时间戳)
   repeated Point global_planning_trajectory = 14; // 全局规划路径
   AVPMap map = 15;                        // 总地图
 };
 
+/*
+SOME/IP
+  Server:HUT
+  ServiceInterfaceName:HUTSystemFunctions
+  ElementName:HAVPMapManagementSet
+  DatatypeReferencea:HAVPMapManagement_Array
+*/
 message AVPMapManage{
-  OperationType opt_type=1;               //操作类型
-  string id=2;                            //地图唯一ID，来源于AVPMapData中的id
-  string map_name=3;                      //重命名的地图名称
-  ParkingSpace parking_space=4;           //编辑的车位信息
+  OperationType opt_type = 1;               //操作类型
+  string id = 2;                            //地图唯一ID，来源于AVPMapData中的id
+  string map_name = 3;                      //重命名的地图名称
+  ParkingSpace parking_space = 4;           //编辑的车位信息
+  ParkingPoi parking_poi = 5;               //POI点信息
 
   enum OperationType
   {
-      OPERATION_TYPE_NONE=0; //无操作
-      OPERATION_TYPE_EDITMAP=1; //编辑地图（含重命名）
-      OPERATION_TYPE_DELETEMAP=2;//删除地图
-      OPERATION_TYPE_EDITPARKINGSPACE=3;//编辑车位（含收藏/取消收藏、默认/取消默认、修改标签、重命名）
-      //OPERATION_TYPE_SELECTPARKINGSPACE=4;//选择车位   注：弃用，选择车位由SlotID（SOME/IP)信号替代
-      OPERATION_TYPE_REQMAP=5;//请求地图
+      OPERATION_TYPE_NONE = 0;              //无操作
+      OPERATION_TYPE_EDITMAP = 1;           //编辑地图（含重命名）
+      OPERATION_TYPE_DELETEMAP = 2;         //删除地图
+      OPERATION_TYPE_EDITPARKINGSPACE = 3;  //编辑车位（含收藏/取消收藏、默认/取消默认、修改标签、重命名）
+      //OPERATION_TYPE_SELECTPARKINGSPACE = 4;//选择车位   注：弃用，选择车位由SlotID（SOME/IP)信号替代
+      OPERATION_TYPE_REQMAP = 5;            //请求地图
+      OPERATION_TYPE_SELECTP_POI = 6;       //选择POI点。用户点选非未收藏POI，通过该接口发送ID为0以及POI坐标。收藏的POI点，通过SlotID发送ID。
+      OPERATION_TYPE_EDIT_POI = 7;          //编辑POI点（含收藏/取消收藏、默认/取消默认、修改标签、重命名）
   }
 }
 
 /*
 SOME/IP
+  Server:ADC
   ServiceInterfaceName:HAVPandAVPFunctions
   ElementName:HAVPPathInfo
   DatatypeReference:HAVPLearningWorldArray
+  TransmissionType: Event Cycle 0.1s
 */
 message AVPNaviMapData{
-  repeated AVPMapPin pins = 1;  
+  repeated AVPMapPin pins = 1;
+  OperationType opt_type = 2;         
+
+  enum OperationType
+  {
+      OPERATION_TYPE_NONE = 0;        //无操作
+      OPERATION_TYPE_MAPPIN = 1;      //绘制地图扎标
+      OPERATION_TYPE_GETNAME = 2;     //获取地图名称
+  }
 }

@@ -30,27 +30,27 @@ message PerceptualObstacleArr {
   repeated PerceptualObstacle obstacles = 1;
 }
 
-// topic: /gl/sr_perception_pk
+// topic: /gl/sr_parkingspace
 message PerceptualSlotArr {
   repeated PerceptualSlot parkingspace = 1;
 }
 
-// topic: /gl/right_lanemaking
+// topic: /gl/sr_right_lanemaking
 message PrkgLaneMarkingRight {
   repeated PrkgLaneMarking lane_marks = 1;
 }
 
-// topic: /gl/left_lanemaking
+// topic: /gl/sr_left_lanemaking
 message PrkgLaneMarkingLeft {
   repeated PrkgLaneMarking lane_marks = 1;
 }
 
-// topic: /gl/right_tracepoint
+// topic: /gl/sr_right_tracepoint
 message PrkgTraceDotRight {
   repeated PrkgTraceDot trace_dots = 1;
 }
 
-// topic: /gl/left_tracepoint
+// topic: /gl/sr_left_tracepoint
 message PrkgTraceDotLeft {
   repeated PrkgTraceDot trace_dots = 1;
 }

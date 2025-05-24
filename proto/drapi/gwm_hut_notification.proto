@@ -55,6 +55,11 @@ GWMParkingHUTNotification {  // https://rqk9rsooi4.feishu.cn/file/IK15bClQYo79cX
   ParkingSpaceInfoUpdate slot_update = 67;  // 车位信息更新后通知
   FloorInfo floor_info = 68;  // 楼层
   VISBtnSts go_to_here_btn_sts = 69;  // 导航状态选定车位【去这里】按钮状态，5hz
+  VISBtnSts e2e_routing_btn_sts = 70; // 端到端开始巡航高亮按钮
+  VISBtnSts e2e_learning_btn_sts = 71; // 端到端开始巡航高亮按钮
+
+  // E2E
+  VISBtnSts prkoutmapbuildbtndisp = 72;   // 创建泊出路线按钮
 }
 
 message Signal_Indnc {
@@ -110,6 +115,10 @@ message InterfaceDisTyp {
     GUIDANCE = 7;
     SELECTSLOT_3D = 8;
     CRUISE_3D = 9;
+    CHOOSE_EXIT = 10;
+    CRUISE_EXIT = 11;
+    MOORED_LEARNING_REQUEST = 12;
+    MOORINGOUT_MAPPING_COMPLETE = 13;
   }
   DisTyp type = 1;
 }
@@ -301,11 +310,11 @@ message HAVPFunctTextDisp {
     GUIDANCE_SUCCESS = 0x83;
 
     // dr
-    LEARNINIG_CHARGEING_CAP_OPENED = 0x84;
-    LEARNINIG_FUEL_CAP_OPENED = 0x85;
-    CRUSING_CHARGEING_CAP_OPENED = 0x86;
-    CRUSING_FUEL_CAP_OPENED = 0x87;
-    THROTTLE_INTERVENE = 0x88;  //巡航中油门接管
+    MAPFUSION = 0x84;
+    DELETESUCCESSFULLY = 0x85;
+    PLEASE_RELEASE_EPB = 0x86;
+    PLEASE_TURN_THE_WHEEL_BACK = 0x87;
+    OPERATION_FAILURE = 0x88;  //巡航中油门接管
     TRYING_TO_PASS_BE_READY_TO_BRAKE = 0x89;
     COLLECTION_SUCCESSFUL = 0x8A;
     MODIFY_SUCCESSFUL = 0x8B;
@@ -328,6 +337,16 @@ message HAVPFunctTextDisp {
     OFF_COURSE_ROUTE_UPDATED = 0x9C;
     PLEASE_SELECT_SUITABLE_PARKING_SLOT_ICON = 0x9D;
     PLEASE_FOLLOW_NAVIGATION_TIPS_TURN_ON_FUNCTION = 0x9E;
+    MAP_DISTANCE_HAS_REACHED_THE_UPPER_LIMIT = 159;
+    ANNOT_SUPPORT_MAPPING = 160;
+    OUT_OF_RANGE = 161;
+    LEAD_OUT_PARKINGLOT = 162;
+    DRIVE_ON = 163;
+    FAILED_TO_PARK_MAP = 164;
+    QUIT_E2E = 165;
+    PULLING_OUT_PARKINGLOT = 166;
+    HEADING_TO_PARKINGSPOT = 167;
+
     GO_STRAIGHT = 0x111;        //直行（导航界面）
     TURN_AROUND = 0x112;        //掉头（导航、巡航界面）
     ROUTE_REPLANNING = 0x113;   //路径重规划（导航、巡航界面）
@@ -410,6 +429,9 @@ message PopupDisp {
     SUSPENSION_MODE_NOT_SUPPORTED = 0x43;
     AVM_NOT_CALIBRATED = 0x44;
     VEHICLE_NOT_READY = 0x45;
+    CAN_GREATE_MOORING_MAP = 70;
+    E2E_CANBE_ENABLED = 71;
+    NOT_ON_MAP = 72;
 
     // for deeproute internal debug
     PRE_MAPPING_CHECK_CANCEL = 0xA0;

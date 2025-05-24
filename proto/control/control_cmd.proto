@@ -139,7 +139,15 @@ message ControlCommand {
   optional bool use_full_feedback_controller = 56 [deprecated = true];
   optional bool standstill = 57 [default = false];
   optional bool driveoff = 58 [default = false];
-
+  optional bool apa_wheel_chock = 59 [default = false];
+  optional bool is_sapa_mode = 60;
+  enum AvhCtrl{
+    No_request = 0;
+    AVH_off = 1;
+    AVH_active = 2;
+    AVH_standby = 3;
+  }
+  optional AvhCtrl avh_ctrl = 61;
 }
 
 // topic:esa/command

@@ -10,6 +10,7 @@ import "routing/local_routing.proto";
 import "routing/cloud_task.proto";
 import "odd/odd.proto";
 import "map/map_common.proto";
+import "map/common_type.proto";
 
 message SDRoutingResponse {
   optional deeproute.map.RoutePlanningType route_planning_type = 1000;
@@ -168,6 +169,25 @@ enum SceneType {
   TRAFFIC_CAMERA_SPD_LIMIT = 9;
 }
 
+enum RoadSceneType {
+  ROAD_SCENE_UNKNOWN = 0;
+  // hard code for local routing
+  ROAD_SCENE_NON_Y_CROSSING = 1;
+}
+
+message RoadSceneInfo {
+  optional deeproute.map.CrossingType static_scene_type = 1;
+  optional deeproute.map.LaneTurn crossing_turn = 2;
+  optional RoadSceneType road_scene_type = 3;
+  optional bool is_way_point = 4;  // 是否要在该路口汇出/汇入
+  optional deeproute.map.LaneTurn traffic_lights_turn_type = 5;  // 信号灯转向
+}
+
+message TrafficLightSceneInfo {
+  optional deeproute.map.LaneTurn scene_turn = 1;
+  optional uint32 out_link_offset = 2;
+}
+
 message SpeedLimitInfo {
   repeated int32 spd_limit_dis = 1;
   repeated int32 spd_limit_spl = 2;
@@ -184,7 +204,12 @@ message StaticRoutingInfo {
   optional int32 priority_lane_index = 1;
   // lane from left to right
   repeated int32 crs = 2;
+
+  repeated RoadSceneInfo local_routing_scene_infos = 3;
+
+  optional TrafficLightSceneInfo traffic_light_scene_info = 4;
 }
+
 message DataCollectSingleTask {
   optional int64 task_id = 1;
 
@@ -206,6 +231,7 @@ message SegmAction {
   optional deeproute.map.LaneActions lane_actions = 3;
   optional deeproute.map.MainAction step_main_action = 4;
   optional deeproute.map.AssistantAction step_assistant_action = 5;
+  repeated deeproute.map.LaneActions multi_lane_actions = 6;
 }
 
 message Segment {
@@ -374,6 +400,8 @@ message Segment {
 
   optional StaticRoutingInfo static_routing_info = 42;
   optional SegmAction segm_action = 50;
+
+  repeated RoadSceneInfo local_routing_scene_infos = 51;
 }
 
 message SpeedLimitConfig {
@@ -410,7 +438,8 @@ message Route {
   repeated deeproute.graph_match.MismatchSegmIndex mismatch_indexes = 7;
 
   optional SpeedLimitConfig speed_limit_config = 10;
-  optional deeproute.sd_map.SDMapVersionOnboard.LocalRoutingConfig local_routing_cloud_config = 11;
+  optional deeproute.sd_map.SDMapVersionOnboard.LocalRoutingConfig
+      local_routing_cloud_config = 11;
 
   // for gwm odd
   repeated graph_match.AmapLinkMatchInfo mismatch_amap_link_range = 28;

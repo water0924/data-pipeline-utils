@@ -80,7 +80,18 @@ message TrafficLight {
   optional bool odd = 19;
   optional bool amap_count_downs = 20; // 融合后的读秒来自高德
   optional bool has_arrow_vote = 21; // 当前状态是否存在箭头灯投票
+  optional bool use_e2e = 22;
+  optional Color e2e_color = 23;
 
+}
+
+message TrafficLightStopS {
+  // In global coordinate, the size should be 2, 
+  // including the starting point and ending point
+  optional common.Polyline polyline = 1;
+  // In sensing coordinate, Corresponding one-to-one
+  // with polyline
+  optional common.Polyline polyline_local = 2;
 }
 
 message TrafficLightDetectionTask {
@@ -129,4 +140,6 @@ message TrafficLightResponse {
   // virtual signal stand as current junction for pnc cache logic
   // start from 0
   optional int64 virtual_traffic_lights_id = 4;
+  // Traffic light stops
+  optional TrafficLightStopS traffic_light_stops = 5;
 }

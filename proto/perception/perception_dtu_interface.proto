@@ -39,6 +39,12 @@ message StartRADSRequest {}
 
 message StopRADSRequest {}
 
+message StartUserDefineParkingRequest {
+  optional deeproute.hdmap.StandbyArea parkspace = 1;
+}
+
+message StopUserDefineParkingRequest {}
+
 // topic: /perception/dtu_request
 message PerceptionRequest {
   optional string id = 1;
@@ -56,6 +62,8 @@ message PerceptionRequest {
     StopRPAStraightFrontBackRequest stop_rpa_straight_front_back_request = 12; // stop straight front back in rpa, only send once
     StartRADSRequest start_rads_request = 13; // start rads, only send once
     StopRADSRequest stop_rads_request = 14; // stop rads, only send once
+    StartUserDefineParkingRequest start_user_define_parking_request = 15;
+    StopUserDefineParkingRequest stop_user_define_parking_request = 16;
   }
 }
 

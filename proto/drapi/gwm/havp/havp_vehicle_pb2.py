@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 from proto.drapi.gwm.havp import havp_common_pb2 as drapi_dot_gwm_dot_havp_dot_havp__common__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!drapi/gwm/havp/havp_vehicle.proto\x12\x04havp\x1a drapi/gwm/havp/havp_common.proto\"\xed\x01\n\x0e\x41VPVehicleData\x12\x11\n\ttimestamp\x18\x01 \x01(\x01\x12\x16\n\x03\x61pa\x18\x02 \x01(\x0b\x32\t.havp.APA\x12\'\n\x0chavp_mapping\x18\x03 \x01(\x0b\x32\x11.havp.HAVPMapping\x12%\n\x0bhavp_cruise\x18\x04 \x01(\x0b\x32\x10.havp.HAVPCruise\x12\x18\n\x04rads\x18\x05 \x01(\x0b\x32\n.havp.RADS\x12#\n\nsvp_cruise\x18\x06 \x01(\x0b\x32\x0f.havp.SVPCruise\x12!\n\thavp_navi\x18\x07 \x01(\x0b\x32\x0e.havp.HAVPNavi\"\xe8\x02\n\x03\x41PA\x12\x1a\n\x12left_path_distance\x18\x01 \x01(\x02\x12\x16\n\x03pas\x18\x02 \x01(\x0b\x32\t.havp.PAS\x12)\n\rparking_space\x18\x03 \x03(\x0b\x32\x12.havp.ParkingSpace\x12\x30\n\tobstacles\x18\x04 \x03(\x0b\x32\x1d.havp.ObjectDetectionObstacle\x12(\n\x13planning_trajectory\x18\x05 \x03(\x0b\x32\x0b.havp.Point\x12 \n\x08location\x18\x06 \x01(\x0b\x32\x0e.havp.Location\x12\'\n\x0cwall_element\x18\x07 \x03(\x0b\x32\x11.havp.WallElement\x12\x32\n\x12sign_line_vertical\x18\x08 \x03(\x0b\x32\x16.havp.SignlineVertical\x12\'\n\x0csign_polygon\x18\t \x03(\x0b\x32\x11.havp.SignPolygon\"\xd0\x03\n\x0bHAVPMapping\x12 \n\x08location\x18\x01 \x01(\x0b\x32\x0e.havp.Location\x12\x16\n\x03pas\x18\x02 \x01(\x0b\x32\t.havp.PAS\x12\x1c\n\x14total_learn_distance\x18\x03 \x01(\x05\x12\x17\n\x0froad_bump_times\x18\x04 \x01(\x05\x12)\n\rparking_space\x18\x05 \x03(\x0b\x32\x12.havp.ParkingSpace\x12\x30\n\tobstacles\x18\x06 \x03(\x0b\x32\x1d.havp.ObjectDetectionObstacle\x12\'\n\x12mapping_trajectory\x18\x07 \x03(\x0b\x32\x0b.havp.Point\x12\x1a\n\x12left_path_distance\x18\x08 \x01(\x02\x12(\n\x13planning_trajectory\x18\t \x03(\x0b\x32\x0b.havp.Point\x12\'\n\x0cwall_element\x18\n \x03(\x0b\x32\x11.havp.WallElement\x12\x32\n\x12sign_line_vertical\x18\x0b \x03(\x0b\x32\x16.havp.SignlineVertical\x12\'\n\x0csign_polygon\x18\x0c \x03(\x0b\x32\x11.havp.SignPolygon\"\x9d\x04\n\nHAVPCruise\x12 \n\x08location\x18\x01 \x01(\x0b\x32\x0e.havp.Location\x12\x16\n\x03pas\x18\x02 \x01(\x0b\x32\t.havp.PAS\x12\x15\n\rdistance_left\x18\x03 \x01(\x05\x12\x0b\n\x03odm\x18\x04 \x01(\x05\x12\x1b\n\x13\x61round_person_times\x18\x05 \x01(\x05\x12\x1d\n\x15\x61round_obstacle_times\x18\x06 \x01(\x05\x12\x30\n\tobstacles\x18\x07 \x03(\x0b\x32\x1d.havp.ObjectDetectionObstacle\x12(\n\x13planning_trajectory\x18\x08 \x03(\x0b\x32\x0b.havp.Point\x12\x33\n+is_display_the_Upstairs_and_Downstairs_page\x18\t \x01(\x05\x12)\n\rparking_space\x18\n \x03(\x0b\x32\x12.havp.ParkingSpace\x12\x17\n\x0froad_bump_times\x18\x0b \x01(\x05\x12\x1a\n\x12left_path_distance\x18\r \x01(\x02\x12\'\n\x0cwall_element\x18\x0e \x03(\x0b\x32\x11.havp.WallElement\x12\x32\n\x12sign_line_vertical\x18\x0f \x03(\x0b\x32\x16.havp.SignlineVertical\x12\'\n\x0csign_polygon\x18\x10 \x03(\x0b\x32\x11.havp.SignPolygon\"\x9c\x04\n\tSVPCruise\x12 \n\x08location\x18\x01 \x01(\x0b\x32\x0e.havp.Location\x12\x16\n\x03pas\x18\x02 \x01(\x0b\x32\t.havp.PAS\x12\x15\n\rdistance_left\x18\x03 \x01(\x05\x12\x0b\n\x03odm\x18\x04 \x01(\x05\x12\x1b\n\x13\x61round_person_times\x18\x05 \x01(\x05\x12\x1d\n\x15\x61round_obstacle_times\x18\x06 \x01(\x05\x12\x30\n\tobstacles\x18\x07 \x03(\x0b\x32\x1d.havp.ObjectDetectionObstacle\x12(\n\x13planning_trajectory\x18\x08 \x03(\x0b\x32\x0b.havp.Point\x12\x33\n+is_display_the_Upstairs_and_Downstairs_page\x18\t \x01(\x05\x12)\n\rparking_space\x18\n \x03(\x0b\x32\x12.havp.ParkingSpace\x12\x17\n\x0froad_bump_times\x18\x0b \x01(\x05\x12\x1a\n\x12left_path_distance\x18\r \x01(\x02\x12\'\n\x0cwall_element\x18\x0e \x03(\x0b\x32\x11.havp.WallElement\x12\x32\n\x12sign_line_vertical\x18\x0f \x03(\x0b\x32\x16.havp.SignlineVertical\x12\'\n\x0csign_polygon\x18\x10 \x03(\x0b\x32\x11.havp.SignPolygon\"\xe4\x02\n\x04RADS\x12 \n\x08location\x18\x01 \x01(\x0b\x32\x0e.havp.Location\x12\x16\n\x03pas\x18\x02 \x01(\x0b\x32\t.havp.PAS\x12\x15\n\rdistance_left\x18\x03 \x01(\x02\x12(\n\x13planning_trajectory\x18\x04 \x03(\x0b\x32\x0b.havp.Point\x12)\n\rparking_space\x18\x05 \x03(\x0b\x32\x12.havp.ParkingSpace\x12\x30\n\tobstacles\x18\x06 \x03(\x0b\x32\x1d.havp.ObjectDetectionObstacle\x12\'\n\x0cwall_element\x18\x07 \x03(\x0b\x32\x11.havp.WallElement\x12\x32\n\x12sign_line_vertical\x18\x08 \x03(\x0b\x32\x16.havp.SignlineVertical\x12\'\n\x0csign_polygon\x18\t \x03(\x0b\x32\x11.havp.SignPolygon\"r\n\x08HAVPNavi\x12 \n\x08location\x18\x01 \x01(\x0b\x32\x0e.havp.Location\x12\x15\n\rdistance_left\x18\x02 \x01(\x05\x12\x0b\n\x03odm\x18\x03 \x01(\x05\x12 \n\x04tips\x18\x04 \x01(\x0e\x32\x12.havp.HAVPNaviTipsb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!drapi/gwm/havp/havp_vehicle.proto\x12\x04havp\x1a drapi/gwm/havp/havp_common.proto\"\xed\x01\n\x0e\x41VPVehicleData\x12\x11\n\ttimestamp\x18\x01 \x01(\x01\x12\x16\n\x03\x61pa\x18\x02 \x01(\x0b\x32\t.havp.APA\x12\'\n\x0chavp_mapping\x18\x03 \x01(\x0b\x32\x11.havp.HAVPMapping\x12%\n\x0bhavp_cruise\x18\x04 \x01(\x0b\x32\x10.havp.HAVPCruise\x12\x18\n\x04rads\x18\x05 \x01(\x0b\x32\n.havp.RADS\x12#\n\nsvp_cruise\x18\x06 \x01(\x0b\x32\x0f.havp.SVPCruise\x12!\n\thavp_navi\x18\x07 \x01(\x0b\x32\x0e.havp.HAVPNavi\"\x9a\x03\n\x03\x41PA\x12\x1a\n\x12left_path_distance\x18\x01 \x01(\x02\x12\x16\n\x03pas\x18\x02 \x01(\x0b\x32\t.havp.PAS\x12)\n\rparking_space\x18\x03 \x03(\x0b\x32\x12.havp.ParkingSpace\x12\x30\n\tobstacles\x18\x04 \x03(\x0b\x32\x1d.havp.ObjectDetectionObstacle\x12(\n\x13planning_trajectory\x18\x05 \x03(\x0b\x32\x0b.havp.Point\x12 \n\x08location\x18\x06 \x01(\x0b\x32\x0e.havp.Location\x12\'\n\x0cwall_element\x18\x07 \x03(\x0b\x32\x11.havp.WallElement\x12\x32\n\x12sign_line_vertical\x18\x08 \x03(\x0b\x32\x16.havp.SignlineVertical\x12\'\n\x0csign_polygon\x18\t \x03(\x0b\x32\x11.havp.SignPolygon\x12\x30\n\x11\x61pa_customize_res\x18\n \x01(\x0b\x32\x15.havp.APACustomizeRes\"\xd0\x03\n\x0bHAVPMapping\x12 \n\x08location\x18\x01 \x01(\x0b\x32\x0e.havp.Location\x12\x16\n\x03pas\x18\x02 \x01(\x0b\x32\t.havp.PAS\x12\x1c\n\x14total_learn_distance\x18\x03 \x01(\x05\x12\x17\n\x0froad_bump_times\x18\x04 \x01(\x05\x12)\n\rparking_space\x18\x05 \x03(\x0b\x32\x12.havp.ParkingSpace\x12\x30\n\tobstacles\x18\x06 \x03(\x0b\x32\x1d.havp.ObjectDetectionObstacle\x12\'\n\x12mapping_trajectory\x18\x07 \x03(\x0b\x32\x0b.havp.Point\x12\x1a\n\x12left_path_distance\x18\x08 \x01(\x02\x12(\n\x13planning_trajectory\x18\t \x03(\x0b\x32\x0b.havp.Point\x12\'\n\x0cwall_element\x18\n \x03(\x0b\x32\x11.havp.WallElement\x12\x32\n\x12sign_line_vertical\x18\x0b \x03(\x0b\x32\x16.havp.SignlineVertical\x12\'\n\x0csign_polygon\x18\x0c \x03(\x0b\x32\x11.havp.SignPolygon\"\x9d\x04\n\nHAVPCruise\x12 \n\x08location\x18\x01 \x01(\x0b\x32\x0e.havp.Location\x12\x16\n\x03pas\x18\x02 \x01(\x0b\x32\t.havp.PAS\x12\x15\n\rdistance_left\x18\x03 \x01(\x05\x12\x0b\n\x03odm\x18\x04 \x01(\x05\x12\x1b\n\x13\x61round_person_times\x18\x05 \x01(\x05\x12\x1d\n\x15\x61round_obstacle_times\x18\x06 \x01(\x05\x12\x30\n\tobstacles\x18\x07 \x03(\x0b\x32\x1d.havp.ObjectDetectionObstacle\x12(\n\x13planning_trajectory\x18\x08 \x03(\x0b\x32\x0b.havp.Point\x12\x33\n+is_display_the_Upstairs_and_Downstairs_page\x18\t \x01(\x05\x12)\n\rparking_space\x18\n \x03(\x0b\x32\x12.havp.ParkingSpace\x12\x17\n\x0froad_bump_times\x18\x0b \x01(\x05\x12\x1a\n\x12left_path_distance\x18\r \x01(\x02\x12\'\n\x0cwall_element\x18\x0e \x03(\x0b\x32\x11.havp.WallElement\x12\x32\n\x12sign_line_vertical\x18\x0f \x03(\x0b\x32\x16.havp.SignlineVertical\x12\'\n\x0csign_polygon\x18\x10 \x03(\x0b\x32\x11.havp.SignPolygon\"\x9c\x04\n\tSVPCruise\x12 \n\x08location\x18\x01 \x01(\x0b\x32\x0e.havp.Location\x12\x16\n\x03pas\x18\x02 \x01(\x0b\x32\t.havp.PAS\x12\x15\n\rdistance_left\x18\x03 \x01(\x05\x12\x0b\n\x03odm\x18\x04 \x01(\x05\x12\x1b\n\x13\x61round_person_times\x18\x05 \x01(\x05\x12\x1d\n\x15\x61round_obstacle_times\x18\x06 \x01(\x05\x12\x30\n\tobstacles\x18\x07 \x03(\x0b\x32\x1d.havp.ObjectDetectionObstacle\x12(\n\x13planning_trajectory\x18\x08 \x03(\x0b\x32\x0b.havp.Point\x12\x33\n+is_display_the_Upstairs_and_Downstairs_page\x18\t \x01(\x05\x12)\n\rparking_space\x18\n \x03(\x0b\x32\x12.havp.ParkingSpace\x12\x17\n\x0froad_bump_times\x18\x0b \x01(\x05\x12\x1a\n\x12left_path_distance\x18\r \x01(\x02\x12\'\n\x0cwall_element\x18\x0e \x03(\x0b\x32\x11.havp.WallElement\x12\x32\n\x12sign_line_vertical\x18\x0f \x03(\x0b\x32\x16.havp.SignlineVertical\x12\'\n\x0csign_polygon\x18\x10 \x03(\x0b\x32\x11.havp.SignPolygon\"\xe4\x02\n\x04RADS\x12 \n\x08location\x18\x01 \x01(\x0b\x32\x0e.havp.Location\x12\x16\n\x03pas\x18\x02 \x01(\x0b\x32\t.havp.PAS\x12\x15\n\rdistance_left\x18\x03 \x01(\x02\x12(\n\x13planning_trajectory\x18\x04 \x03(\x0b\x32\x0b.havp.Point\x12)\n\rparking_space\x18\x05 \x03(\x0b\x32\x12.havp.ParkingSpace\x12\x30\n\tobstacles\x18\x06 \x03(\x0b\x32\x1d.havp.ObjectDetectionObstacle\x12\'\n\x0cwall_element\x18\x07 \x03(\x0b\x32\x11.havp.WallElement\x12\x32\n\x12sign_line_vertical\x18\x08 \x03(\x0b\x32\x16.havp.SignlineVertical\x12\'\n\x0csign_polygon\x18\t \x03(\x0b\x32\x11.havp.SignPolygon\"r\n\x08HAVPNavi\x12 \n\x08location\x18\x01 \x01(\x0b\x32\x0e.havp.Location\x12\x15\n\rdistance_left\x18\x02 \x01(\x05\x12\x0b\n\x03odm\x18\x03 \x01(\x05\x12 \n\x04tips\x18\x04 \x01(\x0e\x32\x12.havp.HAVPNaviTips\"\x85\x02\n\x0f\x41PACustomizeReq\x12\x32\n\x03req\x18\x01 \x01(\x0e\x32%.havp.APACustomizeReq.ParkingSpaceReq\x12\n\n\x02id\x18\x02 \x01(\x05\x12\t\n\x01x\x18\x03 \x01(\x01\x12\t\n\x01y\x18\x04 \x01(\x01\x12\x0b\n\x03yaw\x18\x05 \x01(\x01\"\x8e\x01\n\x0fParkingSpaceReq\x12\x15\n\x11PARK_SPA_REQ_NONE\x10\x00\x12\x15\n\x11PARK_SPA_REQ_INIT\x10\x01\x12\x17\n\x13PARK_SPA_REQ_MOVING\x10\x02\x12\x16\n\x12PARK_SPA_REQ_MOVED\x10\x03\x12\x1c\n\x18PARK_SPA_REQ_PLAN_STATUS\x10\x04\"\xea\x02\n\x0f\x41PACustomizeRes\x12\x38\n\x06status\x18\x01 \x01(\x0e\x32(.havp.APACustomizeRes.ParkingSpaceStatus\x12\n\n\x02id\x18\x02 \x01(\x05\x12\t\n\x01x\x18\x03 \x01(\x01\x12\t\n\x01y\x18\x04 \x01(\x01\x12\x0b\n\x03yaw\x18\x05 \x01(\x01\x12\x0e\n\x06length\x18\x06 \x01(\x01\x12\r\n\x05width\x18\x07 \x01(\x01\"\xce\x01\n\x12ParkingSpaceStatus\x12\x15\n\x11PARK_SPA_STA_NONE\x10\x00\x12\x15\n\x11PARK_SPA_STA_INIT\x10\x01\x12\x18\n\x14PARK_SPA_STA_STANDBY\x10\x02\x12\x19\n\x15PARK_SPA_STA_PLANNING\x10\x03\x12\x1a\n\x16PARK_SPA_STA_OBJ_BLOCK\x10\x04\x12\x1a\n\x16PARK_SPA_STA_PLAN_FAIL\x10\x05\x12\x1d\n\x19PARK_SPA_STA_PLAN_SUCCESS\x10\x06\x62\x06proto3')
 
 
 
@@ -26,6 +26,10 @@ _HAVPCRUISE = DESCRIPTOR.message_types_by_name['HAVPCruise']
 _SVPCRUISE = DESCRIPTOR.message_types_by_name['SVPCruise']
 _RADS = DESCRIPTOR.message_types_by_name['RADS']
 _HAVPNAVI = DESCRIPTOR.message_types_by_name['HAVPNavi']
+_APACUSTOMIZEREQ = DESCRIPTOR.message_types_by_name['APACustomizeReq']
+_APACUSTOMIZERES = DESCRIPTOR.message_types_by_name['APACustomizeRes']
+_APACUSTOMIZEREQ_PARKINGSPACEREQ = _APACUSTOMIZEREQ.enum_types_by_name['ParkingSpaceReq']
+_APACUSTOMIZERES_PARKINGSPACESTATUS = _APACUSTOMIZERES.enum_types_by_name['ParkingSpaceStatus']
 AVPVehicleData = _reflection.GeneratedProtocolMessageType('AVPVehicleData', (_message.Message,), {
   'DESCRIPTOR' : _AVPVEHICLEDATA,
   '__module__' : 'drapi.gwm.havp.havp_vehicle_pb2'
@@ -75,21 +79,43 @@ HAVPNavi = _reflection.GeneratedProtocolMessageType('HAVPNavi', (_message.Messag
   })
 _sym_db.RegisterMessage(HAVPNavi)
 
+APACustomizeReq = _reflection.GeneratedProtocolMessageType('APACustomizeReq', (_message.Message,), {
+  'DESCRIPTOR' : _APACUSTOMIZEREQ,
+  '__module__' : 'drapi.gwm.havp.havp_vehicle_pb2'
+  # @@protoc_insertion_point(class_scope:havp.APACustomizeReq)
+  })
+_sym_db.RegisterMessage(APACustomizeReq)
+
+APACustomizeRes = _reflection.GeneratedProtocolMessageType('APACustomizeRes', (_message.Message,), {
+  'DESCRIPTOR' : _APACUSTOMIZERES,
+  '__module__' : 'drapi.gwm.havp.havp_vehicle_pb2'
+  # @@protoc_insertion_point(class_scope:havp.APACustomizeRes)
+  })
+_sym_db.RegisterMessage(APACustomizeRes)
+
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _AVPVEHICLEDATA._serialized_start=78
   _AVPVEHICLEDATA._serialized_end=315
   _APA._serialized_start=318
-  _APA._serialized_end=678
-  _HAVPMAPPING._serialized_start=681
-  _HAVPMAPPING._serialized_end=1145
-  _HAVPCRUISE._serialized_start=1148
-  _HAVPCRUISE._serialized_end=1689
-  _SVPCRUISE._serialized_start=1692
-  _SVPCRUISE._serialized_end=2232
-  _RADS._serialized_start=2235
-  _RADS._serialized_end=2591
-  _HAVPNAVI._serialized_start=2593
-  _HAVPNAVI._serialized_end=2707
+  _APA._serialized_end=728
+  _HAVPMAPPING._serialized_start=731
+  _HAVPMAPPING._serialized_end=1195
+  _HAVPCRUISE._serialized_start=1198
+  _HAVPCRUISE._serialized_end=1739
+  _SVPCRUISE._serialized_start=1742
+  _SVPCRUISE._serialized_end=2282
+  _RADS._serialized_start=2285
+  _RADS._serialized_end=2641
+  _HAVPNAVI._serialized_start=2643
+  _HAVPNAVI._serialized_end=2757
+  _APACUSTOMIZEREQ._serialized_start=2760
+  _APACUSTOMIZEREQ._serialized_end=3021
+  _APACUSTOMIZEREQ_PARKINGSPACEREQ._serialized_start=2879
+  _APACUSTOMIZEREQ_PARKINGSPACEREQ._serialized_end=3021
+  _APACUSTOMIZERES._serialized_start=3024
+  _APACUSTOMIZERES._serialized_end=3386
+  _APACUSTOMIZERES_PARKINGSPACESTATUS._serialized_start=3180
+  _APACUSTOMIZERES_PARKINGSPACESTATUS._serialized_end=3386
 # @@protoc_insertion_point(module_scope)

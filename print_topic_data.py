@@ -36,6 +36,8 @@ from safety import safety_analysis_pb2,state_exchange_pb2
 from drapi.gwm.havp import havp_vehicle_pb2,havp_map_pb2
 from smart import smart_business_pb2,smart_command_pb2
 from smart.parking import smart_parking_frame_data_pb2,smart_lp_parking_map_pb2
+from drapi import gl_p177_downstream_chassis_pb2,gwm_tank_downstream_chassis_pb2
+
 
 
 
@@ -106,7 +108,11 @@ topic_proto_map = {
     "/smart/lp_command": smart_command_pb2.SmartCommandReq(),
     "/blc/render_context": render_context_pb2.RenderContext(),
     "/smart/lp_map": smart_lp_parking_map_pb2.MapInfoList(),
-    "/gwm/someip_adapter/slot_id_report":avp_pb2.SlotIDReport()
+    "/gwm/someip_adapter/slot_id_report":avp_pb2.SlotIDReport(),
+    "/gwm/someip_adapter/havp_map_management_set":havp_map_pb2.AVPMapManage(),
+    "/mcu_blc/chassis_detail":gl_p177_downstream_chassis_pb2.UpstreamChassis(),
+    "/mcu_blc/chassis_detail_tank":gwm_tank_downstream_chassis_pb2.UpstreamChassisTank(),
+    "/blc/downstream_chassis_tank":gwm_tank_downstream_chassis_pb2.DownstreamChassisTank()
 }
 
 

@@ -5,5 +5,5 @@ package deeproute.perception;
 
 message RasModelFeature {
   optional bytes data = 1;
+  optional bool for_parking = 2 [default = false];
 }
-

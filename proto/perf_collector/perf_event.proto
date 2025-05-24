@@ -199,6 +199,9 @@ message TaskTrace {
   optional uint64 rss = 21;
   optional uint64 uss = 22;
   optional uint64 pss = 23;
+  optional uint32 anon = 24;
+  optional uint32 file = 25;
+  optional uint32 shmem = 26;
 }
 
 message PartitionTrace {

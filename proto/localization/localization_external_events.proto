@@ -16,6 +16,12 @@ enum MatchingStatus {
   NEAR_DESTINATION = 5;   // GWM SOP+3 deprecated
 }
 
+enum OddRange {
+  PUBLIC_ROAD_TO_ODD_START = 0;
+  IN_ODD = 1;
+  ODD_END_TO_PUBLIC_ROAD = 2;
+}
+
 // report map localization module status event
 message MapMatchingStatusEvent {
   string map_id = 1;
@@ -29,6 +35,9 @@ message MapMatchingStatusEvent {
   bool has_default_parking_space = 7;  // 匹配到的地图中有默认车位则为true，如果没有默认车位则是false
   bool is_expand_map_available = 8; // 匹配到的是否是可扩建
   string map_name_debug = 9; // 用于诊断时地图查找
+  bool has_e2e_out_map_trajectory = 10; // 匹配到的地图是否有泊出路线
+  bool is_near_default_parking_space = 11; // 当前位置是否在默认车位附近
+  OddRange odd_range = 12; // 当前 matched 状态对应的子图 odd 属性
 }
 
 message NavigationStatusEvent {
@@ -61,6 +70,8 @@ message NavigationStatusEvent {
   double lost_distance_with_target_parking_space = 9;
   bool navigation_ready = 10;
   float next_speed_limit_remaining_s = 11;
+  double min_distance_to_map = 12;
+  double left_routing_time = 13;
 }
 
 enum MappingStatus {
@@ -99,6 +110,7 @@ message MappingStatusEvent {
   double reverse_distance = 6;
 
   repeated int32 matched_map_ids = 7;
+  int32 passed_slope_count = 8;                      // for Geely
 }
 
 // report current nearby environment status event
@@ -129,6 +141,16 @@ message EnvironmentStatusEvent {
   repeated EnvironmentInfo environment_info = 1;
 }
 
+message InTrajectoryInfo {
+  uint32 map_id = 1;
+  repeated common.PointLLH public_to_odd_trajectory = 2;
+}
+
+message EndToEndParkingEvent {
+  repeated common.Point2D outdoor_position = 1 [deprecated = true];
+  repeated InTrajectoryInfo in_trajectory_infos = 2;
+}
+
 /***  End of VPA Testing ****/
 
 message LocalizationEvent {  // localization modules send 'LocalizationEvent'
@@ -141,4 +163,5 @@ message LocalizationEvent {  // localization modules send 'LocalizationEvent'
   MappingStatusEvent mapping_status_event = 4;
   EnvironmentStatusEvent environment_status_event = 5;
   NavigationStatusEvent navigation_status_event = 6;
+  EndToEndParkingEvent end_to_end_parking_event = 7;
 }

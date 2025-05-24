@@ -18,6 +18,15 @@ message CarObject {
     SAME = 1;
     OPPOSITE = 2;
   };
+  enum AdbObjectType {
+    UNKNOWN = 0;
+    BUS = 1;
+    TRUCK = 2;
+    BIKE_OR_MOTORBIKE = 3;
+    PEDESTRAIN = 4;
+    CAR = 5;
+    MIXED = 6;
+  };
   optional PerceptionObstacle.Type type = 1;
   optional bool trk_info = 2;
   optional Direction obj_dir = 3;
@@ -27,7 +36,8 @@ message CarObject {
   optional float obj_hozl_ag_spd_le = 7;
   optional float obj_hozl_ag_spd_ri = 8;
   optional float vert_ag = 9;
-  optional int32 percep_obj_id = 10;
+  repeated int32 percep_obj_id = 10;
+  optional AdbObjectType adb_type = 11;
 }
 
 message AdbTrafficCond {

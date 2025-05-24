@@ -154,3 +154,52 @@ python_proto_library(
         ":hut_notify_proto",
     ],
 )
+
+proto_library(
+    name = "calibration_config_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["calibration_config.proto"],
+    deps = [],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "calibration_config_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":calibration_config_proto",
+    ],
+)
+
+python_proto_library(
+    name = "calibration_config_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":calibration_config_proto",
+    ],
+)
+
+proto_library(
+    name = "lane_calib_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["lane_calib.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "lane_calib_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":lane_calib_proto",
+    ],
+)
+
+python_proto_library(
+    name = "lane_calib_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":lane_calib_proto",
+    ],
+)

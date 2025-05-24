@@ -477,6 +477,10 @@ message HAVP_SVPScrnInfoStruct {
     HAVPFUNCTTEXTDISP_QUIT_E2E = 165;
     HAVPFUNCTTEXTDISP_PULLING_OUT_PARKINGLOT = 166;
     HAVPFUNCTTEXTDISP_HEADING_TO_PARKINGSPOT = 167;
+    HAVPFUNCTTEXTDISP_E2E_EXIT = 168;
+    HAVPFUNCTTEXTDISP_E2E_EXIT_TAKE_OVER = 169;
+    HAVPFUNCTTEXTDISP_RESERVEED_170 = 170;
+    HAVPFUNCTTEXTDISP_E2E_FINISH = 171;
   }
   HAVPFunctTextDisp havpfuncttextdisp = 18;
   enum SVPFunctTextDisp {
@@ -608,4 +612,69 @@ message HAVP_SVPScrnInfoStruct {
 // topic: /gwm/someip_adapter/slot_id_report
 message SlotIDReport {
   string id = 1;
+}
+
+// topic: /gwm/apa_parking_speed_set
+// topic: /gwm/someip/apa_parking_speed_sts_report
+message APAParkingSpeedSet {
+  enum APAParkingSpeed {
+    Low = 0;
+    Medium = 1;
+    High = 2;
+  }
+  APAParkingSpeed apa_parking_speed = 1;
+}
+
+// topic: /gwm/pass_side_bsd_disp_ena_req
+message PassSideBsdDispEnaReq {
+  enum PassSideBsdDispEna { Request = 0; }
+  PassSideBsdDispEna pass_side_bsd_disp_ena = 1;
+}
+
+// topic: /gwm/pass_side_bsd_disp_ena_sts_report
+message PassSideBsdDispEnaStsReport {
+  enum PassSideBsdDispEnaSts {
+    OFF = 0;
+    ON = 1;
+  }
+  PassSideBsdDispEnaSts pass_side_bsd_disp_ena_sts = 1;
+}
+
+// topic: /gwm/someip/prkg_posn_request
+// topic: /gwm/someip/prkg_posn_resp
+message PrkgPosnSet {
+  enum PrkgPosn {
+    Poc_center = 0;
+    Poc_left = 1;
+    Poc_right = 2;
+  }
+  PrkgPosn prkg_posn = 1;
+}
+
+// topic: /gwm/someip/prkg_posn_sts_resp
+message PrkgPosnSts {
+  enum PocSts {
+    NotSupported = 0;
+    Supported_unselected = 1;
+    Supported_selected = 2;
+  }
+  PocSts center_sts = 1;
+  PocSts left_sts = 2;
+  PocSts right_sts = 3;
+}
+
+// topic: /gwm/someip/prkg_posn_sts_request
+message PrkgPosnStsReq {
+  enum PocStsReq { Request = 0; }
+  PocStsReq poc_sts_req = 1;
+}
+
+// topic: /gwm/apa_customize_req
+message APACustomizeReq {
+  bytes apa_customprkg_slot_array = 1;
+}
+
+// topic:  /gwm/apa_customize_resp
+message APACustomizeResp {
+  bytes apa_custom_prkg_slot_sts_array = 1;
 }

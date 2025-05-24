@@ -15,9 +15,10 @@ _sym_db = _symbol_database.Default()
 from proto.common import vehicle_signal_pb2 as common_dot_vehicle__signal__pb2
 from proto.common.configs import vehicle_config_pb2 as common_dot_configs_dot_vehicle__config__pb2
 from proto.canbus import chassis_pb2 as canbus_dot_chassis__pb2
+from proto.canbus import chassis_control_interface_type_pb2 as canbus_dot_chassis__control__interface__type__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1d\x63\x61nbus/canbus_blc_state.proto\x12\x10\x64\x65\x65proute.canbus\x1a\x1b\x63ommon/vehicle_signal.proto\x1a#common/configs/vehicle_config.proto\x1a\x14\x63\x61nbus/chassis.proto\"\xc1\x02\n\x0f\x43\x61nStateMachine\x12\x11\n\ttime_meas\x18\x01 \x01(\x03\x12\x15\n\rrolling_count\x18\x02 \x01(\x04\x12\x31\n\tlongitude\x18\x06 \x01(\x0b\x32\x1e.deeproute.canbus.CanStateLong\x12*\n\x03lat\x18\x07 \x01(\x0b\x32\x1d.deeproute.canbus.CanStateLat\x12\x34\n\rapa_can_state\x18\x08 \x01(\x0b\x32\x1d.deeproute.canbus.ApaCanState\x12\x31\n\x0b\x62lc_command\x18\t \x01(\x0b\x32\x1c.deeproute.canbus.BlcCommand\x12<\n\x11special_can_state\x18\x64 \x01(\x0b\x32!.deeproute.canbus.SpecialCanState\"\xc3\x02\n\x15\x43\x61nStateMachineReport\x12\x11\n\ttime_meas\x18\x01 \x01(\x03\x12\x15\n\rrolling_count\x18\x02 \x01(\x04\x12\x39\n\x0blong_report\x18\x06 \x01(\x0b\x32$.deeproute.canbus.CanStateLongReport\x12\x37\n\nlat_report\x18\x07 \x01(\x0b\x32#.deeproute.canbus.CanStateLatReport\x12\x41\n\x14\x61pa_can_state_report\x18\x08 \x01(\x0b\x32#.deeproute.canbus.ApaCanStateReport\x12I\n\x18special_can_state_report\x18\x64 \x01(\x0b\x32\'.deeproute.canbus.SpecialCanStateReport\"\xf3\x01\n\x0c\x43\x61nStateLong\x12\x37\n\x05state\x18\x01 \x01(\x0e\x32(.deeproute.canbus.CanStateLong.StateType\"\xa9\x01\n\tStateType\x12\x0f\n\x0bPASSIVE_OFF\x10\x00\x12\x13\n\x0fPASSIVE_FAILURE\x10\x01\x12\x0b\n\x07PASSIVE\x10\x02\x12\x0b\n\x07STANDBY\x10\x03\x12\n\n\x06\x41\x43TIVE\x10\x04\x12\x13\n\x0f\x41\x43TIVE_OVERRIDE\x10\x05\x12\x15\n\x11\x41\x43TIVE_STANDSTILL\x10\x06\x12\x0e\n\nBRAKE_ONLY\x10\x07\x12\x14\n\x10\x41\x43TIVE_STANDWAIT\x10\x08\"\x9e\x01\n\x0b\x43\x61nStateLat\x12\x36\n\x05state\x18\x01 \x01(\x0e\x32\'.deeproute.canbus.CanStateLat.StateType\"W\n\tStateType\x12\x0f\n\x0bPASSIVE_OFF\x10\x00\x12\x13\n\x0fPASSIVE_FAILURE\x10\x01\x12\x0b\n\x07PASSIVE\x10\x02\x12\x0b\n\x07STANDBY\x10\x03\x12\n\n\x06\x41\x43TIVE\x10\x04\"\x80\x01\n\x12\x43\x61nStateLongReport\x12\x31\n\tlongitude\x18\x01 \x01(\x0b\x32\x1e.deeproute.canbus.CanStateLong\x12\x37\n\x0epassive_reason\x18\x02 \x01(\x0b\x32\x1f.deeproute.canbus.PassiveReason\"x\n\x11\x43\x61nStateLatReport\x12*\n\x03lat\x18\x01 \x01(\x0b\x32\x1d.deeproute.canbus.CanStateLat\x12\x37\n\x0epassive_reason\x18\x02 \x01(\x0b\x32\x1f.deeproute.canbus.PassiveReason\"\x8e\x01\n\x15SpecialCanStateReport\x12<\n\x11special_can_state\x18\x01 \x01(\x0b\x32!.deeproute.canbus.SpecialCanState\x12\x37\n\x0epassive_reason\x18\x02 \x01(\x0b\x32\x1f.deeproute.canbus.PassiveReason\"\xa8\x03\n\x0b\x41paCanState\x12\x39\n\x05state\x18\x01 \x01(\x0e\x32*.deeproute.canbus.ApaCanState.ApaStateType\x12\x41\n\rfunction_type\x18\x02 \x01(\x0e\x32*.deeproute.canbus.ApaCanState.FunctionType\x12\x31\n\tlongitude\x18\x03 \x01(\x0b\x32\x1e.deeproute.canbus.CanStateLong\x12*\n\x03lat\x18\x04 \x01(\x0b\x32\x1d.deeproute.canbus.CanStateLat\"f\n\x0c\x41paStateType\x12\x0f\n\x0bPASSIVE_OFF\x10\x00\x12\x13\n\x0fPASSIVE_FAILURE\x10\x01\x12\x0b\n\x07PASSIVE\x10\x02\x12\x0b\n\x07STANDBY\x10\x03\x12\n\n\x06\x41\x43TIVE\x10\x04\x12\n\n\x06\x46INISH\x10\x05\"T\n\x0c\x46unctionType\x12\x07\n\x03\x41PA\x10\x00\x12\x07\n\x03RPA\x10\x01\x12\x0b\n\x07\x41VP_HIC\x10\x02\x12\x0b\n\x07\x41VP_HOC\x10\x03\x12\x07\n\x03HPA\x10\x04\x12\x0f\n\x0bVPA_PARKOUT\x10\x05\"z\n\x11\x41paCanStateReport\x12,\n\x05state\x18\x01 \x01(\x0b\x32\x1d.deeproute.canbus.ApaCanState\x12\x37\n\x0epassive_reason\x18\x02 \x01(\x0b\x32\x1f.deeproute.canbus.PassiveReason\"\xd8\x01\n\rPassiveReason\x12\x16\n\x0epassive_enable\x18\x01 \x01(\x08\x12-\n\x05\x62rand\x18\x02 \x01(\x0e\x32\x1e.deeproute.common.VehicleBrand\x12\x34\n\x05m5_m7\x18\x03 \x01(\x0b\x32#.deeproute.canbus.M5M7PassiveReasonH\x00\x12\x38\n\x07\x62yd_icv\x18\x04 \x01(\x0b\x32%.deeproute.canbus.BydIcvPassiveReasonH\x00\x42\x10\n\x0epassive_reason\"\xef\x02\n\x11M5M7PassiveReason\x12\x1a\n\x12\x64river_belt_untied\x18\x01 \x01(\x08\x12\x1d\n\x15\x65pb_parked_or_parking\x18\x02 \x01(\x08\x12\x1e\n\x16\x61\x63tual_gear_not_driver\x18\x03 \x01(\x08\x12\x16\n\x0e\x64oor_fl_opened\x18\x04 \x01(\x08\x12\x1b\n\x13\x62rake_pedal_appkied\x18\x05 \x01(\x08\x12\x15\n\rvcu_not_ready\x18\x06 \x01(\x08\x12\x11\n\tvlc_error\x18\x07 \x01(\x08\x12\x11\n\tcdd_error\x18\x08 \x01(\x08\x12\x1c\n\x14\x61\x62normal_apa_request\x18\t \x01(\x08\x12\x18\n\x10\x61pa_low_priority\x18\n \x01(\x08\x12\x16\n\x0esteer_override\x18\x0b \x01(\x08\x12\x13\n\x0b\x65ps_failure\x18\x0c \x01(\x08\x12\x14\n\x0c\x63trl_no_auto\x18\x65 \x01(\x08\x12\x12\n\naeb_active\x18\x66 \x01(\x08\"\xc6\x01\n\x13\x42ydIcvPassiveReason\x12\x15\n\rvcu_not_ready\x18\x01 \x01(\x08\x12\x11\n\tvlc_error\x18\x02 \x01(\x08\x12\x11\n\tcdd_error\x18\x03 \x01(\x08\x12\x13\n\x0b\x65ps_failure\x18\x04 \x01(\x08\x12\x16\n\x0esteer_override\x18\x05 \x01(\x08\x12\x1b\n\x13\x62rake_pedal_appkied\x18\x06 \x01(\x08\x12\x14\n\x0c\x63trl_no_auto\x18\x65 \x01(\x08\x12\x12\n\naeb_active\x18\x66 \x01(\x08\"\xbb\x01\n\x0fSpecialCanState\x12-\n\x05\x62rand\x18\x01 \x01(\x0e\x32\x1e.deeproute.common.VehicleBrand\x12:\n\x0b\x62yd_icv_tjp\x18\x02 \x01(\x0b\x32#.deeproute.canbus.BydIcvTjpCanStateH\x00\x12\x30\n\x03gwm\x18\x03 \x01(\x0b\x32!.deeproute.canbus.GwmStateMachineH\x00\x42\x0b\n\tcan_state\"\xf1\x02\n\x11\x42ydIcvTjpCanState\x12\x42\n\tlongitude\x18\x01 \x01(\x0e\x32/.deeproute.canbus.BydIcvTjpCanState.TjpLongType\x12;\n\x03lat\x18\x02 \x01(\x0e\x32..deeproute.canbus.BydIcvTjpCanState.TjpLatType\"o\n\x0bTjpLongType\x12\x0f\n\x0bPASSIVE_OFF\x10\x00\x12\x0b\n\x07PASSIVE\x10\x01\x12\x0b\n\x07STANDBY\x10\x02\x12\n\n\x06\x41\x43TIVE\x10\x03\x12\x11\n\rPASSIVE_FAULT\x10\x04\x12\x07\n\x03MRC\x10\x05\x12\r\n\tFORBIDDEN\x10\x06\"j\n\nTjpLatType\x12\x13\n\x0fLAT_PASSIVE_OFF\x10\x00\x12\x0f\n\x0bLAT_PASSIVE\x10\x01\x12\x0f\n\x0bLAT_STANDBY\x10\x02\x12\x0e\n\nLAT_ACTIVE\x10\x03\x12\x15\n\x11LAT_PASSIVE_FAULT\x10\x04\"\xaa\x07\n\x0fGwmStateMachine\x12M\n\x11parking_longitude\x18\x01 \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12G\n\x0bparking_lat\x18\x02 \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12M\n\x11\x64riving_longitude\x18\x03 \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12G\n\x0b\x64riving_lat\x18\x04 \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12?\n\x03\x61\x65\x62\x18\x05 \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12?\n\x03\x61\x62p\x18\x06 \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12?\n\x03\x61wb\x18\x07 \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12?\n\x03\x61\x62\x61\x18\x08 \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12?\n\x03\x65\x62\x61\x18\t \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12?\n\x03\x65sa\x18\n \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12?\n\x03meb\x18\x0b \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12@\n\x04rctb\x18\x0c \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\"^\n\x10StateMachineType\x12\x0b\n\x07PASSIVE\x10\x00\x12\x0b\n\x07STANDBY\x10\x01\x12\x0b\n\x07TIMEOUT\x10\x02\x12\r\n\tHANDSHAKE\x10\x03\x12\n\n\x06\x41\x43TIVE\x10\x04\x12\x08\n\x04\x45XIT\x10\x05\"\xff\x01\n\nBlcCommand\x12\x16\n\x0e\x63ontrol_by_blc\x18\x01 \x01(\x08\x12@\n\x10\x62lc_gear_request\x18\x02 \x01(\x0e\x32&.deeproute.canbus.Chassis.GearPosition\x12\x1c\n\x14\x62lc_longitudinal_cmd\x18\x03 \x01(\x01\x12\x43\n\x0f\x62lc_turn_signal\x18\x04 \x01(\x0e\x32*.deeproute.common.VehicleSignal.TurnSignal\x12\x1b\n\x13\x62lc_emergency_light\x18\x05 \x01(\x08\x12\x17\n\x0f\x65mergency_brake\x18\x06 \x01(\x08')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1d\x63\x61nbus/canbus_blc_state.proto\x12\x10\x64\x65\x65proute.canbus\x1a\x1b\x63ommon/vehicle_signal.proto\x1a#common/configs/vehicle_config.proto\x1a\x14\x63\x61nbus/chassis.proto\x1a+canbus/chassis_control_interface_type.proto\"\x99\x03\n\x0f\x43\x61nStateMachine\x12\x11\n\ttime_meas\x18\x01 \x01(\x03\x12\x15\n\rrolling_count\x18\x02 \x01(\x04\x12\x31\n\tlongitude\x18\x06 \x01(\x0b\x32\x1e.deeproute.canbus.CanStateLong\x12*\n\x03lat\x18\x07 \x01(\x0b\x32\x1d.deeproute.canbus.CanStateLat\x12\x34\n\rapa_can_state\x18\x08 \x01(\x0b\x32\x1d.deeproute.canbus.ApaCanState\x12\x31\n\x0b\x62lc_command\x18\t \x01(\x0b\x32\x1c.deeproute.canbus.BlcCommand\x12*\n\x03lss\x18\n \x01(\x0b\x32\x1d.deeproute.canbus.LSSCanState\x12*\n\x03\x65\x32\x65\x18\x0b \x01(\x0b\x32\x1d.deeproute.canbus.CanStateE2e\x12<\n\x11special_can_state\x18\x64 \x01(\x0b\x32!.deeproute.canbus.SpecialCanState\"\xc3\x02\n\x15\x43\x61nStateMachineReport\x12\x11\n\ttime_meas\x18\x01 \x01(\x03\x12\x15\n\rrolling_count\x18\x02 \x01(\x04\x12\x39\n\x0blong_report\x18\x06 \x01(\x0b\x32$.deeproute.canbus.CanStateLongReport\x12\x37\n\nlat_report\x18\x07 \x01(\x0b\x32#.deeproute.canbus.CanStateLatReport\x12\x41\n\x14\x61pa_can_state_report\x18\x08 \x01(\x0b\x32#.deeproute.canbus.ApaCanStateReport\x12I\n\x18special_can_state_report\x18\x64 \x01(\x0b\x32\'.deeproute.canbus.SpecialCanStateReport\"\xf3\x01\n\x0c\x43\x61nStateLong\x12\x37\n\x05state\x18\x01 \x01(\x0e\x32(.deeproute.canbus.CanStateLong.StateType\"\xa9\x01\n\tStateType\x12\x0f\n\x0bPASSIVE_OFF\x10\x00\x12\x13\n\x0fPASSIVE_FAILURE\x10\x01\x12\x0b\n\x07PASSIVE\x10\x02\x12\x0b\n\x07STANDBY\x10\x03\x12\n\n\x06\x41\x43TIVE\x10\x04\x12\x13\n\x0f\x41\x43TIVE_OVERRIDE\x10\x05\x12\x15\n\x11\x41\x43TIVE_STANDSTILL\x10\x06\x12\x0e\n\nBRAKE_ONLY\x10\x07\x12\x14\n\x10\x41\x43TIVE_STANDWAIT\x10\x08\"\x9e\x01\n\x0b\x43\x61nStateLat\x12\x36\n\x05state\x18\x01 \x01(\x0e\x32\'.deeproute.canbus.CanStateLat.StateType\"W\n\tStateType\x12\x0f\n\x0bPASSIVE_OFF\x10\x00\x12\x13\n\x0fPASSIVE_FAILURE\x10\x01\x12\x0b\n\x07PASSIVE\x10\x02\x12\x0b\n\x07STANDBY\x10\x03\x12\n\n\x06\x41\x43TIVE\x10\x04\"\x80\x01\n\x12\x43\x61nStateLongReport\x12\x31\n\tlongitude\x18\x01 \x01(\x0b\x32\x1e.deeproute.canbus.CanStateLong\x12\x37\n\x0epassive_reason\x18\x02 \x01(\x0b\x32\x1f.deeproute.canbus.PassiveReason\"x\n\x11\x43\x61nStateLatReport\x12*\n\x03lat\x18\x01 \x01(\x0b\x32\x1d.deeproute.canbus.CanStateLat\x12\x37\n\x0epassive_reason\x18\x02 \x01(\x0b\x32\x1f.deeproute.canbus.PassiveReason\"\x8e\x01\n\x15SpecialCanStateReport\x12<\n\x11special_can_state\x18\x01 \x01(\x0b\x32!.deeproute.canbus.SpecialCanState\x12\x37\n\x0epassive_reason\x18\x02 \x01(\x0b\x32\x1f.deeproute.canbus.PassiveReason\"\xa8\x03\n\x0b\x41paCanState\x12\x39\n\x05state\x18\x01 \x01(\x0e\x32*.deeproute.canbus.ApaCanState.ApaStateType\x12\x41\n\rfunction_type\x18\x02 \x01(\x0e\x32*.deeproute.canbus.ApaCanState.FunctionType\x12\x31\n\tlongitude\x18\x03 \x01(\x0b\x32\x1e.deeproute.canbus.CanStateLong\x12*\n\x03lat\x18\x04 \x01(\x0b\x32\x1d.deeproute.canbus.CanStateLat\"f\n\x0c\x41paStateType\x12\x0f\n\x0bPASSIVE_OFF\x10\x00\x12\x13\n\x0fPASSIVE_FAILURE\x10\x01\x12\x0b\n\x07PASSIVE\x10\x02\x12\x0b\n\x07STANDBY\x10\x03\x12\n\n\x06\x41\x43TIVE\x10\x04\x12\n\n\x06\x46INISH\x10\x05\"T\n\x0c\x46unctionType\x12\x07\n\x03\x41PA\x10\x00\x12\x07\n\x03RPA\x10\x01\x12\x0b\n\x07\x41VP_HIC\x10\x02\x12\x0b\n\x07\x41VP_HOC\x10\x03\x12\x07\n\x03HPA\x10\x04\x12\x0f\n\x0bVPA_PARKOUT\x10\x05\"\xf7\x02\n\x0bLSSCanState\x12\x34\n\x03rdp\x18\x01 \x01(\x0e\x32\'.deeproute.canbus.LSSCanState.StateType\x12>\n\x03\x65lk\x18\x02 \x01(\x0e\x32\x31.deeproute.canbus.LSSCanState.ELKStateMachineType\"W\n\tStateType\x12\x0b\n\x07PASSIVE\x10\x00\x12\x0b\n\x07STANDBY\x10\x01\x12\x0b\n\x07TIMEOUT\x10\x02\x12\r\n\tHANDSHAKE\x10\x03\x12\n\n\x06\x41\x43TIVE\x10\x04\x12\x08\n\x04\x45XIT\x10\x05\"\x98\x01\n\x13\x45LKStateMachineType\x12\x0f\n\x0b\x45LK_PASSIVE\x10\x00\x12\x10\n\x0c\x45LK_S_ACTIVE\x10\x01\x12\x11\n\rELK_RE_ACTIVE\x10\x02\x12\x11\n\rELK_GO_ACTIVE\x10\x03\x12\x12\n\x0e\x45LK_ICS_ACTIVE\x10\x04\x12\x10\n\x0c\x45LK_O_ACTIVE\x10\x05\x12\x12\n\x0e\x45LK_VRU_ACTIVE\x10\x06\"\x9e\x01\n\x0b\x43\x61nStateE2e\x12\x36\n\x05state\x18\x01 \x01(\x0e\x32\'.deeproute.canbus.CanStateE2e.StateType\"W\n\tStateType\x12\x0f\n\x0bPASSIVE_OFF\x10\x00\x12\x13\n\x0fPASSIVE_FAILURE\x10\x01\x12\x0b\n\x07PASSIVE\x10\x02\x12\x0b\n\x07STANDBY\x10\x03\x12\n\n\x06\x41\x43TIVE\x10\x04\"z\n\x11\x41paCanStateReport\x12,\n\x05state\x18\x01 \x01(\x0b\x32\x1d.deeproute.canbus.ApaCanState\x12\x37\n\x0epassive_reason\x18\x02 \x01(\x0b\x32\x1f.deeproute.canbus.PassiveReason\"\xd8\x01\n\rPassiveReason\x12\x16\n\x0epassive_enable\x18\x01 \x01(\x08\x12-\n\x05\x62rand\x18\x02 \x01(\x0e\x32\x1e.deeproute.common.VehicleBrand\x12\x34\n\x05m5_m7\x18\x03 \x01(\x0b\x32#.deeproute.canbus.M5M7PassiveReasonH\x00\x12\x38\n\x07\x62yd_icv\x18\x04 \x01(\x0b\x32%.deeproute.canbus.BydIcvPassiveReasonH\x00\x42\x10\n\x0epassive_reason\"\xef\x02\n\x11M5M7PassiveReason\x12\x1a\n\x12\x64river_belt_untied\x18\x01 \x01(\x08\x12\x1d\n\x15\x65pb_parked_or_parking\x18\x02 \x01(\x08\x12\x1e\n\x16\x61\x63tual_gear_not_driver\x18\x03 \x01(\x08\x12\x16\n\x0e\x64oor_fl_opened\x18\x04 \x01(\x08\x12\x1b\n\x13\x62rake_pedal_appkied\x18\x05 \x01(\x08\x12\x15\n\rvcu_not_ready\x18\x06 \x01(\x08\x12\x11\n\tvlc_error\x18\x07 \x01(\x08\x12\x11\n\tcdd_error\x18\x08 \x01(\x08\x12\x1c\n\x14\x61\x62normal_apa_request\x18\t \x01(\x08\x12\x18\n\x10\x61pa_low_priority\x18\n \x01(\x08\x12\x16\n\x0esteer_override\x18\x0b \x01(\x08\x12\x13\n\x0b\x65ps_failure\x18\x0c \x01(\x08\x12\x14\n\x0c\x63trl_no_auto\x18\x65 \x01(\x08\x12\x12\n\naeb_active\x18\x66 \x01(\x08\"\xc6\x01\n\x13\x42ydIcvPassiveReason\x12\x15\n\rvcu_not_ready\x18\x01 \x01(\x08\x12\x11\n\tvlc_error\x18\x02 \x01(\x08\x12\x11\n\tcdd_error\x18\x03 \x01(\x08\x12\x13\n\x0b\x65ps_failure\x18\x04 \x01(\x08\x12\x16\n\x0esteer_override\x18\x05 \x01(\x08\x12\x1b\n\x13\x62rake_pedal_appkied\x18\x06 \x01(\x08\x12\x14\n\x0c\x63trl_no_auto\x18\x65 \x01(\x08\x12\x12\n\naeb_active\x18\x66 \x01(\x08\"\xbb\x01\n\x0fSpecialCanState\x12-\n\x05\x62rand\x18\x01 \x01(\x0e\x32\x1e.deeproute.common.VehicleBrand\x12:\n\x0b\x62yd_icv_tjp\x18\x02 \x01(\x0b\x32#.deeproute.canbus.BydIcvTjpCanStateH\x00\x12\x30\n\x03gwm\x18\x03 \x01(\x0b\x32!.deeproute.canbus.GwmStateMachineH\x00\x42\x0b\n\tcan_state\"\xf1\x02\n\x11\x42ydIcvTjpCanState\x12\x42\n\tlongitude\x18\x01 \x01(\x0e\x32/.deeproute.canbus.BydIcvTjpCanState.TjpLongType\x12;\n\x03lat\x18\x02 \x01(\x0e\x32..deeproute.canbus.BydIcvTjpCanState.TjpLatType\"o\n\x0bTjpLongType\x12\x0f\n\x0bPASSIVE_OFF\x10\x00\x12\x0b\n\x07PASSIVE\x10\x01\x12\x0b\n\x07STANDBY\x10\x02\x12\n\n\x06\x41\x43TIVE\x10\x03\x12\x11\n\rPASSIVE_FAULT\x10\x04\x12\x07\n\x03MRC\x10\x05\x12\r\n\tFORBIDDEN\x10\x06\"j\n\nTjpLatType\x12\x13\n\x0fLAT_PASSIVE_OFF\x10\x00\x12\x0f\n\x0bLAT_PASSIVE\x10\x01\x12\x0f\n\x0bLAT_STANDBY\x10\x02\x12\x0e\n\nLAT_ACTIVE\x10\x03\x12\x15\n\x11LAT_PASSIVE_FAULT\x10\x04\"\xaa\x07\n\x0fGwmStateMachine\x12M\n\x11parking_longitude\x18\x01 \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12G\n\x0bparking_lat\x18\x02 \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12M\n\x11\x64riving_longitude\x18\x03 \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12G\n\x0b\x64riving_lat\x18\x04 \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12?\n\x03\x61\x65\x62\x18\x05 \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12?\n\x03\x61\x62p\x18\x06 \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12?\n\x03\x61wb\x18\x07 \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12?\n\x03\x61\x62\x61\x18\x08 \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12?\n\x03\x65\x62\x61\x18\t \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12?\n\x03\x65sa\x18\n \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12?\n\x03meb\x18\x0b \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\x12@\n\x04rctb\x18\x0c \x01(\x0e\x32\x32.deeproute.canbus.GwmStateMachine.StateMachineType\"^\n\x10StateMachineType\x12\x0b\n\x07PASSIVE\x10\x00\x12\x0b\n\x07STANDBY\x10\x01\x12\x0b\n\x07TIMEOUT\x10\x02\x12\r\n\tHANDSHAKE\x10\x03\x12\n\n\x06\x41\x43TIVE\x10\x04\x12\x08\n\x04\x45XIT\x10\x05\"\xdc\x05\n\nBlcCommand\x12\x16\n\x0e\x63ontrol_by_blc\x18\x01 \x01(\x08\x12@\n\x10\x62lc_gear_request\x18\x02 \x01(\x0e\x32&.deeproute.canbus.Chassis.GearPosition\x12\x1e\n\x16\x62lc_gear_request_valid\x18\x03 \x01(\x08\x12\x1c\n\x14\x62lc_longitudinal_cmd\x18\x04 \x01(\x01\x12\"\n\x1a\x62lc_longitudinal_cmd_valid\x18\x05 \x01(\x08\x12\x43\n\x0f\x62lc_turn_signal\x18\x06 \x01(\x0e\x32*.deeproute.common.VehicleSignal.TurnSignal\x12\x1d\n\x15\x62lc_turn_signal_valid\x18\x07 \x01(\x08\x12\x1b\n\x13\x62lc_emergency_light\x18\x08 \x01(\x08\x12\x17\n\x0f\x65mergency_brake\x18\t \x01(\x08\x12\x31\n\x0b\x65pb_request\x18\n \x01(\x0b\x32\x1c.deeproute.canbus.EpbRequest\x12\x19\n\x11\x65pb_request_valid\x18\x0b \x01(\x08\x12\x14\n\x0c\x62rake_torque\x18\x0c \x01(\x01\x12\x1a\n\x12\x62rake_torque_valid\x18\r \x01(\x08\x12\x38\n\x07\x61vh_req\x18\x0e \x01(\x0e\x32\'.deeproute.canbus.BlcCommand.AvhRequest\x12\x15\n\ravh_req_valid\x18\x0f \x01(\x08\x12\x17\n\x0fthrottle_torque\x18\x10 \x01(\x01\x12\x1d\n\x15throttle_torque_valid\x18\x11 \x01(\x08\x12\x10\n\x08low_beam\x18\x12 \x01(\x08\x12\x11\n\thigh_beam\x18\x13 \x01(\x08\"J\n\nAvhRequest\x12\x0e\n\nNO_REQUEST\x10\x00\x12\x0b\n\x07\x41VH_OFF\x10\x01\x12\x0e\n\nAVH_ACTIVE\x10\x02\x12\x0f\n\x0b\x41VH_STANDBY\x10\x03')
 
 
 
@@ -29,6 +30,8 @@ _CANSTATELONGREPORT = DESCRIPTOR.message_types_by_name['CanStateLongReport']
 _CANSTATELATREPORT = DESCRIPTOR.message_types_by_name['CanStateLatReport']
 _SPECIALCANSTATEREPORT = DESCRIPTOR.message_types_by_name['SpecialCanStateReport']
 _APACANSTATE = DESCRIPTOR.message_types_by_name['ApaCanState']
+_LSSCANSTATE = DESCRIPTOR.message_types_by_name['LSSCanState']
+_CANSTATEE2E = DESCRIPTOR.message_types_by_name['CanStateE2e']
 _APACANSTATEREPORT = DESCRIPTOR.message_types_by_name['ApaCanStateReport']
 _PASSIVEREASON = DESCRIPTOR.message_types_by_name['PassiveReason']
 _M5M7PASSIVEREASON = DESCRIPTOR.message_types_by_name['M5M7PassiveReason']
@@ -41,9 +44,13 @@ _CANSTATELONG_STATETYPE = _CANSTATELONG.enum_types_by_name['StateType']
 _CANSTATELAT_STATETYPE = _CANSTATELAT.enum_types_by_name['StateType']
 _APACANSTATE_APASTATETYPE = _APACANSTATE.enum_types_by_name['ApaStateType']
 _APACANSTATE_FUNCTIONTYPE = _APACANSTATE.enum_types_by_name['FunctionType']
+_LSSCANSTATE_STATETYPE = _LSSCANSTATE.enum_types_by_name['StateType']
+_LSSCANSTATE_ELKSTATEMACHINETYPE = _LSSCANSTATE.enum_types_by_name['ELKStateMachineType']
+_CANSTATEE2E_STATETYPE = _CANSTATEE2E.enum_types_by_name['StateType']
 _BYDICVTJPCANSTATE_TJPLONGTYPE = _BYDICVTJPCANSTATE.enum_types_by_name['TjpLongType']
 _BYDICVTJPCANSTATE_TJPLATTYPE = _BYDICVTJPCANSTATE.enum_types_by_name['TjpLatType']
 _GWMSTATEMACHINE_STATEMACHINETYPE = _GWMSTATEMACHINE.enum_types_by_name['StateMachineType']
+_BLCCOMMAND_AVHREQUEST = _BLCCOMMAND.enum_types_by_name['AvhRequest']
 CanStateMachine = _reflection.GeneratedProtocolMessageType('CanStateMachine', (_message.Message,), {
   'DESCRIPTOR' : _CANSTATEMACHINE,
   '__module__' : 'canbus.canbus_blc_state_pb2'
@@ -99,6 +106,20 @@ ApaCanState = _reflection.GeneratedProtocolMessageType('ApaCanState', (_message.
   # @@protoc_insertion_point(class_scope:deeproute.canbus.ApaCanState)
   })
 _sym_db.RegisterMessage(ApaCanState)
+
+LSSCanState = _reflection.GeneratedProtocolMessageType('LSSCanState', (_message.Message,), {
+  'DESCRIPTOR' : _LSSCANSTATE,
+  '__module__' : 'canbus.canbus_blc_state_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.canbus.LSSCanState)
+  })
+_sym_db.RegisterMessage(LSSCanState)
+
+CanStateE2e = _reflection.GeneratedProtocolMessageType('CanStateE2e', (_message.Message,), {
+  'DESCRIPTOR' : _CANSTATEE2E,
+  '__module__' : 'canbus.canbus_blc_state_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.canbus.CanStateE2e)
+  })
+_sym_db.RegisterMessage(CanStateE2e)
 
 ApaCanStateReport = _reflection.GeneratedProtocolMessageType('ApaCanStateReport', (_message.Message,), {
   'DESCRIPTOR' : _APACANSTATEREPORT,
@@ -159,50 +180,62 @@ _sym_db.RegisterMessage(BlcCommand)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _CANSTATEMACHINE._serialized_start=140
-  _CANSTATEMACHINE._serialized_end=461
-  _CANSTATEMACHINEREPORT._serialized_start=464
-  _CANSTATEMACHINEREPORT._serialized_end=787
-  _CANSTATELONG._serialized_start=790
-  _CANSTATELONG._serialized_end=1033
-  _CANSTATELONG_STATETYPE._serialized_start=864
-  _CANSTATELONG_STATETYPE._serialized_end=1033
-  _CANSTATELAT._serialized_start=1036
-  _CANSTATELAT._serialized_end=1194
-  _CANSTATELAT_STATETYPE._serialized_start=864
-  _CANSTATELAT_STATETYPE._serialized_end=951
-  _CANSTATELONGREPORT._serialized_start=1197
-  _CANSTATELONGREPORT._serialized_end=1325
-  _CANSTATELATREPORT._serialized_start=1327
-  _CANSTATELATREPORT._serialized_end=1447
-  _SPECIALCANSTATEREPORT._serialized_start=1450
-  _SPECIALCANSTATEREPORT._serialized_end=1592
-  _APACANSTATE._serialized_start=1595
-  _APACANSTATE._serialized_end=2019
-  _APACANSTATE_APASTATETYPE._serialized_start=1831
-  _APACANSTATE_APASTATETYPE._serialized_end=1933
-  _APACANSTATE_FUNCTIONTYPE._serialized_start=1935
-  _APACANSTATE_FUNCTIONTYPE._serialized_end=2019
-  _APACANSTATEREPORT._serialized_start=2021
-  _APACANSTATEREPORT._serialized_end=2143
-  _PASSIVEREASON._serialized_start=2146
-  _PASSIVEREASON._serialized_end=2362
-  _M5M7PASSIVEREASON._serialized_start=2365
-  _M5M7PASSIVEREASON._serialized_end=2732
-  _BYDICVPASSIVEREASON._serialized_start=2735
-  _BYDICVPASSIVEREASON._serialized_end=2933
-  _SPECIALCANSTATE._serialized_start=2936
-  _SPECIALCANSTATE._serialized_end=3123
-  _BYDICVTJPCANSTATE._serialized_start=3126
-  _BYDICVTJPCANSTATE._serialized_end=3495
-  _BYDICVTJPCANSTATE_TJPLONGTYPE._serialized_start=3276
-  _BYDICVTJPCANSTATE_TJPLONGTYPE._serialized_end=3387
-  _BYDICVTJPCANSTATE_TJPLATTYPE._serialized_start=3389
-  _BYDICVTJPCANSTATE_TJPLATTYPE._serialized_end=3495
-  _GWMSTATEMACHINE._serialized_start=3498
-  _GWMSTATEMACHINE._serialized_end=4436
-  _GWMSTATEMACHINE_STATEMACHINETYPE._serialized_start=4342
-  _GWMSTATEMACHINE_STATEMACHINETYPE._serialized_end=4436
-  _BLCCOMMAND._serialized_start=4439
-  _BLCCOMMAND._serialized_end=4694
+  _CANSTATEMACHINE._serialized_start=185
+  _CANSTATEMACHINE._serialized_end=594
+  _CANSTATEMACHINEREPORT._serialized_start=597
+  _CANSTATEMACHINEREPORT._serialized_end=920
+  _CANSTATELONG._serialized_start=923
+  _CANSTATELONG._serialized_end=1166
+  _CANSTATELONG_STATETYPE._serialized_start=997
+  _CANSTATELONG_STATETYPE._serialized_end=1166
+  _CANSTATELAT._serialized_start=1169
+  _CANSTATELAT._serialized_end=1327
+  _CANSTATELAT_STATETYPE._serialized_start=997
+  _CANSTATELAT_STATETYPE._serialized_end=1084
+  _CANSTATELONGREPORT._serialized_start=1330
+  _CANSTATELONGREPORT._serialized_end=1458
+  _CANSTATELATREPORT._serialized_start=1460
+  _CANSTATELATREPORT._serialized_end=1580
+  _SPECIALCANSTATEREPORT._serialized_start=1583
+  _SPECIALCANSTATEREPORT._serialized_end=1725
+  _APACANSTATE._serialized_start=1728
+  _APACANSTATE._serialized_end=2152
+  _APACANSTATE_APASTATETYPE._serialized_start=1964
+  _APACANSTATE_APASTATETYPE._serialized_end=2066
+  _APACANSTATE_FUNCTIONTYPE._serialized_start=2068
+  _APACANSTATE_FUNCTIONTYPE._serialized_end=2152
+  _LSSCANSTATE._serialized_start=2155
+  _LSSCANSTATE._serialized_end=2530
+  _LSSCANSTATE_STATETYPE._serialized_start=2288
+  _LSSCANSTATE_STATETYPE._serialized_end=2375
+  _LSSCANSTATE_ELKSTATEMACHINETYPE._serialized_start=2378
+  _LSSCANSTATE_ELKSTATEMACHINETYPE._serialized_end=2530
+  _CANSTATEE2E._serialized_start=2533
+  _CANSTATEE2E._serialized_end=2691
+  _CANSTATEE2E_STATETYPE._serialized_start=997
+  _CANSTATEE2E_STATETYPE._serialized_end=1084
+  _APACANSTATEREPORT._serialized_start=2693
+  _APACANSTATEREPORT._serialized_end=2815
+  _PASSIVEREASON._serialized_start=2818
+  _PASSIVEREASON._serialized_end=3034
+  _M5M7PASSIVEREASON._serialized_start=3037
+  _M5M7PASSIVEREASON._serialized_end=3404
+  _BYDICVPASSIVEREASON._serialized_start=3407
+  _BYDICVPASSIVEREASON._serialized_end=3605
+  _SPECIALCANSTATE._serialized_start=3608
+  _SPECIALCANSTATE._serialized_end=3795
+  _BYDICVTJPCANSTATE._serialized_start=3798
+  _BYDICVTJPCANSTATE._serialized_end=4167
+  _BYDICVTJPCANSTATE_TJPLONGTYPE._serialized_start=3948
+  _BYDICVTJPCANSTATE_TJPLONGTYPE._serialized_end=4059
+  _BYDICVTJPCANSTATE_TJPLATTYPE._serialized_start=4061
+  _BYDICVTJPCANSTATE_TJPLATTYPE._serialized_end=4167
+  _GWMSTATEMACHINE._serialized_start=4170
+  _GWMSTATEMACHINE._serialized_end=5108
+  _GWMSTATEMACHINE_STATEMACHINETYPE._serialized_start=5014
+  _GWMSTATEMACHINE_STATEMACHINETYPE._serialized_end=5108
+  _BLCCOMMAND._serialized_start=5111
+  _BLCCOMMAND._serialized_end=5843
+  _BLCCOMMAND_AVHREQUEST._serialized_start=5769
+  _BLCCOMMAND_AVHREQUEST._serialized_end=5843
 # @@protoc_insertion_point(module_scope)

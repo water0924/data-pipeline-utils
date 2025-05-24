@@ -52,6 +52,17 @@ message CrossTrafficLightInfos {
   optional uint64 loc_measurement_time = 2;
 }
 
+message CrossingDepthInfo {
+  message DistanceInfo {
+    optional int32 link_index = 1;
+    optional uint64 link_id = 2;
+    // meters
+    optional double distance = 3;
+  }
+  optional DistanceInfo distance_to_crossing_start = 1;
+  optional DistanceInfo distance_to_crossing_end = 2;
+}
+
 message SDLevelMapInfo {
   enum SdInfoType {
     NAVIGATION = 0;
@@ -70,6 +81,9 @@ message SDLevelMapInfo {
 
   // Traffic light info for planning.
   optional CrossTrafficLightInfos sd_road_info = 4;
+
+  // Next crossing depth info
+  optional CrossingDepthInfo next_crossing_depth_info = 5;
 }
 
 message DeeprouteHDLevelMapInfo {

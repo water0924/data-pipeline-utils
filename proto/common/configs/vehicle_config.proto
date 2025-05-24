@@ -64,6 +64,8 @@ enum VehicleBrand {
   GWM_P03 = 34;
   GL_P177 = 35;
   GWM_DE09 = 36;
+  GWM_P02 = 37;
+  GWM_TANK = 38;
 }
 
 message VehicleID {
@@ -154,6 +156,13 @@ message VehicleParam {
   optional SteerRatioTable steer_ratio_table = 41;
   optional SteerRatioTable reverse_steer_ratio_table = 42;
   optional double mirror_width = 43 [default = 0.0];
+  optional double folded_mirror_width = 44 [default = 0.0];
+  optional double mirror_height = 45 [default = 0.0];
+  optional double distance_mirror_to_center = 46 [default = 0.0];
+  optional double front_corner_radius = 47 [default = 0.0];
+  optional double rear_corner_radius = 48 [default = 0.0];
+  optional double front_chassis_height = 49 [default = 0.0];
+  optional double rear_chassis_height = 50 [default = 0.0];
 }
 
 message SensorsParameters {

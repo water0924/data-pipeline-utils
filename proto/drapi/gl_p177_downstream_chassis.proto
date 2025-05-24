@@ -36,6 +36,18 @@ message GLP177DownstreamChassis {
   optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR01_1C0 adcu_zcucanfd1_fr01_1c0=25;
   optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR18_310 paszcucanfd1_fr18_310=26;
   optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR21_1C6 adcu_zcucanfd1_fr21_1c6 = 27;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR14_220 adcu_zcucanfd1_fr14_220 = 28;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR23_116 adcu_zcucanfd1_fr23_116 = 29;
+  optional deeproute.canbus.gl.p177.DHU_ZCUCANFD1_FR02_307 dhu_zcucanfd1_fr02_307 = 30;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR22_1CA adcu_zcucanfd1_fr22_1ca = 31;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR12_370 adcu_zcucanfd1_fr12_370 = 32;
+  optional deeproute.canbus.gl.p177.PSCM_CHAS1_FR01_F6 pscm_chas1_fr01_f6 = 33;
+  optional deeproute.canbus.gl.p177.ASDM_CHAS1_FR10_54 asdm_chas1_fr10_54 = 34;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR20_30A adcu_zcucanfd1_fr20_30a = 35;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR05_480 adcu_zcucanfd1_fr05_480 = 36;
+  optional deeproute.canbus.gl.p177.ASDM_CHAS1_FR01_93 asdm_chas1_fr01_93 = 37;
+  optional deeproute.canbus.gl.p177.DHU_ZCUCANFD1_FR14_1F8 dhu_zcucanfd1_fr14_1f8 = 38;
+  optional deeproute.canbus.gl.p177.ZCUD_ZCUCANFD1_FR07_1C3 zcud_zcucanfd1_fr07_1c3 = 39;
 }
 
 // topic: /mcu_blc/chassis_detail

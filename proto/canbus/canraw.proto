@@ -19,7 +19,7 @@ message CanRawArray {
   optional int64 timestamp_pub = 1; // us
   optional int64 count = 2;
   optional int32 len = 3;  // CanRaw actual quantity.
-  //@C_Mark@36@;
+  //@C_Mark@40@;
   repeated CanRaw can_raw = 4;
 }
 
@@ -27,7 +27,7 @@ message CanRawArray2K {
   optional int64 timestamp_pub = 1; // us
   optional int64 count = 2;
   optional int32 len = 3;  // CanRaw actual quantity.
-  //@C_Mark@18@;
+  //@C_Mark@20@;
   repeated CanRaw can_raw = 4;
 }
 

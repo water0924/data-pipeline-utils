@@ -18,6 +18,7 @@ proto_library(
         "//proto/routing:cloud_task_proto",
         "//proto/odd:odd_proto",
         "//proto/map:map_common_proto",
+        "//proto/map:common_type_proto",
     ],
     strip_import_prefix = "/proto/",
 )

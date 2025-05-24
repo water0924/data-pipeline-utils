@@ -62,6 +62,7 @@ proto_library(
     srcs = ["pointcloud2.proto"],
     deps = [
         "//proto/common:header_proto",
+        "//proto/drivers/lidar:config_proto",
     ],
     strip_import_prefix = "/proto/",
 )

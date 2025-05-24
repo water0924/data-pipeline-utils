@@ -79,6 +79,8 @@ message ReverseTrackingRequest {
   optional bool directly_quit_longitudinal = 7 [default = false];
   optional CancelParkingType cancel_parking_type = 8;
   optional deeproute.canbus.Chassis.DrivingMode driving_mode = 9;
+  optional deeproute.canbus.Chassis.GearPosition target_gear = 10
+      [default = PARK];
 }
 
 // report to dtu with planner/event when reverse tracking active
@@ -87,6 +89,8 @@ message ReverseTrackingInfo {
   optional double remaning_distance_to_start_point =
       2;  // has value only when active
   optional deeproute.common.Point3D start_point = 3;
+  optional bool is_using_lsda_path = 4;
+  optional double explored_dist = 5;
 }
 
 enum ParkingRequestReason {
@@ -109,6 +113,20 @@ enum CancelParkingType {
   EMERGENCY_BRAKE = 2;
 }
 
+// 泊入偏好方式
+enum ParkingPreferenceMod {
+  APA_TO_CENTER = 0;
+  APA_TO_LEFT = 1;
+  APA_TO_RIGHT = 2;
+}
+
+// 泊入速度
+enum APAParkingSpeed {
+  Low = 0;
+  Medium = 1;
+  High = 2;
+}
+
 message ParkingRequest {
   optional int32 parking_space_id = 1;
   optional deeproute.dtu.command.Point parking_space_direct_point = 2;
@@ -118,6 +136,9 @@ message ParkingRequest {
   optional ParkingRequestReason request_reason = 6;
   optional ParkingMod parking_mod = 7;
   optional deeproute.canbus.Chassis.DrivingMode driving_mode = 8;
+  optional ParkingPreferenceMod parking_preference_mod = 9;
+  optional APAParkingSpeed apa_parking_speed = 10;
+  optional bool is_user_defined_park = 11;
 }
 
 message PrePlanParkingReuqest {
@@ -163,6 +184,7 @@ message OutParkingRequest {
   optional APAOutParkingDirection apa_out_parking_direction = 3;
   optional ParkingRequestReason request_reason = 4;
   optional deeproute.canbus.Chassis.DrivingMode driving_mode = 5;
+  optional APAParkingSpeed apa_parking_speed = 6;
 }
 
 message DirectInOutParkingRequest {
@@ -179,7 +201,7 @@ message DirectInOutParkingRequest {
 }
 
 message SuggestOutParkingRequest {
-  optional OutParkingScenario outparking_type  = 1;
+  optional OutParkingScenario outparking_type = 1;
 }
 
 message TrafficRuleRequest {
@@ -218,11 +240,16 @@ message VpaDrivingInfo {
   optional int32 nudge_vehicle_times = 3 [default = 0];
 }
 
+message SingleStagePath {
+  repeated deeproute.common.Point3D trajectory_points = 1;
+}
+
 message PrePlanParkingResult {
   optional int32 parking_space_id = 1;
   repeated deeproute.common.Point3D trajectory_points =
       2;  // 后轴中心为起始点的轨迹线
   optional int32 planning_request_id = 3;
+  repeated SingleStagePath all_stage_path = 4;
 }
 
 message PrePlanParkingModeResult {
@@ -241,6 +268,7 @@ message DirecetInOutAvailableDirectionInfo {
   optional bool front_ignore_side_available = 2;
   optional bool rear_available = 3;
   optional bool rear_ignore_side_available = 4;
+  optional double current_path_remaining_dist = 5;
 }
 
 message DestChangeRequest {
@@ -292,6 +320,8 @@ message AutoFeatureRequest {
     APA = 8;
     ELK = 9;
     TJP = 10;
+    VPA = 11;
+    MNCA = 12;
   }
 
   enum Mode {
@@ -318,6 +348,8 @@ message CancelParkingRequest {
   optional bool directly_quit_lateral = 3 [default = false];
   optional bool directly_quit_longitudinal = 4 [default = false];
   optional CancelParkingType cancel_parking_type = 5;
+  optional deeproute.canbus.Chassis.GearPosition target_gear = 6
+      [default = PARK];
 }
 
 message VpaDrivingRequest {
@@ -349,6 +381,13 @@ message SingleLaneFeatureSwitch {
   optional SwitchStatus enable_model_speed_limit = 2;
   optional SwitchStatus disable_ilqr_lon_safety_cost = 3 [default = NOT_SET];
   optional SwitchStatus disable_ilqr_lat_safety_cost = 4 [default = NOT_SET];
+  optional SwitchStatus ica_enable_local_routing_speed_limit = 5
+      [default = OFF];
+}
+
+message PureModelFeatureSwitch {
+  optional SwitchStatus enable_pure_model_path = 1;
+  optional SwitchStatus enable_pure_model_speed = 2;
 }
 
 message AuxiliaryModeRequest {
@@ -357,9 +396,19 @@ message AuxiliaryModeRequest {
     ON = 1;
     OFF = 2;
   }
+
+  enum DrivingStyle {
+    NOT_SET = 0;
+    STANDARD = 1;
+    CONSERVATIVE = 2;
+    AGGRESSIVE = 3;
+  }
+
   optional Status demo_mode = 1;
   optional LaneChangeFeatureSwitch lane_change_feature_switch = 2;
   optional SingleLaneFeatureSwitch single_lane_feature_switch = 3;
+  optional PureModelFeatureSwitch pure_model_feature_switch = 4;
+  optional DrivingStyle driving_style = 5;
 }
 
 message LSSSwitchRequest {

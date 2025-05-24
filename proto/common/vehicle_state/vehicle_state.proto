@@ -87,4 +87,18 @@ message VehicleState {
         RELEASING = 4;
     }
     optional EpbStatus epb_sts = 43;
+    enum VehSapaMtnStatus {
+        NONE = 0;
+        STANDSTILL = 1;
+        FORWARD = 2;
+        BACKWARD = 3;
+    }
+    optional VehSapaMtnStatus sapa_veh_mtn_sts = 44; // Direction of vehicle movement
+    enum AvhSts {
+        OFF = 0;
+        STANDBY = 1;
+        ACTIVE = 2;
+        INVALID = 3;
+    }
+    optional AvhSts avh_sts = 45;
 }

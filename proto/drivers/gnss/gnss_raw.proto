@@ -94,6 +94,7 @@ enum PositionVelocityType {
   POSITION_TYPE_PPP = 69;
   POSITION_TYPE_INS_PPP_CONVERGING = 73;
   POSITION_TYPE_INS_PPP = 74;
+  POSITION_TYPE_INS_DR = 75;
 }
 
 enum InsRawStatus {
@@ -263,6 +264,12 @@ message ShortRawImu {
   float temperature = 11;  // unit: Celsius
   uint32 imu_gyro_status = 12;
   uint32 imu_acce_status = 13;
+}
+
+// rostopic /sensors/gnss/raw_gga
+message RawGga {
+  int64 measurement_time = 1;
+  string raw_gga = 2;
 }
 
 message InuInternalState {

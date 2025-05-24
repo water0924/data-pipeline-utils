@@ -54,8 +54,8 @@ message DisplayDynamicEffect {
 message EthNarrow {
   uint32 narrow_sts = 1; // (原Uint8) 0x0:Default,0x1:BeforePassed,0x2:Passed
   uint32 narrow_ist = 2; // (原Uint8) Range:0~255,unit:m(前正后负),factor:0.1,offset:0
-  uint32 narrow_point_dst_lat = 3; // (原Uint16) Range:0~65535,unit:m(左正右负),factor:0.002,offset:-65.535
-  uint32 narrow_point_dst_lgt = 4; // (原Uint16) Range:0~65535,unit:m(前正后负),factor:0.004,offset:-30
+  uint32 narrow_point_dst_lat = 3; // (原Uint16) 单位: cm，范围: -32768 ~ 32767，偏移量: -32768，因子: 1
+  uint32 narrow_point_dst_lgt = 4; // (原Uint16) 单位: cm，范围: -32768 ~ 32767，偏移量: -32768，因子: 1
 }
 
 message Point {
@@ -68,7 +68,7 @@ message EthStopPoints1 {
   Point stop_start_point1 = 2; // 刹停点开始点
   Point stop_end_point1 = 3; // 刹停点结束点
 }
-
+// NA
 message LanlinEquation {
   uint32 prmA = 1; // A (原Uint16)，offset:65.635，factor:0.002
   uint32 prmB = 2; // B (原Uint16)，offset:-1.6，  factor:0.001
@@ -159,7 +159,6 @@ message EthBoundary {
 
 message EthHmiGreenBelt {
   repeated Point point = 1; // 点组成的绿化带线(原Uint16数组)
-  uint32 track_id = 2; // ID(原Uint32)
 }
 
 message EthHmiCrosswalk {
@@ -243,9 +242,9 @@ message LaneElement {
 }
 
 message GeneralPosn {
-  uint32 general_posn_x = 1; // 目标坐标横向位置(原 Uint32)，Unit:cm，Offset:-2147483648，Factor:1
-  uint32 general_posn_y = 2; // 目标坐标纵向位置(原 Uint32)，Unit:cm，Offset:-2147483648，Factor:1
-  uint32 general_posn_z = 3; // 目标坐标Z向位置(原 Uint16)，Unit:dm，Range:-32768..32767，Offset:-32768，Factor:1
+  uint32 general_posn_x = 1; // 目标坐标横向位置(原 Uint32)，单位: cm，范围: -2,147,483,648 ~ 2,147,483,647，偏移量: -2,147,483,648，因子: 1
+  uint32 general_posn_y = 2; // 目标坐标纵向位置(原 Uint32)，单位: cm，范围: -2,147,483,648 ~ 2,147,483,647，偏移量: -2,147,483,648，因子: 1
+  uint32 general_posn_z = 3; // 目标坐标Z向位置(原 Uint16)，Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
 }
 
 message MeyPrkgSpe {
@@ -257,8 +256,8 @@ message MeyPrkgSpe {
 }
 
 message DestPosn {
-  uint32 dest_posn_x = 1; // 目的地坐标(原 Uint16)，Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
-  uint32 dest_posn_y = 2; // 目的地坐标(原 Uint16)，Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
+  uint32 dest_posn_x = 1; // 目的地坐标(原 Uint32)，单位: cm，范围: -2,147,483,648 ~ 2,147,483,647，偏移量: -2,147,483,648，因子: 1
+  uint32 dest_posn_y = 2; // 目的地坐标(原 Uint32)，单位: cm，范围: -2,147,483,648 ~ 2,147,483,647，偏移量: -2,147,483,648，因子: 1
   uint32 dest_posn_z = 3; // 目的地坐标(原 Uint16)，Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
 }
 
@@ -333,7 +332,7 @@ message EthHmiTrfcSign {
     UPCOMING_END_OF_CITY_SIGN_WITH_CITY_NAME = 61;  // 即将到达城市终点（带城市名称）
   }
   Type type = 1; // 交通标志类型(原Uint8)
-  uint32 heading_angle = 2; // 航向角(原Uint16) 0~3600，Offset: 0，Factor: 0.1
+  uint32 heading_angle = 2; // 航向角(原Uint16) 0~36000，Offset: 0，Factor: 0.01
   uint32 sign_dst_lat = 3; // 横向坐标(原Uint16) Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
   uint32 sign_dst_lgt = 4; // 纵向坐标(原Uint16) Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
   uint32 sign_dst_height = 5; // 高度(原Uint16) Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
@@ -352,7 +351,7 @@ message EthHmiTrfcLight {
     TYPE_OF_TRFC_LIGHT_RESERVED1 = 7;           // 保留1
   }
   TypeOfTrfcLight type_of_trfc_light = 1; // 红绿灯类型(原Uint8)
-  uint32 heading_angle = 2; // 航向角(原Uint16) 0~3600，Offset: 0，Factor: 0.1
+  uint32 heading_angle = 2; // 航向角(原Uint16) 0~36000，Offset: 0，Factor: 0.01
   uint32 light_dst_lat = 3; // 横向坐标(原Uint16) Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
   uint32 light_dst_lgt = 4; // 纵向坐标(原Uint16) Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
   uint32 light_dst_height = 5; // 高度(原Uint16) Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
@@ -396,9 +395,9 @@ message EthForHumaMach {
 
 message EthHWALeadingPoint {
   uint32 eth_leading_point_valid = 1; // (原Uint8) 落位框有效位  0-无效  1-有效
-  uint32 center_x = 2; // (原Uint16) 落位框中心点坐标x
-  uint32 center_y = 3; // (原Uint16) 落位框中心点坐标y
-  uint32 hd_dir_of_ld_pt = 4; // (原Uint16) 落位框朝向角
+  uint32 center_x = 2; // (原Uint16) 落位框中心点坐标x Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
+  uint32 center_y = 3; // (原Uint16) 落位框中心点坐标y Unit:cm，Range:-32768..32767，Offset:-32768，Factor:1
+  uint32 hd_dir_of_ld_pt = 4; // (原Uint16) 落位框朝向角  航向角(原Uint16) 0~36000，Offset: 0，Factor: 0.01
 }
 
 message Other {
@@ -465,7 +464,7 @@ message ClassicalChinese {
   uint32 eth_warn_for_asy_emgy_lane_keep_aid = 12;
 
   // 0x1 => “紧急制动已激活”
-  uint32 eth_cllsn_aid_poset_ema = 13;
+  uint32 eth_cllsn_aid_post_ema = 13;
 
   // 0x01 => “后方有碰撞风险,已紧急制动”
   uint32 eth_rcwm_brk_req = 14;
@@ -479,11 +478,11 @@ message ClassicalChinese {
 
   // 0x1 => “注意左侧来车”
   // 0x3 => “前方有碰撞风险,因你减缓碰撞”
-  uint32 eth_fctalndcn_le = 17;
+  uint32 eth_fcta_indcn_le = 17;
 
   // 0x1 => “注意右侧来车”
   // 0x3 => “前方有碰撞风险,因你减缓碰撞”
-  uint32 eth_fctalndcn_ri = 18;
+  uint32 eth_fcta_indcn_ri = 18;
 
   // 0x01 => “开门!请注意侧后方”
   uint32 eth_door_openwarn_le_indcn = 19;
@@ -584,7 +583,7 @@ message ClassicalChinese {
   // 0x0D => “前方急弯\n领航驾驶辅助无法激活”
   // 0x0E => “天气条件受限\n领航驾驶辅助不可用(一个点火周期只报一次)”
   // 0x10 => “前方可行驶距离过短\n领航驾驶辅助无法激活”
-  uint32 eth_asy_noa_deactvd_reason_mesg = 27;
+  uint32 eth_asy_noa_deactvd_reasn_mesg = 27;
 
   // 0x01 => “智能巡航辅助可激活”
   // 0x02 => “HiSpd: 车速过高无法激活”
@@ -603,7 +602,7 @@ message ClassicalChinese {
   // 0x15 => “请关闭HDC陡坡缓降后重试”
   // 0x16 => “长时间未接管\n当前驾驶周期2分钟内无法激活”(保留值3)
   // 0x17 => “长时间未接管\n当前驾驶周期1分钟内无法激活”(保留值4)
-  uint32 eth_asy_aut_drv_avl = 28;
+  uint32 eth_asy_aut_drvg_avl = 28;
 
   // 0x1 => “智能巡航辅助可以激活”
   uint32 eth_asy_noa_actv_suggest = 29;
@@ -872,51 +871,41 @@ message PerceptualObstacle {
     WALL = 76;
     POTHOLE = 77;  // 坑洼
     CHARGING_PILE = 78;  // 充电桩
-    STANDARD_POLE = 79;  // 标准杆
-    CAR_PARKED = 80;  // 四轮轿车 - 在车位
-    MICROCAR_PARKED = 81;  // 微型车 - 在车位
-    SUV_PARKED = 82;
-    MPV_PARKED = 83;
-    VAN_PARKED = 84;
-    PICKUP_PARKED = 85;
     SPEEDBUMP_PARKED = 86;
-    POLICE_CAR_PARKED = 87;
-    AMBULANCE_PARKED = 88;
-    HIGHWAY_RESCUE_PARKED = 89;
-    FORKLIFT_PARKED = 90;
-    ROAD_ROLLER_PARKED = 91;
-    TRAILER_PARKED = 92;
-    BOX_TRUCK_SMALL_PARKED = 93;
-    BOX_TRUCK_MEDIUM_PARKED = 94;
-    BOX_TRUCK_LARGE_PARKED = 95;
-    FLAT_TRUCK_SMALL_PARKED = 96;
-    FLAT_TRUCK_MEDIUM_PARKED = 97;
-    FLAT_TRUCK_LARGE_PARKED = 98;
-    MINIBUS_PARKED = 99;
-    BIGBUS_PARKED = 100;
-    SCHOOL_BUS_PARKED = 101;
-    SPECIAL_VEHICLE_PARKED = 102;
-    TANKER_PARKED = 103;
-    FIRE_TRUCK_PARKED = 104;
-    GARBAGE_TRUCK_PARKED = 105;
-    SPRINKLER_TRUCK_PARKED = 106;
-    ROAD_SWEEPER_PARKED = 107;
-    UNKNOWN_SIDE_CAR_PARKED = 108;
+    STANDARD_POLE = 89;  // 标准杆
+    CAR_PARKED = 90;  // 四轮轿车 - 在车位
+    MICROCAR_PARKED = 91;  // 微型车 - 在车位
+    SUV_PARKED = 92;
+    MPV_PARKED = 93;
+    VAN_PARKED = 94;
+    PICKUP_PARKED = 95;
+    POLICE_CAR_PARKED = 96;
+    AMBULANCE_PARKED = 97;
+    HIGHWAY_RESCUE_PARKED = 98;
+    FORKLIFT_PARKED = 99;
+    ROAD_ROLLER_PARKED = 100;
+    TRAILER_PARKED = 101;
+    BOX_TRUCK_SMALL_PARKED = 102;
+    BOX_TRUCK_MEDIUM_PARKED = 103;
+    BOX_TRUCK_LARGE_PARKED = 104;
+    FLAT_TRUCK_SMALL_PARKED = 105;
+    FLAT_TRUCK_MEDIUM_PARKED = 106;
+    FLAT_TRUCK_LARGE_PARKED = 107;
+    MINIBUS_PARKED = 108;
+    BIGBUS_PARKED = 109;
+    SCHOOL_BUS_PARKED = 110;
+    SPECIAL_VEHICLE_PARKED = 111;
+    TANKER_PARKED = 112;
+    FIRE_TRUCK_PARKED = 113;
+    GARBAGE_TRUCK_PARKED = 114;
+    SPRINKLER_TRUCK_PARKED = 115;
+    ROAD_SWEEPER_PARKED = 116;
+    UNKNOWN_SIDE_CAR_PARKED = 117;
   }
   ObsType obs_type = 2; // (原Uint8) 障碍物类型
   GeneralPosn obs_posn = 3; // (原GeneralPosn) 障碍物坐标
   SelfHeadingAg obs_heading = 4; // (原SelfHeadingAg) 航向
-  enum ObsLi {
-    OBJ_LIGHT_NO_DISPLAY = 0; // No display
-    LEFT = 1;                 // Left
-    RIGHT = 2;                // Right
-    BRAKE = 3;                // Brake
-    LEFT_AND_RIGHT = 4;       // Left and Right
-    LEFT_AND_BRAKE = 5;       // Left and Brake
-    RIGHT_AND_BRAKE = 6;      // Right and Brake
-    LEFT_RIGHT_AND_BRAKE = 7; // Left, Right, and Brake
-  };
-  ObsLi obs_li = 5; // (原Uint8) 他车车灯状态
+  uint32 obs_li = 5; // (原Uint8) 他车车灯状态
   uint32 obs_door = 6; // (原Uint8) 他车车门状态
   enum ObsColor {
     WHITE = 0;            // White
@@ -974,10 +963,35 @@ message PerceptualSlot {
 }
 
 message PrkgSlotTyp {
-  uint32 prkg_slot_typ_info = 1;  // 车位类型
+  enum PrkgSlotTypInfo {
+    NONE = 0; // 0x00: 无车位
+    NORMAL_HORIZONTAL = 1; // 0x01: 水平车位
+    NORMAL_VERTICAL = 2; // 0x02: 垂直车位
+    NORMAL_DIAGONAL = 3; // 0x03: 斜列车位
+    MECHANICAL_HORIZONTAL = 4; // 0x04: 机械水平车位
+    MECHANICAL_VERTICAL = 5; // 0x05: 机械垂直车位
+    MECHANICAL_INCLINED = 6; // 0x06: 机械斜列车位
+    VERY_NARROW_HORIZONTAL = 7; // 0x07: 极窄水平车位
+    VERY_NARROW_VERTICAL = 8; // 0x08: 极窄垂直车位
+    VERY_NARROW_OBLIQUE = 9; // 0x09: 极窄斜列车位
+    GUILLOTINE_HORIZONTAL = 10; // 0x0A: 断头路水平车位
+    DEADEND_VERTICAL = 11; // 0x0B: 断头路垂直车位
+    GUILLOTINE_OBLIQUE = 12; // 0x0C: 断头路斜列车位
+    CUSTOM = 13; // 0x0D: 自定义车位
+  }
+  PrkgSlotTypInfo prkg_slot_typ_info = 1;  // 车位类型
   uint32 prkg_slot_yaw_ag = 2;  // 车位相对车角角度（偏航）
   uint32 prkg_slot_roll_ag = 3;  // 车位相对车角角度（横滚）
   uint32 prkg_slot_pitch_ag = 4;  // 车位相对车角角度（俯仰）
+  /*
+  "Uint8
+  BIT0: Bumper，车位是否有轮挡 0没有，1有
+  BIT1: Bumper direction1   轮挡所在车位位置 0无，1车位前方
+  BIT2: Bumper direction2   轮挡所在车位位置 0 无，1车位后方
+  BIT3: Ground locked   车位是否有地锁 0没有，1有
+  BIT4: Ground locked state   地锁的状态 0关闭，1打开
+  BIT5~7：预留"
+  */
   uint32 prkg_slot_typ_element = 5;  // 车位固定元素
 }
 
@@ -989,7 +1003,18 @@ message PrkgSlotBounding {
 }
 
 message PrkgSlotSt {
-  uint32 prkg_slot_sts = 1;  // 车位状态
+  enum PrkgSlotSts {
+    DEFAULT = 0; // 0x00: 默认
+    EMPTY = 1; // 0x01: 空车位
+    TARGET = 2; // 0x02: 目标车位
+    RECOMMENDED = 3; // 0x03: 推荐车位
+    UNUSABLE = 4; // 0x04: 不可用车位
+    MEMORY_AVAILABLE = 5; // 0x05: 记忆车位可用
+    MEMORY_NOT_AVAILABLE = 6; // 0x06: 记忆车位不可用
+    OBSTRUCTION = 7; // 0x07: 车位有障碍物
+    // 0x08-0x255：保留
+  } 
+  PrkgSlotSts prkg_slot_sts = 1;  // 车位状态
   uint32 prkg_slot_number = 2;  // 车位推荐等级编号
 }
 
@@ -1001,7 +1026,7 @@ message SlotCod {
   uint32 slot_cod_5 = 5;
 }
 
-message PrkgLaneMarking {
+message PrkgLaneMarking { 
   uint32 prkg_lane_sts = 1;  // 当前点标记状态
   uint32 prkg_lane_x = 2;  // 点位坐标 X
   uint32 prkg_lane_y = 3;  // 点位坐标 Y

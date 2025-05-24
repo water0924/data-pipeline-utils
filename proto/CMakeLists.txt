@@ -37,13 +37,37 @@ if (NOT PROTOS)
     return()
 endif()
 
-protobuf_generate_cpp(PROTO_SOURCES PROTO_HEADERS ${PROTOS})
-protobuf_generate_python(PROTO_PY ${PROTOS})
+# protobuf_generate_cpp(PROTO_SOURCES PROTO_HEADERS ${PROTOS})
+# protobuf_generate_python(PROTO_PY ${PROTOS})
+protobuf_generate(
+  LANGUAGE cpp
+  OUT_VAR PROTO_SOURCES
+  PROTOS ${PROTOS}
+  IMPORT_DIRS ${PROTOBUF_IMPORT_DIRS}
+)
+protobuf_generate(
+  LANGUAGE python
+  OUT_VAR PROTO_PY
+  PROTOS ${PROTOS}
+  IMPORT_DIRS ${PROTOBUF_IMPORT_DIRS}
+)
 
 file(GLOB_RECURSE CHURCH_PROTOS ${CMAKE_CURRENT_SOURCE_DIR}/church/*.proto)
-protobuf_generate_cpp(CHURCH_PROTO_SOURCES CHURCH_PROTO_HEADERS
-                      ${CHURCH_PROTOS})
-protobuf_generate_python(CHURCH_PROTO_PY ${CHURCH_PROTOS})
+# protobuf_generate_cpp(CHURCH_PROTO_SOURCES CHURCH_PROTO_HEADERS
+#                       ${CHURCH_PROTOS})
+# protobuf_generate_python(CHURCH_PROTO_PY ${CHURCH_PROTOS})
+protobuf_generate(
+  LANGUAGE cpp
+  OUT_VAR CHURCH_PROTO_SOURCES
+  PROTOS ${CHURCH_PROTOS}
+  IMPORT_DIRS ${PROTOBUF_IMPORT_DIRS}
+)
+protobuf_generate(
+  LANGUAGE python
+  OUT_VAR CHURCH_PROTO_PY
+  PROTOS ${CHURCH_PROTOS}
+  IMPORT_DIRS ${PROTOBUF_IMPORT_DIRS}
+)
 
 # The py_target here is added only for the purpose of generating .py files using
 # protobuf_generate_python and no real target will be generated.

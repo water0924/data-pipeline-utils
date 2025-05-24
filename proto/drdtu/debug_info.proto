@@ -3,6 +3,8 @@ syntax = "proto3";
 package dr.blc;
 
 import "drapi/operation_status.proto";
+import "lock_on_road/lock_on_road.proto";
+import "drapi/gwm_hut_notification.proto";
 
 /**
 请注意:
@@ -16,6 +18,8 @@ message BlcDebugInfo {
   SpeedLimitInfo speed_limit_info = 2;  //限速相关信息
   Lanechange lane_change = 3; //变道相关信息  
   SnowyDayModeInfo snow_day= 4; //雪天模式
+  ParkingDebugInfo parking_info = 5; // 泊车相关信息
+  HAVPEndToEndDebugInfo havp_e2e_info = 6;
 }
 
 message SpeedLimitInfo {
@@ -116,4 +120,72 @@ message OddInfo {
     NextRoadClass : 下一个roadclass
     NextRoadClassRemainM : 到下一个roadclass的距离
   */
+}
+
+enum ParkingBLCMRMStatus {
+  STATE_INITIAL  = 0;
+  STATE_DECELERATE = 1;
+  STATE_HOLD = 2;
+  STATE_P_GEAR_AFTER_HOLD = 3;
+  STATE_P_GEAR = 4;
+  STATE_FINISH = 5;
+  STATE_MRM_FAILED = 6;
+  STATE_MRM_ACTIVE = 7;
+}
+
+message ParkingDebugInfo {
+  ParkingBLCMRMStatus mrm_status = 1; // MRM 状态
+}
+
+message HAVPEndToEndDebugInfo {
+  enum LockOnRoadStrictStatus{
+    NAVI_UNKNOWN = 0;
+    NAVI_NORMAL = 1;
+    NAVI_ABNORMAL = 2;
+  }
+  enum LocalizationEnd2EndStatus {
+    STATUS_UNKNOWN = 0;
+    STATUS_READY = 1;
+    STATUS_NOT_READY = 2;
+  }
+  enum LocalizationMatchingStatus {
+    SEARCHING = 0;
+    MATCHING = 1;
+    MATCHED = 2;
+    NO_MAP = 3;
+    ROUTING_NOT_READY = 4;  // GWM SOP+3 deprecated
+    NEAR_DESTINATION = 5;   // GWM SOP+3 deprecated
+  }
+  enum LockOnRoadStatus {
+    NO_ROUTING = 0;                                // no routing response has received
+    NORMAL = 1;                                    // matching succeeded
+    YAWED = 2;                                     // if trajectory yawed from planned path.
+    PASSOVER = 3;                                  // when vehicle takes a short path, skipping many links
+    GNSS_POSE_INVALID = 4;                         // when gnss pose is invalid, such as all zeros
+  }
+  enum VehicleState {
+    VEHICLE_UNKNOWN = 0;
+    VEHICLE_INDOOR = 1;
+    VEHICLE_OUTDOOR = 2;
+  }
+  enum VPALearningStatusType {
+    STATUS_TYPE_NORMAL = 0;
+    STATUS_TYPE_E2E_IN = 1;
+    STATUS_TYPE_E2E_OUT = 2;
+  }
+  enum VPAE2ELearningStage {
+    VPA_STAGE_NONE = 0;
+    VPA_STAGE_1 = 1;
+    VPA_STAGE_2 = 2;
+    VPA_STAGE_3 = 3;
+  }
+  LockOnRoadStrictStatus lock_on_road_strict_status = 1;
+  LocalizationMatchingStatus localization_matching_status = 2;
+  LocalizationEnd2EndStatus localization_end2end_status = 3;
+  LockOnRoadStatus lock_on_road_status = 4;
+  dr.notification.gwmhut.PopupDisp e2e_popup = 5;
+  VehicleState vehilce_state = 6;
+  VPALearningStatusType learning_status_type = 7;
+  VPAE2ELearningStage learning_stage = 8;
+  double pre_mapping_distance = 9; 
 }

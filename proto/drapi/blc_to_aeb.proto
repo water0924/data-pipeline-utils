@@ -10,6 +10,12 @@ enum PolicyResult {
   ERROR = 2;
 }
 
+enum CMSFType {
+  CMSF_UNKNOWN = 0;
+  CMSF_BASE = 1;
+  CMSF_PLUS = 2;
+}
+
 // topic : /blc/policy_result_to_aeb
 message PolicyResultsToAeb {
   int32 msg_id = 1;
@@ -24,6 +30,7 @@ message PolicyResultsToAeb {
   PolicyResult abp_result = 10;
   PolicyResult awb_result = 11;
   PolicyResult aba_result = 12;
+  PolicyResult aes_result = 13;
 }
 
 message AEBStateCondition { // 进入standstill 需要blc作为条件么？
@@ -112,6 +119,17 @@ message ESAStateCondition {
     bool  is_failure = 2;
     bool  is_passive = 3;
     bool  is_active_exit = 4;
+    bool  is_not_pre_active = 5;
+
+    dr.operationstatus.ReasonInfo reason_info = 20;
+}
+
+message AESStateCondition {
+    bool  is_off = 1;
+    bool  is_failure = 2;
+    bool  is_passive = 3;
+    bool  is_active_exit = 4;
+    bool  is_not_pre_active = 5;
 
     dr.operationstatus.ReasonInfo reason_info = 20;
 }
@@ -139,12 +157,14 @@ message SensitivityLevelSet {
     SensitivityLevel  fctb_level = 6;
     SensitivityLevel  rctb_level = 7;
     SensitivityLevel  esa_level = 8;
-    SensitivityLevel  meb_level = 9; 
+    SensitivityLevel  meb_level = 9;
+    SensitivityLevel  aes_level = 10;
 }
 
 message ODDFlags {
     bool is_snow_mode = 1;
     bool is_nca_in_control = 2;
+    CMSFType cmsf_type = 3;
 }
 
 // topic : /blc/aeb_state_conditions
@@ -159,6 +179,7 @@ message StateConditions {
     ESAStateCondition esa_condition = 8;
     MEBStateCondition meb_condition = 9;
     MAIState mai_state = 10;
+    AESStateCondition aes_condition = 11;
 
     ODDFlags odd_flags = 20;
     SensitivityLevelSet sensitivity_level_set = 21;

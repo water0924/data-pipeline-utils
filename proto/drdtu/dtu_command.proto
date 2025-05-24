@@ -253,8 +253,17 @@ message SetMapEngineMode {
   enum Mode {
     SDMAP = 0;
     HDMAP = 1;
+    VPA_MNCA = 2;
   }
+
+  // SDMAP mode sending /map/sd_horizon_map, other mode sending empty message
   Mode mode = 1;
+
+  // control message /map_engine/ras_feature
+  // 1. VPA_MNCA mode sending parking map prior
+  // 2. SDMAP mode sending driving map prior
+  Mode map_prior_mode = 3;
+
   string semantic_map_path = 2;  // only needed in HDMap Mode
 }
 

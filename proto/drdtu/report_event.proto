@@ -447,6 +447,13 @@ message ESAStatusUpdateInfo {
   dr.operationstatus.ReasonInfo reasoninfo = 3;
 }
 
+// AES状态变更, event : BLC_STATE_AES_STATUS_UPDATE_EVENT
+message AESStatusUpdateInfo {
+  dr.operationstatus.AESStatus from = 1;
+  dr.operationstatus.AESStatus to = 2;
+  dr.operationstatus.ReasonInfo reasoninfo = 3;
+}
+
 // FCTA状态变更, event : BLC_STATE_FTCA_STATUS_UPDATE_EVENT
 message FCTAStatusUpdateInfo {
   dr.operationstatus.FCTAStatus from = 1;
@@ -581,6 +588,7 @@ message BLCStateScheduledUpdate {
   dr.operationstatus.RCTBStatusInfo rctb_status_info = 8;
   dr.operationstatus.MEBStatusInfo meb_status_info = 9;
   dr.operationstatus.MAIStatusInfo mai_status_info = 10;
+  dr.operationstatus.AESStatusInfo aes_status_info = 11;
 }
 
 // *******************告警事件**********************************
@@ -815,7 +823,9 @@ message APAReport {
     SEARCH = 4;     // 功能开启（search阶段）
     SEARCH_QUIT = 5;  // search 阶段特殊原因失败
     ACTIVED = 6;    // 功能激活
-    SUSPEND = 7;    // 功能暂停
+    SUSPEND = 7;    // 功能暂停(from ACTIVED)
+    SEARCH_SUSPEND = 8;  // 寻库暂停(from SEARCH)
+    SUSPEND_RESUME = 9; // 暂停恢复(from SUSPEND)
   }
   enum Mode {
     MODE_UNKNOWN = 0;
@@ -825,10 +835,15 @@ message APAReport {
   }
   enum ParkingSpaceType {
     UNKNOWN = 0;
-    VERTICAL = 1;  // rectangle
-    PARALLEL = 2;  // rectangle
-    SLANTED = 3;   // parallelogram, the angle is not 90 degree
+    VERTICAL = 1;  // 垂直车位
+    PARALLEL = 2;  // 水平车位
+    SLANTED = 3;   // 斜列车位
   }
+  enum ParkingSpotBoundedType {
+    ZERO_BOUNDED = 0;      // 无障碍车位
+    SINGLE_BOUNDED = 1;    // 单边界车位
+    DOUBLE_BOUNDED = 2;    // 双边界车位
+  }  
   enum ActiveReason {
     REASON_UNKNOWN = 0;
     APA = 1;
@@ -836,19 +851,33 @@ message APAReport {
     VPA_ROUTING = 3;
     RPA = 4;
   }
+  enum ParkType {
+    PARKTYPE_UNKNOWN = 0;
+    TAIL_PARK_INOUT = 1; // 车尾泊入/泊出
+    HEAD_PARK_INOUT = 2; // 车头泊入/泊出
+  }
+  enum SceneType {
+    SCENETYPE_UNKNOWN = 0;
+    INDOOR = 1;         // 室内
+    OUTDOOR_DAY = 2;    // 室外白天
+    OUTDOOR_NIGHT_DARK = 3;  // 室外黑夜光线差
+    OUTDOOR_NIGHT_BRIGHT = 4;  // 室外黑夜光线良好
+  }
   Result result = 2;                        // 泊车阶段
   Mode mode = 3;                            // 泊车模式
-  int32 gear_change_times = 5;              // 档位切换次数
-  int64 begin_time_ms = 6;                  // 泊车开始时间
-  int64 planning_plan_time_ms = 7;          // planning 规划时间
-  int64 parking_cost_time_ms = 8;           // 泊车耗时
-  ParkingSpaceType parking_space_type = 9;  // 车位类型
-  double begin_longitude = 10;              // 开始经度
-  double begin_latitude = 11;               // 开始纬度
-  ActiveReason active_reason = 12;          // 激活原因
-  int64 perception_resp_time_ms = 13;       // perception 返回耗时
-  dr.operationstatus.ReasonInfo reasoninfo = 14;  //失败/暂停原因
-  deeproute.planning.AStarSearchResultAnalysisInfo analysis_info = 15;  // SUCCESS/FAILED/CANCELED
+  int32 gear_change_times = 4;              // 揉库次数
+  bool fold_mirror = 5;                     // 是否折叠后视镜
+  int32 risk_of_scratches_hint_times = 6;   // 剐蹭提醒次数
+  int32 parking_cost_time_s = 7;            // 泊车耗时
+  ParkingSpaceType parking_space_type = 8;  // 车位类型
+  ParkingSpotBoundedType parking_spot_bounded_type = 9; // 车位边界类型
+  bool is_line_parking_space = 10;          // 是否线车位
+  bool is_less_parking_space = 11;          // 是否窄车位
+  ParkType park_type = 12;                  // 泊车方式
+  ActiveReason active_reason = 13;          // 激活原因
+  SceneType scene_type = 14;                // 泊车场景
+  dr.operationstatus.ReasonInfo reasoninfo = 15;  //失败/暂停/恢复原因
+  deeproute.planning.AStarSearchResultAnalysisInfo analysis_info = 16;  // SUCCESS/FAILED/CANCELED
 }
 
 // rads 倒车循迹， event:BLC_RADS_REPORT

@@ -162,7 +162,8 @@ enum ParkingDwmPopUID {
   //接口：ParkAlarmInfoInf1. ParkAlarmSeN
   PARKING_DWM_POP_DEFAULT_ID = 0;
 
-  PARKING_DWM_POP_ID_70052 = 70052;//请进入停车场
+  PARKING_DWM_POP_ID_70212 = 70212;//请进入停车场
+  PARKING_DWM_POP_ID_70052 = 70052;//未获取定位，请在室外行驶一段距离后再试
   PARKING_DWM_POP_ID_71014 = 71014;//请行驶到平缓区域
   PARKING_DWM_POP_ID_70051 = 70051;//请行驶到明亮区域
   PARKING_DWM_POP_ID_71016 = 71016;//雨量过大

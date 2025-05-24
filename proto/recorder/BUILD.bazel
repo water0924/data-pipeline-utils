@@ -5,6 +5,34 @@ load("@rules_proto//proto:defs.bzl", "proto_library")
 
 load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
 
+
+
+proto_library(
+    name = "trigger_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["trigger.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "trigger_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":trigger_proto",
+    ],
+)
+
+python_proto_library(
+    name = "trigger_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":trigger_proto",
+    ],
+)
+
+
 proto_library(
     name = "record_buffer_stats_proto",
     visibility = ["//visibility:public"],
@@ -185,3 +213,27 @@ python_proto_library(
     ],
 )
 
+proto_library(
+    name = "trigger_config_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["trigger_config.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "trigger_config_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":trigger_config_proto",
+    ],
+)
+
+python_proto_library(
+    name = "trigger_config_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":trigger_config_proto",
+    ],
+)

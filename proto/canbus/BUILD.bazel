@@ -140,6 +140,7 @@ proto_library(
         "//proto/common/configs:vehicle_config_proto",
         "//proto/canbus:chassis_proto",
         "//proto/common:vehicle_signal_proto",
+        "//proto/canbus:chassis_control_interface_type_proto",
     ],
     strip_import_prefix = "/proto/",
 )
@@ -211,52 +212,27 @@ python_proto_library(
 )
 
 proto_library(
-    name = "gwm_d03_chassis_detail_proto",
+    name = "gwm_tank_chassis_detail_proto",
     visibility = ["//visibility:public"],
-    srcs = ["gwm_d03_chassis_detail.proto"],
+    srcs = ["gwm_tank_chassis_detail.proto"],
     deps = [
     ],
     strip_import_prefix = "/proto/",
 )
 
 cc_proto_library(
-    name = "gwm_d03_chassis_detail_proto_cc",
+    name = "gwm_tank_chassis_detail_proto_cc",
     visibility = ["//visibility:public"],
     deps = [
-        ":gwm_d03_chassis_detail_proto",
+        ":gwm_tank_chassis_detail_proto",
     ],
 )
 
 python_proto_library(
-    name = "gwm_d03_chassis_detail_proto_py",
+    name = "gwm_tank_chassis_detail_proto_py",
     visibility = ["//visibility:public"],
     protos = [
-        ":gwm_d03_chassis_detail_proto",
-    ],
-)
-
-proto_library(
-    name = "gwm_p03_chassis_detail_proto",
-    visibility = ["//visibility:public"],
-    srcs = ["gwm_p03_chassis_detail.proto"],
-    deps = [
-    ],
-    strip_import_prefix = "/proto/",
-)
-
-cc_proto_library(
-    name = "gwm_p03_chassis_detail_proto_cc",
-    visibility = ["//visibility:public"],
-    deps = [
-        ":gwm_p03_chassis_detail_proto",
-    ],
-)
-
-python_proto_library(
-    name = "gwm_p03_chassis_detail_proto_py",
-    visibility = ["//visibility:public"],
-    protos = [
-        ":gwm_p03_chassis_detail_proto",
+        ":gwm_tank_chassis_detail_proto",
     ],
 )
 
@@ -392,142 +368,49 @@ expand_template(
     substitutions = selects.with_or({
         ("@deeproute_build_tools//:AT7-ET_setting") : {
             "@_IMPORT_CHASSIS_DETAIL_PROTO_@" : """
-// strip later
-import "canbus/m5_chassis_detail.proto";
-import "canbus/mar_chassis_detail.proto";
 import "canbus/m7_chassis_detail.proto";  // keep
-import "canbus/byd_chassis_detail.proto";
-import "canbus/gwm_chassis_detail.proto";
-import "canbus/hy11_chassis_detail.proto";
 """,
-            "@_CHASSIS_DETAIL_MESAGE_TYPE_@" : """
-    M5ChassisDetail m5 = 2;
-    MarChassisDetail mar = 3;
+            "@_CHASSIS_DETAIL_MESSAGE_TYPE_@" : """
     M7ChassisDetail m7 = 4;  // keep
-    deeproute.canbus.byd.BydChassisDetail byd = 5;
-    GwmChassisDetail gwm = 6;
-    SmartHy11ChassisDetail smart_hy11 = 7;
 """,
         },
-        ("@deeproute_build_tools//:C01-PT_setting", "@deeproute_build_tools//:M8-ALL_setting") : {
+        ("@deeproute_build_tools//:C01-PT_setting", "@deeproute_build_tools//:M8-ALL_setting", "@deeproute_build_tools//:C01T-ET_setting") : {
             "@_IMPORT_CHASSIS_DETAIL_PROTO_@" : """
-// strip later
-import "canbus/m5_chassis_detail.proto";
-import "canbus/mar_chassis_detail.proto";
-import "canbus/m7_chassis_detail.proto";
-import "canbus/byd_chassis_detail.proto";
 import "canbus/gwm_chassis_detail.proto";  // keep
-import "canbus/hy11_chassis_detail.proto";
 """,
-            "@_CHASSIS_DETAIL_MESAGE_TYPE_@" : """
-    M5ChassisDetail m5 = 2;
-    MarChassisDetail mar = 3;
-    M7ChassisDetail m7 = 4;
-    deeproute.canbus.byd.BydChassisDetail byd = 5;
+            "@_CHASSIS_DETAIL_MESSAGE_TYPE_@" : """
     GwmChassisDetail gwm = 6;  // keep
-    SmartHy11ChassisDetail smart_hy11 = 7;
 """,
         },
-        ("@deeproute_build_tools//:D03-ET_setting") : {
+        ("@deeproute_build_tools//:TANK-ALL_setting") : {
             "@_IMPORT_CHASSIS_DETAIL_PROTO_@" : """
-import "canbus/gwm_d03_chassis_detail.proto";
-// strip later
-import "canbus/m5_chassis_detail.proto";
-import "canbus/mar_chassis_detail.proto";
-import "canbus/m7_chassis_detail.proto";
-import "canbus/byd_chassis_detail.proto";
-import "canbus/gwm_chassis_detail.proto";
-import "canbus/hy11_chassis_detail.proto";
+import "canbus/gwm_tank_chassis_detail.proto";
 """,
-            "@_CHASSIS_DETAIL_MESAGE_TYPE_@" : """
-        M5ChassisDetail m5 = 2;
-        MarChassisDetail mar = 3;
-        M7ChassisDetail m7 = 4;
-        deeproute.canbus.byd.BydChassisDetail byd = 5;
-        GwmChassisDetail gwm = 6;
-        SmartHy11ChassisDetail smart_hy11 = 7;
-        deeproute.canbus.gwm.d03.GwmD03ChassisDetail gwm_d03 = 9;
-""",
-        },
-        ("@deeproute_build_tools//:P03-ET_setting") : {
-            "@_IMPORT_CHASSIS_DETAIL_PROTO_@" : """
-import "canbus/gwm_p03_chassis_detail.proto";
-// strip later
-import "canbus/m5_chassis_detail.proto";
-import "canbus/mar_chassis_detail.proto";
-import "canbus/m7_chassis_detail.proto";
-import "canbus/byd_chassis_detail.proto";
-import "canbus/gwm_chassis_detail.proto";
-import "canbus/hy11_chassis_detail.proto";
-""",
-            "@_CHASSIS_DETAIL_MESAGE_TYPE_@" : """
-        M5ChassisDetail m5 = 2;
-        MarChassisDetail mar = 3;
-        M7ChassisDetail m7 = 4;
-        deeproute.canbus.byd.BydChassisDetail byd = 5;
-        GwmChassisDetail gwm = 6;
-        SmartHy11ChassisDetail smart_hy11 = 7;
-        deeproute.canbus.gwm.p03.GwmP03ChassisDetail gwm_p03 = 10;
+            "@_CHASSIS_DETAIL_MESSAGE_TYPE_@" : """
+        deeproute.canbus.gwm.tank.GwmTankChassisDetail gwm_tank = 9;
 """,
         },
         ("@deeproute_build_tools//:DE09-ET_setting") : {
             "@_IMPORT_CHASSIS_DETAIL_PROTO_@" : """
 import "canbus/gwm_de09_chassis_detail.proto";
-// strip later
-import "canbus/m5_chassis_detail.proto";
-import "canbus/mar_chassis_detail.proto";
-import "canbus/m7_chassis_detail.proto";
-import "canbus/byd_chassis_detail.proto";
-import "canbus/gwm_chassis_detail.proto";
-import "canbus/hy11_chassis_detail.proto";
 """,
-            "@_CHASSIS_DETAIL_MESAGE_TYPE_@" : """
-        M5ChassisDetail m5 = 2;
-        MarChassisDetail mar = 3;
-        M7ChassisDetail m7 = 4;
-        deeproute.canbus.byd.BydChassisDetail byd = 5;
-        GwmChassisDetail gwm = 6;
-        SmartHy11ChassisDetail smart_hy11 = 7;
+            "@_CHASSIS_DETAIL_MESSAGE_TYPE_@" : """
         deeproute.canbus.gwm.de09.GwmDe09ChassisDetail gwm_de09 = 12;
 """,
         },
         ("@deeproute_build_tools//:P177-ET_setting") : {
             "@_IMPORT_CHASSIS_DETAIL_PROTO_@" : """
 import "canbus/gl_p177_chassis_detail.proto";
-// strip later
-import "canbus/m5_chassis_detail.proto";
-import "canbus/mar_chassis_detail.proto";
-import "canbus/m7_chassis_detail.proto";
-import "canbus/byd_chassis_detail.proto";
-import "canbus/gwm_chassis_detail.proto";
-import "canbus/hy11_chassis_detail.proto";
 """,
-            "@_CHASSIS_DETAIL_MESAGE_TYPE_@" : """
-        M5ChassisDetail m5 = 2;
-        MarChassisDetail mar = 3;
-        M7ChassisDetail m7 = 4;
-        deeproute.canbus.byd.BydChassisDetail byd = 5;
-        GwmChassisDetail gwm = 6;
-        SmartHy11ChassisDetail smart_hy11 = 7;
+            "@_CHASSIS_DETAIL_MESSAGE_TYPE_@" : """
         deeproute.canbus.gl.p177.GlP177ChassisDetail gl_p177 = 11;
 """,
         },
         ("@deeproute_build_tools//:HY11-ET_setting") : {
             "@_IMPORT_CHASSIS_DETAIL_PROTO_@" : """
-// strip later
-import "canbus/m5_chassis_detail.proto";
-import "canbus/mar_chassis_detail.proto";
-import "canbus/m7_chassis_detail.proto";
-import "canbus/byd_chassis_detail.proto";
-import "canbus/gwm_chassis_detail.proto";
 import "canbus/hy11_chassis_detail.proto";  // keep
 """,
-            "@_CHASSIS_DETAIL_MESAGE_TYPE_@" : """
-        M5ChassisDetail m5 = 2;
-        MarChassisDetail mar = 3;
-        M7ChassisDetail m7 = 4;
-        deeproute.canbus.byd.BydChassisDetail byd = 5;
-        GwmChassisDetail gwm = 6;
+            "@_CHASSIS_DETAIL_MESSAGE_TYPE_@" : """
         SmartHy11ChassisDetail smart_hy11 = 7;  // keep
 """,
         },
@@ -544,67 +427,21 @@ proto_library(
         "//proto/common:vehicle_signal_proto",
     ] + selects.with_or({
         ("@deeproute_build_tools//:AT7-ET_setting") : [
-            "//proto/canbus:m5_chassis_detail_proto",
-            "//proto/canbus:mar_chassis_detail_proto",
             "//proto/canbus:m7_chassis_detail_proto", # keep
-            "//proto/canbus:gwm_chassis_detail_proto",
-            "//proto/canbus:byd_chassis_detail_proto",
-            "//proto/canbus:hy11_chassis_detail_proto",
         ],
-        ("@deeproute_build_tools//:C01-PT_setting", "@deeproute_build_tools//:M8-ALL_setting") : [
-            "//proto/canbus:m5_chassis_detail_proto",
-            "//proto/canbus:mar_chassis_detail_proto",
-            "//proto/canbus:m7_chassis_detail_proto",
+        ("@deeproute_build_tools//:C01-PT_setting", "@deeproute_build_tools//:M8-ALL_setting", "@deeproute_build_tools//:C01T-ET_setting") : [
             "//proto/canbus:gwm_chassis_detail_proto", # keep
-            "//proto/canbus:byd_chassis_detail_proto",
-            "//proto/canbus:hy11_chassis_detail_proto",
         ],
-        ("@deeproute_build_tools//:D03-ET_setting") : [
-            "//proto/canbus:gwm_d03_chassis_detail_proto",
-            # TODO: remove following
-            "//proto/canbus:m5_chassis_detail_proto",
-            "//proto/canbus:mar_chassis_detail_proto",
-            "//proto/canbus:m7_chassis_detail_proto",
-            "//proto/canbus:gwm_chassis_detail_proto",
-            "//proto/canbus:byd_chassis_detail_proto",
-            "//proto/canbus:hy11_chassis_detail_proto",
-        ],
-        ("@deeproute_build_tools//:P03-ET_setting") : [
-            "//proto/canbus:gwm_p03_chassis_detail_proto",
-            # TODO: remove following
-            "//proto/canbus:m5_chassis_detail_proto",
-            "//proto/canbus:mar_chassis_detail_proto",
-            "//proto/canbus:m7_chassis_detail_proto",
-            "//proto/canbus:gwm_chassis_detail_proto",
-            "//proto/canbus:byd_chassis_detail_proto",
-            "//proto/canbus:hy11_chassis_detail_proto",
+        ("@deeproute_build_tools//:TANK-ALL_setting") : [
+            "//proto/canbus:gwm_tank_chassis_detail_proto",
         ],
         ("@deeproute_build_tools//:DE09-ET_setting") : [
             "//proto/canbus:gwm_de09_chassis_detail_proto",
-            # TODO: remove following
-            "//proto/canbus:m5_chassis_detail_proto",
-            "//proto/canbus:mar_chassis_detail_proto",
-            "//proto/canbus:m7_chassis_detail_proto",
-            "//proto/canbus:gwm_chassis_detail_proto",
-            "//proto/canbus:byd_chassis_detail_proto",
-            "//proto/canbus:hy11_chassis_detail_proto",
         ],
         ("@deeproute_build_tools//:P177-ET_setting") : [
             "//proto/canbus:gl_p177_chassis_detail_proto",
-            # TODO: remove following
-            "//proto/canbus:m5_chassis_detail_proto",
-            "//proto/canbus:mar_chassis_detail_proto",
-            "//proto/canbus:m7_chassis_detail_proto",
-            "//proto/canbus:gwm_chassis_detail_proto",
-            "//proto/canbus:byd_chassis_detail_proto",
-            "//proto/canbus:hy11_chassis_detail_proto",
         ],
         ("@deeproute_build_tools//:HY11-ET_setting") : [
-            "//proto/canbus:m5_chassis_detail_proto",
-            "//proto/canbus:mar_chassis_detail_proto",
-            "//proto/canbus:m7_chassis_detail_proto",
-            "//proto/canbus:gwm_chassis_detail_proto",
-            "//proto/canbus:byd_chassis_detail_proto",
             "//proto/canbus:hy11_chassis_detail_proto", # keep
         ],
     }),
@@ -635,12 +472,9 @@ proto_library(
         "//proto/common/configs:vehicle_config_proto",
         "//proto/canbus:byd_chassis_detail_proto",
         "//proto/canbus:gwm_chassis_detail_proto",
-        "//proto/canbus:gwm_d03_chassis_detail_proto",
-        "//proto/canbus:gwm_p03_chassis_detail_proto",
+        "//proto/canbus:gwm_tank_chassis_detail_proto",
         "//proto/canbus:gwm_de09_chassis_detail_proto",
         "//proto/canbus:gl_p177_chassis_detail_proto",
-        "//proto/canbus:byd_tang_adas_detail_proto",
-        "//proto/canbus:byd_tang_chassis_detail_proto",
         "//proto/canbus:hy11_chassis_detail_proto",
     ],
     strip_import_prefix = "/proto/",

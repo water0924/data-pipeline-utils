@@ -12865,6 +12865,22 @@ message RSDS_R_SGU_HEAD_5CF {
   optional int32 rsds_r_sgu_head_block_counter = 22;
 }
 
+message EVENT_MESSAGE_VALIDITY {
+  optional bool eventmessage_hut6_validity = 1;
+  optional bool eventmessage_hut7_validity = 2;
+  optional bool eventmessage_peps1_validity = 3;
+  optional bool eventmessage_t_box_fd6_validity = 4;
+  optional bool eventmessage_hut33_validity = 5;
+  optional bool eventmessage_hut30_validity = 6;
+  optional bool eventmessage_hut23_validity = 7;
+  optional bool eventmessage_hut22_validity = 8;
+  optional bool eventmessage_hut20_validity = 9;
+  optional bool eventmessage_hut21_validity = 10;
+  optional bool eventmessage_hut15_validity = 11;
+  optional bool eventmessage_hut_fd4_validity = 12;
+  optional bool eventmessage_ble2_validity = 13;
+}
+
 message GwmDe09ChassisDetail {
   optional ECM_FD2_103 ecm_fd2_103 = 1; // report message
   optional ECM1_111 ecm1_111 = 2; // report message
@@ -12991,4 +13007,7 @@ message GwmDe09ChassisDetail {
   optional RSDS_R_SGU8_597 rsds_r_sgu8_597 = 123; // report message
   optional RSDS_L_SGU_HEAD_5CE rsds_l_sgu_head_5ce = 124; // report message
   optional RSDS_R_SGU_HEAD_5CF rsds_r_sgu_head_5cf = 125; // report message
+
+/* event_message_validity */
+  optional EVENT_MESSAGE_VALIDITY event_message_validity = 200; // report message
 }

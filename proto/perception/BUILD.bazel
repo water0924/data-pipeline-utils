@@ -115,6 +115,7 @@ proto_library(
     srcs = ["deeproute_perception_rear_warning.proto"],
     deps = [
         "//proto/common:geometry_proto",
+        "//proto/perception:deeproute_perception_obstacle_proto"
     ],
     strip_import_prefix = "/proto/",
 )

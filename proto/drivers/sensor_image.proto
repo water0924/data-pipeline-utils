@@ -77,18 +77,24 @@ message Image {
 
   // Time it takes for image exposure, in nano-second.
   optional uint64 exposure_duration_ns = 9; 
+  // Sequence number of message in shm block.
+  optional uint64 shm_msg_seq = 10;
 }
 
 message CompressedImage {
   optional deeproute.common.Header header = 1;
 
   // Specifies the format of the data
-  //  Acceptable values: jpeg, png
+  // Acceptable values: jpeg, png
   optional string format = 2;
   optional bytes data = 3;  // Compressed image buffer
 
   // Time it takes for image exposure, in nano-second.
   optional uint64 exposure_duration_ns = 4;
+
+  // Specifies the encoding type of the data
+  // Acceptable values: I, P, U(Unkown)
+  optional string type = 5;
 }
 
 message LumaData {

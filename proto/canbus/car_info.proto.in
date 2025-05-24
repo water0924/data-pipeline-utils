@@ -172,7 +172,12 @@ message ShiftReport {
   optional deeproute.canbus.Chassis.GearPosition actual_gear = 1;
   optional deeproute.canbus.Chassis.GearPosition requested_gear = 2;
   
-  optional bool shift_override = 3;
+  enum ShiftOverrideType {
+    NO_OVERRIDE = 0;
+    VALID_OVERRIDE = 1;
+    INVALID_OVERRIDE= 2;
+  }
+  optional ShiftOverrideType shift_override = 3;
   optional bool prepare_to_shift = 4 [default = false];
 }
 
@@ -227,6 +232,8 @@ message BrakeReport {
   optional double master_cylinder_pressure = 11;
 
   optional bool active = 12; // interface is executing(1), or not(0)
+  
+  optional double  drvr_decel_req = 13; //Driver deacceleration request
 }
 
 message BrakeInfo {
@@ -284,7 +291,7 @@ message BrakeInfo {
 message ChassisDetails {
   optional deeproute.common.VehicleBrand brand = 1;
   oneof detail {
-    @_CHASSIS_DETAIL_MESAGE_TYPE_@
+    @_CHASSIS_DETAIL_MESSAGE_TYPE_@
   }
 }
 

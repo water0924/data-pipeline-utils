@@ -90,7 +90,7 @@ message ParkingRenderContext {
   int64 timestamp = 1;
   ParkingSpaceMapping parkingspace_mapping = 2;
   bool background_search = 3;  // 是否后台搜车位，不是情况下仪表不释放车位
-  int32 target_parkingspace_id = 4;  // 巡航目标车位
+  int32 target_parkingspace_id = 4;  // 目标车位
   ParkingActiveMode parking_active_mode = 5;
   string parkin_trajectory_id = 6;  // 全局轨迹线path匹配
   bool search_suspend = 7;  // 是否搜车位暂停，暂停情况下不释放车位 （后续弃用）
@@ -115,6 +115,8 @@ message ParkingRenderContext {
   HUTVPAPage hut_vpa_page = 17;
   PrkModType park_in_type = 18;
   HAVPNaviTips havp_navi_tips = 19;
+  bool enter_user_defined_park = 20;
+  bool apa_force_release = 21;
 }
 
 message TSISign {
@@ -129,7 +131,8 @@ message TSISign {
     SIGN_WARN_LEFT_SHARP_TURN = 7;
     SIGN_WARN_RIGHT_SHARP_TURN = 8;
     SIGN_WARN_MORE_TURN = 9;
-    SIGN_UNBAN_OVERTAKE = 10;
+    SIGN_UNBAN_OVERTAKE = 10;  // 解除禁止超车
+    SIGN_BAN_OVERTAKE = 11;  // 禁止超车
   }
   SignType sign_type = 1;
   int32 limit_value = 2;

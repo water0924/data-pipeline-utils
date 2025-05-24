@@ -12,23 +12,18 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from proto.dem import execution_process_state_pb2 as dem_dot_execution__process__state__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1e\x64\x65m/function_group_state.proto\x12\rdeeproute.dem\"\x88\x01\n\x12\x46unctionGroupState\x12\x1b\n\x13\x66unction_group_name\x18\x01 \x01(\t\x12\x12\n\nstate_name\x18\x02 \x01(\t\x12\x41\n\x15\x65xecutions_start_time\x18\x03 \x01(\x0b\x32\".deeproute.dem.ExecutionsStartTime\"J\n\x12\x45xecutionStartTime\x12\x16\n\x0e\x65xecution_name\x18\x01 \x01(\t\x12\x1c\n\x14\x65xecution_start_time\x18\x02 \x01(\x03\"W\n\x13\x45xecutionsStartTime\x12@\n\x15\x65xecutions_start_time\x18\x01 \x03(\x0b\x32!.deeproute.dem.ExecutionStartTime\"[\n\x1b\x42usinessFunctionGroupsState\x12<\n\x11\x62usiness_fg_state\x18\x01 \x03(\x0b\x32!.deeproute.dem.FunctionGroupState')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1e\x64\x65m/function_group_state.proto\x12\rdeeproute.dem\x1a!dem/execution_process_state.proto\"J\n\x12\x45xecutionStartTime\x12\x16\n\x0e\x65xecution_name\x18\x01 \x01(\t\x12\x1c\n\x14\x65xecution_start_time\x18\x02 \x01(\x03\"W\n\x13\x45xecutionsStartTime\x12@\n\x15\x65xecutions_start_time\x18\x01 \x03(\x0b\x32!.deeproute.dem.ExecutionStartTime\"\x88\x01\n\x12\x46unctionGroupState\x12\x1b\n\x13\x66unction_group_name\x18\x01 \x01(\t\x12\x12\n\nstate_name\x18\x02 \x01(\t\x12\x41\n\x15\x65xecutions_start_time\x18\x03 \x01(\x0b\x32\".deeproute.dem.ExecutionsStartTime\"[\n\x1b\x42usinessFunctionGroupsState\x12<\n\x11\x62usiness_fg_state\x18\x01 \x03(\x0b\x32!.deeproute.dem.FunctionGroupState\"\xac\x01\n\x14\x44\x65mFunctionGroupInfo\x12*\n\tnode_info\x18\x01 \x03(\x0b\x32\x17.deeproute.dem.NodeInfo\x12\x1b\n\x13\x66unction_group_name\x18\x02 \x01(\t\x12\x1c\n\x14\x66unction_group_state\x18\x03 \x01(\t\x12\x16\n\x0e\x63urrent_dem_id\x18\x04 \x01(\x05\x12\x15\n\rcurrent_fg_id\x18\x05 \x01(\x05')
 
 
 
-_FUNCTIONGROUPSTATE = DESCRIPTOR.message_types_by_name['FunctionGroupState']
 _EXECUTIONSTARTTIME = DESCRIPTOR.message_types_by_name['ExecutionStartTime']
 _EXECUTIONSSTARTTIME = DESCRIPTOR.message_types_by_name['ExecutionsStartTime']
+_FUNCTIONGROUPSTATE = DESCRIPTOR.message_types_by_name['FunctionGroupState']
 _BUSINESSFUNCTIONGROUPSSTATE = DESCRIPTOR.message_types_by_name['BusinessFunctionGroupsState']
-FunctionGroupState = _reflection.GeneratedProtocolMessageType('FunctionGroupState', (_message.Message,), {
-  'DESCRIPTOR' : _FUNCTIONGROUPSTATE,
-  '__module__' : 'dem.function_group_state_pb2'
-  # @@protoc_insertion_point(class_scope:deeproute.dem.FunctionGroupState)
-  })
-_sym_db.RegisterMessage(FunctionGroupState)
-
+_DEMFUNCTIONGROUPINFO = DESCRIPTOR.message_types_by_name['DemFunctionGroupInfo']
 ExecutionStartTime = _reflection.GeneratedProtocolMessageType('ExecutionStartTime', (_message.Message,), {
   'DESCRIPTOR' : _EXECUTIONSTARTTIME,
   '__module__' : 'dem.function_group_state_pb2'
@@ -43,6 +38,13 @@ ExecutionsStartTime = _reflection.GeneratedProtocolMessageType('ExecutionsStartT
   })
 _sym_db.RegisterMessage(ExecutionsStartTime)
 
+FunctionGroupState = _reflection.GeneratedProtocolMessageType('FunctionGroupState', (_message.Message,), {
+  'DESCRIPTOR' : _FUNCTIONGROUPSTATE,
+  '__module__' : 'dem.function_group_state_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.dem.FunctionGroupState)
+  })
+_sym_db.RegisterMessage(FunctionGroupState)
+
 BusinessFunctionGroupsState = _reflection.GeneratedProtocolMessageType('BusinessFunctionGroupsState', (_message.Message,), {
   'DESCRIPTOR' : _BUSINESSFUNCTIONGROUPSSTATE,
   '__module__' : 'dem.function_group_state_pb2'
@@ -50,15 +52,24 @@ BusinessFunctionGroupsState = _reflection.GeneratedProtocolMessageType('Business
   })
 _sym_db.RegisterMessage(BusinessFunctionGroupsState)
 
+DemFunctionGroupInfo = _reflection.GeneratedProtocolMessageType('DemFunctionGroupInfo', (_message.Message,), {
+  'DESCRIPTOR' : _DEMFUNCTIONGROUPINFO,
+  '__module__' : 'dem.function_group_state_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.dem.DemFunctionGroupInfo)
+  })
+_sym_db.RegisterMessage(DemFunctionGroupInfo)
+
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _FUNCTIONGROUPSTATE._serialized_start=50
-  _FUNCTIONGROUPSTATE._serialized_end=186
-  _EXECUTIONSTARTTIME._serialized_start=188
-  _EXECUTIONSTARTTIME._serialized_end=262
-  _EXECUTIONSSTARTTIME._serialized_start=264
-  _EXECUTIONSSTARTTIME._serialized_end=351
-  _BUSINESSFUNCTIONGROUPSSTATE._serialized_start=353
-  _BUSINESSFUNCTIONGROUPSSTATE._serialized_end=444
+  _EXECUTIONSTARTTIME._serialized_start=84
+  _EXECUTIONSTARTTIME._serialized_end=158
+  _EXECUTIONSSTARTTIME._serialized_start=160
+  _EXECUTIONSSTARTTIME._serialized_end=247
+  _FUNCTIONGROUPSTATE._serialized_start=250
+  _FUNCTIONGROUPSTATE._serialized_end=386
+  _BUSINESSFUNCTIONGROUPSSTATE._serialized_start=388
+  _BUSINESSFUNCTIONGROUPSSTATE._serialized_end=479
+  _DEMFUNCTIONGROUPINFO._serialized_start=482
+  _DEMFUNCTIONGROUPINFO._serialized_end=654
 # @@protoc_insertion_point(module_scope)

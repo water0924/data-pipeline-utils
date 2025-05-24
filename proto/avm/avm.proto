@@ -22,6 +22,9 @@ enum AroundViewMode {
   AROUND_VIEW_BACK_LEFT_WHEEL = 8;
   AROUND_VIEW_BACK_RIGHT_WHEEL = 9;
   AROUND_VIEW_3D_CONQUEROR = 10;
+  AROUND_VIEW_BROAD_FRONT_WHEEL = 11;
+  AROUND_VIEW_BROAD_BACK_WHEEL = 12;
+  AROUND_VIEW_FOUR_WHEEL = 13;
 }
 
 enum BirdEyeViewMode {
@@ -158,6 +161,18 @@ message AvmParams {
     optional deeproute.common.Point3D bottom_right = 2;  // bottom right pos reference to Vehicle
   }
   optional BirdEyeViewRange bird_eye_view_range = 1;
+  optional double ego_parking_space_scale = 3; 
+}
+
+message Matrix3f {
+  repeated float data = 1; // 3x3 matrix
+}
+
+message AvmCoordMatrixInfo {
+  optional Matrix3f k_matrix = 1;  // the matrix of virtual camera matrix
+  optional float bev_height = 2;  // the virtual camera height
+  optional float sensing_height = 3;  // the sensing height
+  optional deeproute.common.Transformation3 iso_vehicle_sensing = 4; // the matrix of bev coord to vehicle
 }
 
 // topic: /avm/command
@@ -181,6 +196,7 @@ message AvmCommandRP {
   optional AvmParams avm_params = 5;
   optional float curr_yaw_angle = 6;
   optional float curr_pitch_angle = 7;
+  optional AvmCoordMatrixInfo avm_coord_info = 8;
 }
 
 enum AvmErrorCode {

@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\'cloud_cfgs/functions_cloud_config.proto\x12\x14\x64\x65\x65proute.cloud_cfgs\"\xc9\x02\n\x0f\x46unctionsConfig\x12\x11\n\tconfig_id\x18\x04 \x01(\t\x12\x13\n\x0bupdate_time\x18\x05 \x01(\t\x12\x0f\n\x07version\x18\x06 \x01(\t\x12\x44\n\ractive_safety\x18\x01 \x01(\x0b\x32-.deeproute.cloud_cfgs.ActiveSafetyCloudConfig\x12\x39\n\x07parking\x18\x02 \x01(\x0b\x32(.deeproute.cloud_cfgs.ParkingCloudConfig\x12\x41\n\x0b\x63\x61libration\x18\x03 \x01(\x0b\x32,.deeproute.cloud_cfgs.CalibrationCloudConfig\x12\x39\n\x07\x64riving\x18\x07 \x01(\x0b\x32(.deeproute.cloud_cfgs.DrivingCloudConfig\"\xe1\x02\n\x17\x41\x63tiveSafetyCloudConfig\x12M\n\x08\x61\x65\x62_gear\x18\x01 \x01(\x0e\x32&.deeproute.cloud_cfgs.ActiveSafetyGear:\x13\x41\x63tiveSafety_MIDDLE\x12S\n\x0e\x66ront_meb_gear\x18\x02 \x01(\x0e\x32&.deeproute.cloud_cfgs.ActiveSafetyGear:\x13\x41\x63tiveSafety_MIDDLE\x12R\n\rrear_meb_gear\x18\x03 \x01(\x0e\x32&.deeproute.cloud_cfgs.ActiveSafetyGear:\x13\x41\x63tiveSafety_MIDDLE\x12N\n\trctb_gear\x18\x04 \x01(\x0e\x32&.deeproute.cloud_cfgs.ActiveSafetyGear:\x13\x41\x63tiveSafety_MIDDLE\"\xa3\x01\n\x0e\x41PACloudConfig\x12H\n\x0bsafety_mode\x18\x01 \x01(\x0e\x32!.deeproute.cloud_cfgs.ParkingMode:\x10PARKING_STANDARD\x12G\n\nspeed_mode\x18\x02 \x01(\x0e\x32!.deeproute.cloud_cfgs.ParkingMode:\x10PARKING_STANDARD\"\xc0\x02\n\x0fHAVPCloudConfig\x12J\n\rdriving_style\x18\x01 \x01(\x0e\x32!.deeproute.cloud_cfgs.ParkingMode:\x10PARKING_STANDARD\x12!\n\x13\x61\x63tive_notification\x18\x02 \x01(\x08:\x04true\x12\"\n\x13\x62\x61rrier_gate_access\x18\x03 \x01(\x08:\x05\x66\x61lse\x12\x30\n\"enable_outdoor_parking_lot_routing\x18\x04 \x01(\x08:\x04true\x12 \n\x11\x65nable_expand_map\x18\x05 \x01(\x08:\x05\x66\x61lse\x12\x1b\n\renable_detour\x18\x06 \x01(\x08:\x04true\x12)\n\x1b\x65nable_reverse_slope_search\x18\x07 \x01(\x08:\x04true\"[\n\x0fRADSCloudConfig\x12H\n\x0bsafety_mode\x18\x01 \x01(\x0e\x32!.deeproute.cloud_cfgs.ParkingMode:\x10PARKING_STANDARD\"\xd8\x01\n\x12ParkingCloudConfig\x12>\n\x10\x61pa_cloud_config\x18\x01 \x01(\x0b\x32$.deeproute.cloud_cfgs.APACloudConfig\x12@\n\x11havp_cloud_config\x18\x02 \x01(\x0b\x32%.deeproute.cloud_cfgs.HAVPCloudConfig\x12@\n\x11rads_cloud_config\x18\x03 \x01(\x0b\x32%.deeproute.cloud_cfgs.RADSCloudConfig\"\xb6\x01\n\x17\x43\x61libMonitorCloudConfig\x12\x1d\n\x11update_local_file\x18\x01 \x01(\x08\x42\x02\x18\x01\x12\x1d\n\x15\x61vm_update_local_file\x18\x02 \x01(\x08\x12\x1d\n\x15svm_update_local_file\x18\x03 \x01(\x08\x12\x1f\n\x17lidar_update_local_file\x18\x04 \x01(\x08\x12\x1d\n\x15ins_update_local_file\x18\x05 \x01(\x08\"e\n\x16\x43\x61librationCloudConfig\x12K\n\x14\x63\x61lib_monitor_config\x18\x01 \x01(\x0b\x32-.deeproute.cloud_cfgs.CalibMonitorCloudConfig\"K\n\x12\x44rivingCloudConfig\x12\x11\n\texam_mode\x18\x01 \x01(\x08\x12\"\n\x13\x65nable_waiting_area\x18\x02 \x01(\x08:\x05\x66\x61lse*\x88\x01\n\x10\x41\x63tiveSafetyGear\x12\x14\n\x10\x41\x63tiveSafety_OFF\x10\x00\x12\x14\n\x10\x41\x63tiveSafety_LOW\x10\x01\x12\x17\n\x13\x41\x63tiveSafety_MIDDLE\x10\x02\x12\x15\n\x11\x41\x63tiveSafety_HIGH\x10\x03\x12\x18\n\x14\x41\x63tiveSafety_DEFAULT\x10\x04*w\n\x0bParkingMode\x12\x0f\n\x0bPARKING_OFF\x10\x00\x12\x15\n\x11PARKING_AGGRESIVE\x10\x01\x12\x14\n\x10PARKING_STANDARD\x10\x02\x12\x18\n\x14PARKING_CONSERVATIVE\x10\x03\x12\x10\n\x0cPARKING_DEMO\x10\x04')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\'cloud_cfgs/functions_cloud_config.proto\x12\x14\x64\x65\x65proute.cloud_cfgs\"\xc9\x02\n\x0f\x46unctionsConfig\x12\x11\n\tconfig_id\x18\x04 \x01(\t\x12\x13\n\x0bupdate_time\x18\x05 \x01(\t\x12\x0f\n\x07version\x18\x06 \x01(\t\x12\x44\n\ractive_safety\x18\x01 \x01(\x0b\x32-.deeproute.cloud_cfgs.ActiveSafetyCloudConfig\x12\x39\n\x07parking\x18\x02 \x01(\x0b\x32(.deeproute.cloud_cfgs.ParkingCloudConfig\x12\x41\n\x0b\x63\x61libration\x18\x03 \x01(\x0b\x32,.deeproute.cloud_cfgs.CalibrationCloudConfig\x12\x39\n\x07\x64riving\x18\x07 \x01(\x0b\x32(.deeproute.cloud_cfgs.DrivingCloudConfig\"\xc1\x03\n\x17\x41\x63tiveSafetyCloudConfig\x12M\n\x08\x61\x65\x62_gear\x18\x01 \x01(\x0e\x32&.deeproute.cloud_cfgs.ActiveSafetyGear:\x13\x41\x63tiveSafety_MIDDLE\x12S\n\x0e\x66ront_meb_gear\x18\x02 \x01(\x0e\x32&.deeproute.cloud_cfgs.ActiveSafetyGear:\x13\x41\x63tiveSafety_MIDDLE\x12R\n\rrear_meb_gear\x18\x03 \x01(\x0e\x32&.deeproute.cloud_cfgs.ActiveSafetyGear:\x13\x41\x63tiveSafety_MIDDLE\x12N\n\trctb_gear\x18\x04 \x01(\x0e\x32&.deeproute.cloud_cfgs.ActiveSafetyGear:\x13\x41\x63tiveSafety_MIDDLE\x12^\n!active_safety_cloud_config_detail\x18\x05 \x01(\x0b\x32\x33.deeproute.cloud_cfgs.ActiveSafetyCloudConfigDetail\"\x85\r\n\x1d\x41\x63tiveSafetyCloudConfigDetail\x12\x15\n\x06\x65nable\x18\x01 \x01(\x08:\x05\x66\x61lse\x12\'\n\x1avehicle_max_speed_decrease\x18\x02 \x01(\x01:\x03\x31\x35\x30\x12%\n\x18truck_max_speed_decrease\x18\x03 \x01(\x01:\x03\x31\x35\x30\x12*\n\x1dpedestrian_max_speed_decrease\x18\x04 \x01(\x01:\x03\x31\x35\x30\x12\'\n\x1a\x62icycle_max_speed_decrease\x18\x05 \x01(\x01:\x03\x31\x35\x30\x12,\n\x1ftraffic_cone_max_speed_decrease\x18\x06 \x01(\x01:\x03\x31\x35\x30\x12\x31\n$unmovable_unknown_max_speed_decrease\x18\x07 \x01(\x01:\x03\x31\x35\x30\x12+\n\x1e\x64\x65\x66\x61ult_obj_max_speed_decrease\x18\x08 \x01(\x01:\x03\x31\x35\x30\x12\x30\n!enable_obj_model_based_trajectory\x18\t \x01(\x08:\x05\x66\x61lse\x12)\n\x1b\x65nable_obj_steer_trajectory\x18\n \x01(\x08:\x04true\x12\x30\n!enable_adc_model_based_prediction\x18\x0b \x01(\x08:\x05\x66\x61lse\x12&\n\x17\x65nable_reduce_adc_width\x18\x0c \x01(\x08:\x05\x66\x61lse\x12$\n\x16reduce_adc_width_ratio\x18\r \x01(\x01:\x04\x30.12\x12&\n\x1areduce_adc_width_max_speed\x18\x0e \x01(\x01:\x02\x33\x30\x12)\n\x1a\x65nable_tracking_time_check\x18\x0f \x01(\x08:\x05\x66\x61lse\x12\'\n\x1bmin_tracking_time_adc_speed\x18\x10 \x01(\x01:\x02\x36\x30\x12\x1e\n\x11min_tracking_time\x18\x11 \x01(\x01:\x03\x31.5\x12#\n\x17max_tracking_time_decel\x18\x12 \x01(\x01:\x02-5\x12+\n\x1c\x65nable_large_curvature_check\x18\x13 \x01(\x08:\x05\x66\x61lse\x12 \n\x14min_curvature_radius\x18\x14 \x01(\x01:\x02\x35\x30\x12%\n\x16\x64isable_low_pedestrian\x18\x15 \x01(\x08:\x05\x66\x61lse\x12+\n\x1d\x65nable_slow_car_following_obj\x18\x16 \x01(\x08:\x04true\x12#\n\x15\x65nable_cut_in_obj_dtc\x18\x17 \x01(\x08:\x04true\x12\x33\n$disable_dists_stop_change_lower20kph\x18\x18 \x01(\x08:\x05\x66\x61lse\x12\x1e\n\x13min_single_cone_num\x18\x19 \x01(\x03:\x01\x32\x12%\n\x16ignore_cone_upper80kph\x18\x1a \x01(\x08:\x05\x66\x61lse\x12%\n\x17\x65nable_nudge_prediction\x18\x1b \x01(\x08:\x04true\x12&\n\x18\x65nable_unknown_unmovable\x18\x1c \x01(\x08:\x04true\x12\x19\n\x0e\x64ist_stop_0kph\x18\x1d \x01(\x01:\x01\x30\x12\x1c\n\x0f\x64ist_stop_10kph\x18\x1e \x01(\x01:\x03\x30.5\x12\x1c\n\x0f\x64ist_stop_20kph\x18\x1f \x01(\x01:\x03\x30.7\x12\x1c\n\x0f\x64ist_stop_80kph\x18  \x01(\x01:\x03\x30.7\x12\x1b\n\x10\x64ist_stop_120kph\x18! \x01(\x01:\x01\x31\x12\x1b\n\x10\x64ist_stop_150kph\x18\" \x01(\x01:\x01\x31\x12#\n\x14\x65nable_partial_brake\x18# \x01(\x08:\x05\x66\x61lse\x12\x34\n%enable_high_speed_c2c_crossing_hybrid\x18$ \x01(\x08:\x05\x66\x61lse\x12\x31\n\"revert_low_speed_adc_obj_low_speed\x18& \x01(\x08:\x05\x66\x61lse\x12\'\n\x18\x65nable_cut_in_calc_by_lc\x18\' \x01(\x08:\x05\x66\x61lse\x12.\n\x1frevert_close_dist_car_following\x18( \x01(\x08:\x05\x66\x61lse\x12)\n\x1ause_adc_speed_down_inhibit\x18) \x01(\x08:\x05\x66\x61lse\x12(\n\x1c\x61\x64\x63_speed_down_inhibit_thres\x18* \x01(\x01:\x02\x39\x30\"\xa3\x01\n\x0e\x41PACloudConfig\x12H\n\x0bsafety_mode\x18\x01 \x01(\x0e\x32!.deeproute.cloud_cfgs.ParkingMode:\x10PARKING_STANDARD\x12G\n\nspeed_mode\x18\x02 \x01(\x0e\x32!.deeproute.cloud_cfgs.ParkingMode:\x10PARKING_STANDARD\"\xc1\x02\n\x0fHAVPCloudConfig\x12J\n\rdriving_style\x18\x01 \x01(\x0e\x32!.deeproute.cloud_cfgs.ParkingMode:\x10PARKING_STANDARD\x12!\n\x13\x61\x63tive_notification\x18\x02 \x01(\x08:\x04true\x12\"\n\x13\x62\x61rrier_gate_access\x18\x03 \x01(\x08:\x05\x66\x61lse\x12\x30\n\"enable_outdoor_parking_lot_routing\x18\x04 \x01(\x08:\x04true\x12 \n\x11\x65nable_expand_map\x18\x05 \x01(\x08:\x05\x66\x61lse\x12\x1c\n\renable_detour\x18\x06 \x01(\x08:\x05\x66\x61lse\x12)\n\x1b\x65nable_reverse_slope_search\x18\x07 \x01(\x08:\x04true\"[\n\x0fRADSCloudConfig\x12H\n\x0bsafety_mode\x18\x01 \x01(\x0e\x32!.deeproute.cloud_cfgs.ParkingMode:\x10PARKING_STANDARD\"9\n\x0eRPACloudConfig\x12\'\n\x18\x65nable_leave_car_parking\x18\x01 \x01(\x08:\x05\x66\x61lse\"\x98\x02\n\x12ParkingCloudConfig\x12>\n\x10\x61pa_cloud_config\x18\x01 \x01(\x0b\x32$.deeproute.cloud_cfgs.APACloudConfig\x12@\n\x11havp_cloud_config\x18\x02 \x01(\x0b\x32%.deeproute.cloud_cfgs.HAVPCloudConfig\x12@\n\x11rads_cloud_config\x18\x03 \x01(\x0b\x32%.deeproute.cloud_cfgs.RADSCloudConfig\x12>\n\x10rpa_cloud_config\x18\x04 \x01(\x0b\x32$.deeproute.cloud_cfgs.RPACloudConfig\"\xb6\x01\n\x17\x43\x61libMonitorCloudConfig\x12\x1d\n\x11update_local_file\x18\x01 \x01(\x08\x42\x02\x18\x01\x12\x1d\n\x15\x61vm_update_local_file\x18\x02 \x01(\x08\x12\x1d\n\x15svm_update_local_file\x18\x03 \x01(\x08\x12\x1f\n\x17lidar_update_local_file\x18\x04 \x01(\x08\x12\x1d\n\x15ins_update_local_file\x18\x05 \x01(\x08\"e\n\x16\x43\x61librationCloudConfig\x12K\n\x14\x63\x61lib_monitor_config\x18\x01 \x01(\x0b\x32-.deeproute.cloud_cfgs.CalibMonitorCloudConfig\"f\n\x12\x44rivingCloudConfig\x12\x11\n\texam_mode\x18\x01 \x01(\x08\x12\"\n\x13\x65nable_waiting_area\x18\x02 \x01(\x08:\x05\x66\x61lse\x12\x19\n\x0b\x64riving_poa\x18\x03 \x01(\x08:\x04true*\x88\x01\n\x10\x41\x63tiveSafetyGear\x12\x14\n\x10\x41\x63tiveSafety_OFF\x10\x00\x12\x14\n\x10\x41\x63tiveSafety_LOW\x10\x01\x12\x17\n\x13\x41\x63tiveSafety_MIDDLE\x10\x02\x12\x15\n\x11\x41\x63tiveSafety_HIGH\x10\x03\x12\x18\n\x14\x41\x63tiveSafety_DEFAULT\x10\x04*w\n\x0bParkingMode\x12\x0f\n\x0bPARKING_OFF\x10\x00\x12\x15\n\x11PARKING_AGGRESIVE\x10\x01\x12\x14\n\x10PARKING_STANDARD\x10\x02\x12\x18\n\x14PARKING_CONSERVATIVE\x10\x03\x12\x10\n\x0cPARKING_DEMO\x10\x04')
 
 _ACTIVESAFETYGEAR = DESCRIPTOR.enum_types_by_name['ActiveSafetyGear']
 ActiveSafetyGear = enum_type_wrapper.EnumTypeWrapper(_ACTIVESAFETYGEAR)
@@ -35,9 +35,11 @@ PARKING_DEMO = 4
 
 _FUNCTIONSCONFIG = DESCRIPTOR.message_types_by_name['FunctionsConfig']
 _ACTIVESAFETYCLOUDCONFIG = DESCRIPTOR.message_types_by_name['ActiveSafetyCloudConfig']
+_ACTIVESAFETYCLOUDCONFIGDETAIL = DESCRIPTOR.message_types_by_name['ActiveSafetyCloudConfigDetail']
 _APACLOUDCONFIG = DESCRIPTOR.message_types_by_name['APACloudConfig']
 _HAVPCLOUDCONFIG = DESCRIPTOR.message_types_by_name['HAVPCloudConfig']
 _RADSCLOUDCONFIG = DESCRIPTOR.message_types_by_name['RADSCloudConfig']
+_RPACLOUDCONFIG = DESCRIPTOR.message_types_by_name['RPACloudConfig']
 _PARKINGCLOUDCONFIG = DESCRIPTOR.message_types_by_name['ParkingCloudConfig']
 _CALIBMONITORCLOUDCONFIG = DESCRIPTOR.message_types_by_name['CalibMonitorCloudConfig']
 _CALIBRATIONCLOUDCONFIG = DESCRIPTOR.message_types_by_name['CalibrationCloudConfig']
@@ -55,6 +57,13 @@ ActiveSafetyCloudConfig = _reflection.GeneratedProtocolMessageType('ActiveSafety
   # @@protoc_insertion_point(class_scope:deeproute.cloud_cfgs.ActiveSafetyCloudConfig)
   })
 _sym_db.RegisterMessage(ActiveSafetyCloudConfig)
+
+ActiveSafetyCloudConfigDetail = _reflection.GeneratedProtocolMessageType('ActiveSafetyCloudConfigDetail', (_message.Message,), {
+  'DESCRIPTOR' : _ACTIVESAFETYCLOUDCONFIGDETAIL,
+  '__module__' : 'cloud_cfgs.functions_cloud_config_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.cloud_cfgs.ActiveSafetyCloudConfigDetail)
+  })
+_sym_db.RegisterMessage(ActiveSafetyCloudConfigDetail)
 
 APACloudConfig = _reflection.GeneratedProtocolMessageType('APACloudConfig', (_message.Message,), {
   'DESCRIPTOR' : _APACLOUDCONFIG,
@@ -76,6 +85,13 @@ RADSCloudConfig = _reflection.GeneratedProtocolMessageType('RADSCloudConfig', (_
   # @@protoc_insertion_point(class_scope:deeproute.cloud_cfgs.RADSCloudConfig)
   })
 _sym_db.RegisterMessage(RADSCloudConfig)
+
+RPACloudConfig = _reflection.GeneratedProtocolMessageType('RPACloudConfig', (_message.Message,), {
+  'DESCRIPTOR' : _RPACLOUDCONFIG,
+  '__module__' : 'cloud_cfgs.functions_cloud_config_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.cloud_cfgs.RPACloudConfig)
+  })
+_sym_db.RegisterMessage(RPACloudConfig)
 
 ParkingCloudConfig = _reflection.GeneratedProtocolMessageType('ParkingCloudConfig', (_message.Message,), {
   'DESCRIPTOR' : _PARKINGCLOUDCONFIG,
@@ -110,26 +126,30 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _CALIBMONITORCLOUDCONFIG.fields_by_name['update_local_file']._options = None
   _CALIBMONITORCLOUDCONFIG.fields_by_name['update_local_file']._serialized_options = b'\030\001'
-  _ACTIVESAFETYGEAR._serialized_start=1920
-  _ACTIVESAFETYGEAR._serialized_end=2056
-  _PARKINGMODE._serialized_start=2058
-  _PARKINGMODE._serialized_end=2177
+  _ACTIVESAFETYGEAR._serialized_start=3839
+  _ACTIVESAFETYGEAR._serialized_end=3975
+  _PARKINGMODE._serialized_start=3977
+  _PARKINGMODE._serialized_end=4096
   _FUNCTIONSCONFIG._serialized_start=66
   _FUNCTIONSCONFIG._serialized_end=395
   _ACTIVESAFETYCLOUDCONFIG._serialized_start=398
-  _ACTIVESAFETYCLOUDCONFIG._serialized_end=751
-  _APACLOUDCONFIG._serialized_start=754
-  _APACLOUDCONFIG._serialized_end=917
-  _HAVPCLOUDCONFIG._serialized_start=920
-  _HAVPCLOUDCONFIG._serialized_end=1240
-  _RADSCLOUDCONFIG._serialized_start=1242
-  _RADSCLOUDCONFIG._serialized_end=1333
-  _PARKINGCLOUDCONFIG._serialized_start=1336
-  _PARKINGCLOUDCONFIG._serialized_end=1552
-  _CALIBMONITORCLOUDCONFIG._serialized_start=1555
-  _CALIBMONITORCLOUDCONFIG._serialized_end=1737
-  _CALIBRATIONCLOUDCONFIG._serialized_start=1739
-  _CALIBRATIONCLOUDCONFIG._serialized_end=1840
-  _DRIVINGCLOUDCONFIG._serialized_start=1842
-  _DRIVINGCLOUDCONFIG._serialized_end=1917
+  _ACTIVESAFETYCLOUDCONFIG._serialized_end=847
+  _ACTIVESAFETYCLOUDCONFIGDETAIL._serialized_start=850
+  _ACTIVESAFETYCLOUDCONFIGDETAIL._serialized_end=2519
+  _APACLOUDCONFIG._serialized_start=2522
+  _APACLOUDCONFIG._serialized_end=2685
+  _HAVPCLOUDCONFIG._serialized_start=2688
+  _HAVPCLOUDCONFIG._serialized_end=3009
+  _RADSCLOUDCONFIG._serialized_start=3011
+  _RADSCLOUDCONFIG._serialized_end=3102
+  _RPACLOUDCONFIG._serialized_start=3104
+  _RPACLOUDCONFIG._serialized_end=3161
+  _PARKINGCLOUDCONFIG._serialized_start=3164
+  _PARKINGCLOUDCONFIG._serialized_end=3444
+  _CALIBMONITORCLOUDCONFIG._serialized_start=3447
+  _CALIBMONITORCLOUDCONFIG._serialized_end=3629
+  _CALIBRATIONCLOUDCONFIG._serialized_start=3631
+  _CALIBRATIONCLOUDCONFIG._serialized_end=3732
+  _DRIVINGCLOUDCONFIG._serialized_start=3734
+  _DRIVINGCLOUDCONFIG._serialized_end=3836
 # @@protoc_insertion_point(module_scope)
