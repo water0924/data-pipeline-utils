@@ -59,7 +59,7 @@ topic_proto_map = {
     "/sensors/gnss/pose": ins_pb2.SensorsIns(),
     "/app/info": deeproute_app_access_pb2.AppInfo(),
     "/avm/command_response": avm_pb2.AvmCommandRP(),
-    "/dtu/command_response": dtu_command_pb2.DTUCMDRP(),
+    "/blc/algorithm_command_response": dtu_command_pb2.DTUCMDRP(),
     "/perception/ras_map": deeproute_perception_ras_map_pb2.RASMap(),
     "/map/ras_map_plus": deeproute_map_ras_map_plus_pb2.RASMapPlus(),
     "/perception/dtu_response": perception_dtu_interface_pb2.PerceptionResponse(),
@@ -112,7 +112,8 @@ topic_proto_map = {
     "/gwm/someip_adapter/havp_map_management_set":havp_map_pb2.AVPMapManage(),
     "/mcu_blc/chassis_detail":gl_p177_downstream_chassis_pb2.UpstreamChassis(),
     "/mcu_blc/chassis_detail_tank":gwm_tank_downstream_chassis_pb2.UpstreamChassisTank(),
-    "/blc/downstream_chassis_tank":gwm_tank_downstream_chassis_pb2.DownstreamChassisTank()
+    "/blc/downstream_chassis_tank":gwm_tank_downstream_chassis_pb2.DownstreamChassisTank(),
+    "/blc/downstream_chassis":gl_p177_downstream_chassis_pb2.DownstreamChassis(),
 }
 
 
