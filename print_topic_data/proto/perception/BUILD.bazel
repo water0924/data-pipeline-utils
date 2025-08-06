@@ -1,0 +1,305 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "ras_model_feature_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["ras_model_feature.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "ras_model_feature_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":ras_model_feature_proto",
+    ],
+)
+
+python_proto_library(
+    name = "ras_model_feature_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":ras_model_feature_proto",
+    ],
+)
+
+proto_library(
+    name = "traffic_light_detection_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["traffic_light_detection.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "traffic_light_detection_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":traffic_light_detection_proto",
+    ],
+)
+
+python_proto_library(
+    name = "traffic_light_detection_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":traffic_light_detection_proto",
+    ],
+)
+
+proto_library(
+    name = "perception_dtu_interface_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["perception_dtu_interface.proto"],
+    deps = [
+        "//proto/semantic_map:map_standby_area_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "perception_dtu_interface_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":perception_dtu_interface_proto",
+    ],
+)
+
+python_proto_library(
+    name = "perception_dtu_interface_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":perception_dtu_interface_proto",
+    ],
+)
+
+proto_library(
+    name = "deeproute_perception_ras_map_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["deeproute_perception_ras_map.proto"],
+    deps = [
+        "//proto/perception:deeproute_perception_obstacle_proto",
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "deeproute_perception_ras_map_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":deeproute_perception_ras_map_proto",
+    ],
+)
+
+python_proto_library(
+    name = "deeproute_perception_ras_map_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":deeproute_perception_ras_map_proto",
+    ],
+)
+
+proto_library(
+    name = "deeproute_perception_rear_warning_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["deeproute_perception_rear_warning.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/perception:deeproute_perception_obstacle_proto"
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "deeproute_perception_rear_warning_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":deeproute_perception_rear_warning_proto",
+    ],
+)
+
+python_proto_library(
+    name = "deeproute_perception_rear_warning_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":deeproute_perception_rear_warning_proto",
+    ],
+)
+
+
+proto_library(
+    name = "deeproute_perception_adb_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["deeproute_perception_adb.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/perception:deeproute_perception_obstacle_proto"
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "deeproute_perception_adb_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":deeproute_perception_adb_proto",
+    ],
+)
+
+python_proto_library(
+    name = "deeproute_perception_adb_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":deeproute_perception_adb_proto",
+    ],
+)
+
+proto_library(
+    name = "deeproute_perception_camera_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["deeproute_perception_camera.proto"],
+    deps = [
+        "//proto/perception:deeproute_perception_obstacle_proto",
+        "//proto/perception:traffic_light_detection_proto",
+        "//proto/perception:deeproute_perception_ras_map_proto",
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "deeproute_perception_camera_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":deeproute_perception_camera_proto",
+    ],
+)
+
+python_proto_library(
+    name = "deeproute_perception_camera_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":deeproute_perception_camera_proto",
+    ],
+)
+
+proto_library(
+    name = "deeproute_perception_obstacle_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["deeproute_perception_obstacle.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/prediction:trajectory_proto",
+        "//proto/prediction:intention_proto",
+        "//proto/prediction:offline_feature_proto",
+        "//proto/perception:deeproute_perception_invisible_proto",
+        "//proto/perception:perception_dtu_interface_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "deeproute_perception_obstacle_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":deeproute_perception_obstacle_proto",
+    ],
+)
+
+python_proto_library(
+    name = "deeproute_perception_obstacle_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":deeproute_perception_obstacle_proto",
+    ],
+)
+
+proto_library(
+    name = "perception_frame_context_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["perception_frame_context.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/common/vehicle_state:vehicle_state_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "perception_frame_context_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":perception_frame_context_proto",
+    ],
+)
+
+python_proto_library(
+    name = "perception_frame_context_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":perception_frame_context_proto",
+    ],
+)
+
+proto_library(
+    name = "perception_nn_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["perception_nn.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "perception_nn_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":perception_nn_proto",
+    ],
+)
+
+python_proto_library(
+    name = "perception_nn_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":perception_nn_proto",
+    ],
+)
+
+proto_library(
+    name = "deeproute_perception_invisible_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["deeproute_perception_invisible.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "deeproute_perception_invisible_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":deeproute_perception_invisible_proto",
+    ],
+)
+
+python_proto_library(
+    name = "deeproute_perception_invisible_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":deeproute_perception_invisible_proto",
+    ],
+)
+

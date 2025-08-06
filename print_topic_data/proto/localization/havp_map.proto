@@ -1,0 +1,146 @@
+syntax = "proto2";
+
+package deeproute.localization.havp_map;
+
+import "perception/deeproute_perception_ras_map.proto";
+import "perception/deeproute_perception_obstacle.proto";
+import "common/geometry.proto";
+
+enum ParkingSpaceTag {
+  PARK_SPACE_TAG_UNKNOWN = 0;                   // 未知
+  PARK_SPACE_TAG_CHARGING_STATION = 1;          // 充电桩
+  PARK_SPACE_TAG_ELEVATOR = 2;                  // 电梯
+	PARK_SPACE_TAG_FLOOR = 3;                     // 楼层
+	PARK_SPACE_TAG_PASSAGEWAY = 4;                // 出入口
+}
+
+message ParkingSpaceUsrInfo {
+  // map related information
+  optional int32 parking_space_id = 1;
+  optional int32 floor = 2;
+  optional int32 map_id = 3;
+  
+  // user-define information
+  optional string parking_space_name = 11;
+  optional ParkingSpaceTag parking_space_tag = 12;
+  optional bool is_favorite = 13;
+  optional bool is_regional_parking_space = 14;
+
+  optional int64 favorite_time = 20; // latest time added to favorite list
+}
+
+message HAVPParkingSpace {
+  optional ParkingSpaceUsrInfo parking_space_usr_info = 1;
+  optional perception.ParkingSpace parking_space = 2;
+}
+
+message HAVPObstacle {
+  optional perception.PerceptionObstacle obstacle = 1;
+  optional int32 floor = 2;
+}
+
+// TODO: Use better type
+enum TrajectoryType {
+  FLAT = 0;
+  DOWNHILL = 1;
+  UPHILL = 2;
+}
+
+enum TrajectoryPointCurveType {
+  STRAIGHT = 0;
+  CURVE = 1;
+  SPIRAL_SLOPE = 2;
+}
+
+message HAVPLinkTopology {
+  optional uint32 link_id = 1;
+  optional uint32 point_index = 2;  // point index in the link, if 0, means the start point of the link. 
+                                   // Topo only have start or end point connection, a value greater than 0 means the end of the link.
+}
+
+message HAVPTrajectory {
+  optional int32 id = 1;              // trajectory id, each trajectory has an unique id from 0 to positive infinite
+  optional TrajectoryType type = 2;
+  optional int32 from_floor = 3;      // only donwhill or uphill trajectory may have it
+  optional int32 to_floor = 4;        // only donwhill or uphill trajectory may have it
+  repeated common.Point3D trajectory_point = 5;
+  optional int32 floor_id = 6;        // if the trajectory is flat, floor_id means which floor it belongs to. 
+                                      // e.g. floor_id = 0 means this trajectory is belongs to 0th floor.
+                                      // if the trajectory is on uphill or down hill, floor_id only means a unique idx for this
+                                      // trajectory. Now it's a more than 1000 number for distinguishing from flat
+  repeated TrajectoryPointCurveType trajectory_point_curve_type = 7; // Indicates the trajectory point attributes. 
+                                                                     // straight, curve, or spiral slope(slope + curve)
+  repeated HAVPLinkTopology start_point_topology = 8; // start point topology
+  repeated HAVPLinkTopology end_point_topology = 9;   // end point topology                           
+}
+
+message FloorIdSet {
+  repeated int32 floor_id = 1;
+}
+
+enum PoiType {
+  ODD_START = 1;
+  ODD_END = 2;
+  PARKING_OUT_END = 3;
+  USER_DEFINE = 4; // defined by user
+  MAPPING_END = 5; // for gleey. when endmapping with no target parking space
+};
+
+enum ParkingPoiTag {
+  PARK_POI_TAG_UNKNOWN = 0;     // 未知
+  PARK_POI_TAG_CHARGE = 1;      // 充电桩
+  PARK_POI_TAG_ELEVATOR = 2;    // 电梯
+	PARK_POI_TAG_STAIRCASE = 3;   // 楼层
+	PARK_POI_TAG_PASSAGEWAY = 4;  // 出入口
+}
+
+message MapPoiUserInfo {
+  optional string name = 1;
+  optional ParkingPoiTag tag = 2;
+  optional bool is_favorite = 3;
+  optional int64 favorite_time = 4;
+}
+
+message MapPoiInfo {
+  optional PoiType poi_type = 1;
+  optional int32 floor_id = 2;
+  optional deeproute.common.Transformation3 pose = 3;
+  optional string id = 4;
+  // position info in keyframe
+  optional int32 keyframe_id = 5;
+  optional deeproute.common.Transformation3 relative_pose = 6;
+
+  // user info
+  optional MapPoiUserInfo user_info = 10;
+};
+
+message HAVPMapMetaData {
+  // basic map information
+  optional int32 map_id = 1;
+  optional common.Point3D map_origin = 2; // in LLH?
+  optional sfixed64 create_timestamp = 3;
+  optional int32 given_map_id = 4;        // for Geely
+
+  // user-define information
+  optional string map_name = 11;
+  repeated ParkingSpaceUsrInfo favorite_parking_space_infos = 12; // put it here or in parking space info?
+  optional int32 default_parking_space_id = 13;
+  optional string default_map_poi_id = 14;
+  repeated MapPoiInfo favorite_map_poi = 15;
+
+  // statistics information
+  optional float map_length = 21;
+  optional int32 num_parking_spaces = 22;
+  optional int32 num_speedbumps = 23;
+  optional FloorIdSet floor_set = 24;
+}
+
+message HAVPMap {
+  optional HAVPMapMetaData map_meta_data = 1;
+  
+  // map structure
+  repeated HAVPTrajectory map_trajectory = 11; // Better structure maybe need a more complicate structure for slope and multi floor?
+  repeated HAVPParkingSpace map_parking_space = 12;
+  repeated HAVPObstacle map_obstacle = 13;
+  repeated MapPoiInfo map_poi = 14;
+}

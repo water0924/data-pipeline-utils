@@ -1,0 +1,168 @@
+syntax = "proto2";
+
+package deeproute.cloud_cfgs;
+
+
+message FunctionsConfig {
+  // GWM prefix
+  optional string config_id = 4;
+  optional string update_time = 5;
+  optional string version = 6;
+
+  // functions mode/gear
+  optional ActiveSafetyCloudConfig active_safety = 1;
+  optional ParkingCloudConfig parking = 2;
+  optional CalibrationCloudConfig calibration = 3;
+  optional DrivingCloudConfig driving = 7;
+}
+
+enum ActiveSafetyGear {
+  ActiveSafety_OFF = 0;              // close this function
+  ActiveSafety_LOW = 1;              // low level
+  ActiveSafety_MIDDLE = 2;           // middle level
+  ActiveSafety_HIGH = 3;             // high level
+  ActiveSafety_DEFAULT = 4;          // default level for CNCAP testing
+}
+
+message ActiveSafetyCloudConfig {
+  optional ActiveSafetyGear aeb_gear = 1 [ default = ActiveSafety_MIDDLE ];
+  optional ActiveSafetyGear front_meb_gear = 2 [ default = ActiveSafety_MIDDLE ];
+  optional ActiveSafetyGear rear_meb_gear = 3 [ default = ActiveSafety_MIDDLE ];
+  optional ActiveSafetyGear rctb_gear = 4 [ default = ActiveSafety_MIDDLE ];
+  optional ActiveSafetyCloudConfigDetail active_safety_cloud_config_detail = 5;
+}
+
+message ActiveSafetyCloudConfigDetail {
+  // 是否启用详细配置
+  optional bool enable = 1 [default = false];
+  // c2c最大刹停速度
+  optional double vehicle_max_speed_decrease = 2 [default = 150.0];
+  // truck最大刹停速度
+  optional double truck_max_speed_decrease = 3 [default = 150.0];
+  // vru最大刹停速度
+  optional double pedestrian_max_speed_decrease = 4 [default = 150.0];
+  optional double bicycle_max_speed_decrease = 5 [default = 150.0];
+  // 锥桶,水马,三脚架最大刹停速度
+  optional double traffic_cone_max_speed_decrease = 6 [default = 150.0];
+  // 一般静态障碍物最大刹停速度
+  optional double unmovable_unknown_max_speed_decrease = 7 [default = 150.0];
+  // 其余障碍物最大刹停速度
+  optional double default_obj_max_speed_decrease = 8 [default = 150.0];
+  // 启用物体模型预测轨迹
+  optional bool enable_obj_model_based_trajectory = 9 [default = false];
+  // 启用物体转向轨迹
+  optional bool enable_obj_steer_trajectory = 10 [default = true];
+  // 启用自车模型预测轨迹
+  optional bool enable_adc_model_based_prediction = 11 [default = false];
+  // 启用削减车宽
+  optional bool enable_reduce_adc_width = 12 [default = false];
+  // 削减车宽比例
+  optional double reduce_adc_width_ratio = 13 [default = 0.12];
+  // 削减车宽最高速度
+  optional double reduce_adc_width_max_speed = 14 [default = 30];
+  // 启用tracking time 检查
+  optional bool enable_tracking_time_check = 15 [default = false];
+  // tracking time 最低自车速度
+  optional double min_tracking_time_adc_speed = 16 [default = 60.0];
+  // tracking time 最低跟车时间
+  optional double min_tracking_time = 17 [default = 1.5];
+  // tracking time 最大减速度
+  optional double max_tracking_time_decel = 18 [default = -5.0];
+  // 启用大曲率弯道检查
+  optional bool enable_large_curvature_check = 19 [default = false];
+  // 大曲率弯道半径限制
+  optional double min_curvature_radius = 20 [default = 50.0];
+  // 关闭行人高度过滤
+  optional bool disable_low_pedestrian = 21 [default = false];
+  // 启用低相对速度跟车逻辑
+  optional bool enable_slow_car_following_obj = 22 [default = true];
+  // 启用cut in 策略
+  optional bool enable_cut_in_obj_dtc = 23 [default = true];
+  // 20kph 以下自车刹停距离调整
+  optional bool disable_dists_stop_change_lower20kph = 24 [default = false];
+  // 最小锥桶数量
+  optional int64 min_single_cone_num = 25 [default = 2];
+  // 80kph以上锥桶忽略
+  optional bool ignore_cone_upper80kph = 26 [default = false];
+  // 启用绕行策略
+  optional bool enable_nudge_prediction = 27 [default = true];
+  // 启用一般障碍物
+  optional bool enable_unknown_unmovable = 28 [default = true];
+  // aeb 刹停距离
+  optional double dist_stop_0kph = 29 [default = 0.0];
+  optional double dist_stop_10kph = 30 [default = 0.5];
+  optional double dist_stop_20kph = 31 [default = 0.7];
+  optional double dist_stop_80kph = 32 [default = 0.7];
+  optional double dist_stop_120kph = 33 [default = 1.0];
+  optional double dist_stop_150kph = 34 [default = 1.0];
+  // 启用部分刹车
+  optional bool enable_partial_brake = 35 [default = false];
+  // 启用自车高速目标穿行混合计算逻辑
+  optional bool enable_high_speed_c2c_crossing_hybrid = 36 [default = false];
+  // 恢复自车低速目标蠕形逻辑
+  optional bool revert_low_speed_adc_obj_low_speed = 38 [default = false];
+  // 启用变道cut in 逻辑
+  optional bool enable_cut_in_calc_by_lc = 39 [default = false];
+  // 恢复低相对速度跟车逻辑
+  optional bool revert_close_dist_car_following = 40 [default = false];
+  // 启用自车减速抑制逻辑
+  optional bool use_adc_speed_down_inhibit = 41 [default = false];
+  // 自车减速抑制逻辑速度阈值
+  optional double adc_speed_down_inhibit_thres = 42 [default = 90.0];
+}
+
+enum ParkingMode {
+  PARKING_OFF = 0;                      // close this function
+  PARKING_AGGRESIVE = 1;                // aggresive level
+  PARKING_STANDARD = 2;                 // standard level
+  PARKING_CONSERVATIVE = 3;             // conservative level
+  PARKING_DEMO = 4;                     // 不开放给任何用户，仅用于内部测试
+}
+
+message APACloudConfig {
+  optional ParkingMode safety_mode = 1 [ default = PARKING_STANDARD ];
+  optional ParkingMode speed_mode  = 2 [ default = PARKING_STANDARD ];
+}
+
+message HAVPCloudConfig {
+  optional ParkingMode driving_style = 1 [ default = PARKING_STANDARD ];
+  optional bool active_notification = 2 [ default = true ];
+  optional bool barrier_gate_access = 3 [ default = false ];
+  optional bool enable_outdoor_parking_lot_routing = 4 [ default = true ];
+  optional bool enable_expand_map = 5 [ default = false ];
+  optional bool enable_detour = 6 [ default = false ];
+  optional bool enable_reverse_slope_search = 7 [ default = true ];
+}
+
+message RADSCloudConfig {
+  optional ParkingMode safety_mode = 1 [ default = PARKING_STANDARD ];
+}
+
+message RPACloudConfig {
+  optional bool enable_leave_car_parking = 1 [ default = false ];
+}
+
+message ParkingCloudConfig {
+  optional APACloudConfig apa_cloud_config = 1;
+  optional HAVPCloudConfig havp_cloud_config = 2;
+  optional RADSCloudConfig rads_cloud_config = 3;
+  optional RPACloudConfig rpa_cloud_config = 4;
+}
+
+message CalibMonitorCloudConfig {
+  optional bool update_local_file = 1 [deprecated = true];
+  optional bool avm_update_local_file = 2 ;
+  optional bool svm_update_local_file = 3 ;
+  optional bool lidar_update_local_file = 4 ;
+  optional bool ins_update_local_file = 5 ;
+}
+  
+message CalibrationCloudConfig {
+  optional CalibMonitorCloudConfig calib_monitor_config = 1;
+}
+
+message DrivingCloudConfig {
+  optional bool exam_mode = 1;
+  optional bool enable_waiting_area = 2 [ default = false ];
+  optional bool driving_poa = 3 [ default = true ];
+}

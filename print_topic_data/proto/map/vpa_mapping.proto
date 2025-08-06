@@ -1,0 +1,202 @@
+syntax = "proto2";
+
+import "map/sd_map.proto";
+import "map/projection.proto";
+import "common/geometry.proto";
+import "drivers/pointcloud2.proto";
+import "localization/havp_map.proto";
+import "drivers/gnss/ins.proto";
+import "perception/deeproute_perception_ras_map.proto";
+
+package deeproute.map.vpa;
+
+enum ParkingMapSource {
+    INVAILD = 0;
+    USER = 1;
+    CLOUD = 2;
+}
+
+message MapOutEndPoseInfo {
+  optional int32 floor = 1;
+  optional deeproute.common.Transformation3 pose = 2;
+}
+
+message OnboardMapEntry {
+  optional uint32 map_id = 1;
+  optional string map_name = 2;
+  optional double mapping_distance = 3;
+  optional uint32 default_parking_space_id = 4;
+  repeated deeproute.localization.havp_map.ParkingSpaceUsrInfo favorite_parking_space_infos = 5;
+  optional string localization_map_path = 6;  // deprecated
+  optional string semantic_map_path = 7;
+  optional deeproute.common.PointLLH mapping_start_llh = 8;
+  optional ParkingLotType parking_lot_type = 9;
+  optional MapRange map_range = 10;
+  optional uint64 vanishing_point_time = 11;
+  optional uint64 start_mapping_time = 12;
+  optional uint64 end_mapping_time = 13;
+  optional string map_version = 14;
+  optional bool is_uploaded = 15;
+  optional bool has_e2e_out_map = 16;
+  repeated common.PointLLH e2e_in_trajectory = 17;
+  repeated common.PointLLH e2e_out_trajectory = 18;
+  optional MapOutEndPoseInfo map_out_end_pose_info = 19 [deprecated = true];
+  optional deeproute.common.PointLLH parking_odd_start_llh = 20;
+  optional deeproute.localization.havp_map.MapPoiInfo odd_start_poi = 21;
+  optional deeproute.localization.havp_map.MapPoiInfo odd_end_poi = 22;
+  optional deeproute.localization.havp_map.MapPoiInfo parking_out_end_poi = 23;
+  optional deeproute.localization.havp_map.MapPoiInfo mapping_end_poi = 24;
+  repeated deeproute.localization.havp_map.MapPoiInfo favorite_map_poi_list = 25;
+  optional string default_map_poi_id = 26;
+  optional int32 given_map_id = 27;
+  optional deeproute.drivers.gnss.SensorsIns parking_out_end_gnss_pose = 28;
+}
+
+enum ParkingLotType {
+  INDOOR = 0;
+  OUTDOOR = 1;
+}
+
+message MapRange {
+  optional double lower_bound_lat = 1;
+  optional double lower_bound_lon = 2;
+  optional double upper_bound_lat = 3;
+  optional double upper_bound_lon = 4;
+}
+
+message TrackPoses {
+  repeated deeproute.common.Transformation3 track_pose = 1;
+  repeated deeproute.drivers.gnss.SensorsIns track_gnss_pose = 2;
+};
+
+message AlignedBox3d {
+  optional deeproute.common.Point3D min = 1;
+  optional deeproute.common.Point3D max = 2;
+}
+
+message SemanticBoundary {
+  optional deeproute.drivers.PointCloud2 lane_boundary_pointcloud = 1;
+  optional deeproute.drivers.PointCloud2 parking_space_boundary_pointcloud = 2;
+  optional deeproute.drivers.PointCloud2 obstacle_boundary_pointcloud = 3;
+}
+
+message ParkingMapMetaData {
+  optional uint32 map_id = 1;
+  optional string map_name = 2;
+  optional string city = 3;
+  optional uint64 create_time = 10;
+  optional uint64 last_use_time = 11;
+  optional uint64 last_update_time = 12;
+  optional ParkingMapSource source = 20;
+  optional OnboardMapEntry entry = 21;
+}
+
+enum OddRange {
+  PUBLIC_ROAD_TO_ODD_START = 0;
+  IN_ODD = 1;
+  ODD_END_TO_PUBLIC_ROAD = 2;
+}
+
+message Keyframe {
+  // 建图时时间戳
+  optional int64 timestamp = 1;
+  // 带Heading？
+  optional deeproute.common.Transformation3 map_pose = 2;
+  // 本keyFrame内包含的车位
+  repeated localization.havp_map.HAVPParkingSpace parking_space = 3;
+  repeated localization.havp_map.HAVPObstacle obstacle = 4;
+  
+  repeated deeproute.common.Transformation3 track_pose = 5;
+  optional deeproute.drivers.PointCloud2 point_cloud = 6;
+  optional AlignedBox3d sensing_pose_bound_box = 7;
+  optional bool is_premapping = 8;
+  optional bool is_on_slope = 9;
+  optional SemanticBoundary semantic_boundary = 10;
+  repeated perception.RoadPolygon road_polygons = 11;
+  optional OddRange odd_range = 12;
+  repeated localization.havp_map.HAVPTrajectory map_semantic_lane = 13;
+
+  // 关联link List
+  repeated uint64 dr_link_ids = 20;
+  // keyFrame自己的id
+  optional uint64 keyframe_id = 21;
+  // keyFrame所属楼层
+  optional uint32 floor_id = 22;
+}
+
+message SlopeFloorInfo {
+  optional int32 from_floor = 1;
+  optional int32 to_floor = 2;
+  optional deeproute.common.Transformation3 start_pose = 3;
+  optional deeproute.common.Transformation3 end_pose = 4;
+}
+
+message FloorMap {
+  optional int32 floor_id = 1;
+  optional localization.havp_map.TrajectoryType trajectory_type = 2;
+  // 核心的keyframe队列结构
+  repeated Keyframe key_frame = 3;
+  optional SlopeFloorInfo slope_floor_info = 4;
+}
+
+message KeyframeEdge {
+  required uint64 keyframe_i = 1;
+  required uint64 keyframe_j = 2;
+  required deeproute.common.Transformation3 delta_pose = 3;
+}
+
+// 新增一个LinkData结构，参考Horizon Map
+message LinkData {
+  optional uint64 dr_link_id = 1;   // 有向路段id，双向需要打断
+  repeated common.PointLLH points = 2;  // 形状点, 使用经纬度坐标系, H代表高程 *.5代表跨楼层/斜坡
+  repeated common.Point3D points3d = 10; // 形状点，使用xyz坐标系
+
+
+  repeated uint64 in_link_ids = 6; // 入口link列表
+  repeated uint64 out_link_ids = 7; // 出口link列表
+
+  repeated deeproute.sd_map.LinkData.FormWay link_formway = 8;
+  optional uint32 length = 9;            // 路段长度
+}
+
+message MapPoiInfoInMap {
+  optional int32 keyframe_id = 1;
+  optional deeproute.common.Transformation3 relative_pose = 2;
+}
+
+message GlobalMap {
+  // 应该是类似sd map的投影点
+  optional deeproute.map.ProjectionPoint projection_origin = 1;
+  optional float map_resolution = 2;
+  repeated FloorMap floor_map = 3;  // 核心结构，每层的停车场地图
+  // 车位
+  repeated localization.havp_map.HAVPParkingSpace parking_space = 4; 
+  // 静态障碍物
+  repeated localization.havp_map.HAVPObstacle obstacle = 5;
+  repeated KeyframeEdge keyframe_edges = 6;  // 切keyFrame 用的
+  repeated double floor_heights = 7;// 层高
+  repeated int32 viz_floor_ids = 8;
+  // 地图轨迹点，带from→to层数
+  repeated localization.havp_map.HAVPTrajectory map_trajectory = 9;
+  repeated perception.RoadPolygon road_polygons = 10;
+  // poi点相关
+  optional MapPoiInfoInMap odd_start_poi = 11;
+  optional MapPoiInfoInMap odd_end_poi = 12;
+  optional MapPoiInfoInMap parking_out_end_poi = 13;
+  optional MapPoiInfoInMap mapping_end_poi = 14;
+  repeated localization.havp_map.HAVPTrajectory map_semantic_lane = 15;
+
+
+    // link列表
+  repeated LinkData link_datas = 20;
+}
+
+// topic 
+message EntryList {
+  // 终点坐标llh
+  optional common.PointLLH destination = 1;
+  // 终点前几条link
+  repeated uint64 dr_link_ids = 2;
+  // 终点附近的entry
+  repeated OnboardMapEntry nearby_entries = 3;
+}

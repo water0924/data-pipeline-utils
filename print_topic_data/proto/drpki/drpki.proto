@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package deeproute.drpki;
+
+message KeyLearningRequest {
+  string uds_id = 1;
+  int64 timestamp = 2;
+}
+
+message KeyLearningResponse {
+  string uds_id = 1;
+  int64 timestamp = 2;
+  bool learnstatus_ = 3;
+}
+
+message KeyGenerationResponse {
+  bool success = 1;
+}
+
+enum ExceptionType {
+  TLS_UNKNOWN = 0;
+  TLS_PASSWORD_UPDATE_FAILURE = 1;
+  TLS_KEY_STORAGE_READ_FAILURE = 2;
+}
+
+message TLSKeysrvExceptionReport {
+  ExceptionType exception_type = 1;
+}

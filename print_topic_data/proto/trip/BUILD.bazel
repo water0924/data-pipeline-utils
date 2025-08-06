@@ -1,0 +1,82 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "trip_start_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["trip_start.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "trip_start_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":trip_start_proto",
+    ],
+)
+
+python_proto_library(
+    name = "trip_start_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":trip_start_proto",
+    ],
+)
+
+proto_library(
+    name = "trigger_event_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["trigger_event.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "trigger_event_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":trigger_event_proto",
+    ],
+)
+
+python_proto_library(
+    name = "trigger_event_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":trigger_event_proto",
+    ],
+)
+
+proto_library(
+    name = "trip_end_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["trip_end.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "trip_end_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":trip_end_proto",
+    ],
+)
+
+python_proto_library(
+    name = "trip_end_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":trip_end_proto",
+    ],
+)
+

@@ -1,0 +1,54 @@
+syntax = "proto2";
+
+package deeproute.recorder;
+
+enum TriggerType {
+  NORMAL = 0;
+  GROUP = 1;
+  SUB_EVENT = 2;
+  FLEXIBLE = 3;
+}
+
+message Conditions {
+  optional string cel_expr = 1;
+}
+
+message TriggerConfig {
+  optional string name = 1;
+  optional TriggerType type = 2;
+  optional uint32 priority = 3;
+  optional int32 forward_time = 4;
+  optional int32 backward_time = 5;
+  optional bool is_record = 6;
+  optional int32 cool_down_time = 7;
+  optional bool record_light = 8;
+  optional bool record_medium = 9;
+  optional bool record_heavy = 10;
+  optional bool skip_compliance = 11;
+  optional int32 trigger_limit_times = 12;
+  optional int32 max_times = 13;
+  optional int32 group = 14;
+  optional Conditions conditions = 15;
+}
+
+message TriggerConfigList {
+  repeated TriggerConfig trigger_configs = 1;
+}
+
+message UploaderConfig {
+  optional string total_file_size = 1;
+  optional int32 bag_compliance_mode = 2;
+  optional bool skip_desensitization = 3;
+}
+
+message SafetyConfig {
+  optional uint32 group_interval_sec = 1;
+}
+
+message RemoteTriggerConfig {
+  optional string config_id = 1;
+  optional string update_time = 2;
+  repeated TriggerConfig trigger_configs = 3;
+  optional UploaderConfig uploader = 4;
+  optional SafetyConfig safety = 5;
+}

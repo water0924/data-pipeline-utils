@@ -1,0 +1,169 @@
+syntax = "proto3";
+package havp;
+
+import "drapi/gwm/havp/havp_common.proto";
+
+// 具体车辆处于哪个阶段，需要通过SOMEIP接口获取
+message AVPVehicleData {
+  double timestamp = 1; // 微秒时间戳 (1587364593.061575)
+  APA apa = 2; // APA过程中的还原世界
+  HAVPMapping havp_mapping = 3; // HAVP建图（记忆泊车建图）过程中的还原世界
+  HAVPCruise havp_cruise = 4; // HAVP巡航（记忆泊车建图）过程中的还原世界
+  RADS rads = 5; // RADS（倒车循迹）过程中的还原世界
+  SVPCruise svp_cruise = 6; // SVP巡航过程中的还原世界
+  HAVPNavi havp_navi = 7; // HAVP导航数据
+}
+
+message APA {
+  float left_path_distance = 1; // 剩余泊车距离 (单位m,精确到小数点后1位), 支持 APA
+  PAS pas = 2; // 雷达障碍物位置
+  repeated ParkingSpace parking_space = 3; // 停车位（局部坐标）
+  repeated ObjectDetectionObstacle obstacles = 4; // 障碍物识别
+  repeated Point planning_trajectory = 5; // 规划轨迹 (自车坐标 轨迹点集)
+  Location location = 6; // 车辆所在的位置（在全局路径上的位置）
+  repeated WallElement wall_element = 7; // 墙壁点集显示
+  repeated SignlineVertical sign_line_vertical = 8; // 纵向标线集合
+  repeated SignPolygon sign_polygon = 9; // 面状标识集合
+  APACustomizeRes apa_customize_res = 10; //自选车位状态反馈，CUX3.3临时方案，后续CUX3.4通过变更的SOMEIP接口（具体接口名称待定）发送。
+}
+
+message HAVPMapping {
+  Location location = 1; // 车辆所在的位置（在全局路径上的位置）
+  PAS pas = 2; // 雷达障碍物位置
+  int32 total_learn_distance = 3; // 建图阶段，已学习的距离 (单位m，精确到整数位)
+  int32 road_bump_times = 4; // 通过减速带次数
+  repeated ParkingSpace parking_space = 5; // 车位的占用状态
+  repeated ObjectDetectionObstacle obstacles = 6; // 障碍物识别
+  repeated Point mapping_trajectory = 7; // 建图过程中，车走过的轨迹
+  float left_path_distance = 8; // 剩余泊车距离 (单位m,精确到小数点后1位), APA建图
+  repeated Point planning_trajectory = 9; // APA泊车过程中，规划的泊车轨迹 (轨迹点集)
+  repeated WallElement wall_element = 10; // 墙壁点集显示
+  repeated SignlineVertical sign_line_vertical = 11; // 纵向标线集合
+  repeated SignPolygon sign_polygon = 12; // 面状标识集合
+}
+
+message HAVPCruise {
+  Location location = 1; // 车辆所在的位置（在全局路径上的位置）
+  PAS pas = 2; // 雷达障碍物位置
+  int32 distance_left = 3; // 巡航阶段剩余距离 0-3.40E+38(单位m，精确到整数位)
+  int32 odm = 4; // 巡航阶段，本次使用过程中已经走过的距离
+  int32 around_person_times = 5; // 巡航阶段，本次使用过程中避让行人次数
+  int32 around_obstacle_times = 6; // 巡航阶段，本次使用过程中绕障次数
+  repeated ObjectDetectionObstacle obstacles = 7; // 障碍物信息
+  repeated Point planning_trajectory = 8; // 局部规划轨迹 (轨迹点集)
+  int32 is_display_the_Upstairs_and_Downstairs_page = 9; // 0代表平地 1代表上坡 2代表下坡
+  repeated ParkingSpace parking_space = 10; // 分为两个阶段：巡航阶段只使用“车位ID、车位的占用状态、number”三个信息。泊车阶段使用全部的信息。
+  int32 road_bump_times = 11; // 通过减速带次数
+  float left_path_distance = 13; // 剩余泊车距离 (单位m,精确到小数点后1位), APA建图
+  repeated WallElement wall_element =14 ;//墙壁点集显示
+  repeated SignlineVertical sign_line_vertical = 15;//纵向标线集合
+  repeated SignPolygon sign_polygon = 16;// 面状标识集合
+}
+
+message SVPCruise {
+  Location location = 1; // 车辆所在的位置（在全局路径上的位置）
+  PAS pas = 2; // 雷达障碍物位置
+  int32 distance_left = 3; // 巡航阶段剩余距离 0-3.40E+38(单位m，精确到整数位)
+  int32 odm = 4; // 巡航阶段，本次使用过程中已经走过的距离
+  int32 around_person_times = 5; // 巡航阶段，本次使用过程中避让行人次数
+  int32 around_obstacle_times = 6; // 巡航阶段，本次使用过程中绕障次数
+  repeated ObjectDetectionObstacle obstacles = 7; // 障碍物信息
+  repeated Point planning_trajectory = 8; // 规划轨迹 (轨迹点集)
+  int32 is_display_the_Upstairs_and_Downstairs_page = 9; // 0代表平地 1代表上坡 2代表下坡
+  repeated ParkingSpace parking_space = 10; // 分为两个阶段：巡航阶段只使用“车位ID、车位的占用状态、number”三个信息。泊车阶段使用全部的信息。
+  int32 road_bump_times = 11; // 通过减速带次数
+  float left_path_distance = 13; // 剩余泊车距离 (单位m,精确到小数点后1位), APA建图
+  repeated WallElement wall_element = 14 ;//墙壁点集显示
+  repeated SignlineVertical sign_line_vertical = 15;//纵向标线集合
+  repeated SignPolygon sign_polygon = 16;// 面状标识集合
+}
+
+message RADS {
+  Location location = 1; // 车辆所在停车场信息（在全局路径上的位置）
+  PAS pas = 2; // 雷达障碍物位置
+  float distance_left = 3; // 循迹倒车剩余距离 (单位m)
+  repeated Point planning_trajectory = 4; // 规划轨迹 (轨迹点集)
+  repeated ParkingSpace parking_space = 5; // 停车位
+  repeated ObjectDetectionObstacle obstacles = 6; // 障碍物识别
+  repeated WallElement wall_element = 7; // 墙壁点集显示
+  repeated SignlineVertical sign_line_vertical = 8; // 纵向标线集合
+  repeated SignPolygon sign_polygon = 9; // 面状标识集合
+}
+
+message HAVPNavi {
+  Location location = 1; // 车辆所在的位置（在全局路径上的位置）
+  int32 distance_left = 2; // 剩余距离(单位m，精确到整数位)
+  int32 odm = 3; // 本次使用过程中已经走过的距离
+  HAVPNaviTips tips = 4; // 导航提示
+}
+
+/*
+SOME/IP
+  ServiceInterfaceName: HAVPandAVPFunctions
+  TransmissionType: RR-IN
+  ElementName: APACustomizeReq
+  ParameterName: APACustomPrkgSlot
+*/
+message APACustomizeReq{
+  ParkingSpaceReq req                 = 1; //请求类型
+
+  //每次移动时，需要下发新的id，代表新的车位
+  int32 id                            = 2; //车位id
+    
+  /*
+   * 非Bypass方案：
+   *       大环(全屏360的单视区域，C区）左上角为零点，屏幕向右为x轴正方向，屏幕向下为y轴正方向；
+   *       HUT需要等比缩小到原始视频流像素值； 
+   * Bypass方案：
+   *       AVM车模后轴中心为坐标零点，车头方向为y轴正方向，正左侧为x轴正方向(TBD)
+   */  
+  double x                            = 3; //车位的中心点横坐标                             
+  double y                            = 4; //车位的中心点纵坐标
+
+  /*
+   * 非Bypass方案/Bypass方案：
+   *       自选车位中车模的车头朝向屏幕正上方为0°,顺时针旋转为正，逆时针旋转为负
+   */
+  double yaw                          = 5; //车位的航向角
+
+  enum ParkingSpaceReq{
+    PARK_SPA_REQ_NONE         = 0; //无效值
+    PARK_SPA_REQ_INIT         = 1; //初始化
+    PARK_SPA_REQ_MOVING       = 2; //移动中
+    PARK_SPA_REQ_MOVED        = 3; //移动完成
+    PARK_SPA_REQ_PLAN_STATUS  = 4; //规划状态
+  }
+}
+
+/*
+SOME/IP
+  ServiceInterfaceName: HAVPandAVPFunctions
+  TransmissionType: RR-OUT
+  ElementName: APACustomizeReq
+  ParameterName: APACustomPrkgSlotSts
+*/
+message APACustomizeRes{
+  ParkingSpaceStatus status               = 1; //车位状态
+
+  //反馈HUT下发请求中对应id的车位状态
+  int32 id                                = 2; //车位id
+
+  //预留：用于发送初始车位位置或吸附后车位框位置，原始视频流像素值，HUT自行等比例放大； 
+  double x                                = 3; //车位的中心点横坐标
+  double y                                = 4; //车位的中心点纵坐标    
+  double yaw                              = 5; //车位的航向角
+    
+  //用于告知HUT，视频流中的车模长宽，原始视频流像素值，HUT自行等比例放大
+  double length                           = 6;  //车位框长
+  double width                            = 7;  //车位框宽
+    
+  enum ParkingSpaceStatus{
+    PARK_SPA_STA_NONE         = 0;  //功能未开启，未开启自选车位功能时发送
+    PARK_SPA_STA_INIT         = 1;  //初始化
+    PARK_SPA_STA_STANDBY      = 2;  //就绪
+    PARK_SPA_STA_PLANNING     = 3;  //规划中
+    PARK_SPA_STA_OBJ_BLOCK    = 4;  //障碍物阻挡，规划失败
+    PARK_SPA_STA_PLAN_FAIL    = 5;  //无障碍物阻挡，仍规划失败
+    PARK_SPA_STA_PLAN_SUCCESS = 6;  //规划成功  
+  }
+}

@@ -1,0 +1,209 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "frame_ratio_info_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["frame_ratio_info.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "frame_ratio_info_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":frame_ratio_info_proto",
+    ],
+)
+
+python_proto_library(
+    name = "frame_ratio_info_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":frame_ratio_info_proto",
+    ],
+)
+
+proto_library(
+    name = "schedule_events_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["schedule_events.proto"],
+    deps = [
+        "//proto/church:schedule_event_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "schedule_events_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":schedule_events_proto",
+    ],
+)
+
+python_proto_library(
+    name = "schedule_events_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":schedule_events_proto",
+    ],
+)
+
+proto_library(
+    name = "trans_anomaly_events_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["trans_anomaly_events.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "trans_anomaly_events_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":trans_anomaly_events_proto",
+    ],
+)
+
+python_proto_library(
+    name = "trans_anomaly_events_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":trans_anomaly_events_proto",
+    ],
+)
+
+proto_library(
+    name = "component_proc_timeout_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["component_proc_timeout.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "component_proc_timeout_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":component_proc_timeout_proto",
+    ],
+)
+
+python_proto_library(
+    name = "component_proc_timeout_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":component_proc_timeout_proto",
+    ],
+)
+
+proto_library(
+    name = "onboard_header_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["onboard_header.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "onboard_header_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":onboard_header_proto",
+    ],
+)
+
+python_proto_library(
+    name = "onboard_header_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":onboard_header_proto",
+    ],
+)
+
+proto_library(
+    name = "serialized_module_event_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["serialized_module_event.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "serialized_module_event_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":serialized_module_event_proto",
+    ],
+)
+
+python_proto_library(
+    name = "serialized_module_event_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":serialized_module_event_proto",
+    ],
+)
+
+proto_library(
+    name = "schedule_event_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["schedule_event.proto"],
+    deps = [
+        "//proto/church:onboard_header_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "schedule_event_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":schedule_event_proto",
+    ],
+)
+
+python_proto_library(
+    name = "schedule_event_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":schedule_event_proto",
+    ],
+)
+
+proto_library(
+    name = "church_event_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["church_event.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "church_event_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":church_event_proto",
+    ],
+)
+
+python_proto_library(
+    name = "church_event_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":church_event_proto",
+    ],
+)
+

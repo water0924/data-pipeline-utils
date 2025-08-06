@@ -1,0 +1,32 @@
+syntax = "proto2";
+
+package deeproute.common;
+
+message Syslog {
+  optional string debug_level = 1;
+  optional string module_name = 2;
+  optional int32 event_id = 3;
+  optional string event_name = 4;
+  optional string msg = 5;
+  optional string cmd = 6;
+}
+
+message Notification {
+  optional string debug_level = 1;
+  optional string module_name = 2;
+  optional string msg = 3;
+  optional int32 event_id = 4;
+}
+
+message CarStatus {
+  optional int32 id = 1;
+  optional string module_name = 2;
+  optional string msg = 3;
+}
+
+message Operationlog {
+  optional int32 event_id = 1;
+  optional string module_name = 2;
+  optional string msg = 3;
+  optional string event_name = 4;
+}

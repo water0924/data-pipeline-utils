@@ -1,0 +1,322 @@
+syntax = "proto3";
+
+// topic : /automap/navigation
+package dr.navigation;
+
+message NavigationDataInfoNotify {
+  E2E e2e = 1;
+  double timestamp = 2;                      // 时间戳 us
+  NavigationalState navigational_state = 3;  // 导航状态
+  TrafficLight trafficlight = 4;             // 交通信号灯
+  SpeedLimit speed_limit = 5;                // 限速
+  RoadFacility road_facility = 6;            // 电子眼及道路设施信息
+  RoadType road_type = 7;                    // 道路等级或道路类型
+  RoutingPoint routing_point1 = 8;           // 路由点1
+  RoutingPoint routing_point2 = 9;           // 路由点2
+  ServiceArea service_area = 10;             // 收费站或服务区
+  SpecialArea special_area = 11;             // 特殊区域,隧道/导航终点
+  OnlineInformation online_info = 12;        // 在线信息
+  SpecialLaneType special_lane_type = 13;    // 特殊车道类型
+  RoadProperty road_properties = 14;         // 道路属性
+}
+
+message E2E {
+  uint32 checksum = 1;
+  uint32 counter = 2;
+}
+
+enum NavigationalState {
+  UNKNOWN_STATE = 0;         // 默认未知状态
+  START_NAVIGATION = 1;      // 开始导航
+  FINISH_NAVIGATION = 2;     // 结束导航
+  REROUTING = 3;             // 重新规划中
+  YAWED = 4;                 // 偏航
+  CRUISING = 5;              // 巡航
+  ROUTE_ROUTING = 6;         // 路径规划中
+  IN_NAVIGATION = 7;         // 导航中
+  INVALID_NAVIGATION = 255;  // 无效
+}
+
+message TrafficLight {
+  enum TrafficLightExist {
+    UNKNOWN = 0;
+    NO = 1;
+    YES = 2;
+    INVALID = 0xFF;
+  }
+
+  TrafficLightExist trafficlight_exist = 1;  // 前方路口是否有红绿灯
+  uint32 trafficlight_dist = 2;              // 红绿灯距离
+}
+
+message SpeedLimit {
+  uint32 current_road_speed = 1;                       // 当前道路限速
+  uint32 interval_camera_limit_speed = 2;              // 区间测速限速值
+  uint32 interval_cameral_limit_speed_dist = 3;        // 区间测速距离
+  uint32 interval_cameral_limit_speed_remaindist = 4;  // 区间测速剩余距离
+  uint32 navicameral_limit_speed = 5;       // 电子眼测速限速值
+  uint32 navicameral_limit_speed_dist = 6;  // 电子眼测速距离
+}
+
+message RoadFacility {
+  enum CameraType {
+    CAMERA_TYPE_SPEED = 0;
+    CAMERA_TYPE_SURVEILLANCE = 1;
+    CAMERA_TYPE_TRAFFICLIGHT = 2;
+    CAMERA_TYPE_BREAKRULE = 3;
+    CAMERA_TYPE_BUSWAY = 4;
+    CAMERA_TYPE_EMERGENCYLANE = 5;
+    CAMERA_TYPE_BICYCLELANE = 6;
+    CAMERA_TYPE_INTERVAL_VELOCITY = 7;
+    CAMERA_TYPE_INTERVAL_VELOCITYSTART = 8;
+    CAMERA_TYPE_INTERVAL_VELOCITYEND = 9;
+    CAMERA_TYPE_FLOWSPEED = 10;
+    CAMERA_TYPE_ETC = 11;
+    CAMERA_TYPE_CONSEQUENT = 255;
+    CAMERA_TYPE_INVALID = 0XFFFF;
+  }
+  enum FacilityType {
+    FACILITY_TYPE_NULL = 0;
+    FACILITY_TYPE_LEFTINTERFLOW = 1;
+    FACILITY_TYPE_RIGHTINTERFLOW = 2;
+    FACILITY_TYPE_SHARPTURN = 3;
+    FACILITY_TYPE_REVERSETURN = 4;
+    FACILITY_TYPE_LINKINGTURN = 5;
+    FACILITY_TYPE_ACCIDENTAREA = 6;
+    FACILITY_TYPE_FALLINGROCKS = 7;
+    FACILITY_TYPE_RAILWAYCROSS = 8;
+    FACILITY_TYPE_SLIPPERY = 9;
+    FACILITY_TYPE_MAXSPEEDLIMIT = 10;
+    FACILITY_TYPE_MINSPEEDLIMIT = 11;
+    FACILITY_TYPE_VILLAGE = 12;
+    FACILITY_TYPE_LEFTNARROW = 13;
+    FACILITY_TYPE_RIGHTNARROW = 14;
+    FACILITY_TYPE_DOUBLENARROW = 15;
+    FACILITY_TYPE_CROSSWINDAREA = 16;
+    FACILITY_TYPE_SCHOOLZONE = 17;
+    FACILITY_TYPE_OVERTAKEFORBID = 18;
+    FACILITY_TYPE_NARROWBRIDGE = 19;
+    FACILITY_TYPE_DOUBLEDETOUR = 20;
+    FACILITY_TYPE_LEFTDETOUR = 21;
+    FACILITY_TYPE_RIGHTDETOUR = 22;
+    FACILITY_TYPE_LEFTDANGEROUS = 23;
+    FACILITY_TYPE_RIGHTDANGEROUS = 24;
+    FACILITY_TYPE_UPPERSTEEP = 25;
+    FACILITY_TYPE_DOWNSTEEP = 26;
+    FACILITY_TYPE_WATERPAVEMENT = 27;
+    FACILITY_TYPE_IRREGULARITYPAVEMENT = 28;
+    FACILITY_TYPE_AMBLE = 29;
+    FACILITY_TYPE_ATTENTIONDANGER = 30;
+    FACILITY_TYPE_ZEBRACROSSING = 31;
+    FACILITY_TYPE_LEFTSHARPTURN = 46;
+    FACILITY_TYPE_RIGHTSHARPTURN = 47;
+    FACILITY_TYPE_LEFTFALLINGROCKS = 48;
+    FACILITY_TYPE_RIGHTFALLINGROCKS = 49;
+    FACILITY_TYPE_RAILWAYCROSSEXTEND = 50;
+    FACILITY_TYPE_RAILWAYWITHGATES = 51;
+    FACILITY_TYPE_RAILWAYWITHOUTGATES = 52;
+    FACILITY_TYPE_TRUCKHEIGHTLIMIT = 81;
+    FACILITY_TYPE_TRUCKWIDTHLIMIT = 82;
+    FACILITY_TYPE_TRUCKWEIGHTLIMIT = 83;
+    FACILITY_TYPE_CHECKPOINT = 91;
+    FACILITY_TYPE_INVALID = 255;
+  }
+  CameraType camera_type = 1;      // 电子眼信息类型
+  uint32 camera_dist = 2;          // 电子眼距离
+  FacilityType facility_type = 3;  // 道路设施类型
+  uint32 facility_dist = 4;        // 道路设施距离
+}
+
+message RoadType {
+  enum RoadClassRoadType {
+    ROAD_CLASS_FREEWAY = 0;
+    ROAD_CLASS_NATIONALROAD = 1;
+    ROAD_CLASS_PROVINCEROAD = 2;
+    ROAD_CLASS_COUNTYROAD = 3;
+    ROAD_CLASS_RURALROAD = 4;
+    ROAD_CLASS_INCOUNTYROAD = 5;
+    ROAD_CLASS_CITYSPEEDWAY = 6;
+    ROAD_CLASS_MAINROAD = 7;
+    ROAD_CLASS_SECONDARYROAD = 8;
+    ROAD_CLASS_COMMONROAD = 9;
+    ROAD_CLASS_NONNAVIROAD = 10;
+    ROAD_CLASS_COUNT = 11;
+    ROAD_CLASS_UNKNOWN = 0XFF;
+  }
+  RoadClassRoadType roadclass_roadtype = 1;  // 当前道路等级或道路类型
+  uint32 roadclassdist_roadtypedist = 2;  // 当前相同道路等级或道路类型剩余距离
+  RoadClassRoadType next_roadclass_roadtype = 3;  //  下一段道路等级或道路类型
+  uint32 cur_roadclass_roadtype_foradapter = 4;  // 当前道路等级或道路类型(for someip adapter)
+}
+
+message RoutingPoint {
+  enum RoadPoiType {
+    MANEUVER_ICON_NULL = 0;
+    MANEUVER_ICON_CAR = 1;
+    MANEUVER_ICON_TURNLEFT = 2;
+    MANEUVER_ICON_TURNRIGHT = 3;
+    MANEUVER_ICON_SLIGHTLEFT = 4;
+    MANEUVER_ICON_SLIGHTRIGHT = 5;
+    MANEUVER_ICON_TURNHARDLEFT = 6;
+    MANEUVER_ICON_TURNHARDRIGHT = 7;
+    MANEUVER_ICON_UTURN = 8;
+    MANEUVER_ICON_CONTINUE = 9;
+    MANEUVER_ICON_WAY = 10;
+    MANEUVER_ICON_ENTRYRING = 11;
+    MANEUVER_ICON_LEAVERING = 12;
+    MANEUVER_ICON_SAPA = 13;
+    MANEUVER_ICON_TOLLGATE = 14;
+    MANEUVER_ICON_DESTINATION = 15;
+    MANEUVER_ICON_TUNNEL = 16;
+    MANEUVER_ICON_ENTRYLEFTRING = 17;
+    MANEUVER_ICON_LEAVELEFTRING = 18;
+    MANEUVER_ICON_UTURNRIGHT = 19;
+    MANEUVER_ICON_SPECIALCONTINUE = 20;
+    MANEUVER_ICON_ENTRYRINGLEFT = 21;
+    MANEUVER_ICON_ENTRYRINGRIGHT = 22;
+    MANEUVER_ICON_ENTRYRINGCONTINUE = 23;
+    MANEUVER_ICON_ENTRYRINGUTURN = 24;
+    MANEUVER_ICON_ENTRYLEFTRINGLEFT = 25;
+    MANEUVER_ICON_ENTRYLEFTRINGRIGHT = 26;
+    MANEUVER_ICON_ENTRYLEFTRINGCONTINUE = 27;
+    MANEUVER_ICON_ENTRYLEFTRINGUTURN = 28;
+    MANEUVER_ICON_CROSSWALK = 29;
+    MANEUVER_ICON_OVERPASS = 30;
+    MANEUVER_ICON_UNDERGROUND = 31;
+    MANEUVER_ICON_SQUARE = 32;
+    MANEUVER_ICON_PARK = 33;
+    MANEUVER_ICON_STAIRCASE = 34;
+    MANEUVER_ICON_LIFT = 35;
+    MANEUVER_ICON_CABLEWAY = 36;
+    MANEUVER_ICON_SKYCHANNEL = 37;
+    MANEUVER_ICON_CHANNEL = 38;
+    MANEUVER_ICON_WALKROAD = 39;
+    MANEUVER_ICON_BOATLINE = 40;
+    MANEUVER_ICON_SIGHTSEEINGLINE = 41;
+    MANEUVER_ICON_SKIDWAY = 42;
+    MANEUVER_ICON_LADDER = 43;
+    MANEUVER_ICON_SLOPE = 44;
+    MANEUVER_ICON_BRIDGE = 45;
+    MANEUVER_ICON_FERRY = 46;
+    MANEUVER_ICON_SUBWAY = 47;
+    MANEUVER_ICON_ENTERBUILDING = 48;
+    MANEUVER_ICON_LEAVEBUILDING = 49;
+    MANEUVER_ICON_BYELEVATOR = 50;
+    MANEUVER_ICON_BYSTAIR = 51;
+    MANEUVER_ICON_BYESCALATOR = 52;
+    MANEUVER_ICON_LOWTRAFFICCROSS = 53;
+    MANEUVER_ICON_LOWCROSS = 54;
+    MANEUVER_ICON_CNT = 55;
+    MANEUVER_ICON_WAYCHARGESTATION = 64;
+    MANEUVER_ICON_MERGELEFT = 65;
+    MANEUVER_ICON_MERGERIGHT = 66;
+    MANEUVER_ICON_INVALID = 0XFF;
+  }
+
+  RoadPoiType road_poi_type = 1;  // 关键点信息
+  uint32 road_poi_dist = 2;       // 关键点距离
+}
+
+message ServiceArea {
+  enum ServiceAreaType {
+    TOLL_STATION = 0;
+    SERVICE_AREA = 1;
+    AREA_UNKNOWN = 0xFF;
+  }
+  ServiceAreaType service_area_type = 1;  // 收费区或服务区信息
+  uint32 service_area_dist = 2;           // 收费区或服务区距离
+}
+
+message SpecialArea {
+  enum SpecialAreaType {
+    NAVIGATION_ENDPOINT = 0;  // 导航终点
+    TUNNEL = 1;               // 隧道
+    AREA_INVALID = 0xFF;
+  }
+  SpecialAreaType special_area_type = 1;  // 特殊区域信息
+  uint32 special_area_dist = 2;           // 特殊区域距离
+}
+
+message OnlineInformation {
+  enum NaviCongestionInfo {
+    NAVI_UNKNOWN = 0;
+    NAVI_TRAFFIC = 1;
+    NAVI_ACCIDENTS = 2;
+    NAVI_CONSTRUCTION = 3;
+    NAVI_CONTROL = 4;
+    NAVI_WEATHER = 5;
+    NAVI_ROAD_CONDITIONS = 6;
+    NAVI_EVENTS = 7;
+    NAVI_DISASTERS = 8;
+    NAVI_OTHER = 9;
+    NAVI_ACCIDENTS_CONTROL = 10;
+    NAVI_CONSTRUCTION_CONTROL = 11;
+    NAVI_WEATHER_CONTROL = 12;
+    NAVI_ROAD_CONDITIONS_CONTROL = 13;
+    NAVI_INVALID = 255;
+  }
+  NaviCongestionInfo navi_congestion_info = 1;  // 当前道路交通事件信息
+  uint32 distance = 2;                          // 直线距离
+}
+
+message SpecialLaneType {
+  enum LaneType {
+    LaneActionAhead = 0;             /**< 直行 */
+    LaneActionLeft = 1;              /**< 左转 */
+    LaneActionAheadLeft = 2;         /**< 直行+左转 */
+    LaneActionRight = 3;             /**< 右转 */
+    LaneActionAheadRight = 4;        /**< 直行+右转 */
+    LaneActionLUTurn = 5;            /**< 左掉头 */
+    LaneActionLeftRight = 6;         /**< 左转+右转 */
+    LaneActionAheadLeftRight = 7;    /**< 直行+左转+右转 */
+    LaneActionRUTurn = 8;            /**< 右掉头 */
+    LaneActionAheadLUTurn = 9;       /**< 直行+左掉头 */
+    LaneActionAheadRUTurn = 10;      /**< 直行+右掉头 */
+    LaneActionLeftLUTurn = 11;       /**< 左转+左掉头 */
+    LaneActionRightRUTurn = 12;      /**< 右转+右掉头 */
+    LaneActionLeftInAhead = 13;      /**< 无效，保留 */
+    LaneActionReserved = 15;         /**< 保留 */
+    LaneActionAheadLeftLUTurn = 16;  /**< 直行+左转+左掉头 */
+    LaneActionRightLUTurn = 17;      /**< 右转+左掉头 */
+    LaneActionLeftRightLUTurn = 18;  /**< 左转+右转+左掉头 */
+    LaneActionAheadRightLUTurn = 19; /**< 直行+右转+左掉头 */
+    LaneActionLeftRUTurn = 20;       /**< 左转+右掉头 */
+    LaneActionBus = 21;              /**< 公交车道 */
+    LaneActionEmpty = 22;            /**< 空车道 */
+    LaneActionVariable = 23;         /**< 可变车道 */
+    LaneActionDedicated = 24;        /**< 专用车道 */
+    LaneActionTidal = 25;            /**< 潮汐车道 */
+    LaneActionNULL = 0xFF;           /**< 无对应车道 */
+  }
+  repeated LaneType road_lane_types = 1;  // 车道类型
+}
+
+message RoadProperty {
+  enum FormWay {
+    FORMWAY_NULL = 0;
+    FORMWAY_DIVISEDLINK = 1;
+    FORMWAY_CROSSLINK = 2;
+    FORMWAY_JCT = 3;
+    FORMWAY_ROUNDCIRCLE = 4;
+    FORMWAY_SERVICEROAD = 5;
+    FORMWAY_SLIPROAD = 6;
+    FORMWAY_SIDEROAD = 7;
+    FORMWAY_SLIPJCT = 8;
+    FORMWAY_EXITLINK = 9;
+    FORMWAY_ENTRANCELINK = 10;
+    FORMWAY_TURNRIGHTLINEA = 11;
+    FORMWAY_TURNRIGHTLINEB = 12;
+    FORMWAY_TURNLEFTLINEA = 13;
+    FORMWAY_TURNLEFTLINEB = 14;
+    FORMWAY_COMMONLINK = 15;
+    FORMWAY_TURNLEFTRIGHTLINE = 16;
+    FORMWAY_SERVICEJCTROAD = 53;
+    FORMWAY_SERVICESLIPROAD = 56;
+    FORMWAYSERVICESLIPJCTROAD = 58;
+    AUTO_UNKNOWN_ERROR = 0XFFFF;
+  }
+  FormWay form_way = 1;      // 下一个LINK道路属性
+  uint32 form_way_dist = 2;  // 到下一个LINK距离
+  FormWay cur_formway = 3;   // 当前Link道路属性
+  uint32 next_formway_foradapter = 4;   // 下一个Link道路属性(for os someip adapter)
+}

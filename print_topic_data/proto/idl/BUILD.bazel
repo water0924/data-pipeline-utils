@@ -1,0 +1,479 @@
+package(default_visibility = ["//visibility:public"], features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "online_recorder_service_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["online_recorder_service.proto"],
+    deps = [
+        "//proto/recorder:topic_group_proto",
+        "//proto/recorder:record_config_proto",
+        "//proto/recorder:record_stats_proto",
+        "//proto/recorder:error_proto",
+    ],
+    strip_import_prefix = "/proto_idl/",
+)
+
+cc_proto_library(
+    name = "online_recorder_service_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":online_recorder_service_proto",
+    ],
+)
+
+python_proto_library(
+    name = "online_recorder_service_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":online_recorder_service_proto",
+    ],
+)
+
+cc_grpc_library(
+    name = "online_recorder_service_proto_grpc",
+    visibility = ["//visibility:public"],
+    srcs = [":online_recorder_service_proto"],
+    deps = [":online_recorder_service_proto_cc"],
+    grpc_only = True,
+)
+
+proto_library(
+    name = "planning_service_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["planning_service.proto"],
+    deps = [
+        "//proto/common:module_status_proto",
+        "//proto/common/vehicle_state:vehicle_state_proto",
+        "//proto_offboard/offboard/planning:planning_frame_context_proto",
+        "//proto/planning:planning_business_interface_proto",
+        "//proto/perception:deeproute_perception_obstacle_proto",
+        "//proto/perception:deeproute_perception_ras_map_proto",
+        "//proto/perception:traffic_light_detection_proto",
+        "//proto/localization:localization_internal_messages_proto",
+        "//proto/routing:local_routing_proto",
+        "//proto/planning:planning_proto",
+        "//proto_offboard/offboard/planning:planning_debug_info_proto",
+        "//proto/map:deeproute_map_ras_map_plus_proto",
+        "//proto/visualizer:visualizer_command_proto",
+        "//proto/visualizer:rviz_marker_proto",
+    ],
+    strip_import_prefix = "/proto_idl/",
+)
+
+cc_proto_library(
+    name = "planning_service_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":planning_service_proto",
+    ],
+)
+
+python_proto_library(
+    name = "planning_service_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":planning_service_proto",
+    ],
+)
+
+cc_grpc_library(
+    name = "planning_service_proto_grpc",
+    visibility = ["//visibility:public"],
+    srcs = [":planning_service_proto"],
+    deps = [":planning_service_proto_cc"],
+    grpc_only = True,
+)
+
+proto_library(
+    name = "local_routing_service_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["local_routing_service.proto"],
+    deps = [
+        "//proto/common/vehicle_state:vehicle_state_proto",
+        "//proto/routing:local_routing_proto",
+        "//proto/routing:routing_proto",
+        "//proto/drivers/gnss:ins_proto",
+        "//proto/routing:navinfo_routing_proto",
+        "//proto/lock_on_road:lock_on_road_proto",
+        "//proto/lock_on_road:lock_on_road_debug_proto",
+        "//proto/perception:deeproute_perception_ras_map_proto",
+        "//proto/map:deeproute_map_ras_map_plus_proto",
+    ],
+    strip_import_prefix = "/proto_idl/",
+)
+
+cc_proto_library(
+    name = "local_routing_service_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":local_routing_service_proto",
+    ],
+)
+
+python_proto_library(
+    name = "local_routing_service_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":local_routing_service_proto",
+    ],
+)
+
+cc_grpc_library(
+    name = "local_routing_service_proto_grpc",
+    visibility = ["//visibility:public"],
+    srcs = [":local_routing_service_proto"],
+    deps = [":local_routing_service_proto_cc"],
+    grpc_only = True,
+)
+
+proto_library(
+    name = "dtu_grpc_service_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["dtu_grpc_service.proto"],
+    deps = [
+        "//proto/app:deeproute_app_access_proto",
+        "//proto/planning:planning_business_interface_proto",
+        "//proto/routing:routing_proto",
+        "//proto/drdtu:dtu_command_proto",
+        "//proto/common/vehicle_state:vehicle_state_proto",
+        "//proto/drivers/gnss:ins_proto",
+        "//proto/planning:planning_proto",
+        "//proto/control:control_cmd_proto",
+        "//proto/canbus:car_info_proto",
+        "//proto/perception:deeproute_perception_obstacle_proto",
+        "//proto/perception:traffic_light_detection_proto",
+        "//proto/remote_takeover:mode_state_proto",
+        "//proto/perception:deeproute_perception_rear_warning_proto",
+        "//proto/perception:deeproute_perception_adb_proto",
+        "//proto/drapi:command_proto",
+        "//proto/drapi:operation_status_proto",
+        "//proto/map:routing_proto",
+        "//proto/aeb:aeb_state_proto",
+        "//proto/lock_on_road:lock_on_road_proto",
+        "//proto/map:deeproute_map_ras_map_plus_proto",
+        "//proto/perception:perception_dtu_interface_proto",
+        "//proto/localization:localization_external_command_proto",
+        "//proto/smart:smart_business_proto",
+        "@com_google_protobuf//:any_proto",
+    ],
+    strip_import_prefix = "/proto_idl/",
+)
+
+cc_proto_library(
+    name = "dtu_grpc_service_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":dtu_grpc_service_proto",
+    ],
+)
+
+python_proto_library(
+    name = "dtu_grpc_service_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":dtu_grpc_service_proto",
+    ],
+)
+
+cc_grpc_library(
+    name = "dtu_grpc_service_proto_grpc",
+    visibility = ["//visibility:public"],
+    srcs = [":dtu_grpc_service_proto"],
+    deps = [":dtu_grpc_service_proto_cc"],
+    grpc_only = True,
+)
+
+proto_library(
+    name = "church_component_service_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["church_component_service.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto_idl/",
+)
+
+cc_proto_library(
+    name = "church_component_service_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":church_component_service_proto",
+    ],
+)
+
+python_proto_library(
+    name = "church_component_service_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":church_component_service_proto",
+    ],
+)
+
+cc_grpc_library(
+    name = "church_component_service_proto_grpc",
+    visibility = ["//visibility:public"],
+    srcs = [":church_component_service_proto"],
+    deps = [":church_component_service_proto_cc"],
+    grpc_only = True,
+)
+
+proto_library(
+    name = "routing_service_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["routing_service.proto"],
+    deps = [
+        "//proto/routing:routing_proto",
+    ],
+    strip_import_prefix = "/proto_idl/",
+)
+
+cc_proto_library(
+    name = "routing_service_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":routing_service_proto",
+    ],
+)
+
+python_proto_library(
+    name = "routing_service_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":routing_service_proto",
+    ],
+)
+
+cc_grpc_library(
+    name = "routing_service_proto_grpc",
+    visibility = ["//visibility:public"],
+    srcs = [":routing_service_proto"],
+    deps = [":routing_service_proto_cc"],
+    grpc_only = True,
+)
+
+proto_library(
+    name = "map_engine_service_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_engine_service.proto"],
+    deps = [
+        "//proto/common/vehicle_state:vehicle_state_proto",
+        "//proto/map:deeproute_map_ras_map_plus_proto",
+        "//proto/drivers/gnss:ins_proto",
+        "//proto/routing:navinfo_routing_proto",
+        "//proto/lock_on_road:lock_on_road_proto",
+        "//proto/lock_on_road:lock_on_road_debug_proto",
+        "//proto/map:vis_map_proto",
+        "//proto/routing:routing_proto",
+        "//proto/perception:deeproute_perception_ras_map_proto",
+        "//proto/drdtu:dtu_command_proto",
+    ],
+    strip_import_prefix = "/proto_idl/",
+)
+
+cc_proto_library(
+    name = "map_engine_service_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_engine_service_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_engine_service_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_engine_service_proto",
+    ],
+)
+
+cc_grpc_library(
+    name = "map_engine_service_proto_grpc",
+    visibility = ["//visibility:public"],
+    srcs = [":map_engine_service_proto"],
+    deps = [":map_engine_service_proto_cc"],
+    grpc_only = True,
+)
+
+proto_library(
+    name = "localization_service_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["localization_service.proto"],
+    deps = [
+        "//proto/drivers/gnss:ins_proto",
+        "//proto/drivers/gnss:imu_proto",
+        "//proto/drivers/gnss:gnss_proto",
+        "//proto/drivers:pointcloud2_proto",
+        "//proto/canbus:chassis_proto",
+        "//proto/perception:deeproute_perception_obstacle_proto",
+        "//proto/localization:localization_external_command_proto",
+        "//proto/localization:localization_external_events_proto",
+        "//proto/localization:localization_internal_messages_proto",
+        "//proto/drivers/gnss:gnss_raw_proto",
+        "//proto/perception:deeproute_perception_ras_map_proto",
+    ],
+    strip_import_prefix = "/proto_idl/",
+)
+
+cc_proto_library(
+    name = "localization_service_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":localization_service_proto",
+    ],
+)
+
+python_proto_library(
+    name = "localization_service_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":localization_service_proto",
+    ],
+)
+
+cc_grpc_library(
+    name = "localization_service_proto_grpc",
+    visibility = ["//visibility:public"],
+    srcs = [":localization_service_proto"],
+    deps = [":localization_service_proto_cc"],
+    grpc_only = True,
+)
+
+proto_library(
+    name = "control_service_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["control_service.proto"],
+    deps = [
+        "//proto/common:module_status_proto",
+        "//proto/common/vehicle_state:vehicle_state_proto",
+        "//proto/planning:planning_proto",
+        "//proto_offboard/offboard/control:ctrl_debug_info_proto",
+        "//proto/control:control_cmd_proto",
+        "//proto/canbus:car_info_proto",
+        "//proto/remote_takeover:notify_control_proto",
+    ],
+    strip_import_prefix = "/proto_idl/",
+)
+
+cc_proto_library(
+    name = "control_service_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":control_service_proto",
+    ],
+)
+
+python_proto_library(
+    name = "control_service_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":control_service_proto",
+    ],
+)
+
+cc_grpc_library(
+    name = "control_service_proto_grpc",
+    visibility = ["//visibility:public"],
+    srcs = [":control_service_proto"],
+    deps = [":control_service_proto_cc"],
+    grpc_only = True,
+)
+
+proto_library(
+    name = "perception_service_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["perception_service.proto"],
+    deps = [
+        "//proto/canbus:car_info_proto",
+        "//proto/common:module_status_proto",
+        "//proto/common/vehicle_state:vehicle_state_proto",
+        "//proto/drivers:pointcloud2_proto",
+        "//proto/drivers:sensor_image_proto",
+        "//proto/drivers/ultrasonic:ultrasonic_proto",
+        "//proto/drivers/radar:radar_proto",
+        "//proto/map:deeproute_map_ras_map_plus_proto",
+        "//proto/perception:deeproute_perception_obstacle_proto",
+        "//proto/perception:perception_dtu_interface_proto",
+        "//proto/perception:deeproute_perception_camera_proto",
+        "//proto/perception:traffic_light_detection_proto",
+        "//proto/perception:deeproute_perception_ras_map_proto",
+        "//proto/perception:deeproute_perception_rear_warning_proto",
+        "//proto/perception:deeproute_perception_adb_proto",
+    ],
+    strip_import_prefix = "/proto_idl/",
+)
+
+cc_proto_library(
+    name = "perception_service_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":perception_service_proto",
+    ],
+)
+
+python_proto_library(
+    name = "perception_service_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":perception_service_proto",
+    ],
+)
+
+cc_grpc_library(
+    name = "perception_service_proto_grpc",
+    visibility = ["//visibility:public"],
+    srcs = [":perception_service_proto"],
+    deps = [":perception_service_proto_cc"],
+    grpc_only = True,
+)
+
+proto_library(
+    name = "lock_on_road_service_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["lock_on_road_service.proto"],
+    deps = [
+        "//proto/drivers/gnss:ins_proto",
+        "//proto/drivers/gnss:gnss_proto",
+        "//proto/drivers/gnss:gnss_raw_proto",
+        "//proto/perception:deeproute_perception_obstacle_proto",
+        "//proto/perception:deeproute_perception_ras_map_proto",
+        "//proto/routing:navinfo_routing_proto",
+        "//proto/lock_on_road:lock_on_road_proto",
+        "//proto/lock_on_road:lock_on_road_debug_proto",
+    ],
+    strip_import_prefix = "/proto_idl/",
+)
+
+cc_proto_library(
+    name = "lock_on_road_service_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":lock_on_road_service_proto",
+    ],
+)
+
+python_proto_library(
+    name = "lock_on_road_service_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":lock_on_road_service_proto",
+    ],
+)
+
+cc_grpc_library(
+    name = "lock_on_road_service_proto_grpc",
+    visibility = ["//visibility:public"],
+    srcs = [":lock_on_road_service_proto"],
+    deps = [":lock_on_road_service_proto_cc"],
+    grpc_only = True,
+)
+
+proto_library(
+    name = "church_component_service_proto_no_strip",
+    deprecation = "Use proto targets //proto_idl/idl:church_component_service_proto instead",
+    srcs = [ ":church_component_service.proto", ],
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,63 @@
+syntax = "proto2";
+import "canbus/gl_p177_chassis_detail.proto";
+
+package dr.blc.mcu;
+
+message GLP177Request {
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR02_1F0 adcu_zcucanfd1_fr02_1f0 = 1;
+
+};
+
+message GLP177DownstreamChassis {
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR10_1B5 adcu_zcucanfd1_fr10_1b5=1;
+  optional deeproute.canbus.gl.p177.ASDM_CHAS1_FR07_117 asdm_chas1_fr07_117=2;
+  optional deeproute.canbus.gl.p177.DHU_ZCUCANFD1_FR01_1E8 dhu_zcucanfd1_fr01_1e8=3;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR06_1FF adcu_zcucanfd1_fr06_1ff=4;
+  optional deeproute.canbus.gl.p177.DHU_ZCUCANFD1_FR13_367 dhu_zcucanfd1_fr13_367=5;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR13_190 adcu_zcucanfd1_fr13_190=6;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR02_1F0 adcu_zcucanfd1_fr02_1f0=7;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR19_226 adcu_zcucanfd1_fr19_226=8;
+  optional deeproute.canbus.gl.p177.ASDM_CHAS1_FR06_131 asdm_chas1_fr06_131=9;
+  optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR05_335 paszcucanfd1_fr05_335=10;
+  optional deeproute.canbus.gl.p177.ADCU_TO_DHU_SEC_OC_FR01_132 adcu_to_dhu_sec_oc_fr01_132=11;
+  optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR20_112 paszcucanfd1_fr20_112=12;
+  optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR02_311 paszcucanfd1_fr02_311=13;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR08_120 adcu_zcucanfd1_fr08_120=14;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR09_360 adcu_zcucanfd1_fr09_360=15;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR07_280 adcu_zcucanfd1_fr07_280=16;
+  optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR06_210 paszcucanfd1_fr06_210=17;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR04_1A0 adcu_zcucanfd1_fr04_1a0=18;
+  optional deeproute.canbus.gl.p177.DHU_ZCUCANFD1_FR04_175 dhu_zcucanfd1_fr04_175=19;
+  optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR07_60 paszcucanfd1_fr07_60=20;
+  optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR15_24B paszcucanfd1_fr15_24b=21;
+  optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR04_211 paszcucanfd1_fr04_211=22;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR03_2F0 adcu_zcucanfd1_fr03_2f0=23;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR11_1E0 adcu_zcucanfd1_fr11_1e0=24;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR01_1C0 adcu_zcucanfd1_fr01_1c0=25;
+  optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR18_310 paszcucanfd1_fr18_310=26;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR21_1C6 adcu_zcucanfd1_fr21_1c6 = 27;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR14_220 adcu_zcucanfd1_fr14_220 = 28;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR23_116 adcu_zcucanfd1_fr23_116 = 29;
+  optional deeproute.canbus.gl.p177.DHU_ZCUCANFD1_FR02_307 dhu_zcucanfd1_fr02_307 = 30;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR22_1CA adcu_zcucanfd1_fr22_1ca = 31;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR12_370 adcu_zcucanfd1_fr12_370 = 32;
+  optional deeproute.canbus.gl.p177.PSCM_CHAS1_FR01_F6 pscm_chas1_fr01_f6 = 33;
+  optional deeproute.canbus.gl.p177.ASDM_CHAS1_FR10_54 asdm_chas1_fr10_54 = 34;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR20_30A adcu_zcucanfd1_fr20_30a = 35;
+  optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR05_480 adcu_zcucanfd1_fr05_480 = 36;
+  optional deeproute.canbus.gl.p177.ASDM_CHAS1_FR01_93 asdm_chas1_fr01_93 = 37;
+  optional deeproute.canbus.gl.p177.DHU_ZCUCANFD1_FR14_1F8 dhu_zcucanfd1_fr14_1f8 = 38;
+  optional deeproute.canbus.gl.p177.ZCUD_ZCUCANFD1_FR07_1C3 zcud_zcucanfd1_fr07_1c3 = 39;
+}
+
+// topic: /mcu_blc/chassis_detail
+message UpstreamChassis {
+  optional int64 timestamp = 1; // us
+  optional deeproute.canbus.gl.p177.GlP177ChassisDetail chassis_detail = 2;  // chassis detail
+}
+
+// topic: /blc/downstream_chassis
+message DownstreamChassis {
+  optional int64 timestamp = 1; // us
+  optional dr.blc.mcu.GLP177DownstreamChassis chassis_detail = 2;  // chassis detail
+}

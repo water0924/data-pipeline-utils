@@ -1,0 +1,38 @@
+syntax = "proto2";
+
+package deeproute.map;
+
+import "map/sd_map.proto";
+import "routing/navinfo_routing.proto";
+
+message CrowdSourceReportData {
+  // Each info is a json string of SDEventInfo proto, which is define at:
+  // https://code.deeproute.ai/deeproute-org/localization-mapping-calibration/all/lam-common/-/blob/dev_master/lam_common/proto/lam_common/sd_material_server/sd_event.proto
+  repeated string sd_event_info_jsons = 1;
+}
+//线下众包的benchmark使用的proto
+message CrowdSourceBenchmarkDebugInfo {
+  repeated CrowdSourceReportData crowd_source_report_datas = 1;
+}
+
+message OnboardMpConfig {
+  optional string mp_namespace = 1;
+  optional string roi_namespace = 2;
+}
+
+message SdMapDebugInfo {
+  optional CrowdSourceReportData crowd_source_report_data = 1;
+  // sd地图版本
+  optional string sd_map_version = 2;
+
+  // MP配置
+  optional OnboardMpConfig mp_config = 3;
+  // fusion map配置
+  optional deeproute.sd_map.FusionMapConfig fusion_map_config = 4;
+  // routing云控开关
+  // deeproute.sd_map.SDMapVersionOnboard.LocalRoutingConfig
+  optional string local_routing_cloud_config = 11;
+  // 限速云控开关
+  // deeproute.navinfo.SpeedLimitConfig
+  optional string speed_limit_config = 12;
+}

@@ -1,0 +1,673 @@
+
+syntax = "proto3";
+package deeproute.diagnostic;
+
+message GeelyCarConfigPara {
+  uint32 vehicle_type = 1;
+  uint32 number_of_door = 2;
+  uint32 steer_wheel_position = 3;
+  uint32 gear_box_type = 4;
+  uint32 propulsion_type = 5;
+  uint32 tyre_dimension = 6;
+  uint32 tyre_rolling_circumference = 7;
+  uint32 cruise_control = 8;
+  uint32 max_vehicle_speed_limitation = 9;
+  uint32 hill_descent_control = 10;
+  uint32 air_suspension = 11;
+  uint32 assistance_services = 12;
+  uint32 autonomous_drive = 13;
+  uint32 bumper_types = 14;
+  uint32 skidplate_rear = 15;
+  uint32 parking_assistance = 16;
+  uint32 collision_mitigation_support_front = 17;
+  uint32 road_sign_information = 18;
+  uint32 blind_spot_information_system = 19;
+  uint32 collision_mitig_and_warn_rear = 20;
+  uint32 parking_camera = 21;
+  uint32 rear_wiew_mirros_outer = 22;
+  uint32 combined_instrument = 23;
+  uint32 roof_hatch = 24;
+  uint32 system_language = 25;
+  uint32 trailer_module_after_market = 26;
+  uint32 language_region = 27;
+  uint32 emergency_lane_keeping_aid = 28;
+  uint32 evasive_manouevre_assist = 29;
+  uint32 rain_sensor_function = 30;
+  uint32 imu_sensor_configuration = 31;
+  uint32 door_opening_warning = 32;
+  uint32 front_cross_traffic_alert = 33;
+  uint32 digital_video_recorder = 34;
+  uint32 logo_light = 35;
+  uint32 emergency_lane_occupied_warning = 36;
+  uint32 highway_assist = 37;
+  uint32 parking_assistance_support_peb = 38;
+  uint32 driver_alert_control = 39;
+  uint32 traffic_light_attention = 40;
+  uint32 rear_active_steering = 41;
+  uint32 remote_straight_parking_assist = 42;
+  uint32 car_wash_mode = 43;
+  uint32 digital_key_protocol = 44;
+  uint32 remote_pilot_function = 45;
+  uint32 avp_type = 46;
+  uint32 rpa_type = 47;
+  uint32 remote_vehicle_monitoring = 48;
+  uint32 lane_keeping_aid = 49;
+  uint32 market_ccp746 = 50;
+  uint32 power_seats = 51;
+  uint32 wireless_power_transfer_module = 52;
+  uint32 vehicle_sentry_and_theft_deterrence = 53;
+  uint32 lidar_cleaning_and_position_control_function = 54;
+  uint32 community_powered_map_system = 55;
+  uint32 direction_indicator_switch_type = 56;
+  uint32 adavanced_driver_assistance_system = 57;
+  uint32 driving_habits_learning = 58;
+  uint32 active_safety_master = 59;
+  uint32 incar_entertainment_camera = 60;
+  uint32 eco_mode = 61;
+  uint32 remote_control_vehicle = 62;
+  uint32 misoperation_acceleration_inhibition = 63;
+  uint32 commute_noa = 64;
+  uint32 vehicle_motion_control = 65;
+  uint32 tank_turn = 66;
+  uint32 door_to_door = 67;
+  uint32 handsoff_detection = 68;
+}
+
+message GWMCarConfigPara {
+  // - 项目代码
+  enum PROJECT_CODE {
+    C03 = 0; ES15 = 1; M83_1 = 2; C01_1 = 3; M81_3 = 4; M82 = 5; DE09 = 6;
+    DE10 = 7;
+    B07_1 = 8;
+    B01 = 9;
+    P01 = 10;
+    B16_1 = 11;
+    B26_1 = 12;
+    ES14 = 13;
+    EC15 = 14;
+    B12 = 15;
+    C05 = 16;
+    M82_FZ = 17;
+    B01_3S = 18;
+    B26_1Y = 19;
+    P03_XDL_2 = 20;
+    P02_3 = 21;
+    D03_5 = 22;
+    C01_2 = 23;
+
+  }
+  
+  // - 交通标志信息
+  enum TRAFFIC_SIGN_RECOGNITON_TSR {
+    NON_TSR = 0; TSR = 1; TSR_OVERSPEED_ALARM = 2; TSR_OVERSPEED_ALARM_SAS = 3;
+    TSR_SAS = 4;
+  }
+  // - 泊车系统
+  enum AUTO_PARKING_ASSIST_APA {
+    NON_APA = 0;
+    SAPA = 1;
+    FAPA_REMOTE_CONTROL_PARKING = 2;
+    FAPA = 3;
+    INTEGRATED_FAPA = 4;
+    INTEGRATED_FAPA_REMOTE_CONTROL_PARKING = 5;
+    POINT_TO_POINT_PARKING = 6;
+    AUTOMATED_VALET_PARKING_AVP = 7;
+    HOME_AVP = 8;
+    HOME_AVP_WITHOUT_REDUNDANT = 9;
+  }
+
+  // - 动力形式
+  enum POWER_TRAIN_TYPE {
+    NON_TYPE = 0;
+    GW4_GSL_ENG = 1;
+    E15_PHED_GW4_PHEV = 2;
+    BEV_ = 3;
+    FCEV_ = 4;
+  }
+  // - 变速器
+  enum TRANSMISSION {
+    ONE_RATIO_REDUCER = 0;
+    DHT_SERIES_PARALLEL_DISTRIBUTED_HASH_TABLE = 1;
+    DCT_ = 2;
+    HAT_GW = 3;
+  }
+
+  // - 驾驶类型
+  enum DRIVE_HANDLE_TYPE { LHD = 0; RHD = 1; }
+
+  // - 电机位置
+  enum ELECTROMOTOR_POSITION { 
+    NON_NEW_ENERGY_E_MOTOR_SYS = 0;
+    ELECTRIC_DRIVE_AXLE_EV = 1;
+    EM_P0 = 2;
+    EM_P2 = 3;
+    VERTICAL_P2 = 4;
+    EM_P4 = 5;
+    EM_P2_P4 = 6;
+    EM_PS = 7;
+    EM_PS_P4 = 8;
+    EM_P1_P4 = 9;
+    EM_P2_5_P4 = 10;
+    EM_PSD_P4 = 11;
+ 
+  }
+  // - 轮胎
+  enum TIRE_TYPE {     // - add 
+    TIRE_245_45_R20 = 0;
+    TIRE_185_50_R17 = 1;
+    TIRE_185_55_R16 = 2;
+    TIRE_185_65_R15 = 3;
+    TIRE_205_45_R17 = 4;
+    TIRE_225_55_R17 = 5;
+    TIRE_225_50_R18 = 6;
+    TIRE_165_65_R15 = 7;
+    TIRE_175_55_R16 = 8;
+    TIRE_225_50_R19 = 9;
+    TIRE_215_65_R17 = 10;
+    TIRE_195_60_R16 = 11;
+    TIRE_195_55_R16 = 12;
+    TIRE_215_55_R18 = 13;
+    TIRE_215_60_R17 = 14;
+    TIRE_215_65_R16 = 15;
+    TIRE_215_50_R18 = 17; // -
+    TIRE_205_50_R17 = 18;
+    TIRE_205_45_R18 = 19;
+    TIRE_215_35_R19 = 20;
+    TIRE_205_55_R17 = 21;
+    TIRE_225_65_R17 = 22;
+    TIRE_225_55_R19 = 23;
+    TIRE_205_50_R18 = 24;
+    TIRE_205_45_R19 = 25;
+    TIRE_225_45_R18 = 26;
+    TIRE_225_60_R18 = 27;
+    TIRE_225_40_R18 = 28;
+    TIRE_225_40_R19 = 29;
+    TIRE_235_50_R20 = 30;
+    TIRE_225_35_R19 = 31;
+    TIRE_235_55_R18 = 32;
+    TIRE_235_55_R19 = 33;
+    TIRE_235_55_R20 = 34;
+    TIRE_235_60_R18 = 35;
+    TIRE_235_65_R17 = 36;
+    TIRE_225_55_R18 = 37;
+    TIRE_225_60_R17 = 38;
+    TIRE_235_65_R18 = 39;
+    TIRE_235_70_R16 = 40;
+    TIRE_235_60_R19 = 41;
+    TIRE_245_60_R18 = 42;
+    
+    TIRE_245_55_R19 = 43;
+    TIRE_245_45_R19 = 44;
+    TIRE_245_65_R17 = 45;
+    TIRE_245_40_R20 = 46;
+    TIRE_245_70_R16 = 47;
+    TIRE_245_70_R17 = 48;
+    TIRE_245_50_R18 = 49;
+    TIRE_255_55_R19 = 50;
+    TIRE_255_45_R20 = 51;
+    TIRE_255_45_R21 = 52;
+    TIRE_255_50_R19 = 53;
+    TIRE_255_50_R20 = 54;
+    TIRE_245_40_R19 = 55;
+    TIRE_265_45_R21 = 56;
+    TIRE_235_50_R19 = 57;
+    TIRE_235_45_R20 = 58;
+    TIRE_265_50_R20 = 59;
+    TIRE_265_70_R18 = 60;
+    TIRE_265_60_R18 = 61;
+    TIRE_265_55_R19 = 62;
+    TIRE_265_65_R17 = 63;
+    TIRE_265_65_R18 = 64;
+    TIRE_215_60_R18 = 65;
+    TIRE_225_55_R18_XL = 66;
+    TIRE_235_50_R18_XL = 67;
+    TIRE_225_60_R17_XL = 68;
+    TIRE_275_50_R22 = 69;
+    TIRE_275_60_R20 = 70;
+    TIRE_285_50_R20 = 71;
+    TIRE_285_60_R18 = 72;
+    TIRE_315_70_R17 = 73;
+    TIRE_245_55_R17 = 75;
+    TIRE_265_70_R17 = 76;
+    TIRE_255_40_R20 = 77;
+    TIRE_255_40_R20_FR_TIRE_275_40_R20_RR = 78;
+    TIRE_245_70_R17_FR_TIRE_265_65_R17_RR = 79;
+    TIRE_235_45_R19 = 80;
+    TIRE_255_60_R20 = 81;
+    TIRE_255_55_R21 = 82;
+    TIRE_265_65_R20 = 83;
+    TIRE_255_55_R20 = 84;
+    TIRE_255_45_R19 = 85;
+    TIRE_245_40_R20_FR_TIRE_265_45_R20_RR = 86;
+    TIRE_275_45_R21 = 87;
+    TIRE_305_65_R17 = 88;
+    TIRE_245_45_R20_FR_TIRE_265_40_R20_RR = 89;
+    TIRE_245_50_R19 = 90;
+    TIRE_255_50_R21_FR_TIRE_275_45_R21_RR = 91;
+    TIRE_285_70_R17 = 92;
+    TIRE_255_65_R19 = 93;
+    TIRE_285_45_R22 = 94;
+    TIRE_285_40_R23 = 95;
+    TIRE_255_55_R21_FR_TIRE_275_50_R21_RR = 96;
+    TIRE_285_65_R18 = 97;
+    TIRE_265_45_R20_FR_TIRE_285_40_R20_RR = 98;
+    TIRE_235_50_R18 = 99;
+    TIRE_275_65_R18 = 100;
+    TIRE_265_40_R21_FR_TIRE_285_35_R21_RR = 101;
+    TIRE_255_35_R20 = 102;
+    TIRE_315_30_R21 = 103;
+    TIRE_245_65_R17_FR_TIRE_265_65_R17_RR = 104;
+    TIRE_245_40_R21_FR_TIRE_275_40_R20_RR = 105;
+    TIRE_245_40_R21_FR_TIRE_285_35_R21_RR = 106;
+    TIRE_245_45_R20_FR_TIRE_275_40_R20_RR = 107;
+
+    TIRE_255_50_R21 = 109;
+    TIRE_255_60_R19 = 108;
+  }
+  // - 巡航控制
+  enum CRUISE_CONTROL {
+    NON_CRUISE_CONTROL = 0; HAS_CRUISE_CONTROL = 1;
+    ADAPTIVE_CRUISE_CONTROL_ACC = 2;
+    ACC_ICA_TJA_INTELLIGENT_TURNING = 3;
+  }
+  // - 车道偏离预警+车道保持
+  enum LANE_DEPARTURE_WARNING_LDW_LANE_KEEPING_ASSIST_LKA {
+    NON_LDW_LKA = 0; LDW_LKA = 1; LDW_LKA_ELK = 2;
+
+  }
+  // - 前方碰撞预警+制动
+  enum FORWARD_COLLISION_WARNING_FCW_AUTO_EMERGENCY_BRAKING_AEB {
+    NON_FCW_AEB = 0; FCW = 2; AEB = 3; FCW_AEB_AEBP_AEBB = 4;
+
+  }
+  // - 远近光自动切换系统
+  enum HIGH_BEAM_ASSIST_HMA { NON_HMA = 0; HMA = 1; NON_ADB = 2; ADB = 3; }
+  // - 分动器
+  enum TRANSFER_CASE {
+    WD2 = 0;
+    WD4_PART_TIME = 1;
+    INTELLGENT_All_WHEEL_DRIVER = 2;
+    WD6 = 3;
+  }
+  // - 车道辅助系统震动提醒
+  enum HAPTIC_REMINDER_OF_LANE_SUPPORT_SYSTEMS {
+    NON_HAPTIC_REMINDER_OF_LANE_SUPPORT_SYSTEMS = 0;
+    HAS_HAPTIC_REMINDER_OF_LANE_SUPPORT_SYSTEMS = 1;
+  }
+  // - 紧急转向辅助
+  enum EMERGENCY_STEERING_SUPPORT_ESS {
+    NON_EMERGENCY_STEERING_SUPPORT_ESS = 0;
+    HAS_EMERGENCY_STEERING_SUPPORT_ESS = 1;
+  }
+
+  // - 拖车
+  enum TRAILER_HOOK{
+    NON_TRAILER_HOOK = 0;
+    TRAILER_HOOK_NO_POWER = 1;
+    TRAILER_POWER_OUTLET = 2;
+    RR_TRACTION_DEVICE = 3;
+    TRAILER_HOOK_POWER_OUTLET_TRACTION_DEVICE = 4;
+    TRAILER_INTERFACE_POWER_OUTLET = 5;
+  }
+
+  // - 前向横穿预警系统+制动
+  enum FRONT_CROSS_TRAFFIC_ALERTING_BRAKE { 
+    NON_FCTA_NON_FCTB = 0; FCTA_FCTB = 1;
+  }
+
+  // - 自动紧急转向
+  enum AUTOMATIC_EMERGENCY_STEERING_AES { NON_AES = 0; AES = 1; }
+
+  // - 高速公路智能驾驶辅助
+  enum INTELLIGENT_DRIVING_ASSISTANCE_FOR_HIGWAY {
+    NON_HWA = 0;
+    HWA = 1;
+    NON_HWA_FPS_CORNER = 2;
+  }
+  // - 高速自动领航辅助驾驶
+  enum NAVIGATION_ON_HIGHWAYPILOT_NOH {
+    NON_NAVIGATION_ON_HIGHWAYPILOT_NOH = 0;
+    HAS_NAVIGATION_ON_HIGHWAYPILOT_NOH = 1;
+  }
+  // - 城市NOH
+  enum URBAN_NOH { NON_URBAN_NOH = 0; HAS_URBAN_NOH = 1; }
+  // - 速传感器齿数信息
+  enum TOOTH_WHEEL_SPEED_SENSOR { 
+    TEETH_40_PULSESA_LAP_80 = 0; TEETH_48_PULSESA_LAP_96 = 1;
+  }
+  // - 外后视镜
+  enum OUTSIDE_RR_VIEW_MIRROR{
+    MANUALADJUSTMENT = 0;
+    ELECTRIC_ADJUSTMENT = 1;
+    INTELLIGENT_ADJUSTMENT = 2;
+  }
+  // - 电子P档
+  enum E_PARKING {
+    NO_E_PARKING = 0; HAS_E_PARKING = 1; E_PARKING_INTEGRATED_EPB = 2;
+
+  }
+  // - 交通灯识别与控制
+  enum TRAFFIC_LIGHT_AND_STOP_SIGN_CONTROL {
+    NON_TRAFFIC_LIGHT_AND_STOP_SIGN_CONTROL = 0;
+    HAS_TRAFFIC_LIGHT_AND_STOP_SIGN_CONTROL = 1;
+    TRAFFIC_LIGHT_START_AND_STOP = 2;
+  }
+
+  // - 越野巡航控制
+  enum OFF_ROAD_CRUISE_CONTROL_CCO {
+    NON_CCO = 0; HAS_CCO = 1; TRACK_CRUISE_CONTROL = 2;
+  }
+  // - 方向盘按键
+  enum STEERING_WHEEL_BUTTON {
+    MULTI_FUNCTION_STEERING_WHEEL_BUTTON_MECHANICAL = 0;
+    MULTI_FUNCTION_STEERING_WHEEL_BUTTON_MECHANICAL_TOUCH = 1;
+    MULTI_FUNCTION_STEERING_WHEEL_BUTTON_MECHANICAL_TOUCH_SCREEN = 2;
+    MULTI_FUNCTION_STEERING_WHEEL_BUTTON_MECHANICAL_ROLLER = 3;
+  }
+  // - 集成式制动控制系统
+  enum INTEGRATED_BRAKE_CONTROL_SYSTEM_IBC {
+    NON_INTEGRATED_BRAKE_CONTROL_SYSTEM = 0;
+    INTEGRATED_BRAKE_CONTROL_SYSTEM = 1;
+  }
+  // - 并线辅助
+  enum LANE_CHANGE_ASSIST_LCA {
+    NON_LANE_CHANGE_ASSIST_LCA = 0; HAS_LANE_CHANGE_ASSIST_LCA = 1;
+  }
+  // - 开门预警
+  enum DOOR_OPEN_WARNING_DOW {
+    NON_DOOR_OPEN_WARNING_DOW = 0; HAS_DOOR_OPEN_WARNING_DOW = 1;
+    DOOR_OPEN_WARNING_WITH_LOCK = 2;
+  }
+  // - 后碰撞预警
+  enum REAR_COLLISION_WARNING_RCW {
+    NON_REAR_COLLISION_WARNING_RCW = 0; HAS_REAR_COLLISION_WARNING_RCW = 1;
+  }
+  // - 智能驾驶域控制器
+  enum ADAS_DOMAIN_CONTROL {
+    NON_ADAS_DOMAIN_CONTROL = 0;
+    ADAS_DOMAIN_CONTROL_ADC3_0L = 1;
+    ADAS_DOMAIN_CONTROL_ADC1_5H = 2;
+    ADAS_DOMAIN_CONTROL_ADC3_0H = 3;
+    ADAS_DOMAIN_CONTROL_ADC4_0 = 4;
+    ADAS_DOMAIN_CONTROL_ADC3_0 = 5;
+    ADAS_DOMAIN_CONTROL_ADC2_0 = 6;
+  }
+  // - 门模块类型
+  enum DOOR_MODULE_TYPE {
+    NON_DR_MODULE = 0;
+    FRT_DR_MODULE = 1;
+    FRT_DR_RR_DR_MODULE = 2;
+    FRT_DR_MODULE_COMBINE_THE_4_DCM_MESSAGE_SOLUTION = 3;
+  }
+  // - 行车记录仪
+  enum DIGITAL_VIDEO_RECORDER_DVR {
+    NON_ICDR = 0;
+    ICDR = 1;
+  }
+  // - 燃料
+  enum FUEL {
+    DIESEL = 0;
+    GASOLINE = 1;
+    GASOLINE_CNG = 2;
+    HEV = 3;
+    PHEV = 4;
+    EV = 5;
+    EV_CNG = 6;
+    CNG = 7;
+    FUEL_FCEV = 8;
+    FUEL_FCEV_HEV = 9;
+    FUEL_FCEV_PHEV = 10;
+  }
+  // - 方向盘离手检测
+  enum STEERING_WHEEL_OFF_HAND_DETECTION {
+    NON_STEERING_WHEEL_OFF_HAND_DETECTION = 0;
+    HAS_STEERING_WHEEL_OFF_HAND_DETECTION = 1;
+  }
+  // - 地域划分
+  enum REGIONAL {
+    CHINA = 0;
+    EU = 1;
+    GENERAL = 2;
+    NORTH_AMERICA = 3;
+    RUSSIA = 4;
+    INDIA = 5;
+    AUSTRALIA = 6;
+    GENERAL_LHD = 7;
+    GENERAL_RHD = 8;
+  }
+  // - 高电压平台
+  enum HIGH_VOLTAGE_PLATFORM {
+    NON_HIGH_VOLTAGE_PLATFORM = 0;
+    HIGH_VOLTAGE_PLATFORM_400V = 1;
+    HIGH_VOLTAGE_PLATFORM_800V = 2;
+  }
+  // - 倒车雷达+倒车侧向警告
+  enum PARKING_DISTANCE_CONTROL_PDC_REAR_CROSS_TRAFFIC_ALERT_RCTA {
+    NON_PDC_RCTA = 0; PDC = 1; PDC_RCTA_RCTB = 2;
+  }
+  // - IDPS通讯协议
+  enum IDPS_COMMUNICATION_PROTOCOL {
+    NON_IDPS = 0; IDPS_PRIVATE_COMMUNICATION_PROTOCOL = 1; IDPS_MIXED_MODEL = 2;
+  }
+  // - DMS类型
+  enum DMS_TYPE {
+    NO_DMS = 0; EXTERNAL_DMS = 1; EXTERNAL_DMS_DDAW = 2; INTERNAL_DMS = 3;
+  }
+  // - 诊断安全增强认证
+  enum ENHANCED_SECURITY_AUTHENTICATION_DIAGNOSTIC {
+    NON_ENHANCED_SECURITY_AUTHENTICATION_DIAGNOSTIC = 0;
+    ENHANCED_SECURITY_AUTHENTICATION_DIAGNOSTICSINGLE_COMPONENT_MODE = 1;
+    ENHANCED_SECURITY_AUTHENTICATION_DIAGNOSTIC_DEFAULT_MODEL = 2;
+    ENHANCED_SECURITY_AUTHENTICATION_DIAGNOSTIC_ENHANCED_MODEL = 3;
+    ENHANCED_SECURITY_AUTHENTICATION_DIAGNOSTIC_HYBRID_MODE = 4;
+  }
+  // - 角激光雷达传感器 
+  enum CORNER_LIDAR {
+    NON_CORNER_LIDAR = 0;
+    LIDAR_1PCS = 1;
+    LIDAR_2PCS = 2;
+    LIDAR_3PCS = 3;
+    LIDAR_4PCS = 4;
+  }
+  // - 智能驾驶状态指示灯
+  enum INTELLIGENT_DRIVING_STATUS_INDICATOR{
+    NON_STATUS_INDICATOR = 0;
+    STATUS_INDICATOR = 1;
+  }
+  // - 悬架弹簧种类
+  enum SUSPENSION_SPRING_TYPE{
+    COIL_SPRING = 0;
+    COIL_SPRING_HYDROPNEUMATIC_SUSPENSION = 1;
+  }
+  // - 前照灯控制功能
+  enum HEADLAMP_CONTROL_FUNCTION{
+    NON_HEADLAMP_CONTROL_FUNCTION = 0;
+    HEADLAMP_CONTROL_FUNCTION_HCM = 1;
+  }
+  // - 以太网安全TLS
+  enum TLS_FOR_ETHERNET_SECURITY{
+    NO_TLS = 0;
+    TLS = 1;
+  }
+  // - 尾灯控制功能
+  enum TAIL_LAMP_CONTROL_FUNCTION{
+    NON_TAIL_LAMP_MODULE = 0;
+    TAIL_LAMP_MODULE_CAN = 1;
+  }
+  // - 后轮转向
+  enum REAR_WHEEL_STEERING{
+    NON_REAR_WHEEL_STEERING = 0;
+    HAS_REAR_WHEEL_STEERING = 1;
+  }
+
+  // - 转向助力
+  enum STEERING_SYSTEM{
+    HYDRAULIC_POWER_STEERING_HPS = 0;
+    ELECTRIC_POWER_STEERING_EPS = 1;
+    STEERING_BY_WIRE_SBW = 2;
+  }
+
+  // - 智能驾驶控车方案
+  enum INTELLIGENT_DRIVING_LONGITUDINAL_CONTROL_SCHEME{
+    DRIVING_AND_PARKING_INTEGRATED_Fx_Px_SCHEME = 0;
+    DRIVING_Fx_Ax_AND_PARKING_Fx_Px_SEPARATION_SCHEME = 1;
+    DRIVING_AND_PARKING_Fx_Ax_SEPARATION_SCHEME = 2;
+    DRIVING_Fx_Ax_AND_PARKING_SV_SEPARATION_SCHEME = 3;
+  }
+  // - 限定空转差速锁
+  enum LIMITED_SLIP_DIFFERRENTIAL{
+    NON_LSD = 0;
+    MECHANICAL_LSD_FRT_AXLE = 1;
+    MECHANICAL_LSD_RR_AXLE = 2;
+    ELEC_LSD_FRT_AXLE = 3;
+    ELEC_LSD_RR_AXLE = 4;
+    ELEC_LSD_FRT_RR_AXLE = 5;
+    ELEC_LSD_FRT_RR_AXLE_EATON = 6;
+    ELEC_LSD_FRT_RR_AXLE_EXQUISITE = 7;
+    ELEC_LSD_RR_AXLE_EATON = 8;
+    ELEC_LSD_FRT_CTR_RR_AXLE = 9;
+  }
+  // - 项目代码
+  PROJECT_CODE project_code = 1;
+  // - 交通标志信息
+  TRAFFIC_SIGN_RECOGNITON_TSR traffic_sign_recogniton_tsr = 2;
+  // - 泊车系统
+  AUTO_PARKING_ASSIST_APA auto_parking_assist_apa = 3;
+   // - 动力形式
+  POWER_TRAIN_TYPE power_train_type = 4;
+   // - 变速器
+  TRANSMISSION transmission = 5;
+  // - 驾驶类型
+  DRIVE_HANDLE_TYPE drive_handle_type = 6;
+  // - 电机位置
+  ELECTROMOTOR_POSITION electromotor_position = 7;
+  // - 轮胎
+  TIRE_TYPE tire_type = 8;
+  // - 巡航控制
+  CRUISE_CONTROL cruise_control = 9;
+  // - 车道偏离预警+车道保持
+  LANE_DEPARTURE_WARNING_LDW_LANE_KEEPING_ASSIST_LKA 
+        lane_departure_warning_ldw_lane_keeping_assist_lka = 10;
+  // - 前方碰撞预警+制动
+  FORWARD_COLLISION_WARNING_FCW_AUTO_EMERGENCY_BRAKING_AEB
+        forward_collision_warning_fcw_auto_emergency_braking_aeb = 11;
+  // - 远近光自动切换系统
+  HIGH_BEAM_ASSIST_HMA high_beam_assist_hma = 12;
+  //- 分动器
+  TRANSFER_CASE transfer_case = 13;
+  // - 车道辅助系统震动提醒
+  HAPTIC_REMINDER_OF_LANE_SUPPORT_SYSTEMS
+          haptic_reminder_of_lane_support_systems = 14;
+  
+  // - 紧急转向辅助
+  EMERGENCY_STEERING_SUPPORT_ESS emergency_steering_support_ess = 15;
+  // - 拖车
+  TRAILER_HOOK trailer_hook = 16;
+  // - 前向横穿预警系统+制动
+  FRONT_CROSS_TRAFFIC_ALERTING_BRAKE front_cross_traffic_alerting_brake = 17;
+  // - 自动紧急转向
+  AUTOMATIC_EMERGENCY_STEERING_AES automatic_emergency_steering_aes = 18;
+  // - 高速公路智能驾驶辅助
+  INTELLIGENT_DRIVING_ASSISTANCE_FOR_HIGWAY intelligent_driving_assistance_for_higway = 19;
+  // - 高速自动领航辅助驾驶
+  NAVIGATION_ON_HIGHWAYPILOT_NOH navigation_on_highwaypilot_noh = 20;
+  // - 城市NOH
+  URBAN_NOH urban_noh = 21;
+  // - 前轮速传感器齿数信息
+  TOOTH_WHEEL_SPEED_SENSOR front_tooth_wheel_speed_sensor = 22;
+  // - 后轮速传感器齿数信息
+  TOOTH_WHEEL_SPEED_SENSOR rear_tooth_wheel_speed_sensor = 23;
+  // - 外后视镜
+  OUTSIDE_RR_VIEW_MIRROR outside_rr_view_mirror = 24;
+  // - 电子P档
+  E_PARKING e_parking = 25;
+  // - 交通灯识别与控制
+  TRAFFIC_LIGHT_AND_STOP_SIGN_CONTROL traffic_light_and_stop_sign_control = 26;
+  // - 越野巡航控制
+  OFF_ROAD_CRUISE_CONTROL_CCO off_road_cruise_control_cco = 27;
+  // - 方向盘按键
+  STEERING_WHEEL_BUTTON steering_wheel_button = 28;
+  // - 集成式制动控制系统
+  INTEGRATED_BRAKE_CONTROL_SYSTEM_IBC integrated_brake_control_system_ibc = 29;
+  // - 并线辅助
+  LANE_CHANGE_ASSIST_LCA lane_change_assist_lca = 30;
+  // - 开门预警
+  DOOR_OPEN_WARNING_DOW door_open_warning_dow = 31;
+  // - 后碰撞预警
+  REAR_COLLISION_WARNING_RCW rear_collision_warning_rcw = 32;
+  // - 智能驾驶域控制器
+  ADAS_DOMAIN_CONTROL adas_domain_control = 33;
+  // - 门模块类型
+  DOOR_MODULE_TYPE door_module_type = 34;
+  // - 行车记录仪
+  DIGITAL_VIDEO_RECORDER_DVR digital_vided_recorder_dvr = 35;
+  // - 燃料
+  FUEL fuel = 36;
+  // - 方向盘离手检测
+  STEERING_WHEEL_OFF_HAND_DETECTION steering_wheel_off_hand_detection = 37;
+  // - 地域划分
+  REGIONAL regional = 38;
+  // - 高电压平台
+  HIGH_VOLTAGE_PLATFORM high_voltage_platform = 39;
+  // - 倒车雷达+倒车侧向警告
+  PARKING_DISTANCE_CONTROL_PDC_REAR_CROSS_TRAFFIC_ALERT_RCTA
+          parking_distance_control_pdc_rear_cross_traffic_alert_rcta = 40;
+  // - IDPS通讯协议
+  IDPS_COMMUNICATION_PROTOCOL idps_communication_protocol = 41;
+  // - DMS类型
+  DMS_TYPE dms_type = 42;
+  // - 诊断安全增强认证
+  ENHANCED_SECURITY_AUTHENTICATION_DIAGNOSTIC enhanced_security_authentication_diagnostic = 43;
+  // - 角激光雷达传感器
+  CORNER_LIDAR corner_lidar = 44;
+  // - 智能驾驶状态指示灯
+  INTELLIGENT_DRIVING_STATUS_INDICATOR intelligent_driving_status_indicator = 45;
+  // - 悬架弹簧种类
+  SUSPENSION_SPRING_TYPE suspension_spring_type = 46;
+  // - 前照灯控制功能
+  HEADLAMP_CONTROL_FUNCTION headlamp_control_function = 47;
+  // - 以太网安全TLS
+  TLS_FOR_ETHERNET_SECURITY tls_for_ethernet_security = 48;
+  // - 尾灯控制功能
+  TAIL_LAMP_CONTROL_FUNCTION tail_lamp_control_function = 49;
+  // - 后轮转向
+  REAR_WHEEL_STEERING read_wheel_steering = 50;
+  // - 转向助力
+  STEERING_SYSTEM steering_system = 51;
+  // - 智能驾驶控车方案
+  INTELLIGENT_DRIVING_LONGITUDINAL_CONTROL_SCHEME intelligent_driving_longitudinal_control_scheme = 52;
+  // - 限定空转差速锁
+  LIMITED_SLIP_DIFFERRENTIAL limited_slip_differrential = 53;
+
+}
+enum VehicleType {
+  /* gwm 1-99 */
+  UNKNOWN = 0; GWM_C01 = 1; GWM_M81 = 2; GWM_M82 = 3; GWM_M83 = 4;
+  GWM_C01THOR = 5;
+  GWM_D01 = 6;
+  GWM_P02A = 7;
+  GWM_P02B = 8;
+  GWM_P03 = 9;
+  GWM_D03A = 10;
+  GWM_D03B = 11;
+  GWM_DE06 = 12;
+  GWM_DE07 = 13;
+  GWM_DE08 = 14;
+  GWM_DE09 = 15;
+
+  /* geely 100-199 */
+  GL_P177 = 100;
+
+  /* smart 200-249 */
+  SMART_HY11 = 200;
+
+}
+
+message CarConfigPara {  // topic :  /diagnostic/car_config_para 1HZ
+  string vin = 1;
+  VehicleType vehicle_type = 2;
+  oneof brand {
+    GeelyCarConfigPara gl = 3;
+    GWMCarConfigPara gwm = 4;
+  };
+}

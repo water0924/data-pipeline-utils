@@ -1,0 +1,12 @@
+syntax = "proto2";
+
+package deeproute.recorder;
+
+// topic: /safety/trigger_request
+message TriggerRequest {
+  optional string event = 1;
+  optional string event_uuid = 2;
+  optional string module_name = 3;
+  optional uint32 delay_time = 4;
+  repeated string sub_events = 5;
+}

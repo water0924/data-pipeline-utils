@@ -1,0 +1,137 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "ins_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["ins.proto"],
+    deps = [
+        "//proto/common:header_proto",
+        "//proto/common:geometry_proto",
+        "//proto/drivers/gnss:gnss_raw_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "ins_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":ins_proto",
+    ],
+)
+
+python_proto_library(
+    name = "ins_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":ins_proto",
+    ],
+)
+
+proto_library(
+    name = "imu_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["imu.proto"],
+    deps = [
+        "//proto/common:header_proto",
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "imu_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":imu_proto",
+    ],
+)
+
+python_proto_library(
+    name = "imu_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":imu_proto",
+    ],
+)
+
+proto_library(
+    name = "gnss_raw_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gnss_raw.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gnss_raw_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gnss_raw_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gnss_raw_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gnss_raw_proto",
+    ],
+)
+
+proto_library(
+    name = "gnss_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gnss.proto"],
+    deps = [
+        "//proto/common:header_proto",
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gnss_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gnss_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gnss_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gnss_proto",
+    ],
+)
+
+proto_library(
+    name = "m20_ins_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["m20_ins.proto"],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "m20_ins_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":m20_ins_proto",
+    ],
+)
+
+python_proto_library(
+    name = "m20_ins_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":m20_ins_proto",
+    ],
+)

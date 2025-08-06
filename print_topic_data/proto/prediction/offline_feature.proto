@@ -1,0 +1,22 @@
+syntax = "proto2";
+
+package deeproute.prediction;
+
+message LaneFeatureInfo {
+    optional int64 lane_id = 1;
+    optional double lane_s = 2;
+    optional double lane_l = 3;
+    optional double angle_diff = 4;
+    optional double dist_to_left_boundary = 5;
+    optional double dist_to_right_boundary = 6;
+    optional double lane_heading = 7;
+}
+
+message ObstacleOffLineFeature {
+    optional int64 id = 1; // obstacle ID
+    optional LaneFeatureInfo current_lane_feature = 2; // farseer lane feature
+}
+
+message OfflineFeature {
+    repeated ObstacleOffLineFeature obstacle_offline_feature = 1; // obstacle offline feature
+}

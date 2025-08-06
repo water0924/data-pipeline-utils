@@ -1,0 +1,213 @@
+syntax = "proto3";
+package smart;
+
+import "smart/smart_switch.proto";
+import "smart/driving/smart_driving_dwm.proto";
+import "smart/parking/smart_parking_dwm.proto";
+
+message SmartBusinessData {
+  //行车业务状态
+  DrivingBusiness driving_business = 1;
+  //泊车业务状态
+  ParkingBusiness parking_business = 2;
+  //setting开关按钮状态
+  SmartSettingSwitch2DHU setting_switch = 3;
+}
+
+message DrivingBusiness {
+  //行车开关状态
+  DrivingSmartSwitch smart_driving_switch = 1;
+  //感知限速回显 km/h
+  float limit_speed = 2;
+  //行车非故障
+  repeated DrivingDwmUID driving_dwm_id = 3;
+  //故障
+  repeated DrivingDwmUID driving_fault_id = 4;
+  AccStateType acc_state = 5;
+  LccStateType lcc_state = 6;
+  NzpStateType nzp_state = 7;
+  NspUsageStateInfo nsp_usage_state_info = 8;
+  //目标车速回显 km/h
+  float target_speed = 9;
+  //超速警报状态--目前不输出 需smart来处理
+  TSIIconState tsi_icon_state = 10;
+}
+
+message ParkingBusiness {
+  //泊车开关状态
+  ParkingSmartSwitch smart_parking_switch = 1;
+  //泊车DWM                             
+  ParkingDwmUID parking_dwm_id = 2;
+  //泊车DWM1 对应弹窗文言 ParkAlarmInfoInf1                         
+  ParkingDwmPopUID parking_dwm_pop_id = 3;
+  //LpStateType
+  LpStateType lp_state_type = 4;
+  //接管弹窗
+  TORState lp_tor_state = 5;
+  //地图匹配高亮id
+  int32 lp_map_id = 6;
+}
+
+//SocA 发送到SocB上的请求
+message Smart2DrBusinessData {
+  //setting开关状态
+  SmartSettingSwitch setting_switch = 1;
+}
+
+enum LpStateType {
+  Initial = 0;
+  Off = 1;
+  //地图管理
+  LpMapMangement = 2;
+  //LP预泊车(执行器握手)
+  LpParkingInPreactive = 3;
+  //巡航后的泊车（R档后泊车）
+  LpParkingInProcess = 4;
+  //记忆泊车结束
+  LpFunctionCompleted = 5;
+  //Abort
+  LpAbort = 6;
+  //Suspend
+  LpSuspend = 7;
+  //本地没有学习路径信号
+  LpStandbyNoPath = 8;
+  //本地有学习路径，但该停车场没有学习路径（满足ODD）
+  LpStandbyNoPresentPath = 9;
+  //本地有学习路径，但不满足ODD
+  LpStandbyPathNoODD = 10;
+  //本地有学习路径，满足ODD
+  LpStandbyPathODD = 11;
+  //学习完成界面
+  LpStandbyCompleteLearning = 12;
+  //路线学习界面
+  LpMapLearning = 13;
+  //进入APA界面
+  LpMapLearningAPAParking = 14;
+  //建图界面（learing）
+  LpMapBuilding = 15;
+  //巡航界面
+  LpCruising = 16;
+  //LP中泊车界面（车位被占，与4互斥）
+  LpCruisingPark = 17;
+  //学习apa中断界面
+  LpMapLearningAPAPSuspend = 18;
+  //学习apa终止界面
+  LpMapLearningAPAAbort = 19;
+  //巡航中apa复用上面状态？
+}
+
+enum AccStateType {
+  AccStateInitial = 0;
+  AccStateOff = 1;
+  AccStateStandby = 2;
+  AccStateActive = 3;
+  AccStateOverrideLon = 4;
+  AccStateOverrideLat = 5;
+  AccStateStandWait = 6;
+  AccStatePending = 7;
+  AccStateFailure = 8;
+}
+
+enum LccStateType {
+  LccStateInitial = 0;
+  LccStateOff = 1;
+  LccStateStandby = 2;
+  LccStateActive = 3;
+  LccStateOverrideLon = 4;
+  LccStateOverrideLat = 5;
+  LccStateStandWait = 6;
+  LccStatePending = 7;
+  LccStateFailure = 8;
+}
+
+enum NzpStateType {
+  NzpStateInitial = 0;
+  NzpStateOff = 1;
+  NzpStateStandby = 2;
+  NzpStateActive = 3;
+  NzpStateOverrideLon = 4;
+  NzpStateOverrideLat = 5;
+  NzpStateStandWait = 6;
+  NzpStatePending = 7;
+  NzpStateFailure = 8;
+}
+
+message NspUsageStateInfo {
+  enum RoadKind {
+    RoadKindInvalid = 0;
+    //匝道
+    RoadKindRamp = 1;
+    //隧道
+    RoadKindRunnel = 2;
+  }
+  //由客户侧自行统计2和非2上下跳动的段落次数
+  enum LateralBehaviorState {
+    LateralBehaviorStateInvalid = 0;
+    LateralBehaviorStateKeep = 1;
+    LateralBehaviorStateNudge = 2;
+  }
+
+
+  int32 lane_change_count = 1;
+  RoadKind change_road_kind = 2;
+  LateralBehaviorState lateral_behavior_state = 3;
+  //行程避险次数
+  int32 avoid_danger_count = 4;
+  FunctionalBehavior functional_behavior = 5;
+  //正在过路口
+  bool crossing_intersection = 6;
+  //正在绕行障碍物
+  bool winding_around_obstacle = 7;
+}
+
+message FunctionalBehavior {
+  //功能退出状态
+  enum FunctionalBehaviorState {
+    //默认
+    BehaviorStateDefault = 0;
+    //退出NZP
+    BehaviorStateNzpExit = 1;
+    //退出LCC
+    BehaviorStateLccExit = 2;
+    //Nzp横向临退
+    BehaviorStateNzpPending = 3;
+    //Lcc横向临退
+    BehaviorStateLccPending = 4;
+    //预留
+    BehaviorStateReserve1 = 5;
+    //预留
+    BehaviorStateReserve2 = 6;
+  }
+
+  //功能退出原因
+  enum FunctionalBehaviorReason {
+    //默认
+    BehaviorReasonDefault = 0;
+    //刹车
+    BehaviorReasonBrake = 1;
+    //cancel按键
+    BehaviorReasonCancel = 2;
+    //方向盘接管
+    BehaviorReasonSteeringExit = 3;
+    //脱手超时退出（mrm退出）
+    BehaviorReasonMrm = 4;
+    //除脱手超时外其他的被动退出
+    BehaviorReasonOther = 5;
+    //预留
+    BehaviorReasonReserve1 = 6;
+  }
+  FunctionalBehaviorState functional_behavior_state = 1;
+  FunctionalBehaviorReason functional_behavior_reason = 2;
+}
+
+enum TSIIconState {
+  TSIIconStateInvalid = 0;
+  TSIIconStateFlicker = 1;
+  TSIIconStateReserve = 2;
+}
+
+enum TORState {
+  TORStateInvalid = 0;
+  TORStateShow = 1;
+  TORStateCancel = 2;
+}

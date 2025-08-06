@@ -1,0 +1,73 @@
+syntax = "proto2";
+
+package deeproute.someip_adapter.gwm;
+
+message Quaternion_f {
+  optional float qx = 1 [default = nan];
+  optional float qy = 2 [default = nan];
+  optional float qz = 3 [default = nan];
+  optional float qw = 4 [default = nan];
+}
+
+message Vector3 {
+  optional float x = 1 [default = nan];
+  optional float y = 2 [default = nan];
+  optional float z = 3 [default = nan];
+}
+
+message Transformation3 {
+  optional Vector3 position = 1;
+  optional Quaternion_f orientation = 2;
+}
+
+message CameraConfig {
+  optional string camera_dev = 1;
+  message Parameters {
+    message Extrinsic {
+      optional Transformation3 sensor_to_cam = 1;
+    }
+
+    message Intrinsic {
+      enum ModelType {
+        PINHOLE = 0;
+        KANNALA_BRANDT = 1;
+        MEI = 2;
+      }
+      optional int32 img_width = 1;
+      optional int32 img_height = 2;
+
+      // focal length
+      optional float f_x = 3;
+      optional float f_y = 4;
+
+      // origin point
+      optional float o_x = 5;
+      optional float o_y = 6;
+
+      // distortion
+      optional float k_1 = 7;
+      optional float k_2 = 8;
+      optional float k_3 = 9;
+      optional float k_4 = 10;
+      optional float p_1 = 11;
+      optional float p_2 = 12;
+      optional float xi = 13;
+      optional ModelType model_type = 14;
+    }
+    optional Extrinsic extrinsic = 1;
+    optional Intrinsic intrinsic = 2;
+  }
+  optional Parameters parameters = 2;
+  optional string serial_number = 3;
+}
+
+message CalibrationConfig {
+  optional Transformation3 vehicle_to_sensing = 1;
+  optional Transformation3 sensing_to_ground = 2;
+  repeated CameraConfig camera_configs = 3;
+}
+//avm-hut req 
+
+message AvmResultReqParam {
+    optional string req_field = 1;
+}

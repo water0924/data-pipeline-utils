@@ -1,0 +1,153 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "navinfo_routing_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["navinfo_routing.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/map:routing_proto",
+        "//proto/map:sd_map_proto",
+        "//proto/graph_match:graph_matching_proto",
+        "//proto/routing:local_routing_proto",
+        "//proto/routing:cloud_task_proto",
+        "//proto/odd:odd_proto",
+        "//proto/map:map_common_proto",
+        "//proto/map:common_type_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "navinfo_routing_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":navinfo_routing_proto",
+    ],
+)
+
+python_proto_library(
+    name = "navinfo_routing_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":navinfo_routing_proto",
+    ],
+)
+
+proto_library(
+    name = "local_routing_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["local_routing.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/map:common_type_proto",
+        "//proto/map:map_common_proto",
+        "//proto/map:deeproute_map_guidance_action_proto",
+        "//proto/odd:odd_proto",
+        "//proto/localization:localization_internal_messages_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "local_routing_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":local_routing_proto",
+    ],
+)
+
+python_proto_library(
+    name = "local_routing_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":local_routing_proto",
+    ],
+)
+
+proto_library(
+    name = "cloud_task_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["cloud_task.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "cloud_task_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":cloud_task_proto",
+    ],
+)
+
+python_proto_library(
+    name = "cloud_task_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":cloud_task_proto",
+    ],
+)
+
+proto_library(
+    name = "report_event_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["report_event.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "report_event_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":report_event_proto",
+    ],
+)
+
+python_proto_library(
+    name = "report_event_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":report_event_proto",
+    ],
+)
+
+proto_library(
+    name = "routing_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["routing.proto"],
+    deps = [
+        "//proto/common:header_proto",
+        "//proto/common:geometry_proto",
+        "//proto/common:error_code_proto",
+        "//proto/semantic_map:map_parking_space_proto",
+        "//proto/drdtu:dtu_data_proto",
+        "//proto/semantic_map:map_standby_area_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "routing_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":routing_proto",
+    ],
+)
+
+python_proto_library(
+    name = "routing_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":routing_proto",
+    ],
+)
+

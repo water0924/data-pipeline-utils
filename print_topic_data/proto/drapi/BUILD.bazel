@@ -1,0 +1,594 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "render_context_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["render_context.proto"],
+    deps = [
+        "//proto/perception:deeproute_perception_ras_map_proto",
+        "//proto/drapi:business_info_proto",
+        "//proto/drapi:notification_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "render_context_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":render_context_proto",
+    ],
+)
+
+python_proto_library(
+    name = "render_context_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":render_context_proto",
+    ],
+)
+
+proto_library(
+    name = "map_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map.proto"],
+    deps = [
+        "//proto/drapi:base_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_proto",
+    ],
+)
+
+proto_library(
+    name = "request_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["request.proto"],
+    deps = [
+        "//proto/drapi:local_config_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "request_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":request_proto",
+    ],
+)
+
+python_proto_library(
+    name = "request_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":request_proto",
+    ],
+)
+
+proto_library(
+    name = "road_object_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["road_object.proto"],
+    deps = [
+        "//proto/drapi:base_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "road_object_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":road_object_proto",
+    ],
+)
+
+python_proto_library(
+    name = "road_object_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":road_object_proto",
+    ],
+)
+
+proto_library(
+    name = "notification_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["notification.proto"],
+    deps = [
+        "//proto/drapi:operation_status_proto",
+        "//proto/drapi:base_proto",
+        "//proto/drapi:business_info_proto",
+        "//proto/dsm:dsm_proto",
+        "//proto/drapi:gwm_hut_notification_proto",
+        "//proto/drapi:route_planning_proto",
+        "//proto/localization:havp_map_proto",
+        "@com_google_protobuf//:any_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "notification_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":notification_proto",
+    ],
+)
+
+python_proto_library(
+    name = "notification_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":notification_proto",
+    ],
+)
+
+proto_library(
+    name = "payload_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["payload.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "payload_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":payload_proto",
+    ],
+)
+
+python_proto_library(
+    name = "payload_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":payload_proto",
+    ],
+)
+
+proto_library(
+    name = "local_config_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["local_config.proto"],
+    deps = [
+        "//proto/drapi:navigation_map_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "local_config_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":local_config_proto",
+    ],
+)
+
+python_proto_library(
+    name = "local_config_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":local_config_proto",
+    ],
+)
+
+proto_library(
+    name = "command_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["command.proto"],
+    deps = [
+        "//proto/drapi:business_info_proto",
+        "//proto/drapi:base_proto",
+        "//proto/drapi:local_config_proto",
+        "//proto/drapi:operation_status_proto",
+        "//proto/dsm:dsm_proto",
+        "@com_google_protobuf//:any_proto",
+        "//proto/drapi:gwm_hut_notification_proto",
+        "//proto/localization:havp_map_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "command_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":command_proto",
+    ],
+)
+
+python_proto_library(
+    name = "command_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":command_proto",
+    ],
+)
+
+proto_library(
+    name = "gwm_navigation_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gwm_navigation.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gwm_navigation_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gwm_navigation_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gwm_navigation_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gwm_navigation_proto",
+    ],
+)
+
+proto_library(
+    name = "blc_to_aeb_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["blc_to_aeb.proto"],
+    deps = [
+        "//proto/drapi:operation_status_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "blc_to_aeb_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":blc_to_aeb_proto",
+    ],
+)
+
+python_proto_library(
+    name = "blc_to_aeb_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":blc_to_aeb_proto",
+    ],
+)
+
+proto_library(
+    name = "business_info_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["business_info.proto"],
+    deps = [
+        "//proto/drapi:base_proto",
+        "//proto/drapi:navigation_map_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "business_info_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":business_info_proto",
+    ],
+)
+
+python_proto_library(
+    name = "business_info_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":business_info_proto",
+    ],
+)
+
+proto_library(
+    name = "navigation_map_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["navigation_map.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "navigation_map_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":navigation_map_proto",
+    ],
+)
+
+python_proto_library(
+    name = "navigation_map_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":navigation_map_proto",
+    ],
+)
+
+proto_library(
+    name = "gwm_hut_notification_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gwm_hut_notification.proto"],
+    deps = [
+        "//proto/drapi:business_info_proto",
+        "//proto/common:geometry_proto",
+        "//proto/localization:havp_map_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gwm_hut_notification_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gwm_hut_notification_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gwm_hut_notification_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gwm_hut_notification_proto",
+    ],
+)
+
+proto_library(
+    name = "app_navigation_info_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["app_navigation_info.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "app_navigation_info_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":app_navigation_info_proto",
+    ],
+)
+
+python_proto_library(
+    name = "app_navigation_info_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":app_navigation_info_proto",
+    ],
+)
+
+proto_library(
+    name = "vehicle_status_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["vehicle_status.proto"],
+    deps = [
+        "//proto/drapi:base_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "vehicle_status_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":vehicle_status_proto",
+    ],
+)
+
+python_proto_library(
+    name = "vehicle_status_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":vehicle_status_proto",
+    ],
+)
+
+proto_library(
+    name = "operation_status_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["operation_status.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "operation_status_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":operation_status_proto",
+    ],
+)
+
+python_proto_library(
+    name = "operation_status_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":operation_status_proto",
+    ],
+)
+
+proto_library(
+    name = "base_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["base.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "base_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base_proto",
+    ],
+)
+
+python_proto_library(
+    name = "base_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":base_proto",
+    ],
+)
+
+proto_library(
+    name = "route_planning_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["route_planning.proto"],
+    deps = [
+        "//proto/drapi:base_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "route_planning_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":route_planning_proto",
+    ],
+)
+
+python_proto_library(
+    name = "route_planning_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":route_planning_proto",
+    ],
+)
+
+proto_library(
+    name = "blc_mcu_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["blc_mcu.proto"],
+    deps = [
+        ":base_proto",
+        ":gl_p177_downstream_chassis_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "blc_mcu_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":blc_mcu_proto",
+    ],
+)
+
+python_proto_library(
+    name = "blc_mcu_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":blc_mcu_proto",
+    ],
+)
+
+
+proto_library(
+    name = "gl_p177_downstream_chassis_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gl_p177_downstream_chassis.proto"],
+    deps = [
+        ":base_proto",
+        "//proto/canbus:gl_p177_chassis_detail_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gl_p177_downstream_chassis_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gl_p177_downstream_chassis_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gl_p177_downstream_chassis_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gl_p177_downstream_chassis_proto",
+    ],
+)
+
+proto_library(
+    name = "gl_navigation_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gl_navigation.proto"],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gl_navigation_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gl_navigation_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gl_navigation_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gl_navigation_proto",
+    ],
+)
+
+
+proto_library(
+    name = "gwm_tank_downstream_chassis_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gwm_tank_downstream_chassis.proto"],
+    deps = [
+        ":base_proto",
+        "//proto/canbus:gwm_tank_chassis_detail_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gwm_tank_downstream_chassis_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gwm_tank_downstream_chassis_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gwm_tank_downstream_chassis_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gwm_tank_downstream_chassis_proto",
+    ],
+)
+

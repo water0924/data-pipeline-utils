@@ -1,0 +1,43 @@
+syntax = "proto2";
+
+package deeproute.idl.lock_on_road_service;
+
+import "drivers/gnss/ins.proto";
+import "drivers/gnss/gnss.proto";
+import "drivers/gnss/gnss_raw.proto";
+import "perception/deeproute_perception_obstacle.proto";
+import "perception/deeproute_perception_ras_map.proto";
+import "routing/navinfo_routing.proto";
+import "lock_on_road/lock_on_road.proto";
+import "lock_on_road/lock_on_road_debug.proto";
+
+service LockOnRoadService {
+  rpc Init(LockOnRoadInitRequest) returns (LockOnRoadInitResponse) {
+  }
+  rpc Proc(LockOnRoadProcRequest) returns (LockOnRoadProcResponse) {
+  }
+}
+
+message LockOnRoadInitRequest {
+}
+
+message LockOnRoadInitResponse {
+}
+
+message LockOnRoadProcRequest {
+  optional deeproute.drivers.gnss.SensorsIns gnss_pose = 1;
+  optional deeproute.drivers.gnss.Gnss gnss = 2;
+  optional deeproute.drivers.gnss.Ins odom_pose = 3;
+  optional deeproute.perception.RASMap ras_map = 4;
+  optional deeproute.navinfo.SDRoutingResponse routing_response = 5;
+  optional deeproute.perception.PerceptionObstacles perception_obstacles = 6;
+}
+
+message LockOnRoadProcResponse {
+  optional deeproute.localization.LockOnRoadResult lock_on_road_result = 1;
+  optional deeproute.localization.LaneIndexEstimationResult
+      lane_index_estimation_result = 2;
+  optional deeproute.localization.LockOnRoadDebugInfo lock_on_road_debug_info =
+      3;
+  optional deeproute.perception.RASMap debug_rasmap = 4;
+}

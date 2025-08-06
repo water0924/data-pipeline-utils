@@ -1,0 +1,82 @@
+syntax = "proto2";
+
+package deeproute.odd;
+
+import "graph_match/graph_matching.proto";
+
+enum OddLimitType {
+  ODD_UNKNOWN = 0;                // 未知
+  ODD_REST_AREA = 1;              // 服务区
+  ODD_TOLL = 2;                   // 收费站
+  ODD_GRAPH_MATCH_FAILED = 3;     // 异端图匹配失败
+  ODD_U_TURN = 4;                 // 掉头
+  ODD_ROUNDABOUT = 5;             // 环岛
+  ODD_SHARP_CORNER_JUNCTION = 6;  // 锐角路口
+  ODD_FIVE_FORKED_JUNCTION = 7;   // 五岔路口
+  ODD_SIX_FORKED_JUNCTION = 8;    // 六岔路口
+  ODD_TEMPORARY = 9;              // 临时ODD
+  ODD_ROI_REGION = 10;            // ROI ODD
+  ODD_CITY_AND_ROAD_CLASS = 11;   // 城市和道路等级
+  ODD_U_TURN_SINGLE_MOVE = 12;    // 一把掉头
+  ODD_U_TURN_MULTI_MOVE = 13;     // 多把掉头
+  ODD_CITY = 14;                  // 城市
+  ODD_ROAD_CLASS = 15;            // 道路等级
+  ODD_MAIN_SECONDARY_ROAD = 16;   // 主辅路切换
+}
+
+enum OddAction {
+  ODD_ACTION_UNKNOWN = 0;                         // 未知
+  ODD_ACTION_NCA_ACTIVE = 1;                      // 开启NCA
+  ODD_ACTION_NCA_ACTIVE_WITH_TOAST_REMINDER = 2;  // 开启NCA并提示
+  ODD_ACTION_NCA_DEGRADE_TO_LCC = 3;              // 降级至LCC
+  ODD_ACTION_NCA_DEGRADE_TO_ACC = 4;              // 降级至ACC
+  ODD_ACTION_NCA_EXIT_TO_MANUAL = 5;              // 退出智驾
+}
+
+message PreviewOddLimitAreaInfo {
+  optional OddLimitType odd_type = 1;
+  repeated deeproute.graph_match.AmapLinkMatchInfo odd_range = 2
+      [deprecated = true];
+
+  optional deeproute.graph_match.AmapLinkMatchInfo point_range = 3;
+}
+
+message PreviewRouteOddLimitInfo {
+  repeated PreviewOddLimitAreaInfo odd_infos = 1;
+}
+
+// only for preview on vis
+message OddLimitPreviewInfo {
+  optional string request_id = 1;
+  repeated PreviewRouteOddLimitInfo route_odd_infos = 2;
+}
+
+message OddLimitAreaInfo {
+  optional OddLimitType odd_type = 1;
+  // for sd map
+  repeated uint64 link_id = 2;
+  repeated int32 link_index = 3;
+  optional double distance_to_odd_start = 4;
+  optional double distance_to_odd_end = 5;
+}
+
+message OddLimitInfo {
+  optional string request_id = 1;
+
+  // Only notice to user
+  repeated OddLimitAreaInfo only_notice_area_infos = 3;
+
+  // Downgrade to LCC
+  repeated OddLimitAreaInfo odd_area_infos = 2;
+
+  // Downgrade to ACC
+  repeated OddLimitAreaInfo downgrade_acc_area_infos = 4;
+
+  // Downgrade to quit auto-drive
+  repeated OddLimitAreaInfo quit_auto_area_infos = 5;
+}
+
+message OddTypeInfo {
+  optional OddLimitType odd_limit_type = 1;
+  optional OddAction odd_action = 2;
+}

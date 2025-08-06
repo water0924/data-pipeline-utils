@@ -1,0 +1,71 @@
+syntax = "proto3";
+package smart.gnss;
+
+message InsData {
+  enum InsPrecisionLevel {
+    INS_PRECISION_LEVEL_NOT_VALID = 0;
+    INS_PRECISION_LEVEL_HIGHEST_ACCURACY = 1;
+    INS_PRECISION_LEVEL_LESS_ACCURACY = 2;
+    INS_PRECISION_LEVEL_BEING_CALCULATED = 3;
+  }
+  enum DataSourceType {
+    //DR融合数据
+    INS_DATA_SOURCE_TYPE_DR = 0;
+    //ADPU偏转数据
+    INS_DATA_SOURCE_TYPE_ADPU = 1;
+  }
+  //时间戳
+  uint64 time_stamp = 1;
+  // Longitude, latitude & height (GCJ-02).
+  // lon/lat are in degrees while height is in meters.
+  //  oneof PositionLLH{
+  //    deeproute.common.PointLLH vehicle_frame_position_llh = 5;
+  //    deeproute.common.PointLLH imu_frame_position_llh = 6;
+  //  }
+  //自车经度
+  double longitude = 2;
+  //自车纬度
+  double latitude = 3;
+  //椭球高
+  double ellipsoid_Height = 4;
+  // // Roll/Pitch/Azimuth in degrees.
+  //  // Roll, right-handed rotation from local level around y-axis in degrees.
+  //  // Pitch, right-handed rotation from local level around x-axis in degrees.
+  //  // Azimuth, left-handed rotation around z-axis in degrees clockwise from true north.
+  //  // Note: this definition is same as the z-x-y NovAtel euler angles.
+  //  deeproute.common.Point3D roll_pitch_azimuth = 8;
+  //航向角
+  double yaw = 5;
+  //俯仰角
+  double pitch = 6;
+  //旋转角
+  double roll = 7;
+  //速度
+  float speed = 8;
+  // Linear velocity in east/north/up frame, in meters per second.
+  //  oneof LinearVelocityEnu{
+  //    deeproute.common.Point3D vehicle_frame_linear_velocity_enu = 10;
+  //    deeproute.common.Point3D imu_frame_linear_velocity_enu = 11;
+  //  }
+  //东向速度
+  double east_speed = 9;
+  //北向速度
+  double north_speed = 10;
+  //高向速度
+  double up_speed = 11;
+  //定位精度 -- smart 透传
+  InsPrecisionLevel precision_level = 12;
+  //坐标系类型
+  enum ReferenceCoordinateSystem {
+    WGS84 = 0;
+    GCJ02 = 1;
+  }
+  ReferenceCoordinateSystem reference_coodinate_system = 13;
+  //数据来源
+  DataSourceType data_source_type = 14;
+}
+
+message InsDataInfo{
+  repeated InsData ins_data = 1;
+}
+

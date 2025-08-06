@@ -1,0 +1,159 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "human_planning_interface_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["human_planning_interface.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "human_planning_interface_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":human_planning_interface_proto",
+    ],
+)
+
+python_proto_library(
+    name = "human_planning_interface_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":human_planning_interface_proto",
+    ],
+)
+
+proto_library(
+    name = "decision_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["decision.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/common:vehicle_signal_proto",
+        "//proto/routing:routing_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "decision_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":decision_proto",
+    ],
+)
+
+python_proto_library(
+    name = "decision_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":decision_proto",
+    ],
+)
+
+proto_library(
+    name = "business_request_and_response_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["business_request_and_response.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/common:pnc_point_proto",
+        "//proto/drdtu:dtu_command_proto",
+        "//proto/routing:routing_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "business_request_and_response_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":business_request_and_response_proto",
+    ],
+)
+
+python_proto_library(
+    name = "business_request_and_response_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":business_request_and_response_proto",
+    ],
+)
+
+proto_library(
+    name = "planning_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["planning.proto"],
+    deps = [
+        "//proto/canbus:chassis_proto",
+        "//proto/common:drive_state_proto",
+        "//proto/common:geometry_proto",
+        "//proto/common:header_proto",
+        "//proto/common:pnc_point_proto",
+        "//proto/semantic_map:map_id_proto",
+        "//proto/planning:decision_proto",
+        "//proto/common/vehicle_state:vehicle_state_proto",
+        "//proto/perception:deeproute_perception_obstacle_proto",
+        "//proto/perception:deeproute_perception_ras_map_proto",
+        "//proto/common:vehicle_signal_proto",
+        "//proto/planning:human_planning_interface_proto",
+        "//proto/map:common_type_proto",
+        "//proto/perception:traffic_light_detection_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "planning_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":planning_proto",
+    ],
+)
+
+python_proto_library(
+    name = "planning_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":planning_proto",
+    ],
+)
+
+proto_library(
+    name = "planning_business_interface_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["planning_business_interface.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/common:pnc_point_proto",
+        "//proto/common/vehicle_state:vehicle_state_proto",
+        "//proto/drdtu:dtu_command_proto",
+        "//proto/canbus:chassis_proto",
+        "//proto/planning:planning_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "planning_business_interface_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":planning_business_interface_proto",
+    ],
+)
+
+python_proto_library(
+    name = "planning_business_interface_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":planning_business_interface_proto",
+    ],
+)
+

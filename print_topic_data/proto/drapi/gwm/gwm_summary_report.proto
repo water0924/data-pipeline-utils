@@ -1,0 +1,15 @@
+syntax = "proto3";
+package gwm;
+
+message JourneySummary {
+  string distance = 1;  // 行驶里程: km
+  string duration = 2;  // 行驶时长: hour
+  string adas_distance = 3;  // 智驾里程: km
+  string adas_duration = 4;  // 智驾时长: hour
+  string adas_distance_proportion = 5;  // 智驾占比
+  string pass_junction = 6;  // 通过路口
+  string lane_change = 7;  // 变道成功
+  string ramp = 8;  // 汇入汇出匝道
+  string cutin = 9;  // 应对加塞
+  uint64 milliseconds = 10;  // 时间戳
+}
