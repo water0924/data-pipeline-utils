@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package dr.dsm;
-
-// Topic: /dsm/start_topic_supervison
-message StartTopicNotify {
-  string module_name = 1;
-  repeated string topics = 2;
-}

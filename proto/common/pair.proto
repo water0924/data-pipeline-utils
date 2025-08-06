@@ -1,8 +1,0 @@
-syntax = "proto2";
-
-package deeproute.common;
-
-message Pair {
-  optional double key = 1;
-  optional double value = 2;
-}

@@ -1,7 +1,0 @@
-syntax = "proto2";
-
-package deeproute.database;
-
-message TileData {
-  repeated int32 element_ids = 1;
-}
