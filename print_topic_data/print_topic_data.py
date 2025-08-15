@@ -11,8 +11,14 @@ import datetime
 import argparse
 
 
+# current_dir = os.path.dirname(os.path.abspath(__file__))
+# sys.path.append(os.path.join(current_dir, "proto"))
+
 current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(current_dir)
 sys.path.append(os.path.join(current_dir, "proto"))
+sys.path.insert(0, os.path.join(current_dir, "proto")) # 跳过系统库的church 将common库的优先级调高
+
 
 from canbus import car_info_pb2,canbus_blc_state_pb2,dtu_canbus_interface_pb2,dtu_hmi_canbus_interface_pb2
 from routing import local_routing_pb2
@@ -38,7 +44,7 @@ from smart import smart_business_pb2,smart_command_pb2
 from smart.parking import smart_parking_frame_data_pb2,smart_lp_parking_map_pb2
 from drapi import gl_p177_downstream_chassis_pb2,gwm_tank_downstream_chassis_pb2
 
-from print_topic_data.topic_proto_map import topic_proto_map
+from topic_proto_map import topic_proto_map
 
 
 

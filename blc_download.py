@@ -6,9 +6,13 @@ from PySide2.QtWidgets import QApplication, QPushButton
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QSizePolicy
 import platform
+import os
 
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
 # 获取当前 Ubuntu 系统的版本信息
 ubuntu_version = platform.version()
+print("Unsupported Ubuntu version:", ubuntu_version)
 
 # 判断 Ubuntu 版本并动态导入对应模块
 if "18.04" in ubuntu_version:
@@ -175,8 +179,15 @@ class Stats:
         issue_path = self.fileSelectorApp.get_issue_path()
         chance_topic =self.combocheckBox.currentText()
         for topic_name in chance_topic:
-            output_signal.emit(f"解析{topic_name}中，勿动......")
-            PrintMessageData(issue_path,topic_name)
+            if "18.04" in ubuntu_version:
+                output_signal.emit(f"解析{topic_name}中，勿动......")
+                script_path = os.path.join(current_dir,"print_topic_data","print_topic_data.py")
+                subprocess.run(["python2", script_path, issue_path,topic_name])
+                output_signal.emit(f"大吉大利，打印完成......")
+            else:
+                output_signal.emit(f"解析{topic_name}中，勿动......")
+                PrintMessageData(issue_path,topic_name)
+                output_signal.emit(f"大吉大利，打印完成......")
 
 
     def click_open_file_button(self):
