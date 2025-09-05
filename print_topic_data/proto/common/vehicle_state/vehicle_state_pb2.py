@@ -16,17 +16,28 @@ from proto.canbus import chassis_pb2 as canbus_dot_chassis__pb2
 from proto.common import geometry_pb2 as common_dot_geometry__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n(common/vehicle_state/vehicle_state.proto\x12\x10\x64\x65\x65proute.common\x1a\x14\x63\x61nbus/chassis.proto\x1a\x15\x63ommon/geometry.proto\"\xb4\x0e\n\x0cVehicleState\x12\x14\n\ttimestamp\x18\x04 \x01(\x03:\x01\x30\x12\x34\n\x04gear\x18\r \x01(\x0e\x32&.deeproute.canbus.Chassis.GearPosition\x12;\n\x0c\x64riving_mode\x18\x0e \x01(\x0e\x32%.deeproute.canbus.Chassis.DrivingMode\x12+\n\x08position\x18\x10 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12/\n\x0cvelocity_enu\x18\x11 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12/\n\x0cvelocity_flu\x18\x12 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x31\n\x0eroll_pitch_yaw\x18\x13 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x37\n\x14\x61ngular_velocity_flu\x18\x14 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x33\n\x10\x61\x63\x63\x65leration_flu\x18\x15 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x19\n\x11\x66ront_wheel_angle\x18\x16 \x01(\x02\x12>\n\x0bturn_signal\x18\x17 \x01(\x0e\x32).deeproute.common.VehicleState.TurnSignal\x12\x1a\n\x12warning_blinker_on\x18\x18 \x01(\x08\x12 \n\x18\x61\x63\x63\x65leration_over_ground\x18\x19 \x01(\x02\x12\x31\n\x0bwheel_speed\x18\x1a \x01(\x0b\x32\x1c.deeproute.canbus.WheelSpeed\x12\x14\n\x0clongitudinal\x18\x1b \x01(\x02\x12\r\n\x05speed\x18\x1c \x01(\x02\x12\x1e\n\x16\x66ront_wheel_angle_rate\x18\x1d \x01(\x01\x12 \n\x18has_physical_pedal_input\x18\x1e \x01(\x08\x12\x1b\n\x10rear_wheel_angle\x18\x1f \x01(\x02:\x01\x30\x12 \n\x15rear_wheel_angle_rate\x18  \x01(\x02:\x01\x30\x12O\n\x14vehicle_mode_request\x18! \x01(\x0b\x32\x31.deeproute.common.VehicleState.VehicleModeRequest\x12\x44\n\x0e\x63ontrol_source\x18\" \x01(\x0e\x32,.deeproute.common.VehicleState.ControlSource\x12!\n\x16localization_timestamp\x18# \x01(\x03:\x01\x30\x12!\n\x19revised_front_wheel_angle\x18$ \x01(\x01\x12 \n\x18\x66ront_wheel_angle_offset\x18% \x01(\x01\x12\x1e\n\x16\x65nable_offset_observer\x18& \x01(\x08\x12\x19\n\x11observer_yaw_rate\x18\' \x01(\x01\x12\x1a\n\x12\x61\x63t_driving_torque\x18( \x01(\x01\x12\x18\n\x10\x61\x63t_brake_torque\x18) \x01(\x01\x12\x39\n\x07\x65pb_sts\x18+ \x01(\x0e\x32(.deeproute.common.VehicleState.EpbStatus\x12I\n\x10sapa_veh_mtn_sts\x18, \x01(\x0e\x32/.deeproute.common.VehicleState.VehSapaMtnStatus\x12\x36\n\x07\x61vh_sts\x18- \x01(\x0e\x32%.deeproute.common.VehicleState.AvhSts\x1aR\n\x12VehicleModeRequest\x12\x1c\n\x14vehicle_auto_request\x18\x01 \x01(\x08\x12\x1e\n\x16vehicle_manual_request\x18\x02 \x01(\x08\"0\n\nTurnSignal\x12\r\n\tNONE_TURN\x10\x00\x12\x08\n\x04LEFT\x10\x01\x12\t\n\x05RIGHT\x10\x02\"a\n\rControlSource\x12\n\n\x06MANUAL\x10\x00\x12\x08\n\x04\x41UTO\x10\x01\x12\x06\n\x02RC\x10\x02\x12\x10\n\x0cRC_EMERGENCY\x10\x03\x12\n\n\x06REMOTE\x10\x04\x12\x14\n\x10REMOTE_EMERGENCY\x10\x05\"N\n\tEpbStatus\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\n\n\x06PARKED\x10\x01\x12\x0c\n\x08RELEASED\x10\x02\x12\x0b\n\x07PARKING\x10\x03\x12\r\n\tRELEASING\x10\x04\"G\n\x10VehSapaMtnStatus\x12\x08\n\x04NONE\x10\x00\x12\x0e\n\nSTANDSTILL\x10\x01\x12\x0b\n\x07\x46ORWARD\x10\x02\x12\x0c\n\x08\x42\x41\x43KWARD\x10\x03\"7\n\x06\x41vhSts\x12\x07\n\x03OFF\x10\x00\x12\x0b\n\x07STANDBY\x10\x01\x12\n\n\x06\x41\x43TIVE\x10\x02\x12\x0b\n\x07INVALID\x10\x03J\x04\x08\x01\x10\x04J\x04\x08\x05\x10\rJ\x04\x08\x0f\x10\x10')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n(common/vehicle_state/vehicle_state.proto\x12\x10\x64\x65\x65proute.common\x1a\x14\x63\x61nbus/chassis.proto\x1a\x15\x63ommon/geometry.proto\"\xe6#\n\x0cVehicleState\x12\x14\n\ttimestamp\x18\x04 \x01(\x03:\x01\x30\x12\x34\n\x04gear\x18\r \x01(\x0e\x32&.deeproute.canbus.Chassis.GearPosition\x12;\n\x0c\x64riving_mode\x18\x0e \x01(\x0e\x32%.deeproute.canbus.Chassis.DrivingMode\x12+\n\x08position\x18\x10 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12/\n\x0cvelocity_enu\x18\x11 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12/\n\x0cvelocity_flu\x18\x12 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x31\n\x0eroll_pitch_yaw\x18\x13 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x37\n\x14\x61ngular_velocity_flu\x18\x14 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x33\n\x10\x61\x63\x63\x65leration_flu\x18\x15 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x19\n\x11\x66ront_wheel_angle\x18\x16 \x01(\x02\x12>\n\x0bturn_signal\x18\x17 \x01(\x0e\x32).deeproute.common.VehicleState.TurnSignal\x12\x1a\n\x12warning_blinker_on\x18\x18 \x01(\x08\x12 \n\x18\x61\x63\x63\x65leration_over_ground\x18\x19 \x01(\x02\x12\x31\n\x0bwheel_speed\x18\x1a \x01(\x0b\x32\x1c.deeproute.canbus.WheelSpeed\x12\x14\n\x0clongitudinal\x18\x1b \x01(\x02\x12\r\n\x05speed\x18\x1c \x01(\x02\x12\x1e\n\x16\x66ront_wheel_angle_rate\x18\x1d \x01(\x01\x12 \n\x18has_physical_pedal_input\x18\x1e \x01(\x08\x12\x1b\n\x10rear_wheel_angle\x18\x1f \x01(\x02:\x01\x30\x12 \n\x15rear_wheel_angle_rate\x18  \x01(\x02:\x01\x30\x12O\n\x14vehicle_mode_request\x18! \x01(\x0b\x32\x31.deeproute.common.VehicleState.VehicleModeRequest\x12\x44\n\x0e\x63ontrol_source\x18\" \x01(\x0e\x32,.deeproute.common.VehicleState.ControlSource\x12!\n\x16localization_timestamp\x18# \x01(\x03:\x01\x30\x12!\n\x19revised_front_wheel_angle\x18$ \x01(\x01\x12 \n\x18\x66ront_wheel_angle_offset\x18% \x01(\x01\x12\x1e\n\x16\x65nable_offset_observer\x18& \x01(\x08\x12\x19\n\x11observer_yaw_rate\x18\' \x01(\x01\x12\x1a\n\x12\x61\x63t_driving_torque\x18( \x01(\x01\x12\x18\n\x10\x61\x63t_brake_torque\x18) \x01(\x01\x12\x39\n\x07\x65pb_sts\x18+ \x01(\x0e\x32(.deeproute.common.VehicleState.EpbStatus\x12I\n\x10sapa_veh_mtn_sts\x18, \x01(\x0e\x32/.deeproute.common.VehicleState.VehSapaMtnStatus\x12\x36\n\x07\x61vh_sts\x18- \x01(\x0e\x32%.deeproute.common.VehicleState.AvhSts\x12\x45\n\x0f\x61ir_susp_report\x18. \x01(\x0b\x32,.deeproute.common.VehicleState.AirSuspReport\x12&\n\x1bpossible_driving_torque_min\x18/ \x01(\x01:\x01\x30\x12&\n\x1bpossible_driving_torque_max\x18\x30 \x01(\x01:\x01\x30\x12<\n\nrws_report\x18\x31 \x01(\x0b\x32(.deeproute.common.VehicleState.RWSReport\x12\x1d\n\x15\x64pa_lock_wheel_status\x18\x32 \x01(\x08\x12\x1a\n\x0b\x64river_door\x18\x33 \x01(\x08:\x05\x66\x61lse\x12\x1a\n\x0bpassen_door\x18\x34 \x01(\x08:\x05\x66\x61lse\x12\x1a\n\x0brear_l_door\x18\x35 \x01(\x08:\x05\x66\x61lse\x12\x1a\n\x0brear_r_door\x18\x36 \x01(\x08:\x05\x66\x61lse\x12\x13\n\x04hood\x18\x37 \x01(\x08:\x05\x66\x61lse\x12\x14\n\x05trunk\x18\x38 \x01(\x08:\x05\x66\x61lse\x12\x18\n\x10rear_view_mirror\x18\x39 \x03(\x08\x12O\n\x15left_rear_view_mirror\x18: \x01(\x0e\x32\x30.deeproute.common.VehicleState.RearViewMirrorSts\x12P\n\x16right_rear_view_mirror\x18; \x01(\x0e\x32\x30.deeproute.common.VehicleState.RearViewMirrorSts\x12\x39\n\tlow_light\x18< \x01(\x0e\x32&.deeproute.common.VehicleState.BeamSts\x12:\n\nhigh_light\x18= \x01(\x0e\x32&.deeproute.common.VehicleState.BeamSts\x12G\n\x10lcc_lane_request\x18> \x01(\x0e\x32-.deeproute.common.VehicleState.LccLaneRequest\x12\x1b\n\x10ic_vehicle_speed\x18? \x01(\x01:\x01\x30\x12#\n\x18master_cylinder_pressure\x18@ \x01(\x01:\x01\x30\x12\x19\n\x0e\x64rvr_decel_req\x18\x41 \x01(\x01:\x01\x30\x12 \n\x15throttle_actual_pedal\x18\x42 \x01(\x01:\x01\x30\x12\x1d\n\x12\x62rake_actual_pedal\x18\x43 \x01(\x01:\x01\x30\x12#\n\x18steering_wheel_angle_rad\x18\x44 \x01(\x01:\x01\x30\x12\x1f\n\x14steering_wheel_speed\x18\x45 \x01(\x01:\x01\x30\x12\x1d\n\x0esteer_override\x18\x46 \x01(\x08:\x05\x66\x61lse\x12\x1e\n\x0ftorque_override\x18G \x01(\x08:\x05\x66\x61lse\x12\x1d\n\x0e\x62rake_override\x18H \x01(\x08:\x05\x66\x61lse\x12 \n\x11throttle_override\x18I \x01(\x08:\x05\x66\x61lse\x12H\n\x0eshift_override\x18J \x01(\x0e\x32\x30.deeproute.common.VehicleState.ShiftOverrideType\x12 \n\x15steer_wheel_angle_max\x18K \x01(\x02:\x01\x30\x12\x19\n\x0etotal_odometer\x18L \x01(\x01:\x01\x30\x12\x1a\n\x0bprivacy_sts\x18M \x01(\x08:\x05\x66\x61lse\x12<\n\x0b\x62rake_light\x18N \x01(\x0e\x32\'.deeproute.common.VehicleState.LightSts\x12?\n\x0eposition_light\x18O \x01(\x0e\x32\'.deeproute.common.VehicleState.LightSts\x12V\n\x18hut_sentinel_mode_switch\x18P \x01(\x0e\x32\x34.deeproute.common.VehicleState.HutSentinelModeSwitch\x12:\n\x07\x65pb_req\x18Q \x01(\x0e\x32).deeproute.common.VehicleState.EpbRequest\x1aR\n\x12VehicleModeRequest\x12\x1c\n\x14vehicle_auto_request\x18\x01 \x01(\x08\x12\x1e\n\x16vehicle_manual_request\x18\x02 \x01(\x08\x1a\xe9\x02\n\rAirSuspReport\x12M\n\x0c\x61ir_susp_lvl\x18\x01 \x01(\x0e\x32\x37.deeproute.common.VehicleState.AirSuspReport.AirSuspLvl\x12\x19\n\x11susp_posn_vert_lf\x18\x02 \x01(\x01\x12\x19\n\x11susp_posn_vert_lr\x18\x03 \x01(\x01\x12\x19\n\x11susp_posn_vert_rf\x18\x04 \x01(\x01\x12\x19\n\x11susp_posn_vert_rr\x18\x05 \x01(\x01\x12\x15\n\rtarget_height\x18\x06 \x01(\x01\x12\x19\n\x11height_adjust_sts\x18\x07 \x01(\x01\"k\n\nAirSuspLvl\x12\n\n\x06NORMAL\x10\x00\x12\x0e\n\nLOW_LEVEL1\x10\x01\x12\x0e\n\nLOW_LEVEL2\x10\x02\x12\x0f\n\x0bHIGH_LEVEL1\x10\x03\x12\x0f\n\x0bHIGH_LEVEL2\x10\x04\x12\x0f\n\x0bHIGH_LEVEL3\x10\x05\x1a\xaa\x01\n\tRWSReport\x12@\n\x07rws_mod\x18\x01 \x01(\x0e\x32/.deeproute.common.VehicleState.RWSReport.RwsMod\x12\x15\n\rrws_angle_act\x18\x02 \x01(\x01\"D\n\x06RwsMod\x12\x0e\n\nMANUAL_MOD\x10\x00\x12\x0c\n\x08\x41\x44SA_MOD\x10\x01\x12\r\n\tBRAKE_MOD\x10\x02\x12\r\n\tOTHER_MOD\x10\x03\"0\n\nTurnSignal\x12\r\n\tNONE_TURN\x10\x00\x12\x08\n\x04LEFT\x10\x01\x12\t\n\x05RIGHT\x10\x02\"a\n\rControlSource\x12\n\n\x06MANUAL\x10\x00\x12\x08\n\x04\x41UTO\x10\x01\x12\x06\n\x02RC\x10\x02\x12\x10\n\x0cRC_EMERGENCY\x10\x03\x12\n\n\x06REMOTE\x10\x04\x12\x14\n\x10REMOTE_EMERGENCY\x10\x05\"N\n\tEpbStatus\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\n\n\x06PARKED\x10\x01\x12\x0c\n\x08RELEASED\x10\x02\x12\x0b\n\x07PARKING\x10\x03\x12\r\n\tRELEASING\x10\x04\"G\n\x10VehSapaMtnStatus\x12\x08\n\x04NONE\x10\x00\x12\x0e\n\nSTANDSTILL\x10\x01\x12\x0b\n\x07\x46ORWARD\x10\x02\x12\x0c\n\x08\x42\x41\x43KWARD\x10\x03\"7\n\x06\x41vhSts\x12\x07\n\x03OFF\x10\x00\x12\x0b\n\x07STANDBY\x10\x01\x12\n\n\x06\x41\x43TIVE\x10\x02\x12\x0b\n\x07INVALID\x10\x03\"y\n\x11RearViewMirrorSts\x12\x12\n\x0eMIRROR_INVALID\x10\x00\x12\x11\n\rMIRROR_FOLDED\x10\x01\x12\x13\n\x0fMIRROR_UNFOLDED\x10\x02\x12\x12\n\x0eMIRROR_FOLDING\x10\x03\x12\x14\n\x10MIRROR_UNFOLDING\x10\x04\"L\n\x07\x42\x65\x61mSts\x12\x0c\n\x08\x42\x45\x41M_OFF\x10\x00\x12\x0b\n\x07\x42\x45\x41M_ON\x10\x01\x12\x16\n\x12\x42\x45\x41M_FLASH_TO_PASS\x10\x02\x12\x0e\n\nBEAM_FAULT\x10\x03\"b\n\x0eLccLaneRequest\x12\x19\n\x15LCC_LANE_REQUEST_NONE\x10\x00\x12\x19\n\x15LCC_LANE_REQUEST_LEFT\x10\x01\x12\x1a\n\x16LCC_LANE_REQUEST_RIGHT\x10\x02\"N\n\x11ShiftOverrideType\x12\x0f\n\x0bNO_OVERRIDE\x10\x00\x12\x12\n\x0eVALID_OVERRIDE\x10\x01\x12\x14\n\x10INVALID_OVERRIDE\x10\x02\"/\n\x08LightSts\x12\x11\n\rLIGHT_STS_OFF\x10\x00\x12\x10\n\x0cLIGHT_STS_ON\x10\x01\"m\n\x15HutSentinelModeSwitch\x12\x1f\n\x1bHUT_SENTINEL_MODE_NO_ACTION\x10\x00\x12\x19\n\x15HUT_SENTINEL_MODE_OFF\x10\x01\x12\x18\n\x14HUT_SENTINEL_MODE_ON\x10\x02\"T\n\nEpbRequest\x12\x16\n\x12\x45PB_REQUEST_NO_REQ\x10\x00\x12\x17\n\x13\x45PB_REQUEST_RELEASE\x10\x01\x12\x15\n\x11\x45PB_REQUEST_APPLY\x10\x02J\x04\x08\x01\x10\x04J\x04\x08\x05\x10\rJ\x04\x08\x0f\x10\x10')
 
 
 
 _VEHICLESTATE = DESCRIPTOR.message_types_by_name['VehicleState']
 _VEHICLESTATE_VEHICLEMODEREQUEST = _VEHICLESTATE.nested_types_by_name['VehicleModeRequest']
+_VEHICLESTATE_AIRSUSPREPORT = _VEHICLESTATE.nested_types_by_name['AirSuspReport']
+_VEHICLESTATE_RWSREPORT = _VEHICLESTATE.nested_types_by_name['RWSReport']
+_VEHICLESTATE_AIRSUSPREPORT_AIRSUSPLVL = _VEHICLESTATE_AIRSUSPREPORT.enum_types_by_name['AirSuspLvl']
+_VEHICLESTATE_RWSREPORT_RWSMOD = _VEHICLESTATE_RWSREPORT.enum_types_by_name['RwsMod']
 _VEHICLESTATE_TURNSIGNAL = _VEHICLESTATE.enum_types_by_name['TurnSignal']
 _VEHICLESTATE_CONTROLSOURCE = _VEHICLESTATE.enum_types_by_name['ControlSource']
 _VEHICLESTATE_EPBSTATUS = _VEHICLESTATE.enum_types_by_name['EpbStatus']
 _VEHICLESTATE_VEHSAPAMTNSTATUS = _VEHICLESTATE.enum_types_by_name['VehSapaMtnStatus']
 _VEHICLESTATE_AVHSTS = _VEHICLESTATE.enum_types_by_name['AvhSts']
+_VEHICLESTATE_REARVIEWMIRRORSTS = _VEHICLESTATE.enum_types_by_name['RearViewMirrorSts']
+_VEHICLESTATE_BEAMSTS = _VEHICLESTATE.enum_types_by_name['BeamSts']
+_VEHICLESTATE_LCCLANEREQUEST = _VEHICLESTATE.enum_types_by_name['LccLaneRequest']
+_VEHICLESTATE_SHIFTOVERRIDETYPE = _VEHICLESTATE.enum_types_by_name['ShiftOverrideType']
+_VEHICLESTATE_LIGHTSTS = _VEHICLESTATE.enum_types_by_name['LightSts']
+_VEHICLESTATE_HUTSENTINELMODESWITCH = _VEHICLESTATE.enum_types_by_name['HutSentinelModeSwitch']
+_VEHICLESTATE_EPBREQUEST = _VEHICLESTATE.enum_types_by_name['EpbRequest']
 VehicleState = _reflection.GeneratedProtocolMessageType('VehicleState', (_message.Message,), {
 
   'VehicleModeRequest' : _reflection.GeneratedProtocolMessageType('VehicleModeRequest', (_message.Message,), {
@@ -35,28 +46,66 @@ VehicleState = _reflection.GeneratedProtocolMessageType('VehicleState', (_messag
     # @@protoc_insertion_point(class_scope:deeproute.common.VehicleState.VehicleModeRequest)
     })
   ,
+
+  'AirSuspReport' : _reflection.GeneratedProtocolMessageType('AirSuspReport', (_message.Message,), {
+    'DESCRIPTOR' : _VEHICLESTATE_AIRSUSPREPORT,
+    '__module__' : 'common.vehicle_state.vehicle_state_pb2'
+    # @@protoc_insertion_point(class_scope:deeproute.common.VehicleState.AirSuspReport)
+    })
+  ,
+
+  'RWSReport' : _reflection.GeneratedProtocolMessageType('RWSReport', (_message.Message,), {
+    'DESCRIPTOR' : _VEHICLESTATE_RWSREPORT,
+    '__module__' : 'common.vehicle_state.vehicle_state_pb2'
+    # @@protoc_insertion_point(class_scope:deeproute.common.VehicleState.RWSReport)
+    })
+  ,
   'DESCRIPTOR' : _VEHICLESTATE,
   '__module__' : 'common.vehicle_state.vehicle_state_pb2'
   # @@protoc_insertion_point(class_scope:deeproute.common.VehicleState)
   })
 _sym_db.RegisterMessage(VehicleState)
 _sym_db.RegisterMessage(VehicleState.VehicleModeRequest)
+_sym_db.RegisterMessage(VehicleState.AirSuspReport)
+_sym_db.RegisterMessage(VehicleState.RWSReport)
 
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _VEHICLESTATE._serialized_start=108
-  _VEHICLESTATE._serialized_end=1952
-  _VEHICLESTATE_VEHICLEMODEREQUEST._serialized_start=1493
-  _VEHICLESTATE_VEHICLEMODEREQUEST._serialized_end=1575
-  _VEHICLESTATE_TURNSIGNAL._serialized_start=1577
-  _VEHICLESTATE_TURNSIGNAL._serialized_end=1625
-  _VEHICLESTATE_CONTROLSOURCE._serialized_start=1627
-  _VEHICLESTATE_CONTROLSOURCE._serialized_end=1724
-  _VEHICLESTATE_EPBSTATUS._serialized_start=1726
-  _VEHICLESTATE_EPBSTATUS._serialized_end=1804
-  _VEHICLESTATE_VEHSAPAMTNSTATUS._serialized_start=1806
-  _VEHICLESTATE_VEHSAPAMTNSTATUS._serialized_end=1877
-  _VEHICLESTATE_AVHSTS._serialized_start=1879
-  _VEHICLESTATE_AVHSTS._serialized_end=1934
+  _VEHICLESTATE._serialized_end=4690
+  _VEHICLESTATE_VEHICLEMODEREQUEST._serialized_start=3067
+  _VEHICLESTATE_VEHICLEMODEREQUEST._serialized_end=3149
+  _VEHICLESTATE_AIRSUSPREPORT._serialized_start=3152
+  _VEHICLESTATE_AIRSUSPREPORT._serialized_end=3513
+  _VEHICLESTATE_AIRSUSPREPORT_AIRSUSPLVL._serialized_start=3406
+  _VEHICLESTATE_AIRSUSPREPORT_AIRSUSPLVL._serialized_end=3513
+  _VEHICLESTATE_RWSREPORT._serialized_start=3516
+  _VEHICLESTATE_RWSREPORT._serialized_end=3686
+  _VEHICLESTATE_RWSREPORT_RWSMOD._serialized_start=3618
+  _VEHICLESTATE_RWSREPORT_RWSMOD._serialized_end=3686
+  _VEHICLESTATE_TURNSIGNAL._serialized_start=3688
+  _VEHICLESTATE_TURNSIGNAL._serialized_end=3736
+  _VEHICLESTATE_CONTROLSOURCE._serialized_start=3738
+  _VEHICLESTATE_CONTROLSOURCE._serialized_end=3835
+  _VEHICLESTATE_EPBSTATUS._serialized_start=3837
+  _VEHICLESTATE_EPBSTATUS._serialized_end=3915
+  _VEHICLESTATE_VEHSAPAMTNSTATUS._serialized_start=3917
+  _VEHICLESTATE_VEHSAPAMTNSTATUS._serialized_end=3988
+  _VEHICLESTATE_AVHSTS._serialized_start=3990
+  _VEHICLESTATE_AVHSTS._serialized_end=4045
+  _VEHICLESTATE_REARVIEWMIRRORSTS._serialized_start=4047
+  _VEHICLESTATE_REARVIEWMIRRORSTS._serialized_end=4168
+  _VEHICLESTATE_BEAMSTS._serialized_start=4170
+  _VEHICLESTATE_BEAMSTS._serialized_end=4246
+  _VEHICLESTATE_LCCLANEREQUEST._serialized_start=4248
+  _VEHICLESTATE_LCCLANEREQUEST._serialized_end=4346
+  _VEHICLESTATE_SHIFTOVERRIDETYPE._serialized_start=4348
+  _VEHICLESTATE_SHIFTOVERRIDETYPE._serialized_end=4426
+  _VEHICLESTATE_LIGHTSTS._serialized_start=4428
+  _VEHICLESTATE_LIGHTSTS._serialized_end=4475
+  _VEHICLESTATE_HUTSENTINELMODESWITCH._serialized_start=4477
+  _VEHICLESTATE_HUTSENTINELMODESWITCH._serialized_end=4586
+  _VEHICLESTATE_EPBREQUEST._serialized_start=4588
+  _VEHICLESTATE_EPBREQUEST._serialized_end=4672
 # @@protoc_insertion_point(module_scope)

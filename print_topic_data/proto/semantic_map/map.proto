@@ -25,6 +25,7 @@ import "semantic_map/map_road_mask.proto";
 import "semantic_map/map_road_mask_plus.proto";
 import "semantic_map/map_line_sign.proto";
 import "semantic_map/map_connection_line.proto";
+import "semantic_map/map_roi.proto";
 
 // This message defines how we project the ellipsoidal Earth surface to a plane.
 message MapProjection {
@@ -93,4 +94,5 @@ message Map {
   repeated LaneMarker lane_markers = 34;
   repeated BicycleLaneMarker bicycle_lane_markers = 35;
   repeated ConnectionLine connection_lines = 36;
+  repeated Roi rois = 37;
 }

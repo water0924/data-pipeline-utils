@@ -92,6 +92,7 @@ message Overlap {
     LANE_MARKER = 22;
     BICYCLE_LANE_MARKER = 23;    
     CONNECTION_LINE = 24;   
+    ROI = 25;   
   }
   optional OverlapType type = 4;
   // The current overlap message is mainly used in the lane.

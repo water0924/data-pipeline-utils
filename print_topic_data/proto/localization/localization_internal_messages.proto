@@ -67,4 +67,5 @@ message GlobalRoutingInfo {
   optional deeproute.perception.ParkingSpace target_parking_space = 6;
   repeated localization.havp_map.HAVPTrajectory map_trajectories = 7;
   optional deeproute.common.Transformation3 localization_pose = 8;
+  optional double next_gate_remaining_s = 9;
 }

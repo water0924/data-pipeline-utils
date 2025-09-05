@@ -1,0 +1,27 @@
+
+
+// 导航信号 - 接口协议
+
+syntax = "proto2";
+package dr.common.navigation;
+
+enum SourceType {
+  ST_GWM = 0;    // GWM
+  ST_GL = 1;     // GL
+  ST_SMART = 2;  // Smart
+}
+message SpeedLimitInfo {
+  optional int32 value = 1;                // Speed in km/h
+  optional uint32 remaining_distance = 2;  // Speed remaining distance in meters
+  optional uint32 type = 3;                // Speed limit type
+}
+message SpeedLimitInfos {
+  optional SpeedLimitInfo spd_limit = 1;         // Speed limit in km/h
+  optional SpeedLimitInfo camera_spd_limit = 2;  // Speed limit camera type
+}
+
+// Topic: /drapi/navigation_info
+message NavigationInfo {
+  required SourceType source_type = 1;             // Source of the navigation data
+  optional SpeedLimitInfos speed_limit_infos = 2;  // Speed limit informations
+}

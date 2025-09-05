@@ -23,6 +23,7 @@ message LockOnRoadResult {
 
   optional Status status = 5;                      // whether or not the vehicle is deviated from the previous planned route
   optional string request_id = 6;                  // acquired from routing response
+  optional int32 response_id = 27;
   optional common.Point3D matched_position_wgs84 = 7;      // matched position in wgs84, note this field will be deprecated in the future.
   optional common.Point3D matched_position_gcj02 = 12;     // matched position in gcj02
   optional double matched_heading = 8;             // matched point heading
@@ -73,6 +74,7 @@ message LockOnRoadResult {
     optional Source source = 2;
   }
 
+  // 弃用状态
   repeated NaviStatus navi_status_internal = 16;
 
   message SdLocalizationStatus {
@@ -91,6 +93,7 @@ message LockOnRoadResult {
     optional Confidence longitudinal_position_confidence = 3;
   }
 
+  // 弃用状态
   optional SdLocalizationStatus sd_localization_status = 17;
 
   enum YawSceneType {
@@ -101,22 +104,30 @@ message LockOnRoadResult {
   optional YawSceneType yaw_scene_type = 18;
 
   // a more confident status focus on precision for lock on road navigation status
+  // 是否在外部道路。用来判断是否可以从泊车切行车，会比较严格。
   enum StrictStatus{
-    NAVI_NORMAL = 1;
-    NAVI_ABNORMAL = 2;
+    NAVI_NORMAL = 1;  // 车一定在外部道路上
+    NAVI_ABNORMAL = 2;// 不确定在外部道路上
   }
   optional StrictStatus strict_status = 19;
 
   optional uint32 route_seg_size = 20;  // total size of route segments
 
-  optional double avp_remaining_s = 21; // distance to intersection pt along sdroute between sdrote and mapping traj.
-
+  // distance to intersection pt along sdroute between sdrote and mapping traj.
+  // 到avp终点的距离
+  optional double avp_remaining_s = 21;
   optional bool passed_avp_overlap_start_point = 22; // check if the vehicle has passed the start point of the overlap 
                                                      //segment between navigation route and avp trajectory.
+  // 到限速切换点的距离
   optional double avp_turn_point_remaining_s = 23; // distance that ego to avp traj turn point
   optional double avp_turn_point_spl = 24; // speed limit at avp traj turn point
-
+  // 选中的终点地图id
   optional int64 map_id = 25; // avp target map id
+  
+  optional double avp_road_point_remaining_s = 26; // distance that ego to road change point
+
+  optional int32 sd_link_index_raw = 28;    // 没有 reindex 的 link idx ，没有匹配上为-1，其他情况下为原始idx
+
 }
 
 message LaneIndexEstimationResult{

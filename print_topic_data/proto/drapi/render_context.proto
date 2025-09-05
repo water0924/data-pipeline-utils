@@ -117,6 +117,29 @@ message ParkingRenderContext {
   HAVPNaviTips havp_navi_tips = 19;
   bool enter_user_defined_park = 20;
   bool apa_force_release = 21;
+
+  int32 cruising_odm = 22;  // 巡航走过的距离
+  ParkingPosType setting_pos = 23;  // 当前设置的泊入姿态（泊入偏移、停靠偏好）
+  ParkingSpaceStatus apa_customize_parkingspace_status = 24; // 自选车位框状态
+  int32 customize_parking_frame_id = 25;  // 自选车位框ID
+  int32 gl_map_id = 26;
+}
+
+enum ParkingSpaceStatus{
+  PARK_SPA_STA_NONE         = 0;  //功能未开启，未开启自选车位功能时发送
+  PARK_SPA_STA_INIT         = 1;  //初始化
+  PARK_SPA_STA_STANDBY      = 2;  //就绪
+  PARK_SPA_STA_PLANNING     = 3;  //规划中
+  PARK_SPA_STA_OBJ_BLOCK    = 4;  //障碍物阻挡，规划失败
+  PARK_SPA_STA_PLAN_FAIL    = 5;  //无障碍物阻挡，仍规划失败
+  PARK_SPA_STA_PLAN_SUCCESS = 6;  //规划成功  
+}
+
+enum ParkingPosType{
+  PARKING_POS_NONE    =0; //无效值
+  PARKING_POS_CENTER  =1; //居中
+  PARKING_POS_LEFT    =2; //靠左
+  PARKING_POS_RIGHT   =3; //靠右
 }
 
 message TSISign {
@@ -149,8 +172,16 @@ message ActiveSafetyWarningObstacle {
     FCTB_ACTIVE = 4;
     RCTB_ACTIVE = 5;
     ESA_ACTIVE = 6;
+    DOW_ACTIVE = 7;
+    BSD_ACTIVE = 8;
+    RCW_ACTIVE = 9;
+    FCTA_ACTIVE = 10;
+    RCTA_ACTIVE = 11;
+    AES_ACTIVE = 12;
+    RCTA_LEVEL2_ACTIVE = 13; // gl rcta 2级告警需要变红，1级不需要，因此区分
   }
   Type active_feature = 2;
+  double ttc = 3;
 }
 
 message ActiveSafetyRenderContext {
@@ -164,9 +195,16 @@ message GWMRenderContext {
 }
 
 message GLRenderContext {
+  message PathPoint {
+    double x = 1;
+    double y = 2;
+  }
   ActiveSafetyRenderContext active_safety_render_data = 1;
   DrivingRenderContext driving_render_data = 2;
   ParkingRenderContext parking_render_data = 3;
+  repeated PathPoint center_reverse_trajectory = 4;
+  repeated PathPoint left_reverse_trajectory = 5;
+  repeated PathPoint right_reverse_trajectory = 6;
 }
 
 // topic: /blc/render_context

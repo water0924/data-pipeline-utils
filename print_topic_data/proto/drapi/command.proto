@@ -15,6 +15,7 @@ package dr.command;
 /********************************command指令定义*******************************/
 message Command {  // topic: (to blc)/blc/command (to dsm)/dsm/command
   string id = 1;
+  dr.business_info.BlcTriggerType trigger_type = 2;
   oneof cmd {
     // 0~99 reserved
     // 100~999 common
@@ -25,6 +26,13 @@ message Command {  // topic: (to blc)/blc/command (to dsm)/dsm/command
     GetACCTTC get_acc_tcc = 1001;
     GetACCSpeedLimit get_acc_speed_limit = 1002;
     DrivingActiveExit driving_active_exit = 1003;
+    ChangeSpeedLimit change_speed_limit = 1004;    
+    ChangeTimeGap change_time_gap = 1005;
+    ChangeAccelerationStyle change_acceleration_style = 1006;    
+    PullOver pull_over = 1007;
+    YieldObstacle  yield_obstacle = 1008;
+    OverTake over_take = 1009;
+    
     // acc internal
     SetACCTTC set_ttc = 1100;
 
@@ -37,6 +45,7 @@ message Command {  // topic: (to blc)/blc/command (to dsm)/dsm/command
     EnableNCA enable_nca = 3000;
     StartNavigation start_navigation = 3002;
     CancelNavigation cancel_navigation = 3003;
+    ChangeRouting change_routing = 3004; //改变当前导航路线
 
     // nca internal
     GetPath get_path = 3100;
@@ -114,6 +123,9 @@ message Command {  // topic: (to blc)/blc/command (to dsm)/dsm/command
 
     // aeb 7800-7899
     EnableAEB enable_aeb = 7800;
+    EnableESA enable_esa = 7801;
+    EnableAES enable_aes = 7802;
+    EnableMAI enable_mai = 7803;
 
     // 7900-7999
     StartCalibration start_calibration = 7900;
@@ -306,8 +318,35 @@ message GetACCTTCRP {
   dr.business_info.FollowTimeGap ttc = 1;
 }
 
+message ChangeTimeGap {
+  dr.business_info.ChangeValueAction action = 1;
+  dr.business_info.FollowTimeGap ttc = 2; //when  action=SET    
+}
+
+message ChangeAccelerationStyle {
+  dr.business_info.ChangeValueAction action = 1;
+  dr.localconfig.AccelerationStyle style = 2; //when action=SET
+}
+
+message PullOver {//靠边停车
+  string poi_name = 1;  
+  bool task_end = 2; //true:取消靠边停车，false开始靠边停车，默认false
+}
+
+message YieldObstacle {//避让障碍物--车辆行人等  
+}
+
+message OverTake {//超车  
+}
+
 message SetACCTTC {
   double ttc = 1;
+}
+
+message ChangeSpeedLimit {
+  dr.business_info.ChangeValueAction action = 1;
+  int32 speed_limit = 2; //when  action=SET
+  int32 step = 3; //when action=INCREASE,or DECREASE
 }
 
 message GetACCSpeedLimit {
@@ -327,6 +366,7 @@ message ChangeLane {
     NONE = 0;
     TURN_LEFT = 1;
     TURN_RIGHT = 2;
+    TURN = 3; //非指定方向变道
   }
   Action action = 1;
 }
@@ -385,11 +425,17 @@ message StartNavigation {
   repeated dr.base.PointLLH route_points = 3;
   // recomand using this to replace path_id
   uint64 path_id_64 = 4;
+  string map_id = 5; // map_id from cloud
 }
 
 message CancelNavigation {
   int32 path_id = 3;      // ready to deprecate
   uint64 path_id_64 = 4;  // recomand using this to replace path_id
+}
+
+message ChangeRouting {
+  dr.business_info.ChangeRoutingAction action = 1;
+  dr.business_info.PositionOfAction position_of_action = 2;
 }
 
 // las
@@ -444,6 +490,7 @@ message APARealtimeParkingSpaceRP {
 message APAAPPSelectParkingSpace {
   dr.base.ParkingSpace parking_space = 1;
   bool non_empty_parking_space = 2;
+  int32 slot_number = 3;  // 优先级：slot_number > parking_space
 }
 
 message APASuggestOutParking {
@@ -467,6 +514,7 @@ message APALeaveCustomParking {
 }
 
 message APASelectCustomParkingSpace {
+  dr.base.Polygon polygon = 1; // 四个点，顺时针
 }
 
 message VPALearning {
@@ -722,6 +770,7 @@ message RPASuggestOutParking {
 // aeb
 message EnableAEB {
   bool enable = 1;
+  ActiveSafetyControlStatus control_status = 2;
 }
 
 message StartCalibration {
@@ -1013,6 +1062,40 @@ message SmartLPCommand {
 }
 
 message GLParkingCommand {
+  enum PrkgSpdReqType {
+    PRKGSPDREQ_DEFAULTHOLDINGTORQUE = 0;
+    PRKGSPDREQ_LOWSPEEDLEVELTORQUE = 1;
+    PRKGSPDREQ_MEDIUMSPEEDLEVELTORQUE = 2;
+    PRKGSPDREQ_HIGHSPEEDLEVELTORQUE = 3;
+  }
+  enum DrvrAsscWisdomBtnType {
+    DRVRASSCWISDOMBTN_DRVRASSCWISDOMBTN_IDLE = 0;
+    DRVRASSCWISDOMBTN_DRVRASSCWISDOMBTN_LEFTIN = 1;
+    DRVRASSCWISDOMBTN_DRVRASSCWISDOMBTN_RIGHTIN = 2;
+    DRVRASSCWISDOMBTN_DRVRASSCWISDOMBTN_MIDDLEIN = 3;
+    DRVRASSCWISDOMBTN_DRVRASSCWISDOMBTN_APASUSPENSIONBALL = 4;
+  }
+  enum FrntAndRePrkgInSwtType {
+    FRNTANDREPRKGINSWT_FRNTANDREPRKGINSWT_DEFAULT = 0;
+    FRNTANDREPRKGINSWT_FRNTANDREPRKGINSWT_FRNTPRKGIN = 1;
+    FRNTANDREPRKGINSWT_FRNTANDREPRKGINSWT_REPRKGIN = 2;
+    FRNTANDREPRKGINSWT_FRNTANDREPRKGINSWT_RESERVED = 3;
+  }
+  enum LoSpdDrvgAssiShoPushRespType {
+    LOSPDDRVGASSISHOPUSHRESP_CMDTYPE1_IDLE = 0;
+    LOSPDDRVGASSISHOPUSHRESP_CMDTYPE1_CONFIRM = 1;
+    LOSPDDRVGASSISHOPUSHRESP_CMDTYPE1_CANCEL = 2;
+    LOSPDDRVGASSISHOPUSHRESP_CMDTYPE1_NOMOREREMINDER = 3;
+  }
+  enum SwitchCmd {
+    aut_actv_prkg_fct_swt = 0;   // 无感泊车
+    lsda_notif_push_req = 1;     // 低速探索主动推送
+    aut_prkg_voice_swt_resp = 2; // 泊车辅助声音
+    drift_prkg_req = 3;          // 漂移泊车
+    apa_custom_prkg_req = 4;     // 自定义泊车按键
+    apa_prkg_adsorption = 5;     // 自定义泊车吸附按键 
+    lsda_ignore_available = 6;   // lsda窄道判断 内部自用
+  }
   oneof Command {
     // GlP177ChassisDetail.DHU_ZCUCANFD1_FR02_307
     google.protobuf.Any drvr_assc_sys_btn_push = 1; 
@@ -1042,6 +1125,13 @@ message GLParkingCommand {
     google.protobuf.Any aut_prkg_hand_slot_nr_req_topo_slot_id = 13;
     // GlP177ChassisDetail.DHU_ZCUCANFD1_FR04_175
     google.protobuf.Any mob_dev_rpa_req1_rpa_out_mode_sub_t = 14;
+    SwitchCmd config_switch = 15;
+    FrntAndRePrkgInSwtType frnt_and_re_prkg_in_swt = 16;  // 车头车尾
+    DrvrAsscWisdomBtnType drvr_assc_wisdom_btn = 17;      // 智慧偏移
+    LoSpdDrvgAssiShoPushRespType lo_spd_drvg_assi_sho_push_resp = 18; // 窄道推送
+    PrkgSpdReqType prkg_spd_req = 19;  // 速度模式切换按键
+    // GlP177ChassisDetail.DHU_ZCUCANFD1_FR14_1F8
+    google.protobuf.Any rpa_select_par_in = 20;
   }
 }
 
@@ -1155,6 +1245,17 @@ message GLHPACommand {
     AUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQ_SETTINGVOICEBTNREQ_SIMPLEMODEREQ = 2; // 简洁版
     AUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQ_SETTINGVOICEBTNREQ_ALLOFFREQ = 3; // 无语音
   }
+  enum AutValtPrkgMapRespMapIDResultType {
+    MAPIDRESULT_IDLE = 0;
+    MAPIDRESULT_AVAILABLE = 1;
+    MAPIDRESULT_NOTAVAILABLE = 2;
+  }
+  enum AutValtPrkgCoverResultsType {
+    AUTVALTPRKGCOVERRESULTS_DEFAULT = 0;
+    AUTVALTPRKGCOVERRESULTS_SUCCESS = 1;
+    AUTVALTPRKGCOVERRESULTS_FAIL = 2;
+    AUTVALTPRKGCOVERRESULTS_RESERVED = 3;
+  }
   int32 req_map_id = 1;
   oneof Command {
     AutValtPrkgSwtType aut_valt_prkg_swt = 2;
@@ -1171,6 +1272,8 @@ message GLHPACommand {
     AutValtPrkgL2BtnReqSettingFctPushBtnReqType aut_valt_prkg_l2_btn_req_setting_fct_push_btn_req = 13; // 推送开关
     AutValtPrkgL2BtnReqSettingNoSenceBtnReqType aut_valt_prkg_l2_btn_req_setting_no_sence_btn_req = 14; // 无感建图开关
     AutValtPrkgL2BtnReqSettingVoiceBtnReqType aut_valt_prkg_l2_btn_req_setting_voice_btn_req = 15;  // 语音类型开关
+    AutValtPrkgMapRespMapIDResultType aut_valt_prkg_map_resp_map_id_result = 16;  // 新建ID校验结果
+    AutValtPrkgCoverResultsType aut_valt_prkg_cover_results = 17;  // 地图数据覆盖结果
   }
 }
 
@@ -1203,3 +1306,24 @@ message DrivingActiveExit {
   bool driving_off = 2;
   dr.operationstatus.Feature target_feature = 3;
 };
+
+message EnableESA {
+  bool enable = 1;
+  ActiveSafetyControlStatus control_status = 2;
+}
+
+message EnableAES {
+  bool enable = 1;
+  ActiveSafetyControlStatus control_status = 2;
+}
+
+message EnableMAI {
+  bool enable = 1;
+  ActiveSafetyControlStatus control_status = 2;
+}
+
+enum ActiveSafetyControlStatus {
+  UNKNOWN_CONTROL_STATUS = 0;
+  OPEN = 1;  // 控车
+  CLOSED = 2;  // 不控车
+}; 

@@ -12,9 +12,11 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from proto.common import module_event_pb2 as common_dot_module__event__pb2
+from proto.common import geometry_pb2 as common_dot_geometry__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n prediction/offline_feature.proto\x12\x14\x64\x65\x65proute.prediction\"\xab\x01\n\x0fLaneFeatureInfo\x12\x0f\n\x07lane_id\x18\x01 \x01(\x03\x12\x0e\n\x06lane_s\x18\x02 \x01(\x01\x12\x0e\n\x06lane_l\x18\x03 \x01(\x01\x12\x12\n\nangle_diff\x18\x04 \x01(\x01\x12\x1d\n\x15\x64ist_to_left_boundary\x18\x05 \x01(\x01\x12\x1e\n\x16\x64ist_to_right_boundary\x18\x06 \x01(\x01\x12\x14\n\x0clane_heading\x18\x07 \x01(\x01\"i\n\x16ObstacleOffLineFeature\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x43\n\x14\x63urrent_lane_feature\x18\x02 \x01(\x0b\x32%.deeproute.prediction.LaneFeatureInfo\"`\n\x0eOfflineFeature\x12N\n\x18obstacle_offline_feature\x18\x01 \x03(\x0b\x32,.deeproute.prediction.ObstacleOffLineFeature')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n prediction/offline_feature.proto\x12\x14\x64\x65\x65proute.prediction\x1a\x19\x63ommon/module_event.proto\x1a\x15\x63ommon/geometry.proto\"\xab\x01\n\x0fLaneFeatureInfo\x12\x0f\n\x07lane_id\x18\x01 \x01(\x03\x12\x0e\n\x06lane_s\x18\x02 \x01(\x01\x12\x0e\n\x06lane_l\x18\x03 \x01(\x01\x12\x12\n\nangle_diff\x18\x04 \x01(\x01\x12\x1d\n\x15\x64ist_to_left_boundary\x18\x05 \x01(\x01\x12\x1e\n\x16\x64ist_to_right_boundary\x18\x06 \x01(\x01\x12\x14\n\x0clane_heading\x18\x07 \x01(\x01\"\x8f\x01\n\x16ObstacleOffLineFeature\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x43\n\x14\x63urrent_lane_feature\x18\x02 \x01(\x0b\x32%.deeproute.prediction.LaneFeatureInfo\x12$\n\nevent_tags\x18\x03 \x03(\x0e\x32\x10.dr.common.Event\"\xf2\x01\n\x0eOfflineFeature\x12N\n\x18obstacle_offline_feature\x18\x01 \x03(\x0b\x32,.deeproute.prediction.ObstacleOffLineFeature\x12\x1d\n\x15\x66\x65\x61ture_map_timestamp\x18\x02 \x01(\x03\x12\x32\n\x0f\x66\x65\x61ture_map_pos\x18\x03 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12=\n\x1a\x66\x65\x61ture_map_roll_pitch_yaw\x18\x04 \x01(\x0b\x32\x19.deeproute.common.Point3D')
 
 
 
@@ -45,10 +47,10 @@ _sym_db.RegisterMessage(OfflineFeature)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _LANEFEATUREINFO._serialized_start=59
-  _LANEFEATUREINFO._serialized_end=230
-  _OBSTACLEOFFLINEFEATURE._serialized_start=232
-  _OBSTACLEOFFLINEFEATURE._serialized_end=337
-  _OFFLINEFEATURE._serialized_start=339
-  _OFFLINEFEATURE._serialized_end=435
+  _LANEFEATUREINFO._serialized_start=109
+  _LANEFEATUREINFO._serialized_end=280
+  _OBSTACLEOFFLINEFEATURE._serialized_start=283
+  _OBSTACLEOFFLINEFEATURE._serialized_end=426
+  _OFFLINEFEATURE._serialized_start=429
+  _OFFLINEFEATURE._serialized_end=671
 # @@protoc_insertion_point(module_scope)

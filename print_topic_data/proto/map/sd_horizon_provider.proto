@@ -93,11 +93,19 @@ message RealTimeGuidance {
 }
 
 message FusionSdMap {
+  enum FusionMapType {
+    FUSION_MAP_TYPE_UNSPECIFIED = 0;  // 未指定
+    FUSION_MAP_TYPE_NAVIGATION = 1;   // 导航状态
+    FUSION_MAP_TYPE_PULL_OVER = 2;    // 靠边停车状态
+  }
+
   // 必需字段，用于标识等功能
   optional int64 time_measurement = 1;
 
   // 播报信息
   optional RealTimeGuidance guidance = 11;
+
+  optional FusionMapType fusion_map_type = 12;
 
   // TODO(HongyiZhang): 导航信息
   // TODO(HongyiZhang): 路网信息

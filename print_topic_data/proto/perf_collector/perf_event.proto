@@ -171,6 +171,7 @@ message SysTrace {
   optional uint64 pgfree = 39;
   optional uint32 mem_anon = 40;
   optional uint32 mem_file = 41;
+  optional uint32 mem_used = 42;
 }
 
 // 对应于Event id PERF_TRACE_TASK
@@ -228,23 +229,48 @@ message PartitionWarning {
 message NetDeviceTrace {
   optional string time = 1;
   optional string name = 2;
-  optional uint64 rx_bytes = 3;
-  optional uint64 rx_packets = 4;
-  optional uint64 rx_errs = 5;
-  optional uint64 rx_drop = 6;
-  optional uint64 rx_fifo = 7;
-  optional uint64 rx_frame = 8;
-  optional uint64 rx_compressed = 9;
-  optional uint64 rx_multicast = 10;
-  optional uint64 tx_bytes = 11;
-  optional uint64 tx_packets = 12;
-  optional uint64 tx_errs = 13;
-  optional uint64 tx_drop = 14;
-  optional uint64 tx_fifo = 15;
-  optional uint64 tx_colls = 16;
-  optional uint64 tx_carrier = 17;
-  optional uint64 tx_compressed = 18;
+  optional uint32 rx_bps = 3; // 每秒接收比特数，单位bps
+  optional uint32 rx_packets = 4;
+  optional uint32 rx_errs = 5;
+  optional uint32 rx_drop = 6;
+  optional uint32 rx_fifo = 7;
+  optional uint32 rx_frame = 8;
+  optional uint32 rx_compressed = 9;
+  optional uint32 rx_multicast = 10;
+  optional uint32 tx_bps = 11; // 每秒发送比特数，单位bps
+  optional uint32 tx_packets = 12;
+  optional uint32 tx_errs = 13;
+  optional uint32 tx_drop = 14;
+  optional uint32 tx_fifo = 15;
+  optional uint32 tx_colls = 16;
+  optional uint32 tx_carrier = 17;
+  optional uint32 tx_compressed = 18;
 }
+
+message TcpUdpTrace {
+  optional string time = 1;
+  optional uint32 tcp_active_opens = 2; // TCP active opens
+  optional uint32 tcp_passive_opens = 3; // TCP passive opens
+  optional uint32 tcp_attempt_fails = 4; // TCP connection attempt fails
+  optional uint32 tcp_estab_resets = 5; // TCP established resets
+  optional uint32 tcp_curr_estab = 6; // TCP current established connections
+  optional uint32 tcp_in_segs = 7; // TCP segments received
+  optional uint32 tcp_out_segs = 8; // TCP segments sent
+  optional uint32 tcp_retrans_segs = 9; // TCP retransmitted segments
+  optional uint32 tcp_in_errs = 10; // TCP input errors
+  optional uint32 tcp_out_rsts = 11; // TCP output resets
+  optional uint32 tcp_in_csum_errors = 12; // TCP checksum errors
+  optional uint32 udp_in_datagrams = 13; // UDP datagrams received
+  optional uint32 udp_no_ports  =  14; // UDP no ports
+  optional uint32 udp_in_errors =  15; // UDP input errors
+  optional uint32 udp_out_datagrams  = 16; // UDP datagrams sent
+  optional uint32 udp_rcvbuf_errors  = 17; // UDP receive buffer errors
+  optional uint32 udp_sndbuf_errors = 18; // UDP send buffer errors
+  optional uint32 udp_in_csum_errors = 19; // UDP checksum errors
+  optional uint32 udp_ignored_multi  = 20; // UDP ignored multicast datagrams
+  optional uint32 udp_mem_errors = 21; // UDP memory allocation errors
+}
+
 
 message PerfSysWarning{
   optional string time = 1;
@@ -338,4 +364,25 @@ message SystemInterruptsTrace {
   optional uint64 timestamp = 1;        // 时间戳 (Unix毫秒)
   repeated HardwareInterruptTrace hw_interrupts = 2;
   repeated SoftInterruptTrace soft_irqs = 3;
+}
+
+// 线程调度配置
+message ModuleThreadSchedConfig {
+  optional string thread_name = 1; // 线程名称
+  optional string sched_policy = 2; // 调度策略：SCHED_OTHER\CHED_FIFO\SCHED_RR等
+  optional uint32 sched_priority = 3; // 调度优先级
+  optional string cpu_affinity_list = 4; // CPU亲和性
+}
+
+// 进程调度配置，嵌套ModuleThreadSchedConfig
+message ModuleProcessSchedConfig {
+  optional string process_name = 1; // 进程名称
+  repeated ModuleThreadSchedConfig thread_sched_config = 2; // 线程调度配置
+}
+// 系统调度配置 对应于Event id PERF_TRACE_SCHEDCONFIG
+message ModuleSchedConfig {
+  optional string timestamp = 1; // 时间戳
+  optional string msg_index = 2; // 消息索引
+  optional string total_count = 3; // 消息总数
+  repeated ModuleProcessSchedConfig process_sched_config = 4; // 进程调度配置
 }

@@ -15,7 +15,8 @@ message EmergencyStopRequest {
     DOUBLE_FLASH_ON = 2;
     VPA_STOP_FORCE = 3;
     VPA_STOP_COMFORTABLE = 4;
-    VPA_STOP_HOLD = 5;
+    VPA_STOP_HOLD = 5;  // deprecated
+    MRM_WITHOUT_P = 6; 
   }
   enum EmergencyStopScope {
     ALL = 0;
@@ -24,6 +25,7 @@ message EmergencyStopRequest {
   }
   optional EmergencyStopType estop_type = 1;
   optional EmergencyStopScope estop_scope = 2;
+  optional deeproute.canbus.Chassis.GearPosition target_gear = 3 [default = PARK];
 }
 
 message CountdownRequest {
@@ -139,6 +141,8 @@ message ParkingRequest {
   optional ParkingPreferenceMod parking_preference_mod = 9;
   optional APAParkingSpeed apa_parking_speed = 10;
   optional bool is_user_defined_park = 11;
+  optional bool is_need_waiting_move_command = 12;
+  optional bool allow_drifting_parking = 13;
 }
 
 message PrePlanParkingReuqest {
@@ -198,6 +202,8 @@ message DirectInOutParkingRequest {
   optional ParkingRequestReason request_reason = 3;
   optional bool use_auto_driving_mode = 4;
   optional deeproute.canbus.Chassis.DrivingMode driving_mode = 5;
+  optional bool is_lsda_mode = 6;
+  optional double moving_distance = 7;
 }
 
 message SuggestOutParkingRequest {
@@ -232,6 +238,7 @@ message SuggestOutParkingInfo {
   repeated ParkingOutSuggestPose unavailable_suggest_poses = 7;
   optional int32 planning_request_id = 8;
   optional int32 target_parking_space_id = 9;
+  optional ParkingMod current_head_tail_mode = 10;  // 当前姿态，planning 记忆泊入时赋值, 人驾泊入发unknown
 }
 
 message VpaDrivingInfo {
@@ -241,7 +248,13 @@ message VpaDrivingInfo {
 }
 
 message SingleStagePath {
+  enum PathType {
+    KINEMATIC_PATH=1;
+    DRIFTING_PATH=2;
+  }
   repeated deeproute.common.Point3D trajectory_points = 1;
+  optional bool gear = 2; // true mean D, false mean R
+  optional PathType path_type =3;
 }
 
 message PrePlanParkingResult {
@@ -269,6 +282,8 @@ message DirecetInOutAvailableDirectionInfo {
   optional bool rear_available = 3;
   optional bool rear_ignore_side_available = 4;
   optional double current_path_remaining_dist = 5;
+  optional bool is_narrow = 6;
+  optional bool is_init_collision = 7;
 }
 
 message DestChangeRequest {
@@ -381,8 +396,9 @@ message SingleLaneFeatureSwitch {
   optional SwitchStatus enable_model_speed_limit = 2;
   optional SwitchStatus disable_ilqr_lon_safety_cost = 3 [default = NOT_SET];
   optional SwitchStatus disable_ilqr_lat_safety_cost = 4 [default = NOT_SET];
-  optional SwitchStatus ica_enable_local_routing_speed_limit = 5
-      [default = OFF];
+  optional SwitchStatus ica_enable_local_routing_speed_limit = 5 [default = OFF];
+  optional SwitchStatus enable_defensive_deceleration = 6 [default = NOT_SET];
+  optional SwitchStatus enable_vla_speed_limit = 7;
 }
 
 message PureModelFeatureSwitch {
@@ -426,6 +442,24 @@ message LaneChangeConfirmationRequest {
   optional bool cancel_lane_change = 3;
 }
 
+message MinStopFollowDistanceRequest {
+  enum MinStopFollowLevel {
+    LEVEL_INVALID = -1;
+    LEVEL_NONE = 0;
+    LEVEL_0 = 1;   // level for jam mode
+    LEVEL_1 = 2;
+  }
+  optional MinStopFollowLevel min_stop_follow_level = 1;
+}
+
+message ParkingBusinessInformRequest {
+  // https://project.feishu.cn/c_01/parking_story/detail/5983057411
+  optional bool is_rads_record_driving_mode = 1;
+}
+
+message VpaStartRoamRequest {
+}
+
 // topic: /planner/request
 message PlanningRequest {
   optional string id = 1;
@@ -460,7 +494,16 @@ message PlanningRequest {
     ControlModeRequest control_mode_request = 30;
     APADrivingModeRequest apa_driving_mode_request = 31;
     LaneChangeConfirmationRequest lane_change_confirmation_request = 32;
+    MinStopFollowDistanceRequest min_stop_follow_distance_request = 33;
+    ParkingBusinessInformRequest parking_business_inform_request = 34;
+    VpaStartRoamRequest vpa_start_roam_request = 35;
+    VLARequest vla_request = 36;
   }
+}
+
+message VLARequest {
+  optional deeproute.planning.VLARelated.VLARequestType vla_request_type = 1;
+  optional bool task_end = 2;
 }
 
 // topic: /planner/multi_requests
@@ -500,6 +543,8 @@ message TaskResponse {
     LSS_SWITCH = 27;
     APA_DRIVING_MODE = 28;
     LANE_CHANGE_CONFIRMATION = 29;
+    RADS_DRIVING_MODE = 30;
+    VLA_REQUEST = 31;
   }
   optional bool succeeded = 1 [default = false];
   optional TaskType task_type = 2;
@@ -517,6 +562,20 @@ message PlanningResponse {
 message PlanningResponses {
   repeated PlanningResponse planning_responses = 1;
 }
+
+message ApaDriftingParkingInfo {
+  message DriftingParkingTargetPosition {
+    optional double x = 1;
+    optional double y = 2;
+    optional double heading = 3;
+  }
+  optional deeproute.canbus.Chassis.DriftingParkingMode drifting_parking_mode =1;
+  optional bool is_executing_drifting_parking =2[default = false];
+  optional deeproute.canbus.Chassis.DriftingParkingFixedWheel drifting_parking_fixed_wheel = 3;
+  optional deeproute.canbus.Chassis.DriftingParkingDirection drifting_parking_direction = 4;
+  optional DriftingParkingTargetPosition drifting_parking_target_position =5;
+}
+
 
 // topic: /planner/event
 message PlanningEvent {
@@ -587,11 +646,13 @@ message PlanningEvent {
     ELK_REQUEST_LEFT_O = 46;
     ELK_REQUEST_LEFT_ICS = 47;
     ELK_REQUEST_LEFT_GO = 60;
+    ELK_REQUEST_LEFT_VRU = 62;
     ELK_REQUEST_RIGHT_S = 48;
     ELK_REQUEST_RIGHT_RE = 49;
     ELK_REQUEST_RIGHT_O = 50;
     ELK_REQUEST_RIGHT_ICS = 51;
     ELK_REQUEST_RIGHT_GO = 61;
+    ELK_REQUEST_RIGHT_VRU = 63;
 
     // TJP request
     TJP_WARNING_LAT_CAR_FOLLOWING = 52;
@@ -675,6 +736,12 @@ message PlanningEvent {
     VPA_DRIVING_PASSING_BARRIER_GATE = 149;
     VPA_DRIVING_DETOUR_START = 150;
     VPA_DRIVING_DETOUR_FINISH = 151;
+
+    LSDA_FORNT_DRIVABLE = 152;
+    LSDA_REAR_DRIVABLE = 153;
+    VLA_REQUEST_DONE = 154;
+    VLA_REQUEST_FAILED = 155;
+    VLA_REQUEST_END = 156;
   }
 
   optional PlanningStatus planning_status = 2;
@@ -688,4 +755,5 @@ message PlanningEvent {
   optional PrePlanParkingInfo pre_plan_parking_info = 10;
   optional DirecetInOutAvailableDirectionInfo
       direct_in_out_available_direction_info = 11;
+  optional ApaDriftingParkingInfo  apa_drifting_parking_info=12;
 }

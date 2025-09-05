@@ -32,10 +32,36 @@ python_proto_library(
 )
 
 proto_library(
+    name = "gl_internal_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gl_internal.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gl_internal_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gl_internal_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gl_internal_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gl_internal_proto",
+    ],
+)
+
+proto_library(
     name = "gl_sr_common_proto",
     visibility = ["//visibility:public"],
     srcs = ["gl_sr_common.proto"],
     deps = [
+      "//proto/drapi/gl:gl_internal_proto"
     ],
     strip_import_prefix = "/proto/",
 )
@@ -82,3 +108,97 @@ python_proto_library(
     ],
 )
 
+proto_library(
+    name = "gl_dhu_gnss_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gl_dhu_gnss.proto"],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gl_dhu_gnss_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gl_dhu_gnss_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gl_dhu_gnss_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gl_dhu_gnss_proto",
+    ],
+)
+
+proto_library(
+    name = "cpmon_info_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["cpmon_info.proto"],
+    deps = [
+      #"//proto/drapi/gl:gl_sr_common_proto"
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "cpmon_info_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":cpmon_info_proto",
+    ],
+)
+
+python_proto_library(
+    name = "cpmon_info_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":cpmon_info_proto",
+    ],
+)
+
+proto_library(
+    name = "gl_hpa_map_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gl_hpa_map.proto"],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gl_hpa_map_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gl_hpa_map_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gl_hpa_map_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gl_hpa_map_proto",
+    ],
+)
+
+proto_library(
+    name = "gl_heatmap_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gl_heatmap.proto"],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gl_heatmap_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gl_heatmap_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gl_heatmap_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gl_heatmap_proto",
+    ],
+)

@@ -8,6 +8,7 @@ import "map/common_type.proto";
 import "map/amap_drive_route_planning.proto";
 import "graph_match/graph_matching.proto";
 import "odd/odd.proto";
+import "map/vla_command.proto";
 
 message RoutingRequestBody {
   message RoutePlanParam {
@@ -107,12 +108,15 @@ message RequestInfo {
   // for dr route planning
   optional DrRoutingOption dr_option = 6;
 
+  optional VLARoutingOption vla_option = 11;
+
   optional AmapRoutingOption amap_option = 9;
   optional AmapDriveRoutePlanningResponse amap_response = 7;
 
   enum RequestType {
     DEFAULT_EXECUTE = 0;
     ONLY_PREVIEW = 1;
+    VLA_REQUEST = 2;
   }
   optional RequestType request_type = 4;
 
@@ -139,7 +143,29 @@ enum RoutingCode {
   NETWORK_ADDRESS_RESOLUTION_ERROR = 6;
   // 请求超时
   DEADLINE_EXCEEDED = 7;
+
   ROUTING_UNKNOWN = 8;
+
+  // For VLA
+  // 找不到指定指令路口
+  VLA_POSITION_NOT_FOUND = 10;
+
+  // 新路线与原路线重合
+  ROUTE_IS_OVERLAP_THE_ORIGINAL_ROUTE = 11;
+
+  // 新路线与原路线距离过近
+  ACTION_POSITION_IS_TOO_CLOSE = 12;
+  // from server
+  // 路网查不到Link
+  ROUTING_SERVER_NOT_FOUND_LINK = 1003;
+  // 找不到指定路口
+  ROUTING_SERVER_CAN_NOT_FIND_CROSSING = 1004;
+  // 指定路口无法完成动作
+  ROUTING_SERVER_CAN_NOT_COMPLETE = 1005;
+  // 新路线与原路线重合
+  ROUTING_SERVER_ROUTE_IS_OVERLAP_THE_ORIGINAL_ROUTE = 1006;
+  // 原导航路径，在预期转弯前，出现了非直行转向
+  ROUTING_SERVER_ORIGINAL_ROUTE_TURNING_BEFORE_EXPECTED = 1007;
 }
 
 // topic /map/routing/request
@@ -148,6 +174,9 @@ message RoutingRequest {
   oneof request {
     RequestInfo request_info = 2;
   }
+  // parking lot map
+  optional string cloud_map_id = 3; // map_id from viz cloud
+  optional string local_map_id = 4; // map_id from local map
 }
 
 // topic /map/routing/response

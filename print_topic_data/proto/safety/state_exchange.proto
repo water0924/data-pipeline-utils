@@ -109,6 +109,8 @@ message SocDtcs {
 enum SocFailureInfo {
   NO_FAILURE = 0;
   DEM_HEARTBEAT_TIMEOUT = 1; // DEM (on SOC) heartbeat timeout
+  CANBUS_LOST_HEARBEAT = 2;
+  SOC_BLC_CRASH = 3;
 }
 
 // SOC->MCU, topic="/safety/soc_state", max_serialized_size=1024 bytes
@@ -119,9 +121,15 @@ message SocSafetyState {
   optional bool full_detect_enabled = 4; // required. current SOC full_detect status
 }
 
+enum McuMode {
+  MCU_MODE_NORMAL = 0; // normal mode, MCU can receive events from SOC and send events to SOC
+  MCU_MODE_LOW_POWER = 1; //
+}
+
 // MCU->SOC, topic="/safety/mcu_state", max_serialized_size=1024 bytes
 message McuSafetyState {
   optional uint64 timestamp_ms = 1; // required. timestamp in milliseconds
+  optional McuMode mcu_mode = 2; // required. current MCU mode
 }
 
 message McuEventInfo {

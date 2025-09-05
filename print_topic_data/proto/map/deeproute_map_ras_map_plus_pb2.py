@@ -20,7 +20,7 @@ from proto.map import projection_pb2 as map_dot_projection__pb2
 from proto.perception import deeproute_perception_ras_map_pb2 as perception_dot_deeproute__perception__ras__map__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n$map/deeproute_map_ras_map_plus.proto\x12\rdeeproute.map\x1a\x15\x63ommon/geometry.proto\x1a\x15map/common_type.proto\x1a\x1brouting/local_routing.proto\x1a\x14map/projection.proto\x1a-perception/deeproute_perception_ras_map.proto\"\xc3\x01\n\x08LaneRule\x12\x39\n\x0cvehicle_type\x18\x01 \x01(\x0e\x32#.deeproute.map.LaneRule.VehicleType\x12*\n\x04rule\x18\x02 \x01(\x0b\x32\x1c.deeproute.map.LaneRule.Rule\x1a#\n\x04Rule\x12\x13\n\tmax_speed\x18\x01 \x01(\x02H\x00\x42\x06\n\x04rule\"+\n\x0bVehicleType\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x0f\n\x0bLIGHT_TRUCK\x10\x01\"\xe4\x02\n\x16\x43rossTrafficLightInfos\x12^\n\x19\x63ross_traffic_light_infos\x18\x01 \x03(\x0b\x32;.deeproute.map.CrossTrafficLightInfos.CrossTrafficLightInfo\x12\x1c\n\x14loc_measurement_time\x18\x02 \x01(\x04\x1a\xcb\x01\n\x15\x43rossTrafficLightInfo\x12\x0f\n\x07link_id\x18\x01 \x01(\t\x12\x18\n\x10\x64istance_to_link\x18\x02 \x01(\x01\x12\x15\n\rtraffic_light\x18\x03 \x01(\x08\x12\x38\n\x14traffic_position_llh\x18\x04 \x01(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x36\n\x13traffic_position_2d\x18\x05 \x01(\x0b\x32\x19.deeproute.common.Point2D\"\xfe\x01\n\x11\x43rossingDepthInfo\x12Q\n\x1a\x64istance_to_crossing_start\x18\x01 \x01(\x0b\x32-.deeproute.map.CrossingDepthInfo.DistanceInfo\x12O\n\x18\x64istance_to_crossing_end\x18\x02 \x01(\x0b\x32-.deeproute.map.CrossingDepthInfo.DistanceInfo\x1a\x45\n\x0c\x44istanceInfo\x12\x12\n\nlink_index\x18\x01 \x01(\x05\x12\x0f\n\x07link_id\x18\x02 \x01(\x04\x12\x10\n\x08\x64istance\x18\x03 \x01(\x01\"\xb7\x03\n\x0eSDLevelMapInfo\x12>\n\x0csd_info_type\x18\x64 \x01(\x0e\x32(.deeproute.map.SDLevelMapInfo.SdInfoType\x12\x42\n\tlane_info\x18\x01 \x03(\x0b\x32/.deeproute.map.DeeprouteHDLevelMapInfo.LaneInfo\x12\x34\n\x10\x63omplement_lanes\x18\x02 \x03(\x0b\x32\x1a.deeproute.perception.Lane\x12@\n\x14\x63omplement_boundries\x18\x03 \x03(\x0b\x32\".deeproute.perception.LaneBoundary\x12;\n\x0csd_road_info\x18\x04 \x01(\x0b\x32%.deeproute.map.CrossTrafficLightInfos\x12\x42\n\x18next_crossing_depth_info\x18\x05 \x01(\x0b\x32 .deeproute.map.CrossingDepthInfo\"(\n\nSdInfoType\x12\x0e\n\nNAVIGATION\x10\x00\x12\n\n\x06\x43RUISE\x10\x01\"\xc6\x0b\n\x17\x44\x65\x65prouteHDLevelMapInfo\x12\x42\n\tlane_info\x18\x01 \x03(\x0b\x32/.deeproute.map.DeeprouteHDLevelMapInfo.LaneInfo\x12K\n\x0etraffic_lights\x18\x02 \x03(\x0b\x32\x33.deeproute.map.DeeprouteHDLevelMapInfo.TrafficLight\x12J\n\rboundary_info\x18\x03 \x03(\x0b\x32\x33.deeproute.map.DeeprouteHDLevelMapInfo.BoundaryInfo\x12^\n\x1b\x63omplement_ground_obstacles\x18\x04 \x03(\x0b\x32\x39.deeproute.map.DeeprouteHDLevelMapInfo.ComplementObstacle\x12\x44\n\nlayer_info\x18\x05 \x03(\x0b\x32\x30.deeproute.map.DeeprouteHDLevelMapInfo.LayerInfo\x1a\x82\x03\n\x08LaneInfo\x12\n\n\x02id\x18\x01 \x01(\x05\x12,\n\nroad_level\x18\x02 \x01(\x0e\x32\x18.deeproute.map.RoadLevel\x12%\n\x04type\x18\x03 \x01(\x0e\x32\x17.deeproute.map.LaneType\x12%\n\x04turn\x18\x04 \x01(\x0e\x32\x17.deeproute.map.LaneTurn\x12+\n\nlane_rules\x18\x05 \x03(\x0b\x32\x17.deeproute.map.LaneRule\x12\x32\n*manually_set_left_neighbor_forward_lane_id\x18\x06 \x01(\x05\x12\x33\n+manually_set_right_neighbor_forward_lane_id\x18\x07 \x01(\x05\x12*\n\troad_form\x18\x08 \x01(\x0e\x32\x17.deeproute.map.RoadForm\x12,\n\x0b\x61\x63tual_turn\x18\t \x03(\x0e\x32\x17.deeproute.map.LaneTurn\x1a_\n\x0c\x42oundaryInfo\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x43\n\tcrossable\x18\x02 \x01(\x0e\x32\x30.deeproute.map.DeeprouteHDLevelMapInfo.Crossable\x1am\n\x0cTrafficLight\x12+\n\x08location\x18\x01 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\r\n\x05shape\x18\x02 \x01(\x05\x12\x15\n\rstop_line_ids\x18\x03 \x03(\x05\x12\n\n\x02id\x18\x04 \x01(\x05\x1a\xb0\x02\n\x12\x43omplementObstacle\x12\n\n\x02id\x18\x01 \x01(\x05\x12.\n\x08polyline\x18\x02 \x01(\x0b\x32\x1a.deeproute.common.PolylineH\x00\x12,\n\x07polygon\x18\x03 \x01(\x0b\x32\x19.deeproute.common.PolygonH\x00\x12L\n\x04type\x18\x04 \x01(\x0e\x32>.deeproute.map.DeeprouteHDLevelMapInfo.ComplementObstacle.Type\"V\n\x04Type\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x11\n\rWHEEL_STOPPER\x10\x01\x12\x13\n\x0fPEDESTRIAN_POLE\x10\x02\x12\x19\n\x15PHYSICAL_NOT_OBSTACLE\x10\x03\x42\n\n\x08geometry\x1a&\n\tLayerInfo\x12\n\n\x02id\x18\x01 \x01(\x05\x12\r\n\x05layer\x18\x02 \x01(\x05\"x\n\tCrossable\x12\x12\n\x0ePHYSICALLY_NOT\x10\x00\x12\x0f\n\x0bLEGALLY_NOT\x10\x01\x12\x11\n\rRIGHT_TO_LEFT\x10\x02\x12\x11\n\rLEFT_TO_RIGHT\x10\x03\x12\x08\n\x04\x42OTH\x10\x04\x12\x16\n\x12\x43\x41R_PHYSICALLY_NOT\x10\x05\"\xe6\x05\n\x0bMapObstacle\x12\n\n\x02id\x18\x01 \x01(\x05\x12+\n\x08position\x18\x02 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\r\n\x05theta\x18\x03 \x01(\x01\x12\x19\n\x11theta_uncertainty\x18\x04 \x01(\x01\x12\x0e\n\x06length\x18\x05 \x01(\x01\x12\r\n\x05width\x18\x06 \x01(\x01\x12\x0e\n\x06height\x18\x07 \x01(\x01\x12/\n\x0cpolygon_area\x18\x08 \x01(\x0b\x32\x19.deeproute.common.Polygon\x12\x15\n\rtracking_time\x18\t \x01(\x03\x12\x18\n\x10\x63onfidence_score\x18\n \x01(\x01\x12\x11\n\ttimestamp\x18\x0e \x01(\x01\x12L\n\x0bsensor_type\x18\x1c \x01(\x0e\x32%.deeproute.map.MapObstacle.SensorType:\x10PERCEPTION_LIDAR\x12<\n\x04type\x18\x1f \x01(\x0e\x32\x1f.deeproute.map.MapObstacle.Type:\rOTHERS_STATIC\x12\x10\n\x05layer\x18  \x01(\x05:\x01\x30\"\x96\x01\n\nSensorType\x12\x14\n\x10PERCEPTION_LIDAR\x10\x00\x12\x15\n\x11PERCEPTION_CAMERA\x10\x01\x12\x14\n\x10PERCEPTION_RADAR\x10\x02\x12\x19\n\x15PERCEPTION_ULTRASONIC\x10\x03\x12\x15\n\x11PERCEPTION_FUSION\x10\x04\x12\x07\n\x03MAP\x10\x05\x12\n\n\x06\x46USION\x10\x06\"\x98\x01\n\x04Type\x12\x11\n\rOTHERS_STATIC\x10\x00\x12\x08\n\x04WALL\x10\x01\x12\t\n\x05\x43HOCK\x10\x02\x12\x0b\n\x07LOCK_ON\x10\x03\x12\x0c\n\x08LOCK_OFF\x10\x04\x12\r\n\tSPEEDBUMP\x10\x05\x12\t\n\x05\x46\x45NCE\x10\x06\x12\n\n\x06\x42IGCAR\x10\x07\x12\x07\n\x03\x43\x41R\x10\x08\x12\x08\n\x04\x43ONE\x10\t\x12\x08\n\x04\x43URB\x10\n\x12\n\n\x06PILLAR\x10\x0b\"[\n\x0cMapObstacles\x12\x18\n\x10time_measurement\x18\x01 \x01(\x04\x12\x31\n\rmap_obstacles\x18\x02 \x03(\x0b\x32\x1a.deeproute.map.MapObstacle\"\xa7\x03\n\nRASMapPlus\x12\n\n\x02id\x18\x03 \x01(\x05\x12\x32\n\nprojection\x18\x05 \x01(\x0b\x32\x1e.deeproute.map.ProjectionPoint\x12-\n\x07ras_map\x18\x01 \x01(\x0b\x32\x1c.deeproute.perception.RASMap\x12\x36\n\rlocal_routing\x18\x02 \x01(\x0b\x32\x1f.deeproute.routing.LocalRouting\x12\x32\n\rmap_obstacles\x18\x04 \x01(\x0b\x32\x1b.deeproute.map.MapObstacles\x12\x38\n\x11sd_level_map_info\x18\x0b \x01(\x0b\x32\x1d.deeproute.map.SDLevelMapInfo\x12K\n\x1b\x64\x65\x65proute_hd_level_map_info\x18) \x01(\x0b\x32&.deeproute.map.DeeprouteHDLevelMapInfo\x12\x37\n\x0e\x63ruise_routing\x18\x06 \x01(\x0b\x32\x1f.deeproute.routing.LocalRouting*;\n\tRoadLevel\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07HIGHWAY\x10\x01\x12\n\n\x06STREET\x10\x02\x12\x08\n\x04PARK\x10\x03*\'\n\x08RoadForm\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x0e\n\nROUNDABOUT\x10\x01')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n$map/deeproute_map_ras_map_plus.proto\x12\rdeeproute.map\x1a\x15\x63ommon/geometry.proto\x1a\x15map/common_type.proto\x1a\x1brouting/local_routing.proto\x1a\x14map/projection.proto\x1a-perception/deeproute_perception_ras_map.proto\"\xc3\x01\n\x08LaneRule\x12\x39\n\x0cvehicle_type\x18\x01 \x01(\x0e\x32#.deeproute.map.LaneRule.VehicleType\x12*\n\x04rule\x18\x02 \x01(\x0b\x32\x1c.deeproute.map.LaneRule.Rule\x1a#\n\x04Rule\x12\x13\n\tmax_speed\x18\x01 \x01(\x02H\x00\x42\x06\n\x04rule\"+\n\x0bVehicleType\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x0f\n\x0bLIGHT_TRUCK\x10\x01\"\xe4\x02\n\x16\x43rossTrafficLightInfos\x12^\n\x19\x63ross_traffic_light_infos\x18\x01 \x03(\x0b\x32;.deeproute.map.CrossTrafficLightInfos.CrossTrafficLightInfo\x12\x1c\n\x14loc_measurement_time\x18\x02 \x01(\x04\x1a\xcb\x01\n\x15\x43rossTrafficLightInfo\x12\x0f\n\x07link_id\x18\x01 \x01(\t\x12\x18\n\x10\x64istance_to_link\x18\x02 \x01(\x01\x12\x15\n\rtraffic_light\x18\x03 \x01(\x08\x12\x38\n\x14traffic_position_llh\x18\x04 \x01(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x36\n\x13traffic_position_2d\x18\x05 \x01(\x0b\x32\x19.deeproute.common.Point2D\"\xfe\x01\n\x11\x43rossingDepthInfo\x12Q\n\x1a\x64istance_to_crossing_start\x18\x01 \x01(\x0b\x32-.deeproute.map.CrossingDepthInfo.DistanceInfo\x12O\n\x18\x64istance_to_crossing_end\x18\x02 \x01(\x0b\x32-.deeproute.map.CrossingDepthInfo.DistanceInfo\x1a\x45\n\x0c\x44istanceInfo\x12\x12\n\nlink_index\x18\x01 \x01(\x05\x12\x0f\n\x07link_id\x18\x02 \x01(\x04\x12\x10\n\x08\x64istance\x18\x03 \x01(\x01\"w\n\x0eNavigationInfo\x12\x12\n\nrequest_id\x18\x01 \x01(\t\x12\x13\n\x0bresponse_id\x18\x02 \x01(\x05\x12\x14\n\x0c\x61map_path_id\x18\x03 \x01(\x04\x12&\n\x1e\x64istance_to_destination_meters\x18\x04 \x01(\x01\"\xef\x03\n\x0eSDLevelMapInfo\x12>\n\x0csd_info_type\x18\x64 \x01(\x0e\x32(.deeproute.map.SDLevelMapInfo.SdInfoType\x12\x42\n\tlane_info\x18\x01 \x03(\x0b\x32/.deeproute.map.DeeprouteHDLevelMapInfo.LaneInfo\x12\x34\n\x10\x63omplement_lanes\x18\x02 \x03(\x0b\x32\x1a.deeproute.perception.Lane\x12@\n\x14\x63omplement_boundries\x18\x03 \x03(\x0b\x32\".deeproute.perception.LaneBoundary\x12;\n\x0csd_road_info\x18\x04 \x01(\x0b\x32%.deeproute.map.CrossTrafficLightInfos\x12\x42\n\x18next_crossing_depth_info\x18\x05 \x01(\x0b\x32 .deeproute.map.CrossingDepthInfo\x12\x36\n\x0fnavigation_info\x18\x06 \x01(\x0b\x32\x1d.deeproute.map.NavigationInfo\"(\n\nSdInfoType\x12\x0e\n\nNAVIGATION\x10\x00\x12\n\n\x06\x43RUISE\x10\x01\"\xc6\x0b\n\x17\x44\x65\x65prouteHDLevelMapInfo\x12\x42\n\tlane_info\x18\x01 \x03(\x0b\x32/.deeproute.map.DeeprouteHDLevelMapInfo.LaneInfo\x12K\n\x0etraffic_lights\x18\x02 \x03(\x0b\x32\x33.deeproute.map.DeeprouteHDLevelMapInfo.TrafficLight\x12J\n\rboundary_info\x18\x03 \x03(\x0b\x32\x33.deeproute.map.DeeprouteHDLevelMapInfo.BoundaryInfo\x12^\n\x1b\x63omplement_ground_obstacles\x18\x04 \x03(\x0b\x32\x39.deeproute.map.DeeprouteHDLevelMapInfo.ComplementObstacle\x12\x44\n\nlayer_info\x18\x05 \x03(\x0b\x32\x30.deeproute.map.DeeprouteHDLevelMapInfo.LayerInfo\x1a\x82\x03\n\x08LaneInfo\x12\n\n\x02id\x18\x01 \x01(\x05\x12,\n\nroad_level\x18\x02 \x01(\x0e\x32\x18.deeproute.map.RoadLevel\x12%\n\x04type\x18\x03 \x01(\x0e\x32\x17.deeproute.map.LaneType\x12%\n\x04turn\x18\x04 \x01(\x0e\x32\x17.deeproute.map.LaneTurn\x12+\n\nlane_rules\x18\x05 \x03(\x0b\x32\x17.deeproute.map.LaneRule\x12\x32\n*manually_set_left_neighbor_forward_lane_id\x18\x06 \x01(\x05\x12\x33\n+manually_set_right_neighbor_forward_lane_id\x18\x07 \x01(\x05\x12*\n\troad_form\x18\x08 \x01(\x0e\x32\x17.deeproute.map.RoadForm\x12,\n\x0b\x61\x63tual_turn\x18\t \x03(\x0e\x32\x17.deeproute.map.LaneTurn\x1a_\n\x0c\x42oundaryInfo\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x43\n\tcrossable\x18\x02 \x01(\x0e\x32\x30.deeproute.map.DeeprouteHDLevelMapInfo.Crossable\x1am\n\x0cTrafficLight\x12+\n\x08location\x18\x01 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\r\n\x05shape\x18\x02 \x01(\x05\x12\x15\n\rstop_line_ids\x18\x03 \x03(\x05\x12\n\n\x02id\x18\x04 \x01(\x05\x1a\xb0\x02\n\x12\x43omplementObstacle\x12\n\n\x02id\x18\x01 \x01(\x05\x12.\n\x08polyline\x18\x02 \x01(\x0b\x32\x1a.deeproute.common.PolylineH\x00\x12,\n\x07polygon\x18\x03 \x01(\x0b\x32\x19.deeproute.common.PolygonH\x00\x12L\n\x04type\x18\x04 \x01(\x0e\x32>.deeproute.map.DeeprouteHDLevelMapInfo.ComplementObstacle.Type\"V\n\x04Type\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x11\n\rWHEEL_STOPPER\x10\x01\x12\x13\n\x0fPEDESTRIAN_POLE\x10\x02\x12\x19\n\x15PHYSICAL_NOT_OBSTACLE\x10\x03\x42\n\n\x08geometry\x1a&\n\tLayerInfo\x12\n\n\x02id\x18\x01 \x01(\x05\x12\r\n\x05layer\x18\x02 \x01(\x05\"x\n\tCrossable\x12\x12\n\x0ePHYSICALLY_NOT\x10\x00\x12\x0f\n\x0bLEGALLY_NOT\x10\x01\x12\x11\n\rRIGHT_TO_LEFT\x10\x02\x12\x11\n\rLEFT_TO_RIGHT\x10\x03\x12\x08\n\x04\x42OTH\x10\x04\x12\x16\n\x12\x43\x41R_PHYSICALLY_NOT\x10\x05\"\xe6\x05\n\x0bMapObstacle\x12\n\n\x02id\x18\x01 \x01(\x05\x12+\n\x08position\x18\x02 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\r\n\x05theta\x18\x03 \x01(\x01\x12\x19\n\x11theta_uncertainty\x18\x04 \x01(\x01\x12\x0e\n\x06length\x18\x05 \x01(\x01\x12\r\n\x05width\x18\x06 \x01(\x01\x12\x0e\n\x06height\x18\x07 \x01(\x01\x12/\n\x0cpolygon_area\x18\x08 \x01(\x0b\x32\x19.deeproute.common.Polygon\x12\x15\n\rtracking_time\x18\t \x01(\x03\x12\x18\n\x10\x63onfidence_score\x18\n \x01(\x01\x12\x11\n\ttimestamp\x18\x0e \x01(\x01\x12L\n\x0bsensor_type\x18\x1c \x01(\x0e\x32%.deeproute.map.MapObstacle.SensorType:\x10PERCEPTION_LIDAR\x12<\n\x04type\x18\x1f \x01(\x0e\x32\x1f.deeproute.map.MapObstacle.Type:\rOTHERS_STATIC\x12\x10\n\x05layer\x18  \x01(\x05:\x01\x30\"\x96\x01\n\nSensorType\x12\x14\n\x10PERCEPTION_LIDAR\x10\x00\x12\x15\n\x11PERCEPTION_CAMERA\x10\x01\x12\x14\n\x10PERCEPTION_RADAR\x10\x02\x12\x19\n\x15PERCEPTION_ULTRASONIC\x10\x03\x12\x15\n\x11PERCEPTION_FUSION\x10\x04\x12\x07\n\x03MAP\x10\x05\x12\n\n\x06\x46USION\x10\x06\"\x98\x01\n\x04Type\x12\x11\n\rOTHERS_STATIC\x10\x00\x12\x08\n\x04WALL\x10\x01\x12\t\n\x05\x43HOCK\x10\x02\x12\x0b\n\x07LOCK_ON\x10\x03\x12\x0c\n\x08LOCK_OFF\x10\x04\x12\r\n\tSPEEDBUMP\x10\x05\x12\t\n\x05\x46\x45NCE\x10\x06\x12\n\n\x06\x42IGCAR\x10\x07\x12\x07\n\x03\x43\x41R\x10\x08\x12\x08\n\x04\x43ONE\x10\t\x12\x08\n\x04\x43URB\x10\n\x12\n\n\x06PILLAR\x10\x0b\"[\n\x0cMapObstacles\x12\x18\n\x10time_measurement\x18\x01 \x01(\x04\x12\x31\n\rmap_obstacles\x18\x02 \x03(\x0b\x32\x1a.deeproute.map.MapObstacle\"\xa7\x03\n\nRASMapPlus\x12\n\n\x02id\x18\x03 \x01(\x05\x12\x32\n\nprojection\x18\x05 \x01(\x0b\x32\x1e.deeproute.map.ProjectionPoint\x12-\n\x07ras_map\x18\x01 \x01(\x0b\x32\x1c.deeproute.perception.RASMap\x12\x36\n\rlocal_routing\x18\x02 \x01(\x0b\x32\x1f.deeproute.routing.LocalRouting\x12\x32\n\rmap_obstacles\x18\x04 \x01(\x0b\x32\x1b.deeproute.map.MapObstacles\x12\x38\n\x11sd_level_map_info\x18\x0b \x01(\x0b\x32\x1d.deeproute.map.SDLevelMapInfo\x12K\n\x1b\x64\x65\x65proute_hd_level_map_info\x18) \x01(\x0b\x32&.deeproute.map.DeeprouteHDLevelMapInfo\x12\x37\n\x0e\x63ruise_routing\x18\x06 \x01(\x0b\x32\x1f.deeproute.routing.LocalRouting*;\n\tRoadLevel\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07HIGHWAY\x10\x01\x12\n\n\x06STREET\x10\x02\x12\x08\n\x04PARK\x10\x03*\'\n\x08RoadForm\x12\x0b\n\x07\x44\x45\x46\x41ULT\x10\x00\x12\x0e\n\nROUNDABOUT\x10\x01')
 
 _ROADLEVEL = DESCRIPTOR.enum_types_by_name['RoadLevel']
 RoadLevel = enum_type_wrapper.EnumTypeWrapper(_ROADLEVEL)
@@ -40,6 +40,7 @@ _CROSSTRAFFICLIGHTINFOS = DESCRIPTOR.message_types_by_name['CrossTrafficLightInf
 _CROSSTRAFFICLIGHTINFOS_CROSSTRAFFICLIGHTINFO = _CROSSTRAFFICLIGHTINFOS.nested_types_by_name['CrossTrafficLightInfo']
 _CROSSINGDEPTHINFO = DESCRIPTOR.message_types_by_name['CrossingDepthInfo']
 _CROSSINGDEPTHINFO_DISTANCEINFO = _CROSSINGDEPTHINFO.nested_types_by_name['DistanceInfo']
+_NAVIGATIONINFO = DESCRIPTOR.message_types_by_name['NavigationInfo']
 _SDLEVELMAPINFO = DESCRIPTOR.message_types_by_name['SDLevelMapInfo']
 _DEEPROUTEHDLEVELMAPINFO = DESCRIPTOR.message_types_by_name['DeeprouteHDLevelMapInfo']
 _DEEPROUTEHDLEVELMAPINFO_LANEINFO = _DEEPROUTEHDLEVELMAPINFO.nested_types_by_name['LaneInfo']
@@ -100,6 +101,13 @@ CrossingDepthInfo = _reflection.GeneratedProtocolMessageType('CrossingDepthInfo'
   })
 _sym_db.RegisterMessage(CrossingDepthInfo)
 _sym_db.RegisterMessage(CrossingDepthInfo.DistanceInfo)
+
+NavigationInfo = _reflection.GeneratedProtocolMessageType('NavigationInfo', (_message.Message,), {
+  'DESCRIPTOR' : _NAVIGATIONINFO,
+  '__module__' : 'map.deeproute_map_ras_map_plus_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.NavigationInfo)
+  })
+_sym_db.RegisterMessage(NavigationInfo)
 
 SDLevelMapInfo = _reflection.GeneratedProtocolMessageType('SDLevelMapInfo', (_message.Message,), {
   'DESCRIPTOR' : _SDLEVELMAPINFO,
@@ -179,10 +187,10 @@ _sym_db.RegisterMessage(RASMapPlus)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _ROADLEVEL._serialized_start=4200
-  _ROADLEVEL._serialized_end=4259
-  _ROADFORM._serialized_start=4261
-  _ROADFORM._serialized_end=4300
+  _ROADLEVEL._serialized_start=4377
+  _ROADLEVEL._serialized_end=4436
+  _ROADFORM._serialized_start=4438
+  _ROADFORM._serialized_end=4477
   _LANERULE._serialized_start=200
   _LANERULE._serialized_end=395
   _LANERULE_RULE._serialized_start=315
@@ -197,34 +205,36 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _CROSSINGDEPTHINFO._serialized_end=1011
   _CROSSINGDEPTHINFO_DISTANCEINFO._serialized_start=942
   _CROSSINGDEPTHINFO_DISTANCEINFO._serialized_end=1011
-  _SDLEVELMAPINFO._serialized_start=1014
-  _SDLEVELMAPINFO._serialized_end=1453
-  _SDLEVELMAPINFO_SDINFOTYPE._serialized_start=1413
-  _SDLEVELMAPINFO_SDINFOTYPE._serialized_end=1453
-  _DEEPROUTEHDLEVELMAPINFO._serialized_start=1456
-  _DEEPROUTEHDLEVELMAPINFO._serialized_end=2934
-  _DEEPROUTEHDLEVELMAPINFO_LANEINFO._serialized_start=1871
-  _DEEPROUTEHDLEVELMAPINFO_LANEINFO._serialized_end=2257
-  _DEEPROUTEHDLEVELMAPINFO_BOUNDARYINFO._serialized_start=2259
-  _DEEPROUTEHDLEVELMAPINFO_BOUNDARYINFO._serialized_end=2354
-  _DEEPROUTEHDLEVELMAPINFO_TRAFFICLIGHT._serialized_start=2356
-  _DEEPROUTEHDLEVELMAPINFO_TRAFFICLIGHT._serialized_end=2465
-  _DEEPROUTEHDLEVELMAPINFO_COMPLEMENTOBSTACLE._serialized_start=2468
-  _DEEPROUTEHDLEVELMAPINFO_COMPLEMENTOBSTACLE._serialized_end=2772
-  _DEEPROUTEHDLEVELMAPINFO_COMPLEMENTOBSTACLE_TYPE._serialized_start=2674
-  _DEEPROUTEHDLEVELMAPINFO_COMPLEMENTOBSTACLE_TYPE._serialized_end=2760
-  _DEEPROUTEHDLEVELMAPINFO_LAYERINFO._serialized_start=2774
-  _DEEPROUTEHDLEVELMAPINFO_LAYERINFO._serialized_end=2812
-  _DEEPROUTEHDLEVELMAPINFO_CROSSABLE._serialized_start=2814
-  _DEEPROUTEHDLEVELMAPINFO_CROSSABLE._serialized_end=2934
-  _MAPOBSTACLE._serialized_start=2937
-  _MAPOBSTACLE._serialized_end=3679
-  _MAPOBSTACLE_SENSORTYPE._serialized_start=3374
-  _MAPOBSTACLE_SENSORTYPE._serialized_end=3524
-  _MAPOBSTACLE_TYPE._serialized_start=3527
-  _MAPOBSTACLE_TYPE._serialized_end=3679
-  _MAPOBSTACLES._serialized_start=3681
-  _MAPOBSTACLES._serialized_end=3772
-  _RASMAPPLUS._serialized_start=3775
-  _RASMAPPLUS._serialized_end=4198
+  _NAVIGATIONINFO._serialized_start=1013
+  _NAVIGATIONINFO._serialized_end=1132
+  _SDLEVELMAPINFO._serialized_start=1135
+  _SDLEVELMAPINFO._serialized_end=1630
+  _SDLEVELMAPINFO_SDINFOTYPE._serialized_start=1590
+  _SDLEVELMAPINFO_SDINFOTYPE._serialized_end=1630
+  _DEEPROUTEHDLEVELMAPINFO._serialized_start=1633
+  _DEEPROUTEHDLEVELMAPINFO._serialized_end=3111
+  _DEEPROUTEHDLEVELMAPINFO_LANEINFO._serialized_start=2048
+  _DEEPROUTEHDLEVELMAPINFO_LANEINFO._serialized_end=2434
+  _DEEPROUTEHDLEVELMAPINFO_BOUNDARYINFO._serialized_start=2436
+  _DEEPROUTEHDLEVELMAPINFO_BOUNDARYINFO._serialized_end=2531
+  _DEEPROUTEHDLEVELMAPINFO_TRAFFICLIGHT._serialized_start=2533
+  _DEEPROUTEHDLEVELMAPINFO_TRAFFICLIGHT._serialized_end=2642
+  _DEEPROUTEHDLEVELMAPINFO_COMPLEMENTOBSTACLE._serialized_start=2645
+  _DEEPROUTEHDLEVELMAPINFO_COMPLEMENTOBSTACLE._serialized_end=2949
+  _DEEPROUTEHDLEVELMAPINFO_COMPLEMENTOBSTACLE_TYPE._serialized_start=2851
+  _DEEPROUTEHDLEVELMAPINFO_COMPLEMENTOBSTACLE_TYPE._serialized_end=2937
+  _DEEPROUTEHDLEVELMAPINFO_LAYERINFO._serialized_start=2951
+  _DEEPROUTEHDLEVELMAPINFO_LAYERINFO._serialized_end=2989
+  _DEEPROUTEHDLEVELMAPINFO_CROSSABLE._serialized_start=2991
+  _DEEPROUTEHDLEVELMAPINFO_CROSSABLE._serialized_end=3111
+  _MAPOBSTACLE._serialized_start=3114
+  _MAPOBSTACLE._serialized_end=3856
+  _MAPOBSTACLE_SENSORTYPE._serialized_start=3551
+  _MAPOBSTACLE_SENSORTYPE._serialized_end=3701
+  _MAPOBSTACLE_TYPE._serialized_start=3704
+  _MAPOBSTACLE_TYPE._serialized_end=3856
+  _MAPOBSTACLES._serialized_start=3858
+  _MAPOBSTACLES._serialized_end=3949
+  _RASMAPPLUS._serialized_start=3952
+  _RASMAPPLUS._serialized_end=4375
 # @@protoc_insertion_point(module_scope)

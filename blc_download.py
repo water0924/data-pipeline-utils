@@ -7,6 +7,7 @@ from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QSizePolicy
 import platform
 import os
+import requests
 
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -146,6 +147,7 @@ class Stats:
         # 创建并启动线程
         self.thread = ScriptExecutionThread(issue_id)  # 替换为你的脚本路径
         self.thread.output_signal.connect(self.update_text_edit)  # 绑定信号到槽
+        self.thread.finished_signal.connect(self.update_tag_time)
         self.thread.start()
 
     def start_print_data(self):
@@ -174,6 +176,40 @@ class Stats:
     def refresh_text_edit2(self):
         """定期刷新文本框内容"""
         self.ui.textEdit_2.viewport().update()
+    
+    def update_tag_time(self):
+        issue_path = self.ui.lineEdit.text()
+        tag_id_path = issue_path + "/tag_id_path.json"
+        if tag_id_path:
+            with open(tag_id_path, encoding='utf-8') as f:
+                extracted_ids = json.load(f)['extracted_ids']
+
+        # 1. 把这里的 id 换成真实值
+        url = f"https://drplatform-backend.deeproute.cn/scene/tag/instance/{extracted_ids}/"
+
+        # 2. 如果接口需要登录态，取消下一行的注释并换成自己的 Cookie/Token
+        # headers = {"Cookie": "sessionid=xxxxxxxxx"}
+        headers = {}   # 目前为空，表示不带任何额外请求头
+
+        # 3. 发送 GET 请求
+        resp = requests.get(url, headers=headers, timeout=15)
+
+        # 4. 打印返回结果
+        try:
+            # 优先按 JSON 解析
+            data = resp.json() 
+            body = data["body"]  
+        except ValueError:
+            # JSON 解析失败则直接打印文本
+            print(resp.text)
+            
+        from datetime import datetime, timedelta, timezone
+
+        ts_us = body["systemTime"]          # 微秒
+        dt_utc = datetime.fromtimestamp(ts_us / 1e6, tz=timezone.utc)
+        dt_cn  = dt_utc.astimezone(timezone(timedelta(hours=8))).isoformat()
+        self.ui.lineEdit_3.setText(dt_cn)
+
 
     def print_message_data(self,output_signal):
         issue_path = self.fileSelectorApp.get_issue_path()
@@ -201,6 +237,7 @@ class Stats:
 class ScriptExecutionThread(QThread):
     """用于执行脚本的线程"""
     output_signal = Signal(str)  # 定义信号，用于将输出发送到主线程
+    finished_signal = Signal()  
 
     def __init__(self,issue_id):
         super().__init__()
@@ -225,11 +262,13 @@ class ScriptExecutionThread(QThread):
                 self.output_signal.emit(output.strip())  # 发送输出信号
 
         process.wait()
+        self.finished_signal.emit() 
 
 
 class WorkerThread(QThread):
     # 定义一个信号，用于将输出内容发送到主线程
     output_signal = Signal(str)
+    
 
     def __init__(self, function):
         super().__init__()

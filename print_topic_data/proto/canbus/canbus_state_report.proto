@@ -1,7 +1,6 @@
 syntax = "proto2";
 package deeproute.canbus.proto;
 import "common/header.proto";
-import "canbus/car_info.proto";
 
 message CanbusStateReport {
   optional deeproute.common.Header header = 1;
@@ -9,7 +8,6 @@ message CanbusStateReport {
   optional VehicleStatus vehicle_status = 3;
   optional CtrlValue ctrl_value = 4;
   optional DebugInfo debug_info = 5;
-  optional deeproute.canbus.ChassisDetails chassis_details = 6;
 }
 
 enum VcuState {
@@ -22,6 +20,7 @@ enum VcuState {
   ACTIVE_ESA = 6;
   ACTIVE_STANDSTILL = 7;
   EXIT = 8;
+  ACTIVE_DPA = 9;
 }
 
 message VcuStateMachine {
@@ -37,6 +36,7 @@ message VcuStateMachine {
   optional VcuState abp_state = 10;
   optional VcuState rctb_state = 11;
   optional VcuState meb_state = 12;
+  optional VcuState driving_lss_state = 13;
 }
 
 message VehicleStatus {
@@ -72,6 +72,11 @@ message VehicleStatus {
   optional bool prepare_to_shift = 30;
   optional double vehicle_speed_mps = 31;
   optional int32 epb_sts = 32;
+  optional bool is_lss_active = 33;
+  optional bool is_dpa_active = 34;
+  optional int32 fcta_status  = 35; 
+  optional int32 fcw_status  = 36; 
+  optional int32 veh_motion_Status = 37;
 }
 
 message CtrlValue {
@@ -132,6 +137,12 @@ message CtrlValue {
   optional bool is_planning_parking_lon_enable = 54;
   optional bool blc_emergency_brake = 55;
   optional bool is_driving_e2e_enable = 56;
+  optional int32 Lon_scene_type = 57;
+  optional bool is_sapamod_enable = 58;
+  optional bool rws_ang_req_enable = 59 [default = false];
+  optional double rws_ang_req_value = 60 [default = 0];  
+  optional double strg_trq_coeff = 61 [default = 0];
+  optional int32 door_lock_req = 62;
 }
 
 message DebugInfo {
@@ -153,4 +164,9 @@ message DebugInfo {
   optional bool downstream_mcu_timeout = 16;
   optional bool can_raw_array_timeout = 17;
   optional int32 mcu_transmit_mode = 18;
+  optional int32 drv_lon_child_state = 19;
+  optional int32 drv_lat_child_state = 20;
+  optional int32 prk_lon_child_state = 21;
+  optional int32 prk_lat_child_state = 22;
+  optional int32 lss_child_state = 23;
 }

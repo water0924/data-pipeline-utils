@@ -108,6 +108,7 @@ enum ParkingDwmUID {
   PARKING_DWM_POP_ID_60144 = 60144;//空间不足，记忆泊车退出
   PARKING_DWM_POP_ID_60143 = 60143;//车位不可用，记忆泊车退出
   PARKING_DWM_POP_ID_60153 = 60153;//路径规划失败，记忆泊车退出
+  PARKING_DWM_POP_ID_60136 = 60136;//记忆泊车退出，请接管车辆
   PARKING_DWM_POP_ID_60074 = 60074;//记忆泊车退出，请接管车辆
 
   PARKING_DWM_POP_ID_60015 = 60015;//请点击路线学习创建吧
@@ -181,6 +182,7 @@ enum ParkingDwmPopUID {
   PARKING_DWM_POP_ID_74225 = 74225;//暂未定位到路线
   PARKING_DWM_POP_ID_70004 = 70004;//请松开方向盘
   PARKING_DWM_POP_ID_74228 = 74228;//方向盘转角过大，请回正
+  PARKING_DWM_POP_ID_70059 = 70059;//请挂入D档
 
   PARKING_DWM_POP_ID_70041 = 70041;//前视摄像头故障
   PARKING_DWM_POP_ID_70056 = 70056;//前视摄像头被遮挡

@@ -9,6 +9,7 @@ import "drapi/gwm_hut_notification.proto";
 import "drapi/route_planning.proto";
 import "localization/havp_map.proto";
 import "google/protobuf/any.proto";
+import "drapi/local_config.proto";
 
 package dr.notification;
 
@@ -17,6 +18,8 @@ package dr.notification;
 message EventInfo {
   string id = 1;
   uint64 timestamp = 2;  // ms
+  dr.business_info.BlcTriggerType  trigger_type = 3;
+  string trace_id = 4; //长时序指令，关联异步事件，携带原始指令的指令id
   oneof event {
     // common 100 ~ 999
     StatusChange status_change = 100;
@@ -34,12 +37,25 @@ message EventInfo {
     StepingIntoSpecialArea step_into_area = 112;  // 即将进入特定区域
     HandsOffWarn hands_off_warn = 113;            // 脱手告警
     DriverTakeOver driver_take_over = 114;  //驾驶员在各种场景时接管
+    AccelerationStyleChange acceleration_style_change = 116; //驾驶风格变化通知
+    ChangeRoutingRequestResult change_routing_result = 117; //请求变更路线结果
+    NavigationAction navi_action = 118; //导航播报 
+    ChangeRoutingStatusChange change_routing_status_change = 119; //变更路线任务状态变化，开始，结束
+    PullOverRequestResult pull_over_result = 120; //靠边停车请求结果
+    PullOverStatusChange pull_over_status_change = 121; //靠边停车状态变化
+    OverTake over_take = 122; //超车文言
+    GiveWay give_way = 123; //让行文言
+    VlaStatusChange vla_status_change = 124; //Vla任务状态变化
+    PoiPosDisplay poi_pos = 125;//poi位置显示
+    SceneStrategyTypeNotify scene_strategy_notify = 126; //限速场景提示
 
     // ACC 1000~1499
     ACCStatusChange acc_status_change = 1000;
     SpeedLimitChange speed_limit = 1001;
     dr.business_info.FollowTimeGap time_gap = 1002;
     ConfirmSpeed confirm_speed = 1003;  //限速确认提醒
+    JamMode jam_mode = 1004;
+    TimeGapChange time_gap_change = 1005;    
 
     // ICA 1500 ~ 1999
     ICAStatusChange ica_status_change = 1500;
@@ -54,6 +70,7 @@ message EventInfo {
     NCAOutODD nca_out_odd = 2003;
     TurnArround trun_arround = 2004;  //掉头状态
     OddNotification odd_notification = 2005; // odd提示(仅提示)
+    ETCNotification etc_notification = 2006; // ETC通行
 
     // NCA internal 2400~2499
     dr.business_info.CurNaviPointIndex cur_navi_point_index = 2400;
@@ -66,6 +83,7 @@ message EventInfo {
     APASelectParkingSpace apa_select_parkingspace = 2505;
     APAParkOutParkingSpace parkout_parkingspace = 2506;
     dr.business_info.SuggestOutParkingInfo suggest_out_parking_info = 2507;
+    PathPoints avm_path = 2508;
 
     // VPA 3000 ~ 3499
     VPAStatusChange vpa_status_change = 3000;
@@ -110,6 +128,7 @@ message EventInfo {
     dr.notification.gwmhut.GWMParkingHUTNotification gwm_hut_data = 5402;
 
     GLParkingVizNotification gl_viz_data = 5403;
+    E2ENotification e2e_data = 5404;
 
     // DSM 6000~6099 -- Use DSMEvent in drapi/dsm_event.proto instead.
     DSMStart dsm_start = 6000 [deprecated = true];
@@ -132,6 +151,12 @@ message StatusChange {
     dr.operationstatus.ICAStatusInfo to_ica_status_info = 5;
     dr.operationstatus.NCAStatusInfo to_nca_status_info = 6;
   }
+}
+
+enum BtnSts {
+  NOTSHOW = 0;
+  UNAVAILABLE = 1;
+  AVAILABLE = 2;
 }
 
 enum TakeOverRequest {
@@ -189,6 +214,10 @@ enum RemindInfo {
   EPB_REQUEST_TIME_OUT = 33;                 //请求epb超时
   GEAR_P_REQUEST_TIME_OUT = 34;              //请求p档位超时
   SHARP_BEND = 35;                           //前方急弯
+  DRIVE_CAREFULLY = 36;                      //请谨慎驾驶
+  WATCH_PARALLEL_VEHICLES = 37;              //请注意并行车辆
+  WATCH_MERGING_VEHICLES = 38;               //请注意汇入车辆
+  NO_DRIVABLE_PATH_AHEAD = 39;               //前方无可通行道路，请接管
 
   // acc 100~400
   CAN_NOT_ACTIVE_ACC = 100;
@@ -376,6 +405,9 @@ message DecelerationInfo {
     CROSS_LINE = 7;              //超过停止线
     OBSTACLE_COLLISION = 8;      //碰撞风险
     RUN_RED_LIGHT = 9;           // 闯红灯
+    LARGE_VEHICLE_DEFENSIVE = 10; //大车防御性降速
+    SIDE_VEHICLE_DECELERATING = 11; //旁车减速
+    ROADSIDE_PARKING_BLIND_SPOTS = 12; //路边停车盲区
   }
   Reason reason = 1;
 }
@@ -431,6 +463,7 @@ message StepingIntoSpecialArea {
     BUS_LANE = 2;       //公交车道
     VARIABLE_LANE = 3;  //可变车道
     TIDE_LANE = 4;      //潮汐车道
+    WAITING_AREA_STRAIGHT = 5;  // 直行待行区
   }
   SpecialAreaType type = 1;
 }
@@ -462,6 +495,86 @@ message DriverTakeOver {
   Scene scene = 1;
 }
 
+message AccelerationStyleChange {
+  dr.localconfig.AccelerationStyle style = 1; //当前设置的加速风格
+  dr.business_info.ReachingBoundariesType reaching_type = 2; //到达上限边界
+  dr.business_info.ChangeValueAction user_action = 3; //用户操作，调大 or 调小  
+}
+
+message ChangeRoutingRequestResult {
+  dr.business_info.ChangeRoutingAction user_action = 1;  
+  dr.business_info.PositionOfAction position_of_action = 2;
+  bool is_success = 3;
+  int32 map_engine_code = 4; //-1时，表示无效值
+}
+
+
+message NavigationAction {
+  enum LaneTurn {
+    INVALID = 0;
+    STRAIGHT = 1;
+    LEFT = 2;
+    RIGHT = 3;
+    U_TURN = 4;
+    U_TURN_LEFT = 5;
+    U_TURN_RIGHT = 6;
+  };
+  LaneTurn turn = 1;
+}
+
+message VlaStatusChange {
+  enum Type {
+    TYPE_UNKNOWN = 0;
+    PULL_OVER = 1;
+    CHANGE_ROUTING = 2;
+  }
+  Type type = 1;
+  dr.operationstatus.VlaStatus from = 2;
+  dr.operationstatus.VlaStatus to = 3;    
+  dr.business_info.ChangeRoutingAction user_action = 4;  
+}
+
+message ChangeRoutingStatusChange {
+  dr.business_info.ChangeRoutingAction user_action = 1;  
+  dr.operationstatus.VlaStatus from = 2;
+  dr.operationstatus.VlaStatus to = 3;
+}
+
+message PullOverRequestResult {
+  dr.business_info.PullOverType type = 1;
+  bool is_success = 2;
+  int32 map_engine_code = 3; //-1时，表示无效值
+}
+
+message PullOverStatusChange {
+  dr.business_info.PullOverType type = 1;  
+  dr.routeplanning.VLAStatus from = 2;
+  dr.routeplanning.VLAStatus to = 3;
+  dr.routeplanning.BehaviorReason reason = 4;
+  dr.routeplanning.VLAAction vla_action = 5;
+}
+
+message PoiPosDisplay {
+  bool dispaly = 1;
+  dr.base.PointLLH pos = 2;
+}
+
+message SceneStrategyTypeNotify {
+  dr.business_info.BlcSceneStrategyType strategy = 1;
+}
+
+message OverTake {
+  dr.routeplanning.VLAStatus from = 1;
+  dr.routeplanning.VLAStatus to = 2;    
+  dr.routeplanning.BehaviorReason reason = 3;
+}
+
+message GiveWay {
+  dr.routeplanning.VLAStatus from = 1;
+  dr.routeplanning.VLAStatus to = 2;  
+  dr.routeplanning.BehaviorReason reason = 3;
+}
+
 // ACC
 message ACCStatusChange {
   dr.operationstatus.ACCStatus from = 1;
@@ -480,6 +593,8 @@ message SpeedLimitChange {
   Reason reason = 2;
   int32 speed_limit_kmh = 3;
   int32 speed_limit_kph = 4;
+  dr.business_info.ReachingBoundariesType reaching_type = 5; //到达上下边界      
+  repeated dr.business_info.BlcSpeedLimitStrategy strategy = 6; //blc当前的限速策略
   bool is_map_speedlimit_changed_by_driver =
       10;  //地图限速被用户调节限速更新：true，其他：false, 默认值: false
 }
@@ -491,6 +606,21 @@ message ConfirmSpeed {
     CONFIRM = 2;
   }
   Display dispaly = 1;
+}
+
+message JamMode {
+  enum Mode {
+    MODE_UNKNOWN = 0;
+    MODE_OFF = 1;
+    MODE_ON = 2;
+  }
+  Mode mode = 1;
+}
+
+message TimeGapChange {
+  dr.business_info.FollowTimeGap time_gap = 1; //时距档位
+  dr.business_info.ReachingBoundariesType reaching_type = 2; //到达上限边界  
+  dr.business_info.ChangeValueAction user_action = 3; //用户操作，调大 or 调小  
 }
 
 // ICA
@@ -563,6 +693,7 @@ message NCAOutODD {
     UNKNOWN = 0;
     ARRIVING_FINAL_DESTINATION = 1;  //即将到达终点
     UNABLE_TURN_ARROUND = 2;         //前方无法掉头
+    ETC_PASS = 3;                    //ETC通行
   }
   enum RoadClass {
     HIGHWAY = 0;  // 高速
@@ -596,6 +727,17 @@ message NCAOutODD {
 
 message OddNotification {
   NCAOutODD.OddLimitType odd_type = 1;
+}
+
+message ETCNotification {
+  enum Type {
+    UNKNOWN = 0;
+    APPROACHING_ETC = 1;      // 正在接近ETC
+    THROUGH_ETC = 2;          // ETC通行中
+    ETC_PASS_SUCCESS = 3;     // 成功通过ETC
+    ETC_PASS_FAIL = 4;        // ETC通行失败，请求人工接管
+  }
+  Type type = 1;
 }
 
 // APA
@@ -917,4 +1059,19 @@ message TSRSign {
 
 message GLParkingVizNotification {
   google.protobuf.Any gl_p177_chassis_detail_resp = 1; // GlP177ChassisDetail
+}
+
+message E2ENotification {
+  BtnSts e2e_routing_btn_sts = 1; // 端到端开始巡航高亮按钮
+  BtnSts e2e_learning_btn_sts = 2; // 端到端出库学习高亮按钮
+}
+
+message PathPoints {
+  message PathPoint {
+    double x = 1;
+    double y = 2;
+  }
+  repeated PathPoint center_reverse_trajectory = 1;
+  repeated PathPoint left_reverse_trajectory = 2;
+  repeated PathPoint right_reverse_trajectory = 3;
 }

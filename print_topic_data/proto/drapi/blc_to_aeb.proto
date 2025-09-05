@@ -167,6 +167,17 @@ message ODDFlags {
     CMSFType cmsf_type = 3;
 }
 
+message ControlStatus {
+    enum ControlStatusType {
+        CONTROL_STATUS_UNKNOWN = 0;
+        CONTROL_STATUS_ENABLE = 1;
+        CONTROL_STATUS_DISABLE = 2;
+    }
+    ControlStatusType aeb_control_status = 1;
+    ControlStatusType esa_control_status = 2;
+    ControlStatusType aes_control_status = 3;
+}
+
 // topic : /blc/aeb_state_conditions
 message StateConditions {
     AEBStateCondition aeb_condition = 1;
@@ -183,4 +194,5 @@ message StateConditions {
 
     ODDFlags odd_flags = 20;
     SensitivityLevelSet sensitivity_level_set = 21;
+    ControlStatus control_status = 22;
 }

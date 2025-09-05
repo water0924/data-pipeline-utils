@@ -114,6 +114,7 @@ message CarInfo {
   optional bool blc_lost_heartbeat = 39;
   optional bool control_lost_heartbeat = 40;
   optional bool mcu_detect_soc_lost_heartbeat = 41;
+  optional AirSuspReport air_susp_report = 42;
 
   optional ChassisDetails chassis_details = 100;
 }
@@ -232,7 +233,7 @@ message BrakeReport {
   optional double master_cylinder_pressure = 11;
 
   optional bool active = 12; // interface is executing(1), or not(0)
-  
+
   optional double  drvr_decel_req = 13; //Driver deacceleration request
 }
 
@@ -336,6 +337,7 @@ message ApaReport {
   optional ApaMode apa = 1;
   optional ApaMode apa_lateral = 2;
   optional ApaMode apa_longitudinal = 3;
+  optional ApaMode dpa = 4;
 }
 
 message Misc {
@@ -457,6 +459,15 @@ message Misc {
   //control request trun signal
   optional deeproute.common.VehicleSignal.TurnSignal request_turn_signal = 40;
   optional PositionLightReport position_light_report = 41;
+  enum RearViewMirrorSts {
+    INVALID = 0;
+    FOLDED = 1;
+    UNFOLDED = 2;
+    FOLDING = 3;
+    UNFOLDING = 4;
+  }
+  optional RearViewMirrorSts left_rear_view_mirror = 42;
+  optional RearViewMirrorSts right_rear_view_mirror = 43;
 }
 
 message TirePressure {
@@ -624,4 +635,22 @@ message PositionLightReport {
   }
 
   optional PositionLight position_light = 1;
+}
+
+message AirSuspReport{
+  enum AirSuspLvl {
+    NORMAL = 0;
+    LOW_LEVEL1 = 1;
+    LOW_LEVEL2 = 2;
+    HIGH_LEVEL1 = 3;
+    HIGH_LEVEL2 = 4;
+    HIGH_LEVEL3 = 5;
+  }
+  optional AirSuspLvl air_susp_lvl = 1;
+  optional double susp_posn_vert_lf = 2;   //left front
+  optional double susp_posn_vert_lr = 3;   //left rear
+  optional double susp_posn_vert_rf = 4;   //right front
+  optional double susp_posn_vert_rr = 5;   //right rear
+  optional double target_height = 6;         
+  optional double height_adjust_sts = 7;   
 }

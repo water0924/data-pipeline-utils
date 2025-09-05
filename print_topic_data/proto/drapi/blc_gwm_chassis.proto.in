@@ -1,0 +1,22 @@
+syntax = "proto2";
+package dr.blc.mcu;
+import "common/configs/vehicle_config.proto";
+
+@_IMPORT_CHASSIS_DETAIL_PROTO_@
+
+
+message DownstreamChassisGWM {
+  optional int64 timestamp = 1;  // us
+  optional deeproute.common.VehicleBrand brand = 2;
+  oneof detail {
+    @_DOWNSTREAM_CHASSIS_DETAIL_MESSAGE_TYPE_@
+  }
+}
+
+message UpstreamChassisGWM {
+  optional int64 timestamp = 1;  // us
+  optional deeproute.common.VehicleBrand brand = 2;
+  oneof detail {
+    @_UPSTREAM_CHASSIS_DETAIL_MESSAGE_TYPE_@
+  }
+}

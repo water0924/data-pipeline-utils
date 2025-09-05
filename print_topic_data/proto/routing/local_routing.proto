@@ -28,6 +28,17 @@ message LaneRoutingInfo {
     PASSABLE = 2;
   }
   optional PassableLaneType passable_lane_type_before_junction = 10;
+  optional BusLaneInfo bus_lane_info = 11;
+}
+
+message BusLaneInfo {
+  optional bool is_bus_lane = 1;
+  enum AccessStatus {
+    UNKNOWN = 0;
+    PERMITTED = 1;
+    RESTRICTED = 2;
+  }
+  optional AccessStatus access_status = 2;
 }
 
 message NavigationInfoForVisualize {
@@ -88,6 +99,8 @@ message NavigationInfoForVisualize {
     AMAP_HIGHWAY_SPEED_LIMIT = 20;
     // amap speed limit in express 高德快速路限速
     AMAP_EXPRESS_SPEED_LIMIT = 21;
+    // NCA切换VPA限速
+    NCA_VPA_SPEED_LIMIT = 22;
   }
   // 限速类型
   optional SpeedLimitType speed_limit_type = 7;
@@ -96,8 +109,8 @@ message NavigationInfoForVisualize {
   optional double next_strategy_speed_limit = 8;
   optional double next_strategy_speed_limit_remaining_s = 9;
 
-  optional deeproute.map.RoadClass current_road_class = 10;
-  optional deeproute.map.RoadClass next_road_class = 11;
+  optional deeproute.map.RoadClass current_road_class = 10 [default = RC_UNKNOWN];
+  optional deeproute.map.RoadClass next_road_class = 11 [default = RC_UNKNOWN];
   optional double next_road_class_remaining_s = 12;
    
   enum SpeedLimitStatus{
@@ -132,6 +145,61 @@ message NavigationInfoForVisualize {
 
   // 经验限速是否生效
   optional bool exp_spl_enable = 18;
+
+  // 静态限速修正策略类型
+  enum StaticStrategyType {
+    STATIC_NO_STRATEGY = 0;  // 无静态限速修正策略
+
+    // 地图来源和静态修正共有
+    STATIC_TENCENT_SIGN = 1;    // 腾讯标牌限速
+    STATIC_TENCENT_THEORY = 2;  // 腾讯理论限速
+    STATIC_GAODE = 3;           // 高德限速
+    STATIC_EXACT = 4;           // 确认限速
+
+    // 以下为静态限速修正专用
+    STATIC_EXPERIENCE = 20;   // 经验限速
+    STATIC_GLOBAL = 21;       // 兜底策略限速
+    STATIC_RAMP = 22;         // 匝道策略限速
+    STATIC_AVP = 23;          // 泊车限速
+    STATIC_ONEWAY_SLOW = 24;  // 单向单车道减速策略限速
+    STATIC_NARROW_ROAD = 25;  // 窄路策略限速
+  }
+  // 场景策略类型
+  enum SceneStrategyType {
+    SCENE_NO_SCENE = 0;                  // 无场景
+    SCENE_RAMP_EXIT_RAMP = 1;            // 匝道汇出匝道
+    SCENE_FREEWAY_MERGE = 2;             // 高快汇入
+    SCENE_HIGHWAY_EXIT = 3;              // 高速路汇出
+    SCENE_EXPRESSWAY_EXIT = 4;           // 快速路汇出
+    SCENE_ENTER_TUNNEL = 5;              // 高速进入隧道
+    SCENE_CAMERA = 6;                    // 电子眼限速
+    SCENE_IN_TUNNEL = 7;                 // 隧道内
+    SCENE_IN_TUNNEL_TSR = 8;             // 隧道内，使用TSR限速
+    SCENE_TOLL_STATION = 9;              // 收费站
+    SCENE_MAIN_ROAD_TO_AUXILIARY_ROAD = 10;  // 主路切换辅路
+    SCENE_AUXILIARY_ROAD_TO_MAIN_ROAD = 11;  // 辅路切换主路
+    SCENE_JUNCTION_STRAIGHT = 12;            // 路口直行
+    SCENE_JUNCTION_LEFT = 13;                // 路口左转
+    SCENE_JUNCTION_RIGHT = 14;               // 路口右转
+    SCENE_JUNCTION_RIGHT_ADVANCE = 15;       // 路口提前右转
+    SCENE_JUNCTION_SLOW_TURN_RIGHT = 16;     // T字路口减速右转
+    SCENE_JUNCTION_UTURN = 17;               // 路口掉头
+    SCENE_IN_JUNCTION = 18;                  // 路口内
+    SCENE_ENTER_ROUNDABOUT = 19;             // 进入环岛
+    SCENE_TRAFFIC_LIGHT_ROUNDABOUT = 20;     // 红绿灯环岛减速
+    SCENE_NCA_TO_VPA = 21;                   // NCA切换VPA
+    SCENE_BLIND_NARROW_TO_WIDE = 50;         // 盲区小路到大路
+    SCENE_BLIND_OPENING = 60;                // 盲区豁口
+    SCENE_BLIND_MERGING = 70;                // 盲区汇入
+    SCENE_BLIND_CURVE = 80;                  // 弯道盲区
+    SCENE_BLIND_UTURN = 90;                  // 盲区掉头
+    SCENE_NARROW_ROAD = 100;                 // 窄路
+  }
+  optional StaticStrategyType map_speed_limit_source = 19;
+  optional StaticStrategyType static_strategy_type = 20;
+  optional SceneStrategyType scene_strategy_type = 21;
+  optional StaticStrategyType next_static_strategy_type = 22;
+  optional SceneStrategyType next_scene_strategy_type = 23;
 }
 
 message LocalRouting {
@@ -163,6 +231,12 @@ message LocalRouting {
   // is current road on ramp
   optional bool is_on_ramp = 14;
 
+  // 当前是否处于与上一条路线的重叠部分（仅VLA）
+  optional bool is_on_overlap = 41;
+
+  // 当前是否处于与上一条路线的重叠部分(延长抑制高德重规划部分)
+  optional bool is_on_extend_overlap = 42;
+
   // road instance id to priority map
   // priority 0: adc best to go
   // priority 1: adc can go
@@ -171,7 +245,10 @@ message LocalRouting {
   map<int32, int32> road_instance_to_priorities = 15;
 
   optional DebugInfo debug_info = 16;
+
+  // 道路场景和距离
   optional deeproute.map.SdRoadInfo sd_road_info = 17;
+  // 路线上后续的特殊场景距离
   repeated deeproute.map.AreaInfo area_info = 18;
 
   // which link we choose to out lane turn
@@ -195,7 +272,7 @@ message LocalRouting {
   optional bool is_big_right_turn = 27;
   repeated string crowd_source_events = 28; //Only used in crowdsourcing offline benchmarks
 
-  // 导航动作真值
+  // 导航动作真值（给bm learner用的，目前应该没人用，可能已经关掉了）
   optional deeproute.map.GuidanceActionList passable_junction_list = 30;
   // vpa localrouting info
   optional deeproute.localization.message.GlobalRoutingInfo vpa_local_routing = 31;

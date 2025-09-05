@@ -101,4 +101,118 @@ message VehicleState {
         INVALID = 3;
     }
     optional AvhSts avh_sts = 45;
+
+    message AirSuspReport{
+        enum AirSuspLvl {
+          NORMAL = 0;
+          LOW_LEVEL1 = 1;
+          LOW_LEVEL2 = 2;
+          HIGH_LEVEL1 = 3;
+          HIGH_LEVEL2 = 4;
+          HIGH_LEVEL3 = 5;
+        }
+        optional AirSuspLvl air_susp_lvl = 1;
+        optional double susp_posn_vert_lf = 2;   //left front
+        optional double susp_posn_vert_lr = 3;   //left rear
+        optional double susp_posn_vert_rf = 4;   //right front
+        optional double susp_posn_vert_rr = 5;   //right rear
+        optional double target_height = 6 ;         
+        optional double height_adjust_sts = 7 ;   
+      }
+    optional AirSuspReport air_susp_report = 46;
+    optional double possible_driving_torque_min = 47 [default = 0.0];
+    optional double possible_driving_torque_max = 48 [default = 0.0];
+    message RWSReport{  //后轮转向
+        enum RwsMod {
+          MANUAL_MOD = 0;
+          ADSA_MOD = 1;
+          BRAKE_MOD = 2;
+          OTHER_MOD = 3;
+        }
+        optional RwsMod rws_mod = 1;         // 后轮转向模式
+        optional double rws_angle_act = 2 ;  // 后轮转向角度--弧度  
+      }
+    optional RWSReport rws_report = 49;
+
+    optional bool dpa_lock_wheel_status = 50;
+
+    optional bool driver_door = 51 [default = false];  // 主驾车门状态，true:打开，false:关闭
+    optional bool passen_door = 52 [default = false];  // 副驾车门状态，true:打开，false:关闭
+    optional bool rear_l_door = 53 [default = false];  // 左后车门状态，true:打开，false:关闭
+    optional bool rear_r_door = 54 [default = false];  // 右后车门状态，true:打开，false:关闭
+    optional bool hood = 55 [default = false];         // 引擎盖状态，true:打开，false:关闭
+    optional bool trunk = 56 [default = false];        // 后备箱状态，true:打开，false:关闭
+
+    repeated bool rear_view_mirror = 57;  // 后视镜状态，true:展开 false:折叠 [0]:左后视镜 [1]右后视镜
+    // 后视镜状态，目前只有吉利使用，后续考虑将全部车型后视镜切换到该信号
+    enum RearViewMirrorSts {
+        MIRROR_INVALID = 0;
+        MIRROR_FOLDED = 1;
+        MIRROR_UNFOLDED = 2;
+        MIRROR_FOLDING = 3;
+        MIRROR_UNFOLDING = 4;
+    }
+    optional RearViewMirrorSts left_rear_view_mirror = 58;
+    optional RearViewMirrorSts right_rear_view_mirror = 59;
+
+    enum BeamSts {
+        BEAM_OFF = 0;
+        BEAM_ON = 1;
+        BEAM_FLASH_TO_PASS = 2;
+        BEAM_FAULT = 3;
+    }
+    optional BeamSts low_light = 60;   // 远光灯
+    optional BeamSts high_light = 61;  // 近光灯
+
+    enum LccLaneRequest {
+        LCC_LANE_REQUEST_NONE = 0;
+        LCC_LANE_REQUEST_LEFT = 1;   // 向左拨杆
+        LCC_LANE_REQUEST_RIGHT = 2;  // 向右拨杆
+    }
+    optional LccLaneRequest lcc_lane_request = 62;  // 转向灯拨杆信号
+
+    optional double ic_vehicle_speed = 63 [default = 0.0];          // 仪表车速，单位km/h
+    optional double master_cylinder_pressure = 64 [default = 0.0];  // 主缸压力，单位bar
+    optional double  drvr_decel_req = 65 [default = 0.0];           // 驾驶员减速度请求
+    optional double throttle_actual_pedal = 66 [default = 0.0];     // 油门踏板开度 0-1
+    optional double brake_actual_pedal = 67 [default = 0.0];        // 刹车踏板开度 0-1
+    optional double steering_wheel_angle_rad = 68 [default = 0.0];  // 方向盘转角，单位rad
+    optional double steering_wheel_speed = 69 [default = 0.0];      // 方向盘转速，单位rad/s
+
+    optional bool steer_override = 70 [default = false];            // 方向盘接管
+    optional bool torque_override = 71 [default = false] ;          // 方向盘扭矩接管，目前仅用于ESA
+    optional bool brake_override = 72 [default = false];            // 刹车接管
+    optional bool throttle_override = 73 [default = false];         // 油门接管
+    enum ShiftOverrideType {
+        NO_OVERRIDE = 0;
+        VALID_OVERRIDE = 1;
+        INVALID_OVERRIDE= 2;
+    }
+    optional ShiftOverrideType shift_override = 74;  // 挡位接管
+    optional float steer_wheel_angle_max = 75 [default = 0.0];  // [rad]
+
+    optional double total_odometer = 76 [default = 0.0];  // 总里程，单位km
+    optional bool privacy_sts = 77 [default = false];     // 是否处于隐私模式，true:是 false:否
+
+    enum LightSts {
+        LIGHT_STS_OFF = 0;
+        LIGHT_STS_ON = 1;
+    }
+    optional LightSts brake_light = 78;     // 刹车灯
+    optional LightSts position_light = 79;  // 位置灯
+
+    enum HutSentinelModeSwitch {
+        HUT_SENTINEL_MODE_NO_ACTION = 0;
+        HUT_SENTINEL_MODE_OFF = 1;
+        HUT_SENTINEL_MODE_ON = 2;
+    }
+    optional HutSentinelModeSwitch hut_sentinel_mode_switch = 80;  // HUT端哨兵模式开关
+    
+    enum EpbRequest {
+        EPB_REQUEST_NO_REQ = 0;
+        EPB_REQUEST_RELEASE = 1;
+        EPB_REQUEST_APPLY = 2;
+    }
+    optional EpbRequest epb_req = 81;  // canbus下发的epb请求
+    
 }

@@ -19,7 +19,7 @@ message GwmTankDownstreamChassis {
   optional deeproute.canbus.gwm.tank.IFC_FD5_19F ifc_fd5_19f = 11;
   optional deeproute.canbus.gwm.tank.IFC_FD6_222 ifc_fd6_222 = 12;
   optional deeproute.canbus.gwm.tank.IFC_FD2_23D ifc_fd2_23d = 13;
-  //optional deeproute.canbus.gwm.tank.IFC_FD4_240 ifc_fd4_240 = 14;
+  optional deeproute.canbus.gwm.tank.IFC_FD4_240 ifc_fd4_240 = 14;
   optional deeproute.canbus.gwm.tank.IFC_FD7_2A2 ifc_fd7_2a2 = 15;
   optional deeproute.canbus.gwm.tank.IFC_FD3_2CF ifc_fd3_2cf = 16;
 

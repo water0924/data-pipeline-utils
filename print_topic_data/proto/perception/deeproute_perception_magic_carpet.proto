@@ -1,0 +1,47 @@
+syntax = "proto2";
+
+package deeproute.perception;
+
+import "perception/deeproute_perception_obstacle.proto";
+import "common/geometry.proto";
+
+// 魔毯感知的单个目标物体
+message MagicCarpetRawObject {
+  // 魔毯感知目标物的类型
+  enum MagicCarpetObjectType {
+    UNKNOWN = 0;       // 未知类型
+    WELL_TOP = 1;      // 井盖
+    SPEED_BUMP = 2;    // 减速带
+    RESERVED_3 = 3;    // 预留
+    RESERVED_4 = 4;    // 预留
+    RESERVED_5 = 5;    // 预留
+    RESERVED_6 = 6;    // 预留
+    RESERVED_7 = 7;    // 预留
+    RESERVED_8 = 8;    // 预留
+    RESERVED_9 = 9;    // 预留
+    RESERVED_10 = 10;  // 预留
+  }
+
+  optional MagicCarpetObjectType type = 1;         // 目标物类型
+  repeated common.Point3D polygon_3d = 2;          // 目标物3D多边形 (点云)
+  optional float score = 3;                        // 目标物置信度
+  optional int32 id = 4;
+  repeated common.Point3D polygon_3d_frontwheel = 5;   // 目标物3D多边形，前轴系
+  repeated common.Point2D points_2d_fmap = 6;          // 目标物2d填充点，fmap系
+  optional float elevation_cm = 7;                     // 目标物高程，单位cm
+
+}
+  
+// 魔毯感知结果的整体结构
+message MagicCarpetPerception {
+  optional double sensor_timestamp = 1;                      // 传感器时间戳
+  optional uint32 road_scene = 2;                            // 道路场景编号
+  optional uint32 system_status = 3;                         // 系统状态
+
+  // 使用 bytes 类型存储高程图和分割图的二进制数据
+  optional bytes reg_mat = 4;                                // 魔毯高程图 (cv::Mat)
+  optional bytes seg_mat = 5;                                // 魔毯分割图 (cv::Mat)
+
+  repeated MagicCarpetRawObject raw_objects = 6;             // 魔毯感知到的目标物体列表
+  optional string reserved = 7;                              // 预留字段
+}

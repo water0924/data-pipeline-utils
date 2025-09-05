@@ -131,3 +131,28 @@ python_proto_library(
         ":gwm_version_info_proto",
     ],
 )
+
+proto_library(
+    name = "gwm_vla_info_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gwm_vla_info.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gwm_vla_info_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gwm_vla_info_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gwm_vla_info_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gwm_vla_info_proto",
+    ],
+)

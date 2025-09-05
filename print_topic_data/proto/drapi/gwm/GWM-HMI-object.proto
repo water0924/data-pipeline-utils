@@ -11,6 +11,7 @@ message EgoVeh{
   repeated CriticalObject  critical_object = 5;
   Guide_Line decelerate_line = 6;
   ACCEgoStatusType acc_ego_status_type = 7;
+  repeated Guide_Line vla_guide_line = 8; //vla path线
 
   enum ACCEgoStatusType { 
     ACC_EGOSTATUS_NO_DISPLAY = 0; 
@@ -81,7 +82,10 @@ message Obj_Info{
     OBJ_TYPE_AMBULANCE = 27;
     OBJ_TYPE_FIRE_ENGINE = 28;
     OBJ_TYPE_GATE = 29;
+    OBJ_TYPE_SENTRYBOX = 30;
+    OBJ_TYPE_ETC = 31;
   };
+
   Obj_Type type = 5; 
   float length = 6; 
   float width = 7; 
@@ -93,17 +97,55 @@ message Obj_Info{
     RIGHT_DOOR_OPEN = 2;
     TRUNK_OPEN = 3;
   };
+
   repeated AttributeType attribute_type =10;
   enum GateStatus {
     UNKNOWN = 0;
     OPEN = 1;
     CLOSE = 2;
   }
+
+  enum GateAnimation_Status{
+    GateAnimation_Status_UNKNOWN = 0;
+    CLOSEING = 1;
+    OPENING = 2;
+  }
+
   message GateInfo {
     GateStatus status = 1;
-    float put_up_angle=2;
+    float put_up_angle = 2;
+    GateAnimation_Status  gate_animation_status = 3;
   }
+
   GateInfo gate_info = 11;
+
+  enum ETCStatus{
+    ETCStatus_unknown = 0;
+    ETCpass = 1;
+    Artificial = 2;
+    NoPass = 3;
+    Artificial_ETC = 4;
+    GreenChannel = 5;
+    TruckLane = 6;
+  }
+
+  message ETCInfo {
+    ETCStatus etc_status = 1;
+    GateStatus gate_status = 2;
+    GateAnimation_Status gate_animation_status = 3;
+    bool isLeft = 4;
+    Pnt3D pos = 5;
+  }
+
+  ETCInfo ETC_Info = 12;
+
+  enum VLAObjectStatus{
+    VLA_NORMAL = 0;
+    VLA_CONSIDER = 1;  //VLA特殊标注目标物
+    VLA_RESERVE = 2;   //预留
+  }
+  
+  VLAObjectStatus vla_obj_status = 13;
 }
 
 message LightStatus {

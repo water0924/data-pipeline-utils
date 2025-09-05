@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 from proto.canbus import gl_p177_chassis_detail_pb2 as canbus_dot_gl__p177__chassis__detail__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17\x64rapi/gl/gl_canfd.proto\x12\x08gl.canfd\x1a#canbus/gl_p177_chassis_detail.proto\"\xff\x02\n\x0b\x44taToCanbus\x12H\n\radcu_fr10_1b5\x18\x01 \x01(\x0b\x32\x31.deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR10_1B5\x12H\n\radcu_fr04_1a0\x18\x02 \x01(\x0b\x32\x31.deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR04_1A0\x12H\n\radcu_fr02_1f0\x18\x03 \x01(\x0b\x32\x31.deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR02_1F0\x12H\n\radcu_fr06_1ff\x18\x04 \x01(\x0b\x32\x31.deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR06_1FF\x12H\n\radcu_fr11_1e0\x18\x05 \x01(\x0b\x32\x31.deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR11_1E0')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x17\x64rapi/gl/gl_canfd.proto\x12\x08gl.canfd\x1a#canbus/gl_p177_chassis_detail.proto\"\xc6\x03\n\x0b\x44taToCanbus\x12H\n\radcu_fr10_1b5\x18\x01 \x01(\x0b\x32\x31.deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR10_1B5\x12H\n\radcu_fr04_1a0\x18\x02 \x01(\x0b\x32\x31.deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR04_1A0\x12H\n\radcu_fr02_1f0\x18\x03 \x01(\x0b\x32\x31.deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR02_1F0\x12H\n\radcu_fr06_1ff\x18\x04 \x01(\x0b\x32\x31.deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR06_1FF\x12H\n\radcu_fr11_1e0\x18\x05 \x01(\x0b\x32\x31.deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR11_1E0\x12\x45\n\x0cpas_fr15_24b\x18\x06 \x01(\x0b\x32/.deeproute.canbus.gl.p177.PASZCUCANFD1_FR15_24B')
 
 
 
@@ -31,5 +31,5 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _DTATOCANBUS._serialized_start=75
-  _DTATOCANBUS._serialized_end=458
+  _DTATOCANBUS._serialized_end=529
 # @@protoc_insertion_point(module_scope)

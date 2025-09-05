@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1bprediction/trajectory.proto\x12\x14\x64\x65\x65proute.prediction\"\x82\x01\n\nLocusPoint\x12\t\n\x01x\x18\x01 \x01(\x01\x12\t\n\x01y\x18\x02 \x01(\x01\x12\t\n\x01z\x18\x03 \x01(\x01\x12\t\n\x01v\x18\x04 \x01(\x01\x12\t\n\x01\x61\x18\x05 \x01(\x01\x12\x15\n\rrelative_time\x18\x06 \x01(\x03\x12\x0f\n\x07heading\x18\x07 \x01(\x01\x12\x15\n\raccumulated_s\x18\x08 \x01(\x01\"]\n\nTrajectory\x12\x13\n\x0bprobability\x18\x01 \x01(\x01\x12:\n\x10trajectory_point\x18\x02 \x03(\x0b\x32 .deeproute.prediction.LocusPoint\"\xa6\x01\n\x08SpeedSeq\x12\x14\n\x0ctimestamp_us\x18\x01 \x01(\x03\x12\x13\n\x0bprobability\x18\x02 \x01(\x01\x12\x35\n\x0bspeed_point\x18\x03 \x03(\x0b\x32 .deeproute.prediction.SpeedPoint\x12\x38\n\rlon_pos_point\x18\x04 \x03(\x0b\x32!.deeproute.prediction.LonPosPoint\".\n\nSpeedPoint\x12\t\n\x01v\x18\x01 \x01(\x01\x12\x15\n\rrelative_time\x18\x02 \x01(\x03\"/\n\x0bLonPosPoint\x12\t\n\x01s\x18\x01 \x01(\x01\x12\x15\n\rrelative_time\x18\x02 \x01(\x03')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1bprediction/trajectory.proto\x12\x14\x64\x65\x65proute.prediction\"\x82\x01\n\nLocusPoint\x12\t\n\x01x\x18\x01 \x01(\x01\x12\t\n\x01y\x18\x02 \x01(\x01\x12\t\n\x01z\x18\x03 \x01(\x01\x12\t\n\x01v\x18\x04 \x01(\x01\x12\t\n\x01\x61\x18\x05 \x01(\x01\x12\x15\n\rrelative_time\x18\x06 \x01(\x03\x12\x0f\n\x07heading\x18\x07 \x01(\x01\x12\x15\n\raccumulated_s\x18\x08 \x01(\x01\"]\n\nTrajectory\x12\x13\n\x0bprobability\x18\x01 \x01(\x01\x12:\n\x10trajectory_point\x18\x02 \x03(\x0b\x32 .deeproute.prediction.LocusPoint\"\xa6\x01\n\x08SpeedSeq\x12\x14\n\x0ctimestamp_us\x18\x01 \x01(\x03\x12\x13\n\x0bprobability\x18\x02 \x01(\x01\x12\x35\n\x0bspeed_point\x18\x03 \x03(\x0b\x32 .deeproute.prediction.SpeedPoint\x12\x38\n\rlon_pos_point\x18\x04 \x03(\x0b\x32!.deeproute.prediction.LonPosPoint\".\n\nSpeedPoint\x12\t\n\x01v\x18\x01 \x01(\x01\x12\x15\n\rrelative_time\x18\x02 \x01(\x03\"/\n\x0bLonPosPoint\x12\t\n\x01s\x18\x01 \x01(\x01\x12\x15\n\rrelative_time\x18\x02 \x01(\x03\"a\n\x0bSpeedScorer\x12\x1c\n\x14speed_collision_prob\x18\x01 \x01(\x01\x12\x11\n\tspeed_ttc\x18\x02 \x01(\x01\x12!\n\x19speed_collision_threshold\x18\x03 \x01(\x02')
 
 
 
@@ -23,6 +23,7 @@ _TRAJECTORY = DESCRIPTOR.message_types_by_name['Trajectory']
 _SPEEDSEQ = DESCRIPTOR.message_types_by_name['SpeedSeq']
 _SPEEDPOINT = DESCRIPTOR.message_types_by_name['SpeedPoint']
 _LONPOSPOINT = DESCRIPTOR.message_types_by_name['LonPosPoint']
+_SPEEDSCORER = DESCRIPTOR.message_types_by_name['SpeedScorer']
 LocusPoint = _reflection.GeneratedProtocolMessageType('LocusPoint', (_message.Message,), {
   'DESCRIPTOR' : _LOCUSPOINT,
   '__module__' : 'prediction.trajectory_pb2'
@@ -58,6 +59,13 @@ LonPosPoint = _reflection.GeneratedProtocolMessageType('LonPosPoint', (_message.
   })
 _sym_db.RegisterMessage(LonPosPoint)
 
+SpeedScorer = _reflection.GeneratedProtocolMessageType('SpeedScorer', (_message.Message,), {
+  'DESCRIPTOR' : _SPEEDSCORER,
+  '__module__' : 'prediction.trajectory_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.prediction.SpeedScorer)
+  })
+_sym_db.RegisterMessage(SpeedScorer)
+
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
@@ -71,4 +79,6 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _SPEEDPOINT._serialized_end=496
   _LONPOSPOINT._serialized_start=498
   _LONPOSPOINT._serialized_end=545
+  _SPEEDSCORER._serialized_start=547
+  _SPEEDSCORER._serialized_end=644
 # @@protoc_insertion_point(module_scope)

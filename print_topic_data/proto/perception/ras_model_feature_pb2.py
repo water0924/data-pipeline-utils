@@ -12,9 +12,10 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from proto.semantic_map import map_pb2 as semantic__map_dot_map__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\"perception/ras_model_feature.proto\x12\x14\x64\x65\x65proute.perception\";\n\x0fRasModelFeature\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x12\x1a\n\x0b\x66or_parking\x18\x02 \x01(\x08:\x05\x66\x61lse')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\"perception/ras_model_feature.proto\x12\x14\x64\x65\x65proute.perception\x1a\x16semantic_map/map.proto\"g\n\x0fRasModelFeature\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x12\x1a\n\x0b\x66or_parking\x18\x02 \x01(\x08:\x05\x66\x61lse\x12*\n\x0csemantic_map\x18\x03 \x01(\x0b\x32\x14.deeproute.hdmap.Map')
 
 
 
@@ -29,6 +30,6 @@ _sym_db.RegisterMessage(RasModelFeature)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _RASMODELFEATURE._serialized_start=60
-  _RASMODELFEATURE._serialized_end=119
+  _RASMODELFEATURE._serialized_start=84
+  _RASMODELFEATURE._serialized_end=187
 # @@protoc_insertion_point(module_scope)

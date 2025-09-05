@@ -87,6 +87,7 @@ proto_library(
         "//proto/semantic_map:map_road_mask_plus_proto",
         "//proto/semantic_map:map_line_sign_proto",
         "//proto/semantic_map:map_connection_line_proto",
+        "//proto/semantic_map:map_roi_proto",
     ],
     strip_import_prefix = "/proto/",
 )
@@ -694,6 +695,33 @@ python_proto_library(
     visibility = ["//visibility:public"],
     protos = [
         ":map_standby_area_proto",
+    ],
+)
+
+proto_library(
+    name = "map_roi_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_roi.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/semantic_map:map_overlap_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_roi_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_roi_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_roi_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_roi_proto",
     ],
 )
 

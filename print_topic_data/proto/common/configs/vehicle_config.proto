@@ -66,6 +66,12 @@ enum VehicleBrand {
   GWM_DE09 = 36;
   GWM_P02 = 37;
   GWM_TANK = 38;
+  GL_P789 = 39;
+  GWM_EC15 = 40;
+  GWM_C061 = 41;
+  GWM_C062 = 42;
+  GWM_C063 = 43;
+  GWM_C064 = 44;
 }
 
 message VehicleID {
@@ -163,6 +169,9 @@ message VehicleParam {
   optional double rear_corner_radius = 48 [default = 0.0];
   optional double front_chassis_height = 49 [default = 0.0];
   optional double rear_chassis_height = 50 [default = 0.0];
+    // Tire effective front wheel rolling radius (vertical distance between the wheel center
+  // and the ground).
+  optional double front_wheel_rolling_radius = 51 [default = nan];
 }
 
 message SensorsParameters {

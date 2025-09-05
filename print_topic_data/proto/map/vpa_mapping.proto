@@ -50,6 +50,14 @@ message OnboardMapEntry {
   optional string default_map_poi_id = 26;
   optional int32 given_map_id = 27;
   optional deeproute.drivers.gnss.SensorsIns parking_out_end_gnss_pose = 28;
+  optional int32 num_parking_spaces = 29;
+  optional int32 num_speedbumps = 30;
+  repeated int32 viz_floor_set = 31;
+  repeated int32 floor_set = 32;
+
+  // d2d relatives
+  repeated common.PointLLH e2e_in_trajectory_to_parking_space = 50;       // for gleey
+  repeated common.PointLLH e2e_out_trajectory_from_parking_space = 51;    // for gleey
 }
 
 enum ParkingLotType {
@@ -115,13 +123,14 @@ message Keyframe {
   repeated perception.RoadPolygon road_polygons = 11;
   optional OddRange odd_range = 12;
   repeated localization.havp_map.HAVPTrajectory map_semantic_lane = 13;
+  repeated deeproute.drivers.gnss.SensorsIns gnss_poses = 14;
 
   // 关联link List
   repeated uint64 dr_link_ids = 20;
   // keyFrame自己的id
   optional uint64 keyframe_id = 21;
   // keyFrame所属楼层
-  optional uint32 floor_id = 22;
+  optional int32 floor_id = 22;
 }
 
 message SlopeFloorInfo {
@@ -148,7 +157,7 @@ message KeyframeEdge {
 // 新增一个LinkData结构，参考Horizon Map
 message LinkData {
   optional uint64 dr_link_id = 1;   // 有向路段id，双向需要打断
-  repeated common.PointLLH points = 2;  // 形状点, 使用经纬度坐标系, H代表高程 *.5代表跨楼层/斜坡
+  repeated common.PointLLH points = 2;  // 形状点, 使用经纬度坐标系, H代表高程
   repeated common.Point3D points3d = 10; // 形状点，使用xyz坐标系
 
 
@@ -157,6 +166,10 @@ message LinkData {
 
   repeated deeproute.sd_map.LinkData.FormWay link_formway = 8;
   optional uint32 length = 9;            // 路段长度
+
+  optional LinkSlopeType slope_type = 11; // 平楼，上坡，下坡
+  optional int32 floor_id = 12;    // 所属楼层
+  optional LinkCurveType curve_type = 13; // 弯道属性
 }
 
 message MapPoiInfoInMap {
@@ -199,4 +212,17 @@ message EntryList {
   repeated uint64 dr_link_ids = 2;
   // 终点附近的entry
   repeated OnboardMapEntry nearby_entries = 3;
+}
+
+
+enum LinkSlopeType {
+  FLAT = 0;
+  DOWNHILL = 1;
+  UPHILL = 2;
+}
+
+enum LinkCurveType {
+  STRAIGHT = 0;
+  CURVED = 1;
+  SPIRAL = 2;
 }

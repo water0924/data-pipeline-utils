@@ -9,6 +9,7 @@ enum ImageType {
   YUVI420 = 3;
   RAW = 4;
   JPG = 5;
+  NV12 = 6;
 }
 
 message OrinCamSetting {

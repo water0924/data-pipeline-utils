@@ -21,7 +21,7 @@ from proto.map import deeproute_map_ras_map_plus_pb2 as map_dot_deeproute__map__
 from proto.localization import havp_map_pb2 as localization_dot_havp__map__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n0localization/localization_external_command.proto\x12\x1e\x64\x65\x65proute.localization.command\x1a\x15\x63ommon/geometry.proto\x1a#semantic_map/map_standby_area.proto\x1a/localization/localization_external_events.proto\x1a-perception/deeproute_perception_ras_map.proto\x1a$map/deeproute_map_ras_map_plus.proto\x1a\x1blocalization/havp_map.proto\"h\n\x19LocalizationModeChangeCMD\x12K\n\x11localization_mode\x18\x01 \x01(\x0e\x32\x30.deeproute.localization.command.LocalizationMode\"~\n\x1bLocalizationModeChangeCMDRP\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x19\n\x11semantic_map_path\x18\x02 \x01(\t\x12\x33\n\rparking_space\x18\x03 \x01(\x0b\x32\x1c.deeproute.hdmap.StandbyArea\"\x19\n\x17StartMapLocalizationCMD\"k\n\x19StartMapLocalizationCMDRP\x12\x19\n\x11semantic_map_path\x18\x01 \x01(\t\x12\x33\n\rparking_space\x18\x02 \x01(\x0b\x32\x1c.deeproute.hdmap.StandbyArea\"\x17\n\x15\x45ndMapLocalizationCMD\"\x19\n\x17\x45ndMapLocalizationCMDRP\"p\n\x0fStartMappingCMD\x12\x12\n\nexpand_map\x18\x01 \x01(\x08\x12I\n\x06reason\x18\x02 \x01(\x0e\x32\x39.deeproute.localization.command.StartMappingRequestReason\"G\n\x11StartMappingCMDRP\x12\x32\n\x0emapping_origin\x18\x01 \x01(\x0b\x32\x1a.deeproute.common.PointLLH\"b\n\x10\x43\x61ncelMappingCMD\x12N\n\x13\x63\x61ncel_mapping_type\x18\x01 \x01(\x0e\x32\x31.deeproute.localization.command.CancelMappingType\"S\n\x12\x43\x61ncelMappingCMDRP\x12=\n\nerror_code\x18\x01 \x01(\x0e\x32).deeproute.localization.command.ErrorCode\"i\n\x10\x43hangedMapStatus\x12\x0e\n\x06map_id\x18\x01 \x01(\x05\x12\x45\n\x0eoperation_type\x18\x02 \x01(\x0e\x32-.deeproute.localization.command.OperatingType\"\\\n\x14\x43hangedMapStatusList\x12\x44\n\nmap_status\x18\x01 \x03(\x0b\x32\x30.deeproute.localization.command.ChangedMapStatus\"\x8f\x01\n\rEndMappingCMD\x12\x39\n\rparking_space\x18\x01 \x01(\x0b\x32\".deeproute.perception.ParkingSpace\x12\x10\n\x08map_name\x18\x02 \x01(\t\x12!\n\x19target_parking_space_name\x18\x03 \x01(\t\x12\x0e\n\x06map_id\x18\x04 \x01(\x05\"\x92\x04\n\x0f\x45ndMappingCMDRP\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x42\n\nerror_code\x18\x02 \x01(\x0e\x32..deeproute.localization.event.MappingErrorCode\x12\x32\n\x0csemantic_map\x18\x03 \x01(\x0b\x32\x1c.deeproute.perception.RASMap\x12;\n\x16semantic_map_obstacles\x18\x04 \x01(\x0b\x32\x1b.deeproute.map.MapObstacles\x12 \n\x18mapped_trajectory_length\x18\x05 \x01(\x01\x12\x1e\n\x16mapped_speedbump_count\x18\x06 \x01(\r\x12\x1f\n\x17target_parking_space_id\x18\x07 \x01(\x05\x12:\n\x08havp_map\x18\x08 \x01(\x0b\x32(.deeproute.localization.havp_map.HAVPMap\x12\x14\n\x0c\x65go_floor_id\x18\t \x01(\x05\x12-\n%recommended_favorite_parking_space_id\x18\n \x01(\x05\x12U\n\x17\x63hanged_map_status_list\x18\x0b \x01(\x0b\x32\x34.deeproute.localization.command.ChangedMapStatusList\"O\n\x1aSetRegionalParkingSpaceCMD\x12\x0e\n\x06map_id\x18\x01 \x01(\x05\x12!\n\x19is_regional_parking_space\x18\x02 \x01(\x08\"/\n\x1cSetRegionalParkingSpaceCMDRP\x12\x0f\n\x07success\x18\x01 \x01(\x08\">\n\x13\x45ndToEndMapCheckCMD\x12\x13\n\x0b\x66ront_check\x18\x01 \x01(\x08\x12\x12\n\nback_check\x18\x02 \x01(\x08\"(\n\x15\x45ndToEndMapCheckCMDRP\x12\x0f\n\x07success\x18\x01 \x01(\x08\"\xe7\x01\n\x19ParkingSpaceInfoUpdateCMD\x12\x0e\n\x06map_id\x18\x01 \x01(\x05\x12\x45\n\x0eoperation_type\x18\x02 \x01(\x0e\x32-.deeproute.localization.command.OperatingType\x12Q\n\x13parking_spaces_info\x18\x03 \x01(\x0b\x32\x34.deeproute.localization.havp_map.ParkingSpaceUsrInfo\x12 \n\x18is_default_parking_space\x18\x04 \x01(\x08\"\xde\x01\n\x1bParkingSpaceInfoUpdateCMDRP\x12Q\n\x13parking_spaces_info\x18\x01 \x01(\x0b\x32\x34.deeproute.localization.havp_map.ParkingSpaceUsrInfo\x12 \n\x18is_default_parking_space\x18\x02 \x01(\x08\x12J\n\x13real_operation_type\x18\x03 \x01(\x0e\x32-.deeproute.localization.command.OperatingType\"\x9d\x01\n\x10MapInfoUpdateCMD\x12\x45\n\x0eoperation_type\x18\x01 \x01(\x0e\x32-.deeproute.localization.command.OperatingType\x12\x42\n\x08map_info\x18\x02 \x01(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\"X\n\x12MapInfoUpdateCMDRP\x12\x42\n\x08map_info\x18\x01 \x01(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\",\n\x12\x42\x61tchMapsDeleteCMD\x12\x16\n\x0e\x64\x65lete_map_ids\x18\x01 \x03(\x05\"\'\n\x14\x42\x61tchMapsDeleteCMDRP\x12\x0f\n\x07success\x18\x01 \x01(\x08\"|\n\x13MapPoiInfoUpdateCMD\x12\x0e\n\x06map_id\x18\x01 \x01(\x05\x12\x41\n\x0cmap_poi_info\x18\x02 \x01(\x0b\x32+.deeproute.localization.havp_map.MapPoiInfo\x12\x12\n\nis_default\x18\x03 \x01(\x08\"\xba\x01\n\x15MapPoiInfoUpdateCMDRP\x12\x41\n\x0cmap_poi_info\x18\x01 \x01(\x0b\x32+.deeproute.localization.havp_map.MapPoiInfo\x12\x12\n\nis_default\x18\x02 \x01(\x08\x12J\n\x13real_operation_type\x18\x03 \x01(\x0e\x32-.deeproute.localization.command.OperatingType\"4\n\x1bGetTargetHavpMapMetaDataCMD\x12\x15\n\rtarget_map_id\x18\x01 \x01(\x05\"m\n\x1dGetTargetHavpMapMetaDataCMDRP\x12L\n\x12havp_map_meta_data\x18\x01 \x01(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\"\x1a\n\x18GetAllHavpMapMetaDataCMD\"j\n\x1aGetAllHavpMapMetaDataCMDRP\x12L\n\x12havp_map_meta_data\x18\x01 \x03(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\"\x1e\n\nSaveMapCMD\x12\x10\n\x08save_map\x18\x01 \x01(\x08\"\x0e\n\x0cSaveMapCMDRP\"\x1d\n\x1bGetMapTargetParkingSpaceCMD\"T\n\x1dGetMapTargetParkingSpaceCMDRP\x12\x33\n\rparking_space\x18\x01 \x01(\x0b\x32\x1c.deeproute.hdmap.StandbyArea\"L\n\x1dGetTargetParkingSpaceInMapCMD\x12+\n\x08position\x18\x01 \x01(\x0b\x32\x19.deeproute.common.Point3D\"\x80\x01\n\x1fGetTargetParkingSpaceInMapCMDRP\x12]\n\x1ftarget_parking_spaces_user_info\x18\x01 \x01(\x0b\x32\x34.deeproute.localization.havp_map.ParkingSpaceUsrInfo\"P\n\"SetNavigationTargetParkingSpaceCMD\x12*\n\"target_navigation_parking_space_id\x18\x01 \x01(\x05\"&\n$SetNavigationTargetParkingSpaceCMDRP\"\x0b\n\tGetMapCMD\"\xa4\x02\n\x0bGetMapCMDRP\x12\x32\n\x0csemantic_map\x18\x01 \x01(\x0b\x32\x1c.deeproute.perception.RASMap\x12;\n\x16semantic_map_obstacles\x18\x02 \x01(\x0b\x32\x1b.deeproute.map.MapObstacles\x12\x1d\n\x15map_trajectory_length\x18\x03 \x01(\x01\x12I\n\x1eodometry_to_map_transformation\x18\x04 \x01(\x0b\x32!.deeproute.common.Transformation3\x12:\n\x08havp_map\x18\x05 \x01(\x0b\x32(.deeproute.localization.havp_map.HAVPMap\"\xbe\x01\n\x12StartNavigationCMD\x12\x1f\n\x17target_parking_space_id\x18\x01 \x01(\x05\x12L\n\x06reason\x18\x02 \x01(\x0e\x32<.deeproute.localization.command.StartNavigationRequestReason\x12\x39\n\x08poi_type\x18\x03 \x01(\x0e\x32\'.deeproute.localization.command.PoiType\"\xe7\x01\n\x14StartNavigationCMDRP\x12\x1c\n\x14route_total_distance\x18\x01 \x01(\x01\x12=\n\nerror_code\x18\x02 \x01(\x0e\x32).deeproute.localization.command.ErrorCode\x12\x1f\n\x17target_parking_space_id\x18\x03 \x01(\x05\x12\x1f\n\x17remaining_s_after_slope\x18\x04 \x01(\x01\x12\x15\n\rrouting_ready\x18\x05 \x01(\x08\x12\x19\n\x11left_routing_time\x18\x06 \x01(\x01\"\x12\n\x10\x45ndNavigationCMD\"\x14\n\x12\x45ndNavigationCMDRP\"\x15\n\x13\x43\x61ncelPreMappingCMD\"\x17\n\x15\x43\x61ncelPreMappingCMDRP\"[\n\x0fGetNearbyMapCMD\x12\x31\n\rsearch_origin\x18\x01 \x01(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x15\n\rsearch_radius\x18\x02 \x01(\x01\"\xa0\x01\n\x11GetNearbyMapCMDRP\x12X\n\x0fnearby_map_info\x18\x01 \x03(\x0b\x32?.deeproute.localization.command.GetNearbyMapCMDRP.NearbyMapInfo\x1a\x31\n\rNearbyMapInfo\x12\x0e\n\x06map_id\x18\x01 \x01(\x05\x12\x10\n\x08\x64istance\x18\x02 \x01(\x01\"Y\n\x14\x44rivingModeChangeCMD\x12\x41\n\x0c\x64riving_mode\x18\x01 \x01(\x0e\x32+.deeproute.localization.command.CurrentMode\"\x18\n\x16\x44rivingModeChangeCMDRP\"d\n#ParkingSpaceNameDuplicationCheckCMD\x12\x0e\n\x06map_id\x18\x01 \x01(\x05\x12\x1f\n\x17target_parking_space_id\x18\x02 \x01(\x05\x12\x0c\n\x04name\x18\x03 \x01(\t\">\n%ParkingSpaceNameDuplicationCheckCMDRP\x12\x15\n\rname_repeated\x18\x01 \x01(\x08\":\n\x1aMapNameDuplicationCheckCMD\x12\x0e\n\x06map_id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\"9\n MapNameNameDuplicationCheckCMDRP\x12\x15\n\rname_repeated\x18\x01 \x01(\x08\"e\n(SetFreeParkingSpaceAsRouteDestinationCMD\x12\x39\n\rparking_space\x18\x01 \x01(\x0b\x32\".deeproute.perception.ParkingSpace\"M\n*SetFreeParkingSpaceAsRouteDestinationCMDRP\x12\x1f\n\x17set_destination_success\x18\x01 \x01(\x08\"A\n\x1cSetStraightLinkSpeedLimitCMD\x12!\n\x19straight_link_speed_limit\x18\x01 \x01(\x01\"A\n\x1eSetStraightLinkSpeedLimitCMDRP\x12\x1f\n\x17set_speed_limit_success\x18\x01 \x01(\x08\"\xbd\x14\n\x13LocalizationCommand\x12\x0e\n\x06\x63md_id\x18\x01 \x01(\t\x12\x14\n\x0ctimestamp_ms\x18\x02 \x01(\x01\x12]\n\x1astart_map_localization_cmd\x18\x03 \x01(\x0b\x32\x37.deeproute.localization.command.StartMapLocalizationCMDH\x00\x12L\n\x11start_mapping_cmd\x18\x04 \x01(\x0b\x32/.deeproute.localization.command.StartMappingCMDH\x00\x12H\n\x0f\x65nd_mapping_cmd\x18\x05 \x01(\x0b\x32-.deeproute.localization.command.EndMappingCMDH\x00\x12Y\n\x18\x65nd_map_localization_cmd\x18\x06 \x01(\x0b\x32\x35.deeproute.localization.command.EndMapLocalizationCMDH\x00\x12N\n\x12\x63\x61ncel_mapping_cmd\x18\x07 \x01(\x0b\x32\x30.deeproute.localization.command.CancelMappingCMDH\x00\x12\x61\n\x1clocalization_mode_change_cmd\x18\x08 \x01(\x0b\x32\x39.deeproute.localization.command.LocalizationModeChangeCMDH\x00\x12g\n get_map_target_parking_space_cmd\x18\t \x01(\x0b\x32;.deeproute.localization.command.GetMapTargetParkingSpaceCMDH\x00\x12@\n\x0bget_map_cmd\x18\n \x01(\x0b\x32).deeproute.localization.command.GetMapCMDH\x00\x12U\n\x16\x63\x61ncel_pre_mapping_cmd\x18\x0b \x01(\x0b\x32\x33.deeproute.localization.command.CancelPreMappingCMDH\x00\x12W\n\x17\x64riving_mode_change_cmd\x18\x0c \x01(\x0b\x32\x34.deeproute.localization.command.DrivingModeChangeCMDH\x00\x12\x62\n\x1dparking_space_info_update_cmd\x18\r \x01(\x0b\x32\x39.deeproute.localization.command.ParkingSpaceInfoUpdateCMDH\x00\x12O\n\x13map_info_update_cmd\x18\x0e \x01(\x0b\x32\x30.deeproute.localization.command.MapInfoUpdateCMDH\x00\x12h\n!get_target_havp_map_meta_data_cmd\x18\x0f \x01(\x0b\x32;.deeproute.localization.command.GetTargetHavpMapMetaDataCMDH\x00\x12\x62\n\x1eget_all_havp_map_meta_data_cmd\x18\x10 \x01(\x0b\x32\x38.deeproute.localization.command.GetAllHavpMapMetaDataCMDH\x00\x12R\n\x14start_navigation_cmd\x18\x11 \x01(\x0b\x32\x32.deeproute.localization.command.StartNavigationCMDH\x00\x12N\n\x12\x65nd_navigation_cmd\x18\x12 \x01(\x0b\x32\x30.deeproute.localization.command.EndNavigationCMDH\x00\x12l\n#get_target_parking_space_in_map_cmd\x18\x13 \x01(\x0b\x32=.deeproute.localization.command.GetTargetParkingSpaceInMapCMDH\x00\x12u\n\'set_navigation_target_parking_space_cmd\x18\x14 \x01(\x0b\x32\x42.deeproute.localization.command.SetNavigationTargetParkingSpaceCMDH\x00\x12M\n\x12get_nearby_map_cmd\x18\x15 \x01(\x0b\x32/.deeproute.localization.command.GetNearbyMapCMDH\x00\x12w\n(parking_space_name_duplication_check_cmd\x18\x16 \x01(\x0b\x32\x43.deeproute.localization.command.ParkingSpaceNameDuplicationCheckCMDH\x00\x12\x64\n\x1emap_name_duplication_check_cmd\x18\x17 \x01(\x0b\x32:.deeproute.localization.command.MapNameDuplicationCheckCMDH\x00\x12W\n\x18\x65nd_to_end_map_check_cmd\x18\x18 \x01(\x0b\x32\x33.deeproute.localization.command.EndToEndMapCheckCMDH\x00\x12V\n\x17map_poi_info_update_cmd\x18\x19 \x01(\x0b\x32\x33.deeproute.localization.command.MapPoiInfoUpdateCMDH\x00\x12\x83\x01\n/set_free_parking_space_as_route_destination_cmd\x18\x1a \x01(\x0b\x32H.deeproute.localization.command.SetFreeParkingSpaceAsRouteDestinationCMDH\x00\x12i\n!set_straight_link_speed_limit_cmd\x18\x1b \x01(\x0b\x32<.deeproute.localization.command.SetStraightLinkSpeedLimitCMDH\x00\x12\x64\n\x1eset_regional_parking_space_cmd\x18\x1c \x01(\x0b\x32:.deeproute.localization.command.SetRegionalParkingSpaceCMDH\x00\x12S\n\x15\x62\x61tch_maps_delete_cmd\x18\x1d \x01(\x0b\x32\x32.deeproute.localization.command.BatchMapsDeleteCMDH\x00\x42\t\n\x07\x63ommand\"\xd8\x14\n\x14LocalizationResponse\x12\x0e\n\x06\x63md_id\x18\x01 \x01(\t\x12\x14\n\x0ctimestamp_ms\x18\x02 \x01(\x01\x12=\n\nerror_code\x18\x03 \x01(\x0e\x32).deeproute.localization.command.ErrorCode\x12_\n\x1astart_map_localization_cmd\x18\x04 \x01(\x0b\x32\x39.deeproute.localization.command.StartMapLocalizationCMDRPH\x00\x12J\n\rstart_mapping\x18\x05 \x01(\x0b\x32\x31.deeproute.localization.command.StartMappingCMDRPH\x00\x12\x46\n\x0b\x65nd_mapping\x18\x06 \x01(\x0b\x32/.deeproute.localization.command.EndMappingCMDRPH\x00\x12W\n\x14\x65nd_map_localization\x18\x07 \x01(\x0b\x32\x37.deeproute.localization.command.EndMapLocalizationCMDRPH\x00\x12L\n\x0e\x63\x61ncel_mapping\x18\x08 \x01(\x0b\x32\x32.deeproute.localization.command.CancelMappingCMDRPH\x00\x12_\n\x18localization_mode_change\x18\t \x01(\x0b\x32;.deeproute.localization.command.LocalizationModeChangeCMDRPH\x00\x12\x65\n\x1cget_map_target_parking_space\x18\n \x01(\x0b\x32=.deeproute.localization.command.GetMapTargetParkingSpaceCMDRPH\x00\x12>\n\x07get_map\x18\x0b \x01(\x0b\x32+.deeproute.localization.command.GetMapCMDRPH\x00\x12S\n\x12\x63\x61ncel_pre_mapping\x18\x0c \x01(\x0b\x32\x35.deeproute.localization.command.CancelPreMappingCMDRPH\x00\x12U\n\x13\x64riving_mode_change\x18\r \x01(\x0b\x32\x36.deeproute.localization.command.DrivingModeChangeCMDRPH\x00\x12`\n\x19parking_space_info_update\x18\x0e \x01(\x0b\x32;.deeproute.localization.command.ParkingSpaceInfoUpdateCMDRPH\x00\x12M\n\x0fmap_info_update\x18\x0f \x01(\x0b\x32\x32.deeproute.localization.command.MapInfoUpdateCMDRPH\x00\x12\x66\n\x1dget_target_havp_map_meta_data\x18\x10 \x01(\x0b\x32=.deeproute.localization.command.GetTargetHavpMapMetaDataCMDRPH\x00\x12`\n\x1aget_all_havp_map_meta_data\x18\x11 \x01(\x0b\x32:.deeproute.localization.command.GetAllHavpMapMetaDataCMDRPH\x00\x12P\n\x10start_navigation\x18\x12 \x01(\x0b\x32\x34.deeproute.localization.command.StartNavigationCMDRPH\x00\x12L\n\x0e\x65nd_navigation\x18\x13 \x01(\x0b\x32\x32.deeproute.localization.command.EndNavigationCMDRPH\x00\x12j\n\x1fget_target_parking_space_in_map\x18\x14 \x01(\x0b\x32?.deeproute.localization.command.GetTargetParkingSpaceInMapCMDRPH\x00\x12s\n#set_navigation_target_parking_space\x18\x15 \x01(\x0b\x32\x44.deeproute.localization.command.SetNavigationTargetParkingSpaceCMDRPH\x00\x12K\n\x0eget_nearby_map\x18\x16 \x01(\x0b\x32\x31.deeproute.localization.command.GetNearbyMapCMDRPH\x00\x12u\n$parking_space_name_duplication_check\x18\x17 \x01(\x0b\x32\x45.deeproute.localization.command.ParkingSpaceNameDuplicationCheckCMDRPH\x00\x12\x66\n\x1amap_name_duplication_check\x18\x18 \x01(\x0b\x32@.deeproute.localization.command.MapNameNameDuplicationCheckCMDRPH\x00\x12U\n\x14\x65nd_to_end_map_check\x18\x19 \x01(\x0b\x32\x35.deeproute.localization.command.EndToEndMapCheckCMDRPH\x00\x12T\n\x13map_poi_info_update\x18\x1a \x01(\x0b\x32\x35.deeproute.localization.command.MapPoiInfoUpdateCMDRPH\x00\x12\x81\x01\n+set_free_parking_space_as_route_destination\x18\x1b \x01(\x0b\x32J.deeproute.localization.command.SetFreeParkingSpaceAsRouteDestinationCMDRPH\x00\x12g\n\x1dset_straight_link_speed_limit\x18\x1c \x01(\x0b\x32>.deeproute.localization.command.SetStraightLinkSpeedLimitCMDRPH\x00\x12\x62\n\x1aset_regional_parking_space\x18\x1d \x01(\x0b\x32<.deeproute.localization.command.SetRegionalParkingSpaceCMDRPH\x00\x12Q\n\x11\x62\x61tch_maps_delete\x18\x1e \x01(\x0b\x32\x34.deeproute.localization.command.BatchMapsDeleteCMDRPH\x00\x42\x12\n\x10\x63ommand_response*?\n\x10LocalizationMode\x12\x0c\n\x08ODOMETRY\x10\x00\x12\x07\n\x03LIO\x10\x01\x12\x14\n\x10MAP_REGISTRATION\x10\x02*\xa4\x0c\n\tErrorCode\x12\t\n\x05UNSET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x08\n\x04\x46\x41IL\x10\x02\x12\x1c\n\x18VPA_CMD_STATUS_NOT_MATCH\x10\x03\x12\x1d\n\x19VPA_MAPPING_LOOP_DETECTED\x10\x64\x12(\n$VPA_MAPPING_REVERSING_BEFORE_PARKING\x10\x65\x12\x1b\n\x17VPA_MAPPING_MULTI_LEVEL\x10\x66\x12&\n\"VPA_MAPPING_BAD_QUALITY_TRAJECTORY\x10g\x12\x1a\n\x16VPA_MAPPING_NOT_IN_MAP\x10h\x12,\n(VPA_END_MAPPING_ADC_NOT_IN_PARKING_SPACE\x10i\x12/\n+VPA_END_MAPPING_LEARNED_TRAJECORY_TOO_SHORT\x10j\x12+\n\'VPA_END_MAPPING_NO_PARKING_SPACE_NEARBY\x10k\x12.\n*VPA_END_MAPPING_LEARNED_TRAJECORY_TOO_LONG\x10l\x12\x37\n3VPA_END_MAPPING_LEARNED_TRAJECTORY_REACH_MAX_LIMITS\x10m\x12(\n$VPA_END_MAPPING_TRAJECTORY_TOO_STEEP\x10n\x12\x35\n1VPA_END_MAPPING_TRAJECTORY_ENVIRONMENT_TOO_SPARSE\x10o\x12.\n*VPA_END_MAPPING_TRAJECTORY_REVERSE_TOO_FAR\x10p\x12\x36\n2VPA_END_MAPPING_TRAJECTORY_NOT_REACH_PARKING_SPACE\x10q\x12\x39\n5VPA_END_MAPPING_TRAJECTORY_CROSS_TARGET_PARKING_SPACE\x10r\x12,\n(VPA_END_MAPPING_TRAJECTORY_LOOP_DETECTED\x10s\x12)\n%VPA_END_MAPPING_MAPPING_TIME_TOO_LONG\x10t\x12(\n$VPA_END_MAPPING_MAPPING_SAVE_FAILURE\x10u\x12.\n*VPA_END_MAPPING_NOT_ENOUGH_DISK_FREE_SPACE\x10v\x12&\n\"VPA_END_MAPPING_INPUT_DATA_INVALID\x10w\x12-\n)VPA_END_MAPPING_INDOOR_TO_OUTDOOR_MAPPING\x10x\x12\"\n\x1eVPA_END_MAPPING_GNSS_POSE_JUMP\x10y\x12&\n\"VPA_END_MAPPING_MOVE_BACK_TO_START\x10z\x12-\n)VPA_END_MAPPING_NO_DESTINATION_CANDIDATES\x10{\x12\x36\n2VPA_END_MAPPING_NO_VALID_DESTINATION_IN_CANDIDATES\x10|\x12*\n\"VPA_END_MAPPING_OUT_OF_PARKING_ODD\x10}\x1a\x02\x08\x01\x12\x37\n3VPA_END_MAPPING_UNCONFIRM_OUTDOOR_TO_OUT_OF_PARKING\x10~\x12+\n&VPA_END_MAPPING_UNKNOWN_REASON_FAILURE\x10\xc7\x01\x12%\n VPA_START_MAPPING_GNSS_NOT_READY\x10\xc8\x01\x12#\n\x1eVPA_START_MAPPING_GNSS_TOO_OLD\x10\xc9\x01\x12+\n&VPA_START_MAPPING_LOCAL_POSE_NOT_READY\x10\xca\x01\x12\"\n\x1dVPA_START_ROUTING_NOT_MATCHED\x10\xad\x02\x12\'\n\"VPA_START_ROUTING_NEAR_DESTINATION\x10\xae\x02\x12\x1f\n\x1aVPA_START_ROUTING_ABNORMAL\x10\xaf\x02*h\n\x19StartMappingRequestReason\x12\x19\n\x15REASON_CREATE_NEW_MAP\x10\x00\x12\x15\n\x11REASON_EXPAND_MAP\x10\x01\x12\x19\n\x15REASON_EXPAND_OUT_MAP\x10\x02*F\n\x11\x43\x61ncelMappingType\x12\x10\n\x0cUSER_REQUEST\x10\x00\x12\x13\n\x0fMAPPING_FAILURE\x10\x01\x12\n\n\x06OTHERS\x10\x02*p\n\x10MappingErrorCode\x12\x11\n\rLOOP_DETECTED\x10\x00\x12\x1c\n\x18REVERSING_BEFORE_PARKING\x10\x01\x12\x0f\n\x0bMULTI_LEVEL\x10\x02\x12\x1a\n\x16\x42\x41\x44_QUALITY_TRAJECTORY\x10\x03*;\n\rOperatingType\x12\n\n\x06\x44\x45LETE\x10\x00\x12\n\n\x06MODIFY\x10\x01\x12\x07\n\x03\x41\x44\x44\x10\x02\x12\t\n\x05MERGE\x10\x03*\x9c\x01\n\x1cStartNavigationRequestReason\x12\x12\n\x0eREASON_PREPLAN\x10\x00\x12\x19\n\x15REASON_VPA_NAVIGATION\x10\x01\x12\x16\n\x12REASON_VPA_ROUTING\x10\x02\x12\x1a\n\x16REASON_E2E_PARKING_OUT\x10\x03\x12\x19\n\x15REASON_E2E_PARKING_IN\x10\x04*Z\n\x07PoiType\x12\x11\n\rPARKING_SPACE\x10\x00\x12\r\n\tODD_START\x10\x01\x12\x0b\n\x07ODD_END\x10\x02\x12\x0f\n\x0bUSER_DEFINE\x10\x03\x12\x0f\n\x0bMAPPING_END\x10\x04*B\n\x0b\x43urrentMode\x12\x0b\n\x07\x44RIVING\x10\x00\x12\x07\n\x03\x41PA\x10\x01\x12\x08\n\x04RADS\x10\x02\x12\x07\n\x03VPA\x10\x03\x12\n\n\x06MANUAL\x10\x04\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n0localization/localization_external_command.proto\x12\x1e\x64\x65\x65proute.localization.command\x1a\x15\x63ommon/geometry.proto\x1a#semantic_map/map_standby_area.proto\x1a/localization/localization_external_events.proto\x1a-perception/deeproute_perception_ras_map.proto\x1a$map/deeproute_map_ras_map_plus.proto\x1a\x1blocalization/havp_map.proto\"h\n\x19LocalizationModeChangeCMD\x12K\n\x11localization_mode\x18\x01 \x01(\x0e\x32\x30.deeproute.localization.command.LocalizationMode\"~\n\x1bLocalizationModeChangeCMDRP\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x19\n\x11semantic_map_path\x18\x02 \x01(\t\x12\x33\n\rparking_space\x18\x03 \x01(\x0b\x32\x1c.deeproute.hdmap.StandbyArea\"\x19\n\x17StartMapLocalizationCMD\"k\n\x19StartMapLocalizationCMDRP\x12\x19\n\x11semantic_map_path\x18\x01 \x01(\t\x12\x33\n\rparking_space\x18\x02 \x01(\x0b\x32\x1c.deeproute.hdmap.StandbyArea\"\x17\n\x15\x45ndMapLocalizationCMD\"\x19\n\x17\x45ndMapLocalizationCMDRP\"p\n\x0fStartMappingCMD\x12\x12\n\nexpand_map\x18\x01 \x01(\x08\x12I\n\x06reason\x18\x02 \x01(\x0e\x32\x39.deeproute.localization.command.StartMappingRequestReason\"G\n\x11StartMappingCMDRP\x12\x32\n\x0emapping_origin\x18\x01 \x01(\x0b\x32\x1a.deeproute.common.PointLLH\"b\n\x10\x43\x61ncelMappingCMD\x12N\n\x13\x63\x61ncel_mapping_type\x18\x01 \x01(\x0e\x32\x31.deeproute.localization.command.CancelMappingType\"S\n\x12\x43\x61ncelMappingCMDRP\x12=\n\nerror_code\x18\x01 \x01(\x0e\x32).deeproute.localization.command.ErrorCode\"\xae\x01\n\x10\x43hangedMapStatus\x12\x0e\n\x06map_id\x18\x01 \x01(\x05\x12\x45\n\x0eoperation_type\x18\x02 \x01(\x0e\x32-.deeproute.localization.command.OperatingType\x12\x43\n\tmeta_data\x18\x03 \x01(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\"\\\n\x14\x43hangedMapStatusList\x12\x44\n\nmap_status\x18\x01 \x03(\x0b\x32\x30.deeproute.localization.command.ChangedMapStatus\"\xaf\x01\n\rEndMappingCMD\x12\x39\n\rparking_space\x18\x01 \x01(\x0b\x32\".deeproute.perception.ParkingSpace\x12\x10\n\x08map_name\x18\x02 \x01(\t\x12!\n\x19target_parking_space_name\x18\x03 \x01(\t\x12\x0e\n\x06map_id\x18\x04 \x01(\x05\x12\x1e\n\x16not_directly_cover_map\x18\x05 \x01(\x08\"\x92\x04\n\x0f\x45ndMappingCMDRP\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x42\n\nerror_code\x18\x02 \x01(\x0e\x32..deeproute.localization.event.MappingErrorCode\x12\x32\n\x0csemantic_map\x18\x03 \x01(\x0b\x32\x1c.deeproute.perception.RASMap\x12;\n\x16semantic_map_obstacles\x18\x04 \x01(\x0b\x32\x1b.deeproute.map.MapObstacles\x12 \n\x18mapped_trajectory_length\x18\x05 \x01(\x01\x12\x1e\n\x16mapped_speedbump_count\x18\x06 \x01(\r\x12\x1f\n\x17target_parking_space_id\x18\x07 \x01(\x05\x12:\n\x08havp_map\x18\x08 \x01(\x0b\x32(.deeproute.localization.havp_map.HAVPMap\x12\x14\n\x0c\x65go_floor_id\x18\t \x01(\x05\x12-\n%recommended_favorite_parking_space_id\x18\n \x01(\x05\x12U\n\x17\x63hanged_map_status_list\x18\x0b \x01(\x0b\x32\x34.deeproute.localization.command.ChangedMapStatusList\"I\n\x0b\x43overMapCMD\x12\x11\n\tcover_map\x18\x01 \x01(\x08\x12\x13\n\x0bold_map_ids\x18\x02 \x03(\r\x12\x12\n\nnew_map_id\x18\x03 \x01(\r\"+\n\rCoverMapCMDRP\x12\x1a\n\x12map_update_success\x18\x01 \x01(\x08\"O\n\x1aSetRegionalParkingSpaceCMD\x12\x0e\n\x06map_id\x18\x01 \x01(\x05\x12!\n\x19is_regional_parking_space\x18\x02 \x01(\x08\"/\n\x1cSetRegionalParkingSpaceCMDRP\x12\x0f\n\x07success\x18\x01 \x01(\x08\">\n\x13\x45ndToEndMapCheckCMD\x12\x13\n\x0b\x66ront_check\x18\x01 \x01(\x08\x12\x12\n\nback_check\x18\x02 \x01(\x08\"(\n\x15\x45ndToEndMapCheckCMDRP\x12\x0f\n\x07success\x18\x01 \x01(\x08\"\xe7\x01\n\x19ParkingSpaceInfoUpdateCMD\x12\x0e\n\x06map_id\x18\x01 \x01(\x05\x12\x45\n\x0eoperation_type\x18\x02 \x01(\x0e\x32-.deeproute.localization.command.OperatingType\x12Q\n\x13parking_spaces_info\x18\x03 \x01(\x0b\x32\x34.deeproute.localization.havp_map.ParkingSpaceUsrInfo\x12 \n\x18is_default_parking_space\x18\x04 \x01(\x08\"\xde\x01\n\x1bParkingSpaceInfoUpdateCMDRP\x12Q\n\x13parking_spaces_info\x18\x01 \x01(\x0b\x32\x34.deeproute.localization.havp_map.ParkingSpaceUsrInfo\x12 \n\x18is_default_parking_space\x18\x02 \x01(\x08\x12J\n\x13real_operation_type\x18\x03 \x01(\x0e\x32-.deeproute.localization.command.OperatingType\"\x9d\x01\n\x10MapInfoUpdateCMD\x12\x45\n\x0eoperation_type\x18\x01 \x01(\x0e\x32-.deeproute.localization.command.OperatingType\x12\x42\n\x08map_info\x18\x02 \x01(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\"X\n\x12MapInfoUpdateCMDRP\x12\x42\n\x08map_info\x18\x01 \x01(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\",\n\x12\x42\x61tchMapsDeleteCMD\x12\x16\n\x0e\x64\x65lete_map_ids\x18\x01 \x03(\x05\"\'\n\x14\x42\x61tchMapsDeleteCMDRP\x12\x0f\n\x07success\x18\x01 \x01(\x08\"|\n\x13MapPoiInfoUpdateCMD\x12\x0e\n\x06map_id\x18\x01 \x01(\x05\x12\x41\n\x0cmap_poi_info\x18\x02 \x01(\x0b\x32+.deeproute.localization.havp_map.MapPoiInfo\x12\x12\n\nis_default\x18\x03 \x01(\x08\"\xba\x01\n\x15MapPoiInfoUpdateCMDRP\x12\x41\n\x0cmap_poi_info\x18\x01 \x01(\x0b\x32+.deeproute.localization.havp_map.MapPoiInfo\x12\x12\n\nis_default\x18\x02 \x01(\x08\x12J\n\x13real_operation_type\x18\x03 \x01(\x0e\x32-.deeproute.localization.command.OperatingType\"4\n\x1bGetTargetHavpMapMetaDataCMD\x12\x15\n\rtarget_map_id\x18\x01 \x01(\x05\"m\n\x1dGetTargetHavpMapMetaDataCMDRP\x12L\n\x12havp_map_meta_data\x18\x01 \x01(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\"\x1a\n\x18GetAllHavpMapMetaDataCMD\"j\n\x1aGetAllHavpMapMetaDataCMDRP\x12L\n\x12havp_map_meta_data\x18\x01 \x03(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\"\x1e\n\nSaveMapCMD\x12\x10\n\x08save_map\x18\x01 \x01(\x08\"\x0e\n\x0cSaveMapCMDRP\"\x1d\n\x1bGetMapTargetParkingSpaceCMD\"T\n\x1dGetMapTargetParkingSpaceCMDRP\x12\x33\n\rparking_space\x18\x01 \x01(\x0b\x32\x1c.deeproute.hdmap.StandbyArea\"L\n\x1dGetTargetParkingSpaceInMapCMD\x12+\n\x08position\x18\x01 \x01(\x0b\x32\x19.deeproute.common.Point3D\"\x80\x01\n\x1fGetTargetParkingSpaceInMapCMDRP\x12]\n\x1ftarget_parking_spaces_user_info\x18\x01 \x01(\x0b\x32\x34.deeproute.localization.havp_map.ParkingSpaceUsrInfo\"P\n\"SetNavigationTargetParkingSpaceCMD\x12*\n\"target_navigation_parking_space_id\x18\x01 \x01(\x05\"&\n$SetNavigationTargetParkingSpaceCMDRP\"\x0b\n\tGetMapCMD\"\xa4\x02\n\x0bGetMapCMDRP\x12\x32\n\x0csemantic_map\x18\x01 \x01(\x0b\x32\x1c.deeproute.perception.RASMap\x12;\n\x16semantic_map_obstacles\x18\x02 \x01(\x0b\x32\x1b.deeproute.map.MapObstacles\x12\x1d\n\x15map_trajectory_length\x18\x03 \x01(\x01\x12I\n\x1eodometry_to_map_transformation\x18\x04 \x01(\x0b\x32!.deeproute.common.Transformation3\x12:\n\x08havp_map\x18\x05 \x01(\x0b\x32(.deeproute.localization.havp_map.HAVPMap\"\xbe\x01\n\x12StartNavigationCMD\x12\x1f\n\x17target_parking_space_id\x18\x01 \x01(\x05\x12L\n\x06reason\x18\x02 \x01(\x0e\x32<.deeproute.localization.command.StartNavigationRequestReason\x12\x39\n\x08poi_type\x18\x03 \x01(\x0e\x32\'.deeproute.localization.command.PoiType\"\xe7\x01\n\x14StartNavigationCMDRP\x12\x1c\n\x14route_total_distance\x18\x01 \x01(\x01\x12=\n\nerror_code\x18\x02 \x01(\x0e\x32).deeproute.localization.command.ErrorCode\x12\x1f\n\x17target_parking_space_id\x18\x03 \x01(\x05\x12\x1f\n\x17remaining_s_after_slope\x18\x04 \x01(\x01\x12\x15\n\rrouting_ready\x18\x05 \x01(\x08\x12\x19\n\x11left_routing_time\x18\x06 \x01(\x01\"\x12\n\x10\x45ndNavigationCMD\"\x14\n\x12\x45ndNavigationCMDRP\"\x15\n\x13\x43\x61ncelPreMappingCMD\"\x17\n\x15\x43\x61ncelPreMappingCMDRP\"[\n\x0fGetNearbyMapCMD\x12\x31\n\rsearch_origin\x18\x01 \x01(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x15\n\rsearch_radius\x18\x02 \x01(\x01\"\xa0\x01\n\x11GetNearbyMapCMDRP\x12X\n\x0fnearby_map_info\x18\x01 \x03(\x0b\x32?.deeproute.localization.command.GetNearbyMapCMDRP.NearbyMapInfo\x1a\x31\n\rNearbyMapInfo\x12\x0e\n\x06map_id\x18\x01 \x01(\x05\x12\x10\n\x08\x64istance\x18\x02 \x01(\x01\"Y\n\x14\x44rivingModeChangeCMD\x12\x41\n\x0c\x64riving_mode\x18\x01 \x01(\x0e\x32+.deeproute.localization.command.CurrentMode\"\x18\n\x16\x44rivingModeChangeCMDRP\"d\n#ParkingSpaceNameDuplicationCheckCMD\x12\x0e\n\x06map_id\x18\x01 \x01(\x05\x12\x1f\n\x17target_parking_space_id\x18\x02 \x01(\x05\x12\x0c\n\x04name\x18\x03 \x01(\t\">\n%ParkingSpaceNameDuplicationCheckCMDRP\x12\x15\n\rname_repeated\x18\x01 \x01(\x08\":\n\x1aMapNameDuplicationCheckCMD\x12\x0e\n\x06map_id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\"9\n MapNameNameDuplicationCheckCMDRP\x12\x15\n\rname_repeated\x18\x01 \x01(\x08\"e\n(SetFreeParkingSpaceAsRouteDestinationCMD\x12\x39\n\rparking_space\x18\x01 \x01(\x0b\x32\".deeproute.perception.ParkingSpace\"M\n*SetFreeParkingSpaceAsRouteDestinationCMDRP\x12\x1f\n\x17set_destination_success\x18\x01 \x01(\x08\"A\n\x1cSetStraightLinkSpeedLimitCMD\x12!\n\x19straight_link_speed_limit\x18\x01 \x01(\x01\"A\n\x1eSetStraightLinkSpeedLimitCMDRP\x12\x1f\n\x17set_speed_limit_success\x18\x01 \x01(\x08\"\x14\n\x12MapOverlapCheckCMD\"/\n\x14MapOverlapCheckCMDRP\x12\x17\n\x0fhas_overlap_map\x18\x01 \x01(\x08\"L\n\x08RoamInfo\x12\x11\n\ttarget_id\x18\x01 \x01(\r\x12\x15\n\rrouting_ready\x18\x02 \x01(\x08\x12\x16\n\x0etotal_distance\x18\x03 \x01(\x01\"+\n\x16RoamCandidatesCheckCMD\x12\x11\n\ttarget_id\x18\x01 \x03(\r\"W\n\x18RoamCandidatesCheckCMDRP\x12;\n\troam_info\x18\x01 \x03(\x0b\x32(.deeproute.localization.command.RoamInfo\"\xb5\x16\n\x13LocalizationCommand\x12\x0e\n\x06\x63md_id\x18\x01 \x01(\t\x12\x14\n\x0ctimestamp_ms\x18\x02 \x01(\x01\x12]\n\x1astart_map_localization_cmd\x18\x03 \x01(\x0b\x32\x37.deeproute.localization.command.StartMapLocalizationCMDH\x00\x12L\n\x11start_mapping_cmd\x18\x04 \x01(\x0b\x32/.deeproute.localization.command.StartMappingCMDH\x00\x12H\n\x0f\x65nd_mapping_cmd\x18\x05 \x01(\x0b\x32-.deeproute.localization.command.EndMappingCMDH\x00\x12Y\n\x18\x65nd_map_localization_cmd\x18\x06 \x01(\x0b\x32\x35.deeproute.localization.command.EndMapLocalizationCMDH\x00\x12N\n\x12\x63\x61ncel_mapping_cmd\x18\x07 \x01(\x0b\x32\x30.deeproute.localization.command.CancelMappingCMDH\x00\x12\x61\n\x1clocalization_mode_change_cmd\x18\x08 \x01(\x0b\x32\x39.deeproute.localization.command.LocalizationModeChangeCMDH\x00\x12g\n get_map_target_parking_space_cmd\x18\t \x01(\x0b\x32;.deeproute.localization.command.GetMapTargetParkingSpaceCMDH\x00\x12@\n\x0bget_map_cmd\x18\n \x01(\x0b\x32).deeproute.localization.command.GetMapCMDH\x00\x12U\n\x16\x63\x61ncel_pre_mapping_cmd\x18\x0b \x01(\x0b\x32\x33.deeproute.localization.command.CancelPreMappingCMDH\x00\x12W\n\x17\x64riving_mode_change_cmd\x18\x0c \x01(\x0b\x32\x34.deeproute.localization.command.DrivingModeChangeCMDH\x00\x12\x62\n\x1dparking_space_info_update_cmd\x18\r \x01(\x0b\x32\x39.deeproute.localization.command.ParkingSpaceInfoUpdateCMDH\x00\x12O\n\x13map_info_update_cmd\x18\x0e \x01(\x0b\x32\x30.deeproute.localization.command.MapInfoUpdateCMDH\x00\x12h\n!get_target_havp_map_meta_data_cmd\x18\x0f \x01(\x0b\x32;.deeproute.localization.command.GetTargetHavpMapMetaDataCMDH\x00\x12\x62\n\x1eget_all_havp_map_meta_data_cmd\x18\x10 \x01(\x0b\x32\x38.deeproute.localization.command.GetAllHavpMapMetaDataCMDH\x00\x12R\n\x14start_navigation_cmd\x18\x11 \x01(\x0b\x32\x32.deeproute.localization.command.StartNavigationCMDH\x00\x12N\n\x12\x65nd_navigation_cmd\x18\x12 \x01(\x0b\x32\x30.deeproute.localization.command.EndNavigationCMDH\x00\x12l\n#get_target_parking_space_in_map_cmd\x18\x13 \x01(\x0b\x32=.deeproute.localization.command.GetTargetParkingSpaceInMapCMDH\x00\x12u\n\'set_navigation_target_parking_space_cmd\x18\x14 \x01(\x0b\x32\x42.deeproute.localization.command.SetNavigationTargetParkingSpaceCMDH\x00\x12M\n\x12get_nearby_map_cmd\x18\x15 \x01(\x0b\x32/.deeproute.localization.command.GetNearbyMapCMDH\x00\x12w\n(parking_space_name_duplication_check_cmd\x18\x16 \x01(\x0b\x32\x43.deeproute.localization.command.ParkingSpaceNameDuplicationCheckCMDH\x00\x12\x64\n\x1emap_name_duplication_check_cmd\x18\x17 \x01(\x0b\x32:.deeproute.localization.command.MapNameDuplicationCheckCMDH\x00\x12W\n\x18\x65nd_to_end_map_check_cmd\x18\x18 \x01(\x0b\x32\x33.deeproute.localization.command.EndToEndMapCheckCMDH\x00\x12V\n\x17map_poi_info_update_cmd\x18\x19 \x01(\x0b\x32\x33.deeproute.localization.command.MapPoiInfoUpdateCMDH\x00\x12\x83\x01\n/set_free_parking_space_as_route_destination_cmd\x18\x1a \x01(\x0b\x32H.deeproute.localization.command.SetFreeParkingSpaceAsRouteDestinationCMDH\x00\x12i\n!set_straight_link_speed_limit_cmd\x18\x1b \x01(\x0b\x32<.deeproute.localization.command.SetStraightLinkSpeedLimitCMDH\x00\x12\x64\n\x1eset_regional_parking_space_cmd\x18\x1c \x01(\x0b\x32:.deeproute.localization.command.SetRegionalParkingSpaceCMDH\x00\x12S\n\x15\x62\x61tch_maps_delete_cmd\x18\x1d \x01(\x0b\x32\x32.deeproute.localization.command.BatchMapsDeleteCMDH\x00\x12\x44\n\rcover_map_cmd\x18\x1e \x01(\x0b\x32+.deeproute.localization.command.CoverMapCMDH\x00\x12S\n\x15map_overlap_check_cmd\x18\x1f \x01(\x0b\x32\x32.deeproute.localization.command.MapOverlapCheckCMDH\x00\x12[\n\x19roam_candidates_check_cmd\x18  \x01(\x0b\x32\x36.deeproute.localization.command.RoamCandidatesCheckCMDH\x00\x42\t\n\x07\x63ommand\"\xca\x16\n\x14LocalizationResponse\x12\x0e\n\x06\x63md_id\x18\x01 \x01(\t\x12\x14\n\x0ctimestamp_ms\x18\x02 \x01(\x01\x12=\n\nerror_code\x18\x03 \x01(\x0e\x32).deeproute.localization.command.ErrorCode\x12_\n\x1astart_map_localization_cmd\x18\x04 \x01(\x0b\x32\x39.deeproute.localization.command.StartMapLocalizationCMDRPH\x00\x12J\n\rstart_mapping\x18\x05 \x01(\x0b\x32\x31.deeproute.localization.command.StartMappingCMDRPH\x00\x12\x46\n\x0b\x65nd_mapping\x18\x06 \x01(\x0b\x32/.deeproute.localization.command.EndMappingCMDRPH\x00\x12W\n\x14\x65nd_map_localization\x18\x07 \x01(\x0b\x32\x37.deeproute.localization.command.EndMapLocalizationCMDRPH\x00\x12L\n\x0e\x63\x61ncel_mapping\x18\x08 \x01(\x0b\x32\x32.deeproute.localization.command.CancelMappingCMDRPH\x00\x12_\n\x18localization_mode_change\x18\t \x01(\x0b\x32;.deeproute.localization.command.LocalizationModeChangeCMDRPH\x00\x12\x65\n\x1cget_map_target_parking_space\x18\n \x01(\x0b\x32=.deeproute.localization.command.GetMapTargetParkingSpaceCMDRPH\x00\x12>\n\x07get_map\x18\x0b \x01(\x0b\x32+.deeproute.localization.command.GetMapCMDRPH\x00\x12S\n\x12\x63\x61ncel_pre_mapping\x18\x0c \x01(\x0b\x32\x35.deeproute.localization.command.CancelPreMappingCMDRPH\x00\x12U\n\x13\x64riving_mode_change\x18\r \x01(\x0b\x32\x36.deeproute.localization.command.DrivingModeChangeCMDRPH\x00\x12`\n\x19parking_space_info_update\x18\x0e \x01(\x0b\x32;.deeproute.localization.command.ParkingSpaceInfoUpdateCMDRPH\x00\x12M\n\x0fmap_info_update\x18\x0f \x01(\x0b\x32\x32.deeproute.localization.command.MapInfoUpdateCMDRPH\x00\x12\x66\n\x1dget_target_havp_map_meta_data\x18\x10 \x01(\x0b\x32=.deeproute.localization.command.GetTargetHavpMapMetaDataCMDRPH\x00\x12`\n\x1aget_all_havp_map_meta_data\x18\x11 \x01(\x0b\x32:.deeproute.localization.command.GetAllHavpMapMetaDataCMDRPH\x00\x12P\n\x10start_navigation\x18\x12 \x01(\x0b\x32\x34.deeproute.localization.command.StartNavigationCMDRPH\x00\x12L\n\x0e\x65nd_navigation\x18\x13 \x01(\x0b\x32\x32.deeproute.localization.command.EndNavigationCMDRPH\x00\x12j\n\x1fget_target_parking_space_in_map\x18\x14 \x01(\x0b\x32?.deeproute.localization.command.GetTargetParkingSpaceInMapCMDRPH\x00\x12s\n#set_navigation_target_parking_space\x18\x15 \x01(\x0b\x32\x44.deeproute.localization.command.SetNavigationTargetParkingSpaceCMDRPH\x00\x12K\n\x0eget_nearby_map\x18\x16 \x01(\x0b\x32\x31.deeproute.localization.command.GetNearbyMapCMDRPH\x00\x12u\n$parking_space_name_duplication_check\x18\x17 \x01(\x0b\x32\x45.deeproute.localization.command.ParkingSpaceNameDuplicationCheckCMDRPH\x00\x12\x66\n\x1amap_name_duplication_check\x18\x18 \x01(\x0b\x32@.deeproute.localization.command.MapNameNameDuplicationCheckCMDRPH\x00\x12U\n\x14\x65nd_to_end_map_check\x18\x19 \x01(\x0b\x32\x35.deeproute.localization.command.EndToEndMapCheckCMDRPH\x00\x12T\n\x13map_poi_info_update\x18\x1a \x01(\x0b\x32\x35.deeproute.localization.command.MapPoiInfoUpdateCMDRPH\x00\x12\x81\x01\n+set_free_parking_space_as_route_destination\x18\x1b \x01(\x0b\x32J.deeproute.localization.command.SetFreeParkingSpaceAsRouteDestinationCMDRPH\x00\x12g\n\x1dset_straight_link_speed_limit\x18\x1c \x01(\x0b\x32>.deeproute.localization.command.SetStraightLinkSpeedLimitCMDRPH\x00\x12\x62\n\x1aset_regional_parking_space\x18\x1d \x01(\x0b\x32<.deeproute.localization.command.SetRegionalParkingSpaceCMDRPH\x00\x12Q\n\x11\x62\x61tch_maps_delete\x18\x1e \x01(\x0b\x32\x34.deeproute.localization.command.BatchMapsDeleteCMDRPH\x00\x12\x42\n\tcover_map\x18\x1f \x01(\x0b\x32-.deeproute.localization.command.CoverMapCMDRPH\x00\x12Q\n\x11map_overlap_check\x18  \x01(\x0b\x32\x34.deeproute.localization.command.MapOverlapCheckCMDRPH\x00\x12Y\n\x15roam_candidates_check\x18! \x01(\x0b\x32\x38.deeproute.localization.command.RoamCandidatesCheckCMDRPH\x00\x42\x12\n\x10\x63ommand_response*?\n\x10LocalizationMode\x12\x0c\n\x08ODOMETRY\x10\x00\x12\x07\n\x03LIO\x10\x01\x12\x14\n\x10MAP_REGISTRATION\x10\x02*\xa4\x0c\n\tErrorCode\x12\t\n\x05UNSET\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\x08\n\x04\x46\x41IL\x10\x02\x12\x1c\n\x18VPA_CMD_STATUS_NOT_MATCH\x10\x03\x12\x1d\n\x19VPA_MAPPING_LOOP_DETECTED\x10\x64\x12(\n$VPA_MAPPING_REVERSING_BEFORE_PARKING\x10\x65\x12\x1b\n\x17VPA_MAPPING_MULTI_LEVEL\x10\x66\x12&\n\"VPA_MAPPING_BAD_QUALITY_TRAJECTORY\x10g\x12\x1a\n\x16VPA_MAPPING_NOT_IN_MAP\x10h\x12,\n(VPA_END_MAPPING_ADC_NOT_IN_PARKING_SPACE\x10i\x12/\n+VPA_END_MAPPING_LEARNED_TRAJECORY_TOO_SHORT\x10j\x12+\n\'VPA_END_MAPPING_NO_PARKING_SPACE_NEARBY\x10k\x12.\n*VPA_END_MAPPING_LEARNED_TRAJECORY_TOO_LONG\x10l\x12\x37\n3VPA_END_MAPPING_LEARNED_TRAJECTORY_REACH_MAX_LIMITS\x10m\x12(\n$VPA_END_MAPPING_TRAJECTORY_TOO_STEEP\x10n\x12\x35\n1VPA_END_MAPPING_TRAJECTORY_ENVIRONMENT_TOO_SPARSE\x10o\x12.\n*VPA_END_MAPPING_TRAJECTORY_REVERSE_TOO_FAR\x10p\x12\x36\n2VPA_END_MAPPING_TRAJECTORY_NOT_REACH_PARKING_SPACE\x10q\x12\x39\n5VPA_END_MAPPING_TRAJECTORY_CROSS_TARGET_PARKING_SPACE\x10r\x12,\n(VPA_END_MAPPING_TRAJECTORY_LOOP_DETECTED\x10s\x12)\n%VPA_END_MAPPING_MAPPING_TIME_TOO_LONG\x10t\x12(\n$VPA_END_MAPPING_MAPPING_SAVE_FAILURE\x10u\x12.\n*VPA_END_MAPPING_NOT_ENOUGH_DISK_FREE_SPACE\x10v\x12&\n\"VPA_END_MAPPING_INPUT_DATA_INVALID\x10w\x12-\n)VPA_END_MAPPING_INDOOR_TO_OUTDOOR_MAPPING\x10x\x12\"\n\x1eVPA_END_MAPPING_GNSS_POSE_JUMP\x10y\x12&\n\"VPA_END_MAPPING_MOVE_BACK_TO_START\x10z\x12-\n)VPA_END_MAPPING_NO_DESTINATION_CANDIDATES\x10{\x12\x36\n2VPA_END_MAPPING_NO_VALID_DESTINATION_IN_CANDIDATES\x10|\x12*\n\"VPA_END_MAPPING_OUT_OF_PARKING_ODD\x10}\x1a\x02\x08\x01\x12\x37\n3VPA_END_MAPPING_UNCONFIRM_OUTDOOR_TO_OUT_OF_PARKING\x10~\x12+\n&VPA_END_MAPPING_UNKNOWN_REASON_FAILURE\x10\xc7\x01\x12%\n VPA_START_MAPPING_GNSS_NOT_READY\x10\xc8\x01\x12#\n\x1eVPA_START_MAPPING_GNSS_TOO_OLD\x10\xc9\x01\x12+\n&VPA_START_MAPPING_LOCAL_POSE_NOT_READY\x10\xca\x01\x12\"\n\x1dVPA_START_ROUTING_NOT_MATCHED\x10\xad\x02\x12\'\n\"VPA_START_ROUTING_NEAR_DESTINATION\x10\xae\x02\x12\x1f\n\x1aVPA_START_ROUTING_ABNORMAL\x10\xaf\x02*h\n\x19StartMappingRequestReason\x12\x19\n\x15REASON_CREATE_NEW_MAP\x10\x00\x12\x15\n\x11REASON_EXPAND_MAP\x10\x01\x12\x19\n\x15REASON_EXPAND_OUT_MAP\x10\x02*F\n\x11\x43\x61ncelMappingType\x12\x10\n\x0cUSER_REQUEST\x10\x00\x12\x13\n\x0fMAPPING_FAILURE\x10\x01\x12\n\n\x06OTHERS\x10\x02*p\n\x10MappingErrorCode\x12\x11\n\rLOOP_DETECTED\x10\x00\x12\x1c\n\x18REVERSING_BEFORE_PARKING\x10\x01\x12\x0f\n\x0bMULTI_LEVEL\x10\x02\x12\x1a\n\x16\x42\x41\x44_QUALITY_TRAJECTORY\x10\x03*;\n\rOperatingType\x12\n\n\x06\x44\x45LETE\x10\x00\x12\n\n\x06MODIFY\x10\x01\x12\x07\n\x03\x41\x44\x44\x10\x02\x12\t\n\x05MERGE\x10\x03*\x9c\x01\n\x1cStartNavigationRequestReason\x12\x12\n\x0eREASON_PREPLAN\x10\x00\x12\x19\n\x15REASON_VPA_NAVIGATION\x10\x01\x12\x16\n\x12REASON_VPA_ROUTING\x10\x02\x12\x1a\n\x16REASON_E2E_PARKING_OUT\x10\x03\x12\x19\n\x15REASON_E2E_PARKING_IN\x10\x04*Z\n\x07PoiType\x12\x11\n\rPARKING_SPACE\x10\x00\x12\r\n\tODD_START\x10\x01\x12\x0b\n\x07ODD_END\x10\x02\x12\x0f\n\x0bUSER_DEFINE\x10\x03\x12\x0f\n\x0bMAPPING_END\x10\x04*B\n\x0b\x43urrentMode\x12\x0b\n\x07\x44RIVING\x10\x00\x12\x07\n\x03\x41PA\x10\x01\x12\x08\n\x04RADS\x10\x02\x12\x07\n\x03VPA\x10\x03\x12\n\n\x06MANUAL\x10\x04\x62\x06proto3')
 
 _LOCALIZATIONMODE = DESCRIPTOR.enum_types_by_name['LocalizationMode']
 LocalizationMode = enum_type_wrapper.EnumTypeWrapper(_LOCALIZATIONMODE)
@@ -127,6 +127,8 @@ _CHANGEDMAPSTATUS = DESCRIPTOR.message_types_by_name['ChangedMapStatus']
 _CHANGEDMAPSTATUSLIST = DESCRIPTOR.message_types_by_name['ChangedMapStatusList']
 _ENDMAPPINGCMD = DESCRIPTOR.message_types_by_name['EndMappingCMD']
 _ENDMAPPINGCMDRP = DESCRIPTOR.message_types_by_name['EndMappingCMDRP']
+_COVERMAPCMD = DESCRIPTOR.message_types_by_name['CoverMapCMD']
+_COVERMAPCMDRP = DESCRIPTOR.message_types_by_name['CoverMapCMDRP']
 _SETREGIONALPARKINGSPACECMD = DESCRIPTOR.message_types_by_name['SetRegionalParkingSpaceCMD']
 _SETREGIONALPARKINGSPACECMDRP = DESCRIPTOR.message_types_by_name['SetRegionalParkingSpaceCMDRP']
 _ENDTOENDMAPCHECKCMD = DESCRIPTOR.message_types_by_name['EndToEndMapCheckCMD']
@@ -172,6 +174,11 @@ _SETFREEPARKINGSPACEASROUTEDESTINATIONCMD = DESCRIPTOR.message_types_by_name['Se
 _SETFREEPARKINGSPACEASROUTEDESTINATIONCMDRP = DESCRIPTOR.message_types_by_name['SetFreeParkingSpaceAsRouteDestinationCMDRP']
 _SETSTRAIGHTLINKSPEEDLIMITCMD = DESCRIPTOR.message_types_by_name['SetStraightLinkSpeedLimitCMD']
 _SETSTRAIGHTLINKSPEEDLIMITCMDRP = DESCRIPTOR.message_types_by_name['SetStraightLinkSpeedLimitCMDRP']
+_MAPOVERLAPCHECKCMD = DESCRIPTOR.message_types_by_name['MapOverlapCheckCMD']
+_MAPOVERLAPCHECKCMDRP = DESCRIPTOR.message_types_by_name['MapOverlapCheckCMDRP']
+_ROAMINFO = DESCRIPTOR.message_types_by_name['RoamInfo']
+_ROAMCANDIDATESCHECKCMD = DESCRIPTOR.message_types_by_name['RoamCandidatesCheckCMD']
+_ROAMCANDIDATESCHECKCMDRP = DESCRIPTOR.message_types_by_name['RoamCandidatesCheckCMDRP']
 _LOCALIZATIONCOMMAND = DESCRIPTOR.message_types_by_name['LocalizationCommand']
 _LOCALIZATIONRESPONSE = DESCRIPTOR.message_types_by_name['LocalizationResponse']
 LocalizationModeChangeCMD = _reflection.GeneratedProtocolMessageType('LocalizationModeChangeCMD', (_message.Message,), {
@@ -271,6 +278,20 @@ EndMappingCMDRP = _reflection.GeneratedProtocolMessageType('EndMappingCMDRP', (_
   # @@protoc_insertion_point(class_scope:deeproute.localization.command.EndMappingCMDRP)
   })
 _sym_db.RegisterMessage(EndMappingCMDRP)
+
+CoverMapCMD = _reflection.GeneratedProtocolMessageType('CoverMapCMD', (_message.Message,), {
+  'DESCRIPTOR' : _COVERMAPCMD,
+  '__module__' : 'localization.localization_external_command_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.localization.command.CoverMapCMD)
+  })
+_sym_db.RegisterMessage(CoverMapCMD)
+
+CoverMapCMDRP = _reflection.GeneratedProtocolMessageType('CoverMapCMDRP', (_message.Message,), {
+  'DESCRIPTOR' : _COVERMAPCMDRP,
+  '__module__' : 'localization.localization_external_command_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.localization.command.CoverMapCMDRP)
+  })
+_sym_db.RegisterMessage(CoverMapCMDRP)
 
 SetRegionalParkingSpaceCMD = _reflection.GeneratedProtocolMessageType('SetRegionalParkingSpaceCMD', (_message.Message,), {
   'DESCRIPTOR' : _SETREGIONALPARKINGSPACECMD,
@@ -588,6 +609,41 @@ SetStraightLinkSpeedLimitCMDRP = _reflection.GeneratedProtocolMessageType('SetSt
   })
 _sym_db.RegisterMessage(SetStraightLinkSpeedLimitCMDRP)
 
+MapOverlapCheckCMD = _reflection.GeneratedProtocolMessageType('MapOverlapCheckCMD', (_message.Message,), {
+  'DESCRIPTOR' : _MAPOVERLAPCHECKCMD,
+  '__module__' : 'localization.localization_external_command_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.localization.command.MapOverlapCheckCMD)
+  })
+_sym_db.RegisterMessage(MapOverlapCheckCMD)
+
+MapOverlapCheckCMDRP = _reflection.GeneratedProtocolMessageType('MapOverlapCheckCMDRP', (_message.Message,), {
+  'DESCRIPTOR' : _MAPOVERLAPCHECKCMDRP,
+  '__module__' : 'localization.localization_external_command_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.localization.command.MapOverlapCheckCMDRP)
+  })
+_sym_db.RegisterMessage(MapOverlapCheckCMDRP)
+
+RoamInfo = _reflection.GeneratedProtocolMessageType('RoamInfo', (_message.Message,), {
+  'DESCRIPTOR' : _ROAMINFO,
+  '__module__' : 'localization.localization_external_command_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.localization.command.RoamInfo)
+  })
+_sym_db.RegisterMessage(RoamInfo)
+
+RoamCandidatesCheckCMD = _reflection.GeneratedProtocolMessageType('RoamCandidatesCheckCMD', (_message.Message,), {
+  'DESCRIPTOR' : _ROAMCANDIDATESCHECKCMD,
+  '__module__' : 'localization.localization_external_command_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.localization.command.RoamCandidatesCheckCMD)
+  })
+_sym_db.RegisterMessage(RoamCandidatesCheckCMD)
+
+RoamCandidatesCheckCMDRP = _reflection.GeneratedProtocolMessageType('RoamCandidatesCheckCMDRP', (_message.Message,), {
+  'DESCRIPTOR' : _ROAMCANDIDATESCHECKCMDRP,
+  '__module__' : 'localization.localization_external_command_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.localization.command.RoamCandidatesCheckCMDRP)
+  })
+_sym_db.RegisterMessage(RoamCandidatesCheckCMDRP)
+
 LocalizationCommand = _reflection.GeneratedProtocolMessageType('LocalizationCommand', (_message.Message,), {
   'DESCRIPTOR' : _LOCALIZATIONCOMMAND,
   '__module__' : 'localization.localization_external_command_pb2'
@@ -607,24 +663,24 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _ERRORCODE.values_by_name["VPA_END_MAPPING_OUT_OF_PARKING_ODD"]._options = None
   _ERRORCODE.values_by_name["VPA_END_MAPPING_OUT_OF_PARKING_ODD"]._serialized_options = b'\010\001'
-  _LOCALIZATIONMODE._serialized_start=11199
-  _LOCALIZATIONMODE._serialized_end=11262
-  _ERRORCODE._serialized_start=11265
-  _ERRORCODE._serialized_end=12837
-  _STARTMAPPINGREQUESTREASON._serialized_start=12839
-  _STARTMAPPINGREQUESTREASON._serialized_end=12943
-  _CANCELMAPPINGTYPE._serialized_start=12945
-  _CANCELMAPPINGTYPE._serialized_end=13015
-  _MAPPINGERRORCODE._serialized_start=13017
-  _MAPPINGERRORCODE._serialized_end=13129
-  _OPERATINGTYPE._serialized_start=13131
-  _OPERATINGTYPE._serialized_end=13190
-  _STARTNAVIGATIONREQUESTREASON._serialized_start=13193
-  _STARTNAVIGATIONREQUESTREASON._serialized_end=13349
-  _POITYPE._serialized_start=13351
-  _POITYPE._serialized_end=13441
-  _CURRENTMODE._serialized_start=13443
-  _CURRENTMODE._serialized_end=13509
+  _LOCALIZATIONMODE._serialized_start=12194
+  _LOCALIZATIONMODE._serialized_end=12257
+  _ERRORCODE._serialized_start=12260
+  _ERRORCODE._serialized_end=13832
+  _STARTMAPPINGREQUESTREASON._serialized_start=13834
+  _STARTMAPPINGREQUESTREASON._serialized_end=13938
+  _CANCELMAPPINGTYPE._serialized_start=13940
+  _CANCELMAPPINGTYPE._serialized_end=14010
+  _MAPPINGERRORCODE._serialized_start=14012
+  _MAPPINGERRORCODE._serialized_end=14124
+  _OPERATINGTYPE._serialized_start=14126
+  _OPERATINGTYPE._serialized_end=14185
+  _STARTNAVIGATIONREQUESTREASON._serialized_start=14188
+  _STARTNAVIGATIONREQUESTREASON._serialized_end=14344
+  _POITYPE._serialized_start=14346
+  _POITYPE._serialized_end=14436
+  _CURRENTMODE._serialized_start=14438
+  _CURRENTMODE._serialized_end=14504
   _LOCALIZATIONMODECHANGECMD._serialized_start=307
   _LOCALIZATIONMODECHANGECMD._serialized_end=411
   _LOCALIZATIONMODECHANGECMDRP._serialized_start=413
@@ -645,106 +701,120 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _CANCELMAPPINGCMD._serialized_end=1014
   _CANCELMAPPINGCMDRP._serialized_start=1016
   _CANCELMAPPINGCMDRP._serialized_end=1099
-  _CHANGEDMAPSTATUS._serialized_start=1101
-  _CHANGEDMAPSTATUS._serialized_end=1206
-  _CHANGEDMAPSTATUSLIST._serialized_start=1208
-  _CHANGEDMAPSTATUSLIST._serialized_end=1300
-  _ENDMAPPINGCMD._serialized_start=1303
-  _ENDMAPPINGCMD._serialized_end=1446
-  _ENDMAPPINGCMDRP._serialized_start=1449
-  _ENDMAPPINGCMDRP._serialized_end=1979
-  _SETREGIONALPARKINGSPACECMD._serialized_start=1981
-  _SETREGIONALPARKINGSPACECMD._serialized_end=2060
-  _SETREGIONALPARKINGSPACECMDRP._serialized_start=2062
-  _SETREGIONALPARKINGSPACECMDRP._serialized_end=2109
-  _ENDTOENDMAPCHECKCMD._serialized_start=2111
-  _ENDTOENDMAPCHECKCMD._serialized_end=2173
-  _ENDTOENDMAPCHECKCMDRP._serialized_start=2175
-  _ENDTOENDMAPCHECKCMDRP._serialized_end=2215
-  _PARKINGSPACEINFOUPDATECMD._serialized_start=2218
-  _PARKINGSPACEINFOUPDATECMD._serialized_end=2449
-  _PARKINGSPACEINFOUPDATECMDRP._serialized_start=2452
-  _PARKINGSPACEINFOUPDATECMDRP._serialized_end=2674
-  _MAPINFOUPDATECMD._serialized_start=2677
-  _MAPINFOUPDATECMD._serialized_end=2834
-  _MAPINFOUPDATECMDRP._serialized_start=2836
-  _MAPINFOUPDATECMDRP._serialized_end=2924
-  _BATCHMAPSDELETECMD._serialized_start=2926
-  _BATCHMAPSDELETECMD._serialized_end=2970
-  _BATCHMAPSDELETECMDRP._serialized_start=2972
-  _BATCHMAPSDELETECMDRP._serialized_end=3011
-  _MAPPOIINFOUPDATECMD._serialized_start=3013
-  _MAPPOIINFOUPDATECMD._serialized_end=3137
-  _MAPPOIINFOUPDATECMDRP._serialized_start=3140
-  _MAPPOIINFOUPDATECMDRP._serialized_end=3326
-  _GETTARGETHAVPMAPMETADATACMD._serialized_start=3328
-  _GETTARGETHAVPMAPMETADATACMD._serialized_end=3380
-  _GETTARGETHAVPMAPMETADATACMDRP._serialized_start=3382
-  _GETTARGETHAVPMAPMETADATACMDRP._serialized_end=3491
-  _GETALLHAVPMAPMETADATACMD._serialized_start=3493
-  _GETALLHAVPMAPMETADATACMD._serialized_end=3519
-  _GETALLHAVPMAPMETADATACMDRP._serialized_start=3521
-  _GETALLHAVPMAPMETADATACMDRP._serialized_end=3627
-  _SAVEMAPCMD._serialized_start=3629
-  _SAVEMAPCMD._serialized_end=3659
-  _SAVEMAPCMDRP._serialized_start=3661
-  _SAVEMAPCMDRP._serialized_end=3675
-  _GETMAPTARGETPARKINGSPACECMD._serialized_start=3677
-  _GETMAPTARGETPARKINGSPACECMD._serialized_end=3706
-  _GETMAPTARGETPARKINGSPACECMDRP._serialized_start=3708
-  _GETMAPTARGETPARKINGSPACECMDRP._serialized_end=3792
-  _GETTARGETPARKINGSPACEINMAPCMD._serialized_start=3794
-  _GETTARGETPARKINGSPACEINMAPCMD._serialized_end=3870
-  _GETTARGETPARKINGSPACEINMAPCMDRP._serialized_start=3873
-  _GETTARGETPARKINGSPACEINMAPCMDRP._serialized_end=4001
-  _SETNAVIGATIONTARGETPARKINGSPACECMD._serialized_start=4003
-  _SETNAVIGATIONTARGETPARKINGSPACECMD._serialized_end=4083
-  _SETNAVIGATIONTARGETPARKINGSPACECMDRP._serialized_start=4085
-  _SETNAVIGATIONTARGETPARKINGSPACECMDRP._serialized_end=4123
-  _GETMAPCMD._serialized_start=4125
-  _GETMAPCMD._serialized_end=4136
-  _GETMAPCMDRP._serialized_start=4139
-  _GETMAPCMDRP._serialized_end=4431
-  _STARTNAVIGATIONCMD._serialized_start=4434
-  _STARTNAVIGATIONCMD._serialized_end=4624
-  _STARTNAVIGATIONCMDRP._serialized_start=4627
-  _STARTNAVIGATIONCMDRP._serialized_end=4858
-  _ENDNAVIGATIONCMD._serialized_start=4860
-  _ENDNAVIGATIONCMD._serialized_end=4878
-  _ENDNAVIGATIONCMDRP._serialized_start=4880
-  _ENDNAVIGATIONCMDRP._serialized_end=4900
-  _CANCELPREMAPPINGCMD._serialized_start=4902
-  _CANCELPREMAPPINGCMD._serialized_end=4923
-  _CANCELPREMAPPINGCMDRP._serialized_start=4925
-  _CANCELPREMAPPINGCMDRP._serialized_end=4948
-  _GETNEARBYMAPCMD._serialized_start=4950
-  _GETNEARBYMAPCMD._serialized_end=5041
-  _GETNEARBYMAPCMDRP._serialized_start=5044
-  _GETNEARBYMAPCMDRP._serialized_end=5204
-  _GETNEARBYMAPCMDRP_NEARBYMAPINFO._serialized_start=5155
-  _GETNEARBYMAPCMDRP_NEARBYMAPINFO._serialized_end=5204
-  _DRIVINGMODECHANGECMD._serialized_start=5206
-  _DRIVINGMODECHANGECMD._serialized_end=5295
-  _DRIVINGMODECHANGECMDRP._serialized_start=5297
-  _DRIVINGMODECHANGECMDRP._serialized_end=5321
-  _PARKINGSPACENAMEDUPLICATIONCHECKCMD._serialized_start=5323
-  _PARKINGSPACENAMEDUPLICATIONCHECKCMD._serialized_end=5423
-  _PARKINGSPACENAMEDUPLICATIONCHECKCMDRP._serialized_start=5425
-  _PARKINGSPACENAMEDUPLICATIONCHECKCMDRP._serialized_end=5487
-  _MAPNAMEDUPLICATIONCHECKCMD._serialized_start=5489
-  _MAPNAMEDUPLICATIONCHECKCMD._serialized_end=5547
-  _MAPNAMENAMEDUPLICATIONCHECKCMDRP._serialized_start=5549
-  _MAPNAMENAMEDUPLICATIONCHECKCMDRP._serialized_end=5606
-  _SETFREEPARKINGSPACEASROUTEDESTINATIONCMD._serialized_start=5608
-  _SETFREEPARKINGSPACEASROUTEDESTINATIONCMD._serialized_end=5709
-  _SETFREEPARKINGSPACEASROUTEDESTINATIONCMDRP._serialized_start=5711
-  _SETFREEPARKINGSPACEASROUTEDESTINATIONCMDRP._serialized_end=5788
-  _SETSTRAIGHTLINKSPEEDLIMITCMD._serialized_start=5790
-  _SETSTRAIGHTLINKSPEEDLIMITCMD._serialized_end=5855
-  _SETSTRAIGHTLINKSPEEDLIMITCMDRP._serialized_start=5857
-  _SETSTRAIGHTLINKSPEEDLIMITCMDRP._serialized_end=5922
-  _LOCALIZATIONCOMMAND._serialized_start=5925
-  _LOCALIZATIONCOMMAND._serialized_end=8546
-  _LOCALIZATIONRESPONSE._serialized_start=8549
-  _LOCALIZATIONRESPONSE._serialized_end=11197
+  _CHANGEDMAPSTATUS._serialized_start=1102
+  _CHANGEDMAPSTATUS._serialized_end=1276
+  _CHANGEDMAPSTATUSLIST._serialized_start=1278
+  _CHANGEDMAPSTATUSLIST._serialized_end=1370
+  _ENDMAPPINGCMD._serialized_start=1373
+  _ENDMAPPINGCMD._serialized_end=1548
+  _ENDMAPPINGCMDRP._serialized_start=1551
+  _ENDMAPPINGCMDRP._serialized_end=2081
+  _COVERMAPCMD._serialized_start=2083
+  _COVERMAPCMD._serialized_end=2156
+  _COVERMAPCMDRP._serialized_start=2158
+  _COVERMAPCMDRP._serialized_end=2201
+  _SETREGIONALPARKINGSPACECMD._serialized_start=2203
+  _SETREGIONALPARKINGSPACECMD._serialized_end=2282
+  _SETREGIONALPARKINGSPACECMDRP._serialized_start=2284
+  _SETREGIONALPARKINGSPACECMDRP._serialized_end=2331
+  _ENDTOENDMAPCHECKCMD._serialized_start=2333
+  _ENDTOENDMAPCHECKCMD._serialized_end=2395
+  _ENDTOENDMAPCHECKCMDRP._serialized_start=2397
+  _ENDTOENDMAPCHECKCMDRP._serialized_end=2437
+  _PARKINGSPACEINFOUPDATECMD._serialized_start=2440
+  _PARKINGSPACEINFOUPDATECMD._serialized_end=2671
+  _PARKINGSPACEINFOUPDATECMDRP._serialized_start=2674
+  _PARKINGSPACEINFOUPDATECMDRP._serialized_end=2896
+  _MAPINFOUPDATECMD._serialized_start=2899
+  _MAPINFOUPDATECMD._serialized_end=3056
+  _MAPINFOUPDATECMDRP._serialized_start=3058
+  _MAPINFOUPDATECMDRP._serialized_end=3146
+  _BATCHMAPSDELETECMD._serialized_start=3148
+  _BATCHMAPSDELETECMD._serialized_end=3192
+  _BATCHMAPSDELETECMDRP._serialized_start=3194
+  _BATCHMAPSDELETECMDRP._serialized_end=3233
+  _MAPPOIINFOUPDATECMD._serialized_start=3235
+  _MAPPOIINFOUPDATECMD._serialized_end=3359
+  _MAPPOIINFOUPDATECMDRP._serialized_start=3362
+  _MAPPOIINFOUPDATECMDRP._serialized_end=3548
+  _GETTARGETHAVPMAPMETADATACMD._serialized_start=3550
+  _GETTARGETHAVPMAPMETADATACMD._serialized_end=3602
+  _GETTARGETHAVPMAPMETADATACMDRP._serialized_start=3604
+  _GETTARGETHAVPMAPMETADATACMDRP._serialized_end=3713
+  _GETALLHAVPMAPMETADATACMD._serialized_start=3715
+  _GETALLHAVPMAPMETADATACMD._serialized_end=3741
+  _GETALLHAVPMAPMETADATACMDRP._serialized_start=3743
+  _GETALLHAVPMAPMETADATACMDRP._serialized_end=3849
+  _SAVEMAPCMD._serialized_start=3851
+  _SAVEMAPCMD._serialized_end=3881
+  _SAVEMAPCMDRP._serialized_start=3883
+  _SAVEMAPCMDRP._serialized_end=3897
+  _GETMAPTARGETPARKINGSPACECMD._serialized_start=3899
+  _GETMAPTARGETPARKINGSPACECMD._serialized_end=3928
+  _GETMAPTARGETPARKINGSPACECMDRP._serialized_start=3930
+  _GETMAPTARGETPARKINGSPACECMDRP._serialized_end=4014
+  _GETTARGETPARKINGSPACEINMAPCMD._serialized_start=4016
+  _GETTARGETPARKINGSPACEINMAPCMD._serialized_end=4092
+  _GETTARGETPARKINGSPACEINMAPCMDRP._serialized_start=4095
+  _GETTARGETPARKINGSPACEINMAPCMDRP._serialized_end=4223
+  _SETNAVIGATIONTARGETPARKINGSPACECMD._serialized_start=4225
+  _SETNAVIGATIONTARGETPARKINGSPACECMD._serialized_end=4305
+  _SETNAVIGATIONTARGETPARKINGSPACECMDRP._serialized_start=4307
+  _SETNAVIGATIONTARGETPARKINGSPACECMDRP._serialized_end=4345
+  _GETMAPCMD._serialized_start=4347
+  _GETMAPCMD._serialized_end=4358
+  _GETMAPCMDRP._serialized_start=4361
+  _GETMAPCMDRP._serialized_end=4653
+  _STARTNAVIGATIONCMD._serialized_start=4656
+  _STARTNAVIGATIONCMD._serialized_end=4846
+  _STARTNAVIGATIONCMDRP._serialized_start=4849
+  _STARTNAVIGATIONCMDRP._serialized_end=5080
+  _ENDNAVIGATIONCMD._serialized_start=5082
+  _ENDNAVIGATIONCMD._serialized_end=5100
+  _ENDNAVIGATIONCMDRP._serialized_start=5102
+  _ENDNAVIGATIONCMDRP._serialized_end=5122
+  _CANCELPREMAPPINGCMD._serialized_start=5124
+  _CANCELPREMAPPINGCMD._serialized_end=5145
+  _CANCELPREMAPPINGCMDRP._serialized_start=5147
+  _CANCELPREMAPPINGCMDRP._serialized_end=5170
+  _GETNEARBYMAPCMD._serialized_start=5172
+  _GETNEARBYMAPCMD._serialized_end=5263
+  _GETNEARBYMAPCMDRP._serialized_start=5266
+  _GETNEARBYMAPCMDRP._serialized_end=5426
+  _GETNEARBYMAPCMDRP_NEARBYMAPINFO._serialized_start=5377
+  _GETNEARBYMAPCMDRP_NEARBYMAPINFO._serialized_end=5426
+  _DRIVINGMODECHANGECMD._serialized_start=5428
+  _DRIVINGMODECHANGECMD._serialized_end=5517
+  _DRIVINGMODECHANGECMDRP._serialized_start=5519
+  _DRIVINGMODECHANGECMDRP._serialized_end=5543
+  _PARKINGSPACENAMEDUPLICATIONCHECKCMD._serialized_start=5545
+  _PARKINGSPACENAMEDUPLICATIONCHECKCMD._serialized_end=5645
+  _PARKINGSPACENAMEDUPLICATIONCHECKCMDRP._serialized_start=5647
+  _PARKINGSPACENAMEDUPLICATIONCHECKCMDRP._serialized_end=5709
+  _MAPNAMEDUPLICATIONCHECKCMD._serialized_start=5711
+  _MAPNAMEDUPLICATIONCHECKCMD._serialized_end=5769
+  _MAPNAMENAMEDUPLICATIONCHECKCMDRP._serialized_start=5771
+  _MAPNAMENAMEDUPLICATIONCHECKCMDRP._serialized_end=5828
+  _SETFREEPARKINGSPACEASROUTEDESTINATIONCMD._serialized_start=5830
+  _SETFREEPARKINGSPACEASROUTEDESTINATIONCMD._serialized_end=5931
+  _SETFREEPARKINGSPACEASROUTEDESTINATIONCMDRP._serialized_start=5933
+  _SETFREEPARKINGSPACEASROUTEDESTINATIONCMDRP._serialized_end=6010
+  _SETSTRAIGHTLINKSPEEDLIMITCMD._serialized_start=6012
+  _SETSTRAIGHTLINKSPEEDLIMITCMD._serialized_end=6077
+  _SETSTRAIGHTLINKSPEEDLIMITCMDRP._serialized_start=6079
+  _SETSTRAIGHTLINKSPEEDLIMITCMDRP._serialized_end=6144
+  _MAPOVERLAPCHECKCMD._serialized_start=6146
+  _MAPOVERLAPCHECKCMD._serialized_end=6166
+  _MAPOVERLAPCHECKCMDRP._serialized_start=6168
+  _MAPOVERLAPCHECKCMDRP._serialized_end=6215
+  _ROAMINFO._serialized_start=6217
+  _ROAMINFO._serialized_end=6293
+  _ROAMCANDIDATESCHECKCMD._serialized_start=6295
+  _ROAMCANDIDATESCHECKCMD._serialized_end=6338
+  _ROAMCANDIDATESCHECKCMDRP._serialized_start=6340
+  _ROAMCANDIDATESCHECKCMDRP._serialized_end=6427
+  _LOCALIZATIONCOMMAND._serialized_start=6430
+  _LOCALIZATIONCOMMAND._serialized_end=9299
+  _LOCALIZATIONRESPONSE._serialized_start=9302
+  _LOCALIZATIONRESPONSE._serialized_end=12192
 # @@protoc_insertion_point(module_scope)

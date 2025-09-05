@@ -23,7 +23,7 @@ from proto.drapi import gwm_hut_notification_pb2 as drapi_dot_gwm__hut__notifica
 from proto.localization import havp_map_pb2 as localization_dot_havp__map__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13\x64rapi/command.proto\x12\ndr.command\x1a\x19\x64rapi/business_info.proto\x1a\x10\x64rapi/base.proto\x1a\x18\x64rapi/local_config.proto\x1a\x1c\x64rapi/operation_status.proto\x1a\rdsm/dsm.proto\x1a\x19google/protobuf/any.proto\x1a drapi/gwm_hut_notification.proto\x1a\x1blocalization/havp_map.proto\"\xfd!\n\x07\x43ommand\x12\n\n\x02id\x18\x01 \x01(\t\x12\x31\n\rupdate_config\x18\x64 \x01(\x0b\x32\x18.dr.command.UpdateConfigH\x00\x12,\n\nenable_acc\x18\xe8\x07 \x01(\x0b\x32\x15.dr.command.EnableACCH\x00\x12-\n\x0bget_acc_tcc\x18\xe9\x07 \x01(\x0b\x32\x15.dr.command.GetACCTTCH\x00\x12<\n\x13get_acc_speed_limit\x18\xea\x07 \x01(\x0b\x32\x1c.dr.command.GetACCSpeedLimitH\x00\x12=\n\x13\x64riving_active_exit\x18\xeb\x07 \x01(\x0b\x32\x1d.dr.command.DrivingActiveExitH\x00\x12)\n\x07set_ttc\x18\xcc\x08 \x01(\x0b\x32\x15.dr.command.SetACCTTCH\x00\x12,\n\nenable_ica\x18\xd0\x0f \x01(\x0b\x32\x15.dr.command.EnableICAH\x00\x12.\n\x0b\x63hange_lane\x18\xd5\x0f \x01(\x0b\x32\x16.dr.command.ChangeLaneH\x00\x12=\n\x13\x63hange_auto_upgrade\x18\xd6\x0f \x01(\x0b\x32\x1d.dr.command.ChangeAutoUpgradeH\x00\x12,\n\nenable_nca\x18\xb8\x17 \x01(\x0b\x32\x15.dr.command.EnableNCAH\x00\x12\x38\n\x10start_navigation\x18\xba\x17 \x01(\x0b\x32\x1b.dr.command.StartNavigationH\x00\x12:\n\x11\x63\x61ncel_navigation\x18\xbb\x17 \x01(\x0b\x32\x1c.dr.command.CancelNavigationH\x00\x12(\n\x08get_path\x18\x9c\x18 \x01(\x0b\x32\x13.dr.command.GetPathH\x00\x12/\n\x0cget_cur_path\x18\x9d\x18 \x01(\x0b\x32\x16.dr.command.GetCurPathH\x00\x12\x34\n\x0fget_cur_path_id\x18\x9e\x18 \x01(\x0b\x32\x18.dr.command.GetCurPathIdH\x00\x12,\n\nenable_ldw\x18\xa0\x1f \x01(\x0b\x32\x15.dr.command.EnableLDWH\x00\x12,\n\nenable_rdp\x18\x94# \x01(\x0b\x32\x15.dr.command.EnableRDPH\x00\x12,\n\nactive_apa\x18\x88\' \x01(\x0b\x32\x15.dr.command.ActiveAPAH\x00\x12\x41\n\x12image_pixel_to_pos\x18\x89\' \x01(\x0b\x32\".dr.command.RequestImagePixelToPosH\x00\x12)\n\x07parking\x18\x8a\' \x01(\x0b\x32\x15.dr.command.APAParkInH\x00\x12.\n\x0bout_parking\x18\x8b\' \x01(\x0b\x32\x16.dr.command.APAParkOutH\x00\x12<\n\x13update_apa_settings\x18\x8d\' \x01(\x0b\x32\x1c.dr.command.UpdateApaSettingH\x00\x12\x44\n\x17\x61pa_parking_switch_mode\x18\x90\' \x01(\x0b\x32 .dr.command.APAParkingSwitchModeH\x00\x12\x41\n\x12\x61pa_parking_update\x18\x91\' \x01(\x0b\x32\".dr.command.APAParkingUpdateStatusH\x00\x12@\n\x15\x61pa_get_active_source\x18\x92\' \x01(\x0b\x32\x1e.dr.command.APAGetActiveSourceH\x00\x12P\n\x1d\x61pa_get_realtime_parkingspace\x18\x93\' \x01(\x0b\x32&.dr.command.APAGetRealtimeParkingSpaceH\x00\x12L\n\x1b\x61pa_select_avm_parkingspace\x18\x94\' \x01(\x0b\x32$.dr.command.APASelectAVMParkingSpaceH\x00\x12L\n\x1b\x61pa_app_select_parkingspace\x18\x95\' \x01(\x0b\x32$.dr.command.APAAPPSelectParkingSpaceH\x00\x12\x44\n\x17\x61pa_suggest_out_parking\x18\x96\' \x01(\x0b\x32 .dr.command.APASuggestOutParkingH\x00\x12<\n\x13\x61pa_active_out_park\x18\x97\' \x01(\x0b\x32\x1c.dr.command.APAActiveParkOutH\x00\x12\x46\n\x18\x61pa_skip_countdown_clock\x18\x98\' \x01(\x0b\x32!.dr.command.APASkipCountDownClockH\x00\x12\x46\n\x18\x61pa_enter_custom_parking\x18\x99\' \x01(\x0b\x32!.dr.command.APAEnterCustomParkingH\x00\x12\x46\n\x18\x61pa_leave_custom_parking\x18\x9a\' \x01(\x0b\x32!.dr.command.APALeaveCustomParkingH\x00\x12S\n\x1f\x61pa_select_custom_parking_space\x18\x9b\' \x01(\x0b\x32\'.dr.command.APASelectCustomParkingSpaceH\x00\x12;\n\x12gw_parking_command\x18\xed\' \x01(\x0b\x32\x1c.dr.command.GWParkingCommandH\x00\x12\x37\n\x10smart_lp_command\x18\xee\' \x01(\x0b\x32\x1a.dr.command.SmartLPCommandH\x00\x12;\n\x12gl_parking_command\x18\xef\' \x01(\x0b\x32\x1c.dr.command.GLParkingCommandH\x00\x12\x33\n\x0egl_hpa_command\x18\xf0\' \x01(\x0b\x32\x18.dr.command.GLHPACommandH\x00\x12.\n\x0bvpa_routing\x18\xf1. \x01(\x0b\x32\x16.dr.command.VPARoutingH\x00\x12\x30\n\x0cvpa_learning\x18\xf2. \x01(\x0b\x32\x17.dr.command.VPALearningH\x00\x12\x44\n\x17vpa_routing_switch_mode\x18\xf3. \x01(\x0b\x32 .dr.command.VPARoutingSwitchModeH\x00\x12\x31\n\x0cvpa_get_info\x18\xf4. \x01(\x0b\x32\x18.dr.command.VPAGetInfoRQH\x00\x12<\n\x13vpa_routing_get_map\x18\xf5. \x01(\x0b\x32\x1c.dr.command.VPARoutingGetMapH\x00\x12-\n\x0b\x62tn_ena_req\x18\xf6. \x01(\x0b\x32\x15.dr.command.BtnEnaReqH\x00\x12,\n\nenable_hma\x18\xd8\x36 \x01(\x0b\x32\x15.dr.command.EnableHMAH\x00\x12,\n\nenable_bsd\x18\xbc\x37 \x01(\x0b\x32\x15.dr.command.EnableBSDH\x00\x12,\n\nenable_lca\x18\xa0\x38 \x01(\x0b\x32\x15.dr.command.EnableLCAH\x00\x12,\n\nenable_dow\x18\x84\x39 \x01(\x0b\x32\x15.dr.command.EnableDOWH\x00\x12.\n\x0b\x65nable_rcta\x18\xe8\x39 \x01(\x0b\x32\x16.dr.command.EnableRCTAH\x00\x12,\n\nenable_rcw\x18\xcc: \x01(\x0b\x32\x15.dr.command.EnableRCWH\x00\x12.\n\x0b\x65nable_rctb\x18\xb0; \x01(\x0b\x32\x16.dr.command.EnableRCTBH\x00\x12,\n\nenable_avm\x18\x95< \x01(\x0b\x32\x15.dr.command.EnableAVMH\x00\x12\x30\n\nswitch_avm\x18\x96< \x01(\x0b\x32\x19.dr.command.SwitchAVMViewH\x00\x12\x32\n\x0cparking_shot\x18\x97< \x01(\x0b\x32\x19.dr.command.ParkedShotingH\x00\x12\x37\n\x10get_avm_settings\x18\x98< \x01(\x0b\x32\x1a.dr.command.GetAVMSettingsH\x00\x12,\n\nenable_aeb\x18\xf8< \x01(\x0b\x32\x15.dr.command.EnableAEBH\x00\x12:\n\x11start_calibration\x18\xdc= \x01(\x0b\x32\x1c.dr.command.StartCalibrationH\x00\x12,\n\nenable_elk\x18\xc0> \x01(\x0b\x32\x15.dr.command.EnableELKH\x00\x12(\n\x08lss_mute\x18\xc1> \x01(\x0b\x32\x13.dr.command.LSSMuteH\x00\x12+\n\tpdc_curve\x18\xa4? \x01(\x0b\x32\x15.dr.command.PDCUpdateH\x00\x12,\n\nrpa_parkin\x18\x89@ \x01(\x0b\x32\x15.dr.command.RPAParkInH\x00\x12.\n\x0brpa_parkout\x18\x8a@ \x01(\x0b\x32\x16.dr.command.RPAParkOutH\x00\x12\x38\n\x0frpa_park_update\x18\x8b@ \x01(\x0b\x32\x1c.dr.command.RPAParkingUpdateH\x00\x12\x38\n\x0fstraight_in_out\x18\x8c@ \x01(\x0b\x32\x1c.dr.command.RPAStraightInOutH\x00\x12\x35\n\rrpa_heartbeat\x18\x8d@ \x01(\x0b\x32\x1b.dr.command.RPAAppHeartbeatH\x00\x12(\n\x08rpa_init\x18\x8e@ \x01(\x0b\x32\x13.dr.command.RPAInitH\x00\x12*\n\trpa_close\x18\x8f@ \x01(\x0b\x32\x14.dr.command.RPACloseH\x00\x12*\n\trpa_check\x18\x90@ \x01(\x0b\x32\x14.dr.command.RPACheckH\x00\x12\x44\n\x17rpa_suggest_out_parking\x18\x91@ \x01(\x0b\x32 .dr.command.RPASuggestOutParkingH\x00\x12&\n\x07tjp_cmd\x18\xed@ \x01(\x0b\x32\x12.dr.command.TJPCmdH\x00\x12\x39\n\x0fsentry_mode_cmd\x18\x9f\x41 \x01(\x0b\x32\x1d.dr.command.SentryModeCommandH\x00\x12H\n\x19sentry_mode_get_statistic\x18\xa0\x41 \x01(\x0b\x32\".dr.command.SentryModeGetStatisticH\x00\x12\'\n\x0b\x64sm_trigger\x18\xd0\x41 \x01(\x0b\x32\x0f.dr.dsm.TriggerH\x00\x12\x33\n\x0c\x64\x65\x66\x61ult_mode\x18\xd1\x41 \x01(\x0b\x32\x1a.dr.command.SetDefaultModeH\x00\x12\x1c\n\x11get_tracking_data\x18\xd2\x41 \x01(\x08H\x00\x12>\n\x17select_parking_function\x18\xb4\x42 \x01(\x0b\x32\x1a.dr.command.SelPrkgFctnCmdH\x00\x12=\n\x18\x63ontinue_parking_request\x18\xb5\x42 \x01(\x0b\x32\x18.dr.command.ContnPrkgReqH\x00\x12,\n\nenable_tsr\x18\x98\x43 \x01(\x0b\x32\x15.dr.command.EnableTSRH\x00\x12,\n\nenable_slw\x18\x99\x43 \x01(\x0b\x32\x15.dr.command.EnableSLWH\x00\x42\x05\n\x03\x63md\"\x9b\r\n\tCommandRP\x12\n\n\x02id\x18\x01 \x01(\t\x12&\n\nerror_code\x18\x02 \x01(\x0e\x32\x12.dr.base.ErrorCode\x12+\n\x07\x61\x63\x63_tcc\x18\xe8\x07 \x01(\x0b\x32\x17.dr.command.GetACCTTCRPH\x00\x12:\n\x0f\x61\x63\x63_speed_limit\x18\xe9\x07 \x01(\x0b\x32\x1e.dr.command.GetACCSpeedLimitRPH\x00\x12/\n\rpath_response\x18\x9c\x18 \x01(\x0b\x32\x15.dr.command.GetPathRPH\x00\x12\x36\n\x11\x63ur_path_response\x18\x9d\x18 \x01(\x0b\x32\x18.dr.command.GetCurPathRPH\x00\x12;\n\x14\x63ur_path_id_response\x18\x9e\x18 \x01(\x0b\x32\x1a.dr.command.GetCurPathIdRPH\x00\x12\x34\n\x03pos\x18\x8b\' \x01(\x0b\x32$.dr.command.RequestImagePixelToPosRPH\x00\x12\x30\n\x0e\x61pa_parkin_res\x18\x8c\' \x01(\x0b\x32\x15.dr.command.APAParkRPH\x00\x12K\n\x19\x61pa_realtime_parkingspace\x18\x8d\' \x01(\x0b\x32%.dr.command.APARealtimeParkingSpaceRPH\x00\x12\x45\n\x14\x61pa_avm_parkingspace\x18\x8e\' \x01(\x0b\x32$.dr.command.APASelectAVMParkingSpaceH\x00\x12\x46\n\x17\x61pa_suggest_out_parking\x18\x8f\' \x01(\x0b\x32\".dr.command.APASuggestOutParkingRPH\x00\x12\x33\n\x0evpa_routing_rp\x18\xf2. \x01(\x0b\x32\x18.dr.command.VPARoutingRPH\x00\x12-\n\x08vpa_info\x18\xf3. \x01(\x0b\x32\x18.dr.command.VPAGetInfoRPH\x00\x12\x43\n\x18vpa_routing_get_map_info\x18\xf4. \x01(\x0b\x32\x1e.dr.command.VPARoutingGetMapRPH\x00\x12\x35\n\x0fvpa_learning_rp\x18\xf5. \x01(\x0b\x32\x19.dr.command.VPALearningRPH\x00\x12\x32\n\x0e\x62tn_ena_req_rp\x18\xf6. \x01(\x0b\x32\x17.dr.command.BtnEnaReqRPH\x00\x12.\n\navm_status\x18\x94< \x01(\x0b\x32\x17.dr.command.EnableAVMRPH\x00\x12\x37\n\x0f\x61vm_view_status\x18\x95< \x01(\x0b\x32\x1b.dr.command.SwitchAVMViewRPH\x00\x12?\n\x17\x61vm_parking_shot_status\x18\x96< \x01(\x0b\x32\x1b.dr.command.ParkedShotingRPH\x00\x12=\n\x14\x63urrent_avm_settings\x18\x97< \x01(\x0b\x32\x1c.dr.command.GetAVMSettingsRPH\x00\x12?\n\x14start_calibration_rp\x18\x98< \x01(\x0b\x32\x1e.dr.command.StartCalibrationRPH\x00\x12\x46\n\x17rpa_suggest_out_parking\x18\x99< \x01(\x0b\x32\".dr.command.RPASuggestOutParkingRPH\x00\x12\x31\n\x10tracking_data_rp\x18\xa4? \x01(\x0b\x32\x14.dr.dsm.TrackingDataH\x00\x12G\n\x15sentry_mode_statistic\x18\xd7? \x01(\x0b\x32%.dr.business_info.SentryModeStatisticH\x00\x12\x32\n\x0b\x63urr_config\x18\x88@ \x01(\x0b\x32\x1a.dr.localconfig.UserConfigH\x00\x12@\n\x0b\x66\x61il_reason\x18\xa8\x46 \x01(\x0b\x32*.dr.operationstatus.CommonStatusFailReason\x12#\n\x06module\x18\x8dG \x01(\x0e\x32\x12.dr.command.Module\x12\x35\n\x0fmap_engine_code\x18\x8eG \x01(\x0e\x32\x19.dr.command.MapEngineCodeH\x01\x12\x17\n\x0emodule_err_msg\x18\x8fG \x01(\tB\x07\n\x05\x63mdrpB\x11\n\x0fModuleErrorCode\"?\n\x0cUpdateConfig\x12/\n\x0buser_config\x18\x01 \x01(\x0b\x32\x1a.dr.localconfig.UserConfig\"\x1b\n\tEnableACC\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x0b\n\tGetACCTTC\";\n\x0bGetACCTTCRP\x12,\n\x03ttc\x18\x01 \x01(\x0e\x32\x1f.dr.business_info.FollowTimeGap\"\x18\n\tSetACCTTC\x12\x0b\n\x03ttc\x18\x01 \x01(\x01\"\x12\n\x10GetACCSpeedLimit\")\n\x12GetACCSpeedLimitRP\x12\x13\n\x0bspeed_limit\x18\x01 \x01(\x05\"\x1b\n\tEnableICA\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"n\n\nChangeLane\x12-\n\x06\x61\x63tion\x18\x01 \x01(\x0e\x32\x1d.dr.command.ChangeLane.Action\"1\n\x06\x41\x63tion\x12\x08\n\x04NONE\x10\x00\x12\r\n\tTURN_LEFT\x10\x01\x12\x0e\n\nTURN_RIGHT\x10\x02\"\x82\x01\n\x11\x43hangeAutoUpgrade\x12\x34\n\x06\x61\x63tion\x18\x01 \x01(\x0e\x32$.dr.command.ChangeAutoUpgrade.Action\"7\n\x06\x41\x63tion\x12\x08\n\x04NONE\x10\x00\x12\x0f\n\x0b\x44OWN_TO_ICA\x10\x01\x12\x12\n\x0eUPGRADE_TO_NCA\x10\x02\"\x1b\n\tEnableNCA\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\xe9\x02\n\x07GetPath\x12!\n\x06points\x18\x01 \x03(\x0b\x32\x11.dr.base.PointLLH\x12/\n\x06option\x18\x02 \x01(\x0b\x32\x1f.dr.business_info.RoutingOption\x12O\n\x1aroute_planning_data_source\x18\x03 \x01(\x0e\x32+.dr.command.GetPath.RoutePlanningDataSource\x12\x14\n\x0cmax_path_num\x18\x06 \x01(\x05\x12-\n\x0f\x61map_extra_info\x18\x07 \x01(\x0b\x32\x14.google.protobuf.Any\x12\x38\n\x12retry_on_net_error\x18\x08 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\":\n\x17RoutePlanningDataSource\x12\x10\n\x0cTENCENT_DATA\x10\x00\x12\r\n\tNAVI_DATA\x10\x01\"D\n\tGetPathRP\x12\x37\n\x0erouting_result\x18\x01 \x01(\x0b\x32\x1f.dr.business_info.RoutingResult\"\x0c\n\nGetCurPath\"4\n\x0cGetCurPathRP\x12$\n\x04path\x18\x01 \x01(\x0b\x32\x16.dr.business_info.Path\"\x0e\n\x0cGetCurPathId\"5\n\x0eGetCurPathIdRP\x12\x0f\n\x07path_id\x18\x01 \x01(\x05\x12\x12\n\npath_id_64\x18\x02 \x01(\x04\"\x82\x01\n\x0fStartNavigation\x12!\n\x06points\x18\x01 \x03(\x0b\x32\x11.dr.base.PointLLH\x12\x0f\n\x07path_id\x18\x02 \x01(\x05\x12\'\n\x0croute_points\x18\x03 \x03(\x0b\x32\x11.dr.base.PointLLH\x12\x12\n\npath_id_64\x18\x04 \x01(\x04\"7\n\x10\x43\x61ncelNavigation\x12\x0f\n\x07path_id\x18\x03 \x01(\x05\x12\x12\n\npath_id_64\x18\x04 \x01(\x04\"\x1b\n\tEnableLDW\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x1b\n\tEnableRDP\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x1b\n\tActiveAPA\x12\x0e\n\x06\x61\x63tive\x18\x01 \x01(\x08\"\x1b\n\tEnableVPA\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"n\n\x14\x41PAParkingSwitchMode\x12\x33\n\x04type\x18\x01 \x01(\x0e\x32%.dr.command.APAParkingSwitchMode.Mode\"!\n\x04Mode\x12\x0b\n\x07PARK_IN\x10\x00\x12\x0c\n\x08PARK_OUT\x10\x01\"\x1b\n\tActiveVPA\x12\x0e\n\x06\x61\x63tive\x18\x01 \x01(\x08\"\x92\x01\n\x16\x41PAParkingUpdateStatus\x12\x43\n\toperation\x18\x01 \x01(\x0e\x32\x30.dr.command.APAParkingUpdateStatus.OperationType\"3\n\rOperationType\x12\t\n\x05PAUSE\x10\x00\x12\x0b\n\x07RECOVER\x10\x01\x12\n\n\x06\x43\x41NCEL\x10\x02\"\x1c\n\x1a\x41PAGetRealtimeParkingSpace\"I\n\x19\x41PARealtimeParkingSpaceRP\x12,\n\rparking_space\x18\x01 \x01(\x0b\x32\x15.dr.base.ParkingSpace\"i\n\x18\x41PAAPPSelectParkingSpace\x12,\n\rparking_space\x18\x01 \x01(\x0b\x32\x15.dr.base.ParkingSpace\x12\x1f\n\x17non_empty_parking_space\x18\x02 \x01(\x08\"\x16\n\x14\x41PASuggestOutParking\"c\n\x16\x41PASuggestOutParkingRP\x12I\n\x18suggest_out_parking_info\x18\x01 \x01(\x0b\x32\'.dr.business_info.SuggestOutParkingInfo\"\x12\n\x10\x41PAActiveParkOut\"\x17\n\x15\x41PASkipCountDownClock\"\x17\n\x15\x41PAEnterCustomParking\"\x17\n\x15\x41PALeaveCustomParking\"\x1d\n\x1b\x41PASelectCustomParkingSpace\"\xbe\x01\n\x0bVPALearning\x12>\n\x0eoperation_type\x18\x01 \x01(\x0e\x32&.dr.command.VPALearning.LearningOpType\"o\n\x0eLearningOpType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x18\n\x14START_ROUTE_LEARNING\x10\x01\x12\x0e\n\nSAVE_ROUTE\x10\x02\x12\x0e\n\nDROP_ROUTE\x10\x03\x12\x16\n\x12\x45\x32\x45_START_LEARNING\x10\x04\"\x84\x01\n\x14VPARoutingSwitchMode\x12\x33\n\x04mode\x18\x01 \x01(\x0e\x32%.dr.command.VPARoutingSwitchMode.Mode\"7\n\x04Mode\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0f\n\x0bVPA_ROUTING\x10\x01\x12\x11\n\rVPA_SEARCHINE\x10\x02\"\xa6\x01\n\nVPARouting\x12<\n\x0eoperation_type\x18\x01 \x01(\x0e\x32$.dr.command.VPARouting.RougintOpType\"Z\n\rRougintOpType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x11\n\rSTART_ROUTING\x10\x01\x12\x12\n\x0e\x43\x41NCEL_ROUTING\x10\x02\x12\x15\n\x11\x45\x32\x45_START_ROUTING\x10\x03\"<\n\x0cVPARoutingRP\x12,\n\rparking_space\x18\x01 \x01(\x0b\x32\x15.dr.base.ParkingSpace\"\x0e\n\x0cVPAGetInfoRQ\"=\n\x0cVPAGetInfoRP\x12-\n\x07summary\x18\x01 \x01(\x0b\x32\x1c.dr.business_info.VPASummary\"\x12\n\x10VPARoutingGetMap\"\xaa\x01\n\x12VPARoutingGetMapRP\x12\x1e\n\x16vpa_estimated_distance\x18\x01 \x01(\r\x12\x1a\n\x12vpa_estimated_time\x18\x02 \x01(\r\x12\x14\n\x0csemantic_map\x18\x03 \x01(\x0c\x12\x42\n\x08map_info\x18\x04 \x01(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\"]\n\rVPALearningRP\x12\x1d\n\x15vpa_learning_distance\x18\x01 \x01(\r\x12\x17\n\x0fvpa_speed_bumps\x18\x02 \x01(\r\x12\x14\n\x0csemantic_map\x18\x03 \x01(\x0c\"Q\n\tEnableAVM\x12\x0e\n\x06\x61\x63tive\x18\x01 \x01(\x08\x12\x34\n\x0b\x65nable_mode\x18\x02 \x01(\x0e\x32\x1f.dr.business_info.AVMEnableMode\"?\n\x0b\x45nableAVMRP\x12\x30\n\x06status\x18\x01 \x01(\x0b\x32 .dr.business_info.AVMSettingInfo\"\xf0\x01\n\rSwitchAVMView\x12\x19\n\x11\x62ird_view_enabled\x18\x01 \x01(\x08\x12\x19\n\x11round_view_enable\x18\x02 \x01(\x08\x12\x37\n\tavm2dview\x18\x03 \x01(\x0e\x32\".dr.business_info.AVM2DViewSettingH\x00\x12\x30\n\tavm3dview\x18\x04 \x01(\x0b\x32\x1b.dr.business_info.AVM3DViewH\x00\x12\x36\n\x0c\x61vmwheelview\x18\x05 \x01(\x0e\x32\x1e.dr.business_info.AVMWheelViewH\x00\x42\x06\n\x04View\"C\n\x0fSwitchAVMViewRP\x12\x30\n\x06status\x18\x01 \x01(\x0b\x32 .dr.business_info.AVMSettingInfo\"\x1f\n\rParkedShoting\x12\x0e\n\x06\x61\x63tive\x18\x01 \x01(\x08\"C\n\x0fParkedShotingRP\x12\x30\n\x06status\x18\x01 \x01(\x0b\x32 .dr.business_info.AVMSettingInfo\"\x10\n\x0eGetAVMSettings\"D\n\x10GetAVMSettingsRP\x12\x30\n\x06status\x18\x01 \x01(\x0b\x32 .dr.business_info.AVMSettingInfo\"+\n\tPDCUpdate\x12\x1e\n\x16request_pdc_curve_data\x18\x01 \x01(\x08\"\x1b\n\tEnableHMA\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x1b\n\tEnableBSD\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x1b\n\tEnableLCA\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x1b\n\tEnableDOW\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x1c\n\nEnableRCTA\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x1b\n\tEnableRCW\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x1c\n\nEnableRCTB\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\" \n\x10UpdateApaSetting\x12\x0c\n\x04mute\x18\x01 \x01(\x08\"N\n\tAPAParkIn\x12,\n\rparking_space\x18\x01 \x01(\x0b\x32\x15.dr.base.ParkingSpace\x12\x13\n\x0bvpa_task_id\x18\x02 \x01(\t\"B\n\nAPAParkOut\x12\x34\n\tdirection\x18\x01 \x01(\x0e\x32!.dr.business_info.APAOutDirection\"@\n\tAPAParkRP\x12\x33\n\x06reason\x18\x01 \x01(\x0b\x32#.dr.operationstatus.APAStatusReason\"\xd5\x01\n\x12\x41PAGetActiveSource\x12@\n\x08vpa_info\x18\x01 \x01(\x0b\x32,.dr.command.APAGetActiveSource.VPAActiveInfoH\x00\x12@\n\x08\x61pa_info\x18\x02 \x01(\x0b\x32,.dr.command.APAGetActiveSource.APAActiveInfoH\x00\x1a \n\rVPAActiveInfo\x12\x0f\n\x07task_id\x18\x01 \x01(\t\x1a\x0f\n\rAPAActiveInfoB\x08\n\x06source\"V\n\x16RequestImagePixelToPos\x12<\n\x0b\x63oordinates\x18\x01 \x03(\x0b\x32\'.dr.business_info.ImagePixelCoordinates\"P\n\x18RequestImagePixelToPosRP\x12\x34\n\x07objects\x18\x01 \x03(\x0b\x32#.dr.business_info.TransformedObject\";\n\x18\x41PASelectAVMParkingSpace\x12\x1f\n\x05point\x18\x01 \x01(\x0b\x32\x10.dr.base.Point2D\"J\n\x1a\x41PASelectAVMParkingSpaceRP\x12,\n\rparking_space\x18\x01 \x01(\x0b\x32\x15.dr.base.ParkingSpace\"\n\n\x08RPACheck\"\x0b\n\tRPAParkIn\"\x9b\x01\n\x10RPAParkingUpdate\x12=\n\toperation\x18\x01 \x01(\x0e\x32*.dr.command.RPAParkingUpdate.OperationType\"H\n\rOperationType\x12\x0b\n\x07OP_NONE\x10\x00\x12\x0c\n\x08OP_PAUSE\x10\x01\x12\r\n\tOP_CANCEL\x10\x02\x12\r\n\tOP_RESUME\x10\x03\"B\n\nRPAParkOut\x12\x34\n\tdirection\x18\x01 \x01(\x0e\x32!.dr.business_info.APAOutDirection\"c\n\x16RPASuggestOutParkingRP\x12I\n\x18suggest_out_parking_info\x18\x01 \x01(\x0b\x32\'.dr.business_info.SuggestOutParkingInfo\"\xad\x02\n\x10RPAStraightInOut\x12\x39\n\tdirection\x18\x01 \x01(\x0e\x32&.dr.command.RPAStraightInOut.Direction\x12=\n\toperation\x18\x02 \x01(\x0e\x32*.dr.command.RPAStraightInOut.OperationType\"G\n\tDirection\x12\x0f\n\x0b\x44IR_UNKNOWN\x10\x00\x12\x13\n\x0f\x44IR_STRAIGHT_IN\x10\x01\x12\x14\n\x10\x44IR_STRAIGHT_OUT\x10\x02\"V\n\rOperationType\x12\x0b\n\x07OP_NONE\x10\x00\x12\x0c\n\x08OP_START\x10\x01\x12\x0c\n\x08OP_PAUSE\x10\x02\x12\r\n\tOP_CANCEL\x10\x03\x12\r\n\tOP_RESUME\x10\x04\"4\n\x0fRPAAppHeartbeat\x12!\n\x04type\x18\x01 \x01(\x0e\x32\x13.dr.command.RPAType\",\n\x07RPAInit\x12!\n\x04type\x18\x01 \x01(\x0e\x32\x13.dr.command.RPAType\"\n\n\x08RPAClose\"\x16\n\x14RPASuggestOutParking\"\x1b\n\tEnableAEB\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\xa4\x02\n\x10StartCalibration\x12\x42\n\x0eoperation_type\x18\x01 \x01(\x0e\x32*.dr.command.StartCalibration.OperationType\x12\x35\n\ncalib_mode\x18\x02 \x01(\x0e\x32!.dr.business_info.CalibrationMode\x12@\n\x10\x63\x61libration_info\x18\x03 \x03(\x0b\x32&.dr.business_info.CalibrationBoardInfo\x12 \n\x18is_rear_axle_positioning\x18\x04 \x01(\x08\"1\n\rOperationType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\t\n\x05START\x10\x01\x12\x08\n\x04STOP\x10\x02\"\x14\n\x12StartCalibrationRP\"\x1b\n\tEnableELK\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\t\n\x07LSSMute\"\xf6\x01\n\x06TJPCmd\x12(\n\x04type\x18\x01 \x01(\x0e\x32\x1a.dr.command.TJPCmd.CmdType\"\xc1\x01\n\x07\x43mdType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x1a\n\x16REMIND_READY_TO_ACTIVE\x10\x01\x12\x13\n\x0fREMIND_TAKEOVER\x10\x02\x12\x17\n\x13SPEED_LIMIT_LEVEL_1\x10\x03\x12\x17\n\x13SPEED_LIMIT_LEVEL_2\x10\x04\x12\x17\n\x13SPEED_LIMIT_LEVEL_3\x10\x05\x12\x0f\n\x0bSIGNAL_LAMP\x10\x06\x12\n\n\x06TUNNEL\x10\x07\x12\x10\n\x0cTOLL_STATION\x10\x08\"^\n\x0eSetDefaultMode\x12$\n\rdefault_state\x18\x01 \x01(\x0e\x32\r.dr.dsm.State\x12&\n\x0c\x64\x65\x66\x61ult_mode\x18\x02 \x01(\x0e\x32\x10.dr.dsm.SubState\"\xa3\x01\n\x0eSelPrkgFctnCmd\x12\x30\n\x04type\x18\x01 \x01(\x0e\x32\".dr.command.SelPrkgFctnCmd.CmdType\"_\n\x07\x43mdType\x12\r\n\tNO_SELECT\x10\x00\x12\x0f\n\x0b\x41PA_PARKING\x10\x01\x12\x0f\n\x0bP2P_PARKING\x10\x02\x12\x13\n\x0f\x45XPLORE_FORWARD\x10\x03\x12\x0e\n\nDRIVE_BACK\x10\x04\"\x8f\x01\n\x0c\x43ontnPrkgReq\x12.\n\x04type\x18\x01 \x01(\x0e\x32 .dr.command.ContnPrkgReq.CmdType\"O\n\x07\x43mdType\x12\r\n\tNO_SELECT\x10\x00\x12\x14\n\x10\x43ONTINUE_PARKING\x10\x01\x12\x12\n\x0e\x43\x41NCEL_PARKING\x10\x02\x12\x0b\n\x07INVALID\x10\x03\"\xf0\n\n\tBtnEnaReq\x12+\n\x03\x63md\x18\x01 \x01(\x0e\x32\x1c.dr.command.BtnEnaReq.ReqCmdH\x00\x12\x42\n\x11\x65nter_routing_req\x18\x02 \x01(\x0b\x32%.dr.command.BtnEnaReq.EnterRoutingReqH\x00\x12K\n\x16select_target_slot_req\x18\x03 \x01(\x0b\x32).dr.command.BtnEnaReq.SelectTargetSlotReqH\x00\x12;\n\x0ego_to_here_req\x18\x04 \x01(\x0b\x32!.dr.command.BtnEnaReq.GoToHereReqH\x00\x12G\n\x14update_slot_info_req\x18\x05 \x01(\x0b\x32\'.dr.command.BtnEnaReq.UpdateSlotInfoReqH\x00\x12\x45\n\x13update_map_info_req\x18\x06 \x01(\x0b\x32&.dr.command.BtnEnaReq.UpdateMapInfoReqH\x00\x12?\n\x10get_map_info_req\x18\x07 \x01(\x0b\x32#.dr.command.BtnEnaReq.GetMapInfoReqH\x00\x1a\x11\n\x0f\x45nterRoutingReq\x1a\x36\n\x13SelectTargetSlotReq\x12\x1f\n\x17target_parking_space_id\x18\x01 \x01(\r\x1a.\n\x0bGoToHereReq\x12\x1f\n\x17target_parking_space_id\x18\x01 \x01(\r\x1a\xca\x01\n\x11UpdateSlotInfoReq\x12=\n\x0eoperation_type\x18\x01 \x01(\x0e\x32%.dr.notification.gwmhut.OperatingType\x12W\n\x19parking_space_info_change\x18\x02 \x01(\x0b\x32\x34.deeproute.localization.havp_map.ParkingSpaceUsrInfo\x12\x1d\n\x15\x64\x65\x66\x61ult_parking_space\x18\x03 \x01(\x08\x1a\x9c\x01\n\x10UpdateMapInfoReq\x12=\n\x0eoperation_type\x18\x01 \x01(\x0e\x32%.dr.notification.gwmhut.OperatingType\x12I\n\x0fmap_info_change\x18\x02 \x01(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\x1a@\n\rGetMapInfoReq\x12\x18\n\x10get_all_map_info\x18\x01 \x01(\x08\x12\x15\n\rtarget_map_id\x18\x02 \x01(\r\"\xe2\x02\n\x06ReqCmd\x12\x08\n\x04NONE\x10\x00\x12\x18\n\x14\x43ONTINUE_SEARCH_SLOT\x10\x01\x12\x11\n\rACTIVE_SIGNAL\x10\x02\x12\x11\n\rSTART_HAVP_VR\x10\x03\x12\x14\n\x10\x43ONFRIM_MAPBUILT\x10\x04\x12\n\n\x06\x43\x41NCEL\x10\x05\x12\x19\n\x15\x43ONFRIM_START_PARKING\x10\x06\x12\x19\n\x15SEARCH_SLOT_ALONG_WAY\x10\x07\x12\x12\n\x0eHAVP_COMPLETED\x10\x08\x12\x07\n\x03TRY\x10\t\x12\x16\n\x12LEARNING_COMPLETED\x10\n\x12\x12\n\x0e\x43ONTINUE_LEARN\x10\x0b\x12\x10\n\x0cSTART_SVP_VR\x10\x0c\x12\x18\n\x14\x43REAT_MOORINGOUT_MAP\x10\r\x12\r\n\tSTART_E2E\x10\x0e\x12\x17\n\x12\x43\x41NCEL_PRE_MAPPING\x10\xa1\x01\x12\x19\n\x14\x43ONTINUE_PRE_MAPPING\x10\xa2\x01\x42\t\n\x07HAVPCMD\"\xfe\x02\n\x0b\x42tnEnaReqRP\x12\x30\n\x05popup\x18\x01 \x01(\x0b\x32!.dr.notification.gwmhut.PopupDisp\x12\x36\n\x0bmap_info_rp\x18\x02 \x01(\x0b\x32!.dr.command.BtnEnaReqRP.MapInfoRP\x12J\n\x16parking_spaces_info_rp\x18\x03 \x01(\x0b\x32*.dr.command.BtnEnaReqRP.ParkingSpaceInfoRP\x1aP\n\tMapInfoRP\x12\x43\n\tmaps_info\x18\x01 \x03(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\x1ag\n\x12ParkingSpaceInfoRP\x12Q\n\x13parking_spaces_info\x18\x01 \x03(\x0b\x32\x34.deeproute.localization.havp_map.ParkingSpaceUsrInfo\"\xe1\x12\n\x10GWParkingCommand\x12H\n\x11sel_prkg_fctn_cmd\x18\x01 \x01(\x0b\x32+.dr.command.GWParkingCommand.SelPrkgFctnCmdH\x00\x12\x43\n\x0e\x63ontn_prkg_req\x18\x02 \x01(\x0b\x32).dr.command.GWParkingCommand.ContnPrkgReqH\x00\x12?\n\x0cpas_work_cmd\x18\x03 \x01(\x0b\x32\'.dr.command.GWParkingCommand.PASWorkCmdH\x00\x12K\n\x13sel_prk_out_dir_req\x18\x04 \x01(\x0b\x32,.dr.command.GWParkingCommand.SelPrkOutDirReqH\x00\x12=\n\x0bprk_mod_req\x18\x05 \x01(\x0b\x32&.dr.command.GWParkingCommand.PrkModreqH\x00\x12?\n\x0c\x62\x61\x63k_req_aps\x18\x06 \x01(\x0b\x32\'.dr.command.GWParkingCommand.BackReqAPSH\x00\x12H\n\x11prkg_ctrl_mod_req\x18\x07 \x01(\x0b\x32+.dr.command.GWParkingCommand.PrkgCtrlModReqH\x00\x12\x42\n\x0e\x61ps_swt_req_vr\x18\x08 \x01(\x0b\x32(.dr.command.GWParkingCommand.APSSwtReqVRH\x00\x12=\n\x0bslot_num_vr\x18\t \x01(\x0b\x32&.dr.command.GWParkingCommand.SlotNumVRH\x00\x1a\x88\x02\n\x0eSelPrkgFctnCmd\x12<\n\x03\x63md\x18\x01 \x01(\x0e\x32/.dr.command.GWParkingCommand.SelPrkgFctnCmd.Cmd\"\xb7\x01\n\x03\x43md\x12\r\n\tNO_SELECT\x10\x00\x12\x16\n\x12SELECT_APA_PARKING\x10\x01\x12\x16\n\x12SELECT_P2P_PARKING\x10\x02\x12\x1a\n\x16SELECT_EXPLORE_FORWARD\x10\x03\x12\x15\n\x11SELECT_DRIVE_BACK\x10\x04\x12\x17\n\x13SELECT_HAVP_PARKING\x10\x05\x12\x17\n\x13SELECT_PAVP_PARKING\x10\x06\x12\x0c\n\x08RESERVED\x10\x07\x1a\x80\x02\n\x0c\x43ontnPrkgReq\x12:\n\x03\x63md\x18\x01 \x01(\x0e\x32-.dr.command.GWParkingCommand.ContnPrkgReq.Cmd\x12>\n\x05valid\x18\x02 \x01(\x0e\x32/.dr.command.GWParkingCommand.ContnPrkgReq.Valid\"S\n\x03\x43md\x12\r\n\tNO_SELECT\x10\x00\x12\x1b\n\x17SELECT_CONTINUE_PARKING\x10\x01\x12\x12\n\x0e\x43\x41NCEL_PARKING\x10\x02\x12\x0c\n\x08RESERVED\x10\x03\"\x1f\n\x05Valid\x12\t\n\x05VALID\x10\x00\x12\x0b\n\x07INVALID\x10\x01\x1a^\n\nPASWorkCmd\x12\x38\n\x03\x63md\x18\x01 \x01(\x0e\x32+.dr.command.GWParkingCommand.PASWorkCmd.Cmd\"\x16\n\x03\x43md\x12\x07\n\x03OFF\x10\x00\x12\x06\n\x02ON\x10\x01\x1a\x9b\x03\n\x0fSelPrkOutDirReq\x12=\n\x03\x63md\x18\x01 \x01(\x0e\x32\x30.dr.command.GWParkingCommand.SelPrkOutDirReq.Cmd\"\xc8\x02\n\x03\x43md\x12\x10\n\x0cNO_SELECTION\x10\x00\x12$\n PARK_OUT_FRONT_VERTICAL_HEAD_OUT\x10\x01\x12#\n\x1fPARK_OUT_REAR_VERTICAL_TAIL_OUT\x10\x02\x12#\n\x1fPARK_OUT_LEFT_PARALLEL_LEFT_OUT\x10\x03\x12%\n!PARK_OUT_RIGHT_PARALLEL_RIGHT_OUT\x10\x04\x12#\n\x1fPARK_OUT_LEFT_VERTICAL_LEFT_OUT\x10\x05\x12%\n!PARK_OUT_RIGHT_VERTICAL_RIGHT_OUT\x10\x06\x12\x0c\n\x08RESERVED\x10\x07\x12\x0e\n\nFRONT_LEFT\x10\x08\x12\x0f\n\x0b\x46RONT_RIGHT\x10\t\x12\r\n\tBACK_LEFT\x10\n\x12\x0e\n\nBACK_RIGHT\x10\x0b\x1a\xa8\x01\n\tPrkModreq\x12\x37\n\x03\x63md\x18\x01 \x01(\x0e\x32*.dr.command.GWParkingCommand.PrkModreq.Cmd\"b\n\x03\x43md\x12\r\n\tNO_SELECT\x10\x00\x12\x13\n\x0fHEAD_PARKING_IN\x10\x01\x12\x13\n\x0fTAIL_PARKING_IN\x10\x02\x12\x10\n\x0cRESERVED_0x3\x10\x03\x12\x10\n\x0cRESERVED_0x4\x10\x04\x1a\xfd\x01\n\x0ePrkgCtrlModReq\x12<\n\x03\x63md\x18\x01 \x01(\x0e\x32/.dr.command.GWParkingCommand.PrkgCtrlModReq.Cmd\x12@\n\x05valid\x18\x02 \x01(\x0e\x32\x31.dr.command.GWParkingCommand.PrkgCtrlModReq.Valid\"J\n\x03\x43md\x12\r\n\tNO_ACTION\x10\x00\x12\x12\n\x0ePARKING_IN_CAR\x10\x01\x12\x12\n\x0eREMOTE_PARKING\x10\x02\x12\x0c\n\x08RESERVED\x10\x03\"\x1f\n\x05Valid\x12\t\n\x05VALID\x10\x00\x12\x0b\n\x07INVALID\x10\x01\x1aj\n\nBackReqAPS\x12\x38\n\x03\x63md\x18\x01 \x01(\x0e\x32+.dr.command.GWParkingCommand.BackReqAPS.Cmd\"\"\n\x03\x43md\x12\x0e\n\nNO_REQUEST\x10\x00\x12\x0b\n\x07REQUEST\x10\x01\x1a}\n\x0b\x41PSSwtReqVR\x12\x39\n\x03\x63md\x18\x01 \x01(\x0e\x32,.dr.command.GWParkingCommand.APSSwtReqVR.Cmd\"3\n\x03\x43md\x12\r\n\tNO_ACTION\x10\x00\x12\x07\n\x03OFF\x10\x01\x12\x06\n\x02ON\x10\x02\x12\x0c\n\x08RESERVED\x10\x03\x1a\x39\n\tSlotNumVR\x12,\n\rparking_space\x18\x01 \x01(\x0b\x32\x15.dr.base.ParkingSpaceB\x06\n\x04type\"\xba\x03\n\x0eSmartLPCommand\x12\x1d\n\x13lp_function_confirm\x18\x01 \x01(\x08H\x00\x12\x1a\n\x10lp_function_exit\x18\x02 \x01(\x08H\x00\x12\x1c\n\x12lp_function_cancel\x18\x03 \x01(\x08H\x00\x12\x1b\n\x11lp_learning_start\x18\x04 \x01(\x08H\x00\x12\x1c\n\x12lp_function_return\x18\x05 \x01(\x08H\x00\x12\x18\n\x0elp_path_manage\x18\x06 \x01(\x08H\x00\x12\x1d\n\x13lp_selected_slot_id\x18\x07 \x01(\x05H\x00\x12\x1e\n\x14lp_learning_complete\x18\x08 \x01(\x08H\x00\x12\x18\n\x0elp_parking_try\x18\t \x01(\x08H\x00\x12\x1a\n\x10lp_function_park\x18\n \x01(\x08H\x00\x12\x30\n\ndelete_map\x18\x0b \x01(\x0b\x32\x1a.dr.command.ParkingMapInfoH\x00\x12\x19\n\x0flp_recover_park\x18\x0c \x01(\x08H\x00\x12\x16\n\x0clp_start_apa\x18\r \x01(\x08H\x00\x12\x15\n\x0blp_exit_apa\x18\x0e \x01(\x08H\x00\x42\t\n\x07\x43ommand\"\xce\x06\n\x10GLParkingCommand\x12\x36\n\x16\x64rvr_assc_sys_btn_push\x18\x01 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x34\n\x14prkg_intrpt_reld_btn\x18\x02 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x36\n\x16\x64rvr_assc_sys_park_mod\x18\x03 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x37\n\x17prkg_in_or_out_and_cncl\x18\x04 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x34\n\x14\x61ut_prkg_slot_nr_req\x18\x05 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x34\n\x14lo_spd_drvg_assi_swt\x18\x06 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x36\n\x16prkg_frnt_or_re_select\x18\x07 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x38\n\x18mob_dev_rpa_req1_rpa_req\x18\x08 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x39\n\x19\x61ut_prkg_hand_slot_nr_req\x18\t \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x31\n\x11\x61ut_valt_prkg_swt\x18\n \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12=\n\x1d\x61ut_valt_prkg_experience_resp\x18\x0b \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x38\n\x18\x61ut_valt_prkg_l1_btn_req\x18\x0c \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x46\n&aut_prkg_hand_slot_nr_req_topo_slot_id\x18\r \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x43\n#mob_dev_rpa_req1_rpa_out_mode_sub_t\x18\x0e \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x42\t\n\x07\x43ommand\"\xd5%\n\x0cGLHPACommand\x12\x12\n\nreq_map_id\x18\x01 \x01(\x05\x12H\n\x11\x61ut_valt_prkg_swt\x18\x02 \x01(\x0e\x32+.dr.command.GLHPACommand.AutValtPrkgSwtTypeH\x00\x12_\n\x1d\x61ut_valt_prkg_experience_resp\x18\x03 \x01(\x0e\x32\x36.dr.command.GLHPACommand.AutValtPrkgExperienceRespTypeH\x00\x12N\n\x14prkg_intrpt_reld_btn\x18\x04 \x01(\x0e\x32..dr.command.GLHPACommand.PrkgIntrptReldBtnTypeH\x00\x12[\n\x1c\x61ut_valt_prkg_l2_pop_btn_req\x18\x05 \x01(\x0e\x32\x33.dr.command.GLHPACommand.AutValtPrkgL2PopBtnReqTypeH\x00\x12l\n%aut_valt_prkg_map_oper_req2_map_type2\x18\x06 \x01(\x0e\x32;.dr.command.GLHPACommand.AutValtPrkgMapOperReq2MapType2TypeH\x00\x12\x41\n\rmap_build_sts\x18\x07 \x01(\x0e\x32(.dr.command.GLHPACommand.MapBuildStsTypeH\x00\x12T\n\x18\x61ut_valt_prkg_l1_btn_req\x18\x08 \x01(\x0e\x32\x30.dr.command.GLHPACommand.AutValtPrkgL1BtnReqTypeH\x00\x12N\n\x14prkg_slot_typ_select\x18\t \x01(\x0e\x32..dr.command.GLHPACommand.PrkgSlotTypSelectTypeH\x00\x12V\n\x18\x61ut_prkg_select_entrance\x18\n \x01(\x0e\x32\x32.dr.command.GLHPACommand.AutPrkgSelectEntranceTypeH\x00\x12R\n\x17\x63rs_ctrl_ti_gap_adj_req\x18\x0b \x01(\x0e\x32/.dr.command.GLHPACommand.CrsCtrlTiGapAdjReqTypeH\x00\x12w\n,drvr_ac_crs_set_spd_req_drvr_crs_set_spd_req\x18\x0c \x01(\x0e\x32?.dr.command.GLHPACommand.DrvrACCrsSetSpdReqDrvrCrsSetSpdReqTypeH\x00\x12\x81\x01\n1aut_valt_prkg_l2_btn_req_setting_fct_push_btn_req\x18\r \x01(\x0e\x32\x44.dr.command.GLHPACommand.AutValtPrkgL2BtnReqSettingFctPushBtnReqTypeH\x00\x12\x81\x01\n1aut_valt_prkg_l2_btn_req_setting_no_sence_btn_req\x18\x0e \x01(\x0e\x32\x44.dr.command.GLHPACommand.AutValtPrkgL2BtnReqSettingNoSenceBtnReqTypeH\x00\x12|\n.aut_valt_prkg_l2_btn_req_setting_voice_btn_req\x18\x0f \x01(\x0e\x32\x42.dr.command.GLHPACommand.AutValtPrkgL2BtnReqSettingVoiceBtnReqTypeH\x00\"Q\n\x12\x41utValtPrkgSwtType\x12\x14\n\x10ONOFFNOREQ_NOREQ\x10\x00\x12\x11\n\rONOFFNOREQ_ON\x10\x01\x12\x12\n\x0eONOFFNOREQ_OFF\x10\x02\"z\n\x1d\x41utValtPrkgExperienceRespType\x12\x11\n\rCMDTYPE1_IDLE\x10\x00\x12\x14\n\x10\x43MDTYPE1_CONFIRM\x10\x01\x12\x13\n\x0f\x43MDTYPE1_CANCEL\x10\x02\x12\x1b\n\x17\x43MDTYPE1_NOMOREREMINDER\x10\x03\"s\n\x15PrkgIntrptReldBtnType\x12\x10\n\x0c\x42TNREQ_NOREQ\x10\x00\x12\x13\n\x0f\x42TNREQ_CONTINUE\x10\x01\x12\x16\n\x12\x42TNREQ_NOTCONTINUE\x10\x02\x12\x1b\n\x17\x42TNREQ_BACKTOSTARTPOINT\x10\x03\"\x81\x04\n\x1a\x41utValtPrkgL2PopBtnReqType\x12\"\n\x1e\x41UTVALTPRKGL2POPBTNREQ_DEFAULT\x10\x00\x12*\n&AUTVALTPRKGL2POPBTNREQ_TUTORIALSTRTREQ\x10\x01\x12*\n&AUTVALTPRKGL2POPBTNREQ_TUTORIALCNCLREQ\x10\x02\x12#\n\x1f\x41UTVALTPRKGL2POPBTNREQ_RESERVED\x10\x03\x12,\n(AUTVALTPRKGL2POPBTNREQ_COVERROUTECNCLREQ\x10\x04\x12.\n*AUTVALTPRKGL2POPBTNREQ_NAMEROUTECONFIRMREQ\x10\x05\x12(\n$AUTVALTPRKGL2POPBTNREQ_SETTINGFCTREQ\x10\x06\x12)\n%AUTVALTPRKGL2POPBTNREQ_SETTINGHELPREQ\x10\x07\x12*\n&AUTVALTPRKGL2POPBTNREQ_SETTINGROUTEREQ\x10\x08\x12\x30\n,AUTVALTPRKGL2POPBTNREQ_SETTINGPRKGINROUTEREQ\x10\t\x12\x31\n-AUTVALTPRKGL2POPBTNREQ_SETTINGPRKGOUTROUTEREQ\x10\n\"\xbd\x03\n\"AutValtPrkgMapOperReq2MapType2Type\x12\x14\n\x10MAPTYPE2_DEFAULT\x10\x00\x12\x19\n\x15MAPTYPE2_PRKGINCREATE\x10\x01\x12\x1a\n\x16MAPTYPE2_PRKGOUTCREATE\x10\x02\x12\x1b\n\x17MAPTYPE2_PRKGCNCLLOCATD\x10\x03\x12\x19\n\x15MAPTYPE2_PRKGINDELETE\x10\x04\x12\x1a\n\x16MAPTYPE2_PRKGOUTDELETE\x10\x05\x12\x19\n\x15MAPTYPE2_PRKGINSELECT\x10\x06\x12\x1a\n\x16MAPTYPE2_PRKGOUTSELECT\x10\x07\x12\"\n\x1eMAPTYPE2_PRKGINSELECT_NOLONGER\x10\x08\x12#\n\x1fMAPTYPE2_PRKGOUTSELECT_NOLONGER\x10\t\x12\x18\n\x14MAPTYPE2_PRKGINCOVER\x10\n\x12\x19\n\x15MAPTYPE2_PRKGOUTCOVER\x10\x0b\x12\x11\n\rMAPTYPE2_SYNC\x10\x0c\x12\x16\n\x12MAPTYPE2_RESERVED1\x10\r\x12\x16\n\x12MAPTYPE2_RESERVED2\x10\x0e\"\xa9\x01\n\x0fMapBuildStsType\x12\x17\n\x13MAPBUILDSTS_DEFAULT\x10\x00\x12\x1b\n\x17MAPBUILDSTS_STORSUCCEED\x10\x01\x12\x18\n\x14MAPBUILDSTS_STORFAIL\x10\x02\x12\"\n\x1eMAPBUILDSTS_STORSUCDADBULDSUCD\x10\x03\x12\"\n\x1eMAPBUILDSTS_STORSUCDADBULDFAIL\x10\x04\"\xcd\x02\n\x17\x41utValtPrkgL1BtnReqType\x12\x1f\n\x1b\x41UTVALTPRKGL1BTNREQ_DEFAULT\x10\x00\x12\"\n\x1e\x41UTVALTPRKGL1BTNREQ_SETTINGREQ\x10\x01\x12\x1f\n\x1b\x41UTVALTPRKGL1BTNREQ_EXITREQ\x10\x02\x12+\n\'AUTVALTPRKGL1BTNREQ_REACHDESTINATIONREQ\x10\x03\x12&\n\"AUTVALTPRKGL1BTNREQ_GLBVIRTVIEWREQ\x10\x04\x12&\n\"AUTVALTPRKGL1BTNREQ_PTLVIRTVIEWREQ\x10\x05\x12\x19\n\x15\x41UTVALTPRKGL1BTNREQ_6\x10\x06\x12\x19\n\x15\x41UTVALTPRKGL1BTNREQ_7\x10\x07\x12\x19\n\x15\x41UTVALTPRKGL1BTNREQ_8\x10\x08\"\x9a\x01\n\x15PrkgSlotTypSelectType\x12\x1d\n\x19PRKGSLOTTYPSELECT_DEFAULT\x10\x00\x12\"\n\x1ePRKGSLOTTYPSELECT_TERMIANLSLOT\x10\x01\x12\x1e\n\x1aPRKGSLOTTYPSELECT_AREASLOT\x10\x02\x12\x1e\n\x1aPRKGSLOTTYPSELECT_RESERVED\x10\x03\"\xa5\x02\n\x19\x41utPrkgSelectEntranceType\x12\x1e\n\x1a\x41UTPRKGSELECTENTRANCE_IDLE\x10\x00\x12$\n AUTPRKGSELECTENTRANCE_TARGETPRKG\x10\x01\x12&\n\"AUTPRKGSELECTENTRANCE_PARKENTRANCE\x10\x02\x12*\n&AUTPRKGSELECTENTRANCE_BASEMENTENTRANCE\x10\x03\x12\"\n\x1e\x41UTPRKGSELECTENTRANCE_PARKEXIT\x10\x04\x12&\n\"AUTPRKGSELECTENTRANCE_BASEMENTEXIT\x10\x05\x12\"\n\x1e\x41UTPRKGSELECTENTRANCE_RESERVED\x10\x06\"\x9b\x01\n\x16\x43rsCtrlTiGapAdjReqType\x12\x1b\n\x17TIGAPSETFORLGTCTRL_NONE\x10\x00\x12 \n\x1cTIGAPSETFORLGTCTRL_TIMEGAP_1\x10\x01\x12 \n\x1cTIGAPSETFORLGTCTRL_TIMEGAP_2\x10\x02\x12 \n\x1cTIGAPSETFORLGTCTRL_TIMEGAP_3\x10\x03\"\xc4\x01\n&DrvrACCrsSetSpdReqDrvrCrsSetSpdReqType\x12\x1a\n\x16\x44RVRCRSAMODREQ_NEUTRAL\x10\x00\x12\x1e\n\x1a\x44RVRCRSAMODREQ_APOSREQMOD1\x10\x01\x12\x1e\n\x1a\x44RVRCRSAMODREQ_APOSREQMOD2\x10\x02\x12\x1e\n\x1a\x44RVRCRSAMODREQ_ANEGREQMOD1\x10\x03\x12\x1e\n\x1a\x44RVRCRSAMODREQ_ANEGREQMOD2\x10\x04\"\xe3\x01\n+AutValtPrkgL2BtnReqSettingFctPushBtnReqType\x12;\n7AUTVALTPRKGL2BTNREQSETTINGFCTPUSHBTNREQ_BTNREQ1_DEFAULT\x10\x00\x12;\n7AUTVALTPRKGL2BTNREQSETTINGFCTPUSHBTNREQ_BTNREQ1_OPENREQ\x10\x01\x12:\n6AUTVALTPRKGL2BTNREQSETTINGFCTPUSHBTNREQ_BTNREQ1_OFFREQ\x10\x02\"\xe3\x01\n+AutValtPrkgL2BtnReqSettingNoSenceBtnReqType\x12;\n7AUTVALTPRKGL2BTNREQSETTINGNOSENCEBTNREQ_BTNREQ1_DEFAULT\x10\x00\x12;\n7AUTVALTPRKGL2BTNREQSETTINGNOSENCEBTNREQ_BTNREQ1_OPENREQ\x10\x01\x12:\n6AUTVALTPRKGL2BTNREQSETTINGNOSENCEBTNREQ_BTNREQ1_OFFREQ\x10\x02\"\xd1\x02\n)AutValtPrkgL2BtnReqSettingVoiceBtnReqType\x12\x44\n@AUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQ_SETTINGVOICEBTNREQ_DEFAULT\x10\x00\x12J\nFAUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQ_SETTINGVOICEBTNREQ_DETAILMODEREQ\x10\x01\x12J\nFAUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQ_SETTINGVOICEBTNREQ_SIMPLEMODEREQ\x10\x02\x12\x46\nBAUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQ_SETTINGVOICEBTNREQ_ALLOFFREQ\x10\x03\x42\t\n\x07\x43ommand\"\x1c\n\x0eParkingMapInfo\x12\n\n\x02id\x18\x01 \x01(\x05\"\x8f\x01\n\x11SentryModeCommand\x12\x33\n\x04type\x18\x01 \x01(\x0e\x32%.dr.command.SentryModeCommand.CmdType\"E\n\x07\x43mdType\x12\r\n\tNO_SELECT\x10\x00\x12\x15\n\x11START_SENTRY_MODE\x10\x01\x12\x14\n\x10STOP_SENTRY_MODE\x10\x02\"\x18\n\x16SentryModeGetStatistic\"\x1b\n\tEnableTSR\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x1b\n\tEnableSLW\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"q\n\x11\x44rivingActiveExit\x12\x12\n\ndriving_on\x18\x01 \x01(\x08\x12\x13\n\x0b\x64riving_off\x18\x02 \x01(\x08\x12\x33\n\x0etarget_feature\x18\x03 \x01(\x0e\x32\x1b.dr.operationstatus.Feature*\x98\x03\n\x06Module\x12\x12\n\x0eUNKNOWN_MODULE\x10\x00\x12\x10\n\x0cSENSOR_LIDAR\x10\x01\x12\x0e\n\nSENSOR_USS\x10\x02\x12\x0e\n\nSENSOR_INS\x10\x03\x12\x10\n\x0cSENSOR_RADAR\x10\x04\x12\x0e\n\nMAP_ENGINE\x10\x05\x12\x10\n\x0cLOCK_ON_ROAD\x10\x06\x12\x0e\n\nINS_ONLINE\x10\x07\x12\x10\n\x0cLOCALIZATION\x10\x08\x12\x0e\n\nPERCEPTION\x10\t\x12\x0c\n\x08PLANNING\x10\n\x12\n\n\x06\x43\x41NBUS\x10\x0b\x12\x07\n\x03\x42LC\x10\x0c\x12\n\n\x06SAFETY\x10\r\x12\x0b\n\x07STARTER\x10\x0e\x12\x12\n\x0ePERF_COLLECTOR\x10\x0f\x12\n\n\x06\x43HURCH\x10\x10\x12\n\n\x06SENTRY\x10\x11\x12\x11\n\rSENSOR_CAMERA\x10\x12\x12\x11\n\rLOCAL_ROUTING\x10\x13\x12\x0b\n\x07\x43ONTROL\x10\x14\x12\x0b\n\x07ROUTING\x10\x15\x12\x1b\n\x17PARKING_ENTRY_DETECTION\x10\x16\x12\x14\n\x10RTK_POSE_FORWARD\x10\x17\x12\x07\n\x03\x44SM\x10\x18*\xc4\x01\n\rMapEngineCode\x12\x0b\n\x07SUCCESS\x10\x00\x12\x0c\n\x08INTERNAL\x10\x01\x12\r\n\tNOT_FOUND\x10\x02\x12\x14\n\x10INVALID_ARGUMENT\x10\x03\x12\x0f\n\x0bUNAVAILABLE\x10\x04\x12\x10\n\x0cOUT_OF_RANGE\x10\x05\x12$\n NETWORK_ADDRESS_RESOLUTION_ERROR\x10\x06\x12\x15\n\x11\x44\x45\x41\x44LINE_EXCEEDED\x10\x07\x12\x13\n\x0fROUTING_UNKNOWN\x10\x08*M\n\x07RPAType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0e\n\nPARKING_IN\x10\x01\x12\x0f\n\x0bPARKING_OUT\x10\x02\x12\x14\n\x10STARAIGHT_IN_OUT\x10\x03\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13\x64rapi/command.proto\x12\ndr.command\x1a\x19\x64rapi/business_info.proto\x1a\x10\x64rapi/base.proto\x1a\x18\x64rapi/local_config.proto\x1a\x1c\x64rapi/operation_status.proto\x1a\rdsm/dsm.proto\x1a\x19google/protobuf/any.proto\x1a drapi/gwm_hut_notification.proto\x1a\x1blocalization/havp_map.proto\"\xc2&\n\x07\x43ommand\x12\n\n\x02id\x18\x01 \x01(\t\x12\x36\n\x0ctrigger_type\x18\x02 \x01(\x0e\x32 .dr.business_info.BlcTriggerType\x12\x31\n\rupdate_config\x18\x64 \x01(\x0b\x32\x18.dr.command.UpdateConfigH\x00\x12,\n\nenable_acc\x18\xe8\x07 \x01(\x0b\x32\x15.dr.command.EnableACCH\x00\x12-\n\x0bget_acc_tcc\x18\xe9\x07 \x01(\x0b\x32\x15.dr.command.GetACCTTCH\x00\x12<\n\x13get_acc_speed_limit\x18\xea\x07 \x01(\x0b\x32\x1c.dr.command.GetACCSpeedLimitH\x00\x12=\n\x13\x64riving_active_exit\x18\xeb\x07 \x01(\x0b\x32\x1d.dr.command.DrivingActiveExitH\x00\x12;\n\x12\x63hange_speed_limit\x18\xec\x07 \x01(\x0b\x32\x1c.dr.command.ChangeSpeedLimitH\x00\x12\x35\n\x0f\x63hange_time_gap\x18\xed\x07 \x01(\x0b\x32\x19.dr.command.ChangeTimeGapH\x00\x12I\n\x19\x63hange_acceleration_style\x18\xee\x07 \x01(\x0b\x32#.dr.command.ChangeAccelerationStyleH\x00\x12*\n\tpull_over\x18\xef\x07 \x01(\x0b\x32\x14.dr.command.PullOverH\x00\x12\x34\n\x0eyield_obstacle\x18\xf0\x07 \x01(\x0b\x32\x19.dr.command.YieldObstacleH\x00\x12*\n\tover_take\x18\xf1\x07 \x01(\x0b\x32\x14.dr.command.OverTakeH\x00\x12)\n\x07set_ttc\x18\xcc\x08 \x01(\x0b\x32\x15.dr.command.SetACCTTCH\x00\x12,\n\nenable_ica\x18\xd0\x0f \x01(\x0b\x32\x15.dr.command.EnableICAH\x00\x12.\n\x0b\x63hange_lane\x18\xd5\x0f \x01(\x0b\x32\x16.dr.command.ChangeLaneH\x00\x12=\n\x13\x63hange_auto_upgrade\x18\xd6\x0f \x01(\x0b\x32\x1d.dr.command.ChangeAutoUpgradeH\x00\x12,\n\nenable_nca\x18\xb8\x17 \x01(\x0b\x32\x15.dr.command.EnableNCAH\x00\x12\x38\n\x10start_navigation\x18\xba\x17 \x01(\x0b\x32\x1b.dr.command.StartNavigationH\x00\x12:\n\x11\x63\x61ncel_navigation\x18\xbb\x17 \x01(\x0b\x32\x1c.dr.command.CancelNavigationH\x00\x12\x34\n\x0e\x63hange_routing\x18\xbc\x17 \x01(\x0b\x32\x19.dr.command.ChangeRoutingH\x00\x12(\n\x08get_path\x18\x9c\x18 \x01(\x0b\x32\x13.dr.command.GetPathH\x00\x12/\n\x0cget_cur_path\x18\x9d\x18 \x01(\x0b\x32\x16.dr.command.GetCurPathH\x00\x12\x34\n\x0fget_cur_path_id\x18\x9e\x18 \x01(\x0b\x32\x18.dr.command.GetCurPathIdH\x00\x12,\n\nenable_ldw\x18\xa0\x1f \x01(\x0b\x32\x15.dr.command.EnableLDWH\x00\x12,\n\nenable_rdp\x18\x94# \x01(\x0b\x32\x15.dr.command.EnableRDPH\x00\x12,\n\nactive_apa\x18\x88\' \x01(\x0b\x32\x15.dr.command.ActiveAPAH\x00\x12\x41\n\x12image_pixel_to_pos\x18\x89\' \x01(\x0b\x32\".dr.command.RequestImagePixelToPosH\x00\x12)\n\x07parking\x18\x8a\' \x01(\x0b\x32\x15.dr.command.APAParkInH\x00\x12.\n\x0bout_parking\x18\x8b\' \x01(\x0b\x32\x16.dr.command.APAParkOutH\x00\x12<\n\x13update_apa_settings\x18\x8d\' \x01(\x0b\x32\x1c.dr.command.UpdateApaSettingH\x00\x12\x44\n\x17\x61pa_parking_switch_mode\x18\x90\' \x01(\x0b\x32 .dr.command.APAParkingSwitchModeH\x00\x12\x41\n\x12\x61pa_parking_update\x18\x91\' \x01(\x0b\x32\".dr.command.APAParkingUpdateStatusH\x00\x12@\n\x15\x61pa_get_active_source\x18\x92\' \x01(\x0b\x32\x1e.dr.command.APAGetActiveSourceH\x00\x12P\n\x1d\x61pa_get_realtime_parkingspace\x18\x93\' \x01(\x0b\x32&.dr.command.APAGetRealtimeParkingSpaceH\x00\x12L\n\x1b\x61pa_select_avm_parkingspace\x18\x94\' \x01(\x0b\x32$.dr.command.APASelectAVMParkingSpaceH\x00\x12L\n\x1b\x61pa_app_select_parkingspace\x18\x95\' \x01(\x0b\x32$.dr.command.APAAPPSelectParkingSpaceH\x00\x12\x44\n\x17\x61pa_suggest_out_parking\x18\x96\' \x01(\x0b\x32 .dr.command.APASuggestOutParkingH\x00\x12<\n\x13\x61pa_active_out_park\x18\x97\' \x01(\x0b\x32\x1c.dr.command.APAActiveParkOutH\x00\x12\x46\n\x18\x61pa_skip_countdown_clock\x18\x98\' \x01(\x0b\x32!.dr.command.APASkipCountDownClockH\x00\x12\x46\n\x18\x61pa_enter_custom_parking\x18\x99\' \x01(\x0b\x32!.dr.command.APAEnterCustomParkingH\x00\x12\x46\n\x18\x61pa_leave_custom_parking\x18\x9a\' \x01(\x0b\x32!.dr.command.APALeaveCustomParkingH\x00\x12S\n\x1f\x61pa_select_custom_parking_space\x18\x9b\' \x01(\x0b\x32\'.dr.command.APASelectCustomParkingSpaceH\x00\x12;\n\x12gw_parking_command\x18\xed\' \x01(\x0b\x32\x1c.dr.command.GWParkingCommandH\x00\x12\x37\n\x10smart_lp_command\x18\xee\' \x01(\x0b\x32\x1a.dr.command.SmartLPCommandH\x00\x12;\n\x12gl_parking_command\x18\xef\' \x01(\x0b\x32\x1c.dr.command.GLParkingCommandH\x00\x12\x33\n\x0egl_hpa_command\x18\xf0\' \x01(\x0b\x32\x18.dr.command.GLHPACommandH\x00\x12.\n\x0bvpa_routing\x18\xf1. \x01(\x0b\x32\x16.dr.command.VPARoutingH\x00\x12\x30\n\x0cvpa_learning\x18\xf2. \x01(\x0b\x32\x17.dr.command.VPALearningH\x00\x12\x44\n\x17vpa_routing_switch_mode\x18\xf3. \x01(\x0b\x32 .dr.command.VPARoutingSwitchModeH\x00\x12\x31\n\x0cvpa_get_info\x18\xf4. \x01(\x0b\x32\x18.dr.command.VPAGetInfoRQH\x00\x12<\n\x13vpa_routing_get_map\x18\xf5. \x01(\x0b\x32\x1c.dr.command.VPARoutingGetMapH\x00\x12-\n\x0b\x62tn_ena_req\x18\xf6. \x01(\x0b\x32\x15.dr.command.BtnEnaReqH\x00\x12,\n\nenable_hma\x18\xd8\x36 \x01(\x0b\x32\x15.dr.command.EnableHMAH\x00\x12,\n\nenable_bsd\x18\xbc\x37 \x01(\x0b\x32\x15.dr.command.EnableBSDH\x00\x12,\n\nenable_lca\x18\xa0\x38 \x01(\x0b\x32\x15.dr.command.EnableLCAH\x00\x12,\n\nenable_dow\x18\x84\x39 \x01(\x0b\x32\x15.dr.command.EnableDOWH\x00\x12.\n\x0b\x65nable_rcta\x18\xe8\x39 \x01(\x0b\x32\x16.dr.command.EnableRCTAH\x00\x12,\n\nenable_rcw\x18\xcc: \x01(\x0b\x32\x15.dr.command.EnableRCWH\x00\x12.\n\x0b\x65nable_rctb\x18\xb0; \x01(\x0b\x32\x16.dr.command.EnableRCTBH\x00\x12,\n\nenable_avm\x18\x95< \x01(\x0b\x32\x15.dr.command.EnableAVMH\x00\x12\x30\n\nswitch_avm\x18\x96< \x01(\x0b\x32\x19.dr.command.SwitchAVMViewH\x00\x12\x32\n\x0cparking_shot\x18\x97< \x01(\x0b\x32\x19.dr.command.ParkedShotingH\x00\x12\x37\n\x10get_avm_settings\x18\x98< \x01(\x0b\x32\x1a.dr.command.GetAVMSettingsH\x00\x12,\n\nenable_aeb\x18\xf8< \x01(\x0b\x32\x15.dr.command.EnableAEBH\x00\x12,\n\nenable_esa\x18\xf9< \x01(\x0b\x32\x15.dr.command.EnableESAH\x00\x12,\n\nenable_aes\x18\xfa< \x01(\x0b\x32\x15.dr.command.EnableAESH\x00\x12,\n\nenable_mai\x18\xfb< \x01(\x0b\x32\x15.dr.command.EnableMAIH\x00\x12:\n\x11start_calibration\x18\xdc= \x01(\x0b\x32\x1c.dr.command.StartCalibrationH\x00\x12,\n\nenable_elk\x18\xc0> \x01(\x0b\x32\x15.dr.command.EnableELKH\x00\x12(\n\x08lss_mute\x18\xc1> \x01(\x0b\x32\x13.dr.command.LSSMuteH\x00\x12+\n\tpdc_curve\x18\xa4? \x01(\x0b\x32\x15.dr.command.PDCUpdateH\x00\x12,\n\nrpa_parkin\x18\x89@ \x01(\x0b\x32\x15.dr.command.RPAParkInH\x00\x12.\n\x0brpa_parkout\x18\x8a@ \x01(\x0b\x32\x16.dr.command.RPAParkOutH\x00\x12\x38\n\x0frpa_park_update\x18\x8b@ \x01(\x0b\x32\x1c.dr.command.RPAParkingUpdateH\x00\x12\x38\n\x0fstraight_in_out\x18\x8c@ \x01(\x0b\x32\x1c.dr.command.RPAStraightInOutH\x00\x12\x35\n\rrpa_heartbeat\x18\x8d@ \x01(\x0b\x32\x1b.dr.command.RPAAppHeartbeatH\x00\x12(\n\x08rpa_init\x18\x8e@ \x01(\x0b\x32\x13.dr.command.RPAInitH\x00\x12*\n\trpa_close\x18\x8f@ \x01(\x0b\x32\x14.dr.command.RPACloseH\x00\x12*\n\trpa_check\x18\x90@ \x01(\x0b\x32\x14.dr.command.RPACheckH\x00\x12\x44\n\x17rpa_suggest_out_parking\x18\x91@ \x01(\x0b\x32 .dr.command.RPASuggestOutParkingH\x00\x12&\n\x07tjp_cmd\x18\xed@ \x01(\x0b\x32\x12.dr.command.TJPCmdH\x00\x12\x39\n\x0fsentry_mode_cmd\x18\x9f\x41 \x01(\x0b\x32\x1d.dr.command.SentryModeCommandH\x00\x12H\n\x19sentry_mode_get_statistic\x18\xa0\x41 \x01(\x0b\x32\".dr.command.SentryModeGetStatisticH\x00\x12\'\n\x0b\x64sm_trigger\x18\xd0\x41 \x01(\x0b\x32\x0f.dr.dsm.TriggerH\x00\x12\x33\n\x0c\x64\x65\x66\x61ult_mode\x18\xd1\x41 \x01(\x0b\x32\x1a.dr.command.SetDefaultModeH\x00\x12\x1c\n\x11get_tracking_data\x18\xd2\x41 \x01(\x08H\x00\x12>\n\x17select_parking_function\x18\xb4\x42 \x01(\x0b\x32\x1a.dr.command.SelPrkgFctnCmdH\x00\x12=\n\x18\x63ontinue_parking_request\x18\xb5\x42 \x01(\x0b\x32\x18.dr.command.ContnPrkgReqH\x00\x12,\n\nenable_tsr\x18\x98\x43 \x01(\x0b\x32\x15.dr.command.EnableTSRH\x00\x12,\n\nenable_slw\x18\x99\x43 \x01(\x0b\x32\x15.dr.command.EnableSLWH\x00\x42\x05\n\x03\x63md\"\x9b\r\n\tCommandRP\x12\n\n\x02id\x18\x01 \x01(\t\x12&\n\nerror_code\x18\x02 \x01(\x0e\x32\x12.dr.base.ErrorCode\x12+\n\x07\x61\x63\x63_tcc\x18\xe8\x07 \x01(\x0b\x32\x17.dr.command.GetACCTTCRPH\x00\x12:\n\x0f\x61\x63\x63_speed_limit\x18\xe9\x07 \x01(\x0b\x32\x1e.dr.command.GetACCSpeedLimitRPH\x00\x12/\n\rpath_response\x18\x9c\x18 \x01(\x0b\x32\x15.dr.command.GetPathRPH\x00\x12\x36\n\x11\x63ur_path_response\x18\x9d\x18 \x01(\x0b\x32\x18.dr.command.GetCurPathRPH\x00\x12;\n\x14\x63ur_path_id_response\x18\x9e\x18 \x01(\x0b\x32\x1a.dr.command.GetCurPathIdRPH\x00\x12\x34\n\x03pos\x18\x8b\' \x01(\x0b\x32$.dr.command.RequestImagePixelToPosRPH\x00\x12\x30\n\x0e\x61pa_parkin_res\x18\x8c\' \x01(\x0b\x32\x15.dr.command.APAParkRPH\x00\x12K\n\x19\x61pa_realtime_parkingspace\x18\x8d\' \x01(\x0b\x32%.dr.command.APARealtimeParkingSpaceRPH\x00\x12\x45\n\x14\x61pa_avm_parkingspace\x18\x8e\' \x01(\x0b\x32$.dr.command.APASelectAVMParkingSpaceH\x00\x12\x46\n\x17\x61pa_suggest_out_parking\x18\x8f\' \x01(\x0b\x32\".dr.command.APASuggestOutParkingRPH\x00\x12\x33\n\x0evpa_routing_rp\x18\xf2. \x01(\x0b\x32\x18.dr.command.VPARoutingRPH\x00\x12-\n\x08vpa_info\x18\xf3. \x01(\x0b\x32\x18.dr.command.VPAGetInfoRPH\x00\x12\x43\n\x18vpa_routing_get_map_info\x18\xf4. \x01(\x0b\x32\x1e.dr.command.VPARoutingGetMapRPH\x00\x12\x35\n\x0fvpa_learning_rp\x18\xf5. \x01(\x0b\x32\x19.dr.command.VPALearningRPH\x00\x12\x32\n\x0e\x62tn_ena_req_rp\x18\xf6. \x01(\x0b\x32\x17.dr.command.BtnEnaReqRPH\x00\x12.\n\navm_status\x18\x94< \x01(\x0b\x32\x17.dr.command.EnableAVMRPH\x00\x12\x37\n\x0f\x61vm_view_status\x18\x95< \x01(\x0b\x32\x1b.dr.command.SwitchAVMViewRPH\x00\x12?\n\x17\x61vm_parking_shot_status\x18\x96< \x01(\x0b\x32\x1b.dr.command.ParkedShotingRPH\x00\x12=\n\x14\x63urrent_avm_settings\x18\x97< \x01(\x0b\x32\x1c.dr.command.GetAVMSettingsRPH\x00\x12?\n\x14start_calibration_rp\x18\x98< \x01(\x0b\x32\x1e.dr.command.StartCalibrationRPH\x00\x12\x46\n\x17rpa_suggest_out_parking\x18\x99< \x01(\x0b\x32\".dr.command.RPASuggestOutParkingRPH\x00\x12\x31\n\x10tracking_data_rp\x18\xa4? \x01(\x0b\x32\x14.dr.dsm.TrackingDataH\x00\x12G\n\x15sentry_mode_statistic\x18\xd7? \x01(\x0b\x32%.dr.business_info.SentryModeStatisticH\x00\x12\x32\n\x0b\x63urr_config\x18\x88@ \x01(\x0b\x32\x1a.dr.localconfig.UserConfigH\x00\x12@\n\x0b\x66\x61il_reason\x18\xa8\x46 \x01(\x0b\x32*.dr.operationstatus.CommonStatusFailReason\x12#\n\x06module\x18\x8dG \x01(\x0e\x32\x12.dr.command.Module\x12\x35\n\x0fmap_engine_code\x18\x8eG \x01(\x0e\x32\x19.dr.command.MapEngineCodeH\x01\x12\x17\n\x0emodule_err_msg\x18\x8fG \x01(\tB\x07\n\x05\x63mdrpB\x11\n\x0fModuleErrorCode\"?\n\x0cUpdateConfig\x12/\n\x0buser_config\x18\x01 \x01(\x0b\x32\x1a.dr.localconfig.UserConfig\"\x1b\n\tEnableACC\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x0b\n\tGetACCTTC\";\n\x0bGetACCTTCRP\x12,\n\x03ttc\x18\x01 \x01(\x0e\x32\x1f.dr.business_info.FollowTimeGap\"r\n\rChangeTimeGap\x12\x33\n\x06\x61\x63tion\x18\x01 \x01(\x0e\x32#.dr.business_info.ChangeValueAction\x12,\n\x03ttc\x18\x02 \x01(\x0e\x32\x1f.dr.business_info.FollowTimeGap\"\x80\x01\n\x17\x43hangeAccelerationStyle\x12\x33\n\x06\x61\x63tion\x18\x01 \x01(\x0e\x32#.dr.business_info.ChangeValueAction\x12\x30\n\x05style\x18\x02 \x01(\x0e\x32!.dr.localconfig.AccelerationStyle\".\n\x08PullOver\x12\x10\n\x08poi_name\x18\x01 \x01(\t\x12\x10\n\x08task_end\x18\x02 \x01(\x08\"\x0f\n\rYieldObstacle\"\n\n\x08OverTake\"\x18\n\tSetACCTTC\x12\x0b\n\x03ttc\x18\x01 \x01(\x01\"j\n\x10\x43hangeSpeedLimit\x12\x33\n\x06\x61\x63tion\x18\x01 \x01(\x0e\x32#.dr.business_info.ChangeValueAction\x12\x13\n\x0bspeed_limit\x18\x02 \x01(\x05\x12\x0c\n\x04step\x18\x03 \x01(\x05\"\x12\n\x10GetACCSpeedLimit\")\n\x12GetACCSpeedLimitRP\x12\x13\n\x0bspeed_limit\x18\x01 \x01(\x05\"\x1b\n\tEnableICA\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"x\n\nChangeLane\x12-\n\x06\x61\x63tion\x18\x01 \x01(\x0e\x32\x1d.dr.command.ChangeLane.Action\";\n\x06\x41\x63tion\x12\x08\n\x04NONE\x10\x00\x12\r\n\tTURN_LEFT\x10\x01\x12\x0e\n\nTURN_RIGHT\x10\x02\x12\x08\n\x04TURN\x10\x03\"\x82\x01\n\x11\x43hangeAutoUpgrade\x12\x34\n\x06\x61\x63tion\x18\x01 \x01(\x0e\x32$.dr.command.ChangeAutoUpgrade.Action\"7\n\x06\x41\x63tion\x12\x08\n\x04NONE\x10\x00\x12\x0f\n\x0b\x44OWN_TO_ICA\x10\x01\x12\x12\n\x0eUPGRADE_TO_NCA\x10\x02\"\x1b\n\tEnableNCA\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\xe9\x02\n\x07GetPath\x12!\n\x06points\x18\x01 \x03(\x0b\x32\x11.dr.base.PointLLH\x12/\n\x06option\x18\x02 \x01(\x0b\x32\x1f.dr.business_info.RoutingOption\x12O\n\x1aroute_planning_data_source\x18\x03 \x01(\x0e\x32+.dr.command.GetPath.RoutePlanningDataSource\x12\x14\n\x0cmax_path_num\x18\x06 \x01(\x05\x12-\n\x0f\x61map_extra_info\x18\x07 \x01(\x0b\x32\x14.google.protobuf.Any\x12\x38\n\x12retry_on_net_error\x18\x08 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\":\n\x17RoutePlanningDataSource\x12\x10\n\x0cTENCENT_DATA\x10\x00\x12\r\n\tNAVI_DATA\x10\x01\"D\n\tGetPathRP\x12\x37\n\x0erouting_result\x18\x01 \x01(\x0b\x32\x1f.dr.business_info.RoutingResult\"\x0c\n\nGetCurPath\"4\n\x0cGetCurPathRP\x12$\n\x04path\x18\x01 \x01(\x0b\x32\x16.dr.business_info.Path\"\x0e\n\x0cGetCurPathId\"5\n\x0eGetCurPathIdRP\x12\x0f\n\x07path_id\x18\x01 \x01(\x05\x12\x12\n\npath_id_64\x18\x02 \x01(\x04\"\x92\x01\n\x0fStartNavigation\x12!\n\x06points\x18\x01 \x03(\x0b\x32\x11.dr.base.PointLLH\x12\x0f\n\x07path_id\x18\x02 \x01(\x05\x12\'\n\x0croute_points\x18\x03 \x03(\x0b\x32\x11.dr.base.PointLLH\x12\x12\n\npath_id_64\x18\x04 \x01(\x04\x12\x0e\n\x06map_id\x18\x05 \x01(\t\"7\n\x10\x43\x61ncelNavigation\x12\x0f\n\x07path_id\x18\x03 \x01(\x05\x12\x12\n\npath_id_64\x18\x04 \x01(\x04\"\x86\x01\n\rChangeRouting\x12\x35\n\x06\x61\x63tion\x18\x01 \x01(\x0e\x32%.dr.business_info.ChangeRoutingAction\x12>\n\x12position_of_action\x18\x02 \x01(\x0b\x32\".dr.business_info.PositionOfAction\"\x1b\n\tEnableLDW\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x1b\n\tEnableRDP\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x1b\n\tActiveAPA\x12\x0e\n\x06\x61\x63tive\x18\x01 \x01(\x08\"\x1b\n\tEnableVPA\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"n\n\x14\x41PAParkingSwitchMode\x12\x33\n\x04type\x18\x01 \x01(\x0e\x32%.dr.command.APAParkingSwitchMode.Mode\"!\n\x04Mode\x12\x0b\n\x07PARK_IN\x10\x00\x12\x0c\n\x08PARK_OUT\x10\x01\"\x1b\n\tActiveVPA\x12\x0e\n\x06\x61\x63tive\x18\x01 \x01(\x08\"\x92\x01\n\x16\x41PAParkingUpdateStatus\x12\x43\n\toperation\x18\x01 \x01(\x0e\x32\x30.dr.command.APAParkingUpdateStatus.OperationType\"3\n\rOperationType\x12\t\n\x05PAUSE\x10\x00\x12\x0b\n\x07RECOVER\x10\x01\x12\n\n\x06\x43\x41NCEL\x10\x02\"\x1c\n\x1a\x41PAGetRealtimeParkingSpace\"I\n\x19\x41PARealtimeParkingSpaceRP\x12,\n\rparking_space\x18\x01 \x01(\x0b\x32\x15.dr.base.ParkingSpace\"~\n\x18\x41PAAPPSelectParkingSpace\x12,\n\rparking_space\x18\x01 \x01(\x0b\x32\x15.dr.base.ParkingSpace\x12\x1f\n\x17non_empty_parking_space\x18\x02 \x01(\x08\x12\x13\n\x0bslot_number\x18\x03 \x01(\x05\"\x16\n\x14\x41PASuggestOutParking\"c\n\x16\x41PASuggestOutParkingRP\x12I\n\x18suggest_out_parking_info\x18\x01 \x01(\x0b\x32\'.dr.business_info.SuggestOutParkingInfo\"\x12\n\x10\x41PAActiveParkOut\"\x17\n\x15\x41PASkipCountDownClock\"\x17\n\x15\x41PAEnterCustomParking\"\x17\n\x15\x41PALeaveCustomParking\"@\n\x1b\x41PASelectCustomParkingSpace\x12!\n\x07polygon\x18\x01 \x01(\x0b\x32\x10.dr.base.Polygon\"\xbe\x01\n\x0bVPALearning\x12>\n\x0eoperation_type\x18\x01 \x01(\x0e\x32&.dr.command.VPALearning.LearningOpType\"o\n\x0eLearningOpType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x18\n\x14START_ROUTE_LEARNING\x10\x01\x12\x0e\n\nSAVE_ROUTE\x10\x02\x12\x0e\n\nDROP_ROUTE\x10\x03\x12\x16\n\x12\x45\x32\x45_START_LEARNING\x10\x04\"\x84\x01\n\x14VPARoutingSwitchMode\x12\x33\n\x04mode\x18\x01 \x01(\x0e\x32%.dr.command.VPARoutingSwitchMode.Mode\"7\n\x04Mode\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0f\n\x0bVPA_ROUTING\x10\x01\x12\x11\n\rVPA_SEARCHINE\x10\x02\"\xa6\x01\n\nVPARouting\x12<\n\x0eoperation_type\x18\x01 \x01(\x0e\x32$.dr.command.VPARouting.RougintOpType\"Z\n\rRougintOpType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x11\n\rSTART_ROUTING\x10\x01\x12\x12\n\x0e\x43\x41NCEL_ROUTING\x10\x02\x12\x15\n\x11\x45\x32\x45_START_ROUTING\x10\x03\"<\n\x0cVPARoutingRP\x12,\n\rparking_space\x18\x01 \x01(\x0b\x32\x15.dr.base.ParkingSpace\"\x0e\n\x0cVPAGetInfoRQ\"=\n\x0cVPAGetInfoRP\x12-\n\x07summary\x18\x01 \x01(\x0b\x32\x1c.dr.business_info.VPASummary\"\x12\n\x10VPARoutingGetMap\"\xaa\x01\n\x12VPARoutingGetMapRP\x12\x1e\n\x16vpa_estimated_distance\x18\x01 \x01(\r\x12\x1a\n\x12vpa_estimated_time\x18\x02 \x01(\r\x12\x14\n\x0csemantic_map\x18\x03 \x01(\x0c\x12\x42\n\x08map_info\x18\x04 \x01(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\"]\n\rVPALearningRP\x12\x1d\n\x15vpa_learning_distance\x18\x01 \x01(\r\x12\x17\n\x0fvpa_speed_bumps\x18\x02 \x01(\r\x12\x14\n\x0csemantic_map\x18\x03 \x01(\x0c\"Q\n\tEnableAVM\x12\x0e\n\x06\x61\x63tive\x18\x01 \x01(\x08\x12\x34\n\x0b\x65nable_mode\x18\x02 \x01(\x0e\x32\x1f.dr.business_info.AVMEnableMode\"?\n\x0b\x45nableAVMRP\x12\x30\n\x06status\x18\x01 \x01(\x0b\x32 .dr.business_info.AVMSettingInfo\"\xf0\x01\n\rSwitchAVMView\x12\x19\n\x11\x62ird_view_enabled\x18\x01 \x01(\x08\x12\x19\n\x11round_view_enable\x18\x02 \x01(\x08\x12\x37\n\tavm2dview\x18\x03 \x01(\x0e\x32\".dr.business_info.AVM2DViewSettingH\x00\x12\x30\n\tavm3dview\x18\x04 \x01(\x0b\x32\x1b.dr.business_info.AVM3DViewH\x00\x12\x36\n\x0c\x61vmwheelview\x18\x05 \x01(\x0e\x32\x1e.dr.business_info.AVMWheelViewH\x00\x42\x06\n\x04View\"C\n\x0fSwitchAVMViewRP\x12\x30\n\x06status\x18\x01 \x01(\x0b\x32 .dr.business_info.AVMSettingInfo\"\x1f\n\rParkedShoting\x12\x0e\n\x06\x61\x63tive\x18\x01 \x01(\x08\"C\n\x0fParkedShotingRP\x12\x30\n\x06status\x18\x01 \x01(\x0b\x32 .dr.business_info.AVMSettingInfo\"\x10\n\x0eGetAVMSettings\"D\n\x10GetAVMSettingsRP\x12\x30\n\x06status\x18\x01 \x01(\x0b\x32 .dr.business_info.AVMSettingInfo\"+\n\tPDCUpdate\x12\x1e\n\x16request_pdc_curve_data\x18\x01 \x01(\x08\"\x1b\n\tEnableHMA\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x1b\n\tEnableBSD\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x1b\n\tEnableLCA\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x1b\n\tEnableDOW\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x1c\n\nEnableRCTA\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x1b\n\tEnableRCW\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x1c\n\nEnableRCTB\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\" \n\x10UpdateApaSetting\x12\x0c\n\x04mute\x18\x01 \x01(\x08\"N\n\tAPAParkIn\x12,\n\rparking_space\x18\x01 \x01(\x0b\x32\x15.dr.base.ParkingSpace\x12\x13\n\x0bvpa_task_id\x18\x02 \x01(\t\"B\n\nAPAParkOut\x12\x34\n\tdirection\x18\x01 \x01(\x0e\x32!.dr.business_info.APAOutDirection\"@\n\tAPAParkRP\x12\x33\n\x06reason\x18\x01 \x01(\x0b\x32#.dr.operationstatus.APAStatusReason\"\xd5\x01\n\x12\x41PAGetActiveSource\x12@\n\x08vpa_info\x18\x01 \x01(\x0b\x32,.dr.command.APAGetActiveSource.VPAActiveInfoH\x00\x12@\n\x08\x61pa_info\x18\x02 \x01(\x0b\x32,.dr.command.APAGetActiveSource.APAActiveInfoH\x00\x1a \n\rVPAActiveInfo\x12\x0f\n\x07task_id\x18\x01 \x01(\t\x1a\x0f\n\rAPAActiveInfoB\x08\n\x06source\"V\n\x16RequestImagePixelToPos\x12<\n\x0b\x63oordinates\x18\x01 \x03(\x0b\x32\'.dr.business_info.ImagePixelCoordinates\"P\n\x18RequestImagePixelToPosRP\x12\x34\n\x07objects\x18\x01 \x03(\x0b\x32#.dr.business_info.TransformedObject\";\n\x18\x41PASelectAVMParkingSpace\x12\x1f\n\x05point\x18\x01 \x01(\x0b\x32\x10.dr.base.Point2D\"J\n\x1a\x41PASelectAVMParkingSpaceRP\x12,\n\rparking_space\x18\x01 \x01(\x0b\x32\x15.dr.base.ParkingSpace\"\n\n\x08RPACheck\"\x0b\n\tRPAParkIn\"\x9b\x01\n\x10RPAParkingUpdate\x12=\n\toperation\x18\x01 \x01(\x0e\x32*.dr.command.RPAParkingUpdate.OperationType\"H\n\rOperationType\x12\x0b\n\x07OP_NONE\x10\x00\x12\x0c\n\x08OP_PAUSE\x10\x01\x12\r\n\tOP_CANCEL\x10\x02\x12\r\n\tOP_RESUME\x10\x03\"B\n\nRPAParkOut\x12\x34\n\tdirection\x18\x01 \x01(\x0e\x32!.dr.business_info.APAOutDirection\"c\n\x16RPASuggestOutParkingRP\x12I\n\x18suggest_out_parking_info\x18\x01 \x01(\x0b\x32\'.dr.business_info.SuggestOutParkingInfo\"\xad\x02\n\x10RPAStraightInOut\x12\x39\n\tdirection\x18\x01 \x01(\x0e\x32&.dr.command.RPAStraightInOut.Direction\x12=\n\toperation\x18\x02 \x01(\x0e\x32*.dr.command.RPAStraightInOut.OperationType\"G\n\tDirection\x12\x0f\n\x0b\x44IR_UNKNOWN\x10\x00\x12\x13\n\x0f\x44IR_STRAIGHT_IN\x10\x01\x12\x14\n\x10\x44IR_STRAIGHT_OUT\x10\x02\"V\n\rOperationType\x12\x0b\n\x07OP_NONE\x10\x00\x12\x0c\n\x08OP_START\x10\x01\x12\x0c\n\x08OP_PAUSE\x10\x02\x12\r\n\tOP_CANCEL\x10\x03\x12\r\n\tOP_RESUME\x10\x04\"4\n\x0fRPAAppHeartbeat\x12!\n\x04type\x18\x01 \x01(\x0e\x32\x13.dr.command.RPAType\",\n\x07RPAInit\x12!\n\x04type\x18\x01 \x01(\x0e\x32\x13.dr.command.RPAType\"\n\n\x08RPAClose\"\x16\n\x14RPASuggestOutParking\"Z\n\tEnableAEB\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\x12=\n\x0e\x63ontrol_status\x18\x02 \x01(\x0e\x32%.dr.command.ActiveSafetyControlStatus\"\xa4\x02\n\x10StartCalibration\x12\x42\n\x0eoperation_type\x18\x01 \x01(\x0e\x32*.dr.command.StartCalibration.OperationType\x12\x35\n\ncalib_mode\x18\x02 \x01(\x0e\x32!.dr.business_info.CalibrationMode\x12@\n\x10\x63\x61libration_info\x18\x03 \x03(\x0b\x32&.dr.business_info.CalibrationBoardInfo\x12 \n\x18is_rear_axle_positioning\x18\x04 \x01(\x08\"1\n\rOperationType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\t\n\x05START\x10\x01\x12\x08\n\x04STOP\x10\x02\"\x14\n\x12StartCalibrationRP\"\x1b\n\tEnableELK\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\t\n\x07LSSMute\"\xf6\x01\n\x06TJPCmd\x12(\n\x04type\x18\x01 \x01(\x0e\x32\x1a.dr.command.TJPCmd.CmdType\"\xc1\x01\n\x07\x43mdType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x1a\n\x16REMIND_READY_TO_ACTIVE\x10\x01\x12\x13\n\x0fREMIND_TAKEOVER\x10\x02\x12\x17\n\x13SPEED_LIMIT_LEVEL_1\x10\x03\x12\x17\n\x13SPEED_LIMIT_LEVEL_2\x10\x04\x12\x17\n\x13SPEED_LIMIT_LEVEL_3\x10\x05\x12\x0f\n\x0bSIGNAL_LAMP\x10\x06\x12\n\n\x06TUNNEL\x10\x07\x12\x10\n\x0cTOLL_STATION\x10\x08\"^\n\x0eSetDefaultMode\x12$\n\rdefault_state\x18\x01 \x01(\x0e\x32\r.dr.dsm.State\x12&\n\x0c\x64\x65\x66\x61ult_mode\x18\x02 \x01(\x0e\x32\x10.dr.dsm.SubState\"\xa3\x01\n\x0eSelPrkgFctnCmd\x12\x30\n\x04type\x18\x01 \x01(\x0e\x32\".dr.command.SelPrkgFctnCmd.CmdType\"_\n\x07\x43mdType\x12\r\n\tNO_SELECT\x10\x00\x12\x0f\n\x0b\x41PA_PARKING\x10\x01\x12\x0f\n\x0bP2P_PARKING\x10\x02\x12\x13\n\x0f\x45XPLORE_FORWARD\x10\x03\x12\x0e\n\nDRIVE_BACK\x10\x04\"\x8f\x01\n\x0c\x43ontnPrkgReq\x12.\n\x04type\x18\x01 \x01(\x0e\x32 .dr.command.ContnPrkgReq.CmdType\"O\n\x07\x43mdType\x12\r\n\tNO_SELECT\x10\x00\x12\x14\n\x10\x43ONTINUE_PARKING\x10\x01\x12\x12\n\x0e\x43\x41NCEL_PARKING\x10\x02\x12\x0b\n\x07INVALID\x10\x03\"\xf0\n\n\tBtnEnaReq\x12+\n\x03\x63md\x18\x01 \x01(\x0e\x32\x1c.dr.command.BtnEnaReq.ReqCmdH\x00\x12\x42\n\x11\x65nter_routing_req\x18\x02 \x01(\x0b\x32%.dr.command.BtnEnaReq.EnterRoutingReqH\x00\x12K\n\x16select_target_slot_req\x18\x03 \x01(\x0b\x32).dr.command.BtnEnaReq.SelectTargetSlotReqH\x00\x12;\n\x0ego_to_here_req\x18\x04 \x01(\x0b\x32!.dr.command.BtnEnaReq.GoToHereReqH\x00\x12G\n\x14update_slot_info_req\x18\x05 \x01(\x0b\x32\'.dr.command.BtnEnaReq.UpdateSlotInfoReqH\x00\x12\x45\n\x13update_map_info_req\x18\x06 \x01(\x0b\x32&.dr.command.BtnEnaReq.UpdateMapInfoReqH\x00\x12?\n\x10get_map_info_req\x18\x07 \x01(\x0b\x32#.dr.command.BtnEnaReq.GetMapInfoReqH\x00\x1a\x11\n\x0f\x45nterRoutingReq\x1a\x36\n\x13SelectTargetSlotReq\x12\x1f\n\x17target_parking_space_id\x18\x01 \x01(\r\x1a.\n\x0bGoToHereReq\x12\x1f\n\x17target_parking_space_id\x18\x01 \x01(\r\x1a\xca\x01\n\x11UpdateSlotInfoReq\x12=\n\x0eoperation_type\x18\x01 \x01(\x0e\x32%.dr.notification.gwmhut.OperatingType\x12W\n\x19parking_space_info_change\x18\x02 \x01(\x0b\x32\x34.deeproute.localization.havp_map.ParkingSpaceUsrInfo\x12\x1d\n\x15\x64\x65\x66\x61ult_parking_space\x18\x03 \x01(\x08\x1a\x9c\x01\n\x10UpdateMapInfoReq\x12=\n\x0eoperation_type\x18\x01 \x01(\x0e\x32%.dr.notification.gwmhut.OperatingType\x12I\n\x0fmap_info_change\x18\x02 \x01(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\x1a@\n\rGetMapInfoReq\x12\x18\n\x10get_all_map_info\x18\x01 \x01(\x08\x12\x15\n\rtarget_map_id\x18\x02 \x01(\r\"\xe2\x02\n\x06ReqCmd\x12\x08\n\x04NONE\x10\x00\x12\x18\n\x14\x43ONTINUE_SEARCH_SLOT\x10\x01\x12\x11\n\rACTIVE_SIGNAL\x10\x02\x12\x11\n\rSTART_HAVP_VR\x10\x03\x12\x14\n\x10\x43ONFRIM_MAPBUILT\x10\x04\x12\n\n\x06\x43\x41NCEL\x10\x05\x12\x19\n\x15\x43ONFRIM_START_PARKING\x10\x06\x12\x19\n\x15SEARCH_SLOT_ALONG_WAY\x10\x07\x12\x12\n\x0eHAVP_COMPLETED\x10\x08\x12\x07\n\x03TRY\x10\t\x12\x16\n\x12LEARNING_COMPLETED\x10\n\x12\x12\n\x0e\x43ONTINUE_LEARN\x10\x0b\x12\x10\n\x0cSTART_SVP_VR\x10\x0c\x12\x18\n\x14\x43REAT_MOORINGOUT_MAP\x10\r\x12\r\n\tSTART_E2E\x10\x0e\x12\x17\n\x12\x43\x41NCEL_PRE_MAPPING\x10\xa1\x01\x12\x19\n\x14\x43ONTINUE_PRE_MAPPING\x10\xa2\x01\x42\t\n\x07HAVPCMD\"\xfe\x02\n\x0b\x42tnEnaReqRP\x12\x30\n\x05popup\x18\x01 \x01(\x0b\x32!.dr.notification.gwmhut.PopupDisp\x12\x36\n\x0bmap_info_rp\x18\x02 \x01(\x0b\x32!.dr.command.BtnEnaReqRP.MapInfoRP\x12J\n\x16parking_spaces_info_rp\x18\x03 \x01(\x0b\x32*.dr.command.BtnEnaReqRP.ParkingSpaceInfoRP\x1aP\n\tMapInfoRP\x12\x43\n\tmaps_info\x18\x01 \x03(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\x1ag\n\x12ParkingSpaceInfoRP\x12Q\n\x13parking_spaces_info\x18\x01 \x03(\x0b\x32\x34.deeproute.localization.havp_map.ParkingSpaceUsrInfo\"\xe1\x12\n\x10GWParkingCommand\x12H\n\x11sel_prkg_fctn_cmd\x18\x01 \x01(\x0b\x32+.dr.command.GWParkingCommand.SelPrkgFctnCmdH\x00\x12\x43\n\x0e\x63ontn_prkg_req\x18\x02 \x01(\x0b\x32).dr.command.GWParkingCommand.ContnPrkgReqH\x00\x12?\n\x0cpas_work_cmd\x18\x03 \x01(\x0b\x32\'.dr.command.GWParkingCommand.PASWorkCmdH\x00\x12K\n\x13sel_prk_out_dir_req\x18\x04 \x01(\x0b\x32,.dr.command.GWParkingCommand.SelPrkOutDirReqH\x00\x12=\n\x0bprk_mod_req\x18\x05 \x01(\x0b\x32&.dr.command.GWParkingCommand.PrkModreqH\x00\x12?\n\x0c\x62\x61\x63k_req_aps\x18\x06 \x01(\x0b\x32\'.dr.command.GWParkingCommand.BackReqAPSH\x00\x12H\n\x11prkg_ctrl_mod_req\x18\x07 \x01(\x0b\x32+.dr.command.GWParkingCommand.PrkgCtrlModReqH\x00\x12\x42\n\x0e\x61ps_swt_req_vr\x18\x08 \x01(\x0b\x32(.dr.command.GWParkingCommand.APSSwtReqVRH\x00\x12=\n\x0bslot_num_vr\x18\t \x01(\x0b\x32&.dr.command.GWParkingCommand.SlotNumVRH\x00\x1a\x88\x02\n\x0eSelPrkgFctnCmd\x12<\n\x03\x63md\x18\x01 \x01(\x0e\x32/.dr.command.GWParkingCommand.SelPrkgFctnCmd.Cmd\"\xb7\x01\n\x03\x43md\x12\r\n\tNO_SELECT\x10\x00\x12\x16\n\x12SELECT_APA_PARKING\x10\x01\x12\x16\n\x12SELECT_P2P_PARKING\x10\x02\x12\x1a\n\x16SELECT_EXPLORE_FORWARD\x10\x03\x12\x15\n\x11SELECT_DRIVE_BACK\x10\x04\x12\x17\n\x13SELECT_HAVP_PARKING\x10\x05\x12\x17\n\x13SELECT_PAVP_PARKING\x10\x06\x12\x0c\n\x08RESERVED\x10\x07\x1a\x80\x02\n\x0c\x43ontnPrkgReq\x12:\n\x03\x63md\x18\x01 \x01(\x0e\x32-.dr.command.GWParkingCommand.ContnPrkgReq.Cmd\x12>\n\x05valid\x18\x02 \x01(\x0e\x32/.dr.command.GWParkingCommand.ContnPrkgReq.Valid\"S\n\x03\x43md\x12\r\n\tNO_SELECT\x10\x00\x12\x1b\n\x17SELECT_CONTINUE_PARKING\x10\x01\x12\x12\n\x0e\x43\x41NCEL_PARKING\x10\x02\x12\x0c\n\x08RESERVED\x10\x03\"\x1f\n\x05Valid\x12\t\n\x05VALID\x10\x00\x12\x0b\n\x07INVALID\x10\x01\x1a^\n\nPASWorkCmd\x12\x38\n\x03\x63md\x18\x01 \x01(\x0e\x32+.dr.command.GWParkingCommand.PASWorkCmd.Cmd\"\x16\n\x03\x43md\x12\x07\n\x03OFF\x10\x00\x12\x06\n\x02ON\x10\x01\x1a\x9b\x03\n\x0fSelPrkOutDirReq\x12=\n\x03\x63md\x18\x01 \x01(\x0e\x32\x30.dr.command.GWParkingCommand.SelPrkOutDirReq.Cmd\"\xc8\x02\n\x03\x43md\x12\x10\n\x0cNO_SELECTION\x10\x00\x12$\n PARK_OUT_FRONT_VERTICAL_HEAD_OUT\x10\x01\x12#\n\x1fPARK_OUT_REAR_VERTICAL_TAIL_OUT\x10\x02\x12#\n\x1fPARK_OUT_LEFT_PARALLEL_LEFT_OUT\x10\x03\x12%\n!PARK_OUT_RIGHT_PARALLEL_RIGHT_OUT\x10\x04\x12#\n\x1fPARK_OUT_LEFT_VERTICAL_LEFT_OUT\x10\x05\x12%\n!PARK_OUT_RIGHT_VERTICAL_RIGHT_OUT\x10\x06\x12\x0c\n\x08RESERVED\x10\x07\x12\x0e\n\nFRONT_LEFT\x10\x08\x12\x0f\n\x0b\x46RONT_RIGHT\x10\t\x12\r\n\tBACK_LEFT\x10\n\x12\x0e\n\nBACK_RIGHT\x10\x0b\x1a\xa8\x01\n\tPrkModreq\x12\x37\n\x03\x63md\x18\x01 \x01(\x0e\x32*.dr.command.GWParkingCommand.PrkModreq.Cmd\"b\n\x03\x43md\x12\r\n\tNO_SELECT\x10\x00\x12\x13\n\x0fHEAD_PARKING_IN\x10\x01\x12\x13\n\x0fTAIL_PARKING_IN\x10\x02\x12\x10\n\x0cRESERVED_0x3\x10\x03\x12\x10\n\x0cRESERVED_0x4\x10\x04\x1a\xfd\x01\n\x0ePrkgCtrlModReq\x12<\n\x03\x63md\x18\x01 \x01(\x0e\x32/.dr.command.GWParkingCommand.PrkgCtrlModReq.Cmd\x12@\n\x05valid\x18\x02 \x01(\x0e\x32\x31.dr.command.GWParkingCommand.PrkgCtrlModReq.Valid\"J\n\x03\x43md\x12\r\n\tNO_ACTION\x10\x00\x12\x12\n\x0ePARKING_IN_CAR\x10\x01\x12\x12\n\x0eREMOTE_PARKING\x10\x02\x12\x0c\n\x08RESERVED\x10\x03\"\x1f\n\x05Valid\x12\t\n\x05VALID\x10\x00\x12\x0b\n\x07INVALID\x10\x01\x1aj\n\nBackReqAPS\x12\x38\n\x03\x63md\x18\x01 \x01(\x0e\x32+.dr.command.GWParkingCommand.BackReqAPS.Cmd\"\"\n\x03\x43md\x12\x0e\n\nNO_REQUEST\x10\x00\x12\x0b\n\x07REQUEST\x10\x01\x1a}\n\x0b\x41PSSwtReqVR\x12\x39\n\x03\x63md\x18\x01 \x01(\x0e\x32,.dr.command.GWParkingCommand.APSSwtReqVR.Cmd\"3\n\x03\x43md\x12\r\n\tNO_ACTION\x10\x00\x12\x07\n\x03OFF\x10\x01\x12\x06\n\x02ON\x10\x02\x12\x0c\n\x08RESERVED\x10\x03\x1a\x39\n\tSlotNumVR\x12,\n\rparking_space\x18\x01 \x01(\x0b\x32\x15.dr.base.ParkingSpaceB\x06\n\x04type\"\xba\x03\n\x0eSmartLPCommand\x12\x1d\n\x13lp_function_confirm\x18\x01 \x01(\x08H\x00\x12\x1a\n\x10lp_function_exit\x18\x02 \x01(\x08H\x00\x12\x1c\n\x12lp_function_cancel\x18\x03 \x01(\x08H\x00\x12\x1b\n\x11lp_learning_start\x18\x04 \x01(\x08H\x00\x12\x1c\n\x12lp_function_return\x18\x05 \x01(\x08H\x00\x12\x18\n\x0elp_path_manage\x18\x06 \x01(\x08H\x00\x12\x1d\n\x13lp_selected_slot_id\x18\x07 \x01(\x05H\x00\x12\x1e\n\x14lp_learning_complete\x18\x08 \x01(\x08H\x00\x12\x18\n\x0elp_parking_try\x18\t \x01(\x08H\x00\x12\x1a\n\x10lp_function_park\x18\n \x01(\x08H\x00\x12\x30\n\ndelete_map\x18\x0b \x01(\x0b\x32\x1a.dr.command.ParkingMapInfoH\x00\x12\x19\n\x0flp_recover_park\x18\x0c \x01(\x08H\x00\x12\x16\n\x0clp_start_apa\x18\r \x01(\x08H\x00\x12\x15\n\x0blp_exit_apa\x18\x0e \x01(\x08H\x00\x42\t\n\x07\x43ommand\"\xe2\x12\n\x10GLParkingCommand\x12\x36\n\x16\x64rvr_assc_sys_btn_push\x18\x01 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x34\n\x14prkg_intrpt_reld_btn\x18\x02 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x36\n\x16\x64rvr_assc_sys_park_mod\x18\x03 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x37\n\x17prkg_in_or_out_and_cncl\x18\x04 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x34\n\x14\x61ut_prkg_slot_nr_req\x18\x05 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x34\n\x14lo_spd_drvg_assi_swt\x18\x06 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x36\n\x16prkg_frnt_or_re_select\x18\x07 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x38\n\x18mob_dev_rpa_req1_rpa_req\x18\x08 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x39\n\x19\x61ut_prkg_hand_slot_nr_req\x18\t \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x31\n\x11\x61ut_valt_prkg_swt\x18\n \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12=\n\x1d\x61ut_valt_prkg_experience_resp\x18\x0b \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x38\n\x18\x61ut_valt_prkg_l1_btn_req\x18\x0c \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x46\n&aut_prkg_hand_slot_nr_req_topo_slot_id\x18\r \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12\x43\n#mob_dev_rpa_req1_rpa_out_mode_sub_t\x18\x0e \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\x12?\n\rconfig_switch\x18\x0f \x01(\x0e\x32&.dr.command.GLParkingCommand.SwitchCmdH\x00\x12V\n\x17\x66rnt_and_re_prkg_in_swt\x18\x10 \x01(\x0e\x32\x33.dr.command.GLParkingCommand.FrntAndRePrkgInSwtTypeH\x00\x12R\n\x14\x64rvr_assc_wisdom_btn\x18\x11 \x01(\x0e\x32\x32.dr.command.GLParkingCommand.DrvrAsscWisdomBtnTypeH\x00\x12\x63\n\x1elo_spd_drvg_assi_sho_push_resp\x18\x12 \x01(\x0e\x32\x39.dr.command.GLParkingCommand.LoSpdDrvgAssiShoPushRespTypeH\x00\x12\x43\n\x0cprkg_spd_req\x18\x13 \x01(\x0e\x32+.dr.command.GLParkingCommand.PrkgSpdReqTypeH\x00\x12\x31\n\x11rpa_select_par_in\x18\x14 \x01(\x0b\x32\x14.google.protobuf.AnyH\x00\"\xa5\x01\n\x0ePrkgSpdReqType\x12#\n\x1fPRKGSPDREQ_DEFAULTHOLDINGTORQUE\x10\x00\x12\"\n\x1ePRKGSPDREQ_LOWSPEEDLEVELTORQUE\x10\x01\x12%\n!PRKGSPDREQ_MEDIUMSPEEDLEVELTORQUE\x10\x02\x12#\n\x1fPRKGSPDREQ_HIGHSPEEDLEVELTORQUE\x10\x03\"\x93\x02\n\x15\x44rvrAsscWisdomBtnType\x12,\n(DRVRASSCWISDOMBTN_DRVRASSCWISDOMBTN_IDLE\x10\x00\x12.\n*DRVRASSCWISDOMBTN_DRVRASSCWISDOMBTN_LEFTIN\x10\x01\x12/\n+DRVRASSCWISDOMBTN_DRVRASSCWISDOMBTN_RIGHTIN\x10\x02\x12\x30\n,DRVRASSCWISDOMBTN_DRVRASSCWISDOMBTN_MIDDLEIN\x10\x03\x12\x39\n5DRVRASSCWISDOMBTN_DRVRASSCWISDOMBTN_APASUSPENSIONBALL\x10\x04\"\xe9\x01\n\x16\x46rntAndRePrkgInSwtType\x12\x31\n-FRNTANDREPRKGINSWT_FRNTANDREPRKGINSWT_DEFAULT\x10\x00\x12\x34\n0FRNTANDREPRKGINSWT_FRNTANDREPRKGINSWT_FRNTPRKGIN\x10\x01\x12\x32\n.FRNTANDREPRKGINSWT_FRNTANDREPRKGINSWT_REPRKGIN\x10\x02\x12\x32\n.FRNTANDREPRKGINSWT_FRNTANDREPRKGINSWT_RESERVED\x10\x03\"\xdd\x01\n\x1cLoSpdDrvgAssiShoPushRespType\x12*\n&LOSPDDRVGASSISHOPUSHRESP_CMDTYPE1_IDLE\x10\x00\x12-\n)LOSPDDRVGASSISHOPUSHRESP_CMDTYPE1_CONFIRM\x10\x01\x12,\n(LOSPDDRVGASSISHOPUSHRESP_CMDTYPE1_CANCEL\x10\x02\x12\x34\n0LOSPDDRVGASSISHOPUSHRESP_CMDTYPE1_NOMOREREMINDER\x10\x03\"\xbd\x01\n\tSwitchCmd\x12\x19\n\x15\x61ut_actv_prkg_fct_swt\x10\x00\x12\x17\n\x13lsda_notif_push_req\x10\x01\x12\x1b\n\x17\x61ut_prkg_voice_swt_resp\x10\x02\x12\x12\n\x0e\x64rift_prkg_req\x10\x03\x12\x17\n\x13\x61pa_custom_prkg_req\x10\x04\x12\x17\n\x13\x61pa_prkg_adsorption\x10\x05\x12\x19\n\x15lsda_ignore_available\x10\x06\x42\t\n\x07\x43ommand\"\xc4)\n\x0cGLHPACommand\x12\x12\n\nreq_map_id\x18\x01 \x01(\x05\x12H\n\x11\x61ut_valt_prkg_swt\x18\x02 \x01(\x0e\x32+.dr.command.GLHPACommand.AutValtPrkgSwtTypeH\x00\x12_\n\x1d\x61ut_valt_prkg_experience_resp\x18\x03 \x01(\x0e\x32\x36.dr.command.GLHPACommand.AutValtPrkgExperienceRespTypeH\x00\x12N\n\x14prkg_intrpt_reld_btn\x18\x04 \x01(\x0e\x32..dr.command.GLHPACommand.PrkgIntrptReldBtnTypeH\x00\x12[\n\x1c\x61ut_valt_prkg_l2_pop_btn_req\x18\x05 \x01(\x0e\x32\x33.dr.command.GLHPACommand.AutValtPrkgL2PopBtnReqTypeH\x00\x12l\n%aut_valt_prkg_map_oper_req2_map_type2\x18\x06 \x01(\x0e\x32;.dr.command.GLHPACommand.AutValtPrkgMapOperReq2MapType2TypeH\x00\x12\x41\n\rmap_build_sts\x18\x07 \x01(\x0e\x32(.dr.command.GLHPACommand.MapBuildStsTypeH\x00\x12T\n\x18\x61ut_valt_prkg_l1_btn_req\x18\x08 \x01(\x0e\x32\x30.dr.command.GLHPACommand.AutValtPrkgL1BtnReqTypeH\x00\x12N\n\x14prkg_slot_typ_select\x18\t \x01(\x0e\x32..dr.command.GLHPACommand.PrkgSlotTypSelectTypeH\x00\x12V\n\x18\x61ut_prkg_select_entrance\x18\n \x01(\x0e\x32\x32.dr.command.GLHPACommand.AutPrkgSelectEntranceTypeH\x00\x12R\n\x17\x63rs_ctrl_ti_gap_adj_req\x18\x0b \x01(\x0e\x32/.dr.command.GLHPACommand.CrsCtrlTiGapAdjReqTypeH\x00\x12w\n,drvr_ac_crs_set_spd_req_drvr_crs_set_spd_req\x18\x0c \x01(\x0e\x32?.dr.command.GLHPACommand.DrvrACCrsSetSpdReqDrvrCrsSetSpdReqTypeH\x00\x12\x81\x01\n1aut_valt_prkg_l2_btn_req_setting_fct_push_btn_req\x18\r \x01(\x0e\x32\x44.dr.command.GLHPACommand.AutValtPrkgL2BtnReqSettingFctPushBtnReqTypeH\x00\x12\x81\x01\n1aut_valt_prkg_l2_btn_req_setting_no_sence_btn_req\x18\x0e \x01(\x0e\x32\x44.dr.command.GLHPACommand.AutValtPrkgL2BtnReqSettingNoSenceBtnReqTypeH\x00\x12|\n.aut_valt_prkg_l2_btn_req_setting_voice_btn_req\x18\x0f \x01(\x0e\x32\x42.dr.command.GLHPACommand.AutValtPrkgL2BtnReqSettingVoiceBtnReqTypeH\x00\x12j\n$aut_valt_prkg_map_resp_map_id_result\x18\x10 \x01(\x0e\x32:.dr.command.GLHPACommand.AutValtPrkgMapRespMapIDResultTypeH\x00\x12[\n\x1b\x61ut_valt_prkg_cover_results\x18\x11 \x01(\x0e\x32\x34.dr.command.GLHPACommand.AutValtPrkgCoverResultsTypeH\x00\"Q\n\x12\x41utValtPrkgSwtType\x12\x14\n\x10ONOFFNOREQ_NOREQ\x10\x00\x12\x11\n\rONOFFNOREQ_ON\x10\x01\x12\x12\n\x0eONOFFNOREQ_OFF\x10\x02\"z\n\x1d\x41utValtPrkgExperienceRespType\x12\x11\n\rCMDTYPE1_IDLE\x10\x00\x12\x14\n\x10\x43MDTYPE1_CONFIRM\x10\x01\x12\x13\n\x0f\x43MDTYPE1_CANCEL\x10\x02\x12\x1b\n\x17\x43MDTYPE1_NOMOREREMINDER\x10\x03\"s\n\x15PrkgIntrptReldBtnType\x12\x10\n\x0c\x42TNREQ_NOREQ\x10\x00\x12\x13\n\x0f\x42TNREQ_CONTINUE\x10\x01\x12\x16\n\x12\x42TNREQ_NOTCONTINUE\x10\x02\x12\x1b\n\x17\x42TNREQ_BACKTOSTARTPOINT\x10\x03\"\x81\x04\n\x1a\x41utValtPrkgL2PopBtnReqType\x12\"\n\x1e\x41UTVALTPRKGL2POPBTNREQ_DEFAULT\x10\x00\x12*\n&AUTVALTPRKGL2POPBTNREQ_TUTORIALSTRTREQ\x10\x01\x12*\n&AUTVALTPRKGL2POPBTNREQ_TUTORIALCNCLREQ\x10\x02\x12#\n\x1f\x41UTVALTPRKGL2POPBTNREQ_RESERVED\x10\x03\x12,\n(AUTVALTPRKGL2POPBTNREQ_COVERROUTECNCLREQ\x10\x04\x12.\n*AUTVALTPRKGL2POPBTNREQ_NAMEROUTECONFIRMREQ\x10\x05\x12(\n$AUTVALTPRKGL2POPBTNREQ_SETTINGFCTREQ\x10\x06\x12)\n%AUTVALTPRKGL2POPBTNREQ_SETTINGHELPREQ\x10\x07\x12*\n&AUTVALTPRKGL2POPBTNREQ_SETTINGROUTEREQ\x10\x08\x12\x30\n,AUTVALTPRKGL2POPBTNREQ_SETTINGPRKGINROUTEREQ\x10\t\x12\x31\n-AUTVALTPRKGL2POPBTNREQ_SETTINGPRKGOUTROUTEREQ\x10\n\"\xbd\x03\n\"AutValtPrkgMapOperReq2MapType2Type\x12\x14\n\x10MAPTYPE2_DEFAULT\x10\x00\x12\x19\n\x15MAPTYPE2_PRKGINCREATE\x10\x01\x12\x1a\n\x16MAPTYPE2_PRKGOUTCREATE\x10\x02\x12\x1b\n\x17MAPTYPE2_PRKGCNCLLOCATD\x10\x03\x12\x19\n\x15MAPTYPE2_PRKGINDELETE\x10\x04\x12\x1a\n\x16MAPTYPE2_PRKGOUTDELETE\x10\x05\x12\x19\n\x15MAPTYPE2_PRKGINSELECT\x10\x06\x12\x1a\n\x16MAPTYPE2_PRKGOUTSELECT\x10\x07\x12\"\n\x1eMAPTYPE2_PRKGINSELECT_NOLONGER\x10\x08\x12#\n\x1fMAPTYPE2_PRKGOUTSELECT_NOLONGER\x10\t\x12\x18\n\x14MAPTYPE2_PRKGINCOVER\x10\n\x12\x19\n\x15MAPTYPE2_PRKGOUTCOVER\x10\x0b\x12\x11\n\rMAPTYPE2_SYNC\x10\x0c\x12\x16\n\x12MAPTYPE2_RESERVED1\x10\r\x12\x16\n\x12MAPTYPE2_RESERVED2\x10\x0e\"\xa9\x01\n\x0fMapBuildStsType\x12\x17\n\x13MAPBUILDSTS_DEFAULT\x10\x00\x12\x1b\n\x17MAPBUILDSTS_STORSUCCEED\x10\x01\x12\x18\n\x14MAPBUILDSTS_STORFAIL\x10\x02\x12\"\n\x1eMAPBUILDSTS_STORSUCDADBULDSUCD\x10\x03\x12\"\n\x1eMAPBUILDSTS_STORSUCDADBULDFAIL\x10\x04\"\xcd\x02\n\x17\x41utValtPrkgL1BtnReqType\x12\x1f\n\x1b\x41UTVALTPRKGL1BTNREQ_DEFAULT\x10\x00\x12\"\n\x1e\x41UTVALTPRKGL1BTNREQ_SETTINGREQ\x10\x01\x12\x1f\n\x1b\x41UTVALTPRKGL1BTNREQ_EXITREQ\x10\x02\x12+\n\'AUTVALTPRKGL1BTNREQ_REACHDESTINATIONREQ\x10\x03\x12&\n\"AUTVALTPRKGL1BTNREQ_GLBVIRTVIEWREQ\x10\x04\x12&\n\"AUTVALTPRKGL1BTNREQ_PTLVIRTVIEWREQ\x10\x05\x12\x19\n\x15\x41UTVALTPRKGL1BTNREQ_6\x10\x06\x12\x19\n\x15\x41UTVALTPRKGL1BTNREQ_7\x10\x07\x12\x19\n\x15\x41UTVALTPRKGL1BTNREQ_8\x10\x08\"\x9a\x01\n\x15PrkgSlotTypSelectType\x12\x1d\n\x19PRKGSLOTTYPSELECT_DEFAULT\x10\x00\x12\"\n\x1ePRKGSLOTTYPSELECT_TERMIANLSLOT\x10\x01\x12\x1e\n\x1aPRKGSLOTTYPSELECT_AREASLOT\x10\x02\x12\x1e\n\x1aPRKGSLOTTYPSELECT_RESERVED\x10\x03\"\xa5\x02\n\x19\x41utPrkgSelectEntranceType\x12\x1e\n\x1a\x41UTPRKGSELECTENTRANCE_IDLE\x10\x00\x12$\n AUTPRKGSELECTENTRANCE_TARGETPRKG\x10\x01\x12&\n\"AUTPRKGSELECTENTRANCE_PARKENTRANCE\x10\x02\x12*\n&AUTPRKGSELECTENTRANCE_BASEMENTENTRANCE\x10\x03\x12\"\n\x1e\x41UTPRKGSELECTENTRANCE_PARKEXIT\x10\x04\x12&\n\"AUTPRKGSELECTENTRANCE_BASEMENTEXIT\x10\x05\x12\"\n\x1e\x41UTPRKGSELECTENTRANCE_RESERVED\x10\x06\"\x9b\x01\n\x16\x43rsCtrlTiGapAdjReqType\x12\x1b\n\x17TIGAPSETFORLGTCTRL_NONE\x10\x00\x12 \n\x1cTIGAPSETFORLGTCTRL_TIMEGAP_1\x10\x01\x12 \n\x1cTIGAPSETFORLGTCTRL_TIMEGAP_2\x10\x02\x12 \n\x1cTIGAPSETFORLGTCTRL_TIMEGAP_3\x10\x03\"\xc4\x01\n&DrvrACCrsSetSpdReqDrvrCrsSetSpdReqType\x12\x1a\n\x16\x44RVRCRSAMODREQ_NEUTRAL\x10\x00\x12\x1e\n\x1a\x44RVRCRSAMODREQ_APOSREQMOD1\x10\x01\x12\x1e\n\x1a\x44RVRCRSAMODREQ_APOSREQMOD2\x10\x02\x12\x1e\n\x1a\x44RVRCRSAMODREQ_ANEGREQMOD1\x10\x03\x12\x1e\n\x1a\x44RVRCRSAMODREQ_ANEGREQMOD2\x10\x04\"\xe3\x01\n+AutValtPrkgL2BtnReqSettingFctPushBtnReqType\x12;\n7AUTVALTPRKGL2BTNREQSETTINGFCTPUSHBTNREQ_BTNREQ1_DEFAULT\x10\x00\x12;\n7AUTVALTPRKGL2BTNREQSETTINGFCTPUSHBTNREQ_BTNREQ1_OPENREQ\x10\x01\x12:\n6AUTVALTPRKGL2BTNREQSETTINGFCTPUSHBTNREQ_BTNREQ1_OFFREQ\x10\x02\"\xe3\x01\n+AutValtPrkgL2BtnReqSettingNoSenceBtnReqType\x12;\n7AUTVALTPRKGL2BTNREQSETTINGNOSENCEBTNREQ_BTNREQ1_DEFAULT\x10\x00\x12;\n7AUTVALTPRKGL2BTNREQSETTINGNOSENCEBTNREQ_BTNREQ1_OPENREQ\x10\x01\x12:\n6AUTVALTPRKGL2BTNREQSETTINGNOSENCEBTNREQ_BTNREQ1_OFFREQ\x10\x02\"\xd1\x02\n)AutValtPrkgL2BtnReqSettingVoiceBtnReqType\x12\x44\n@AUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQ_SETTINGVOICEBTNREQ_DEFAULT\x10\x00\x12J\nFAUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQ_SETTINGVOICEBTNREQ_DETAILMODEREQ\x10\x01\x12J\nFAUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQ_SETTINGVOICEBTNREQ_SIMPLEMODEREQ\x10\x02\x12\x46\nBAUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQ_SETTINGVOICEBTNREQ_ALLOFFREQ\x10\x03\"r\n!AutValtPrkgMapRespMapIDResultType\x12\x14\n\x10MAPIDRESULT_IDLE\x10\x00\x12\x19\n\x15MAPIDRESULT_AVAILABLE\x10\x01\x12\x1c\n\x18MAPIDRESULT_NOTAVAILABLE\x10\x02\"\xaf\x01\n\x1b\x41utValtPrkgCoverResultsType\x12#\n\x1f\x41UTVALTPRKGCOVERRESULTS_DEFAULT\x10\x00\x12#\n\x1f\x41UTVALTPRKGCOVERRESULTS_SUCCESS\x10\x01\x12 \n\x1c\x41UTVALTPRKGCOVERRESULTS_FAIL\x10\x02\x12$\n AUTVALTPRKGCOVERRESULTS_RESERVED\x10\x03\x42\t\n\x07\x43ommand\"\x1c\n\x0eParkingMapInfo\x12\n\n\x02id\x18\x01 \x01(\x05\"\x8f\x01\n\x11SentryModeCommand\x12\x33\n\x04type\x18\x01 \x01(\x0e\x32%.dr.command.SentryModeCommand.CmdType\"E\n\x07\x43mdType\x12\r\n\tNO_SELECT\x10\x00\x12\x15\n\x11START_SENTRY_MODE\x10\x01\x12\x14\n\x10STOP_SENTRY_MODE\x10\x02\"\x18\n\x16SentryModeGetStatistic\"\x1b\n\tEnableTSR\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"\x1b\n\tEnableSLW\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\"q\n\x11\x44rivingActiveExit\x12\x12\n\ndriving_on\x18\x01 \x01(\x08\x12\x13\n\x0b\x64riving_off\x18\x02 \x01(\x08\x12\x33\n\x0etarget_feature\x18\x03 \x01(\x0e\x32\x1b.dr.operationstatus.Feature\"Z\n\tEnableESA\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\x12=\n\x0e\x63ontrol_status\x18\x02 \x01(\x0e\x32%.dr.command.ActiveSafetyControlStatus\"Z\n\tEnableAES\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\x12=\n\x0e\x63ontrol_status\x18\x02 \x01(\x0e\x32%.dr.command.ActiveSafetyControlStatus\"Z\n\tEnableMAI\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\x12=\n\x0e\x63ontrol_status\x18\x02 \x01(\x0e\x32%.dr.command.ActiveSafetyControlStatus*\x98\x03\n\x06Module\x12\x12\n\x0eUNKNOWN_MODULE\x10\x00\x12\x10\n\x0cSENSOR_LIDAR\x10\x01\x12\x0e\n\nSENSOR_USS\x10\x02\x12\x0e\n\nSENSOR_INS\x10\x03\x12\x10\n\x0cSENSOR_RADAR\x10\x04\x12\x0e\n\nMAP_ENGINE\x10\x05\x12\x10\n\x0cLOCK_ON_ROAD\x10\x06\x12\x0e\n\nINS_ONLINE\x10\x07\x12\x10\n\x0cLOCALIZATION\x10\x08\x12\x0e\n\nPERCEPTION\x10\t\x12\x0c\n\x08PLANNING\x10\n\x12\n\n\x06\x43\x41NBUS\x10\x0b\x12\x07\n\x03\x42LC\x10\x0c\x12\n\n\x06SAFETY\x10\r\x12\x0b\n\x07STARTER\x10\x0e\x12\x12\n\x0ePERF_COLLECTOR\x10\x0f\x12\n\n\x06\x43HURCH\x10\x10\x12\n\n\x06SENTRY\x10\x11\x12\x11\n\rSENSOR_CAMERA\x10\x12\x12\x11\n\rLOCAL_ROUTING\x10\x13\x12\x0b\n\x07\x43ONTROL\x10\x14\x12\x0b\n\x07ROUTING\x10\x15\x12\x1b\n\x17PARKING_ENTRY_DETECTION\x10\x16\x12\x14\n\x10RTK_POSE_FORWARD\x10\x17\x12\x07\n\x03\x44SM\x10\x18*\xc4\x01\n\rMapEngineCode\x12\x0b\n\x07SUCCESS\x10\x00\x12\x0c\n\x08INTERNAL\x10\x01\x12\r\n\tNOT_FOUND\x10\x02\x12\x14\n\x10INVALID_ARGUMENT\x10\x03\x12\x0f\n\x0bUNAVAILABLE\x10\x04\x12\x10\n\x0cOUT_OF_RANGE\x10\x05\x12$\n NETWORK_ADDRESS_RESOLUTION_ERROR\x10\x06\x12\x15\n\x11\x44\x45\x41\x44LINE_EXCEEDED\x10\x07\x12\x13\n\x0fROUTING_UNKNOWN\x10\x08*M\n\x07RPAType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0e\n\nPARKING_IN\x10\x01\x12\x0f\n\x0bPARKING_OUT\x10\x02\x12\x14\n\x10STARAIGHT_IN_OUT\x10\x03*M\n\x19\x41\x63tiveSafetyControlStatus\x12\x1a\n\x16UNKNOWN_CONTROL_STATUS\x10\x00\x12\x08\n\x04OPEN\x10\x01\x12\n\n\x06\x43LOSED\x10\x02\x62\x06proto3')
 
 _MODULE = DESCRIPTOR.enum_types_by_name['Module']
 Module = enum_type_wrapper.EnumTypeWrapper(_MODULE)
@@ -31,6 +31,8 @@ _MAPENGINECODE = DESCRIPTOR.enum_types_by_name['MapEngineCode']
 MapEngineCode = enum_type_wrapper.EnumTypeWrapper(_MAPENGINECODE)
 _RPATYPE = DESCRIPTOR.enum_types_by_name['RPAType']
 RPAType = enum_type_wrapper.EnumTypeWrapper(_RPATYPE)
+_ACTIVESAFETYCONTROLSTATUS = DESCRIPTOR.enum_types_by_name['ActiveSafetyControlStatus']
+ActiveSafetyControlStatus = enum_type_wrapper.EnumTypeWrapper(_ACTIVESAFETYCONTROLSTATUS)
 UNKNOWN_MODULE = 0
 SENSOR_LIDAR = 1
 SENSOR_USS = 2
@@ -69,6 +71,9 @@ UNKNOWN = 0
 PARKING_IN = 1
 PARKING_OUT = 2
 STARAIGHT_IN_OUT = 3
+UNKNOWN_CONTROL_STATUS = 0
+OPEN = 1
+CLOSED = 2
 
 
 _COMMAND = DESCRIPTOR.message_types_by_name['Command']
@@ -77,7 +82,13 @@ _UPDATECONFIG = DESCRIPTOR.message_types_by_name['UpdateConfig']
 _ENABLEACC = DESCRIPTOR.message_types_by_name['EnableACC']
 _GETACCTTC = DESCRIPTOR.message_types_by_name['GetACCTTC']
 _GETACCTTCRP = DESCRIPTOR.message_types_by_name['GetACCTTCRP']
+_CHANGETIMEGAP = DESCRIPTOR.message_types_by_name['ChangeTimeGap']
+_CHANGEACCELERATIONSTYLE = DESCRIPTOR.message_types_by_name['ChangeAccelerationStyle']
+_PULLOVER = DESCRIPTOR.message_types_by_name['PullOver']
+_YIELDOBSTACLE = DESCRIPTOR.message_types_by_name['YieldObstacle']
+_OVERTAKE = DESCRIPTOR.message_types_by_name['OverTake']
 _SETACCTTC = DESCRIPTOR.message_types_by_name['SetACCTTC']
+_CHANGESPEEDLIMIT = DESCRIPTOR.message_types_by_name['ChangeSpeedLimit']
 _GETACCSPEEDLIMIT = DESCRIPTOR.message_types_by_name['GetACCSpeedLimit']
 _GETACCSPEEDLIMITRP = DESCRIPTOR.message_types_by_name['GetACCSpeedLimitRP']
 _ENABLEICA = DESCRIPTOR.message_types_by_name['EnableICA']
@@ -92,6 +103,7 @@ _GETCURPATHID = DESCRIPTOR.message_types_by_name['GetCurPathId']
 _GETCURPATHIDRP = DESCRIPTOR.message_types_by_name['GetCurPathIdRP']
 _STARTNAVIGATION = DESCRIPTOR.message_types_by_name['StartNavigation']
 _CANCELNAVIGATION = DESCRIPTOR.message_types_by_name['CancelNavigation']
+_CHANGEROUTING = DESCRIPTOR.message_types_by_name['ChangeRouting']
 _ENABLELDW = DESCRIPTOR.message_types_by_name['EnableLDW']
 _ENABLERDP = DESCRIPTOR.message_types_by_name['EnableRDP']
 _ACTIVEAPA = DESCRIPTOR.message_types_by_name['ActiveAPA']
@@ -193,6 +205,9 @@ _SENTRYMODEGETSTATISTIC = DESCRIPTOR.message_types_by_name['SentryModeGetStatist
 _ENABLETSR = DESCRIPTOR.message_types_by_name['EnableTSR']
 _ENABLESLW = DESCRIPTOR.message_types_by_name['EnableSLW']
 _DRIVINGACTIVEEXIT = DESCRIPTOR.message_types_by_name['DrivingActiveExit']
+_ENABLEESA = DESCRIPTOR.message_types_by_name['EnableESA']
+_ENABLEAES = DESCRIPTOR.message_types_by_name['EnableAES']
+_ENABLEMAI = DESCRIPTOR.message_types_by_name['EnableMAI']
 _CHANGELANE_ACTION = _CHANGELANE.enum_types_by_name['Action']
 _CHANGEAUTOUPGRADE_ACTION = _CHANGEAUTOUPGRADE.enum_types_by_name['Action']
 _GETPATH_ROUTEPLANNINGDATASOURCE = _GETPATH.enum_types_by_name['RoutePlanningDataSource']
@@ -219,6 +234,11 @@ _GWPARKINGCOMMAND_PRKGCTRLMODREQ_CMD = _GWPARKINGCOMMAND_PRKGCTRLMODREQ.enum_typ
 _GWPARKINGCOMMAND_PRKGCTRLMODREQ_VALID = _GWPARKINGCOMMAND_PRKGCTRLMODREQ.enum_types_by_name['Valid']
 _GWPARKINGCOMMAND_BACKREQAPS_CMD = _GWPARKINGCOMMAND_BACKREQAPS.enum_types_by_name['Cmd']
 _GWPARKINGCOMMAND_APSSWTREQVR_CMD = _GWPARKINGCOMMAND_APSSWTREQVR.enum_types_by_name['Cmd']
+_GLPARKINGCOMMAND_PRKGSPDREQTYPE = _GLPARKINGCOMMAND.enum_types_by_name['PrkgSpdReqType']
+_GLPARKINGCOMMAND_DRVRASSCWISDOMBTNTYPE = _GLPARKINGCOMMAND.enum_types_by_name['DrvrAsscWisdomBtnType']
+_GLPARKINGCOMMAND_FRNTANDREPRKGINSWTTYPE = _GLPARKINGCOMMAND.enum_types_by_name['FrntAndRePrkgInSwtType']
+_GLPARKINGCOMMAND_LOSPDDRVGASSISHOPUSHRESPTYPE = _GLPARKINGCOMMAND.enum_types_by_name['LoSpdDrvgAssiShoPushRespType']
+_GLPARKINGCOMMAND_SWITCHCMD = _GLPARKINGCOMMAND.enum_types_by_name['SwitchCmd']
 _GLHPACOMMAND_AUTVALTPRKGSWTTYPE = _GLHPACOMMAND.enum_types_by_name['AutValtPrkgSwtType']
 _GLHPACOMMAND_AUTVALTPRKGEXPERIENCERESPTYPE = _GLHPACOMMAND.enum_types_by_name['AutValtPrkgExperienceRespType']
 _GLHPACOMMAND_PRKGINTRPTRELDBTNTYPE = _GLHPACOMMAND.enum_types_by_name['PrkgIntrptReldBtnType']
@@ -233,6 +253,8 @@ _GLHPACOMMAND_DRVRACCRSSETSPDREQDRVRCRSSETSPDREQTYPE = _GLHPACOMMAND.enum_types_
 _GLHPACOMMAND_AUTVALTPRKGL2BTNREQSETTINGFCTPUSHBTNREQTYPE = _GLHPACOMMAND.enum_types_by_name['AutValtPrkgL2BtnReqSettingFctPushBtnReqType']
 _GLHPACOMMAND_AUTVALTPRKGL2BTNREQSETTINGNOSENCEBTNREQTYPE = _GLHPACOMMAND.enum_types_by_name['AutValtPrkgL2BtnReqSettingNoSenceBtnReqType']
 _GLHPACOMMAND_AUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQTYPE = _GLHPACOMMAND.enum_types_by_name['AutValtPrkgL2BtnReqSettingVoiceBtnReqType']
+_GLHPACOMMAND_AUTVALTPRKGMAPRESPMAPIDRESULTTYPE = _GLHPACOMMAND.enum_types_by_name['AutValtPrkgMapRespMapIDResultType']
+_GLHPACOMMAND_AUTVALTPRKGCOVERRESULTSTYPE = _GLHPACOMMAND.enum_types_by_name['AutValtPrkgCoverResultsType']
 _SENTRYMODECOMMAND_CMDTYPE = _SENTRYMODECOMMAND.enum_types_by_name['CmdType']
 Command = _reflection.GeneratedProtocolMessageType('Command', (_message.Message,), {
   'DESCRIPTOR' : _COMMAND,
@@ -276,12 +298,54 @@ GetACCTTCRP = _reflection.GeneratedProtocolMessageType('GetACCTTCRP', (_message.
   })
 _sym_db.RegisterMessage(GetACCTTCRP)
 
+ChangeTimeGap = _reflection.GeneratedProtocolMessageType('ChangeTimeGap', (_message.Message,), {
+  'DESCRIPTOR' : _CHANGETIMEGAP,
+  '__module__' : 'drapi.command_pb2'
+  # @@protoc_insertion_point(class_scope:dr.command.ChangeTimeGap)
+  })
+_sym_db.RegisterMessage(ChangeTimeGap)
+
+ChangeAccelerationStyle = _reflection.GeneratedProtocolMessageType('ChangeAccelerationStyle', (_message.Message,), {
+  'DESCRIPTOR' : _CHANGEACCELERATIONSTYLE,
+  '__module__' : 'drapi.command_pb2'
+  # @@protoc_insertion_point(class_scope:dr.command.ChangeAccelerationStyle)
+  })
+_sym_db.RegisterMessage(ChangeAccelerationStyle)
+
+PullOver = _reflection.GeneratedProtocolMessageType('PullOver', (_message.Message,), {
+  'DESCRIPTOR' : _PULLOVER,
+  '__module__' : 'drapi.command_pb2'
+  # @@protoc_insertion_point(class_scope:dr.command.PullOver)
+  })
+_sym_db.RegisterMessage(PullOver)
+
+YieldObstacle = _reflection.GeneratedProtocolMessageType('YieldObstacle', (_message.Message,), {
+  'DESCRIPTOR' : _YIELDOBSTACLE,
+  '__module__' : 'drapi.command_pb2'
+  # @@protoc_insertion_point(class_scope:dr.command.YieldObstacle)
+  })
+_sym_db.RegisterMessage(YieldObstacle)
+
+OverTake = _reflection.GeneratedProtocolMessageType('OverTake', (_message.Message,), {
+  'DESCRIPTOR' : _OVERTAKE,
+  '__module__' : 'drapi.command_pb2'
+  # @@protoc_insertion_point(class_scope:dr.command.OverTake)
+  })
+_sym_db.RegisterMessage(OverTake)
+
 SetACCTTC = _reflection.GeneratedProtocolMessageType('SetACCTTC', (_message.Message,), {
   'DESCRIPTOR' : _SETACCTTC,
   '__module__' : 'drapi.command_pb2'
   # @@protoc_insertion_point(class_scope:dr.command.SetACCTTC)
   })
 _sym_db.RegisterMessage(SetACCTTC)
+
+ChangeSpeedLimit = _reflection.GeneratedProtocolMessageType('ChangeSpeedLimit', (_message.Message,), {
+  'DESCRIPTOR' : _CHANGESPEEDLIMIT,
+  '__module__' : 'drapi.command_pb2'
+  # @@protoc_insertion_point(class_scope:dr.command.ChangeSpeedLimit)
+  })
+_sym_db.RegisterMessage(ChangeSpeedLimit)
 
 GetACCSpeedLimit = _reflection.GeneratedProtocolMessageType('GetACCSpeedLimit', (_message.Message,), {
   'DESCRIPTOR' : _GETACCSPEEDLIMIT,
@@ -380,6 +444,13 @@ CancelNavigation = _reflection.GeneratedProtocolMessageType('CancelNavigation', 
   # @@protoc_insertion_point(class_scope:dr.command.CancelNavigation)
   })
 _sym_db.RegisterMessage(CancelNavigation)
+
+ChangeRouting = _reflection.GeneratedProtocolMessageType('ChangeRouting', (_message.Message,), {
+  'DESCRIPTOR' : _CHANGEROUTING,
+  '__module__' : 'drapi.command_pb2'
+  # @@protoc_insertion_point(class_scope:dr.command.ChangeRouting)
+  })
+_sym_db.RegisterMessage(ChangeRouting)
 
 EnableLDW = _reflection.GeneratedProtocolMessageType('EnableLDW', (_message.Message,), {
   'DESCRIPTOR' : _ENABLELDW,
@@ -1107,339 +1178,396 @@ DrivingActiveExit = _reflection.GeneratedProtocolMessageType('DrivingActiveExit'
   })
 _sym_db.RegisterMessage(DrivingActiveExit)
 
+EnableESA = _reflection.GeneratedProtocolMessageType('EnableESA', (_message.Message,), {
+  'DESCRIPTOR' : _ENABLEESA,
+  '__module__' : 'drapi.command_pb2'
+  # @@protoc_insertion_point(class_scope:dr.command.EnableESA)
+  })
+_sym_db.RegisterMessage(EnableESA)
+
+EnableAES = _reflection.GeneratedProtocolMessageType('EnableAES', (_message.Message,), {
+  'DESCRIPTOR' : _ENABLEAES,
+  '__module__' : 'drapi.command_pb2'
+  # @@protoc_insertion_point(class_scope:dr.command.EnableAES)
+  })
+_sym_db.RegisterMessage(EnableAES)
+
+EnableMAI = _reflection.GeneratedProtocolMessageType('EnableMAI', (_message.Message,), {
+  'DESCRIPTOR' : _ENABLEMAI,
+  '__module__' : 'drapi.command_pb2'
+  # @@protoc_insertion_point(class_scope:dr.command.EnableMAI)
+  })
+_sym_db.RegisterMessage(EnableMAI)
+
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _MODULE._serialized_start=23589
-  _MODULE._serialized_end=23997
-  _MAPENGINECODE._serialized_start=24000
-  _MAPENGINECODE._serialized_end=24196
-  _RPATYPE._serialized_start=24198
-  _RPATYPE._serialized_end=24275
+  _MODULE._serialized_start=27211
+  _MODULE._serialized_end=27619
+  _MAPENGINECODE._serialized_start=27622
+  _MAPENGINECODE._serialized_end=27818
+  _RPATYPE._serialized_start=27820
+  _RPATYPE._serialized_end=27897
+  _ACTIVESAFETYCONTROLSTATUS._serialized_start=27899
+  _ACTIVESAFETYCONTROLSTATUS._serialized_end=27976
   _COMMAND._serialized_start=242
-  _COMMAND._serialized_end=4591
-  _COMMANDRP._serialized_start=4594
-  _COMMANDRP._serialized_end=6285
-  _UPDATECONFIG._serialized_start=6287
-  _UPDATECONFIG._serialized_end=6350
-  _ENABLEACC._serialized_start=6352
-  _ENABLEACC._serialized_end=6379
-  _GETACCTTC._serialized_start=6381
-  _GETACCTTC._serialized_end=6392
-  _GETACCTTCRP._serialized_start=6394
-  _GETACCTTCRP._serialized_end=6453
-  _SETACCTTC._serialized_start=6455
-  _SETACCTTC._serialized_end=6479
-  _GETACCSPEEDLIMIT._serialized_start=6481
-  _GETACCSPEEDLIMIT._serialized_end=6499
-  _GETACCSPEEDLIMITRP._serialized_start=6501
-  _GETACCSPEEDLIMITRP._serialized_end=6542
-  _ENABLEICA._serialized_start=6544
-  _ENABLEICA._serialized_end=6571
-  _CHANGELANE._serialized_start=6573
-  _CHANGELANE._serialized_end=6683
-  _CHANGELANE_ACTION._serialized_start=6634
-  _CHANGELANE_ACTION._serialized_end=6683
-  _CHANGEAUTOUPGRADE._serialized_start=6686
-  _CHANGEAUTOUPGRADE._serialized_end=6816
-  _CHANGEAUTOUPGRADE_ACTION._serialized_start=6761
-  _CHANGEAUTOUPGRADE_ACTION._serialized_end=6816
-  _ENABLENCA._serialized_start=6818
-  _ENABLENCA._serialized_end=6845
-  _GETPATH._serialized_start=6848
-  _GETPATH._serialized_end=7209
-  _GETPATH_ROUTEPLANNINGDATASOURCE._serialized_start=7151
-  _GETPATH_ROUTEPLANNINGDATASOURCE._serialized_end=7209
-  _GETPATHRP._serialized_start=7211
-  _GETPATHRP._serialized_end=7279
-  _GETCURPATH._serialized_start=7281
-  _GETCURPATH._serialized_end=7293
-  _GETCURPATHRP._serialized_start=7295
-  _GETCURPATHRP._serialized_end=7347
-  _GETCURPATHID._serialized_start=7349
-  _GETCURPATHID._serialized_end=7363
-  _GETCURPATHIDRP._serialized_start=7365
-  _GETCURPATHIDRP._serialized_end=7418
-  _STARTNAVIGATION._serialized_start=7421
-  _STARTNAVIGATION._serialized_end=7551
-  _CANCELNAVIGATION._serialized_start=7553
-  _CANCELNAVIGATION._serialized_end=7608
-  _ENABLELDW._serialized_start=7610
-  _ENABLELDW._serialized_end=7637
-  _ENABLERDP._serialized_start=7639
-  _ENABLERDP._serialized_end=7666
-  _ACTIVEAPA._serialized_start=7668
-  _ACTIVEAPA._serialized_end=7695
-  _ENABLEVPA._serialized_start=7697
-  _ENABLEVPA._serialized_end=7724
-  _APAPARKINGSWITCHMODE._serialized_start=7726
-  _APAPARKINGSWITCHMODE._serialized_end=7836
-  _APAPARKINGSWITCHMODE_MODE._serialized_start=7803
-  _APAPARKINGSWITCHMODE_MODE._serialized_end=7836
-  _ACTIVEVPA._serialized_start=7838
-  _ACTIVEVPA._serialized_end=7865
-  _APAPARKINGUPDATESTATUS._serialized_start=7868
-  _APAPARKINGUPDATESTATUS._serialized_end=8014
-  _APAPARKINGUPDATESTATUS_OPERATIONTYPE._serialized_start=7963
-  _APAPARKINGUPDATESTATUS_OPERATIONTYPE._serialized_end=8014
-  _APAGETREALTIMEPARKINGSPACE._serialized_start=8016
-  _APAGETREALTIMEPARKINGSPACE._serialized_end=8044
-  _APAREALTIMEPARKINGSPACERP._serialized_start=8046
-  _APAREALTIMEPARKINGSPACERP._serialized_end=8119
-  _APAAPPSELECTPARKINGSPACE._serialized_start=8121
-  _APAAPPSELECTPARKINGSPACE._serialized_end=8226
-  _APASUGGESTOUTPARKING._serialized_start=8228
-  _APASUGGESTOUTPARKING._serialized_end=8250
-  _APASUGGESTOUTPARKINGRP._serialized_start=8252
-  _APASUGGESTOUTPARKINGRP._serialized_end=8351
-  _APAACTIVEPARKOUT._serialized_start=8353
-  _APAACTIVEPARKOUT._serialized_end=8371
-  _APASKIPCOUNTDOWNCLOCK._serialized_start=8373
-  _APASKIPCOUNTDOWNCLOCK._serialized_end=8396
-  _APAENTERCUSTOMPARKING._serialized_start=8398
-  _APAENTERCUSTOMPARKING._serialized_end=8421
-  _APALEAVECUSTOMPARKING._serialized_start=8423
-  _APALEAVECUSTOMPARKING._serialized_end=8446
-  _APASELECTCUSTOMPARKINGSPACE._serialized_start=8448
-  _APASELECTCUSTOMPARKINGSPACE._serialized_end=8477
-  _VPALEARNING._serialized_start=8480
-  _VPALEARNING._serialized_end=8670
-  _VPALEARNING_LEARNINGOPTYPE._serialized_start=8559
-  _VPALEARNING_LEARNINGOPTYPE._serialized_end=8670
-  _VPAROUTINGSWITCHMODE._serialized_start=8673
-  _VPAROUTINGSWITCHMODE._serialized_end=8805
-  _VPAROUTINGSWITCHMODE_MODE._serialized_start=8750
-  _VPAROUTINGSWITCHMODE_MODE._serialized_end=8805
-  _VPAROUTING._serialized_start=8808
-  _VPAROUTING._serialized_end=8974
-  _VPAROUTING_ROUGINTOPTYPE._serialized_start=8884
-  _VPAROUTING_ROUGINTOPTYPE._serialized_end=8974
-  _VPAROUTINGRP._serialized_start=8976
-  _VPAROUTINGRP._serialized_end=9036
-  _VPAGETINFORQ._serialized_start=9038
-  _VPAGETINFORQ._serialized_end=9052
-  _VPAGETINFORP._serialized_start=9054
-  _VPAGETINFORP._serialized_end=9115
-  _VPAROUTINGGETMAP._serialized_start=9117
-  _VPAROUTINGGETMAP._serialized_end=9135
-  _VPAROUTINGGETMAPRP._serialized_start=9138
-  _VPAROUTINGGETMAPRP._serialized_end=9308
-  _VPALEARNINGRP._serialized_start=9310
-  _VPALEARNINGRP._serialized_end=9403
-  _ENABLEAVM._serialized_start=9405
-  _ENABLEAVM._serialized_end=9486
-  _ENABLEAVMRP._serialized_start=9488
-  _ENABLEAVMRP._serialized_end=9551
-  _SWITCHAVMVIEW._serialized_start=9554
-  _SWITCHAVMVIEW._serialized_end=9794
-  _SWITCHAVMVIEWRP._serialized_start=9796
-  _SWITCHAVMVIEWRP._serialized_end=9863
-  _PARKEDSHOTING._serialized_start=9865
-  _PARKEDSHOTING._serialized_end=9896
-  _PARKEDSHOTINGRP._serialized_start=9898
-  _PARKEDSHOTINGRP._serialized_end=9965
-  _GETAVMSETTINGS._serialized_start=9967
-  _GETAVMSETTINGS._serialized_end=9983
-  _GETAVMSETTINGSRP._serialized_start=9985
-  _GETAVMSETTINGSRP._serialized_end=10053
-  _PDCUPDATE._serialized_start=10055
-  _PDCUPDATE._serialized_end=10098
-  _ENABLEHMA._serialized_start=10100
-  _ENABLEHMA._serialized_end=10127
-  _ENABLEBSD._serialized_start=10129
-  _ENABLEBSD._serialized_end=10156
-  _ENABLELCA._serialized_start=10158
-  _ENABLELCA._serialized_end=10185
-  _ENABLEDOW._serialized_start=10187
-  _ENABLEDOW._serialized_end=10214
-  _ENABLERCTA._serialized_start=10216
-  _ENABLERCTA._serialized_end=10244
-  _ENABLERCW._serialized_start=10246
-  _ENABLERCW._serialized_end=10273
-  _ENABLERCTB._serialized_start=10275
-  _ENABLERCTB._serialized_end=10303
-  _UPDATEAPASETTING._serialized_start=10305
-  _UPDATEAPASETTING._serialized_end=10337
-  _APAPARKIN._serialized_start=10339
-  _APAPARKIN._serialized_end=10417
-  _APAPARKOUT._serialized_start=10419
-  _APAPARKOUT._serialized_end=10485
-  _APAPARKRP._serialized_start=10487
-  _APAPARKRP._serialized_end=10551
-  _APAGETACTIVESOURCE._serialized_start=10554
-  _APAGETACTIVESOURCE._serialized_end=10767
-  _APAGETACTIVESOURCE_VPAACTIVEINFO._serialized_start=10708
-  _APAGETACTIVESOURCE_VPAACTIVEINFO._serialized_end=10740
-  _APAGETACTIVESOURCE_APAACTIVEINFO._serialized_start=10742
-  _APAGETACTIVESOURCE_APAACTIVEINFO._serialized_end=10757
-  _REQUESTIMAGEPIXELTOPOS._serialized_start=10769
-  _REQUESTIMAGEPIXELTOPOS._serialized_end=10855
-  _REQUESTIMAGEPIXELTOPOSRP._serialized_start=10857
-  _REQUESTIMAGEPIXELTOPOSRP._serialized_end=10937
-  _APASELECTAVMPARKINGSPACE._serialized_start=10939
-  _APASELECTAVMPARKINGSPACE._serialized_end=10998
-  _APASELECTAVMPARKINGSPACERP._serialized_start=11000
-  _APASELECTAVMPARKINGSPACERP._serialized_end=11074
-  _RPACHECK._serialized_start=11076
-  _RPACHECK._serialized_end=11086
-  _RPAPARKIN._serialized_start=11088
-  _RPAPARKIN._serialized_end=11099
-  _RPAPARKINGUPDATE._serialized_start=11102
-  _RPAPARKINGUPDATE._serialized_end=11257
-  _RPAPARKINGUPDATE_OPERATIONTYPE._serialized_start=11185
-  _RPAPARKINGUPDATE_OPERATIONTYPE._serialized_end=11257
-  _RPAPARKOUT._serialized_start=11259
-  _RPAPARKOUT._serialized_end=11325
-  _RPASUGGESTOUTPARKINGRP._serialized_start=11327
-  _RPASUGGESTOUTPARKINGRP._serialized_end=11426
-  _RPASTRAIGHTINOUT._serialized_start=11429
-  _RPASTRAIGHTINOUT._serialized_end=11730
-  _RPASTRAIGHTINOUT_DIRECTION._serialized_start=11571
-  _RPASTRAIGHTINOUT_DIRECTION._serialized_end=11642
-  _RPASTRAIGHTINOUT_OPERATIONTYPE._serialized_start=11644
-  _RPASTRAIGHTINOUT_OPERATIONTYPE._serialized_end=11730
-  _RPAAPPHEARTBEAT._serialized_start=11732
-  _RPAAPPHEARTBEAT._serialized_end=11784
-  _RPAINIT._serialized_start=11786
-  _RPAINIT._serialized_end=11830
-  _RPACLOSE._serialized_start=11832
-  _RPACLOSE._serialized_end=11842
-  _RPASUGGESTOUTPARKING._serialized_start=11844
-  _RPASUGGESTOUTPARKING._serialized_end=11866
-  _ENABLEAEB._serialized_start=11868
-  _ENABLEAEB._serialized_end=11895
-  _STARTCALIBRATION._serialized_start=11898
-  _STARTCALIBRATION._serialized_end=12190
-  _STARTCALIBRATION_OPERATIONTYPE._serialized_start=12141
-  _STARTCALIBRATION_OPERATIONTYPE._serialized_end=12190
-  _STARTCALIBRATIONRP._serialized_start=12192
-  _STARTCALIBRATIONRP._serialized_end=12212
-  _ENABLEELK._serialized_start=12214
-  _ENABLEELK._serialized_end=12241
-  _LSSMUTE._serialized_start=12243
-  _LSSMUTE._serialized_end=12252
-  _TJPCMD._serialized_start=12255
-  _TJPCMD._serialized_end=12501
-  _TJPCMD_CMDTYPE._serialized_start=12308
-  _TJPCMD_CMDTYPE._serialized_end=12501
-  _SETDEFAULTMODE._serialized_start=12503
-  _SETDEFAULTMODE._serialized_end=12597
-  _SELPRKGFCTNCMD._serialized_start=12600
-  _SELPRKGFCTNCMD._serialized_end=12763
-  _SELPRKGFCTNCMD_CMDTYPE._serialized_start=12668
-  _SELPRKGFCTNCMD_CMDTYPE._serialized_end=12763
-  _CONTNPRKGREQ._serialized_start=12766
-  _CONTNPRKGREQ._serialized_end=12909
-  _CONTNPRKGREQ_CMDTYPE._serialized_start=12830
-  _CONTNPRKGREQ_CMDTYPE._serialized_end=12909
-  _BTNENAREQ._serialized_start=12912
-  _BTNENAREQ._serialized_end=14304
-  _BTNENAREQ_ENTERROUTINGREQ._serialized_start=13385
-  _BTNENAREQ_ENTERROUTINGREQ._serialized_end=13402
-  _BTNENAREQ_SELECTTARGETSLOTREQ._serialized_start=13404
-  _BTNENAREQ_SELECTTARGETSLOTREQ._serialized_end=13458
-  _BTNENAREQ_GOTOHEREREQ._serialized_start=13460
-  _BTNENAREQ_GOTOHEREREQ._serialized_end=13506
-  _BTNENAREQ_UPDATESLOTINFOREQ._serialized_start=13509
-  _BTNENAREQ_UPDATESLOTINFOREQ._serialized_end=13711
-  _BTNENAREQ_UPDATEMAPINFOREQ._serialized_start=13714
-  _BTNENAREQ_UPDATEMAPINFOREQ._serialized_end=13870
-  _BTNENAREQ_GETMAPINFOREQ._serialized_start=13872
-  _BTNENAREQ_GETMAPINFOREQ._serialized_end=13936
-  _BTNENAREQ_REQCMD._serialized_start=13939
-  _BTNENAREQ_REQCMD._serialized_end=14293
-  _BTNENAREQRP._serialized_start=14307
-  _BTNENAREQRP._serialized_end=14689
-  _BTNENAREQRP_MAPINFORP._serialized_start=14504
-  _BTNENAREQRP_MAPINFORP._serialized_end=14584
-  _BTNENAREQRP_PARKINGSPACEINFORP._serialized_start=14586
-  _BTNENAREQRP_PARKINGSPACEINFORP._serialized_end=14689
-  _GWPARKINGCOMMAND._serialized_start=14692
-  _GWPARKINGCOMMAND._serialized_end=17093
-  _GWPARKINGCOMMAND_SELPRKGFCTNCMD._serialized_start=15331
-  _GWPARKINGCOMMAND_SELPRKGFCTNCMD._serialized_end=15595
-  _GWPARKINGCOMMAND_SELPRKGFCTNCMD_CMD._serialized_start=15412
-  _GWPARKINGCOMMAND_SELPRKGFCTNCMD_CMD._serialized_end=15595
-  _GWPARKINGCOMMAND_CONTNPRKGREQ._serialized_start=15598
-  _GWPARKINGCOMMAND_CONTNPRKGREQ._serialized_end=15854
-  _GWPARKINGCOMMAND_CONTNPRKGREQ_CMD._serialized_start=15738
-  _GWPARKINGCOMMAND_CONTNPRKGREQ_CMD._serialized_end=15821
-  _GWPARKINGCOMMAND_CONTNPRKGREQ_VALID._serialized_start=15823
-  _GWPARKINGCOMMAND_CONTNPRKGREQ_VALID._serialized_end=15854
-  _GWPARKINGCOMMAND_PASWORKCMD._serialized_start=15856
-  _GWPARKINGCOMMAND_PASWORKCMD._serialized_end=15950
-  _GWPARKINGCOMMAND_PASWORKCMD_CMD._serialized_start=15928
-  _GWPARKINGCOMMAND_PASWORKCMD_CMD._serialized_end=15950
-  _GWPARKINGCOMMAND_SELPRKOUTDIRREQ._serialized_start=15953
-  _GWPARKINGCOMMAND_SELPRKOUTDIRREQ._serialized_end=16364
-  _GWPARKINGCOMMAND_SELPRKOUTDIRREQ_CMD._serialized_start=16036
-  _GWPARKINGCOMMAND_SELPRKOUTDIRREQ_CMD._serialized_end=16364
-  _GWPARKINGCOMMAND_PRKMODREQ._serialized_start=16367
-  _GWPARKINGCOMMAND_PRKMODREQ._serialized_end=16535
-  _GWPARKINGCOMMAND_PRKMODREQ_CMD._serialized_start=16437
-  _GWPARKINGCOMMAND_PRKMODREQ_CMD._serialized_end=16535
-  _GWPARKINGCOMMAND_PRKGCTRLMODREQ._serialized_start=16538
-  _GWPARKINGCOMMAND_PRKGCTRLMODREQ._serialized_end=16791
-  _GWPARKINGCOMMAND_PRKGCTRLMODREQ_CMD._serialized_start=16684
-  _GWPARKINGCOMMAND_PRKGCTRLMODREQ_CMD._serialized_end=16758
-  _GWPARKINGCOMMAND_PRKGCTRLMODREQ_VALID._serialized_start=15823
-  _GWPARKINGCOMMAND_PRKGCTRLMODREQ_VALID._serialized_end=15854
-  _GWPARKINGCOMMAND_BACKREQAPS._serialized_start=16793
-  _GWPARKINGCOMMAND_BACKREQAPS._serialized_end=16899
-  _GWPARKINGCOMMAND_BACKREQAPS_CMD._serialized_start=16865
-  _GWPARKINGCOMMAND_BACKREQAPS_CMD._serialized_end=16899
-  _GWPARKINGCOMMAND_APSSWTREQVR._serialized_start=16901
-  _GWPARKINGCOMMAND_APSSWTREQVR._serialized_end=17026
-  _GWPARKINGCOMMAND_APSSWTREQVR_CMD._serialized_start=16975
-  _GWPARKINGCOMMAND_APSSWTREQVR_CMD._serialized_end=17026
-  _GWPARKINGCOMMAND_SLOTNUMVR._serialized_start=17028
-  _GWPARKINGCOMMAND_SLOTNUMVR._serialized_end=17085
-  _SMARTLPCOMMAND._serialized_start=17096
-  _SMARTLPCOMMAND._serialized_end=17538
-  _GLPARKINGCOMMAND._serialized_start=17541
-  _GLPARKINGCOMMAND._serialized_end=18387
-  _GLHPACOMMAND._serialized_start=18390
-  _GLHPACOMMAND._serialized_end=23211
-  _GLHPACOMMAND_AUTVALTPRKGSWTTYPE._serialized_start=19796
-  _GLHPACOMMAND_AUTVALTPRKGSWTTYPE._serialized_end=19877
-  _GLHPACOMMAND_AUTVALTPRKGEXPERIENCERESPTYPE._serialized_start=19879
-  _GLHPACOMMAND_AUTVALTPRKGEXPERIENCERESPTYPE._serialized_end=20001
-  _GLHPACOMMAND_PRKGINTRPTRELDBTNTYPE._serialized_start=20003
-  _GLHPACOMMAND_PRKGINTRPTRELDBTNTYPE._serialized_end=20118
-  _GLHPACOMMAND_AUTVALTPRKGL2POPBTNREQTYPE._serialized_start=20121
-  _GLHPACOMMAND_AUTVALTPRKGL2POPBTNREQTYPE._serialized_end=20634
-  _GLHPACOMMAND_AUTVALTPRKGMAPOPERREQ2MAPTYPE2TYPE._serialized_start=20637
-  _GLHPACOMMAND_AUTVALTPRKGMAPOPERREQ2MAPTYPE2TYPE._serialized_end=21082
-  _GLHPACOMMAND_MAPBUILDSTSTYPE._serialized_start=21085
-  _GLHPACOMMAND_MAPBUILDSTSTYPE._serialized_end=21254
-  _GLHPACOMMAND_AUTVALTPRKGL1BTNREQTYPE._serialized_start=21257
-  _GLHPACOMMAND_AUTVALTPRKGL1BTNREQTYPE._serialized_end=21590
-  _GLHPACOMMAND_PRKGSLOTTYPSELECTTYPE._serialized_start=21593
-  _GLHPACOMMAND_PRKGSLOTTYPSELECTTYPE._serialized_end=21747
-  _GLHPACOMMAND_AUTPRKGSELECTENTRANCETYPE._serialized_start=21750
-  _GLHPACOMMAND_AUTPRKGSELECTENTRANCETYPE._serialized_end=22043
-  _GLHPACOMMAND_CRSCTRLTIGAPADJREQTYPE._serialized_start=22046
-  _GLHPACOMMAND_CRSCTRLTIGAPADJREQTYPE._serialized_end=22201
-  _GLHPACOMMAND_DRVRACCRSSETSPDREQDRVRCRSSETSPDREQTYPE._serialized_start=22204
-  _GLHPACOMMAND_DRVRACCRSSETSPDREQDRVRCRSSETSPDREQTYPE._serialized_end=22400
-  _GLHPACOMMAND_AUTVALTPRKGL2BTNREQSETTINGFCTPUSHBTNREQTYPE._serialized_start=22403
-  _GLHPACOMMAND_AUTVALTPRKGL2BTNREQSETTINGFCTPUSHBTNREQTYPE._serialized_end=22630
-  _GLHPACOMMAND_AUTVALTPRKGL2BTNREQSETTINGNOSENCEBTNREQTYPE._serialized_start=22633
-  _GLHPACOMMAND_AUTVALTPRKGL2BTNREQSETTINGNOSENCEBTNREQTYPE._serialized_end=22860
-  _GLHPACOMMAND_AUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQTYPE._serialized_start=22863
-  _GLHPACOMMAND_AUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQTYPE._serialized_end=23200
-  _PARKINGMAPINFO._serialized_start=23213
-  _PARKINGMAPINFO._serialized_end=23241
-  _SENTRYMODECOMMAND._serialized_start=23244
-  _SENTRYMODECOMMAND._serialized_end=23387
-  _SENTRYMODECOMMAND_CMDTYPE._serialized_start=23318
-  _SENTRYMODECOMMAND_CMDTYPE._serialized_end=23387
-  _SENTRYMODEGETSTATISTIC._serialized_start=23389
-  _SENTRYMODEGETSTATISTIC._serialized_end=23413
-  _ENABLETSR._serialized_start=23415
-  _ENABLETSR._serialized_end=23442
-  _ENABLESLW._serialized_start=23444
-  _ENABLESLW._serialized_end=23471
-  _DRIVINGACTIVEEXIT._serialized_start=23473
-  _DRIVINGACTIVEEXIT._serialized_end=23586
+  _COMMAND._serialized_end=5172
+  _COMMANDRP._serialized_start=5175
+  _COMMANDRP._serialized_end=6866
+  _UPDATECONFIG._serialized_start=6868
+  _UPDATECONFIG._serialized_end=6931
+  _ENABLEACC._serialized_start=6933
+  _ENABLEACC._serialized_end=6960
+  _GETACCTTC._serialized_start=6962
+  _GETACCTTC._serialized_end=6973
+  _GETACCTTCRP._serialized_start=6975
+  _GETACCTTCRP._serialized_end=7034
+  _CHANGETIMEGAP._serialized_start=7036
+  _CHANGETIMEGAP._serialized_end=7150
+  _CHANGEACCELERATIONSTYLE._serialized_start=7153
+  _CHANGEACCELERATIONSTYLE._serialized_end=7281
+  _PULLOVER._serialized_start=7283
+  _PULLOVER._serialized_end=7329
+  _YIELDOBSTACLE._serialized_start=7331
+  _YIELDOBSTACLE._serialized_end=7346
+  _OVERTAKE._serialized_start=7348
+  _OVERTAKE._serialized_end=7358
+  _SETACCTTC._serialized_start=7360
+  _SETACCTTC._serialized_end=7384
+  _CHANGESPEEDLIMIT._serialized_start=7386
+  _CHANGESPEEDLIMIT._serialized_end=7492
+  _GETACCSPEEDLIMIT._serialized_start=7494
+  _GETACCSPEEDLIMIT._serialized_end=7512
+  _GETACCSPEEDLIMITRP._serialized_start=7514
+  _GETACCSPEEDLIMITRP._serialized_end=7555
+  _ENABLEICA._serialized_start=7557
+  _ENABLEICA._serialized_end=7584
+  _CHANGELANE._serialized_start=7586
+  _CHANGELANE._serialized_end=7706
+  _CHANGELANE_ACTION._serialized_start=7647
+  _CHANGELANE_ACTION._serialized_end=7706
+  _CHANGEAUTOUPGRADE._serialized_start=7709
+  _CHANGEAUTOUPGRADE._serialized_end=7839
+  _CHANGEAUTOUPGRADE_ACTION._serialized_start=7784
+  _CHANGEAUTOUPGRADE_ACTION._serialized_end=7839
+  _ENABLENCA._serialized_start=7841
+  _ENABLENCA._serialized_end=7868
+  _GETPATH._serialized_start=7871
+  _GETPATH._serialized_end=8232
+  _GETPATH_ROUTEPLANNINGDATASOURCE._serialized_start=8174
+  _GETPATH_ROUTEPLANNINGDATASOURCE._serialized_end=8232
+  _GETPATHRP._serialized_start=8234
+  _GETPATHRP._serialized_end=8302
+  _GETCURPATH._serialized_start=8304
+  _GETCURPATH._serialized_end=8316
+  _GETCURPATHRP._serialized_start=8318
+  _GETCURPATHRP._serialized_end=8370
+  _GETCURPATHID._serialized_start=8372
+  _GETCURPATHID._serialized_end=8386
+  _GETCURPATHIDRP._serialized_start=8388
+  _GETCURPATHIDRP._serialized_end=8441
+  _STARTNAVIGATION._serialized_start=8444
+  _STARTNAVIGATION._serialized_end=8590
+  _CANCELNAVIGATION._serialized_start=8592
+  _CANCELNAVIGATION._serialized_end=8647
+  _CHANGEROUTING._serialized_start=8650
+  _CHANGEROUTING._serialized_end=8784
+  _ENABLELDW._serialized_start=8786
+  _ENABLELDW._serialized_end=8813
+  _ENABLERDP._serialized_start=8815
+  _ENABLERDP._serialized_end=8842
+  _ACTIVEAPA._serialized_start=8844
+  _ACTIVEAPA._serialized_end=8871
+  _ENABLEVPA._serialized_start=8873
+  _ENABLEVPA._serialized_end=8900
+  _APAPARKINGSWITCHMODE._serialized_start=8902
+  _APAPARKINGSWITCHMODE._serialized_end=9012
+  _APAPARKINGSWITCHMODE_MODE._serialized_start=8979
+  _APAPARKINGSWITCHMODE_MODE._serialized_end=9012
+  _ACTIVEVPA._serialized_start=9014
+  _ACTIVEVPA._serialized_end=9041
+  _APAPARKINGUPDATESTATUS._serialized_start=9044
+  _APAPARKINGUPDATESTATUS._serialized_end=9190
+  _APAPARKINGUPDATESTATUS_OPERATIONTYPE._serialized_start=9139
+  _APAPARKINGUPDATESTATUS_OPERATIONTYPE._serialized_end=9190
+  _APAGETREALTIMEPARKINGSPACE._serialized_start=9192
+  _APAGETREALTIMEPARKINGSPACE._serialized_end=9220
+  _APAREALTIMEPARKINGSPACERP._serialized_start=9222
+  _APAREALTIMEPARKINGSPACERP._serialized_end=9295
+  _APAAPPSELECTPARKINGSPACE._serialized_start=9297
+  _APAAPPSELECTPARKINGSPACE._serialized_end=9423
+  _APASUGGESTOUTPARKING._serialized_start=9425
+  _APASUGGESTOUTPARKING._serialized_end=9447
+  _APASUGGESTOUTPARKINGRP._serialized_start=9449
+  _APASUGGESTOUTPARKINGRP._serialized_end=9548
+  _APAACTIVEPARKOUT._serialized_start=9550
+  _APAACTIVEPARKOUT._serialized_end=9568
+  _APASKIPCOUNTDOWNCLOCK._serialized_start=9570
+  _APASKIPCOUNTDOWNCLOCK._serialized_end=9593
+  _APAENTERCUSTOMPARKING._serialized_start=9595
+  _APAENTERCUSTOMPARKING._serialized_end=9618
+  _APALEAVECUSTOMPARKING._serialized_start=9620
+  _APALEAVECUSTOMPARKING._serialized_end=9643
+  _APASELECTCUSTOMPARKINGSPACE._serialized_start=9645
+  _APASELECTCUSTOMPARKINGSPACE._serialized_end=9709
+  _VPALEARNING._serialized_start=9712
+  _VPALEARNING._serialized_end=9902
+  _VPALEARNING_LEARNINGOPTYPE._serialized_start=9791
+  _VPALEARNING_LEARNINGOPTYPE._serialized_end=9902
+  _VPAROUTINGSWITCHMODE._serialized_start=9905
+  _VPAROUTINGSWITCHMODE._serialized_end=10037
+  _VPAROUTINGSWITCHMODE_MODE._serialized_start=9982
+  _VPAROUTINGSWITCHMODE_MODE._serialized_end=10037
+  _VPAROUTING._serialized_start=10040
+  _VPAROUTING._serialized_end=10206
+  _VPAROUTING_ROUGINTOPTYPE._serialized_start=10116
+  _VPAROUTING_ROUGINTOPTYPE._serialized_end=10206
+  _VPAROUTINGRP._serialized_start=10208
+  _VPAROUTINGRP._serialized_end=10268
+  _VPAGETINFORQ._serialized_start=10270
+  _VPAGETINFORQ._serialized_end=10284
+  _VPAGETINFORP._serialized_start=10286
+  _VPAGETINFORP._serialized_end=10347
+  _VPAROUTINGGETMAP._serialized_start=10349
+  _VPAROUTINGGETMAP._serialized_end=10367
+  _VPAROUTINGGETMAPRP._serialized_start=10370
+  _VPAROUTINGGETMAPRP._serialized_end=10540
+  _VPALEARNINGRP._serialized_start=10542
+  _VPALEARNINGRP._serialized_end=10635
+  _ENABLEAVM._serialized_start=10637
+  _ENABLEAVM._serialized_end=10718
+  _ENABLEAVMRP._serialized_start=10720
+  _ENABLEAVMRP._serialized_end=10783
+  _SWITCHAVMVIEW._serialized_start=10786
+  _SWITCHAVMVIEW._serialized_end=11026
+  _SWITCHAVMVIEWRP._serialized_start=11028
+  _SWITCHAVMVIEWRP._serialized_end=11095
+  _PARKEDSHOTING._serialized_start=11097
+  _PARKEDSHOTING._serialized_end=11128
+  _PARKEDSHOTINGRP._serialized_start=11130
+  _PARKEDSHOTINGRP._serialized_end=11197
+  _GETAVMSETTINGS._serialized_start=11199
+  _GETAVMSETTINGS._serialized_end=11215
+  _GETAVMSETTINGSRP._serialized_start=11217
+  _GETAVMSETTINGSRP._serialized_end=11285
+  _PDCUPDATE._serialized_start=11287
+  _PDCUPDATE._serialized_end=11330
+  _ENABLEHMA._serialized_start=11332
+  _ENABLEHMA._serialized_end=11359
+  _ENABLEBSD._serialized_start=11361
+  _ENABLEBSD._serialized_end=11388
+  _ENABLELCA._serialized_start=11390
+  _ENABLELCA._serialized_end=11417
+  _ENABLEDOW._serialized_start=11419
+  _ENABLEDOW._serialized_end=11446
+  _ENABLERCTA._serialized_start=11448
+  _ENABLERCTA._serialized_end=11476
+  _ENABLERCW._serialized_start=11478
+  _ENABLERCW._serialized_end=11505
+  _ENABLERCTB._serialized_start=11507
+  _ENABLERCTB._serialized_end=11535
+  _UPDATEAPASETTING._serialized_start=11537
+  _UPDATEAPASETTING._serialized_end=11569
+  _APAPARKIN._serialized_start=11571
+  _APAPARKIN._serialized_end=11649
+  _APAPARKOUT._serialized_start=11651
+  _APAPARKOUT._serialized_end=11717
+  _APAPARKRP._serialized_start=11719
+  _APAPARKRP._serialized_end=11783
+  _APAGETACTIVESOURCE._serialized_start=11786
+  _APAGETACTIVESOURCE._serialized_end=11999
+  _APAGETACTIVESOURCE_VPAACTIVEINFO._serialized_start=11940
+  _APAGETACTIVESOURCE_VPAACTIVEINFO._serialized_end=11972
+  _APAGETACTIVESOURCE_APAACTIVEINFO._serialized_start=11974
+  _APAGETACTIVESOURCE_APAACTIVEINFO._serialized_end=11989
+  _REQUESTIMAGEPIXELTOPOS._serialized_start=12001
+  _REQUESTIMAGEPIXELTOPOS._serialized_end=12087
+  _REQUESTIMAGEPIXELTOPOSRP._serialized_start=12089
+  _REQUESTIMAGEPIXELTOPOSRP._serialized_end=12169
+  _APASELECTAVMPARKINGSPACE._serialized_start=12171
+  _APASELECTAVMPARKINGSPACE._serialized_end=12230
+  _APASELECTAVMPARKINGSPACERP._serialized_start=12232
+  _APASELECTAVMPARKINGSPACERP._serialized_end=12306
+  _RPACHECK._serialized_start=12308
+  _RPACHECK._serialized_end=12318
+  _RPAPARKIN._serialized_start=12320
+  _RPAPARKIN._serialized_end=12331
+  _RPAPARKINGUPDATE._serialized_start=12334
+  _RPAPARKINGUPDATE._serialized_end=12489
+  _RPAPARKINGUPDATE_OPERATIONTYPE._serialized_start=12417
+  _RPAPARKINGUPDATE_OPERATIONTYPE._serialized_end=12489
+  _RPAPARKOUT._serialized_start=12491
+  _RPAPARKOUT._serialized_end=12557
+  _RPASUGGESTOUTPARKINGRP._serialized_start=12559
+  _RPASUGGESTOUTPARKINGRP._serialized_end=12658
+  _RPASTRAIGHTINOUT._serialized_start=12661
+  _RPASTRAIGHTINOUT._serialized_end=12962
+  _RPASTRAIGHTINOUT_DIRECTION._serialized_start=12803
+  _RPASTRAIGHTINOUT_DIRECTION._serialized_end=12874
+  _RPASTRAIGHTINOUT_OPERATIONTYPE._serialized_start=12876
+  _RPASTRAIGHTINOUT_OPERATIONTYPE._serialized_end=12962
+  _RPAAPPHEARTBEAT._serialized_start=12964
+  _RPAAPPHEARTBEAT._serialized_end=13016
+  _RPAINIT._serialized_start=13018
+  _RPAINIT._serialized_end=13062
+  _RPACLOSE._serialized_start=13064
+  _RPACLOSE._serialized_end=13074
+  _RPASUGGESTOUTPARKING._serialized_start=13076
+  _RPASUGGESTOUTPARKING._serialized_end=13098
+  _ENABLEAEB._serialized_start=13100
+  _ENABLEAEB._serialized_end=13190
+  _STARTCALIBRATION._serialized_start=13193
+  _STARTCALIBRATION._serialized_end=13485
+  _STARTCALIBRATION_OPERATIONTYPE._serialized_start=13436
+  _STARTCALIBRATION_OPERATIONTYPE._serialized_end=13485
+  _STARTCALIBRATIONRP._serialized_start=13487
+  _STARTCALIBRATIONRP._serialized_end=13507
+  _ENABLEELK._serialized_start=13509
+  _ENABLEELK._serialized_end=13536
+  _LSSMUTE._serialized_start=13538
+  _LSSMUTE._serialized_end=13547
+  _TJPCMD._serialized_start=13550
+  _TJPCMD._serialized_end=13796
+  _TJPCMD_CMDTYPE._serialized_start=13603
+  _TJPCMD_CMDTYPE._serialized_end=13796
+  _SETDEFAULTMODE._serialized_start=13798
+  _SETDEFAULTMODE._serialized_end=13892
+  _SELPRKGFCTNCMD._serialized_start=13895
+  _SELPRKGFCTNCMD._serialized_end=14058
+  _SELPRKGFCTNCMD_CMDTYPE._serialized_start=13963
+  _SELPRKGFCTNCMD_CMDTYPE._serialized_end=14058
+  _CONTNPRKGREQ._serialized_start=14061
+  _CONTNPRKGREQ._serialized_end=14204
+  _CONTNPRKGREQ_CMDTYPE._serialized_start=14125
+  _CONTNPRKGREQ_CMDTYPE._serialized_end=14204
+  _BTNENAREQ._serialized_start=14207
+  _BTNENAREQ._serialized_end=15599
+  _BTNENAREQ_ENTERROUTINGREQ._serialized_start=14680
+  _BTNENAREQ_ENTERROUTINGREQ._serialized_end=14697
+  _BTNENAREQ_SELECTTARGETSLOTREQ._serialized_start=14699
+  _BTNENAREQ_SELECTTARGETSLOTREQ._serialized_end=14753
+  _BTNENAREQ_GOTOHEREREQ._serialized_start=14755
+  _BTNENAREQ_GOTOHEREREQ._serialized_end=14801
+  _BTNENAREQ_UPDATESLOTINFOREQ._serialized_start=14804
+  _BTNENAREQ_UPDATESLOTINFOREQ._serialized_end=15006
+  _BTNENAREQ_UPDATEMAPINFOREQ._serialized_start=15009
+  _BTNENAREQ_UPDATEMAPINFOREQ._serialized_end=15165
+  _BTNENAREQ_GETMAPINFOREQ._serialized_start=15167
+  _BTNENAREQ_GETMAPINFOREQ._serialized_end=15231
+  _BTNENAREQ_REQCMD._serialized_start=15234
+  _BTNENAREQ_REQCMD._serialized_end=15588
+  _BTNENAREQRP._serialized_start=15602
+  _BTNENAREQRP._serialized_end=15984
+  _BTNENAREQRP_MAPINFORP._serialized_start=15799
+  _BTNENAREQRP_MAPINFORP._serialized_end=15879
+  _BTNENAREQRP_PARKINGSPACEINFORP._serialized_start=15881
+  _BTNENAREQRP_PARKINGSPACEINFORP._serialized_end=15984
+  _GWPARKINGCOMMAND._serialized_start=15987
+  _GWPARKINGCOMMAND._serialized_end=18388
+  _GWPARKINGCOMMAND_SELPRKGFCTNCMD._serialized_start=16626
+  _GWPARKINGCOMMAND_SELPRKGFCTNCMD._serialized_end=16890
+  _GWPARKINGCOMMAND_SELPRKGFCTNCMD_CMD._serialized_start=16707
+  _GWPARKINGCOMMAND_SELPRKGFCTNCMD_CMD._serialized_end=16890
+  _GWPARKINGCOMMAND_CONTNPRKGREQ._serialized_start=16893
+  _GWPARKINGCOMMAND_CONTNPRKGREQ._serialized_end=17149
+  _GWPARKINGCOMMAND_CONTNPRKGREQ_CMD._serialized_start=17033
+  _GWPARKINGCOMMAND_CONTNPRKGREQ_CMD._serialized_end=17116
+  _GWPARKINGCOMMAND_CONTNPRKGREQ_VALID._serialized_start=17118
+  _GWPARKINGCOMMAND_CONTNPRKGREQ_VALID._serialized_end=17149
+  _GWPARKINGCOMMAND_PASWORKCMD._serialized_start=17151
+  _GWPARKINGCOMMAND_PASWORKCMD._serialized_end=17245
+  _GWPARKINGCOMMAND_PASWORKCMD_CMD._serialized_start=17223
+  _GWPARKINGCOMMAND_PASWORKCMD_CMD._serialized_end=17245
+  _GWPARKINGCOMMAND_SELPRKOUTDIRREQ._serialized_start=17248
+  _GWPARKINGCOMMAND_SELPRKOUTDIRREQ._serialized_end=17659
+  _GWPARKINGCOMMAND_SELPRKOUTDIRREQ_CMD._serialized_start=17331
+  _GWPARKINGCOMMAND_SELPRKOUTDIRREQ_CMD._serialized_end=17659
+  _GWPARKINGCOMMAND_PRKMODREQ._serialized_start=17662
+  _GWPARKINGCOMMAND_PRKMODREQ._serialized_end=17830
+  _GWPARKINGCOMMAND_PRKMODREQ_CMD._serialized_start=17732
+  _GWPARKINGCOMMAND_PRKMODREQ_CMD._serialized_end=17830
+  _GWPARKINGCOMMAND_PRKGCTRLMODREQ._serialized_start=17833
+  _GWPARKINGCOMMAND_PRKGCTRLMODREQ._serialized_end=18086
+  _GWPARKINGCOMMAND_PRKGCTRLMODREQ_CMD._serialized_start=17979
+  _GWPARKINGCOMMAND_PRKGCTRLMODREQ_CMD._serialized_end=18053
+  _GWPARKINGCOMMAND_PRKGCTRLMODREQ_VALID._serialized_start=17118
+  _GWPARKINGCOMMAND_PRKGCTRLMODREQ_VALID._serialized_end=17149
+  _GWPARKINGCOMMAND_BACKREQAPS._serialized_start=18088
+  _GWPARKINGCOMMAND_BACKREQAPS._serialized_end=18194
+  _GWPARKINGCOMMAND_BACKREQAPS_CMD._serialized_start=18160
+  _GWPARKINGCOMMAND_BACKREQAPS_CMD._serialized_end=18194
+  _GWPARKINGCOMMAND_APSSWTREQVR._serialized_start=18196
+  _GWPARKINGCOMMAND_APSSWTREQVR._serialized_end=18321
+  _GWPARKINGCOMMAND_APSSWTREQVR_CMD._serialized_start=18270
+  _GWPARKINGCOMMAND_APSSWTREQVR_CMD._serialized_end=18321
+  _GWPARKINGCOMMAND_SLOTNUMVR._serialized_start=18323
+  _GWPARKINGCOMMAND_SLOTNUMVR._serialized_end=18380
+  _SMARTLPCOMMAND._serialized_start=18391
+  _SMARTLPCOMMAND._serialized_end=18833
+  _GLPARKINGCOMMAND._serialized_start=18836
+  _GLPARKINGCOMMAND._serialized_end=21238
+  _GLPARKINGCOMMAND_PRKGSPDREQTYPE._serialized_start=20132
+  _GLPARKINGCOMMAND_PRKGSPDREQTYPE._serialized_end=20297
+  _GLPARKINGCOMMAND_DRVRASSCWISDOMBTNTYPE._serialized_start=20300
+  _GLPARKINGCOMMAND_DRVRASSCWISDOMBTNTYPE._serialized_end=20575
+  _GLPARKINGCOMMAND_FRNTANDREPRKGINSWTTYPE._serialized_start=20578
+  _GLPARKINGCOMMAND_FRNTANDREPRKGINSWTTYPE._serialized_end=20811
+  _GLPARKINGCOMMAND_LOSPDDRVGASSISHOPUSHRESPTYPE._serialized_start=20814
+  _GLPARKINGCOMMAND_LOSPDDRVGASSISHOPUSHRESPTYPE._serialized_end=21035
+  _GLPARKINGCOMMAND_SWITCHCMD._serialized_start=21038
+  _GLPARKINGCOMMAND_SWITCHCMD._serialized_end=21227
+  _GLHPACOMMAND._serialized_start=21241
+  _GLHPACOMMAND._serialized_end=26557
+  _GLHPACOMMAND_AUTVALTPRKGSWTTYPE._serialized_start=22848
+  _GLHPACOMMAND_AUTVALTPRKGSWTTYPE._serialized_end=22929
+  _GLHPACOMMAND_AUTVALTPRKGEXPERIENCERESPTYPE._serialized_start=22931
+  _GLHPACOMMAND_AUTVALTPRKGEXPERIENCERESPTYPE._serialized_end=23053
+  _GLHPACOMMAND_PRKGINTRPTRELDBTNTYPE._serialized_start=23055
+  _GLHPACOMMAND_PRKGINTRPTRELDBTNTYPE._serialized_end=23170
+  _GLHPACOMMAND_AUTVALTPRKGL2POPBTNREQTYPE._serialized_start=23173
+  _GLHPACOMMAND_AUTVALTPRKGL2POPBTNREQTYPE._serialized_end=23686
+  _GLHPACOMMAND_AUTVALTPRKGMAPOPERREQ2MAPTYPE2TYPE._serialized_start=23689
+  _GLHPACOMMAND_AUTVALTPRKGMAPOPERREQ2MAPTYPE2TYPE._serialized_end=24134
+  _GLHPACOMMAND_MAPBUILDSTSTYPE._serialized_start=24137
+  _GLHPACOMMAND_MAPBUILDSTSTYPE._serialized_end=24306
+  _GLHPACOMMAND_AUTVALTPRKGL1BTNREQTYPE._serialized_start=24309
+  _GLHPACOMMAND_AUTVALTPRKGL1BTNREQTYPE._serialized_end=24642
+  _GLHPACOMMAND_PRKGSLOTTYPSELECTTYPE._serialized_start=24645
+  _GLHPACOMMAND_PRKGSLOTTYPSELECTTYPE._serialized_end=24799
+  _GLHPACOMMAND_AUTPRKGSELECTENTRANCETYPE._serialized_start=24802
+  _GLHPACOMMAND_AUTPRKGSELECTENTRANCETYPE._serialized_end=25095
+  _GLHPACOMMAND_CRSCTRLTIGAPADJREQTYPE._serialized_start=25098
+  _GLHPACOMMAND_CRSCTRLTIGAPADJREQTYPE._serialized_end=25253
+  _GLHPACOMMAND_DRVRACCRSSETSPDREQDRVRCRSSETSPDREQTYPE._serialized_start=25256
+  _GLHPACOMMAND_DRVRACCRSSETSPDREQDRVRCRSSETSPDREQTYPE._serialized_end=25452
+  _GLHPACOMMAND_AUTVALTPRKGL2BTNREQSETTINGFCTPUSHBTNREQTYPE._serialized_start=25455
+  _GLHPACOMMAND_AUTVALTPRKGL2BTNREQSETTINGFCTPUSHBTNREQTYPE._serialized_end=25682
+  _GLHPACOMMAND_AUTVALTPRKGL2BTNREQSETTINGNOSENCEBTNREQTYPE._serialized_start=25685
+  _GLHPACOMMAND_AUTVALTPRKGL2BTNREQSETTINGNOSENCEBTNREQTYPE._serialized_end=25912
+  _GLHPACOMMAND_AUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQTYPE._serialized_start=25915
+  _GLHPACOMMAND_AUTVALTPRKGL2BTNREQSETTINGVOICEBTNREQTYPE._serialized_end=26252
+  _GLHPACOMMAND_AUTVALTPRKGMAPRESPMAPIDRESULTTYPE._serialized_start=26254
+  _GLHPACOMMAND_AUTVALTPRKGMAPRESPMAPIDRESULTTYPE._serialized_end=26368
+  _GLHPACOMMAND_AUTVALTPRKGCOVERRESULTSTYPE._serialized_start=26371
+  _GLHPACOMMAND_AUTVALTPRKGCOVERRESULTSTYPE._serialized_end=26546
+  _PARKINGMAPINFO._serialized_start=26559
+  _PARKINGMAPINFO._serialized_end=26587
+  _SENTRYMODECOMMAND._serialized_start=26590
+  _SENTRYMODECOMMAND._serialized_end=26733
+  _SENTRYMODECOMMAND_CMDTYPE._serialized_start=26664
+  _SENTRYMODECOMMAND_CMDTYPE._serialized_end=26733
+  _SENTRYMODEGETSTATISTIC._serialized_start=26735
+  _SENTRYMODEGETSTATISTIC._serialized_end=26759
+  _ENABLETSR._serialized_start=26761
+  _ENABLETSR._serialized_end=26788
+  _ENABLESLW._serialized_start=26790
+  _ENABLESLW._serialized_end=26817
+  _DRIVINGACTIVEEXIT._serialized_start=26819
+  _DRIVINGACTIVEEXIT._serialized_end=26932
+  _ENABLEESA._serialized_start=26934
+  _ENABLEESA._serialized_end=27024
+  _ENABLEAES._serialized_start=27026
+  _ENABLEAES._serialized_end=27116
+  _ENABLEMAI._serialized_start=27118
+  _ENABLEMAI._serialized_end=27208
 # @@protoc_insertion_point(module_scope)

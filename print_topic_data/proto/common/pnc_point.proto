@@ -43,6 +43,7 @@ message SimplifiedPathPoint {
 
   optional double x = 3;
   optional double y = 4;
+  optional double theta = 5;
 }
 
 message PathPoint {

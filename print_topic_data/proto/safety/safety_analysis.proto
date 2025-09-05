@@ -27,8 +27,8 @@ enum TaskType {
   RCTB = 12;
   AVM = 13;
   APA = 14;
-  VPA_ROUTING = 15;   // VPA 建图
-  VPA_LEARNING = 16;  // VPA 巡航
+  VPA_ROUTING = 15;   // VPA 巡航
+  VPA_LEARNING = 16;  // VPA 建图
   PDC = 17;
   AEB = 18;
   ELK = 19;
@@ -45,6 +45,9 @@ enum TaskType {
   AWB = 30;
   DW = 31;
   SENTINEL = 32;
+  AES = 33;
+  RAEB = 34;
+  ADB = 35;
   VPA_APA = 100;  // VPA 的APA阶段
   VPA_MAP_SAVING = 101;  // VPA 的存图阶段
   MAI = 1003;
@@ -72,9 +75,15 @@ enum FailurePolicy {
   FAILURE_POLICY_41 = 41;
   FAILURE_POLICY_42 = 42;
   FAILURE_POLICY_43 = 43;
+  FAILURE_POLICY_44 = 44;
+  FAILURE_POLICY_45 = 45;
+  FAILURE_POLICY_46 = 46;
   FAILURE_POLICY_50 = 50;
   FAILURE_POLICY_51 = 51;
   FAILURE_POLICY_52 = 52;
+  FAILURE_POLICY_64 = 64;
+  FAILURE_POLICY_65 = 65;
+  FAILURE_POLICY_68 = 68;
 }
 
 message TaskPolicy {

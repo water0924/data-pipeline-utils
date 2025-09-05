@@ -49,6 +49,26 @@ message Chassis {
     UNSPECIFIED = 6;
   }
 
+  enum DriftingParkingMode {
+    DRIFTING_PARKING_MODE_INVALID = 0;
+    DRIFTING_PARKING_MODE_ON = 1;
+    DRIFTING_PARKING_MODE_OFF = 2;
+  }
+
+  enum DriftingParkingFixedWheel {
+    FIXED_INVALID_WHEEL = 0;
+    FIXED_FRONT_LEFT_WHEEL = 1;
+    FIXED_FRONT_RIGHT_WHEEL= 2;
+    FIXED_REAR_LEFT_WHEEL = 3;
+    FIXED_REAR_RIGHT_WHEEL = 4;
+  }
+
+  enum DriftingParkingDirection {
+    DIRECTION_INVALID = 0;
+    DIRECTION_CLOCKWISE = 1;
+    DIRECTION_ANTICLOCKWISE = 2;
+  }
+
   optional bool engine_started = 3;
 
   // Engine speed in RPM.
@@ -189,6 +209,8 @@ message WheelSpeed {
   optional bool sum_of_edge_rl_wss_valid = 21;
   // can frame heartbeat
   optional int32 rolling_count = 22;
+
+  optional deeproute.canbus.Chassis.DriftingParkingFixedWheel is_wheel_lock = 23;
 }
 
 message Sonar {

@@ -97,6 +97,8 @@ message LaneBoundary {
   //分为左右两侧
   optional bool has_left_deceleration_marking = 12;   
   optional bool has_right_deceleration_marking = 13;
+  //是否属于双线的一条
+  optional bool is_double_line = 14;
 }
 
 // Association between central point to closest boundary.
@@ -225,6 +227,9 @@ message Lane {
     TIDAL_LANE = 20;     //潮汐车道
     TRANSFER_LANE = 21;  //中转车道
     PASSABLE_LANE = 22;  //可通行车道
+    STRAIGHT_TURN_WAITING_AREA = 23; //直行等候区
+    RIGHT_TURN_WAITING_AREA = 24; //右转等候区
+    HIGHWAY_PARKING_LANE = 25; //高速停车区     
   };
   optional LaneType type = 12;
 

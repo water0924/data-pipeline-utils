@@ -23,6 +23,53 @@ message CanRawArray {
   repeated CanRaw can_raw = 4;
 }
 
+// Remain temorarily for compatibility
+// topic: /blc/mcu_operation_status
+message MCUOperationStatus {
+   // common 1~10
+   optional uint64 timestamp = 1;  // ms
+   // status 11
+   optional int32 acc_status = 11;
+   optional int32 ica_status = 12;
+   optional int32 nca_status = 13;
+   optional int32 hma_status = 14;
+   optional int32 bsd_status = 15;
+   optional int32 lca_status = 16;
+   optional int32 dow_status = 17;
+   optional int32 rcta_status = 18;
+   optional int32 rcw_status = 19;
+   optional int32 ldw_status = 20;
+   optional int32 rdp_status = 21;
+   optional int32 rctb_status = 22;
+   optional int32 avm_status = 23;
+   optional int32 apa_status = 24;
+   optional int32 vpa_routing_status = 25;
+   optional int32 vpa_learning_status = 26;
+   optional int32 pdc_status = 27;
+   optional int32 elk_status = 28;
+   optional int32 rpa_status = 29;
+   optional int32 tjp_status = 30;
+   optional int32 rads_status = 31;
+   optional int32 sentry_mode_info = 32;
+   optional int32 ilc_status = 33;
+   optional int32 tsr_status = 34;
+   optional int32 dw_status = 35;
+   optional int32 dvr_status = 36;
+   optional int32 sentinel_status = 37;
+ 
+   // aeb迁移
+   optional int32 fcw_status = 50;
+   optional int32 fcta_status = 51;
+   optional int32 fctb_status = 52;
+   optional int32 meb_status = 53;
+   optional int32 esa_status = 54;
+   optional int32 awb_status = 55;
+   optional int32 abp_status = 56;
+   optional int32 aeb_status = 57;
+   optional int32 aes_status = 58;
+
+}
+
 
 message SOCRPABusiness {
   message RPAHandShakeStatus {
@@ -93,9 +140,15 @@ message MCURPAHandShakeInfo {
   optional RPAHandShakeType handshake_type = 2;
 }
 
+message MCURPASafetyInfo {
+  optional uint64 duration_ms = 1;
+  optional int32 safety_policy = 2;
+  optional int32 safety_event = 3;
+}
 // topic: /mcu_blc/to_soc_business
 message MCUBusiness {
   optional uint64 timestamp = 1;  // ms
   optional int32 rpa_status = 2;
   optional MCURPAHandShakeInfo handshake_info = 3;
+  optional MCURPASafetyInfo safety_info = 4;
 }

@@ -1,6 +1,8 @@
 syntax = "proto3";
 package gl.sr;
 
+import "drapi/gl/gl_internal.proto";
+
 message SelfPosn {
   uint32 self_posn_x = 1; // 自车X坐标，单位: cm，范围: -2,147,483,648 ~ 2,147,483,647，偏移量: -2,147,483,648，因子: 1
   uint32 self_posn_y = 2; // 自车Y坐标，单位: cm，范围: -2,147,483,648 ~ 2,147,483,647，偏移量: -2,147,483,648，因子: 1
@@ -859,8 +861,8 @@ message PerceptualObstacle {
     SCOOTER = 64;  // 摩托车
     BOX_TRICYCLE = 65;  // 带箱三轮车
     SEMI_TRICYCLE = 66;  // 带斗三轮车
-    BARRIER_GATE_CLOSE = 67;  // 打开的收费杆
-    BARRIER_GATE_OPEN = 68;  // 关闭的收费杆
+    BARRIER_GATE_OPEN = 67;  // 打开的收费杆
+    BARRIER_GATE_CLOSE = 68;  // 关闭的收费杆
     ETC = 69;
     LOW_OBSTACLE_BOX = 70;  // 低矮障碍物-箱子
     LOSE_TIRE = 71;  // 掉落的轮胎
@@ -872,6 +874,7 @@ message PerceptualObstacle {
     POTHOLE = 77;  // 坑洼
     CHARGING_PILE = 78;  // 充电桩
     SPEEDBUMP_PARKED = 86;
+    FIRE_HYDRANT = 87;
     STANDARD_POLE = 89;  // 标准杆
     CAR_PARKED = 90;  // 四轮轿车 - 在车位
     MICROCAR_PARKED = 91;  // 微型车 - 在车位
@@ -931,6 +934,9 @@ message PerceptualObstacle {
   ObsAcce obs_acce = 11; // (原ObsAcce) 目标加速度
   uint32 ti_stamp = 12; // (原Uint32) 时间戳(UTC)
   uint32 class_confidence = 13; // (原Uint8) 分类置信度
+  SteplessRisk stepless_risk = 14; // 风险碰撞等级
+
+  gl.internal.Obstacle obstacle = 100;
 }
 
 // 预留: 数据定义暂时比较混乱，无法实现
@@ -953,6 +959,17 @@ message ObsAcce {
   uint32 long_acceleration = 1;  // 物体在参考坐标系中的纵向加速度
   uint32 long_acceleration_std_dev = 2;  // 纵向加速度标准差
 }
+message SteplessRisk {
+  uint32 risk_lvl = 1; // (原Uint8)
+  uint32 ttc = 2; // (原Uint16)  0~65535， factor:2  0为无效值，大于65535会被设置为0
+  // Point point = 3;
+}
+
+message BasePoint {
+  double x = 1;
+  double y = 2;
+  double z = 3;
+}
 
 message PerceptualSlot {
   uint32 prkg_slot_id = 1;  // 车位ID
@@ -960,6 +977,14 @@ message PerceptualSlot {
   PrkgSlotBounding prkg_slot_bounding = 3;  // 车位四个顶点坐标
   PrkgSlotSt prkg_slot_st = 4;  // 车位状态
   SlotCod prkg_slot_cod = 5;  // 停车车位编号
+
+  message DebugInfo {
+    repeated BasePoint origin_points = 1; // 原始坐标点
+    repeated BasePoint coord_poiots = 2; // 坐标转换后的点
+    bool is_lateral_reverse = 3; // 水平车位是否修改感知原始点序
+  }
+  DebugInfo debug_info = 10;
+  gl.internal.Parkingspace internal_parkingspace = 100;
 }
 
 message PrkgSlotTyp {

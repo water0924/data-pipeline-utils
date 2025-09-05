@@ -104,6 +104,79 @@ message Camera {
   optional int32 speed_limit = 3;              //限速值
 }
 
+// link 末尾开始长实线
+message LongSolidLine {
+  enum LSLType {
+    LSL_TYPE_NONE = 0;
+    LSL_TYPE_SINGLE_SOLID = 1;          // 单实线
+    LSL_TYPE_LEFT_DOT_RIGHT_SOLID = 2;  //左虚右实
+    LSL_TYPE_LEFT_SOLID_RIGHT_DOT = 3;  //左实右虚
+  }
+
+  optional uint64 out_dr_link_id =
+      1;  // 该长实线的outlink,即长实线在这个outlink的开头结束
+  repeated uint64 pass_dr_link_ids = 2;  // 到出边需要经过的路段ID
+  optional int32 lane_bm = 3;  // 作用的车道编号,从左到右从1开始
+  optional LSLType long_solid_line_type = 4;  // 长实线的类型
+  optional int32 seq_num = 5;                 //作用车道序号
+  optional int32 lane_nums = 6;               //长实线总车道数
+}
+
+message TollStationInfo {
+  enum ChargeType {
+    CHARGE_TYPE_CASH = 0;       // 现金
+    CHARGE_TYPE_ETC = 1;        // ETC
+    CHARGE_TYPE_WECHAT = 2;     // 微信
+    CHARGE_TYPE_ALIPAY = 3;     // 支付宝
+    CHARGE_TYPE_OTHER_PAY = 4;  // 其他支付
+    CHARGE_TYPE_RESERVED = 5;   // 保留
+  }
+  // 一个车道可能支持多种收费方式
+  message ChargeTypes {
+    repeated ChargeType charge_types = 1;
+  }
+
+  enum TollType {
+    TOLL_TYPE_NONE = 0;         // 无
+    TOLL_TYPE_WEIGHT_LANE = 1;  // 称重车道
+    TOLL_TYPE_GREEN_LANE = 2;   // 绿通车道
+    TOLL_TYPE_NORMAL_LANE = 3;  // 普通车道
+  }
+  // 一个车道可能支持多种收费车道类型
+  message TollTypes {
+    repeated TollType toll_types = 1;
+  }
+
+  enum TollGateType {
+    TOLL_GATE_TYPE_UNKNOWN = 0;            // 未知
+    TOLL_GATE_TYPE_EXIT = 1;               // 出口
+    TOLL_GATE_TYPE_ENTRANCE = 2;           // 入口
+    TOLL_GATE_TYPE_EXIT_AND_ENTRANCE = 3;  // 出入口
+  }
+  enum TollSeparateType {
+    TOLL_SEPARATE_TYPE_UNKNOWN = 0;        // 未知
+    TOLL_SEPARATE_TYPE_EXIT_SINGLE = 1;    // 单出口
+    TOLL_SEPARATE_TYPE_EXIT_MULTIPLY = 2;  // 多出口
+  }
+
+  optional string name = 1;                     // 收费站名称
+  optional string name_eng = 2;                 // 收费站英文名称
+  repeated ChargeTypes toll_means = 3;          // 收费方式
+  repeated TollTypes passage_ways = 4;          // 收费车道类型
+  optional TollGateType gate_flag = 5;          // 收费站类型
+  optional TollSeparateType separate_flag = 6;  // 收费站分离类型
+}
+
+message SpeedSource {
+  enum SpeedSourceType {
+    SPEED_SOURCE_TYPE_NONE = 0;    // 空
+    SPEED_SOURCE_TYPE_SIGN = 1;    // 标牌
+    SPEED_SOURCE_TYPE_THEORY = 2;  // 理论
+    SPEED_SOURCE_TYPE_MANUAL = 3;  // 人工
+  }
+  optional SpeedSourceType speed_source_type = 1;
+}
+
 // 单向link
 message LinkData {
   enum FormWay {
@@ -165,6 +238,9 @@ message LinkData {
     ROAD_KIND_OTHER = 57;                      // 其他
     ROAD_KIND_VIRTUAL_SOLID_CONNECTION = 58;   // 虚实连接
     ROAD_KIND_PARKING_INTERNAL_ROAD = 59;      // 停车场内部道路
+    ROAD_KIND_MAIN_ROAD_EXTEND = 60;           // 主路延长路
+    ROAD_KIND_AHEAD_TURN_LEFT = 61;            // 提前左转(高精)
+    ROAD_KIND_CHECKPOINT = 62;                 // 检查站
 
     ROAD_KIND_ENTER_SINGLE_CROSS = 27;  // 进入复合路口道路
     ROAD_KIND_ENTER_MULTI_CROSS = 28;   // 进入单一路口道路
@@ -181,9 +257,10 @@ message LinkData {
   optional bool traffic_light = 4;       // 路段末尾是否有红绿灯
   optional uint32 speed_limit = 5;       // 道路限速km/h
   optional uint32 forward_lane_num = 6;  // 正向可用车道数
-  optional string name = 7;              // 路段名称
-  optional uint32 priority = 8;          // 路段等级
-  repeated LaneData lanes = 9;           // 车信信息对象数组
+  optional uint32 lane_num_sum = 37;  // 所有车道数, 在双向道路上包含双向的车道
+  optional string name = 7;      // 路段名称
+  optional uint32 priority = 8;  // 路段等级
+  repeated LaneData lanes = 9;   // 车信信息对象数组
   optional uint32 reversible_lane_bitmap =
       10;  // 以位来表示各车道是否是潮汐车道
   optional uint32 variable_turn_lane_bitmap =
@@ -201,17 +278,21 @@ message LinkData {
   repeated ConnectivityData out_links_data = 18;  // 出边信息对象数组
   optional bool elevated = 21;                    // 是否为高架
   optional bool toll_station_at_link_start = 22;  // 路段起点处是否有收费站
+  optional TollStationInfo toll_station_info = 38;  // 收费站信息
+
   repeated LaneAttr lane_attrs = 24;  // 车道级属性，从左到右表示所有车道的信息
-  optional uint64 start_node_id = 25;              // 起点节点id
-  optional uint64 end_node_id = 26;                // 终点节点id
-  optional uint64 main_node_id = 27;               // 主节点id
-  optional uint32 tile_id = 28;                    // 路段所在图幅ID
-  optional uint32 experience_speed_limit = 30;     // 道路经验限速km/h
-  optional int32 admin_code = 31;                  // 行政区划代码
-  optional LaneInfoData lane_info_data = 32;       // 车道信息
-  optional uint32 exact_speed_limit = 33;          // 道路确定限速km/h
-  repeated Camera camera = 34;                     // 电子眼
-  repeated SpeedLimitInfo speed_limit_infos = 35;  // 限速信息
+  optional uint64 start_node_id = 25;                 // 起点节点id
+  optional uint64 end_node_id = 26;                   // 终点节点id
+  optional uint64 main_node_id = 27;                  // 主节点id
+  optional uint32 tile_id = 28;                       // 路段所在图幅ID
+  optional uint32 experience_speed_limit = 30;        // 道路经验限速km/h
+  optional int32 admin_code = 31;                     // 行政区划代码
+  optional LaneInfoData lane_info_data = 32;          // 车道信息
+  optional uint32 exact_speed_limit = 33;             // 道路确定限速km/h
+  repeated Camera camera = 34;                        // 电子眼
+  repeated SpeedLimitInfo speed_limit_infos = 35;     // 限速信息
+  repeated LongSolidLine long_solid_line_infos = 36;  // 长实线信息
+  optional SpeedSource speed_source = 39;             // 限速来源
 
   repeated common.PointLLH points = 101;   // 形状点, 使用编码02经纬度
   repeated common.Point2D points2d = 102;  // 形状点, 使用地图坐标系
@@ -326,9 +407,8 @@ message SDMapVersionOnboard {
   message ObstacleReportConfig {
     optional bool enable_report_vhr = 1;
 
-    optional int32 max_movement = 3 [default = 25]; // In meter
+    optional int32 max_movement = 3 [default = 25];  // In meter
     optional int32 max_report_interval_sec = 4 [default = 10];
-
   }
   message MpInfoReportConfig {
     optional bool enable_report_vhr = 1;
@@ -378,7 +458,6 @@ message SDMapVersionOnboard {
 
     optional float min_score = 3 [default = 0.3];
     optional int32 max_cache_num = 4 [default = 100];
-
   }
   message LaneAttributesReportConfig {
     optional bool enable_report_vhr = 1;
@@ -392,8 +471,20 @@ message SDMapVersionOnboard {
   message BoundaryReportConfig {
     optional bool enable_report_vhr = 1;
     optional bool is_only_tunnel = 2 [default = true];
-    optional int32 sample_movement_distance = 3 [default = 1]; // In meter
+    optional int32 sample_movement_distance = 3 [default = 1];  // In meter
     optional int32 max_cache_num = 4 [default = 10];
+  }
+  message GuidanceDiffReportConfig {
+    optional bool enable_report_vhr = 1;
+  
+    optional uint32 min_report_version = 2;
+    optional uint32 max_cached_num = 3 [default = 10];
+    optional uint32 half_context_size = 4 [default = 20];
+
+    optional double min_distance_to_lane_threshold = 12 [default = 100];
+    optional double similarity_threshold = 13 [default = 100];
+    optional double context_simulation_threshold = 14 [default = 5];
+    optional double integration_threshold = 15 [default = 200];
   }
   // Used to control map engine crowd-source report events.
   message DataCloseLoopConfig {
@@ -405,10 +496,12 @@ message SDMapVersionOnboard {
     optional LaneMarkerReportConfig lane_marker_config = 6;
     optional TrafficLightReportConfig traffic_light_config = 7;
     optional LaneAttributesReportConfig lane_attributes_config = 8;
-    optional ManualSpeedRegulationReportConfig manaul_speed_regulation_config = 14;
+    optional ManualSpeedRegulationReportConfig manaul_speed_regulation_config =
+        14;
     optional BoundaryReportConfig boundary_config = 15;
     optional TunnelTSRReportConfig tunnel_tsr_config = 16;
     optional AmapLaneActionReportConfig amap_lane_action_config = 17;
+    optional GuidanceDiffReportConfig guid_diff_config = 18;
   }
 
   message TopoInfoConfig {
@@ -419,7 +512,8 @@ message SDMapVersionOnboard {
   }
   message CrsConfig {
     optional bool turn_off_force_right_for_tunnel_near_right_split = 1;
-    optional int32 force_right_highway_dist_threshold = 2 [default = 1000]; // In meter
+    optional int32 force_right_highway_dist_threshold = 2
+        [default = 1000];  // In meter
     optional int32 force_right_default_dist_threshold = 3 [default = 500];
   }
   message StaticRoutingConfig {
@@ -430,7 +524,7 @@ message SDMapVersionOnboard {
     optional bool switch_off_reset_speed_limit = 5;
     optional bool switch_off_reset_lane_num = 6;
     optional bool switch_off_reset_arr = 7;
-    
+
     optional bool enable_p0_from_server = 8;
     optional bool enable_crs_from_server = 9;
 
@@ -443,6 +537,9 @@ message SDMapVersionOnboard {
     optional bool enable_config = 2;
     optional StaticRoutingConfig static_routing_config = 1;
   }
+  message SdRoutingConfig {
+    optional bool enable_amap_bind_split = 1 [default = true];
+  }
 
   optional string sd_map_plus_version = 1;
   optional TencentSDVersion tencent_sd_version = 2;
@@ -451,10 +548,11 @@ message SDMapVersionOnboard {
 
   optional GraphMatchRoutingConfig graph_match_routing_config = 5;
 
-  // image_report_config can be deprecated when all ota2 version are not used on car.
+  // image_report_config can be deprecated when all ota2 version are not used on
+  // car.
   optional ImageReportConfig image_report_config = 6;
-  // Can be deprecated when data_close_loop_config_json and local_routing_config_json
-  // is used.
+  // Can be deprecated when data_close_loop_config_json and
+  // local_routing_config_json is used.
   optional DataCloseLoopConfig data_close_loop_config = 7;
   optional LocalRoutingConfig local_routing_config = 8;
 
@@ -470,4 +568,10 @@ message SDMapVersionOnboard {
 
   // Fusion map config
   optional FusionMapConfig fusion_map_config = 13;
+  // Sd routing config
+  optional SdRoutingConfig sd_routing_config = 15;
+
+  optional string tencent_sdk_version = 14;
+
+  optional string trace_id = 16;
 }

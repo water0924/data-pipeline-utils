@@ -1,0 +1,36 @@
+syntax = "proto2";
+package dr.blc.mcu;
+import "common/configs/vehicle_config.proto";
+import "canbus/gwm_de09_chassis_detail.proto";
+import "drapi/gwm_de09_downstream_chassis.proto";
+import "canbus/gwm_chassis_detail.proto";  
+import "drapi/gwm_c01_downstream_chassis.proto";
+import "canbus/gwm_tank_chassis_detail.proto";
+import "drapi/gwm_tank_downstream_chassis.proto";
+import "canbus/gwm_all_chassis_detail.proto";
+import "drapi/gwm_all_downstream_chassis.proto";
+
+
+// topic /blc/downstream_chassis_gwm
+message DownstreamChassisGWM {
+  optional int64 timestamp = 1;  // us
+  optional deeproute.common.VehicleBrand brand = 2;
+  oneof detail {
+    dr.blc.mcu.GwmC01DownstreamChassis gwm = 3;
+    dr.blc.mcu.GwmTankDownstreamChassis gwm_tank = 4;
+    dr.blc.mcu.GwmDe09DownstreamChassis gwm_de09 = 5;
+    dr.blc.mcu.GwmAllDownstreamChassis gwm_all = 7;
+  }
+}
+
+// topic /mcu_blc/chassis_detail_gwm
+message UpstreamChassisGWM {
+  optional int64 timestamp = 1;  // us
+  optional deeproute.common.VehicleBrand brand = 2;
+  oneof detail {
+    deeproute.canbus.GwmChassisDetail gwm = 3;
+    deeproute.canbus.gwm.tank.GwmTankChassisDetail gwm_tank = 4;
+    deeproute.canbus.gwm.de09.GwmDe09ChassisDetail gwm_de09 = 5;
+    deeproute.canbus.gwm.all.GwmAllChassisDetail gwm_all = 7;
+  }
+}

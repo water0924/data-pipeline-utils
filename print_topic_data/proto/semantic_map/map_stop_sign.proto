@@ -63,6 +63,19 @@ message StopLine {
   optional StopType type = 13;
 
   repeated Overlap overlaps = 14;
+
+  // turn type
+  enum TurnType{
+    Normal = 0;
+    Left = 1;
+    Right = 2;
+    UTurnLeft = 3;
+    UTurnRight = 4;
+    Straight = 5;
+  };
+
+  repeated TurnType turn_type = 15;
+  optional bool is_waiting_area = 16 [default = false];
 }
 
 message JunctionEndLine {

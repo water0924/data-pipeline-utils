@@ -11,4 +11,5 @@ message DtaToCanbus {
   optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR02_1F0 adcu_fr02_1f0 = 3; // 线属性(除右车道线类型)
   optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR06_1FF adcu_fr06_1ff = 4; // 线属性(右车道线类型)
   optional deeproute.canbus.gl.p177.ADCU_ZCUCANFD1_FR11_1E0 adcu_fr11_1e0 = 5; // 底纹颜色
+  optional deeproute.canbus.gl.p177.PASZCUCANFD1_FR15_24B pas_fr15_24b = 6;    // rpa车位
 }

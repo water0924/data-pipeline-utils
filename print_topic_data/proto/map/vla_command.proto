@@ -1,0 +1,77 @@
+syntax = "proto2";
+
+package deeproute.map;
+
+import "common/geometry.proto";
+
+enum VLACommandCode {
+  VLA_SUCCESS = 0;
+  // routing 服务内部错误
+  VLA_INTERNAL = 1;
+  // 位置未找到
+  VLA_NOT_FOUND = 2;
+}
+
+message VLARoutingOption {
+  // VLA command, used to request VLA route planning.
+  enum VLACommand {
+    VLA_COMMAND_UNKNOWN = 0;
+    VLA_COMMAND_TURN_LEFT = 1;
+    VLA_COMMAND_TURN_RIGHT = 2;
+    VLA_COMMAND_GO_STRAIGHT = 3;
+    VLA_COMMAND_U_TURN = 4;
+
+    VLA_COMMAND_PULL_OVER = 5;
+  }
+
+  message VLAPositionOfAction {
+    enum VLACommandType {
+      // 在unkown时，会使用has判断使用哪一种type
+      VLA_COMMAND_TYPE_UNKNOWN = 0;
+      VLA_COMMAND_TYPE_INTERSECTION_AHEAD = 1;
+      VLA_COMMAND_TYPE_METER_AHEAD = 2;
+      VLA_COMMAND_TYPE_POI_AHEAD = 3;
+      VLA_COMMAND_TYPE_DESTINATION = 4;
+      VLA_COMMAND_TYPE_NO_DESIGNATED_POINT = 5;
+    }
+
+    optional VLACommandType vla_command_type = 100;
+
+    // 前方第几个路口
+    optional int32 intersection_ahead_num = 1;
+
+    // 前方多少米
+    optional int32 meters_ahead = 2;
+
+    // poi 名，例如星巴克
+    optional string poi_name = 3;
+
+    // 作用在路线终点
+    optional bool on_destination = 4;
+
+    // 无指定点
+    optional bool no_designated_point = 5;
+  }
+
+  optional VLACommand vla_command = 1;
+  optional VLAPositionOfAction vla_position_of_action = 2;
+}
+
+// topic /map/vla/request
+message VLACommandRequest {
+  optional string request_id = 1;
+  oneof request {
+    VLARoutingOption request_info = 2;
+  }
+}
+
+// topic /map/vla/response
+message VLACommandResponse {
+  message Status {
+    optional VLACommandCode code = 1;
+    optional string err_msg = 2;
+  }
+  optional Status status = 1;
+  optional string request_id = 2;
+  optional common.PointLLH position = 3;
+}

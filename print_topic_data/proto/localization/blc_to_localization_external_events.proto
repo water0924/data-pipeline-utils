@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package deeproute.localization.blc_event;
+
+enum CurrentMode {
+  NCA = 0;
+  E2E = 1;
+  ACC = 2;
+  LCC = 3;
+  APA = 4;
+  RADS = 5;
+  VPA = 6;
+  MANUAL = 7;
+}
+
+message CurrentModeEvent {
+  CurrentMode current_mode = 1;
+}
+
+// blc modules send 'BlcToLocalizationEvent' 
+// message to external users use '/localization/blc_event' topic
+message BlcToLocalizationEvent {  
+  string event_id = 1;
+  double timestamp_ms = 2;
+
+  CurrentModeEvent current_mode_event = 3;
+}

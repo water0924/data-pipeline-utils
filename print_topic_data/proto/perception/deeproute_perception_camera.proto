@@ -131,6 +131,14 @@ message TrafficSignInfo {
     SIGN_INS_SEP_RIGHT = 108;
     SIGN_INS_BAN_PASS = 109;
     SIGN_NON_SPEED_GENERAL = 110;
+    SIGN_LARGE_ROAD_INFO = 111;
+    SIGN_TB_CLOSE = 112;
+    SIGN_TB_ETC = 113;
+    SIGN_TB_ETC_MANUAL = 114;
+    SIGN_TB_FREE_LANE = 115;
+    SIGN_TB_LIGHT_ON = 116;
+    SIGN_TB_MANUAL = 117;
+    SIGN_TB_TRUCK_LANE = 118;
   };
   optional SignType sign_type = 1;
   optional float limit_value = 2;
@@ -141,6 +149,7 @@ message TrafficSignInfo {
   optional bool is_on_vehicle = 7 [default=false];
   optional common.Point3D pos_from_lidar = 8;
   optional bool is_from_cache = 9 [default = false];
+  optional bool is_ramp_sign = 10 [default = false];
 }
 
 message BeamInfo {
@@ -150,6 +159,24 @@ message BeamInfo {
     BACK_LIGHT = 2;
   };
   optional BeamType beam_type = 1;
+}
+
+message TollBoothVisObstacle {
+  enum EtcType {
+    CLOSE = 0;
+    ETC = 1;
+    ETC_OR_MANUAL = 2;
+    FREE = 3;
+    LIGHT_ON = 4;
+    MANUAL = 5;
+    TRUCK_LANE = 6;
+    UNKNOWN = 7;
+  };
+  optional int32 id = 1;
+  optional EtcType etc_type = 2;
+  optional int32 lane_id = 3;
+  optional common.Point3D position = 4;
+  optional float heading = 5;
 }
 
 message CameraObstacle {
@@ -175,6 +202,10 @@ message CameraObstacle {
   optional CameraDebugInfo debug_info = 7;
   optional TrafficSignInfo traffic_sign_info = 8;
   optional BeamInfo beam_info = 9;
+  optional double length = 10;        
+  optional double width = 11;
+  optional double height = 12; 
+  optional bool is_t2c = 13 [default = false];
 }
 
 // cubic polynomial y = a*x^3 + b*x^2 + c*x + d
@@ -234,10 +265,18 @@ message CameraLaneLine {
   optional float confidence = 9;
 }
 
+message CameraSpeedObstacles {
+  optional CameraObstacle road_max_speed_sign = 1;
+  optional CameraObstacle road_min_speed_sign = 2;
+  optional CameraObstacle road_non_speed_sign = 3;
+}
+
 message CameraObstacles {
   optional int64 time_measurement = 1;
   repeated CameraObstacle camera_obstacle = 2;   // An array of obstacles
   repeated CameraLaneLine camera_lane_line = 3;  // An array of lane lines
+  optional CameraSpeedObstacles camera_speed_obstacles = 4;
+  repeated TollBoothVisObstacle toll_booth_vis_obstacle = 5;
 }
 
 message CameraQualityInfo {
@@ -298,7 +337,8 @@ message CameraRegion {
     BUS_PARKING_AREA = 7;         // 公交停车区域
     HIGHWAY = 8;                  // 高速
     RURAL_ROAD = 9;               // 乡村道路
-    GAS_STATION = 10;            // 加油站
+    GAS_STATION = 10;             // 加油站
+    AEB_EXAM_SCENE = 11;          // AEB考试场景 
   };
   optional CameraRegionType camera_region = 1;
   optional float camera_region_prob = 2;
@@ -381,14 +421,19 @@ message CameraStatus {
   optional CameraRoadCondition camera_road_condition = 6;
 }
 
+message CameraSceneDebugInfo {
+  repeated float camera_scene_prob = 1;
+}
+
 message CameraInfo {
   optional int64 time_measurement = 1;
   optional string sensor_name = 2;
   optional CameraScheme camera_scheme = 3; // weather
   optional CameraRegion camera_region = 4; // region
   optional CameraRoadCondition camera_road_condition = 5; //road surface
-  optional CameraLightingStatus camera_lighting = 6; // lighting
-  optional CameraPhysicStatus camera_physic_status = 7; // camera physic status
-  optional CameraTimeStatus camera_time = 8;
-  optional CameraLightingStatus camera_scene = 9; // deprecated
+  optional CameraLightingStatus camera_scene = 6; // deprecated
+  optional CameraTimeStatus camera_time = 7;
+  optional CameraLightingStatus camera_lighting = 8; // lighting
+  optional CameraPhysicStatus camera_physic_status = 9; // camera physic status
+  optional CameraSceneDebugInfo camera_scene_debug_info = 10;
 }

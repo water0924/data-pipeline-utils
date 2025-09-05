@@ -110,6 +110,7 @@ message StateInfo {
   optional ABPState abp_state = 8;
   optional AWBState awb_state = 9;
   optional deeproute.esa.ESAState esa_state = 10;
+  optional deeproute.esa.AESState aes_state = 11;
 }
 
 message ObjectInfo{
@@ -195,6 +196,9 @@ message FeatureInfo {
     FCW = 3;
     MAI = 4;
     RCTB = 5;
+    MEB = 6;
+    ESA = 7;
+    AES = 8;
   }
   optional string name = 1 [default = ""];
   optional double ttc = 2 [default = 100.0];

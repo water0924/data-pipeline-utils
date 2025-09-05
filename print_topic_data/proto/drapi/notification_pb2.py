@@ -21,16 +21,22 @@ from proto.drapi import gwm_hut_notification_pb2 as drapi_dot_gwm__hut__notifica
 from proto.drapi import route_planning_pb2 as drapi_dot_route__planning__pb2
 from proto.localization import havp_map_pb2 as localization_dot_havp__map__pb2
 from google.protobuf import any_pb2 as google_dot_protobuf_dot_any__pb2
+from proto.drapi import local_config_pb2 as drapi_dot_local__config__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x18\x64rapi/notification.proto\x12\x0f\x64r.notification\x1a\x1c\x64rapi/operation_status.proto\x1a\x10\x64rapi/base.proto\x1a\x19\x64rapi/business_info.proto\x1a\rdsm/dsm.proto\x1a drapi/gwm_hut_notification.proto\x1a\x1a\x64rapi/route_planning.proto\x1a\x1blocalization/havp_map.proto\x1a\x19google/protobuf/any.proto\"\xe3\x1e\n\tEventInfo\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x04\x12\x36\n\rstatus_change\x18\x64 \x01(\x0b\x32\x1d.dr.notification.StatusChangeH\x00\x12\x35\n\ttake_over\x18\x65 \x01(\x0e\x32 .dr.notification.TakeOverRequestH\x00\x12\x32\n\x0bremind_info\x18\x66 \x01(\x0e\x32\x1b.dr.notification.RemindInfoH\x00\x12<\n\ractive_result\x18g \x01(\x0b\x32#.dr.notification.ActiveResultRemindH\x00\x12\x34\n\x0c\x66\x61ult_remind\x18h \x01(\x0b\x32\x1c.dr.notification.FaultRemindH\x00\x12\x32\n\tdrive_off\x18i \x01(\x0b\x32\x1d.dr.notification.DriveOffInfoH\x00\x12\x39\n\x0c\x64\x65\x63\x65leration\x18j \x01(\x0b\x32!.dr.notification.DecelerationInfoH\x00\x12\x44\n\x14trafficlight_warning\x18k \x01(\x0b\x32$.dr.notification.TrafficLightWarningH\x00\x12\x30\n\nerror_lane\x18l \x01(\x0b\x32\x1a.dr.notification.ErrorLaneH\x00\x12;\n\x0c\x64own_grading\x18m \x01(\x0b\x32#.dr.notification.DrivingDowngradingH\x00\x12\x36\n\rfeature_abort\x18n \x01(\x0b\x32\x1d.dr.notification.FeatureAbortH\x00\x12\x32\n\x0blaterm_exit\x18o \x01(\x0b\x32\x1b.dr.notification.LaExitInfoH\x00\x12\x41\n\x0estep_into_area\x18p \x01(\x0b\x32\'.dr.notification.StepingIntoSpecialAreaH\x00\x12\x37\n\x0ehands_off_warn\x18q \x01(\x0b\x32\x1d.dr.notification.HandsOffWarnH\x00\x12;\n\x10\x64river_take_over\x18r \x01(\x0b\x32\x1f.dr.notification.DriverTakeOverH\x00\x12>\n\x11\x61\x63\x63_status_change\x18\xe8\x07 \x01(\x0b\x32 .dr.notification.ACCStatusChangeH\x00\x12\x39\n\x0bspeed_limit\x18\xe9\x07 \x01(\x0b\x32!.dr.notification.SpeedLimitChangeH\x00\x12\x34\n\x08time_gap\x18\xea\x07 \x01(\x0e\x32\x1f.dr.business_info.FollowTimeGapH\x00\x12\x37\n\rconfirm_speed\x18\xeb\x07 \x01(\x0b\x32\x1d.dr.notification.ConfirmSpeedH\x00\x12>\n\x11ica_status_change\x18\xdc\x0b \x01(\x0b\x32 .dr.notification.ICAStatusChangeH\x00\x12\x42\n\x13nudge_status_change\x18\xcc\x0f \x01(\x0b\x32\".dr.notification.NudgeStatusChangeH\x00\x12M\n\x19lane_change_status_change\x18\xcd\x0f \x01(\x0b\x32\'.dr.notification.LaneChangeStatusChangeH\x00\x12Q\n\x19ilc_lane_change_rq_result\x18\xce\x0f \x01(\x0b\x32+.dr.notification.ILCLaneChangeRequestResultH\x00\x12>\n\x11ilc_status_change\x18\xcf\x0f \x01(\x0b\x32 .dr.notification.ILCStatusChangeH\x00\x12\x42\n\x13lane_change_warning\x18\xd0\x0f \x01(\x0b\x32\".dr.notification.LaneChangeWarningH\x00\x12>\n\x11nca_status_change\x18\xd2\x0f \x01(\x0b\x32 .dr.notification.NCAStatusChangeH\x00\x12\x32\n\x0bnca_out_odd\x18\xd3\x0f \x01(\x0b\x32\x1a.dr.notification.NCAOutODDH\x00\x12\x35\n\x0ctrun_arround\x18\xd4\x0f \x01(\x0b\x32\x1c.dr.notification.TurnArroundH\x00\x12=\n\x10odd_notification\x18\xd5\x0f \x01(\x0b\x32 .dr.notification.OddNotificationH\x00\x12\x44\n\x14\x63ur_navi_point_index\x18\xe0\x12 \x01(\x0b\x32#.dr.business_info.CurNaviPointIndexH\x00\x12>\n\x11\x61pa_status_change\x18\xc4\x13 \x01(\x0b\x32 .dr.notification.APAStatusChangeH\x00\x12\x44\n\x14parking_lot_detected\x18\xc5\x13 \x01(\x0b\x32#.dr.notification.ParkingLotDetectedH\x00\x12,\n\x07parking\x18\xc7\x13 \x01(\x0b\x32\x18.dr.notification.ParkingH\x00\x12\x33\n\x0bout_parking\x18\xc8\x13 \x01(\x0b\x32\x1b.dr.notification.OutParkingH\x00\x12J\n\x17\x61pa_select_parkingspace\x18\xc9\x13 \x01(\x0b\x32&.dr.notification.APASelectParkingSpaceH\x00\x12H\n\x14parkout_parkingspace\x18\xca\x13 \x01(\x0b\x32\'.dr.notification.APAParkOutParkingSpaceH\x00\x12L\n\x18suggest_out_parking_info\x18\xcb\x13 \x01(\x0b\x32\'.dr.business_info.SuggestOutParkingInfoH\x00\x12>\n\x11vpa_status_change\x18\xb8\x17 \x01(\x0b\x32 .dr.notification.VPAStatusChangeH\x00\x12\x41\n\x11vpa_learning_info\x18\xbc\x17 \x01(\x0b\x32#.dr.notification.VPALearingProgressH\x00\x12@\n\x10vpa_routing_info\x18\xbd\x17 \x01(\x0b\x32#.dr.notification.VPARoutingProgressH\x00\x12Z\n vpa_learning_saved_parking_space\x18\xbe\x17 \x01(\x0b\x32-.dr.notification.VPALearningSavedParkingSpaceH\x00\x12\x61\n$vpa_routing_get_target_parking_space\x18\xbf\x17 \x01(\x0b\x32\x30.dr.notification.VPARoutingGetTargetParkingSpaceH\x00\x12P\n\x1bvpa_learning_completed_info\x18\xc0\x17 \x01(\x0b\x32(.dr.notification.VPALearingCompletedInfoH\x00\x12P\n\x1bvpa_map_match_status_change\x18\xc1\x17 \x01(\x0b\x32(.dr.notification.VPAMapMatchStatusChangeH\x00\x12>\n\x11\x61vm_status_change\x18\xac\x1b \x01(\x0b\x32 .dr.notification.AVMStatusChangeH\x00\x12\x35\n\x0c\x61vm_settings\x18\xad\x1b \x01(\x0b\x32\x1c.dr.notification.AVMSettingsH\x00\x12\x39\n\x0esentinel_event\x18\x90\x1c \x01(\x0b\x32\x1e.dr.notification.SentinelEventH\x00\x12-\n\x08pdc_info\x18\xa0\x1f \x01(\x0b\x32\x18.dr.notification.PDCInfoH\x00\x12-\n\x08pdc_data\x18\xa1\x1f \x01(\x0b\x32\x18.dr.notification.PDCDataH\x00\x12\x41\n\x12\x63\x61libration_status\x18\x88\' \x01(\x0b\x32\".dr.notification.CalibrationStatusH\x00\x12\x42\n\x13rpa_business_status\x18\xed\' \x01(\x0b\x32\".dr.business_info.RPABusinessStateH\x00\x12>\n\x11rpa_status_change\x18\xee\' \x01(\x0b\x32 .dr.notification.RPAStatusChangeH\x00\x12P\n\x1crpa_suggest_out_parking_info\x18\xef\' \x01(\x0b\x32\'.dr.business_info.SuggestOutParkingInfoH\x00\x12\x37\n\rrads_progress\x18\xd1( \x01(\x0b\x32\x1d.dr.notification.RADSProgressH\x00\x12\x39\n\x10\x61ps_text_display\x18\xd2( \x01(\x0b\x32\x1c.dr.notification.APSTextDispH\x00\x12\x42\n\x13\x61ps_sys_sound_indcn\x18\xd3( \x01(\x0e\x32\".dr.business_info.APSSysSoundIndcnH\x00\x12@\n\x12gwmlss_warning_sts\x18\x99* \x01(\x0b\x32!.dr.notification.GWMLSSWarningStsH\x00\x12J\n\x0cgwm_hut_data\x18\x9a* \x01(\x0b\x32\x31.dr.notification.gwmhut.GWMParkingHUTNotificationH\x00\x12\x41\n\x0bgl_viz_data\x18\x9b* \x01(\x0b\x32).dr.notification.GLParkingVizNotificationH\x00\x12\x33\n\tdsm_start\x18\xf0. \x01(\x0b\x32\x19.dr.notification.DSMStartB\x02\x18\x01H\x00\x12.\n\ttsr_event\x18\xd4/ \x01(\x0b\x32\x18.dr.notification.TSRSignH\x00\x42\x07\n\x05\x65vent\"\x99\x03\n\x0cStatusChange\x12<\n\x0f\x61\x63\x63_status_info\x18\x01 \x01(\x0b\x32!.dr.operationstatus.ACCStatusInfoH\x00\x12<\n\x0fica_status_info\x18\x02 \x01(\x0b\x32!.dr.operationstatus.ICAStatusInfoH\x00\x12<\n\x0fnca_status_info\x18\x03 \x01(\x0b\x32!.dr.operationstatus.NCAStatusInfoH\x00\x12?\n\x12to_acc_status_info\x18\x04 \x01(\x0b\x32!.dr.operationstatus.ACCStatusInfoH\x01\x12?\n\x12to_ica_status_info\x18\x05 \x01(\x0b\x32!.dr.operationstatus.ICAStatusInfoH\x01\x12?\n\x12to_nca_status_info\x18\x06 \x01(\x0b\x32!.dr.operationstatus.NCAStatusInfoH\x01\x42\x06\n\x04\x66romB\x04\n\x02to\"\x86\x02\n\x12\x41\x63tiveResultRemind\x12,\n\x07\x66\x65\x61ture\x18\x01 \x01(\x0e\x32\x1b.dr.operationstatus.Feature\x12.\n\x06result\x18\x02 \x01(\x0e\x32\x1e.dr.business_info.ActiveResult\x12+\n\x06remind\x18\x03 \x01(\x0e\x32\x1b.dr.notification.RemindInfo\x12.\n\x06reason\x18\x04 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\x12\x35\n\x0c\x66\x61ult_reason\x18\x05 \x01(\x0b\x32\x1f.dr.notification.FaultEventInfo\"Q\n\x0e\x46\x61ultEventInfo\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\x05\x12\x12\n\nalert_info\x18\x02 \x01(\t\x12\x19\n\x11suggestion_prompt\x18\x03 \x01(\t\"\xfd\x03\n\x0b\x46\x61ultRemind\x12\x31\n\x05level\x18\x01 \x01(\x0e\x32\".dr.notification.FaultRemind.Level\x12\x33\n\nevent_info\x18\x02 \x03(\x0b\x32\x1f.dr.notification.FaultEventInfo\x12\x33\n\x06policy\x18\x03 \x01(\x0e\x32#.dr.notification.FaultRemind.Policy\x12\x31\n\nfault_info\x18\x04 \x01(\x0b\x32\x1d.dr.operationstatus.FaultInfo\"Z\n\x05Level\x12\x11\n\rLEVEL_UNKNOWN\x10\x00\x12\n\n\x06LEVEL1\x10\x01\x12\n\n\x06LEVEL2\x10\x02\x12\n\n\x06LEVEL3\x10\x03\x12\n\n\x06LEVEL4\x10\x04\x12\x0e\n\tLEVEL_MAX\x10\xe7\x07\"\xc1\x01\n\x06Policy\x12\x11\n\rPOLICY_UNKNOW\x10\x00\x12\x0c\n\x08\x45XIT_NCA\x10\x01\x12\x0c\n\x08\x45XIT_ICA\x10\x02\x12\x0c\n\x08\x45XIT_ACC\x10\x03\x12\x08\n\x04STOP\x10\x04\x12\x0e\n\nDELAY_STOP\x10\x05\x12\r\n\tPULL_OVER\x10\x06\x12\x13\n\x0f\x44\x45LAY_PULL_OVER\x10\x07\x12\x14\n\x10\x44OWNGRADE_TO_ACC\x10\x08\x12\x14\n\x10\x44OWNGRADE_TO_ICA\x10\t\x12\x10\n\x0cJUST_WARNING\x10\n\"\xad\x03\n\x0c\x44riveOffInfo\x12\x34\n\x06reason\x18\x01 \x01(\x0e\x32$.dr.notification.DriveOffInfo.Reason\x12\x36\n\x07suggest\x18\x02 \x01(\x0e\x32%.dr.notification.DriveOffInfo.Suggest\x12\x32\n\x05state\x18\x03 \x01(\x0e\x32#.dr.notification.DriveOffInfo.State\"D\n\x06Reason\x12\x12\n\x0eREASON_UNKNOWN\x10\x00\x12\x15\n\x11\x46RONT_CAR_STARTED\x10\x01\x12\x0f\n\x0bGREEN_LIGHT\x10\x02\"z\n\x07Suggest\x12\x13\n\x0fSUGGEST_UNKNOWN\x10\x00\x12\x18\n\x14\x41TTENTION_ROAD_AHEAD\x10\x01\x12\x12\n\x0eKEEP_ATTENTION\x10\x02\x12\x15\n\x11TAKE_OVER_THE_CAR\x10\x03\x12\x15\n\x11PRESS_ACCELERATOR\x10\x04\"9\n\x05State\x12\x10\n\x0cSTATE_UNKNOW\x10\x00\x12\x0b\n\x07STARTED\x10\x01\x12\x11\n\rREADY_STARTED\x10\x02\"\xa1\x02\n\x10\x44\x65\x63\x65lerationInfo\x12\x38\n\x06reason\x18\x01 \x01(\x0e\x32(.dr.notification.DecelerationInfo.Reason\"\xd2\x01\n\x06Reason\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0e\n\nFOLLOW_CAR\x10\x01\x12\x15\n\x11RED_TRAFFIC_LIGHT\x10\x02\x12\x18\n\x14YELLOW_TRAFFIC_LIGHT\x10\x03\x12\x0e\n\nPEDESTRIAN\x10\x04\x12\x1a\n\x16\x43OMPLEX_ROAD_CONDITION\x10\x05\x12\x13\n\x0fOTHER_OBSTACLES\x10\x06\x12\x0e\n\nCROSS_LINE\x10\x07\x12\x16\n\x12OBSTACLE_COLLISION\x10\x08\x12\x11\n\rRUN_RED_LIGHT\x10\t\"\x91\x02\n\x13TrafficLightWarning\x12H\n\x08tl_state\x18\x01 \x01(\x0e\x32\x36.dr.notification.TrafficLightWarning.TrafficLightState\x12 \n\x08tl_color\x18\x02 \x01(\x0e\x32\x0e.dr.base.Color\"\x8d\x01\n\x11TrafficLightState\x12\x1d\n\x19TRAFFICLIGHTSTATE_UNKNOWN\x10\x00\x12\x08\n\x04NONE\x10\x01\x12\n\n\x06NORMAL\x10\x02\x12\x0b\n\x07\x42LOCKED\x10\x03\x12\x17\n\x13UNABLE_TO_LINK_LANE\x10\x04\x12\x1d\n\x19RESULT_IS_NOT_TRUSTWORTHY\x10\x05\"\xad\x02\n\tErrorLane\x12\x31\n\x03pos\x18\x01 \x01(\x0e\x32$.dr.notification.ErrorLane.EgoCarPos\x12\x38\n\nerror_type\x18\x02 \x01(\x0e\x32$.dr.notification.ErrorLane.ErrorType\"f\n\tEgoCarPos\x12\x15\n\x11\x45GOCARPOS_UNKNOWN\x10\x00\x12\x14\n\x10\x45NTER_ERROR_LANE\x10\x01\x12\x14\n\x10LEAVE_ERROR_LANE\x10\x02\x12\x16\n\x12STOP_ON_ERROR_LANE\x10\x03\"K\n\tErrorType\x12\x15\n\x11\x45RRORTYPE_UNKNOWN\x10\x00\x12\'\n#ICA_ON_CROSSROADS_NON_STRAIGHT_LANE\x10\x01\"\x98\x01\n\x12\x44rivingDowngrading\x12)\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1b.dr.operationstatus.Feature\x12\'\n\x02to\x18\x02 \x01(\x0e\x32\x1b.dr.operationstatus.Feature\x12.\n\x06reason\x18\x03 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"\xd0\x01\n\x0c\x46\x65\x61tureAbort\x12,\n\x07\x66\x65\x61ture\x18\x01 \x01(\x0e\x32\x1b.dr.operationstatus.Feature\x12+\n\x06remind\x18\x02 \x01(\x0e\x32\x1b.dr.notification.RemindInfo\x12.\n\x06reason\x18\x03 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\x12\x35\n\x0c\x66\x61ult_reason\x18\x04 \x01(\x0b\x32\x1f.dr.notification.FaultEventInfo\"\xce\x01\n\x16StepingIntoSpecialArea\x12\x45\n\x04type\x18\x01 \x01(\x0e\x32\x37.dr.notification.StepingIntoSpecialArea.SpecialAreaType\"m\n\x0fSpecialAreaType\x12\x18\n\x14UNKNONW_SPECIAL_AREA\x10\x00\x12\x10\n\x0cWAITING_AREA\x10\x01\x12\x0c\n\x08\x42US_LANE\x10\x02\x12\x11\n\rVARIABLE_LANE\x10\x03\x12\r\n\tTIDE_LANE\x10\x04\"\xee\x01\n\x0cHandsOffWarn\x12:\n\x05level\x18\x01 \x01(\x0e\x32+.dr.notification.HandsOffWarn.HandsOffLevel\"\xa1\x01\n\rHandsOffLevel\x12\x0c\n\x08HANDS_ON\x10\x00\x12\x14\n\x10HANDS_OFF_LEVEL0\x10\x01\x12\x14\n\x10HANDS_OFF_LEVEL1\x10\x02\x12\x14\n\x10HANDS_OFF_LEVEL2\x10\x03\x12\x14\n\x10HANDS_OFF_LEVEL3\x10\x04\x12\x14\n\x10HANDS_OFF_LEVEL4\x10\x05\x12\x14\n\x10HANDS_OFF_LEVEL5\x10\x06\"\xfa\x01\n\x0e\x44riverTakeOver\x12\x34\n\x05scene\x18\x01 \x01(\x0e\x32%.dr.notification.DriverTakeOver.Scene\"\xb1\x01\n\x05Scene\x12\x11\n\rSCENE_UNKNOWN\x10\x00\x12*\n&TRAFFICLIGHT_RESULT_IS_NOT_TRUSTWORTHY\x10\x01\x12\x07\n\x03\x45OP\x10\x02\x12\x0e\n\nCROSS_LINE\x10\x03\x12\x10\n\x0cUTURN_FAILED\x10\x04\x12\x0f\n\x0bINVALID_ODD\x10\x05\x12\x11\n\rRUN_RED_LIGHT\x10\x06\x12\x1a\n\x16NARROW_ROAD_IMPASSIBLE\x10\x07\"\xb9\x01\n\x0f\x41\x43\x43StatusChange\x12+\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.ACCStatus\x12)\n\x02to\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.ACCStatus\x12\x1e\n\x16is_enter_graceful_exit\x18\x03 \x01(\x08\x12.\n\x06reason\x18\x04 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"\xed\x01\n\x10SpeedLimitChange\x12\x13\n\x0bspeed_limit\x18\x01 \x01(\x01\x12\x38\n\x06reason\x18\x02 \x01(\x0e\x32(.dr.notification.SpeedLimitChange.Reason\x12\x17\n\x0fspeed_limit_kmh\x18\x03 \x01(\x05\x12\x17\n\x0fspeed_limit_kph\x18\x04 \x01(\x05\x12+\n#is_map_speedlimit_changed_by_driver\x18\n \x01(\x08\"+\n\x06Reason\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x08\n\x04\x41UTO\x10\x01\x12\n\n\x06MANUAL\x10\x02\"\x83\x01\n\x0c\x43onfirmSpeed\x12\x36\n\x07\x64ispaly\x18\x01 \x01(\x0e\x32%.dr.notification.ConfirmSpeed.Display\";\n\x07\x44isplay\x12\x13\n\x0f\x44ISPLAY_UNKNOWN\x10\x00\x12\x0e\n\nNO_DISPLAY\x10\x01\x12\x0b\n\x07\x43ONFIRM\x10\x02\"i\n\x0fICAStatusChange\x12+\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.ICAStatus\x12)\n\x02to\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.ICAStatus\"\xa4\x01\n\x1aILCLaneChangeRequestResult\x12 \n\x04type\x18\x01 \x01(\x0e\x32\x12.dr.base.Direction\x12\x34\n\x06result\x18\x02 \x01(\x0e\x32$.dr.business_info.LaneChangeRqResult\x12.\n\x06reason\x18\x03 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"i\n\x0fILCStatusChange\x12+\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.ILCStatus\x12)\n\x02to\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.ILCStatus\"\xdf\x01\n\x16LaneChangeStatusChange\x12\x30\n\x04\x66rom\x18\x01 \x01(\x0e\x32\".dr.routeplanning.LaneChangeStatus\x12.\n\x02to\x18\x02 \x01(\x0e\x32\".dr.routeplanning.LaneChangeStatus\x12\x30\n\x06reason\x18\x03 \x01(\x0e\x32 .dr.routeplanning.BehaviorReason\x12\x31\n\x15lane_change_direction\x18\x04 \x01(\x0e\x32\x12.dr.base.Direction\"\xf5\x01\n\x11NudgeStatusChange\x12+\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1d.dr.routeplanning.NudgeStatus\x12)\n\x02to\x18\x02 \x01(\x0e\x32\x1d.dr.routeplanning.NudgeStatus\x12\x30\n\x06reason\x18\x03 \x01(\x0e\x32 .dr.routeplanning.BehaviorReason\x12+\n\x0fnudge_direction\x18\x04 \x01(\x0e\x32\x12.dr.base.Direction\x12)\n\x04type\x18\x05 \x01(\x0e\x32\x1b.dr.routeplanning.NudgeType\"\xb0\x01\n\x11LaneChangeWarning\x12\x35\n\x04type\x18\x01 \x01(\x0e\x32\'.dr.notification.LaneChangeWarning.Type\"d\n\x04Type\x12\x10\n\x0cTYPE_UNKNOWN\x10\x00\x12\x0f\n\x0b\x45XTRICATION\x10\x01\x12\r\n\tWRONG_WAY\x10\x02\x12\x0e\n\nEOP_NO_GAP\x10\x03\x12\x1a\n\x16NARROW_ROAD_IMPASSIBLE\x10\x04\"i\n\x0fNCAStatusChange\x12+\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.NCAStatus\x12)\n\x02to\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.NCAStatus\"s\n\x0bTurnArround\x12\x31\n\x05state\x18\x01 \x01(\x0e\x32\".dr.notification.TurnArround.State\"1\n\x05State\x12\x11\n\rSTATE_UNKNOWN\x10\x00\x12\t\n\x05READY\x10\x01\x12\n\n\x06\x46\x41ILED\x10\x02\"j\n\nLaExitInfo\x12,\n\x07\x66\x65\x61ture\x18\x01 \x01(\x0e\x32\x1b.dr.operationstatus.Feature\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"\xe7\x05\n\tNCAOutODD\x12\x13\n\x0bneed_remind\x18\x01 \x01(\x08\x12\x13\n\x0bremaining_s\x18\x02 \x01(\x01\x12-\n\x04type\x18\x03 \x01(\x0e\x32\x1f.dr.notification.NCAOutODD.Type\x12\x39\n\x08odd_type\x18\x04 \x01(\x0e\x32\'.dr.notification.NCAOutODD.OddLimitType\x12\x38\n\nroad_class\x18\x05 \x01(\x0e\x32$.dr.notification.NCAOutODD.RoadClass\"L\n\x04Type\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x1e\n\x1a\x41RRIVING_FINAL_DESTINATION\x10\x01\x12\x17\n\x13UNABLE_TURN_ARROUND\x10\x02\"\'\n\tRoadClass\x12\x0b\n\x07HIGHWAY\x10\x00\x12\r\n\tCITY_ROAD\x10\x01\"\x94\x03\n\x0cOddLimitType\x12\x0f\n\x0bODD_UNKNOWN\x10\x00\x12\x11\n\rODD_REST_AREA\x10\x01\x12\x0c\n\x08ODD_TOLL\x10\x02\x12\x1a\n\x16ODD_GRAPH_MATCH_FAILED\x10\x03\x12\x0e\n\nODD_U_TURN\x10\x04\x12\x12\n\x0eODD_ROUNDABOUT\x10\x05\x12\x1d\n\x19ODD_SHARP_CORNER_JUNCTION\x10\x06\x12\x1c\n\x18ODD_FIVE_FORKED_JUNCTION\x10\x07\x12\x1b\n\x17ODD_SIX_FORKED_JUNCTION\x10\x08\x12\x11\n\rODD_TEMPORARY\x10\t\x12\x12\n\x0eODD_ROI_REGION\x10\n\x12\x1b\n\x17ODD_CITY_AND_ROAD_CLASS\x10\x0b\x12\x1a\n\x16ODD_U_TURN_SINGLE_MOVE\x10\x0c\x12\x19\n\x15ODD_U_TURN_MULTI_MOVE\x10\r\x12\x0c\n\x08ODD_CITY\x10\x0e\x12\x12\n\x0eODD_ROAD_CLASS\x10\x0f\x12\x1b\n\x17ODD_MAIN_SECONDARY_ROAD\x10\x10\"L\n\x0fOddNotification\x12\x39\n\x08odd_type\x18\x01 \x01(\x0e\x32\'.dr.notification.NCAOutODD.OddLimitType\"\xa4\x01\n\x0f\x41PAStatusChange\x12+\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.APAStatus\x12)\n\x02to\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.APAStatus\x12\x39\n\x06reason\x18\x03 \x01(\x0b\x32).dr.operationstatus.APAStatusChangeReason\"\x8e\x02\n\x15\x41PASelectParkingSpace\x12+\n\x0cparkingspace\x18\x01 \x01(\x0b\x32\x15.dr.base.ParkingSpace\x12\x0c\n\x04show\x18\x02 \x01(\x08\x12G\n\x0cpark_in_type\x18\x03 \x01(\x0e\x32\x31.dr.notification.APASelectParkingSpace.PrkModType\"q\n\nPrkModType\x12\x14\n\x10PRKMOD_NO_ACTION\x10\x00\x12\x1a\n\x16PRKMOD_HEAD_PARKING_IN\x10\x01\x12\x1a\n\x16PRKMOD_TAIL_PARKING_IN\x10\x02\x12\x15\n\x11PRKMOD_RESERVED_3\x10\x03\"E\n\x16\x41PAParkOutParkingSpace\x12+\n\x0cparkingspace\x18\x01 \x01(\x0b\x32\x15.dr.base.ParkingSpace\"\xba\x01\n\x12ParkingLotDetected\x12L\n\x10parking_lot_type\x18\x01 \x01(\x0e\x32\x32.dr.notification.ParkingLotDetected.ParkingLotType\x12$\n\x05\x61reas\x18\x02 \x03(\x0b\x32\x15.dr.base.ParkingSpace\"0\n\x0eParkingLotType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x11\n\rROUTE_COVERED\x10\x01\"\x1b\n\x07Parking\x12\x10\n\x08progress\x18\x01 \x01(\r\"\x1e\n\nOutParking\x12\x10\n\x08progress\x18\x01 \x01(\r\"i\n\x0fVPAStatusChange\x12+\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.VPAStatus\x12)\n\x02to\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.VPAStatus\"\xad\x01\n\x12VPALearingProgress\x12\x10\n\x08\x64istance\x18\x01 \x01(\x01\x12\x1b\n\x13map_saving_progress\x18\x02 \x01(\x05\x12\x1e\n\x16passed_speedbump_count\x18\x03 \x01(\x05\x12\x17\n\x0fneed_map_fusion\x18\x04 \x01(\x08\x12/\n\te2e_stage\x18\x05 \x01(\x0e\x32\x1c.dr.notification.VPAE2EStage\"\xb3\x01\n\x12VPARoutingProgress\x12\x0f\n\x07\x61rrived\x18\x01 \x01(\x08\x12\x17\n\x0fremain_distance\x18\x02 \x01(\x01\x12\x1f\n\x17\x61void_pedestrain_number\x18\x03 \x01(\r\x12\x1f\n\x17passed_crosswalk_number\x18\x04 \x01(\r\x12\x19\n\x11speed_bump_number\x18\x05 \x01(\r\x12\x16\n\x0etotal_distance\x18\x06 \x01(\x01\"[\n\x1cVPALearningSavedParkingSpace\x12\r\n\x05saved\x18\x01 \x01(\x08\x12,\n\rparking_space\x18\x02 \x01(\x0b\x32\x15.dr.base.ParkingSpace\"O\n\x1fVPARoutingGetTargetParkingSpace\x12,\n\rparking_space\x18\x01 \x01(\x0b\x32\x15.dr.base.ParkingSpace\"\xcc\x01\n\x17VPALearingCompletedInfo\x12\x1d\n\x15vpa_learning_distance\x18\x01 \x01(\r\x12\x17\n\x0fvpa_speed_bumps\x18\x02 \x01(\r\x12\x14\n\x0csemantic_map\x18\x03 \x01(\x0c\x12\x1f\n\x17target_parking_space_id\x18\x04 \x01(\x05\x12\x42\n\x08map_info\x18\x05 \x01(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\"\x98\x02\n\x17VPAMapMatchStatusChange\x12G\n\x06status\x18\x01 \x01(\x0e\x32\x37.dr.notification.VPAMapMatchStatusChange.MapMatchStatus\x12\x14\n\x0csemantic_map\x18\x02 \x01(\x0c\x12\x42\n\x08map_info\x18\x03 \x01(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\"Z\n\x0eMapMatchStatus\x12\x15\n\x11MTACH_STATUS_NONE\x10\x00\x12\x17\n\x13MISMATCH_TO_MATCHED\x10\x01\x12\x18\n\x14MACTHED_TO_MIS_MATCH\x10\x02\"A\n\x0b\x41VMSettings\x12\x32\n\x08settings\x18\x02 \x01(\x0b\x32 .dr.business_info.AVMSettingInfo\"\x9e\x01\n\x0f\x41VMStatusChange\x12+\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.AVMStatus\x12)\n\x02to\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.AVMStatus\x12\x33\n\x06reason\x18\x03 \x01(\x0b\x32#.dr.operationstatus.AVMChangeReason\"U\n\rSentinelEvent\x12\x44\n\x15sentry_mode_statistic\x18\x01 \x01(\x0b\x32%.dr.business_info.SentryModeStatistic\"\xe3\x01\n\x07PDCInfo\x12I\n\x14\x62uzzer_alarm_pattern\x18\x01 \x01(\x0e\x32+.dr.notification.PDCInfo.BuzzerAlarmPattern\"\x8c\x01\n\x12\x42uzzerAlarmPattern\x12\x0e\n\nBUZZER_OFF\x10\x00\x12\x18\n\x14\x42UZZER_ON_AT_LEVEL_1\x10\x01\x12\x18\n\x14\x42UZZER_ON_AT_LEVEL_2\x10\x02\x12\x18\n\x14\x42UZZER_ON_AT_LEVEL_3\x10\x03\x12\x18\n\x14\x42UZZER_ON_AT_LEVEL_4\x10\x04\"\xe1\x01\n\x07PDCData\x12\x35\n\npdc_curves\x18\x01 \x03(\x0b\x32!.dr.notification.PDCData.PDCCurve\x1a\x9e\x01\n\x08PDCCurve\x12#\n\x08polyline\x18\x01 \x01(\x0b\x32\x11.dr.base.Polyline\x12\x10\n\x08\x64istance\x18\x02 \x01(\x01\x12\x39\n\x04type\x18\x03 \x01(\x0e\x32+.dr.notification.PDCData.PDCCurve.CurveType\" \n\tCurveType\x12\t\n\x05\x46RONT\x10\x00\x12\x08\n\x04\x42\x41\x43K\x10\x01\"\xbf\x01\n\x17\x43\x61librationUploadStatus\x12P\n\x06result\x18\x01 \x01(\x0e\x32@.dr.notification.CalibrationUploadStatus.CalibrationUploadResult\x12\x11\n\thttp_code\x18\x02 \x01(\x05\"?\n\x17\x43\x61librationUploadResult\x12\x0b\n\x07UNKONWN\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\n\n\x06\x46\x41ILED\x10\x02\"\xbb\x04\n\x11\x43\x61librationStatus\x12\x35\n\ncalib_mode\x18\x01 \x01(\x0e\x32!.dr.business_info.CalibrationMode\x12\x37\n\x0b\x63\x61lib_state\x18\x02 \x01(\x0e\x32\".dr.business_info.CalibrationState\x12\x35\n\ncalib_step\x18\x03 \x01(\x0e\x32!.dr.business_info.CalibrationStep\x12\x14\n\x0cprogress_bar\x18\x04 \x01(\x05\x12?\n\rupload_status\x18\x05 \x01(\x0b\x32(.dr.notification.CalibrationUploadStatus\x12:\n\nerror_code\x18\x06 \x01(\x0e\x32&.dr.business_info.CalibrationErrorCode\x12\x45\n\x0f\x65rr_state_seres\x18\x07 \x01(\x0b\x32*.dr.business_info.CalibrationSeresErrStateH\x00\x12\x41\n\rerr_state_gwm\x18\x08 \x01(\x0b\x32(.dr.business_info.CalibrationGwmErrStateH\x00\x12K\n\x12\x65rror_state_common\x18\t \x01(\x0b\x32-.dr.business_info.CalibrationCommonErrorStateH\x00\x42\x15\n\x13\x43\x61librationErrState\"\x9e\x01\n\x0fRPAStatusChange\x12+\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.RPAStatus\x12)\n\x02to\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.RPAStatus\x12\x33\n\x06reason\x18\x03 \x01(\x0b\x32#.dr.operationstatus.RPAStatusReason\"8\n\x0cRADSProgress\x12\x0f\n\x07\x61rrived\x18\x01 \x01(\x08\x12\x17\n\x0fremain_distance\x18\x02 \x01(\x01\"6\n\x0b\x41PSTextDisp\x12\'\n\x04text\x18\x01 \x03(\x0e\x32\x19.dr.business_info.APSText\"\xa5\x01\n\x10GWMLSSWarningSts\x12\x13\n\x0bldw_warning\x18\x01 \x01(\x05\x12\x13\n\x0brdp_warning\x18\x02 \x01(\x05\x12\x13\n\x0b\x65lk_warning\x18\x03 \x01(\x05\x12<\n\ndebug_info\x18\x04 \x01(\x0b\x32(.dr.business_info.GWMLSSWarningDebugInfo\x12\x14\n\x0clss_overtime\x18\x05 \x01(\x08\"n\n\x08\x44SMStart\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x1c\n\x05state\x18\x02 \x01(\x0e\x32\r.dr.dsm.State\x12\x1e\n\x04mode\x18\x03 \x01(\x0e\x32\x10.dr.dsm.SubState\x12\x13\n\x0btime_cost_s\x18\x04 \x01(\x05\"\xee\x14\n\x0fTrafficSignInfo\x12<\n\tsign_type\x18\x01 \x01(\x0e\x32).dr.notification.TrafficSignInfo.SignType\x12\x13\n\x0blimit_value\x18\x02 \x01(\x02\"\x87\x14\n\x08SignType\x12\x10\n\x0cSIGN_BAN_CAR\x10\x00\x12\x12\n\x0eSIGN_BAN_ENTER\x10\x01\x12\x13\n\x0fSIGN_BAN_HEIGHT\x10\x02\x12\x11\n\rSIGN_BAN_LEFT\x10\x03\x12\x17\n\x13SIGN_BAN_LEFT_RIGHT\x10\x04\x12\x12\n\x0eSIGN_BAN_OTHER\x10\x05\x12\x15\n\x11SIGN_BAN_OVERTAKE\x10\x06\x12\x14\n\x10SIGN_BAN_PARKING\x10\x07\x12\x11\n\rSIGN_BAN_PASS\x10\x08\x12\x12\n\x0eSIGN_BAN_RIGHT\x10\t\x12\x11\n\rSIGN_BAN_SLOW\x10\n\x12\x11\n\rSIGN_BAN_STOP\x10\x0b\x12\x15\n\x11SIGN_BAN_STRAIGHT\x10\x0c\x12\x1b\n\x17SIGN_BAN_STRAIGHT_RIGHT\x10\r\x12\x14\n\x10SIGN_BAN_TRAILER\x10\x0e\x12\x13\n\x0fSIGN_BAN_U_TURN\x10\x0f\x12\x14\n\x10SIGN_BAN_VEHICLE\x10\x10\x12\x13\n\x0fSIGN_BAN_WEIGHT\x10\x11\x12\x16\n\x12SIGN_ENTER_HIGHWAY\x10\x12\x12\x12\n\x0eSIGN_MAX_SPEED\x10\x13\x12\x12\n\x0eSIGN_MIN_SPEED\x10\x14\x12\x12\n\x0eSIGN_NON_SPEED\x10\x15\x12\x0e\n\nSIGN_OTHER\x10\x16\x12\x14\n\x10SIGN_OUT_HIGHWAY\x10\x17\x12\x17\n\x13SIGN_UNBAN_OVERTAKE\x10\x18\x12\x16\n\x12SIGN_WARN_ACCIDENT\x10\x19\x12\x14\n\x10SIGN_WARN_ANIMAL\x10\x1a\x12\x15\n\x11SIGN_WARN_BICYCLE\x10\x1b\x12\x1a\n\x16SIGN_WARN_CONSTRUCTION\x10\x1c\x12\x13\n\x0fSIGN_WARN_CROSS\x10\x1d\x12\x11\n\rSIGN_WARN_FOG\x10\x1e\x12\x16\n\x12SIGN_WARN_ICE_ROAD\x10\x1f\x12\x11\n\rSIGN_WARN_KID\x10 \x12\x18\n\x14SIGN_WARN_LEFT_MERGE\x10!\x12\x1d\n\x19SIGN_WARN_LEFT_SHARP_TURN\x10\"\x12\x17\n\x13SIGN_WARN_LIVESTOCK\x10#\x12\x17\n\x13SIGN_WARN_MORE_TURN\x10$\x12\x13\n\x0fSIGN_WARN_OTHER\x10%\x12\x14\n\x10SIGN_WARN_PEOPLE\x10&\x12\x12\n\x0eSIGN_WARN_RAIN\x10\'\x12\x19\n\x15SIGN_WARN_RIGHT_MERGE\x10(\x12\x1e\n\x1aSIGN_WARN_RIGHT_SHARP_TURN\x10)\x12\x12\n\x0eSIGN_WARN_SLOW\x10*\x12\x18\n\x14SIGN_WARN_TWO_TURN_1\x10+\x12\x18\n\x14SIGN_WARN_TWO_TURN_2\x10,\x12\x15\n\x11SIGN_WARN_VILLAGE\x10-\x12\x15\n\x11SIGN_WARN_WEATHER\x10.\x12\x14\n\x10SIGN_WARN_UPHILL\x10/\x12\x16\n\x12SIGN_WARN_DOWNHILL\x10\x30\x12\x1b\n\x17SIGN_WARN_MORE_DOWNHILL\x10\x31\x12\x12\n\x0eSIGN_WARN_WIND\x10\x32\x12\x16\n\x12SIGN_WARN_SLIPPERY\x10\x33\x12\x14\n\x10SIGN_WARN_TUNNEL\x10\x34\x12\x13\n\x0fSIGN_WARN_BUMPY\x10\x35\x12\x13\n\x0fSIGN_WARN_WATER\x10\x36\x12\x14\n\x10SIGN_WARN_DETOUR\x10\x37\x12\x19\n\x15SIGN_WARN_LEFT_DETOUR\x10\x38\x12\x1a\n\x16SIGN_WARN_RIGHT_DETOUR\x10\x39\x12\x13\n\x0fSIGN_WARN_MERGE\x10:\x12\x14\n\x10SIGN_WARN_NARROW\x10;\x12\x1b\n\x17SIGN_WARN_ACCIDENT_MANA\x10<\x12\x12\n\x0eSIGN_WARN_BUMP\x10=\x12\x15\n\x11SIGN_WARN_TWO_WAY\x10>\x12\x1c\n\x18SIGN_WARN_RIGHT_MOUNTAIN\x10?\x12\x1a\n\x16SIGN_WARN_RIGHT_NARROW\x10@\x12\x18\n\x14SIGN_WARN_EMBANKMENT\x10\x41\x12\x15\n\x11SIGN_WARN_RAILWAY\x10\x42\x12\x1b\n\x17SIGN_WARN_GUARD_RAILWAY\x10\x43\x12\x16\n\x12SIGN_WARN_DISTANCE\x10\x44\x12\x1b\n\x17SIGN_WARN_TRAFFIC_LIGHT\x10\x45\x12\x13\n\x0fSIGN_WARN_QUEUE\x10\x46\x12\x14\n\x10SIGN_WARN_DANGER\x10G\x12\x18\n\x14SIGN_WARN_RIGHT_ROCK\x10H\x12\x17\n\x13SIGN_WARN_LEFT_ROCK\x10I\x12\x18\n\x14SIGN_WARN_TIDAL_LANE\x10J\x12\x1b\n\x17SIGN_WARN_NARROW_BRIDGE\x10K\x12\x19\n\x15SIGN_WARN_HUMP_BRIDGE\x10L\x12\x19\n\x15SIGN_BAN_WAIT_MEETING\x10M\x12\x1a\n\x16SIGN_BAN_TRUCK_TRAILER\x10N\x12\x11\n\rSIGN_BAN_HORN\x10O\x12\x16\n\x12SIGN_BAN_LONG_STOP\x10P\x12\x16\n\x12SIGN_ASS_LEFT_RAMP\x10Q\x12\x10\n\x0cSIGN_ASS_CAR\x10R\x12\x16\n\x12SIGN_ASS_CAR_TRUCK\x10S\x12\x12\n\x0eSIGN_ASS_TRUCK\x10T\x12\x10\n\x0cSIGN_ASS_BUS\x10U\x12\x16\n\x12SIGN_ASS_DIRECTION\x10V\x12\x12\n\x0eSIGN_ASS_FRONT\x10W\x12\x12\n\x0eSIGN_ASS_RIGHT\x10X\x12\x11\n\rSIGN_ASS_LEFT\x10Y\x12\x17\n\x13SIGN_ASS_LEFT_RIGHT\x10Z\x12\x11\n\rSIGN_ASS_TIME\x10[\x12\x11\n\rSIGN_INS_MEET\x10\\\x12\x16\n\x12SIGN_INS_LEFT_LANE\x10]\x12\x17\n\x13SIGN_INS_RIGHT_LANE\x10^\x12\x1d\n\x19SIGN_INS_LEFT_U_TURN_LANE\x10_\x12\x18\n\x14SIGN_INS_U_TURN_LANE\x10`\x12\x1c\n\x18SIGN_INS_STRA_RIGHT_LANE\x10\x61\x12\x1b\n\x17SIGN_INS_STRA_LEFT_LANE\x10\x62\x12\x16\n\x12SIGN_INS_STRA_LANE\x10\x63\x12\x12\n\x0eSIGN_INS_RIGHT\x10\x64\x12\x11\n\rSIGN_INS_LEFT\x10\x65\x12\x17\n\x13SIGN_INS_STRA_RIGHT\x10\x66\x12\x16\n\x12SIGN_INS_STRA_LEFT\x10g\x12\x11\n\rSIGN_INS_STRA\x10h\x12\x17\n\x13SIGN_INS_LEFT_RIGHT\x10i\x12\x13\n\x0fSIGN_INS_U_TURN\x10j\x12\x15\n\x11SIGN_INS_SEP_LEFT\x10k\x12\x16\n\x12SIGN_INS_SEP_RIGHT\x10l\x12\x15\n\x11SIGN_INS_BAN_PASS\x10m\"\x9f\x01\n\x07TSRSign\x12:\n\x10speed_limit_sign\x18\x01 \x01(\x0b\x32 .dr.notification.TrafficSignInfo\x12=\n\x13no_speed_limit_sign\x18\x02 \x01(\x0b\x32 .dr.notification.TrafficSignInfo\x12\x19\n\x11maintain_distance\x18\x03 \x01(\x02\"U\n\x18GLParkingVizNotification\x12\x39\n\x1bgl_p177_chassis_detail_resp\x18\x01 \x01(\x0b\x32\x14.google.protobuf.Any*\xe9\x01\n\x0fTakeOverRequest\x12\x1e\n\x1aTAKEOVER_REQUEST_NOT_EXIST\x10\x00\x12\x12\n\x0e\x42LOCK_ALL_ROAD\x10\x01\x12\x18\n\x14\x41\x42NORMAL_SINGLE_ROAD\x10\x02\x12\x19\n\x15UPSTREAM_DATA_FAILURE\x10\x03\x12\x1f\n\x1b\x44RIVER_SEATBELT_NOT_BUCKLED\x10\n\x12\x0f\n\x0b\x44OOR_OPENED\x10\x0b\x12\x0e\n\nWIPER_HIGH\x10\x0c\x12\x0f\n\x0bINVALID_ODD\x10\x14\x12\x1a\n\x15\x41\x43\x43_TAKEOVER_BY_FAULT\x10\xac\x02*\x8c\x1b\n\nRemindInfo\x12\x0e\n\nNO_SUGGEST\x10\x00\x12\x0e\n\nCLOSE_DOOR\x10\x01\x12\x14\n\x10\x46\x41STEN_SEAT_BEAT\x10\x02\x12\x19\n\x15RELEASE_THE_HANDBRAKE\x10\x03\x12\x12\n\x0eGEAR_TO_DRIVER\x10\x04\x12\x1c\n\x18PRESS_RES_OR_ACCELERATOR\x10\x05\x12\x13\n\x0fGEAR_TO_PARKING\x10\x06\x12\x14\n\x10HANDS_OFF_LEVEL3\x10\t\x12\x14\n\x10HANDS_OFF_LEVEL2\x10\n\x12\x14\n\x10HANDS_OFF_LEVEL1\x10\x0b\x12\x0c\n\x08HANDS_ON\x10\x0c\x12\x13\n\x0fRED_LIGHTS_STOP\x10\r\x12\x14\n\x10REQUEST_TAKEOVER\x10\x0e\x12\x1b\n\x17LEFT_LANE_MERGE_STARTED\x10\x0f\x12\x1c\n\x18RIGHT_LANE_MERGE_STARTED\x10\x10\x12\x13\n\x0fLANE_MERGE_DONE\x10\x11\x12\"\n\x1eLEFT_INTERSECTION_TURN_STARTED\x10\x12\x12#\n\x1fRIGHT_INTERSECTION_TURN_STARTED\x10\x13\x12\x1a\n\x16INTERSECTION_TURN_DONE\x10\x14\x12\x17\n\x13NUDGE_TRUCK_STARTED\x10\x15\x12\x14\n\x10NUDGE_TRUCK_DONE\x10\x16\x12\'\n#OBSTACLE_DETECTED_IN_THE_BLIND_SPOT\x10\x17\x12\"\n\x1e\x42LIND_SPOT_OBSTACLE_DISAPPEARS\x10\x18\x12$\n ENTER_CONSTRUCTION_ZONE_SCENARIO\x10\x19\x12$\n LEAVE_CONSTRUCTION_ZONE_SCENARIO\x10\x1a\x12\r\n\tLEFT_TURN\x10\x1b\x12\x0e\n\nRIGHT_TURN\x10\x1c\x12\n\n\x06\x44\x45TOUR\x10\x1d\x12!\n\x1dSTRAIGHTEN_THE_STEERING_WHEEL\x10\x1e\x12\x1b\n\x17REACH_SPEED_UPPER_LIMIT\x10\x1f\x12\x1b\n\x17REACH_SPEED_LOWER_LIMIT\x10 \x12\x18\n\x14\x45PB_REQUEST_TIME_OUT\x10!\x12\x1b\n\x17GEAR_P_REQUEST_TIME_OUT\x10\"\x12\x0e\n\nSHARP_BEND\x10#\x12\x16\n\x12\x43\x41N_NOT_ACTIVE_ACC\x10\x64\x12\x0f\n\x0b\x41\x43\x43_ACTIVED\x10\x65\x12\x15\n\x11\x41\x43\x43_ACTIVE_FAILED\x10\x66\x12\x10\n\x0c\x41\x43\x43_CANCELED\x10g\x12\x15\n\x11\x41\x43\x43_CANCEL_FAILED\x10h\x12\r\n\tACC_ABORT\x10i\x12 \n\x1c\x43\x41N_NOT_ACTIVE_ACC_BY_RESUME\x10j\x12#\n\x1f\x43\x41N_NOT_ACTIVE_ACC_WHEN_PARKING\x10k\x12\x10\n\x0c\x41\x43\x43_OVERRIDE\x10l\x12\x17\n\x12\x43\x41N_NOT_ACTIVE_ICA\x10\xf4\x03\x12\x10\n\x0bICA_ACTIVED\x10\xf5\x03\x12\x17\n\x12ICA_ACTIVED_FAILED\x10\xf6\x03\x12\x11\n\x0cICA_CANCELED\x10\xf7\x03\x12\x0e\n\tICA_ABORT\x10\xf8\x03\x12\x16\n\x11ICA_CANCEL_FAILED\x10\xf9\x03\x12\x10\n\x0bICA_RECOVER\x10\xfa\x03\x12+\n&ICA_LATEMEXIT_CAN_NOT_RETURN_TO_NORMAL\x10\xfb\x03\x12\r\n\x08OPEN_ICA\x10\xfc\x03\x12\x12\n\rICA_LATEMEXIT\x10\xfd\x03\x12\x17\n\x12\x43\x41N_NOT_ACTIVE_NCA\x10\x84\x07\x12\x10\n\x0bNCA_ACTIVED\x10\x85\x07\x12\x17\n\x12NCA_ACTIVED_FAILED\x10\x86\x07\x12\x11\n\x0cNCA_CANCELED\x10\x87\x07\x12\x0e\n\tNCA_ABORT\x10\x88\x07\x12\x16\n\x11NCA_CANCEL_FAILED\x10\x89\x07\x12\x10\n\x0bNCA_RECOVER\x10\x8a\x07\x12\x0e\n\tNCA_YAWED\x10\x8b\x07\x12\x1a\n\x15NCA_REROUTING_SUCCESS\x10\x8c\x07\x12#\n\x1eNCA_EXCEED_SPEED_LIMIT_WARNING\x10\x8d\x07\x12\r\n\x08OPEN_NCA\x10\x8e\x07\x12\x12\n\rNCA_LATEMEXIT\x10\x8f\x07\x12\x16\n\x11\x41PA_RELEASE_BREAK\x10\xb1\t\x12\x1e\n\x19\x41PA_CLOSE_TANK_FILTER_GAP\x10\xb2\t\x12\x1a\n\x15\x41PA_CLOSE_CHARG_COVER\x10\xb3\t\x12\x17\n\x12\x41PA_SPEED_TOO_HIGH\x10\xb4\t\x12\x1c\n\x17\x41PA_HINT_RESUME_PARKING\x10\xb5\t\x12\x1d\n\x18\x41PA_INSIDE_PARKING_SPACE\x10\xb6\t\x12\x1e\n\x19\x41PA_OUTSIDE_PARKING_SPACE\x10\xb7\t\x12\x16\n\x11\x41PA_ACTIVE_FAILED\x10\xb8\t\x12$\n\x1f\x43\x41N_NOT_ACTIVE_APA_WHEN_DRIVING\x10\xb9\t\x12\x17\n\x12\x41PA_ACTIVE_SUCCESS\x10\xba\t\x12\x17\n\x12\x41PA_ACTIVE_TIMEOUT\x10\xbb\t\x12\x11\n\x0c\x41PA_DISABLED\x10\xbc\t\x12\x1b\n\x16VPA_LEARNING_AVALIABLE\x10\xf9\n\x12\x19\n\x14VPA_ROUTING_AVALIBLE\x10\xfa\n\x12\x1c\n\x17VPA_MAP_LEARNING_FAILED\x10\xfb\n\x12\x19\n\x14VPA_ROUTING_FINISHED\x10\xfd\n\x12\x17\n\x12VPA_ROUTING_FAILED\x10\xfe\n\x12,\n\'VPA_LEARNING_EXCEED_SPEED_LIMIT_WARNING\x10\xff\n\x12\x1a\n\x15VPA_ODD_ABOUT_TO_EXIT\x10\x80\x0b\x12\x15\n\x10VPA_SYSTEM_ERROR\x10\x81\x0b\x12(\n#VPA_ROUTING_REQUEST_TAKEOVER_DETURE\x10\x82\x0b\x12#\n\x1eVPA_ROUTING_REQUEST_TAKEOVER_1\x10\x83\x0b\x12#\n\x1eVPA_ROUTING_REQUEST_TAKEOVER_2\x10\x84\x0b\x12&\n!VPA_ROUTING_HINT_AVOID_PEDESTRAIN\x10\x85\x0b\x12\x1c\n\x17VPA_ROUTING_HINT_DETURE\x10\x86\x0b\x12$\n\x1f\x43\x41N_NOT_ACTIVE_VPA_WHEN_DRIVING\x10\x87\x0b\x12\x1e\n\x19VPA_NO_EMPTY_PARKINGSPACE\x10\x88\x0b\x12#\n\x1eVPA_EXIT_REASON_STEER_OVERRIDE\x10\x89\x0b\x12#\n\x1eVPA_EXIT_REASON_BRAKE_OVERRIDE\x10\x8a\x0b\x12&\n!VPA_EXIT_REASON_THROTTLE_OVERRIDE\x10\x8b\x0b\x12\"\n\x1dVPA_EXIT_REASON_GEAR_OVERRIDE\x10\x8c\x0b\x12)\n$VPA_EXIT_REASON_LOCALIZATION_FAILURE\x10\x8d\x0b\x12\x32\n-VPA_EXIT_REASON_STATIC_OBSTACLE_DRIVING_BLOCK\x10\x8e\x0b\x12%\n VPA_EXIT_REASON_NO_PARKING_SPACE\x10\x8f\x0b\x12 \n\x1bVPA_EXIT_REASON_ODD_INVALID\x10\x90\x0b\x12 \n\x1bVPA_EXIT_REASON_ABS_ACTIVED\x10\x91\x0b\x12 \n\x1bVPA_EXIT_REASON_VDC_ACTIVED\x10\x92\x0b\x12 \n\x1bVPA_EXIT_REASON_ESC_ACTIVED\x10\x93\x0b\x12 \n\x1bVPA_EXIT_REASON_TCS_ACTIVED\x10\x94\x0b\x12 \n\x1bVPA_EXIT_REASON_AEB_ACTIVED\x10\x95\x0b\x12 \n\x1bVPA_EXIT_REASON_HDC_ACTIVED\x10\x96\x0b\x12\"\n\x1dVPA_EXIT_REASON_VCU_NOT_READY\x10\x97\x0b\x12 \n\x1bVPA_EXIT_REASON_DOOR_OPENED\x10\x98\x0b\x12)\n$VPA_DRIVING_DYNAMIC_OBSTACLE_BLOCKED\x10\x99\x0b\x12)\n$VPA_DRIVING_DYNAMIC_OBSTACLE_REMOVED\x10\x9a\x0b\x12\"\n\x1dVPA_LEARNING_DO_NOT_REVERSING\x10\x9b\x0b\x12#\n\x1eVPA_LEARNING_HIDE_PARKING_HINT\x10\x9c\x0b\x12)\n$VPA_EXIT_REASON_SEATBELT_NOT_BUCKLED\x10\x9d\x0b\x12 \n\x1bVPA_EXIT_REASON_HOOD_OPENED\x10\x9e\x0b\x12!\n\x1cVPA_EXIT_REASON_TRUNK_OPENED\x10\x9f\x0b\x12\x1f\n\x1aVPA_LEARNING_SPEEDING_HINT\x10\xa0\x0b\x12\"\n\x1dVPA_EXIT_REASON_SPEED_OVER_30\x10\xa1\x0b\x12%\n VPA_EXIT_REASON_COLLIDE_OVERRIDE\x10\xa2\x0b\x12\x18\n\x13TJP_ACTIVED_SUCCESS\x10\xc1\x0c\x12\x17\n\x12TJP_ACTIVED_FAILED\x10\xc2\x0c\x12\x18\n\x13TJP_TAKEOVER_REMIND\x10\xc3\x0c\x12\x18\n\x13TJP_READY_TO_ACTIVE\x10\xc4\x0c*T\n\x0bVPAE2EStage\x12\x12\n\x0eVPA_STAGE_NONE\x10\x00\x12\x0f\n\x0bVPA_STAGE_1\x10\x01\x12\x0f\n\x0bVPA_STAGE_2\x10\x02\x12\x0f\n\x0bVPA_STAGE_3\x10\x03\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x18\x64rapi/notification.proto\x12\x0f\x64r.notification\x1a\x1c\x64rapi/operation_status.proto\x1a\x10\x64rapi/base.proto\x1a\x19\x64rapi/business_info.proto\x1a\rdsm/dsm.proto\x1a drapi/gwm_hut_notification.proto\x1a\x1a\x64rapi/route_planning.proto\x1a\x1blocalization/havp_map.proto\x1a\x19google/protobuf/any.proto\x1a\x18\x64rapi/local_config.proto\"\x94\'\n\tEventInfo\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x04\x12\x36\n\x0ctrigger_type\x18\x03 \x01(\x0e\x32 .dr.business_info.BlcTriggerType\x12\x10\n\x08trace_id\x18\x04 \x01(\t\x12\x36\n\rstatus_change\x18\x64 \x01(\x0b\x32\x1d.dr.notification.StatusChangeH\x00\x12\x35\n\ttake_over\x18\x65 \x01(\x0e\x32 .dr.notification.TakeOverRequestH\x00\x12\x32\n\x0bremind_info\x18\x66 \x01(\x0e\x32\x1b.dr.notification.RemindInfoH\x00\x12<\n\ractive_result\x18g \x01(\x0b\x32#.dr.notification.ActiveResultRemindH\x00\x12\x34\n\x0c\x66\x61ult_remind\x18h \x01(\x0b\x32\x1c.dr.notification.FaultRemindH\x00\x12\x32\n\tdrive_off\x18i \x01(\x0b\x32\x1d.dr.notification.DriveOffInfoH\x00\x12\x39\n\x0c\x64\x65\x63\x65leration\x18j \x01(\x0b\x32!.dr.notification.DecelerationInfoH\x00\x12\x44\n\x14trafficlight_warning\x18k \x01(\x0b\x32$.dr.notification.TrafficLightWarningH\x00\x12\x30\n\nerror_lane\x18l \x01(\x0b\x32\x1a.dr.notification.ErrorLaneH\x00\x12;\n\x0c\x64own_grading\x18m \x01(\x0b\x32#.dr.notification.DrivingDowngradingH\x00\x12\x36\n\rfeature_abort\x18n \x01(\x0b\x32\x1d.dr.notification.FeatureAbortH\x00\x12\x32\n\x0blaterm_exit\x18o \x01(\x0b\x32\x1b.dr.notification.LaExitInfoH\x00\x12\x41\n\x0estep_into_area\x18p \x01(\x0b\x32\'.dr.notification.StepingIntoSpecialAreaH\x00\x12\x37\n\x0ehands_off_warn\x18q \x01(\x0b\x32\x1d.dr.notification.HandsOffWarnH\x00\x12;\n\x10\x64river_take_over\x18r \x01(\x0b\x32\x1f.dr.notification.DriverTakeOverH\x00\x12M\n\x19\x61\x63\x63\x65leration_style_change\x18t \x01(\x0b\x32(.dr.notification.AccelerationStyleChangeH\x00\x12L\n\x15\x63hange_routing_result\x18u \x01(\x0b\x32+.dr.notification.ChangeRoutingRequestResultH\x00\x12\x38\n\x0bnavi_action\x18v \x01(\x0b\x32!.dr.notification.NavigationActionH\x00\x12R\n\x1c\x63hange_routing_status_change\x18w \x01(\x0b\x32*.dr.notification.ChangeRoutingStatusChangeH\x00\x12\x42\n\x10pull_over_result\x18x \x01(\x0b\x32&.dr.notification.PullOverRequestResultH\x00\x12H\n\x17pull_over_status_change\x18y \x01(\x0b\x32%.dr.notification.PullOverStatusChangeH\x00\x12.\n\tover_take\x18z \x01(\x0b\x32\x19.dr.notification.OverTakeH\x00\x12,\n\x08give_way\x18{ \x01(\x0b\x32\x18.dr.notification.GiveWayH\x00\x12=\n\x11vla_status_change\x18| \x01(\x0b\x32 .dr.notification.VlaStatusChangeH\x00\x12\x31\n\x07poi_pos\x18} \x01(\x0b\x32\x1e.dr.notification.PoiPosDisplayH\x00\x12I\n\x15scene_strategy_notify\x18~ \x01(\x0b\x32(.dr.notification.SceneStrategyTypeNotifyH\x00\x12>\n\x11\x61\x63\x63_status_change\x18\xe8\x07 \x01(\x0b\x32 .dr.notification.ACCStatusChangeH\x00\x12\x39\n\x0bspeed_limit\x18\xe9\x07 \x01(\x0b\x32!.dr.notification.SpeedLimitChangeH\x00\x12\x34\n\x08time_gap\x18\xea\x07 \x01(\x0e\x32\x1f.dr.business_info.FollowTimeGapH\x00\x12\x37\n\rconfirm_speed\x18\xeb\x07 \x01(\x0b\x32\x1d.dr.notification.ConfirmSpeedH\x00\x12-\n\x08jam_mode\x18\xec\x07 \x01(\x0b\x32\x18.dr.notification.JamModeH\x00\x12:\n\x0ftime_gap_change\x18\xed\x07 \x01(\x0b\x32\x1e.dr.notification.TimeGapChangeH\x00\x12>\n\x11ica_status_change\x18\xdc\x0b \x01(\x0b\x32 .dr.notification.ICAStatusChangeH\x00\x12\x42\n\x13nudge_status_change\x18\xcc\x0f \x01(\x0b\x32\".dr.notification.NudgeStatusChangeH\x00\x12M\n\x19lane_change_status_change\x18\xcd\x0f \x01(\x0b\x32\'.dr.notification.LaneChangeStatusChangeH\x00\x12Q\n\x19ilc_lane_change_rq_result\x18\xce\x0f \x01(\x0b\x32+.dr.notification.ILCLaneChangeRequestResultH\x00\x12>\n\x11ilc_status_change\x18\xcf\x0f \x01(\x0b\x32 .dr.notification.ILCStatusChangeH\x00\x12\x42\n\x13lane_change_warning\x18\xd0\x0f \x01(\x0b\x32\".dr.notification.LaneChangeWarningH\x00\x12>\n\x11nca_status_change\x18\xd2\x0f \x01(\x0b\x32 .dr.notification.NCAStatusChangeH\x00\x12\x32\n\x0bnca_out_odd\x18\xd3\x0f \x01(\x0b\x32\x1a.dr.notification.NCAOutODDH\x00\x12\x35\n\x0ctrun_arround\x18\xd4\x0f \x01(\x0b\x32\x1c.dr.notification.TurnArroundH\x00\x12=\n\x10odd_notification\x18\xd5\x0f \x01(\x0b\x32 .dr.notification.OddNotificationH\x00\x12=\n\x10\x65tc_notification\x18\xd6\x0f \x01(\x0b\x32 .dr.notification.ETCNotificationH\x00\x12\x44\n\x14\x63ur_navi_point_index\x18\xe0\x12 \x01(\x0b\x32#.dr.business_info.CurNaviPointIndexH\x00\x12>\n\x11\x61pa_status_change\x18\xc4\x13 \x01(\x0b\x32 .dr.notification.APAStatusChangeH\x00\x12\x44\n\x14parking_lot_detected\x18\xc5\x13 \x01(\x0b\x32#.dr.notification.ParkingLotDetectedH\x00\x12,\n\x07parking\x18\xc7\x13 \x01(\x0b\x32\x18.dr.notification.ParkingH\x00\x12\x33\n\x0bout_parking\x18\xc8\x13 \x01(\x0b\x32\x1b.dr.notification.OutParkingH\x00\x12J\n\x17\x61pa_select_parkingspace\x18\xc9\x13 \x01(\x0b\x32&.dr.notification.APASelectParkingSpaceH\x00\x12H\n\x14parkout_parkingspace\x18\xca\x13 \x01(\x0b\x32\'.dr.notification.APAParkOutParkingSpaceH\x00\x12L\n\x18suggest_out_parking_info\x18\xcb\x13 \x01(\x0b\x32\'.dr.business_info.SuggestOutParkingInfoH\x00\x12\x30\n\x08\x61vm_path\x18\xcc\x13 \x01(\x0b\x32\x1b.dr.notification.PathPointsH\x00\x12>\n\x11vpa_status_change\x18\xb8\x17 \x01(\x0b\x32 .dr.notification.VPAStatusChangeH\x00\x12\x41\n\x11vpa_learning_info\x18\xbc\x17 \x01(\x0b\x32#.dr.notification.VPALearingProgressH\x00\x12@\n\x10vpa_routing_info\x18\xbd\x17 \x01(\x0b\x32#.dr.notification.VPARoutingProgressH\x00\x12Z\n vpa_learning_saved_parking_space\x18\xbe\x17 \x01(\x0b\x32-.dr.notification.VPALearningSavedParkingSpaceH\x00\x12\x61\n$vpa_routing_get_target_parking_space\x18\xbf\x17 \x01(\x0b\x32\x30.dr.notification.VPARoutingGetTargetParkingSpaceH\x00\x12P\n\x1bvpa_learning_completed_info\x18\xc0\x17 \x01(\x0b\x32(.dr.notification.VPALearingCompletedInfoH\x00\x12P\n\x1bvpa_map_match_status_change\x18\xc1\x17 \x01(\x0b\x32(.dr.notification.VPAMapMatchStatusChangeH\x00\x12>\n\x11\x61vm_status_change\x18\xac\x1b \x01(\x0b\x32 .dr.notification.AVMStatusChangeH\x00\x12\x35\n\x0c\x61vm_settings\x18\xad\x1b \x01(\x0b\x32\x1c.dr.notification.AVMSettingsH\x00\x12\x39\n\x0esentinel_event\x18\x90\x1c \x01(\x0b\x32\x1e.dr.notification.SentinelEventH\x00\x12-\n\x08pdc_info\x18\xa0\x1f \x01(\x0b\x32\x18.dr.notification.PDCInfoH\x00\x12-\n\x08pdc_data\x18\xa1\x1f \x01(\x0b\x32\x18.dr.notification.PDCDataH\x00\x12\x41\n\x12\x63\x61libration_status\x18\x88\' \x01(\x0b\x32\".dr.notification.CalibrationStatusH\x00\x12\x42\n\x13rpa_business_status\x18\xed\' \x01(\x0b\x32\".dr.business_info.RPABusinessStateH\x00\x12>\n\x11rpa_status_change\x18\xee\' \x01(\x0b\x32 .dr.notification.RPAStatusChangeH\x00\x12P\n\x1crpa_suggest_out_parking_info\x18\xef\' \x01(\x0b\x32\'.dr.business_info.SuggestOutParkingInfoH\x00\x12\x37\n\rrads_progress\x18\xd1( \x01(\x0b\x32\x1d.dr.notification.RADSProgressH\x00\x12\x39\n\x10\x61ps_text_display\x18\xd2( \x01(\x0b\x32\x1c.dr.notification.APSTextDispH\x00\x12\x42\n\x13\x61ps_sys_sound_indcn\x18\xd3( \x01(\x0e\x32\".dr.business_info.APSSysSoundIndcnH\x00\x12@\n\x12gwmlss_warning_sts\x18\x99* \x01(\x0b\x32!.dr.notification.GWMLSSWarningStsH\x00\x12J\n\x0cgwm_hut_data\x18\x9a* \x01(\x0b\x32\x31.dr.notification.gwmhut.GWMParkingHUTNotificationH\x00\x12\x41\n\x0bgl_viz_data\x18\x9b* \x01(\x0b\x32).dr.notification.GLParkingVizNotificationH\x00\x12\x35\n\x08\x65\x32\x65_data\x18\x9c* \x01(\x0b\x32 .dr.notification.E2ENotificationH\x00\x12\x33\n\tdsm_start\x18\xf0. \x01(\x0b\x32\x19.dr.notification.DSMStartB\x02\x18\x01H\x00\x12.\n\ttsr_event\x18\xd4/ \x01(\x0b\x32\x18.dr.notification.TSRSignH\x00\x42\x07\n\x05\x65vent\"\x99\x03\n\x0cStatusChange\x12<\n\x0f\x61\x63\x63_status_info\x18\x01 \x01(\x0b\x32!.dr.operationstatus.ACCStatusInfoH\x00\x12<\n\x0fica_status_info\x18\x02 \x01(\x0b\x32!.dr.operationstatus.ICAStatusInfoH\x00\x12<\n\x0fnca_status_info\x18\x03 \x01(\x0b\x32!.dr.operationstatus.NCAStatusInfoH\x00\x12?\n\x12to_acc_status_info\x18\x04 \x01(\x0b\x32!.dr.operationstatus.ACCStatusInfoH\x01\x12?\n\x12to_ica_status_info\x18\x05 \x01(\x0b\x32!.dr.operationstatus.ICAStatusInfoH\x01\x12?\n\x12to_nca_status_info\x18\x06 \x01(\x0b\x32!.dr.operationstatus.NCAStatusInfoH\x01\x42\x06\n\x04\x66romB\x04\n\x02to\"\x86\x02\n\x12\x41\x63tiveResultRemind\x12,\n\x07\x66\x65\x61ture\x18\x01 \x01(\x0e\x32\x1b.dr.operationstatus.Feature\x12.\n\x06result\x18\x02 \x01(\x0e\x32\x1e.dr.business_info.ActiveResult\x12+\n\x06remind\x18\x03 \x01(\x0e\x32\x1b.dr.notification.RemindInfo\x12.\n\x06reason\x18\x04 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\x12\x35\n\x0c\x66\x61ult_reason\x18\x05 \x01(\x0b\x32\x1f.dr.notification.FaultEventInfo\"Q\n\x0e\x46\x61ultEventInfo\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\x05\x12\x12\n\nalert_info\x18\x02 \x01(\t\x12\x19\n\x11suggestion_prompt\x18\x03 \x01(\t\"\xfd\x03\n\x0b\x46\x61ultRemind\x12\x31\n\x05level\x18\x01 \x01(\x0e\x32\".dr.notification.FaultRemind.Level\x12\x33\n\nevent_info\x18\x02 \x03(\x0b\x32\x1f.dr.notification.FaultEventInfo\x12\x33\n\x06policy\x18\x03 \x01(\x0e\x32#.dr.notification.FaultRemind.Policy\x12\x31\n\nfault_info\x18\x04 \x01(\x0b\x32\x1d.dr.operationstatus.FaultInfo\"Z\n\x05Level\x12\x11\n\rLEVEL_UNKNOWN\x10\x00\x12\n\n\x06LEVEL1\x10\x01\x12\n\n\x06LEVEL2\x10\x02\x12\n\n\x06LEVEL3\x10\x03\x12\n\n\x06LEVEL4\x10\x04\x12\x0e\n\tLEVEL_MAX\x10\xe7\x07\"\xc1\x01\n\x06Policy\x12\x11\n\rPOLICY_UNKNOW\x10\x00\x12\x0c\n\x08\x45XIT_NCA\x10\x01\x12\x0c\n\x08\x45XIT_ICA\x10\x02\x12\x0c\n\x08\x45XIT_ACC\x10\x03\x12\x08\n\x04STOP\x10\x04\x12\x0e\n\nDELAY_STOP\x10\x05\x12\r\n\tPULL_OVER\x10\x06\x12\x13\n\x0f\x44\x45LAY_PULL_OVER\x10\x07\x12\x14\n\x10\x44OWNGRADE_TO_ACC\x10\x08\x12\x14\n\x10\x44OWNGRADE_TO_ICA\x10\t\x12\x10\n\x0cJUST_WARNING\x10\n\"\xad\x03\n\x0c\x44riveOffInfo\x12\x34\n\x06reason\x18\x01 \x01(\x0e\x32$.dr.notification.DriveOffInfo.Reason\x12\x36\n\x07suggest\x18\x02 \x01(\x0e\x32%.dr.notification.DriveOffInfo.Suggest\x12\x32\n\x05state\x18\x03 \x01(\x0e\x32#.dr.notification.DriveOffInfo.State\"D\n\x06Reason\x12\x12\n\x0eREASON_UNKNOWN\x10\x00\x12\x15\n\x11\x46RONT_CAR_STARTED\x10\x01\x12\x0f\n\x0bGREEN_LIGHT\x10\x02\"z\n\x07Suggest\x12\x13\n\x0fSUGGEST_UNKNOWN\x10\x00\x12\x18\n\x14\x41TTENTION_ROAD_AHEAD\x10\x01\x12\x12\n\x0eKEEP_ATTENTION\x10\x02\x12\x15\n\x11TAKE_OVER_THE_CAR\x10\x03\x12\x15\n\x11PRESS_ACCELERATOR\x10\x04\"9\n\x05State\x12\x10\n\x0cSTATE_UNKNOW\x10\x00\x12\x0b\n\x07STARTED\x10\x01\x12\x11\n\rREADY_STARTED\x10\x02\"\xff\x02\n\x10\x44\x65\x63\x65lerationInfo\x12\x38\n\x06reason\x18\x01 \x01(\x0e\x32(.dr.notification.DecelerationInfo.Reason\"\xb0\x02\n\x06Reason\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0e\n\nFOLLOW_CAR\x10\x01\x12\x15\n\x11RED_TRAFFIC_LIGHT\x10\x02\x12\x18\n\x14YELLOW_TRAFFIC_LIGHT\x10\x03\x12\x0e\n\nPEDESTRIAN\x10\x04\x12\x1a\n\x16\x43OMPLEX_ROAD_CONDITION\x10\x05\x12\x13\n\x0fOTHER_OBSTACLES\x10\x06\x12\x0e\n\nCROSS_LINE\x10\x07\x12\x16\n\x12OBSTACLE_COLLISION\x10\x08\x12\x11\n\rRUN_RED_LIGHT\x10\t\x12\x1b\n\x17LARGE_VEHICLE_DEFENSIVE\x10\n\x12\x1d\n\x19SIDE_VEHICLE_DECELERATING\x10\x0b\x12 \n\x1cROADSIDE_PARKING_BLIND_SPOTS\x10\x0c\"\x91\x02\n\x13TrafficLightWarning\x12H\n\x08tl_state\x18\x01 \x01(\x0e\x32\x36.dr.notification.TrafficLightWarning.TrafficLightState\x12 \n\x08tl_color\x18\x02 \x01(\x0e\x32\x0e.dr.base.Color\"\x8d\x01\n\x11TrafficLightState\x12\x1d\n\x19TRAFFICLIGHTSTATE_UNKNOWN\x10\x00\x12\x08\n\x04NONE\x10\x01\x12\n\n\x06NORMAL\x10\x02\x12\x0b\n\x07\x42LOCKED\x10\x03\x12\x17\n\x13UNABLE_TO_LINK_LANE\x10\x04\x12\x1d\n\x19RESULT_IS_NOT_TRUSTWORTHY\x10\x05\"\xad\x02\n\tErrorLane\x12\x31\n\x03pos\x18\x01 \x01(\x0e\x32$.dr.notification.ErrorLane.EgoCarPos\x12\x38\n\nerror_type\x18\x02 \x01(\x0e\x32$.dr.notification.ErrorLane.ErrorType\"f\n\tEgoCarPos\x12\x15\n\x11\x45GOCARPOS_UNKNOWN\x10\x00\x12\x14\n\x10\x45NTER_ERROR_LANE\x10\x01\x12\x14\n\x10LEAVE_ERROR_LANE\x10\x02\x12\x16\n\x12STOP_ON_ERROR_LANE\x10\x03\"K\n\tErrorType\x12\x15\n\x11\x45RRORTYPE_UNKNOWN\x10\x00\x12\'\n#ICA_ON_CROSSROADS_NON_STRAIGHT_LANE\x10\x01\"\x98\x01\n\x12\x44rivingDowngrading\x12)\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1b.dr.operationstatus.Feature\x12\'\n\x02to\x18\x02 \x01(\x0e\x32\x1b.dr.operationstatus.Feature\x12.\n\x06reason\x18\x03 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"\xd0\x01\n\x0c\x46\x65\x61tureAbort\x12,\n\x07\x66\x65\x61ture\x18\x01 \x01(\x0e\x32\x1b.dr.operationstatus.Feature\x12+\n\x06remind\x18\x02 \x01(\x0e\x32\x1b.dr.notification.RemindInfo\x12.\n\x06reason\x18\x03 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\x12\x35\n\x0c\x66\x61ult_reason\x18\x04 \x01(\x0b\x32\x1f.dr.notification.FaultEventInfo\"\xea\x01\n\x16StepingIntoSpecialArea\x12\x45\n\x04type\x18\x01 \x01(\x0e\x32\x37.dr.notification.StepingIntoSpecialArea.SpecialAreaType\"\x88\x01\n\x0fSpecialAreaType\x12\x18\n\x14UNKNONW_SPECIAL_AREA\x10\x00\x12\x10\n\x0cWAITING_AREA\x10\x01\x12\x0c\n\x08\x42US_LANE\x10\x02\x12\x11\n\rVARIABLE_LANE\x10\x03\x12\r\n\tTIDE_LANE\x10\x04\x12\x19\n\x15WAITING_AREA_STRAIGHT\x10\x05\"\xee\x01\n\x0cHandsOffWarn\x12:\n\x05level\x18\x01 \x01(\x0e\x32+.dr.notification.HandsOffWarn.HandsOffLevel\"\xa1\x01\n\rHandsOffLevel\x12\x0c\n\x08HANDS_ON\x10\x00\x12\x14\n\x10HANDS_OFF_LEVEL0\x10\x01\x12\x14\n\x10HANDS_OFF_LEVEL1\x10\x02\x12\x14\n\x10HANDS_OFF_LEVEL2\x10\x03\x12\x14\n\x10HANDS_OFF_LEVEL3\x10\x04\x12\x14\n\x10HANDS_OFF_LEVEL4\x10\x05\x12\x14\n\x10HANDS_OFF_LEVEL5\x10\x06\"\xfa\x01\n\x0e\x44riverTakeOver\x12\x34\n\x05scene\x18\x01 \x01(\x0e\x32%.dr.notification.DriverTakeOver.Scene\"\xb1\x01\n\x05Scene\x12\x11\n\rSCENE_UNKNOWN\x10\x00\x12*\n&TRAFFICLIGHT_RESULT_IS_NOT_TRUSTWORTHY\x10\x01\x12\x07\n\x03\x45OP\x10\x02\x12\x0e\n\nCROSS_LINE\x10\x03\x12\x10\n\x0cUTURN_FAILED\x10\x04\x12\x0f\n\x0bINVALID_ODD\x10\x05\x12\x11\n\rRUN_RED_LIGHT\x10\x06\x12\x1a\n\x16NARROW_ROAD_IMPASSIBLE\x10\x07\"\xc6\x01\n\x17\x41\x63\x63\x65lerationStyleChange\x12\x30\n\x05style\x18\x01 \x01(\x0e\x32!.dr.localconfig.AccelerationStyle\x12?\n\rreaching_type\x18\x02 \x01(\x0e\x32(.dr.business_info.ReachingBoundariesType\x12\x38\n\x0buser_action\x18\x03 \x01(\x0e\x32#.dr.business_info.ChangeValueAction\"\xc5\x01\n\x1a\x43hangeRoutingRequestResult\x12:\n\x0buser_action\x18\x01 \x01(\x0e\x32%.dr.business_info.ChangeRoutingAction\x12>\n\x12position_of_action\x18\x02 \x01(\x0b\x32\".dr.business_info.PositionOfAction\x12\x12\n\nis_success\x18\x03 \x01(\x08\x12\x17\n\x0fmap_engine_code\x18\x04 \x01(\x05\"\xb7\x01\n\x10NavigationAction\x12\x38\n\x04turn\x18\x01 \x01(\x0e\x32*.dr.notification.NavigationAction.LaneTurn\"i\n\x08LaneTurn\x12\x0b\n\x07INVALID\x10\x00\x12\x0c\n\x08STRAIGHT\x10\x01\x12\x08\n\x04LEFT\x10\x02\x12\t\n\x05RIGHT\x10\x03\x12\n\n\x06U_TURN\x10\x04\x12\x0f\n\x0bU_TURN_LEFT\x10\x05\x12\x10\n\x0cU_TURN_RIGHT\x10\x06\"\x97\x02\n\x0fVlaStatusChange\x12\x33\n\x04type\x18\x01 \x01(\x0e\x32%.dr.notification.VlaStatusChange.Type\x12+\n\x04\x66rom\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.VlaStatus\x12)\n\x02to\x18\x03 \x01(\x0e\x32\x1d.dr.operationstatus.VlaStatus\x12:\n\x0buser_action\x18\x04 \x01(\x0e\x32%.dr.business_info.ChangeRoutingAction\";\n\x04Type\x12\x10\n\x0cTYPE_UNKNOWN\x10\x00\x12\r\n\tPULL_OVER\x10\x01\x12\x12\n\x0e\x43HANGE_ROUTING\x10\x02\"\xaf\x01\n\x19\x43hangeRoutingStatusChange\x12:\n\x0buser_action\x18\x01 \x01(\x0e\x32%.dr.business_info.ChangeRoutingAction\x12+\n\x04\x66rom\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.VlaStatus\x12)\n\x02to\x18\x03 \x01(\x0e\x32\x1d.dr.operationstatus.VlaStatus\"r\n\x15PullOverRequestResult\x12,\n\x04type\x18\x01 \x01(\x0e\x32\x1e.dr.business_info.PullOverType\x12\x12\n\nis_success\x18\x02 \x01(\x08\x12\x17\n\x0fmap_engine_code\x18\x03 \x01(\x05\"\xfb\x01\n\x14PullOverStatusChange\x12,\n\x04type\x18\x01 \x01(\x0e\x32\x1e.dr.business_info.PullOverType\x12)\n\x04\x66rom\x18\x02 \x01(\x0e\x32\x1b.dr.routeplanning.VLAStatus\x12\'\n\x02to\x18\x03 \x01(\x0e\x32\x1b.dr.routeplanning.VLAStatus\x12\x30\n\x06reason\x18\x04 \x01(\x0e\x32 .dr.routeplanning.BehaviorReason\x12/\n\nvla_action\x18\x05 \x01(\x0e\x32\x1b.dr.routeplanning.VLAAction\"@\n\rPoiPosDisplay\x12\x0f\n\x07\x64ispaly\x18\x01 \x01(\x08\x12\x1e\n\x03pos\x18\x02 \x01(\x0b\x32\x11.dr.base.PointLLH\"S\n\x17SceneStrategyTypeNotify\x12\x38\n\x08strategy\x18\x01 \x01(\x0e\x32&.dr.business_info.BlcSceneStrategyType\"\x90\x01\n\x08OverTake\x12)\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1b.dr.routeplanning.VLAStatus\x12\'\n\x02to\x18\x02 \x01(\x0e\x32\x1b.dr.routeplanning.VLAStatus\x12\x30\n\x06reason\x18\x03 \x01(\x0e\x32 .dr.routeplanning.BehaviorReason\"\x8f\x01\n\x07GiveWay\x12)\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1b.dr.routeplanning.VLAStatus\x12\'\n\x02to\x18\x02 \x01(\x0e\x32\x1b.dr.routeplanning.VLAStatus\x12\x30\n\x06reason\x18\x03 \x01(\x0e\x32 .dr.routeplanning.BehaviorReason\"\xb9\x01\n\x0f\x41\x43\x43StatusChange\x12+\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.ACCStatus\x12)\n\x02to\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.ACCStatus\x12\x1e\n\x16is_enter_graceful_exit\x18\x03 \x01(\x08\x12.\n\x06reason\x18\x04 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"\xe9\x02\n\x10SpeedLimitChange\x12\x13\n\x0bspeed_limit\x18\x01 \x01(\x01\x12\x38\n\x06reason\x18\x02 \x01(\x0e\x32(.dr.notification.SpeedLimitChange.Reason\x12\x17\n\x0fspeed_limit_kmh\x18\x03 \x01(\x05\x12\x17\n\x0fspeed_limit_kph\x18\x04 \x01(\x05\x12?\n\rreaching_type\x18\x05 \x01(\x0e\x32(.dr.business_info.ReachingBoundariesType\x12\x39\n\x08strategy\x18\x06 \x03(\x0e\x32\'.dr.business_info.BlcSpeedLimitStrategy\x12+\n#is_map_speedlimit_changed_by_driver\x18\n \x01(\x08\"+\n\x06Reason\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x08\n\x04\x41UTO\x10\x01\x12\n\n\x06MANUAL\x10\x02\"\x83\x01\n\x0c\x43onfirmSpeed\x12\x36\n\x07\x64ispaly\x18\x01 \x01(\x0e\x32%.dr.notification.ConfirmSpeed.Display\";\n\x07\x44isplay\x12\x13\n\x0f\x44ISPLAY_UNKNOWN\x10\x00\x12\x0e\n\nNO_DISPLAY\x10\x01\x12\x0b\n\x07\x43ONFIRM\x10\x02\"k\n\x07JamMode\x12+\n\x04mode\x18\x01 \x01(\x0e\x32\x1d.dr.notification.JamMode.Mode\"3\n\x04Mode\x12\x10\n\x0cMODE_UNKNOWN\x10\x00\x12\x0c\n\x08MODE_OFF\x10\x01\x12\x0b\n\x07MODE_ON\x10\x02\"\xbd\x01\n\rTimeGapChange\x12\x31\n\x08time_gap\x18\x01 \x01(\x0e\x32\x1f.dr.business_info.FollowTimeGap\x12?\n\rreaching_type\x18\x02 \x01(\x0e\x32(.dr.business_info.ReachingBoundariesType\x12\x38\n\x0buser_action\x18\x03 \x01(\x0e\x32#.dr.business_info.ChangeValueAction\"i\n\x0fICAStatusChange\x12+\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.ICAStatus\x12)\n\x02to\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.ICAStatus\"\xa4\x01\n\x1aILCLaneChangeRequestResult\x12 \n\x04type\x18\x01 \x01(\x0e\x32\x12.dr.base.Direction\x12\x34\n\x06result\x18\x02 \x01(\x0e\x32$.dr.business_info.LaneChangeRqResult\x12.\n\x06reason\x18\x03 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"i\n\x0fILCStatusChange\x12+\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.ILCStatus\x12)\n\x02to\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.ILCStatus\"\xdf\x01\n\x16LaneChangeStatusChange\x12\x30\n\x04\x66rom\x18\x01 \x01(\x0e\x32\".dr.routeplanning.LaneChangeStatus\x12.\n\x02to\x18\x02 \x01(\x0e\x32\".dr.routeplanning.LaneChangeStatus\x12\x30\n\x06reason\x18\x03 \x01(\x0e\x32 .dr.routeplanning.BehaviorReason\x12\x31\n\x15lane_change_direction\x18\x04 \x01(\x0e\x32\x12.dr.base.Direction\"\xf5\x01\n\x11NudgeStatusChange\x12+\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1d.dr.routeplanning.NudgeStatus\x12)\n\x02to\x18\x02 \x01(\x0e\x32\x1d.dr.routeplanning.NudgeStatus\x12\x30\n\x06reason\x18\x03 \x01(\x0e\x32 .dr.routeplanning.BehaviorReason\x12+\n\x0fnudge_direction\x18\x04 \x01(\x0e\x32\x12.dr.base.Direction\x12)\n\x04type\x18\x05 \x01(\x0e\x32\x1b.dr.routeplanning.NudgeType\"\xb0\x01\n\x11LaneChangeWarning\x12\x35\n\x04type\x18\x01 \x01(\x0e\x32\'.dr.notification.LaneChangeWarning.Type\"d\n\x04Type\x12\x10\n\x0cTYPE_UNKNOWN\x10\x00\x12\x0f\n\x0b\x45XTRICATION\x10\x01\x12\r\n\tWRONG_WAY\x10\x02\x12\x0e\n\nEOP_NO_GAP\x10\x03\x12\x1a\n\x16NARROW_ROAD_IMPASSIBLE\x10\x04\"i\n\x0fNCAStatusChange\x12+\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.NCAStatus\x12)\n\x02to\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.NCAStatus\"s\n\x0bTurnArround\x12\x31\n\x05state\x18\x01 \x01(\x0e\x32\".dr.notification.TurnArround.State\"1\n\x05State\x12\x11\n\rSTATE_UNKNOWN\x10\x00\x12\t\n\x05READY\x10\x01\x12\n\n\x06\x46\x41ILED\x10\x02\"j\n\nLaExitInfo\x12,\n\x07\x66\x65\x61ture\x18\x01 \x01(\x0e\x32\x1b.dr.operationstatus.Feature\x12.\n\x06reason\x18\x02 \x01(\x0b\x32\x1e.dr.operationstatus.ReasonInfo\"\xf5\x05\n\tNCAOutODD\x12\x13\n\x0bneed_remind\x18\x01 \x01(\x08\x12\x13\n\x0bremaining_s\x18\x02 \x01(\x01\x12-\n\x04type\x18\x03 \x01(\x0e\x32\x1f.dr.notification.NCAOutODD.Type\x12\x39\n\x08odd_type\x18\x04 \x01(\x0e\x32\'.dr.notification.NCAOutODD.OddLimitType\x12\x38\n\nroad_class\x18\x05 \x01(\x0e\x32$.dr.notification.NCAOutODD.RoadClass\"Z\n\x04Type\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x1e\n\x1a\x41RRIVING_FINAL_DESTINATION\x10\x01\x12\x17\n\x13UNABLE_TURN_ARROUND\x10\x02\x12\x0c\n\x08\x45TC_PASS\x10\x03\"\'\n\tRoadClass\x12\x0b\n\x07HIGHWAY\x10\x00\x12\r\n\tCITY_ROAD\x10\x01\"\x94\x03\n\x0cOddLimitType\x12\x0f\n\x0bODD_UNKNOWN\x10\x00\x12\x11\n\rODD_REST_AREA\x10\x01\x12\x0c\n\x08ODD_TOLL\x10\x02\x12\x1a\n\x16ODD_GRAPH_MATCH_FAILED\x10\x03\x12\x0e\n\nODD_U_TURN\x10\x04\x12\x12\n\x0eODD_ROUNDABOUT\x10\x05\x12\x1d\n\x19ODD_SHARP_CORNER_JUNCTION\x10\x06\x12\x1c\n\x18ODD_FIVE_FORKED_JUNCTION\x10\x07\x12\x1b\n\x17ODD_SIX_FORKED_JUNCTION\x10\x08\x12\x11\n\rODD_TEMPORARY\x10\t\x12\x12\n\x0eODD_ROI_REGION\x10\n\x12\x1b\n\x17ODD_CITY_AND_ROAD_CLASS\x10\x0b\x12\x1a\n\x16ODD_U_TURN_SINGLE_MOVE\x10\x0c\x12\x19\n\x15ODD_U_TURN_MULTI_MOVE\x10\r\x12\x0c\n\x08ODD_CITY\x10\x0e\x12\x12\n\x0eODD_ROAD_CLASS\x10\x0f\x12\x1b\n\x17ODD_MAIN_SECONDARY_ROAD\x10\x10\"L\n\x0fOddNotification\x12\x39\n\x08odd_type\x18\x01 \x01(\x0e\x32\'.dr.notification.NCAOutODD.OddLimitType\"\xaa\x01\n\x0f\x45TCNotification\x12\x33\n\x04type\x18\x01 \x01(\x0e\x32%.dr.notification.ETCNotification.Type\"b\n\x04Type\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x13\n\x0f\x41PPROACHING_ETC\x10\x01\x12\x0f\n\x0bTHROUGH_ETC\x10\x02\x12\x14\n\x10\x45TC_PASS_SUCCESS\x10\x03\x12\x11\n\rETC_PASS_FAIL\x10\x04\"\xa4\x01\n\x0f\x41PAStatusChange\x12+\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.APAStatus\x12)\n\x02to\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.APAStatus\x12\x39\n\x06reason\x18\x03 \x01(\x0b\x32).dr.operationstatus.APAStatusChangeReason\"\x8e\x02\n\x15\x41PASelectParkingSpace\x12+\n\x0cparkingspace\x18\x01 \x01(\x0b\x32\x15.dr.base.ParkingSpace\x12\x0c\n\x04show\x18\x02 \x01(\x08\x12G\n\x0cpark_in_type\x18\x03 \x01(\x0e\x32\x31.dr.notification.APASelectParkingSpace.PrkModType\"q\n\nPrkModType\x12\x14\n\x10PRKMOD_NO_ACTION\x10\x00\x12\x1a\n\x16PRKMOD_HEAD_PARKING_IN\x10\x01\x12\x1a\n\x16PRKMOD_TAIL_PARKING_IN\x10\x02\x12\x15\n\x11PRKMOD_RESERVED_3\x10\x03\"E\n\x16\x41PAParkOutParkingSpace\x12+\n\x0cparkingspace\x18\x01 \x01(\x0b\x32\x15.dr.base.ParkingSpace\"\xba\x01\n\x12ParkingLotDetected\x12L\n\x10parking_lot_type\x18\x01 \x01(\x0e\x32\x32.dr.notification.ParkingLotDetected.ParkingLotType\x12$\n\x05\x61reas\x18\x02 \x03(\x0b\x32\x15.dr.base.ParkingSpace\"0\n\x0eParkingLotType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x11\n\rROUTE_COVERED\x10\x01\"\x1b\n\x07Parking\x12\x10\n\x08progress\x18\x01 \x01(\r\"\x1e\n\nOutParking\x12\x10\n\x08progress\x18\x01 \x01(\r\"i\n\x0fVPAStatusChange\x12+\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.VPAStatus\x12)\n\x02to\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.VPAStatus\"\xad\x01\n\x12VPALearingProgress\x12\x10\n\x08\x64istance\x18\x01 \x01(\x01\x12\x1b\n\x13map_saving_progress\x18\x02 \x01(\x05\x12\x1e\n\x16passed_speedbump_count\x18\x03 \x01(\x05\x12\x17\n\x0fneed_map_fusion\x18\x04 \x01(\x08\x12/\n\te2e_stage\x18\x05 \x01(\x0e\x32\x1c.dr.notification.VPAE2EStage\"\xb3\x01\n\x12VPARoutingProgress\x12\x0f\n\x07\x61rrived\x18\x01 \x01(\x08\x12\x17\n\x0fremain_distance\x18\x02 \x01(\x01\x12\x1f\n\x17\x61void_pedestrain_number\x18\x03 \x01(\r\x12\x1f\n\x17passed_crosswalk_number\x18\x04 \x01(\r\x12\x19\n\x11speed_bump_number\x18\x05 \x01(\r\x12\x16\n\x0etotal_distance\x18\x06 \x01(\x01\"[\n\x1cVPALearningSavedParkingSpace\x12\r\n\x05saved\x18\x01 \x01(\x08\x12,\n\rparking_space\x18\x02 \x01(\x0b\x32\x15.dr.base.ParkingSpace\"O\n\x1fVPARoutingGetTargetParkingSpace\x12,\n\rparking_space\x18\x01 \x01(\x0b\x32\x15.dr.base.ParkingSpace\"\xcc\x01\n\x17VPALearingCompletedInfo\x12\x1d\n\x15vpa_learning_distance\x18\x01 \x01(\r\x12\x17\n\x0fvpa_speed_bumps\x18\x02 \x01(\r\x12\x14\n\x0csemantic_map\x18\x03 \x01(\x0c\x12\x1f\n\x17target_parking_space_id\x18\x04 \x01(\x05\x12\x42\n\x08map_info\x18\x05 \x01(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\"\x98\x02\n\x17VPAMapMatchStatusChange\x12G\n\x06status\x18\x01 \x01(\x0e\x32\x37.dr.notification.VPAMapMatchStatusChange.MapMatchStatus\x12\x14\n\x0csemantic_map\x18\x02 \x01(\x0c\x12\x42\n\x08map_info\x18\x03 \x01(\x0b\x32\x30.deeproute.localization.havp_map.HAVPMapMetaData\"Z\n\x0eMapMatchStatus\x12\x15\n\x11MTACH_STATUS_NONE\x10\x00\x12\x17\n\x13MISMATCH_TO_MATCHED\x10\x01\x12\x18\n\x14MACTHED_TO_MIS_MATCH\x10\x02\"A\n\x0b\x41VMSettings\x12\x32\n\x08settings\x18\x02 \x01(\x0b\x32 .dr.business_info.AVMSettingInfo\"\x9e\x01\n\x0f\x41VMStatusChange\x12+\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.AVMStatus\x12)\n\x02to\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.AVMStatus\x12\x33\n\x06reason\x18\x03 \x01(\x0b\x32#.dr.operationstatus.AVMChangeReason\"U\n\rSentinelEvent\x12\x44\n\x15sentry_mode_statistic\x18\x01 \x01(\x0b\x32%.dr.business_info.SentryModeStatistic\"\xe3\x01\n\x07PDCInfo\x12I\n\x14\x62uzzer_alarm_pattern\x18\x01 \x01(\x0e\x32+.dr.notification.PDCInfo.BuzzerAlarmPattern\"\x8c\x01\n\x12\x42uzzerAlarmPattern\x12\x0e\n\nBUZZER_OFF\x10\x00\x12\x18\n\x14\x42UZZER_ON_AT_LEVEL_1\x10\x01\x12\x18\n\x14\x42UZZER_ON_AT_LEVEL_2\x10\x02\x12\x18\n\x14\x42UZZER_ON_AT_LEVEL_3\x10\x03\x12\x18\n\x14\x42UZZER_ON_AT_LEVEL_4\x10\x04\"\xe1\x01\n\x07PDCData\x12\x35\n\npdc_curves\x18\x01 \x03(\x0b\x32!.dr.notification.PDCData.PDCCurve\x1a\x9e\x01\n\x08PDCCurve\x12#\n\x08polyline\x18\x01 \x01(\x0b\x32\x11.dr.base.Polyline\x12\x10\n\x08\x64istance\x18\x02 \x01(\x01\x12\x39\n\x04type\x18\x03 \x01(\x0e\x32+.dr.notification.PDCData.PDCCurve.CurveType\" \n\tCurveType\x12\t\n\x05\x46RONT\x10\x00\x12\x08\n\x04\x42\x41\x43K\x10\x01\"\xbf\x01\n\x17\x43\x61librationUploadStatus\x12P\n\x06result\x18\x01 \x01(\x0e\x32@.dr.notification.CalibrationUploadStatus.CalibrationUploadResult\x12\x11\n\thttp_code\x18\x02 \x01(\x05\"?\n\x17\x43\x61librationUploadResult\x12\x0b\n\x07UNKONWN\x10\x00\x12\x0b\n\x07SUCCESS\x10\x01\x12\n\n\x06\x46\x41ILED\x10\x02\"\xbb\x04\n\x11\x43\x61librationStatus\x12\x35\n\ncalib_mode\x18\x01 \x01(\x0e\x32!.dr.business_info.CalibrationMode\x12\x37\n\x0b\x63\x61lib_state\x18\x02 \x01(\x0e\x32\".dr.business_info.CalibrationState\x12\x35\n\ncalib_step\x18\x03 \x01(\x0e\x32!.dr.business_info.CalibrationStep\x12\x14\n\x0cprogress_bar\x18\x04 \x01(\x05\x12?\n\rupload_status\x18\x05 \x01(\x0b\x32(.dr.notification.CalibrationUploadStatus\x12:\n\nerror_code\x18\x06 \x01(\x0e\x32&.dr.business_info.CalibrationErrorCode\x12\x45\n\x0f\x65rr_state_seres\x18\x07 \x01(\x0b\x32*.dr.business_info.CalibrationSeresErrStateH\x00\x12\x41\n\rerr_state_gwm\x18\x08 \x01(\x0b\x32(.dr.business_info.CalibrationGwmErrStateH\x00\x12K\n\x12\x65rror_state_common\x18\t \x01(\x0b\x32-.dr.business_info.CalibrationCommonErrorStateH\x00\x42\x15\n\x13\x43\x61librationErrState\"\x9e\x01\n\x0fRPAStatusChange\x12+\n\x04\x66rom\x18\x01 \x01(\x0e\x32\x1d.dr.operationstatus.RPAStatus\x12)\n\x02to\x18\x02 \x01(\x0e\x32\x1d.dr.operationstatus.RPAStatus\x12\x33\n\x06reason\x18\x03 \x01(\x0b\x32#.dr.operationstatus.RPAStatusReason\"8\n\x0cRADSProgress\x12\x0f\n\x07\x61rrived\x18\x01 \x01(\x08\x12\x17\n\x0fremain_distance\x18\x02 \x01(\x01\"6\n\x0b\x41PSTextDisp\x12\'\n\x04text\x18\x01 \x03(\x0e\x32\x19.dr.business_info.APSText\"\xa5\x01\n\x10GWMLSSWarningSts\x12\x13\n\x0bldw_warning\x18\x01 \x01(\x05\x12\x13\n\x0brdp_warning\x18\x02 \x01(\x05\x12\x13\n\x0b\x65lk_warning\x18\x03 \x01(\x05\x12<\n\ndebug_info\x18\x04 \x01(\x0b\x32(.dr.business_info.GWMLSSWarningDebugInfo\x12\x14\n\x0clss_overtime\x18\x05 \x01(\x08\"n\n\x08\x44SMStart\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x1c\n\x05state\x18\x02 \x01(\x0e\x32\r.dr.dsm.State\x12\x1e\n\x04mode\x18\x03 \x01(\x0e\x32\x10.dr.dsm.SubState\x12\x13\n\x0btime_cost_s\x18\x04 \x01(\x05\"\xee\x14\n\x0fTrafficSignInfo\x12<\n\tsign_type\x18\x01 \x01(\x0e\x32).dr.notification.TrafficSignInfo.SignType\x12\x13\n\x0blimit_value\x18\x02 \x01(\x02\"\x87\x14\n\x08SignType\x12\x10\n\x0cSIGN_BAN_CAR\x10\x00\x12\x12\n\x0eSIGN_BAN_ENTER\x10\x01\x12\x13\n\x0fSIGN_BAN_HEIGHT\x10\x02\x12\x11\n\rSIGN_BAN_LEFT\x10\x03\x12\x17\n\x13SIGN_BAN_LEFT_RIGHT\x10\x04\x12\x12\n\x0eSIGN_BAN_OTHER\x10\x05\x12\x15\n\x11SIGN_BAN_OVERTAKE\x10\x06\x12\x14\n\x10SIGN_BAN_PARKING\x10\x07\x12\x11\n\rSIGN_BAN_PASS\x10\x08\x12\x12\n\x0eSIGN_BAN_RIGHT\x10\t\x12\x11\n\rSIGN_BAN_SLOW\x10\n\x12\x11\n\rSIGN_BAN_STOP\x10\x0b\x12\x15\n\x11SIGN_BAN_STRAIGHT\x10\x0c\x12\x1b\n\x17SIGN_BAN_STRAIGHT_RIGHT\x10\r\x12\x14\n\x10SIGN_BAN_TRAILER\x10\x0e\x12\x13\n\x0fSIGN_BAN_U_TURN\x10\x0f\x12\x14\n\x10SIGN_BAN_VEHICLE\x10\x10\x12\x13\n\x0fSIGN_BAN_WEIGHT\x10\x11\x12\x16\n\x12SIGN_ENTER_HIGHWAY\x10\x12\x12\x12\n\x0eSIGN_MAX_SPEED\x10\x13\x12\x12\n\x0eSIGN_MIN_SPEED\x10\x14\x12\x12\n\x0eSIGN_NON_SPEED\x10\x15\x12\x0e\n\nSIGN_OTHER\x10\x16\x12\x14\n\x10SIGN_OUT_HIGHWAY\x10\x17\x12\x17\n\x13SIGN_UNBAN_OVERTAKE\x10\x18\x12\x16\n\x12SIGN_WARN_ACCIDENT\x10\x19\x12\x14\n\x10SIGN_WARN_ANIMAL\x10\x1a\x12\x15\n\x11SIGN_WARN_BICYCLE\x10\x1b\x12\x1a\n\x16SIGN_WARN_CONSTRUCTION\x10\x1c\x12\x13\n\x0fSIGN_WARN_CROSS\x10\x1d\x12\x11\n\rSIGN_WARN_FOG\x10\x1e\x12\x16\n\x12SIGN_WARN_ICE_ROAD\x10\x1f\x12\x11\n\rSIGN_WARN_KID\x10 \x12\x18\n\x14SIGN_WARN_LEFT_MERGE\x10!\x12\x1d\n\x19SIGN_WARN_LEFT_SHARP_TURN\x10\"\x12\x17\n\x13SIGN_WARN_LIVESTOCK\x10#\x12\x17\n\x13SIGN_WARN_MORE_TURN\x10$\x12\x13\n\x0fSIGN_WARN_OTHER\x10%\x12\x14\n\x10SIGN_WARN_PEOPLE\x10&\x12\x12\n\x0eSIGN_WARN_RAIN\x10\'\x12\x19\n\x15SIGN_WARN_RIGHT_MERGE\x10(\x12\x1e\n\x1aSIGN_WARN_RIGHT_SHARP_TURN\x10)\x12\x12\n\x0eSIGN_WARN_SLOW\x10*\x12\x18\n\x14SIGN_WARN_TWO_TURN_1\x10+\x12\x18\n\x14SIGN_WARN_TWO_TURN_2\x10,\x12\x15\n\x11SIGN_WARN_VILLAGE\x10-\x12\x15\n\x11SIGN_WARN_WEATHER\x10.\x12\x14\n\x10SIGN_WARN_UPHILL\x10/\x12\x16\n\x12SIGN_WARN_DOWNHILL\x10\x30\x12\x1b\n\x17SIGN_WARN_MORE_DOWNHILL\x10\x31\x12\x12\n\x0eSIGN_WARN_WIND\x10\x32\x12\x16\n\x12SIGN_WARN_SLIPPERY\x10\x33\x12\x14\n\x10SIGN_WARN_TUNNEL\x10\x34\x12\x13\n\x0fSIGN_WARN_BUMPY\x10\x35\x12\x13\n\x0fSIGN_WARN_WATER\x10\x36\x12\x14\n\x10SIGN_WARN_DETOUR\x10\x37\x12\x19\n\x15SIGN_WARN_LEFT_DETOUR\x10\x38\x12\x1a\n\x16SIGN_WARN_RIGHT_DETOUR\x10\x39\x12\x13\n\x0fSIGN_WARN_MERGE\x10:\x12\x14\n\x10SIGN_WARN_NARROW\x10;\x12\x1b\n\x17SIGN_WARN_ACCIDENT_MANA\x10<\x12\x12\n\x0eSIGN_WARN_BUMP\x10=\x12\x15\n\x11SIGN_WARN_TWO_WAY\x10>\x12\x1c\n\x18SIGN_WARN_RIGHT_MOUNTAIN\x10?\x12\x1a\n\x16SIGN_WARN_RIGHT_NARROW\x10@\x12\x18\n\x14SIGN_WARN_EMBANKMENT\x10\x41\x12\x15\n\x11SIGN_WARN_RAILWAY\x10\x42\x12\x1b\n\x17SIGN_WARN_GUARD_RAILWAY\x10\x43\x12\x16\n\x12SIGN_WARN_DISTANCE\x10\x44\x12\x1b\n\x17SIGN_WARN_TRAFFIC_LIGHT\x10\x45\x12\x13\n\x0fSIGN_WARN_QUEUE\x10\x46\x12\x14\n\x10SIGN_WARN_DANGER\x10G\x12\x18\n\x14SIGN_WARN_RIGHT_ROCK\x10H\x12\x17\n\x13SIGN_WARN_LEFT_ROCK\x10I\x12\x18\n\x14SIGN_WARN_TIDAL_LANE\x10J\x12\x1b\n\x17SIGN_WARN_NARROW_BRIDGE\x10K\x12\x19\n\x15SIGN_WARN_HUMP_BRIDGE\x10L\x12\x19\n\x15SIGN_BAN_WAIT_MEETING\x10M\x12\x1a\n\x16SIGN_BAN_TRUCK_TRAILER\x10N\x12\x11\n\rSIGN_BAN_HORN\x10O\x12\x16\n\x12SIGN_BAN_LONG_STOP\x10P\x12\x16\n\x12SIGN_ASS_LEFT_RAMP\x10Q\x12\x10\n\x0cSIGN_ASS_CAR\x10R\x12\x16\n\x12SIGN_ASS_CAR_TRUCK\x10S\x12\x12\n\x0eSIGN_ASS_TRUCK\x10T\x12\x10\n\x0cSIGN_ASS_BUS\x10U\x12\x16\n\x12SIGN_ASS_DIRECTION\x10V\x12\x12\n\x0eSIGN_ASS_FRONT\x10W\x12\x12\n\x0eSIGN_ASS_RIGHT\x10X\x12\x11\n\rSIGN_ASS_LEFT\x10Y\x12\x17\n\x13SIGN_ASS_LEFT_RIGHT\x10Z\x12\x11\n\rSIGN_ASS_TIME\x10[\x12\x11\n\rSIGN_INS_MEET\x10\\\x12\x16\n\x12SIGN_INS_LEFT_LANE\x10]\x12\x17\n\x13SIGN_INS_RIGHT_LANE\x10^\x12\x1d\n\x19SIGN_INS_LEFT_U_TURN_LANE\x10_\x12\x18\n\x14SIGN_INS_U_TURN_LANE\x10`\x12\x1c\n\x18SIGN_INS_STRA_RIGHT_LANE\x10\x61\x12\x1b\n\x17SIGN_INS_STRA_LEFT_LANE\x10\x62\x12\x16\n\x12SIGN_INS_STRA_LANE\x10\x63\x12\x12\n\x0eSIGN_INS_RIGHT\x10\x64\x12\x11\n\rSIGN_INS_LEFT\x10\x65\x12\x17\n\x13SIGN_INS_STRA_RIGHT\x10\x66\x12\x16\n\x12SIGN_INS_STRA_LEFT\x10g\x12\x11\n\rSIGN_INS_STRA\x10h\x12\x17\n\x13SIGN_INS_LEFT_RIGHT\x10i\x12\x13\n\x0fSIGN_INS_U_TURN\x10j\x12\x15\n\x11SIGN_INS_SEP_LEFT\x10k\x12\x16\n\x12SIGN_INS_SEP_RIGHT\x10l\x12\x15\n\x11SIGN_INS_BAN_PASS\x10m\"\x9f\x01\n\x07TSRSign\x12:\n\x10speed_limit_sign\x18\x01 \x01(\x0b\x32 .dr.notification.TrafficSignInfo\x12=\n\x13no_speed_limit_sign\x18\x02 \x01(\x0b\x32 .dr.notification.TrafficSignInfo\x12\x19\n\x11maintain_distance\x18\x03 \x01(\x02\"U\n\x18GLParkingVizNotification\x12\x39\n\x1bgl_p177_chassis_detail_resp\x18\x01 \x01(\x0b\x32\x14.google.protobuf.Any\"~\n\x0f\x45\x32\x45Notification\x12\x34\n\x13\x65\x32\x65_routing_btn_sts\x18\x01 \x01(\x0e\x32\x17.dr.notification.BtnSts\x12\x35\n\x14\x65\x32\x65_learning_btn_sts\x18\x02 \x01(\x0e\x32\x17.dr.notification.BtnSts\"\x8a\x02\n\nPathPoints\x12H\n\x19\x63\x65nter_reverse_trajectory\x18\x01 \x03(\x0b\x32%.dr.notification.PathPoints.PathPoint\x12\x46\n\x17left_reverse_trajectory\x18\x02 \x03(\x0b\x32%.dr.notification.PathPoints.PathPoint\x12G\n\x18right_reverse_trajectory\x18\x03 \x03(\x0b\x32%.dr.notification.PathPoints.PathPoint\x1a!\n\tPathPoint\x12\t\n\x01x\x18\x01 \x01(\x01\x12\t\n\x01y\x18\x02 \x01(\x01*5\n\x06\x42tnSts\x12\x0b\n\x07NOTSHOW\x10\x00\x12\x0f\n\x0bUNAVAILABLE\x10\x01\x12\r\n\tAVAILABLE\x10\x02*\xe9\x01\n\x0fTakeOverRequest\x12\x1e\n\x1aTAKEOVER_REQUEST_NOT_EXIST\x10\x00\x12\x12\n\x0e\x42LOCK_ALL_ROAD\x10\x01\x12\x18\n\x14\x41\x42NORMAL_SINGLE_ROAD\x10\x02\x12\x19\n\x15UPSTREAM_DATA_FAILURE\x10\x03\x12\x1f\n\x1b\x44RIVER_SEATBELT_NOT_BUCKLED\x10\n\x12\x0f\n\x0b\x44OOR_OPENED\x10\x0b\x12\x0e\n\nWIPER_HIGH\x10\x0c\x12\x0f\n\x0bINVALID_ODD\x10\x14\x12\x1a\n\x15\x41\x43\x43_TAKEOVER_BY_FAULT\x10\xac\x02*\xf6\x1b\n\nRemindInfo\x12\x0e\n\nNO_SUGGEST\x10\x00\x12\x0e\n\nCLOSE_DOOR\x10\x01\x12\x14\n\x10\x46\x41STEN_SEAT_BEAT\x10\x02\x12\x19\n\x15RELEASE_THE_HANDBRAKE\x10\x03\x12\x12\n\x0eGEAR_TO_DRIVER\x10\x04\x12\x1c\n\x18PRESS_RES_OR_ACCELERATOR\x10\x05\x12\x13\n\x0fGEAR_TO_PARKING\x10\x06\x12\x14\n\x10HANDS_OFF_LEVEL3\x10\t\x12\x14\n\x10HANDS_OFF_LEVEL2\x10\n\x12\x14\n\x10HANDS_OFF_LEVEL1\x10\x0b\x12\x0c\n\x08HANDS_ON\x10\x0c\x12\x13\n\x0fRED_LIGHTS_STOP\x10\r\x12\x14\n\x10REQUEST_TAKEOVER\x10\x0e\x12\x1b\n\x17LEFT_LANE_MERGE_STARTED\x10\x0f\x12\x1c\n\x18RIGHT_LANE_MERGE_STARTED\x10\x10\x12\x13\n\x0fLANE_MERGE_DONE\x10\x11\x12\"\n\x1eLEFT_INTERSECTION_TURN_STARTED\x10\x12\x12#\n\x1fRIGHT_INTERSECTION_TURN_STARTED\x10\x13\x12\x1a\n\x16INTERSECTION_TURN_DONE\x10\x14\x12\x17\n\x13NUDGE_TRUCK_STARTED\x10\x15\x12\x14\n\x10NUDGE_TRUCK_DONE\x10\x16\x12\'\n#OBSTACLE_DETECTED_IN_THE_BLIND_SPOT\x10\x17\x12\"\n\x1e\x42LIND_SPOT_OBSTACLE_DISAPPEARS\x10\x18\x12$\n ENTER_CONSTRUCTION_ZONE_SCENARIO\x10\x19\x12$\n LEAVE_CONSTRUCTION_ZONE_SCENARIO\x10\x1a\x12\r\n\tLEFT_TURN\x10\x1b\x12\x0e\n\nRIGHT_TURN\x10\x1c\x12\n\n\x06\x44\x45TOUR\x10\x1d\x12!\n\x1dSTRAIGHTEN_THE_STEERING_WHEEL\x10\x1e\x12\x1b\n\x17REACH_SPEED_UPPER_LIMIT\x10\x1f\x12\x1b\n\x17REACH_SPEED_LOWER_LIMIT\x10 \x12\x18\n\x14\x45PB_REQUEST_TIME_OUT\x10!\x12\x1b\n\x17GEAR_P_REQUEST_TIME_OUT\x10\"\x12\x0e\n\nSHARP_BEND\x10#\x12\x13\n\x0f\x44RIVE_CAREFULLY\x10$\x12\x1b\n\x17WATCH_PARALLEL_VEHICLES\x10%\x12\x1a\n\x16WATCH_MERGING_VEHICLES\x10&\x12\x1a\n\x16NO_DRIVABLE_PATH_AHEAD\x10\'\x12\x16\n\x12\x43\x41N_NOT_ACTIVE_ACC\x10\x64\x12\x0f\n\x0b\x41\x43\x43_ACTIVED\x10\x65\x12\x15\n\x11\x41\x43\x43_ACTIVE_FAILED\x10\x66\x12\x10\n\x0c\x41\x43\x43_CANCELED\x10g\x12\x15\n\x11\x41\x43\x43_CANCEL_FAILED\x10h\x12\r\n\tACC_ABORT\x10i\x12 \n\x1c\x43\x41N_NOT_ACTIVE_ACC_BY_RESUME\x10j\x12#\n\x1f\x43\x41N_NOT_ACTIVE_ACC_WHEN_PARKING\x10k\x12\x10\n\x0c\x41\x43\x43_OVERRIDE\x10l\x12\x17\n\x12\x43\x41N_NOT_ACTIVE_ICA\x10\xf4\x03\x12\x10\n\x0bICA_ACTIVED\x10\xf5\x03\x12\x17\n\x12ICA_ACTIVED_FAILED\x10\xf6\x03\x12\x11\n\x0cICA_CANCELED\x10\xf7\x03\x12\x0e\n\tICA_ABORT\x10\xf8\x03\x12\x16\n\x11ICA_CANCEL_FAILED\x10\xf9\x03\x12\x10\n\x0bICA_RECOVER\x10\xfa\x03\x12+\n&ICA_LATEMEXIT_CAN_NOT_RETURN_TO_NORMAL\x10\xfb\x03\x12\r\n\x08OPEN_ICA\x10\xfc\x03\x12\x12\n\rICA_LATEMEXIT\x10\xfd\x03\x12\x17\n\x12\x43\x41N_NOT_ACTIVE_NCA\x10\x84\x07\x12\x10\n\x0bNCA_ACTIVED\x10\x85\x07\x12\x17\n\x12NCA_ACTIVED_FAILED\x10\x86\x07\x12\x11\n\x0cNCA_CANCELED\x10\x87\x07\x12\x0e\n\tNCA_ABORT\x10\x88\x07\x12\x16\n\x11NCA_CANCEL_FAILED\x10\x89\x07\x12\x10\n\x0bNCA_RECOVER\x10\x8a\x07\x12\x0e\n\tNCA_YAWED\x10\x8b\x07\x12\x1a\n\x15NCA_REROUTING_SUCCESS\x10\x8c\x07\x12#\n\x1eNCA_EXCEED_SPEED_LIMIT_WARNING\x10\x8d\x07\x12\r\n\x08OPEN_NCA\x10\x8e\x07\x12\x12\n\rNCA_LATEMEXIT\x10\x8f\x07\x12\x16\n\x11\x41PA_RELEASE_BREAK\x10\xb1\t\x12\x1e\n\x19\x41PA_CLOSE_TANK_FILTER_GAP\x10\xb2\t\x12\x1a\n\x15\x41PA_CLOSE_CHARG_COVER\x10\xb3\t\x12\x17\n\x12\x41PA_SPEED_TOO_HIGH\x10\xb4\t\x12\x1c\n\x17\x41PA_HINT_RESUME_PARKING\x10\xb5\t\x12\x1d\n\x18\x41PA_INSIDE_PARKING_SPACE\x10\xb6\t\x12\x1e\n\x19\x41PA_OUTSIDE_PARKING_SPACE\x10\xb7\t\x12\x16\n\x11\x41PA_ACTIVE_FAILED\x10\xb8\t\x12$\n\x1f\x43\x41N_NOT_ACTIVE_APA_WHEN_DRIVING\x10\xb9\t\x12\x17\n\x12\x41PA_ACTIVE_SUCCESS\x10\xba\t\x12\x17\n\x12\x41PA_ACTIVE_TIMEOUT\x10\xbb\t\x12\x11\n\x0c\x41PA_DISABLED\x10\xbc\t\x12\x1b\n\x16VPA_LEARNING_AVALIABLE\x10\xf9\n\x12\x19\n\x14VPA_ROUTING_AVALIBLE\x10\xfa\n\x12\x1c\n\x17VPA_MAP_LEARNING_FAILED\x10\xfb\n\x12\x19\n\x14VPA_ROUTING_FINISHED\x10\xfd\n\x12\x17\n\x12VPA_ROUTING_FAILED\x10\xfe\n\x12,\n\'VPA_LEARNING_EXCEED_SPEED_LIMIT_WARNING\x10\xff\n\x12\x1a\n\x15VPA_ODD_ABOUT_TO_EXIT\x10\x80\x0b\x12\x15\n\x10VPA_SYSTEM_ERROR\x10\x81\x0b\x12(\n#VPA_ROUTING_REQUEST_TAKEOVER_DETURE\x10\x82\x0b\x12#\n\x1eVPA_ROUTING_REQUEST_TAKEOVER_1\x10\x83\x0b\x12#\n\x1eVPA_ROUTING_REQUEST_TAKEOVER_2\x10\x84\x0b\x12&\n!VPA_ROUTING_HINT_AVOID_PEDESTRAIN\x10\x85\x0b\x12\x1c\n\x17VPA_ROUTING_HINT_DETURE\x10\x86\x0b\x12$\n\x1f\x43\x41N_NOT_ACTIVE_VPA_WHEN_DRIVING\x10\x87\x0b\x12\x1e\n\x19VPA_NO_EMPTY_PARKINGSPACE\x10\x88\x0b\x12#\n\x1eVPA_EXIT_REASON_STEER_OVERRIDE\x10\x89\x0b\x12#\n\x1eVPA_EXIT_REASON_BRAKE_OVERRIDE\x10\x8a\x0b\x12&\n!VPA_EXIT_REASON_THROTTLE_OVERRIDE\x10\x8b\x0b\x12\"\n\x1dVPA_EXIT_REASON_GEAR_OVERRIDE\x10\x8c\x0b\x12)\n$VPA_EXIT_REASON_LOCALIZATION_FAILURE\x10\x8d\x0b\x12\x32\n-VPA_EXIT_REASON_STATIC_OBSTACLE_DRIVING_BLOCK\x10\x8e\x0b\x12%\n VPA_EXIT_REASON_NO_PARKING_SPACE\x10\x8f\x0b\x12 \n\x1bVPA_EXIT_REASON_ODD_INVALID\x10\x90\x0b\x12 \n\x1bVPA_EXIT_REASON_ABS_ACTIVED\x10\x91\x0b\x12 \n\x1bVPA_EXIT_REASON_VDC_ACTIVED\x10\x92\x0b\x12 \n\x1bVPA_EXIT_REASON_ESC_ACTIVED\x10\x93\x0b\x12 \n\x1bVPA_EXIT_REASON_TCS_ACTIVED\x10\x94\x0b\x12 \n\x1bVPA_EXIT_REASON_AEB_ACTIVED\x10\x95\x0b\x12 \n\x1bVPA_EXIT_REASON_HDC_ACTIVED\x10\x96\x0b\x12\"\n\x1dVPA_EXIT_REASON_VCU_NOT_READY\x10\x97\x0b\x12 \n\x1bVPA_EXIT_REASON_DOOR_OPENED\x10\x98\x0b\x12)\n$VPA_DRIVING_DYNAMIC_OBSTACLE_BLOCKED\x10\x99\x0b\x12)\n$VPA_DRIVING_DYNAMIC_OBSTACLE_REMOVED\x10\x9a\x0b\x12\"\n\x1dVPA_LEARNING_DO_NOT_REVERSING\x10\x9b\x0b\x12#\n\x1eVPA_LEARNING_HIDE_PARKING_HINT\x10\x9c\x0b\x12)\n$VPA_EXIT_REASON_SEATBELT_NOT_BUCKLED\x10\x9d\x0b\x12 \n\x1bVPA_EXIT_REASON_HOOD_OPENED\x10\x9e\x0b\x12!\n\x1cVPA_EXIT_REASON_TRUNK_OPENED\x10\x9f\x0b\x12\x1f\n\x1aVPA_LEARNING_SPEEDING_HINT\x10\xa0\x0b\x12\"\n\x1dVPA_EXIT_REASON_SPEED_OVER_30\x10\xa1\x0b\x12%\n VPA_EXIT_REASON_COLLIDE_OVERRIDE\x10\xa2\x0b\x12\x18\n\x13TJP_ACTIVED_SUCCESS\x10\xc1\x0c\x12\x17\n\x12TJP_ACTIVED_FAILED\x10\xc2\x0c\x12\x18\n\x13TJP_TAKEOVER_REMIND\x10\xc3\x0c\x12\x18\n\x13TJP_READY_TO_ACTIVE\x10\xc4\x0c*T\n\x0bVPAE2EStage\x12\x12\n\x0eVPA_STAGE_NONE\x10\x00\x12\x0f\n\x0bVPA_STAGE_1\x10\x01\x12\x0f\n\x0bVPA_STAGE_2\x10\x02\x12\x0f\n\x0bVPA_STAGE_3\x10\x03\x62\x06proto3')
 
+_BTNSTS = DESCRIPTOR.enum_types_by_name['BtnSts']
+BtnSts = enum_type_wrapper.EnumTypeWrapper(_BTNSTS)
 _TAKEOVERREQUEST = DESCRIPTOR.enum_types_by_name['TakeOverRequest']
 TakeOverRequest = enum_type_wrapper.EnumTypeWrapper(_TAKEOVERREQUEST)
 _REMINDINFO = DESCRIPTOR.enum_types_by_name['RemindInfo']
 RemindInfo = enum_type_wrapper.EnumTypeWrapper(_REMINDINFO)
 _VPAE2ESTAGE = DESCRIPTOR.enum_types_by_name['VPAE2EStage']
 VPAE2EStage = enum_type_wrapper.EnumTypeWrapper(_VPAE2ESTAGE)
+NOTSHOW = 0
+UNAVAILABLE = 1
+AVAILABLE = 2
 TAKEOVER_REQUEST_NOT_EXIST = 0
 BLOCK_ALL_ROAD = 1
 ABNORMAL_SINGLE_ROAD = 2
@@ -74,6 +80,10 @@ REACH_SPEED_LOWER_LIMIT = 32
 EPB_REQUEST_TIME_OUT = 33
 GEAR_P_REQUEST_TIME_OUT = 34
 SHARP_BEND = 35
+DRIVE_CAREFULLY = 36
+WATCH_PARALLEL_VEHICLES = 37
+WATCH_MERGING_VEHICLES = 38
+NO_DRIVABLE_PATH_AHEAD = 39
 CAN_NOT_ACTIVE_ACC = 100
 ACC_ACTIVED = 101
 ACC_ACTIVE_FAILED = 102
@@ -182,9 +192,22 @@ _FEATUREABORT = DESCRIPTOR.message_types_by_name['FeatureAbort']
 _STEPINGINTOSPECIALAREA = DESCRIPTOR.message_types_by_name['StepingIntoSpecialArea']
 _HANDSOFFWARN = DESCRIPTOR.message_types_by_name['HandsOffWarn']
 _DRIVERTAKEOVER = DESCRIPTOR.message_types_by_name['DriverTakeOver']
+_ACCELERATIONSTYLECHANGE = DESCRIPTOR.message_types_by_name['AccelerationStyleChange']
+_CHANGEROUTINGREQUESTRESULT = DESCRIPTOR.message_types_by_name['ChangeRoutingRequestResult']
+_NAVIGATIONACTION = DESCRIPTOR.message_types_by_name['NavigationAction']
+_VLASTATUSCHANGE = DESCRIPTOR.message_types_by_name['VlaStatusChange']
+_CHANGEROUTINGSTATUSCHANGE = DESCRIPTOR.message_types_by_name['ChangeRoutingStatusChange']
+_PULLOVERREQUESTRESULT = DESCRIPTOR.message_types_by_name['PullOverRequestResult']
+_PULLOVERSTATUSCHANGE = DESCRIPTOR.message_types_by_name['PullOverStatusChange']
+_POIPOSDISPLAY = DESCRIPTOR.message_types_by_name['PoiPosDisplay']
+_SCENESTRATEGYTYPENOTIFY = DESCRIPTOR.message_types_by_name['SceneStrategyTypeNotify']
+_OVERTAKE = DESCRIPTOR.message_types_by_name['OverTake']
+_GIVEWAY = DESCRIPTOR.message_types_by_name['GiveWay']
 _ACCSTATUSCHANGE = DESCRIPTOR.message_types_by_name['ACCStatusChange']
 _SPEEDLIMITCHANGE = DESCRIPTOR.message_types_by_name['SpeedLimitChange']
 _CONFIRMSPEED = DESCRIPTOR.message_types_by_name['ConfirmSpeed']
+_JAMMODE = DESCRIPTOR.message_types_by_name['JamMode']
+_TIMEGAPCHANGE = DESCRIPTOR.message_types_by_name['TimeGapChange']
 _ICASTATUSCHANGE = DESCRIPTOR.message_types_by_name['ICAStatusChange']
 _ILCLANECHANGEREQUESTRESULT = DESCRIPTOR.message_types_by_name['ILCLaneChangeRequestResult']
 _ILCSTATUSCHANGE = DESCRIPTOR.message_types_by_name['ILCStatusChange']
@@ -196,6 +219,7 @@ _TURNARROUND = DESCRIPTOR.message_types_by_name['TurnArround']
 _LAEXITINFO = DESCRIPTOR.message_types_by_name['LaExitInfo']
 _NCAOUTODD = DESCRIPTOR.message_types_by_name['NCAOutODD']
 _ODDNOTIFICATION = DESCRIPTOR.message_types_by_name['OddNotification']
+_ETCNOTIFICATION = DESCRIPTOR.message_types_by_name['ETCNotification']
 _APASTATUSCHANGE = DESCRIPTOR.message_types_by_name['APAStatusChange']
 _APASELECTPARKINGSPACE = DESCRIPTOR.message_types_by_name['APASelectParkingSpace']
 _APAPARKOUTPARKINGSPACE = DESCRIPTOR.message_types_by_name['APAParkOutParkingSpace']
@@ -225,6 +249,9 @@ _DSMSTART = DESCRIPTOR.message_types_by_name['DSMStart']
 _TRAFFICSIGNINFO = DESCRIPTOR.message_types_by_name['TrafficSignInfo']
 _TSRSIGN = DESCRIPTOR.message_types_by_name['TSRSign']
 _GLPARKINGVIZNOTIFICATION = DESCRIPTOR.message_types_by_name['GLParkingVizNotification']
+_E2ENOTIFICATION = DESCRIPTOR.message_types_by_name['E2ENotification']
+_PATHPOINTS = DESCRIPTOR.message_types_by_name['PathPoints']
+_PATHPOINTS_PATHPOINT = _PATHPOINTS.nested_types_by_name['PathPoint']
 _FAULTREMIND_LEVEL = _FAULTREMIND.enum_types_by_name['Level']
 _FAULTREMIND_POLICY = _FAULTREMIND.enum_types_by_name['Policy']
 _DRIVEOFFINFO_REASON = _DRIVEOFFINFO.enum_types_by_name['Reason']
@@ -237,13 +264,17 @@ _ERRORLANE_ERRORTYPE = _ERRORLANE.enum_types_by_name['ErrorType']
 _STEPINGINTOSPECIALAREA_SPECIALAREATYPE = _STEPINGINTOSPECIALAREA.enum_types_by_name['SpecialAreaType']
 _HANDSOFFWARN_HANDSOFFLEVEL = _HANDSOFFWARN.enum_types_by_name['HandsOffLevel']
 _DRIVERTAKEOVER_SCENE = _DRIVERTAKEOVER.enum_types_by_name['Scene']
+_NAVIGATIONACTION_LANETURN = _NAVIGATIONACTION.enum_types_by_name['LaneTurn']
+_VLASTATUSCHANGE_TYPE = _VLASTATUSCHANGE.enum_types_by_name['Type']
 _SPEEDLIMITCHANGE_REASON = _SPEEDLIMITCHANGE.enum_types_by_name['Reason']
 _CONFIRMSPEED_DISPLAY = _CONFIRMSPEED.enum_types_by_name['Display']
+_JAMMODE_MODE = _JAMMODE.enum_types_by_name['Mode']
 _LANECHANGEWARNING_TYPE = _LANECHANGEWARNING.enum_types_by_name['Type']
 _TURNARROUND_STATE = _TURNARROUND.enum_types_by_name['State']
 _NCAOUTODD_TYPE = _NCAOUTODD.enum_types_by_name['Type']
 _NCAOUTODD_ROADCLASS = _NCAOUTODD.enum_types_by_name['RoadClass']
 _NCAOUTODD_ODDLIMITTYPE = _NCAOUTODD.enum_types_by_name['OddLimitType']
+_ETCNOTIFICATION_TYPE = _ETCNOTIFICATION.enum_types_by_name['Type']
 _APASELECTPARKINGSPACE_PRKMODTYPE = _APASELECTPARKINGSPACE.enum_types_by_name['PrkModType']
 _PARKINGLOTDETECTED_PARKINGLOTTYPE = _PARKINGLOTDETECTED.enum_types_by_name['ParkingLotType']
 _VPAMAPMATCHSTATUSCHANGE_MAPMATCHSTATUS = _VPAMAPMATCHSTATUSCHANGE.enum_types_by_name['MapMatchStatus']
@@ -349,6 +380,83 @@ DriverTakeOver = _reflection.GeneratedProtocolMessageType('DriverTakeOver', (_me
   })
 _sym_db.RegisterMessage(DriverTakeOver)
 
+AccelerationStyleChange = _reflection.GeneratedProtocolMessageType('AccelerationStyleChange', (_message.Message,), {
+  'DESCRIPTOR' : _ACCELERATIONSTYLECHANGE,
+  '__module__' : 'drapi.notification_pb2'
+  # @@protoc_insertion_point(class_scope:dr.notification.AccelerationStyleChange)
+  })
+_sym_db.RegisterMessage(AccelerationStyleChange)
+
+ChangeRoutingRequestResult = _reflection.GeneratedProtocolMessageType('ChangeRoutingRequestResult', (_message.Message,), {
+  'DESCRIPTOR' : _CHANGEROUTINGREQUESTRESULT,
+  '__module__' : 'drapi.notification_pb2'
+  # @@protoc_insertion_point(class_scope:dr.notification.ChangeRoutingRequestResult)
+  })
+_sym_db.RegisterMessage(ChangeRoutingRequestResult)
+
+NavigationAction = _reflection.GeneratedProtocolMessageType('NavigationAction', (_message.Message,), {
+  'DESCRIPTOR' : _NAVIGATIONACTION,
+  '__module__' : 'drapi.notification_pb2'
+  # @@protoc_insertion_point(class_scope:dr.notification.NavigationAction)
+  })
+_sym_db.RegisterMessage(NavigationAction)
+
+VlaStatusChange = _reflection.GeneratedProtocolMessageType('VlaStatusChange', (_message.Message,), {
+  'DESCRIPTOR' : _VLASTATUSCHANGE,
+  '__module__' : 'drapi.notification_pb2'
+  # @@protoc_insertion_point(class_scope:dr.notification.VlaStatusChange)
+  })
+_sym_db.RegisterMessage(VlaStatusChange)
+
+ChangeRoutingStatusChange = _reflection.GeneratedProtocolMessageType('ChangeRoutingStatusChange', (_message.Message,), {
+  'DESCRIPTOR' : _CHANGEROUTINGSTATUSCHANGE,
+  '__module__' : 'drapi.notification_pb2'
+  # @@protoc_insertion_point(class_scope:dr.notification.ChangeRoutingStatusChange)
+  })
+_sym_db.RegisterMessage(ChangeRoutingStatusChange)
+
+PullOverRequestResult = _reflection.GeneratedProtocolMessageType('PullOverRequestResult', (_message.Message,), {
+  'DESCRIPTOR' : _PULLOVERREQUESTRESULT,
+  '__module__' : 'drapi.notification_pb2'
+  # @@protoc_insertion_point(class_scope:dr.notification.PullOverRequestResult)
+  })
+_sym_db.RegisterMessage(PullOverRequestResult)
+
+PullOverStatusChange = _reflection.GeneratedProtocolMessageType('PullOverStatusChange', (_message.Message,), {
+  'DESCRIPTOR' : _PULLOVERSTATUSCHANGE,
+  '__module__' : 'drapi.notification_pb2'
+  # @@protoc_insertion_point(class_scope:dr.notification.PullOverStatusChange)
+  })
+_sym_db.RegisterMessage(PullOverStatusChange)
+
+PoiPosDisplay = _reflection.GeneratedProtocolMessageType('PoiPosDisplay', (_message.Message,), {
+  'DESCRIPTOR' : _POIPOSDISPLAY,
+  '__module__' : 'drapi.notification_pb2'
+  # @@protoc_insertion_point(class_scope:dr.notification.PoiPosDisplay)
+  })
+_sym_db.RegisterMessage(PoiPosDisplay)
+
+SceneStrategyTypeNotify = _reflection.GeneratedProtocolMessageType('SceneStrategyTypeNotify', (_message.Message,), {
+  'DESCRIPTOR' : _SCENESTRATEGYTYPENOTIFY,
+  '__module__' : 'drapi.notification_pb2'
+  # @@protoc_insertion_point(class_scope:dr.notification.SceneStrategyTypeNotify)
+  })
+_sym_db.RegisterMessage(SceneStrategyTypeNotify)
+
+OverTake = _reflection.GeneratedProtocolMessageType('OverTake', (_message.Message,), {
+  'DESCRIPTOR' : _OVERTAKE,
+  '__module__' : 'drapi.notification_pb2'
+  # @@protoc_insertion_point(class_scope:dr.notification.OverTake)
+  })
+_sym_db.RegisterMessage(OverTake)
+
+GiveWay = _reflection.GeneratedProtocolMessageType('GiveWay', (_message.Message,), {
+  'DESCRIPTOR' : _GIVEWAY,
+  '__module__' : 'drapi.notification_pb2'
+  # @@protoc_insertion_point(class_scope:dr.notification.GiveWay)
+  })
+_sym_db.RegisterMessage(GiveWay)
+
 ACCStatusChange = _reflection.GeneratedProtocolMessageType('ACCStatusChange', (_message.Message,), {
   'DESCRIPTOR' : _ACCSTATUSCHANGE,
   '__module__' : 'drapi.notification_pb2'
@@ -369,6 +477,20 @@ ConfirmSpeed = _reflection.GeneratedProtocolMessageType('ConfirmSpeed', (_messag
   # @@protoc_insertion_point(class_scope:dr.notification.ConfirmSpeed)
   })
 _sym_db.RegisterMessage(ConfirmSpeed)
+
+JamMode = _reflection.GeneratedProtocolMessageType('JamMode', (_message.Message,), {
+  'DESCRIPTOR' : _JAMMODE,
+  '__module__' : 'drapi.notification_pb2'
+  # @@protoc_insertion_point(class_scope:dr.notification.JamMode)
+  })
+_sym_db.RegisterMessage(JamMode)
+
+TimeGapChange = _reflection.GeneratedProtocolMessageType('TimeGapChange', (_message.Message,), {
+  'DESCRIPTOR' : _TIMEGAPCHANGE,
+  '__module__' : 'drapi.notification_pb2'
+  # @@protoc_insertion_point(class_scope:dr.notification.TimeGapChange)
+  })
+_sym_db.RegisterMessage(TimeGapChange)
 
 ICAStatusChange = _reflection.GeneratedProtocolMessageType('ICAStatusChange', (_message.Message,), {
   'DESCRIPTOR' : _ICASTATUSCHANGE,
@@ -446,6 +568,13 @@ OddNotification = _reflection.GeneratedProtocolMessageType('OddNotification', (_
   # @@protoc_insertion_point(class_scope:dr.notification.OddNotification)
   })
 _sym_db.RegisterMessage(OddNotification)
+
+ETCNotification = _reflection.GeneratedProtocolMessageType('ETCNotification', (_message.Message,), {
+  'DESCRIPTOR' : _ETCNOTIFICATION,
+  '__module__' : 'drapi.notification_pb2'
+  # @@protoc_insertion_point(class_scope:dr.notification.ETCNotification)
+  })
+_sym_db.RegisterMessage(ETCNotification)
 
 APAStatusChange = _reflection.GeneratedProtocolMessageType('APAStatusChange', (_message.Message,), {
   'DESCRIPTOR' : _APASTATUSCHANGE,
@@ -651,181 +780,247 @@ GLParkingVizNotification = _reflection.GeneratedProtocolMessageType('GLParkingVi
   })
 _sym_db.RegisterMessage(GLParkingVizNotification)
 
+E2ENotification = _reflection.GeneratedProtocolMessageType('E2ENotification', (_message.Message,), {
+  'DESCRIPTOR' : _E2ENOTIFICATION,
+  '__module__' : 'drapi.notification_pb2'
+  # @@protoc_insertion_point(class_scope:dr.notification.E2ENotification)
+  })
+_sym_db.RegisterMessage(E2ENotification)
+
+PathPoints = _reflection.GeneratedProtocolMessageType('PathPoints', (_message.Message,), {
+
+  'PathPoint' : _reflection.GeneratedProtocolMessageType('PathPoint', (_message.Message,), {
+    'DESCRIPTOR' : _PATHPOINTS_PATHPOINT,
+    '__module__' : 'drapi.notification_pb2'
+    # @@protoc_insertion_point(class_scope:dr.notification.PathPoints.PathPoint)
+    })
+  ,
+  'DESCRIPTOR' : _PATHPOINTS,
+  '__module__' : 'drapi.notification_pb2'
+  # @@protoc_insertion_point(class_scope:dr.notification.PathPoints)
+  })
+_sym_db.RegisterMessage(PathPoints)
+_sym_db.RegisterMessage(PathPoints.PathPoint)
+
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _EVENTINFO.fields_by_name['dsm_start']._options = None
   _EVENTINFO.fields_by_name['dsm_start']._serialized_options = b'\030\001'
-  _TAKEOVERREQUEST._serialized_start=17501
-  _TAKEOVERREQUEST._serialized_end=17734
-  _REMINDINFO._serialized_start=17737
-  _REMINDINFO._serialized_end=21205
-  _VPAE2ESTAGE._serialized_start=21207
-  _VPAE2ESTAGE._serialized_end=21291
-  _EVENTINFO._serialized_start=254
-  _EVENTINFO._serialized_end=4193
-  _STATUSCHANGE._serialized_start=4196
-  _STATUSCHANGE._serialized_end=4605
-  _ACTIVERESULTREMIND._serialized_start=4608
-  _ACTIVERESULTREMIND._serialized_end=4870
-  _FAULTEVENTINFO._serialized_start=4872
-  _FAULTEVENTINFO._serialized_end=4953
-  _FAULTREMIND._serialized_start=4956
-  _FAULTREMIND._serialized_end=5465
-  _FAULTREMIND_LEVEL._serialized_start=5179
-  _FAULTREMIND_LEVEL._serialized_end=5269
-  _FAULTREMIND_POLICY._serialized_start=5272
-  _FAULTREMIND_POLICY._serialized_end=5465
-  _DRIVEOFFINFO._serialized_start=5468
-  _DRIVEOFFINFO._serialized_end=5897
-  _DRIVEOFFINFO_REASON._serialized_start=5646
-  _DRIVEOFFINFO_REASON._serialized_end=5714
-  _DRIVEOFFINFO_SUGGEST._serialized_start=5716
-  _DRIVEOFFINFO_SUGGEST._serialized_end=5838
-  _DRIVEOFFINFO_STATE._serialized_start=5840
-  _DRIVEOFFINFO_STATE._serialized_end=5897
-  _DECELERATIONINFO._serialized_start=5900
-  _DECELERATIONINFO._serialized_end=6189
-  _DECELERATIONINFO_REASON._serialized_start=5979
-  _DECELERATIONINFO_REASON._serialized_end=6189
-  _TRAFFICLIGHTWARNING._serialized_start=6192
-  _TRAFFICLIGHTWARNING._serialized_end=6465
-  _TRAFFICLIGHTWARNING_TRAFFICLIGHTSTATE._serialized_start=6324
-  _TRAFFICLIGHTWARNING_TRAFFICLIGHTSTATE._serialized_end=6465
-  _ERRORLANE._serialized_start=6468
-  _ERRORLANE._serialized_end=6769
-  _ERRORLANE_EGOCARPOS._serialized_start=6590
-  _ERRORLANE_EGOCARPOS._serialized_end=6692
-  _ERRORLANE_ERRORTYPE._serialized_start=6694
-  _ERRORLANE_ERRORTYPE._serialized_end=6769
-  _DRIVINGDOWNGRADING._serialized_start=6772
-  _DRIVINGDOWNGRADING._serialized_end=6924
-  _FEATUREABORT._serialized_start=6927
-  _FEATUREABORT._serialized_end=7135
-  _STEPINGINTOSPECIALAREA._serialized_start=7138
-  _STEPINGINTOSPECIALAREA._serialized_end=7344
-  _STEPINGINTOSPECIALAREA_SPECIALAREATYPE._serialized_start=7235
-  _STEPINGINTOSPECIALAREA_SPECIALAREATYPE._serialized_end=7344
-  _HANDSOFFWARN._serialized_start=7347
-  _HANDSOFFWARN._serialized_end=7585
-  _HANDSOFFWARN_HANDSOFFLEVEL._serialized_start=7424
-  _HANDSOFFWARN_HANDSOFFLEVEL._serialized_end=7585
-  _DRIVERTAKEOVER._serialized_start=7588
-  _DRIVERTAKEOVER._serialized_end=7838
-  _DRIVERTAKEOVER_SCENE._serialized_start=7661
-  _DRIVERTAKEOVER_SCENE._serialized_end=7838
-  _ACCSTATUSCHANGE._serialized_start=7841
-  _ACCSTATUSCHANGE._serialized_end=8026
-  _SPEEDLIMITCHANGE._serialized_start=8029
-  _SPEEDLIMITCHANGE._serialized_end=8266
-  _SPEEDLIMITCHANGE_REASON._serialized_start=8223
-  _SPEEDLIMITCHANGE_REASON._serialized_end=8266
-  _CONFIRMSPEED._serialized_start=8269
-  _CONFIRMSPEED._serialized_end=8400
-  _CONFIRMSPEED_DISPLAY._serialized_start=8341
-  _CONFIRMSPEED_DISPLAY._serialized_end=8400
-  _ICASTATUSCHANGE._serialized_start=8402
-  _ICASTATUSCHANGE._serialized_end=8507
-  _ILCLANECHANGEREQUESTRESULT._serialized_start=8510
-  _ILCLANECHANGEREQUESTRESULT._serialized_end=8674
-  _ILCSTATUSCHANGE._serialized_start=8676
-  _ILCSTATUSCHANGE._serialized_end=8781
-  _LANECHANGESTATUSCHANGE._serialized_start=8784
-  _LANECHANGESTATUSCHANGE._serialized_end=9007
-  _NUDGESTATUSCHANGE._serialized_start=9010
-  _NUDGESTATUSCHANGE._serialized_end=9255
-  _LANECHANGEWARNING._serialized_start=9258
-  _LANECHANGEWARNING._serialized_end=9434
-  _LANECHANGEWARNING_TYPE._serialized_start=9334
-  _LANECHANGEWARNING_TYPE._serialized_end=9434
-  _NCASTATUSCHANGE._serialized_start=9436
-  _NCASTATUSCHANGE._serialized_end=9541
-  _TURNARROUND._serialized_start=9543
-  _TURNARROUND._serialized_end=9658
-  _TURNARROUND_STATE._serialized_start=9609
-  _TURNARROUND_STATE._serialized_end=9658
-  _LAEXITINFO._serialized_start=9660
-  _LAEXITINFO._serialized_end=9766
-  _NCAOUTODD._serialized_start=9769
-  _NCAOUTODD._serialized_end=10512
-  _NCAOUTODD_TYPE._serialized_start=9988
-  _NCAOUTODD_TYPE._serialized_end=10064
-  _NCAOUTODD_ROADCLASS._serialized_start=10066
-  _NCAOUTODD_ROADCLASS._serialized_end=10105
-  _NCAOUTODD_ODDLIMITTYPE._serialized_start=10108
-  _NCAOUTODD_ODDLIMITTYPE._serialized_end=10512
-  _ODDNOTIFICATION._serialized_start=10514
-  _ODDNOTIFICATION._serialized_end=10590
-  _APASTATUSCHANGE._serialized_start=10593
-  _APASTATUSCHANGE._serialized_end=10757
-  _APASELECTPARKINGSPACE._serialized_start=10760
-  _APASELECTPARKINGSPACE._serialized_end=11030
-  _APASELECTPARKINGSPACE_PRKMODTYPE._serialized_start=10917
-  _APASELECTPARKINGSPACE_PRKMODTYPE._serialized_end=11030
-  _APAPARKOUTPARKINGSPACE._serialized_start=11032
-  _APAPARKOUTPARKINGSPACE._serialized_end=11101
-  _PARKINGLOTDETECTED._serialized_start=11104
-  _PARKINGLOTDETECTED._serialized_end=11290
-  _PARKINGLOTDETECTED_PARKINGLOTTYPE._serialized_start=11242
-  _PARKINGLOTDETECTED_PARKINGLOTTYPE._serialized_end=11290
-  _PARKING._serialized_start=11292
-  _PARKING._serialized_end=11319
-  _OUTPARKING._serialized_start=11321
-  _OUTPARKING._serialized_end=11351
-  _VPASTATUSCHANGE._serialized_start=11353
-  _VPASTATUSCHANGE._serialized_end=11458
-  _VPALEARINGPROGRESS._serialized_start=11461
-  _VPALEARINGPROGRESS._serialized_end=11634
-  _VPAROUTINGPROGRESS._serialized_start=11637
-  _VPAROUTINGPROGRESS._serialized_end=11816
-  _VPALEARNINGSAVEDPARKINGSPACE._serialized_start=11818
-  _VPALEARNINGSAVEDPARKINGSPACE._serialized_end=11909
-  _VPAROUTINGGETTARGETPARKINGSPACE._serialized_start=11911
-  _VPAROUTINGGETTARGETPARKINGSPACE._serialized_end=11990
-  _VPALEARINGCOMPLETEDINFO._serialized_start=11993
-  _VPALEARINGCOMPLETEDINFO._serialized_end=12197
-  _VPAMAPMATCHSTATUSCHANGE._serialized_start=12200
-  _VPAMAPMATCHSTATUSCHANGE._serialized_end=12480
-  _VPAMAPMATCHSTATUSCHANGE_MAPMATCHSTATUS._serialized_start=12390
-  _VPAMAPMATCHSTATUSCHANGE_MAPMATCHSTATUS._serialized_end=12480
-  _AVMSETTINGS._serialized_start=12482
-  _AVMSETTINGS._serialized_end=12547
-  _AVMSTATUSCHANGE._serialized_start=12550
-  _AVMSTATUSCHANGE._serialized_end=12708
-  _SENTINELEVENT._serialized_start=12710
-  _SENTINELEVENT._serialized_end=12795
-  _PDCINFO._serialized_start=12798
-  _PDCINFO._serialized_end=13025
-  _PDCINFO_BUZZERALARMPATTERN._serialized_start=12885
-  _PDCINFO_BUZZERALARMPATTERN._serialized_end=13025
-  _PDCDATA._serialized_start=13028
-  _PDCDATA._serialized_end=13253
-  _PDCDATA_PDCCURVE._serialized_start=13095
-  _PDCDATA_PDCCURVE._serialized_end=13253
-  _PDCDATA_PDCCURVE_CURVETYPE._serialized_start=13221
-  _PDCDATA_PDCCURVE_CURVETYPE._serialized_end=13253
-  _CALIBRATIONUPLOADSTATUS._serialized_start=13256
-  _CALIBRATIONUPLOADSTATUS._serialized_end=13447
-  _CALIBRATIONUPLOADSTATUS_CALIBRATIONUPLOADRESULT._serialized_start=13384
-  _CALIBRATIONUPLOADSTATUS_CALIBRATIONUPLOADRESULT._serialized_end=13447
-  _CALIBRATIONSTATUS._serialized_start=13450
-  _CALIBRATIONSTATUS._serialized_end=14021
-  _RPASTATUSCHANGE._serialized_start=14024
-  _RPASTATUSCHANGE._serialized_end=14182
-  _RADSPROGRESS._serialized_start=14184
-  _RADSPROGRESS._serialized_end=14240
-  _APSTEXTDISP._serialized_start=14242
-  _APSTEXTDISP._serialized_end=14296
-  _GWMLSSWARNINGSTS._serialized_start=14299
-  _GWMLSSWARNINGSTS._serialized_end=14464
-  _DSMSTART._serialized_start=14466
-  _DSMSTART._serialized_end=14576
-  _TRAFFICSIGNINFO._serialized_start=14579
-  _TRAFFICSIGNINFO._serialized_end=17249
-  _TRAFFICSIGNINFO_SIGNTYPE._serialized_start=14682
-  _TRAFFICSIGNINFO_SIGNTYPE._serialized_end=17249
-  _TSRSIGN._serialized_start=17252
-  _TSRSIGN._serialized_end=17411
-  _GLPARKINGVIZNOTIFICATION._serialized_start=17413
-  _GLPARKINGVIZNOTIFICATION._serialized_end=17498
+  _BTNSTS._serialized_start=21591
+  _BTNSTS._serialized_end=21644
+  _TAKEOVERREQUEST._serialized_start=21647
+  _TAKEOVERREQUEST._serialized_end=21880
+  _REMINDINFO._serialized_start=21883
+  _REMINDINFO._serialized_end=25457
+  _VPAE2ESTAGE._serialized_start=25459
+  _VPAE2ESTAGE._serialized_end=25543
+  _EVENTINFO._serialized_start=280
+  _EVENTINFO._serialized_end=5292
+  _STATUSCHANGE._serialized_start=5295
+  _STATUSCHANGE._serialized_end=5704
+  _ACTIVERESULTREMIND._serialized_start=5707
+  _ACTIVERESULTREMIND._serialized_end=5969
+  _FAULTEVENTINFO._serialized_start=5971
+  _FAULTEVENTINFO._serialized_end=6052
+  _FAULTREMIND._serialized_start=6055
+  _FAULTREMIND._serialized_end=6564
+  _FAULTREMIND_LEVEL._serialized_start=6278
+  _FAULTREMIND_LEVEL._serialized_end=6368
+  _FAULTREMIND_POLICY._serialized_start=6371
+  _FAULTREMIND_POLICY._serialized_end=6564
+  _DRIVEOFFINFO._serialized_start=6567
+  _DRIVEOFFINFO._serialized_end=6996
+  _DRIVEOFFINFO_REASON._serialized_start=6745
+  _DRIVEOFFINFO_REASON._serialized_end=6813
+  _DRIVEOFFINFO_SUGGEST._serialized_start=6815
+  _DRIVEOFFINFO_SUGGEST._serialized_end=6937
+  _DRIVEOFFINFO_STATE._serialized_start=6939
+  _DRIVEOFFINFO_STATE._serialized_end=6996
+  _DECELERATIONINFO._serialized_start=6999
+  _DECELERATIONINFO._serialized_end=7382
+  _DECELERATIONINFO_REASON._serialized_start=7078
+  _DECELERATIONINFO_REASON._serialized_end=7382
+  _TRAFFICLIGHTWARNING._serialized_start=7385
+  _TRAFFICLIGHTWARNING._serialized_end=7658
+  _TRAFFICLIGHTWARNING_TRAFFICLIGHTSTATE._serialized_start=7517
+  _TRAFFICLIGHTWARNING_TRAFFICLIGHTSTATE._serialized_end=7658
+  _ERRORLANE._serialized_start=7661
+  _ERRORLANE._serialized_end=7962
+  _ERRORLANE_EGOCARPOS._serialized_start=7783
+  _ERRORLANE_EGOCARPOS._serialized_end=7885
+  _ERRORLANE_ERRORTYPE._serialized_start=7887
+  _ERRORLANE_ERRORTYPE._serialized_end=7962
+  _DRIVINGDOWNGRADING._serialized_start=7965
+  _DRIVINGDOWNGRADING._serialized_end=8117
+  _FEATUREABORT._serialized_start=8120
+  _FEATUREABORT._serialized_end=8328
+  _STEPINGINTOSPECIALAREA._serialized_start=8331
+  _STEPINGINTOSPECIALAREA._serialized_end=8565
+  _STEPINGINTOSPECIALAREA_SPECIALAREATYPE._serialized_start=8429
+  _STEPINGINTOSPECIALAREA_SPECIALAREATYPE._serialized_end=8565
+  _HANDSOFFWARN._serialized_start=8568
+  _HANDSOFFWARN._serialized_end=8806
+  _HANDSOFFWARN_HANDSOFFLEVEL._serialized_start=8645
+  _HANDSOFFWARN_HANDSOFFLEVEL._serialized_end=8806
+  _DRIVERTAKEOVER._serialized_start=8809
+  _DRIVERTAKEOVER._serialized_end=9059
+  _DRIVERTAKEOVER_SCENE._serialized_start=8882
+  _DRIVERTAKEOVER_SCENE._serialized_end=9059
+  _ACCELERATIONSTYLECHANGE._serialized_start=9062
+  _ACCELERATIONSTYLECHANGE._serialized_end=9260
+  _CHANGEROUTINGREQUESTRESULT._serialized_start=9263
+  _CHANGEROUTINGREQUESTRESULT._serialized_end=9460
+  _NAVIGATIONACTION._serialized_start=9463
+  _NAVIGATIONACTION._serialized_end=9646
+  _NAVIGATIONACTION_LANETURN._serialized_start=9541
+  _NAVIGATIONACTION_LANETURN._serialized_end=9646
+  _VLASTATUSCHANGE._serialized_start=9649
+  _VLASTATUSCHANGE._serialized_end=9928
+  _VLASTATUSCHANGE_TYPE._serialized_start=9869
+  _VLASTATUSCHANGE_TYPE._serialized_end=9928
+  _CHANGEROUTINGSTATUSCHANGE._serialized_start=9931
+  _CHANGEROUTINGSTATUSCHANGE._serialized_end=10106
+  _PULLOVERREQUESTRESULT._serialized_start=10108
+  _PULLOVERREQUESTRESULT._serialized_end=10222
+  _PULLOVERSTATUSCHANGE._serialized_start=10225
+  _PULLOVERSTATUSCHANGE._serialized_end=10476
+  _POIPOSDISPLAY._serialized_start=10478
+  _POIPOSDISPLAY._serialized_end=10542
+  _SCENESTRATEGYTYPENOTIFY._serialized_start=10544
+  _SCENESTRATEGYTYPENOTIFY._serialized_end=10627
+  _OVERTAKE._serialized_start=10630
+  _OVERTAKE._serialized_end=10774
+  _GIVEWAY._serialized_start=10777
+  _GIVEWAY._serialized_end=10920
+  _ACCSTATUSCHANGE._serialized_start=10923
+  _ACCSTATUSCHANGE._serialized_end=11108
+  _SPEEDLIMITCHANGE._serialized_start=11111
+  _SPEEDLIMITCHANGE._serialized_end=11472
+  _SPEEDLIMITCHANGE_REASON._serialized_start=11429
+  _SPEEDLIMITCHANGE_REASON._serialized_end=11472
+  _CONFIRMSPEED._serialized_start=11475
+  _CONFIRMSPEED._serialized_end=11606
+  _CONFIRMSPEED_DISPLAY._serialized_start=11547
+  _CONFIRMSPEED_DISPLAY._serialized_end=11606
+  _JAMMODE._serialized_start=11608
+  _JAMMODE._serialized_end=11715
+  _JAMMODE_MODE._serialized_start=11664
+  _JAMMODE_MODE._serialized_end=11715
+  _TIMEGAPCHANGE._serialized_start=11718
+  _TIMEGAPCHANGE._serialized_end=11907
+  _ICASTATUSCHANGE._serialized_start=11909
+  _ICASTATUSCHANGE._serialized_end=12014
+  _ILCLANECHANGEREQUESTRESULT._serialized_start=12017
+  _ILCLANECHANGEREQUESTRESULT._serialized_end=12181
+  _ILCSTATUSCHANGE._serialized_start=12183
+  _ILCSTATUSCHANGE._serialized_end=12288
+  _LANECHANGESTATUSCHANGE._serialized_start=12291
+  _LANECHANGESTATUSCHANGE._serialized_end=12514
+  _NUDGESTATUSCHANGE._serialized_start=12517
+  _NUDGESTATUSCHANGE._serialized_end=12762
+  _LANECHANGEWARNING._serialized_start=12765
+  _LANECHANGEWARNING._serialized_end=12941
+  _LANECHANGEWARNING_TYPE._serialized_start=12841
+  _LANECHANGEWARNING_TYPE._serialized_end=12941
+  _NCASTATUSCHANGE._serialized_start=12943
+  _NCASTATUSCHANGE._serialized_end=13048
+  _TURNARROUND._serialized_start=13050
+  _TURNARROUND._serialized_end=13165
+  _TURNARROUND_STATE._serialized_start=13116
+  _TURNARROUND_STATE._serialized_end=13165
+  _LAEXITINFO._serialized_start=13167
+  _LAEXITINFO._serialized_end=13273
+  _NCAOUTODD._serialized_start=13276
+  _NCAOUTODD._serialized_end=14033
+  _NCAOUTODD_TYPE._serialized_start=13495
+  _NCAOUTODD_TYPE._serialized_end=13585
+  _NCAOUTODD_ROADCLASS._serialized_start=13587
+  _NCAOUTODD_ROADCLASS._serialized_end=13626
+  _NCAOUTODD_ODDLIMITTYPE._serialized_start=13629
+  _NCAOUTODD_ODDLIMITTYPE._serialized_end=14033
+  _ODDNOTIFICATION._serialized_start=14035
+  _ODDNOTIFICATION._serialized_end=14111
+  _ETCNOTIFICATION._serialized_start=14114
+  _ETCNOTIFICATION._serialized_end=14284
+  _ETCNOTIFICATION_TYPE._serialized_start=14186
+  _ETCNOTIFICATION_TYPE._serialized_end=14284
+  _APASTATUSCHANGE._serialized_start=14287
+  _APASTATUSCHANGE._serialized_end=14451
+  _APASELECTPARKINGSPACE._serialized_start=14454
+  _APASELECTPARKINGSPACE._serialized_end=14724
+  _APASELECTPARKINGSPACE_PRKMODTYPE._serialized_start=14611
+  _APASELECTPARKINGSPACE_PRKMODTYPE._serialized_end=14724
+  _APAPARKOUTPARKINGSPACE._serialized_start=14726
+  _APAPARKOUTPARKINGSPACE._serialized_end=14795
+  _PARKINGLOTDETECTED._serialized_start=14798
+  _PARKINGLOTDETECTED._serialized_end=14984
+  _PARKINGLOTDETECTED_PARKINGLOTTYPE._serialized_start=14936
+  _PARKINGLOTDETECTED_PARKINGLOTTYPE._serialized_end=14984
+  _PARKING._serialized_start=14986
+  _PARKING._serialized_end=15013
+  _OUTPARKING._serialized_start=15015
+  _OUTPARKING._serialized_end=15045
+  _VPASTATUSCHANGE._serialized_start=15047
+  _VPASTATUSCHANGE._serialized_end=15152
+  _VPALEARINGPROGRESS._serialized_start=15155
+  _VPALEARINGPROGRESS._serialized_end=15328
+  _VPAROUTINGPROGRESS._serialized_start=15331
+  _VPAROUTINGPROGRESS._serialized_end=15510
+  _VPALEARNINGSAVEDPARKINGSPACE._serialized_start=15512
+  _VPALEARNINGSAVEDPARKINGSPACE._serialized_end=15603
+  _VPAROUTINGGETTARGETPARKINGSPACE._serialized_start=15605
+  _VPAROUTINGGETTARGETPARKINGSPACE._serialized_end=15684
+  _VPALEARINGCOMPLETEDINFO._serialized_start=15687
+  _VPALEARINGCOMPLETEDINFO._serialized_end=15891
+  _VPAMAPMATCHSTATUSCHANGE._serialized_start=15894
+  _VPAMAPMATCHSTATUSCHANGE._serialized_end=16174
+  _VPAMAPMATCHSTATUSCHANGE_MAPMATCHSTATUS._serialized_start=16084
+  _VPAMAPMATCHSTATUSCHANGE_MAPMATCHSTATUS._serialized_end=16174
+  _AVMSETTINGS._serialized_start=16176
+  _AVMSETTINGS._serialized_end=16241
+  _AVMSTATUSCHANGE._serialized_start=16244
+  _AVMSTATUSCHANGE._serialized_end=16402
+  _SENTINELEVENT._serialized_start=16404
+  _SENTINELEVENT._serialized_end=16489
+  _PDCINFO._serialized_start=16492
+  _PDCINFO._serialized_end=16719
+  _PDCINFO_BUZZERALARMPATTERN._serialized_start=16579
+  _PDCINFO_BUZZERALARMPATTERN._serialized_end=16719
+  _PDCDATA._serialized_start=16722
+  _PDCDATA._serialized_end=16947
+  _PDCDATA_PDCCURVE._serialized_start=16789
+  _PDCDATA_PDCCURVE._serialized_end=16947
+  _PDCDATA_PDCCURVE_CURVETYPE._serialized_start=16915
+  _PDCDATA_PDCCURVE_CURVETYPE._serialized_end=16947
+  _CALIBRATIONUPLOADSTATUS._serialized_start=16950
+  _CALIBRATIONUPLOADSTATUS._serialized_end=17141
+  _CALIBRATIONUPLOADSTATUS_CALIBRATIONUPLOADRESULT._serialized_start=17078
+  _CALIBRATIONUPLOADSTATUS_CALIBRATIONUPLOADRESULT._serialized_end=17141
+  _CALIBRATIONSTATUS._serialized_start=17144
+  _CALIBRATIONSTATUS._serialized_end=17715
+  _RPASTATUSCHANGE._serialized_start=17718
+  _RPASTATUSCHANGE._serialized_end=17876
+  _RADSPROGRESS._serialized_start=17878
+  _RADSPROGRESS._serialized_end=17934
+  _APSTEXTDISP._serialized_start=17936
+  _APSTEXTDISP._serialized_end=17990
+  _GWMLSSWARNINGSTS._serialized_start=17993
+  _GWMLSSWARNINGSTS._serialized_end=18158
+  _DSMSTART._serialized_start=18160
+  _DSMSTART._serialized_end=18270
+  _TRAFFICSIGNINFO._serialized_start=18273
+  _TRAFFICSIGNINFO._serialized_end=20943
+  _TRAFFICSIGNINFO_SIGNTYPE._serialized_start=18376
+  _TRAFFICSIGNINFO_SIGNTYPE._serialized_end=20943
+  _TSRSIGN._serialized_start=20946
+  _TSRSIGN._serialized_end=21105
+  _GLPARKINGVIZNOTIFICATION._serialized_start=21107
+  _GLPARKINGVIZNOTIFICATION._serialized_end=21192
+  _E2ENOTIFICATION._serialized_start=21194
+  _E2ENOTIFICATION._serialized_end=21320
+  _PATHPOINTS._serialized_start=21323
+  _PATHPOINTS._serialized_end=21589
+  _PATHPOINTS_PATHPOINT._serialized_start=21556
+  _PATHPOINTS_PATHPOINT._serialized_end=21589
 # @@protoc_insertion_point(module_scope)

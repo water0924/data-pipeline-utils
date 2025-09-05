@@ -6,27 +6,27 @@ load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
 
 proto_library(
-    name = "drpki_proto",
+    name = "mcu_log_proto",
     visibility = ["//visibility:public"],
-    srcs = ["drpki.proto"],
+    srcs = ["mcu_log.proto"],
     deps = [
     ],
     strip_import_prefix = "/proto/",
 )
 
 cc_proto_library(
-    name = "drpki_proto_cc",
+    name = "mcu_log_proto_cc",
     visibility = ["//visibility:public"],
     deps = [
-        ":drpki_proto",
+        ":mcu_log_proto",
     ],
 )
 
 python_proto_library(
-    name = "drpki_proto_py",
+    name = "mcu_log_proto_py",
     visibility = ["//visibility:public"],
     protos = [
-        ":drpki_proto",
+        ":mcu_log_proto",
     ],
 )
 

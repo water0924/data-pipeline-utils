@@ -30,6 +30,7 @@ message ActiveSafetyCloudConfig {
   optional ActiveSafetyGear rear_meb_gear = 3 [ default = ActiveSafety_MIDDLE ];
   optional ActiveSafetyGear rctb_gear = 4 [ default = ActiveSafety_MIDDLE ];
   optional ActiveSafetyCloudConfigDetail active_safety_cloud_config_detail = 5;
+  optional MAICloudConfig mai_cloud_config = 6;
 }
 
 message ActiveSafetyCloudConfigDetail {
@@ -100,15 +101,29 @@ message ActiveSafetyCloudConfigDetail {
   // 启用自车高速目标穿行混合计算逻辑
   optional bool enable_high_speed_c2c_crossing_hybrid = 36 [default = false];
   // 恢复自车低速目标蠕形逻辑
-  optional bool revert_low_speed_adc_obj_low_speed = 38 [default = false];
+  optional bool revert_low_speed_adc_obj_low_speed = 37 [default = false];
   // 启用变道cut in 逻辑
-  optional bool enable_cut_in_calc_by_lc = 39 [default = false];
+  optional bool enable_cut_in_calc_by_lc = 38 [default = false];
   // 恢复低相对速度跟车逻辑
-  optional bool revert_close_dist_car_following = 40 [default = false];
+  optional bool revert_close_dist_car_following = 39 [default = false];
   // 启用自车减速抑制逻辑
-  optional bool use_adc_speed_down_inhibit = 41 [default = false];
+  optional bool use_adc_speed_down_inhibit = 40 [default = false];
   // 自车减速抑制逻辑速度阈值
-  optional double adc_speed_down_inhibit_thres = 42 [default = 90.0];
+  optional double adc_speed_down_inhibit_thres = 41 [default = 90.0];
+  // 启用自车绕行轨迹优化
+  optional bool revert_adc_nudge_trajectory_optimization = 42 [default = false];
+  // 启用junction场景考虑大曲率抑制
+  optional bool enable_junction_large_curvature = 43 [default = true];
+  // 是否对车辆等非VRU物体启用traj_line_near_adc过滤
+  optional bool enable_traj_near_adc_for_car = 44 [default = false];
+}
+
+message MAICloudConfig {
+  optional double window_duration = 1;
+  optional double high_pedal_duration_repeat = 2;
+  optional double pedal_rate = 3;
+  optional double high_pedal_threshold = 4;
+  optional double high_pedal_duration = 5;
 }
 
 enum ParkingMode {

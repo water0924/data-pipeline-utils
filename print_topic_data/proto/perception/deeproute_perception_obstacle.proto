@@ -8,6 +8,7 @@ import "prediction/offline_feature.proto";
 import "prediction/intention.proto";
 import "perception/deeproute_perception_invisible.proto";
 import "perception/perception_dtu_interface.proto";
+import "drivers/ultrasonic/ultrasonic.proto";
 
 message BBox2D {
   optional double xmin = 1;  // in pixels.
@@ -44,6 +45,18 @@ message UltrasonicInfo {
       [default = -1.0];  // distance from orrespond uss sensor
   optional bool is_memory = 3
       [default = false];  // obstacles acquired through temporal memory
+  optional deeproute.drivers.ultrasonic.UltrasonicObstacle.HeightType 
+      obstacle_height = 4;
+  optional double obstacle_height_prob = 5;
+  optional deeproute.drivers.ultrasonic.UltrasonicObstacle.ObstacleType 
+      obstacle_type = 6;
+  optional double confidence = 7;
+  optional deeproute.drivers.ultrasonic.UltrasonicType ultrasonic_type = 8;
+}
+
+message RadarInfo {
+  optional string sensor_name = 1; // radar frame_id
+  optional int32 id = 2;           // radar id
 }
 
 message PerceptionObstacle {
@@ -108,6 +121,7 @@ message PerceptionObstacle {
     BARRIER_GATE = 13;
     LOCK = 14;
     SPEEDBUMP = 15;
+    FAKED2D = 16;  // estimated fake 2d object for hma
   };
 
   // detection subtype, e.g., tri-cone,
@@ -361,9 +375,13 @@ message PerceptionObstacle {
     INSERTED_POLY_BY_SPLIT = 22;
     FILTERED_BY_NO_HEIGHT_OVERLAP = 23;
     FILTERED_BY_AVP_MERGING = 24;
+    KEPT_BY_EXTRA_ROI = 25;
   };
 
   optional StatusCode status_code = 42 [default = NOT_FILTERED];
+  optional bool radar_fusion_flag = 45 [default = false];
+  optional bool is_fake = 46 [default = false];  // obstacle is fake or 
+  optional RadarInfo radar_info = 47;
 }
 
 message PointSemantics {
@@ -391,6 +409,18 @@ enum ObstaclesMode {
   PARKING = 1;
 }
 
+message OverheadObstacle {
+   optional float distance=1;
+   optional float height_above_ground=2;
+   // obstacle position in the world coordinate system.
+   optional common.Point3D position = 3;
+   optional double theta = 4;  // heading in the world coordinate system.
+   // Size of obstacle bounding box.
+   optional double length = 5;        // obstacle length.
+   optional double width = 6;         // obstacle width.
+   optional double height = 7;        // obstacle height.
+}
+
 message PerceptionObstacles {
     optional int64 time_measurement = 1;
     repeated PerceptionObstacle perception_obstacle = 2; // An array of obstacles
@@ -407,6 +437,33 @@ message PerceptionObstacles {
     optional DrivingMode.Mode curr_driving_mode = 12;
     repeated deeproute.prediction.SpeedSeq model_based_speed = 13;
     optional deeproute.prediction.OfflineFeature offline_feature = 14; // offline data production usage
+    repeated OverheadObstacle overhead_obstacle = 15;   
+    optional ModelBasedScorer model_based_scorer = 16; //scorer from speed model
+    optional SafetyModelBasedResult safety_model_based_result = 17; // for ai-safety model based result
+}
+
+message SafetyTrajecoty{
+  optional int32 id = 1;  // Obstacle ID.
+  repeated deeproute.prediction.Trajectory trajectory = 2;
+}
+
+message CriticalObstacle{
+  optional int32 id = 1;  // Critical Obstacle ID.
+  optional float prob = 2; // Critical Obstacle prob.
+}
+
+message SafetyModelBasedResult {
+    // aeb_decision part
+    optional bool aeb_triggered = 1;
+    optional float aeb_triggered_prob = 2;
+    optional float aeb_triggered_offset = 3;
+    // ttc predict part
+    optional bool critical_scene = 4;
+    optional float critical_scene_prob = 5;
+    repeated CriticalObstacle critical_obstacle= 6;
+    optional float ttc_value = 7;
+    // traj predict part
+    repeated SafetyTrajecoty safety_trajectory = 8;
 }
 
 // For extending more model-based decision message;
@@ -432,6 +489,15 @@ message ModelBasedDecision {
     // model path speed, each path associates with 3 speed profiles
     repeated deeproute.prediction.SpeedSeq multi_modal_speed = 12;
     repeated float multi_modal_speed_scores = 13;
+
+    // multi score
+    repeated float legal_scores = 14;
+    repeated common.Point2D legal_collision_pts = 15;
+    repeated float static_collision_scores = 16;
+    repeated common.Point2D static_collision_pts = 17;
+
+    //  collision score and ttc from speed model
+    repeated deeproute.prediction.SpeedScorer multi_modal_speed_scorenet = 18;
 }
 
 // Model-based lane change efficiency, independently making decision for 'left'
@@ -444,4 +510,11 @@ message LaneChangeEfficiency {
   optional int32 adc_lane_id = 3;
   optional int32 left_lane_id = 4;
   optional int32 right_lane_id = 5;
+}
+
+//  collision score and ttc from speed model
+message ModelBasedScorer {
+  optional float multi_modal_speed_collision_scores = 1;
+  optional float multi_modal_speed_ttc = 2;
+  optional float multi_modal_collision_threshold = 3;
 }

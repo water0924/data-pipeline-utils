@@ -29,6 +29,7 @@ message TriggerConfig {
   optional int32 max_times = 13;
   optional int32 group = 14;
   optional Conditions conditions = 15;
+  optional bool record_full_point_cloud = 16;
 }
 
 message TriggerConfigList {

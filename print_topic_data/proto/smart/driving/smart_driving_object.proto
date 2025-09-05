@@ -117,6 +117,14 @@ message Obj_Info{
     OBJ_TYPE_CHOCK = 23;
     //24.地锁"
     OBJ_TYPE_LOCK = 24;
+    //25.警车
+    OBJ_TYPE_POLICE_CAR = 25;
+    //26.MPV
+    OBJ_TYPE_MPV = 26;
+    //27.出租车
+    OBJ_TYPE_TAXI = 27;
+    //28.搅拌车
+    OBJ_TYPE_MIXER_TRUCK = 28;
   };
   Obj_Type type = 5;
   //todo 单位

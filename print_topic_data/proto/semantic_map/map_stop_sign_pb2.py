@@ -17,7 +17,7 @@ from proto.common import geometry_pb2 as common_dot_geometry__pb2
 from proto.semantic_map import map_overlap_pb2 as semantic__map_dot_map__overlap__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n semantic_map/map_stop_sign.proto\x12\x0f\x64\x65\x65proute.hdmap\x1a\x1fsemantic_map/map_geometry.proto\x1a\x15\x63ommon/geometry.proto\x1a\x1esemantic_map/map_overlap.proto\"\xaf\x02\n\x08StopSign\x12\n\n\x02id\x18\x01 \x01(\x05\x12)\n\tstop_line\x18\x02 \x03(\x0b\x32\x16.deeproute.hdmap.Curve\x12\x12\n\noverlap_id\x18\x03 \x03(\x05\x12\x30\n\x04type\x18\x04 \x01(\x0e\x32\".deeproute.hdmap.StopSign.StopType\x12+\n\x08location\x18\x05 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x0c\n\x04\x63ost\x18\x06 \x01(\x01\x12\x0e\n\x06layers\x18\x07 \x03(\x05\"[\n\x08StopType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07ONE_WAY\x10\x01\x12\x0b\n\x07TWO_WAY\x10\x02\x12\r\n\tTHREE_WAY\x10\x03\x12\x0c\n\x08\x46OUR_WAY\x10\x04\x12\x0b\n\x07\x41LL_WAY\x10\x05\"\xaa\x03\n\x08StopLine\x12\n\n\x02id\x18\x01 \x01(\x05\x12-\n\tstop_line\x18\x02 \x01(\x0b\x32\x1a.deeproute.common.Polyline\x12\x14\n\x0cstop_sign_id\x18\x03 \x01(\x05\x12\x15\n\ryield_sign_id\x18\x04 \x01(\x05\x12\x1c\n\x10traffic_light_id\x18\x05 \x03(\x05\x42\x02\x10\x01\x12\x0c\n\x04\x63ost\x18\x06 \x01(\x01\x12\x1a\n\x12yield_stop_line_id\x18\x07 \x01(\x05\x12\x18\n\x10yield_to_lane_id\x18\x08 \x03(\x05\x12\x0e\n\x06layers\x18\t \x03(\x05\x12\x17\n\x0ftoll_station_id\x18\n \x01(\x05\x12\x1c\n\x14junction_end_line_id\x18\x0b \x03(\x05\x12\x0f\n\x07virtual\x18\x0c \x01(\x08\x12\x30\n\x04type\x18\r \x01(\x0e\x32\".deeproute.hdmap.StopLine.StopType\x12*\n\x08overlaps\x18\x0e \x03(\x0b\x32\x18.deeproute.hdmap.Overlap\"\x1e\n\x08StopType\x12\x07\n\x03\x43\x61r\x10\x00\x12\t\n\x05Truck\x10\x01\"\xbb\x01\n\x0fJunctionEndLine\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x35\n\x11junction_end_line\x18\x02 \x01(\x0b\x32\x1a.deeproute.common.Polyline\x12\x18\n\x10traffic_light_id\x18\x03 \x03(\x05\x12\x0e\n\x06layers\x18\x04 \x03(\x05\x12\x0f\n\x07virtual\x18\x05 \x01(\x08\x12*\n\x08overlaps\x18\x06 \x03(\x0b\x32\x18.deeproute.hdmap.Overlap')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n semantic_map/map_stop_sign.proto\x12\x0f\x64\x65\x65proute.hdmap\x1a\x1fsemantic_map/map_geometry.proto\x1a\x15\x63ommon/geometry.proto\x1a\x1esemantic_map/map_overlap.proto\"\xaf\x02\n\x08StopSign\x12\n\n\x02id\x18\x01 \x01(\x05\x12)\n\tstop_line\x18\x02 \x03(\x0b\x32\x16.deeproute.hdmap.Curve\x12\x12\n\noverlap_id\x18\x03 \x03(\x05\x12\x30\n\x04type\x18\x04 \x01(\x0e\x32\".deeproute.hdmap.StopSign.StopType\x12+\n\x08location\x18\x05 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x0c\n\x04\x63ost\x18\x06 \x01(\x01\x12\x0e\n\x06layers\x18\x07 \x03(\x05\"[\n\x08StopType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07ONE_WAY\x10\x01\x12\x0b\n\x07TWO_WAY\x10\x02\x12\r\n\tTHREE_WAY\x10\x03\x12\x0c\n\x08\x46OUR_WAY\x10\x04\x12\x0b\n\x07\x41LL_WAY\x10\x05\"\xdb\x04\n\x08StopLine\x12\n\n\x02id\x18\x01 \x01(\x05\x12-\n\tstop_line\x18\x02 \x01(\x0b\x32\x1a.deeproute.common.Polyline\x12\x14\n\x0cstop_sign_id\x18\x03 \x01(\x05\x12\x15\n\ryield_sign_id\x18\x04 \x01(\x05\x12\x1c\n\x10traffic_light_id\x18\x05 \x03(\x05\x42\x02\x10\x01\x12\x0c\n\x04\x63ost\x18\x06 \x01(\x01\x12\x1a\n\x12yield_stop_line_id\x18\x07 \x01(\x05\x12\x18\n\x10yield_to_lane_id\x18\x08 \x03(\x05\x12\x0e\n\x06layers\x18\t \x03(\x05\x12\x17\n\x0ftoll_station_id\x18\n \x01(\x05\x12\x1c\n\x14junction_end_line_id\x18\x0b \x03(\x05\x12\x0f\n\x07virtual\x18\x0c \x01(\x08\x12\x30\n\x04type\x18\r \x01(\x0e\x32\".deeproute.hdmap.StopLine.StopType\x12*\n\x08overlaps\x18\x0e \x03(\x0b\x32\x18.deeproute.hdmap.Overlap\x12\x35\n\tturn_type\x18\x0f \x03(\x0e\x32\".deeproute.hdmap.StopLine.TurnType\x12\x1e\n\x0fis_waiting_area\x18\x10 \x01(\x08:\x05\x66\x61lse\"\x1e\n\x08StopType\x12\x07\n\x03\x43\x61r\x10\x00\x12\t\n\x05Truck\x10\x01\"X\n\x08TurnType\x12\n\n\x06Normal\x10\x00\x12\x08\n\x04Left\x10\x01\x12\t\n\x05Right\x10\x02\x12\r\n\tUTurnLeft\x10\x03\x12\x0e\n\nUTurnRight\x10\x04\x12\x0c\n\x08Straight\x10\x05\"\xbb\x01\n\x0fJunctionEndLine\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x35\n\x11junction_end_line\x18\x02 \x01(\x0b\x32\x1a.deeproute.common.Polyline\x12\x18\n\x10traffic_light_id\x18\x03 \x03(\x05\x12\x0e\n\x06layers\x18\x04 \x03(\x05\x12\x0f\n\x07virtual\x18\x05 \x01(\x08\x12*\n\x08overlaps\x18\x06 \x03(\x0b\x32\x18.deeproute.hdmap.Overlap')
 
 
 
@@ -26,6 +26,7 @@ _STOPLINE = DESCRIPTOR.message_types_by_name['StopLine']
 _JUNCTIONENDLINE = DESCRIPTOR.message_types_by_name['JunctionEndLine']
 _STOPSIGN_STOPTYPE = _STOPSIGN.enum_types_by_name['StopType']
 _STOPLINE_STOPTYPE = _STOPLINE.enum_types_by_name['StopType']
+_STOPLINE_TURNTYPE = _STOPLINE.enum_types_by_name['TurnType']
 StopSign = _reflection.GeneratedProtocolMessageType('StopSign', (_message.Message,), {
   'DESCRIPTOR' : _STOPSIGN,
   '__module__' : 'semantic_map.map_stop_sign_pb2'
@@ -57,9 +58,11 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _STOPSIGN_STOPTYPE._serialized_start=354
   _STOPSIGN_STOPTYPE._serialized_end=445
   _STOPLINE._serialized_start=448
-  _STOPLINE._serialized_end=874
-  _STOPLINE_STOPTYPE._serialized_start=844
-  _STOPLINE_STOPTYPE._serialized_end=874
-  _JUNCTIONENDLINE._serialized_start=877
-  _JUNCTIONENDLINE._serialized_end=1064
+  _STOPLINE._serialized_end=1051
+  _STOPLINE_STOPTYPE._serialized_start=931
+  _STOPLINE_STOPTYPE._serialized_end=961
+  _STOPLINE_TURNTYPE._serialized_start=963
+  _STOPLINE_TURNTYPE._serialized_end=1051
+  _JUNCTIONENDLINE._serialized_start=1054
+  _JUNCTIONENDLINE._serialized_end=1241
 # @@protoc_insertion_point(module_scope)

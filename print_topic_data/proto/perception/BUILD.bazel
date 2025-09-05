@@ -10,6 +10,7 @@ proto_library(
     visibility = ["//visibility:public"],
     srcs = ["ras_model_feature.proto"],
     deps = [
+        "//proto/semantic_map:map_proto",
     ],
     strip_import_prefix = "/proto/",
 )
@@ -36,6 +37,7 @@ proto_library(
     srcs = ["traffic_light_detection.proto"],
     deps = [
         "//proto/common:geometry_proto",
+        "//proto/semantic_map:map_proto",
     ],
     strip_import_prefix = "/proto/",
 )
@@ -93,11 +95,38 @@ proto_library(
     strip_import_prefix = "/proto/",
 )
 
+proto_library(
+    name = "deeproute_perception_magic_carpet_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["deeproute_perception_magic_carpet.proto"],
+    deps = [
+        "//proto/perception:deeproute_perception_obstacle_proto",
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "deeproute_perception_magic_carpet_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":deeproute_perception_magic_carpet_proto",
+    ],
+)
+
 cc_proto_library(
     name = "deeproute_perception_ras_map_proto_cc",
     visibility = ["//visibility:public"],
     deps = [
         ":deeproute_perception_ras_map_proto",
+    ],
+)
+
+python_proto_library(
+    name = "deeproute_perception_magic_carpet_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":deeproute_perception_magic_carpet_proto",
     ],
 )
 
@@ -204,6 +233,7 @@ proto_library(
         "//proto/prediction:offline_feature_proto",
         "//proto/perception:deeproute_perception_invisible_proto",
         "//proto/perception:perception_dtu_interface_proto",
+        "//proto/drivers/ultrasonic:ultrasonic_proto",
     ],
     strip_import_prefix = "/proto/",
 )

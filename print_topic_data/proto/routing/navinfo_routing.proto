@@ -11,6 +11,7 @@ import "routing/cloud_task.proto";
 import "odd/odd.proto";
 import "map/map_common.proto";
 import "map/common_type.proto";
+import "routing/collection_trigger_rule.proto";
 
 message SDRoutingResponse {
   optional deeproute.map.RoutePlanningType route_planning_type = 1000;
@@ -26,6 +27,11 @@ message SDRoutingResponse {
 
   optional string sd_map_version = 6;
   optional uint64 route_id = 7;
+  optional string trace_id = 9;
+
+  // local parking map id near trip end
+  // source: RoutingRequest.local_map_id
+  optional string local_map_id = 10;
 }
 
 message NaviHead {
@@ -198,6 +204,10 @@ message SpeedLimitInfo {
   optional SceneType scene_type = 6;
   optional bool is_map_spl_limit = 7;
   optional int32 exp_spd_limit = 8;
+  repeated deeproute.routing.NavigationInfoForVisualize.StaticStrategyType
+      spd_static_strategy_type = 9;
+  repeated deeproute.routing.NavigationInfoForVisualize.SceneStrategyType
+      spd_scene_strategy_type = 10;
 }
 
 message StaticRoutingInfo {
@@ -292,6 +302,9 @@ message Segment {
   // Lane number.
   // Actual number of lanes on link
   optional int32 f_lane_num = 7;
+  
+  optional uint32 lane_num_sum = 52;
+
   // Not required.
   // Whether the end of the road segment is a junction.
   // 0 non-junction 1 junction.
@@ -402,6 +415,18 @@ message Segment {
   optional SegmAction segm_action = 50;
 
   repeated RoadSceneInfo local_routing_scene_infos = 51;
+
+  repeated sd_map.LongSolidLine long_solid_line_infos = 43;
+
+  optional sd_map.TollStationInfo toll_station_info = 53;
+
+  optional sd_map.SpeedSource speed_source = 54;
+
+  // 仅VLA下，和此前的路线重合。
+  optional bool is_overlap = 55;
+
+  // 仅VLA下，和此前的路线重合, 用于抑制重规划的范围
+  optional bool is_extend_overlap = 56;
 }
 
 message SpeedLimitConfig {
@@ -415,6 +440,8 @@ message SpeedLimitConfig {
   optional bool enable_highway_amap_camera_spl = 4;
   // use amap camera spd limit on express
   optional bool enable_express_amap_camera_spl = 5;
+  // use amap camera spd limit on city
+  optional bool enable_city_amap_camera_spl = 6;
 }
 
 message Route {
@@ -425,6 +452,10 @@ message Route {
   optional NaviHead navi_head = 1;
   // Route distance, unit: meters.
   optional int32 dis = 2;
+
+  // remaining distance of unpublished route. unit: meters.
+  optional int32 remaining_distance = 29;
+
   // Total route time. unit: seconds.
   optional int32 dur = 3;
 
@@ -447,4 +478,10 @@ message Route {
 
 message Result {
   optional Route route = 1;
+}
+
+// /map/data_collection/trigger_list
+message TriggerList {
+  optional uint64 dr_link_id = 1; // current link id
+  repeated deeproute.collection_trigger_rule.Trigger trigger_list = 2; 
 }

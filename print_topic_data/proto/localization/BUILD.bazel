@@ -147,3 +147,27 @@ python_proto_library(
     ],
 )
 
+proto_library(
+    name = "blc_to_localization_external_events_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["blc_to_localization_external_events.proto"],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "blc_to_localization_external_events_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":blc_to_localization_external_events_proto",
+    ],
+)
+
+python_proto_library(
+    name = "blc_to_localization_external_events_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":blc_to_localization_external_events_proto",
+    ],
+)
+
+

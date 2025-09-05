@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package gl.heatmap;
+
+// topic: /gl/heatmap
+message Heatmap {
+  uint64 timestamp = 1; // ms
+  repeated CameraFrame camera_frames = 2;
+}
+
+message PixelPoint {
+  uint32 u = 1;
+  uint32 v = 2;
+}
+
+message HeatElement {
+  int32 obstacle_id = 1; // 障碍物ID, 同PerceptualObstacle下的obs_id匹配
+  PixelPoint center_point = 2; // 近面心
+  repeated PixelPoint bounding_rect = 3; // 近面框
+}
+
+message CameraFrame {
+  /*
+  0: 未知类型
+  1: 前视
+  2: 左后视
+  3: 右后视
+  */
+  uint32 camera_type = 1;
+  repeated HeatElement heat_elements = 2;
+}

@@ -112,6 +112,16 @@ message MapPoiInfo {
 
   // user info
   optional MapPoiUserInfo user_info = 10;
+
+  // LLH
+  optional deeproute.common.PointLLH llh = 11;
+};
+
+message D2DMapTrajectories {
+  repeated deeproute.common.PointLLH parking_in_overlap_trajectory_for_routing = 1;
+  repeated deeproute.common.PointLLH parking_out_overlap_trajectory_for_routing = 2;
+  repeated deeproute.common.PointLLH parking_in_trajectory_to_parking_space_for_viz = 3;
+  repeated deeproute.common.PointLLH parking_out_trajectory_from_parking_space_for_viz = 4;
 };
 
 message HAVPMapMetaData {
@@ -143,4 +153,7 @@ message HAVPMap {
   repeated HAVPParkingSpace map_parking_space = 12;
   repeated HAVPObstacle map_obstacle = 13;
   repeated MapPoiInfo map_poi = 14;
+
+  // d2d relatives
+  optional D2DMapTrajectories d2d_map_trajectories = 30; // for gleey
 }

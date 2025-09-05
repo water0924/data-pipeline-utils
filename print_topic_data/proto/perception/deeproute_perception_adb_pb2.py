@@ -16,7 +16,7 @@ from proto.common import geometry_pb2 as common_dot_geometry__pb2
 from proto.perception import deeproute_perception_obstacle_pb2 as perception_dot_deeproute__perception__obstacle__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)perception/deeproute_perception_adb.proto\x12\x14\x64\x65\x65proute.perception\x1a\x15\x63ommon/geometry.proto\x1a.perception/deeproute_perception_obstacle.proto\"\x93\x02\n\tAdbOutput\x12\x18\n\x10time_measurement\x18\x01 \x01(\x03\x12\x33\n\nadb_object\x18\x02 \x03(\x0b\x32\x1f.deeproute.perception.CarObject\x12>\n\x10\x61\x64\x62_traffic_cond\x18\x03 \x01(\x0b\x32$.deeproute.perception.AdbTrafficCond\x12>\n\x10\x61\x64\x62_traffic_sign\x18\x04 \x03(\x0b\x32$.deeproute.perception.AdbTrafficSign\x12\x37\n\radb_object_2d\x18\x05 \x03(\x0b\x32 .deeproute.perception.AdbLight2D\"\x8e\x04\n\tCarObject\x12;\n\x04type\x18\x01 \x01(\x0e\x32-.deeproute.perception.PerceptionObstacle.Type\x12\x10\n\x08trk_info\x18\x02 \x01(\x08\x12:\n\x07obj_dir\x18\x03 \x01(\x0e\x32).deeproute.perception.CarObject.Direction\x12\x10\n\x08\x61\x62s_dist\x18\x04 \x01(\x02\x12\x12\n\nhozl_ag_le\x18\x05 \x01(\x02\x12\x12\n\nhozl_ag_re\x18\x06 \x01(\x02\x12\x1a\n\x12obj_hozl_ag_spd_le\x18\x07 \x01(\x02\x12\x1a\n\x12obj_hozl_ag_spd_ri\x18\x08 \x01(\x02\x12\x0f\n\x07vert_ag\x18\t \x01(\x02\x12\x15\n\rpercep_obj_id\x18\n \x03(\x05\x12?\n\x08\x61\x64\x62_type\x18\x0b \x01(\x0e\x32-.deeproute.perception.CarObject.AdbObjectType\".\n\tDirection\x12\t\n\x05OTHER\x10\x00\x12\x08\n\x04SAME\x10\x01\x12\x0c\n\x08OPPOSITE\x10\x02\"k\n\rAdbObjectType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x07\n\x03\x42US\x10\x01\x12\t\n\x05TRUCK\x10\x02\x12\x15\n\x11\x42IKE_OR_MOTORBIKE\x10\x03\x12\x0e\n\nPEDESTRAIN\x10\x04\x12\x07\n\x03\x43\x41R\x10\x05\x12\t\n\x05MIXED\x10\x06\"a\n\x0e\x41\x64\x62TrafficCond\x12\x15\n\rtoo_many_cars\x18\x01 \x01(\x05\x12\x38\n\rdebug_car_num\x18\x02 \x01(\x0b\x32!.deeproute.perception.CarNumDebug\"\xac\x01\n\x0b\x43\x61rNumDebug\x12\x1a\n\x12inrange_100_income\x18\x01 \x01(\x05\x12\x17\n\x0finrange_100_all\x18\x02 \x01(\x05\x12\x1a\n\x12inrange_150_income\x18\x03 \x01(\x05\x12\x17\n\x0finrange_150_all\x18\x04 \x01(\x05\x12\x1a\n\x12inrange_200_income\x18\x05 \x01(\x05\x12\x17\n\x0finrange_200_all\x18\x06 \x01(\x05\"\xe8\x02\n\x0e\x41\x64\x62TrafficSign\x12\x45\n\x0c\x61\x64\x62_trk_info\x18\x01 \x01(\x0e\x32/.deeproute.perception.AdbTrafficSign.TrackState\x12\x14\n\x0c\x61\x64\x62_abs_dist\x18\x02 \x01(\x02\x12\x16\n\x0e\x61\x64\x62_hozl_ag_le\x18\x03 \x01(\x02\x12\x16\n\x0e\x61\x64\x62_hozl_ag_re\x18\x04 \x01(\x02\x12\x17\n\x0f\x61\x64\x62_vert_ag_top\x18\x05 \x01(\x02\x12\x17\n\x0f\x61\x64\x62_vert_ag_bot\x18\x06 \x01(\x02\x12\x41\n\x08\x61\x64\x62_conf\x18\x07 \x01(\x0e\x32).deeproute.perception.AdbTrafficSign.Conf:\x04HIGH\"-\n\nTrackState\x12\x0b\n\x07TRACKED\x10\x00\x12\x08\n\x04MISS\x10\x01\x12\x08\n\x04LOST\x10\x02\"%\n\x04\x43onf\x12\x07\n\x03LOW\x10\x00\x12\n\n\x06MEDIUM\x10\x01\x12\x08\n\x04HIGH\x10\x02\"\x9f\x01\n\nAdbLight2D\x12*\n\x04\x62\x62ox\x18\x01 \x01(\x0b\x32\x1c.deeproute.perception.BBox2D\x12\x13\n\x0b\x61pprox_dist\x18\x02 \x01(\x02\x12\x12\n\nconfidence\x18\x03 \x01(\x01\x12<\n\tdirection\x18\x04 \x01(\x0e\x32).deeproute.perception.CarObject.Direction')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)perception/deeproute_perception_adb.proto\x12\x14\x64\x65\x65proute.perception\x1a\x15\x63ommon/geometry.proto\x1a.perception/deeproute_perception_obstacle.proto\"\xe7\x02\n\tAdbOutput\x12\x18\n\x10time_measurement\x18\x01 \x01(\x03\x12\x33\n\nadb_object\x18\x02 \x03(\x0b\x32\x1f.deeproute.perception.CarObject\x12>\n\x10\x61\x64\x62_traffic_cond\x18\x03 \x01(\x0b\x32$.deeproute.perception.AdbTrafficCond\x12>\n\x10\x61\x64\x62_traffic_sign\x18\x04 \x03(\x0b\x32$.deeproute.perception.AdbTrafficSign\x12\x37\n\radb_object_2d\x18\x05 \x03(\x0b\x32 .deeproute.perception.AdbLight2D\x12\x19\n\x11\x61hb_has_car_ahead\x18\x06 \x01(\x08\x12\x37\n\x0c\x61\x64\x62_lighting\x18\x07 \x01(\x0b\x32!.deeproute.perception.AdbLighting\"\x9b\x04\n\tCarObject\x12;\n\x04type\x18\x01 \x01(\x0e\x32-.deeproute.perception.PerceptionObstacle.Type\x12\x10\n\x08trk_info\x18\x02 \x01(\x08\x12:\n\x07obj_dir\x18\x03 \x01(\x0e\x32).deeproute.perception.CarObject.Direction\x12\x10\n\x08\x61\x62s_dist\x18\x04 \x01(\x02\x12\x12\n\nhozl_ag_le\x18\x05 \x01(\x02\x12\x12\n\nhozl_ag_re\x18\x06 \x01(\x02\x12\x1a\n\x12obj_hozl_ag_spd_le\x18\x07 \x01(\x02\x12\x1a\n\x12obj_hozl_ag_spd_ri\x18\x08 \x01(\x02\x12\x0f\n\x07vert_ag\x18\t \x01(\x02\x12\x15\n\rpercep_obj_id\x18\n \x03(\x05\x12?\n\x08\x61\x64\x62_type\x18\x0b \x01(\x0e\x32-.deeproute.perception.CarObject.AdbObjectType\".\n\tDirection\x12\t\n\x05OTHER\x10\x00\x12\x08\n\x04SAME\x10\x01\x12\x0c\n\x08OPPOSITE\x10\x02\"x\n\rAdbObjectType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x07\n\x03\x42US\x10\x01\x12\t\n\x05TRUCK\x10\x02\x12\x15\n\x11\x42IKE_OR_MOTORBIKE\x10\x03\x12\x0e\n\nPEDESTRAIN\x10\x04\x12\x07\n\x03\x43\x41R\x10\x05\x12\t\n\x05MIXED\x10\x06\x12\x0b\n\x07\x46\x41KED2D\x10\x07\"a\n\x0e\x41\x64\x62TrafficCond\x12\x15\n\rtoo_many_cars\x18\x01 \x01(\x05\x12\x38\n\rdebug_car_num\x18\x02 \x01(\x0b\x32!.deeproute.perception.CarNumDebug\"\xac\x01\n\x0b\x43\x61rNumDebug\x12\x1a\n\x12inrange_100_income\x18\x01 \x01(\x05\x12\x17\n\x0finrange_100_all\x18\x02 \x01(\x05\x12\x1a\n\x12inrange_150_income\x18\x03 \x01(\x05\x12\x17\n\x0finrange_150_all\x18\x04 \x01(\x05\x12\x1a\n\x12inrange_200_income\x18\x05 \x01(\x05\x12\x17\n\x0finrange_200_all\x18\x06 \x01(\x05\"\xe8\x02\n\x0e\x41\x64\x62TrafficSign\x12\x45\n\x0c\x61\x64\x62_trk_info\x18\x01 \x01(\x0e\x32/.deeproute.perception.AdbTrafficSign.TrackState\x12\x14\n\x0c\x61\x64\x62_abs_dist\x18\x02 \x01(\x02\x12\x16\n\x0e\x61\x64\x62_hozl_ag_le\x18\x03 \x01(\x02\x12\x16\n\x0e\x61\x64\x62_hozl_ag_re\x18\x04 \x01(\x02\x12\x17\n\x0f\x61\x64\x62_vert_ag_top\x18\x05 \x01(\x02\x12\x17\n\x0f\x61\x64\x62_vert_ag_bot\x18\x06 \x01(\x02\x12\x41\n\x08\x61\x64\x62_conf\x18\x07 \x01(\x0e\x32).deeproute.perception.AdbTrafficSign.Conf:\x04HIGH\"-\n\nTrackState\x12\x0b\n\x07TRACKED\x10\x00\x12\x08\n\x04MISS\x10\x01\x12\x08\n\x04LOST\x10\x02\"%\n\x04\x43onf\x12\x07\n\x03LOW\x10\x00\x12\n\n\x06MEDIUM\x10\x01\x12\x08\n\x04HIGH\x10\x02\"\x9f\x01\n\nAdbLight2D\x12*\n\x04\x62\x62ox\x18\x01 \x01(\x0b\x32\x1c.deeproute.perception.BBox2D\x12\x13\n\x0b\x61pprox_dist\x18\x02 \x01(\x02\x12\x12\n\nconfidence\x18\x03 \x01(\x01\x12<\n\tdirection\x18\x04 \x01(\x0e\x32).deeproute.perception.CarObject.Direction\"9\n\x0b\x41\x64\x62Lighting\x12\x11\n\tamb_light\x18\x01 \x01(\x08\x12\x17\n\x0froad_illum_detd\x18\x02 \x01(\x08')
 
 
 
@@ -26,6 +26,7 @@ _ADBTRAFFICCOND = DESCRIPTOR.message_types_by_name['AdbTrafficCond']
 _CARNUMDEBUG = DESCRIPTOR.message_types_by_name['CarNumDebug']
 _ADBTRAFFICSIGN = DESCRIPTOR.message_types_by_name['AdbTrafficSign']
 _ADBLIGHT2D = DESCRIPTOR.message_types_by_name['AdbLight2D']
+_ADBLIGHTING = DESCRIPTOR.message_types_by_name['AdbLighting']
 _CAROBJECT_DIRECTION = _CAROBJECT.enum_types_by_name['Direction']
 _CAROBJECT_ADBOBJECTTYPE = _CAROBJECT.enum_types_by_name['AdbObjectType']
 _ADBTRAFFICSIGN_TRACKSTATE = _ADBTRAFFICSIGN.enum_types_by_name['TrackState']
@@ -72,27 +73,36 @@ AdbLight2D = _reflection.GeneratedProtocolMessageType('AdbLight2D', (_message.Me
   })
 _sym_db.RegisterMessage(AdbLight2D)
 
+AdbLighting = _reflection.GeneratedProtocolMessageType('AdbLighting', (_message.Message,), {
+  'DESCRIPTOR' : _ADBLIGHTING,
+  '__module__' : 'perception.deeproute_perception_adb_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.perception.AdbLighting)
+  })
+_sym_db.RegisterMessage(AdbLighting)
+
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _ADBOUTPUT._serialized_start=139
-  _ADBOUTPUT._serialized_end=414
-  _CAROBJECT._serialized_start=417
-  _CAROBJECT._serialized_end=943
-  _CAROBJECT_DIRECTION._serialized_start=788
-  _CAROBJECT_DIRECTION._serialized_end=834
-  _CAROBJECT_ADBOBJECTTYPE._serialized_start=836
-  _CAROBJECT_ADBOBJECTTYPE._serialized_end=943
-  _ADBTRAFFICCOND._serialized_start=945
-  _ADBTRAFFICCOND._serialized_end=1042
-  _CARNUMDEBUG._serialized_start=1045
-  _CARNUMDEBUG._serialized_end=1217
-  _ADBTRAFFICSIGN._serialized_start=1220
-  _ADBTRAFFICSIGN._serialized_end=1580
-  _ADBTRAFFICSIGN_TRACKSTATE._serialized_start=1496
-  _ADBTRAFFICSIGN_TRACKSTATE._serialized_end=1541
-  _ADBTRAFFICSIGN_CONF._serialized_start=1543
-  _ADBTRAFFICSIGN_CONF._serialized_end=1580
-  _ADBLIGHT2D._serialized_start=1583
-  _ADBLIGHT2D._serialized_end=1742
+  _ADBOUTPUT._serialized_end=498
+  _CAROBJECT._serialized_start=501
+  _CAROBJECT._serialized_end=1040
+  _CAROBJECT_DIRECTION._serialized_start=872
+  _CAROBJECT_DIRECTION._serialized_end=918
+  _CAROBJECT_ADBOBJECTTYPE._serialized_start=920
+  _CAROBJECT_ADBOBJECTTYPE._serialized_end=1040
+  _ADBTRAFFICCOND._serialized_start=1042
+  _ADBTRAFFICCOND._serialized_end=1139
+  _CARNUMDEBUG._serialized_start=1142
+  _CARNUMDEBUG._serialized_end=1314
+  _ADBTRAFFICSIGN._serialized_start=1317
+  _ADBTRAFFICSIGN._serialized_end=1677
+  _ADBTRAFFICSIGN_TRACKSTATE._serialized_start=1593
+  _ADBTRAFFICSIGN_TRACKSTATE._serialized_end=1638
+  _ADBTRAFFICSIGN_CONF._serialized_start=1640
+  _ADBTRAFFICSIGN_CONF._serialized_end=1677
+  _ADBLIGHT2D._serialized_start=1680
+  _ADBLIGHT2D._serialized_end=1839
+  _ADBLIGHTING._serialized_start=1841
+  _ADBLIGHTING._serialized_end=1898
 # @@protoc_insertion_point(module_scope)

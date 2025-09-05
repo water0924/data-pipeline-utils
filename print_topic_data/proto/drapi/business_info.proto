@@ -15,6 +15,85 @@ message Travel {
   uint32 end_time = 4;
 }
 
+enum BlcSpeedLimitStrategy {
+  SPEEDLIMIT_STRATEGY_UNKNOWN = 0;
+  SNOW_MODE = 1; //雪天模式降速
+  HEAVY_RAIN = 2; //雨天降速
+  SINGLE_LANE = 3; //单车道降速
+  SPEED_OFFSET = 4; //限速偏移
+  NCA_ACTIVE_SPEED_LIMIT = 5; //功能激活限速
+  MAP_STRATEGY_SPEED_LIMIT = 6; //地图策略限速
+  KEEP_LAST_MANUAL_SPEED_LIMIT = 7; //保持上个限速段用户设置限速
+  KEEP_BEFORE_STRATEGY_MANUAL_SPEED_LIMIT = 8; //保持进入限速策略前用户设置的限速
+  KEEP_PLANNING_USE_NEXT_MANUAL_SPEED_LIMIT = 9; //保持planning预减速段用户设置的限速
+  KEEP_BEFORE_CAMERA_SPEED_LIMIT = 10; //保持进入电子眼前的限速
+  PLANNING_USE_NEXT = 11; //planning预减速
+  KEEP_LAST_ROAD_CLASS_MANUAL_SPEED_LIMIT = 12; //保持上一个道路类型用户调节的限速
+  MANUAL_SPEED_LIMIT = 13; //用户调节限速
+  UPPER_LIMIT = 14; //限速上限
+  LOWER_LIMIT = 15; //限速下限 
+}
+
+enum BlcTriggerType {
+  UNKNOWN_TRIGGER = 0;
+  TRIGGER_BY_VOICE = 1;
+}
+
+enum ChangeValueAction {
+  CHANGE_VALUE_ACTION_UNKNOWN = 0;
+  SET = 1;
+  INCREASE = 2;
+  DECREASE = 3;
+  INCREASE_TO_MAX = 4;
+  DECREASE_TO_MIN = 5;
+}
+
+enum ReachingBoundariesType {
+  REACHING_BOUNDARIES_TYPE_UNKNOWN = 0;
+  REACHING_UPPER_LIMIT = 1;
+  REACHING_LOWER_LIMIT = 2;
+}
+
+
+enum ChangeRoutingAction {
+  CHANGE_ROUTING_ACTION_UNKNOWN = 0;
+  TURN_LEFT = 1;
+  TURN_RIGHT = 2;
+  GO_STRAIGHT = 3;
+  U_TURN = 4;
+}
+
+message PositionOfAction {
+  enum PositionType {
+    PositionType_unknown = 0;
+    INTERSECTION_AHEAD = 1;
+    METERS_AHEAD = 2;
+  }  
+  PositionType type = 1;
+  // 前方第几个路口
+  int32 intersection_ahead_num = 2;
+  // 前方多少米
+  int32 meters_ahead = 3;
+}
+
+enum PullOverType {
+  PULL_OVER_TYPE_UNKNOWN = 0;
+  PULL_OVER = 1; //非指定点靠边停车
+  ON_DESTINATION_PARKING_DESIGNATED_SPOT = 2; //终点指定点靠边停车
+  PARKING_DESIGNATED_SPOT = 3; //指定点靠边停车
+}
+
+// 场景策略类型
+enum BlcSceneStrategyType {
+  SCENE_NO_SCENE = 0;                  // 无场景
+  SCENE_BLIND_NARROW_TO_WIDE = 50;         // 盲区小路到大路
+  SCENE_BLIND_OPENING = 60;                // 盲区豁口
+  SCENE_BLIND_MERGING = 70;                // 盲区汇入
+  SCENE_BLIND_CURVE = 80;                  // 弯道盲区
+  SCENE_BLIND_UTURN = 90;                  // 盲区掉头
+}
+
+
 // ACC
 enum SpeedLimitType {
   RELATIVE_SPEED_LIMIT = 0;

@@ -356,6 +356,9 @@ message RadarObs {
   // relative or absolute >> true rel  ||  false abs
   optional bool is_rel_speed = 31 [default = true];
   optional RadarType radar_type = 32;
+  optional double longitude_absolute_vel = 33 [default = 0.0];
+  optional double lateral_absolute_vel = 34 [default = 0.0];
+  optional bool has_absolute_velocity = 35 [default = false]; 
 }
 
 message GMState {
@@ -366,6 +369,17 @@ message GMState {
   optional uint32 blind_state = 5;
   optional uint64 as_timestamp = 6;
   optional uint32 hdr_timestamp = 7;
+  optional uint32 hdr_timestamp_status = 8;
+}
+
+message GLState {
+  optional string radar = 1;
+  optional uint32 rdr_sts_blkd0bin = 2;
+  optional uint32 rdr_sts_faulty = 3;
+  optional uint32 rdr_sts_mis_align = 4;
+  optional uint32 rdr_sts_sfty_flt = 5;
+  optional uint32 rdr_sts_chks = 6;
+  optional uint32 rdr_sts_cntr = 7;
 }
 
 message Radar {
@@ -381,4 +395,5 @@ message Radar {
   repeated HwRadarRoads hwroads = 7;
   repeated RadarObs radar_obs = 8;
   repeated GMState gm_state = 9;
+  repeated GLState gl_state = 10;
 }

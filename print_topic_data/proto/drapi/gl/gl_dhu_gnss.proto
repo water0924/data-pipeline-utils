@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package gl.dhu;
+
+// topic: /gl/dhu_imu_ins
+message ImuInsData {
+  message ImuData {
+    int32 acce_x = 1;
+    int32 acce_y = 2;
+    int32 acce_z = 3;
+    int32 gyro_x = 4;
+    int32 gyro_y = 5;
+    int32 gyro_z = 6;
+    uint32 imu_sts = 7;
+    uint64 gnss_utc_time_ms = 8;
+  }
+
+  message InsData {
+    double longitude = 1;
+    double latitude = 2;
+    float altitude = 3;
+    float velo_e = 4;
+    float velo_n = 5;
+    float velo_u = 6;
+    uint64 gnss_utc_time_ms = 7;
+    float roll = 8;
+    float pitch = 9;
+    float yaw = 10;
+    float velob_x = 11;
+    float velob_y = 12;
+    float velob_Z = 13;
+    float accb_x = 14;
+    float accb_y = 15;
+    float accb_Z = 16;
+    uint32 pos_type_of_integrated = 17;
+    uint32 pos_type_of_gnss = 18;
+  }
+
+  ImuData imu_data = 1;
+  InsData ins_data = 2; 
+}

@@ -34,6 +34,12 @@ message UltrasonicState {
   optional bool fpas_dispcmd = 2;
   optional WorkStsType apasys_workstatus = 3;
   repeated uint32 probe_fault_status = 4;
+  optional uint32 pdc_mute_btn_sts = 5;
+  optional uint32 frnt_min_dst = 6;
+  optional uint32 frnt_stop_disp_req = 7;
+  optional uint32 re_min_dst = 8;
+  optional uint32 re_stop_disp_req = 9;
+  repeated uint32 object_area_distance_list = 10; // pdc 分区距离
 }
 
 message UltrasonicObject {
@@ -87,6 +93,7 @@ message UltrasonicObstacle {
   optional ObstacleType obstacle_type = 8;
   optional double confidence = 9;
   optional uint32 id = 10;
+  optional uint32 is_memorized = 11;
 }
 
 message UltrasonicParkingSlot {
@@ -163,6 +170,14 @@ message UltrasonicParkingSlot {
   optional ObjectType slot_obj_end_pt_status = 33;
 }
 
+message UltrasonicDebugData {
+  optional double timestamp = 1;
+  optional bytes msg_data64 = 2;
+  optional uint32 msg_id = 3;
+  optional uint32 update_cnt = 4;
+  optional uint32 lock_flag = 5;
+}
+
 message Ultrasonic {
   optional deeproute.common.Header header = 1;
   //@C_Mark@12@;
@@ -175,4 +190,5 @@ message Ultrasonic {
   optional UltrasonicType type = 6;
 
   optional UltrasonicState state = 7;
+  repeated UltrasonicDebugData debug_data = 8;
 }

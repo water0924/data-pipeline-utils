@@ -12,13 +12,15 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from proto.routing import collection_trigger_rule_pb2 as routing_dot_collection__trigger__rule__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16recorder/trigger.proto\x12\x12\x64\x65\x65proute.recorder\"p\n\x0eTriggerRequest\x12\r\n\x05\x65vent\x18\x01 \x01(\t\x12\x12\n\nevent_uuid\x18\x02 \x01(\t\x12\x13\n\x0bmodule_name\x18\x03 \x01(\t\x12\x12\n\ndelay_time\x18\x04 \x01(\r\x12\x12\n\nsub_events\x18\x05 \x03(\t')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16recorder/trigger.proto\x12\x12\x64\x65\x65proute.recorder\x1a%routing/collection_trigger_rule.proto\"p\n\x0eTriggerRequest\x12\r\n\x05\x65vent\x18\x01 \x01(\t\x12\x12\n\nevent_uuid\x18\x02 \x01(\t\x12\x13\n\x0bmodule_name\x18\x03 \x01(\t\x12\x12\n\ndelay_time\x18\x04 \x01(\r\x12\x12\n\nsub_events\x18\x05 \x03(\t\"\xe8\x01\n\x15GradingTriggerRequest\x12\x15\n\rscenario_name\x18\x01 \x01(\t\x12\x13\n\x0bscenario_id\x18\x02 \x01(\r\x12\x0f\n\x07link_id\x18\x03 \x01(\x04\x12H\n\x0e\x63ollection_arg\x18\x04 \x01(\x0b\x32\x30.deeproute.collection_trigger_rule.CollectionArg\x12\x12\n\ndelay_time\x18\x05 \x01(\r\x12\x1b\n\x13trigger_limit_times\x18\x06 \x01(\x05\x12\x17\n\x0fskip_compliance\x18\x07 \x01(\x08')
 
 
 
 _TRIGGERREQUEST = DESCRIPTOR.message_types_by_name['TriggerRequest']
+_GRADINGTRIGGERREQUEST = DESCRIPTOR.message_types_by_name['GradingTriggerRequest']
 TriggerRequest = _reflection.GeneratedProtocolMessageType('TriggerRequest', (_message.Message,), {
   'DESCRIPTOR' : _TRIGGERREQUEST,
   '__module__' : 'recorder.trigger_pb2'
@@ -26,9 +28,18 @@ TriggerRequest = _reflection.GeneratedProtocolMessageType('TriggerRequest', (_me
   })
 _sym_db.RegisterMessage(TriggerRequest)
 
+GradingTriggerRequest = _reflection.GeneratedProtocolMessageType('GradingTriggerRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GRADINGTRIGGERREQUEST,
+  '__module__' : 'recorder.trigger_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.recorder.GradingTriggerRequest)
+  })
+_sym_db.RegisterMessage(GradingTriggerRequest)
+
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _TRIGGERREQUEST._serialized_start=46
-  _TRIGGERREQUEST._serialized_end=158
+  _TRIGGERREQUEST._serialized_start=85
+  _TRIGGERREQUEST._serialized_end=197
+  _GRADINGTRIGGERREQUEST._serialized_start=200
+  _GRADINGTRIGGERREQUEST._serialized_end=432
 # @@protoc_insertion_point(module_scope)

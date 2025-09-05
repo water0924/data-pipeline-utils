@@ -158,6 +158,10 @@ message NspUsageStateInfo {
   bool crossing_intersection = 6;
   //正在绕行障碍物
   bool winding_around_obstacle = 7;
+  // 通过环岛
+  bool pass_roundabout = 8;
+  // 通过掉头
+  bool pass_u_turn = 9;
 }
 
 message FunctionalBehavior {

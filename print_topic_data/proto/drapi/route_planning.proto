@@ -68,6 +68,14 @@ enum NudgeType {
   OUT_OF_LANE = 2;
 }
 
+enum VLAAction {
+  VLA_ACTION_NO_ACTION = 0;
+  CURRENT_LANE_ACCELERATE = 1;
+  RIGHT_GIVE_WAY = 2;
+  LANE_CHANGE_TO_SECOND_RIGHT = 3;
+  LANE_CHANGE_TO_MOST_RIGHT = 4;
+}
+
 enum BehaviorReason {
   // commom 1~100
   CHANGE_REASON_UNKNOWN = 0;
@@ -110,6 +118,19 @@ enum BehaviorReason {
   // nudge 200~300
   STATIC_OBJECT = 200;
   LARGE_VEHICLE = 201;
+
+  //PullOver 301~400
+  TASK_TIMEOUT = 301;
+  USER_CANCEL = 302;
+  NO_MIDDLE_REFLINE = 303;
+  TOO_CLOSE_TO_ROUTING_END = 304;
+  FAILED_TO_SECOND_RIGHT = 305;
+  FAILED_TO_MOST_RIGHT = 306;
+  FAILED_TO_POI_RANGE = 307;  
+
+  //OVERTAKE 401-500
+  NO_OVERTAKE_TARGET = 401;
+  OVERTAKE_TARGET_NULL = 402;  
 }
 
 enum LaneChangeStatus {
@@ -124,6 +145,14 @@ enum LaneChangeStatus {
   RECOVERING = 8;
   FRONT_CENTER_CROSSED = 9;
   LANE_CHANGE_HOLD = 10;
+}
+
+enum VLAStatus {
+  VLA_STANDBY = 0;
+  VLA_DURING = 1;
+  VLA_SUCCEEDED = 2;
+  VLA_FAILED = 3;
+  VLA_END = 4;
 }
 
 enum StopReason {
@@ -155,6 +184,12 @@ message LaneChangeRelated {
   dr.base.Point2DWithHeading target_position = 3;
   BehaviorReason lane_change_reason = 4;
   LaneChangeStatus lane_change_status = 5;
+}
+
+message VLARelated {
+  VLAStatus vla_status = 1;
+  BehaviorReason vla_failure_reason = 2;
+  VLAAction vla_action = 3;
 }
 
 message DisengagementWarning {

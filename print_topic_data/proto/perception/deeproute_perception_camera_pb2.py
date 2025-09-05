@@ -18,17 +18,19 @@ from proto.perception import deeproute_perception_ras_map_pb2 as perception_dot_
 from proto.common import geometry_pb2 as common_dot_geometry__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n,perception/deeproute_perception_camera.proto\x12\x14\x64\x65\x65proute.perception\x1a.perception/deeproute_perception_obstacle.proto\x1a(perception/traffic_light_detection.proto\x1a-perception/deeproute_perception_ras_map.proto\x1a\x15\x63ommon/geometry.proto\"\xec\x02\n\x0f\x43\x61meraDebugInfo\x12:\n\x08tl_color\x18\x01 \x01(\x0e\x32(.deeproute.perception.TrafficLight.Color\x12\x33\n\rprojected_roi\x18\x02 \x01(\x0b\x32\x1c.deeproute.perception.BBox2D\x12\x13\n\x0bsensor_name\x18\x03 \x01(\t\x12\x37\n\x07tl_type\x18\x04 \x01(\x0e\x32&.deeproute.perception.TrafficLightType\x12+\n\x08position\x18\x05 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x35\n\x0bmap_element\x18\x06 \x01(\x0b\x32 .deeproute.perception.MapElement\x12\x19\n\x11\x63ount_down_number\x18\x07 \x01(\x05\x12\x1b\n\x10is_traffic_light\x18\x08 \x01(\x05:\x01\x30\"\xdf\x16\n\x0fTrafficSignInfo\x12\x41\n\tsign_type\x18\x01 \x01(\x0e\x32..deeproute.perception.TrafficSignInfo.SignType\x12\x13\n\x0blimit_value\x18\x02 \x01(\x02\x12\x18\n\x10matched_lane_ids\x18\x03 \x03(\x05\x12\x18\n\x10matched_link_ids\x18\x04 \x03(\x04\x12\x0f\n\x07heading\x18\x05 \x01(\x02\x12\x1a\n\x0bis_ego_sign\x18\x06 \x01(\x08:\x05\x66\x61lse\x12\x1c\n\ris_on_vehicle\x18\x07 \x01(\x08:\x05\x66\x61lse\x12\x31\n\x0epos_from_lidar\x18\x08 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x1c\n\ris_from_cache\x18\t \x01(\x08:\x05\x66\x61lse\"\xa3\x14\n\x08SignType\x12\x10\n\x0cSIGN_BAN_CAR\x10\x00\x12\x12\n\x0eSIGN_BAN_ENTER\x10\x01\x12\x13\n\x0fSIGN_BAN_HEIGHT\x10\x02\x12\x11\n\rSIGN_BAN_LEFT\x10\x03\x12\x17\n\x13SIGN_BAN_LEFT_RIGHT\x10\x04\x12\x12\n\x0eSIGN_BAN_OTHER\x10\x05\x12\x15\n\x11SIGN_BAN_OVERTAKE\x10\x06\x12\x14\n\x10SIGN_BAN_PARKING\x10\x07\x12\x11\n\rSIGN_BAN_PASS\x10\x08\x12\x12\n\x0eSIGN_BAN_RIGHT\x10\t\x12\x11\n\rSIGN_BAN_SLOW\x10\n\x12\x11\n\rSIGN_BAN_STOP\x10\x0b\x12\x15\n\x11SIGN_BAN_STRAIGHT\x10\x0c\x12\x1b\n\x17SIGN_BAN_STRAIGHT_RIGHT\x10\r\x12\x14\n\x10SIGN_BAN_TRAILER\x10\x0e\x12\x13\n\x0fSIGN_BAN_U_TURN\x10\x0f\x12\x14\n\x10SIGN_BAN_VEHICLE\x10\x10\x12\x13\n\x0fSIGN_BAN_WEIGHT\x10\x11\x12\x16\n\x12SIGN_ENTER_HIGHWAY\x10\x12\x12\x12\n\x0eSIGN_MAX_SPEED\x10\x13\x12\x12\n\x0eSIGN_MIN_SPEED\x10\x14\x12\x12\n\x0eSIGN_NON_SPEED\x10\x15\x12\x0e\n\nSIGN_OTHER\x10\x16\x12\x14\n\x10SIGN_OUT_HIGHWAY\x10\x17\x12\x17\n\x13SIGN_UNBAN_OVERTAKE\x10\x18\x12\x16\n\x12SIGN_WARN_ACCIDENT\x10\x19\x12\x14\n\x10SIGN_WARN_ANIMAL\x10\x1a\x12\x15\n\x11SIGN_WARN_BICYCLE\x10\x1b\x12\x1a\n\x16SIGN_WARN_CONSTRUCTION\x10\x1c\x12\x13\n\x0fSIGN_WARN_CROSS\x10\x1d\x12\x11\n\rSIGN_WARN_FOG\x10\x1e\x12\x16\n\x12SIGN_WARN_ICE_ROAD\x10\x1f\x12\x11\n\rSIGN_WARN_KID\x10 \x12\x18\n\x14SIGN_WARN_LEFT_MERGE\x10!\x12\x1d\n\x19SIGN_WARN_LEFT_SHARP_TURN\x10\"\x12\x17\n\x13SIGN_WARN_LIVESTOCK\x10#\x12\x17\n\x13SIGN_WARN_MORE_TURN\x10$\x12\x13\n\x0fSIGN_WARN_OTHER\x10%\x12\x14\n\x10SIGN_WARN_PEOPLE\x10&\x12\x12\n\x0eSIGN_WARN_RAIN\x10\'\x12\x19\n\x15SIGN_WARN_RIGHT_MERGE\x10(\x12\x1e\n\x1aSIGN_WARN_RIGHT_SHARP_TURN\x10)\x12\x12\n\x0eSIGN_WARN_SLOW\x10*\x12\x18\n\x14SIGN_WARN_TWO_TURN_1\x10+\x12\x18\n\x14SIGN_WARN_TWO_TURN_2\x10,\x12\x15\n\x11SIGN_WARN_VILLAGE\x10-\x12\x15\n\x11SIGN_WARN_WEATHER\x10.\x12\x14\n\x10SIGN_WARN_UPHILL\x10/\x12\x16\n\x12SIGN_WARN_DOWNHILL\x10\x30\x12\x1b\n\x17SIGN_WARN_MORE_DOWNHILL\x10\x31\x12\x12\n\x0eSIGN_WARN_WIND\x10\x32\x12\x16\n\x12SIGN_WARN_SLIPPERY\x10\x33\x12\x14\n\x10SIGN_WARN_TUNNEL\x10\x34\x12\x13\n\x0fSIGN_WARN_BUMPY\x10\x35\x12\x13\n\x0fSIGN_WARN_WATER\x10\x36\x12\x14\n\x10SIGN_WARN_DETOUR\x10\x37\x12\x19\n\x15SIGN_WARN_LEFT_DETOUR\x10\x38\x12\x1a\n\x16SIGN_WARN_RIGHT_DETOUR\x10\x39\x12\x13\n\x0fSIGN_WARN_MERGE\x10:\x12\x14\n\x10SIGN_WARN_NARROW\x10;\x12\x1b\n\x17SIGN_WARN_ACCIDENT_MANA\x10<\x12\x12\n\x0eSIGN_WARN_BUMP\x10=\x12\x15\n\x11SIGN_WARN_TWO_WAY\x10>\x12\x1c\n\x18SIGN_WARN_RIGHT_MOUNTAIN\x10?\x12\x1a\n\x16SIGN_WARN_RIGHT_NARROW\x10@\x12\x18\n\x14SIGN_WARN_EMBANKMENT\x10\x41\x12\x15\n\x11SIGN_WARN_RAILWAY\x10\x42\x12\x1b\n\x17SIGN_WARN_GUARD_RAILWAY\x10\x43\x12\x16\n\x12SIGN_WARN_DISTANCE\x10\x44\x12\x1b\n\x17SIGN_WARN_TRAFFIC_LIGHT\x10\x45\x12\x13\n\x0fSIGN_WARN_QUEUE\x10\x46\x12\x14\n\x10SIGN_WARN_DANGER\x10G\x12\x18\n\x14SIGN_WARN_RIGHT_ROCK\x10H\x12\x17\n\x13SIGN_WARN_LEFT_ROCK\x10I\x12\x18\n\x14SIGN_WARN_TIDAL_LANE\x10J\x12\x1b\n\x17SIGN_WARN_NARROW_BRIDGE\x10K\x12\x19\n\x15SIGN_WARN_HUMP_BRIDGE\x10L\x12\x19\n\x15SIGN_BAN_WAIT_MEETING\x10M\x12\x1a\n\x16SIGN_BAN_TRUCK_TRAILER\x10N\x12\x11\n\rSIGN_BAN_HORN\x10O\x12\x16\n\x12SIGN_BAN_LONG_STOP\x10P\x12\x16\n\x12SIGN_ASS_LEFT_RAMP\x10Q\x12\x10\n\x0cSIGN_ASS_CAR\x10R\x12\x16\n\x12SIGN_ASS_CAR_TRUCK\x10S\x12\x12\n\x0eSIGN_ASS_TRUCK\x10T\x12\x10\n\x0cSIGN_ASS_BUS\x10U\x12\x16\n\x12SIGN_ASS_DIRECTION\x10V\x12\x12\n\x0eSIGN_ASS_FRONT\x10W\x12\x12\n\x0eSIGN_ASS_RIGHT\x10X\x12\x11\n\rSIGN_ASS_LEFT\x10Y\x12\x17\n\x13SIGN_ASS_LEFT_RIGHT\x10Z\x12\x11\n\rSIGN_ASS_TIME\x10[\x12\x11\n\rSIGN_INS_MEET\x10\\\x12\x16\n\x12SIGN_INS_LEFT_LANE\x10]\x12\x17\n\x13SIGN_INS_RIGHT_LANE\x10^\x12\x1d\n\x19SIGN_INS_LEFT_U_TURN_LANE\x10_\x12\x18\n\x14SIGN_INS_U_TURN_LANE\x10`\x12\x1c\n\x18SIGN_INS_STRA_RIGHT_LANE\x10\x61\x12\x1b\n\x17SIGN_INS_STRA_LEFT_LANE\x10\x62\x12\x16\n\x12SIGN_INS_STRA_LANE\x10\x63\x12\x12\n\x0eSIGN_INS_RIGHT\x10\x64\x12\x11\n\rSIGN_INS_LEFT\x10\x65\x12\x17\n\x13SIGN_INS_STRA_RIGHT\x10\x66\x12\x16\n\x12SIGN_INS_STRA_LEFT\x10g\x12\x11\n\rSIGN_INS_STRA\x10h\x12\x17\n\x13SIGN_INS_LEFT_RIGHT\x10i\x12\x13\n\x0fSIGN_INS_U_TURN\x10j\x12\x15\n\x11SIGN_INS_SEP_LEFT\x10k\x12\x16\n\x12SIGN_INS_SEP_RIGHT\x10l\x12\x15\n\x11SIGN_INS_BAN_PASS\x10m\x12\x1a\n\x16SIGN_NON_SPEED_GENERAL\x10n\"\x82\x01\n\x08\x42\x65\x61mInfo\x12:\n\tbeam_type\x18\x01 \x01(\x0e\x32\'.deeproute.perception.BeamInfo.BeamType\":\n\x08\x42\x65\x61mType\x12\x0f\n\x0b\x46RONT_LIGHT\x10\x00\x12\r\n\tUNCERTAIN\x10\x01\x12\x0e\n\nBACK_LIGHT\x10\x02\"\xc9\x04\n\x0e\x43\x61meraObstacle\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x18\n\x10\x63onfidence_score\x18\x02 \x01(\x01\x12,\n\x06\x62\x62ox2d\x18\x03 \x01(\x0b\x32\x1c.deeproute.perception.BBox2D\x12\x37\n\x04type\x18\x04 \x01(\x0e\x32).deeproute.perception.CameraObstacle.Type\x12\x11\n\ttimestamp\x18\x05 \x01(\x03\x12>\n\x08tl_color\x18\x06 \x01(\x0e\x32(.deeproute.perception.TrafficLight.ColorB\x02\x18\x01\x12\x39\n\ndebug_info\x18\x07 \x01(\x0b\x32%.deeproute.perception.CameraDebugInfo\x12@\n\x11traffic_sign_info\x18\x08 \x01(\x0b\x32%.deeproute.perception.TrafficSignInfo\x12\x31\n\tbeam_info\x18\t \x01(\x0b\x32\x1e.deeproute.perception.BeamInfo\"\xa6\x01\n\x04Type\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x11\n\rTRAFFIC_LIGHT\x10\x01\x12\x10\n\x0cTRAFFIC_SIGN\x10\x02\x12\x0e\n\nPEDESTRIAN\x10\x03\x12\x0b\n\x07\x42ICYCLE\x10\x04\x12\x0b\n\x07VEHICLE\x10\x05\x12\x13\n\x0fUNKNOWN_MOVABLE\x10\x06\x12\x15\n\x11UNKNOWN_UNMOVABLE\x10\x07\x12\x0c\n\x08LANEMARK\x10\x08\x12\x08\n\x04\x42\x45\x41M\x10\t\"n\n\x12LaneLineCubicCurve\x12\x15\n\rlongitude_min\x18\x01 \x01(\x02\x12\x15\n\rlongitude_max\x18\x02 \x01(\x02\x12\t\n\x01\x61\x18\x03 \x01(\x02\x12\t\n\x01\x62\x18\x04 \x01(\x02\x12\t\n\x01\x63\x18\x05 \x01(\x02\x12\t\n\x01\x64\x18\x06 \x01(\x02\"]\n\tEndPoints\x12(\n\x05start\x18\x01 \x01(\x0b\x32\x19.deeproute.common.Point2D\x12&\n\x03\x65nd\x18\x02 \x01(\x0b\x32\x19.deeproute.common.Point2D\"\xd4\x06\n\x0e\x43\x61meraLaneLine\x12?\n\x04type\x18\x01 \x01(\x0e\x32\x31.deeproute.perception.CameraLaneLine.LaneLineType\x12K\n\x08pos_type\x18\x02 \x01(\x0e\x32\x39.deeproute.perception.CameraLaneLine.LaneLinePositionType\x12\x44\n\x12\x63urve_camera_coord\x18\x03 \x01(\x0b\x32(.deeproute.perception.LaneLineCubicCurve\x12\x43\n\x11\x63urve_image_coord\x18\x04 \x01(\x0b\x32(.deeproute.perception.LaneLineCubicCurve\x12-\n\ncam_points\x18\x05 \x03(\x0b\x32\x19.deeproute.common.Point3D\x12-\n\nimg_points\x18\x06 \x03(\x0b\x32\x19.deeproute.common.Point2D\x12<\n\x13image_end_point_set\x18\x07 \x03(\x0b\x32\x1f.deeproute.perception.EndPoints\x12\x10\n\x08track_id\x18\x08 \x01(\x05\x12\x12\n\nconfidence\x18\t \x01(\x02\"\x85\x01\n\x0cLaneLineType\x12\x10\n\x0cUNKNOWN_TYPE\x10\x00\x12\x10\n\x0c\x44\x41SHED_WHITE\x10\x01\x12\x0f\n\x0bSOLID_WHITE\x10\x02\x12\x11\n\rDASHED_YELLOW\x10\x03\x12\x10\n\x0cSOLID_YELLOW\x10\x04\x12\x11\n\rDOUBLE_YELLOW\x10\x05\x12\x08\n\x04\x43URB\x10\x06\"\xde\x01\n\x14LaneLinePositionType\x12\x19\n\x15UNKNOWN_POSITION_TYPE\x10\x00\x12\x10\n\x0c\x42OLLARD_LEFT\x10\x01\x12\x0f\n\x0b\x46OURTH_LEFT\x10\x02\x12\x0e\n\nTHIRD_LEFT\x10\x03\x12\x11\n\rADJACENT_LEFT\x10\x04\x12\x0c\n\x08\x45GO_LEFT\x10\x05\x12\r\n\tEGO_RIGHT\x10\x06\x12\x12\n\x0e\x41\x44JACENT_RIGHT\x10\x07\x12\x0f\n\x0bTHIRD_RIGHT\x10\x08\x12\x10\n\x0c\x46OURTH_RIGHT\x10\t\x12\x11\n\rBOLLARD_RIGHT\x10\n\"\xaa\x01\n\x0f\x43\x61meraObstacles\x12\x18\n\x10time_measurement\x18\x01 \x01(\x03\x12=\n\x0f\x63\x61mera_obstacle\x18\x02 \x03(\x0b\x32$.deeproute.perception.CameraObstacle\x12>\n\x10\x63\x61mera_lane_line\x18\x03 \x03(\x0b\x32$.deeproute.perception.CameraLaneLine\"\x91\x04\n\x11\x43\x61meraQualityInfo\x12Q\n\rabnormal_type\x18\x01 \x01(\x0e\x32:.deeproute.perception.CameraQualityInfo.CamereAbnormalType\x12\x13\n\x0bsensor_name\x18\x02 \x01(\t\x12Q\n\rquality_level\x18\x03 \x01(\x0e\x32:.deeproute.perception.CameraQualityInfo.CamereQualityLevel\x12\x1b\n\x13keep_time_in_second\x18\x04 \x01(\x05\x12\x17\n\x0f\x62lur_area_ratio\x18\x05 \x01(\x02\x12\x16\n\x0eocc_area_ratio\x18\x06 \x01(\x02\x12\x12\n\nblur_score\x18\x07 \x01(\x02\x12\x17\n\x0fstart_timestamp\x18\x08 \x01(\x03\x12\x14\n\x0cis_face_wall\x18\t \x01(\x08\x12\x16\n\x0ewall_timestamp\x18\n \x01(\x03\"G\n\x12\x43\x61mereAbnormalType\x12\n\n\x06NORMAL\x10\x00\x12\x08\n\x04\x42LUR\x10\x01\x12\t\n\x05SMEAR\x10\x02\x12\x10\n\x0cOverExposure\x10\x03\"O\n\x12\x43\x61mereQualityLevel\x12\x12\n\x0eNORMAL_QUALITY\x10\x00\x12\x0f\n\x0bLOW_QUALITY\x10\x01\x12\x14\n\x10VERY_LOW_QUALITY\x10\x02\"o\n\rCameraQuality\x12\x18\n\x10time_measurement\x18\x01 \x01(\x03\x12\x44\n\x13\x63\x61mera_quality_info\x18\x02 \x03(\x0b\x32\'.deeproute.perception.CameraQualityInfo\"\xe8\x01\n\x0c\x43\x61meraScheme\x12J\n\rcamera_scheme\x18\x01 \x01(\x0e\x32\x33.deeproute.perception.CameraScheme.CameraSchemeType\x12\x1a\n\x12\x63\x61mera_scheme_prob\x18\x02 \x01(\x02\"p\n\x10\x43\x61meraSchemeType\x12\x0b\n\x07REGULAR\x10\x00\x12\x08\n\x04RAIN\x10\x01\x12\x08\n\x04SNOW\x10\x02\x12\t\n\x05\x46ROST\x10\x03\x12\x07\n\x03\x46OG\x10\x04\x12\n\n\x06SMUDGE\x10\x05\x12\x0e\n\nSAND_STORM\x10\x07\x12\x0b\n\x07UNKNOWN\x10\x06\"\xde\x02\n\x0c\x43\x61meraRegion\x12J\n\rcamera_region\x18\x01 \x01(\x0e\x32\x33.deeproute.perception.CameraRegion.CameraRegionType\x12\x1a\n\x12\x63\x61mera_region_prob\x18\x02 \x01(\x02\"\xe5\x01\n\x10\x43\x61meraRegionType\x12\x08\n\x04NONE\x10\x00\x12\x12\n\x0eOUTSIDE_TUNNEL\x10\x01\x12\x11\n\rINSIDE_TUNNEL\x10\x02\x12\x1b\n\x17UNDERGROUND_PARKING_LOT\x10\x03\x12\x16\n\x12GROUND_PARKING_LOT\x10\x04\x12\x10\n\x0cTOLL_STATION\x10\x05\x12\x15\n\x11\x43ONSTRUCTION_AREA\x10\x06\x12\x14\n\x10\x42US_PARKING_AREA\x10\x07\x12\x0b\n\x07HIGHWAY\x10\x08\x12\x0e\n\nRURAL_ROAD\x10\t\x12\x0f\n\x0bGAS_STATION\x10\n\"\xb8\x02\n\x13\x43\x61meraRoadCondition\x12`\n\x15\x63\x61mera_road_condition\x18\x01 \x01(\x0e\x32\x41.deeproute.perception.CameraRoadCondition.CameraRoadConditionType\x12\"\n\x1a\x63\x61mera_road_condition_prob\x18\x02 \x01(\x02\"\x9a\x01\n\x17\x43\x61meraRoadConditionType\x12\x0b\n\x07REGULAR\x10\x00\x12\x08\n\x04\x44UST\x10\x01\x12\x0c\n\x08SLIPERRY\x10\x02\x12\x0b\n\x07PONDING\x10\x03\x12\x0c\n\x08PATHHOLE\x10\x04\x12\t\n\x05ICING\x10\x05\x12\x0b\n\x07UNKNOWN\x10\x06\x12\x0b\n\x07POTHOLE\x10\x07\x12\x0e\n\nSNOW_COVER\x10\x08\x12\n\n\x06\x46REEZE\x10\t\"\x82\x01\n\rImageLighting\x12\x0e\n\x06\x63\x61mera\x18\x01 \x01(\t\x12\x0e\n\x06\x62right\x18\x02 \x01(\x02\x12Q\n\nlight_type\x18\x03 \x01(\x0e\x32=.deeproute.perception.CameraLightingStatus.CameraLightingType\"\x8b\x01\n\x0cHmaDebugInfo\x12<\n\x0fimage_lightings\x18\x01 \x03(\x0b\x32#.deeproute.perception.ImageLighting\x12\x1a\n\x12valid_obstacle_ids\x18\x02 \x03(\x05\x12!\n\x19outside_rail_obstacle_ids\x18\x03 \x03(\x05\"\x98\x02\n\x14\x43\x61meraLightingStatus\x12Q\n\nlight_type\x18\x01 \x01(\x0e\x32=.deeproute.perception.CameraLightingStatus.CameraLightingType\x12\x12\n\nlight_prob\x18\x02 \x01(\x02\x12\x19\n\x11has_vehicle_ahead\x18\x03 \x01(\x08\x12:\n\x0ehma_debug_info\x18\x04 \x01(\x0b\x32\".deeproute.perception.HmaDebugInfo\"B\n\x12\x43\x61meraLightingType\x12\x08\n\x04\x44USK\x10\x00\x12\x08\n\x04\x44\x41RK\x10\x01\x12\n\n\x06\x42RIGHT\x10\x02\x12\x0c\n\x08\x44\x41Y_TIME\x10\x03\"\xad\x01\n\x10\x43\x61meraTimeStatus\x12K\n\x0b\x63\x61mera_time\x18\x01 \x01(\x0e\x32\x36.deeproute.perception.CameraTimeStatus.CameraTimesType\x12\x18\n\x10\x63\x61mera_time_prob\x18\x02 \x01(\x02\"2\n\x0f\x43\x61meraTimesType\x12\x07\n\x03\x44\x41Y\x10\x00\x12\x0b\n\x07\x45VENING\x10\x01\x12\t\n\x05NIGHT\x10\x02\"\xe8\x01\n\x12\x43\x61meraPhysicStatus\x12]\n\x14\x63\x61mera_physic_status\x18\x01 \x01(\x0e\x32?.deeproute.perception.CameraPhysicStatus.CameraPhysicStatusType\x12!\n\x19\x63\x61mera_physic_status_prob\x18\x02 \x01(\x02\"P\n\x16\x43\x61meraPhysicStatusType\x12\t\n\x05\x43LEAR\x10\x00\x12\x08\n\x04\x42LUR\x10\x01\x12\t\n\x05\x44IRTY\x10\x02\x12\t\n\x05\x46LARE\x10\x03\x12\x0b\n\x07\x46\x41ILURE\x10\x04\"\xa5\x02\n\x0c\x43\x61meraStatus\x12\x18\n\x10time_measurement\x18\x01 \x01(\x03\x12\x13\n\x0bsensor_name\x18\x02 \x01(\t\x12\x15\n\rimage_quality\x18\x03 \x01(\x02\x12\x39\n\rcamera_scheme\x18\x04 \x01(\x0b\x32\".deeproute.perception.CameraScheme\x12J\n\x16\x63\x61mera_lighting_status\x18\x05 \x01(\x0b\x32*.deeproute.perception.CameraLightingStatus\x12H\n\x15\x63\x61mera_road_condition\x18\x06 \x01(\x0b\x32).deeproute.perception.CameraRoadCondition\"\x87\x04\n\nCameraInfo\x12\x18\n\x10time_measurement\x18\x01 \x01(\x03\x12\x13\n\x0bsensor_name\x18\x02 \x01(\t\x12\x39\n\rcamera_scheme\x18\x03 \x01(\x0b\x32\".deeproute.perception.CameraScheme\x12\x39\n\rcamera_region\x18\x04 \x01(\x0b\x32\".deeproute.perception.CameraRegion\x12H\n\x15\x63\x61mera_road_condition\x18\x05 \x01(\x0b\x32).deeproute.perception.CameraRoadCondition\x12\x43\n\x0f\x63\x61mera_lighting\x18\x06 \x01(\x0b\x32*.deeproute.perception.CameraLightingStatus\x12\x46\n\x14\x63\x61mera_physic_status\x18\x07 \x01(\x0b\x32(.deeproute.perception.CameraPhysicStatus\x12;\n\x0b\x63\x61mera_time\x18\x08 \x01(\x0b\x32&.deeproute.perception.CameraTimeStatus\x12@\n\x0c\x63\x61mera_scene\x18\t \x01(\x0b\x32*.deeproute.perception.CameraLightingStatus')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n,perception/deeproute_perception_camera.proto\x12\x14\x64\x65\x65proute.perception\x1a.perception/deeproute_perception_obstacle.proto\x1a(perception/traffic_light_detection.proto\x1a-perception/deeproute_perception_ras_map.proto\x1a\x15\x63ommon/geometry.proto\"\xec\x02\n\x0f\x43\x61meraDebugInfo\x12:\n\x08tl_color\x18\x01 \x01(\x0e\x32(.deeproute.perception.TrafficLight.Color\x12\x33\n\rprojected_roi\x18\x02 \x01(\x0b\x32\x1c.deeproute.perception.BBox2D\x12\x13\n\x0bsensor_name\x18\x03 \x01(\t\x12\x37\n\x07tl_type\x18\x04 \x01(\x0e\x32&.deeproute.perception.TrafficLightType\x12+\n\x08position\x18\x05 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x35\n\x0bmap_element\x18\x06 \x01(\x0b\x32 .deeproute.perception.MapElement\x12\x19\n\x11\x63ount_down_number\x18\x07 \x01(\x05\x12\x1b\n\x10is_traffic_light\x18\x08 \x01(\x05:\x01\x30\"\xab\x18\n\x0fTrafficSignInfo\x12\x41\n\tsign_type\x18\x01 \x01(\x0e\x32..deeproute.perception.TrafficSignInfo.SignType\x12\x13\n\x0blimit_value\x18\x02 \x01(\x02\x12\x18\n\x10matched_lane_ids\x18\x03 \x03(\x05\x12\x18\n\x10matched_link_ids\x18\x04 \x03(\x04\x12\x0f\n\x07heading\x18\x05 \x01(\x02\x12\x1a\n\x0bis_ego_sign\x18\x06 \x01(\x08:\x05\x66\x61lse\x12\x1c\n\ris_on_vehicle\x18\x07 \x01(\x08:\x05\x66\x61lse\x12\x31\n\x0epos_from_lidar\x18\x08 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x1c\n\ris_from_cache\x18\t \x01(\x08:\x05\x66\x61lse\x12\x1b\n\x0cis_ramp_sign\x18\n \x01(\x08:\x05\x66\x61lse\"\xd2\x15\n\x08SignType\x12\x10\n\x0cSIGN_BAN_CAR\x10\x00\x12\x12\n\x0eSIGN_BAN_ENTER\x10\x01\x12\x13\n\x0fSIGN_BAN_HEIGHT\x10\x02\x12\x11\n\rSIGN_BAN_LEFT\x10\x03\x12\x17\n\x13SIGN_BAN_LEFT_RIGHT\x10\x04\x12\x12\n\x0eSIGN_BAN_OTHER\x10\x05\x12\x15\n\x11SIGN_BAN_OVERTAKE\x10\x06\x12\x14\n\x10SIGN_BAN_PARKING\x10\x07\x12\x11\n\rSIGN_BAN_PASS\x10\x08\x12\x12\n\x0eSIGN_BAN_RIGHT\x10\t\x12\x11\n\rSIGN_BAN_SLOW\x10\n\x12\x11\n\rSIGN_BAN_STOP\x10\x0b\x12\x15\n\x11SIGN_BAN_STRAIGHT\x10\x0c\x12\x1b\n\x17SIGN_BAN_STRAIGHT_RIGHT\x10\r\x12\x14\n\x10SIGN_BAN_TRAILER\x10\x0e\x12\x13\n\x0fSIGN_BAN_U_TURN\x10\x0f\x12\x14\n\x10SIGN_BAN_VEHICLE\x10\x10\x12\x13\n\x0fSIGN_BAN_WEIGHT\x10\x11\x12\x16\n\x12SIGN_ENTER_HIGHWAY\x10\x12\x12\x12\n\x0eSIGN_MAX_SPEED\x10\x13\x12\x12\n\x0eSIGN_MIN_SPEED\x10\x14\x12\x12\n\x0eSIGN_NON_SPEED\x10\x15\x12\x0e\n\nSIGN_OTHER\x10\x16\x12\x14\n\x10SIGN_OUT_HIGHWAY\x10\x17\x12\x17\n\x13SIGN_UNBAN_OVERTAKE\x10\x18\x12\x16\n\x12SIGN_WARN_ACCIDENT\x10\x19\x12\x14\n\x10SIGN_WARN_ANIMAL\x10\x1a\x12\x15\n\x11SIGN_WARN_BICYCLE\x10\x1b\x12\x1a\n\x16SIGN_WARN_CONSTRUCTION\x10\x1c\x12\x13\n\x0fSIGN_WARN_CROSS\x10\x1d\x12\x11\n\rSIGN_WARN_FOG\x10\x1e\x12\x16\n\x12SIGN_WARN_ICE_ROAD\x10\x1f\x12\x11\n\rSIGN_WARN_KID\x10 \x12\x18\n\x14SIGN_WARN_LEFT_MERGE\x10!\x12\x1d\n\x19SIGN_WARN_LEFT_SHARP_TURN\x10\"\x12\x17\n\x13SIGN_WARN_LIVESTOCK\x10#\x12\x17\n\x13SIGN_WARN_MORE_TURN\x10$\x12\x13\n\x0fSIGN_WARN_OTHER\x10%\x12\x14\n\x10SIGN_WARN_PEOPLE\x10&\x12\x12\n\x0eSIGN_WARN_RAIN\x10\'\x12\x19\n\x15SIGN_WARN_RIGHT_MERGE\x10(\x12\x1e\n\x1aSIGN_WARN_RIGHT_SHARP_TURN\x10)\x12\x12\n\x0eSIGN_WARN_SLOW\x10*\x12\x18\n\x14SIGN_WARN_TWO_TURN_1\x10+\x12\x18\n\x14SIGN_WARN_TWO_TURN_2\x10,\x12\x15\n\x11SIGN_WARN_VILLAGE\x10-\x12\x15\n\x11SIGN_WARN_WEATHER\x10.\x12\x14\n\x10SIGN_WARN_UPHILL\x10/\x12\x16\n\x12SIGN_WARN_DOWNHILL\x10\x30\x12\x1b\n\x17SIGN_WARN_MORE_DOWNHILL\x10\x31\x12\x12\n\x0eSIGN_WARN_WIND\x10\x32\x12\x16\n\x12SIGN_WARN_SLIPPERY\x10\x33\x12\x14\n\x10SIGN_WARN_TUNNEL\x10\x34\x12\x13\n\x0fSIGN_WARN_BUMPY\x10\x35\x12\x13\n\x0fSIGN_WARN_WATER\x10\x36\x12\x14\n\x10SIGN_WARN_DETOUR\x10\x37\x12\x19\n\x15SIGN_WARN_LEFT_DETOUR\x10\x38\x12\x1a\n\x16SIGN_WARN_RIGHT_DETOUR\x10\x39\x12\x13\n\x0fSIGN_WARN_MERGE\x10:\x12\x14\n\x10SIGN_WARN_NARROW\x10;\x12\x1b\n\x17SIGN_WARN_ACCIDENT_MANA\x10<\x12\x12\n\x0eSIGN_WARN_BUMP\x10=\x12\x15\n\x11SIGN_WARN_TWO_WAY\x10>\x12\x1c\n\x18SIGN_WARN_RIGHT_MOUNTAIN\x10?\x12\x1a\n\x16SIGN_WARN_RIGHT_NARROW\x10@\x12\x18\n\x14SIGN_WARN_EMBANKMENT\x10\x41\x12\x15\n\x11SIGN_WARN_RAILWAY\x10\x42\x12\x1b\n\x17SIGN_WARN_GUARD_RAILWAY\x10\x43\x12\x16\n\x12SIGN_WARN_DISTANCE\x10\x44\x12\x1b\n\x17SIGN_WARN_TRAFFIC_LIGHT\x10\x45\x12\x13\n\x0fSIGN_WARN_QUEUE\x10\x46\x12\x14\n\x10SIGN_WARN_DANGER\x10G\x12\x18\n\x14SIGN_WARN_RIGHT_ROCK\x10H\x12\x17\n\x13SIGN_WARN_LEFT_ROCK\x10I\x12\x18\n\x14SIGN_WARN_TIDAL_LANE\x10J\x12\x1b\n\x17SIGN_WARN_NARROW_BRIDGE\x10K\x12\x19\n\x15SIGN_WARN_HUMP_BRIDGE\x10L\x12\x19\n\x15SIGN_BAN_WAIT_MEETING\x10M\x12\x1a\n\x16SIGN_BAN_TRUCK_TRAILER\x10N\x12\x11\n\rSIGN_BAN_HORN\x10O\x12\x16\n\x12SIGN_BAN_LONG_STOP\x10P\x12\x16\n\x12SIGN_ASS_LEFT_RAMP\x10Q\x12\x10\n\x0cSIGN_ASS_CAR\x10R\x12\x16\n\x12SIGN_ASS_CAR_TRUCK\x10S\x12\x12\n\x0eSIGN_ASS_TRUCK\x10T\x12\x10\n\x0cSIGN_ASS_BUS\x10U\x12\x16\n\x12SIGN_ASS_DIRECTION\x10V\x12\x12\n\x0eSIGN_ASS_FRONT\x10W\x12\x12\n\x0eSIGN_ASS_RIGHT\x10X\x12\x11\n\rSIGN_ASS_LEFT\x10Y\x12\x17\n\x13SIGN_ASS_LEFT_RIGHT\x10Z\x12\x11\n\rSIGN_ASS_TIME\x10[\x12\x11\n\rSIGN_INS_MEET\x10\\\x12\x16\n\x12SIGN_INS_LEFT_LANE\x10]\x12\x17\n\x13SIGN_INS_RIGHT_LANE\x10^\x12\x1d\n\x19SIGN_INS_LEFT_U_TURN_LANE\x10_\x12\x18\n\x14SIGN_INS_U_TURN_LANE\x10`\x12\x1c\n\x18SIGN_INS_STRA_RIGHT_LANE\x10\x61\x12\x1b\n\x17SIGN_INS_STRA_LEFT_LANE\x10\x62\x12\x16\n\x12SIGN_INS_STRA_LANE\x10\x63\x12\x12\n\x0eSIGN_INS_RIGHT\x10\x64\x12\x11\n\rSIGN_INS_LEFT\x10\x65\x12\x17\n\x13SIGN_INS_STRA_RIGHT\x10\x66\x12\x16\n\x12SIGN_INS_STRA_LEFT\x10g\x12\x11\n\rSIGN_INS_STRA\x10h\x12\x17\n\x13SIGN_INS_LEFT_RIGHT\x10i\x12\x13\n\x0fSIGN_INS_U_TURN\x10j\x12\x15\n\x11SIGN_INS_SEP_LEFT\x10k\x12\x16\n\x12SIGN_INS_SEP_RIGHT\x10l\x12\x15\n\x11SIGN_INS_BAN_PASS\x10m\x12\x1a\n\x16SIGN_NON_SPEED_GENERAL\x10n\x12\x18\n\x14SIGN_LARGE_ROAD_INFO\x10o\x12\x11\n\rSIGN_TB_CLOSE\x10p\x12\x0f\n\x0bSIGN_TB_ETC\x10q\x12\x16\n\x12SIGN_TB_ETC_MANUAL\x10r\x12\x15\n\x11SIGN_TB_FREE_LANE\x10s\x12\x14\n\x10SIGN_TB_LIGHT_ON\x10t\x12\x12\n\x0eSIGN_TB_MANUAL\x10u\x12\x16\n\x12SIGN_TB_TRUCK_LANE\x10v\"\x82\x01\n\x08\x42\x65\x61mInfo\x12:\n\tbeam_type\x18\x01 \x01(\x0e\x32\'.deeproute.perception.BeamInfo.BeamType\":\n\x08\x42\x65\x61mType\x12\x0f\n\x0b\x46RONT_LIGHT\x10\x00\x12\r\n\tUNCERTAIN\x10\x01\x12\x0e\n\nBACK_LIGHT\x10\x02\"\xaa\x02\n\x14TollBoothVisObstacle\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x44\n\x08\x65tc_type\x18\x02 \x01(\x0e\x32\x32.deeproute.perception.TollBoothVisObstacle.EtcType\x12\x0f\n\x07lane_id\x18\x03 \x01(\x05\x12+\n\x08position\x18\x04 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x0f\n\x07heading\x18\x05 \x01(\x02\"q\n\x07\x45tcType\x12\t\n\x05\x43LOSE\x10\x00\x12\x07\n\x03\x45TC\x10\x01\x12\x11\n\rETC_OR_MANUAL\x10\x02\x12\x08\n\x04\x46REE\x10\x03\x12\x0c\n\x08LIGHT_ON\x10\x04\x12\n\n\x06MANUAL\x10\x05\x12\x0e\n\nTRUCK_LANE\x10\x06\x12\x0b\n\x07UNKNOWN\x10\x07\"\x8f\x05\n\x0e\x43\x61meraObstacle\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x18\n\x10\x63onfidence_score\x18\x02 \x01(\x01\x12,\n\x06\x62\x62ox2d\x18\x03 \x01(\x0b\x32\x1c.deeproute.perception.BBox2D\x12\x37\n\x04type\x18\x04 \x01(\x0e\x32).deeproute.perception.CameraObstacle.Type\x12\x11\n\ttimestamp\x18\x05 \x01(\x03\x12>\n\x08tl_color\x18\x06 \x01(\x0e\x32(.deeproute.perception.TrafficLight.ColorB\x02\x18\x01\x12\x39\n\ndebug_info\x18\x07 \x01(\x0b\x32%.deeproute.perception.CameraDebugInfo\x12@\n\x11traffic_sign_info\x18\x08 \x01(\x0b\x32%.deeproute.perception.TrafficSignInfo\x12\x31\n\tbeam_info\x18\t \x01(\x0b\x32\x1e.deeproute.perception.BeamInfo\x12\x0e\n\x06length\x18\n \x01(\x01\x12\r\n\x05width\x18\x0b \x01(\x01\x12\x0e\n\x06height\x18\x0c \x01(\x01\x12\x15\n\x06is_t2c\x18\r \x01(\x08:\x05\x66\x61lse\"\xa6\x01\n\x04Type\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x11\n\rTRAFFIC_LIGHT\x10\x01\x12\x10\n\x0cTRAFFIC_SIGN\x10\x02\x12\x0e\n\nPEDESTRIAN\x10\x03\x12\x0b\n\x07\x42ICYCLE\x10\x04\x12\x0b\n\x07VEHICLE\x10\x05\x12\x13\n\x0fUNKNOWN_MOVABLE\x10\x06\x12\x15\n\x11UNKNOWN_UNMOVABLE\x10\x07\x12\x0c\n\x08LANEMARK\x10\x08\x12\x08\n\x04\x42\x45\x41M\x10\t\"n\n\x12LaneLineCubicCurve\x12\x15\n\rlongitude_min\x18\x01 \x01(\x02\x12\x15\n\rlongitude_max\x18\x02 \x01(\x02\x12\t\n\x01\x61\x18\x03 \x01(\x02\x12\t\n\x01\x62\x18\x04 \x01(\x02\x12\t\n\x01\x63\x18\x05 \x01(\x02\x12\t\n\x01\x64\x18\x06 \x01(\x02\"]\n\tEndPoints\x12(\n\x05start\x18\x01 \x01(\x0b\x32\x19.deeproute.common.Point2D\x12&\n\x03\x65nd\x18\x02 \x01(\x0b\x32\x19.deeproute.common.Point2D\"\xd4\x06\n\x0e\x43\x61meraLaneLine\x12?\n\x04type\x18\x01 \x01(\x0e\x32\x31.deeproute.perception.CameraLaneLine.LaneLineType\x12K\n\x08pos_type\x18\x02 \x01(\x0e\x32\x39.deeproute.perception.CameraLaneLine.LaneLinePositionType\x12\x44\n\x12\x63urve_camera_coord\x18\x03 \x01(\x0b\x32(.deeproute.perception.LaneLineCubicCurve\x12\x43\n\x11\x63urve_image_coord\x18\x04 \x01(\x0b\x32(.deeproute.perception.LaneLineCubicCurve\x12-\n\ncam_points\x18\x05 \x03(\x0b\x32\x19.deeproute.common.Point3D\x12-\n\nimg_points\x18\x06 \x03(\x0b\x32\x19.deeproute.common.Point2D\x12<\n\x13image_end_point_set\x18\x07 \x03(\x0b\x32\x1f.deeproute.perception.EndPoints\x12\x10\n\x08track_id\x18\x08 \x01(\x05\x12\x12\n\nconfidence\x18\t \x01(\x02\"\x85\x01\n\x0cLaneLineType\x12\x10\n\x0cUNKNOWN_TYPE\x10\x00\x12\x10\n\x0c\x44\x41SHED_WHITE\x10\x01\x12\x0f\n\x0bSOLID_WHITE\x10\x02\x12\x11\n\rDASHED_YELLOW\x10\x03\x12\x10\n\x0cSOLID_YELLOW\x10\x04\x12\x11\n\rDOUBLE_YELLOW\x10\x05\x12\x08\n\x04\x43URB\x10\x06\"\xde\x01\n\x14LaneLinePositionType\x12\x19\n\x15UNKNOWN_POSITION_TYPE\x10\x00\x12\x10\n\x0c\x42OLLARD_LEFT\x10\x01\x12\x0f\n\x0b\x46OURTH_LEFT\x10\x02\x12\x0e\n\nTHIRD_LEFT\x10\x03\x12\x11\n\rADJACENT_LEFT\x10\x04\x12\x0c\n\x08\x45GO_LEFT\x10\x05\x12\r\n\tEGO_RIGHT\x10\x06\x12\x12\n\x0e\x41\x44JACENT_RIGHT\x10\x07\x12\x0f\n\x0bTHIRD_RIGHT\x10\x08\x12\x10\n\x0c\x46OURTH_RIGHT\x10\t\x12\x11\n\rBOLLARD_RIGHT\x10\n\"\xdf\x01\n\x14\x43\x61meraSpeedObstacles\x12\x41\n\x13road_max_speed_sign\x18\x01 \x01(\x0b\x32$.deeproute.perception.CameraObstacle\x12\x41\n\x13road_min_speed_sign\x18\x02 \x01(\x0b\x32$.deeproute.perception.CameraObstacle\x12\x41\n\x13road_non_speed_sign\x18\x03 \x01(\x0b\x32$.deeproute.perception.CameraObstacle\"\xc3\x02\n\x0f\x43\x61meraObstacles\x12\x18\n\x10time_measurement\x18\x01 \x01(\x03\x12=\n\x0f\x63\x61mera_obstacle\x18\x02 \x03(\x0b\x32$.deeproute.perception.CameraObstacle\x12>\n\x10\x63\x61mera_lane_line\x18\x03 \x03(\x0b\x32$.deeproute.perception.CameraLaneLine\x12J\n\x16\x63\x61mera_speed_obstacles\x18\x04 \x01(\x0b\x32*.deeproute.perception.CameraSpeedObstacles\x12K\n\x17toll_booth_vis_obstacle\x18\x05 \x03(\x0b\x32*.deeproute.perception.TollBoothVisObstacle\"\x91\x04\n\x11\x43\x61meraQualityInfo\x12Q\n\rabnormal_type\x18\x01 \x01(\x0e\x32:.deeproute.perception.CameraQualityInfo.CamereAbnormalType\x12\x13\n\x0bsensor_name\x18\x02 \x01(\t\x12Q\n\rquality_level\x18\x03 \x01(\x0e\x32:.deeproute.perception.CameraQualityInfo.CamereQualityLevel\x12\x1b\n\x13keep_time_in_second\x18\x04 \x01(\x05\x12\x17\n\x0f\x62lur_area_ratio\x18\x05 \x01(\x02\x12\x16\n\x0eocc_area_ratio\x18\x06 \x01(\x02\x12\x12\n\nblur_score\x18\x07 \x01(\x02\x12\x17\n\x0fstart_timestamp\x18\x08 \x01(\x03\x12\x14\n\x0cis_face_wall\x18\t \x01(\x08\x12\x16\n\x0ewall_timestamp\x18\n \x01(\x03\"G\n\x12\x43\x61mereAbnormalType\x12\n\n\x06NORMAL\x10\x00\x12\x08\n\x04\x42LUR\x10\x01\x12\t\n\x05SMEAR\x10\x02\x12\x10\n\x0cOverExposure\x10\x03\"O\n\x12\x43\x61mereQualityLevel\x12\x12\n\x0eNORMAL_QUALITY\x10\x00\x12\x0f\n\x0bLOW_QUALITY\x10\x01\x12\x14\n\x10VERY_LOW_QUALITY\x10\x02\"o\n\rCameraQuality\x12\x18\n\x10time_measurement\x18\x01 \x01(\x03\x12\x44\n\x13\x63\x61mera_quality_info\x18\x02 \x03(\x0b\x32\'.deeproute.perception.CameraQualityInfo\"\xe8\x01\n\x0c\x43\x61meraScheme\x12J\n\rcamera_scheme\x18\x01 \x01(\x0e\x32\x33.deeproute.perception.CameraScheme.CameraSchemeType\x12\x1a\n\x12\x63\x61mera_scheme_prob\x18\x02 \x01(\x02\"p\n\x10\x43\x61meraSchemeType\x12\x0b\n\x07REGULAR\x10\x00\x12\x08\n\x04RAIN\x10\x01\x12\x08\n\x04SNOW\x10\x02\x12\t\n\x05\x46ROST\x10\x03\x12\x07\n\x03\x46OG\x10\x04\x12\n\n\x06SMUDGE\x10\x05\x12\x0e\n\nSAND_STORM\x10\x07\x12\x0b\n\x07UNKNOWN\x10\x06\"\xf2\x02\n\x0c\x43\x61meraRegion\x12J\n\rcamera_region\x18\x01 \x01(\x0e\x32\x33.deeproute.perception.CameraRegion.CameraRegionType\x12\x1a\n\x12\x63\x61mera_region_prob\x18\x02 \x01(\x02\"\xf9\x01\n\x10\x43\x61meraRegionType\x12\x08\n\x04NONE\x10\x00\x12\x12\n\x0eOUTSIDE_TUNNEL\x10\x01\x12\x11\n\rINSIDE_TUNNEL\x10\x02\x12\x1b\n\x17UNDERGROUND_PARKING_LOT\x10\x03\x12\x16\n\x12GROUND_PARKING_LOT\x10\x04\x12\x10\n\x0cTOLL_STATION\x10\x05\x12\x15\n\x11\x43ONSTRUCTION_AREA\x10\x06\x12\x14\n\x10\x42US_PARKING_AREA\x10\x07\x12\x0b\n\x07HIGHWAY\x10\x08\x12\x0e\n\nRURAL_ROAD\x10\t\x12\x0f\n\x0bGAS_STATION\x10\n\x12\x12\n\x0e\x41\x45\x42_EXAM_SCENE\x10\x0b\"\xb8\x02\n\x13\x43\x61meraRoadCondition\x12`\n\x15\x63\x61mera_road_condition\x18\x01 \x01(\x0e\x32\x41.deeproute.perception.CameraRoadCondition.CameraRoadConditionType\x12\"\n\x1a\x63\x61mera_road_condition_prob\x18\x02 \x01(\x02\"\x9a\x01\n\x17\x43\x61meraRoadConditionType\x12\x0b\n\x07REGULAR\x10\x00\x12\x08\n\x04\x44UST\x10\x01\x12\x0c\n\x08SLIPERRY\x10\x02\x12\x0b\n\x07PONDING\x10\x03\x12\x0c\n\x08PATHHOLE\x10\x04\x12\t\n\x05ICING\x10\x05\x12\x0b\n\x07UNKNOWN\x10\x06\x12\x0b\n\x07POTHOLE\x10\x07\x12\x0e\n\nSNOW_COVER\x10\x08\x12\n\n\x06\x46REEZE\x10\t\"\x82\x01\n\rImageLighting\x12\x0e\n\x06\x63\x61mera\x18\x01 \x01(\t\x12\x0e\n\x06\x62right\x18\x02 \x01(\x02\x12Q\n\nlight_type\x18\x03 \x01(\x0e\x32=.deeproute.perception.CameraLightingStatus.CameraLightingType\"\x8b\x01\n\x0cHmaDebugInfo\x12<\n\x0fimage_lightings\x18\x01 \x03(\x0b\x32#.deeproute.perception.ImageLighting\x12\x1a\n\x12valid_obstacle_ids\x18\x02 \x03(\x05\x12!\n\x19outside_rail_obstacle_ids\x18\x03 \x03(\x05\"\x98\x02\n\x14\x43\x61meraLightingStatus\x12Q\n\nlight_type\x18\x01 \x01(\x0e\x32=.deeproute.perception.CameraLightingStatus.CameraLightingType\x12\x12\n\nlight_prob\x18\x02 \x01(\x02\x12\x19\n\x11has_vehicle_ahead\x18\x03 \x01(\x08\x12:\n\x0ehma_debug_info\x18\x04 \x01(\x0b\x32\".deeproute.perception.HmaDebugInfo\"B\n\x12\x43\x61meraLightingType\x12\x08\n\x04\x44USK\x10\x00\x12\x08\n\x04\x44\x41RK\x10\x01\x12\n\n\x06\x42RIGHT\x10\x02\x12\x0c\n\x08\x44\x41Y_TIME\x10\x03\"\xad\x01\n\x10\x43\x61meraTimeStatus\x12K\n\x0b\x63\x61mera_time\x18\x01 \x01(\x0e\x32\x36.deeproute.perception.CameraTimeStatus.CameraTimesType\x12\x18\n\x10\x63\x61mera_time_prob\x18\x02 \x01(\x02\"2\n\x0f\x43\x61meraTimesType\x12\x07\n\x03\x44\x41Y\x10\x00\x12\x0b\n\x07\x45VENING\x10\x01\x12\t\n\x05NIGHT\x10\x02\"\xe8\x01\n\x12\x43\x61meraPhysicStatus\x12]\n\x14\x63\x61mera_physic_status\x18\x01 \x01(\x0e\x32?.deeproute.perception.CameraPhysicStatus.CameraPhysicStatusType\x12!\n\x19\x63\x61mera_physic_status_prob\x18\x02 \x01(\x02\"P\n\x16\x43\x61meraPhysicStatusType\x12\t\n\x05\x43LEAR\x10\x00\x12\x08\n\x04\x42LUR\x10\x01\x12\t\n\x05\x44IRTY\x10\x02\x12\t\n\x05\x46LARE\x10\x03\x12\x0b\n\x07\x46\x41ILURE\x10\x04\"\xa5\x02\n\x0c\x43\x61meraStatus\x12\x18\n\x10time_measurement\x18\x01 \x01(\x03\x12\x13\n\x0bsensor_name\x18\x02 \x01(\t\x12\x15\n\rimage_quality\x18\x03 \x01(\x02\x12\x39\n\rcamera_scheme\x18\x04 \x01(\x0b\x32\".deeproute.perception.CameraScheme\x12J\n\x16\x63\x61mera_lighting_status\x18\x05 \x01(\x0b\x32*.deeproute.perception.CameraLightingStatus\x12H\n\x15\x63\x61mera_road_condition\x18\x06 \x01(\x0b\x32).deeproute.perception.CameraRoadCondition\"1\n\x14\x43\x61meraSceneDebugInfo\x12\x19\n\x11\x63\x61mera_scene_prob\x18\x01 \x03(\x02\"\xd4\x04\n\nCameraInfo\x12\x18\n\x10time_measurement\x18\x01 \x01(\x03\x12\x13\n\x0bsensor_name\x18\x02 \x01(\t\x12\x39\n\rcamera_scheme\x18\x03 \x01(\x0b\x32\".deeproute.perception.CameraScheme\x12\x39\n\rcamera_region\x18\x04 \x01(\x0b\x32\".deeproute.perception.CameraRegion\x12H\n\x15\x63\x61mera_road_condition\x18\x05 \x01(\x0b\x32).deeproute.perception.CameraRoadCondition\x12@\n\x0c\x63\x61mera_scene\x18\x06 \x01(\x0b\x32*.deeproute.perception.CameraLightingStatus\x12;\n\x0b\x63\x61mera_time\x18\x07 \x01(\x0b\x32&.deeproute.perception.CameraTimeStatus\x12\x43\n\x0f\x63\x61mera_lighting\x18\x08 \x01(\x0b\x32*.deeproute.perception.CameraLightingStatus\x12\x46\n\x14\x63\x61mera_physic_status\x18\t \x01(\x0b\x32(.deeproute.perception.CameraPhysicStatus\x12K\n\x17\x63\x61mera_scene_debug_info\x18\n \x01(\x0b\x32*.deeproute.perception.CameraSceneDebugInfo')
 
 
 
 _CAMERADEBUGINFO = DESCRIPTOR.message_types_by_name['CameraDebugInfo']
 _TRAFFICSIGNINFO = DESCRIPTOR.message_types_by_name['TrafficSignInfo']
 _BEAMINFO = DESCRIPTOR.message_types_by_name['BeamInfo']
+_TOLLBOOTHVISOBSTACLE = DESCRIPTOR.message_types_by_name['TollBoothVisObstacle']
 _CAMERAOBSTACLE = DESCRIPTOR.message_types_by_name['CameraObstacle']
 _LANELINECUBICCURVE = DESCRIPTOR.message_types_by_name['LaneLineCubicCurve']
 _ENDPOINTS = DESCRIPTOR.message_types_by_name['EndPoints']
 _CAMERALANELINE = DESCRIPTOR.message_types_by_name['CameraLaneLine']
+_CAMERASPEEDOBSTACLES = DESCRIPTOR.message_types_by_name['CameraSpeedObstacles']
 _CAMERAOBSTACLES = DESCRIPTOR.message_types_by_name['CameraObstacles']
 _CAMERAQUALITYINFO = DESCRIPTOR.message_types_by_name['CameraQualityInfo']
 _CAMERAQUALITY = DESCRIPTOR.message_types_by_name['CameraQuality']
@@ -41,9 +43,11 @@ _CAMERALIGHTINGSTATUS = DESCRIPTOR.message_types_by_name['CameraLightingStatus']
 _CAMERATIMESTATUS = DESCRIPTOR.message_types_by_name['CameraTimeStatus']
 _CAMERAPHYSICSTATUS = DESCRIPTOR.message_types_by_name['CameraPhysicStatus']
 _CAMERASTATUS = DESCRIPTOR.message_types_by_name['CameraStatus']
+_CAMERASCENEDEBUGINFO = DESCRIPTOR.message_types_by_name['CameraSceneDebugInfo']
 _CAMERAINFO = DESCRIPTOR.message_types_by_name['CameraInfo']
 _TRAFFICSIGNINFO_SIGNTYPE = _TRAFFICSIGNINFO.enum_types_by_name['SignType']
 _BEAMINFO_BEAMTYPE = _BEAMINFO.enum_types_by_name['BeamType']
+_TOLLBOOTHVISOBSTACLE_ETCTYPE = _TOLLBOOTHVISOBSTACLE.enum_types_by_name['EtcType']
 _CAMERAOBSTACLE_TYPE = _CAMERAOBSTACLE.enum_types_by_name['Type']
 _CAMERALANELINE_LANELINETYPE = _CAMERALANELINE.enum_types_by_name['LaneLineType']
 _CAMERALANELINE_LANELINEPOSITIONTYPE = _CAMERALANELINE.enum_types_by_name['LaneLinePositionType']
@@ -76,6 +80,13 @@ BeamInfo = _reflection.GeneratedProtocolMessageType('BeamInfo', (_message.Messag
   })
 _sym_db.RegisterMessage(BeamInfo)
 
+TollBoothVisObstacle = _reflection.GeneratedProtocolMessageType('TollBoothVisObstacle', (_message.Message,), {
+  'DESCRIPTOR' : _TOLLBOOTHVISOBSTACLE,
+  '__module__' : 'perception.deeproute_perception_camera_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.perception.TollBoothVisObstacle)
+  })
+_sym_db.RegisterMessage(TollBoothVisObstacle)
+
 CameraObstacle = _reflection.GeneratedProtocolMessageType('CameraObstacle', (_message.Message,), {
   'DESCRIPTOR' : _CAMERAOBSTACLE,
   '__module__' : 'perception.deeproute_perception_camera_pb2'
@@ -103,6 +114,13 @@ CameraLaneLine = _reflection.GeneratedProtocolMessageType('CameraLaneLine', (_me
   # @@protoc_insertion_point(class_scope:deeproute.perception.CameraLaneLine)
   })
 _sym_db.RegisterMessage(CameraLaneLine)
+
+CameraSpeedObstacles = _reflection.GeneratedProtocolMessageType('CameraSpeedObstacles', (_message.Message,), {
+  'DESCRIPTOR' : _CAMERASPEEDOBSTACLES,
+  '__module__' : 'perception.deeproute_perception_camera_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.perception.CameraSpeedObstacles)
+  })
+_sym_db.RegisterMessage(CameraSpeedObstacles)
 
 CameraObstacles = _reflection.GeneratedProtocolMessageType('CameraObstacles', (_message.Message,), {
   'DESCRIPTOR' : _CAMERAOBSTACLES,
@@ -188,6 +206,13 @@ CameraStatus = _reflection.GeneratedProtocolMessageType('CameraStatus', (_messag
   })
 _sym_db.RegisterMessage(CameraStatus)
 
+CameraSceneDebugInfo = _reflection.GeneratedProtocolMessageType('CameraSceneDebugInfo', (_message.Message,), {
+  'DESCRIPTOR' : _CAMERASCENEDEBUGINFO,
+  '__module__' : 'perception.deeproute_perception_camera_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.perception.CameraSceneDebugInfo)
+  })
+_sym_db.RegisterMessage(CameraSceneDebugInfo)
+
 CameraInfo = _reflection.GeneratedProtocolMessageType('CameraInfo', (_message.Message,), {
   'DESCRIPTOR' : _CAMERAINFO,
   '__module__' : 'perception.deeproute_perception_camera_pb2'
@@ -203,67 +228,75 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _CAMERADEBUGINFO._serialized_start=231
   _CAMERADEBUGINFO._serialized_end=595
   _TRAFFICSIGNINFO._serialized_start=598
-  _TRAFFICSIGNINFO._serialized_end=3509
-  _TRAFFICSIGNINFO_SIGNTYPE._serialized_start=914
-  _TRAFFICSIGNINFO_SIGNTYPE._serialized_end=3509
-  _BEAMINFO._serialized_start=3512
-  _BEAMINFO._serialized_end=3642
-  _BEAMINFO_BEAMTYPE._serialized_start=3584
-  _BEAMINFO_BEAMTYPE._serialized_end=3642
-  _CAMERAOBSTACLE._serialized_start=3645
-  _CAMERAOBSTACLE._serialized_end=4230
-  _CAMERAOBSTACLE_TYPE._serialized_start=4064
-  _CAMERAOBSTACLE_TYPE._serialized_end=4230
-  _LANELINECUBICCURVE._serialized_start=4232
-  _LANELINECUBICCURVE._serialized_end=4342
-  _ENDPOINTS._serialized_start=4344
-  _ENDPOINTS._serialized_end=4437
-  _CAMERALANELINE._serialized_start=4440
-  _CAMERALANELINE._serialized_end=5292
-  _CAMERALANELINE_LANELINETYPE._serialized_start=4934
-  _CAMERALANELINE_LANELINETYPE._serialized_end=5067
-  _CAMERALANELINE_LANELINEPOSITIONTYPE._serialized_start=5070
-  _CAMERALANELINE_LANELINEPOSITIONTYPE._serialized_end=5292
-  _CAMERAOBSTACLES._serialized_start=5295
-  _CAMERAOBSTACLES._serialized_end=5465
-  _CAMERAQUALITYINFO._serialized_start=5468
-  _CAMERAQUALITYINFO._serialized_end=5997
-  _CAMERAQUALITYINFO_CAMEREABNORMALTYPE._serialized_start=5845
-  _CAMERAQUALITYINFO_CAMEREABNORMALTYPE._serialized_end=5916
-  _CAMERAQUALITYINFO_CAMEREQUALITYLEVEL._serialized_start=5918
-  _CAMERAQUALITYINFO_CAMEREQUALITYLEVEL._serialized_end=5997
-  _CAMERAQUALITY._serialized_start=5999
-  _CAMERAQUALITY._serialized_end=6110
-  _CAMERASCHEME._serialized_start=6113
-  _CAMERASCHEME._serialized_end=6345
-  _CAMERASCHEME_CAMERASCHEMETYPE._serialized_start=6233
-  _CAMERASCHEME_CAMERASCHEMETYPE._serialized_end=6345
-  _CAMERAREGION._serialized_start=6348
-  _CAMERAREGION._serialized_end=6698
-  _CAMERAREGION_CAMERAREGIONTYPE._serialized_start=6469
-  _CAMERAREGION_CAMERAREGIONTYPE._serialized_end=6698
-  _CAMERAROADCONDITION._serialized_start=6701
-  _CAMERAROADCONDITION._serialized_end=7013
-  _CAMERAROADCONDITION_CAMERAROADCONDITIONTYPE._serialized_start=6859
-  _CAMERAROADCONDITION_CAMERAROADCONDITIONTYPE._serialized_end=7013
-  _IMAGELIGHTING._serialized_start=7016
-  _IMAGELIGHTING._serialized_end=7146
-  _HMADEBUGINFO._serialized_start=7149
-  _HMADEBUGINFO._serialized_end=7288
-  _CAMERALIGHTINGSTATUS._serialized_start=7291
-  _CAMERALIGHTINGSTATUS._serialized_end=7571
-  _CAMERALIGHTINGSTATUS_CAMERALIGHTINGTYPE._serialized_start=7505
-  _CAMERALIGHTINGSTATUS_CAMERALIGHTINGTYPE._serialized_end=7571
-  _CAMERATIMESTATUS._serialized_start=7574
-  _CAMERATIMESTATUS._serialized_end=7747
-  _CAMERATIMESTATUS_CAMERATIMESTYPE._serialized_start=7697
-  _CAMERATIMESTATUS_CAMERATIMESTYPE._serialized_end=7747
-  _CAMERAPHYSICSTATUS._serialized_start=7750
-  _CAMERAPHYSICSTATUS._serialized_end=7982
-  _CAMERAPHYSICSTATUS_CAMERAPHYSICSTATUSTYPE._serialized_start=7902
-  _CAMERAPHYSICSTATUS_CAMERAPHYSICSTATUSTYPE._serialized_end=7982
-  _CAMERASTATUS._serialized_start=7985
-  _CAMERASTATUS._serialized_end=8278
-  _CAMERAINFO._serialized_start=8281
-  _CAMERAINFO._serialized_end=8800
+  _TRAFFICSIGNINFO._serialized_end=3713
+  _TRAFFICSIGNINFO_SIGNTYPE._serialized_start=943
+  _TRAFFICSIGNINFO_SIGNTYPE._serialized_end=3713
+  _BEAMINFO._serialized_start=3716
+  _BEAMINFO._serialized_end=3846
+  _BEAMINFO_BEAMTYPE._serialized_start=3788
+  _BEAMINFO_BEAMTYPE._serialized_end=3846
+  _TOLLBOOTHVISOBSTACLE._serialized_start=3849
+  _TOLLBOOTHVISOBSTACLE._serialized_end=4147
+  _TOLLBOOTHVISOBSTACLE_ETCTYPE._serialized_start=4034
+  _TOLLBOOTHVISOBSTACLE_ETCTYPE._serialized_end=4147
+  _CAMERAOBSTACLE._serialized_start=4150
+  _CAMERAOBSTACLE._serialized_end=4805
+  _CAMERAOBSTACLE_TYPE._serialized_start=4639
+  _CAMERAOBSTACLE_TYPE._serialized_end=4805
+  _LANELINECUBICCURVE._serialized_start=4807
+  _LANELINECUBICCURVE._serialized_end=4917
+  _ENDPOINTS._serialized_start=4919
+  _ENDPOINTS._serialized_end=5012
+  _CAMERALANELINE._serialized_start=5015
+  _CAMERALANELINE._serialized_end=5867
+  _CAMERALANELINE_LANELINETYPE._serialized_start=5509
+  _CAMERALANELINE_LANELINETYPE._serialized_end=5642
+  _CAMERALANELINE_LANELINEPOSITIONTYPE._serialized_start=5645
+  _CAMERALANELINE_LANELINEPOSITIONTYPE._serialized_end=5867
+  _CAMERASPEEDOBSTACLES._serialized_start=5870
+  _CAMERASPEEDOBSTACLES._serialized_end=6093
+  _CAMERAOBSTACLES._serialized_start=6096
+  _CAMERAOBSTACLES._serialized_end=6419
+  _CAMERAQUALITYINFO._serialized_start=6422
+  _CAMERAQUALITYINFO._serialized_end=6951
+  _CAMERAQUALITYINFO_CAMEREABNORMALTYPE._serialized_start=6799
+  _CAMERAQUALITYINFO_CAMEREABNORMALTYPE._serialized_end=6870
+  _CAMERAQUALITYINFO_CAMEREQUALITYLEVEL._serialized_start=6872
+  _CAMERAQUALITYINFO_CAMEREQUALITYLEVEL._serialized_end=6951
+  _CAMERAQUALITY._serialized_start=6953
+  _CAMERAQUALITY._serialized_end=7064
+  _CAMERASCHEME._serialized_start=7067
+  _CAMERASCHEME._serialized_end=7299
+  _CAMERASCHEME_CAMERASCHEMETYPE._serialized_start=7187
+  _CAMERASCHEME_CAMERASCHEMETYPE._serialized_end=7299
+  _CAMERAREGION._serialized_start=7302
+  _CAMERAREGION._serialized_end=7672
+  _CAMERAREGION_CAMERAREGIONTYPE._serialized_start=7423
+  _CAMERAREGION_CAMERAREGIONTYPE._serialized_end=7672
+  _CAMERAROADCONDITION._serialized_start=7675
+  _CAMERAROADCONDITION._serialized_end=7987
+  _CAMERAROADCONDITION_CAMERAROADCONDITIONTYPE._serialized_start=7833
+  _CAMERAROADCONDITION_CAMERAROADCONDITIONTYPE._serialized_end=7987
+  _IMAGELIGHTING._serialized_start=7990
+  _IMAGELIGHTING._serialized_end=8120
+  _HMADEBUGINFO._serialized_start=8123
+  _HMADEBUGINFO._serialized_end=8262
+  _CAMERALIGHTINGSTATUS._serialized_start=8265
+  _CAMERALIGHTINGSTATUS._serialized_end=8545
+  _CAMERALIGHTINGSTATUS_CAMERALIGHTINGTYPE._serialized_start=8479
+  _CAMERALIGHTINGSTATUS_CAMERALIGHTINGTYPE._serialized_end=8545
+  _CAMERATIMESTATUS._serialized_start=8548
+  _CAMERATIMESTATUS._serialized_end=8721
+  _CAMERATIMESTATUS_CAMERATIMESTYPE._serialized_start=8671
+  _CAMERATIMESTATUS_CAMERATIMESTYPE._serialized_end=8721
+  _CAMERAPHYSICSTATUS._serialized_start=8724
+  _CAMERAPHYSICSTATUS._serialized_end=8956
+  _CAMERAPHYSICSTATUS_CAMERAPHYSICSTATUSTYPE._serialized_start=8876
+  _CAMERAPHYSICSTATUS_CAMERAPHYSICSTATUSTYPE._serialized_end=8956
+  _CAMERASTATUS._serialized_start=8959
+  _CAMERASTATUS._serialized_end=9252
+  _CAMERASCENEDEBUGINFO._serialized_start=9254
+  _CAMERASCENEDEBUGINFO._serialized_end=9303
+  _CAMERAINFO._serialized_start=9306
+  _CAMERAINFO._serialized_end=9902
 # @@protoc_insertion_point(module_scope)

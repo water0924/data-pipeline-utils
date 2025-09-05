@@ -10,6 +10,8 @@ message AdbOutput {
   optional AdbTrafficCond adb_traffic_cond = 3;
   repeated AdbTrafficSign adb_traffic_sign = 4;
   repeated AdbLight2D adb_object_2d = 5;
+  optional bool ahb_has_car_ahead = 6;
+  optional AdbLighting adb_lighting = 7;
 }
 
 message CarObject {
@@ -26,6 +28,7 @@ message CarObject {
     PEDESTRAIN = 4;
     CAR = 5;
     MIXED = 6;
+    FAKED2D = 7; // for 2d estimate object
   };
   optional PerceptionObstacle.Type type = 1;
   optional bool trk_info = 2;
@@ -80,4 +83,9 @@ message AdbLight2D {
   optional float approx_dist = 2; // m
   optional double confidence = 3;
   optional CarObject.Direction direction = 4;
+}
+
+message AdbLighting {
+  optional bool amb_light = 1;
+  optional bool road_illum_detd = 2;
 }

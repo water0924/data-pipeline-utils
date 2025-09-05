@@ -90,6 +90,7 @@ proto_library(
         "//proto/drapi:operation_status_proto",
         "//proto/lock_on_road:lock_on_road_proto",
         "//proto/drapi:gwm_hut_notification_proto",
+        "//proto/drapi:business_info_proto",
     ],
     strip_import_prefix = "/proto/",
 )
@@ -243,6 +244,32 @@ python_proto_library(
     visibility = ["//visibility:public"],
     protos = [
         ":amap_display_route_proto",
+    ],
+)
+
+proto_library(
+    name = "blc_to_diagnostic_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["blc_to_diagnostic.proto"],
+    deps = [
+        "//proto/drapi:operation_status_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "blc_to_diagnostic_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":blc_to_diagnostic_proto",
+    ],
+)
+
+python_proto_library(
+    name = "blc_to_diagnostic_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":blc_to_diagnostic_proto",
     ],
 )
 

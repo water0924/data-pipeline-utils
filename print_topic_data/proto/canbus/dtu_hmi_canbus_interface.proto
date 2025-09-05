@@ -7,6 +7,7 @@ import "canbus/byd_chassis_detail.proto";
 import "canbus/gwm_chassis_detail.proto";
 import "canbus/gwm_tank_chassis_detail.proto";
 import "canbus/gwm_de09_chassis_detail.proto";
+import "canbus/gwm_all_chassis_detail.proto";
 import "canbus/hy11_chassis_detail.proto";
 import "canbus/gl_p177_chassis_detail.proto";
 
@@ -30,6 +31,8 @@ message HmiChassisDetails {
     GwmTankHmi gwm_tank = 9;
     GLP177Hmi gl_p177 = 10;
     GwmDe09Hmi gwm_de09 = 11;
+    GwmEc15Hmi gwm_ec15 = 12; //deprecated
+    GwmAllHmi gwm_all = 13;
   }
   reserved 7;
 }
@@ -145,6 +148,40 @@ message GwmDe09Hmi {
   optional deeproute.canbus.gwm.de09.ADAS_AD1_470 adas_ad1_470 = 22;
   optional deeproute.canbus.gwm.de09.RSDS_FD1_16F rsds_fd1_16f = 23;
   optional deeproute.canbus.gwm.de09.RSDS_FD2_30A rsds_fd2_30a = 24;
+}
+
+message GwmAllHmi {
+  optional deeproute.canbus.gwm.all.HAP_FD1_15B hap_fd1_15b = 1;
+  optional deeproute.canbus.gwm.all.HAP_FD2_274 hap_fd2_274 = 2;
+  optional deeproute.canbus.gwm.all.HAP_FD6_289 hap_fd6_289 = 3;
+  optional deeproute.canbus.gwm.all.HAP_FD3_298 hap_fd3_298 = 4;
+  optional deeproute.canbus.gwm.all.HAP_FD7_29B hap_fd7_29b = 5;
+
+  optional deeproute.canbus.gwm.all.ACC_FD1_143 acc_fd1_143 = 6;
+  optional deeproute.canbus.gwm.all.ACC_FD2_2AB acc_fd2_2ab = 7;
+  optional deeproute.canbus.gwm.all.ACC_FD3_2B4 acc_fd3_2b4 = 8;
+  optional deeproute.canbus.gwm.all.ACC_FD4_2B8 acc_fd4_2b8 = 9;
+
+  optional deeproute.canbus.gwm.all.IFC_FD1_12B ifc_fd1_12b = 10;
+  optional deeproute.canbus.gwm.all.IFC_FD5_19F ifc_fd5_19f = 11;
+  optional deeproute.canbus.gwm.all.IFC_FD6_222 ifc_fd6_222 = 12;
+  optional deeproute.canbus.gwm.all.IFC_FD2_23D ifc_fd2_23d = 13;
+  optional deeproute.canbus.gwm.all.IFC_FD4_240 ifc_fd4_240 = 14;
+  optional deeproute.canbus.gwm.all.IFC_FD7_2A2 ifc_fd7_2a2 = 15;
+  optional deeproute.canbus.gwm.all.IFC_FD3_2CF ifc_fd3_2cf = 16;
+  optional deeproute.canbus.gwm.all.IFC_FD10_266 ifc_fd10_266 = 17;
+  
+  optional deeproute.canbus.gwm.all.AEB_FD1_18B aeb_fd1_18b = 18;
+  optional deeproute.canbus.gwm.all.AEB_FD2_227 aeb_fd2_227 = 19;
+
+  optional deeproute.canbus.gwm.all.MDC_FD1_312 mdc_fd1_312 = 20;
+  optional deeproute.canbus.gwm.all.CR_FD1_15E cr_fd1_15e = 21;
+  optional deeproute.canbus.gwm.all.ADAS_AD1_470 adas_ad1_470 = 22;
+  optional deeproute.canbus.gwm.all.RSDS_FD1_16F rsds_fd1_16f = 23;
+  optional deeproute.canbus.gwm.all.RSDS_FD2_30A rsds_fd2_30a = 24;
+}
+
+message GwmEc15Hmi { //deprecated
 }
 
 message GLP177Hmi {

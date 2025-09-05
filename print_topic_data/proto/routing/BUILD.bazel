@@ -19,6 +19,7 @@ proto_library(
         "//proto/odd:odd_proto",
         "//proto/map:map_common_proto",
         "//proto/map:common_type_proto",
+        "//proto/routing:collection_trigger_rule_proto",
     ],
     strip_import_prefix = "/proto/",
 )
@@ -75,6 +76,7 @@ proto_library(
     visibility = ["//visibility:public"],
     srcs = ["cloud_task.proto"],
     deps = [
+        "//proto/routing:collection_trigger_rule_proto"
     ],
     strip_import_prefix = "/proto/",
 )
@@ -151,3 +153,27 @@ python_proto_library(
     ],
 )
 
+proto_library(
+    name = "collection_trigger_rule_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["collection_trigger_rule.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "collection_trigger_rule_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":collection_trigger_rule_proto"
+    ],
+)
+
+python_proto_library(
+    name = "collection_trigger_rule_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":collection_trigger_rule_proto",
+    ],
+)

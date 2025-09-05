@@ -12,6 +12,7 @@ proto_library(
     visibility = ["//visibility:public"],
     srcs = ["trigger.proto"],
     deps = [
+        "//proto/routing:collection_trigger_rule_proto",
     ],
     strip_import_prefix = "/proto/",
 )

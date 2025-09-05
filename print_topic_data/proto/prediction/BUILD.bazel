@@ -89,6 +89,8 @@ proto_library(
     visibility = ["//visibility:public"],
     srcs = ["offline_feature.proto"],
     deps = [
+        "//proto/common:geometry_proto",
+        "//proto/common:module_event_proto",
     ],
     strip_import_prefix = "/proto/",
 )

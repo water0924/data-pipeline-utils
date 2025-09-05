@@ -16,9 +16,10 @@ _sym_db = _symbol_database.Default()
 from proto.drapi import operation_status_pb2 as drapi_dot_operation__status__pb2
 from proto.lock_on_road import lock_on_road_pb2 as lock__on__road_dot_lock__on__road__pb2
 from proto.drapi import gwm_hut_notification_pb2 as drapi_dot_gwm__hut__notification__pb2
+from proto.drapi import business_info_pb2 as drapi_dot_business__info__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16\x64rdtu/debug_info.proto\x12\x06\x64r.blc\x1a\x1c\x64rapi/operation_status.proto\x1a\x1flock_on_road/lock_on_road.proto\x1a drapi/gwm_hut_notification.proto\"\xa9\x02\n\x0c\x42lcDebugInfo\x12,\n\nnavigation\x18\x01 \x01(\x0b\x32\x18.dr.blc.NavigationNotify\x12\x30\n\x10speed_limit_info\x18\x02 \x01(\x0b\x32\x16.dr.blc.SpeedLimitInfo\x12\'\n\x0blane_change\x18\x03 \x01(\x0b\x32\x12.dr.blc.Lanechange\x12*\n\x08snow_day\x18\x04 \x01(\x0b\x32\x18.dr.blc.SnowyDayModeInfo\x12.\n\x0cparking_info\x18\x05 \x01(\x0b\x32\x18.dr.blc.ParkingDebugInfo\x12\x34\n\rhavp_e2e_info\x18\x06 \x01(\x0b\x32\x1d.dr.blc.HAVPEndToEndDebugInfo\")\n\x0eSpeedLimitInfo\x12\x17\n\x0fuse_model_speed\x18\x01 \x01(\x08\"\'\n\nLanechange\x12\x19\n\x11\x66orce_lane_change\x18\x01 \x01(\x08\"6\n\x10SnowyDayModeInfo\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x0f\n\x07is_snow\x18\x02 \x01(\x08\"\xd6\x02\n\x10NavigationNotify\x12\x14\n\x0ctimestamp_ms\x18\x01 \x01(\x04\x12@\n\x12nca_passive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.NCAPassiveReason\x12/\n\x0bpreview_cmd\x18\x03 \x01(\x0b\x32\x1a.dr.blc.PreviewCommandInfo\x12/\n\x0b\x65xecute_cmd\x18\x04 \x01(\x0b\x32\x1a.dr.blc.ExecuteCommandInfo\x12\x37\n\rrealtime_navi\x18\x05 \x01(\x0b\x32 .dr.blc.RealTimeNavigationStatus\x12,\n\nlor_status\x18\x06 \x01(\x0b\x32\x18.dr.blc.LockOnRoadStatus\x12!\n\x08odd_info\x18\x07 \x01(\x0b\x32\x0f.dr.blc.OddInfo\"x\n\x12PreviewCommandInfo\x12\x34\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32%.dr.blc.PreviewCommandInfo.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"x\n\x12\x45xecuteCommandInfo\x12\x34\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32%.dr.blc.ExecuteCommandInfo.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x84\x01\n\x18RealTimeNavigationStatus\x12:\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32+.dr.blc.RealTimeNavigationStatus.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"t\n\x10LockOnRoadStatus\x12\x32\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32#.dr.blc.LockOnRoadStatus.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"b\n\x07OddInfo\x12)\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32\x1a.dr.blc.OddInfo.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"C\n\x10ParkingDebugInfo\x12/\n\nmrm_status\x18\x01 \x01(\x0e\x32\x1b.dr.blc.ParkingBLCMRMStatus\"\xc9\n\n\x15HAVPEndToEndDebugInfo\x12X\n\x1alock_on_road_strict_status\x18\x01 \x01(\x0e\x32\x34.dr.blc.HAVPEndToEndDebugInfo.LockOnRoadStrictStatus\x12^\n\x1clocalization_matching_status\x18\x02 \x01(\x0e\x32\x38.dr.blc.HAVPEndToEndDebugInfo.LocalizationMatchingStatus\x12\\\n\x1blocalization_end2end_status\x18\x03 \x01(\x0e\x32\x37.dr.blc.HAVPEndToEndDebugInfo.LocalizationEnd2EndStatus\x12K\n\x13lock_on_road_status\x18\x04 \x01(\x0e\x32..dr.blc.HAVPEndToEndDebugInfo.LockOnRoadStatus\x12\x34\n\te2e_popup\x18\x05 \x01(\x0b\x32!.dr.notification.gwmhut.PopupDisp\x12\x41\n\rvehilce_state\x18\x06 \x01(\x0e\x32*.dr.blc.HAVPEndToEndDebugInfo.VehicleState\x12Q\n\x14learning_status_type\x18\x07 \x01(\x0e\x32\x33.dr.blc.HAVPEndToEndDebugInfo.VPALearningStatusType\x12I\n\x0elearning_stage\x18\x08 \x01(\x0e\x32\x31.dr.blc.HAVPEndToEndDebugInfo.VPAE2ELearningStage\x12\x1c\n\x14pre_mapping_distance\x18\t \x01(\x01\"N\n\x16LockOnRoadStrictStatus\x12\x10\n\x0cNAVI_UNKNOWN\x10\x00\x12\x0f\n\x0bNAVI_NORMAL\x10\x01\x12\x11\n\rNAVI_ABNORMAL\x10\x02\"W\n\x19LocalizationEnd2EndStatus\x12\x12\n\x0eSTATUS_UNKNOWN\x10\x00\x12\x10\n\x0cSTATUS_READY\x10\x01\x12\x14\n\x10STATUS_NOT_READY\x10\x02\"\x7f\n\x1aLocalizationMatchingStatus\x12\r\n\tSEARCHING\x10\x00\x12\x0c\n\x08MATCHING\x10\x01\x12\x0b\n\x07MATCHED\x10\x02\x12\n\n\x06NO_MAP\x10\x03\x12\x15\n\x11ROUTING_NOT_READY\x10\x04\x12\x14\n\x10NEAR_DESTINATION\x10\x05\"^\n\x10LockOnRoadStatus\x12\x0e\n\nNO_ROUTING\x10\x00\x12\n\n\x06NORMAL\x10\x01\x12\t\n\x05YAWED\x10\x02\x12\x0c\n\x08PASSOVER\x10\x03\x12\x15\n\x11GNSS_POSE_INVALID\x10\x04\"L\n\x0cVehicleState\x12\x13\n\x0fVEHICLE_UNKNOWN\x10\x00\x12\x12\n\x0eVEHICLE_INDOOR\x10\x01\x12\x13\n\x0fVEHICLE_OUTDOOR\x10\x02\"`\n\x15VPALearningStatusType\x12\x16\n\x12STATUS_TYPE_NORMAL\x10\x00\x12\x16\n\x12STATUS_TYPE_E2E_IN\x10\x01\x12\x17\n\x13STATUS_TYPE_E2E_OUT\x10\x02\"\\\n\x13VPAE2ELearningStage\x12\x12\n\x0eVPA_STAGE_NONE\x10\x00\x12\x0f\n\x0bVPA_STAGE_1\x10\x01\x12\x0f\n\x0bVPA_STAGE_2\x10\x02\x12\x0f\n\x0bVPA_STAGE_3\x10\x03*\xbb\x01\n\x13ParkingBLCMRMStatus\x12\x11\n\rSTATE_INITIAL\x10\x00\x12\x14\n\x10STATE_DECELERATE\x10\x01\x12\x0e\n\nSTATE_HOLD\x10\x02\x12\x1b\n\x17STATE_P_GEAR_AFTER_HOLD\x10\x03\x12\x10\n\x0cSTATE_P_GEAR\x10\x04\x12\x10\n\x0cSTATE_FINISH\x10\x05\x12\x14\n\x10STATE_MRM_FAILED\x10\x06\x12\x14\n\x10STATE_MRM_ACTIVE\x10\x07\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16\x64rdtu/debug_info.proto\x12\x06\x64r.blc\x1a\x1c\x64rapi/operation_status.proto\x1a\x1flock_on_road/lock_on_road.proto\x1a drapi/gwm_hut_notification.proto\x1a\x19\x64rapi/business_info.proto\"\xd7\x02\n\x0c\x42lcDebugInfo\x12,\n\nnavigation\x18\x01 \x01(\x0b\x32\x18.dr.blc.NavigationNotify\x12\x30\n\x10speed_limit_info\x18\x02 \x01(\x0b\x32\x16.dr.blc.SpeedLimitInfo\x12\'\n\x0blane_change\x18\x03 \x01(\x0b\x32\x12.dr.blc.Lanechange\x12*\n\x08snow_day\x18\x04 \x01(\x0b\x32\x18.dr.blc.SnowyDayModeInfo\x12.\n\x0cparking_info\x18\x05 \x01(\x0b\x32\x18.dr.blc.ParkingDebugInfo\x12\x34\n\rhavp_e2e_info\x18\x06 \x01(\x0b\x32\x1d.dr.blc.HAVPEndToEndDebugInfo\x12,\n\x0ehands_off_info\x18\x07 \x01(\x0b\x32\x14.dr.blc.HandsOffInfo\"\x9f\x01\n\x0eSpeedLimitInfo\x12\x17\n\x0fuse_model_speed\x18\x01 \x01(\x08\x12\x39\n\x08strategy\x18\x02 \x03(\x0e\x32\'.dr.business_info.BlcSpeedLimitStrategy\x12\x1c\n\x14static_strategy_type\x18\x14 \x01(\x05\x12\x1b\n\x13scene_strategy_type\x18\x15 \x01(\x05\"\'\n\nLanechange\x12\x19\n\x11\x66orce_lane_change\x18\x01 \x01(\x08\"6\n\x10SnowyDayModeInfo\x12\x11\n\tis_active\x18\x01 \x01(\x08\x12\x0f\n\x07is_snow\x18\x02 \x01(\x08\"\xd6\x02\n\x10NavigationNotify\x12\x14\n\x0ctimestamp_ms\x18\x01 \x01(\x04\x12@\n\x12nca_passive_reason\x18\x02 \x01(\x0b\x32$.dr.operationstatus.NCAPassiveReason\x12/\n\x0bpreview_cmd\x18\x03 \x01(\x0b\x32\x1a.dr.blc.PreviewCommandInfo\x12/\n\x0b\x65xecute_cmd\x18\x04 \x01(\x0b\x32\x1a.dr.blc.ExecuteCommandInfo\x12\x37\n\rrealtime_navi\x18\x05 \x01(\x0b\x32 .dr.blc.RealTimeNavigationStatus\x12,\n\nlor_status\x18\x06 \x01(\x0b\x32\x18.dr.blc.LockOnRoadStatus\x12!\n\x08odd_info\x18\x07 \x01(\x0b\x32\x0f.dr.blc.OddInfo\"x\n\x12PreviewCommandInfo\x12\x34\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32%.dr.blc.PreviewCommandInfo.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"x\n\x12\x45xecuteCommandInfo\x12\x34\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32%.dr.blc.ExecuteCommandInfo.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x84\x01\n\x18RealTimeNavigationStatus\x12:\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32+.dr.blc.RealTimeNavigationStatus.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"t\n\x10LockOnRoadStatus\x12\x32\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32#.dr.blc.LockOnRoadStatus.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"b\n\x07OddInfo\x12)\n\x05\x61ttrs\x18\x01 \x03(\x0b\x32\x1a.dr.blc.OddInfo.AttrsEntry\x1a,\n\nAttrsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x87\x01\n\x10ParkingDebugInfo\x12/\n\nmrm_status\x18\x01 \x01(\x0e\x32\x1b.dr.blc.ParkingBLCMRMStatus\x12\"\n\x1ais_need_recom_park_out_dir\x18\x02 \x01(\x08\x12\x1e\n\x16rpa_min_human_distance\x18\x03 \x01(\r\"\xc9\n\n\x15HAVPEndToEndDebugInfo\x12X\n\x1alock_on_road_strict_status\x18\x01 \x01(\x0e\x32\x34.dr.blc.HAVPEndToEndDebugInfo.LockOnRoadStrictStatus\x12^\n\x1clocalization_matching_status\x18\x02 \x01(\x0e\x32\x38.dr.blc.HAVPEndToEndDebugInfo.LocalizationMatchingStatus\x12\\\n\x1blocalization_end2end_status\x18\x03 \x01(\x0e\x32\x37.dr.blc.HAVPEndToEndDebugInfo.LocalizationEnd2EndStatus\x12K\n\x13lock_on_road_status\x18\x04 \x01(\x0e\x32..dr.blc.HAVPEndToEndDebugInfo.LockOnRoadStatus\x12\x34\n\te2e_popup\x18\x05 \x01(\x0b\x32!.dr.notification.gwmhut.PopupDisp\x12\x41\n\rvehilce_state\x18\x06 \x01(\x0e\x32*.dr.blc.HAVPEndToEndDebugInfo.VehicleState\x12Q\n\x14learning_status_type\x18\x07 \x01(\x0e\x32\x33.dr.blc.HAVPEndToEndDebugInfo.VPALearningStatusType\x12I\n\x0elearning_stage\x18\x08 \x01(\x0e\x32\x31.dr.blc.HAVPEndToEndDebugInfo.VPAE2ELearningStage\x12\x1c\n\x14pre_mapping_distance\x18\t \x01(\x01\"N\n\x16LockOnRoadStrictStatus\x12\x10\n\x0cNAVI_UNKNOWN\x10\x00\x12\x0f\n\x0bNAVI_NORMAL\x10\x01\x12\x11\n\rNAVI_ABNORMAL\x10\x02\"W\n\x19LocalizationEnd2EndStatus\x12\x12\n\x0eSTATUS_UNKNOWN\x10\x00\x12\x10\n\x0cSTATUS_READY\x10\x01\x12\x14\n\x10STATUS_NOT_READY\x10\x02\"\x7f\n\x1aLocalizationMatchingStatus\x12\r\n\tSEARCHING\x10\x00\x12\x0c\n\x08MATCHING\x10\x01\x12\x0b\n\x07MATCHED\x10\x02\x12\n\n\x06NO_MAP\x10\x03\x12\x15\n\x11ROUTING_NOT_READY\x10\x04\x12\x14\n\x10NEAR_DESTINATION\x10\x05\"^\n\x10LockOnRoadStatus\x12\x0e\n\nNO_ROUTING\x10\x00\x12\n\n\x06NORMAL\x10\x01\x12\t\n\x05YAWED\x10\x02\x12\x0c\n\x08PASSOVER\x10\x03\x12\x15\n\x11GNSS_POSE_INVALID\x10\x04\"L\n\x0cVehicleState\x12\x13\n\x0fVEHICLE_UNKNOWN\x10\x00\x12\x12\n\x0eVEHICLE_INDOOR\x10\x01\x12\x13\n\x0fVEHICLE_OUTDOOR\x10\x02\"`\n\x15VPALearningStatusType\x12\x16\n\x12STATUS_TYPE_NORMAL\x10\x00\x12\x16\n\x12STATUS_TYPE_E2E_IN\x10\x01\x12\x17\n\x13STATUS_TYPE_E2E_OUT\x10\x02\"\\\n\x13VPAE2ELearningStage\x12\x12\n\x0eVPA_STAGE_NONE\x10\x00\x12\x0f\n\x0bVPA_STAGE_1\x10\x01\x12\x0f\n\x0bVPA_STAGE_2\x10\x02\x12\x0f\n\x0bVPA_STAGE_3\x10\x03\"\x93\x01\n\x0cHandsOffInfo\x12=\n\x10hands_off_status\x18\x01 \x01(\x0e\x32#.dr.blc.HandsOffInfo.HandsOffStatus\"D\n\x0eHandsOffStatus\x12\x15\n\x11HANDS_OFF_UNKNOWN\x10\x00\x12\x0c\n\x08HANDS_ON\x10\x01\x12\r\n\tHANDS_OFF\x10\x02*\xcf\x01\n\x13ParkingBLCMRMStatus\x12\x11\n\rSTATE_INITIAL\x10\x00\x12\x14\n\x10STATE_DECELERATE\x10\x01\x12\x0e\n\nSTATE_HOLD\x10\x02\x12\x1b\n\x17STATE_P_GEAR_AFTER_HOLD\x10\x03\x12\x10\n\x0cSTATE_P_GEAR\x10\x04\x12\x10\n\x0cSTATE_FINISH\x10\x05\x12\x14\n\x10STATE_MRM_FAILED\x10\x06\x12\x14\n\x10STATE_MRM_ACTIVE\x10\x07\x12\x12\n\x0eSTATE_LAST_EPB\x10\x08\x62\x06proto3')
 
 _PARKINGBLCMRMSTATUS = DESCRIPTOR.enum_types_by_name['ParkingBLCMRMStatus']
 ParkingBLCMRMStatus = enum_type_wrapper.EnumTypeWrapper(_PARKINGBLCMRMSTATUS)
@@ -30,6 +31,7 @@ STATE_P_GEAR = 4
 STATE_FINISH = 5
 STATE_MRM_FAILED = 6
 STATE_MRM_ACTIVE = 7
+STATE_LAST_EPB = 8
 
 
 _BLCDEBUGINFO = DESCRIPTOR.message_types_by_name['BlcDebugInfo']
@@ -49,6 +51,7 @@ _ODDINFO = DESCRIPTOR.message_types_by_name['OddInfo']
 _ODDINFO_ATTRSENTRY = _ODDINFO.nested_types_by_name['AttrsEntry']
 _PARKINGDEBUGINFO = DESCRIPTOR.message_types_by_name['ParkingDebugInfo']
 _HAVPENDTOENDDEBUGINFO = DESCRIPTOR.message_types_by_name['HAVPEndToEndDebugInfo']
+_HANDSOFFINFO = DESCRIPTOR.message_types_by_name['HandsOffInfo']
 _HAVPENDTOENDDEBUGINFO_LOCKONROADSTRICTSTATUS = _HAVPENDTOENDDEBUGINFO.enum_types_by_name['LockOnRoadStrictStatus']
 _HAVPENDTOENDDEBUGINFO_LOCALIZATIONEND2ENDSTATUS = _HAVPENDTOENDDEBUGINFO.enum_types_by_name['LocalizationEnd2EndStatus']
 _HAVPENDTOENDDEBUGINFO_LOCALIZATIONMATCHINGSTATUS = _HAVPENDTOENDDEBUGINFO.enum_types_by_name['LocalizationMatchingStatus']
@@ -56,6 +59,7 @@ _HAVPENDTOENDDEBUGINFO_LOCKONROADSTATUS = _HAVPENDTOENDDEBUGINFO.enum_types_by_n
 _HAVPENDTOENDDEBUGINFO_VEHICLESTATE = _HAVPENDTOENDDEBUGINFO.enum_types_by_name['VehicleState']
 _HAVPENDTOENDDEBUGINFO_VPALEARNINGSTATUSTYPE = _HAVPENDTOENDDEBUGINFO.enum_types_by_name['VPALearningStatusType']
 _HAVPENDTOENDDEBUGINFO_VPAE2ELEARNINGSTAGE = _HAVPENDTOENDDEBUGINFO.enum_types_by_name['VPAE2ELearningStage']
+_HANDSOFFINFO_HANDSOFFSTATUS = _HANDSOFFINFO.enum_types_by_name['HandsOffStatus']
 BlcDebugInfo = _reflection.GeneratedProtocolMessageType('BlcDebugInfo', (_message.Message,), {
   'DESCRIPTOR' : _BLCDEBUGINFO,
   '__module__' : 'drdtu.debug_info_pb2'
@@ -180,6 +184,13 @@ HAVPEndToEndDebugInfo = _reflection.GeneratedProtocolMessageType('HAVPEndToEndDe
   })
 _sym_db.RegisterMessage(HAVPEndToEndDebugInfo)
 
+HandsOffInfo = _reflection.GeneratedProtocolMessageType('HandsOffInfo', (_message.Message,), {
+  'DESCRIPTOR' : _HANDSOFFINFO,
+  '__module__' : 'drdtu.debug_info_pb2'
+  # @@protoc_insertion_point(class_scope:dr.blc.HandsOffInfo)
+  })
+_sym_db.RegisterMessage(HandsOffInfo)
+
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
@@ -193,54 +204,58 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _LOCKONROADSTATUS_ATTRSENTRY._serialized_options = b'8\001'
   _ODDINFO_ATTRSENTRY._options = None
   _ODDINFO_ATTRSENTRY._serialized_options = b'8\001'
-  _PARKINGBLCMRMSTATUS._serialized_start=2939
-  _PARKINGBLCMRMSTATUS._serialized_end=3126
-  _BLCDEBUGINFO._serialized_start=132
-  _BLCDEBUGINFO._serialized_end=429
-  _SPEEDLIMITINFO._serialized_start=431
-  _SPEEDLIMITINFO._serialized_end=472
-  _LANECHANGE._serialized_start=474
-  _LANECHANGE._serialized_end=513
-  _SNOWYDAYMODEINFO._serialized_start=515
-  _SNOWYDAYMODEINFO._serialized_end=569
-  _NAVIGATIONNOTIFY._serialized_start=572
-  _NAVIGATIONNOTIFY._serialized_end=914
-  _PREVIEWCOMMANDINFO._serialized_start=916
-  _PREVIEWCOMMANDINFO._serialized_end=1036
-  _PREVIEWCOMMANDINFO_ATTRSENTRY._serialized_start=992
-  _PREVIEWCOMMANDINFO_ATTRSENTRY._serialized_end=1036
-  _EXECUTECOMMANDINFO._serialized_start=1038
-  _EXECUTECOMMANDINFO._serialized_end=1158
-  _EXECUTECOMMANDINFO_ATTRSENTRY._serialized_start=992
-  _EXECUTECOMMANDINFO_ATTRSENTRY._serialized_end=1036
-  _REALTIMENAVIGATIONSTATUS._serialized_start=1161
-  _REALTIMENAVIGATIONSTATUS._serialized_end=1293
-  _REALTIMENAVIGATIONSTATUS_ATTRSENTRY._serialized_start=992
-  _REALTIMENAVIGATIONSTATUS_ATTRSENTRY._serialized_end=1036
-  _LOCKONROADSTATUS._serialized_start=1295
-  _LOCKONROADSTATUS._serialized_end=1411
-  _LOCKONROADSTATUS_ATTRSENTRY._serialized_start=992
-  _LOCKONROADSTATUS_ATTRSENTRY._serialized_end=1036
-  _ODDINFO._serialized_start=1413
-  _ODDINFO._serialized_end=1511
-  _ODDINFO_ATTRSENTRY._serialized_start=992
-  _ODDINFO_ATTRSENTRY._serialized_end=1036
-  _PARKINGDEBUGINFO._serialized_start=1513
-  _PARKINGDEBUGINFO._serialized_end=1580
-  _HAVPENDTOENDDEBUGINFO._serialized_start=1583
-  _HAVPENDTOENDDEBUGINFO._serialized_end=2936
-  _HAVPENDTOENDDEBUGINFO_LOCKONROADSTRICTSTATUS._serialized_start=2274
-  _HAVPENDTOENDDEBUGINFO_LOCKONROADSTRICTSTATUS._serialized_end=2352
-  _HAVPENDTOENDDEBUGINFO_LOCALIZATIONEND2ENDSTATUS._serialized_start=2354
-  _HAVPENDTOENDDEBUGINFO_LOCALIZATIONEND2ENDSTATUS._serialized_end=2441
-  _HAVPENDTOENDDEBUGINFO_LOCALIZATIONMATCHINGSTATUS._serialized_start=2443
-  _HAVPENDTOENDDEBUGINFO_LOCALIZATIONMATCHINGSTATUS._serialized_end=2570
-  _HAVPENDTOENDDEBUGINFO_LOCKONROADSTATUS._serialized_start=2572
-  _HAVPENDTOENDDEBUGINFO_LOCKONROADSTATUS._serialized_end=2666
-  _HAVPENDTOENDDEBUGINFO_VEHICLESTATE._serialized_start=2668
-  _HAVPENDTOENDDEBUGINFO_VEHICLESTATE._serialized_end=2744
-  _HAVPENDTOENDDEBUGINFO_VPALEARNINGSTATUSTYPE._serialized_start=2746
-  _HAVPENDTOENDDEBUGINFO_VPALEARNINGSTATUSTYPE._serialized_end=2842
-  _HAVPENDTOENDDEBUGINFO_VPAE2ELEARNINGSTAGE._serialized_start=2844
-  _HAVPENDTOENDDEBUGINFO_VPAE2ELEARNINGSTAGE._serialized_end=2936
+  _PARKINGBLCMRMSTATUS._serialized_start=3350
+  _PARKINGBLCMRMSTATUS._serialized_end=3557
+  _BLCDEBUGINFO._serialized_start=159
+  _BLCDEBUGINFO._serialized_end=502
+  _SPEEDLIMITINFO._serialized_start=505
+  _SPEEDLIMITINFO._serialized_end=664
+  _LANECHANGE._serialized_start=666
+  _LANECHANGE._serialized_end=705
+  _SNOWYDAYMODEINFO._serialized_start=707
+  _SNOWYDAYMODEINFO._serialized_end=761
+  _NAVIGATIONNOTIFY._serialized_start=764
+  _NAVIGATIONNOTIFY._serialized_end=1106
+  _PREVIEWCOMMANDINFO._serialized_start=1108
+  _PREVIEWCOMMANDINFO._serialized_end=1228
+  _PREVIEWCOMMANDINFO_ATTRSENTRY._serialized_start=1184
+  _PREVIEWCOMMANDINFO_ATTRSENTRY._serialized_end=1228
+  _EXECUTECOMMANDINFO._serialized_start=1230
+  _EXECUTECOMMANDINFO._serialized_end=1350
+  _EXECUTECOMMANDINFO_ATTRSENTRY._serialized_start=1184
+  _EXECUTECOMMANDINFO_ATTRSENTRY._serialized_end=1228
+  _REALTIMENAVIGATIONSTATUS._serialized_start=1353
+  _REALTIMENAVIGATIONSTATUS._serialized_end=1485
+  _REALTIMENAVIGATIONSTATUS_ATTRSENTRY._serialized_start=1184
+  _REALTIMENAVIGATIONSTATUS_ATTRSENTRY._serialized_end=1228
+  _LOCKONROADSTATUS._serialized_start=1487
+  _LOCKONROADSTATUS._serialized_end=1603
+  _LOCKONROADSTATUS_ATTRSENTRY._serialized_start=1184
+  _LOCKONROADSTATUS_ATTRSENTRY._serialized_end=1228
+  _ODDINFO._serialized_start=1605
+  _ODDINFO._serialized_end=1703
+  _ODDINFO_ATTRSENTRY._serialized_start=1184
+  _ODDINFO_ATTRSENTRY._serialized_end=1228
+  _PARKINGDEBUGINFO._serialized_start=1706
+  _PARKINGDEBUGINFO._serialized_end=1841
+  _HAVPENDTOENDDEBUGINFO._serialized_start=1844
+  _HAVPENDTOENDDEBUGINFO._serialized_end=3197
+  _HAVPENDTOENDDEBUGINFO_LOCKONROADSTRICTSTATUS._serialized_start=2535
+  _HAVPENDTOENDDEBUGINFO_LOCKONROADSTRICTSTATUS._serialized_end=2613
+  _HAVPENDTOENDDEBUGINFO_LOCALIZATIONEND2ENDSTATUS._serialized_start=2615
+  _HAVPENDTOENDDEBUGINFO_LOCALIZATIONEND2ENDSTATUS._serialized_end=2702
+  _HAVPENDTOENDDEBUGINFO_LOCALIZATIONMATCHINGSTATUS._serialized_start=2704
+  _HAVPENDTOENDDEBUGINFO_LOCALIZATIONMATCHINGSTATUS._serialized_end=2831
+  _HAVPENDTOENDDEBUGINFO_LOCKONROADSTATUS._serialized_start=2833
+  _HAVPENDTOENDDEBUGINFO_LOCKONROADSTATUS._serialized_end=2927
+  _HAVPENDTOENDDEBUGINFO_VEHICLESTATE._serialized_start=2929
+  _HAVPENDTOENDDEBUGINFO_VEHICLESTATE._serialized_end=3005
+  _HAVPENDTOENDDEBUGINFO_VPALEARNINGSTATUSTYPE._serialized_start=3007
+  _HAVPENDTOENDDEBUGINFO_VPALEARNINGSTATUSTYPE._serialized_end=3103
+  _HAVPENDTOENDDEBUGINFO_VPAE2ELEARNINGSTAGE._serialized_start=3105
+  _HAVPENDTOENDDEBUGINFO_VPAE2ELEARNINGSTAGE._serialized_end=3197
+  _HANDSOFFINFO._serialized_start=3200
+  _HANDSOFFINFO._serialized_end=3347
+  _HANDSOFFINFO_HANDSOFFSTATUS._serialized_start=3279
+  _HANDSOFFINFO_HANDSOFFSTATUS._serialized_end=3347
 # @@protoc_insertion_point(module_scope)

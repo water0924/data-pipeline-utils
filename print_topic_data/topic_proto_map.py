@@ -21,6 +21,7 @@ from drapi.gwm.havp import havp_vehicle_pb2,havp_map_pb2
 from smart import smart_business_pb2,smart_command_pb2
 from smart.parking import smart_parking_frame_data_pb2,smart_lp_parking_map_pb2
 from drapi import gl_p177_downstream_chassis_pb2,gwm_tank_downstream_chassis_pb2
+from drapi.gl import gl_hpa_map_pb2
 
 
 
@@ -95,4 +96,6 @@ topic_proto_map = {
     "/mcu_blc/chassis_detail_tank":gwm_tank_downstream_chassis_pb2.UpstreamChassisTank(),
     "/blc/downstream_chassis_tank":gwm_tank_downstream_chassis_pb2.DownstreamChassisTank(),
     "/blc/downstream_chassis":gl_p177_downstream_chassis_pb2.DownstreamChassis(),
+    "/gl/hpa_map":gl_hpa_map_pb2.HpaMap(),
+    "/gl/hpa_map_vis":gl_hpa_map_pb2.HpaMap(),
 }

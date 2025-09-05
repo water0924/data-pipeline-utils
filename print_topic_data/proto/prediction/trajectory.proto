@@ -44,3 +44,10 @@ message LonPosPoint {
   optional double s = 1;
   optional int64 relative_time =2;
 }
+
+message SpeedScorer {
+  //  collision score and ttc from speed model
+  optional double speed_collision_prob = 1;
+  optional double speed_ttc = 2;
+  optional float speed_collision_threshold = 3;
+}

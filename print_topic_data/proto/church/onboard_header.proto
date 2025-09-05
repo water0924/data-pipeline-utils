@@ -31,4 +31,9 @@ message OnboardHeader {
   optional uint64 dataplane_timestamp = 7;
 
   optional Simulation simulation = 8;
+
+  // address of data
+  optional uint64 data_unsafe_address = 9;
+  // address of data validation value
+  optional uint64 data_unsafe_tag = 10;
 }

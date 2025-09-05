@@ -2,6 +2,8 @@ package(features=['-hidden_visibility_feature'])
 load("@rules_cc//cc:defs.bzl", "cc_proto_library")
 load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@bazel_skylib//lib:selects.bzl", "selects")
+load("@bazel_skylib//rules:expand_template.bzl", "expand_template")
 
 load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
 
@@ -123,6 +125,7 @@ proto_library(
         "//proto/drapi:gwm_hut_notification_proto",
         "//proto/drapi:route_planning_proto",
         "//proto/localization:havp_map_proto",
+        "//proto/drapi:local_config_proto",
         "@com_google_protobuf//:any_proto",
     ],
     strip_import_prefix = "/proto/",
@@ -250,6 +253,56 @@ python_proto_library(
     visibility = ["//visibility:public"],
     protos = [
         ":gwm_navigation_proto",
+    ],
+)
+
+proto_library(
+    name = "unified_navigation_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["unified_navigation.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "unified_navigation_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":unified_navigation_proto",
+    ],
+)
+
+python_proto_library(
+    name = "unified_navigation_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":unified_navigation_proto",
+    ],
+)
+
+proto_library(
+    name = "magic_carpet_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["magic_carpet.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "magic_carpet_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":magic_carpet_proto",
+    ],
+)
+
+python_proto_library(
+    name = "magic_carpet_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":magic_carpet_proto",
     ],
 )
 
@@ -592,3 +645,220 @@ python_proto_library(
     ],
 )
 
+
+proto_library(
+    name = "gwm_de09_downstream_chassis_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gwm_de09_downstream_chassis.proto"],
+    deps = [
+        ":base_proto",
+        "//proto/canbus:gwm_de09_chassis_detail_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gwm_de09_downstream_chassis_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gwm_de09_downstream_chassis_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gwm_de09_downstream_chassis_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gwm_de09_downstream_chassis_proto",
+    ],
+)
+
+proto_library(
+    name = "gwm_c01t_downstream_chassis_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gwm_c01t_downstream_chassis.proto"],
+    deps = [
+        ":base_proto",
+        "//proto/canbus:gwm_chassis_detail_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gwm_c01t_downstream_chassis_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gwm_c01t_downstream_chassis_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gwm_c01t_downstream_chassis_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gwm_c01t_downstream_chassis_proto",
+    ],
+)
+
+proto_library(
+    name = "gwm_all_downstream_chassis_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gwm_all_downstream_chassis.proto"],
+    deps = [
+        ":base_proto",
+        "//proto/canbus:gwm_all_chassis_detail_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gwm_all_downstream_chassis_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gwm_all_downstream_chassis_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gwm_all_downstream_chassis_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gwm_all_downstream_chassis_proto",
+    ],
+)
+
+expand_template(
+    name = "blc_gwm_chassis",
+    out = "blc_gwm_chassis.proto",
+    template = "blc_gwm_chassis.proto.in",
+    substitutions = selects.with_or({
+        ("@deeproute_build_tools//:C01-PT_setting", "@deeproute_build_tools//:M8-ALL_setting") : {
+            "@_IMPORT_CHASSIS_DETAIL_PROTO_@" : """
+import "canbus/gwm_chassis_detail.proto";  
+import "drapi/gwm_c01_downstream_chassis.proto";
+""",
+            "@_DOWNSTREAM_CHASSIS_DETAIL_MESSAGE_TYPE_@" : """
+            dr.blc.mcu.GwmC01DownstreamChassis gwm = 3;
+""",
+            "@_UPSTREAM_CHASSIS_DETAIL_MESSAGE_TYPE_@" : """
+            deeproute.canbus.GwmChassisDetail gwm = 3;
+""",
+        },
+        ("@deeproute_build_tools//:TANK-ALL_setting") : {
+            "@_IMPORT_CHASSIS_DETAIL_PROTO_@" : """
+import "canbus/gwm_tank_chassis_detail.proto";
+import "drapi/gwm_tank_downstream_chassis.proto";
+""",
+            "@_DOWNSTREAM_CHASSIS_DETAIL_MESSAGE_TYPE_@" : """
+        dr.blc.mcu.GwmTankDownstreamChassis gwm_tank = 4;
+""",
+            "@_UPSTREAM_CHASSIS_DETAIL_MESSAGE_TYPE_@" : """
+        deeproute.canbus.gwm.tank.GwmTankChassisDetail gwm_tank = 4;
+""",
+        },
+        ("@deeproute_build_tools//:GWM-ORINY-SHARE_setting") : {
+            "@_IMPORT_CHASSIS_DETAIL_PROTO_@" : """
+import "canbus/gwm_all_chassis_detail.proto";
+import "drapi/gwm_all_downstream_chassis.proto";
+""",
+            "@_DOWNSTREAM_CHASSIS_DETAIL_MESSAGE_TYPE_@" : """
+        dr.blc.mcu.GwmAllDownstreamChassis gwm_all = 7;
+""",
+            "@_UPSTREAM_CHASSIS_DETAIL_MESSAGE_TYPE_@" : """
+        deeproute.canbus.gwm.all.GwmAllChassisDetail gwm_all = 7;
+""",
+        },
+        ("@deeproute_build_tools//:GWM-THORU-SHARE_setting") : {
+            "@_IMPORT_CHASSIS_DETAIL_PROTO_@" : """
+import "canbus/gwm_all_chassis_detail.proto";
+import "drapi/gwm_all_downstream_chassis.proto";
+""",
+            "@_DOWNSTREAM_CHASSIS_DETAIL_MESSAGE_TYPE_@" : """
+        dr.blc.mcu.GwmAllDownstreamChassis gwm_all = 7;
+""",
+            "@_UPSTREAM_CHASSIS_DETAIL_MESSAGE_TYPE_@" : """
+        deeproute.canbus.gwm.all.GwmAllChassisDetail gwm_all = 7;
+""",
+        },
+        ("//conditions:default") : {
+            "@_IMPORT_CHASSIS_DETAIL_PROTO_@" : """
+""",
+            "@_DOWNSTREAM_CHASSIS_DETAIL_MESSAGE_TYPE_@" : """
+            int32 not_use_place_holder = 100;
+""",
+            "@_UPSTREAM_CHASSIS_DETAIL_MESSAGE_TYPE_@" : """
+            int32 not_use_place_holder = 100;
+""",
+        },
+    })
+)
+
+proto_library(
+    name = "blc_gwm_chassis_proto",
+    visibility = ["//visibility:public"],
+    srcs = [":blc_gwm_chassis.proto"],
+    deps = [
+        "//proto/canbus:chassis_proto",
+        "//proto/common/configs:vehicle_config_proto",
+        "//proto/common:vehicle_signal_proto",
+    ] + selects.with_or({
+        ("@deeproute_build_tools//:C01-PT_setting", "@deeproute_build_tools//:M8-ALL_setting") : [
+            "//proto/canbus:gwm_chassis_detail_proto", 
+            ":gwm_c01_downstream_chassis_proto",
+        ],
+        ("@deeproute_build_tools//:TANK-ALL_setting") : [
+            "//proto/canbus:gwm_tank_chassis_detail_proto",
+            ":gwm_tank_downstream_chassis_proto",
+        ],
+        ("@deeproute_build_tools//:GWM-ORINY-SHARE_setting") : [
+            "//proto/canbus:gwm_all_chassis_detail_proto",
+            ":gwm_all_downstream_chassis_proto",
+        ],
+        ("@deeproute_build_tools//:GWM-THORU-SHARE_setting") : [
+            "//proto/canbus:gwm_all_chassis_detail_proto",
+            ":gwm_all_downstream_chassis_proto",
+        ],
+        ("@deeproute_build_tools//:P177-ET_setting") : [
+            "//proto/canbus:gl_p177_chassis_detail_proto",
+        ],
+        ("//conditions:default") : [
+        ]
+    }),
+    strip_import_prefix = "/proto/",
+)
+
+
+cc_proto_library(
+    name = "blc_gwm_chassis_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":blc_gwm_chassis_proto",
+    ],
+)
+
+proto_library(
+    name = "gwm_c01_downstream_chassis_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gwm_c01_downstream_chassis.proto"],
+    deps = [
+        ":base_proto",
+        "//proto/canbus:gwm_chassis_detail_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gwm_c01_downstream_chassis_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gwm_c01_downstream_chassis_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gwm_c01_downstream_chassis_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gwm_c01_downstream_chassis_proto",
+    ],
+)

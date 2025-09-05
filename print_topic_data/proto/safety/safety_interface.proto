@@ -50,6 +50,15 @@ message SetSafetyPolicyRp {
   bool critical_policy_enabled = 2; // is critical safety policy enabled. when policy_enabled is true, critical_policy_enabled will also be set to true.
 }
 
+message GetSafetyPolicyStatusRq {}
+
+message GetSafetyPolicyStatusRp {
+  bool policy_enabled = 1;  // is general safety policy enabled
+  bool critical_policy_enabled =
+      2;  // is critical safety policy enabled. when policy_enabled is true,
+          // critical_policy_enabled will also be set to true.
+}
+
 message ManageSafetyEventRequest {
   bool enable_safety_event = 1;
 }
@@ -65,6 +74,7 @@ message Request {  // topic: /safety/request
     GetEvents get_events = 3;
     SetSafetyPolicy set_safety_policy = 4;
     ManageSafetyEventRequest manage_safety_event_request = 5;
+    GetSafetyPolicyStatusRq get_safety_policy_status_rq = 6;
   }
 }
 
@@ -75,6 +85,7 @@ message Response {  // topic: /safety/Response
     GetEventsRp get_events_rp = 3;
     SetSafetyPolicyRp set_safety_policy_rp = 4;
     ManageSafetyEventResponse manage_safety_event_response = 5;
+    GetSafetyPolicyStatusRp get_safety_policy_status_rp = 6;
   }
 }
 

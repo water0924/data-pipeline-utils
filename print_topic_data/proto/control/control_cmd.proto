@@ -46,6 +46,20 @@ message AEBCommand {
   optional int64 time_measurement = 10;
 }
 
+message DPACommand {
+  optional deeproute.canbus.Chassis.DriftingParkingMode dpa_enable = 1;
+  optional deeproute.canbus.Chassis.DriftingParkingFixedWheel dpa_lock_wheel_req = 2;
+  optional deeproute.canbus.Chassis.DriftingParkingDirection dpa_lock_wheel_direction_req = 3;
+  // the planning request suspend
+  optional bool drift_suspend_req = 4;
+  // the planning target angle 
+  optional double target_angle = 5;
+  // the vehicle actual the rotation Angle
+  optional double veh_ata_rtonl_ag = 6;
+  // the planning actual requst the rotation Angle
+  optional double rton_ag_req = 7;
+}
+
 // next id : 27
 message ControlCommand {
   optional deeproute.common.Header header = 1;
@@ -148,6 +162,14 @@ message ControlCommand {
     AVH_standby = 3;
   }
   optional AvhCtrl avh_ctrl = 61;
+  optional int32 function_type = 62;
+  optional int32 lat_scene_type = 63;
+  optional int32 lon_scene_type = 64;
+  optional bool dynamic_shifting_status = 65 [default = false];
+  optional DPACommand dpa_command = 66;
+  optional bool rws_ang_req_enable = 67 [default = false];
+  optional double rws_ang_req_value = 68 [default = 0];  //弧度   最大角度6.5deg
+  optional double strg_trq_coeff = 69 [default = 0];
 }
 
 // topic:esa/command

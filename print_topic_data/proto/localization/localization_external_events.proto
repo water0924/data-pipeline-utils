@@ -38,6 +38,7 @@ message MapMatchingStatusEvent {
   bool has_e2e_out_map_trajectory = 10; // 匹配到的地图是否有泊出路线
   bool is_near_default_parking_space = 11; // 当前位置是否在默认车位附近
   OddRange odd_range = 12; // 当前 matched 状态对应的子图 odd 属性
+  bool is_reach_max_expansion_distance = 13; // 匹配的地图是否已经超过最大扩展距离
 }
 
 message NavigationStatusEvent {
@@ -89,7 +90,7 @@ enum MappingStatus {
   ROAD_LEVEL_OUT_OF_ODD = 22;  // Current road level is out of odd, e.g freeway
   GNSS_SIGNAL_LOST = 23;       // Currently no gnss signal
   MAP_NUMBER_REACH_MAX = 24;     // Map number over the threshold for SMART
-  REACH_MAX_EXPANSION_DISTANCE = 25; // Matched map is over max distance, can't be expanded
+  REACH_MAX_EXPANSION_DISTANCE = 25 [deprecated = true]; // Matched map is over max distance, can't be expanded (Move to map_matching_status_event)
   NEED_REENTER_PARKING_ODD = 26; // need to re-enter parking odd (in parking odd but not in pre-mapping)
 }
 
@@ -151,6 +152,19 @@ message EndToEndParkingEvent {
   repeated InTrajectoryInfo in_trajectory_infos = 2;
 }
 
+
+enum ParkingOddState {
+  OUT_OF_PARKING_ODD = 0;  // odd外，剩下状态是都是odd内，因此判断是否在odd内只看是否是OUT_OF_PARKING_ODD即可
+  OUTDOOR_PARKING_ODD = 1;
+  INDOOR_PARKING_ODD = 2;
+  MIXPARKING_ODD = 3;
+  UNCONFIRM_OUTDOOR = 4;
+}
+
+message ParkingOddStatusEvent {
+  ParkingOddState parking_odd_state = 1;
+}
+
 /***  End of VPA Testing ****/
 
 message LocalizationEvent {  // localization modules send 'LocalizationEvent'
@@ -164,4 +178,5 @@ message LocalizationEvent {  // localization modules send 'LocalizationEvent'
   EnvironmentStatusEvent environment_status_event = 5;
   NavigationStatusEvent navigation_status_event = 6;
   EndToEndParkingEvent end_to_end_parking_event = 7;
+  ParkingOddStatusEvent parking_odd_status_event = 8;
 }

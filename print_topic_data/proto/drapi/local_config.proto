@@ -12,6 +12,10 @@ message UserConfig {
                                  //nca, 开关关闭，不产生快捷激活信号
 
   // common internal use
+  SwitchStatus truck_defensive_deceleration = 16; //大车防御性降速开关，开关开，planning会对大车防御性降速，开关关闭，不降速，默认开  
+  SwitchStatus vla = 17; //vla控车开关，Vla控车开关打开，planning会使用Vla输出控车，开关关闭，不使用Vla信息，默认关闭
+  SwitchStatus ignore_toll_downgrade = 18;//收费站降级开关，开关开，收费站不降级，开关关闭，收费站降级，默认关闭
+  SwitchStatus in_crossing_check = 19; //路口是否抑制功能检测开关，开关开，路口抑制功能，开关关闭，路口不抑制功能，默认开
   AccelerationStyle acceleration_style = 20; //加速风格
   SwitchStatus pure_model_path = 21; //planning轨迹规划是否使用纯模型debug开关，开关开，使用纯模型
   SwitchStatus pure_model_speed = 22; //planning速度规划是否使用纯模型debug开关，开关开，使用纯模型
@@ -71,6 +75,7 @@ message UserConfig {
   RPAConfig rpa_config = 58;
   HUTConfig hut_config = 59;
   E2EConfig e2e_config = 60;
+  IntellgntAsscLmpConfig lmp_config = 61;
 
   SwitchStatus brake_light_fault_check =
       100;  // 刹车灯故障时，开关打开，退出行车，开关关闭，不影响行车
@@ -301,4 +306,16 @@ message NCAODDTypeLimitConfig {
   SwitchStatus temporary_odd_passive = 2;  // 已弃用
   SwitchStatus dynamic_static_odd = 3;
   SwitchStatus roi_odd = 4;
+}
+
+enum IntellgntAsscLmpEna {
+  INTELLGNTASSCLMPENA_INITIAL_VALUE = 0;
+  INTELLGNTASSCLMPENA_OFF = 1;
+  INTELLGNTASSCLMPENA_FULL_BRIGHT = 2;
+  INTELLGNTASSCLMPENA_OLNY_PARKING_ON = 3;
+}
+
+// 智能辅助灯配置
+message IntellgntAsscLmpConfig {
+  IntellgntAsscLmpEna intellgnt_assc_lmp_ena = 1;
 }

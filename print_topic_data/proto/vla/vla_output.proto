@@ -1,0 +1,117 @@
+syntax = "proto3";
+import "drivers/sensor_image.proto";
+import "common/geometry.proto";
+
+package deeproute.vla.vla_output;
+
+message Action {
+    repeated common.Polyline junction_reference_line = 1;    // refline
+    float model_speed_limit = 2; // 限速值，m/s
+}
+
+message VlaDebugInfo {
+    deeproute.drivers.CompressedImage image = 1;           // 压缩图片
+    uint64  image_timestamp_us = 2;                        // 图片时间戳
+    deeproute.drivers.Image raw_image = 3;                 // 原始图片
+}
+
+message VlaOutput {
+  enum DataType {
+    SUCCESS = 0;  // 成功
+    FAIL = 1;     // 失败
+    DEBUG = 2;    // 调试
+  };
+
+  enum RiskScenario {
+    RISK_UNKNOWN = 0;
+    NO_RISK = 1;                        // 无风险
+    BLIND_SPOT = 2;                     // 盲区 deprecated
+    NIGHT = 3;                          // 夜晚 deprecated
+    RAIN_OR_SNOW = 4;                   // 雨雪天 deprecated
+    POTHOLE = 5;                        // 坑洼 deprecated
+    CURVE = 6;                          // 弯道 deprecated
+    MOUNTAIN_ROAD = 7;                  // 山路 deprecated
+    NARROW_ROAD = 8;                    // 窄路 deprecated
+    ALLEY = 9;                          // 小路 deprecated
+
+    // 新增风险场景
+    RISK_BLINDSPOT_ADJACENT_VEHICLE_BRAKE = 10;    // 刹停 & 盲区
+    RISK_BLINDSPOT_PARKING = 12;                   // 静止临停车 & 盲区
+    RISK_BLINDSPOT_OPENING = 13;                   // 豁口 & 盲区
+    RISK_BLINDSPOT_UTURN = 14;                     // 调头 & 盲区
+    RISK_BLINDSPOT_MERGING = 15;                   // 汇入 & 盲区
+    RISK_BLINDSPOT_CURVE = 16;                     // 弯道 & 盲区
+    RISK_BLINDSPOT_UPHILL = 17;                    // 上坡坡道 & 盲区
+    RISK_CUTIN_CONSTRUCTION_LANECLOSE = 18;        // （施工 ｜ 施工道路关闭）& 切入
+    RISK_CUTIN_MARKING_LANECLOSE = 19;             // 道路缩减 & 切入
+    RISK_CUTIN_OBSTACLE = 20;                      // 避让障碍物 & 切入
+    RISK_CUTIN_PARKING = 21;                       // 避让静止临停车 & 切入
+    RISK_LOW_LIGHTING = 22;                        // 光线不足 ｜ 黑夜
+    RISK_ROAD_NARROW = 23;                         // 窄路 | 狭窄
+    RISK_ROAD_POTHOLE = 24;                        // 坑洼 | 路面包凸 | 包凸 | 颠簸
+    RISK_ROAD_POOLED_WATER = 25;                   // 积水
+    RISK_ROAD_SNOW_COVERED = 26;                   // 积雪
+    RISK_ROAD_ICE_COVERED = 27;                    // 结冰
+    RISK_ROAD_MUDDY = 28;                          // 泥泞
+    RISK_ROAD_OBSTACLE = 29;                       // 障碍物
+    RISK_ROAD_SPEED_BUMP = 30;                     // 减速带
+    RISK_ROAD_RUMBLE_STRIPS = 31;                  // 减速标线
+    RISK_WEATHER_HEAVY_RAIN = 32;                  // 大雨
+    RISK_WEATHER_HEAVY_SNOW = 33;                  // 大雪
+    RISK_WEATHER_DENSE_FOG = 34;                   // 大雾
+    RISK_WEATHER_SANDSTORM = 35;                   // 沙尘暴
+    RISK_TRAFFIC_LOADED_VEHICLE = 36;              // 载货 & 裸露
+    RISK_TRAFFIC_PARALLEL_VRU = 37;                // （非机动车 ｜ 行人）& （同向 ｜ 逆向 | 并行）
+    RISK_TRAFFIC_UNSIGNALIZED_T_INTERSECTION = 38; // 无红绿灯 & 丁字路口
+    RISK_LANECLOSE_CONSTRUCTION = 39;              // 施工 & 道路关闭  
+    RISK_LANECLOSE_OBSTACLE = 40;                  // 障碍物 & 道路关闭
+    RISK_LANECLOSE_POLICE_CHECKPOINT = 41;         // 交警查车 & 道路关闭
+
+    // 新增非风险场景
+    NO_RISK_BUS_LANE = 101;               // 公交车道
+    NO_RISK_VARIABLE_LANE = 102;          // 可变车道
+    NO_RISK_TIDAL_LANE = 103;             // 潮汐车道
+    NO_RISK_BICYCLE_LANE = 104;           // 自行车道｜非机动车道
+    NO_RISK_EMERGENCY_LANE = 105;         // 应急车道
+    NO_RISK_TOLL_STATION = 106;           // 收费站｜ETC
+    NO_RISK_INTERSECTION = 107;           // 路口
+    NO_RISK_PARKING_LOT = 108;            // 停车场｜车库
+    NO_RISK_WAITING_AREA = 109;           // 待转区
+    NO_RISK_CAMPUS_LANE = 110;            // 园区道路
+    NO_RISK_CONSTRUCTION_LANE = 111;      // 施工占道
+    NO_RISK_TRAFFIC_LIGHT = 112;          // 交通灯｜红绿灯｜信号灯｜红灯｜绿灯｜黄灯｜黄闪
+    NO_RISK_POLICE_VEHICLE = 113;         // 警车
+    NO_RISK_FIRE_TRUCK = 114;             // 消防车
+    NO_RISK_AMBULANCE = 115;              // 救护车
+    NO_RISK_TANK_TRUCK = 116;             // 油罐车
+    NO_RISK_DUMP_TRUCK = 117;             // 泥头车
+    NO_RISK_HEAVY_DUTY_TRUCK = 118;       // 大车  
+    NO_RISK_SIGN_MAX_SPEED = 119;         // 限速    
+    NO_RISK_SIGN_BAN_PARKING = 120;       // 禁止停车
+    NO_RISK_SIGN_BAN_SLOW = 121;          // 减速让行
+    NO_RISK_SIGN_BAN_STOP = 122;          // 停车让行
+    NO_RISK_SIGN_WARN_KID = 123;          // 学校区域
+    NO_RISK_SIGN_WARN_PEOPLE = 124;       // 注意行人
+    NO_RISK_SIGN_BAN_HEIGHT = 125;        // 限高
+    NO_RISK_SIGN_BAN_WEIGHT = 126;        // 限重
+    NO_RISK_SIGN_BAN_LEFT = 127;          // 禁止左转
+    NO_RISK_SIGN_BAN_RIGHT = 128;         // 禁止右转
+    NO_RISK_SIGN_BAN_U_TURN = 129;        // 禁止掉头
+    NO_RISK_SIGN_BAN = 130;               // 禁止鸣笛
+    NO_RISK_SIGN_WARN_RIGHT_MERGE = 131;  // 右侧合流
+    NO_RISK_SIGN_WARN_LEFT_MERGE = 132;   // 左侧合流
+    NO_RISK_GOOD_CONDITION = 133;         // 路况良好
+    NO_RISK_OTHER = 134;                  // 其它（未匹配上前述关键词的情况）
+  };
+  
+  DataType data_type = 1;                         // 数据类型
+  uint64 timestamp_us = 2;                        // 时间戳
+  string debug_message = 3;                       // 提示消息（异常、调试等信息）
+  string description = 4;                         // 模型输出的文字内容
+  RiskScenario risk_flag = 5;                     // 单一风险标签（兼容字段）
+
+  Action adc_action = 6;                          // ego action
+  VlaDebugInfo vla_debug_info = 7;               // for debug
+  
+  repeated RiskScenario scene_flags = 8;         // 多个风险或场景标签（推荐使用）
+}

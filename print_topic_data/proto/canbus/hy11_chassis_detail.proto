@@ -362,9 +362,9 @@ message SmartHy11ChassisDetail {
 
   optional ADMod a_d_l3_lat_ctrl_sts_for_bkp_a_d_mod = 114;
   optional int32 a_d_l3_lat_ctrl_sts_for_bkp_ctrl_sts = 115;
-  optional int32 a_d_l3_lat_ctrl_sts_for_bkp_degraded = 116;
+  optional LatDegrad a_d_l3_lat_ctrl_sts_for_bkp_degraded = 116;
   optional int32 a_d_l3_lat_ctrl_sts_for_bkp_qf = 117;
-  optional int32 a_d_l3_lat_ctrl_sts_for_bkp_sts = 118;
+  optional ColorSts a_d_l3_lat_ctrl_sts_for_bkp_sts = 118;
   
   optional ADMod a_d_l3_lgt_ctrl_sts_a_d_mode = 119;
   optional CtrlStatus a_d_l3_lgt_ctrl_sts_ctrl_status = 120;
@@ -477,7 +477,13 @@ message SmartHy11ChassisDetail {
   optional DoorSts2 door_pass_sts = 147;
   optional DoorSts2 door_lere_sts = 148;
   optional DoorSts2 door_rire_sts = 149;
-  optional int32 door_drvr_lock_sts = 150;
+  enum LockSts2 {
+    LockSts2_LockStsUkwn = 0;
+    LockSts2_Unlckd = 1;
+    LockSts2_Lockd = 2;
+    LockSts2_SafeLockd = 3;
+  }
+  optional LockSts2 door_drvr_lock_sts = 150;
   enum GearLvrIndcn2 {
     GearLvrIndcn2_ParkIndcn = 0;
     GearLvrIndcn2_RvsIndcn = 1;
@@ -536,9 +542,9 @@ message SmartHy11ChassisDetail {
   optional int32 monr_sys_sts1 = 160;
   optional DoorSts2 ajar_chrg_lid_rear_switch = 161;
   optional int32 tr_lock_sts = 162;
-  optional int32 door_rire_lock_sts = 163;
-  optional int32 door_lere_lock_sts = 164;
-  optional int32 door_pass_lock_sts = 165;
+  optional LockSts2 door_rire_lock_sts = 163;
+  optional LockSts2 door_lere_lock_sts = 164;
+  optional LockSts2 door_pass_lock_sts = 165;
   enum ActrActvForLgtCtrl {
     ActrActvForLgtCtrl_ActrNotEnadForCmft = 0;
     ActrActvForLgtCtrl_PrpsnActrEnadForCmft = 1;
@@ -1145,4 +1151,6 @@ message SmartHy11ChassisDetail {
   optional int32 z_i_d_turn_indic_req = 1120;
   optional int32 z_i_d_h_w_l_req_asy_sfty_h_w_l_req = 1121;
   optional double asy_pinion_ag_req_for_bkp = 1122;
+  optional int32 asy_stand_still_req_for_cmft = 1123;
+  optional int32 veh_prkg_lock_theft_req = 1124;
 }

@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 from proto.drapi.gwm import GWM_HMI_common_pb2 as drapi_dot_gwm_dot_GWM__HMI__common__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1e\x64rapi/gwm/GWM-HMI-object.proto\x12\x03gwm\x1a\x1e\x64rapi/gwm/GWM-HMI-common.proto\"\x8e\x04\n\x06\x45goVeh\x12\x12\n\ntime_stamp\x18\x01 \x01(\x04\x12%\n\x0bvehicle_pos\x18\x02 \x01(\x0b\x32\x10.gwm.Vehicle_Pos\x12#\n\nguide_line\x18\x03 \x01(\x0b\x32\x0f.gwm.Guide_Line\x12\x1b\n\x04objs\x18\x04 \x01(\x0b\x32\r.gwm.Obj_Disp\x12,\n\x0f\x63ritical_object\x18\x05 \x03(\x0b\x32\x13.gwm.CriticalObject\x12(\n\x0f\x64\x65\x63\x65lerate_line\x18\x06 \x01(\x0b\x32\x0f.gwm.Guide_Line\x12\x39\n\x13\x61\x63\x63_ego_status_type\x18\x07 \x01(\x0e\x32\x1c.gwm.EgoVeh.ACCEgoStatusType\x12\x17\n\x0finit_time_stamp\x18\x64 \x01(\x04\x12\x19\n\x11update_time_stamp\x18\x65 \x01(\x04\x12\x1c\n\x14processed_time_stamp\x18\x66 \x01(\x04\x12\x17\n\x0fis_framefilling\x18g \x01(\x08\"\x88\x01\n\x10\x41\x43\x43\x45goStatusType\x12\x1c\n\x18\x41\x43\x43_EGOSTATUS_NO_DISPLAY\x10\x00\x12\x1a\n\x16\x41\x43\x43_EGOSTATUS_OVERRIDE\x10\x01\x12\x1e\n\x1a\x41\x43\x43_EGOSTATUS_DECELERATION\x10\x02\x12\x1a\n\x16\x41\x43\x43_EGOSTATUS_RESERVED\x10\x03\"r\n\x0bVehicle_Pos\x12\n\n\x02qx\x18\x01 \x01(\x02\x12\n\n\x02qy\x18\x02 \x01(\x02\x12\n\n\x02qz\x18\x03 \x01(\x02\x12\n\n\x02qw\x18\x04 \x01(\x02\x12\x11\n\tlongitude\x18\x05 \x01(\x02\x12\x10\n\x08latitude\x18\x06 \x01(\x02\x12\x0e\n\x06height\x18\x07 \x01(\x02\"%\n\nGuide_Line\x12\x17\n\x03pnt\x18\x01 \x03(\x0b\x32\n.gwm.Pnt3D\"?\n\x08Obj_Disp\x12\x12\n\ntime_stamp\x18\x01 \x01(\x04\x12\x1f\n\x08obj_info\x18\x02 \x03(\x0b\x32\r.gwm.Obj_Info\"\xc1\t\n\x08Obj_Info\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x17\n\x03pos\x18\x02 \x01(\x0b\x32\n.gwm.Pnt3D\x12\r\n\x05speed\x18\x03 \x01(\x02\x12\x0f\n\x07heading\x18\x04 \x01(\x02\x12$\n\x04type\x18\x05 \x01(\x0e\x32\x16.gwm.Obj_Info.Obj_Type\x12\x0e\n\x06length\x18\x06 \x01(\x02\x12\r\n\x05width\x18\x07 \x01(\x02\x12\x0e\n\x06height\x18\x08 \x01(\x02\x12&\n\x0clight_status\x18\t \x03(\x0b\x32\x10.gwm.LightStatus\x12\x33\n\x0e\x61ttribute_type\x18\n \x03(\x0e\x32\x1b.gwm.Obj_Info.AttributeType\x12)\n\tgate_info\x18\x0b \x01(\x0b\x32\x16.gwm.Obj_Info.GateInfo\x1aJ\n\x08GateInfo\x12(\n\x06status\x18\x01 \x01(\x0e\x32\x18.gwm.Obj_Info.GateStatus\x12\x14\n\x0cput_up_angle\x18\x02 \x01(\x02\"\xbb\x05\n\x08Obj_Type\x12\x14\n\x10OBJ_TYPE_UNKNOWN\x10\x00\x12\x1a\n\x16OBJ_TYPE_PASSENGER_CAR\x10\x01\x12\x16\n\x12OBJ_TYPE_TRUCK_BOX\x10\x02\x12\x10\n\x0cOBJ_TYPE_BUS\x10\x03\x12\x14\n\x10OBJ_TYPE_BICYCLE\x10\x04\x12\x17\n\x13OBJ_TYPE_MOTORCYCLE\x10\x05\x12\x15\n\x11OBJ_TYPE_TRICYCLE\x10\x06\x12\x17\n\x13OBJ_TYPE_PEDESTRIAN\x10\x07\x12\x12\n\x0eOBJ_TYPE_CHILD\x10\x08\x12\x11\n\rOBJ_TYPE_CONE\x10\t\x12\x10\n\x0cOBJ_TYPE_SUV\x10\n\x12\x14\n\x10OBJ_TYPE_MINIBUS\x10\x0b\x12\x1c\n\x18OBJ_TYPE_ELETIRC_BICYCLE\x10\x0c\x12\x13\n\x0fOBJ_TYPE_POLICE\x10\r\x12\x13\n\x0fOBJ_TYPE_BUCKET\x10\x0e\x12\x13\n\x0fOBJ_TYPE_TRIPOD\x10\x0f\x12!\n\x1dOBJ_TYPE_WATER_FILLED_BARRIER\x10\x10\x12\x13\n\x0fOBJ_TYPE_PICKUP\x10\x11\x12\x17\n\x13OBJ_TYPE_TRUCK_FLAT\x10\x12\x12\x1d\n\x19OBJ_TYPE_SPECIAL_VEHICLES\x10\x13\x12\x15\n\x11OBJ_TYPE_SCAFFOLD\x10\x14\x12\x13\n\x0fOBJ_TYPE_PILLAR\x10\x15\x12\x16\n\x12OBJ_TYPE_SPEEDBUMP\x10\x16\x12\x12\n\x0eOBJ_TYPE_CHOCK\x10\x17\x12\x11\n\rOBJ_TYPE_LOCK\x10\x18\x12\x12\n\x0eOBJ_TYPE_MIXER\x10\x19\x12\x14\n\x10OBJ_TYPE_OIL_CAR\x10\x1a\x12\x16\n\x12OBJ_TYPE_AMBULANCE\x10\x1b\x12\x18\n\x14OBJ_TYPE_FIRE_ENGINE\x10\x1c\x12\x11\n\rOBJ_TYPE_GATE\x10\x1d\"Y\n\rAttributeType\x12\x0f\n\x0bNORMAL_TYPE\x10\x00\x12\x12\n\x0eLEFT_DOOR_OPEN\x10\x01\x12\x13\n\x0fRIGHT_DOOR_OPEN\x10\x02\x12\x0e\n\nTRUNK_OPEN\x10\x03\".\n\nGateStatus\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x08\n\x04OPEN\x10\x01\x12\t\n\x05\x43LOSE\x10\x02\"\x84\x01\n\x0bLightStatus\x12\x17\n\x0f\x62rake_switch_on\x18\x01 \x01(\x08\x12\x1b\n\x13left_turn_switch_on\x18\x02 \x01(\x08\x12\x1c\n\x14right_turn_switch_on\x18\x03 \x01(\x08\x12!\n\x19left_right_turn_switch_on\x18\x04 \x01(\x08\"\xaf\x01\n\x0e\x43riticalObject\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x33\n\x0bobject_type\x18\x02 \x01(\x0e\x32\x1e.gwm.CriticalObject.ObjectType\x12\x10\n\x08\x64istance\x18\x03 \x01(\x02\"J\n\nObjectType\x12\x13\n\x0fGREEN_ALARM_OBJ\x10\x00\x12\x14\n\x10YELLOW_ALARM_OBJ\x10\x01\x12\x11\n\rRED_ALARM_OBJ\x10\x02\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1e\x64rapi/gwm/GWM-HMI-object.proto\x12\x03gwm\x1a\x1e\x64rapi/gwm/GWM-HMI-common.proto\"\xb7\x04\n\x06\x45goVeh\x12\x12\n\ntime_stamp\x18\x01 \x01(\x04\x12%\n\x0bvehicle_pos\x18\x02 \x01(\x0b\x32\x10.gwm.Vehicle_Pos\x12#\n\nguide_line\x18\x03 \x01(\x0b\x32\x0f.gwm.Guide_Line\x12\x1b\n\x04objs\x18\x04 \x01(\x0b\x32\r.gwm.Obj_Disp\x12,\n\x0f\x63ritical_object\x18\x05 \x03(\x0b\x32\x13.gwm.CriticalObject\x12(\n\x0f\x64\x65\x63\x65lerate_line\x18\x06 \x01(\x0b\x32\x0f.gwm.Guide_Line\x12\x39\n\x13\x61\x63\x63_ego_status_type\x18\x07 \x01(\x0e\x32\x1c.gwm.EgoVeh.ACCEgoStatusType\x12\'\n\x0evla_guide_line\x18\x08 \x03(\x0b\x32\x0f.gwm.Guide_Line\x12\x17\n\x0finit_time_stamp\x18\x64 \x01(\x04\x12\x19\n\x11update_time_stamp\x18\x65 \x01(\x04\x12\x1c\n\x14processed_time_stamp\x18\x66 \x01(\x04\x12\x17\n\x0fis_framefilling\x18g \x01(\x08\"\x88\x01\n\x10\x41\x43\x43\x45goStatusType\x12\x1c\n\x18\x41\x43\x43_EGOSTATUS_NO_DISPLAY\x10\x00\x12\x1a\n\x16\x41\x43\x43_EGOSTATUS_OVERRIDE\x10\x01\x12\x1e\n\x1a\x41\x43\x43_EGOSTATUS_DECELERATION\x10\x02\x12\x1a\n\x16\x41\x43\x43_EGOSTATUS_RESERVED\x10\x03\"r\n\x0bVehicle_Pos\x12\n\n\x02qx\x18\x01 \x01(\x02\x12\n\n\x02qy\x18\x02 \x01(\x02\x12\n\n\x02qz\x18\x03 \x01(\x02\x12\n\n\x02qw\x18\x04 \x01(\x02\x12\x11\n\tlongitude\x18\x05 \x01(\x02\x12\x10\n\x08latitude\x18\x06 \x01(\x02\x12\x0e\n\x06height\x18\x07 \x01(\x02\"%\n\nGuide_Line\x12\x17\n\x03pnt\x18\x01 \x03(\x0b\x32\n.gwm.Pnt3D\"?\n\x08Obj_Disp\x12\x12\n\ntime_stamp\x18\x01 \x01(\x04\x12\x1f\n\x08obj_info\x18\x02 \x03(\x0b\x32\r.gwm.Obj_Info\"\x81\x0f\n\x08Obj_Info\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x17\n\x03pos\x18\x02 \x01(\x0b\x32\n.gwm.Pnt3D\x12\r\n\x05speed\x18\x03 \x01(\x02\x12\x0f\n\x07heading\x18\x04 \x01(\x02\x12$\n\x04type\x18\x05 \x01(\x0e\x32\x16.gwm.Obj_Info.Obj_Type\x12\x0e\n\x06length\x18\x06 \x01(\x02\x12\r\n\x05width\x18\x07 \x01(\x02\x12\x0e\n\x06height\x18\x08 \x01(\x02\x12&\n\x0clight_status\x18\t \x03(\x0b\x32\x10.gwm.LightStatus\x12\x33\n\x0e\x61ttribute_type\x18\n \x03(\x0e\x32\x1b.gwm.Obj_Info.AttributeType\x12)\n\tgate_info\x18\x0b \x01(\x0b\x32\x16.gwm.Obj_Info.GateInfo\x12\'\n\x08\x45TC_Info\x18\x0c \x01(\x0b\x32\x15.gwm.Obj_Info.ETCInfo\x12\x35\n\x0evla_obj_status\x18\r \x01(\x0e\x32\x1d.gwm.Obj_Info.VLAObjectStatus\x1a\x8d\x01\n\x08GateInfo\x12(\n\x06status\x18\x01 \x01(\x0e\x32\x18.gwm.Obj_Info.GateStatus\x12\x14\n\x0cput_up_angle\x18\x02 \x01(\x02\x12\x41\n\x15gate_animation_status\x18\x03 \x01(\x0e\x32\".gwm.Obj_Info.GateAnimation_Status\x1a\xd1\x01\n\x07\x45TCInfo\x12+\n\netc_status\x18\x01 \x01(\x0e\x32\x17.gwm.Obj_Info.ETCStatus\x12-\n\x0bgate_status\x18\x02 \x01(\x0e\x32\x18.gwm.Obj_Info.GateStatus\x12\x41\n\x15gate_animation_status\x18\x03 \x01(\x0e\x32\".gwm.Obj_Info.GateAnimation_Status\x12\x0e\n\x06isLeft\x18\x04 \x01(\x08\x12\x17\n\x03pos\x18\x05 \x01(\x0b\x32\n.gwm.Pnt3D\"\xe5\x05\n\x08Obj_Type\x12\x14\n\x10OBJ_TYPE_UNKNOWN\x10\x00\x12\x1a\n\x16OBJ_TYPE_PASSENGER_CAR\x10\x01\x12\x16\n\x12OBJ_TYPE_TRUCK_BOX\x10\x02\x12\x10\n\x0cOBJ_TYPE_BUS\x10\x03\x12\x14\n\x10OBJ_TYPE_BICYCLE\x10\x04\x12\x17\n\x13OBJ_TYPE_MOTORCYCLE\x10\x05\x12\x15\n\x11OBJ_TYPE_TRICYCLE\x10\x06\x12\x17\n\x13OBJ_TYPE_PEDESTRIAN\x10\x07\x12\x12\n\x0eOBJ_TYPE_CHILD\x10\x08\x12\x11\n\rOBJ_TYPE_CONE\x10\t\x12\x10\n\x0cOBJ_TYPE_SUV\x10\n\x12\x14\n\x10OBJ_TYPE_MINIBUS\x10\x0b\x12\x1c\n\x18OBJ_TYPE_ELETIRC_BICYCLE\x10\x0c\x12\x13\n\x0fOBJ_TYPE_POLICE\x10\r\x12\x13\n\x0fOBJ_TYPE_BUCKET\x10\x0e\x12\x13\n\x0fOBJ_TYPE_TRIPOD\x10\x0f\x12!\n\x1dOBJ_TYPE_WATER_FILLED_BARRIER\x10\x10\x12\x13\n\x0fOBJ_TYPE_PICKUP\x10\x11\x12\x17\n\x13OBJ_TYPE_TRUCK_FLAT\x10\x12\x12\x1d\n\x19OBJ_TYPE_SPECIAL_VEHICLES\x10\x13\x12\x15\n\x11OBJ_TYPE_SCAFFOLD\x10\x14\x12\x13\n\x0fOBJ_TYPE_PILLAR\x10\x15\x12\x16\n\x12OBJ_TYPE_SPEEDBUMP\x10\x16\x12\x12\n\x0eOBJ_TYPE_CHOCK\x10\x17\x12\x11\n\rOBJ_TYPE_LOCK\x10\x18\x12\x12\n\x0eOBJ_TYPE_MIXER\x10\x19\x12\x14\n\x10OBJ_TYPE_OIL_CAR\x10\x1a\x12\x16\n\x12OBJ_TYPE_AMBULANCE\x10\x1b\x12\x18\n\x14OBJ_TYPE_FIRE_ENGINE\x10\x1c\x12\x11\n\rOBJ_TYPE_GATE\x10\x1d\x12\x16\n\x12OBJ_TYPE_SENTRYBOX\x10\x1e\x12\x10\n\x0cOBJ_TYPE_ETC\x10\x1f\"Y\n\rAttributeType\x12\x0f\n\x0bNORMAL_TYPE\x10\x00\x12\x12\n\x0eLEFT_DOOR_OPEN\x10\x01\x12\x13\n\x0fRIGHT_DOOR_OPEN\x10\x02\x12\x0e\n\nTRUNK_OPEN\x10\x03\".\n\nGateStatus\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x08\n\x04OPEN\x10\x01\x12\t\n\x05\x43LOSE\x10\x02\"S\n\x14GateAnimation_Status\x12 \n\x1cGateAnimation_Status_UNKNOWN\x10\x00\x12\x0c\n\x08\x43LOSEING\x10\x01\x12\x0b\n\x07OPENING\x10\x02\"\x80\x01\n\tETCStatus\x12\x15\n\x11\x45TCStatus_unknown\x10\x00\x12\x0b\n\x07\x45TCpass\x10\x01\x12\x0e\n\nArtificial\x10\x02\x12\n\n\x06NoPass\x10\x03\x12\x12\n\x0e\x41rtificial_ETC\x10\x04\x12\x10\n\x0cGreenChannel\x10\x05\x12\r\n\tTruckLane\x10\x06\"D\n\x0fVLAObjectStatus\x12\x0e\n\nVLA_NORMAL\x10\x00\x12\x10\n\x0cVLA_CONSIDER\x10\x01\x12\x0f\n\x0bVLA_RESERVE\x10\x02\"\x84\x01\n\x0bLightStatus\x12\x17\n\x0f\x62rake_switch_on\x18\x01 \x01(\x08\x12\x1b\n\x13left_turn_switch_on\x18\x02 \x01(\x08\x12\x1c\n\x14right_turn_switch_on\x18\x03 \x01(\x08\x12!\n\x19left_right_turn_switch_on\x18\x04 \x01(\x08\"\xaf\x01\n\x0e\x43riticalObject\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x33\n\x0bobject_type\x18\x02 \x01(\x0e\x32\x1e.gwm.CriticalObject.ObjectType\x12\x10\n\x08\x64istance\x18\x03 \x01(\x02\"J\n\nObjectType\x12\x13\n\x0fGREEN_ALARM_OBJ\x10\x00\x12\x14\n\x10YELLOW_ALARM_OBJ\x10\x01\x12\x11\n\rRED_ALARM_OBJ\x10\x02\x62\x06proto3')
 
 
 
@@ -25,12 +25,16 @@ _GUIDE_LINE = DESCRIPTOR.message_types_by_name['Guide_Line']
 _OBJ_DISP = DESCRIPTOR.message_types_by_name['Obj_Disp']
 _OBJ_INFO = DESCRIPTOR.message_types_by_name['Obj_Info']
 _OBJ_INFO_GATEINFO = _OBJ_INFO.nested_types_by_name['GateInfo']
+_OBJ_INFO_ETCINFO = _OBJ_INFO.nested_types_by_name['ETCInfo']
 _LIGHTSTATUS = DESCRIPTOR.message_types_by_name['LightStatus']
 _CRITICALOBJECT = DESCRIPTOR.message_types_by_name['CriticalObject']
 _EGOVEH_ACCEGOSTATUSTYPE = _EGOVEH.enum_types_by_name['ACCEgoStatusType']
 _OBJ_INFO_OBJ_TYPE = _OBJ_INFO.enum_types_by_name['Obj_Type']
 _OBJ_INFO_ATTRIBUTETYPE = _OBJ_INFO.enum_types_by_name['AttributeType']
 _OBJ_INFO_GATESTATUS = _OBJ_INFO.enum_types_by_name['GateStatus']
+_OBJ_INFO_GATEANIMATION_STATUS = _OBJ_INFO.enum_types_by_name['GateAnimation_Status']
+_OBJ_INFO_ETCSTATUS = _OBJ_INFO.enum_types_by_name['ETCStatus']
+_OBJ_INFO_VLAOBJECTSTATUS = _OBJ_INFO.enum_types_by_name['VLAObjectStatus']
 _CRITICALOBJECT_OBJECTTYPE = _CRITICALOBJECT.enum_types_by_name['ObjectType']
 EgoVeh = _reflection.GeneratedProtocolMessageType('EgoVeh', (_message.Message,), {
   'DESCRIPTOR' : _EGOVEH,
@@ -68,12 +72,20 @@ Obj_Info = _reflection.GeneratedProtocolMessageType('Obj_Info', (_message.Messag
     # @@protoc_insertion_point(class_scope:gwm.Obj_Info.GateInfo)
     })
   ,
+
+  'ETCInfo' : _reflection.GeneratedProtocolMessageType('ETCInfo', (_message.Message,), {
+    'DESCRIPTOR' : _OBJ_INFO_ETCINFO,
+    '__module__' : 'drapi.gwm.GWM_HMI_object_pb2'
+    # @@protoc_insertion_point(class_scope:gwm.Obj_Info.ETCInfo)
+    })
+  ,
   'DESCRIPTOR' : _OBJ_INFO,
   '__module__' : 'drapi.gwm.GWM_HMI_object_pb2'
   # @@protoc_insertion_point(class_scope:gwm.Obj_Info)
   })
 _sym_db.RegisterMessage(Obj_Info)
 _sym_db.RegisterMessage(Obj_Info.GateInfo)
+_sym_db.RegisterMessage(Obj_Info.ETCInfo)
 
 LightStatus = _reflection.GeneratedProtocolMessageType('LightStatus', (_message.Message,), {
   'DESCRIPTOR' : _LIGHTSTATUS,
@@ -93,29 +105,37 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _EGOVEH._serialized_start=72
-  _EGOVEH._serialized_end=598
-  _EGOVEH_ACCEGOSTATUSTYPE._serialized_start=462
-  _EGOVEH_ACCEGOSTATUSTYPE._serialized_end=598
-  _VEHICLE_POS._serialized_start=600
-  _VEHICLE_POS._serialized_end=714
-  _GUIDE_LINE._serialized_start=716
-  _GUIDE_LINE._serialized_end=753
-  _OBJ_DISP._serialized_start=755
-  _OBJ_DISP._serialized_end=818
-  _OBJ_INFO._serialized_start=821
-  _OBJ_INFO._serialized_end=2038
-  _OBJ_INFO_GATEINFO._serialized_start=1123
-  _OBJ_INFO_GATEINFO._serialized_end=1197
-  _OBJ_INFO_OBJ_TYPE._serialized_start=1200
-  _OBJ_INFO_OBJ_TYPE._serialized_end=1899
-  _OBJ_INFO_ATTRIBUTETYPE._serialized_start=1901
-  _OBJ_INFO_ATTRIBUTETYPE._serialized_end=1990
-  _OBJ_INFO_GATESTATUS._serialized_start=1992
-  _OBJ_INFO_GATESTATUS._serialized_end=2038
-  _LIGHTSTATUS._serialized_start=2041
-  _LIGHTSTATUS._serialized_end=2173
-  _CRITICALOBJECT._serialized_start=2176
-  _CRITICALOBJECT._serialized_end=2351
-  _CRITICALOBJECT_OBJECTTYPE._serialized_start=2277
-  _CRITICALOBJECT_OBJECTTYPE._serialized_end=2351
+  _EGOVEH._serialized_end=639
+  _EGOVEH_ACCEGOSTATUSTYPE._serialized_start=503
+  _EGOVEH_ACCEGOSTATUSTYPE._serialized_end=639
+  _VEHICLE_POS._serialized_start=641
+  _VEHICLE_POS._serialized_end=755
+  _GUIDE_LINE._serialized_start=757
+  _GUIDE_LINE._serialized_end=794
+  _OBJ_DISP._serialized_start=796
+  _OBJ_DISP._serialized_end=859
+  _OBJ_INFO._serialized_start=862
+  _OBJ_INFO._serialized_end=2783
+  _OBJ_INFO_GATEINFO._serialized_start=1261
+  _OBJ_INFO_GATEINFO._serialized_end=1402
+  _OBJ_INFO_ETCINFO._serialized_start=1405
+  _OBJ_INFO_ETCINFO._serialized_end=1614
+  _OBJ_INFO_OBJ_TYPE._serialized_start=1617
+  _OBJ_INFO_OBJ_TYPE._serialized_end=2358
+  _OBJ_INFO_ATTRIBUTETYPE._serialized_start=2360
+  _OBJ_INFO_ATTRIBUTETYPE._serialized_end=2449
+  _OBJ_INFO_GATESTATUS._serialized_start=2451
+  _OBJ_INFO_GATESTATUS._serialized_end=2497
+  _OBJ_INFO_GATEANIMATION_STATUS._serialized_start=2499
+  _OBJ_INFO_GATEANIMATION_STATUS._serialized_end=2582
+  _OBJ_INFO_ETCSTATUS._serialized_start=2585
+  _OBJ_INFO_ETCSTATUS._serialized_end=2713
+  _OBJ_INFO_VLAOBJECTSTATUS._serialized_start=2715
+  _OBJ_INFO_VLAOBJECTSTATUS._serialized_end=2783
+  _LIGHTSTATUS._serialized_start=2786
+  _LIGHTSTATUS._serialized_end=2918
+  _CRITICALOBJECT._serialized_start=2921
+  _CRITICALOBJECT._serialized_end=3096
+  _CRITICALOBJECT_OBJECTTYPE._serialized_start=3022
+  _CRITICALOBJECT_OBJECTTYPE._serialized_end=3096
 # @@protoc_insertion_point(module_scope)

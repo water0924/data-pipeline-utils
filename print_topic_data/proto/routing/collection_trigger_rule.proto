@@ -1,0 +1,120 @@
+syntax = "proto2";
+
+package deeproute.collection_trigger_rule;
+
+enum ConnectType{
+  AND = 0;
+}
+
+enum Operator {
+  UNKNOWN = 0;
+  EXISTS = 1;
+  EQ = 2;
+  NOT_EQ = 3;
+  IN = 4;
+  NOT_IN = 5;
+  LT = 6;
+  LTE = 7;
+  GT = 8;
+  GTE = 9;
+  BETWEEN = 10;
+  NOT_BETWEEN = 11;
+  LIKE = 12;
+  NOT_LIKE = 13;
+  CONTAIN = 14;
+  NOT_CONTAIN = 15;
+  EMPTY = 16;
+  NOT_EMPTY = 17;
+}
+
+
+message Connector{
+  optional ConnectType connect_type = 1;
+  repeated Condition conditions = 2;
+  // repeated Connector connector = 3;
+}
+
+
+message FieldValue{
+  oneof value{
+    string string_value = 1;
+    int32 int32_value = 2;
+    int64 int64_value = 3;
+    uint32 uint32_value = 4;
+    uint64 uint64_value = 5;
+    double double_value = 6;
+    bool bool_value = 7;
+  }
+}
+
+message Condition{
+  optional string field = 1;
+  optional Operator operator = 2;
+  repeated FieldValue values = 3; // if opeator is between, values should be 2, and type must be digital.
+  optional Window window = 4; //时间窗口或距离窗口
+}
+
+
+//场景
+message SceneCondition{
+  optional collection_trigger_rule.Connector connector = 1;
+}
+
+//采集参数
+message CollectionArg {
+  optional uint32 forward_time = 1;
+  optional uint32 backward_time = 2;
+  optional uint32 priority =3;
+  optional bool record_heavy = 4;
+  optional bool record_medium = 5; 
+  optional bool record_light = 6;
+  optional bool record_full_point_cloud = 7;
+}
+
+// begin--endtime gap
+message TimePoint {
+  optional uint32 hour = 1;
+  optional uint32 min = 2;
+  optional uint32 seconds = 3;
+}
+
+message TimePhase {
+  optional TimePoint begin = 1;
+  optional TimePoint end = 2;
+}
+
+
+message TimeWindow {
+  optional uint32 time = 1; //单位秒
+}
+
+message DistanceWindow {
+  optional uint32 distance = 1; //单位米
+}
+
+// message SingleFrame {
+//  optional uint32 frame_count = 1 ; //连续帧数
+// }
+
+message Window {
+  oneof WindowType{
+    TimeWindow time_window = 1; //时间窗口
+    DistanceWindow distance_window = 2; //距离窗口
+   // SingleFrame single_frame = 3; //单帧
+  }
+}
+
+message Trigger {
+  optional uint64 scenario_id = 1;
+  optional string scenario_name = 2;
+  // repeated TimePhase time_phase = 3; // TRIGGER生效时间段
+  repeated uint64 dr_link_ids = 4;
+  optional SceneCondition scene_condition = 5;
+  optional CollectionArg collection_arg = 6;//如果没有，车端有一个DATA_COLLECT_TRIGGER默认的采集策略。
+  optional Window window = 7 [deprecated = true]; //时间窗口或距离窗口, 废弃
+  optional uint32 cooldown_seconds = 8; //冷却时间, 默认5s
+  optional int32 trigger_limit_times = 9; //触发次数限制, -1表示不限制
+  optional bool skip_compliance = 10; //是否跳过合规检查
+
+  optional bool upload_only_when_lock_on_road_valid = 21;
+}

@@ -71,6 +71,8 @@ message GeelyCarConfigPara {
   uint32 tank_turn = 66;
   uint32 door_to_door = 67;
   uint32 handsoff_detection = 68;
+  uint32 ad_training_and_test = 69;
+  uint32 ohc_variant = 70;
 }
 
 message GWMCarConfigPara {
@@ -94,7 +96,11 @@ message GWMCarConfigPara {
     P02_3 = 21;
     D03_5 = 22;
     C01_2 = 23;
-
+    EC15S = 27;
+    C061 = 28;
+    C062 = 29;
+    C063 = 30;
+    C064 = 31;
   }
   
   // - 交通标志信息
@@ -645,18 +651,26 @@ enum VehicleType {
   UNKNOWN = 0; GWM_C01 = 1; GWM_M81 = 2; GWM_M82 = 3; GWM_M83 = 4;
   GWM_C01THOR = 5;
   GWM_D01 = 6;
-  GWM_P02A = 7;
-  GWM_P02B = 8;
+  GWM_P02 = 7;
+  GWM_P02A = 8;
   GWM_P03 = 9;
-  GWM_D03A = 10;
-  GWM_D03B = 11;
-  GWM_DE06 = 12;
-  GWM_DE07 = 13;
-  GWM_DE08 = 14;
-  GWM_DE09 = 15;
+  GWM_P03A = 10;
+  GWM_D03A = 11;
+  GWM_D03B = 12;
+  GWM_DE06 = 13;
+  GWM_DE07 = 14;
+  GWM_DE08 = 15;
+  GWM_DE09 = 16;
+  GWM_EC15 = 17;
+  GWM_EC15S = 18;
+  GWM_C061 = 19;
+  GWM_C062 = 20;
+  GWM_C063 = 21;
+  GWM_C064 = 22;
 
   /* geely 100-199 */
   GL_P177 = 100;
+  GL_P789 = 101;
 
   /* smart 200-249 */
   SMART_HY11 = 200;

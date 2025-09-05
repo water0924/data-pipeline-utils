@@ -5,6 +5,7 @@ package dr.blc;
 import "drapi/operation_status.proto";
 import "lock_on_road/lock_on_road.proto";
 import "drapi/gwm_hut_notification.proto";
+import "drapi/business_info.proto";
 
 /**
 请注意:
@@ -20,10 +21,14 @@ message BlcDebugInfo {
   SnowyDayModeInfo snow_day= 4; //雪天模式
   ParkingDebugInfo parking_info = 5; // 泊车相关信息
   HAVPEndToEndDebugInfo havp_e2e_info = 6;
+  HandsOffInfo hands_off_info = 7;
 }
 
 message SpeedLimitInfo {
-  bool use_model_speed = 1;  //是否使用模型限速
+  bool use_model_speed = 1;  //是否使用模型限速  
+  repeated dr.business_info.BlcSpeedLimitStrategy strategy = 2; //当前blc限速策略
+  int32 static_strategy_type = 20; //deeproute.routing.NavigationInfoForVisualize.StaticStrategyType
+  int32 scene_strategy_type = 21; //deeproute.routing.NavigationInfoForVisualize.SceneStrategyType    
 }
 
 message Lanechange {
@@ -52,8 +57,8 @@ message PreviewCommandInfo {
   map<string, string> attrs = 1;
   /* attrs信息记录如下:
     CommandRequestId: request id
-    ResponseErrCode: 接口错误码
-    ResponseErrMsg: 接口错误信息
+    PreviewErrCode: 接口错误码
+    PreviewErrMsg: 接口错误信息
     StartPreviewTime: 预览开始时间
     EndPreviewTime: 预览结束时间
     HasPreview: 是否预览过,仅用于判断是否发起过预览请求
@@ -74,14 +79,15 @@ message ExecuteCommandInfo {
   map<string, string> attrs = 1;
   /* attrs信息记录如下:
     CommandRequestId : request id
-    ResponseErrCode : 接口错误码
-    ResponseErrMsg : 接口错误信息
+    ExecuteErrCode : 接口错误码
+    ExecuteErrMsg : 接口错误信息
     StartExecuteTime : 开始导航开始时间
     EndExecuteTime : 开始导航结束时间
     HasExecute : 是否开始导航,仅用于判断是否发起过开始导航请求
     PathId : 开始导航的路径id
     StartPoint : 开始导航起点位置
     EndPoint : 开始导航终点位置
+    ExecuteRequestSource: 请求导航的触发源VLA...其他
   */
 }
 
@@ -131,10 +137,13 @@ enum ParkingBLCMRMStatus {
   STATE_FINISH = 5;
   STATE_MRM_FAILED = 6;
   STATE_MRM_ACTIVE = 7;
+  STATE_LAST_EPB = 8;
 }
 
 message ParkingDebugInfo {
   ParkingBLCMRMStatus mrm_status = 1; // MRM 状态
+  bool is_need_recom_park_out_dir = 2; // 是否需要推荐泊出方向
+  uint32 rpa_min_human_distance = 3; // 关门泊入最小行人距离
 }
 
 message HAVPEndToEndDebugInfo {
@@ -188,4 +197,14 @@ message HAVPEndToEndDebugInfo {
   VPALearningStatusType learning_status_type = 7;
   VPAE2ELearningStage learning_stage = 8;
   double pre_mapping_distance = 9; 
+}
+
+
+message HandsOffInfo {
+  enum HandsOffStatus {
+    HANDS_OFF_UNKNOWN = 0;
+    HANDS_ON = 1;
+    HANDS_OFF = 2;
+  }
+  HandsOffStatus hands_off_status = 1; 
 }

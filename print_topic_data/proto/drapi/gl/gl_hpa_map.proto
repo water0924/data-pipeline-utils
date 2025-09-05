@@ -1,0 +1,190 @@
+syntax = "proto3";
+
+package gl.hpa;
+
+/*
+enum Version {
+  DEFAULT_VERSION = 0;
+  MAJOR_VERSION = 1;  // Updated when deleting or modifying existing data
+  MINOR_VERSION = 0;  // Updated when adding new interfaces or data
+  option allow_alias = true;  // Enable alias support
+}
+*/
+
+enum MessageId {
+  MSG_ID_DEFAULT = 0;
+
+  // Frequency: notifier
+  // Comment: HPA self-built map data
+  MSG_ID_HPA_MAP = 1;
+
+  // Frequency: notifier
+  // Comment: DHU rendering map status signal
+  MSG_ID_HPA_MAP_USE_SHOW = 2;
+
+  // Frequency: get
+  // Comment: DHU reacquires map data information
+  MSG_ID_GET_HPA_MAP = 3;
+}
+
+//-------------------- ADCU Notifier Data ----------------------------
+
+message Point3D {
+  // Description: Longitude or X coordinate
+  double x = 1;
+  
+  // Description: Latitude or Y coordinate
+  double y = 2;
+  
+  // Description: Z coordinate
+  double z = 3;
+}
+
+message ParkSpaceBoundingBox {
+  // Description: Parking slot corner point
+  Point3D prkg_slot_start = 1;
+  
+  // Description: Parking slot corner point
+  Point3D prkg_slot_end = 2;
+  
+  // Description: Parking slot corner point
+  Point3D prkg_slot_start_rear = 3;
+  
+  // Description: Parking slot corner point
+  Point3D prkg_slot_end_rear = 4;
+}
+
+message MapParkingSpace {
+  // Description: Parking slot ID
+  uint32 id = 1;
+  
+  // Description: Corresponding floor
+  int32 floor = 2;
+  
+  // Enum: slot_type
+  // 0 - Default value
+  // 1 - Unavailable slot (global coordinate system)
+  // 2 - Memory slot (global coordinate system)
+  // 3 - Unavailable slot (map coordinate system)
+  // 4 - Memory slot (map coordinate system)
+  // Description: Parking slot status
+  uint32 slot_type = 3;
+  
+  // Description: Parking slot bounding box coordinates
+  ParkSpaceBoundingBox bounding_box = 4;
+}
+
+message MapLLRoad {
+  // Description: Navigation route: map entrance to target position
+  repeated Point3D entrance_routing = 1;
+  
+  // Description: Navigation route: target position to map exit
+  repeated Point3D exit_routing = 2;
+  
+  // Description: Path display: map entrance to target position
+  repeated Point3D entrance_display = 3;
+  
+  // Description: Path display: target position to map exit
+  repeated Point3D exit_display = 4;
+}
+
+message MapRoadPoint {
+  // Enum: maproadpoint_sts
+  // 0 - Default value
+  // 1 - Straight marker (global coordinate system)
+  // 2 - Curve marker (global coordinate system)
+  // 3 - Spiral ramp marker (global coordinate system)
+  // 4 - Straight marker (external, global coordinate system)
+  // 5 - Curve marker (external, global coordinate system)
+  // 6 - Spiral ramp marker (external, global coordinate system)
+  // 7 - Straight marker (map coordinate system)
+  // 8 - Curve marker (map coordinate system)
+  // 9 - Spiral ramp marker (map coordinate system)
+  // 10 - Straight marker (external, map coordinate system)
+  // 11 - Curve marker (external, map coordinate system)
+  // 12 - Spiral ramp marker (external, map coordinate system)
+  // Description: Road point marker
+  uint32 maproadpoint_sts = 1;
+  
+  // Description: Road point sequence
+  Point3D point = 2;
+}
+
+message MapRoad {
+  // Description: Road ID (used for segmented routes in topo maps)
+  uint32 id = 1;
+  
+  // Description: Road point sequence
+  repeated MapRoadPoint maproad_point = 2;
+  
+  // Enum: floor
+  // 100 - Up slope point
+  // 101 - Down slope point
+  // Other values represent floor numbers
+  // Description: Current point's floor number
+  int32 floor = 3;
+}
+
+message MapMetaData {
+  // Description: Map ID
+  uint32 map_id = 1;
+  
+  // Enum: map_type
+  // 0 - Default value
+  // 1 - Self-built map (post-construction)
+  // 2 - Crowdsourced map (post-construction)
+  // 3 - Self-built map (reacquired)
+  // 4 - Crowdsourced map (reacquired)
+  // Description: Map type
+  uint32 map_type = 2;
+}
+// topic: /gl/hpa_map
+message HpaMap {
+  // Description: Map type
+  MapMetaData meta_data = 1;
+  
+  // Description: Map parking space information
+  repeated MapParkingSpace map_parking_space = 2;
+  
+  // Description: Map road information
+  repeated MapRoad map_road = 3;
+  
+  // Description: Map geodetic information
+  repeated MapLLRoad map_llh_road = 4;
+}
+
+message HpaMapUse {
+  // Description: Map ID
+  uint32 id = 1;
+  
+  // Enum: hpa_map_use_type
+  // 0 - Default value
+  // 1 - Start parking lot (local)
+  // 2 - Destination parking lot (local)
+  // 3 - Start parking lot (crowdsourced)
+  // 4 - Destination parking lot (crowdsourced)
+  // Description: 
+  // Start parking lot: Current map matched after power-on
+  // Destination parking lot: Map matched after user inputs POI
+  uint32 hpa_map_use_type = 2;
+  
+  // Enum: hpa_map_use_sts
+  // 0 - Default value
+  // 1 - Retrieved
+  // Description: Whether DHU has retrieved this map for rendering
+  uint32 hpa_map_use_sts = 3;
+}
+
+message HpaMapUseShow {
+  // Description: D2D - DHU local map display flags
+  repeated HpaMapUse hpamapuse_show = 1;
+}
+
+//--------------------------------------- DHU Get Interface -------------------------------
+
+message GetHpaMap {
+  // Enum: get_hpamap
+  // DHU reacquires ADCU map data
+  // Note: Cannot acquire all maps at once to avoid overloading ADCU
+  MapMetaData get_hpamap = 1;
+}

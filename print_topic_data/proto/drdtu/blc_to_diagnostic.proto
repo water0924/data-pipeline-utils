@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+import "drapi/operation_status.proto";
+
+package dr.blc;
+
+// topic : /blc/to_diagnostic_event
+message BLCDiagnosticEvent {
+    dr.operationstatus.Feature feature = 1;
+    enum Action {
+        UNKNOWN = 0;
+        EXIT = 1; // 功能退出/打断，active->passive or failure
+        ACTIVE_FAILED = 2; // 功能激活失败，即没有抑制条件则会激活的情况
+        FAILURE = 3; // 非故障到故障
+    }
+    Action action = 2;
+    dr.operationstatus.ReasonInfo reason = 3;
+}

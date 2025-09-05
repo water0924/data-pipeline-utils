@@ -3,6 +3,7 @@ syntax = "proto2";
 package deeproute.perception;
 
 import "common/geometry.proto";
+import "semantic_map/map.proto";
 
 enum TrafficLightType {
   UNKNOWN = 0;
@@ -10,6 +11,12 @@ enum TrafficLightType {
   LEFT = 2;
   RIGHT = 3;
   UTURN = 4;
+  WAITAREA_LEFT_IN = 5;
+  WAITAREA_LEFT_OUT = 6;
+  WAITAREA_STRAIGHT_IN = 7;
+  WAITAREA_STRAIGHT_OUT = 8;
+  WAITAREA_RIGHT_IN = 9;
+  WAITAREA_RIGHT_OUT = 10;
 }
 
 message TrafficLightBox {
@@ -55,7 +62,8 @@ message TrafficLight {
   optional bool long_term_blink = 14;
 
   // traffic light countdowns
-  optional int32 countdowns = 13;
+  optional int32 countdowns = 13; // 融合后的系统倒计时
+  optional int32 e2e_countdowns = 25; // 模型检测出的倒计时
   // v2x traffic light remaining time.
   optional double remaining_time = 6;
 
@@ -82,6 +90,7 @@ message TrafficLight {
   optional bool has_arrow_vote = 21; // 当前状态是否存在箭头灯投票
   optional bool use_e2e = 22;
   optional Color e2e_color = 23;
+  optional TrafficLightStopS tl_stops = 24;
 
 }
 
@@ -92,6 +101,8 @@ message TrafficLightStopS {
   // In sensing coordinate, Corresponding one-to-one
   // with polyline
   optional common.Polyline polyline_local = 2;
+  // stops exist
+  optional bool stops_exist = 3;
 }
 
 message TrafficLightDetectionTask {
@@ -123,6 +134,14 @@ message TrafficLight3D {
   optional int32 count_down_number = 8;
 }
 
+message TrafficLightMpStopline {
+  // world coordinate
+  optional common.Polyline polyline = 1;
+  optional bool ignore_traffic_lights = 2;
+  repeated TrafficLightType traffic_type = 3;
+  optional int32 id = 4;
+}
+
 message TrafficLightResponse {
   // Traffic light mapping result for PNC
   // Note that:
@@ -142,4 +161,8 @@ message TrafficLightResponse {
   optional int64 virtual_traffic_lights_id = 4;
   // Traffic light stops
   optional TrafficLightStopS traffic_light_stops = 5;
+  // Convert from RasModelFeature.semantic_map to world coordinate
+  optional hdmap.Map semantic_map = 6 [deprecated = true]; 
+  // Extract from semantic_map
+  repeated TrafficLightMpStopline traffic_light_mp_stopline = 7; 
 }

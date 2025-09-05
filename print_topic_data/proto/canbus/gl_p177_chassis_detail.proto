@@ -130,6 +130,13 @@ message ADSC_AD_REDUNDANCY_FR05_115 {
 
 message ADSC_AD_REDUNDANCY_FR04_126 {
 // Control Message
+  enum EpbsoftswtCtrlst1Type {
+    EPBSOFTSWTCTRLST1_EPBSOFTSWTCTRLST_NOREQUEST = 0;
+    EPBSOFTSWTCTRLST1_EPBSOFTSWTCTRLST_APPLYREQUEST = 1;
+    EPBSOFTSWTCTRLST1_EPBSOFTSWTCTRLST_RELEASEREQUEST = 2;
+    EPBSOFTSWTCTRLST1_EPBSOFTSWTCTRLST_FORBIDDEN = 3;
+    EPBSOFTSWTCTRLST1_EPBSOFTSWTCTRLST_UNKNOWN = 4;
+  }
   // [] [0|1] [initial_value:None]
   optional bool ad4_asy_pinion_ag_req_for_bkp_ub = 1;
   // description Steering request signal from Secondary AD controller with function safety. [rad] [-14.5|17.4990234375] [initial_value:14848]
@@ -142,6 +149,10 @@ message ADSC_AD_REDUNDANCY_FR04_126 {
   optional bool rly_pwr_distbn_cmd1_wd_ign_rly_cmd = 5;
   // [] [0|1] [initial_value:None]
   optional bool rly_pwr_distbn_cmd1_wd_ign_rly_cmd_ub = 6;
+  // description Epb Soft Switch Control Standby signal [] [0|7] [initial_value:0]
+  optional EpbsoftswtCtrlst1Type epbsoftswt_ctrlst1 = 7;
+  // [] [0|1] [initial_value:None]
+  optional bool epbsoftswt_ctrlst1_ub = 8;
 }
 
 message RBCM_AD_REDUNDANCY_FR09_158 {
@@ -1260,6 +1271,60 @@ message ASDM_CHAS1_FR05_165 {
   optional RoadSurfCondRoadSurfCondType road_surf_cond_road_surf_cond = 3;
   // description Road Surface Condition timestamp. [s] [0.0|429496.7295] [initial_value:0]
   optional double road_surf_cond_ti_stamp = 4;
+}
+
+message ASDM_CHAS1_FR21_167 {
+  // Control Message
+    enum RoadSurfCondLeftRoadSurfCondType {
+      ROADSURFCONDLEFTROADSURFCOND_ROADTYPELEN5_INVALID = 0;
+      ROADSURFCONDLEFTROADSURFCOND_ROADTYPELEN5_WELLPAVEDROAD = 1;
+      ROADSURFCONDLEFTROADSURFCOND_ROADTYPELEN5_GRASSROAD = 2;
+      ROADSURFCONDLEFTROADSURFCOND_ROADTYPELEN5_SANDROAD = 3;
+      ROADSURFCONDLEFTROADSURFCOND_ROADTYPELEN5_SNOWROAD = 4;
+      ROADSURFCONDLEFTROADSURFCOND_ROADTYPELEN5_MUDROAD = 5;
+      ROADSURFCONDLEFTROADSURFCOND_ROADTYPELEN5_ROCKYROAD = 6;
+      ROADSURFCONDLEFTROADSURFCOND_ROADTYPELEN5_FORDINGROAD = 7;
+      ROADSURFCONDLEFTROADSURFCOND_ROADTYPELEN5_GRAVELROAD = 8;
+      ROADSURFCONDLEFTROADSURFCOND_ROADTYPELEN5_ICEROAD = 9;
+      ROADSURFCONDLEFTROADSURFCOND_ROADTYPELEN5_RESERVE = 10;
+    }
+    // [] [0|1] [initial_value:None]
+    optional bool road_surf_cond_left_ub = 1;
+    // description Confidence [Unitless] [0.0|1.0] [initial_value:0]
+    optional double road_surf_cond_left_confidence = 2;
+    // description Distance [Unitless] [0.0|51.1] [initial_value:0]
+    optional double road_surf_cond_leftdistance = 3;
+    // description RoadSurfType [] [0|31] [initial_value:0]
+    optional RoadSurfCondLeftRoadSurfCondType road_surf_cond_left_road_surf_cond = 4;
+    // description TimeStamp [s] [0.0|429496.7295] [initial_value:0]
+    optional double road_surf_cond_left_ti_stamp = 5;
+  }
+  
+  message ASDM_CHAS1_FR22_16E {
+  // Control Message
+    enum RoadSurfCondRightRoadSurfCondType {
+      ROADSURFCONDRIGHTROADSURFCOND_ROADTYPELEN5_INVALID = 0;
+      ROADSURFCONDRIGHTROADSURFCOND_ROADTYPELEN5_WELLPAVEDROAD = 1;
+      ROADSURFCONDRIGHTROADSURFCOND_ROADTYPELEN5_GRASSROAD = 2;
+      ROADSURFCONDRIGHTROADSURFCOND_ROADTYPELEN5_SANDROAD = 3;
+      ROADSURFCONDRIGHTROADSURFCOND_ROADTYPELEN5_SNOWROAD = 4;
+      ROADSURFCONDRIGHTROADSURFCOND_ROADTYPELEN5_MUDROAD = 5;
+      ROADSURFCONDRIGHTROADSURFCOND_ROADTYPELEN5_ROCKYROAD = 6;
+      ROADSURFCONDRIGHTROADSURFCOND_ROADTYPELEN5_FORDINGROAD = 7;
+      ROADSURFCONDRIGHTROADSURFCOND_ROADTYPELEN5_GRAVELROAD = 8;
+      ROADSURFCONDRIGHTROADSURFCOND_ROADTYPELEN5_ICEROAD = 9;
+      ROADSURFCONDRIGHTROADSURFCOND_ROADTYPELEN5_RESERVE = 10;
+    }
+    // [] [0|1] [initial_value:None]
+    optional bool road_surf_cond_right_ub = 1;
+    // description Confidence [Unitless] [0.0|1.0] [initial_value:0]
+    optional double road_surf_cond_right_confidence = 2;
+    // description Distance [Unitless] [0.0|51.1] [initial_value:0]
+    optional double road_surf_cond_rightdistance = 3;
+    // description RoadSurfType [] [0|31] [initial_value:0]
+    optional RoadSurfCondRightRoadSurfCondType road_surf_cond_right_road_surf_cond = 4;
+    // description TimeStamp [s] [0.0|429496.7295] [initial_value:0]
+    optional double road_surf_cond_right_ti_stamp = 5;
 }
 
 message ASDM_CHAS1_FR11_176 {
@@ -2905,6 +2970,16 @@ message BCM_ZCUCANFD1_FR17_10A {
   optional uint32 rbu_ctrl_mod_req_safe2_chks = 35;
   // description cpimter [Unitless] [0.0|15.0] [initial_value:0]
   optional uint32 rbu_ctrl_mod_req_safe2_cntr = 36;
+  // [] [0|1] [initial_value:None]
+  optional bool spd_ctrl_lgt_group_ub = 37;
+  // description checksum [Unitless] [0.0|255.0] [initial_value:0]
+  optional uint32 spd_ctrl_lgt_group_chks = 38;
+  // description counter [Unitless] [0.0|15.0] [initial_value:0]
+  optional uint32 spd_ctrl_lgt_group_cntr = 39;
+  // description longitudinal speed control actual [m/s] [0.0|81.91] [initial_value:0]
+  optional double spd_ctrl_lgt_group_spd_ctrl_act_lgt = 40;
+  // description speed control status [Unitless] [0.0|3.0] [initial_value:0]
+  optional uint32 spd_ctrl_lgt_group_spd_ctrl_sts = 41;  
 }
 
 message PASZCUCANFD1_FR20_112 {
@@ -3521,6 +3596,14 @@ message ADCU_ZCUCANFD1_FR08_120 {
     ASYSTEERAPPLYRQRD_LVLWARN2_LVL2 = 2;
     ASYSTEERAPPLYRQRD_LVLWARN2_LVL3 = 3;
   }
+  enum AsySVCtrlReqGroupGearCtrlReqType {
+    ASYSVCTRLREQGROUPGEARCTRLREQ_GEARPRKGASSIREQ_NOREQUEST = 0;
+    ASYSVCTRLREQGROUPGEARCTRLREQ_GEARPRKGASSIREQ_TARGETGEARP = 1;
+    ASYSVCTRLREQGROUPGEARCTRLREQ_GEARPRKGASSIREQ_TARGETGEARR = 2;
+    ASYSVCTRLREQGROUPGEARCTRLREQ_GEARPRKGASSIREQ_TARGETGEARN = 3;
+    ASYSVCTRLREQGROUPGEARCTRLREQ_GEARPRKGASSIREQ_TARGETGEARD = 4;
+    ASYSVCTRLREQGROUPGEARCTRLREQ_GEARPRKGASSIREQ_INVALID = 7;
+  }
   enum DoorOpenwarnLeIndcnType {
     DOOROPENWARNLEINDCN_LCMAINDCN_NOLCMAWARN = 0;
     DOOROPENWARNLEINDCN_LCMAINDCN_LCMAWARNLVL1 = 1;
@@ -3870,6 +3953,20 @@ message ADCU_ZCUCANFD1_FR08_120 {
   optional TrfcliInfoRightType trfcli_info_right = 90;
   // [] [0|1] [initial_value:None]
   optional bool trfcli_info_right_ub = 91;
+  // [] [0|1] [initial_value:None]
+  optional bool asy_sv_ctrl_req_group_ub = 92;
+  // description chks [Unitless] [0.0|255.0] [initial_value:0]
+  optional uint32 asy_sv_ctrl_req_group_chks = 93;
+  // description cntr [Unitless] [0.0|15.0] [initial_value:0]
+  optional uint32 asy_sv_ctrl_req_group_cntr = 94;
+  // description Longitudinal control distance request [m] [-10.0|317.67] [initial_value:32767]
+  optional double asy_sv_ctrl_req_group_dst_req = 95;
+  // description Target gear request [] [0|7] [initial_value:0]
+  optional AsySVCtrlReqGroupGearCtrlReqType asy_sv_ctrl_req_group_gear_ctrl_req = 96;
+  // description Silky control mode request [] [0|1] [initial_value:0]
+  optional bool asy_sv_ctrl_req_group_smooth_ctrl_mod = 97;
+  // description Vertical control speed request [m/s] [0.0|81.91] [initial_value:0]
+  optional double asy_sv_ctrl_req_group_spd_req = 98;
 }
 
 message ADCU_ZCUCANFD1_RESD_FR01_131 {
@@ -4718,6 +4815,41 @@ message DHU_ZCUCANFD1_FR16_160 {
     CTRBSWONOFF_CTRBSWONOFF_WARNINGANDBARKE = 2;
     CTRBSWONOFF_CTRBSWONOFF_RESERVE = 3;
   }
+  enum DvrErrStsType {
+    DVRERRSTS_DVRERRSTS_NOERROR = 0;
+    DVRERRSTS_DVRERRSTS_NOCAMERACONNECTED = 1;
+    DVRERRSTS_DVRERRSTS_RECORDINGERROR = 2;
+    DVRERRSTS_DVRERRSTS_ETHERNETERROR = 3;
+    DVRERRSTS_DVRERRSTS_GSENSORERROR = 4;
+    DVRERRSTS_DVRERRSTS_NANDFLASHREADINGERROR = 5;
+    DVRERRSTS_DVRERRSTS_NANDFLASHWRITINGERROR = 6;
+    DVRERRSTS_DVRERRSTS_SYSTEMCRASHORWATCHDOGTIMEOUT = 7;
+    DVRERRSTS_DVRERRSTS_PASERRORHAPPENED = 8;
+    DVRERRSTS_DVRERRSTS_RESERVED1 = 9;
+    DVRERRSTS_DVRERRSTS_OVERHEATPROTECTIONMODE = 10;
+    DVRERRSTS_DVRERRSTS_DVROCCUPIED = 11;
+    DVRERRSTS_DVRERRSTS_TFCARDSLOW = 12;
+    DVRERRSTS_DVRERRSTS_TFCARDFRAGMENT = 13;
+    DVRERRSTS_DVRERRSTS_ABNORMALVOLT = 14;
+    DVRERRSTS_DVRERRSTS_UNKNOWNERROR = 15;
+  }
+  enum DVRSysStsType {
+    DVRSYSSTS_DVRSYSSTS_OFF = 0;
+    DVRSYSSTS_DVRSYSSTS_NORMAL = 1;
+    DVRSYSSTS_DVRSYSSTS_OVERHEAT = 2;
+    DVRSYSSTS_DVRSYSSTS_PARKINGRECORD = 3;
+    DVRSYSSTS_DVRSYSSTS_PARKINGMONITOR = 4;
+    DVRSYSSTS_DVRSYSSTS_RESERVED1 = 5;
+    DVRSYSSTS_DVRSYSSTS_RESERVED2 = 6;
+    DVRSYSSTS_DVRSYSSTS_RESERVED3 = 7;
+  }
+  enum EpbsoftswtCtrlst1Type {
+    EPBSOFTSWTCTRLST1_EPBSOFTSWTCTRLST_NOREQUEST = 0;
+    EPBSOFTSWTCTRLST1_EPBSOFTSWTCTRLST_APPLYREQUEST = 1;
+    EPBSOFTSWTCTRLST1_EPBSOFTSWTCTRLST_RELEASEREQUEST = 2;
+    EPBSOFTSWTCTRLST1_EPBSOFTSWTCTRLST_FORBIDDEN = 3;
+    EPBSOFTSWTCTRLST1_EPBSOFTSWTCTRLST_UNKNOWN = 4;
+  }
   enum HznSplyElectcStsType {
     HZNSPLYELECTCSTS_HZNSPLYELECTCSTS1_UKWN = 0;
     HZNSPLYELECTCSTS_HZNSPLYELECTCSTS1_NOSPPRT = 1;
@@ -4975,6 +5107,18 @@ message DHU_ZCUCANFD1_FR16_160 {
   optional WarnTypForLaneKeepAidStsType warn_typ_for_lane_keep_aid_sts = 99;
   // [] [0|1] [initial_value:None]
   optional bool warn_typ_for_lane_keep_aid_sts_ub = 100;
+  // description The other error code of DVR [] [0|15] [initial_value:0]
+  optional DvrErrStsType dvr_err_sts = 101;
+  // [] [0|1] [initial_value:None]
+  optional bool dvr_err_sts_ub = 102;
+  // description The working status of DVR [] [0|7] [initial_value:0]
+  optional DVRSysStsType dvr_sys_sts = 103;
+  // [] [0|1] [initial_value:None]
+  optional bool dvr_sys_sts_ub = 104;
+  // description Epb Soft Switch Control Standby signal [] [0|7] [initial_value:0]
+  optional EpbsoftswtCtrlst1Type epbsoftswt_ctrlst1 = 105;
+  // [] [0|1] [initial_value:None]
+  optional bool epbsoftswt_ctrlst1_ub = 106;
 }
 
 message DHU_ZCUCANFD1_FR04_175 {
@@ -8020,6 +8164,12 @@ message ADCU_ZCUCANFD1_FR22_1CA {
 
 message ADCU_ZCUCANFD1_FR11_1E0 {
 // Control Message
+  enum AsyFctLrngMesgType {
+    ASYFCTLRNGMESG_ASYFCTLRNGMESG_DEFAULT = 0;
+    ASYFCTLRNGMESG_ASYFCTLRNGMESG_LEARNMESSAGE = 1;
+    ASYFCTLRNGMESG_ASYFCTLRNGMESG_RESERVED1 = 2;
+    ASYFCTLRNGMESG_ASYFCTLRNGMESG_RESERVED2 = 3;
+  }
   enum HmiRoadArrow1HmiRoadArrowLaneType {
     HMIROADARROW1HMIROADARROWLANE_LANE_UNASSIGNED = 0;
     HMIROADARROW1HMIROADARROWLANE_LANE_CURRENT = 1;
@@ -8517,6 +8667,14 @@ message ADCU_ZCUCANFD1_FR11_1E0 {
   optional TPTFUserRptType tptf_user_rpt = 87;
   // [] [0|1] [initial_value:None]
   optional bool tptf_user_rpt_ub = 88;
+  // description ADAS function learning message signal [] [0|3] [initial_value:0]
+  optional AsyFctLrngMesgType asy_fct_lrng_mesg = 89;
+  // [] [0|1] [initial_value:None]
+  optional bool asy_fct_lrng_mesg_ub = 90;
+  // description Jam road mode classical Chinese [Unitless] [0.0|15.0] [initial_value:0]
+  optional uint32 trfc_jam_warn = 91;
+  // [] [0|1] [initial_value:None]
+  optional bool trfc_jam_warn_ub = 92;
 }
 
 message BCM_ZCUCANFD1_FR03_1E3 {
@@ -9320,6 +9478,11 @@ message DHU_ZCUCANFD1_FR12_1F5 {
 
 message DHU_ZCUCANFD1_FR14_1F8 {
 // Report Message
+  enum AutValtPrkgMapRespMapIDResultType {
+    AUTVALTPRKGMAPRESPMAPIDRESULT_MAPIDRESULT_IDLE = 0;
+    AUTVALTPRKGMAPRESPMAPIDRESULT_MAPIDRESULT_AVAILABLE = 1;
+    AUTVALTPRKGMAPRESPMAPIDRESULT_MAPIDRESULT_NOTAVAILABLE = 2;
+  }
   enum FrntAndRePrkgInSwtType {
     FRNTANDREPRKGINSWT_FRNTANDREPRKGINSWT_DEFAULT = 0;
     FRNTANDREPRKGINSWT_FRNTANDREPRKGINSWT_FRNTPRKGIN = 1;
@@ -9649,6 +9812,18 @@ message DHU_ZCUCANFD1_FR14_1F8 {
   optional bool voice_ctrl_brk = 82;
   // [] [0|1] [initial_value:None]
   optional bool voice_ctrl_brk_ub = 83;
+  // [] [0|1] [initial_value:None]
+  optional bool aut_valt_prkg_map_resp_ub = 84;
+  // description bit0-31 means map ID 1-32 [Unitless] [0.0|4294967295.0] [initial_value:0]
+  optional uint32 aut_valt_prkg_map_resp_map_id_list1 = 85;
+  // description bit0-31 means map ID 33-64 [Unitless] [0.0|4294967295.0] [initial_value:0]
+  optional uint32 aut_valt_prkg_map_resp_map_id_list2 = 86;
+  // description bit0-31 means map ID 65-96 [Unitless] [0.0|4294967295.0] [initial_value:0]
+  optional uint32 aut_valt_prkg_map_resp_map_id_list3 = 87;
+  // description bit0-31 means map ID 97-100 [Unitless] [0.0|4294967295.0] [initial_value:0]
+  optional uint32 aut_valt_prkg_map_resp_map_id_list4 = 88;
+  // description Map ID self-test result [] [0|15] [initial_value:0]
+  optional AutValtPrkgMapRespMapIDResultType aut_valt_prkg_map_resp_map_id_result = 89;
 }
 
 message ADCU_ZCUCANFD1_FR06_1FF {
@@ -10953,11 +11128,23 @@ message ADCU_ZCUCANFD1_FR19_226 {
     ASYD2DMODED2DMODE_ASYD2DMODE_APA = 6;
     ASYD2DMODED2DMODE_ASYD2DMODE_RESERVED = 7;
   }
+  enum CreateMapCourseDisplayType {
+    CREATEMAPCOURSEDISPLAY_CREATEMAPCOURSEDISPLAY_DEFAULT = 0;
+    CREATEMAPCOURSEDISPLAY_CREATEMAPCOURSEDISPLAY_COURSE1 = 1;
+    CREATEMAPCOURSEDISPLAY_CREATEMAPCOURSEDISPLAY_COURSE2 = 2;
+    CREATEMAPCOURSEDISPLAY_CREATEMAPCOURSEDISPLAY_COURSE3 = 3;
+  }
   enum CustBtnStsType {
     CUSTBTNSTS_ACTVNAVL4_IDLE = 0;
     CUSTBTNSTS_ACTVNAVL4_ACTVN = 1;
     CUSTBTNSTS_ACTVNAVL4_DEACTVN = 2;
     CUSTBTNSTS_ACTVNAVL4_RECOMMAND = 3;
+  }
+  enum D2DMapPopupDisplayType {
+    D2DMAPPOPUPDISPLAY_DISPLAY_DEFAULT = 0;
+    D2DMAPPOPUPDISPLAY_DISPLAY_DISPLAY = 1;
+    D2DMAPPOPUPDISPLAY_DISPLAY_RESERVE1 = 2;
+    D2DMAPPOPUPDISPLAY_DISPLAY_RESERVE2 = 3;
   }
   enum ExitCustBtnStsType {
     EXITCUSTBTNSTS_ACTVNAVL4_IDLE = 0;
@@ -10976,6 +11163,13 @@ message ADCU_ZCUCANFD1_FR19_226 {
     HPAPUSHMMAPCARDTARGETPRKGTYPE_TARGETPRKGTYPE_TARGETPARKINGSPACE = 1;
     HPAPUSHMMAPCARDTARGETPRKGTYPE_TARGETPRKGTYPE_REGIONALPARKINGSPACE = 2;
     HPAPUSHMMAPCARDTARGETPRKGTYPE_TARGETPRKGTYPE_RESERVE = 3;
+  }
+  enum HpaToHMIPopDisplayType {
+    HPATOHMIPOPDISPLAY_HPATOHMIPOPDISPLAY_DEFAULT = 0;
+    HPATOHMIPOPDISPLAY_HPATOHMIPOPDISPLAY_D2DPOPAFTERDRA = 1;
+    HPATOHMIPOPDISPLAY_HPATOHMIPOPDISPLAY_CREMAPSIGPOP = 2;
+    HPATOHMIPOPDISPLAY_HPATOHMIPOPDISPLAY_FIDPRKGLOC = 3;
+    HPATOHMIPOPDISPLAY_HPATOHMIPOPDISPLAY_OPTIMAL_PARKING = 4;
   }
   enum ISAReqDHUTraVidType {
     ISAREQDHUTRAVID_ISAREQTRAVID_DEFULT = 0;
@@ -11018,6 +11212,7 @@ message ADCU_ZCUCANFD1_FR19_226 {
     PRKGACTIVEPUSH_PRKGACTIVEPUSH_PROMPT = 1;
     PRKGACTIVEPUSH_PRKGACTIVEPUSH_BUTTON = 2;
     PRKGACTIVEPUSH_PRKGACTIVEPUSH_PROMPTANDBUTTON = 3;
+    PRKGACTIVEPUSH_PRKGACTIVEPUSH_AVM_RECOMMEND = 4;
   }
   enum PrkgBtnStsDispFloatType {
     PRKGBTNSTSDISPFLOAT_ACTVNAVL4_IDLE = 0;
@@ -11117,6 +11312,24 @@ message ADCU_ZCUCANFD1_FR19_226 {
     VALTPRKGL1BTNDISP1FINISHBTNST_BTNST1_DISPLAYEDANDCLICKABLE = 1;
     VALTPRKGL1BTNDISP1FINISHBTNST_BTNST1_DISPLAYEDANDUNCLICKABLE = 2;
     VALTPRKGL1BTNDISP1FINISHBTNST_BTNST1_UNDISPLAYED = 3;
+  }
+  enum ValtPrkgOutUseBtnType {
+    VALTPRKGOUTUSEBTN_BTNST1_DEFAULT = 0;
+    VALTPRKGOUTUSEBTN_BTNST1_DISPLAYEDANDCLICKABLE = 1;
+    VALTPRKGOUTUSEBTN_BTNST1_DISPLAYEDANDUNCLICKABLE = 2;
+    VALTPRKGOUTUSEBTN_BTNST1_UNDISPLAYED = 3;
+  }
+  enum ValtPrkgOutUsePopType {
+    VALTPRKGOUTUSEPOP_VALTPRKGOUTUSEPOP_DEFAULT = 0;
+    VALTPRKGOUTUSEPOP_VALTPRKGOUTUSEPOP_POPBTN = 1;
+    VALTPRKGOUTUSEPOP_VALTPRKGOUTUSEPOP_RESVERSE1 = 2;
+    VALTPRKGOUTUSEPOP_VALTPRKGOUTUSEPOP_RESVERSE2 = 3;
+  }
+  enum ValtPrkgTTLightType {
+    VALTPRKGTTLIGHT_CRUISEICONCOLOUR_DEFAULT = 0;
+    VALTPRKGTTLIGHT_CRUISEICONCOLOUR_GREEN = 1;
+    VALTPRKGTTLIGHT_CRUISEICONCOLOUR_WHITE = 2;
+    VALTPRKGTTLIGHT_CRUISEICONCOLOUR_GREY = 3;
   }
   // description Voice warning for unable to active CNOA cruise function. [Unitless] [0.0|31.0] [initial_value:0]
   optional uint32 asy_cnoa_crs_actv_faild_voice = 1;
@@ -11422,6 +11635,30 @@ message ADCU_ZCUCANFD1_FR19_226 {
   optional bool view_layout_req = 151;
   // [] [0|1] [initial_value:None]
   optional bool view_layout_req_ub = 152;
+  // description CreateMapCourseDisplay [] [0|3] [initial_value:0]
+  optional CreateMapCourseDisplayType create_map_course_display = 153;
+  // [] [0|1] [initial_value:None]
+  optional bool create_map_course_display_ub = 154;
+  // description D2DMapPopupDisplay [] [0|3] [initial_value:0]
+  optional D2DMapPopupDisplayType d2_d_map_popup_display = 155;
+  // [] [0|1] [initial_value:None]
+  optional bool d2_d_map_popup_display_ub = 156;
+  // description HpaToHMIPopDisplay [] [0|15] [initial_value:0]
+  optional HpaToHMIPopDisplayType hpa_to_hmi_pop_display = 157;
+  // [] [0|1] [initial_value:None]
+  optional bool hpa_to_hmi_pop_display_ub = 158;
+  // description ValtPrkgOutUseBtn [] [0|3] [initial_value:0]
+  optional ValtPrkgOutUseBtnType valt_prkg_out_use_btn = 1159;
+  // [] [0|1] [initial_value:None]
+  optional bool valt_prkg_out_use_btn_ub = 160;
+  // description ValtPrkgOutUsePop [] [0|3] [initial_value:0]
+  optional ValtPrkgOutUsePopType valt_prkg_out_use_pop = 161;
+  // [] [0|1] [initial_value:None]
+  optional bool valt_prkg_out_use_pop_ub = 162;
+  // description ValtPrkgTTLight [] [0|3] [initial_value:0]
+  optional ValtPrkgTTLightType valt_prkg_tt_light = 163;
+  // [] [0|1] [initial_value:None]
+  optional bool valt_prkg_tt_light_ub = 164;
 }
 
 message BCM_ZCUCANFD1_FR11_240 {
@@ -12054,6 +12291,11 @@ message ADCU_ZCUCANFD1_FR07_280 {
     ASYALGTINDCR_ASYINDCRDISPSTS_FAILUREDISP = 5;
     ASYALGTINDCR_ASYINDCRDISPSTS_PASSIVE = 6;
   }
+  enum AsyAutDrvgLiReqType {
+    ASYAUTDRVGLIREQ_ONOFFNOREQ_NOREQ = 0;
+    ASYAUTDRVGLIREQ_ONOFFNOREQ_ON = 1;
+    ASYAUTDRVGLIREQ_ONOFFNOREQ_OFF = 2;
+  }
   enum AsyObjForBigData0SnsrSrcOfAbsLatSpdType {
     ASYOBJFORBIGDATA0SNSRSRCOFABSLATSPD_SNSRSRC1_UKWN = 0;
     ASYOBJFORBIGDATA0SNSRSRCOFABSLATSPD_SNSRSRC1_RADAR = 1;
@@ -12202,6 +12444,15 @@ message ADCU_ZCUCANFD1_FR07_280 {
     HMIAUTOLANECHGSTSFORASYAIASISTAUDIO_LANECHGCNCONLESIDE = 9;
     HMIAUTOLANECHGSTSFORASYAIASISTAUDIO_LANECHGCNCONRISIDE = 10;
   }
+  enum HPAMapIDDistributionMapIDTypeType {
+    HPAMAPIDDISTRIBUTIONMAPIDTYPE_MAPIDTYPE_DLE = 0;
+    HPAMAPIDDISTRIBUTIONMAPIDTYPE_MAPIDTYPE_ENTERCREATED = 1;
+    HPAMAPIDDISTRIBUTIONMAPIDTYPE_MAPIDTYPE_EXITCREATED = 2;
+    HPAMAPIDDISTRIBUTIONMAPIDTYPE_MAPIDTYPE_CREATEROUTE = 3;
+    HPAMAPIDDISTRIBUTIONMAPIDTYPE_MAPIDTYPE_OVERENTERCREATED = 4;
+    HPAMAPIDDISTRIBUTIONMAPIDTYPE_MAPIDTYPE_OVEREXITCREATED = 5;
+    HPAMAPIDDISTRIBUTIONMAPIDTYPE_MAPIDTYPE_OVERCREATEROUTE = 6;
+  }
   enum IHUSetDispADType {
     IHUSETDISPAD_SETTINGDISPSTS_NORMAL = 0;
     IHUSETDISPAD_SETTINGDISPSTS_ALCAUNAVAILABLE = 1;
@@ -12227,6 +12478,12 @@ message ADCU_ZCUCANFD1_FR07_280 {
     OFFSFORSPDWARNSETGSTS_OFFSFORSPDWARNSETGSTS_PLUS5 = 3;
     OFFSFORSPDWARNSETGSTS_OFFSFORSPDWARNSETGSTS_PLUS10 = 4;
     OFFSFORSPDWARNSETGSTS_OFFSFORSPDWARNSETGSTS_RESERVED = 5;
+  }
+  enum PrkgFctLrngMesgType {
+    PRKGFCTLRNGMESG_ASYFCTLRNGMESG_DEFAULT = 0;
+    PRKGFCTLRNGMESG_ASYFCTLRNGMESG_LEARNMESSAGE = 1;
+    PRKGFCTLRNGMESG_ASYFCTLRNGMESG_RESERVED1 = 2;
+    PRKGFCTLRNGMESG_ASYFCTLRNGMESG_RESERVED2 = 3;
   }
   enum ReSideRdrLeSts0Type {
     RESIDERDRLESTS0_RSDSMSTST_CFG = 0;
@@ -12473,6 +12730,26 @@ message ADCU_ZCUCANFD1_FR07_280 {
   optional bool too_many_cars = 85;
   // [] [0|1] [initial_value:None]
   optional bool too_many_cars_ub = 86;
+  // description Smart drive light request signal [] [0|3] [initial_value:0]
+  optional AsyAutDrvgLiReqType asy_aut_drvg_li_req = 87;
+  // [] [0|1] [initial_value:None]
+  optional bool asy_aut_drvg_li_req_ub = 88;
+  // [] [0|1] [initial_value:None]
+  optional bool hpa_map_id_distribution_ub = 89;
+  // description MapIDList1 [Unitless] [0.0|4294967295.0] [initial_value:0]
+  optional uint32 hpa_map_id_distribution_map_id_list1 = 90;
+  // description MapIDList2 [Unitless] [0.0|4294967295.0] [initial_value:0]
+  optional uint32 hpa_map_id_distribution_map_id_list2 = 91;
+  // description MapIDList3 [Unitless] [0.0|4294967295.0] [initial_value:0]
+  optional uint32 hpa_map_id_distribution_map_id_list3 = 92;
+  // description MapIDList4 [Unitless] [0.0|4294967295.0] [initial_value:0]
+  optional uint32 hpa_map_id_distribution_map_id_list4 = 93;
+  // description MapIDType [] [0|15] [initial_value:0]
+  optional HPAMapIDDistributionMapIDTypeType hpa_map_id_distribution_map_id_type = 94;
+  // description Parking function video learn pop-up requests [] [0|3] [initial_value:0]
+  optional PrkgFctLrngMesgType prkg_fct_lrng_mesg = 95;
+  // [] [0|1] [initial_value:None]
+  optional bool prkg_fct_lrng_mesg_ub = 96;
 }
 
 message BCM_ZCUCANFD1_FR14_2C0 {
@@ -12499,6 +12776,18 @@ message DHU_ZCUCANFD1_FR08_2EF {
     AUTPRKGSELECTENTRANCE_AUTPRKGSELECTENTRANCE_PARKEXIT = 4;
     AUTPRKGSELECTENTRANCE_AUTPRKGSELECTENTRANCE_BASEMENTEXIT = 5;
     AUTPRKGSELECTENTRANCE_AUTPRKGSELECTENTRANCE_RESERVED = 6;
+  }
+  enum AutValtPrkgClsPopType {
+    AUTVALTPRKGCLSPOP_AUTVALTPRKGCLSPOP_DEFAULT = 0;
+    AUTVALTPRKGCLSPOP_AUTVALTPRKGCLSPOP_CONFIRMEXIT = 1;
+    AUTVALTPRKGCLSPOP_AUTVALTPRKGCLSPOP_CANCELEXIT = 2;
+    AUTVALTPRKGCLSPOP_AUTVALTPRKGCLSPOP_RESERVED = 3;
+  }
+  enum AutValtPrkgCoverResultsType {
+    AUTVALTPRKGCOVERRESULTS_AUTVALTPRKGCOVERRESULTS_DEFAULT = 0;
+    AUTVALTPRKGCOVERRESULTS_AUTVALTPRKGCOVERRESULTS_SUCCESS = 1;
+    AUTVALTPRKGCOVERRESULTS_AUTVALTPRKGCOVERRESULTS_FAIL = 2;
+    AUTVALTPRKGCOVERRESULTS_AUTVALTPRKGCOVERRESULTS_RESERVED = 3;
   }
   enum AutValtPrkgMapUploadBulidMapType2Type {
     AUTVALTPRKGMAPUPLOADBULIDMAPTYPE2_MAPTYPE2_DEFAULT = 0;
@@ -12534,6 +12823,18 @@ message DHU_ZCUCANFD1_FR08_2EF {
     AUTVALTPRKGMAPUPLOADUSEMAPTYPE2_MAPTYPE2_RESERVED1 = 13;
     AUTVALTPRKGMAPUPLOADUSEMAPTYPE2_MAPTYPE2_RESERVED2 = 14;
   }
+  enum AutValtPrkgOutdBtnType {
+    AUTVALTPRKGOUTDBTN_AUTVALTPRKGOUTDBTN_DEFAULT = 0;
+    AUTVALTPRKGOUTDBTN_AUTVALTPRKGOUTDBTN_CONFIRM = 1;
+    AUTVALTPRKGOUTDBTN_AUTVALTPRKGOUTDBTN_CANCEL = 2;
+    AUTVALTPRKGOUTDBTN_AUTVALTPRKGOUTDBTN_RESERVED = 3;
+  }
+  enum AutValtPrkgSelectD2DType {
+    AUTVALTPRKGSELECTD2D_AUTVALTPRKGSELECTD2D_DEFAULT = 0;
+    AUTVALTPRKGSELECTD2D_AUTVALTPRKGSELECTD2D_D2DMAP = 1;
+    AUTVALTPRKGSELECTD2D_AUTVALTPRKGSELECTD2D_CLOUDMAP = 2;
+    AUTVALTPRKGSELECTD2D_AUTVALTPRKGSELECTD2D_NAVIGATION = 3;
+  }
   enum CalltypeAndStsCallTypeType {
     CALLTYPEANDSTSCALLTYPE_CALLTYPE_NOCALL = 0;
     CALLTYPEANDSTSCALLTYPE_CALLTYPE_MANUALECALL = 1;
@@ -12554,11 +12855,34 @@ message DHU_ZCUCANFD1_FR08_2EF {
     CALLTYPEANDSTSECALLSTATUS_ECALLSTATUS_INCOMINGCALL = 6;
     CALLTYPEANDSTSECALLSTATUS_ECALLSTATUS_CALLFAILED = 7;
   }
+  enum HmiActvSftyLrngStsType {
+    HMIACTVSFTYLRNGSTS_LRNGSTS_DEFAULT = 0;
+    HMIACTVSFTYLRNGSTS_LRNGSTS_FINISH = 1;
+    HMIACTVSFTYLRNGSTS_LRNGSTS_NOTFINISH = 2;
+    HMIACTVSFTYLRNGSTS_LRNGSTS_RESERVED = 3;
+  }
   enum HmiCnoaCrsSpdOfstModeType {
     HMICNOACRSSPDOFSTMODE_HMISPDLIMMETHDOFFSMOD_FIXVALUE = 0;
     HMICNOACRSSPDOFSTMODE_HMISPDLIMMETHDOFFSMOD_PERCENTAGE = 1;
     HMICNOACRSSPDOFSTMODE_HMISPDLIMMETHDOFFSMOD_FAULT = 2;
     HMICNOACRSSPDOFSTMODE_HMISPDLIMMETHDOFFSMOD_RESERVED1 = 3;
+  }
+  enum HmiCrsCtrlLrngStsType {
+    HMICRSCTRLLRNGSTS_LRNGSTS_DEFAULT = 0;
+    HMICRSCTRLLRNGSTS_LRNGSTS_FINISH = 1;
+    HMICRSCTRLLRNGSTS_LRNGSTS_NOTFINISH = 2;
+    HMICRSCTRLLRNGSTS_LRNGSTS_RESERVED = 3;
+  }
+  enum HmiD2DLrngStsType {
+    HMID2DLRNGSTS_LRNGSTS_DEFAULT = 0;
+    HMID2DLRNGSTS_LRNGSTS_FINISH = 1;
+    HMID2DLRNGSTS_LRNGSTS_NOTFINISH = 2;
+    HMID2DLRNGSTS_LRNGSTS_RESERVED = 3;
+  }
+  enum HmiFctLrngMesgFbType {
+    HMIFCTLRNGMESGFB_ONOFFNOREQ_NOREQ = 0;
+    HMIFCTLRNGMESGFB_ONOFFNOREQ_ON = 1;
+    HMIFCTLRNGMESGFB_ONOFFNOREQ_OFF = 2;
   }
   enum HznDataMapProviderType {
     HZNDATAMAPPROVIDER_MAPPROVIDER_UNKNOWN = 0;
@@ -12647,11 +12971,47 @@ message DHU_ZCUCANFD1_FR08_2EF {
     MISCTRFCSGNINFOFROMNAVMAP_TRFCINFOMISCFIRST_SERIESCURVES = 11;
     MISCTRFCSGNINFOFROMNAVMAP_TRFCINFOMISCFIRST_RESERVED = 12;
   }
+  enum PrkgLrngStsAPARPALrngStsType {
+    PRKGLRNGSTSAPARPALRNGSTS_LRNGSTS_DEFAULT = 0;
+    PRKGLRNGSTSAPARPALRNGSTS_LRNGSTS_FINISH = 1;
+    PRKGLRNGSTSAPARPALRNGSTS_LRNGSTS_NOTFINISH = 2;
+    PRKGLRNGSTSAPARPALRNGSTS_LRNGSTS_RESERVED = 3;
+  }
+  enum PrkgLrngStsHPALrngStsType {
+    PRKGLRNGSTSHPALRNGSTS_LRNGSTS_DEFAULT = 0;
+    PRKGLRNGSTSHPALRNGSTS_LRNGSTS_FINISH = 1;
+    PRKGLRNGSTSHPALRNGSTS_LRNGSTS_NOTFINISH = 2;
+    PRKGLRNGSTSHPALRNGSTS_LRNGSTS_RESERVED = 3;
+  }
+  enum PrkgLrngStsReserved1Type {
+    PRKGLRNGSTSRESERVED1_LRNGSTS_DEFAULT = 0;
+    PRKGLRNGSTSRESERVED1_LRNGSTS_FINISH = 1;
+    PRKGLRNGSTSRESERVED1_LRNGSTS_NOTFINISH = 2;
+    PRKGLRNGSTSRESERVED1_LRNGSTS_RESERVED = 3;
+  }
+  enum PrkgLrngStsReserved2Type {
+    PRKGLRNGSTSRESERVED2_LRNGSTS_DEFAULT = 0;
+    PRKGLRNGSTSRESERVED2_LRNGSTS_FINISH = 1;
+    PRKGLRNGSTSRESERVED2_LRNGSTS_NOTFINISH = 2;
+    PRKGLRNGSTSRESERVED2_LRNGSTS_RESERVED = 3;
+  }
+  enum PrkgLrngStsReserved3Type {
+    PRKGLRNGSTSRESERVED3_LRNGSTS_DEFAULT = 0;
+    PRKGLRNGSTSRESERVED3_LRNGSTS_FINISH = 1;
+    PRKGLRNGSTSRESERVED3_LRNGSTS_NOTFINISH = 2;
+    PRKGLRNGSTSRESERVED3_LRNGSTS_RESERVED = 3;
+  }
   enum PrkgSlotTypSelectType {
     PRKGSLOTTYPSELECT_PRKGSLOTTYPSELECT_DEFAULT = 0;
     PRKGSLOTTYPSELECT_PRKGSLOTTYPSELECT_TERMIANLSLOT = 1;
     PRKGSLOTTYPSELECT_PRKGSLOTTYPSELECT_AREASLOT = 2;
     PRKGSLOTTYPSELECT_PRKGSLOTTYPSELECT_RESERVED = 3;
+  }
+  enum PrkgTutorialRespType {
+    PRKGTUTORIALRESP_PRKGTUTORIALRESP_DEFAULT = 0;
+    PRKGTUTORIALRESP_PRKGTUTORIALRESP_GOTIT = 1;
+    PRKGTUTORIALRESP_PRKGTUTORIALRESP_LEARN = 2;
+    PRKGTUTORIALRESP_PRKGTUTORIALRESP_RESERVED = 3;
   }
   // description APA parking slot id when user select by hand [Unitless] [0.0|31.0] [initial_value:0]
   optional uint32 aut_prkg_hand_slot_nr_req = 1;
@@ -12835,6 +13195,62 @@ message DHU_ZCUCANFD1_FR08_2EF {
   optional bool veh_actv_drvg_actvn_sts = 90;
   // [] [0|1] [initial_value:None]
   optional bool veh_actv_drvg_actvn_sts_ub = 91;
+  // description Intelligent Driving Light Control Switch [] [0|1] [initial_value:0]
+  optional bool asy_aut_drvg_li_swt = 92;
+  // [] [0|1] [initial_value:None]
+  optional bool asy_aut_drvg_li_swt_ub = 93;
+  // description HPA-MAX Close the pop-up window outside the car [] [0|3] [initial_value:0]
+  optional AutValtPrkgClsPopType aut_valt_prkg_cls_pop = 94;
+  // [] [0|1] [initial_value:None]
+  optional bool aut_valt_prkg_cls_pop_ub = 95;
+  // description Cover route result [] [0|3] [initial_value:0]
+  optional AutValtPrkgCoverResultsType aut_valt_prkg_cover_results = 96;
+  // [] [0|1] [initial_value:None]
+  optional bool aut_valt_prkg_cover_results_ub = 97;
+  // description HPA-MAX Use buttons outside the car [] [0|3] [initial_value:0]
+  optional AutValtPrkgOutdBtnType aut_valt_prkg_outd_btn = 98;
+  // [] [0|1] [initial_value:None]
+  optional bool aut_valt_prkg_outd_btn_ub = 99;
+  // description user chooses to select a fixed parking space/crowdsourced map/navigation [] [0|3] [initial_value:0]
+  optional AutValtPrkgSelectD2DType aut_valt_prkg_select_d2_d = 100;
+  // [] [0|1] [initial_value:None]
+  optional bool aut_valt_prkg_select_d2_d_ub = 101;
+  // description Intelligent Driving Learning Status Feedback Signal [] [0|3] [initial_value:0]
+  optional HmiActvSftyLrngStsType hmi_actv_sfty_lrng_sts = 102;
+  // [] [0|1] [initial_value:None]
+  optional bool hmi_actv_sfty_lrng_sts_ub = 103;
+  // description Intelligent Driving Learning Status Feedback Signal [] [0|3] [initial_value:0]
+  optional HmiCrsCtrlLrngStsType hmi_crs_ctrl_lrng_sts = 104;
+  // [] [0|1] [initial_value:None]
+  optional bool hmi_crs_ctrl_lrng_sts_ub = 105;
+  // description Intelligent Driving Learning Status Feedback Signal [] [0|3] [initial_value:0]
+  optional HmiD2DLrngStsType hmi_d2_d_lrng_sts = 106;
+  // [] [0|1] [initial_value:None]
+  optional bool hmi_d2_d_lrng_sts_ub = 107;
+  // description Intelligent Driving Video Tutorial Popup Feedback Signal [] [0|3] [initial_value:0]
+  optional HmiFctLrngMesgFbType hmi_fct_lrng_mesg_fb = 108;
+  // [] [0|1] [initial_value:None]
+  optional bool hmi_fct_lrng_mesg_fb_ub = 109;
+  // [] [0|1] [initial_value:None]
+  optional bool prkg_lrng_sts_ub = 110;
+  // description APA/RPA tutorial video learning status [] [0|3] [initial_value:0]
+  optional PrkgLrngStsAPARPALrngStsType prkg_lrng_sts_aparpa_lrng_sts = 111;
+  // description HPA tutorial video learning status [] [0|3] [initial_value:0]
+  optional PrkgLrngStsHPALrngStsType prkg_lrng_sts_hpa_lrng_sts = 112;
+  // description Reserved1 [] [0|3] [initial_value:0]
+  optional PrkgLrngStsReserved1Type prkg_lrng_sts_reserved1 = 1113;
+  // description Reserved2 [] [0|3] [initial_value:0]
+  optional PrkgLrngStsReserved2Type prkg_lrng_sts_reserved2 = 114;
+  // description Reserved3 [] [0|3] [initial_value:0]
+  optional PrkgLrngStsReserved3Type prkg_lrng_sts_reserved3 = 115;
+  // description Parking video tutorial pop-up feedback signal [] [0|3] [initial_value:0]
+  optional PrkgTutorialRespType prkg_tutorial_resp = 116;
+  // [] [0|1] [initial_value:None]
+  optional bool prkg_tutorial_resp_ub = 117;
+  // description Jam mode switch [] [0|1] [initial_value:0]
+  optional bool trfc_jam_swt_on_off = 118;
+  // [] [0|1] [initial_value:None]
+  optional bool trfc_jam_swt_on_off_ub = 119;
 }
 
 message ADCU_ZCUCANFD1_FR03_2F0 {
@@ -13308,6 +13724,14 @@ message ADCU_ZCUCANFD1_FR03_2F0 {
   optional TrfcLiStsType trfc_li_sts = 103;
   // [] [0|1] [initial_value:None]
   optional bool trfc_li_sts_ub = 104;
+  // [] [0|1] [initial_value:None]
+  optional bool valt_prkg_l1_special_prompt_disp1_ub = 105;
+  // description AsternDistance [m] [0.0|1023.0] [initial_value:0]
+  optional uint32 valt_prkg_l1_special_prompt_disp1_astern_distance = 106;
+  // description CruisingRemainDst1 [m] [0.0|6553.5] [initial_value:0]
+  optional double valt_prkg_l1_special_prompt_disp1_cruising_remain_dst1 = 107;
+  // description MappedRecDst1 [m] [0.0|6553.5] [initial_value:0]
+  optional double valt_prkg_l1_special_prompt_disp1_mapped_rec_dst1 = 108;
 }
 
 message ADCU_ZCUCANFD1_FR24_300 {
@@ -14875,6 +15299,10 @@ message ADCU_ZCUCANFD1_FR30_306 {
   optional TerrainSystemStatusType terrain_system_status = 35;
   // [] [0|1] [initial_value:None]
   optional bool terrain_system_status_ub = 36;
+  // description AD4 Camera heating request [] [0|1] [initial_value:0]
+  optional bool ad4_camera_heating_req_zcu = 37;
+  // [] [0|1] [initial_value:None]
+  optional bool ad4_camera_heating_req_zcu_ub = 38;
 }
 
 message DHU_ZCUCANFD1_FR02_307 {
@@ -15295,6 +15723,10 @@ message ADCU_ZCUCANFD1_FR20_30A {
   optional bool rvm_req_vm_mchg = 47;
   // [] [0|1] [initial_value:None]
   optional bool rvm_req_vm_mchg_ub = 48;
+  // description D2DRoutePushButton [Unitless] [0.0|3.0] [initial_value:0]
+  optional uint32 d2_d_route_push_button = 49;
+  // [] [0|1] [initial_value:None]
+  optional bool d2_d_route_push_button_ub = 50;
 }
 
 message PASZCUCANFD1_FR18_310 {
@@ -17976,14 +18408,28 @@ message ZCUD_ZCUCANFD1_FR10_53 {
     VEHMODMNGTGLBSAFE1CARMODSTS1_CARMODSTS1_CARMODTRNSP = 1;
     VEHMODMNGTGLBSAFE1CARMODSTS1_CARMODSTS1_CARMODFCY = 2;
     VEHMODMNGTGLBSAFE1CARMODSTS1_CARMODSTS1_CARMODCRASH = 3;
+    VEHMODMNGTGLBSAFE1CARMODSTS1_CARMODSTS1_RESERVED4 = 4;
     VEHMODMNGTGLBSAFE1CARMODSTS1_CARMODSTS1_CARMODDYNO = 5;
+    VEHMODMNGTGLBSAFE1CARMODSTS1_CARMODSTS1_RESERVED6 = 6;
+    VEHMODMNGTGLBSAFE1CARMODSTS1_CARMODSTS1_RESERVED7 = 7;
   }
   enum VehModMngtGlbSafe1UsgModStsType {
     VEHMODMNGTGLBSAFE1USGMODSTS_USGMODSTS1_USGMODABDND = 0;
     VEHMODMNGTGLBSAFE1USGMODSTS_USGMODSTS1_USGMODINACTV = 1;
     VEHMODMNGTGLBSAFE1USGMODSTS_USGMODSTS1_USGMODCNVINC = 2;
+    VEHMODMNGTGLBSAFE1USGMODSTS_USGMODSTS1_RESERVED3 = 3;
+    VEHMODMNGTGLBSAFE1USGMODSTS_USGMODSTS1_RESERVED4 = 4;
+    VEHMODMNGTGLBSAFE1USGMODSTS_USGMODSTS1_RESERVED5 = 5;
+    VEHMODMNGTGLBSAFE1USGMODSTS_USGMODSTS1_RESERVED6 = 6;
+    VEHMODMNGTGLBSAFE1USGMODSTS_USGMODSTS1_RESERVED7 = 7;
+    VEHMODMNGTGLBSAFE1USGMODSTS_USGMODSTS1_RESERVED8 = 8;
+    VEHMODMNGTGLBSAFE1USGMODSTS_USGMODSTS1_RESERVED9 = 9;
+    VEHMODMNGTGLBSAFE1USGMODSTS_USGMODSTS1_RESERVED10 = 10;
     VEHMODMNGTGLBSAFE1USGMODSTS_USGMODSTS1_USGMODACTV = 11;
+    VEHMODMNGTGLBSAFE1USGMODSTS_USGMODSTS1_RESERVED12 = 12;
     VEHMODMNGTGLBSAFE1USGMODSTS_USGMODSTS1_USGMODDRVG = 13;
+    VEHMODMNGTGLBSAFE1USGMODSTS_USGMODSTS1_RESERVED14 = 14;
+    VEHMODMNGTGLBSAFE1USGMODSTS_USGMODSTS1_RESERVED15 = 15;
   }
   enum WinPosnStsAtDrvrType {
     WINPOSNSTSATDRVR_WINANDROOFANDCURTPOSNTYP_POSNUKWN = 0;
@@ -18407,6 +18853,14 @@ message DHU_ZCUCANFD1_FR03_56 {
   optional bool tptf_rpt_req = 32;
   // [] [0|1] [initial_value:None]
   optional bool tptf_rpt_req_ub = 33;
+  // description D2D P Icon is Clicked [] [0|1] [initial_value:0]
+  optional bool d2_dp_icon_clicked = 34;
+  // [] [0|1] [initial_value:None]
+  optional bool d2_dp_icon_clicked_ub = 35;
+  // description D2D Route Push Button Resp [Unitless] [0.0|3.0] [initial_value:0]
+  optional uint32 d2_d_route_push_button_resp = 36;
+  // [] [0|1] [initial_value:None]
+  optional bool d2_d_route_push_button_resp_ub = 37;
 }
 
 message DHU_TO_ADCU_SEC_OC_FR01_57 {
@@ -19225,4 +19679,6 @@ message GlP177ChassisDetail {
   optional PASZCUCANFD1_FR07_60 paszcucanfd1_fr07_60 = 153; // control message
   optional ZCUD_ZCUCANFD1_FR01_61 zcud_zcucanfd1_fr01_61 = 154; // report message
   optional BCM_ZCUCANFD1_FR16_62 bcm_zcucanfd1_fr16_62 = 155; // report message
+  optional ASDM_CHAS1_FR21_167 asdm_chas1_fr21_167 = 156; // control message
+  optional ASDM_CHAS1_FR22_16E asdm_chas1_fr22_16e = 157; // control message
 }

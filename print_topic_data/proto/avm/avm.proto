@@ -105,6 +105,7 @@ message AvmSetter {
   optional DebugSetting debug_setting = 6;
   optional APASetting apa_setting = 7;
   optional CalibSetting calib_setting = 8;
+  optional bool close_avm_cycle = 9 [default = false];
 }
 
 message AvmParkingArea {

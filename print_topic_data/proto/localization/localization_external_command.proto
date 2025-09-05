@@ -128,6 +128,7 @@ enum MappingErrorCode {
 message ChangedMapStatus {
   int32 map_id = 1;
   OperatingType operation_type = 2;
+  havp_map.HAVPMapMetaData meta_data = 3;
 }
 
 message ChangedMapStatusList {
@@ -139,6 +140,7 @@ message EndMappingCMD {
   string map_name = 2;
   string target_parking_space_name = 3;
   int32 map_id = 4;         // for Geely
+  bool not_directly_cover_map = 5;       // if is true, covering map uses logic 
 }
 message EndMappingCMDRP {
   bool success = 1;
@@ -154,6 +156,16 @@ message EndMappingCMDRP {
   int32 ego_floor_id = 9;
   int32 recommended_favorite_parking_space_id = 10;
   ChangedMapStatusList changed_map_status_list = 11;
+}
+
+message CoverMapCMD {
+  bool cover_map = 1;
+  repeated uint32 old_map_ids = 2;
+  uint32 new_map_id = 3;
+}
+
+message CoverMapCMDRP {
+  bool map_update_success = 1;
 }
 
 // for gleey
@@ -327,6 +339,7 @@ message GetNearbyMapCMDRP {
 
 /*** End of VPA Test ***/
 
+// deprecated in light map
 enum CurrentMode {
   DRIVING = 0;  // auto-driving
   APA = 1;
@@ -361,18 +374,40 @@ message SetFreeParkingSpaceAsRouteDestinationCMD {
   perception.ParkingSpace parking_space = 1;
 }
 
-// for gleey
+// for geely
 message SetFreeParkingSpaceAsRouteDestinationCMDRP {
   bool set_destination_success = 1;
 }
 
-// for gleey
+// for geely
 message SetStraightLinkSpeedLimitCMD {
   double straight_link_speed_limit = 1;
 }
 
 message SetStraightLinkSpeedLimitCMDRP {
   bool set_speed_limit_success = 1;
+}
+
+// for silent mapping overlap check
+message MapOverlapCheckCMD {}
+
+message MapOverlapCheckCMDRP {
+  bool has_overlap_map = 1;
+}
+
+message RoamInfo {
+  uint32 target_id = 1;
+  bool routing_ready = 2;
+  double total_distance = 3;
+}
+
+// for geely roam
+message RoamCandidatesCheckCMD {
+  repeated uint32 target_id = 1;
+}
+
+message RoamCandidatesCheckCMDRP {
+  repeated RoamInfo roam_info = 1;
 }
 
 message LocalizationCommand {  // external users send commands in
@@ -391,7 +426,7 @@ message LocalizationCommand {  // external users send commands in
     GetMapTargetParkingSpaceCMD get_map_target_parking_space_cmd = 9;
     GetMapCMD get_map_cmd = 10;
     CancelPreMappingCMD cancel_pre_mapping_cmd = 11;
-    DrivingModeChangeCMD driving_mode_change_cmd = 12;
+    DrivingModeChangeCMD driving_mode_change_cmd = 12;                                // deprecated in light map
     ParkingSpaceInfoUpdateCMD parking_space_info_update_cmd = 13;
     MapInfoUpdateCMD map_info_update_cmd = 14;
     GetTargetHavpMapMetaDataCMD get_target_havp_map_meta_data_cmd = 15;
@@ -409,6 +444,9 @@ message LocalizationCommand {  // external users send commands in
     SetStraightLinkSpeedLimitCMD set_straight_link_speed_limit_cmd = 27;
     SetRegionalParkingSpaceCMD set_regional_parking_space_cmd = 28;
     BatchMapsDeleteCMD batch_maps_delete_cmd = 29;
+    CoverMapCMD cover_map_cmd = 30;
+    MapOverlapCheckCMD map_overlap_check_cmd = 31;
+    RoamCandidatesCheckCMD roam_candidates_check_cmd = 32;
   }
 }
 
@@ -428,7 +466,7 @@ message LocalizationResponse {  // external users receive 'LocalizationResponse'
     GetMapTargetParkingSpaceCMDRP get_map_target_parking_space = 10;
     GetMapCMDRP get_map = 11;
     CancelPreMappingCMDRP cancel_pre_mapping = 12;
-    DrivingModeChangeCMDRP driving_mode_change = 13;
+    DrivingModeChangeCMDRP driving_mode_change = 13;                                  // deprecated in light map
     ParkingSpaceInfoUpdateCMDRP parking_space_info_update = 14;
     MapInfoUpdateCMDRP map_info_update = 15;
     GetTargetHavpMapMetaDataCMDRP get_target_havp_map_meta_data = 16;
@@ -446,5 +484,8 @@ message LocalizationResponse {  // external users receive 'LocalizationResponse'
     SetStraightLinkSpeedLimitCMDRP set_straight_link_speed_limit = 28;
     SetRegionalParkingSpaceCMDRP set_regional_parking_space = 29;
     BatchMapsDeleteCMDRP batch_maps_delete = 30;
+    CoverMapCMDRP cover_map = 31;
+    MapOverlapCheckCMDRP map_overlap_check = 32;
+    RoamCandidatesCheckCMDRP roam_candidates_check = 33;
   }
 }

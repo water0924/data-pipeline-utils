@@ -63,6 +63,14 @@ message CrossingDepthInfo {
   optional DistanceInfo distance_to_crossing_end = 2;
 }
 
+message NavigationInfo {
+  optional string request_id = 1;
+  optional int32 response_id = 2;
+  optional uint64 amap_path_id = 3;
+  
+  optional double distance_to_destination_meters = 4;
+}
+
 message SDLevelMapInfo {
   enum SdInfoType {
     NAVIGATION = 0;
@@ -84,6 +92,8 @@ message SDLevelMapInfo {
 
   // Next crossing depth info
   optional CrossingDepthInfo next_crossing_depth_info = 5;
+
+  optional NavigationInfo navigation_info = 6;
 }
 
 message DeeprouteHDLevelMapInfo {

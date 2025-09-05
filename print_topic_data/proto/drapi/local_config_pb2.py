@@ -16,7 +16,7 @@ _sym_db = _symbol_database.Default()
 from proto.drapi import navigation_map_pb2 as drapi_dot_navigation__map__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x18\x64rapi/local_config.proto\x12\x0e\x64r.localconfig\x1a\x1a\x64rapi/navigation_map.proto\"\xdf\x16\n\nUserConfig\x12\x33\n\rdriving_style\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.DrivingStyle\x12\x31\n\x0b\x66\x61st_active\x18\x02 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12=\n\x12\x61\x63\x63\x65leration_style\x18\x14 \x01(\x0e\x32!.dr.localconfig.AccelerationStyle\x12\x35\n\x0fpure_model_path\x18\x15 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x36\n\x10pure_model_speed\x18\x16 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12:\n\x14ilqr_lon_safety_cost\x18\x17 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12:\n\x14ilqr_lat_safety_cost\x18\x18 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x36\n\x10wait_area_enable\x18\x19 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12>\n\x18obstacle_collision_check\x18\x1a \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x42\n\x1cno_front_vehicle_speed_check\x18\x1b \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x36\n\x10wrong_lane_check\x18\x1c \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x42\n\x1ctraffic_light_abnormal_check\x18\x1d \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x38\n\x12will_out_odd_check\x18\x1e \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12/\n\tdms_check\x18\x1f \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12<\n\x16vehicle_lat_dist_check\x18  \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12>\n\x18vehicle_angle_diff_check\x18! \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12>\n\x18speed_switch_fault_check\x18\" \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x41\n\x1btime_gap_switch_fault_check\x18# \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12;\n\x15\x65mergency_light_check\x18$ \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12/\n\tota_check\x18% \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x36\n\x10\x65sa_active_check\x18& \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x36\n\x10\x61\x65\x62_active_check\x18\' \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12<\n\x16\x63ruise_cancel_exit_all\x18( \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12/\n\tdemo_mode\x18) \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12=\n\x17traffic_light_attention\x18* \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x32\n\x0c\x63\x61mera_check\x18+ \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x35\n\x0flane_miss_latem\x18, \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x37\n\x11lane_narrow_latem\x18- \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x46\n turnarround_roundabout_downgrade\x18. \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12=\n\x17\x66orce_lane_change_check\x18/ \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x35\n\x0fsnowy_day_check\x18\x30 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12-\n\nacc_config\x18\x33 \x01(\x0b\x32\x19.dr.localconfig.ACCConfig\x12-\n\nica_config\x18\x34 \x01(\x0b\x32\x19.dr.localconfig.ICAConfig\x12-\n\nnca_config\x18\x35 \x01(\x0b\x32\x19.dr.localconfig.NCAConfig\x12-\n\navm_config\x18\x36 \x01(\x0b\x32\x19.dr.localconfig.AVMConfig\x12-\n\nlas_config\x18\x37 \x01(\x0b\x32\x19.dr.localconfig.LASConfig\x12-\n\ntjp_config\x18\x38 \x01(\x0b\x32\x19.dr.localconfig.TJPConfig\x12-\n\napa_config\x18\x39 \x01(\x0b\x32\x19.dr.localconfig.APAConfig\x12-\n\nrpa_config\x18: \x01(\x0b\x32\x19.dr.localconfig.RPAConfig\x12-\n\nhut_config\x18; \x01(\x0b\x32\x19.dr.localconfig.HUTConfig\x12-\n\ne2e_config\x18< \x01(\x0b\x32\x19.dr.localconfig.E2EConfig\x12=\n\x17\x62rake_light_fault_check\x18\x64 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x34\n\x0eip_error_check\x18\x65 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x35\n\x0fvcu_error_check\x18\x66 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x39\n\x13vcu_com_error_check\x18g \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x39\n\x13\x65ps_lka_fault_check\x18h \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12=\n\x17turn_signal_error_check\x18i \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12:\n\x14privacy_switch_check\x18j \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12;\n\x15gps_auth_switch_check\x18k \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12=\n\x17map_status_switch_check\x18l \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x42\n\x1cplanning_failed_switch_check\x18m \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"\x82\x02\n\tACCConfig\x12:\n\x14\x65nable_switch_status\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x37\n\x11isl_switch_status\x18\x02 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12<\n\x16tsr_warn_switch_status\x18\x03 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x42\n\x1c\x62rake_detecter_switch_status\x18\x14 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"\x9b\x03\n\tICAConfig\x12:\n\x14\x65nable_switch_status\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x39\n\x13\x61uto_upgrade_status\x18\x02 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12=\n\x17pole_lane_change_switch\x18\x03 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x30\n\nalc_switch\x18\x04 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12:\n\x11lane_change_snvty\x18\x05 \x01(\x0e\x32\x1f.dr.localconfig.LaneChangeSnvty\x12\x33\n\rdetour_switch\x18\x06 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x35\n\x0fhands_on_switch\x18\x14 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"\xb5\x03\n\tNCAConfig\x12:\n\x14\x65nable_switch_status\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12>\n\x13speed_offset_config\x18\x02 \x01(\x0b\x32!.dr.localconfig.SpeedOffsetConfig\x12@\n\x1a\x65xceed_speed_limit_warning\x18\x03 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x37\n\x0fnavigation_mode\x18\x04 \x01(\x0e\x32\x1e.dr.localconfig.NavigationMode\x12\x39\n\x10handsoff_timeset\x18\x05 \x01(\x0e\x32\x1f.dr.localconfig.HandsOffTimeSet\x12\x44\n\x15odd_type_limit_config\x18\x06 \x01(\x0b\x32%.dr.localconfig.NCAODDTypeLimitConfig\x12\x30\n\nodd_config\x18\x14 \x01(\x0b\x32\x1c.dr.localconfig.NCAODDConfig\"D\n\x0cNCAODDConfig\x12\x34\n\x0eroad_class_set\x18\x01 \x03(\x0e\x32\x1c.dr.navigation_map.RoadClass\"|\n\x11SpeedOffsetConfig\x12\x34\n\x04type\x18\x01 \x01(\x0e\x32&.dr.localconfig.SpeedOffsetConfig.Type\x12\x0e\n\x06offset\x18\x02 \x01(\x05\"!\n\x04Type\x12\t\n\x05\x46IXED\x10\x00\x12\x0e\n\nPERCENTAGE\x10\x01\"\x89\x03\n\tLASConfig\x12\x37\n\nlas_switch\x18\x01 \x01(\x0e\x32#.dr.localconfig.LASConfig.LasSwitch\x12\x37\n\x11gw_warning_switch\x18\x02 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12<\n\x0bmute_config\x18\x03 \x01(\x0e\x32\'.dr.localconfig.LASConfig.MuteKeyConfig\x12<\n\x16pnc_lat_control_switch\x18\x04 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"O\n\tLasSwitch\x12\x12\n\x0eUNKNOWN_SWITCH\x10\x00\x12\r\n\tCLOSE_ALL\x10\x01\x12\x11\n\rONLY_OPEN_LDW\x10\x02\x12\x0c\n\x08OPEN_ALL\x10\x03\"=\n\rMuteKeyConfig\x12\x10\n\x0cUNKNOWN_MUTE\x10\x00\x12\x0c\n\x08MUTE_ALL\x10\x01\x12\x0c\n\x08MUTE_ELK\x10\x02\"\x93\t\n\tAVMConfig\x12\x42\n\x1clow_speed_roation_activation\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x45\n\x1f\x63\x61r_body_transparent_activation\x18\x02 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12J\n\x0b\x61ssist_type\x18\x03 \x01(\x0e\x32\x35.dr.localconfig.AVMConfig.NarrowPathAndObstacleAssist\x12\x44\n\x1epdc_active_avm_only_on_level_4\x18\x04 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12<\n\x12\x61vm_driving_config\x18\x05 \x01(\x0b\x32 .dr.localconfig.AVMDrivingConfig\x12\x33\n\x0c\x65nable_debug\x18\xe8\x07 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x44\n\x1donly_show_ultrasonic_obstacle\x18\xe9\x07 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x35\n\x0epdc_bev_enable\x18\xea\x07 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12=\n\x0bspeed_limit\x18\xeb\x07 \x01(\x0e\x32\'.dr.localconfig.AVMConfig.AvmSpeedLimit\x12=\n\ravm_turn_mode\x18\xec\x07 \x01(\x0e\x32%.dr.localconfig.AVMConfig.AvmTurnMode\x12\x34\n\rfpas_auto_mod\x18\xed\x07 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12<\n\x15open_visualizer_image\x18\xee\x07 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x36\n\x0fwheel_view_mode\x18\xef\x07 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x37\n\rwheel_vie_sts\x18\xf0\x07 \x01(\x0e\x32\x1f.dr.localconfig.WheelVieStsType\"X\n\x1bNarrowPathAndObstacleAssist\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07\x44ISABLE\x10\x01\x12\n\n\x06NEARLY\x10\x02\x12\n\n\x06MEDIUM\x10\x03\x12\x07\n\x03\x46\x41R\x10\x04\"T\n\rAvmSpeedLimit\x12\x17\n\x13SPEED_LIMIT_UNKNOWN\x10\x00\x12\x14\n\x10SPEED_LIMIT_15KM\x10\x01\x12\x14\n\x10SPEED_LIMIT_30KM\x10\x02\"f\n\x0b\x41vmTurnMode\x12\x15\n\x11TURN_MODE_UNKNOWN\x10\x00\x12\x11\n\rTURN_MODE_OFF\x10\x01\x12\x12\n\x0eTURN_MODE_CARD\x10\x02\x12\x19\n\x15TURN_MODE_FULL_SCREEN\x10\x03\"\xba\x01\n\x10\x41VMDrivingConfig\x12\x38\n\x05style\x18\x01 \x01(\x0e\x32).dr.localconfig.AVMDrivingConfig.AVMStyle\x12\x34\n\x0eturning_enable\x18\x02 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"6\n\x08\x41VMStyle\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0f\n\x0b\x46ULL_SCREEN\x10\x01\x12\x0c\n\x08\x46LOATING\x10\x02\"G\n\tTJPConfig\x12:\n\x14\x65nable_switch_status\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"\x9d\x02\n\tAPAConfig\x12\x32\n\x0c\x66\x61st_parking\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x30\n\nenable_apa\x18\x02 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x32\n\x0c\x61uto_parkout\x18\x03 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x44\n\x11\x61pa_parking_speed\x18\x04 \x01(\x0e\x32).dr.localconfig.APAConfig.APAParkingSpeed\"0\n\x0f\x41PAParkingSpeed\x12\x07\n\x03Low\x10\x00\x12\n\n\x06Medium\x10\x01\x12\x08\n\x04High\x10\x02\"G\n\tRPAConfig\x12:\n\x14ignore_side_obstacle\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"o\n\tHUTConfig\x12\x30\n\nenable_hut\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x30\n\nenable_viz\x18\x02 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"=\n\tE2EConfig\x12\x30\n\nenable_e2e\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"D\n\tCMSConfig\x12\x37\n\x11side_bsd_disp_sts\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"\xf6\x01\n\x15NCAODDTypeLimitConfig\x12\x37\n\x11\x66ixed_odd_passive\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12;\n\x15temporary_odd_passive\x18\x02 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x38\n\x12\x64ynamic_static_odd\x18\x03 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12-\n\x07roi_odd\x18\x04 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus*H\n\x0cSwitchStatus\x12\x19\n\x15SWITCH_STATUS_UNKNOWN\x10\x00\x12\r\n\tSWITCH_ON\x10\x01\x12\x0e\n\nSWITCH_OFF\x10\x02*T\n\x0c\x44rivingStyle\x12\x10\n\x0cUNKNOWN_MODE\x10\x00\x12\x0f\n\x0b\x43\x41SUAL_MODE\x10\x01\x12\x11\n\rSTANDARD_MODE\x10\x02\x12\x0e\n\nSPORT_MODE\x10\x03*\x84\x01\n\x11\x41\x63\x63\x65lerationStyle\x12\x18\n\x14UNKNOWN_ACCELERATION\x10\x00\x12\x19\n\x15STANDARD_ACCELERATION\x10\x01\x12\x1d\n\x19\x43ONSERVATIVE_ACCELERATION\x10\x02\x12\x1b\n\x17\x41GGRESSIVE_ACCELERATION\x10\x03*K\n\x0eNavigationMode\x12\x15\n\x11UNKNOWN_NAVI_MODE\x10\x00\x12\x0f\n\x0b\x44R_NAVIMODE\x10\x01\x12\x11\n\rAMAP_NAVIMODE\x10\x02*g\n\x0fLaneChangeSnvty\x12\x11\n\rSNVTY_UNKNOWN\x10\x00\x12\x16\n\x12NORMAL_SENSITIVITY\x10\x01\x12\x14\n\x10HIGH_SENSITIVITY\x10\x02\x12\x13\n\x0fLOW_SENSITIVITY\x10\x03*O\n\x0fHandsOffTimeSet\x12\x14\n\x10HANDSOFF_UNKNOWN\x10\x00\x12\x13\n\x0fHANDSOFF_NORMAL\x10\x01\x12\x11\n\rHANDSOFF_LONG\x10\x02*\x8b\x01\n\x0fWheelVieStsType\x12\x1d\n\x19WHEELVIESTS_INITIAL_VALUE\x10\x00\x12\x1e\n\x1aWHEELVIESTS_TWO_WHEEL_MODE\x10\x01\x12\x1f\n\x1bWHEELVIESTS_FOUR_WHEEL_MODE\x10\x02\x12\x18\n\x14WHEELVIESTS_REVERSED\x10\x03\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x18\x64rapi/local_config.proto\x12\x0e\x64r.localconfig\x1a\x1a\x64rapi/navigation_map.proto\"\x80\x19\n\nUserConfig\x12\x33\n\rdriving_style\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.DrivingStyle\x12\x31\n\x0b\x66\x61st_active\x18\x02 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x42\n\x1ctruck_defensive_deceleration\x18\x10 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12)\n\x03vla\x18\x11 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12;\n\x15ignore_toll_downgrade\x18\x12 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x37\n\x11in_crossing_check\x18\x13 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12=\n\x12\x61\x63\x63\x65leration_style\x18\x14 \x01(\x0e\x32!.dr.localconfig.AccelerationStyle\x12\x35\n\x0fpure_model_path\x18\x15 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x36\n\x10pure_model_speed\x18\x16 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12:\n\x14ilqr_lon_safety_cost\x18\x17 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12:\n\x14ilqr_lat_safety_cost\x18\x18 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x36\n\x10wait_area_enable\x18\x19 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12>\n\x18obstacle_collision_check\x18\x1a \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x42\n\x1cno_front_vehicle_speed_check\x18\x1b \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x36\n\x10wrong_lane_check\x18\x1c \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x42\n\x1ctraffic_light_abnormal_check\x18\x1d \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x38\n\x12will_out_odd_check\x18\x1e \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12/\n\tdms_check\x18\x1f \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12<\n\x16vehicle_lat_dist_check\x18  \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12>\n\x18vehicle_angle_diff_check\x18! \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12>\n\x18speed_switch_fault_check\x18\" \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x41\n\x1btime_gap_switch_fault_check\x18# \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12;\n\x15\x65mergency_light_check\x18$ \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12/\n\tota_check\x18% \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x36\n\x10\x65sa_active_check\x18& \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x36\n\x10\x61\x65\x62_active_check\x18\' \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12<\n\x16\x63ruise_cancel_exit_all\x18( \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12/\n\tdemo_mode\x18) \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12=\n\x17traffic_light_attention\x18* \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x32\n\x0c\x63\x61mera_check\x18+ \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x35\n\x0flane_miss_latem\x18, \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x37\n\x11lane_narrow_latem\x18- \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x46\n turnarround_roundabout_downgrade\x18. \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12=\n\x17\x66orce_lane_change_check\x18/ \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x35\n\x0fsnowy_day_check\x18\x30 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12-\n\nacc_config\x18\x33 \x01(\x0b\x32\x19.dr.localconfig.ACCConfig\x12-\n\nica_config\x18\x34 \x01(\x0b\x32\x19.dr.localconfig.ICAConfig\x12-\n\nnca_config\x18\x35 \x01(\x0b\x32\x19.dr.localconfig.NCAConfig\x12-\n\navm_config\x18\x36 \x01(\x0b\x32\x19.dr.localconfig.AVMConfig\x12-\n\nlas_config\x18\x37 \x01(\x0b\x32\x19.dr.localconfig.LASConfig\x12-\n\ntjp_config\x18\x38 \x01(\x0b\x32\x19.dr.localconfig.TJPConfig\x12-\n\napa_config\x18\x39 \x01(\x0b\x32\x19.dr.localconfig.APAConfig\x12-\n\nrpa_config\x18: \x01(\x0b\x32\x19.dr.localconfig.RPAConfig\x12-\n\nhut_config\x18; \x01(\x0b\x32\x19.dr.localconfig.HUTConfig\x12-\n\ne2e_config\x18< \x01(\x0b\x32\x19.dr.localconfig.E2EConfig\x12:\n\nlmp_config\x18= \x01(\x0b\x32&.dr.localconfig.IntellgntAsscLmpConfig\x12=\n\x17\x62rake_light_fault_check\x18\x64 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x34\n\x0eip_error_check\x18\x65 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x35\n\x0fvcu_error_check\x18\x66 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x39\n\x13vcu_com_error_check\x18g \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x39\n\x13\x65ps_lka_fault_check\x18h \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12=\n\x17turn_signal_error_check\x18i \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12:\n\x14privacy_switch_check\x18j \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12;\n\x15gps_auth_switch_check\x18k \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12=\n\x17map_status_switch_check\x18l \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x42\n\x1cplanning_failed_switch_check\x18m \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"\x82\x02\n\tACCConfig\x12:\n\x14\x65nable_switch_status\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x37\n\x11isl_switch_status\x18\x02 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12<\n\x16tsr_warn_switch_status\x18\x03 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x42\n\x1c\x62rake_detecter_switch_status\x18\x14 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"\x9b\x03\n\tICAConfig\x12:\n\x14\x65nable_switch_status\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x39\n\x13\x61uto_upgrade_status\x18\x02 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12=\n\x17pole_lane_change_switch\x18\x03 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x30\n\nalc_switch\x18\x04 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12:\n\x11lane_change_snvty\x18\x05 \x01(\x0e\x32\x1f.dr.localconfig.LaneChangeSnvty\x12\x33\n\rdetour_switch\x18\x06 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x35\n\x0fhands_on_switch\x18\x14 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"\xb5\x03\n\tNCAConfig\x12:\n\x14\x65nable_switch_status\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12>\n\x13speed_offset_config\x18\x02 \x01(\x0b\x32!.dr.localconfig.SpeedOffsetConfig\x12@\n\x1a\x65xceed_speed_limit_warning\x18\x03 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x37\n\x0fnavigation_mode\x18\x04 \x01(\x0e\x32\x1e.dr.localconfig.NavigationMode\x12\x39\n\x10handsoff_timeset\x18\x05 \x01(\x0e\x32\x1f.dr.localconfig.HandsOffTimeSet\x12\x44\n\x15odd_type_limit_config\x18\x06 \x01(\x0b\x32%.dr.localconfig.NCAODDTypeLimitConfig\x12\x30\n\nodd_config\x18\x14 \x01(\x0b\x32\x1c.dr.localconfig.NCAODDConfig\"D\n\x0cNCAODDConfig\x12\x34\n\x0eroad_class_set\x18\x01 \x03(\x0e\x32\x1c.dr.navigation_map.RoadClass\"|\n\x11SpeedOffsetConfig\x12\x34\n\x04type\x18\x01 \x01(\x0e\x32&.dr.localconfig.SpeedOffsetConfig.Type\x12\x0e\n\x06offset\x18\x02 \x01(\x05\"!\n\x04Type\x12\t\n\x05\x46IXED\x10\x00\x12\x0e\n\nPERCENTAGE\x10\x01\"\x89\x03\n\tLASConfig\x12\x37\n\nlas_switch\x18\x01 \x01(\x0e\x32#.dr.localconfig.LASConfig.LasSwitch\x12\x37\n\x11gw_warning_switch\x18\x02 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12<\n\x0bmute_config\x18\x03 \x01(\x0e\x32\'.dr.localconfig.LASConfig.MuteKeyConfig\x12<\n\x16pnc_lat_control_switch\x18\x04 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"O\n\tLasSwitch\x12\x12\n\x0eUNKNOWN_SWITCH\x10\x00\x12\r\n\tCLOSE_ALL\x10\x01\x12\x11\n\rONLY_OPEN_LDW\x10\x02\x12\x0c\n\x08OPEN_ALL\x10\x03\"=\n\rMuteKeyConfig\x12\x10\n\x0cUNKNOWN_MUTE\x10\x00\x12\x0c\n\x08MUTE_ALL\x10\x01\x12\x0c\n\x08MUTE_ELK\x10\x02\"\x93\t\n\tAVMConfig\x12\x42\n\x1clow_speed_roation_activation\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x45\n\x1f\x63\x61r_body_transparent_activation\x18\x02 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12J\n\x0b\x61ssist_type\x18\x03 \x01(\x0e\x32\x35.dr.localconfig.AVMConfig.NarrowPathAndObstacleAssist\x12\x44\n\x1epdc_active_avm_only_on_level_4\x18\x04 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12<\n\x12\x61vm_driving_config\x18\x05 \x01(\x0b\x32 .dr.localconfig.AVMDrivingConfig\x12\x33\n\x0c\x65nable_debug\x18\xe8\x07 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x44\n\x1donly_show_ultrasonic_obstacle\x18\xe9\x07 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x35\n\x0epdc_bev_enable\x18\xea\x07 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12=\n\x0bspeed_limit\x18\xeb\x07 \x01(\x0e\x32\'.dr.localconfig.AVMConfig.AvmSpeedLimit\x12=\n\ravm_turn_mode\x18\xec\x07 \x01(\x0e\x32%.dr.localconfig.AVMConfig.AvmTurnMode\x12\x34\n\rfpas_auto_mod\x18\xed\x07 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12<\n\x15open_visualizer_image\x18\xee\x07 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x36\n\x0fwheel_view_mode\x18\xef\x07 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x37\n\rwheel_vie_sts\x18\xf0\x07 \x01(\x0e\x32\x1f.dr.localconfig.WheelVieStsType\"X\n\x1bNarrowPathAndObstacleAssist\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07\x44ISABLE\x10\x01\x12\n\n\x06NEARLY\x10\x02\x12\n\n\x06MEDIUM\x10\x03\x12\x07\n\x03\x46\x41R\x10\x04\"T\n\rAvmSpeedLimit\x12\x17\n\x13SPEED_LIMIT_UNKNOWN\x10\x00\x12\x14\n\x10SPEED_LIMIT_15KM\x10\x01\x12\x14\n\x10SPEED_LIMIT_30KM\x10\x02\"f\n\x0b\x41vmTurnMode\x12\x15\n\x11TURN_MODE_UNKNOWN\x10\x00\x12\x11\n\rTURN_MODE_OFF\x10\x01\x12\x12\n\x0eTURN_MODE_CARD\x10\x02\x12\x19\n\x15TURN_MODE_FULL_SCREEN\x10\x03\"\xba\x01\n\x10\x41VMDrivingConfig\x12\x38\n\x05style\x18\x01 \x01(\x0e\x32).dr.localconfig.AVMDrivingConfig.AVMStyle\x12\x34\n\x0eturning_enable\x18\x02 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"6\n\x08\x41VMStyle\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0f\n\x0b\x46ULL_SCREEN\x10\x01\x12\x0c\n\x08\x46LOATING\x10\x02\"G\n\tTJPConfig\x12:\n\x14\x65nable_switch_status\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"\x9d\x02\n\tAPAConfig\x12\x32\n\x0c\x66\x61st_parking\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x30\n\nenable_apa\x18\x02 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x32\n\x0c\x61uto_parkout\x18\x03 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x44\n\x11\x61pa_parking_speed\x18\x04 \x01(\x0e\x32).dr.localconfig.APAConfig.APAParkingSpeed\"0\n\x0f\x41PAParkingSpeed\x12\x07\n\x03Low\x10\x00\x12\n\n\x06Medium\x10\x01\x12\x08\n\x04High\x10\x02\"G\n\tRPAConfig\x12:\n\x14ignore_side_obstacle\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"o\n\tHUTConfig\x12\x30\n\nenable_hut\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x30\n\nenable_viz\x18\x02 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"=\n\tE2EConfig\x12\x30\n\nenable_e2e\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"D\n\tCMSConfig\x12\x37\n\x11side_bsd_disp_sts\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"\xf6\x01\n\x15NCAODDTypeLimitConfig\x12\x37\n\x11\x66ixed_odd_passive\x18\x01 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12;\n\x15temporary_odd_passive\x18\x02 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12\x38\n\x12\x64ynamic_static_odd\x18\x03 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\x12-\n\x07roi_odd\x18\x04 \x01(\x0e\x32\x1c.dr.localconfig.SwitchStatus\"]\n\x16IntellgntAsscLmpConfig\x12\x43\n\x16intellgnt_assc_lmp_ena\x18\x01 \x01(\x0e\x32#.dr.localconfig.IntellgntAsscLmpEna*H\n\x0cSwitchStatus\x12\x19\n\x15SWITCH_STATUS_UNKNOWN\x10\x00\x12\r\n\tSWITCH_ON\x10\x01\x12\x0e\n\nSWITCH_OFF\x10\x02*T\n\x0c\x44rivingStyle\x12\x10\n\x0cUNKNOWN_MODE\x10\x00\x12\x0f\n\x0b\x43\x41SUAL_MODE\x10\x01\x12\x11\n\rSTANDARD_MODE\x10\x02\x12\x0e\n\nSPORT_MODE\x10\x03*\x84\x01\n\x11\x41\x63\x63\x65lerationStyle\x12\x18\n\x14UNKNOWN_ACCELERATION\x10\x00\x12\x19\n\x15STANDARD_ACCELERATION\x10\x01\x12\x1d\n\x19\x43ONSERVATIVE_ACCELERATION\x10\x02\x12\x1b\n\x17\x41GGRESSIVE_ACCELERATION\x10\x03*K\n\x0eNavigationMode\x12\x15\n\x11UNKNOWN_NAVI_MODE\x10\x00\x12\x0f\n\x0b\x44R_NAVIMODE\x10\x01\x12\x11\n\rAMAP_NAVIMODE\x10\x02*g\n\x0fLaneChangeSnvty\x12\x11\n\rSNVTY_UNKNOWN\x10\x00\x12\x16\n\x12NORMAL_SENSITIVITY\x10\x01\x12\x14\n\x10HIGH_SENSITIVITY\x10\x02\x12\x13\n\x0fLOW_SENSITIVITY\x10\x03*O\n\x0fHandsOffTimeSet\x12\x14\n\x10HANDSOFF_UNKNOWN\x10\x00\x12\x13\n\x0fHANDSOFF_NORMAL\x10\x01\x12\x11\n\rHANDSOFF_LONG\x10\x02*\x8b\x01\n\x0fWheelVieStsType\x12\x1d\n\x19WHEELVIESTS_INITIAL_VALUE\x10\x00\x12\x1e\n\x1aWHEELVIESTS_TWO_WHEEL_MODE\x10\x01\x12\x1f\n\x1bWHEELVIESTS_FOUR_WHEEL_MODE\x10\x02\x12\x18\n\x14WHEELVIESTS_REVERSED\x10\x03*\xa7\x01\n\x13IntellgntAsscLmpEna\x12%\n!INTELLGNTASSCLMPENA_INITIAL_VALUE\x10\x00\x12\x1b\n\x17INTELLGNTASSCLMPENA_OFF\x10\x01\x12#\n\x1fINTELLGNTASSCLMPENA_FULL_BRIGHT\x10\x02\x12\'\n#INTELLGNTASSCLMPENA_OLNY_PARKING_ON\x10\x03\x62\x06proto3')
 
 _SWITCHSTATUS = DESCRIPTOR.enum_types_by_name['SwitchStatus']
 SwitchStatus = enum_type_wrapper.EnumTypeWrapper(_SWITCHSTATUS)
@@ -32,6 +32,8 @@ _HANDSOFFTIMESET = DESCRIPTOR.enum_types_by_name['HandsOffTimeSet']
 HandsOffTimeSet = enum_type_wrapper.EnumTypeWrapper(_HANDSOFFTIMESET)
 _WHEELVIESTSTYPE = DESCRIPTOR.enum_types_by_name['WheelVieStsType']
 WheelVieStsType = enum_type_wrapper.EnumTypeWrapper(_WHEELVIESTSTYPE)
+_INTELLGNTASSCLMPENA = DESCRIPTOR.enum_types_by_name['IntellgntAsscLmpEna']
+IntellgntAsscLmpEna = enum_type_wrapper.EnumTypeWrapper(_INTELLGNTASSCLMPENA)
 SWITCH_STATUS_UNKNOWN = 0
 SWITCH_ON = 1
 SWITCH_OFF = 2
@@ -57,6 +59,10 @@ WHEELVIESTS_INITIAL_VALUE = 0
 WHEELVIESTS_TWO_WHEEL_MODE = 1
 WHEELVIESTS_FOUR_WHEEL_MODE = 2
 WHEELVIESTS_REVERSED = 3
+INTELLGNTASSCLMPENA_INITIAL_VALUE = 0
+INTELLGNTASSCLMPENA_OFF = 1
+INTELLGNTASSCLMPENA_FULL_BRIGHT = 2
+INTELLGNTASSCLMPENA_OLNY_PARKING_ON = 3
 
 
 _USERCONFIG = DESCRIPTOR.message_types_by_name['UserConfig']
@@ -75,6 +81,7 @@ _HUTCONFIG = DESCRIPTOR.message_types_by_name['HUTConfig']
 _E2ECONFIG = DESCRIPTOR.message_types_by_name['E2EConfig']
 _CMSCONFIG = DESCRIPTOR.message_types_by_name['CMSConfig']
 _NCAODDTYPELIMITCONFIG = DESCRIPTOR.message_types_by_name['NCAODDTypeLimitConfig']
+_INTELLGNTASSCLMPCONFIG = DESCRIPTOR.message_types_by_name['IntellgntAsscLmpConfig']
 _SPEEDOFFSETCONFIG_TYPE = _SPEEDOFFSETCONFIG.enum_types_by_name['Type']
 _LASCONFIG_LASSWITCH = _LASCONFIG.enum_types_by_name['LasSwitch']
 _LASCONFIG_MUTEKEYCONFIG = _LASCONFIG.enum_types_by_name['MuteKeyConfig']
@@ -195,69 +202,80 @@ NCAODDTypeLimitConfig = _reflection.GeneratedProtocolMessageType('NCAODDTypeLimi
   })
 _sym_db.RegisterMessage(NCAODDTypeLimitConfig)
 
+IntellgntAsscLmpConfig = _reflection.GeneratedProtocolMessageType('IntellgntAsscLmpConfig', (_message.Message,), {
+  'DESCRIPTOR' : _INTELLGNTASSCLMPCONFIG,
+  '__module__' : 'drapi.local_config_pb2'
+  # @@protoc_insertion_point(class_scope:dr.localconfig.IntellgntAsscLmpConfig)
+  })
+_sym_db.RegisterMessage(IntellgntAsscLmpConfig)
+
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _SWITCHSTATUS._serialized_start=6985
-  _SWITCHSTATUS._serialized_end=7057
-  _DRIVINGSTYLE._serialized_start=7059
-  _DRIVINGSTYLE._serialized_end=7143
-  _ACCELERATIONSTYLE._serialized_start=7146
-  _ACCELERATIONSTYLE._serialized_end=7278
-  _NAVIGATIONMODE._serialized_start=7280
-  _NAVIGATIONMODE._serialized_end=7355
-  _LANECHANGESNVTY._serialized_start=7357
-  _LANECHANGESNVTY._serialized_end=7460
-  _HANDSOFFTIMESET._serialized_start=7462
-  _HANDSOFFTIMESET._serialized_end=7541
-  _WHEELVIESTSTYPE._serialized_start=7544
-  _WHEELVIESTSTYPE._serialized_end=7683
+  _SWITCHSTATUS._serialized_start=7369
+  _SWITCHSTATUS._serialized_end=7441
+  _DRIVINGSTYLE._serialized_start=7443
+  _DRIVINGSTYLE._serialized_end=7527
+  _ACCELERATIONSTYLE._serialized_start=7530
+  _ACCELERATIONSTYLE._serialized_end=7662
+  _NAVIGATIONMODE._serialized_start=7664
+  _NAVIGATIONMODE._serialized_end=7739
+  _LANECHANGESNVTY._serialized_start=7741
+  _LANECHANGESNVTY._serialized_end=7844
+  _HANDSOFFTIMESET._serialized_start=7846
+  _HANDSOFFTIMESET._serialized_end=7925
+  _WHEELVIESTSTYPE._serialized_start=7928
+  _WHEELVIESTSTYPE._serialized_end=8067
+  _INTELLGNTASSCLMPENA._serialized_start=8070
+  _INTELLGNTASSCLMPENA._serialized_end=8237
   _USERCONFIG._serialized_start=73
-  _USERCONFIG._serialized_end=2984
-  _ACCCONFIG._serialized_start=2987
-  _ACCCONFIG._serialized_end=3245
-  _ICACONFIG._serialized_start=3248
-  _ICACONFIG._serialized_end=3659
-  _NCACONFIG._serialized_start=3662
-  _NCACONFIG._serialized_end=4099
-  _NCAODDCONFIG._serialized_start=4101
-  _NCAODDCONFIG._serialized_end=4169
-  _SPEEDOFFSETCONFIG._serialized_start=4171
-  _SPEEDOFFSETCONFIG._serialized_end=4295
-  _SPEEDOFFSETCONFIG_TYPE._serialized_start=4262
-  _SPEEDOFFSETCONFIG_TYPE._serialized_end=4295
-  _LASCONFIG._serialized_start=4298
-  _LASCONFIG._serialized_end=4691
-  _LASCONFIG_LASSWITCH._serialized_start=4549
-  _LASCONFIG_LASSWITCH._serialized_end=4628
-  _LASCONFIG_MUTEKEYCONFIG._serialized_start=4630
-  _LASCONFIG_MUTEKEYCONFIG._serialized_end=4691
-  _AVMCONFIG._serialized_start=4694
-  _AVMCONFIG._serialized_end=5865
-  _AVMCONFIG_NARROWPATHANDOBSTACLEASSIST._serialized_start=5587
-  _AVMCONFIG_NARROWPATHANDOBSTACLEASSIST._serialized_end=5675
-  _AVMCONFIG_AVMSPEEDLIMIT._serialized_start=5677
-  _AVMCONFIG_AVMSPEEDLIMIT._serialized_end=5761
-  _AVMCONFIG_AVMTURNMODE._serialized_start=5763
-  _AVMCONFIG_AVMTURNMODE._serialized_end=5865
-  _AVMDRIVINGCONFIG._serialized_start=5868
-  _AVMDRIVINGCONFIG._serialized_end=6054
-  _AVMDRIVINGCONFIG_AVMSTYLE._serialized_start=6000
-  _AVMDRIVINGCONFIG_AVMSTYLE._serialized_end=6054
-  _TJPCONFIG._serialized_start=6056
-  _TJPCONFIG._serialized_end=6127
-  _APACONFIG._serialized_start=6130
-  _APACONFIG._serialized_end=6415
-  _APACONFIG_APAPARKINGSPEED._serialized_start=6367
-  _APACONFIG_APAPARKINGSPEED._serialized_end=6415
-  _RPACONFIG._serialized_start=6417
-  _RPACONFIG._serialized_end=6488
-  _HUTCONFIG._serialized_start=6490
-  _HUTCONFIG._serialized_end=6601
-  _E2ECONFIG._serialized_start=6603
-  _E2ECONFIG._serialized_end=6664
-  _CMSCONFIG._serialized_start=6666
-  _CMSCONFIG._serialized_end=6734
-  _NCAODDTYPELIMITCONFIG._serialized_start=6737
-  _NCAODDTYPELIMITCONFIG._serialized_end=6983
+  _USERCONFIG._serialized_end=3273
+  _ACCCONFIG._serialized_start=3276
+  _ACCCONFIG._serialized_end=3534
+  _ICACONFIG._serialized_start=3537
+  _ICACONFIG._serialized_end=3948
+  _NCACONFIG._serialized_start=3951
+  _NCACONFIG._serialized_end=4388
+  _NCAODDCONFIG._serialized_start=4390
+  _NCAODDCONFIG._serialized_end=4458
+  _SPEEDOFFSETCONFIG._serialized_start=4460
+  _SPEEDOFFSETCONFIG._serialized_end=4584
+  _SPEEDOFFSETCONFIG_TYPE._serialized_start=4551
+  _SPEEDOFFSETCONFIG_TYPE._serialized_end=4584
+  _LASCONFIG._serialized_start=4587
+  _LASCONFIG._serialized_end=4980
+  _LASCONFIG_LASSWITCH._serialized_start=4838
+  _LASCONFIG_LASSWITCH._serialized_end=4917
+  _LASCONFIG_MUTEKEYCONFIG._serialized_start=4919
+  _LASCONFIG_MUTEKEYCONFIG._serialized_end=4980
+  _AVMCONFIG._serialized_start=4983
+  _AVMCONFIG._serialized_end=6154
+  _AVMCONFIG_NARROWPATHANDOBSTACLEASSIST._serialized_start=5876
+  _AVMCONFIG_NARROWPATHANDOBSTACLEASSIST._serialized_end=5964
+  _AVMCONFIG_AVMSPEEDLIMIT._serialized_start=5966
+  _AVMCONFIG_AVMSPEEDLIMIT._serialized_end=6050
+  _AVMCONFIG_AVMTURNMODE._serialized_start=6052
+  _AVMCONFIG_AVMTURNMODE._serialized_end=6154
+  _AVMDRIVINGCONFIG._serialized_start=6157
+  _AVMDRIVINGCONFIG._serialized_end=6343
+  _AVMDRIVINGCONFIG_AVMSTYLE._serialized_start=6289
+  _AVMDRIVINGCONFIG_AVMSTYLE._serialized_end=6343
+  _TJPCONFIG._serialized_start=6345
+  _TJPCONFIG._serialized_end=6416
+  _APACONFIG._serialized_start=6419
+  _APACONFIG._serialized_end=6704
+  _APACONFIG_APAPARKINGSPEED._serialized_start=6656
+  _APACONFIG_APAPARKINGSPEED._serialized_end=6704
+  _RPACONFIG._serialized_start=6706
+  _RPACONFIG._serialized_end=6777
+  _HUTCONFIG._serialized_start=6779
+  _HUTCONFIG._serialized_end=6890
+  _E2ECONFIG._serialized_start=6892
+  _E2ECONFIG._serialized_end=6953
+  _CMSCONFIG._serialized_start=6955
+  _CMSCONFIG._serialized_end=7023
+  _NCAODDTYPELIMITCONFIG._serialized_start=7026
+  _NCAODDTYPELIMITCONFIG._serialized_end=7272
+  _INTELLGNTASSCLMPCONFIG._serialized_start=7274
+  _INTELLGNTASSCLMPCONFIG._serialized_end=7367
 # @@protoc_insertion_point(module_scope)

@@ -61,6 +61,12 @@ message Topic {
    @~chinese 通信方式
    **/
   optional ChannelType channel_type = 3;
+
+  /**
+   @~english cache time in seconds
+   @~chinese 缓存时间，单位为秒
+   **/
+  optional uint32 cache_time = 4;
 }
 
 message TopicGroup {

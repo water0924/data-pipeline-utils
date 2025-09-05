@@ -24,10 +24,12 @@ enum LaneType {
   TIDAL_LANE = 9;
 }
 
+// 使用本属性需要小心。默认值是高速路。
 enum RoadClass {
   RC_HIGHWAY = 0;
   RC_URBAN_EXPRESSWAY = 1;
   RC_OTHER = 99;
+  RC_UNKNOWN = 100;
 }
 
 enum LinkUsage {

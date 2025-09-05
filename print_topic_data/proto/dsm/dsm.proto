@@ -92,7 +92,7 @@ enum SubState {
   WAIT_OFF_MODE = 552 [deprecated = true];  // 准下电模式
   /* 600~649 for DATA_COLLECTOR*/
   DATA_COLLECTOR_PARKING = 600;      // 泊车采集
-  DATA_COLLECTOR_FACTORY_CALIB = 601;  // 生产标定采集
+  DATA_COLLECTOR_FACTORY_CALIB = 601 [deprecated = true];  // 生产标定采集
   DATA_COLLECTOR_DRIVING = 602;  // 行车数采
   /* 650 ~ 699 for IMU */
   IMU_CALIBRATION_MODE = 650; // 惯性导航动态标定

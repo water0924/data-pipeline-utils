@@ -16,7 +16,7 @@ _sym_db = _symbol_database.Default()
 from proto.drapi import base_pb2 as drapi_dot_base__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1a\x64rapi/route_planning.proto\x12\x10\x64r.routeplanning\x1a\x10\x64rapi/base.proto\"\xd1\x01\n\x12PlanningTrajectory\x12\x11\n\ttimestamp\x18\x01 \x01(\x04\x12;\n\x10trajectory_point\x18\x02 \x03(\x0b\x32!.dr.routeplanning.TrajectoryPoint\x12=\n\x18visual_trajectory_points\x18\x03 \x03(\x0b\x32\x1b.dr.base.Point2DWithHeading\x12,\n\rgear_position\x18\x04 \x01(\x0e\x32\x15.dr.base.GearPosition\"\xc9\x02\n\x14PlanningSemanticInfo\x12@\n\x13lane_change_related\x18\x01 \x01(\x0b\x32#.dr.routeplanning.LaneChangeRelated\x12\x45\n\x15\x64isengagement_warning\x18\x02 \x01(\x0b\x32&.dr.routeplanning.DisengagementWarning\x12\x30\n\x0cnearest_stop\x18\x03 \x01(\x0b\x32\x1a.dr.routeplanning.StopLine\x12\x37\n\x0e\x62roadcast_info\x18\x04 \x01(\x0b\x32\x1f.dr.routeplanning.BroadcastInfo\x12=\n\x11traffic_condition\x18\x05 \x01(\x0e\x32\".dr.routeplanning.TrafficCondition\"\xf0\x01\n\tNudgeInfo\x12\x33\n\x0cnudge_status\x18\x01 \x01(\x0e\x32\x1d.dr.routeplanning.NudgeStatus\x12\x36\n\x0cnudge_reason\x18\x02 \x03(\x0e\x32 .dr.routeplanning.BehaviorReason\x12\x18\n\x10nudge_object_ids\x18\x03 \x03(\x05\x12+\n\x0fnudge_direction\x18\x04 \x01(\x0e\x32\x12.dr.base.Direction\x12/\n\nnudge_type\x18\x05 \x01(\x0e\x32\x1b.dr.routeplanning.NudgeType\"\x92\x02\n\x11LaneChangeRelated\x12\x31\n\x0btarget_lane\x18\x01 \x01(\x0e\x32\x1c.dr.routeplanning.TargetLane\x12\x16\n\x0etarget_lane_id\x18\x02 \x03(\x05\x12\x34\n\x0ftarget_position\x18\x03 \x01(\x0b\x32\x1b.dr.base.Point2DWithHeading\x12<\n\x12lane_change_reason\x18\x04 \x01(\x0e\x32 .dr.routeplanning.BehaviorReason\x12>\n\x12lane_change_status\x18\x05 \x01(\x0e\x32\".dr.routeplanning.LaneChangeStatus\"\xbd\x01\n\x14\x44isengagementWarning\x12\x46\n\x16safety_related_warning\x18\x01 \x01(\x0e\x32&.dr.routeplanning.SafetyRelatedWarning\x12]\n\"human_interference_related_warning\x18\x02 \x01(\x0e\x32\x31.dr.routeplanning.HumanInterferenceRelatedWarning\"d\n\x08StopLine\x12*\n\x05point\x18\x01 \x01(\x0b\x32\x1b.dr.base.Point2DWithHeading\x12,\n\x06reason\x18\x02 \x01(\x0e\x32\x1c.dr.routeplanning.StopReason\"\x7f\n\rBroadcastInfo\x12;\n\x10\x62roadcast_reason\x18\x01 \x01(\x0e\x32!.dr.routeplanning.BroadcastReason\x12\x31\n\x0bstop_reason\x18\x02 \x01(\x0e\x32\x1c.dr.routeplanning.StopReason\"\xb3\x01\n\tPathPoint\x12\t\n\x01x\x18\x01 \x01(\x01\x12\t\n\x01y\x18\x02 \x01(\x01\x12\t\n\x01z\x18\x03 \x01(\x01\x12\r\n\x05theta\x18\x04 \x01(\x01\x12\r\n\x05kappa\x18\x05 \x01(\x01\x12\t\n\x01s\x18\x06 \x01(\x01\x12\x0e\n\x06\x64kappa\x18\x07 \x01(\x01\x12\x0f\n\x07\x64\x64kappa\x18\x08 \x01(\x01\x12\x0f\n\x07lane_id\x18\t \x01(\t\x12\x14\n\x0cx_derivative\x18\n \x01(\x01\x12\x14\n\x0cy_derivative\x18\x0b \x01(\x01\"\x8a\x01\n\x0fTrajectoryPoint\x12/\n\npath_point\x18\x01 \x01(\x0b\x32\x1b.dr.routeplanning.PathPoint\x12\t\n\x01v\x18\x02 \x01(\x01\x12\t\n\x01\x61\x18\x03 \x01(\x01\x12\x15\n\rrelative_time\x18\x04 \x01(\x01\x12\n\n\x02\x64\x61\x18\x05 \x01(\x01\x12\r\n\x05steer\x18\x06 \x01(\x01*^\n\x10TrafficCondition\x12\x15\n\x11\x43ONDITION_UNKNOWN\x10\x00\x12\t\n\x05LIGHT\x10\x01\x12\n\n\x06MEDIUM\x10\x02\x12\t\n\x05HEAVY\x10\x03\x12\x08\n\x04SLOW\x10\x04\x12\x07\n\x03JAM\x10\x05*W\n\x0f\x42roadcastReason\x12\x1c\n\x18\x42ROADCAST_REASON_UNKNOWN\x10\x00\x12\x17\n\x13\x44\x41NGER_FRONT_OBJECT\x10\x01\x12\r\n\tCROSSWALK\x10\x02*p\n\x14SafetyRelatedWarning\x12\x15\n\x11NO_SAFETY_WARNING\x10\x00\x12\x13\n\x0fPLANNING_FAILED\x10\x01\x12\x16\n\x12INVALID_TRAJECTORY\x10\x02\x12\x14\n\x10PLANNING_BLOCKED\x10\x03*g\n\x1fHumanInterferenceRelatedWarning\x12\x1b\n\x17NO_INTERFERENCE_WARNING\x10\x00\x12\x10\n\x0cLONGITUDINAL\x10\x01\x12\x0b\n\x07LATERAL\x10\x02\x12\x08\n\x04\x42OTH\x10\x03*-\n\nTargetLane\x12\n\n\x06MIDDLE\x10\x00\x12\x08\n\x04LEFT\x10\x01\x12\t\n\x05RIGHT\x10\x02*A\n\x0bNudgeStatus\x12\x11\n\rNUDGE_UNKNOWN\x10\x00\x12\x0e\n\nNUDGE_KEEP\x10\x01\x12\x0f\n\x0bNUDGE_NUDGE\x10\x02*@\n\tNudgeType\x12\x15\n\x11NUDGETYPE_UNKNOWN\x10\x00\x12\x0b\n\x07IN_LANE\x10\x01\x12\x0f\n\x0bOUT_OF_LANE\x10\x02*\xb4\x05\n\x0e\x42\x65haviorReason\x12\x19\n\x15\x43HANGE_REASON_UNKNOWN\x10\x00\x12\x0b\n\x07ROUTING\x10\x65\x12\t\n\x05MERGE\x10\x66\x12\x0f\n\x0bSLOW_OBJECT\x10g\x12\x0f\n\x0b\x46\x41STER_LANE\x10h\x12\x0f\n\x0bPARKED_CARS\x10i\x12\x13\n\x0f\x42REAK_DOWN_CARS\x10j\x12\x15\n\x11\x43ONSTRUCTION_ZONE\x10k\x12\x16\n\x12UNMOVABLE_OBSTACLE\x10l\x12\x08\n\x04POLE\x10m\x12\x10\n\x0c\x44RIVER_VIOCE\x10n\x12\x10\n\x0cTRAFFIC_CONE\x10o\x12\x16\n\x12REAR_CAR_TOO_CLOSE\x10p\x12\x1d\n\x19SURROUNDING_CAR_TOO_CLOSE\x10q\x12\x1d\n\x19NO_LANE_CHANGE_TRAJECTORY\x10r\x12\x15\n\x11\x45XCESSIVE_BRAKING\x10s\x12\x17\n\x13ILC_HUMAN_CANCELLED\x10t\x12\x0b\n\x07NO_ROOM\x10u\x12\x10\n\x0cNONCROSSABLE\x10v\x12\x0f\n\x0bILC_TIMEOUT\x10w\x12\x11\n\rHEAVY_TRAFFIC\x10x\x12\x17\n\x13\x42LIND_SPOT_OCCUPIED\x10y\x12\x17\n\x13\x42\x41\x44_LANE_CHANGE_POS\x10z\x12\x10\n\x0bHUMAN_INPUT\x10\x8c\x01\x12\x0f\n\nWRONG_LANE\x10\x8d\x01\x12\x11\n\x0cHIGHWAY_LANE\x10\x8e\x01\x12\x12\n\rMERGE_IN_LANE\x10\x8f\x01\x12\x13\n\x0eMERGE_OUT_LANE\x10\x90\x01\x12\x13\n\x0ePARALLEL_TRUCK\x10\x91\x01\x12\x1c\n\x17MODEL_REFLINE_INTENTION\x10\x92\x01\x12\x15\n\x10\x41VOID_MERGE_LANE\x10\x93\x01\x12\x12\n\rSTATIC_OBJECT\x10\xc8\x01\x12\x12\n\rLARGE_VEHICLE\x10\xc9\x01*\xd1\x01\n\x10LaneChangeStatus\x12\x12\n\x0eNO_LANE_CHANGE\x10\x00\x12\n\n\x06\x44URING\x10\x01\x12\x0b\n\x07SUCCESS\x10\x02\x12\x08\n\x04\x46\x41IL\x10\x03\x12\x08\n\x04WAIT\x10\x04\x12\x13\n\x0f\x42OX_ON_BOUNDARY\x10\x05\x12\x0f\n\x0b\x42OX_IN_LANE\x10\x06\x12\x16\n\x12LANE_CHANGE_BUFFER\x10\x07\x12\x0e\n\nRECOVERING\x10\x08\x12\x18\n\x14\x46RONT_CENTER_CROSSED\x10\t\x12\x14\n\x10LANE_CHANGE_HOLD\x10\n*\xca\x01\n\nStopReason\x12\x17\n\x13STOP_REASON_UNKNOWN\x10\x00\x12\x0f\n\x0b\x44\x45STINATION\x10\x01\x12\x0b\n\x07VEHICLE\x10\x02\x12\x0e\n\nPEDESTRIAN\x10\x03\x12\x0c\n\x08OBSTACLE\x10\x04\x12\x0b\n\x07PARKING\x10\x05\x12\x11\n\rTRAFFIC_LIGHT\x10\x06\x12\r\n\tSTOP_SIGN\x10\x07\x12\x0e\n\nYIELD_SIGN\x10\x08\x12\x0e\n\nCLEAR_ZONE\x10\t\x12\x0e\n\nCROSS_WALK\x10\n\x12\x08\n\x04TEST\x10\x0b\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1a\x64rapi/route_planning.proto\x12\x10\x64r.routeplanning\x1a\x10\x64rapi/base.proto\"\xd1\x01\n\x12PlanningTrajectory\x12\x11\n\ttimestamp\x18\x01 \x01(\x04\x12;\n\x10trajectory_point\x18\x02 \x03(\x0b\x32!.dr.routeplanning.TrajectoryPoint\x12=\n\x18visual_trajectory_points\x18\x03 \x03(\x0b\x32\x1b.dr.base.Point2DWithHeading\x12,\n\rgear_position\x18\x04 \x01(\x0e\x32\x15.dr.base.GearPosition\"\xc9\x02\n\x14PlanningSemanticInfo\x12@\n\x13lane_change_related\x18\x01 \x01(\x0b\x32#.dr.routeplanning.LaneChangeRelated\x12\x45\n\x15\x64isengagement_warning\x18\x02 \x01(\x0b\x32&.dr.routeplanning.DisengagementWarning\x12\x30\n\x0cnearest_stop\x18\x03 \x01(\x0b\x32\x1a.dr.routeplanning.StopLine\x12\x37\n\x0e\x62roadcast_info\x18\x04 \x01(\x0b\x32\x1f.dr.routeplanning.BroadcastInfo\x12=\n\x11traffic_condition\x18\x05 \x01(\x0e\x32\".dr.routeplanning.TrafficCondition\"\xf0\x01\n\tNudgeInfo\x12\x33\n\x0cnudge_status\x18\x01 \x01(\x0e\x32\x1d.dr.routeplanning.NudgeStatus\x12\x36\n\x0cnudge_reason\x18\x02 \x03(\x0e\x32 .dr.routeplanning.BehaviorReason\x12\x18\n\x10nudge_object_ids\x18\x03 \x03(\x05\x12+\n\x0fnudge_direction\x18\x04 \x01(\x0e\x32\x12.dr.base.Direction\x12/\n\nnudge_type\x18\x05 \x01(\x0e\x32\x1b.dr.routeplanning.NudgeType\"\x92\x02\n\x11LaneChangeRelated\x12\x31\n\x0btarget_lane\x18\x01 \x01(\x0e\x32\x1c.dr.routeplanning.TargetLane\x12\x16\n\x0etarget_lane_id\x18\x02 \x03(\x05\x12\x34\n\x0ftarget_position\x18\x03 \x01(\x0b\x32\x1b.dr.base.Point2DWithHeading\x12<\n\x12lane_change_reason\x18\x04 \x01(\x0e\x32 .dr.routeplanning.BehaviorReason\x12>\n\x12lane_change_status\x18\x05 \x01(\x0e\x32\".dr.routeplanning.LaneChangeStatus\"\xac\x01\n\nVLARelated\x12/\n\nvla_status\x18\x01 \x01(\x0e\x32\x1b.dr.routeplanning.VLAStatus\x12<\n\x12vla_failure_reason\x18\x02 \x01(\x0e\x32 .dr.routeplanning.BehaviorReason\x12/\n\nvla_action\x18\x03 \x01(\x0e\x32\x1b.dr.routeplanning.VLAAction\"\xbd\x01\n\x14\x44isengagementWarning\x12\x46\n\x16safety_related_warning\x18\x01 \x01(\x0e\x32&.dr.routeplanning.SafetyRelatedWarning\x12]\n\"human_interference_related_warning\x18\x02 \x01(\x0e\x32\x31.dr.routeplanning.HumanInterferenceRelatedWarning\"d\n\x08StopLine\x12*\n\x05point\x18\x01 \x01(\x0b\x32\x1b.dr.base.Point2DWithHeading\x12,\n\x06reason\x18\x02 \x01(\x0e\x32\x1c.dr.routeplanning.StopReason\"\x7f\n\rBroadcastInfo\x12;\n\x10\x62roadcast_reason\x18\x01 \x01(\x0e\x32!.dr.routeplanning.BroadcastReason\x12\x31\n\x0bstop_reason\x18\x02 \x01(\x0e\x32\x1c.dr.routeplanning.StopReason\"\xb3\x01\n\tPathPoint\x12\t\n\x01x\x18\x01 \x01(\x01\x12\t\n\x01y\x18\x02 \x01(\x01\x12\t\n\x01z\x18\x03 \x01(\x01\x12\r\n\x05theta\x18\x04 \x01(\x01\x12\r\n\x05kappa\x18\x05 \x01(\x01\x12\t\n\x01s\x18\x06 \x01(\x01\x12\x0e\n\x06\x64kappa\x18\x07 \x01(\x01\x12\x0f\n\x07\x64\x64kappa\x18\x08 \x01(\x01\x12\x0f\n\x07lane_id\x18\t \x01(\t\x12\x14\n\x0cx_derivative\x18\n \x01(\x01\x12\x14\n\x0cy_derivative\x18\x0b \x01(\x01\"\x8a\x01\n\x0fTrajectoryPoint\x12/\n\npath_point\x18\x01 \x01(\x0b\x32\x1b.dr.routeplanning.PathPoint\x12\t\n\x01v\x18\x02 \x01(\x01\x12\t\n\x01\x61\x18\x03 \x01(\x01\x12\x15\n\rrelative_time\x18\x04 \x01(\x01\x12\n\n\x02\x64\x61\x18\x05 \x01(\x01\x12\r\n\x05steer\x18\x06 \x01(\x01*^\n\x10TrafficCondition\x12\x15\n\x11\x43ONDITION_UNKNOWN\x10\x00\x12\t\n\x05LIGHT\x10\x01\x12\n\n\x06MEDIUM\x10\x02\x12\t\n\x05HEAVY\x10\x03\x12\x08\n\x04SLOW\x10\x04\x12\x07\n\x03JAM\x10\x05*W\n\x0f\x42roadcastReason\x12\x1c\n\x18\x42ROADCAST_REASON_UNKNOWN\x10\x00\x12\x17\n\x13\x44\x41NGER_FRONT_OBJECT\x10\x01\x12\r\n\tCROSSWALK\x10\x02*p\n\x14SafetyRelatedWarning\x12\x15\n\x11NO_SAFETY_WARNING\x10\x00\x12\x13\n\x0fPLANNING_FAILED\x10\x01\x12\x16\n\x12INVALID_TRAJECTORY\x10\x02\x12\x14\n\x10PLANNING_BLOCKED\x10\x03*g\n\x1fHumanInterferenceRelatedWarning\x12\x1b\n\x17NO_INTERFERENCE_WARNING\x10\x00\x12\x10\n\x0cLONGITUDINAL\x10\x01\x12\x0b\n\x07LATERAL\x10\x02\x12\x08\n\x04\x42OTH\x10\x03*-\n\nTargetLane\x12\n\n\x06MIDDLE\x10\x00\x12\x08\n\x04LEFT\x10\x01\x12\t\n\x05RIGHT\x10\x02*A\n\x0bNudgeStatus\x12\x11\n\rNUDGE_UNKNOWN\x10\x00\x12\x0e\n\nNUDGE_KEEP\x10\x01\x12\x0f\n\x0bNUDGE_NUDGE\x10\x02*@\n\tNudgeType\x12\x15\n\x11NUDGETYPE_UNKNOWN\x10\x00\x12\x0b\n\x07IN_LANE\x10\x01\x12\x0f\n\x0bOUT_OF_LANE\x10\x02*\x96\x01\n\tVLAAction\x12\x18\n\x14VLA_ACTION_NO_ACTION\x10\x00\x12\x1b\n\x17\x43URRENT_LANE_ACCELERATE\x10\x01\x12\x12\n\x0eRIGHT_GIVE_WAY\x10\x02\x12\x1f\n\x1bLANE_CHANGE_TO_SECOND_RIGHT\x10\x03\x12\x1d\n\x19LANE_CHANGE_TO_MOST_RIGHT\x10\x04*\x96\x07\n\x0e\x42\x65haviorReason\x12\x19\n\x15\x43HANGE_REASON_UNKNOWN\x10\x00\x12\x0b\n\x07ROUTING\x10\x65\x12\t\n\x05MERGE\x10\x66\x12\x0f\n\x0bSLOW_OBJECT\x10g\x12\x0f\n\x0b\x46\x41STER_LANE\x10h\x12\x0f\n\x0bPARKED_CARS\x10i\x12\x13\n\x0f\x42REAK_DOWN_CARS\x10j\x12\x15\n\x11\x43ONSTRUCTION_ZONE\x10k\x12\x16\n\x12UNMOVABLE_OBSTACLE\x10l\x12\x08\n\x04POLE\x10m\x12\x10\n\x0c\x44RIVER_VIOCE\x10n\x12\x10\n\x0cTRAFFIC_CONE\x10o\x12\x16\n\x12REAR_CAR_TOO_CLOSE\x10p\x12\x1d\n\x19SURROUNDING_CAR_TOO_CLOSE\x10q\x12\x1d\n\x19NO_LANE_CHANGE_TRAJECTORY\x10r\x12\x15\n\x11\x45XCESSIVE_BRAKING\x10s\x12\x17\n\x13ILC_HUMAN_CANCELLED\x10t\x12\x0b\n\x07NO_ROOM\x10u\x12\x10\n\x0cNONCROSSABLE\x10v\x12\x0f\n\x0bILC_TIMEOUT\x10w\x12\x11\n\rHEAVY_TRAFFIC\x10x\x12\x17\n\x13\x42LIND_SPOT_OCCUPIED\x10y\x12\x17\n\x13\x42\x41\x44_LANE_CHANGE_POS\x10z\x12\x10\n\x0bHUMAN_INPUT\x10\x8c\x01\x12\x0f\n\nWRONG_LANE\x10\x8d\x01\x12\x11\n\x0cHIGHWAY_LANE\x10\x8e\x01\x12\x12\n\rMERGE_IN_LANE\x10\x8f\x01\x12\x13\n\x0eMERGE_OUT_LANE\x10\x90\x01\x12\x13\n\x0ePARALLEL_TRUCK\x10\x91\x01\x12\x1c\n\x17MODEL_REFLINE_INTENTION\x10\x92\x01\x12\x15\n\x10\x41VOID_MERGE_LANE\x10\x93\x01\x12\x12\n\rSTATIC_OBJECT\x10\xc8\x01\x12\x12\n\rLARGE_VEHICLE\x10\xc9\x01\x12\x11\n\x0cTASK_TIMEOUT\x10\xad\x02\x12\x10\n\x0bUSER_CANCEL\x10\xae\x02\x12\x16\n\x11NO_MIDDLE_REFLINE\x10\xaf\x02\x12\x1d\n\x18TOO_CLOSE_TO_ROUTING_END\x10\xb0\x02\x12\x1b\n\x16\x46\x41ILED_TO_SECOND_RIGHT\x10\xb1\x02\x12\x19\n\x14\x46\x41ILED_TO_MOST_RIGHT\x10\xb2\x02\x12\x18\n\x13\x46\x41ILED_TO_POI_RANGE\x10\xb3\x02\x12\x17\n\x12NO_OVERTAKE_TARGET\x10\x91\x03\x12\x19\n\x14OVERTAKE_TARGET_NULL\x10\x92\x03*\xd1\x01\n\x10LaneChangeStatus\x12\x12\n\x0eNO_LANE_CHANGE\x10\x00\x12\n\n\x06\x44URING\x10\x01\x12\x0b\n\x07SUCCESS\x10\x02\x12\x08\n\x04\x46\x41IL\x10\x03\x12\x08\n\x04WAIT\x10\x04\x12\x13\n\x0f\x42OX_ON_BOUNDARY\x10\x05\x12\x0f\n\x0b\x42OX_IN_LANE\x10\x06\x12\x16\n\x12LANE_CHANGE_BUFFER\x10\x07\x12\x0e\n\nRECOVERING\x10\x08\x12\x18\n\x14\x46RONT_CENTER_CROSSED\x10\t\x12\x14\n\x10LANE_CHANGE_HOLD\x10\n*\\\n\tVLAStatus\x12\x0f\n\x0bVLA_STANDBY\x10\x00\x12\x0e\n\nVLA_DURING\x10\x01\x12\x11\n\rVLA_SUCCEEDED\x10\x02\x12\x0e\n\nVLA_FAILED\x10\x03\x12\x0b\n\x07VLA_END\x10\x04*\xca\x01\n\nStopReason\x12\x17\n\x13STOP_REASON_UNKNOWN\x10\x00\x12\x0f\n\x0b\x44\x45STINATION\x10\x01\x12\x0b\n\x07VEHICLE\x10\x02\x12\x0e\n\nPEDESTRIAN\x10\x03\x12\x0c\n\x08OBSTACLE\x10\x04\x12\x0b\n\x07PARKING\x10\x05\x12\x11\n\rTRAFFIC_LIGHT\x10\x06\x12\r\n\tSTOP_SIGN\x10\x07\x12\x0e\n\nYIELD_SIGN\x10\x08\x12\x0e\n\nCLEAR_ZONE\x10\t\x12\x0e\n\nCROSS_WALK\x10\n\x12\x08\n\x04TEST\x10\x0b\x62\x06proto3')
 
 _TRAFFICCONDITION = DESCRIPTOR.enum_types_by_name['TrafficCondition']
 TrafficCondition = enum_type_wrapper.EnumTypeWrapper(_TRAFFICCONDITION)
@@ -32,10 +32,14 @@ _NUDGESTATUS = DESCRIPTOR.enum_types_by_name['NudgeStatus']
 NudgeStatus = enum_type_wrapper.EnumTypeWrapper(_NUDGESTATUS)
 _NUDGETYPE = DESCRIPTOR.enum_types_by_name['NudgeType']
 NudgeType = enum_type_wrapper.EnumTypeWrapper(_NUDGETYPE)
+_VLAACTION = DESCRIPTOR.enum_types_by_name['VLAAction']
+VLAAction = enum_type_wrapper.EnumTypeWrapper(_VLAACTION)
 _BEHAVIORREASON = DESCRIPTOR.enum_types_by_name['BehaviorReason']
 BehaviorReason = enum_type_wrapper.EnumTypeWrapper(_BEHAVIORREASON)
 _LANECHANGESTATUS = DESCRIPTOR.enum_types_by_name['LaneChangeStatus']
 LaneChangeStatus = enum_type_wrapper.EnumTypeWrapper(_LANECHANGESTATUS)
+_VLASTATUS = DESCRIPTOR.enum_types_by_name['VLAStatus']
+VLAStatus = enum_type_wrapper.EnumTypeWrapper(_VLASTATUS)
 _STOPREASON = DESCRIPTOR.enum_types_by_name['StopReason']
 StopReason = enum_type_wrapper.EnumTypeWrapper(_STOPREASON)
 CONDITION_UNKNOWN = 0
@@ -64,6 +68,11 @@ NUDGE_NUDGE = 2
 NUDGETYPE_UNKNOWN = 0
 IN_LANE = 1
 OUT_OF_LANE = 2
+VLA_ACTION_NO_ACTION = 0
+CURRENT_LANE_ACCELERATE = 1
+RIGHT_GIVE_WAY = 2
+LANE_CHANGE_TO_SECOND_RIGHT = 3
+LANE_CHANGE_TO_MOST_RIGHT = 4
 CHANGE_REASON_UNKNOWN = 0
 ROUTING = 101
 MERGE = 102
@@ -97,6 +106,15 @@ MODEL_REFLINE_INTENTION = 146
 AVOID_MERGE_LANE = 147
 STATIC_OBJECT = 200
 LARGE_VEHICLE = 201
+TASK_TIMEOUT = 301
+USER_CANCEL = 302
+NO_MIDDLE_REFLINE = 303
+TOO_CLOSE_TO_ROUTING_END = 304
+FAILED_TO_SECOND_RIGHT = 305
+FAILED_TO_MOST_RIGHT = 306
+FAILED_TO_POI_RANGE = 307
+NO_OVERTAKE_TARGET = 401
+OVERTAKE_TARGET_NULL = 402
 NO_LANE_CHANGE = 0
 DURING = 1
 SUCCESS = 2
@@ -108,6 +126,11 @@ LANE_CHANGE_BUFFER = 7
 RECOVERING = 8
 FRONT_CENTER_CROSSED = 9
 LANE_CHANGE_HOLD = 10
+VLA_STANDBY = 0
+VLA_DURING = 1
+VLA_SUCCEEDED = 2
+VLA_FAILED = 3
+VLA_END = 4
 STOP_REASON_UNKNOWN = 0
 DESTINATION = 1
 VEHICLE = 2
@@ -126,6 +149,7 @@ _PLANNINGTRAJECTORY = DESCRIPTOR.message_types_by_name['PlanningTrajectory']
 _PLANNINGSEMANTICINFO = DESCRIPTOR.message_types_by_name['PlanningSemanticInfo']
 _NUDGEINFO = DESCRIPTOR.message_types_by_name['NudgeInfo']
 _LANECHANGERELATED = DESCRIPTOR.message_types_by_name['LaneChangeRelated']
+_VLARELATED = DESCRIPTOR.message_types_by_name['VLARelated']
 _DISENGAGEMENTWARNING = DESCRIPTOR.message_types_by_name['DisengagementWarning']
 _STOPLINE = DESCRIPTOR.message_types_by_name['StopLine']
 _BROADCASTINFO = DESCRIPTOR.message_types_by_name['BroadcastInfo']
@@ -158,6 +182,13 @@ LaneChangeRelated = _reflection.GeneratedProtocolMessageType('LaneChangeRelated'
   # @@protoc_insertion_point(class_scope:dr.routeplanning.LaneChangeRelated)
   })
 _sym_db.RegisterMessage(LaneChangeRelated)
+
+VLARelated = _reflection.GeneratedProtocolMessageType('VLARelated', (_message.Message,), {
+  'DESCRIPTOR' : _VLARELATED,
+  '__module__' : 'drapi.route_planning_pb2'
+  # @@protoc_insertion_point(class_scope:dr.routeplanning.VLARelated)
+  })
+_sym_db.RegisterMessage(VLARelated)
 
 DisengagementWarning = _reflection.GeneratedProtocolMessageType('DisengagementWarning', (_message.Message,), {
   'DESCRIPTOR' : _DISENGAGEMENTWARNING,
@@ -197,26 +228,30 @@ _sym_db.RegisterMessage(TrajectoryPoint)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _TRAFFICCONDITION._serialized_start=1876
-  _TRAFFICCONDITION._serialized_end=1970
-  _BROADCASTREASON._serialized_start=1972
-  _BROADCASTREASON._serialized_end=2059
-  _SAFETYRELATEDWARNING._serialized_start=2061
-  _SAFETYRELATEDWARNING._serialized_end=2173
-  _HUMANINTERFERENCERELATEDWARNING._serialized_start=2175
-  _HUMANINTERFERENCERELATEDWARNING._serialized_end=2278
-  _TARGETLANE._serialized_start=2280
-  _TARGETLANE._serialized_end=2325
-  _NUDGESTATUS._serialized_start=2327
-  _NUDGESTATUS._serialized_end=2392
-  _NUDGETYPE._serialized_start=2394
-  _NUDGETYPE._serialized_end=2458
-  _BEHAVIORREASON._serialized_start=2461
-  _BEHAVIORREASON._serialized_end=3153
-  _LANECHANGESTATUS._serialized_start=3156
-  _LANECHANGESTATUS._serialized_end=3365
-  _STOPREASON._serialized_start=3368
-  _STOPREASON._serialized_end=3570
+  _TRAFFICCONDITION._serialized_start=2051
+  _TRAFFICCONDITION._serialized_end=2145
+  _BROADCASTREASON._serialized_start=2147
+  _BROADCASTREASON._serialized_end=2234
+  _SAFETYRELATEDWARNING._serialized_start=2236
+  _SAFETYRELATEDWARNING._serialized_end=2348
+  _HUMANINTERFERENCERELATEDWARNING._serialized_start=2350
+  _HUMANINTERFERENCERELATEDWARNING._serialized_end=2453
+  _TARGETLANE._serialized_start=2455
+  _TARGETLANE._serialized_end=2500
+  _NUDGESTATUS._serialized_start=2502
+  _NUDGESTATUS._serialized_end=2567
+  _NUDGETYPE._serialized_start=2569
+  _NUDGETYPE._serialized_end=2633
+  _VLAACTION._serialized_start=2636
+  _VLAACTION._serialized_end=2786
+  _BEHAVIORREASON._serialized_start=2789
+  _BEHAVIORREASON._serialized_end=3707
+  _LANECHANGESTATUS._serialized_start=3710
+  _LANECHANGESTATUS._serialized_end=3919
+  _VLASTATUS._serialized_start=3921
+  _VLASTATUS._serialized_end=4013
+  _STOPREASON._serialized_start=4016
+  _STOPREASON._serialized_end=4218
   _PLANNINGTRAJECTORY._serialized_start=67
   _PLANNINGTRAJECTORY._serialized_end=276
   _PLANNINGSEMANTICINFO._serialized_start=279
@@ -225,14 +260,16 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _NUDGEINFO._serialized_end=851
   _LANECHANGERELATED._serialized_start=854
   _LANECHANGERELATED._serialized_end=1128
-  _DISENGAGEMENTWARNING._serialized_start=1131
-  _DISENGAGEMENTWARNING._serialized_end=1320
-  _STOPLINE._serialized_start=1322
-  _STOPLINE._serialized_end=1422
-  _BROADCASTINFO._serialized_start=1424
-  _BROADCASTINFO._serialized_end=1551
-  _PATHPOINT._serialized_start=1554
-  _PATHPOINT._serialized_end=1733
-  _TRAJECTORYPOINT._serialized_start=1736
-  _TRAJECTORYPOINT._serialized_end=1874
+  _VLARELATED._serialized_start=1131
+  _VLARELATED._serialized_end=1303
+  _DISENGAGEMENTWARNING._serialized_start=1306
+  _DISENGAGEMENTWARNING._serialized_end=1495
+  _STOPLINE._serialized_start=1497
+  _STOPLINE._serialized_end=1597
+  _BROADCASTINFO._serialized_start=1599
+  _BROADCASTINFO._serialized_end=1726
+  _PATHPOINT._serialized_start=1729
+  _PATHPOINT._serialized_end=1908
+  _TRAJECTORYPOINT._serialized_start=1911
+  _TRAJECTORYPOINT._serialized_end=2049
 # @@protoc_insertion_point(module_scope)

@@ -205,12 +205,16 @@ message CrossingInfo {
   optional string crossing_link_id = 9;  // 路口所在link的id
 }
 
+// 当前和后续道路信息
 message SdRoadInfo {
-  optional deeproute.map.RoadClass road_class = 1;
-  /// 当前路口信息
+  // 当前道路等级，根据pr算的。
+  optional deeproute.map.RoadClass road_class = 1 [default = RC_UNKNOWN];
+
+  // 下一个路口的信息
   optional CrossingInfo crossing_info = 2;
   optional deeproute.map.LinkUsage link_usage = 3;
   optional deeproute.sd_map.LinkData.FormWay link_formway = 4;
+  // 后续路口信息，一直给到waypoint
   repeated CrossingInfo crossing_infos = 5;
   optional bool is_on_main_road = 6;
   optional deeproute.localization.LockOnRoadResult.Status lock_on_road_status = 7;
@@ -232,6 +236,7 @@ message AreaInfo {
     ROUNDABOUT = 3;  // 环岛
   }
   optional AreaType area_type = 1;
+  // 到link首尾的距离
   optional double distance_to_area_start = 2;
   optional double distance_to_area_end = 3;
 }

@@ -18,13 +18,28 @@ from proto.drapi import business_info_pb2 as drapi_dot_business__info__pb2
 from proto.drapi import notification_pb2 as drapi_dot_notification__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1a\x64rapi/render_context.proto\x12\x06\x64r.hmi\x1a-perception/deeproute_perception_ras_map.proto\x1a\x19\x64rapi/business_info.proto\x1a\x18\x64rapi/notification.proto\"\xb2\x01\n\x0e\x43riticalObject\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x36\n\x0bobject_type\x18\x02 \x01(\x0e\x32!.dr.hmi.CriticalObject.ObjectType\x12\x10\n\x08\x64istance\x18\x03 \x01(\x02\"J\n\nObjectType\x12\x13\n\x0fGREEN_ALARM_OBJ\x10\x00\x12\x14\n\x10YELLOW_ALARM_OBJ\x10\x01\x12\x11\n\rRED_ALARM_OBJ\x10\x02\"\xef\x01\n\x14\x44rivingRenderContext\x12\x30\n\x10\x63ritical_objects\x18\x01 \x03(\x0b\x32\x16.dr.hmi.CriticalObject\x12\x31\n\x08time_gap\x18\x02 \x01(\x0e\x32\x1f.dr.business_info.FollowTimeGap\x12)\n\nsla_status\x18\x03 \x01(\x0e\x32\x15.dr.hmi.StatusDisplay\x12+\n\x07out_odd\x18\x04 \x01(\x0b\x32\x1a.dr.notification.NCAOutODD\x12\x1a\n\x12target_speed_limit\x18\x05 \x01(\r\"\x88\x01\n\x13ParkingSpaceMapping\x12\x39\n\x08mappings\x18\x01 \x03(\x0b\x32\'.dr.hmi.ParkingSpaceMapping.MappingData\x1a\x36\n\x0bMappingData\x12\x0e\n\x06number\x18\x01 \x01(\x05\x12\x17\n\x0fparkingspace_id\x18\x02 \x01(\x05\"\xcf\x01\n\x11SearchSuspendInfo\x12\x16\n\x0esearch_suspend\x18\x01 \x01(\x08\x12\x41\n\x0csuspend_type\x18\x02 \x01(\x0e\x32+.dr.hmi.SearchSuspendInfo.SearchSuspendType\"_\n\x11SearchSuspendType\x12\r\n\tTYPE_NONE\x10\x00\x12\x0f\n\x0bTYPE_NORMAL\x10\x01\x12\x13\n\x0fTYPE_SELECTABLE\x10\x02\x12\x15\n\x11TYPE_UNSELECTABLE\x10\x03\"\x8a\r\n\x14ParkingRenderContext\x12\x11\n\ttimestamp\x18\x01 \x01(\x03\x12\x39\n\x14parkingspace_mapping\x18\x02 \x01(\x0b\x32\x1b.dr.hmi.ParkingSpaceMapping\x12\x19\n\x11\x62\x61\x63kground_search\x18\x03 \x01(\x08\x12\x1e\n\x16target_parkingspace_id\x18\x04 \x01(\x05\x12K\n\x13parking_active_mode\x18\x05 \x01(\x0e\x32..dr.hmi.ParkingRenderContext.ParkingActiveMode\x12\x1c\n\x14parkin_trajectory_id\x18\x06 \x01(\t\x12\x16\n\x0esearch_suspend\x18\x07 \x01(\x08\x12\'\n\x1fis_dir_and_gear_not_consistent_\x18\x08 \x01(\x08\x12V\n\x19\x61pa_out_parking_direction\x18\t \x01(\x0e\x32\x33.dr.hmi.ParkingRenderContext.APAOutParkingDirection\x12,\n$is_routing_end_target_slot_occupied_\x18\n \x01(\x08\x12\x36\n\x13search_suspend_info\x18\x0b \x01(\x0b\x32\x19.dr.hmi.SearchSuspendInfo\x12\x1a\n\x12is_map_saving_done\x18\x0c \x01(\x08\x12\x19\n\x11is_apa_park_ready\x18\r \x01(\x08\x12\x1d\n\x15mapping_save_progress\x18\x0e \x01(\x02\x12\x39\n\rparking_space\x18\x0f \x01(\x0b\x32\".deeproute.perception.ParkingSpace\x12&\n\x1erouting_target_parkingspace_id\x18\x10 \x01(\x05\x12=\n\x0chut_vpa_page\x18\x11 \x01(\x0e\x32\'.dr.hmi.ParkingRenderContext.HUTVPAPage\x12=\n\x0cpark_in_type\x18\x12 \x01(\x0e\x32\'.dr.hmi.ParkingRenderContext.PrkModType\x12\x41\n\x0ehavp_navi_tips\x18\x13 \x01(\x0e\x32).dr.hmi.ParkingRenderContext.HAVPNaviTips\x12\x1f\n\x17\x65nter_user_defined_park\x18\x14 \x01(\x08\x12\x19\n\x11\x61pa_force_release\x18\x15 \x01(\x08\"A\n\x11ParkingActiveMode\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0e\n\nPARKING_IN\x10\x01\x12\x0f\n\x0bPARKING_OUT\x10\x02\"\xbd\x01\n\x16\x41PAOutParkingDirection\x12\x15\n\x11\x44IRECTION_UNKNOWN\x10\x00\x12\x11\n\rPARELLEL_LEFT\x10\x01\x12\x12\n\x0ePARELLEL_RIGHT\x10\x02\x12\x0e\n\nFRONT_LEFT\x10\x03\x12\x0f\n\x0b\x46RONT_RIGHT\x10\x04\x12\r\n\tBACK_LEFT\x10\x05\x12\x0e\n\nBACK_RIGHT\x10\x06\x12\x12\n\x0eSTRAIGHT_FRONT\x10\x07\x12\x11\n\rSTRAIGHT_BACK\x10\x08\"q\n\nPrkModType\x12\x14\n\x10PRKMOD_NO_ACTION\x10\x00\x12\x1a\n\x16PRKMOD_HEAD_PARKING_IN\x10\x01\x12\x1a\n\x16PRKMOD_TAIL_PARKING_IN\x10\x02\x12\x15\n\x11PRKMOD_RESERVED_3\x10\x03\"\xa5\x02\n\x0cHAVPNaviTips\x12\x11\n\rHAVP_TIP_NONE\x10\x00\x12\x18\n\x14HAVP_TIP_PARKING_OUT\x10\x01\x12\x18\n\x14HAVP_TIP_ARRIVE_DEST\x10\x02\x12\x16\n\x12HAVP_TIP_TURN_LEFT\x10\x03\x12\x17\n\x13HAVP_TIP_TURN_RIGHT\x10\x04\x12\x18\n\x14HAVP_TIP_TURN_AROUND\x10\x05\x12\x13\n\x0fHAVP_TIP_UPHILL\x10\x06\x12\x15\n\x11HAVP_TIP_DOWNHILL\x10\x07\x12\x1e\n\x1aHAVP_TIP_ENTER_PARKING_LOT\x10\x08\x12\x1d\n\x19HAVP_TIP_EXIT_PARKING_LOT\x10\t\x12\x18\n\x14HAVP_TIP_RETURN_ROAD\x10\n\"+\n\nHUTVPAPage\x12\r\n\tPAGE_NONE\x10\x00\x12\x0e\n\nMAP_MANAGE\x10\x01\"\xfc\x02\n\x07TSISign\x12+\n\tsign_type\x18\x01 \x01(\x0e\x32\x18.dr.hmi.TSISign.SignType\x12\x13\n\x0blimit_value\x18\x02 \x01(\x05\x12\n\n\x02id\x18\x03 \x01(\x05\"\xa2\x02\n\x08SignType\x12\x0f\n\x0bUNKONW_SIGN\x10\x00\x12\x12\n\x0eSIGN_MAX_SPEED\x10\x01\x12\x12\n\x0eSIGN_MIN_SPEED\x10\x02\x12\x12\n\x0eSIGN_NON_SPEED\x10\x03\x12\x11\n\rSIGN_WARN_KID\x10\x04\x12\x12\n\x0eSIGN_BAN_ENTER\x10\x05\x12\x1a\n\x16SIGN_WARN_CONSTRUCTION\x10\x06\x12\x1d\n\x19SIGN_WARN_LEFT_SHARP_TURN\x10\x07\x12\x1e\n\x1aSIGN_WARN_RIGHT_SHARP_TURN\x10\x08\x12\x17\n\x13SIGN_WARN_MORE_TURN\x10\t\x12\x17\n\x13SIGN_UNBAN_OVERTAKE\x10\n\x12\x15\n\x11SIGN_BAN_OVERTAKE\x10\x0b\"\xe8\x01\n\x1b\x41\x63tiveSafetyWarningObstacle\x12\n\n\x02id\x18\x01 \x01(\r\x12@\n\x0e\x61\x63tive_feature\x18\x02 \x01(\x0e\x32(.dr.hmi.ActiveSafetyWarningObstacle.Type\"{\n\x04Type\x12\x12\n\x0eUNKONW_FEATURE\x10\x00\x12\r\n\tDW_ACTIVE\x10\x01\x12\x0e\n\nFCW_ACTIVE\x10\x02\x12\x0e\n\nAEB_ACTIVE\x10\x03\x12\x0f\n\x0b\x46\x43TB_ACTIVE\x10\x04\x12\x0f\n\x0bRCTB_ACTIVE\x10\x05\x12\x0e\n\nESA_ACTIVE\x10\x06\"v\n\x19\x41\x63tiveSafetyRenderContext\x12\x36\n\tobstacles\x18\x01 \x03(\x0b\x32#.dr.hmi.ActiveSafetyWarningObstacle\x12!\n\x08tsi_sign\x18\x02 \x03(\x0b\x32\x0f.dr.hmi.TSISign\"\x88\x01\n\x10GWMRenderContext\x12\x39\n\x13\x64riving_render_data\x18\x01 \x01(\x0b\x32\x1c.dr.hmi.DrivingRenderContext\x12\x39\n\x13parking_render_data\x18\x02 \x01(\x0b\x32\x1c.dr.hmi.ParkingRenderContext\"\xcd\x01\n\x0fGLRenderContext\x12\x44\n\x19\x61\x63tive_safety_render_data\x18\x01 \x01(\x0b\x32!.dr.hmi.ActiveSafetyRenderContext\x12\x39\n\x13\x64riving_render_data\x18\x02 \x01(\x0b\x32\x1c.dr.hmi.DrivingRenderContext\x12\x39\n\x13parking_render_data\x18\x03 \x01(\x0b\x32\x1c.dr.hmi.ParkingRenderContext\"q\n\rRenderContext\x12,\n\x08gwm_data\x18\x01 \x01(\x0b\x32\x18.dr.hmi.GWMRenderContextH\x00\x12*\n\x07gl_data\x18\x02 \x01(\x0b\x32\x17.dr.hmi.GLRenderContextH\x00\x42\x06\n\x04type\"A\n\x0b\x44\x61taConvert\x12*\n\x08gwm_task\x18\x01 \x01(\x0b\x32\x16.dr.hmi.GWMConvertTaskH\x00\x42\x06\n\x04type\":\n\x0eGWMConvertTask\x12(\n havp_map_manage_map_data_convert\x18\x01 \x01(\x0c*E\n\rStatusDisplay\x12\x15\n\x11STATUS_NO_DISPLAY\x10\x00\x12\x0e\n\nSTATUS_YES\x10\x01\x12\r\n\tSTATUS_NO\x10\x02\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1a\x64rapi/render_context.proto\x12\x06\x64r.hmi\x1a-perception/deeproute_perception_ras_map.proto\x1a\x19\x64rapi/business_info.proto\x1a\x18\x64rapi/notification.proto\"\xb2\x01\n\x0e\x43riticalObject\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x36\n\x0bobject_type\x18\x02 \x01(\x0e\x32!.dr.hmi.CriticalObject.ObjectType\x12\x10\n\x08\x64istance\x18\x03 \x01(\x02\"J\n\nObjectType\x12\x13\n\x0fGREEN_ALARM_OBJ\x10\x00\x12\x14\n\x10YELLOW_ALARM_OBJ\x10\x01\x12\x11\n\rRED_ALARM_OBJ\x10\x02\"\xef\x01\n\x14\x44rivingRenderContext\x12\x30\n\x10\x63ritical_objects\x18\x01 \x03(\x0b\x32\x16.dr.hmi.CriticalObject\x12\x31\n\x08time_gap\x18\x02 \x01(\x0e\x32\x1f.dr.business_info.FollowTimeGap\x12)\n\nsla_status\x18\x03 \x01(\x0e\x32\x15.dr.hmi.StatusDisplay\x12+\n\x07out_odd\x18\x04 \x01(\x0b\x32\x1a.dr.notification.NCAOutODD\x12\x1a\n\x12target_speed_limit\x18\x05 \x01(\r\"\x88\x01\n\x13ParkingSpaceMapping\x12\x39\n\x08mappings\x18\x01 \x03(\x0b\x32\'.dr.hmi.ParkingSpaceMapping.MappingData\x1a\x36\n\x0bMappingData\x12\x0e\n\x06number\x18\x01 \x01(\x05\x12\x17\n\x0fparkingspace_id\x18\x02 \x01(\x05\"\xcf\x01\n\x11SearchSuspendInfo\x12\x16\n\x0esearch_suspend\x18\x01 \x01(\x08\x12\x41\n\x0csuspend_type\x18\x02 \x01(\x0e\x32+.dr.hmi.SearchSuspendInfo.SearchSuspendType\"_\n\x11SearchSuspendType\x12\r\n\tTYPE_NONE\x10\x00\x12\x0f\n\x0bTYPE_NORMAL\x10\x01\x12\x13\n\x0fTYPE_SELECTABLE\x10\x02\x12\x15\n\x11TYPE_UNSELECTABLE\x10\x03\"\xcb\x0e\n\x14ParkingRenderContext\x12\x11\n\ttimestamp\x18\x01 \x01(\x03\x12\x39\n\x14parkingspace_mapping\x18\x02 \x01(\x0b\x32\x1b.dr.hmi.ParkingSpaceMapping\x12\x19\n\x11\x62\x61\x63kground_search\x18\x03 \x01(\x08\x12\x1e\n\x16target_parkingspace_id\x18\x04 \x01(\x05\x12K\n\x13parking_active_mode\x18\x05 \x01(\x0e\x32..dr.hmi.ParkingRenderContext.ParkingActiveMode\x12\x1c\n\x14parkin_trajectory_id\x18\x06 \x01(\t\x12\x16\n\x0esearch_suspend\x18\x07 \x01(\x08\x12\'\n\x1fis_dir_and_gear_not_consistent_\x18\x08 \x01(\x08\x12V\n\x19\x61pa_out_parking_direction\x18\t \x01(\x0e\x32\x33.dr.hmi.ParkingRenderContext.APAOutParkingDirection\x12,\n$is_routing_end_target_slot_occupied_\x18\n \x01(\x08\x12\x36\n\x13search_suspend_info\x18\x0b \x01(\x0b\x32\x19.dr.hmi.SearchSuspendInfo\x12\x1a\n\x12is_map_saving_done\x18\x0c \x01(\x08\x12\x19\n\x11is_apa_park_ready\x18\r \x01(\x08\x12\x1d\n\x15mapping_save_progress\x18\x0e \x01(\x02\x12\x39\n\rparking_space\x18\x0f \x01(\x0b\x32\".deeproute.perception.ParkingSpace\x12&\n\x1erouting_target_parkingspace_id\x18\x10 \x01(\x05\x12=\n\x0chut_vpa_page\x18\x11 \x01(\x0e\x32\'.dr.hmi.ParkingRenderContext.HUTVPAPage\x12=\n\x0cpark_in_type\x18\x12 \x01(\x0e\x32\'.dr.hmi.ParkingRenderContext.PrkModType\x12\x41\n\x0ehavp_navi_tips\x18\x13 \x01(\x0e\x32).dr.hmi.ParkingRenderContext.HAVPNaviTips\x12\x1f\n\x17\x65nter_user_defined_park\x18\x14 \x01(\x08\x12\x19\n\x11\x61pa_force_release\x18\x15 \x01(\x08\x12\x14\n\x0c\x63ruising_odm\x18\x16 \x01(\x05\x12+\n\x0bsetting_pos\x18\x17 \x01(\x0e\x32\x16.dr.hmi.ParkingPosType\x12\x45\n!apa_customize_parkingspace_status\x18\x18 \x01(\x0e\x32\x1a.dr.hmi.ParkingSpaceStatus\x12\"\n\x1a\x63ustomize_parking_frame_id\x18\x19 \x01(\x05\x12\x11\n\tgl_map_id\x18\x1a \x01(\x05\"A\n\x11ParkingActiveMode\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0e\n\nPARKING_IN\x10\x01\x12\x0f\n\x0bPARKING_OUT\x10\x02\"\xbd\x01\n\x16\x41PAOutParkingDirection\x12\x15\n\x11\x44IRECTION_UNKNOWN\x10\x00\x12\x11\n\rPARELLEL_LEFT\x10\x01\x12\x12\n\x0ePARELLEL_RIGHT\x10\x02\x12\x0e\n\nFRONT_LEFT\x10\x03\x12\x0f\n\x0b\x46RONT_RIGHT\x10\x04\x12\r\n\tBACK_LEFT\x10\x05\x12\x0e\n\nBACK_RIGHT\x10\x06\x12\x12\n\x0eSTRAIGHT_FRONT\x10\x07\x12\x11\n\rSTRAIGHT_BACK\x10\x08\"q\n\nPrkModType\x12\x14\n\x10PRKMOD_NO_ACTION\x10\x00\x12\x1a\n\x16PRKMOD_HEAD_PARKING_IN\x10\x01\x12\x1a\n\x16PRKMOD_TAIL_PARKING_IN\x10\x02\x12\x15\n\x11PRKMOD_RESERVED_3\x10\x03\"\xa5\x02\n\x0cHAVPNaviTips\x12\x11\n\rHAVP_TIP_NONE\x10\x00\x12\x18\n\x14HAVP_TIP_PARKING_OUT\x10\x01\x12\x18\n\x14HAVP_TIP_ARRIVE_DEST\x10\x02\x12\x16\n\x12HAVP_TIP_TURN_LEFT\x10\x03\x12\x17\n\x13HAVP_TIP_TURN_RIGHT\x10\x04\x12\x18\n\x14HAVP_TIP_TURN_AROUND\x10\x05\x12\x13\n\x0fHAVP_TIP_UPHILL\x10\x06\x12\x15\n\x11HAVP_TIP_DOWNHILL\x10\x07\x12\x1e\n\x1aHAVP_TIP_ENTER_PARKING_LOT\x10\x08\x12\x1d\n\x19HAVP_TIP_EXIT_PARKING_LOT\x10\t\x12\x18\n\x14HAVP_TIP_RETURN_ROAD\x10\n\"+\n\nHUTVPAPage\x12\r\n\tPAGE_NONE\x10\x00\x12\x0e\n\nMAP_MANAGE\x10\x01\"\xfc\x02\n\x07TSISign\x12+\n\tsign_type\x18\x01 \x01(\x0e\x32\x18.dr.hmi.TSISign.SignType\x12\x13\n\x0blimit_value\x18\x02 \x01(\x05\x12\n\n\x02id\x18\x03 \x01(\x05\"\xa2\x02\n\x08SignType\x12\x0f\n\x0bUNKONW_SIGN\x10\x00\x12\x12\n\x0eSIGN_MAX_SPEED\x10\x01\x12\x12\n\x0eSIGN_MIN_SPEED\x10\x02\x12\x12\n\x0eSIGN_NON_SPEED\x10\x03\x12\x11\n\rSIGN_WARN_KID\x10\x04\x12\x12\n\x0eSIGN_BAN_ENTER\x10\x05\x12\x1a\n\x16SIGN_WARN_CONSTRUCTION\x10\x06\x12\x1d\n\x19SIGN_WARN_LEFT_SHARP_TURN\x10\x07\x12\x1e\n\x1aSIGN_WARN_RIGHT_SHARP_TURN\x10\x08\x12\x17\n\x13SIGN_WARN_MORE_TURN\x10\t\x12\x17\n\x13SIGN_UNBAN_OVERTAKE\x10\n\x12\x15\n\x11SIGN_BAN_OVERTAKE\x10\x0b\"\xf0\x02\n\x1b\x41\x63tiveSafetyWarningObstacle\x12\n\n\x02id\x18\x01 \x01(\r\x12@\n\x0e\x61\x63tive_feature\x18\x02 \x01(\x0e\x32(.dr.hmi.ActiveSafetyWarningObstacle.Type\x12\x0b\n\x03ttc\x18\x03 \x01(\x01\"\xf5\x01\n\x04Type\x12\x12\n\x0eUNKONW_FEATURE\x10\x00\x12\r\n\tDW_ACTIVE\x10\x01\x12\x0e\n\nFCW_ACTIVE\x10\x02\x12\x0e\n\nAEB_ACTIVE\x10\x03\x12\x0f\n\x0b\x46\x43TB_ACTIVE\x10\x04\x12\x0f\n\x0bRCTB_ACTIVE\x10\x05\x12\x0e\n\nESA_ACTIVE\x10\x06\x12\x0e\n\nDOW_ACTIVE\x10\x07\x12\x0e\n\nBSD_ACTIVE\x10\x08\x12\x0e\n\nRCW_ACTIVE\x10\t\x12\x0f\n\x0b\x46\x43TA_ACTIVE\x10\n\x12\x0f\n\x0bRCTA_ACTIVE\x10\x0b\x12\x0e\n\nAES_ACTIVE\x10\x0c\x12\x16\n\x12RCTA_LEVEL2_ACTIVE\x10\r\"v\n\x19\x41\x63tiveSafetyRenderContext\x12\x36\n\tobstacles\x18\x01 \x03(\x0b\x32#.dr.hmi.ActiveSafetyWarningObstacle\x12!\n\x08tsi_sign\x18\x02 \x03(\x0b\x32\x0f.dr.hmi.TSISign\"\x88\x01\n\x10GWMRenderContext\x12\x39\n\x13\x64riving_render_data\x18\x01 \x01(\x0b\x32\x1c.dr.hmi.DrivingRenderContext\x12\x39\n\x13parking_render_data\x18\x02 \x01(\x0b\x32\x1c.dr.hmi.ParkingRenderContext\"\xbf\x03\n\x0fGLRenderContext\x12\x44\n\x19\x61\x63tive_safety_render_data\x18\x01 \x01(\x0b\x32!.dr.hmi.ActiveSafetyRenderContext\x12\x39\n\x13\x64riving_render_data\x18\x02 \x01(\x0b\x32\x1c.dr.hmi.DrivingRenderContext\x12\x39\n\x13parking_render_data\x18\x03 \x01(\x0b\x32\x1c.dr.hmi.ParkingRenderContext\x12\x44\n\x19\x63\x65nter_reverse_trajectory\x18\x04 \x03(\x0b\x32!.dr.hmi.GLRenderContext.PathPoint\x12\x42\n\x17left_reverse_trajectory\x18\x05 \x03(\x0b\x32!.dr.hmi.GLRenderContext.PathPoint\x12\x43\n\x18right_reverse_trajectory\x18\x06 \x03(\x0b\x32!.dr.hmi.GLRenderContext.PathPoint\x1a!\n\tPathPoint\x12\t\n\x01x\x18\x01 \x01(\x01\x12\t\n\x01y\x18\x02 \x01(\x01\"q\n\rRenderContext\x12,\n\x08gwm_data\x18\x01 \x01(\x0b\x32\x18.dr.hmi.GWMRenderContextH\x00\x12*\n\x07gl_data\x18\x02 \x01(\x0b\x32\x17.dr.hmi.GLRenderContextH\x00\x42\x06\n\x04type\"A\n\x0b\x44\x61taConvert\x12*\n\x08gwm_task\x18\x01 \x01(\x0b\x32\x16.dr.hmi.GWMConvertTaskH\x00\x42\x06\n\x04type\":\n\x0eGWMConvertTask\x12(\n havp_map_manage_map_data_convert\x18\x01 \x01(\x0c*E\n\rStatusDisplay\x12\x15\n\x11STATUS_NO_DISPLAY\x10\x00\x12\x0e\n\nSTATUS_YES\x10\x01\x12\r\n\tSTATUS_NO\x10\x02*\xce\x01\n\x12ParkingSpaceStatus\x12\x15\n\x11PARK_SPA_STA_NONE\x10\x00\x12\x15\n\x11PARK_SPA_STA_INIT\x10\x01\x12\x18\n\x14PARK_SPA_STA_STANDBY\x10\x02\x12\x19\n\x15PARK_SPA_STA_PLANNING\x10\x03\x12\x1a\n\x16PARK_SPA_STA_OBJ_BLOCK\x10\x04\x12\x1a\n\x16PARK_SPA_STA_PLAN_FAIL\x10\x05\x12\x1d\n\x19PARK_SPA_STA_PLAN_SUCCESS\x10\x06*k\n\x0eParkingPosType\x12\x14\n\x10PARKING_POS_NONE\x10\x00\x12\x16\n\x12PARKING_POS_CENTER\x10\x01\x12\x14\n\x10PARKING_POS_LEFT\x10\x02\x12\x15\n\x11PARKING_POS_RIGHT\x10\x03\x62\x06proto3')
 
 _STATUSDISPLAY = DESCRIPTOR.enum_types_by_name['StatusDisplay']
 StatusDisplay = enum_type_wrapper.EnumTypeWrapper(_STATUSDISPLAY)
+_PARKINGSPACESTATUS = DESCRIPTOR.enum_types_by_name['ParkingSpaceStatus']
+ParkingSpaceStatus = enum_type_wrapper.EnumTypeWrapper(_PARKINGSPACESTATUS)
+_PARKINGPOSTYPE = DESCRIPTOR.enum_types_by_name['ParkingPosType']
+ParkingPosType = enum_type_wrapper.EnumTypeWrapper(_PARKINGPOSTYPE)
 STATUS_NO_DISPLAY = 0
 STATUS_YES = 1
 STATUS_NO = 2
+PARK_SPA_STA_NONE = 0
+PARK_SPA_STA_INIT = 1
+PARK_SPA_STA_STANDBY = 2
+PARK_SPA_STA_PLANNING = 3
+PARK_SPA_STA_OBJ_BLOCK = 4
+PARK_SPA_STA_PLAN_FAIL = 5
+PARK_SPA_STA_PLAN_SUCCESS = 6
+PARKING_POS_NONE = 0
+PARKING_POS_CENTER = 1
+PARKING_POS_LEFT = 2
+PARKING_POS_RIGHT = 3
 
 
 _CRITICALOBJECT = DESCRIPTOR.message_types_by_name['CriticalObject']
@@ -38,6 +53,7 @@ _ACTIVESAFETYWARNINGOBSTACLE = DESCRIPTOR.message_types_by_name['ActiveSafetyWar
 _ACTIVESAFETYRENDERCONTEXT = DESCRIPTOR.message_types_by_name['ActiveSafetyRenderContext']
 _GWMRENDERCONTEXT = DESCRIPTOR.message_types_by_name['GWMRenderContext']
 _GLRENDERCONTEXT = DESCRIPTOR.message_types_by_name['GLRenderContext']
+_GLRENDERCONTEXT_PATHPOINT = _GLRENDERCONTEXT.nested_types_by_name['PathPoint']
 _RENDERCONTEXT = DESCRIPTOR.message_types_by_name['RenderContext']
 _DATACONVERT = DESCRIPTOR.message_types_by_name['DataConvert']
 _GWMCONVERTTASK = DESCRIPTOR.message_types_by_name['GWMConvertTask']
@@ -122,11 +138,19 @@ GWMRenderContext = _reflection.GeneratedProtocolMessageType('GWMRenderContext', 
 _sym_db.RegisterMessage(GWMRenderContext)
 
 GLRenderContext = _reflection.GeneratedProtocolMessageType('GLRenderContext', (_message.Message,), {
+
+  'PathPoint' : _reflection.GeneratedProtocolMessageType('PathPoint', (_message.Message,), {
+    'DESCRIPTOR' : _GLRENDERCONTEXT_PATHPOINT,
+    '__module__' : 'drapi.render_context_pb2'
+    # @@protoc_insertion_point(class_scope:dr.hmi.GLRenderContext.PathPoint)
+    })
+  ,
   'DESCRIPTOR' : _GLRENDERCONTEXT,
   '__module__' : 'drapi.render_context_pb2'
   # @@protoc_insertion_point(class_scope:dr.hmi.GLRenderContext)
   })
 _sym_db.RegisterMessage(GLRenderContext)
+_sym_db.RegisterMessage(GLRenderContext.PathPoint)
 
 RenderContext = _reflection.GeneratedProtocolMessageType('RenderContext', (_message.Message,), {
   'DESCRIPTOR' : _RENDERCONTEXT,
@@ -152,8 +176,12 @@ _sym_db.RegisterMessage(GWMConvertTask)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _STATUSDISPLAY._serialized_start=3914
-  _STATUSDISPLAY._serialized_end=3983
+  _STATUSDISPLAY._serialized_start=4485
+  _STATUSDISPLAY._serialized_end=4554
+  _PARKINGSPACESTATUS._serialized_start=4557
+  _PARKINGSPACESTATUS._serialized_end=4763
+  _PARKINGPOSTYPE._serialized_start=4765
+  _PARKINGPOSTYPE._serialized_end=4872
   _CRITICALOBJECT._serialized_start=139
   _CRITICALOBJECT._serialized_end=317
   _CRITICALOBJECT_OBJECTTYPE._serialized_start=243
@@ -169,35 +197,37 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _SEARCHSUSPENDINFO_SEARCHSUSPENDTYPE._serialized_start=813
   _SEARCHSUSPENDINFO_SEARCHSUSPENDTYPE._serialized_end=908
   _PARKINGRENDERCONTEXT._serialized_start=911
-  _PARKINGRENDERCONTEXT._serialized_end=2585
-  _PARKINGRENDERCONTEXT_PARKINGACTIVEMODE._serialized_start=1872
-  _PARKINGRENDERCONTEXT_PARKINGACTIVEMODE._serialized_end=1937
-  _PARKINGRENDERCONTEXT_APAOUTPARKINGDIRECTION._serialized_start=1940
-  _PARKINGRENDERCONTEXT_APAOUTPARKINGDIRECTION._serialized_end=2129
-  _PARKINGRENDERCONTEXT_PRKMODTYPE._serialized_start=2131
-  _PARKINGRENDERCONTEXT_PRKMODTYPE._serialized_end=2244
-  _PARKINGRENDERCONTEXT_HAVPNAVITIPS._serialized_start=2247
-  _PARKINGRENDERCONTEXT_HAVPNAVITIPS._serialized_end=2540
-  _PARKINGRENDERCONTEXT_HUTVPAPAGE._serialized_start=2542
-  _PARKINGRENDERCONTEXT_HUTVPAPAGE._serialized_end=2585
-  _TSISIGN._serialized_start=2588
-  _TSISIGN._serialized_end=2968
-  _TSISIGN_SIGNTYPE._serialized_start=2678
-  _TSISIGN_SIGNTYPE._serialized_end=2968
-  _ACTIVESAFETYWARNINGOBSTACLE._serialized_start=2971
-  _ACTIVESAFETYWARNINGOBSTACLE._serialized_end=3203
-  _ACTIVESAFETYWARNINGOBSTACLE_TYPE._serialized_start=3080
-  _ACTIVESAFETYWARNINGOBSTACLE_TYPE._serialized_end=3203
-  _ACTIVESAFETYRENDERCONTEXT._serialized_start=3205
-  _ACTIVESAFETYRENDERCONTEXT._serialized_end=3323
-  _GWMRENDERCONTEXT._serialized_start=3326
-  _GWMRENDERCONTEXT._serialized_end=3462
-  _GLRENDERCONTEXT._serialized_start=3465
-  _GLRENDERCONTEXT._serialized_end=3670
-  _RENDERCONTEXT._serialized_start=3672
-  _RENDERCONTEXT._serialized_end=3785
-  _DATACONVERT._serialized_start=3787
-  _DATACONVERT._serialized_end=3852
-  _GWMCONVERTTASK._serialized_start=3854
-  _GWMCONVERTTASK._serialized_end=3912
+  _PARKINGRENDERCONTEXT._serialized_end=2778
+  _PARKINGRENDERCONTEXT_PARKINGACTIVEMODE._serialized_start=2065
+  _PARKINGRENDERCONTEXT_PARKINGACTIVEMODE._serialized_end=2130
+  _PARKINGRENDERCONTEXT_APAOUTPARKINGDIRECTION._serialized_start=2133
+  _PARKINGRENDERCONTEXT_APAOUTPARKINGDIRECTION._serialized_end=2322
+  _PARKINGRENDERCONTEXT_PRKMODTYPE._serialized_start=2324
+  _PARKINGRENDERCONTEXT_PRKMODTYPE._serialized_end=2437
+  _PARKINGRENDERCONTEXT_HAVPNAVITIPS._serialized_start=2440
+  _PARKINGRENDERCONTEXT_HAVPNAVITIPS._serialized_end=2733
+  _PARKINGRENDERCONTEXT_HUTVPAPAGE._serialized_start=2735
+  _PARKINGRENDERCONTEXT_HUTVPAPAGE._serialized_end=2778
+  _TSISIGN._serialized_start=2781
+  _TSISIGN._serialized_end=3161
+  _TSISIGN_SIGNTYPE._serialized_start=2871
+  _TSISIGN_SIGNTYPE._serialized_end=3161
+  _ACTIVESAFETYWARNINGOBSTACLE._serialized_start=3164
+  _ACTIVESAFETYWARNINGOBSTACLE._serialized_end=3532
+  _ACTIVESAFETYWARNINGOBSTACLE_TYPE._serialized_start=3287
+  _ACTIVESAFETYWARNINGOBSTACLE_TYPE._serialized_end=3532
+  _ACTIVESAFETYRENDERCONTEXT._serialized_start=3534
+  _ACTIVESAFETYRENDERCONTEXT._serialized_end=3652
+  _GWMRENDERCONTEXT._serialized_start=3655
+  _GWMRENDERCONTEXT._serialized_end=3791
+  _GLRENDERCONTEXT._serialized_start=3794
+  _GLRENDERCONTEXT._serialized_end=4241
+  _GLRENDERCONTEXT_PATHPOINT._serialized_start=4208
+  _GLRENDERCONTEXT_PATHPOINT._serialized_end=4241
+  _RENDERCONTEXT._serialized_start=4243
+  _RENDERCONTEXT._serialized_end=4356
+  _DATACONVERT._serialized_start=4358
+  _DATACONVERT._serialized_end=4423
+  _GWMCONVERTTASK._serialized_start=4425
+  _GWMCONVERTTASK._serialized_end=4483
 # @@protoc_insertion_point(module_scope)

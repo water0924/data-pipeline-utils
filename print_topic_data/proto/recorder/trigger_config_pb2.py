@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1drecorder/trigger_config.proto\x12\x12\x64\x65\x65proute.recorder\"\x1e\n\nConditions\x12\x10\n\x08\x63\x65l_expr\x18\x01 \x01(\t\"\x85\x03\n\rTriggerConfig\x12\x0c\n\x04name\x18\x01 \x01(\t\x12-\n\x04type\x18\x02 \x01(\x0e\x32\x1f.deeproute.recorder.TriggerType\x12\x10\n\x08priority\x18\x03 \x01(\r\x12\x14\n\x0c\x66orward_time\x18\x04 \x01(\x05\x12\x15\n\rbackward_time\x18\x05 \x01(\x05\x12\x11\n\tis_record\x18\x06 \x01(\x08\x12\x16\n\x0e\x63ool_down_time\x18\x07 \x01(\x05\x12\x14\n\x0crecord_light\x18\x08 \x01(\x08\x12\x15\n\rrecord_medium\x18\t \x01(\x08\x12\x14\n\x0crecord_heavy\x18\n \x01(\x08\x12\x17\n\x0fskip_compliance\x18\x0b \x01(\x08\x12\x1b\n\x13trigger_limit_times\x18\x0c \x01(\x05\x12\x11\n\tmax_times\x18\r \x01(\x05\x12\r\n\x05group\x18\x0e \x01(\x05\x12\x32\n\nconditions\x18\x0f \x01(\x0b\x32\x1e.deeproute.recorder.Conditions\"O\n\x11TriggerConfigList\x12:\n\x0ftrigger_configs\x18\x01 \x03(\x0b\x32!.deeproute.recorder.TriggerConfig\"d\n\x0eUploaderConfig\x12\x17\n\x0ftotal_file_size\x18\x01 \x01(\t\x12\x1b\n\x13\x62\x61g_compliance_mode\x18\x02 \x01(\x05\x12\x1c\n\x14skip_desensitization\x18\x03 \x01(\x08\"*\n\x0cSafetyConfig\x12\x1a\n\x12group_interval_sec\x18\x01 \x01(\r\"\xe1\x01\n\x13RemoteTriggerConfig\x12\x11\n\tconfig_id\x18\x01 \x01(\t\x12\x13\n\x0bupdate_time\x18\x02 \x01(\t\x12:\n\x0ftrigger_configs\x18\x03 \x03(\x0b\x32!.deeproute.recorder.TriggerConfig\x12\x34\n\x08uploader\x18\x04 \x01(\x0b\x32\".deeproute.recorder.UploaderConfig\x12\x30\n\x06safety\x18\x05 \x01(\x0b\x32 .deeproute.recorder.SafetyConfig*A\n\x0bTriggerType\x12\n\n\x06NORMAL\x10\x00\x12\t\n\x05GROUP\x10\x01\x12\r\n\tSUB_EVENT\x10\x02\x12\x0c\n\x08\x46LEXIBLE\x10\x03')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1drecorder/trigger_config.proto\x12\x12\x64\x65\x65proute.recorder\"\x1e\n\nConditions\x12\x10\n\x08\x63\x65l_expr\x18\x01 \x01(\t\"\xa6\x03\n\rTriggerConfig\x12\x0c\n\x04name\x18\x01 \x01(\t\x12-\n\x04type\x18\x02 \x01(\x0e\x32\x1f.deeproute.recorder.TriggerType\x12\x10\n\x08priority\x18\x03 \x01(\r\x12\x14\n\x0c\x66orward_time\x18\x04 \x01(\x05\x12\x15\n\rbackward_time\x18\x05 \x01(\x05\x12\x11\n\tis_record\x18\x06 \x01(\x08\x12\x16\n\x0e\x63ool_down_time\x18\x07 \x01(\x05\x12\x14\n\x0crecord_light\x18\x08 \x01(\x08\x12\x15\n\rrecord_medium\x18\t \x01(\x08\x12\x14\n\x0crecord_heavy\x18\n \x01(\x08\x12\x17\n\x0fskip_compliance\x18\x0b \x01(\x08\x12\x1b\n\x13trigger_limit_times\x18\x0c \x01(\x05\x12\x11\n\tmax_times\x18\r \x01(\x05\x12\r\n\x05group\x18\x0e \x01(\x05\x12\x32\n\nconditions\x18\x0f \x01(\x0b\x32\x1e.deeproute.recorder.Conditions\x12\x1f\n\x17record_full_point_cloud\x18\x10 \x01(\x08\"O\n\x11TriggerConfigList\x12:\n\x0ftrigger_configs\x18\x01 \x03(\x0b\x32!.deeproute.recorder.TriggerConfig\"d\n\x0eUploaderConfig\x12\x17\n\x0ftotal_file_size\x18\x01 \x01(\t\x12\x1b\n\x13\x62\x61g_compliance_mode\x18\x02 \x01(\x05\x12\x1c\n\x14skip_desensitization\x18\x03 \x01(\x08\"*\n\x0cSafetyConfig\x12\x1a\n\x12group_interval_sec\x18\x01 \x01(\r\"\xe1\x01\n\x13RemoteTriggerConfig\x12\x11\n\tconfig_id\x18\x01 \x01(\t\x12\x13\n\x0bupdate_time\x18\x02 \x01(\t\x12:\n\x0ftrigger_configs\x18\x03 \x03(\x0b\x32!.deeproute.recorder.TriggerConfig\x12\x34\n\x08uploader\x18\x04 \x01(\x0b\x32\".deeproute.recorder.UploaderConfig\x12\x30\n\x06safety\x18\x05 \x01(\x0b\x32 .deeproute.recorder.SafetyConfig*A\n\x0bTriggerType\x12\n\n\x06NORMAL\x10\x00\x12\t\n\x05GROUP\x10\x01\x12\r\n\tSUB_EVENT\x10\x02\x12\x0c\n\x08\x46LEXIBLE\x10\x03')
 
 _TRIGGERTYPE = DESCRIPTOR.enum_types_by_name['TriggerType']
 TriggerType = enum_type_wrapper.EnumTypeWrapper(_TRIGGERTYPE)
@@ -76,18 +76,18 @@ _sym_db.RegisterMessage(RemoteTriggerConfig)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _TRIGGERTYPE._serialized_start=932
-  _TRIGGERTYPE._serialized_end=997
+  _TRIGGERTYPE._serialized_start=965
+  _TRIGGERTYPE._serialized_end=1030
   _CONDITIONS._serialized_start=53
   _CONDITIONS._serialized_end=83
   _TRIGGERCONFIG._serialized_start=86
-  _TRIGGERCONFIG._serialized_end=475
-  _TRIGGERCONFIGLIST._serialized_start=477
-  _TRIGGERCONFIGLIST._serialized_end=556
-  _UPLOADERCONFIG._serialized_start=558
-  _UPLOADERCONFIG._serialized_end=658
-  _SAFETYCONFIG._serialized_start=660
-  _SAFETYCONFIG._serialized_end=702
-  _REMOTETRIGGERCONFIG._serialized_start=705
-  _REMOTETRIGGERCONFIG._serialized_end=930
+  _TRIGGERCONFIG._serialized_end=508
+  _TRIGGERCONFIGLIST._serialized_start=510
+  _TRIGGERCONFIGLIST._serialized_end=589
+  _UPLOADERCONFIG._serialized_start=591
+  _UPLOADERCONFIG._serialized_end=691
+  _SAFETYCONFIG._serialized_start=693
+  _SAFETYCONFIG._serialized_end=735
+  _REMOTETRIGGERCONFIG._serialized_start=738
+  _REMOTETRIGGERCONFIG._serialized_end=963
 # @@protoc_insertion_point(module_scope)

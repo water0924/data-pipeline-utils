@@ -167,6 +167,7 @@ message ObjectDetectionObstacle {// 障碍物信息
     OBSTACLE_TYPE_PARKING_LIMITER = 25; //一体限位器
     OBSTACLE_TYPE_PARKING_LIMITER_SEPARATE = 26; //分离限位器
     OBSTACLE_TYPE_VAN = 27; //厢式货车
+    OBSTACLE_TYPE_MOTORCYCLE = 28; //人骑摩托车
 
     // TRAFFIC_SIGN 交通标志箭头
     OBSTACLE_TYPE_ARROW_TS_STRAIGHT = 100;    // 直行

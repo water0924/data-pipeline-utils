@@ -314,6 +314,7 @@ proto_library(
         "//proto/map:amap_drive_route_planning_proto",
         "//proto/graph_match:graph_matching_proto",
         "//proto/odd:odd_proto",
+        "//proto/map:vla_command_proto",
     ],
     strip_import_prefix = "/proto/",
 )
@@ -389,5 +390,31 @@ python_proto_library(
     visibility = ["//visibility:public"],
     protos = [
         ":vpa_mapping_proto",
+    ],
+)
+
+proto_library(
+    name = "vla_command_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["vla_command.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "vla_command_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":vla_command_proto",
+    ],
+)
+
+python_proto_library(
+    name = "vla_command_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":vla_command_proto",
     ],
 )

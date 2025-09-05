@@ -1,7 +1,11 @@
 syntax = "proto2";
 
 package deeproute.cloud_task;
- 
+
+import "routing/collection_trigger_rule.proto";
+
+
+
 message ImageCollectEvent {
   // Image hz control parameter. At least need to define one of them.
   optional double min_move_dist_meter = 3;
@@ -17,18 +21,7 @@ message DataCollectionTriggerEvent {
   // Optional parameters
   optional double link_offset_start = 1; // Use 0 if not set.
   optional double link_offset_end = 2;   // Use link length if not set.
-
-  // begin--endtime gap
-  message TimePoint {
-    optional uint32 hour = 1;
-    optional uint32 min = 2;
-    optional uint32 seconds = 3;
-  }
-  message TimePhase {
-    optional TimePoint begin = 1;
-    optional TimePoint end = 2;
-  }
-  repeated TimePhase time_phase = 3;     // if empty, data collection behavior will be triggered at any time
+  repeated collection_trigger_rule.TimePhase time_phase = 3;     // if empty, data collection behavior will be triggered at any time
 }
 
 message SampleParameters {
@@ -51,3 +44,5 @@ message NNFeatureCollectEvent {
   // Frame sampling parameters
   optional SampleParameters sample_parameters = 1;
 }
+
+

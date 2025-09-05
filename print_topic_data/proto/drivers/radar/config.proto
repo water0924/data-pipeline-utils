@@ -3,9 +3,36 @@ syntax = "proto2";
 package deeproute.drivers.radar;
 import "common/geometry.proto";
 
+enum RadarType {
+  UNKNOWN = 0;
+  CONTI_408 = 1;
+  HW_MRR_631 = 2;
+  HW_SRR_621 = 3;
+  DSV_SRR = 4;
+  DSV_MRR = 5;
+  CONTI_308 = 6;
+  CONTI_430 = 7;
+  GM_BS_MRR = 8;
+  GM_BS_SRR = 9;
+  BYD_SENSETECH_MRR = 10;
+  BYD_SENSETECH_SRR = 11;
+
+  BOSCH_GEN5_FR = 20;
+  BOSCH_GEN5_CR = 21;
+  BOSCH_GEN6_FR = 22;
+  BOSCH_GEN6_CR = 23;
+  RABO_6F_FR = 24;
+  RABO_6C_CR = 25;
+  WHST_STA77_5S_FR = 26;
+  WHST_STA79_2PRO_CR = 27;
+  FREETECH_CVR30_CR = 28;
+  WHST_STA77_6_4D_FR = 29;
+}
+
 message Config {
   optional string frame_id = 1;
   optional deeproute.common.Transformation3 sensor_to_radar = 2;
+  optional RadarType type = 3 [default = UNKNOWN];
 }
 
 message RadarConfig {

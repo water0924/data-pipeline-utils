@@ -179,6 +179,8 @@ message StopLine {
     LEFTTURN = 5;
   }
   optional Type type = 4;
+  optional bool is_from_semantic_map = 5;
+  optional int32 semantic_map_id = 6;
 }
 
 message PerceptionInfo {
@@ -282,6 +284,18 @@ message ParkingSpace {
     CHARGING_STATION = 25;
     BARRIER_GATE = 26;
   }
+  enum OpenDirection {
+    K_0_1 = 0;
+    K_1_2 = 1;
+    K_2_3 = 2;
+    K_3_0 = 3;
+  }
+  enum AttributeType {
+    DEFAULT_LINE_PARKSPACE = 0;
+    MECHANICAL_PARKSPACE = 1;
+    BEND_LINE_PARKSPACE = 2;
+    SPACE_PARKSPACE = 3;
+  }
   optional ShapeType shape_type = 7;
   optional BoundaryType boundary_type = 14;
   optional SourceType source_type = 8;
@@ -295,6 +309,8 @@ message ParkingSpace {
   optional bool head_parking_available = 16 [default = false];
   optional bool tail_parking_available = 17 [default = true];
   optional int32 request_id = 18;  // for user define parkspace, other parkspace don't have this field
+  optional OpenDirection open_direction = 19;
+  optional AttributeType attribute_type = 20;
 }
 
 message Road {
@@ -335,6 +351,7 @@ message RoadPolygon {
     DIVERSION = 3;
     NODIR_ROADMASK = 4;
     BOTHDIR_ROADMASK = 5;
+    NO_STOPPING = 6;
   }
   optional Type type = 2;
   optional common.Polygon polygon = 3;
@@ -398,6 +415,12 @@ message RASMap {
 
   optional float heading_angle = 22; // rad
   optional bool is_uncertain = 23;
+  enum PassageType {
+    PASSAGE_TYPE_UNKNOWN = 0;
+    PASSAGE_TYPE_NARROW = 1;
+    PASSAGE_TYPE_NOT_NARROW = 2;    
+  }
+  optional PassageType passage_type = 24;
 }
 
 message Extrinsic {

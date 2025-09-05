@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package gl.internal;
+
+message BasePoint {
+  double x = 1;
+  double y = 2;
+  double z = 3;
+}
+
+message BaseSize {
+  double height = 1;
+  double width = 2;
+  double length = 3;
+}
+
+message Parkingspace {
+  repeated BasePoint origin_points = 1; // 原始坐标点
+  repeated BasePoint coord_poiots = 2; // 坐标转换后的点
+  bool is_lateral_reverse = 3; // 水平车位是否修改感知原始点序
+}
+
+message Obstacle {
+  BasePoint position = 1;
+  BaseSize size = 2;
+  double angle = 3;
+}
