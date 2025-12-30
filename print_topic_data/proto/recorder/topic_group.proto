@@ -76,4 +76,3 @@ message TopicGroup {
    **/
   repeated Topic topics = 1;
 }
-

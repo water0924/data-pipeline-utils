@@ -240,3 +240,25 @@ message AreaInfo {
   optional double distance_to_area_start = 2;
   optional double distance_to_area_end = 3;
 }
+
+enum SdSceneType {
+  SD_SCENE_UNKNOWN = 0;             // 未知
+  SD_SCENE_COMMUNITY_JUNCTION = 1;  // 小区路豁口
+  SD_SCENE_CROSSROAD = 2;           // 十字路口
+}
+
+enum SdSceneLabelType {
+  SD_SCENE_LABEL_UNKNOWN = 0;            // 未知
+  SD_SCENE_LABEL_JUNCTION_ON_LEFT = 1;   // 左侧豁口
+  SD_SCENE_LABEL_JUNCTION_ON_RIGHT = 2;  // 右侧豁口
+  SD_SCENE_LABEL_NO_TRAFFIC_LIGHT = 3;   // 无红绿灯
+  SD_SCENE_LABEL_SINGLE_LANE = 4;        // 单车道
+}
+
+message LinkSdScene {
+  optional uint64 link_id = 1;                    // Link ID
+  optional SdSceneType sd_scene_type = 2;         // 场景类型
+  repeated SdSceneLabelType sd_scene_labels = 3;  // 场景标签
+  optional double distance_to_scene = 4;          // 到场景的距离
+}
+

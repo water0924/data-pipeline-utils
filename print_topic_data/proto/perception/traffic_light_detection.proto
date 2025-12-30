@@ -19,6 +19,24 @@ enum TrafficLightType {
   WAITAREA_RIGHT_OUT = 10;
 }
 
+enum E2EShape {
+  CIRCLE = 0;
+  ARROW = 1;
+  TEXT = 2;
+  COUNT = 3;
+  BAR = 4;
+  OTHER = 5;
+  FLOWER = 6;
+  UNKNOWN_SHAPE = 7;
+}
+
+enum E2ECross {
+  APPROACH = 0;
+  CROSS = 1;
+  MANEUVER = 2;
+  UNKNOWN_CROSS = 3;
+}
+
 message TrafficLightBox {
   optional int32 x = 1;
   optional int32 y = 2;
@@ -91,7 +109,9 @@ message TrafficLight {
   optional bool use_e2e = 22;
   optional Color e2e_color = 23;
   optional TrafficLightStopS tl_stops = 24;
-
+  optional bool obscured = 26 [default = false]; // 是否被遮挡
+  optional E2EShape e2e_shape = 27;
+  optional E2ECross e2e_cross = 28;
 }
 
 message TrafficLightStopS {
@@ -103,6 +123,19 @@ message TrafficLightStopS {
   optional common.Polyline polyline_local = 2;
   // stops exist
   optional bool stops_exist = 3;
+}
+
+message TrafficLightE2ETags {
+  optional bool uturn_stops = 1 [default = false];
+  optional bool main_cam_no_light = 2 [default = false];
+  optional bool wait_area = 3 [default = false];
+  optional bool landing_light = 4 [default = false];
+  optional bool right_turn_lane = 5 [default = false];
+  optional bool warning_light = 6 [default = false];
+  optional bool tide_lane = 7 [default = false];
+  optional bool roundabout_light = 8 [default = false];
+  optional bool lane_level_light = 9 [default = false];
+  optional bool round_turn_left = 10 [default = false];
 }
 
 message TrafficLightDetectionTask {
@@ -160,9 +193,13 @@ message TrafficLightResponse {
   // start from 0
   optional int64 virtual_traffic_lights_id = 4;
   // Traffic light stops
+  // Output the unsmooth results of the model, directly.
+  // Only for debugging, do not use it in planning.
   optional TrafficLightStopS traffic_light_stops = 5;
   // Convert from RasModelFeature.semantic_map to world coordinate
   optional hdmap.Map semantic_map = 6 [deprecated = true]; 
   // Extract from semantic_map
   repeated TrafficLightMpStopline traffic_light_mp_stopline = 7; 
+
+  optional TrafficLightE2ETags e2e_tags = 8;
 }

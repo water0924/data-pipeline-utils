@@ -87,6 +87,17 @@ message ParkingRenderContext {
     HAVP_TIP_EXIT_PARKING_LOT   =9; //即将驶离地库
     HAVP_TIP_RETURN_ROAD        =10; //请行驶至道路 
   }
+
+  // special for LP USS
+  enum SlotTypeEnum {
+    NONE_SLOT_TYPE            = 0;
+    VERTICAL_SLOT             = 1; // 垂直车位
+    PARALLEL_SLOT             = 2; // 水平车位
+    OBLIQUE_SLOT              = 3; // 斜车位
+    MECHANICAL_SLOT           = 4; // 机械车位
+    CUSTOM_SLOT               = 5; // 自定义车位
+    REGULAR_SLOT              = 6; // 常用车位
+  }
   int64 timestamp = 1;
   ParkingSpaceMapping parkingspace_mapping = 2;
   bool background_search = 3;  // 是否后台搜车位，不是情况下仪表不释放车位
@@ -123,6 +134,9 @@ message ParkingRenderContext {
   ParkingSpaceStatus apa_customize_parkingspace_status = 24; // 自选车位框状态
   int32 customize_parking_frame_id = 25;  // 自选车位框ID
   int32 gl_map_id = 26;
+  bool custom_park_reversed = 27;
+  bool saving_map_when_learning_not_sence = 28;  // 学习无感知时是否保存地图
+  SlotTypeEnum parking_space_type = 29; // LP泊入目标车位类型
 }
 
 enum ParkingSpaceStatus{
@@ -179,6 +193,11 @@ message ActiveSafetyWarningObstacle {
     RCTA_ACTIVE = 11;
     AES_ACTIVE = 12;
     RCTA_LEVEL2_ACTIVE = 13; // gl rcta 2级告警需要变红，1级不需要，因此区分
+    FVSA_ACTIVE = 14; // 前车起步
+    RAEB_ACTIVE = 15;
+    ELK_ACTIVE = 16;
+    MAI_ACTIVE = 17;
+    MEB_ACTIVE = 18; // LP项目叫LAEB
   }
   Type active_feature = 2;
   double ttc = 3;
@@ -207,12 +226,19 @@ message GLRenderContext {
   repeated PathPoint right_reverse_trajectory = 6;
 }
 
+message CommonRenderContext {
+  ActiveSafetyRenderContext active_safety_render_data = 1;
+  ParkingRenderContext parking_render_data = 2;
+  DrivingRenderContext driving_render_data = 3;
+}
+
 // topic: /blc/render_context
 message RenderContext {
   oneof type {
     GWMRenderContext gwm_data = 1;
     GLRenderContext gl_data = 2;
   }
+  CommonRenderContext common_render_data = 100;
 }
 
 // topic: /dta/data_convert

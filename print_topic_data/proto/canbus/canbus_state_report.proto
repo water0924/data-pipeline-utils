@@ -37,6 +37,7 @@ message VcuStateMachine {
   optional VcuState rctb_state = 11;
   optional VcuState meb_state = 12;
   optional VcuState driving_lss_state = 13;
+  optional VcuState rws_state = 14;
 }
 
 message VehicleStatus {
@@ -77,6 +78,8 @@ message VehicleStatus {
   optional int32 fcta_status  = 35; 
   optional int32 fcw_status  = 36; 
   optional int32 veh_motion_Status = 37;
+  optional bool is_rws_available = 38;
+  optional bool is_rws_active = 39; 
 }
 
 message CtrlValue {
@@ -143,6 +146,8 @@ message CtrlValue {
   optional double rws_ang_req_value = 60 [default = 0];  
   optional double strg_trq_coeff = 61 [default = 0];
   optional int32 door_lock_req = 62;
+  optional bool lss_enable = 63;
+  optional int32 lss_functon_type = 64;
 }
 
 message DebugInfo {
@@ -169,4 +174,5 @@ message DebugInfo {
   optional int32 prk_lon_child_state = 21;
   optional int32 prk_lat_child_state = 22;
   optional int32 lss_child_state = 23;
+  optional double anti_silp_brake_torque = 24;
 }

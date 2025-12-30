@@ -13,6 +13,32 @@ import "map/map_common.proto";
 import "map/common_type.proto";
 import "routing/collection_trigger_rule.proto";
 
+message FeatureInfo {
+  optional string feature_id = 1;
+  optional string feature_stage = 2;
+  optional string feature_name = 3;
+  optional string feature_image = 4;
+  optional string feature_email = 5;
+}
+
+message PodInfo {
+  optional string pod_name = 1;
+  optional string pod_namespace = 2;
+  optional string pod_ip = 3;
+}
+
+message RoutingVersion {
+  optional FeatureInfo feature_info = 1;
+  optional PodInfo pod_info = 2;
+  optional string node_name = 3;
+}
+
+enum ShapePointType {
+  UNKNOWN = 0;
+  SHPOS_FIVE_DIGIT = 1;
+  SHPOS_FIVE_DIGIT_AND_SHAPE_POINT = 2;
+}
+
 message SDRoutingResponse {
   optional deeproute.map.RoutePlanningType route_planning_type = 1000;
 
@@ -32,6 +58,10 @@ message SDRoutingResponse {
   // local parking map id near trip end
   // source: RoutingRequest.local_map_id
   optional string local_map_id = 10;
+
+  optional RoutingVersion routing_version = 11;
+
+  optional ShapePointType shape_point_type = 12;
 }
 
 message NaviHead {
@@ -208,6 +238,8 @@ message SpeedLimitInfo {
       spd_static_strategy_type = 9;
   repeated deeproute.routing.NavigationInfoForVisualize.SceneStrategyType
       spd_scene_strategy_type = 10;
+  optional int32 turn_radius = 11;
+  optional bool is_large_curvature = 12;
 }
 
 message StaticRoutingInfo {
@@ -242,6 +274,26 @@ message SegmAction {
   optional deeproute.map.MainAction step_main_action = 4;
   optional deeproute.map.AssistantAction step_assistant_action = 5;
   repeated deeproute.map.LaneActions multi_lane_actions = 6;
+}
+
+enum DefenceSceneType {
+  DEFENCE_NARROW_ROAD = 0;           // 狭窄道路
+  DEFENCE_BLIND_NARROW_TO_WIDE = 1;  // 盲区小路到大路
+  DEFENCE_BLIND_OPENING = 2;         // 盲区豁口
+  DEFENCE_BLIND_MERGING = 3;         // 盲区汇入
+  DEFENCE_BLIND_CURVE = 4;           // 弯道盲区
+  DEFENCE_BLIND_UTURN = 5;           // 盲区掉头
+  DEFENCE_BLIND_UPHILL = 6;          // 上坡盲区
+}
+
+message DefenceSceneInfo {
+  optional DefenceSceneType defence_scene_type = 1;
+  // The start distance to the link start for the defence scene, unit: meters.
+  optional int32 start_offset_to_link_start = 2;
+  // The end distance to the link start for the defence scene, unit: meters.
+  optional int32 end_offset_to_link_start = 3;
+  // The suggest speed limit of the defence scene, unit: meters.
+  optional int32 suggest_speed_limit = 4;
 }
 
 message Segment {
@@ -302,7 +354,7 @@ message Segment {
   // Lane number.
   // Actual number of lanes on link
   optional int32 f_lane_num = 7;
-  
+
   optional uint32 lane_num_sum = 52;
 
   // Not required.
@@ -427,6 +479,13 @@ message Segment {
 
   // 仅VLA下，和此前的路线重合, 用于抑制重规划的范围
   optional bool is_extend_overlap = 56;
+
+  repeated deeproute.sd_map.LaneNumChangePoint lane_num_change_points = 57;
+
+  optional DefenceSceneInfo defence_scene_info = 58;
+
+  // SD道路场景
+  repeated deeproute.map.LinkSdScene sd_scene_list = 59;
 }
 
 message SpeedLimitConfig {
@@ -442,6 +501,10 @@ message SpeedLimitConfig {
   optional bool enable_express_amap_camera_spl = 5;
   // use amap camera spd limit on city
   optional bool enable_city_amap_camera_spl = 6;
+  // use amap spd limit on city
+  optional bool enable_city_amap_spl = 7;
+  // use amap construction spd limit on highway
+  optional bool enable_highway_amap_construction_spl = 8 [default = true];
 }
 
 message Route {
@@ -478,10 +541,4 @@ message Route {
 
 message Result {
   optional Route route = 1;
-}
-
-// /map/data_collection/trigger_list
-message TriggerList {
-  optional uint64 dr_link_id = 1; // current link id
-  repeated deeproute.collection_trigger_rule.Trigger trigger_list = 2; 
 }

@@ -115,7 +115,7 @@ message CarInfo {
   optional bool control_lost_heartbeat = 40;
   optional bool mcu_detect_soc_lost_heartbeat = 41;
   optional AirSuspReport air_susp_report = 42;
-
+  optional string dbc_version = 99;// DBC version info
   optional ChassisDetails chassis_details = 100;
 }
 

@@ -164,6 +164,10 @@ message GnssPosition {
   uint32 signals_mask_Galileo_and_BeiDou = 21;
   uint32 signals_mask_Gps_and_Glonass = 22;
   ReferenceCoordinateSystem reference_coordinate_system = 23;
+  repeated float gnss_l1_cn0 = 24;
+  repeated float gnss_l5_cn0 = 25;
+  uint32 l1_cn0_size = 26;
+  uint32 l5_cn0_size = 27;
 }
 
 // rostopic /sensors/gnss/raw_gnss_velocity

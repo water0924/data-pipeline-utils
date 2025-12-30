@@ -4,7 +4,6 @@ package deeproute.canbus;
 
 import "common/vehicle_signal.proto";
 import "common/configs/vehicle_config.proto";
-import "canbus/byd_chassis_detail.proto";
 import "canbus/chassis_control_interface_type.proto";
 import "canbus/gwm_chassis_detail.proto";
 
@@ -37,7 +36,6 @@ message ChassisDetailsRequest {
     M5DetailsRequest m5 = 2;
     MarDetailsRequest mar = 3;
     M7DetailsRequest m7 = 4;
-    BydDetailsRequest byd = 5;
     GwmDetailsRequest gwm = 6;
     Hy11DetailsRequest hy11 = 7;
   }
@@ -50,10 +48,6 @@ message M7DetailsRequest {
 }
 
 message MarDetailsRequest {
-}
-
-message BydDetailsRequest {
-  optional deeproute.canbus.byd.ADS_0x11E ads_0x11e = 1;
 }
 
 message GwmDetailsRequest {

@@ -9,6 +9,14 @@
 // v3.4_gwm_20240522新增int32 light_count_down=7;  //红绿灯倒计时，单位秒
 // v3.5_gwm_20240718新增LightStateType light_type = 8; // 红绿灯颜色状态
 // v3.6_gwm_20241231新增repeated NaviGreenWaveCarSpeed  navi_green_wave = 43;//绿波路段信息
+
+// v3.7_gwm_20250422新增messageParallelRoadStatus parallel_road_status =44;  //  平行路状态信息，包括主辅路和高架
+// v3.8_gwm_20250718新增实时信息中45-48字段及全局路径中11-14字段，link路段及前背景车道coding值
+// v3.8_gwm_lock_20250805补充 ServiceAreaInfo service_area_info = 48服务区字段，traffic_light_cnt类型由int32改为uint64
+// v3.8_gwm_lock_20250808增加meeage MapRoute中两个字段（tag和laneaction arg），用于区分sd route和lane action内容
+// v3.8_gwm_lock_20250812将meeage MapRoute中两个字段tag和laneaction arg替换为EnumMessageType message_type = 3和LaneActionMessage lane_action_message = 4两个字段；删除实时信息里47路口信息列表字段
+// v3.9_gwm_20251011增加message GlobalRoute中字段GpsPoint3D pull_over_poi =15; // NEW语音停车位置信息。
+
 syntax = "proto3";
 package dr.gwm.navigation;
 
@@ -69,6 +77,24 @@ message RealTimeData {
   repeated double reserves_double = 41;  // 实时信息预留变量,浮点数
   uint64 check_code = 42;  // 按本协议发送时请填1234, 用于校验proto内容
   repeated NaviGreenWaveCarSpeed navi_green_wave = 43;
+  ParallelRoadStatus parallel_road_status = 44;  //  平行路状态信息，包括主辅路和高架
+  int32 curr_ownership = 45;                          // NEW 当前道路所有权，巡航也需要   导航、巡航按照统一输出，只关注0和其他，透出高德结果即可
+  repeated MixForkInfo mix_fork_list = 46;            // NEW 混淆路口信息列表，导航时支持 巡航不支持
+  ServiceAreaInfo service_area_info = 47;             // NEW 前方2km(TBD)内服务区信息，巡航也需要  导航时支持 巡航不支持 
+}
+
+// NEW 混淆路口信息
+message MixForkInfo {
+  GpsPoint3D pos = 1;       // 经纬度
+  int32 dist = 2;           // 混淆路口到导航点距离
+  int32 road_class = 3;     // 道路等级
+  int32 segment_index = 4;  // 当前导航段索引
+}
+
+// NEW 服务区信息
+message ServiceAreaInfo {
+  int32 is_valid = 1; // 0:该信息无效，1：该信息有效
+  int32 distance = 2; // 到服务区的距离，已进入服务区时填0   无法判断是否进入服务区
 }
 
 /**
@@ -77,8 +103,21 @@ message RealTimeData {
  */
 // 新增多条路线的数组集合
 message MapRoute {
-  int32 id = 1;
+  uint64 id = 1;
   repeated GlobalRoute global_route = 2;
+  EnumMessageType message_type = 3;
+  LaneActionMessage lane_action_message = 4;
+}
+
+message LaneActionMessage{
+   uint64 path_id = 1;
+   repeated LaneActions lane_action_list  = 2;
+}
+
+enum EnumMessageType{
+   UNKNOWN = 0;
+   MAP_ROUTE = 1;
+   LANE_ACTION =2;
 }
 
 message GlobalRoute {
@@ -94,7 +133,25 @@ message GlobalRoute {
   repeated int32 reserves_int = 8;      // 全局路径预留变量,整数
   repeated double reserves_double = 9;  // 实时信息预留变量,浮点数
   uint64 check_code = 10;  // 按本协议发送时请填1234, 用于校验proto内容
+  repeated ViaRoadInfo via_road_list = 11;      // NEW 途径路信息列表。参考： PathInfo.getPathViaRoadInfo()  
+  string engine_ver = 12;                       // NEW 导航引擎版本。参考： ServiceMgr.getEngineVersion()  
+  string sdk_ver = 13;                          // NEW 导航sdk版本。参考： ServiceMgr.getVersion()  支持
+  repeated GpsPoint3D traffic_light_list = 14;  // NEW 全局交通灯信息。参考： PathInfo.getAllTrafficLights()  
+  GpsPoint3D pull_over_poi =15; // NEW语音停车位置信息。无效时都传0。
 }
+
+// NEW 途径路信息列表
+message ViaRoadInfo {
+  string road_name = 1;       // NEW 道路名称
+  uint32 min_speed_limit = 2; // NEW 道路最小限速
+  uint32 max_speed_limit = 3; // NEW 道路最大限速
+  uint32 min_lane_num = 4;    // NEW 道路最小车道数
+  uint32 max_lane_num = 5;    // NEW 道路最大车道数
+  uint32 length = 6;          // NEW 聚合段长度
+  uint32 road_class = 7;      // NEW 道路等级
+  GpsPoint3D coord = 8;       // NEW 坐标（2D）
+}
+
 
 /**
  * 导航段定义
@@ -134,6 +191,10 @@ message Link {
   repeated CameraInfo camera_info = 16;  // 摄像头信息,距离填相对link起点的距离
   repeated Facility facilities = 17;  // 道路设施,距离填相对link起点的距离
   repeated int32 reserves = 18;  // link预留变量
+  int32 is_parking_road = 24;             // NEW 是否为停车道路，0无效值，1是，2否   指的是停车场内部道路
+  int64 adcode = 25;                      // NEW 道路所属行政区划代码 
+  int32 has_parallel_road = 26;           // NEW 是否有平行路，如主路辅路，高架上下等, 0无效值，1是，2否  
+  int32 road_owner_ship = 27;             // NEW 道路所有权，直接透出原始值 
 }
 
 /**
@@ -156,6 +217,15 @@ message LaneActions {
   double distance_to_lane_actions = 1;       // 到前背景车道的距离
   repeated LaneAction foreground_lanes = 2;  // 前景车道
   repeated LaneAction background_lanes = 3;  // 背景车道
+  repeated int32 optimal_lanes = 4;         // NEW 建议车道  支持 
+  repeated int32 front_exten_lanes = 5;     // NEW 前景扩展车道信息  支持
+  repeated int32 back_exten_lanes = 6;      // NEW 背景扩展车道信息  支持
+  repeated int32 front_lane_type = 7;       // NEW 前景分时车道类型，仅在线导航有效  支持
+  repeated int32 back_lane_type = 8;        // NEW 背景分时车道类型，仅在线导航有效  支持
+  GpsPoint3D gps_point = 9;                 // NEW 车道坐标点，仅巡航有效  支持
+  int32 segment_idx = 10;                   // NEW 所在导航段索引，仅导航有效  支持
+  int32 link_idx = 11;                      // NEW 所在link索引，仅导航有效  支持
+  int64 timestamp = 12;                     // NEW 导航发出前背景车道信息更新的车机时间，用于信号生效时间确认  支持，
 }
 
 /**
@@ -652,7 +722,7 @@ enum AssistantAction {
  * 红绿灯状态和倒计时
  */
 message TrafficLight {
-  int32 is_valid = 1;              // 0:该信息无效，1：该信息有效
+  int32 is_valid = 1;              // 0:该信息无效，1：该信息有效，20240322::距离大于0小于2k米有效，仅距离有效时is_valid设置为1
   int32 distance = 2;              // 到达红绿灯的距离
   TrafficLightDir dir = 3;         // 红绿灯控制方向
   int32 wait_num = 4;              // 等红绿灯轮数
@@ -764,4 +834,13 @@ message NaviGreenWaveCarSpeed {
   uint64 maxSpeed = 3; //最大建议车速，单位：km/h
   uint64 minSpeed = 4; //最小建议车速，单位：km/h
   uint64 lightCount = 5; //剩余绿灯数量，单位：个
+}
+
+/**
+ * 平行路状态信息
+ */
+message ParallelRoadStatus {
+   int32 status =1;  //主辅路切换状态（0表示非平行路切换期间，1表示平行路切换期间）
+   int32 flag =2;  //主辅路标识（默认0，离线数据计算/在线算路下发） 0：无主辅路（车标所在道路旁无主辅路） 1：车标在主路（车标所在道路旁有辅路） 2：车标在辅路（车标所在道路旁有主路）
+   int32 hwFlag =3;  //高架上下标识（0表示无高架，1表示车标在高架上，2表示车标在高架下）
 }

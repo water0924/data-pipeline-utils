@@ -16,6 +16,14 @@ enum CMSFType {
   CMSF_PLUS = 2;
 }
 
+enum AebState {
+    OFF = 0;
+    FAILURE = 1;
+    PASSIVE = 2;
+    STANDBY = 3;
+    ACTIVE = 4;
+}
+
 // topic : /blc/policy_result_to_aeb
 message PolicyResultsToAeb {
   int32 msg_id = 1;
@@ -134,6 +142,63 @@ message AESStateCondition {
     dr.operationstatus.ReasonInfo reason_info = 20;
 }
 
+message RAEBStateCondition { 
+    bool  is_off = 1;
+    bool  is_failure = 2;
+    bool  is_raeb_passive = 3; 
+    bool  is_raeb_active_exit = 4; 
+    bool  is_reba_passive = 5;
+    bool  is_reba_active_exit = 6;
+    bool  is_standstill_exit = 7;
+    bool  is_standstill_enter = 8;
+    bool  is_reba_active = 9;
+
+    dr.operationstatus.ReasonInfo reason_info = 20; // passive或者退出或者failure都会有对应reason，便于debug
+}
+message ELKStateCondition {
+    bool is_off = 1;                
+    bool is_failure = 2;
+    bool is_passive = 3;
+    bool is_active_exit = 4;
+    repeated dr.operationstatus.ELKScenario enabled_scenarios = 5;
+    AebState source_state = 15;
+    dr.operationstatus.ReasonInfo reason_info = 20;
+}
+
+enum LKAScenario {
+    UNKNOWN_LKA_SCENARIO = 0;
+    LKA_LEFT = 1;
+    LKA_LEFT_RE = 2;
+    LKA_RIGHT = 3;
+    LKA_RIGHT_RE = 4;
+}
+
+message LKAStateCondition {
+    bool is_off = 1;                
+    bool is_failure = 2;
+    bool is_passive = 3;
+    bool is_active_exit = 4;
+    repeated dr.operationstatus.LKAScenario enabled_scenarios = 5;
+    AebState source_state = 15;
+    dr.operationstatus.ReasonInfo reason_info = 20;
+}
+
+enum LDWScenario {
+    UNKNOWN_LDW_SCENARIO = 0;
+    LDW_LEFT = 1;
+    LDW_RIGHT = 2;
+}
+
+message LDWStateCondition {
+    bool is_off = 1;            
+    bool is_failure = 2;
+    bool is_passive = 3;
+    bool is_active_exit = 4;
+    repeated dr.operationstatus.LDWScenario enabled_scenarios = 5;
+    AebState source_state = 15;
+    dr.operationstatus.ReasonInfo reason_info = 20;
+}
+
 enum SensitivityLevel {
     MIDDLE = 0;
     HIGH = 1;
@@ -159,6 +224,7 @@ message SensitivityLevelSet {
     SensitivityLevel  esa_level = 8;
     SensitivityLevel  meb_level = 9;
     SensitivityLevel  aes_level = 10;
+    SensitivityLevel  raeb_level = 11;
 }
 
 message ODDFlags {
@@ -176,6 +242,8 @@ message ControlStatus {
     ControlStatusType aeb_control_status = 1;
     ControlStatusType esa_control_status = 2;
     ControlStatusType aes_control_status = 3;
+    ControlStatusType elk_control_status = 4;
+    ControlStatusType lka_control_status = 5;
 }
 
 // topic : /blc/aeb_state_conditions
@@ -191,6 +259,10 @@ message StateConditions {
     MEBStateCondition meb_condition = 9;
     MAIState mai_state = 10;
     AESStateCondition aes_condition = 11;
+    RAEBStateCondition raeb_condition = 12;
+    ELKStateCondition elk_condition = 13;
+    LKAStateCondition lka_condition = 14;
+    LDWStateCondition ldw_condition = 15;
 
     ODDFlags odd_flags = 20;
     SensitivityLevelSet sensitivity_level_set = 21;

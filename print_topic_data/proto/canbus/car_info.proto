@@ -9,13 +9,14 @@ import "canbus/mar_chassis_detail.proto";
 import "canbus/m7_chassis_detail.proto";
 import "canbus/byd_chassis_detail.proto";
 import "canbus/gwm_chassis_detail.proto";
-import "canbus/gwm_tank_chassis_detail.proto";
 import "canbus/gwm_de09_chassis_detail.proto";
 import "canbus/gwm_all_chassis_detail.proto";
 import "canbus/byd_tang_detail.proto";
 import "canbus/hy11_chassis_detail.proto";
 import "canbus/gl_p177_chassis_detail.proto";
 import "common/vehicle_signal.proto";
+import "canbus/lp_v35_chassis_detail.proto";
+import "canbus/lp_v35x_chassis_detail.proto";
 
 message CarInfo {
   // in us
@@ -124,6 +125,7 @@ message CarInfo {
   optional bool mcu_detect_soc_lost_heartbeat = 41;
   optional AirSuspReport air_susp_report = 42;
 
+  optional string dbc_version = 99;// DBC version info
   optional ChassisDetails chassis_details = 100;
 }
 
@@ -307,11 +309,13 @@ message ChassisDetails {
     GwmChassisDetail gwm = 6;
     SmartHy11ChassisDetail smart_hy11 = 7;
     BydTangDetail byd_tang = 8;
-    deeproute.canbus.gwm.tank.GwmTankChassisDetail gwm_tank = 9;
+    //deeproute.canbus.gwm.tank.GwmTankChassisDetail gwm_tank = 9 [deprecated = true]; 
     // deeproute.canbus.gwm.ec15.GwmEc15ChassisDetail gwm_ec15 = 10; //deprecated
     deeproute.canbus.gl.p177.GlP177ChassisDetail gl_p177 = 11;
     deeproute.canbus.gwm.de09.GwmDe09ChassisDetail gwm_de09 = 12;
     deeproute.canbus.gwm.all.GwmAllChassisDetail gwm_all = 13;
+    deeproute.canbus.lp.v35.LpV35ChassisDetail lp_v35 = 14;
+    deeproute.canbus.lp.v35x.LpV35xChassisDetail lp_v35x = 15;
   }
 }
 

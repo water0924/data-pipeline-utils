@@ -92,11 +92,18 @@ message RealTimeGuidance {
   optional deeproute.sd_map.FusionMapConfig fusion_map_source = 41;
 }
 
+message SdRoadScene {
+  repeated LinkSdScene scene_list = 1;  // 自车向前一段距离内的所有SD道路场景
+}
+
 message FusionSdMap {
   enum FusionMapType {
-    FUSION_MAP_TYPE_UNSPECIFIED = 0;  // 未指定
-    FUSION_MAP_TYPE_NAVIGATION = 1;   // 导航状态
-    FUSION_MAP_TYPE_PULL_OVER = 2;    // 靠边停车状态
+    FUSION_MAP_TYPE_UNSPECIFIED = 0;      // 未指定
+    FUSION_MAP_TYPE_NAVIGATION = 1;       // 导航状态
+    FUSION_MAP_TYPE_PULL_OVER = 2;        // 靠边停车状态
+    FUSION_MAP_TYPE_VLA_LANE_CHANGE = 3;  // VLA变道状态
+    FUSION_MAP_TYPE_PULL_OVER_PENDING =
+        4;  // 靠边停车待进入。指靠边停车还未开始，但指令已经完成下发
   }
 
   // 必需字段，用于标识等功能
@@ -106,6 +113,9 @@ message FusionSdMap {
   optional RealTimeGuidance guidance = 11;
 
   optional FusionMapType fusion_map_type = 12;
+
+  // SD道路场景
+  optional SdRoadScene sd_road_scene = 13;
 
   // TODO(HongyiZhang): 导航信息
   // TODO(HongyiZhang): 路网信息

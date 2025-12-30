@@ -72,6 +72,8 @@ enum VehicleBrand {
   GWM_C062 = 42;
   GWM_C063 = 43;
   GWM_C064 = 44;
+  GL_P171 = 45;
+  LP_A10 = 46;
 }
 
 message VehicleID {

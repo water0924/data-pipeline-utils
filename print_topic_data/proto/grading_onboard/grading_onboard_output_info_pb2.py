@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 from proto.common import module_event_pb2 as common_dot_module__event__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n1grading_onboard/grading_onboard_output_info.proto\x12\x19\x64\x65\x65proute.grading_onboard\x1a\x19\x63ommon/module_event.proto\"A\n\tEventInfo\x12$\n\nevent_type\x18\x01 \x01(\x0e\x32\x10.dr.common.Event\x12\x0e\n\x06result\x18\x02 \x01(\x08\"C\n\x07\x44taInfo\x12\x38\n\nevent_info\x18\x01 \x03(\x0b\x32$.deeproute.grading_onboard.EventInfo\"\xd5\x01\n\tCountInfo\x12\x17\n\x0fyield_vru_count\x18\x01 \x01(\x05\x12\x13\n\x0b\x63utin_count\x18\x02 \x01(\x05\x12\x14\n\x0c\x64\x65tour_count\x18\x03 \x01(\x05\x12\x19\n\x11lane_change_count\x18\x04 \x01(\x05\x12!\n\x19inbound_or_outbound_count\x18\x05 \x01(\x05\x12\x16\n\x0ejunction_count\x18\x06 \x01(\x05\x12\x18\n\x10roundabout_count\x18\x07 \x01(\x05\x12\x14\n\x0cu_turn_count\x18\x08 \x01(\x05\".\n\rHDSingleEvent\x12\x0e\n\x06\x61\x63tive\x18\x01 \x01(\x08\x12\r\n\x05\x63ount\x18\x02 \x01(\x05\"\x8a\x03\n\x0c\x41utoTagEvent\x12\x14\n\x0c\x64isplay_text\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\x12\x45\n\nevent_type\x18\x03 \x01(\x0e\x32\x31.deeproute.grading_onboard.AutoTagEvent.EventType\"\x89\x02\n\tEventType\x12\x10\n\x0cSUDDEN_BRAKE\x10\x01\x12\x0e\n\nHARD_BRAKE\x10\x02\x12\x10\n\x0cINBOUND_RAMP\x10\x03\x12\x11\n\rOUTBOUND_RAMP\x10\x04\x12\n\n\x06\x43UT_IN\x10\x05\x12\x0f\n\x0bLANE_CHANGE\x10\x06\x12\x0e\n\nOFF_CENTER\x10\x07\x12\x13\n\x0fPASS_ROUNDABOUT\x10\x08\x12\x0f\n\x0bPASS_U_TURN\x10\t\x12\x1a\n\x16PASS_LEFT_WAITING_AREA\x10\n\x12\x18\n\x14PASS_RIGHT_ONLY_LANE\x10\x0b\x12\x10\n\x0cWRONG_BRANCH\x10\x0c\x12\x1a\n\x16PASS_CONSTRUCTION_ZONE\x10\r\"\xb8\x03\n\x0bHDEventInfo\x12\x44\n\x12sudden_brake_event\x18\x01 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12\x42\n\x10hard_brake_event\x18\x02 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12\x42\n\x10not_center_event\x18\x03 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12>\n\x0cwiggle_event\x18\x04 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12M\n\x1bon_boundary_long_time_event\x18\x05 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12L\n\x1auncrossable_boundary_event\x18\x06 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\"\x82\x01\n\x07VisInfo\x12\x38\n\ncount_info\x18\x01 \x01(\x0b\x32$.deeproute.grading_onboard.CountInfo\x12=\n\rhd_event_info\x18\x02 \x01(\x0b\x32&.deeproute.grading_onboard.HDEventInfo\"\xc7\x01\n\x18GradingOnboardOutputInfo\x12\x34\n\x08\x64ta_info\x18\x01 \x01(\x0b\x32\".deeproute.grading_onboard.DtaInfo\x12\x34\n\x08vis_info\x18\x02 \x01(\x0b\x32\".deeproute.grading_onboard.VisInfo\x12?\n\x0e\x61utotag_events\x18\x03 \x03(\x0b\x32\'.deeproute.grading_onboard.AutoTagEvent')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n1grading_onboard/grading_onboard_output_info.proto\x12\x19\x64\x65\x65proute.grading_onboard\x1a\x19\x63ommon/module_event.proto\"A\n\tEventInfo\x12$\n\nevent_type\x18\x01 \x01(\x0e\x32\x10.dr.common.Event\x12\x0e\n\x06result\x18\x02 \x01(\x08\"C\n\x07\x44taInfo\x12\x38\n\nevent_info\x18\x01 \x03(\x0b\x32$.deeproute.grading_onboard.EventInfo\"\xd5\x01\n\tCountInfo\x12\x17\n\x0fyield_vru_count\x18\x01 \x01(\x05\x12\x13\n\x0b\x63utin_count\x18\x02 \x01(\x05\x12\x14\n\x0c\x64\x65tour_count\x18\x03 \x01(\x05\x12\x19\n\x11lane_change_count\x18\x04 \x01(\x05\x12!\n\x19inbound_or_outbound_count\x18\x05 \x01(\x05\x12\x16\n\x0ejunction_count\x18\x06 \x01(\x05\x12\x18\n\x10roundabout_count\x18\x07 \x01(\x05\x12\x14\n\x0cu_turn_count\x18\x08 \x01(\x05\".\n\rHDSingleEvent\x12\x0e\n\x06\x61\x63tive\x18\x01 \x01(\x08\x12\r\n\x05\x63ount\x18\x02 \x01(\x05\"\x8a\x03\n\x0c\x41utoTagEvent\x12\x14\n\x0c\x64isplay_text\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\x12\x45\n\nevent_type\x18\x03 \x01(\x0e\x32\x31.deeproute.grading_onboard.AutoTagEvent.EventType\"\x89\x02\n\tEventType\x12\x10\n\x0cSUDDEN_BRAKE\x10\x01\x12\x0e\n\nHARD_BRAKE\x10\x02\x12\x10\n\x0cINBOUND_RAMP\x10\x03\x12\x11\n\rOUTBOUND_RAMP\x10\x04\x12\n\n\x06\x43UT_IN\x10\x05\x12\x0f\n\x0bLANE_CHANGE\x10\x06\x12\x0e\n\nOFF_CENTER\x10\x07\x12\x13\n\x0fPASS_ROUNDABOUT\x10\x08\x12\x0f\n\x0bPASS_U_TURN\x10\t\x12\x1a\n\x16PASS_LEFT_WAITING_AREA\x10\n\x12\x18\n\x14PASS_RIGHT_ONLY_LANE\x10\x0b\x12\x10\n\x0cWRONG_BRANCH\x10\x0c\x12\x1a\n\x16PASS_CONSTRUCTION_ZONE\x10\r\"\xb8\x03\n\x0bHDEventInfo\x12\x44\n\x12sudden_brake_event\x18\x01 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12\x42\n\x10hard_brake_event\x18\x02 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12\x42\n\x10not_center_event\x18\x03 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12>\n\x0cwiggle_event\x18\x04 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12M\n\x1bon_boundary_long_time_event\x18\x05 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\x12L\n\x1auncrossable_boundary_event\x18\x06 \x01(\x0b\x32(.deeproute.grading_onboard.HDSingleEvent\"\x82\x01\n\x07VisInfo\x12\x38\n\ncount_info\x18\x01 \x01(\x0b\x32$.deeproute.grading_onboard.CountInfo\x12=\n\rhd_event_info\x18\x02 \x01(\x0b\x32&.deeproute.grading_onboard.HDEventInfo\"\xc7\x01\n\x18GradingOnboardOutputInfo\x12\x34\n\x08\x64ta_info\x18\x01 \x01(\x0b\x32\".deeproute.grading_onboard.DtaInfo\x12\x34\n\x08vis_info\x18\x02 \x01(\x0b\x32\".deeproute.grading_onboard.VisInfo\x12?\n\x0e\x61utotag_events\x18\x03 \x03(\x0b\x32\'.deeproute.grading_onboard.AutoTagEvent\"-\n\tStringTag\x12\r\n\x05value\x18\x01 \x01(\t\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\"\x85\x01\n\x0f\x43utInInvadedTag\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x0f\n\x07lat_dis\x18\x02 \x01(\x01\x12\x0f\n\x07lon_dis\x18\x03 \x01(\x01\x12\x0b\n\x03ttc\x18\x04 \x01(\x01\x12\x11\n\tobj_speed\x18\x05 \x01(\x01\x12\x0f\n\x07obj_acc\x18\x06 \x01(\x01\x12\x11\n\ttimestamp\x18\x07 \x01(\x03\"\xfa\x02\n\x07MetaMsg\x12\x39\n\x0blane_change\x18\x01 \x01(\x0b\x32$.deeproute.grading_onboard.StringTag\x12@\n\x12lane_change_reason\x18\x02 \x01(\x0b\x32$.deeproute.grading_onboard.StringTag\x12?\n\x11lane_change_cutin\x18\x03 \x01(\x0b\x32$.deeproute.grading_onboard.StringTag\x12\x42\n\x0e\x63ut_in_invaded\x18\x04 \x01(\x0b\x32*.deeproute.grading_onboard.CutInInvadedTag\x12\x38\n\nego_cut_in\x18\x05 \x01(\x0b\x32$.deeproute.grading_onboard.StringTag\x12\x33\n\x05nudge\x18\x06 \x01(\x0b\x32$.deeproute.grading_onboard.StringTag\"\xa9\x02\n\x08SceneMsg\x12\x12\n\nadmin_code\x18\x01 \x01(\x03\x12\x11\n\tarea_type\x18\x02 \x01(\t\x12\x12\n\nroad_types\x18\x03 \x03(\t\x12\x13\n\x0btime_of_day\x18\x04 \x01(\t\x12\x0f\n\x07weather\x18\x05 \x01(\t\x12\x13\n\x0b\x62rake_level\x18\x06 \x01(\x01\x12\x18\n\x10take_over_method\x18\x07 \x01(\t\x12\x1a\n\x12steering_angle_deg\x18\x08 \x01(\x01\x12\x16\n\x0ethrottle_level\x18\t \x01(\x01\x12\x10\n\x08\x61\x63\x63_mps2\x18\n \x01(\x01\x12\x0c\n\x04gear\x18\x0b \x01(\t\x12\x11\n\tspeed_mps\x18\x0c \x01(\x01\x12\x13\n\x0bturn_signal\x18\r \x01(\t\x12\x11\n\ttimestamp\x18\x0e \x01(\x03\"\x86\x01\n\x15GradingOnboardMetaMsg\x12\x35\n\tmeta_msgs\x18\x01 \x01(\x0b\x32\".deeproute.grading_onboard.MetaMsg\x12\x36\n\tscene_msg\x18\x02 \x01(\x0b\x32#.deeproute.grading_onboard.SceneMsg')
 
 
 
@@ -27,6 +27,11 @@ _AUTOTAGEVENT = DESCRIPTOR.message_types_by_name['AutoTagEvent']
 _HDEVENTINFO = DESCRIPTOR.message_types_by_name['HDEventInfo']
 _VISINFO = DESCRIPTOR.message_types_by_name['VisInfo']
 _GRADINGONBOARDOUTPUTINFO = DESCRIPTOR.message_types_by_name['GradingOnboardOutputInfo']
+_STRINGTAG = DESCRIPTOR.message_types_by_name['StringTag']
+_CUTININVADEDTAG = DESCRIPTOR.message_types_by_name['CutInInvadedTag']
+_METAMSG = DESCRIPTOR.message_types_by_name['MetaMsg']
+_SCENEMSG = DESCRIPTOR.message_types_by_name['SceneMsg']
+_GRADINGONBOARDMETAMSG = DESCRIPTOR.message_types_by_name['GradingOnboardMetaMsg']
 _AUTOTAGEVENT_EVENTTYPE = _AUTOTAGEVENT.enum_types_by_name['EventType']
 EventInfo = _reflection.GeneratedProtocolMessageType('EventInfo', (_message.Message,), {
   'DESCRIPTOR' : _EVENTINFO,
@@ -84,6 +89,41 @@ GradingOnboardOutputInfo = _reflection.GeneratedProtocolMessageType('GradingOnbo
   })
 _sym_db.RegisterMessage(GradingOnboardOutputInfo)
 
+StringTag = _reflection.GeneratedProtocolMessageType('StringTag', (_message.Message,), {
+  'DESCRIPTOR' : _STRINGTAG,
+  '__module__' : 'grading_onboard.grading_onboard_output_info_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.grading_onboard.StringTag)
+  })
+_sym_db.RegisterMessage(StringTag)
+
+CutInInvadedTag = _reflection.GeneratedProtocolMessageType('CutInInvadedTag', (_message.Message,), {
+  'DESCRIPTOR' : _CUTININVADEDTAG,
+  '__module__' : 'grading_onboard.grading_onboard_output_info_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.grading_onboard.CutInInvadedTag)
+  })
+_sym_db.RegisterMessage(CutInInvadedTag)
+
+MetaMsg = _reflection.GeneratedProtocolMessageType('MetaMsg', (_message.Message,), {
+  'DESCRIPTOR' : _METAMSG,
+  '__module__' : 'grading_onboard.grading_onboard_output_info_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.grading_onboard.MetaMsg)
+  })
+_sym_db.RegisterMessage(MetaMsg)
+
+SceneMsg = _reflection.GeneratedProtocolMessageType('SceneMsg', (_message.Message,), {
+  'DESCRIPTOR' : _SCENEMSG,
+  '__module__' : 'grading_onboard.grading_onboard_output_info_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.grading_onboard.SceneMsg)
+  })
+_sym_db.RegisterMessage(SceneMsg)
+
+GradingOnboardMetaMsg = _reflection.GeneratedProtocolMessageType('GradingOnboardMetaMsg', (_message.Message,), {
+  'DESCRIPTOR' : _GRADINGONBOARDMETAMSG,
+  '__module__' : 'grading_onboard.grading_onboard_output_info_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.grading_onboard.GradingOnboardMetaMsg)
+  })
+_sym_db.RegisterMessage(GradingOnboardMetaMsg)
+
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
@@ -105,4 +145,14 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _VISINFO._serialized_end=1478
   _GRADINGONBOARDOUTPUTINFO._serialized_start=1481
   _GRADINGONBOARDOUTPUTINFO._serialized_end=1680
+  _STRINGTAG._serialized_start=1682
+  _STRINGTAG._serialized_end=1727
+  _CUTININVADEDTAG._serialized_start=1730
+  _CUTININVADEDTAG._serialized_end=1863
+  _METAMSG._serialized_start=1866
+  _METAMSG._serialized_end=2244
+  _SCENEMSG._serialized_start=2247
+  _SCENEMSG._serialized_end=2544
+  _GRADINGONBOARDMETAMSG._serialized_start=2547
+  _GRADINGONBOARDMETAMSG._serialized_end=2681
 # @@protoc_insertion_point(module_scope)

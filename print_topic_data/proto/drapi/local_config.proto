@@ -12,6 +12,13 @@ message UserConfig {
                                  //nca, 开关关闭，不产生快捷激活信号
 
   // common internal use
+  SwitchStatus visible_mask_defensive_deceleration = 11; //基于visible_mask盲区防御性降速，开关开，planning会对盲区防御性降速，开关关闭，不降速，默认开    
+  SwitchStatus enable_rule_construction_zone = 12; //施工区域是否使用rule逻辑， 
+                                                   //开关开，默认的rule+模型综合判断和避让
+                                                   //开关关闭, 屏蔽planning rule层面对于施工区的避让逻辑， 只通过模型判断和避让
+  SwitchStatus cross_defensive_deceleration = 13; //横穿目标防御性降速开关，开关开，planning会对横穿目标防御性降速，开关关闭，不降速，默认关
+  SwitchStatus construction_zone_deceleration = 14; //施工降速，开关开，planning会对施工区域降速，开关关闭，不降速，默认开
+  SwitchStatus destination_auto_pull_over = 15; //终点自动靠边停车开关，开关开，blc终点会发起靠边停车，开关关闭，终点不会靠边停车，默认关
   SwitchStatus truck_defensive_deceleration = 16; //大车防御性降速开关，开关开，planning会对大车防御性降速，开关关闭，不降速，默认开  
   SwitchStatus vla = 17; //vla控车开关，Vla控车开关打开，planning会使用Vla输出控车，开关关闭，不使用Vla信息，默认关闭
   SwitchStatus ignore_toll_downgrade = 18;//收费站降级开关，开关开，收费站不降级，开关关闭，收费站降级，默认关闭
@@ -98,6 +105,8 @@ message UserConfig {
   SwitchStatus planning_failed_switch_check =
       109;  // planning上报规划失败时，开关打开，ica
             // nca临退，开关关闭，不影响行车
+  SwitchStatus multiple_uturn_switch =
+      110;  // 多把掉头手动触发倒车开关，打开时需用户手动确认倒车
 }
 
 // common
@@ -105,6 +114,13 @@ enum SwitchStatus {
   SWITCH_STATUS_UNKNOWN = 0;
   SWITCH_ON = 1;
   SWITCH_OFF = 2;
+}
+
+enum SwitchOption {
+  SWITCH_OPTION_UNKNOWN = 0;
+  CONTROL_BY_SERVER = 1;
+  FORCE_TURN_ON = 2;
+  FORCE_TURN_OFF = 3;
 }
 
 enum DrivingStyle {
@@ -306,6 +322,8 @@ message NCAODDTypeLimitConfig {
   SwitchStatus temporary_odd_passive = 2;  // 已弃用
   SwitchStatus dynamic_static_odd = 3;
   SwitchStatus roi_odd = 4;
+  SwitchOption experience_spl_switch = 5;
+  SwitchOption static_defensive_strategy = 6;
 }
 
 enum IntellgntAsscLmpEna {

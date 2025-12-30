@@ -13,5 +13,13 @@ message ConnectionLine {
   //上一条lane的id
   optional int32 last_lane_id = 4;   
   optional int32 layer = 5;
-  repeated Overlap overlaps = 6;   
+  repeated Overlap overlaps = 6;  
+  enum Usage {
+    ETC_CENTERLINE = 0;
+    PASSABLE_LINE = 1;
+    PLANNING_LINE = 2;
+    PREDICTION_LINE = 3;
+  }
+  repeated Usage usage = 7;
+  optional common.Polyline mp_polyline = 8;
 }

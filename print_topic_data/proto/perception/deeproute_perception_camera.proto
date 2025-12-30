@@ -313,12 +313,15 @@ message CameraScheme {
   enum CameraSchemeType {
     REGULAR = 0;     // 正常天气
     RAIN = 1;        // 雨天
-    SNOW = 2;        // 雪天
-    FROST = 3;       // 霜天
-    FOG = 4;         // 雾天
-    SMUDGE = 5;      // deprecate future
-    SAND_STORM = 7;  // 沙尘暴
-    UNKNOWN = 6;     // 未知
+    HEAVY_RAIN = 2;  // 暴雨
+    SNOW = 3;        // 雪天
+    HEAVY_SNOW = 4;  // 暴雪天
+    FROST = 5;       // 霜天
+    HAZY = 6;        // 雾天
+    HEAVY_HAZY = 7;  // 浓雾天
+    SMUDGE = 8;      // deprecate future
+    SAND_STORM = 9;  // 沙尘暴
+    UNKNOWN = 10;     // 未知
   };
   optional CameraSchemeType camera_scheme = 1;
   optional float camera_scheme_prob = 2;
@@ -351,12 +354,14 @@ message CameraRoadCondition {
     DUST = 1;      // 沙石道路
     SLIPERRY = 2;  // 滑溜道路
     PONDING = 3;   // 有积水的道路
-    PATHHOLE = 4;  // 有坑的路 deprecated
-    ICING = 5;     // 结冰道路 deprecated
-    UNKNOWN = 6;   // 未知 deprecated
-    POTHOLE = 7;  // 有坑的路
-    SNOW_COVER = 8;  // 雪覆盖的路
-    FREEZE = 9;     // 结冰道路
+    HEAVY_PONDING = 4; // 大量积水的道路
+    PATHHOLE = 5;  // 有坑的路 deprecated
+    ICING = 6;     // 结冰道路 deprecated
+    UNKNOWN = 7;   // 未知 deprecated
+    POTHOLE = 8;  // 有坑的路
+    SNOW_COVER = 9;  // 雪覆盖的路
+    HEAVY_SNOW_COVER = 10; // 大量积雪的路
+    FREEZE = 11;     // 结冰道路
   };
   optional CameraRoadConditionType camera_road_condition = 1;
   optional float camera_road_condition_prob = 2;
@@ -381,6 +386,7 @@ message CameraLightingStatus {
     DARK = 1;         // 基本全黑
     BRIGHT = 2;       // 废弃
     DAY_TIME = 3;     // 白天
+    INDOOR_LIGHTING = 4; // 室内光
   };
   optional CameraLightingType light_type = 1;
   optional float light_prob = 2;
@@ -399,7 +405,7 @@ message CameraTimeStatus {
   optional float camera_time_prob = 2;
 }
 
-// camera status for camera all
+// camera status for camera all (deprecated)
 message CameraPhysicStatus {
   enum CameraPhysicStatusType {
     CLEAR = 0;  // 正常

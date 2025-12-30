@@ -936,7 +936,7 @@ message PerceptualObstacle {
   uint32 class_confidence = 13; // (原Uint8) 分类置信度
   SteplessRisk stepless_risk = 14; // 风险碰撞等级
 
-  gl.internal.Obstacle obstacle = 100;
+  gl.internal.Obstacle internal_obstacle = 100;
 }
 
 // 预留: 数据定义暂时比较混乱，无法实现

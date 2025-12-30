@@ -25,6 +25,8 @@ enum Operator {
   NOT_CONTAIN = 15;
   EMPTY = 16;
   NOT_EMPTY = 17;
+  REGEX = 18;
+  CONTAINS_ALL = 19;       // 用于数组判断  
 }
 
 
@@ -45,6 +47,7 @@ message FieldValue{
     double double_value = 6;
     bool bool_value = 7;
   }
+  optional string alias = 20;
 }
 
 message Condition{
@@ -66,9 +69,11 @@ message CollectionArg {
   optional uint32 backward_time = 2;
   optional uint32 priority =3;
   optional bool record_heavy = 4;
-  optional bool record_medium = 5; 
+  optional bool record_medium = 5;
   optional bool record_light = 6;
   optional bool record_full_point_cloud = 7;
+  repeated string topic_list = 8; // topic list
+  optional CollectionType collection_type = 9; // collection type
 }
 
 // begin--endtime gap
@@ -104,6 +109,12 @@ message Window {
   }
 }
 
+enum CollectionType {
+  COLLECTION_TYPE_UNKNOWN = 0;
+  COLLECTION_LMH =1;
+  COLLECTION_TOPIC_LIST = 2;
+}
+
 message Trigger {
   optional uint64 scenario_id = 1;
   optional string scenario_name = 2;
@@ -117,4 +128,24 @@ message Trigger {
   optional bool skip_compliance = 10; //是否跳过合规检查
 
   optional bool upload_only_when_lock_on_road_valid = 21;
+}
+
+enum MatchRule {
+  MATCH_ANY_LINK = 1;
+  MATCH_ALL_LINK = 2;
+}
+
+message MapSceneInfo{
+  repeated uint64 link_ids = 1;
+  optional MatchRule match_rule = 2;
+  repeated string scene_types = 3;
+  optional uint64 roi_id = 4; // source roi id
+}
+
+// /map/data_collection/trigger_list
+message TriggerList {
+  optional uint64 dr_link_id = 1; // current link id
+  repeated deeproute.collection_trigger_rule.Trigger trigger_list = 2;
+  repeated deeproute.collection_trigger_rule.MapSceneInfo map_scene_info = 3; // static map scene type
+  optional bool is_lock_on_road_valid = 4;
 }

@@ -10,6 +10,7 @@ proto_library(
     visibility = ["//visibility:public"],
     srcs = ["functions_cloud_config.proto"],
     deps = [
+        "//proto/vla:vla_output_proto"
     ],
     strip_import_prefix = "/proto/",
 )

@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package lp.hmi;
+
+import "drapi/lp/basic_common.proto";
+
+enum MotionStatusEnum {
+  MOTION_STATUS_UNKNOWN       = 0; // 未知
+  MOTION_STATUS_RECEDING      = 1; // 同向运动
+  MOTION_STATUS_STOPPED       = 2; // 停止
+  MOTION_STATUS_STATIONARY    = 3; // 始终静止
+  MOTION_STATUS_ONCOMING      = 4; // 对向运动
+  MOTION_STATUS_ACROSS        = 5; // 侧向插入
+}
+
+enum ObstacleTypeEnum {
+  OBSTACLE_TYPE_UNKNOWN             =  0;
+  OBSTACLE_TYPE_PEDESTRIAN          =  1;
+  OBSTACLE_TYPE_CAR                 =  2; // 普通轿车
+  OBSTACLE_TYPE_CYCLIST             =  3; // 自行车，有人
+  OBSTACLE_TYPE_MOTORCYCLE          =  4; // 摩托车，有人
+  OBSTACLE_TYPE_BUS                 =  5;
+  OBSTACLE_TYPE_TRUCKS              =  6;
+  OBSTACLE_TYPE_CYCLE               =  7; // 自行车，无人
+  OBSTACLE_TYPE_MOTORCYCLE_NO_MAN   =  8; // 摩托车，无人
+  OBSTACLE_TYPE_TRICYCLE            =  9; // 三轮车
+  OBSTACLE_TYPE_CAR_SUV             = 10; // SUV车型
+  OBSTACLE_TYPE_CAR_MPV             = 11; // MPV轿车
+  OBSTACLE_TYPE_TRAILER             = 12; // 拖挂车
+  OBSTACLE_TYPE_HANDCART            = 13; // 手推车
+  OBSTACLE_TYPE_STROLLER            = 14; // 婴儿车
+  OBSTACLE_TYPE_ANIMAL              = 15; // 动物
+  OBSTACLE_TYPE_AEB_PEDESTRAIN      = 16; // 假人
+  OBSTACLE_TYPE_AEB_CYCLIST         = 17; // 假二轮车
+  OBSTACLE_TYPE_AEB_VEHICLE         = 18; // 假车
+}
+
+// 障碍物信息
+message AdbObstacle {
+  uint32 id = 1;                              // id号
+  uint64 timestamp_ns = 2;                    // 时间, 以纳秒为单位
+  MotionStatusEnum type = 3;                              // 障碍物类型 需要定义
+  ObstacleTypeEnum motion_status = 4;                     // 物体运动状态 需要定义
+  uint32 turn_light_status = 5;               // 预留，不发 -- 转向灯状态, 0:none, 1:left; 2:right; 3:warning; 4:unknown
+  uint32 brake_light_status = 6;              // 预留，不发 -- 刹车灯状态, 0:none, 1:brake; 2:reserve; 3:unknown
+  uint32 confidence = 7;                      // 置信度, 取值0-100
+  float adbobj_hozl_ag_spd_le = 8;            // 角度, 左正右负, 目标物AdbobjHozlAgSpdLe, 以后轴中心为坐标原点
+  float adbobj_hozl_ag_spd_ri = 9;            // 角度, 左正右负, 目标物AdbobjHozlAgSpdRi, 以后轴中心为坐标原点
+  float adb_hozl_ag_re = 10;                  // 角度, 左正右负, 目标物AdbHozlAgRe, 以后轴中心为坐标原点
+  float adb_hozl_ag_le = 11;                  // 角度, 左正右负, 目标物AdbHozlAgLe, 以后轴中心为坐标原点
+  float adb_abs_dist = 12;                    // 角度, 左正右负, 目标物AdbAbsDist, 以后轴中心为坐标原点
+  float adb_vert_ag = 13;                     // 角度, 左正右负, 目标物AdbVertAg, 以后轴中心为坐标原点
+}
+
+// 交通标识信息
+message AdbTrafficSign {
+  uint32 id = 1;                              // id号
+  uint64 timestamp_ns = 2;                    // 时间, 以纳秒为单位
+  float adb_abs_dist = 3;                     // 角度, 左正右负, AdbAbsDist标志牌中心点距车身坐标系原点的绝对距离, 以后轴中心为坐标原点
+  float adb_hozl_ag_le = 4;                   // 角度, 左正右负, AdbHozlAgLe标志牌左边沿到车身坐标系原点的连线与X轴的水平夹角, 以后轴中心为坐标原点
+  float adb_hozl_ag_ri = 5;                   // 角度, 左正右负, AdbHozlAgRi标志牌右边沿到车身坐标系原点的连线与X轴的水平夹角, 以后轴中心为坐标原点
+  float adb_vert_ag_bot = 6;                  // 角度, 左正右负, AdbVertAgbot标志牌下边沿与摄像头连线与X轴的垂直夹角, 以后轴中心为坐标原点
+  float adb_vert_ag_top = 7;                  // 角度, 左正右负, AdbVertAgtop标志牌上边沿与摄像头连线与X轴的垂直夹角, 以后轴中心为坐标原点
+}
+
+// 感知信息
+// /leap/hmi/perception_light
+message HmiPerceptionLight {
+  lp.basiccommon.Header header = 1;           // 帧头，包含时间戳、序列号、模块
+  repeated AdbObstacle obstacles = 5;         // 融合后的障碍物信息
+  repeated AdbTrafficSign traffic_signs = 7;  // 交通标识牌信息
+  uint32 status = 8;                          // 0:Normal, 1:Error, 2:遮挡, 3:Reserve
+}

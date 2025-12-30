@@ -17,7 +17,7 @@ enum OdometryMode {
 }
 
 message LidarMatchingMessage {
-  optional int64 measurement_time = 1;
+  optional int64 measurement_time = 1; // 主线程的点云点云时间戳
   optional int64 reference_time = 2;
   optional OdometryMode odometry_mode = 3;
   // optional bool is_map_registration = 3;
@@ -34,6 +34,8 @@ message LidarMatchingMessage {
   optional double matching_mean_error = 13;
   optional bool is_converged = 14;
   optional bool is_available_for_odom = 15;
+  optional deeproute.common.Transformation3 local_to_sensing = 16;
+  optional int64 map_pose_time = 17; // 用于双线程中真实匹配帧的点云时间戳
 }
 
 message KeyframeUpdateStatus {

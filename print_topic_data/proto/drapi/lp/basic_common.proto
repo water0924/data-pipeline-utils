@@ -1,0 +1,73 @@
+syntax  = "proto3";
+
+package lp.basiccommon;
+
+message Header {
+  uint32     seq_num      =  1; // 序列号
+  uint64     timestamp_ns =  2; // 时间，以纳秒为单位
+}
+
+message LatencyStatus {
+  float     elapsed_time_ms  =  1; // 实际耗时
+  float     interval_time_ms =  2; // 周期时间
+}
+
+enum StatusEnum {
+  STATUS_NORMAL = 0;  // 正常
+  STATUS_ERROR  = 1;  // 异常
+}
+
+message ModuleStatus {
+  StatusEnum     status          =  1; // 状态，0：正常，1：异常
+  uint32         error_code      =  2; // 故障码，见故障码表
+  bytes          reason          =  3; // 故障原因
+}
+
+message Point2D {
+  float x = 1;
+  float y = 2;
+}
+
+message Point3D {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+
+message Point3DList {//新增
+  repeated Point3D points = 1;
+}
+
+message Point2DList {//新增
+  repeated Point2D points = 1;
+}
+
+enum SlotSideEnum {
+  NONE_SLOT_SIDE            = 0; //默认值
+  VEHICLE_LEFT_SIDE         = 1; 	
+  VEHICLE_RIGHT_SIDE        = 2;
+  VEHICLE_FRONT_SIDE        = 3;
+  VEHICLE_BACK_SIDE         = 4;
+}
+
+
+enum CheckResult { 
+  CHECK_RESULT_UNSPECIFIED 	= 0;  // 未指定/无效结果
+  CHECK_RESULT_SUCCESS 		= 1;  // 校验成功
+  CHECK_RESULT_FAILURE 		= 2;  // 校验失败
+}
+
+enum FunctionSwitchEnum {
+	DISABLE   = 0;     // 关闭，未激活
+	ENABLE    = 1;     // 打开; 激活
+}
+
+enum SlotTypeEnum {
+  NONE_SLOT_TYPE            = 0;
+  VERTICAL_SLOT             = 1;
+  PARALLEL_SLOT             = 2;
+  OBLIQUE_SLOT              = 3; // 斜车位
+  MECHANICAL_SLOT           = 4; // 机械车位
+  CUSTOM_SLOT               = 5; // 自定义车位
+  REGULAR_SLOT              = 6; // 常用车位
+}

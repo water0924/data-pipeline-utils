@@ -23,6 +23,8 @@ message VehicleSignal {
     MERGE = 4;
     SPLIT = 5;
     PARKING = 6;
+    MODEL_BEHAVIOR = 7;
+    EXIT_SPEED_LIMIT = 8;
   };
 
   optional TurnSignal turn_signal = 1;

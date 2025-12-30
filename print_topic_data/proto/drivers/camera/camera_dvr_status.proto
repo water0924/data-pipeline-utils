@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+package deeproute.drivers.camera;
+
+enum DvrStatus {
+  DVR_STATUS_UNKNOWN = 0;
+  DVR_INITIAL = 1;
+  DVR_AVAILABLE = 2;
+  DVR_UNAVAILABLE = 3;
+}
+
+message CameraDvrStatus {
+  optional string id = 1;
+  oneof cmd {
+    DvrStatus dvr_status = 2;
+  }
+}

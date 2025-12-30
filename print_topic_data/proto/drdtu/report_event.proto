@@ -4,6 +4,9 @@ import "drapi/operation_status.proto";
 import "drapi/base.proto";
 import "safety/safety_analysis.proto";
 import "planning/planning.proto";
+import "drapi/gwm/gwm_vla_info.proto";
+import "vla/vla_output.proto";
+import "drapi/blc_mcu_report_event.proto";
 
 package deeproute.dtu.report_event;
 /***************************事件通知**********************************************/
@@ -331,6 +334,14 @@ enum PassiveCondition {
   HAS_VEHICLE_AHEAD = 10001;           // 对向来车
 }
 
+// 使用本属性需要小心。默认值是高速路。
+enum RoadClass {
+  RC_HIGHWAY = 0;
+  RC_URBAN_EXPRESSWAY = 1;
+  RC_OTHER = 99;
+  RC_UNKNOWN = 100;
+}
+
 //故障原因
 message FaultInfo {
   int32 safety_policy = 1;         // safety安全策略
@@ -589,6 +600,7 @@ message BLCStateScheduledUpdate {
   dr.operationstatus.MEBStatusInfo meb_status_info = 9;
   dr.operationstatus.MAIStatusInfo mai_status_info = 10;
   dr.operationstatus.AESStatusInfo aes_status_info = 11;
+  dr.operationstatus.RAEBStatusInfo raeb_status_info = 12;
 }
 
 // *******************告警事件**********************************
@@ -601,6 +613,7 @@ enum TakeOverType {
   TAKEOVER_SHIFT = 4;
   TAKEOVER_EPB = 5;
   TAKEOVER_USER_EXIT = 6;  // 按功能界面X退出接管
+  TAKEOVER_SETSPEED_UP = 7; //调节限速
 }
 
 message DriverTakeOverInfo {
@@ -813,6 +826,577 @@ message BlcProcTimeWarnInfo {
   uint64 duration_ms = 4;
 }
 
+// 泊车通用信息
+message ParkingCommon {
+  enum Func {
+    FUNC_UNKNOWN = 0;
+    APA_RPA = 1;     // APA/RPA
+    RADS = 2;        // RADS
+    HAVP = 3;        // HAVP
+    AVM = 4;         // AVM
+    MEB = 5;         // MEB
+    E2E_HAVP = 6;    // E2E HAVP
+    E2E_NOA = 7;    // E2E NOA
+    RSPA = 8;        // RSPA
+  }
+
+  enum SubFunc {
+    SUBFUNC_UNKNOWN = 0;
+    APA_IN = 1;       // 智能泊入
+    APA_OUT = 2;      // 智能泊出
+    RPA_IN = 3;      // 遥控泊入
+    RPA_OUT = 4;     // 遥控泊出
+    STRAIGHT_IN_OUT = 5;       // 直线召唤
+
+    // RADS子功能
+    REVERSE_TRACKING = 11;   // 倒车循迹
+
+    // HAVP子功能
+    PARK_IN_MAPPING = 21;    // 泊入建图
+    PARK_OUT_MAPPING = 22;   // 泊出建图
+    PARK_IN_CRUISE = 23;     // 泊入巡航
+    PARK_OUT_CRUISE = 24;    // 泊出巡航
+    PARK_IN_NAVI = 25;       // 泊入导航
+    PARK_OUT_NAVI = 26;      // 泊出导航
+  }
+
+  enum CtrlState {
+    State_Default = 0;
+    State_NotAuto = 1;
+    State_LonAuto = 2;
+    State_InAuto = 3;
+  }
+
+  Func func = 1;                  // 泊车功能
+  SubFunc sub_func = 2;            // 泊车子功能
+  string trip_id = 3;              // 行程ID（由长城数据闭环开发部门定义）
+  int32 func_open_id = 4;          // 泊车功能打开ID（从功能打开到关闭为同一个ID）
+  int32 func_active_id = 5;        // 泊车功能激活ID（从功能激活到完成/中断为同一个ID）
+  CtrlState ctrl_state = 6;        // 控车状态
+}
+
+enum ObjType {
+  UNKNOWN = 0;
+  VEHICLE_OBJ = 1;  // 机动车
+  TRUCK_OBJ = 2;  // 卡车
+  BICYCLE = 6;  // 自行车
+  TRICYCLE = 7;  // 三轮车
+  ADULT = 11;  // 成人
+  CHILD = 12;  // 儿童
+  PILLAR = 16;  // 柱子
+  WALL = 17;  // 墙
+  CONE = 21;  // 锥桶
+  WATER_BARRIER = 22;  // 水马
+  CURB = 23;  // 路沿
+  RESERVED = 26;  // 预留
+  OTHER = 99;  // 其他
+}
+
+// 障碍物信息
+message SubObjInfo {
+  enum PosDir {
+    POS_DIR_UNKNOWN = 0;
+    POS_DIR_FRONT = 1;
+    POS_DIR_BACK = 2;
+    POS_DIR_LEFT = 3;
+    POS_DIR_RIGHT = 4;
+  }
+  int32 id = 1;           // 障碍物ID（根据感知障碍物ID赋值）
+  ObjType type = 2;         // 障碍物类型
+  float x = 3;            // 障碍物中心点x坐标（单位：m，精度0.01m）相对坐标系
+  float y = 4;            // 障碍物中心点y坐标（单位：m，精度0.01m）
+  float yaw = 5;          // 障碍物航向角（单位：°，精度0.01°）
+  float speed = 6;        // 障碍物速度（单位：m/s，精度0.1m/s）
+  bool is_moving = 7;     // 障碍物是否移动
+  PosDir pos_dir = 8;     // 障碍物相对于自车的位置方向
+  float distance = 9;    // RSPA 最近距离
+}
+
+message ObjInfo {
+  repeated SubObjInfo obj_infos = 1;
+}
+
+// 用户所选车位数据
+message SlotInfo {
+  enum ParkingDir {
+    PARKINGDIR_UNKNOWN = 0;
+    REAR_IN = 1;          // 车尾泊入
+    FRONT_IN = 2;         // 车头泊入
+    FRONT_OUT = 11;       // 正前泊出
+    LEFT_FRONT_OUT = 12;  // 左前泊出
+    RIGHT_FRONT_OUT = 13; // 右前泊出
+    REAR_OUT = 14;        // 正后泊出
+    LEFT_REAR_OUT = 15;   // 左后泊出
+    RIGHT_REAR_OUT = 16;  // 右后泊出
+    FORWARD = 21;         // 前进（直线召唤）
+    BACKWARD = 22;        // 后退（直线召唤）
+  }
+
+  enum ParkingPos {
+    PARKINGPOS_UNKNOWN = 0;
+    LEFT = 1;     // 靠左
+    CENTER = 2;   // 居中
+    RIGHT = 3;    // 靠右
+  }
+
+  enum SlotTypeDir {
+    SLOTTYPEDIR_UNKNOWN = 0;
+    VERTICAL = 1;     // 垂直车位
+    PARALLEL = 2;   // 水平车位
+    SLANTED = 3;      // 斜列车位
+  }
+
+  enum SlotTypeLine {
+    SLOTTYPELINE_UNKNOWN = 0;
+    SPACE = 1;        // 空间车位
+    MARKED = 2;       // 划线车位
+    MECHANICAL = 3;   // 机械车位
+    CUSTOM = 4;       // 自选车位
+  }
+
+  enum SlotTypeObj {
+    SLOTTYPEOBJ_UNKNOWN = 0;
+    BOTH_OPEN = 1;    // 双边空旷车位
+    SINGLE_OPEN = 2;  // 单边空旷车位
+    BOTH_OBSTACLE = 3; // 双边障碍车位
+    DEAD_END = 4;     // 断头车位
+  }
+
+  enum SlotTypeSpace {
+    SLOTTYPESPACE_UNKNOWN = 0;
+    STANDARD = 1;       // 标准车位
+    NARROW = 2;         // 狭窄车位
+    EXTREME_NARROW = 3; // 极小车位
+  }
+
+  enum NoParkReason {
+    INITIAL_VALUE = 0;
+    THE_ENVIRONMENT_IS_DARK = 1;
+    SLOT_NARROW = 2;
+    PASSAGE_NARROW = 3;
+    FAR_FROM_THE_SLOT = 4;
+    GROUND_LOCK_IS_OPENED = 5;
+    SLOT_IS_OCCUPIED = 6;
+    WHEELSTOPPER_INVADE = 7;
+    TRUCK_INVADE = 8;
+    VEHICLE_INVADE = 9;
+    CONE_BARREL_INVADE = 10;
+    PEDESTRIAN_INVADE = 11;
+    PILLAR_INVADE = 12;
+    BUSHES_INVADE = 13;
+    TREE_INVADE = 14;
+    FIRE_FIGHTING_FACILITIES_INVADE = 15;
+    CHARGING_EQUIPMENT_INVADE = 16;
+    UNKNOWN = 17;
+  }
+
+  int32 id = 1;                   // 车位ID（根据感知车位ID赋值）
+  ParkingDir parking_dir = 2;     // 泊车方向
+  ParkingPos parking_pos = 3;     // 停靠偏好
+  SlotTypeDir slot_type_dir = 4;  // 车位类型-方向
+  SlotTypeLine slot_type_line = 5; // 车位类型-车位线
+  SlotTypeObj slot_type_obj = 6;  // 车位类型-障碍
+  SlotTypeSpace slot_type_space = 7; // 车位类型-空间
+  float slot_length = 8;          // 车位长度（单位：m，精度0.01m）
+  float slot_width = 9;          // 车位宽度（单位：m，精度0.01m）
+  float space_length = 10;       // 空间长度（单位：m，精度0.01m）
+  float space_width = 11;        // 空间宽度（单位：m，精度0.01m）
+  NoParkReason nopark_reason = 12;      // 不可泊原因（如果车位不可泊）
+  SubObjInfo slot_obj_left = 13;      // 车位左侧障碍物信息
+  SubObjInfo slot_obj_right = 14;     // 车位右侧障碍物信息
+  SubObjInfo slot_obj_behind = 15;    // 车位后方障碍物信息
+}
+
+// 车辆位置信息
+message LocationInfo {
+  string city = 1;        // 城市行政区名称（到市级）
+  double longitude = 2;    // 车辆经度坐标（GCJ02坐标系）
+  double latitude = 3;     // 车辆纬度坐标（GCJ02坐标系）
+}
+
+// 停车场类型枚举
+enum ParkingLotType {
+  PARKING_LOT_NONE = 0;          // 无
+  UNDERGROUND = 1;    // 地下停车场
+  GROUND = 2;         // 地面停车场
+  STEREO = 3;         // 立体停车场
+}
+
+// 特定场景通行信息
+message SpecScene {
+  enum SceneClass {
+    SCENE_CLASS_NONE = 0;         // 无
+    GATE = 1;         // 闸机
+    STRAIGHT = 2;     // 直道
+    CURVE = 3;        // 弯道
+    SLOPE = 4;        // 坡道
+  }
+  
+  enum SceneDescription {
+    SCENE_DESCRIPTION_NONE = 0;          // 无
+    // 闸机通行
+    GATE_PASS = 1;
+    // 直道通行
+    STRAIGHT_PASS = 21;
+    // 弯道通行
+    CURVE_PASS = 31;      // 弯道通行    
+    // 坡道通行
+    SPIRAL_UP = 41;           // 螺旋坡道上坡
+    SPIRAL_DOWN = 42;         // 螺旋坡道下坡
+    STRAIGHT_UP = 43;         // 直坡上坡
+    STRAIGHT_DOWN = 44;       // 直坡下坡
+  }
+  
+  SceneClass scene_class = 1;          // 场景通行分类
+  SceneDescription scene_description = 2; // 场景通行描述
+  string scene_time = 3;          // 触发场景通行时刻（精确到ms，格式“2025-01-25 15:47:00.012”）
+  float duration = 4;                  // 场景通行时长（单位：秒，精度0.1s）
+}
+
+// 障碍物交互信息
+message ObjInteraction {
+  enum SceneClass {
+    SCENE_CLASS_NONE = 0;          // 无
+    VEHICLE = 1;       // 机动车
+    NON_VEHICLE = 2;   // 非机动车
+    PEDESTRIAN = 3;    // 行人
+    STATIC_OBJ = 4;    // 静态障碍物
+  }
+  enum InteractionType {
+    INTERACTION_NONE = 0;     // 无
+    INTERACTION_NUDGE = 1;    // 绕行
+    INTERACTION_DETOUR = 2;   // 腾挪
+    INTERACTION_DECELERATE = 3;    // 减速
+    INTERACTION_STOP = 4;    // 刹停
+  }
+  SceneClass scene_class = 1;          // 交互场景分类
+  InteractionType scene_description = 2; // 交互干预类型
+  string interaction_time = 3;          // 触发交互时刻（精确到ms，格式“2025-01-25 15:47:00.012”）
+  ObjType obj_type = 4;                  // 障碍物类型
+}
+
+// 规划信息
+message PathInfo {
+  float path_length = 1;           // 规划路径长度（单位：米，精度0.1m）
+  float remaining_length = 2;      // 规划路径剩余长度（单位：米，精度0.1m）
+}
+
+// 底盘信息
+message ChassisInfo {
+  float speed = 1;                 // 车速（单位：m/s，精度0.1m/s）
+  float acc = 2;                   // 加速度（单位：m/s²，精度0.1m/s²）
+  enum Gear {
+    GEAR_UNKNOWN = 0;
+    P = 1;
+    D = 2;
+    N = 3;
+    R = 4;
+    M = 5;
+  }
+  Gear gear = 3;                   // 挡位
+  int32 steer_ang = 4;             // 方向盘角度（单位：度）
+  int32 brake_pedl = 5;            // 刹车踏板开度（单位：%）
+  int32 acc_pedl = 6;              // 油门踏板开度（单位：%）
+  double brake_press = 7;           // 踩刹车力度（单位：bar），ESP_MasterCylBrkPress的数值
+  double steer_trq = 8;             // 干预方向盘力度（单位：Nm），EPS_DrvInpTrqVal_HighReslolution数值
+}
+
+// 用户交互信息
+enum OpenType {
+  OPEN_TYPE_UNKNOWN = 0;
+  // 硬按键类
+  OPEN_TYPE_HARD_KEY = 1;
+  OPEN_TYPE_STEERING_KEY = 2;
+  
+  // 软按键类
+  OPEN_TYPE_SOFT_KEY = 11;
+  OPEN_TYPE_AVM_KEY = 12;
+  OPEN_TYPE_DRIVING_WORLD_KEY = 13;
+  OPEN_TYPE_DRIVING_WORLD_SLOT = 14;
+  OPEN_TYPE_PUSH_POPUP = 15;
+  OPEN_TYPE_APP_ICON = 16;
+  
+  // 远程车外类
+  OPEN_TYPE_REMOTE_TRIGGER = 21;
+  OPEN_TYPE_MOBILE_APP = 22;
+  
+  // 语音类
+  OPEN_TYPE_VOICE = 31;
+  
+  // 自动类
+  OPEN_TYPE_AUTO_TRIGGER = 41;
+  OPEN_TYPE_R_GEAR_AUTO = 42;
+  OPEN_TYPE_POWER_ON_AUTO = 43;
+}
+
+enum ActiveType {
+  ACTIVE_TYPE_UNKNOWN = 0;
+  // 硬按键类
+  ACTIVE_TYPE_HARD_KEY = 1;
+  
+  // 软按键类
+  ACTIVE_SOFT_KEY = 11;
+  ACTIVE_TYPE_PARKING_WORLD_KEY = 12;
+  ACTIVE_TYPE_DRIVING_WORLD_KEY = 13;
+  ACTIVE_TYPE_PUSH_POPUP = 14;
+  
+  // 远程车外类
+  ACTIVE_TYPE_REMOTE = 21;
+  ACTIVE_TYPE_MOBILE_APP = 22;
+  ACTIVE_TYPE_KEY = 23;
+  ACTIVE_TYPE_DOOR_HANDLE = 24;
+  
+  // 语音类
+  ACTIVE_TYPE_VOICE = 31;
+  
+  // 自动类
+  ACTIVE_TYPE_AUTO = 41;
+}
+
+enum IntervType {
+  INTERV_TYPE_UNKNOWN = 0;
+  INTERV_TYPE_STEER_OVERRIDE = 1;    // 方向盘
+  INTERV_TYPE_GEAR_OVERRIDE = 2;     // 挡位
+  INTERV_TYPE_EPB_OVERRIDE = 3;      // EPB
+  INTERV_TYPE_THROTTLE_OVERRIDE = 4; // 油门
+  INTERV_TYPE_BRAKE_OVERRIDE = 5;    // 刹车
+}
+
+// 失败或暂停原因
+message FailOrSuspendReason {
+  // 一级失败或暂停原因枚举
+  enum MainFailOrSuspendReason {
+    // ===== 故障失效类 (0-19) =====
+    FAIL_OR_SUSPEND_REASON_UNKNOWN = 0;
+    MAIN_CONTROL_UNIT_FAILURE = 1;     // 主控单元异常
+    ASSOCIATED_SYSTEM_FAILURE = 2;     // 关联系统异常
+    CAMERA_FAILURE = 3;                // 摄像头异常
+    OTHER_INHIBITION_CONDITION = 4;   // 其他抑制条件
+    LIDAR_FAILURE = 5;                 // 激光雷达异常
+    ULTRASONIC_FAILURE = 6;            // 超声波雷达异常
+    BLUETOOTH_CONNECTION_FAILURE = 7;  // 蓝牙连接异常
+    PARKING_BRAKE_FAILURE = 8;         // 驻车故障
+    // 9-19 预留
+
+    // ===== 超出系统边界类 (20-79) =====
+    PARKING_ROUNDS_LIMIT = 20;         // 泊车揉库次数超限
+    OPERATION_TIMEOUT = 21;            // 时间超时
+    SPEED_LIMIT_D_GEAR = 22;           // 车速超限(D档)
+    SPEED_LIMIT_R_GEAR = 23;           // 车速超限(R档)
+    SLOPE_LIMIT_EXCEEDED = 24;         // 坡度超限
+    SAFETY_SYSTEM_ACTIVATED = 25;      // 主被动安全功能激活
+    POWER_MODE_NOT_READY = 26;         // 动力模式未ready
+    DRIVING_MODE_UNSUPPORTED = 27;     // 驾驶模式不满足
+    CAMERA_DIRTY = 28;                 // 摄像头脏污
+    CAMERA_OCCLUDED = 29;              // 摄像头遮挡
+    LIDAR_OCCLUDED = 30;               // 激光雷达遮挡
+    PARK_IN_FAILURE = 31;              // 系统无法泊入车位
+    PARK_OUT_FAILURE = 32;             // 系统无法泊出
+    NARROW_PARKING_SPACE = 33;         // 车位空间狭窄受限
+    EXCESSIVE_DISTANCE = 34;           // 距离过长
+    HANDBRAKE_REQUIRED = 35;           // 请拉起手刹挂至P挡
+    ROUTE_DUPLICATION = 36;            // 路线重复
+    ENVIRONMENT_TOO_OPEN = 37;         // 环境过于空旷
+    TRAJECTORY_CALCULATION_FAILED = 38; // 轨迹计算不成功
+    HOOD_OPEN = 39;                    // 前机舱打开
+    TRUNK_OPEN = 40;                   // 后备箱打开
+    DOOR_OPEN = 41;                    // 车门打开
+    MIRROR_FOLDED = 42;                // 外后视镜折叠
+    SEATBELT_UNFASTENED = 43;          // 主驾驶安全带解开
+    PEDESTRIAN_INTRUSION = 44;         // 行人入侵
+    VEHICLE_INTRUSION = 45;            // 车辆入侵
+    STATIC_OBSTACLE_BLOCKING = 46;      // 遇到无法绕行的静态障碍物
+    TARGET_SLOT_OCCUPIED = 47;         // 目标车位被占
+    ILLUMINATION_CONDITION = 48;       // 光照条件ODD不满足
+    RAIN_CONDITION = 49;               // 雨量条件ODD不满足
+    GATE_PASS_FAILURE = 50;            // 无法通过闸机
+    ROUTE_MATCH_TIMEOUT = 51;          // 路线匹配超时
+    ACTIVATION_FAILURE = 52;           // 激活失败导致
+    SENSOR_UNCALIBRATED = 53;          // 传感器未标定
+    OTHER_ADAS_ACTIVATED = 54;         // 其他辅助驾驶功能激活
+    PARK_OUT_DIRECTION_LOST = 55;      // 泊出方向消失
+    REVERSE_DISTANCE_LIMIT = 56;       // 倒车距离超限
+    POSITIONING_FAILURE = 57;          // 定位不成功
+    E2E_SWITCH_FAILURE = 58;           // E2E切换失败
+    // 59-79 预留
+
+    // ===== 用户干预类 (80-89) =====
+    USER_MANUAL_EXIT = 80;             // 驾驶员主动退出
+    GEAR_INTERVENTION = 81;            // 驾驶员干预（挡位）
+    STEERING_INTERVENTION = 82;        // 驾驶员干预（方向盘）
+    HANDBRAKE_INTERVENTION = 83;       // 驾驶员干预（手刹）
+    BRAKE_INTERVENTION = 84;           // 驾驶员干预（刹车）
+    ACCELERATOR_INTERVENTION = 85;     // 驾驶员干预（油门）
+    APP_SUSPENSION = 86;               // 驾驶员手机APP暂停
+    // 87-89 预留
+
+    // ===== 建图路线异常 (100-104) =====
+    VEHICLE_NOT_IN_SLOT = 100;         // 车辆未在车位中
+    HEAD_IN_PARKING = 101;             // 车头泊入
+    ROUTE_QUALITY_INSUFFICIENT = 102;  // 路线质量不满足
+    INSUFFICIENT_STORAGE = 103;        // 存储空间不足
+    MAPPING_DISTANCE_TOO_SHORT = 104;  // 建图距离过短
+  }
+  
+  MainFailOrSuspendReason main_fail_or_suspend_reason = 1;  // 一级失败或暂停原因, 包含pause_reason 暂停原因
+  string pause_time = 2;   // 暂停时刻, TODO: 待确认
+  string restore_time = 3; // 暂停恢复耗时，泊车功能暂停到恢复的时间
+  string resume_time = 4;  // 重新恢复泊车耗时, 泊车功能恢复到用户确认恢复按钮这两段
+  int32 second_fail_or_suspend_reason = 5;         // 二级失败或暂停原因（预留，填0）
+  repeated int32 safety_events = 6;         // 具体safety事件
+}
+
+message SpecialInfo {
+  enum ChokeReq {
+    UNKNOWN = 0;
+    UNCHOKEREQ= 1;
+    CHOKEREQ = 2;
+  }
+  ChokeReq choke_req = 1;
+  float push_delay = 2;
+  float activation_location = 3;
+}
+
+enum DesSlotState {
+  DES_SLOT_STATE_NONE = 0;  // 无
+  UNOCCUPIED = 1;       // 未占用
+  OCCUPIED = 2;         // 占用
+}
+
+message SearchStatus {
+  int32 slot_selectable_num = 1;    // 点击可泊车位的次数
+  int32 slot_unselectable_num = 2;  // 点击不可泊车位的次数
+  int32 unselectable_space_num = 3; // 搜索到不可泊车位数量
+  int32 selectable_space_num = 4;   // 搜索到可泊车位数量
+}
+
+// 功能运行时元数据
+message ParkingStatus {
+  enum ParkOutInterv {
+    UNKNOWN = 0;
+    NOALARMTAKE = 1;
+    ALARMNOTAKE= 2;
+    ALARMANDTAKE = 3;
+  }
+  enum MirrorAutoFold {
+    UNKNOWNSTATUS = 0;
+    UNFOLD = 1;
+    AUTOFOLD = 2;
+  }
+  FailOrSuspendReason suspend_info = 1;    // 暂停信息
+  int32 round_num = 2;             // 揉库次数
+  int32 working_time_used = 3;     // 泊车时长（单位：秒）
+  int32 working_time_excluding_suspend = 4; // 泊车时长（扣除暂停时间）
+  float max_deceleration = 5;      // 最大纵向减速度（单位：m/s²，精度0.1m/s²）
+  float max_acceleration = 6;      // 最大纵向加速度
+  float max_speed = 7;             // 最大车速（单位：m/s，精度0.1m/s）
+  float avg_speed = 8;             // 平均车速（单位：m/s，精度0.1m/s）
+  float mileage = 9;               // 行驶里程（单位：米，精度0.1m）
+  ParkOutInterv parkout_interv = 10;  // 泊出接管
+  MirrorAutoFold is_fold_mirror = 11; // 泊车过程中系统是否自动折叠后视镜，0=无效值，1=否，2=是
+  int32 emerg_brake = 12; // 急刹次数，按照BLC下发紧急制动标志位来识别
+  float trqmax = 13; // 最大请求驱动扭矩（稳态）
+  float brkmax = 14; // 最大请求制动扭矩（稳态）
+  float veh_in_slot_per = 15; // 车辆中心距离车位中心
+  int32 brake_lvl1 = 16; // 刹车等级1次数
+  int32 brake_lvl2 = 17; // 刹车等级2次数
+  int32 brake_lvl3 = 18; // 刹车等级3次数
+}
+
+// 建图过程数据
+message MappingStatus {
+  int32 running_time = 1;          // 建图时长（单位：秒）
+  float max_speed = 2;             // 最大车速（单位：m/s，精度0.1m/s）
+  float avg_speed = 3;             // 平均车速（单位：m/s，精度0.1m/s）
+  float route_length_raw = 4;          // 建图路线总长度（非融合，单位：米，精度0.1m）
+  float parking_road_length_raw = 5;    // 停车场道路部分长度（非融合，单位：米，精度0.1m）
+}
+
+// 建图保存数据
+message MapSaveStatus {
+  enum MappingFinishType {
+    MAPPING_FINISH_TYPE_NONE = 0;              // 无
+    APA = 1;               // APA方式(含成功或失败)
+    MANUAL_PARK = 2;       // 手动泊入P档
+    GEAR_P_WITHOUT_SLOT = 3; // 未选车位直接挂P档
+    SELECT_SLOT = 4;       // 选中车位未泊入
+    DISTANCE_TOO_LONG = 5; // 超3km自动存图
+    IN_MAPPING_OUT_ODD = 6; // 出停车场ODD自动存图（泊入建图）
+    OUT_MAPPING = 7; // 公共道路自动存图（泊出建图） 
+  }
+  float save_duration = 1;         // 保存地图时长（单位：秒，精度0.1s）
+  MappingFinishType mapping_finish_type = 2; // 建图结束方式
+  float route_length_fused = 3;          // 建图路线总长度（融合后，单位：米，精度0.1m）
+  float parking_road_length_fused = 4;    // 停车场道路部分长度（融合后，单位：米，精度0.1m）
+  int32 floor_count = 5;           // 建图楼层数
+}
+
+// 巡航过程数据
+message CruisingStatus {
+  int32 running_time = 1;          // 巡航时长（单位：秒）
+  float max_speed = 2;             // 最大车速（单位：m/s，精度0.1m/s）
+  float avg_speed = 3;             // 平均车速（单位：m/s，精度0.1m/s）
+  float public_road_avg_speed = 4; // 公共道路巡航平均车速（单位：m/s，精度0.1m/s）
+  float parking_route_avg_speed = 5; // 园区/停车场巡航平均车速（单位：m/s，精度0.1m/s）
+  float mileage = 6;               // 行驶里程（单位：米，精度0.1m）
+  int32 floor_count = 7;           // 通过的楼层数
+  repeated SpecScene spec_scene = 8; // 特定场景通行
+  repeated ObjInteraction obj_interaction = 9; // 障碍物交互
+  int32 emergency_braking = 10;     // 急刹次数（减速度≥-4m/s²）
+  int32 accelerator_pedal = 11;     // 踩油门次数
+  DesSlotState des_slot_state = 12; // 终点车位占用状态
+}
+
+// 导航过程数据
+message NaviStatus {  
+  int32 running_time = 1;          // 导航时长（单位：秒）
+  float max_speed = 2;             // 最大车速（单位：m/s，精度0.1m/s）
+  float avg_speed = 3;             // 平均车速（单位：m/s，精度0.1m/s）
+  float mileage = 4;               // 行驶里程（单位：米，精度0.1m）
+  int32 floor_count = 5;           // 通过的楼层数
+  DesSlotState des_slot_state = 6; // 终点车位占用状态
+}
+
+// E2E切换数据
+message E2ESwitch {
+  enum SwitchType {
+    SWITCH_TYPE_NONE = 0;              // 无
+    NOA_TO_HAVP = 1;      // noa2havp
+    HAVP_TO_NOA = 2;      // havp2noa
+  }
+  enum NoaToHpaSwitchFailedReason {
+    NOA_TO_HPA_REASON_UNKNOWN = 0;
+    NOT_MATCHED_END_MAP = 1;  // 未定位到泊入路线
+    NO_OVERLAP_WITH_HPA = 2;  // 没有NCA重叠
+    NOA_DOWNGRADING_TOO_EARLY = 3;  // NOA降级过早
+    SPEED_OVER_HPA_ODD = 4;  // 速度超过HPA ODD
+    HPA_PASSIVE = 5;  // HPA被抑制
+    USER_DOWNDEGRADE_NOA = 6;  // 用户主动降级NOA
+    OTHER_NOA_TO_HPA_SWITCH_FAILED = 7;  // 其他失败原因
+    LATERAL_DIST_TO_PATH_TOO_LARGE = 8;  // 横向距离到泊入路线过大
+    E2E_IN_AND_OUT_IN_SAME_PARKING = 9;  // E2E入库和泊出在同一个停车场范围内切换
+  }
+  enum HpaToNoaSwitchFailedReason {
+    HPA_TO_NOA_REASON_UNKNOWN = 0;
+    NOA_PASSIVE_SWITCH_TO_LCC = 1;  // NOA被抑制只切换到LCC
+    NOA_LCC_PASSIVE = 2;  // NOA/LCC都被抑制
+    HPA_EXIT_TOO_EARLY = 3;  // 提前退出HPA
+    PARKING_ODD_EXIT_CHECK_FAILED = 4;  // 驶出停车场ODD判断异常
+    NAVI_ABNORMAL = 5;  // 导航异常
+    OTHER_HPA_TO_NOA_SWITCH_FAILED = 6;  // 其他失败原因
+  }
+  SwitchType switch_type = 1;      // 切换类型
+  float switch_location = 2;       // 切换位置（单位：米）
+  float speed_difference = 3;      // 切换前后的速度变化（单位：m/s）
+  NoaToHpaSwitchFailedReason noa_to_hpa_switch_failed_reason = 4;  // NOA到HPA切换失败原因
+  HpaToNoaSwitchFailedReason hpa_to_noa_switch_failed_reason = 5;  // HPA到NOA切换失败原因
+}
+
+message D2DNaviMatchInfo {
+  float navi_point_location = 1; // 导航终点与ODD起点距离
+  float overlap_length = 2; // overlap长度（单位m，精度0.1m）
+}
+
 // apa/rpa 泊车， event:BLC_APA_PARKING_REPORT
 message APAReport {
   enum Result {
@@ -838,6 +1422,7 @@ message APAReport {
     VERTICAL = 1;  // 垂直车位
     PARALLEL = 2;  // 水平车位
     SLANTED = 3;   // 斜列车位
+    MECHANICAL = 4;   // 机械车位
   }
   enum ParkingSpotBoundedType {
     ZERO_BOUNDED = 0;      // 无障碍车位
@@ -878,6 +1463,93 @@ message APAReport {
   SceneType scene_type = 14;                // 泊车场景
   dr.operationstatus.ReasonInfo reasoninfo = 15;  //失败/暂停/恢复原因
   deeproute.planning.AStarSearchResultAnalysisInfo analysis_info = 16;  // SUCCESS/FAILED/CANCELED
+  SlotInfo slot_info = 17;                  // 车位信息
+}
+
+// apa/rpa 泊车， event:BLC_NEW_APA_PARKING_REPORT
+message NewAPAReport {
+  enum ReportStatus {
+    UNKNOWN = 0;
+    SUCCESS = 1;      // 泊车完成
+    FAILED = 2;       // 泊车失败
+    OPEN_FAILED = 3;  // 打开功能失败
+    OPEN_SUCCESS = 4; // 打开功能成功
+    SEARCH = 5;       // 搜库打点
+    SEARCH_QUIT = 6;  // 寻库退出
+    ACTIVED = 7;      // 泊车激活
+    SUSPEND = 8;      // 泊车暂停
+    APA_INTERVENTION = 9; // 泊车用户干预
+    APA_AFTER_INTER = 10; // 泊车用户干预后行为
+    APA_SPECIAL_SCENARIO = 11; // 特殊场景埋点
+  }
+  enum AfterIntervAction {
+    AFTER_INTERV_ACTION_UNKNOW = 0;
+    AFTER_INTERV_ACTION_POWER_OFF = 1;// 下电
+    AFTER_INTERV_ACTION_PARKOUT = 2;  // 手动泊出
+    AFTER_INTERV_ACTION_PARKIN = 3;   // 手动泊入
+  }
+  enum SpecialType {
+    SPECIAL_TYPE_UNKNOWN = 0;
+    SPECIAL_TYPE_USER_BRAKE = 1;     // 用户踩刹车
+    SPECIAL_TYPE_STAND_TIMEOUT = 2;  // 静止超时
+    SPECIAL_TYPE_STEER_EXCEED = 3;   // 方向盘超限
+    SPECIAL_TYPE_WARNED_SCRATCH = 4; // 剐蹭提醒
+  }
+  ParkingCommon parking_common = 1;     // 功能
+  LocationInfo location_info = 2;       // 泊车地点位置
+  PathInfo path_info = 3;               // 规划信息
+  SlotInfo slot_info = 4;               // 车位信息
+  ChassisInfo chassis_info = 5;         // 触发时刻的底盘信息
+  OpenType open_type = 6;               // 打开功能方式
+  ActiveType active_type = 7;           // 泊车激活方式
+  IntervType interv_type = 8;           // 用户干预方式
+  ObjInfo obj_info = 9;                 // 障碍物信息
+  SearchStatus search_sts = 10;         // 搜车位统计
+  ParkingStatus parking_sts = 11;       // 泊车状态
+  FailOrSuspendReason fail_reason = 12; // 失败原因
+  ReportStatus report_status = 13;      // 事件上报状态
+  AfterIntervAction after_interv = 14;  // 用户干预后行为
+  SpecialType special_type = 15;        // 特殊场景类型
+}
+
+message RSPASuspendReason {
+  dr.blc.mcu.report_event.RSPAFailOrSuspendReason pause_reason = 1;  // 一级失败或暂停原因, 包含pause_reason 暂停原因
+  string pause_time = 2;   // 暂停时刻, 目前发空值
+  string restore_time = 3; // 暂停恢复耗时，泊车功能暂停到恢复的时间, 目前发空值
+  string resume_time = 4;  // 重新恢复泊车耗时, 泊车功能恢复到用户确认恢复按钮这两段, 目前发空值
+}
+
+message RSPAFailReason {
+  dr.blc.mcu.report_event.RSPAFailOrSuspendReason main_fail_reason = 1;  // 一级失败或暂停原因, 包含pause_reason 暂停原因
+  int32 second_fail_reason = 2;         // 二级失败或暂停原因（预留，目前填0）
+}
+
+// RSPA 直线召唤， event: BLC_NEW_RSPA_REPORT
+message NewRSPAReport {
+  enum ReportStatus {
+    UNKNOWN = 0;
+    OPEN_SUCCESS = 1;  // 功能开启成功
+    OPEN_FAILED = 2;   // 功能开启失败
+    ACTIVED = 3;       // 功能激活
+    SUSPEND = 4;       // 功能暂停
+    EXIT = 5;          // 控车后，功能退出
+    COMPLETE = 6;      // 功能完成
+    FAILED = 7;        // 功能失败
+    OPEN_EXIT = 8;     // 开启后，控车前退出
+    OBJ_IGNORE_OPEN = 9;   // 开启忽略障碍物
+    OBJ_IGNORE_CLOSE = 10; // 关闭忽略障碍物
+    OBJ_IGNORE_EXIT = 11;  // 未忽略障碍物退出
+  }
+
+  ParkingCommon parking_common = 1;     // 通用功能信息
+  ObjInfo  obj_info = 2;                // 障碍物信息
+  SlotInfo slot_info = 3;               // 车位信息
+  OpenType open_type = 4;               // 打开方式
+  RSPASuspendReason suspend_info = 5;   // 暂停原因
+  RSPAFailReason fail_reason = 6;      // 失败原因
+  dr.blc.mcu.report_event.StraightSummonStatus straight_status = 7;  // 直线召唤过程数据
+  dr.blc.mcu.report_event.AwakenInfo awaken_info = 8;          // 唤醒时长及类型
+  ReportStatus report_status = 9;       // 事件状态
 }
 
 // rads 倒车循迹， event:BLC_RADS_REPORT
@@ -905,9 +1577,21 @@ message VPALearningReport {
     CANCELED = 3;   // 用户退出功能（from ACTIVED）
     ACTIVED = 4;    // 功能激活
   }
+  enum LearningType {
+    LEARNING_TYPE_UNKNOWN = 0;
+    LEARNING_TYPE_IN = 1;    // 泊入建图
+    LEARNING_TYPE_OUT = 2;   // 泊出建图
+  }
+  enum LearningNoSenseType {
+    LEARNING_NO_SENSE_UNKNOWN = 0;
+    LEARNING_NORMAL = 1;    // 无感泊入建图
+    LEARNING_NO_SENSE = 2;   // 无感泊出建图
+  }
   Result result = 1;       // 泊车阶段
   dr.operationstatus.ReasonInfo reasoninfo = 2;  //失败原因
   bool study_finish = 3;   // 是否用户完成学习
+  LearningType learning_type = 4; // 泊入建图/泊出建图
+  LearningNoSenseType learning_no_sense_type = 5; // 前台建图/无感建图
 }
 
 // vpa-routing 记忆泊车巡航， event:BLC_VPA_ROUTING_REPORT
@@ -922,6 +1606,146 @@ message VPARoutingReport {
   Result result = 1;       // 泊车阶段
   dr.operationstatus.ReasonInfo reasoninfo = 2;  //失败原因
   bool cruise_switch_apa = 3;      // 巡航是否切APA成功
+}
+
+// 停车场ODD， event:BLC_PARKING_LOT_REPORT
+message ParkingLotReport {
+  enum Result {
+    RESULT_UNKNOWN = 0;
+    PARKING_LOT_ENTRY = 1; // 进入停车场
+    PARKING_LOT_EXIT = 2; // 离开停车场
+  }
+  ParkingCommon parking_common = 1; // 功能
+  Result result = 2;       // 进入/离开停车场
+  LocationInfo location_info = 3; // 停车场位置
+  ParkingLotType parking_lot_type = 4; // 停车场类型
+}
+
+// vpa-learning 记忆泊车建图， event:BLC_NEW_VPA_LEARNING_REPORT
+message NewVPALearningReport {
+  enum Result {
+    RESULT_UNKNOWN = 0;
+    HAVP_STUDY_OPEN = 1; // HAVP建图开启
+    HAVP_STUDY_ACTIVE = 2; // HAVP建图激活
+    HAVP_STUDY_EXIT = 3; // HAVP建图退出
+    HAVP_STUDY_FINISH = 4; // HAVP建图完成
+    HAVP_STUDY_FAILED = 5; // HAVP建图生成失败
+    HAVP_STUDY_SUCCEED = 6; // HAVP建图生成成功
+    HAVP_PARKING_SLOT_MANAGE_OPEN = 7; // HAVP库位管理开启
+  }
+  ParkingCommon parking_common = 1; // 功能
+  Result result = 2;  // 建图阶段
+  LocationInfo location_info = 3; // 建图位置
+  OpenType open_type = 4; // 建图方式
+  ActiveType active_type = 5; // 建图激活方式
+  float push_delay = 6; // 建图推送延迟时长（单位：秒）
+  float active_location = 7; // 建图激活位置（进入预期ODD环境后，用户激活建图的位置点距离建图可用时的起始点的距离，单位：米）
+  FailOrSuspendReason fail_reason = 8; // 建图失败原因
+  MappingStatus mapping_status = 9; // 建图过程数据
+  MapSaveStatus map_save_status = 10; // 建图保存数据
+  dr.operationstatus.ReasonInfo reasoninfo = 11;  //失败原因
+}
+
+// vpa-routing 记忆泊车巡航， event:BLC_NEW_VPA_ROUTING_REPORT
+message NewVPARoutingReport {
+  enum Result {
+    RESULT_UNKNOWN = 0;
+    HAVP_CRUISE_ACTIVE_EXCLUDE_APA = 1; // HAVP巡航激活（不包含APA）
+    HAVP_CRUISE_EXIT = 2; // HAVP巡航退出
+    HAVP_CRUISE_FINISH_EXCLUDE_APA = 3; // HAVP巡航完成（不包含APA）
+    HAVP_CRUISE_TAKEOVER = 4; // HAVP巡航用户干预
+  }
+  ParkingCommon parking_common = 1; // 功能
+  Result result = 2;       // 巡航阶段
+  LocationInfo location_info = 3; // 巡航位置
+  ActiveType active_type = 4; // 巡航激活方式
+  float push_delay = 5; // 巡航推送延迟时长（单位：秒）
+  PathInfo path_info = 6; // 巡航路径信息
+  FailOrSuspendReason fail_reason = 7; // 巡航失败原因
+  CruisingStatus cruising_status = 8; // 巡航状态
+  IntervType interv_type = 9; // 用户干预方式
+  ChassisInfo chassis_info = 10; // 底盘信息
+  ObjInfo obj_info = 11; // 障碍物信息
+  dr.operationstatus.ReasonInfo reasoninfo = 12;  //失败原因
+}
+
+// 记忆泊车导航， event:BLC_VPA_NAVI_REPORT
+message VPANavigationReport {
+  enum Result {
+    RESULT_UNKNOWN = 0;
+    HAVP_NAVI_ACTIVE = 1; // HAVP导航激活
+    HAVP_NAVI_EXIT = 2; // HAVP导航退出
+    HAVP_NAVI_FINISH = 3; // HAVP导航完成
+  }
+  ParkingCommon parking_common = 1; // 功能
+  Result result = 2;       // 导航阶段
+  LocationInfo location_info = 3; // 导航位置
+  ActiveType active_type = 4; // 导航激活方式
+  NaviStatus navi_status = 5; // 导航状态
+}
+
+// 记忆泊车APA， event:BLC_VPA_PARKING_REPORT
+message VPAParkingReport {
+  enum Result {
+    RESULT_UNKNOWN = 0;
+    HAVP_APA_ACTIVE = 1; // HAVP APA激活
+    HAVP_APA_EXIT = 2; // HAVP APA退出
+    HAVP_APA_FINISH = 3; // HAVP APA完成
+  }
+  ParkingCommon parking_common = 1; // 功能
+  Result result = 2;       // 泊车阶段
+  LocationInfo location_info = 3; // 泊车位置
+  ActiveType active_type = 4; // 泊车激活方式
+  SlotInfo slot_info = 5; // 车位信息
+  ParkingStatus parking_status = 6; // 泊车状态
+  PathInfo path_info = 7; // 泊车路径信息
+  FailOrSuspendReason fail_reason = 8; // 泊车失败原因
+  dr.operationstatus.ReasonInfo reasoninfo = 9;  //失败原因
+}
+
+// D2D切换， event:BLC_D2D_SWITCH_REPORT
+message D2DReport {
+  enum Result {
+    SWITCH_RESULT_UNKNOWN = 0;
+    E2E_SWITCH_SUCCESS = 1;
+    E2E_SWITCH_FAILED = 2;
+  }
+  ParkingCommon parking_common = 1; // 功能
+  Result result = 2;       // 切换结果
+  E2ESwitch e2e_switch = 3; // 切换过程数据
+}
+
+// 闸机通行， event:BLC_BARRIER_GATE_REPORT
+message BarrierGateReport {
+  enum Result {
+    RESULT_UNKNOWN = 0;
+    GATE_PASS_SUCCESS = 1; // 通行成功
+    GATE_PASS_FAILED = 2; // 通行失败
+  }
+  enum PassFailReason {
+    PASS_FAIL_REASON_UNKNOWN = 0;
+    PASS_FAIL_REASON_NARROW_EXIT = 1; // 窄路退出
+    PASS_FAIL_REASON_BLOCK_TIMEOUT = 2; // 堵塞超时
+    PASS_FAIL_REASON_USER_TAKEOVER = 3; // 用户接管
+    OTHER_PASS_FAIL_REASON = 4; // 其他失败原因
+  }
+  ParkingCommon parking_common = 1; // 功能
+  Result result = 2; // 通行结果
+  PassFailReason pass_fail_reason = 3; // 通行失败原因
+  SpecScene spec_scene = 4; // 特定场景信息
+  ChassisInfo chassis_info = 5; // 触发时刻的底盘信息
+}
+
+// D2D导航匹配， event:BLC_D2D_NAVI_MATCH_REPORT
+message D2DNaviMatchReport {
+  enum Result {
+    RESULT_UNKNOWN = 0;
+    NAVI_MATCH_SUCCESS = 1; // 导航匹配成功
+    NAVI_MATCH_FAILED = 2; // 导航匹配失败
+  }
+  ParkingCommon parking_common = 1; // 功能
+  Result result = 2; // 匹配结果
+  D2DNaviMatchInfo d2d_navi_match_info = 3; // 导航匹配信息
 }
 
 // 场景触发导致泊车功能退出 , event  :  BLC_PARKING_FAILURE_BUSINESS_REPORT
@@ -1008,3 +1832,78 @@ message AVMEventInfo {
   FaultInfo fault_reason = 1;            //故障原因
   dr.operationstatus.ReasonInfo reasoninfo = 2;  // 非故障原因
 }
+
+
+message VlaReqInfo {//BLC_VLA_REQUEST_EVENT
+  gwm.VLAReq vla_req = 1;//用户下发的请求
+  uint64 path_id = 2; //导航路线id
+  RoadClass road_class = 3;//道路类型，城市，高快城快
+}
+
+message VlaTaskStatus {//BLC_VLA_TASK_RESULT_EVENT
+  gwm.VLAReq vla_req = 1;//用户下发的请求
+  uint64 path_id = 2; //导航路线id
+  RoadClass road_class = 3;//道路类型，城市，高快城快 
+  bool is_success = 4; //是否成功   
+  VlaFailReason fail_reason = 5;  
+}
+
+message DefensiveInfo {//BLC_VLA_DEFENSIVE_EVENT
+  uint64 path_id = 1; //导航路线id
+  RoadClass road_class = 2;//道路类型，城市，高快城快   
+  repeated deeproute.vla.vla_output.VlaOutput.RiskScenario scene_flags = 3;//场景  
+}
+
+//防御性驾驶时用户接管
+message DefensiveTakeOverInfo {//BLC_VLA_DEFENSIVE_TAKE_OVER_EVENT
+  uint64 path_id = 1; //导航路线id
+  RoadClass road_class = 2;//道路类型，城市，高快城快   
+  repeated deeproute.vla.vla_output.VlaOutput.RiskScenario scene_flags = 3;//场景  
+  TakeOverType takeover_type = 4;
+}
+
+enum VlaFailReason {
+  VLA_REASON_UNKNOWN = 0;// 未知原因
+  //1-100公共错误
+  TASK_TIMEOUT = 1;
+  USER_CANCEL = 2;
+
+  //101-200路口左右转
+  // 与导航路径一致，无需调整
+  VLA_REASON_ROUTE_IS_OVERLAP_THE_ORIGINAL_ROUTE = 101;
+  // 新路线与路口距离过近
+  VLA_REASON_ACTION_POSITION_IS_TOO_CLOSE = 102;
+  // 原导航路径，在预期转弯前，出现了非直行转向
+  VLA_REASON_ROUTING_SERVER_ORIGINAL_ROUTE_TURNING_BEFORE_EXPECTED = 103;
+  // 找不到指定路口
+  VLA_REASON_ROUTING_SERVER_CAN_NOT_FIND_CROSSING = 104;
+
+  //201-300变道
+  VLA_REASON_REAR_CAR_TOO_CLOSE = 201;
+  VLA_REASON_SURROUNDING_CAR_TOO_CLOSE = 202;
+  VLA_REASON_NO_LANE_CHANGE_TRAJECTORY = 203;
+  VLA_REASON_EXCESSIVE_BRAKING = 204;
+  VLA_REASON_ILC_HUMAN_CANCELLED = 205;
+  VLA_REASON_NO_ROOM = 206;
+  VLA_REASON_NONCROSSABLE = 207;
+  VLA_REASON_ILC_TIMEOUT = 208;
+  VLA_REASON_HEAVY_TRAFFIC = 209;
+  VLA_REASON_BLIND_SPOT_OCCUPIED = 210;
+  VLA_REASON_BAD_LANE_CHANGE_POS = 211;
+  //301-400超车
+  VLA_REASON_NO_OVERTAKE_TARGET = 301;
+  VLA_REASON_TOO_CLOSE_TO_ROUTING_END = 302;
+  //401-500靠边停车
+  VLA_REASON_FAILED_TO_SECOND_RIGHT = 402;
+  VLA_REASON_FAILED_TO_MOST_RIGHT = 403;
+  VLA_REASON_FAILED_TO_POI_RANGE = 404;
+  VLA_REASON_OBS_CONFLICTION = 405;
+  VLA_REASON_RIGHT_CONSTRUCTION_ZONE = 406;  
+  VLA_REASON_NO_PARKING_ZONE = 407;
+  VLA_REASON_FUSION_MAP_ERROR = 408;  
+  
+  VLA_REASON_SCENE_CROSSING = 460;
+  VLA_REASON_SCENE_MAIN_SECONDARY_ENTRANCE = 461;
+  VLA_REASON_SCENE_FIELD = 462;
+}
+

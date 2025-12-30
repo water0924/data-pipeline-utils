@@ -51,7 +51,8 @@ enum TaskType {
   VPA_APA = 100;  // VPA 的APA阶段
   VPA_MAP_SAVING = 101;  // VPA 的存图阶段
   MAI = 1003;
-  TLA = 1004;
+  R_MAI = 1004;
+  TLA = 1005;
 }
 
 enum FailurePolicy {
@@ -81,6 +82,7 @@ enum FailurePolicy {
   FAILURE_POLICY_50 = 50;
   FAILURE_POLICY_51 = 51;
   FAILURE_POLICY_52 = 52;
+  FAILURE_POLICY_53 = 53;
   FAILURE_POLICY_64 = 64;
   FAILURE_POLICY_65 = 65;
   FAILURE_POLICY_68 = 68;
@@ -108,4 +110,9 @@ message SourceEvent {
 message SafetyAnalysis {// topic: /safety/analysis
   repeated SourceEvent source_event = 2;
   repeated TaskPolicy task_policy = 3;
+}
+
+message VehicleFaultsInfo {
+  optional uint64 timestamp = 1;
+  repeated dr.common.Event activating_faults = 2;
 }

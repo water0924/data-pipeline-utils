@@ -27,6 +27,7 @@ enum RadarType {
   WHST_STA79_2PRO_CR = 27;
   FREETECH_CVR30_CR = 28;
   WHST_STA77_6_4D_FR = 29;
+  WHST_STA77_7S_4D_FR = 30;
 }
 
 message Config {

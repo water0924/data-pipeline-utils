@@ -22,6 +22,9 @@ enum OddLimitType {
   ODD_CITY = 14;                  // 城市
   ODD_ROAD_CLASS = 15;            // 道路等级
   ODD_MAIN_SECONDARY_ROAD = 16;   // 主辅路切换
+  ODD_PARKING_AREA = 17;          // 停车区
+  ODD_CHECKPOINT = 18;            // 检查站
+  ODD_EARLY_DEGRADE = 19;         // 提前降级
 }
 
 enum OddAction {
@@ -56,6 +59,10 @@ message OddLimitAreaInfo {
   // for sd map
   repeated uint64 link_id = 2;
   repeated int32 link_index = 3;
+
+  optional double start_offset = 6;
+  optional double end_offset = 7;
+
   optional double distance_to_odd_start = 4;
   optional double distance_to_odd_end = 5;
 }
@@ -79,4 +86,6 @@ message OddLimitInfo {
 message OddTypeInfo {
   optional OddLimitType odd_limit_type = 1;
   optional OddAction odd_action = 2;
+  optional double start_offset = 3;
+  optional double end_offset = 4;
 }

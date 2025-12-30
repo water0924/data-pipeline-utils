@@ -35,4 +35,6 @@ message SdMapDebugInfo {
   // 限速云控开关
   // deeproute.navinfo.SpeedLimitConfig
   optional string speed_limit_config = 12;
+
+  optional deeproute.navinfo.RoutingVersion routing_version = 13;
 }

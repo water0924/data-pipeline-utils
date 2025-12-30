@@ -1,0 +1,3711 @@
+syntax = "proto2";
+
+package deeproute.canbus.lp.v35;
+
+message HPCBCM_1_F3_1F3 {
+// Report Message
+  // description CRC [-] [0.0|255.0] [initial_value:0]
+  optional uint32 bcm_crc_1_f3 = 1;
+  // description RollingCounter [-] [0.0|15.0] [initial_value:0]
+  optional uint32 bcm_rolling_counter_1_f3 = 2;
+  // description RearFogCtrl [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_rear_fog_ctrl = 3;
+  // description FrontFogCtrl [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_front_fog_ctrl = 4;
+}
+
+message ZCUR_22_F_22F {
+// Report Message
+  // description CRC [-] [0.0|255.0] [initial_value:0]
+  optional uint32 zcur_crc_22_f = 1;
+  // description RollingCounter [-] [0.0|15.0] [initial_value:0]
+  optional uint32 zcur_rolling_counter_22_f = 2;
+  // description FrontRightLockStsFeedback [-] [0.0|1.0] [initial_value:1]
+  optional bool zcur_fr_lock_sts = 3;
+  // description RightMirrorFoldSts [-] [0.0|1.0] [initial_value:0]
+  optional bool zcur_r_mirr_fold_sts = 4;
+}
+
+message ZCUL_231_231 {
+// Report Message
+  // description CRC [-] [0.0|255.0] [initial_value:0]
+  optional uint32 zcul_crc_231 = 1;
+  // description RollingCounter [-] [0.0|15.0] [initial_value:0]
+  optional uint32 zcul_rolling_counter_231 = 2;
+  // description FrontLeftLockStsFeedback [-] [0.0|1.0] [initial_value:1]
+  optional bool zcul_fl_lock_sts = 3;
+  // description LeftMirrorFoldSts [-] [0.0|1.0] [initial_value:0]
+  optional bool zcul_l_mirr_fold_sts = 4;
+}
+
+message ZCUL_234_234 {
+// Report Message
+  enum ZCULRLSRQRainLevelType {
+    ZCUL_RLS_RQ_RAINLEVEL_0 = 0;
+    ZCUL_RLS_RQ_RAINLEVEL_LEVEL1 = 1;
+    ZCUL_RLS_RQ_RAINLEVEL_LEVEL2 = 2;
+    ZCUL_RLS_RQ_RAINLEVEL_LEVEL3 = 3;
+  }
+  // description CRC [-] [0.0|255.0] [initial_value:0]
+  optional uint32 zcul_crc_234 = 1;
+  // description RollingCounter [-] [0.0|15.0] [initial_value:0]
+  optional uint32 zcul_rolling_counter_234 = 2;
+  // description RainLevel [-] [0.0|7.0] [initial_value:0]
+  optional ZCULRLSRQRainLevelType zcul_rls_rq_rain_level = 3;
+  // description RainSensorFaultSts [-] [0.0|1.0] [initial_value:0]
+  optional bool zcul_rls_fault_rain = 4;
+  // description LightSensorFaultSts [-] [0.0|1.0] [initial_value:0]
+  optional bool zcul_rls_fault_light = 5;
+  // description HazardLightWorkSts [-] [0.0|1.0] [initial_value:0]
+  optional bool zcul_hazard_light_sts = 6;
+  // description HazardLightSwitchSts [-] [0.0|1.0] [initial_value:0]
+  optional bool zcul_hazard_light_sw_sts = 7;
+  // description FrontDefrostWorkSts [-] [0.0|1.0] [initial_value:0]
+  optional bool zcul_front_defrost_sts = 8;
+  // description HazardSwitchPressedSignal [-] [0.0|1.0] [initial_value:0]
+  optional bool zcul_hazard_swt_pressed_sig = 9;
+}
+
+message HPCBCM_527_527 {
+// Report Message
+  // description CRC [-] [0.0|255.0] [initial_value:0]
+  optional uint32 bcm_crc_527 = 1;
+  // description RollingCounter [-] [0.0|15.0] [initial_value:0]
+  optional uint32 bcm_rolling_counter_527 = 2;
+  // description SentinelMode [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_sentinel_mode = 3;
+}
+
+message IBC_182_182 {
+// Report Message
+  enum IBCTSAStatusType {
+    IBC_TSASTATUS_OFF = 0;
+    IBC_TSASTATUS_NORMAL = 1;
+    IBC_TSASTATUS_UNKNOWN = 2;
+    IBC_TSASTATUS_ERROR = 3;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 ibc_crc_182 = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 ibc_rolling_counter_182 = 2;
+  // description IBC车速 [KPH] [0.0|450.0] [initial_value:0]
+  optional double ibc_vehicle_speed = 3;
+  // description IBC车速信号有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_vehicle_speed_vd = 4;
+  // description ABS是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_abs_active = 5;
+  // description ABS是否正常 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_abs_failed = 6;
+  // description TCS是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_tcs_active = 7;
+  // description TCS是否正常 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_tcs_failed = 8;
+  // description ESC功能开启状态 [-] [0.0|1.0] [initial_value:1]
+  optional bool ibc_esc_function_status = 9;
+  // description ESC提示有制动力 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_brake_force = 10;
+  // description 指示车辆是否停下来 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_vehiclestandstill = 11;
+  // description EBD是否正常 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_ebd_failed = 12;
+  // description EBD功能是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_ebd_active = 13;
+  // description VDC是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_vdc_active = 14;
+  // description VDC是否正常 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_vdc_failed = 15;
+  // description EDC是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_edc_active = 16;
+  // description EDC是否正常 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_edc_failed = 17;
+  // description IBC系统初始化状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_system_initialize_status = 18;
+  // description BTCS是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_btcs_active = 19;
+  // description ETCS是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_etcs_active = 20;
+  // description ARP是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_arp_active = 21;
+  // description IBC反馈转鼓模式状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_vcu_drum_mode = 22;
+  // description MPS是否正常 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_mps_elec_warnning_lamp = 23;
+  // description IBC脱困模式状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_escape_mode_sts = 24;
+  // description TSA是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_tsa_active = 25;
+  // description TSA状态 [-] [0.0|3.0] [initial_value:0]
+  optional IBCTSAStatusType ibc_tsa_status = 26;
+}
+
+message IBC_183_183 {
+// Report Message
+  enum IBCRecuBrakeTorqueRequestQType {
+    IBC_RECUBRAKETORQUEREQUEST_Q_NOTINITIALIZED = 0;
+    IBC_RECUBRAKETORQUEREQUEST_Q_NORMAL = 1;
+    IBC_RECUBRAKETORQUEREQUEST_Q_FAULTY = 2;
+  }
+  enum IBCBrakePedalAppliedQType {
+    IBC_BRAKEPEDALAPPLIED_Q_NOTINITIALIZED = 0;
+    IBC_BRAKEPEDALAPPLIED_Q_NORMAL = 1;
+    IBC_BRAKEPEDALAPPLIED_Q_FAULTY = 2;
+  }
+  enum IBCCtrlModeType {
+    IBC_CTRLMODE_NO_BRAKING = 0;
+    IBC_CTRLMODE_DBR = 1;
+    IBC_CTRLMODE_EBR = 2;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 ibc_crc_183 = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 ibc_rolling_counter_183 = 2;
+  // description 制动能量回收制动扭矩请求 [N·m] [0.0|32767.0] [initial_value:0]
+  optional uint32 ibc_recu_brake_torque_request = 3;
+  // description 制动能量回收制动扭矩请求有效性 [-] [0.0|3.0] [initial_value:0]
+  optional IBCRecuBrakeTorqueRequestQType ibc_recu_brake_torque_request_q = 4;
+  // description 制动踏板行程开度百分比有效性 [-] [0.0|2.0] [initial_value:0]
+  optional double ibc_s_output_rod_driver_per_q = 5;
+  // description 驾驶员是否踩下制动踏板有效性 [-] [0.0|3.0] [initial_value:0]
+  optional IBCBrakePedalAppliedQType ibc_brake_pedal_applied_q = 6;
+  // description 液压扭矩执行值有效性 [-] [0.0|2.0] [initial_value:0]
+  optional double ibc_hydra_torq_tgt_act_q = 7;
+  // description 液压扭矩执行值 [N·m] [0.0|32767.0] [initial_value:0]
+  optional uint32 ibc_hydra_torq_tgt_act = 8;
+  // description 驾驶员是否踩下制动踏板 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_brake_pedal_applied = 9;
+  // description 制动踏板行程开度百分比 [%] [0.0|100.0] [initial_value:0]
+  optional double ibc_s_output_rod_driver_per = 10;
+  // description 液压扭矩可用状态 [] [0.0|1.0] [initial_value:0]
+  optional bool ibc_hydra_torq_available = 11;
+  // description 控制模式 [-] [0.0|7.0] [initial_value:0]
+  optional IBCCtrlModeType ibc_ctrl_mode = 12;
+  // description VLC扭矩有效性 [-] [0.0|1.0] [initial_value:1]
+  optional bool ibc_eng_torq_vlc_vaild = 13;
+  // description VLC请求的扭矩 [N·m] [-6000.0|10000.0] [initial_value:6000]
+  optional double ibc_eng_torq_vlc = 14;
+  // description VLC减速请求的扭矩 [N·m] [-32767.0|0.0] [initial_value:0]
+  optional double ibc_brk_torq_vlc = 15;
+  // description VLC减速扭矩有效性 [-] [0.0|1.0] [initial_value:1]
+  optional bool ibc_brk_torq_vlc_vaild = 16;
+}
+
+message IBC_184_184 {
+// Report Message
+  enum IBCFLWheelDirectionType {
+    IBC_FLWHEELDIRECTION_STANDSTILL = 0;
+    IBC_FLWHEELDIRECTION_FORWARD = 1;
+    IBC_FLWHEELDIRECTION_BACKWARD = 2;
+    IBC_FLWHEELDIRECTION_INVALID = 3;
+  }
+  enum IBCFRWheelDirectionType {
+    IBC_FRWHEELDIRECTION_STANDSTILL = 0;
+    IBC_FRWHEELDIRECTION_FORWARD = 1;
+    IBC_FRWHEELDIRECTION_BACKWARD = 2;
+    IBC_FRWHEELDIRECTION_INVALID = 3;
+  }
+  enum IBCRLWheelDirectionType {
+    IBC_RLWHEELDIRECTION_STANDSTILL = 0;
+    IBC_RLWHEELDIRECTION_FORWARD = 1;
+    IBC_RLWHEELDIRECTION_BACKWARD = 2;
+    IBC_RLWHEELDIRECTION_INVALID = 3;
+  }
+  enum IBCRRWheelDirectionType {
+    IBC_RRWHEELDIRECTION_STANDSTILL = 0;
+    IBC_RRWHEELDIRECTION_FORWARD = 1;
+    IBC_RRWHEELDIRECTION_BACKWARD = 2;
+    IBC_RRWHEELDIRECTION_INVALID = 3;
+  }
+  enum IBCDiscTemperatureFLType {
+    IBC_DISCTEMPERATUREFL_LEVEL_0_50 = 0;
+    IBC_DISCTEMPERATUREFL_LEVEL_1_50_200 = 1;
+    IBC_DISCTEMPERATUREFL_LEVEL_2_200_350 = 2;
+    IBC_DISCTEMPERATUREFL_LEVEL_3_350_500 = 3;
+    IBC_DISCTEMPERATUREFL_LEVEL_4_500 = 4;
+    IBC_DISCTEMPERATUREFL_RESERVED = 5;
+  }
+  enum IBCDiscTemperatureFRType {
+    IBC_DISCTEMPERATUREFR_LEVEL_0_50 = 0;
+    IBC_DISCTEMPERATUREFR_LEVEL_1_50_200 = 1;
+    IBC_DISCTEMPERATUREFR_LEVEL_2_200_350 = 2;
+    IBC_DISCTEMPERATUREFR_LEVEL_3_350_500 = 3;
+    IBC_DISCTEMPERATUREFR_LEVEL_4_500 = 4;
+    IBC_DISCTEMPERATUREFR_RESERVED = 5;
+  }
+  enum IBCDiscTemperatureRLType {
+    IBC_DISCTEMPERATURERL_LEVEL_0_50 = 0;
+    IBC_DISCTEMPERATURERL_LEVEL_1_50_200 = 1;
+    IBC_DISCTEMPERATURERL_LEVEL_2_200_350 = 2;
+    IBC_DISCTEMPERATURERL_LEVEL_3_350_500 = 3;
+    IBC_DISCTEMPERATURERL_LEVEL_4_500 = 4;
+    IBC_DISCTEMPERATURERL_RESERVED = 5;
+  }
+  enum IBCDiscTemperatureRRType {
+    IBC_DISCTEMPERATURERR_LEVEL_0_50 = 0;
+    IBC_DISCTEMPERATURERR_LEVEL_1_50_200 = 1;
+    IBC_DISCTEMPERATURERR_LEVEL_2_200_350 = 2;
+    IBC_DISCTEMPERATURERR_LEVEL_3_350_500 = 3;
+    IBC_DISCTEMPERATURERR_LEVEL_4_500 = 4;
+    IBC_DISCTEMPERATURERR_RESERVED = 5;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 ibc_crc_184 = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 ibc_rolling_counter_184 = 2;
+  // description 左前轮轮速信号 [KPH] [0.0|450.0] [initial_value:0]
+  optional double ibc_fl_wheel_speed_kph = 3;
+  // description 右前轮轮速信号 [KPH] [0.0|450.0] [initial_value:0]
+  optional double ibc_fr_wheel_speed_kph = 4;
+  // description 左后轮轮速信号 [KPH] [0.0|450.0] [initial_value:0]
+  optional double ibc_rl_wheel_speed_kph = 5;
+  // description 右后轮轮速信号 [KPH] [0.0|450.0] [initial_value:0]
+  optional double ibc_rr_wheel_speed_kph = 6;
+  // description 左前轮方向 [-] [0.0|3.0] [initial_value:3]
+  optional IBCFLWheelDirectionType ibc_fl_wheel_direction = 7;
+  // description 右前轮方向 [-] [0.0|3.0] [initial_value:3]
+  optional IBCFRWheelDirectionType ibc_fr_wheel_direction = 8;
+  // description 左后轮方向 [-] [0.0|3.0] [initial_value:3]
+  optional IBCRLWheelDirectionType ibc_rl_wheel_direction = 9;
+  // description 右后轮方向 [-] [0.0|3.0] [initial_value:3]
+  optional IBCRRWheelDirectionType ibc_rr_wheel_direction = 10;
+  // description 左前轮轮速值有效 [-] [0.0|1.0] [initial_value:1]
+  optional bool ibc_fl_wheel_speed_vd = 11;
+  // description 右前轮轮速值有效 [-] [0.0|1.0] [initial_value:1]
+  optional bool ibc_fr_wheel_speed_vd = 12;
+  // description 左后轮轮速值有效 [-] [0.0|1.0] [initial_value:1]
+  optional bool ibc_rl_wheel_speed_vd = 13;
+  // description 右后轮轮速值有效 [-] [0.0|1.0] [initial_value:1]
+  optional bool ibc_rr_wheel_speed_vd = 14;
+  // description 左前轮速脉冲信号 [-] [0.0|4094.0] [initial_value:0]
+  optional double ibc_fl_wheel_speed_rc = 15;
+  // description 右前轮速脉冲信号 [-] [0.0|4094.0] [initial_value:0]
+  optional double ibc_fr_wheel_speed_rc = 16;
+  // description 左后轮速脉冲信号 [-] [0.0|4094.0] [initial_value:0]
+  optional double ibc_rl_wheel_speed_rc = 17;
+  // description 右后轮速脉冲信号 [-] [0.0|4094.0] [initial_value:0]
+  optional double ibc_rr_wheel_speed_rc = 18;
+  // description 左前轮加速值有效 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_wheel_acc_front_left_vd = 19;
+  // description 右前轮加速度有效 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_wheel_acc_front_right_vd = 20;
+  // description 左后轮加速度有效 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_wheel_acc_rear_left_vd = 21;
+  // description 右后轮加速度有效 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_wheel_acc_rear_right_vd = 22;
+  // description 左前轮加速度 [m/s2] [-16.0|15.9] [initial_value:0]
+  optional double ibc_wheel_acc_front_left = 23;
+  // description 右前轮加速度 [m/s2] [-16.0|15.9] [initial_value:0]
+  optional double ibc_wheel_acc_front_right = 24;
+  // description 左后轮加速度 [m/s2] [-16.0|15.9] [initial_value:0]
+  optional double ibc_wheel_acc_rear_left = 25;
+  // description 右后轮加速度 [m/s2] [-16.0|15.9] [initial_value:0]
+  optional double ibc_wheel_acc_rear_right = 26;
+  // description 左前轮盘温 [-] [0.0|7.0] [initial_value:0]
+  optional IBCDiscTemperatureFLType ibc_disc_temperature_fl = 27;
+  // description 左前轮盘温有效 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_disc_temperature_flvd = 28;
+  // description 右前轮盘温 [-] [0.0|7.0] [initial_value:0]
+  optional IBCDiscTemperatureFRType ibc_disc_temperature_fr = 29;
+  // description 右前轮盘温有效 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_disc_temperature_frvd = 30;
+  // description 左后轮盘温 [-] [0.0|7.0] [initial_value:0]
+  optional IBCDiscTemperatureRLType ibc_disc_temperature_rl = 31;
+  // description 左后轮盘温有效 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_disc_temperature_rlvd = 32;
+  // description 右后轮盘温 [-] [0.0|7.0] [initial_value:0]
+  optional IBCDiscTemperatureRRType ibc_disc_temperature_rr = 33;
+  // description 右后轮盘温有效 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_disc_temperature_rrvd = 34;
+  // description 左前轮频信号 [Hz] [0.0|127.0] [initial_value:0]
+  optional double ibc_fl_wheel_frequency = 35;
+  // description 右前轮频信号 [Hz] [0.0|127.0] [initial_value:0]
+  optional double ibc_fr_wheel_frequency = 36;
+  // description 左后轮频信号 [Hz] [0.0|127.0] [initial_value:0]
+  optional double ibc_rl_wheel_frequency = 37;
+  // description 右后轮频信号 [Hz] [0.0|127.0] [initial_value:0]
+  optional double ibc_rr_wheel_frequency = 38;
+  // description 左前轮频信号有效 [-] [0.0|1.0] [initial_value:1]
+  optional bool ibc_fl_wheel_frequency_vd = 39;
+  // description 右前轮频信号有效 [-] [0.0|1.0] [initial_value:1]
+  optional bool ibc_fr_wheel_frequency_vd = 40;
+  // description 左后轮频信号有效 [-] [0.0|1.0] [initial_value:1]
+  optional bool ibc_rl_wheel_frequency_vd = 41;
+  // description 右后轮频信号有效 [-] [0.0|1.0] [initial_value:1]
+  optional bool ibc_rr_wheel_frequency_vd = 42;
+}
+
+message IBC_185_185 {
+// Report Message
+  enum IBCESPFailureLampType {
+    IBC_ESP_FAILURELAMP_OFF = 0;
+    IBC_ESP_FAILURELAMP_ON = 1;
+    IBC_ESP_FAILURELAMP_BLINK = 2;
+    IBC_ESP_FAILURELAMP_RESERVED = 3;
+  }
+  enum IBCHMIWarningOnType {
+    IBC_HMI_WARNINGON_NO_REQUEST = 0;
+    IBC_HMI_WARNINGON_WARNING_LAMP_LV1 = 1;
+    IBC_HMI_WARNINGON_WARNING_LAMP_LV2 = 2;
+  }
+  enum IBCbrakeFluidWarningType {
+    IBC_BRAKEFLUIDWARNING_NORMAL = 0;
+    IBC_BRAKEFLUIDWARNING_EMPTYE = 1;
+    IBC_BRAKEFLUIDWARNING_ERROR = 2;
+    IBC_BRAKEFLUIDWARNING_RESERVED = 3;
+  }
+  enum IBCAVHStatusType {
+    IBC_AVHSTATUS_OFF = 0;
+    IBC_AVHSTATUS_ACTIVE = 1;
+    IBC_AVHSTATUS_STAND_BY = 2;
+    IBC_AVHSTATUS_ERROR = 3;
+  }
+  enum IBCHDCStatusType {
+    IBC_HDCSTATUS_OFF = 0;
+    IBC_HDCSTATUS_ACTIVE = 1;
+    IBC_HDCSTATUS_STAND_BY = 2;
+    IBC_HDCSTATUS_ERROR = 3;
+  }
+  enum IBCCSTStatusType {
+    IBC_CSTSTATUS_OFF = 0;
+    IBC_CSTSTATUS_ACTIVE = 1;
+    IBC_CSTSTATUS_STAND_BY = 2;
+    IBC_CSTSTATUS_ERROR = 3;
+  }
+  enum IBCVehicleHoldStatusType {
+    IBC_VEHICLEHOLDSTATUS_NO_VEHLICLE_HOLD_DUE_TO_ADAS_FUNCTION = 0;
+    IBC_VEHICLEHOLDSTATUS_VEHLICLE_HOLD_DUE_TO_COMFORT_FUNCTION_APA_ACC = 1;
+    IBC_VEHICLEHOLDSTATUS_VEHLICLE_HOLD_DUE_TO_SECURITY_FUNCTION_AEB = 2;
+    IBC_VEHICLEHOLDSTATUS_RESERVED = 3;
+  }
+  enum IBCAPSPrecheckStsType {
+    IBC_APS_PRECHECKSTS_OFF = 0;
+    IBC_APS_PRECHECKSTS_PRECHECKING = 1;
+    IBC_APS_PRECHECKSTS_PRECHECK_COMPLETE = 2;
+    IBC_APS_PRECHECKSTS_PRECHECK_FAILED = 3;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 ibc_crc_185 = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 ibc_rolling_counter_185 = 2;
+  // description 活塞端压力（DAP腔压力） [bar] [0.0|255.8] [initial_value:0]
+  optional double ibc_plunger_pressure = 3;
+  // description 活塞端压力有效性 [-] [0.0|1.0] [initial_value:1]
+  optional bool ibc_plunger_pressure_q = 4;
+  // description ESP故障指示灯 [-] [0.0|3.0] [initial_value:0]
+  optional IBCESPFailureLampType ibc_esp_failure_lamp = 5;
+  // description ABS故障指示灯 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_abs_failure_lamp = 6;
+  // description EBD故障指示灯 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_ebd_failure_lamp = 7;
+  // description HHC故障指示灯 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_hhc_failure_lamp = 8;
+  // description IBC基础制动故障灯（HMI） [-] [0.0|3.0] [initial_value:0]
+  optional IBCHMIWarningOnType ibc_hmi_warning_on = 9;
+  // description IBC MIL灯请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_mil_warning_on = 10;
+  // description 车辆实际纵向加速度 [m/s2] [-16.0|15.9] [initial_value:None]
+  optional double ibc_longit_acce_act = 11;
+  // description 车辆实际纵向加速度有效性 [-] [0.0|1.0] [initial_value:1]
+  optional bool ibc_longit_acce_act_valid = 12;
+  // description 制动液位报警 [-] [0.0|3.0] [initial_value:0]
+  optional IBCbrakeFluidWarningType ibc_brake_fluid_warning = 13;
+  // description RAB是否可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_rab_avatiable = 14;
+  // description RAB是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_rab_active = 15;
+  // description ABA是否可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_aba_avaliable = 16;
+  // description ABA是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_aba_active = 17;
+  // description AWB是否可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_awb_avaliable = 18;
+  // description AWB是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_awb_active = 19;
+  // description ABP是否可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_abp_aviliable = 20;
+  // description ABP是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_abp_active = 21;
+  // description SCM（二次碰撞）是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_scm_active = 22;
+  // description SCM（二次碰撞）是否正常 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_scm_failed = 23;
+  // description RCTB是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_rctb_active = 24;
+  // description RCTB是否可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_rctb_aviliable = 25;
+  // description HBA是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_hba_active = 26;
+  // description HBA是否正常 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_hba_failed = 27;
+  // description 保压请求是否可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_hold_available = 28;
+  // description 是否紧急制动 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_abl_active = 29;
+  // description 请求BCM激活刹车灯 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_ldm_blc = 30;
+  // description CDP是否可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_cdp_available = 31;
+  // description CDP激活状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_cdp_intervention = 32;
+  // description AEB是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_aeb_active = 33;
+  // description AEB是否可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_ae_bdec_available = 34;
+  // description AVH状态 [-] [0.0|3.0] [initial_value:0]
+  optional IBCAVHStatusType ibc_avh_status = 35;
+  // description AVH是否可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_avh_available = 36;
+  // description HHC是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_hhc_active = 37;
+  // description HHC是否正常 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_hhc_failed = 38;
+  // description APA是否可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_cdd_available_apa = 39;
+  // description APA是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_cdd_active_apa = 40;
+  // description IBC检测到AEB所发报文错误 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_qdcaeb = 41;
+  // description ACC是否可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_cdd_available_acc = 42;
+  // description ACC是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_cdd_active_acc = 43;
+  // description IBC检测到ACC所发报文错误 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_qdcacc = 44;
+  // description IBC检测到APA所发报文错误 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_qdcaps = 45;
+  // description HDC状态 [-] [0.0|3.0] [initial_value:0]
+  optional IBCHDCStatusType ibc_hdc_status = 46;
+  // description HDC是否可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_hdc_available = 47;
+  // description CST状态 [-] [0.0|3.0] [initial_value:0]
+  optional IBCCSTStatusType ibc_cst_status = 48;
+  // description CST是否可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_cst_available = 49;
+  // description ACC(VLC)是否可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_vlc_available_acc = 50;
+  // description ACC(VLC)是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_vlc_active_acc = 51;
+  // description APA(VLC)是否有效 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_vlc_available_apa = 52;
+  // description APA(VLC)是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_vlc_active_apa = 53;
+  // description 车辆是否在Hold状态 [-] [0.0|3.0] [initial_value:0]
+  optional IBCVehicleHoldStatusType ibc_vehicle_hold_status = 54;
+  // description 泊车压力自检状态 [-] [0.0|3.0] [initial_value:0]
+  optional IBCAPSPrecheckStsType ibc_aps_precheck_sts = 55;
+  // description 低速AEB是否可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_low_aeb_available = 56;
+  // description 低速AEB是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_low_aeb_active = 57;
+  // description 驾驶员需求轮端制动扭矩 [N·m] [0.0|32767.0] [initial_value:0]
+  optional uint32 ibc_drvr_brk_tq_at_whls_reqd = 58;
+}
+
+message IBC_18_C_18C {
+// Report Message
+  enum LMCLDCStType {
+    LMC_LDC_ST_OFF = 0;
+    LMC_LDC_ST_STANDBY = 1;
+    LMC_LDC_ST_ACTIVE = 2;
+    LMC_LDC_ST_FAILED = 3;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 ibc_crc_18_c = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 ibc_rolling_counter_18_c = 2;
+  // description 零动漂移功能状态 [-] [0.0|3.0] [initial_value:0]
+  optional LMCLDCStType lmc_ldc_st = 3;
+}
+
+message EPS_18_D_18D {
+// Report Message
+  enum EPSFaultLightType {
+    EPS_FAULT_LIGHT_NO_FAULT = 0;
+    EPS_FAULT_LIGHT_LEVEL_1_FAULT = 1;
+    EPS_FAULT_LIGHT_LEVEL_2_FAULT = 2;
+    EPS_FAULT_LIGHT_LEVEL_3_FAULT = 3;
+  }
+  enum EPSSteeringModeStsFBType {
+    EPS_STEERINGMODESTSFB_RESERVED = 0;
+    EPS_STEERINGMODESTSFB_NOMAL_MODE = 1;
+    EPS_STEERINGMODESTSFB_COMFORTABLE_MODE = 2;
+    EPS_STEERINGMODESTSFB_SPORT_MODE = 3;
+  }
+  enum EPSLateralNotAvailableReasonType {
+    EPS_LATERALNOTAVAILABLEREASON_NO_ABORT_AVAILABLE = 0;
+    EPS_LATERALNOTAVAILABLEREASON_OVERSPEED = 1;
+    EPS_LATERALNOTAVAILABLEREASON_DRIVER_OVERRIDE = 2;
+    EPS_LATERALNOTAVAILABLEREASON_INTERNAL_FAULT = 3;
+    EPS_LATERALNOTAVAILABLEREASON_ABNORMAL_CAN_INPUT = 4;
+    EPS_LATERALNOTAVAILABLEREASON_ANGLE_GRADIENT_TOO_HIGH = 5;
+    EPS_LATERALNOTAVAILABLEREASON_EXCESS_ANGLE_MAX_RANGE = 6;
+    EPS_LATERALNOTAVAILABLEREASON_EPS_FAILURE = 7;
+  }
+  enum EPSAPSCtrlAbortFeedbackType {
+    EPS_APSCTRLABORTFEEDBACK_NORMALOPERATION = 0;
+    EPS_APSCTRLABORTFEEDBACK_OVER_SPEED = 1;
+    EPS_APSCTRLABORTFEEDBACK_DRIVER_OVERRIDE = 2;
+    EPS_APSCTRLABORTFEEDBACK_INTERNAL_FAULT = 3;
+    EPS_APSCTRLABORTFEEDBACK_ABNORMAL_CAN_INPUT = 4;
+    EPS_APSCTRLABORTFEEDBACK_ANGLE_GRADIENT_TOO_HIGH = 5;
+    EPS_APSCTRLABORTFEEDBACK_EXCESS_ANGLE_MAX_RANGE = 6;
+    EPS_APSCTRLABORTFEEDBACK_EXCESS_ANGLE_DEVIATION = 7;
+    EPS_APSCTRLABORTFEEDBACK_EPS_FAILURE = 8;
+  }
+  enum EPSCtrlActModeType {
+    EPS_CTRLACTMODE_NO_ACTIVE = 0;
+    EPS_CTRLACTMODE_ANGLE_ACTIVE = 1;
+    EPS_CTRLACTMODE_TQ_ACTIVE = 2;
+    EPS_CTRLACTMODE_RESERVED = 3;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 eps_crc_18_d = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 eps_rolling_counter_18_d = 2;
+  // description EPS故障 [-] [0.0|1.0] [initial_value:0]
+  optional bool eps_fault = 3;
+  // description 方向盘转角标定位 [-] [0.0|1.0] [initial_value:0]
+  optional bool eps_calibration_sts = 4;
+  // description 方向盘转角传感器错误标志 [-] [0.0|1.0] [initial_value:0]
+  optional bool eps_failure_sts = 5;
+  // description 实际方向盘转角信号有效性 [-] [0.0|1.0] [initial_value:1]
+  optional bool eps_steering_angle_valid_data = 6;
+  // description 方向盘转角速度信号有效性 [-] [0.0|1.0] [initial_value:1]
+  optional bool eps_steering_angle_speed_valid_data = 7;
+  // description 方向盘扭矩信号有效性 [-] [0.0|1.0] [initial_value:1]
+  optional bool eps_steering_torque_valid_data = 8;
+  // description EPS是否允许APS控制转向 [-] [0.0|1.0] [initial_value:0]
+  optional bool eps_aps_available = 9;
+  // description EPS是否正在响应APS转向控制 [-] [0.0|1.0] [initial_value:0]
+  optional bool eps_aps_active = 10;
+  // description 实际方向盘转角 [°] [-650.0|650.0] [initial_value:32500]
+  optional double eps_steer_wheel_angle = 11;
+  // description 方向盘转角速度 [°/s] [0.0|1016.0] [initial_value:0]
+  optional double eps_steer_wheel_rot_spd = 12;
+  // description 方向盘扭矩 [N·m] [-8.0|8.0] [initial_value:1000]
+  optional double eps_steering_torque = 13;
+  // description EPS故障灯 [-] [0.0|3.0] [initial_value:0]
+  optional EPSFaultLightType eps_fault_light = 14;
+  // description EPS自检状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool eps_self_check_st = 15;
+  // description EPS是否允许HPC切换转向模式 [-] [0.0|1.0] [initial_value:0]
+  optional bool eps_steering_mode_sw_fb = 16;
+  // description 转向模式状态反馈 [-] [0.0|3.0] [initial_value:0]
+  optional EPSSteeringModeStsFBType eps_steering_mode_sts_fb = 17;
+  // description EPS是否允许横向控制转向 [-] [0.0|1.0] [initial_value:0]
+  optional bool eps_lateral_available = 18;
+  // description EPS是否正在响应横向转向控制 [-] [0.0|1.0] [initial_value:0]
+  optional bool eps_lateral_active = 19;
+  // description EPS管柱扭矩 [N·m] [-200.0|200.0] [initial_value:20000]
+  optional double eps_column_torque = 20;
+  // description 不允许横向控制原因 [-] [0.0|7.0] [initial_value:0]
+  optional EPSLateralNotAvailableReasonType eps_lateral_not_available_reason = 21;
+  // description APS控制退出原因 [-] [0.0|15.0] [initial_value:0]
+  optional EPSAPSCtrlAbortFeedbackType eps_aps_ctrl_abort_feedback = 22;
+  // description EPS输出助力电机扭矩信号 [N·m] [-5.2|5.2] [initial_value:520]
+  optional double eps_motor_torque = 23;
+  // description EPSCalibAllowedstatus [-] [0.0|1.0] [initial_value:0]
+  optional bool eps_calib_allow = 24;
+  // description EPS末端保护激活状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool eps_end_stop_status = 25;
+  // description LKA/LCC电机响应的等价输入手力矩 [N·m] [-8.0|8.0] [initial_value:1000]
+  optional double eps_lateral_ctrl_hand_torq = 26;
+  // description 方向盘震动激活状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool eps_pulse_active_sts = 27;
+  // description EPS控制激活模式 [-] [0.0|3.0] [initial_value:0]
+  optional EPSCtrlActModeType eps_ctrl_act_mode = 28;
+}
+
+message IBC_227_227 {
+// Report Message
+  enum IBCEPBFailStatusType {
+    IBC_EPB_FAILSTATUS_NO_ERROR = 0;
+    IBC_EPB_FAILSTATUS_APPLY_ONLY = 1;
+    IBC_EPB_FAILSTATUS_RELEASE_ONLY = 2;
+    IBC_EPB_FAILSTATUS_ERROR = 3;
+  }
+  enum IBCEPBStatusType {
+    IBC_EPB_STATUS_RELEASED = 0;
+    IBC_EPB_STATUS_APPLIED = 1;
+    IBC_EPB_STATUS_BOTH_BRAKES_IN_APPLYING = 2;
+    IBC_EPB_STATUS_DYNAMIC_BRAKING_VIA_EPB = 3;
+    IBC_EPB_STATUS_BOTH_BRAKES_IN_RELEASING = 4;
+    IBC_EPB_STATUS_FULL_RELEASED = 5;
+    IBC_EPB_STATUS_UNKNOWN = 6;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 ibc_crc_227 = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 ibc_rolling_counter_227 = 2;
+  // description EPB故障状态 [-] [0.0|3.0] [initial_value:0]
+  optional IBCEPBFailStatusType ibc_epb_fail_status = 3;
+  // description EPB状态 [-] [0.0|7.0] [initial_value:0]
+  optional IBCEPBStatusType ibc_epb_status = 4;
+  // description APA/ACC请求拉EPBi可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_epb_apaacc_request_available = 5;
+  // description 制动盘过热 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_epb_brake_over_heat = 6;
+  // description 转鼓模式 [-] [0.0|1.0] [initial_value:0]
+  optional bool ibc_epb_drum_mode = 7;
+}
+
+message ACU_233_233 {
+// Report Message
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 acu_crc_233 = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 acu_rolling_counter_233 = 2;
+  // description 横向加速度 [m/s2] [-16.0|15.9] [initial_value:None]
+  optional double acu_lateral_acce = 3;
+  // description 纵向加速度 [m/s2] [-16.0|15.9] [initial_value:None]
+  optional double acu_longit_acce = 4;
+  // description 横向加速度有效性 [-] [0.0|1.0] [initial_value:1]
+  optional bool acu_lateral_acce_valid = 5;
+  // description 纵向加速度有效性 [-] [0.0|1.0] [initial_value:1]
+  optional bool acu_longit_acce_valid = 6;
+  // description 传感器标定状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool acu_sensor_cal_st = 7;
+  // description 偏航率 [degree/s] [-81.9|81.9] [initial_value:8191]
+  optional double acu_yaw_rate = 8;
+  // description 偏航率有效性 [-] [0.0|1.0] [initial_value:1]
+  optional bool acu_yaw_rate_valid = 9;
+}
+
+message ADDC_23_E_23E {
+// Control Message
+  enum ADDCLeftTraObj1Type {
+    ADDC_LEFTTRAOBJ1_INVALID = 0;
+    ADDC_LEFTTRAOBJ1_MANHOLE_COVER = 1;
+    ADDC_LEFTTRAOBJ1_SPEED_BUMP = 2;
+    ADDC_LEFTTRAOBJ1_OTHER = 3;
+  }
+  enum ADDCLeftTraObj2Type {
+    ADDC_LEFTTRAOBJ2_INVALID = 0;
+    ADDC_LEFTTRAOBJ2_MANHOLE_COVER = 1;
+    ADDC_LEFTTRAOBJ2_SPEED_BUMP = 2;
+    ADDC_LEFTTRAOBJ2_OTHER = 3;
+  }
+  enum ADDCLeftTraObj3Type {
+    ADDC_LEFTTRAOBJ3_INVALID = 0;
+    ADDC_LEFTTRAOBJ3_MANHOLE_COVER = 1;
+    ADDC_LEFTTRAOBJ3_SPEED_BUMP = 2;
+    ADDC_LEFTTRAOBJ3_OTHER = 3;
+  }
+  enum ADDCRightTraObj1Type {
+    ADDC_RIGHTTRAOBJ1_INVALID = 0;
+    ADDC_RIGHTTRAOBJ1_MANHOLE_COVER = 1;
+    ADDC_RIGHTTRAOBJ1_SPEED_BUMP = 2;
+    ADDC_RIGHTTRAOBJ1_OTHER = 3;
+  }
+  enum ADDCRightTraObj2Type {
+    ADDC_RIGHTTRAOBJ2_INVALID = 0;
+    ADDC_RIGHTTRAOBJ2_MANHOLE_COVER = 1;
+    ADDC_RIGHTTRAOBJ2_SPEED_BUMP = 2;
+    ADDC_RIGHTTRAOBJ2_OTHER = 3;
+  }
+  enum ADDCRightTraObj3Type {
+    ADDC_RIGHTTRAOBJ3_INVALID = 0;
+    ADDC_RIGHTTRAOBJ3_MANHOLE_COVER = 1;
+    ADDC_RIGHTTRAOBJ3_SPEED_BUMP = 2;
+    ADDC_RIGHTTRAOBJ3_OTHER = 3;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 addc_crc_23_e = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 addc_rolling_counter_23_e = 2;
+  // description 系统状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_sys_sts = 3;
+  // description 系统车速 [KPH] [1.0|450.0] [initial_value:None]
+  optional double addc_sys_veh_spd = 4;
+  // description 左侧障碍物检测状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_left_obj_dete_sts = 5;
+  // description 左侧目标有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_left_obj_vd = 6;
+  // description 左侧轨迹目标物1 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCLeftTraObj1Type addc_left_tra_obj1 = 7;
+  // description 左侧目标物1置信度 [-] [0.0|10.0] [initial_value:0]
+  optional double addc_left_tra_obj1_conf = 8;
+  // description 左侧轨迹目标物1高度 [dm] [0.0|6.3] [initial_value:0]
+  optional double addc_left_tra_obj1_height = 9;
+  // description 左侧目标物1距离 [m] [0.0|102.3] [initial_value:0]
+  optional double addc_left_tra_obj1_dist = 10;
+  // description 左侧轨迹目标物2 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCLeftTraObj2Type addc_left_tra_obj2 = 11;
+  // description 左侧目标物2置信度 [-] [0.0|10.0] [initial_value:0]
+  optional double addc_left_tra_obj2_conf = 12;
+  // description 左侧轨迹目标物2高度 [dm] [0.0|6.3] [initial_value:0]
+  optional double addc_left_tra_obj2_height = 13;
+  // description 左侧目标物2距离 [m] [0.0|102.3] [initial_value:0]
+  optional double addc_left_tra_obj2_dist = 14;
+  // description 左侧轨迹目标物3 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCLeftTraObj3Type addc_left_tra_obj3 = 15;
+  // description 左侧目标物3置信度 [-] [0.0|10.0] [initial_value:0]
+  optional double addc_left_tra_obj3_conf = 16;
+  // description 左侧轨迹目标物3高度 [dm] [0.0|6.3] [initial_value:0]
+  optional double addc_left_tra_obj3_height = 17;
+  // description 左侧目标物3距离 [m] [0.0|102.3] [initial_value:0]
+  optional double addc_left_tra_obj3_dist = 18;
+  // description 右侧障碍物检测状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_right_obj_dete_sts = 19;
+  // description 右侧目标有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_right_obj_vd = 20;
+  // description 右侧轨迹目标物1 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCRightTraObj1Type addc_right_tra_obj1 = 21;
+  // description 右侧目标物1置信度 [-] [0.0|10.0] [initial_value:0]
+  optional double addc_right_tra_obj1_conf = 22;
+  // description 右侧轨迹目标物1高度 [dm] [0.0|6.3] [initial_value:0]
+  optional double addc_right_tra_obj1_height = 23;
+  // description 右侧目标物1距离 [m] [0.0|102.3] [initial_value:0]
+  optional double addc_right_tra_obj1_dist = 24;
+  // description 右侧轨迹目标物2 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCRightTraObj2Type addc_right_tra_obj2 = 25;
+  // description 右侧目标物2置信度 [-] [0.0|10.0] [initial_value:0]
+  optional double addc_right_tra_obj2_conf = 26;
+  // description 右侧轨迹目标物2高度 [dm] [0.0|6.3] [initial_value:0]
+  optional double addc_right_tra_obj2_height = 27;
+  // description 右侧目标物2距离 [m] [0.0|102.3] [initial_value:0]
+  optional double addc_right_tra_obj2_dist = 28;
+  // description 右侧轨迹目标物3 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCRightTraObj3Type addc_right_tra_obj3 = 29;
+  // description 右侧目标物3置信度 [-] [0.0|10.0] [initial_value:0]
+  optional double addc_right_tra_obj3_conf = 30;
+  // description 右侧轨迹目标物3高度 [dm] [0.0|6.3] [initial_value:0]
+  optional double addc_right_tra_obj3_height = 31;
+  // description 右侧目标物3距离 [m] [0.0|102.3] [initial_value:0]
+  optional double addc_right_tra_obj3_dist = 32;
+}
+
+message ADDC_23_F_23F {
+// Control Message
+  enum ADDCLaneTypLeLaneType {
+    ADDC_LANETYP_LELANE_NONE = 0;
+    ADDC_LANETYP_LELANE_SOLID = 1;
+    ADDC_LANETYP_LELANE_DASHED = 2;
+    ADDC_LANETYP_LELANE_DOUBLESOLID = 3;
+    ADDC_LANETYP_LELANE_DOUBLEDASHED = 4;
+    ADDC_LANETYP_LELANE_DASHEDSOLID = 5;
+    ADDC_LANETYP_LELANE_SOLIDDASHED = 6;
+    ADDC_LANETYP_LELANE_TIDALFLOW = 7;
+    ADDC_LANETYP_LELANE_CURB = 8;
+    ADDC_LANETYP_LELANE_WALL = 9;
+    ADDC_LANETYP_LELANE_GUARDRAIL = 10;
+    ADDC_LANETYP_LELANE_CONE = 11;
+    ADDC_LANETYP_LELANE_TRAFFICHORSE = 12;
+    ADDC_LANETYP_LELANE_POLE = 13;
+    ADDC_LANETYP_LELANE_BARRIER = 14;
+  }
+  enum ADDCLaneTypRiLaneType {
+    ADDC_LANETYP_RILANE_NONE = 0;
+    ADDC_LANETYP_RILANE_SOLID = 1;
+    ADDC_LANETYP_RILANE_DASHED = 2;
+    ADDC_LANETYP_RILANE_DOUBLESOLID = 3;
+    ADDC_LANETYP_RILANE_DOUBLEDASHED = 4;
+    ADDC_LANETYP_RILANE_DASHEDSOLID = 5;
+    ADDC_LANETYP_RILANE_SOLIDDASHED = 6;
+    ADDC_LANETYP_RILANE_TIDALFLOW = 7;
+    ADDC_LANETYP_RILANE_CURB = 8;
+    ADDC_LANETYP_RILANE_WALL = 9;
+    ADDC_LANETYP_RILANE_GUARDRAIL = 10;
+    ADDC_LANETYP_RILANE_CONE = 11;
+    ADDC_LANETYP_RILANE_TRAFFICHORSE = 12;
+    ADDC_LANETYP_RILANE_POLE = 13;
+    ADDC_LANETYP_RILANE_BARRIER = 14;
+  }
+  enum ADDCLaneTypNxtLeLaneType {
+    ADDC_LANETYP_NXTLELANE_NONE = 0;
+    ADDC_LANETYP_NXTLELANE_SOLID = 1;
+    ADDC_LANETYP_NXTLELANE_DASHED = 2;
+    ADDC_LANETYP_NXTLELANE_DOUBLESOLID = 3;
+    ADDC_LANETYP_NXTLELANE_DOUBLEDASHED = 4;
+    ADDC_LANETYP_NXTLELANE_DASHEDSOLID = 5;
+    ADDC_LANETYP_NXTLELANE_SOLIDDASHED = 6;
+    ADDC_LANETYP_NXTLELANE_TIDALFLOW = 7;
+    ADDC_LANETYP_NXTLELANE_CURB = 8;
+    ADDC_LANETYP_NXTLELANE_WALL = 9;
+    ADDC_LANETYP_NXTLELANE_GUARDRAIL = 10;
+    ADDC_LANETYP_NXTLELANE_CONE = 11;
+    ADDC_LANETYP_NXTLELANE_TRAFFICHORSE = 12;
+    ADDC_LANETYP_NXTLELANE_POLE = 13;
+    ADDC_LANETYP_NXTLELANE_BARRIER = 14;
+  }
+  enum ADDCLaneTypNxtRiLaneType {
+    ADDC_LANETYP_NXTRILANE_NONE = 0;
+    ADDC_LANETYP_NXTRILANE_SOLID = 1;
+    ADDC_LANETYP_NXTRILANE_DASHED = 2;
+    ADDC_LANETYP_NXTRILANE_DOUBLESOLID = 3;
+    ADDC_LANETYP_NXTRILANE_DOUBLEDASHED = 4;
+    ADDC_LANETYP_NXTRILANE_DASHEDSOLID = 5;
+    ADDC_LANETYP_NXTRILANE_SOLIDDASHED = 6;
+    ADDC_LANETYP_NXTRILANE_TIDALFLOW = 7;
+    ADDC_LANETYP_NXTRILANE_CURB = 8;
+    ADDC_LANETYP_NXTRILANE_WALL = 9;
+    ADDC_LANETYP_NXTRILANE_GUARDRAIL = 10;
+    ADDC_LANETYP_NXTRILANE_CONE = 11;
+    ADDC_LANETYP_NXTRILANE_TRAFFICHORSE = 12;
+    ADDC_LANETYP_NXTRILANE_POLE = 13;
+    ADDC_LANETYP_NXTRILANE_BARRIER = 14;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 addc_crc_23_f = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 addc_rolling_counter_23_f = 2;
+  // description 自车道左车道线多项式系数a0车道线距离 [m] [-12.7|12.7] [initial_value:0]
+  optional double addc_dis_to_lane_le_lane = 3;
+  // description 自车道左车道线多项式系数a1起点切线斜率 [-] [-1.3|1.3] [initial_value:0]
+  optional double addc_strt_tan_slop_le_lane = 4;
+  // description 自车道左车道线多项式系数a2车道曲率 [-] [-0.1|0.1] [initial_value:0]
+  optional double addc_lane_crvt_le_lane = 5;
+  // description 自车道左车道线多项式系数a3车道曲率变化率 [-] [-0.0|0.0] [initial_value:0]
+  optional double addc_lane_crvt_chg_rate_le_lane = 6;
+  // description 自车道左车道线类型 [-] [0.0|15.0] [initial_value:0]
+  optional ADDCLaneTypLeLaneType addc_lane_typ_le_lane = 7;
+  // description 左车道线信号置信度 [％] [0.0|100.0] [initial_value:0]
+  optional double addc_confidence_le_lane = 8;
+  // description 自车道右车道线多项式系数a0车道线距离 [m] [-12.7|12.7] [initial_value:0]
+  optional double addc_dis_to_lane_ri_lane = 9;
+  // description 自车道右车道线多项式系数a1起点切线斜率 [-] [-1.3|1.3] [initial_value:0]
+  optional double addc_strt_tan_slop_ri_lane = 10;
+  // description 自车道右车道线多项式系数a2车道曲率 [-] [-0.1|0.1] [initial_value:0]
+  optional double addc_lane_crvt_ri_lane = 11;
+  // description 自车道右车道线多项式系数a3车道曲率变化率 [-] [-0.0|0.0] [initial_value:0]
+  optional double addc_lane_crvt_chg_rate_ri_lane = 12;
+  // description 自车道右侧车道线类型 [-] [0.0|15.0] [initial_value:0]
+  optional ADDCLaneTypRiLaneType addc_lane_typ_ri_lane = 13;
+  // description 右侧车道线信号置信度 [％] [0.0|100.0] [initial_value:0]
+  optional double addc_confidence_ri_lane = 14;
+  // description 左左车道线多项式系数a0车道线距离 [m] [-12.7|12.7] [initial_value:0]
+  optional double addc_dis_to_lane_nxt_le_lane = 15;
+  // description 左左车道线多项式系数a1起点切线斜率 [-] [-1.3|1.3] [initial_value:0]
+  optional double addc_strt_tan_slop_nxt_le_lane = 16;
+  // description 左左车道线多项式系数a2车道曲率 [-] [-0.1|0.1] [initial_value:0]
+  optional double addc_lane_crvt_nxt_le_lane = 17;
+  // description 左左车道线多项式系数a3车道曲率变化率 [-] [-0.0|0.0] [initial_value:0]
+  optional double addc_lane_crvt_chg_rate_nxt_le_lane = 18;
+  // description 左左车道线类型 [-] [0.0|15.0] [initial_value:0]
+  optional ADDCLaneTypNxtLeLaneType addc_lane_typ_nxt_le_lane = 19;
+  // description 左左车道线信号置信度 [％] [0.0|100.0] [initial_value:0]
+  optional double addc_confidence_nxt_le_lane = 20;
+  // description 右右车道线多项式系数a0车道线距离 [m] [-12.7|12.7] [initial_value:0]
+  optional double addc_dis_to_lane_nxt_ri_lane = 21;
+  // description 右右车道线多项式系数a1起点切线斜率 [-] [-1.3|1.3] [initial_value:0]
+  optional double addc_strt_tan_slop_nxt_ri_lane = 22;
+  // description 右右车道线多项式系数a2车道曲率 [-] [-0.1|0.1] [initial_value:0]
+  optional double addc_lane_crvt_nxt_ri_lane = 23;
+  // description 右右车道线多项式系数a3车道曲率变化率 [-] [-0.0|0.0] [initial_value:0]
+  optional double addc_lane_crvt_chg_rate_nxt_ri_lane = 24;
+  // description 右右侧车道线类型 [-] [0.0|15.0] [initial_value:0]
+  optional ADDCLaneTypNxtRiLaneType addc_lane_typ_nxt_ri_lane = 25;
+  // description 右右侧车道线信号置信度 [％] [0.0|100.0] [initial_value:0]
+  optional double addc_confidence_nxt_ri_lane = 26;
+}
+
+message HPCBCM_241_241 {
+// Report Message
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 bcm_crc_241 = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 bcm_rolling_counter_241 = 2;
+  // description 功能安全监测到转向灯故障 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_turn_indicator_fault_fu_sa = 3;
+}
+
+message ICU_24_D_24D {
+// Report Message
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 icu_crc_24_d = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 icu_rolling_counter_24_d = 2;
+  // description 总里程 [km] [0.0|999999.0] [initial_value:0]
+  optional double icu_total_odometerkm = 3;
+}
+
+message LMC_25_A_25A {
+// Report Message
+  enum LMCLSFCActiveStType {
+    LMC_LSFCACTIVEST_OFF = 0;
+    LMC_LSFCACTIVEST_STANDBY = 1;
+    LMC_LSFCACTIVEST_ON = 2;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 lmc_crc_25_a = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 lmc_rolling_counter_25_a = 2;
+  // description 低速灵活控制状态反馈 [-] [0.0|3.0] [initial_value:0]
+  optional LMCLSFCActiveStType lmc_lsfc_active_st = 3;
+}
+
+message HPCBCM_290_290 {
+// Report Message
+  enum BCMSRMOCPPDStatusType {
+    BCM_SRMOC_PPD_STATUS_EMPTY_OC_NOT_OCCIPIED_PPD = 0;
+    BCM_SRMOC_PPD_STATUS_INDETERMINED_OC_FAULT_PPD = 1;
+    BCM_SRMOC_PPD_STATUS_ADULT_OC_OCCIPIED_PPD = 2;
+    BCM_SRMOC_PPD_STATUS_NOT_USED = 3;
+  }
+  enum BCMDrOCPPDStatusType {
+    BCM_DROC_PPD_STATUS_EMPTY_OC_NOT_OOBCPIED_PPD = 0;
+    BCM_DROC_PPD_STATUS_INDETERMINED_OC_FAULT_PPD = 1;
+    BCM_DROC_PPD_STATUS_ADULT_OC_OOBCPIED_PPD = 2;
+    BCM_DROC_PPD_STATUS_NOT_USED = 3;
+  }
+  enum BCMFLOCPPDStatusType {
+    BCM_FLOC_PPD_STATUS_EMPTY_OC_NOT_OOBCPIED_PPD = 0;
+    BCM_FLOC_PPD_STATUS_INDETERMINED_OC_FAULT_PPD = 1;
+    BCM_FLOC_PPD_STATUS_ADULT_OC_OOBCPIED_PPD = 2;
+    BCM_FLOC_PPD_STATUS_NOT_USED = 3;
+  }
+  enum BCMFROCPPDStatusType {
+    BCM_FROC_PPD_STATUS_EMPTY_OC_NOT_OOBCPIED_PPD = 0;
+    BCM_FROC_PPD_STATUS_INDETERMINED_OC_FAULT_PPD = 1;
+    BCM_FROC_PPD_STATUS_ADULT_OC_OOBCPIED_PPD = 2;
+    BCM_FROC_PPD_STATUS_NOT_USED = 3;
+  }
+  enum BCMRLOCPPDStatusType {
+    BCM_RLOC_PPD_STATUS_EMPTY_OC_NOT_OCCUPIED_PPD = 0;
+    BCM_RLOC_PPD_STATUS_INDETERMINED_OC_FAULT_PPD = 1;
+    BCM_RLOC_PPD_STATUS_ADULT_OC_OCCUPIED_PPD = 2;
+    BCM_RLOC_PPD_STATUS_NOT_USED = 3;
+  }
+  enum BCMRMOCPPDStatusType {
+    BCM_RMOC_PPD_STATUS_EMPTY_OC_NOT_OCCUPIED_PPD = 0;
+    BCM_RMOC_PPD_STATUS_INDETERMINED_OC_FAULT_PPD = 1;
+    BCM_RMOC_PPD_STATUS_ADULT_OC_OCCUPIED_PPD = 2;
+    BCM_RMOC_PPD_STATUS_NOT_USED = 3;
+  }
+  enum BCMRROCPPDStatusType {
+    BCM_RROC_PPD_STATUS_EMPTY_OC_NOT_OCCUPIED_PPD = 0;
+    BCM_RROC_PPD_STATUS_INDETERMINED_OC_FAULT_PPD = 1;
+    BCM_RROC_PPD_STATUS_ADULT_OC_OCCUPIED_PPD = 2;
+    BCM_RROC_PPD_STATUS_NOT_USED = 3;
+  }
+  enum BCMSRLOCPPDStatusType {
+    BCM_SRLOC_PPD_STATUS_EMPTY_OC_NOT_OOBCPIED_PPD = 0;
+    BCM_SRLOC_PPD_STATUS_INDETERMINED_OC_FAULT_PPD = 1;
+    BCM_SRLOC_PPD_STATUS_ADULT_OC_OOBCPIED_PPD = 2;
+    BCM_SRLOC_PPD_STATUS_NOT_USED = 3;
+  }
+  enum BCMSRROCPPDStatusType {
+    BCM_SRROC_PPD_STATUS_EMPTY_OC_NOT_OOBCPIED_PPD = 0;
+    BCM_SRROC_PPD_STATUS_INDETERMINED_OC_FAULT_PPD = 1;
+    BCM_SRROC_PPD_STATUS_ADULT_OC_OOBCPIED_PPD = 2;
+    BCM_SRROC_PPD_STATUS_NOT_USED = 3;
+  }
+  enum BCMFrontWiperStsType {
+    BCM_FRONTWIPERSTS_OFF = 0;
+    BCM_FRONTWIPERSTS_LOW = 1;
+    BCM_FRONTWIPERSTS_HIGH = 2;
+    BCM_FRONTWIPERSTS_RESERVED = 3;
+  }
+  enum BCMAlarmModeCType {
+    BCM_ALARMMODE_C_DISARMED = 0;
+    BCM_ALARMMODE_C_WARNING_GUARD = 1;
+    BCM_ALARMMODE_C_ARMED = 2;
+    BCM_ALARMMODE_C_WARNING = 3;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 bcm_crc_290 = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 bcm_rolling_counter_290 = 2;
+  // description 中排中间乘员检测 [-] [0.0|3.0] [initial_value:3]
+  optional BCMSRMOCPPDStatusType bcm_srmoc_ppd_status = 3;
+  // description ON1A电源 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_key_position_on1_a = 4;
+  // description ON1B电源 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_key_position_on1_b = 5;
+  // description ON2A电源 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_key_position_on2_a = 6;
+  // description ON2B电源 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_key_position_on2_b = 7;
+  // description ON3电源 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_key_position_on3 = 8;
+  // description 左转向灯开关信号 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_turn_left_swt_sts = 9;
+  // description 右转向灯开关信号 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_turn_right_swt_sts = 10;
+  // description 危险警报灯开关状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_hazard_swt_sts = 11;
+  // description 左转向灯控制 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_turn_left_ctrl = 12;
+  // description 右转向灯控制 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_turn_right_ctrl = 13;
+  // description 近光灯控制 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_low_beam_ctrl = 14;
+  // description 远光灯控制 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_high_beam_ctrl = 15;
+  // description 主驾乘员检测 [-] [0.0|3.0] [initial_value:3]
+  optional BCMDrOCPPDStatusType bcm_dr_oc_ppd_status = 16;
+  // description 左前乘员检测 [-] [0.0|3.0] [initial_value:3]
+  optional BCMFLOCPPDStatusType bcm_floc_ppd_status = 17;
+  // description 右前乘员检测 [-] [0.0|3.0] [initial_value:3]
+  optional BCMFROCPPDStatusType bcm_froc_ppd_status = 18;
+  // description 后排左乘员检测 [-] [0.0|3.0] [initial_value:3]
+  optional BCMRLOCPPDStatusType bcm_rloc_ppd_status = 19;
+  // description 后排中乘员检测 [-] [0.0|3.0] [initial_value:3]
+  optional BCMRMOCPPDStatusType bcm_rmoc_ppd_status = 20;
+  // description 后排右乘员检测 [-] [0.0|3.0] [initial_value:3]
+  optional BCMRROCPPDStatusType bcm_rroc_ppd_status = 21;
+  // description 中排左侧乘员检测 [-] [0.0|3.0] [initial_value:3]
+  optional BCMSRLOCPPDStatusType bcm_srloc_ppd_status = 22;
+  // description 中排右侧乘员检测 [-] [0.0|3.0] [initial_value:3]
+  optional BCMSRROCPPDStatusType bcm_srroc_ppd_status = 23;
+  // description 主驾驶门状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_driver_door_sts = 24;
+  // description 主驾驶门状态有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_driver_door_sts_vd = 25;
+  // description 左前门状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_fl_door_sts = 26;
+  // description 右前门状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_fr_door_sts = 27;
+  // description 左后门状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_rl_door_sts = 28;
+  // description 右后门状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_rr_door_sts = 29;
+  // description 后背门门状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_back_door_sts = 30;
+  // description 前机盖状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_front_cover_sts = 31;
+  // description 危险报警灯开关主动触发状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_hazard_swt_open_sts = 32;
+  // description 前雨刮工作状态 [-] [0.0|3.0] [initial_value:0]
+  optional BCMFrontWiperStsType bcm_front_wiper_sts = 33;
+  // description ON2B继电器状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_on2_b_relay_sts = 34;
+  // description ON2C继电器状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_on2_c_relay_sts = 35;
+  // description 后雾灯控制 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_rear_fog_ctrl = 36;
+  // description 车辆解设防状态C_CANFD [-] [0.0|3.0] [initial_value:0]
+  optional BCMAlarmModeCType bcm_alarm_mode_c = 37;
+}
+
+message ACU_2_A3_2A3 {
+// Report Message
+  enum ACUCrashOutputStsType {
+    ACU_CRASHOUTPUTSTS_NO_CRASH = 0;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH = 1;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH = 2;
+    ACU_CRASHOUTPUTSTS_LEFT_CRASH = 3;
+    ACU_CRASHOUTPUTSTS_RIGHT_CRASH = 4;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_RIGHT_CRASH = 5;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_LEFT_CRASH = 6;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH = 7;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_LEFT_CRASH = 8;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_RIGHT_CRASH = 9;
+    ACU_CRASHOUTPUTSTS_LEFT_CRASH_RIGHT_CRASH = 10;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_LEFT_CRASH = 11;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_RIGHT_CRASH = 12;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_LEFT_CRASH_RIGHT_CRASH = 13;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_LEFT_CRASH_RIGHT_CRASH = 14;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_LEFT_CRASH_RIGHT_CRASH = 15;
+    ACU_CRASHOUTPUTSTS_ROLLOVER = 16;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_ROLLOVER = 17;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_ROLLOVER = 18;
+    ACU_CRASHOUTPUTSTS_LEFT_CRASH_ROLLOVER = 19;
+    ACU_CRASHOUTPUTSTS_RIGHT_CRASH_ROLLOVER = 20;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_RIGHT_CRASH_ROLLOVER = 21;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_LEFT_CRASH_ROLLOVER = 22;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_ROLLOVER = 23;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_LEFT_CRASH_ROLLOVER = 24;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_RIGHT_CRASH_ROLLOVER = 25;
+    ACU_CRASHOUTPUTSTS_LEFT_CRASH_RIGHT_CRASH_ROLLOVER = 26;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_LEFT_CRASH_ROLLOVER = 27;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_RIGHT_CRASH_ROLLOVER = 28;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_LEFT_CRASH_RIGHT_CRASH_ROLLOVER = 29;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_LEFT_CRASH_RIGHT_CRASH_ROLLOVER = 30;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_LEFT_CRASH_RIGHT_CRASH_ROLLOVER = 31;
+    ACU_CRASHOUTPUTSTS_PPS = 32;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_PPS = 33;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_PPS = 34;
+    ACU_CRASHOUTPUTSTS_LEFT_CRASH_PPS = 35;
+    ACU_CRASHOUTPUTSTS_RIGHT_CRASH_PPS = 36;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_RIGHT_CRASH_PPS = 37;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_LEFT_CRASH_PPS = 38;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_PPS = 39;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_LEFT_CRASH_PPS = 40;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_RIGHT_CRASH_PPS = 41;
+    ACU_CRASHOUTPUTSTS_LEFT_CRASH_RIGHT_CRASH_PPS = 42;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_LEFT_CRASH_PPS = 43;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_RIGHT_CRASH_PPS = 44;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_LEFT_CRASH_RIGHT_CRASH_PPS = 45;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_LEFT_CRASH_RIGHT_CRASH_PPS = 46;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_LEFT_CRASH_RIGHT_CRASH_PPS = 47;
+    ACU_CRASHOUTPUTSTS_ROLLOVER_PPS = 48;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_ROLLOVER_PPS = 49;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_ROLLOVER_PPS = 50;
+    ACU_CRASHOUTPUTSTS_LEFT_CRASH_ROLLOVER_PPS = 51;
+    ACU_CRASHOUTPUTSTS_RIGHT_CRASH_ROLLOVER_PPS = 52;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_RIGHT_CRASH_ROLLOVER_PPS = 53;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_LEFT_CRASH_ROLLOVER_PPS = 54;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_ROLLOVER_PPS = 55;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_LEFT_CRASH_ROLLOVER_PPS = 56;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_RIGHT_CRASH_ROLLOVER_PPS = 57;
+    ACU_CRASHOUTPUTSTS_LEFT_CRASH_RIGHT_CRASH_ROLLOVER_PPS = 58;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_LEFT_CRASH_ROLLOVER_PPS = 59;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_RIGHT_CRASH_ROLLOVER_PPS = 60;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_LEFT_CRASH_RIGHT_CRASH_ROLLOVER_PPS = 61;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_LEFT_CRASH_RIGHT_CRASH_ROLLOVER_PPS = 62;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_LEFT_CRASH_RIGHT_CRASH_ROLLOVER_PPS = 63;
+    ACU_CRASHOUTPUTSTS_PITCHOVER = 64;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_PITCHOVER = 65;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_PITCHOVER = 66;
+    ACU_CRASHOUTPUTSTS_LEFT_CRASH_PITCHOVER = 67;
+    ACU_CRASHOUTPUTSTS_RIGHT_CRASH_PITCHOVER = 68;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_RIGHT_CRASH_PITCHOVER = 69;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_LEFT_CRASH_PITCHOVER = 70;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_PITCHOVER = 71;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_LEFT_CRASH_PITCHOVER = 72;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_RIGHT_CRASH_PITCHOVER = 73;
+    ACU_CRASHOUTPUTSTS_LEFT_CRASH_RIGHT_CRASH_PITCHOVER = 74;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_LEFT_CRASH_PITCHOVER = 75;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_RIGHT_CRASH_PITCHOVER = 76;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_LEFT_CRASH_RIGHT_CRASH_PITCHOVER = 77;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_LEFT_CRASH_RIGHT_CRASH_PITCHOVER = 78;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_LEFT_CRASH_RIGHT_CRASH_PITCHOVER = 79;
+    ACU_CRASHOUTPUTSTS_ROLLOVER_PITCHOVER = 80;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_ROLLOVER_PITCHOVER = 81;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_ROLLOVER_PITCHOVER = 82;
+    ACU_CRASHOUTPUTSTS_LEFT_CRASH_ROLLOVER_PITCHOVER = 83;
+    ACU_CRASHOUTPUTSTS_RIGHT_CRASH_ROLLOVER_PITCHOVER = 84;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_RIGHT_CRASH_ROLLOVER_PITCHOVER = 85;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_LEFT_CRASH_ROLLOVER_PITCHOVER = 86;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_ROLLOVER_PITCHOVER = 87;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_LEFT_CRASH_ROLLOVER_PITCHOVER = 88;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_RIGHT_CRASH_ROLLOVER_PITCHOVER = 89;
+    ACU_CRASHOUTPUTSTS_LEFT_CRASH_RIGHT_CRASH_ROLLOVER_PITCHOVER = 90;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_LEFT_CRASH_ROLLOVER_PITCHOVER = 91;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_RIGHT_CRASH_ROLLOVER_PITCHOVER = 92;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_LEFT_CRASH_RIGHT_CRASH_ROLLOVER_PITCHOVER = 93;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_LEFT_CRASH_RIGHT_CRASH_ROLLOVER_PITCHOVER = 94;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_LEFT_CRASH_RIGHT_CRASH_ROLLOVER_PITCHOVER = 95;
+    ACU_CRASHOUTPUTSTS_PPS_PITCHOVER = 96;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_PPS_PITCHOVER = 97;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_PPS_PITCHOVER = 98;
+    ACU_CRASHOUTPUTSTS_LEFT_CRASH_PPS_PITCHOVER = 99;
+    ACU_CRASHOUTPUTSTS_RIGHT_CRASH_PPS_PITCHOVER = 100;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_RIGHT_CRASH_PPS_PITCHOVER = 101;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_LEFT_CRASH_PPS_PITCHOVER = 102;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_PPS_PITCHOVER = 103;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_LEFT_CRASH_PPS_PITCHOVER = 104;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_RIGHT_CRASH_PPS_PITCHOVER = 105;
+    ACU_CRASHOUTPUTSTS_LEFT_CRASH_RIGHT_CRASH_PPS_PITCHOVER = 106;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_LEFT_CRASH_PPS_PITCHOVER = 107;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_RIGHT_CRASH_PPS_PITCHOVER = 108;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_LEFT_CRASH_RIGHT_CRASH_PPS_PITCHOVER = 109;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_LEFT_CRASH_RIGHT_CRASH_PPS_PITCHOVER = 110;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_LEFT_CRASH_RIGHT_CRASH_PPS_PITCHOVER = 111;
+    ACU_CRASHOUTPUTSTS_ROLLOVER_PPS_PITCHOVER = 112;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_ROLLOVER_PPS_PITCHOVER = 113;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_ROLLOVER_PPS_PITCHOVER = 114;
+    ACU_CRASHOUTPUTSTS_LEFT_CRASH_ROLLOVER_PPS_PITCHOVER = 115;
+    ACU_CRASHOUTPUTSTS_RIGHT_CRASH_ROLLOVER_PPS_PITCHOVER = 116;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_RIGHT_CRASH_ROLLOVER_PPS_PITCHOVER = 117;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_LEFT_CRASH_ROLLOVER_PPS_PITCHOVER = 118;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_ROLLOVER_PPS_PITCHOVER = 119;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_LEFT_CRASH_ROLLOVER_PPS_PITCHOVER = 120;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_RIGHT_CRASH_ROLLOVER_PPS_PITCHOVER = 121;
+    ACU_CRASHOUTPUTSTS_LEFT_CRASH_RIGHT_CRASH_ROLLOVER_PPS_PITCHOVER = 122;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_LEFT_CRASH_ROLLOVER_PPS_PITCHOVER = 123;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_RIGHT_CRASH_ROLLOVER_PPS_PITCHOVER = 124;
+    ACU_CRASHOUTPUTSTS_REAR_CRASH_LEFT_CRASH_RIGHT_CRASH_ROLLOVER_PPS_PITCHOVER = 125;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_REAR_CRASH_LEFT_CRASH_RIGHT_CRASH_ROLLOVER_PPS_PITCHOVER = 126;
+    ACU_CRASHOUTPUTSTS_FRONT_CRASH_LEFT_CRASH_RIGHT_CRASH_ROLLOVER_PPS_PITCHOVER = 127;
+  }
+  enum ACUAirbagFailStsType {
+    ACU_AIRBAGFAILSTS_FAIL_NO_PRESENT_LAMP_OFF = 0;
+    ACU_AIRBAGFAILSTS_FAIL_NO_PRESENT_LAMP_FLASHING = 1;
+    ACU_AIRBAGFAILSTS_FAIL_PRESENT_LAMP_ON = 2;
+    ACU_AIRBAGFAILSTS_NOT_USED = 3;
+  }
+  enum ACUFLSeatBeltRStType {
+    ACU_FLSEATBELTRST_BUCKLE = 0;
+    ACU_FLSEATBELTRST_FAULT = 1;
+    ACU_FLSEATBELTRST_UNBUCKLE = 2;
+    ACU_FLSEATBELTRST_NOT_USED = 3;
+  }
+  enum ACUFRSeatBeltRStType {
+    ACU_FRSEATBELTRST_BUCKLE = 0;
+    ACU_FRSEATBELTRST_FAULT = 1;
+    ACU_FRSEATBELTRST_UNBUCKLE = 2;
+    ACU_FRSEATBELTRST_NOT_USED = 3;
+  }
+  enum ACURLSeatBeltRStType {
+    ACU_RLSEATBELTRST_BUCKLE = 0;
+    ACU_RLSEATBELTRST_FAULT = 1;
+    ACU_RLSEATBELTRST_UNBUCKLE = 2;
+    ACU_RLSEATBELTRST_NOT_USED = 3;
+  }
+  enum ACURMSeatBeltRStType {
+    ACU_RMSEATBELTRST_BUCKLE = 0;
+    ACU_RMSEATBELTRST_FAULT = 1;
+    ACU_RMSEATBELTRST_UNBUCKLE = 2;
+    ACU_RMSEATBELTRST_NOT_USED = 3;
+  }
+  enum ACURRSeatBeltRStType {
+    ACU_RRSEATBELTRST_BUCKLE = 0;
+    ACU_RRSEATBELTRST_FAULT = 1;
+    ACU_RRSEATBELTRST_UNBUCKLE = 2;
+    ACU_RRSEATBELTRST_NOT_USED = 3;
+  }
+  enum ACUTLSeatBeltRStType {
+    ACU_TLSEATBELTRST_BUCKLE = 0;
+    ACU_TLSEATBELTRST_FAULT = 1;
+    ACU_TLSEATBELTRST_UNBUCKLE = 2;
+    ACU_TLSEATBELTRST_NOT_USED = 3;
+  }
+  enum ACUTMSeatBeltRStType {
+    ACU_TMSEATBELTRST_BUCKLE = 0;
+    ACU_TMSEATBELTRST_FAULT = 1;
+    ACU_TMSEATBELTRST_UNBUCKLE = 2;
+    ACU_TMSEATBELTRST_NOT_USED = 3;
+  }
+  enum ACUTRSeatBeltRStType {
+    ACU_TRSEATBELTRST_BUCKLE = 0;
+    ACU_TRSEATBELTRST_FAULT = 1;
+    ACU_TRSEATBELTRST_UNBUCKLE = 2;
+    ACU_TRSEATBELTRST_NOT_USED = 3;
+  }
+  enum ACUEventType {
+    ACU_EVENT_NOEVENT = 0;
+    ACU_EVENT_1EVENT = 1;
+    ACU_EVENT_2EVENTS = 2;
+    ACU_EVENT_3EVENTS = 3;
+    ACU_EVENT_4EVENTS = 4;
+    ACU_EVENT_5EVENTS = 5;
+    ACU_EVENT_6EVENTS = 6;
+    ACU_EVENT_OVER6EVENTS = 7;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 acu_crc_2_a3 = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 acu_rolling_counter_2_a3 = 2;
+  // description 碰撞输出状态 [-] [0.0|255.0] [initial_value:0]
+  optional ACUCrashOutputStsType acu_crash_output_sts = 3;
+  // description 安全气囊故障 [-] [0.0|7.0] [initial_value:2]
+  optional ACUAirbagFailStsType acu_airbag_fail_sts = 4;
+  // description 副驾安全气囊状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool acu_ps_airbag_sw_sts = 5;
+  // description ACU自检状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool acu_self_check_st = 6;
+  // description 安全带预紧控制 [-] [0.0|1.0] [initial_value:0]
+  optional bool acu_seat_belt_preload_control = 7;
+  // description 左前安全带锁扣 [-] [0.0|3.0] [initial_value:0]
+  optional ACUFLSeatBeltRStType acu_fl_seat_belt_r_st = 8;
+  // description 右前安全带锁扣 [-] [0.0|3.0] [initial_value:0]
+  optional ACUFRSeatBeltRStType acu_fr_seat_belt_r_st = 9;
+  // description 第二排左安全带锁扣 [-] [0.0|3.0] [initial_value:0]
+  optional ACURLSeatBeltRStType acu_rl_seat_belt_r_st = 10;
+  // description 第二排中安全带锁扣 [-] [0.0|3.0] [initial_value:0]
+  optional ACURMSeatBeltRStType acu_rm_seat_belt_r_st = 11;
+  // description 第二排右安全带锁扣 [-] [0.0|3.0] [initial_value:0]
+  optional ACURRSeatBeltRStType acu_rr_seat_belt_r_st = 12;
+  // description 第三排左安全带锁扣 [-] [0.0|3.0] [initial_value:0]
+  optional ACUTLSeatBeltRStType acu_tl_seat_belt_r_st = 13;
+  // description 第三排中安全带锁扣 [-] [0.0|3.0] [initial_value:0]
+  optional ACUTMSeatBeltRStType acu_tm_seat_belt_r_st = 14;
+  // description 第三排右安全带锁扣 [-] [0.0|3.0] [initial_value:0]
+  optional ACUTRSeatBeltRStType acu_tr_seat_belt_r_st = 15;
+  // description ACU气囊配置状态1_左前正面 [-] [0.0|1.0] [initial_value:0]
+  optional bool acu_airbag_config_sts_1 = 16;
+  // description ACU气囊配置状态2_右前正面 [-] [0.0|1.0] [initial_value:0]
+  optional bool acu_airbag_config_sts_2 = 17;
+  // description ACU气囊配置状态3_前排侧面左 [-] [0.0|1.0] [initial_value:0]
+  optional bool acu_airbag_config_sts_3 = 18;
+  // description ACU气囊配置状态4_前排侧面右 [-] [0.0|1.0] [initial_value:0]
+  optional bool acu_airbag_config_sts_4 = 19;
+  // description ACU气囊配置状态5_二排侧面左 [-] [0.0|1.0] [initial_value:0]
+  optional bool acu_airbag_config_sts_5 = 20;
+  // description ACU气囊配置状态6_二排侧面右 [-] [0.0|1.0] [initial_value:0]
+  optional bool acu_airbag_config_sts_6 = 21;
+  // description ACU气囊配置状态7_侧气帘左 [-] [0.0|1.0] [initial_value:0]
+  optional bool acu_airbag_config_sts_7 = 22;
+  // description ACU气囊配置状态8_侧气帘右 [-] [0.0|1.0] [initial_value:0]
+  optional bool acu_airbag_config_sts_8 = 23;
+  // description ACU气囊配置状态9_前排远端 [-] [0.0|1.0] [initial_value:0]
+  optional bool acu_airbag_config_sts_9 = 24;
+  // description ACU气囊配置状态10_二排远端 [-] [0.0|1.0] [initial_value:0]
+  optional bool acu_airbag_config_sts_10 = 25;
+  // description 点灯故障DTC [-] [0.0|16777215.0] [initial_value:0]
+  optional uint32 acu_warning_dtc = 26;
+  // description 是否有触发非起爆碰撞事件 [-] [0.0|1.0] [initial_value:0]
+  optional bool acu_trigger = 27;
+  // description 碰撞事件触发数量 [-] [0.0|7.0] [initial_value:0]
+  optional ACUEventType acu_event = 28;
+}
+
+message IVI_331_331 {
+// Report Message
+  enum IVIPowerSavingModeReqType {
+    IVI_POWERSAVINGMODEREQ_OFF = 0;
+    IVI_POWERSAVINGMODEREQ_ON = 1;
+    IVI_POWERSAVINGMODEREQ_RESERVED = 2;
+    IVI_POWERSAVINGMODEREQ_RESERVED_3 = 3;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 ivi_crc_331 = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 ivi_rolling_counter_331 = 2;
+  // description 省电模式请求 [-] [0.0|3.0] [initial_value:0]
+  optional IVIPowerSavingModeReqType ivi_power_saving_mode_req = 3;
+}
+
+message HPCGW_3_B0_3B0 {
+// Report Message
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 gw_crc_3_b0 = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 gw_rolling_counter_3_b0 = 2;
+  // description 室外温度有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool gw_tms_outside_temp_vd = 3;
+  // description 室外温度校正值 [℃] [-40.0|80.0] [initial_value:130]
+  optional double gw_tms_outside_temp_corrected = 4;
+  // description 拖车连接状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool gw_trm_connect_status = 5;
+}
+
+message IBC_3_CE_3CE {
+// Report Message
+  enum iTPMSWarnningStatusFLType {
+    ITPMS_WARNNINGSTATUS_FL_NO_WARNNING = 0;
+    ITPMS_WARNNINGSTATUS_FL_WARNNING = 1;
+    ITPMS_WARNNINGSTATUS_FL_INCOMPATIBLE = 2;
+    ITPMS_WARNNINGSTATUS_FL_RESERVED = 3;
+  }
+  enum iTPMSWarnningStatusFRType {
+    ITPMS_WARNNINGSTATUS_FR_NO_WARNNING = 0;
+    ITPMS_WARNNINGSTATUS_FR_WARNNING = 1;
+    ITPMS_WARNNINGSTATUS_FR_INCOMPATIBLE = 2;
+    ITPMS_WARNNINGSTATUS_FR_RESERVED = 3;
+  }
+  enum iTPMSWarnningStatusRLType {
+    ITPMS_WARNNINGSTATUS_RL_NO_WARNNING = 0;
+    ITPMS_WARNNINGSTATUS_RL_WARNNING = 1;
+    ITPMS_WARNNINGSTATUS_RL_INCOMPATIBLE = 2;
+    ITPMS_WARNNINGSTATUS_RL_RESERVED = 3;
+  }
+  enum iTPMSWarnningStatusRRType {
+    ITPMS_WARNNINGSTATUS_RR_NO_WARNNING = 0;
+    ITPMS_WARNNINGSTATUS_RR_WARNNING = 1;
+    ITPMS_WARNNINGSTATUS_RR_INCOMPATIBLE = 2;
+    ITPMS_WARNNINGSTATUS_RR_RESERVED = 3;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 ibc_crc_3_ce = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 ibc_rolling_counter = 2;
+  // description 胎压系统故障 [-] [0.0|1.0] [initial_value:0]
+  optional bool i_tpms_system_status = 3;
+  // description 胎压报警（欠压） [-] [0.0|1.0] [initial_value:0]
+  optional bool i_tpms_warnning_status = 4;
+  // description 左前胎压报警（欠压） [-] [0.0|3.0] [initial_value:0]
+  optional iTPMSWarnningStatusFLType i_tpms_warnning_status_fl = 5;
+  // description 右前胎压报警（欠压） [-] [0.0|3.0] [initial_value:0]
+  optional iTPMSWarnningStatusFRType i_tpms_warnning_status_fr = 6;
+  // description 左后胎压报警（欠压） [-] [0.0|3.0] [initial_value:0]
+  optional iTPMSWarnningStatusRLType i_tpms_warnning_status_rl = 7;
+  // description 右后胎压报警（欠压） [-] [0.0|3.0] [initial_value:0]
+  optional iTPMSWarnningStatusRRType i_tpms_warnning_status_rr = 8;
+}
+
+message IVI_5_CE_5CE {
+// Report Message
+  // description 年 [-] [0.0|4094.0] [initial_value:0]
+  optional double ivi_year = 1;
+  // description 月 [-] [0.0|12.0] [initial_value:0]
+  optional double ivi_month = 2;
+  // description 日 [-] [0.0|31.0] [initial_value:0]
+  optional uint32 ivi_date = 3;
+  // description 时 [-] [0.0|23.0] [initial_value:0]
+  optional double ivi_hour = 4;
+  // description 分 [-] [0.0|59.0] [initial_value:0]
+  optional double ivi_minute = 5;
+  // description 秒 [-] [0.0|59.0] [initial_value:0]
+  optional double ivi_second = 6;
+}
+
+message ADDC_83_83 {
+// Control Message
+  enum ADDCACCFunTypeType {
+    ADDC_ACC_FUNTYPE_NONE = 0;
+    ADDC_ACC_FUNTYPE_ACC = 1;
+    ADDC_ACC_FUNTYPE_URP = 2;
+    ADDC_ACC_FUNTYPE_HPA = 3;
+  }
+  enum ADDCACCModeType {
+    ADDC_ACCMODE_OFF_MODE = 0;
+    ADDC_ACCMODE_PASSIVE_MODE = 1;
+    ADDC_ACCMODE_STAND_BY_MODE = 2;
+    ADDC_ACCMODE_ACTIVE_CONTROL_MODE = 3;
+    ADDC_ACCMODE_WARNING_BRAKE_ONLY_MODE = 4;
+    ADDC_ACCMODE_OVERRIDE = 5;
+    ADDC_ACCMODE_SUSPEND = 6;
+    ADDC_ACCMODE_FAILURE_MODE = 7;
+  }
+  enum ADDCACCRecordingPulseType {
+    ADDC_ACC_RECORDINGPULSE_NOT_TRIGGERED = 0;
+    ADDC_ACC_RECORDINGPULSE_ACC_D_EVENT = 1;
+    ADDC_ACC_RECORDINGPULSE_ACC_C_EVENT = 2;
+    ADDC_ACC_RECORDINGPULSE_ACC_R_EVENT = 3;
+  }
+  enum ADDCACCEPBReqType {
+    ADDC_ACC_EPBREQ_NO_REQUEST = 0;
+    ADDC_ACC_EPBREQ_RELEASE_BRAKE_REQUEST = 1;
+    ADDC_ACC_EPBREQ_LOCK_BRAKE_REQUEST = 2;
+    ADDC_ACC_EPBREQ_RESERVED = 3;
+  }
+  enum ADDCACCVehicleDirectCtlType {
+    ADDC_ACC_VEHICLEDIRECTCTL_STAND_STILL = 0;
+    ADDC_ACC_VEHICLEDIRECTCTL_FORWARD = 1;
+    ADDC_ACC_VEHICLEDIRECTCTL_BACKWARD = 2;
+    ADDC_ACC_VEHICLEDIRECTCTL_RESERVED = 3;
+  }
+  enum ADDCABAlevelType {
+    ADDC_ABALEVEL_LEVEL_0 = 0;
+    ADDC_ABALEVEL_LEVEL_1 = 1;
+    ADDC_ABALEVEL_LEVEL_2 = 2;
+    ADDC_ABALEVEL_LEVEL_3 = 3;
+  }
+  enum ADDCAWBlevelType {
+    ADDC_AWBLEVEL_NO_LEVEL = 0;
+    ADDC_AWBLEVEL_LEVEL_1 = 1;
+    ADDC_AWBLEVEL_LEVEL_2 = 2;
+    ADDC_AWBLEVEL_LEVEL_3 = 3;
+    ADDC_AWBLEVEL_LEVEL_4 = 4;
+  }
+  enum ADDCAEBModeType {
+    ADDC_AEBMODE_OFF = 0;
+    ADDC_AEBMODE_WARNING = 1;
+    ADDC_AEBMODE_PARTIAL_DECELERATION = 2;
+    ADDC_AEBMODE_FULL_DECELERATION = 3;
+    ADDC_AEBMODE_STOP = 4;
+    ADDC_AEBMODE_FUN_ON = 5;
+    ADDC_AEBMODE_AVAILABLE = 6;
+    ADDC_AEBMODE_FAILURE = 7;
+  }
+  enum ADDCLKAmodeType {
+    ADDC_LKAMODE_OFF = 0;
+    ADDC_LKAMODE_WAITING = 1;
+    ADDC_LKAMODE_READY = 2;
+    ADDC_LKAMODE_ACTIVE = 3;
+    ADDC_LKAMODE_INHIBIT = 4;
+    ADDC_LKAMODE_RESERVED = 5;
+    ADDC_LKAMODE_INVENTION = 6;
+    ADDC_LKAMODE_FAILURE = 7;
+  }
+  enum FSCLKAWarningTypeType {
+    FSC_LKA_WARNINGTYPE_NO_WARNING = 0;
+    FSC_LKA_WARNINGTYPE_LEFT_SIDE_INTERVENTION_WARNING = 1;
+    FSC_LKA_WARNINGTYPE_RIGHT_SIDE_INTERVENTION_WARNING = 2;
+    FSC_LKA_WARNINGTYPE_RESERVED = 3;
+  }
+  enum FSCLKAEscapeLevelType {
+    FSC_LKAESCAPELEVEL_NO_WARNING = 0;
+    FSC_LKAESCAPELEVEL_ESCAPE_WARN1_FIRST_LEVEL_WARNING = 1;
+    FSC_LKAESCAPELEVEL_ESCAPE_WARN2_SECOND_LEVEL_WARNING = 2;
+    FSC_LKAESCAPELEVEL_SAFETYQUIT_REQUEST_CONTROL_SOFT_EXIT = 3;
+  }
+  enum ADDCLKAFuncTypeType {
+    ADDC_LKA_FUNCTYPE_LKA_LCC_ALC_ELK = 0;
+    ADDC_LKA_FUNCTYPE_HPA = 1;
+    ADDC_LKA_FUNCTYPE_URP = 2;
+    ADDC_LKA_FUNCTYPE_ESA = 3;
+    ADDC_LKA_FUNCTYPE_AES = 4;
+    ADDC_LKA_FUNCTYPE_LKA_WITHOUT_HUMAN_MACHINE_CO_DRIVING = 5;
+  }
+  enum ADDCLAEBModeType {
+    ADDC_LAEBMODE_OFF = 0;
+    ADDC_LAEBMODE_WARNING = 1;
+    ADDC_LAEBMODE_PARTIAL_DECELERATION = 2;
+    ADDC_LAEBMODE_FULL_DECELERATION = 3;
+    ADDC_LAEBMODE_STOP = 4;
+    ADDC_LAEBMODE_PASSIVE = 5;
+    ADDC_LAEBMODE_STANDBY = 6;
+    ADDC_LAEBMODE_FAILURE = 7;
+  }
+  enum ADDCRAEBModeType {
+    ADDC_RAEBMODE_OFF = 0;
+    ADDC_RAEBMODE_WARNING = 1;
+    ADDC_RAEBMODE_PARTIAL_DECELERATION = 2;
+    ADDC_RAEBMODE_FULL_DECELERATION = 3;
+    ADDC_RAEBMODE_STOP = 4;
+    ADDC_RAEBMODE_PASSIVE = 5;
+    ADDC_RAEBMODE_STANDBY = 6;
+    ADDC_RAEBMODE_FAILURE = 7;
+  }
+  enum ADDCFCTBModeType {
+    ADDC_FCTBMODE_OFF = 0;
+    ADDC_FCTBMODE_WARNING = 1;
+    ADDC_FCTBMODE_PARTIAL_DECELERATION = 2;
+    ADDC_FCTBMODE_FULL_DECELERATION = 3;
+    ADDC_FCTBMODE_STOP = 4;
+    ADDC_FCTBMODE_PASSIVE = 5;
+    ADDC_FCTBMODE_STANDBY = 6;
+    ADDC_FCTBMODE_FAILURE = 7;
+  }
+  enum ADDCRCTBModeType {
+    ADDC_RCTBMODE_OFF = 0;
+    ADDC_RCTBMODE_WARNING = 1;
+    ADDC_RCTBMODE_PARTIAL_DECELERATION = 2;
+    ADDC_RCTBMODE_FULL_DECELERATION = 3;
+    ADDC_RCTBMODE_STOP = 4;
+    ADDC_RCTBMODE_PASSIVE = 5;
+    ADDC_RCTBMODE_STANDBY = 6;
+    ADDC_RCTBMODE_FAILURE = 7;
+  }
+  enum ADDCAEBDeModeType {
+    ADDC_AEBDEMODE_OFF = 0;
+    ADDC_AEBDEMODE_GENERAL_MODE = 1;
+    ADDC_AEBDEMODE_SPECIAL_MODE = 2;
+    ADDC_AEBDEMODE_RESERVED = 3;
+  }
+  enum ADDCLDWReqType {
+    ADDC_LDWREQ_NO_WARNNING = 0;
+    ADDC_LDWREQ_LEVEL_1_WARNING = 1;
+    ADDC_LDWREQ_LEVEL_2_WARNING = 2;
+    ADDC_LDWREQ_LEVEL_3_WARNING = 3;
+  }
+  enum FSCALClatdirectionType {
+    FSC_ALC_LAT_DIRECTION_LANE_CHANGE_WAITING = 0;
+    FSC_ALC_LAT_DIRECTION_LEFT_LANE_CHANGE = 1;
+    FSC_ALC_LAT_DIRECTION_RIGHT_LANE_CHANGE = 2;
+    FSC_ALC_LAT_DIRECTION_ERROR = 3;
+    FSC_ALC_LAT_DIRECTION_LEFT_LANE_CHANGE_NOT_MET = 4;
+    FSC_ALC_LAT_DIRECTION_RIGHT_LANE_CHANGE_NOT_MET = 5;
+    FSC_ALC_LAT_DIRECTION_LANE_CHANGE_COMPLETED = 6;
+    FSC_ALC_LAT_DIRECTION_ADD_LEFT_LANE_CHANGE_STS = 7;
+    FSC_ALC_LAT_DIRECTION_ADD_RIGHT_LANE_CHANGE_STS = 8;
+    FSC_ALC_LAT_DIRECTION_ADD_BOTH_SIDES_LANE_CHANGE_STS = 9;
+    FSC_ALC_LAT_DIRECTION_ADD_ROAD_TYPE_AVAILABLE_STS = 10;
+  }
+  enum FSCALCmodeType {
+    FSC_ALC_MODE_OFF = 0;
+    FSC_ALC_MODE_UNAVAILABLE_STATE = 1;
+    FSC_ALC_MODE_STANDBY = 2;
+    FSC_ALC_MODE_ACTIVE = 3;
+    FSC_ALC_MODE_REJECT = 4;
+    FSC_ALC_MODE_ABORT = 5;
+    FSC_ALC_MODE_OVERRIDE = 6;
+    FSC_ALC_MODE_ERROR = 7;
+    FSC_ALC_MODE_WAIT = 8;
+    FSC_ALC_MODE_FINISH = 9;
+  }
+  enum FSCALCNotAvaliableReasonType {
+    FSC_ALC_NOTAVALIABLEREASON_NOTHING = 0;
+    FSC_ALC_NOTAVALIABLEREASON_FRONT_DANGEROUS_VEHICLE = 7;
+    FSC_ALC_NOTAVALIABLEREASON_REAR_DANGEROUS_VEHICLE = 8;
+    FSC_ALC_NOTAVALIABLEREASON_TURN_SIGNAL_CANCEL = 9;
+    FSC_ALC_NOTAVALIABLEREASON_OVERRIDE = 10;
+    FSC_ALC_NOTAVALIABLEREASON_OTHER_CONDITIONS = 11;
+  }
+  enum ADDCMAIWarnTrqCtrlFlgType {
+    ADDC_MAIWARNTRQCTRLFLG_INITIAL = 0;
+    ADDC_MAIWARNTRQCTRLFLG_NOT_ACTIVE = 1;
+    ADDC_MAIWARNTRQCTRLFLG_LIMIT_TORQUE = 2;
+    ADDC_MAIWARNTRQCTRLFLG_CLEAR_TORQUE = 3;
+    ADDC_MAIWARNTRQCTRLFLG_ONLY_WARNING = 4;
+    ADDC_MAIWARNTRQCTRLFLG_RESERVED = 5;
+    ADDC_MAIWARNTRQCTRLFLG_RESERVED_6 = 6;
+    ADDC_MAIWARNTRQCTRLFLG_RESERVED_7 = 7;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 addc_crc_83 = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 addc_rolling_counter_83 = 2;
+  // description 纵向控制功能类型 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCACCFunTypeType addc_acc_fun_type = 3;
+  // description ACC工作模式 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCACCModeType addc_acc_mode = 4;
+  // description ACC起步请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_driveoff_request = 5;
+  // description ACC停止请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_dec_to_stop = 6;
+  // description ACC可用状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_acc_available = 7;
+  // description IACC调整车速请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool fsc_iacc_speed_change_request = 8;
+  // description ACC请求目标加速度值 [-] [-5.0|7.8] [initial_value:100]
+  optional double addc_acc_target_acc = 9;
+  // description ACC目标加速度有效性 [-] [0.0|1.0] [initial_value:1]
+  optional bool addc_acc_target_acc_vd = 10;
+  // description ACC事件触发信号 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCACCRecordingPulseType addc_acc_recording_pulse = 11;
+  // description ACC控制车速有效性 [-] [0.0|1.0] [initial_value:1]
+  optional bool addc_vehicle_speed_ctl_vd = 12;
+  // description ACC控制车速 [KPH] [0.0|180.0] [initial_value:0]
+  optional double addc_vehicle_speed_ctl = 13;
+  // description ACC请求EPB状态 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCACCEPBReqType addc_acc_epb_req = 14;
+  // description ACC控制车辆方向 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCACCVehicleDirectCtlType addc_acc_vehicle_direct_ctl = 15;
+  // description ACC控制车辆方向有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_acc_vehicle_direct_ctl_vd = 16;
+  // description ACC保压状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_acc_hold_sts = 17;
+  // description ACC请求释放AVH [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_acc_avh_req = 18;
+  // description AEB请求目标减速度值 [m/s2] [-16.0|16.0] [initial_value:32000]
+  optional double addc_aeb_target_dec = 19;
+  // description AEB减速请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_aeb_dec_ctrl = 20;
+  // description ABA级别 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCABAlevelType addc_ab_alevel = 21;
+  // description ABA请求有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_ab_aavailable = 22;
+  // description AWB级别 [-] [0.0|15.0] [initial_value:0]
+  optional ADDCAWBlevelType addc_aw_blevel = 23;
+  // description AWB请求有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_aw_bavailable = 24;
+  // description AEBL驻车 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_aebl_vehiclehold = 25;
+  // description 自适应制动器预充压 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_esp_prefill = 26;
+  // description AEB工作状态 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCAEBModeType addc_aeb_mode = 27;
+  // description AEB可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_aeb_available = 28;
+  // description AEB_EBA请求信号 [-] [0.0|1.0] [initial_value:0]
+  optional bool fsc_aeb_eba_req = 29;
+  // description LKA工作状态 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCLKAmodeType addc_lk_amode = 30;
+  // description LKA方向盘控制请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_lka_steer_wheel_ang_req = 31;
+  // description LKA压线告警信号 [-] [0.0|3.0] [initial_value:0]
+  optional FSCLKAWarningTypeType fsc_lka_warning_type = 32;
+  // description LKA脱手提示等级 [-] [0.0|3.0] [initial_value:0]
+  optional FSCLKAEscapeLevelType fsc_lka_escape_level = 33;
+  // description LKA请求的方向盘角度 [°] [-650.0|650.0] [initial_value:32500]
+  optional double addc_lka_steering_wheel_angle = 34;
+  // description LKA请求的方向盘角速度 [°/s] [0.0|1016.0] [initial_value:0]
+  optional double addc_lka_steering_wheel_rot_spd = 35;
+  // description 横向控制模式 [-] [0.0|1.0] [initial_value:0]
+  optional bool fsc_lateral_control_mode = 36;
+  // description LKA转角请求扭矩上限 [N·m] [0.0|6.0] [initial_value:0]
+  optional double addc_ang_ctrl_trq_uppr_lim = 37;
+  // description LKA转角请求扭矩下限 [N·m] [-6.0|0.0] [initial_value:0]
+  optional double addc_ang_ctrl_trq_lowr_lim = 38;
+  // description LKA事件记录脉冲信号 [-] [0.0|1.0] [initial_value:0]
+  optional bool fsc_lka_recording_pulse = 39;
+  // description LKA工作模式 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCLKAFuncTypeType addc_lka_func_type = 40;
+  // description 人机共驾激活状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_lka_dil_mode = 41;
+  // description ESS扭矩控制请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_ess_tq_req = 42;
+  // description ESS扭矩请求值 [N·m ] [-8.0|8.0] [initial_value:1000]
+  optional double addc_ess_tq = 43;
+  // description FSC_LKA工作模式 [-] [0.0|1.0] [initial_value:0]
+  optional bool fsc_lka_func_type = 44;
+  // description LAEB工作状态 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCLAEBModeType addc_laeb_mode = 45;
+  // description RAEB工作状态 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCRAEBModeType addc_raeb_mode = 46;
+  // description FCTB工作状态 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCFCTBModeType addc_fctb_mode = 47;
+  // description RCTB工作状态 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCRCTBModeType addc_rctb_mode = 48;
+  // description AEB工作模式 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCAEBDeModeType addc_aeb_de_mode = 49;
+  // description 方向盘震动请求 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCLDWReqType addc_ldw_req = 50;
+  // description ACC纵向控制请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_acc_vlc_ctl_req = 51;
+  // description Override状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_acc_ovrd_sts = 52;
+  // description RCTB可用状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_rctb_available = 53;
+  // description RCTB减速请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_rctb_dec_req = 54;
+  // description 紧急制动目标减速度值 [m/s2] [-16.0|16.0] [initial_value:0]
+  optional double addc_target_decel = 55;
+  // description RAEB可用状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_raeb_available = 56;
+  // description RAEB减速请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_raeb_dec_req = 57;
+  // description MEB可用状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_meb_available = 58;
+  // description MEB减速请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_meb_dec_req = 59;
+  // description ALC控制车辆变道 [-] [0.0|15.0] [initial_value:0]
+  optional FSCALClatdirectionType fsc_alc_lat_direction = 60;
+  // description ALC功能状态 [-] [0.0|15.0] [initial_value:0]
+  optional FSCALCmodeType fsc_alc_mode = 61;
+  // description ALC不可用原因 [-] [0.0|15.0] [initial_value:0]
+  optional FSCALCNotAvaliableReasonType fsc_alc_not_avaliable_reason = 62;
+  // description ALC落位框横向距离 [m] [-15.0|15.0] [initial_value:0]
+  optional double fsc_alc_box_distance = 63;
+  // description ACL声音报警 [-] [0.0|3.0] [initial_value:0]
+  optional uint32 fsc_alc_warming_req = 64;
+  // description MAI功能请求报警、限扭、断扭标志位 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCMAIWarnTrqCtrlFlgType addc_mai_warn_trq_ctrl_flg = 65;
+  // description ACC请求目标制动扭矩值 [N·m] [-8000.0|0.0] [initial_value:None]
+  optional double addc_acc_target_trq_brk = 66;
+  // description ACC请求目标制动扭矩有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_acc_target_trq_brk_vd = 67;
+  // description ACC请求目标扭矩有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_acc_target_trq_vd = 68;
+  // description ACC请求目标扭矩值 [N·m] [-8000.0|8000.0] [initial_value:8000]
+  optional double addc_acc_target_trq = 69;
+}
+
+message ADDC_84_84 {
+// Control Message
+  enum ADDCAPSPDCVehicleDirectCtlType {
+    ADDC_APS_PDC_VEHICLEDIRECTCTL_STAND_STILL = 0;
+    ADDC_APS_PDC_VEHICLEDIRECTCTL_FORWARD = 1;
+    ADDC_APS_PDC_VEHICLEDIRECTCTL_BACKWARD = 2;
+    ADDC_APS_PDC_VEHICLEDIRECTCTL_RESERVED = 3;
+  }
+  enum ADDCAPSParkingReqType {
+    ADDC_APS_PARKINGREQ_NO_REQUEST = 0;
+    ADDC_APS_PARKINGREQ_RELEASE_BRAKE_REQUEST = 1;
+    ADDC_APS_PARKINGREQ_LOCK_BRAKE_REQUEST = 2;
+    ADDC_APS_PARKINGREQ_NOT_USED = 3;
+  }
+  enum ADDCAPSFuncTypeType {
+    ADDC_APS_FUNCTYPE_OFF = 0;
+    ADDC_APS_FUNCTYPE_APA = 1;
+    ADDC_APS_FUNCTYPE_RPA = 2;
+    ADDC_APS_FUNCTYPE_HPA = 3;
+    ADDC_APS_FUNCTYPE_RESERVED = 4;
+  }
+  enum ADDCAPSVehicleholdreqType {
+    ADDC_APS_VEHICLEHOLDREQ_NO_REQUEST = 0;
+    ADDC_APS_VEHICLEHOLDREQ_REQUEST = 1;
+    ADDC_APS_VEHICLEHOLDREQ_RELEASE_REQUEST = 2;
+  }
+  enum ADDCleftsafetylevelType {
+    ADDC_LEFTSAFETY_LEVEL_NO_COLLISION_RISK = 0;
+    ADDC_LEFTSAFETY_LEVEL_COLLISION_LEVEL_1 = 1;
+    ADDC_LEFTSAFETY_LEVEL_COLLISION_LEVEL_2 = 2;
+    ADDC_LEFTSAFETY_LEVEL_COLLISION_LEVEL_3 = 3;
+    ADDC_LEFTSAFETY_LEVEL_COLLISION_LEVEL_4 = 4;
+  }
+  enum ADDCrightsafetylevelType {
+    ADDC_RIGHTSAFETY_LEVEL_NO_COLLISION_RISK = 0;
+    ADDC_RIGHTSAFETY_LEVEL_COLLISION_LEVEL_1 = 1;
+    ADDC_RIGHTSAFETY_LEVEL_COLLISION_LEVEL_2 = 2;
+    ADDC_RIGHTSAFETY_LEVEL_COLLISION_LEVEL_3 = 3;
+    ADDC_RIGHTSAFETY_LEVEL_COLLISION_LEVEL_4 = 4;
+  }
+  enum ADDCfrontsafetylevelType {
+    ADDC_FRONTSAFETY_LEVEL_NO_COLLISION_RISK = 0;
+    ADDC_FRONTSAFETY_LEVEL_COLLISION_LEVEL_1 = 1;
+    ADDC_FRONTSAFETY_LEVEL_COLLISION_LEVEL_2 = 2;
+    ADDC_FRONTSAFETY_LEVEL_COLLISION_LEVEL_3 = 3;
+    ADDC_FRONTSAFETY_LEVEL_COLLISION_LEVEL_4 = 4;
+  }
+  enum ADDCrearsafetylevelType {
+    ADDC_REARSAFETY_LEVEL_NO_COLLISION_RISK = 0;
+    ADDC_REARSAFETY_LEVEL_COLLISION_LEVEL_1 = 1;
+    ADDC_REARSAFETY_LEVEL_COLLISION_LEVEL_2 = 2;
+    ADDC_REARSAFETY_LEVEL_COLLISION_LEVEL_3 = 3;
+    ADDC_REARSAFETY_LEVEL_COLLISION_LEVEL_4 = 4;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 addc_crc_84 = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 addc_rolling_counter_84 = 2;
+  // description APS请求开启自动泊车 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_aps_enable_req = 3;
+  // description APS自动泊车工作状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_aps_work_sts = 4;
+  // description APS危险告警灯点亮请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_alarm_light_req = 5;
+  // description APS自动泊车控制车辆方向有效性 [-] [0.0|1.0] [initial_value:1]
+  optional bool addc_aps_pdc_vehicle_direct_ctl_vd = 6;
+  // description APS自动泊车控制车速有效性 [-] [0.0|1.0] [initial_value:1]
+  optional bool addc_aps_vehicle_speed_ctl_vd = 7;
+  // description APS自动泊车控制车辆方向 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCAPSPDCVehicleDirectCtlType addc_aps_pdc_vehicle_direct_ctl = 8;
+  // description 禁用调节ECAS请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_disable_ecas_req = 9;
+  // description APS自动泊车控制方向盘转角 [°] [-650.0|650.0] [initial_value:32500]
+  optional double addc_aps_pdc_sw_ang_ctl = 10;
+  // description APS自动泊车请求驻车 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCAPSParkingReqType addc_aps_parking_req = 11;
+  // description APS紧急制动请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_aps_emergence_brake = 12;
+  // description APS目标加速度有效性 [-] [0.0|1.0] [initial_value:1]
+  optional bool addc_aps_target_acc_vd = 13;
+  // description APS保压状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_aps_hold_sts = 14;
+  // description APS请求释放AVH [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_aps_avh_req = 15;
+  // description APS自动泊车控制方向盘转角速度最大限定值 [°/s] [0.0|1016.0] [initial_value:0]
+  optional double addc_aps_pdc_max_sw_ang_speed_limit = 16;
+  // description APS目标加速度 [m/s2] [-7.0|5.0] [initial_value:None]
+  optional double addc_aps_target_acc = 17;
+  // description APS自动泊车控制车速 [Km/h] [0.0|7.9] [initial_value:0]
+  optional double addc_aps_vehicle_speed_ctl = 18;
+  // description APS停止请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_aps_dec_to_stop = 19;
+  // description APS LSC功能开启状态，APA准备启动 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_aps_lsc_action = 20;
+  // description APS起步请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_aps_driveoff_request = 21;
+  // description APS泊车类型 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCAPSFuncTypeType addc_aps_func_type = 22;
+  // description APS功能是否可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_aps_available = 23;
+  // description APA请求保压驻车 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCAPSVehicleholdreqType addc_aps_vehicleholdreq = 24;
+  // description 左侧碰撞等级 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCleftsafetylevelType addc_leftsafety_level = 25;
+  // description 右侧碰撞等级 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCrightsafetylevelType addc_rightsafety_level = 26;
+  // description 前侧碰撞等级 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCfrontsafetylevelType addc_frontsafety_level = 27;
+  // description 后侧碰撞等级 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCrearsafetylevelType addc_rearsafety_level = 28;
+  // description 碰撞风险有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_safety_valid = 29;
+  // description APA请求目标扭矩值 [N·m] [-8000.0|8000.0] [initial_value:8000]
+  optional double addc_aps_target_trq = 30;
+  // description APA请求目标扭矩有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_aps_target_trq_vd = 31;
+  // description APA请求目标制动扭矩值 [N·m] [-8000.0|0.0] [initial_value:None]
+  optional double addc_aps_target_trq_brk = 32;
+  // description APA请求目标制动扭矩有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_aps_target_trq_brk_vd = 33;
+  // description APA请求保压驻车有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_aps_vehicleholdreq_vd = 34;
+}
+
+message VCU_B6_B6 {
+// Report Message
+  enum VCUGearLevelPosStsType {
+    VCU_GEARLEVELPOSSTS_P = 0;
+    VCU_GEARLEVELPOSSTS_R = 1;
+    VCU_GEARLEVELPOSSTS_N = 2;
+    VCU_GEARLEVELPOSSTS_D = 3;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 vcu_crc_b6 = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 vcu_rolling_counter_b6 = 2;
+  // description 主电机扭矩控制值 [Nm] [-500.0|500.0] [initial_value:4000]
+  optional double vcu_m_drv_request_torque = 3;
+  // description 辅电机扭矩控制值 [Nm] [-500.0|500.0] [initial_value:4000]
+  optional double vcu_s_drv_request_torque = 4;
+  // description 加速踏板位置信号 [%] [0.0|100.0] [initial_value:0]
+  optional double vcu_throttle_position = 5;
+  // description 加速踏板有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_acc_pedal_valid = 6;
+  // description 制动系统故障状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_brake_sys_fault = 7;
+  // description 制动灯点亮请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_brake_light_req = 8;
+  // description 刹车开关状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_brake_pedal_sts = 9;
+  // description 刹车开关状态有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_brake_pedal_sts_valid = 10;
+  // description 档位信号 [-] [0.0|3.0] [initial_value:2]
+  optional VCUGearLevelPosStsType vcu_gear_level_pos_sts = 11;
+  // description 档位信号有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_gear_lever_valid = 12;
+  // description 交付模式开启状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_delivery_mode_sts = 13;
+}
+
+message VCU_B7_B7 {
+// Report Message
+  enum VCUVehicleWarningType {
+    VCU_VEHICLE_WARNING_NO_ERROR = 0;
+    VCU_VEHICLE_WARNING_LEVEL_1_ERROR_LOW = 1;
+    VCU_VEHICLE_WARNING_LEVEL_2_ERROR = 2;
+    VCU_VEHICLE_WARNING_LEVEL_3_ERROR_HIGH = 3;
+  }
+  enum VCUPowerReduceReqType {
+    VCU_POWERREDUCEREQ_NOT_REQUEST = 0;
+    VCU_POWERREDUCEREQ_LEVEL_1_REQUEST_HIGH = 1;
+    VCU_POWERREDUCEREQ_LEVEL_2_REQUEST = 2;
+    VCU_POWERREDUCEREQ_LEVEL_3_REQUEST_LOW = 3;
+  }
+  enum VCUParkingReqToEPBVDType {
+    VCU_PARKINGREQTOEPB_VD_ALL_VALID = 0;
+    VCU_PARKINGREQTOEPB_VD_ONLY_RELEASE_VALID = 1;
+    VCU_PARKINGREQTOEPB_VD_ONLY_PULL_VALID = 2;
+    VCU_PARKINGREQTOEPB_VD_ALL_INVALID = 3;
+  }
+  enum VCUParkingReqToEPBType {
+    VCU_PARKINGREQTOEPB_NO_REQUEST = 0;
+    VCU_PARKINGREQTOEPB_RELEASE_BRAKE_REQUEST = 1;
+    VCU_PARKINGREQTOEPB_LOCK_BRAKE_REQUEST = 2;
+    VCU_PARKINGREQTOEPB_NOT_USED = 3;
+  }
+  enum VCUACCAvailableType {
+    VCU_ACCAVAILABLE_ALLOW_ACC = 0;
+    VCU_ACCAVAILABLE_PROHIBIT_ACC = 1;
+    VCU_ACCAVAILABLE_OVERRIDE = 2;
+    VCU_ACCAVAILABLE_RESERVED = 3;
+  }
+  enum VCUCCSStatusType {
+    VCU_CCSSTATUS_NOT_ACTIVE = 0;
+    VCU_CCSSTATUS_STANDBY = 1;
+    VCU_CCSSTATUS_ACTIVE = 2;
+  }
+  enum VCUAutoDriveRequestType {
+    VCU_AUTODRIVEREQUEST_NO_REQUEST = 0;
+    VCU_AUTODRIVEREQUEST_SWITCH_SINGLE_CLICK = 1;
+    VCU_AUTODRIVEREQUEST_SWITCH_DOUBLE_CLICK = 2;
+    VCU_AUTODRIVEREQUEST_CANCEL = 3;
+  }
+  enum VCUHoldReqStsType {
+    VCU_HOLDREQSTS_NO_REQUEST = 0;
+    VCU_HOLDREQSTS_APPLY_REQUEST = 1;
+    VCU_HOLDREQSTS_RELEASE_REQUEST = 2;
+    VCU_HOLDREQSTS_NOT_USED = 3;
+  }
+  enum VCURecuBrakeTorqueCapQType {
+    VCU_RECUBRAKETORQUECAP_Q_NOTINITIALIZED = 0;
+    VCU_RECUBRAKETORQUECAP_Q_NORMAL = 1;
+    VCU_RECUBRAKETORQUECAP_Q_FAULTY = 2;
+  }
+  enum VCURecuBrakeTorqueActQType {
+    VCU_RECUBRAKETORQUEACT_Q_NOTINITIALIZED = 0;
+    VCU_RECUBRAKETORQUEACT_Q_NORMAL = 1;
+    VCU_RECUBRAKETORQUEACT_Q_FAULTY = 2;
+  }
+  enum VCUHydraTorqTgtQType {
+    VCU_HYDRATORQTGT_Q_NOTINITIALIZED = 0;
+    VCU_HYDRATORQTGT_Q_NORMAL = 1;
+    VCU_HYDRATORQTGT_Q_FAULTY = 2;
+  }
+  enum VCURecuBrakeTorqueActDragQType {
+    VCU_RECUBRAKETORQUEACTDRAG_Q_NOTINITIALIZED = 0;
+    VCU_RECUBRAKETORQUEACTDRAG_Q_NORMAL = 1;
+    VCU_RECUBRAKETORQUEACTDRAG_Q_FAULTY = 2;
+  }
+  enum VCURecuBrakeTorqueTargetDragQType {
+    VCU_RECUBRAKETORQUETARGET_DRAG_Q_NOTINITIALIZED = 0;
+    VCU_RECUBRAKETORQUETARGET_DRAG_Q_NORMAL = 1;
+    VCU_RECUBRAKETORQUETARGET_DRAG_Q_FAULTY = 2;
+  }
+  enum VCUMGCUWorkModeCType {
+    VCU_MGCUWORKMODE_C_DEFAULT_STS = 0;
+    VCU_MGCUWORKMODE_C_GENERATING_STS = 1;
+    VCU_MGCUWORKMODE_C_DRIVE_STS = 2;
+    VCU_MGCUWORKMODE_C_RESERVED = 3;
+  }
+  enum VCUMCUSWorkFailMsgType {
+    VCU_MCUSWORKFAILMSG_DEFAULT_NO_PROMPT = 0;
+    VCU_MCUSWORKFAILMSG_SPEED_TOO_HIGH = 1;
+    VCU_MCUSWORKFAILMSG_LOW_BATTERY = 2;
+    VCU_MCUSWORKFAILMSG_VEHICLE_FAULT = 3;
+  }
+  enum VCUEscapeWorkFailMsgType {
+    VCU_ESCAPEWORKFAILMSG_DEFAULT_NO_PROMPT = 0;
+    VCU_ESCAPEWORKFAILMSG_SPEED_TOO_HIGH = 1;
+    VCU_ESCAPEWORKFAILMSG_LOW_BATTERY = 2;
+    VCU_ESCAPEWORKFAILMSG_VEHICLE_FAULT = 3;
+  }
+  enum VCUBoostModeFailCType {
+    VCU_BOOSTMODE_FAIL_C_NO_FAULT = 0;
+    VCU_BOOSTMODE_FAIL_C_BOOST_MODE_TIMEOUT_PLEASE_RETRY = 1;
+    VCU_BOOSTMODE_FAIL_C_PLEASE_MANUALLY_TURN_OFF_ESC_AND_TRY_AGAIN = 2;
+    VCU_BOOSTMODE_FAIL_C_CONDITION_NOT_MET_BOOST_MODE_CANNOT_ACTIVATE = 3;
+  }
+  enum VCUBoostModeStsCType {
+    VCU_BOOSTMODESTS_C_OFF = 0;
+    VCU_BOOSTMODESTS_C_STANDBY = 1;
+    VCU_BOOSTMODESTS_C_ON = 2;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 vcu_crc_b7 = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 vcu_rolling_counter_b7 = 2;
+  // description 整车故障报警 [-] [0.0|3.0] [initial_value:0]
+  optional VCUVehicleWarningType vcu_vehicle_warning = 3;
+  // description 整车状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_vehicle_sts = 4;
+  // description 降功率请求 [-] [0.0|3.0] [initial_value:0]
+  optional VCUPowerReduceReqType vcu_power_reduce_req = 5;
+  // description 请求EPB驻车有效性 [-] [0.0|3.0] [initial_value:0]
+  optional VCUParkingReqToEPBVDType vcu_parking_req_to_epb_vd = 6;
+  // description 请求EPB驻车 [-] [0.0|3.0] [initial_value:0]
+  optional VCUParkingReqToEPBType vcu_parking_req_to_epb = 7;
+  // description VCU可以响应ACC [-] [0.0|3.0] [initial_value:0]
+  optional VCUACCAvailableType vcu_acc_available = 8;
+  // description VCU正在响应ACC [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_acc_active_sts = 9;
+  // description VCU正在响应APS [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_active_aps = 10;
+  // description VCU可以响应APS [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_available_aps = 11;
+  // description ESC控制触发 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_esc_active = 12;
+  // description ESC扭矩请求响应 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_esc_torq_req_availability = 13;
+  // description AutoHold功能禁止 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_auto_hold_ibit = 14;
+  // description 车速有效性 [-] [0.0|3.0] [initial_value:0]
+  optional uint32 vcu_vehicle_speed_vd = 15;
+  // description 定速巡航开关状态 [-] [0.0|3.0] [initial_value:0]
+  optional VCUCCSStatusType vcu_ccs_status = 16;
+  // description 自动驾驶请求 [-] [0.0|3.0] [initial_value:0]
+  optional VCUAutoDriveRequestType vcu_auto_drive_request = 17;
+  // description 定速巡航允许 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_ccs_allow = 18;
+  // description 车辆保压状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_vlc_hold_sts = 19;
+  // description Hold请求状态 [-] [0.0|3.0] [initial_value:0]
+  optional VCUHoldReqStsType vcu_hold_req_sts = 20;
+  // description 驾驶辅助功能禁用状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_driver_assist_prohibit_sts = 21;
+  // description 整车限速状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_speed_limited_sts = 22;
+  // description 整车限速值 [km/h] [0.0|254.0] [initial_value:0]
+  optional double vcu_speed_limited_value = 23;
+  // description 虚拟加速踏板百分比 [-] [0.0|100.0] [initial_value:0]
+  optional double vcu_theo_acce_pedal_percent = 24;
+  // description 能量回收最大能力 [N·m] [0.0|32767.0] [initial_value:0]
+  optional uint32 vcu_recu_brake_torque_cap = 25;
+  // description Hold请求状态有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_hold_req_sts_valid = 26;
+  // description 实际制动能量回收扭矩 [N·m] [0.0|32767.0] [initial_value:0]
+  optional uint32 vcu_recu_brake_torque_act = 27;
+  // description 虚拟加速踏板有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_theo_acce_pedal_valid = 28;
+  // description 液压扭矩请求目标值 [N·m] [0.0|32767.0] [initial_value:0]
+  optional uint32 vcu_hydra_torq_tgt = 29;
+  // description 滑行能量回收扭矩 [N·m] [0.0|32767.0] [initial_value:0]
+  optional uint32 vcu_recu_brake_torque_act_drag = 30;
+  // description 能量回收最大能力有效性 [-] [0.0|3.0] [initial_value:0]
+  optional VCURecuBrakeTorqueCapQType vcu_recu_brake_torque_cap_q = 31;
+  // description 实际制动能量回收扭矩有效性 [-] [0.0|3.0] [initial_value:0]
+  optional VCURecuBrakeTorqueActQType vcu_recu_brake_torque_act_q = 32;
+  // description 液压扭矩请求目标值有效性 [-] [0.0|3.0] [initial_value:0]
+  optional VCUHydraTorqTgtQType vcu_hydra_torq_tgt_q = 33;
+  // description 滑行能量回收扭矩有效性 [-] [0.0|3.0] [initial_value:0]
+  optional VCURecuBrakeTorqueActDragQType vcu_recu_brake_torque_act_drag_q = 34;
+  // description 滑行能量回收目标值 [N·m] [0.0|32767.0] [initial_value:0]
+  optional uint32 vcu_recu_brake_torque_target_drag = 35;
+  // description 防溜坡功能激活状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_prevent_veh_slip_sts = 36;
+  // description 滑行能量回收目标值有效性 [-] [0.0|3.0] [initial_value:0]
+  optional VCURecuBrakeTorqueTargetDragQType vcu_recu_brake_torque_target_drag_q = 37;
+  // description 所有电机轮端实际总扭矩反馈 [N·m] [-6000.0|10000.0] [initial_value:6000]
+  optional double vcu_all_mot_whl_trq_fb = 38;
+  // description 所有电机轮端实际总扭矩反馈有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_all_mot_whl_trq_fb_vd = 39;
+  // description VCU能响应ADAS最大正扭 [N·m] [0.0|10000.0] [initial_value:0]
+  optional double vcu_adas_pos_torque_cap = 40;
+  // description VCU能响应ADAS最大正扭有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_adas_pos_torque_cap_vd = 41;
+  // description VCU低速灵活控制允许状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_lsfc_allow = 42;
+  // description VCU低速灵活控制激活状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_lsfc_active = 43;
+  // description 工作模式状态_C [-] [0.0|3.0] [initial_value:0]
+  optional VCUMGCUWorkModeCType vcu_mgcu_work_mode_c = 44;
+  // description VCU_MAI踏板防误踩功能是否可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_mai_available = 45;
+  // description VCU_MAI踏板防误踩功能是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_mai_active = 46;
+  // description VCU脱困模式状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool vcu_escape_mode_sts = 47;
+  // description 四驱工作失败提示 [-] [0.0|7.0] [initial_value:0]
+  optional VCUMCUSWorkFailMsgType vcu_mcus_work_fail_msg = 48;
+  // description 脱困工作失败提示 [-] [0.0|7.0] [initial_value:0]
+  optional VCUEscapeWorkFailMsgType vcu_escape_work_fail_msg = 49;
+  // description 增程离合故障提示 [-] [0.0|3.0] [initial_value:0]
+  optional uint32 vcu_re_clutch_flt_msg = 50;
+  // description 弹射模式开启失败_C [-] [0.0|7.0] [initial_value:0]
+  optional VCUBoostModeFailCType vcu_boost_mode_fail_c = 51;
+  // description 弹射模式状态_C [-] [0.0|3.0] [initial_value:0]
+  optional VCUBoostModeStsCType vcu_boost_mode_sts_c = 52;
+}
+
+message HPCGW_CB_CB {
+// Report Message
+  enum GWMCUMDrvMotorWorkStsType {
+    GW_MCUM_DRVMOTORWORKSTS_CONSUMER_POWER = 0;
+    GW_MCUM_DRVMOTORWORKSTS_ELECTRICITY_GENERATION = 1;
+    GW_MCUM_DRVMOTORWORKSTS_NOT_WORK = 2;
+    GW_MCUM_DRVMOTORWORKSTS_READY = 3;
+  }
+  enum GWMCUSDrvMotorWorkStsType {
+    GW_MCUS_DRVMOTORWORKSTS_CONSUMER_POWER = 0;
+    GW_MCUS_DRVMOTORWORKSTS_ELECTRICITY_GENERATION = 1;
+    GW_MCUS_DRVMOTORWORKSTS_NOT_WORK = 2;
+    GW_MCUS_DRVMOTORWORKSTS_READY = 3;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 gw_crc_cb = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 gw_rolling_counter_cb = 2;
+  // description 主电机转速 [rpm] [-17000.0|30000.0] [initial_value:17000]
+  optional double gw_mcum_drv_motor_rpm = 3;
+  // description 主电机实际扭矩反馈 [N·m] [-500.0|500.0] [initial_value:5000]
+  optional double gw_mcum_actual_torque_fb = 4;
+  // description 主电机旋变故障 [-] [0.0|1.0] [initial_value:0]
+  optional bool gw_mcum_hw_rdc_fault = 5;
+  // description 主驱动电机工作状态 [-] [0.0|3.0] [initial_value:0]
+  optional GWMCUMDrvMotorWorkStsType gw_mcum_drv_motor_work_sts = 6;
+  // description 辅电机转速 [rpm] [-17000.0|30000.0] [initial_value:17000]
+  optional double gw_mcus_drv_motor_rpm = 7;
+  // description 辅电机实际扭矩反馈 [N·m] [-500.0|500.0] [initial_value:5000]
+  optional double gw_mcus_actual_torque_fb = 8;
+  // description 辅电机旋变故障 [-] [0.0|1.0] [initial_value:0]
+  optional bool gw_mcus_hw_rdc_fault = 9;
+  // description 辅驱动电机工作状态 [-] [0.0|3.0] [initial_value:0]
+  optional GWMCUSDrvMotorWorkStsType gw_mcus_drv_motor_work_sts = 10;
+}
+
+message LMC_FD_FD {
+// Report Message
+  enum LMCWBDCActiveStType {
+    LMC_WBDC_ACTIVEST_NO_ACTIVE = 0;
+    LMC_WBDC_ACTIVEST_WBDC_STANDBY = 1;
+    LMC_WBDC_ACTIVEST_WBDC_ACTIVE = 2;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 lmc_crc_fd = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 lmc_rolling_counter_fd = 2;
+  // description 高速预稳定控制激活状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool lmc_hspc_active_st = 3;
+  // description 爆胎功能激活状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool lmc_ftsc_active_st = 4;
+  // description 起步整合控制激活状态 [-] [0.0|3.0] [initial_value:0]
+  optional LMCWBDCActiveStType lmc_wbdc_active_st = 5;
+}
+
+message SWB_305_305 {
+// Report Message
+  enum SWBRRollerPressStsType {
+    SWB_RROLLERPRESSSTS_NO_ACTION = 0;
+    SWB_RROLLERPRESSSTS_SHORT_PRESS = 1;
+    SWB_RROLLERPRESSSTS_LONG_PRESS = 2;
+    SWB_RROLLERPRESSSTS_DOUBLE_PRESS = 3;
+    SWB_RROLLERPRESSSTS_ERROR = 4;
+  }
+  enum SWBLRollerPressStsType {
+    SWB_LROLLERPRESSSTS_NO_ACTION = 0;
+    SWB_LROLLERPRESSSTS_SHORT_PRESS = 1;
+    SWB_LROLLERPRESSSTS_LONG_PRESS = 2;
+    SWB_LROLLERPRESSSTS_DOUBLE_PRESS = 3;
+    SWB_LROLLERPRESSSTS_ERROR = 4;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 swb_crc_305 = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 swb_rolling_counter_305 = 2;
+  // description 右滚轮按下状态 [-] [0.0|7.0] [initial_value:0]
+  optional SWBRRollerPressStsType swb_r_roller_press_sts = 3;
+  // description 左滚轮按下状态 [-] [0.0|7.0] [initial_value:0]
+  optional SWBLRollerPressStsType swb_l_roller_press_sts = 4;
+}
+
+message TCM_30_B_30B {
+// Report Message
+  enum TCMParkingSwStsType {
+    TCM_PARKINGSWSTS_NOT_ACTIVE = 0;
+    TCM_PARKINGSWSTS_ACTIVE = 1;
+    TCM_PARKINGSWSTS_RESERVED = 2;
+    TCM_PARKINGSWSTS_RESERVED_3 = 3;
+  }
+  enum TCMGearLevelSwitchStsType {
+    TCM_GEARLEVELSWITCHSTS_NEUTRAL = 0;
+    TCM_GEARLEVELSWITCHSTS_UP1GEAR = 1;
+    TCM_GEARLEVELSWITCHSTS_UP2GEARS = 2;
+    TCM_GEARLEVELSWITCHSTS_DOWN1GEAR = 3;
+    TCM_GEARLEVELSWITCHSTS_DOWN2GEARS = 4;
+    TCM_GEARLEVELSWITCHSTS_RESERVED = 5;
+  }
+  enum TCMHighBeamSwStsType {
+    TCM_HIGHBEAMSWSTS_NOT_ACTIVE = 0;
+    TCM_HIGHBEAMSWSTS_ACTIVE = 1;
+    TCM_HIGHBEAMSWSTS_RESERVED = 2;
+    TCM_HIGHBEAMSWSTS_RESERVED_3 = 3;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 tcm_crc_30_b = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 tcm_rolling_counter_30_b = 2;
+  // description P档开关信号 [-] [0.0|3.0] [initial_value:0]
+  optional TCMParkingSwStsType tcm_parking_sw_sts = 3;
+  // description 档位开关信号 [-] [0.0|7.0] [initial_value:0]
+  optional TCMGearLevelSwitchStsType tcm_gear_level_switch_sts = 4;
+  // description 远光灯开关信号 [-] [0.0|3.0] [initial_value:0]
+  optional TCMHighBeamSwStsType tcm_high_beam_sw_sts = 5;
+}
+
+message TCM_30_C_30C {
+// Report Message
+  enum TCMLaneChangeLeftSwStsType {
+    TCM_LANECHANGELEFTSWSTS_NOT_ACTIVE = 0;
+    TCM_LANECHANGELEFTSWSTS_ACTIVE = 1;
+    TCM_LANECHANGELEFTSWSTS_ERROR = 2;
+  }
+  enum TCMLaneChangeRightSwStsType {
+    TCM_LANECHANGERIGHTSWSTS_NOT_ACTIVE = 0;
+    TCM_LANECHANGERIGHTSWSTS_ACTIVE = 1;
+    TCM_LANECHANGERIGHTSWSTS_ERROR = 2;
+  }
+  enum TCMTurnLeftSwStsType {
+    TCM_TURNLEFTSWSTS_NOT_ACTIVE = 0;
+    TCM_TURNLEFTSWSTS_ACTIVE = 1;
+    TCM_TURNLEFTSWSTS_RESERVED = 2;
+    TCM_TURNLEFTSWSTS_RESERVED_3 = 3;
+  }
+  enum TCMTurnRightSwStsType {
+    TCM_TURNRIGHTSWSTS_NOT_ACTIVE = 0;
+    TCM_TURNRIGHTSWSTS_ACTIVE = 1;
+    TCM_TURNRIGHTSWSTS_RESERVED = 2;
+    TCM_TURNRIGHTSWSTS_RESERVED_3 = 3;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 tcm_crc_30_c = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 tcm_rolling_counter_30_c = 2;
+  // description 左变道灯开关信号 [-] [0.0|3.0] [initial_value:0]
+  optional TCMLaneChangeLeftSwStsType tcm_lane_change_left_sw_sts = 3;
+  // description 右变道灯开关信号 [-] [0.0|3.0] [initial_value:0]
+  optional TCMLaneChangeRightSwStsType tcm_lane_change_right_sw_sts = 4;
+  // description 左转向灯开关信号 [-] [0.0|3.0] [initial_value:0]
+  optional TCMTurnLeftSwStsType tcm_turn_left_sw_sts = 5;
+  // description 右转向灯开关信号 [-] [0.0|3.0] [initial_value:0]
+  optional TCMTurnRightSwStsType tcm_turn_right_sw_sts = 6;
+}
+
+message ADDC_23_A_23A {
+// Control Message
+  enum ADDCSelfCheckType {
+    ADDC_SELFCHECK_NOT_FINISHED = 0;
+    ADDC_SELFCHECK_FINISHED = 1;
+    ADDC_SELFCHECK_FAILURE = 2;
+    ADDC_SELFCHECK_RESERVED = 3;
+  }
+  enum ADDC360VidoeCalibStsType {
+    ADDC_360VIDOECALIBSTS_UNCALIBRATED = 0;
+    ADDC_360VIDOECALIBSTS_CALIBRATED = 1;
+    ADDC_360VIDOECALIBSTS_CALIBRATING = 2;
+    ADDC_360VIDOECALIBSTS_CALIBRATE_FAILED = 3;
+  }
+  enum ADDCFSCCalibStsType {
+    ADDC_FSCCALIBSTS_UNCALIBRATED = 0;
+    ADDC_FSCCALIBSTS_CALIBRATED = 1;
+    ADDC_FSCCALIBSTS_CALIBRATING = 2;
+    ADDC_FSCCALIBSTS_CALIBRATE_FAILED = 3;
+  }
+  enum ADDCLACRRALarmType {
+    ADDC_LAC_RR_ALARM_NO_ALARM = 0;
+    ADDC_LAC_RR_ALARM_LEVEL_1_ALARM = 1;
+    ADDC_LAC_RR_ALARM_LEVEL_2_ALARM = 2;
+  }
+  enum ADDCACCCalibStsType {
+    ADDC_ACCCALIBSTS_UNCALIBRATED = 0;
+    ADDC_ACCCALIBSTS_CALIBRATED = 1;
+    ADDC_ACCCALIBSTS_CALIBRATING = 2;
+    ADDC_ACCCALIBSTS_CALIBRATE_FAILED = 3;
+  }
+  enum ADDCLObstacleAlarmType {
+    ADDC_LOBSTACLEALARM_NO_ALARM = 0;
+    ADDC_LOBSTACLEALARM_LEVEL_1_ALARM = 1;
+    ADDC_LOBSTACLEALARM_LEVEL_2_ALARM = 2;
+  }
+  enum ADDCRObstacleAlarmType {
+    ADDC_ROBSTACLEALARM_NO_ALARM = 0;
+    ADDC_ROBSTACLEALARM_LEVEL_1_ALARM = 1;
+    ADDC_ROBSTACLEALARM_LEVEL_2_ALARM = 2;
+  }
+  enum ADDCLDOWWarningType {
+    ADDC_LDOW_WARNING_NO_ALARM = 0;
+    ADDC_LDOW_WARNING_LEVEL_1_ALARM = 1;
+    ADDC_LDOW_WARNING_LEVEL_2_ALARM = 2;
+  }
+  enum ADDCRDOWWarningType {
+    ADDC_RDOW_WARNING_NO_ALARM = 0;
+    ADDC_RDOW_WARNING_LEVEL_1_ALARM = 1;
+    ADDC_RDOW_WARNING_LEVEL_2_ALARM = 2;
+  }
+  enum ADDCBlindVidoeCalibStsType {
+    ADDC_BLINDVIDOECALIBSTS_UNCALIBRATED = 0;
+    ADDC_BLINDVIDOECALIBSTS_CALIBRATED = 1;
+    ADDC_BLINDVIDOECALIBSTS_CALIBRATING = 2;
+    ADDC_BLINDVIDOECALIBSTS_CALIBRATE_FAILED = 3;
+  }
+  enum ADDCLACRLALarmType {
+    ADDC_LAC_RL_ALARM_NO_ALARM = 0;
+    ADDC_LAC_RL_ALARM_LEVEL_1_ALARM = 1;
+    ADDC_LAC_RL_ALARM_LEVEL_2_ALARM = 2;
+  }
+  enum ADDCFDMFCWWarmingType {
+    ADDC_FDMFCWWARMING_NO_ALARM = 0;
+    ADDC_FDMFCWWARMING_LEVEL_1_ALARM = 1;
+    ADDC_FDMFCWWARMING_LEVEL_2_ALARM = 2;
+  }
+  enum ADDCLVDSVideoStsType {
+    ADDC_LVDSVIDEO_STS_NOT_ACTIVE = 0;
+    ADDC_LVDSVIDEO_STS_360_VIDEO = 1;
+    ADDC_LVDSVIDEO_STS_BSD_VIDEO = 2;
+    ADDC_LVDSVIDEO_STS_RVC_VIDEO = 3;
+  }
+  enum ADDCLBSVLampReqType {
+    ADDC_LBSVLAMPREQ_NO_REQUEST = 0;
+    ADDC_LBSVLAMPREQ_LIGHT_ON_REQUEST = 1;
+    ADDC_LBSVLAMPREQ_FLASHING_REQUEST = 2;
+  }
+  enum ADDCRBSVLampReqType {
+    ADDC_RBSVLAMPREQ_NO_REQUEST = 0;
+    ADDC_RBSVLAMPREQ_LIGHT_ON_REQUEST = 1;
+    ADDC_RBSVLAMPREQ_FLASHING_REQUEST = 2;
+  }
+  enum ADDCHandsoffLevelType {
+    ADDC_HANDSOFF_LEVEL_NO_REQUEST = 0;
+    ADDC_HANDSOFF_LEVEL_LEVEL_1 = 1;
+    ADDC_HANDSOFF_LEVEL_LEVEL_2 = 2;
+    ADDC_HANDSOFF_LEVEL_LEVEL_3 = 3;
+  }
+  // description ADAS自检状态 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCSelfCheckType addc_self_check = 1;
+  // description 全景标定状态 [-] [0.0|3.0] [initial_value:1]
+  optional ADDC360VidoeCalibStsType addc_360_vidoe_calib_sts = 2;
+  // description 前视标定状态 [-] [0.0|3.0] [initial_value:1]
+  optional ADDCFSCCalibStsType addc_fsc_calib_sts = 3;
+  // description 右后方侧边车道碰撞预警 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCLACRRALarmType addc_lac_rr_a_larm = 4;
+  // description ACC标定状态 [-] [0.0|3.0] [initial_value:1]
+  optional ADDCACCCalibStsType addc_acc_calib_sts = 5;
+  // description 左偏航提示 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_left_ldwon_warning = 6;
+  // description 右偏航提示 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_right_ldwon_warning = 7;
+  // description 左盲区障碍物提示 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCLObstacleAlarmType addc_l_obstacle_alarm = 8;
+  // description 右盲区障碍物提示 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCRObstacleAlarmType addc_r_obstacle_alarm = 9;
+  // description DOW左模块报警 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCLDOWWarningType addc_ldow_warning = 10;
+  // description DOW右模块报警 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCRDOWWarningType addc_rdow_warning = 11;
+  // description 盲区标定状态 [-] [0.0|3.0] [initial_value:1]
+  optional ADDCBlindVidoeCalibStsType addc_blind_vidoe_calib_sts = 12;
+  // description 生命信号 [-] [0.0|3.0] [initial_value:0]
+  optional uint32 addc_alive_count = 13;
+  // description SLIF限速标识 [km/h] [0.0|150.0] [initial_value:0]
+  optional double addc_slif_speed = 14;
+  // description 360全景窄道激活请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_360_vidoe_active_req = 15;
+  // description 左后方侧边车道碰撞预警 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCLACRLALarmType addc_lac_rl_a_larm = 16;
+  // description RCTA后方来车报警 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_rcta_alarm = 17;
+  // description RCW后碰撞报警 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_rcw_alarm = 18;
+  // description 环视/盲区视频状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_360_video_sts = 19;
+  // description 前视视频状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_forward_video_sts = 20;
+  // description 前向车距检测及碰撞预警 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCFDMFCWWarmingType addc_fdmfcw_warming = 21;
+  // description LVDS视频输出状态 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCLVDSVideoStsType addc_lvds_video_sts = 22;
+  // description 前视视频输出状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_fsc_video_sts = 23;
+  // description 左盲区指示灯点亮请求 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCLBSVLampReqType addc_lbsv_lamp_req = 24;
+  // description 右盲区指示灯点亮请求 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCRBSVLampReqType addc_rbsv_lamp_req = 25;
+  // description 加热丝开启状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_heater_sts = 26;
+  // description 后碰撞预警功能故障 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_rcw_fault = 27;
+  // description 后方来车预警功能故障 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_rcta_fault = 28;
+  // description 手离方向盘功能故障 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_icm_fault = 29;
+  // description 前向车距检测及碰撞功能故障 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_fdmfcw_fault = 30;
+  // description 紧急视频录制请求  [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_emergency_record_req = 31;
+  // description 自动泊车功能故障 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_aps_fault = 32;
+  // description ADAS故障状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_fault = 33;
+  // description 脱手报警等级 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCHandsoffLevelType addc_handsoff_level = 34;
+  // description ADAS功能匹配版本号 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 addc_adas_fun_version = 35;
+}
+
+message ADDC_23_B_23B {
+// Control Message
+  enum ADASCCmodeType {
+    ADAS_CC_MODE_OFF_MODE = 0;
+    ADAS_CC_MODE_RESERVED_PASSIVE_MODE = 1;
+    ADAS_CC_MODE_STAND_BY_MODE = 2;
+    ADAS_CC_MODE_ACTIVE_CONTROL_MODE = 3;
+    ADAS_CC_MODE_WARNING_BRAKE_ONLY_MODE = 4;
+    ADAS_CC_MODE_RESERVED_OVERRIDE = 5;
+    ADAS_CC_MODE_RESERVED = 6;
+    ADAS_CC_MODE_FAILURE_MODE = 7;
+  }
+  // description 照地灯点亮请求 [-] [0.0|1.0] [initial_value:0]
+  optional bool adas_ground_lamp_req = 1;
+  // description 前车起步提醒功能报警 [-] [0.0|1.0] [initial_value:0]
+  optional bool adas_fvsa_warning = 2;
+  // description PDC功能是否激活 [-] [0.0|4.0] [initial_value:0]
+  optional double adas_aps_pdc_mode = 3;
+  // description CC模式 [-] [0.0|7.0] [initial_value:0]
+  optional ADASCCmodeType adas_cc_mode = 4;
+  // description CC功能是否可用 [-] [0.0|1.0] [initial_value:0]
+  optional bool adas_cc_available = 5;
+  // description 泊车智驾灯功能状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool addc_aps_work_sts_light = 6;
+}
+
+message ADDC_23_C_23C {
+// Control Message
+  enum ADDCemergencyLightReqType {
+    ADDC_EMERGENCYLIGHTREQ_NO_REQUEST = 0;
+    ADDC_EMERGENCYLIGHTREQ_REQUEST_OFF = 1;
+    ADDC_EMERGENCYLIGHTREQ_REQUEST_ON = 2;
+    ADDC_EMERGENCYLIGHTREQ_REQUEST_FAST = 3;
+  }
+  enum SWBLRollerUpStsType {
+    SWB_LROLLERUPSTS_NO_ACTION = 0;
+    SWB_LROLLERUPSTS_UP = 1;
+    SWB_LROLLERUPSTS_RESERVED = 2;
+    SWB_LROLLERUPSTS_ERROR = 3;
+  }
+  enum SWBLRollerDownStsType {
+    SWB_LROLLERDOWNSTS_NO_ACTION = 0;
+    SWB_LROLLERDOWNSTS_DOWN = 1;
+    SWB_LROLLERDOWNSTS_RESERVED = 2;
+    SWB_LROLLERDOWNSTS_ERROR = 3;
+  }
+  enum SWBFunctionSwitchStsType {
+    SWB_FUNCTIONSWITCHSTS_NO_ACTION = 0;
+    SWB_FUNCTIONSWITCHSTS_SHORT_PRESS = 1;
+    SWB_FUNCTIONSWITCHSTS_LONG_PRESS = 2;
+    SWB_FUNCTIONSWITCHSTS_DOUBLE_PRESS = 3;
+    SWB_FUNCTIONSWITCHSTS_ERROR = 4;
+  }
+  enum SWBLRollerPressStsType {
+    SWB_LROLLERPRESSSTS_NO_ACTION = 0;
+    SWB_LROLLERPRESSSTS_SHORT_PRESS = 1;
+    SWB_LROLLERPRESSSTS_LONG_PRESS = 2;
+    SWB_LROLLERPRESSSTS_DOUBLE_PRESS = 3;
+    SWB_LROLLERPRESSSTS_ERROR = 4;
+  }
+  enum TCMGearLevelSwitchStsType {
+    TCM_GEARLEVELSWITCHSTS_NEUTRAL = 0;
+    TCM_GEARLEVELSWITCHSTS_UP1GEAR = 1;
+    TCM_GEARLEVELSWITCHSTS_UP2GEARS = 2;
+    TCM_GEARLEVELSWITCHSTS_DOWN1GEAR = 3;
+    TCM_GEARLEVELSWITCHSTS_DOWN2GEARS = 4;
+    TCM_GEARLEVELSWITCHSTS_INVALID = 5;
+  }
+  enum FSCIHBCModeType {
+    FSC_IHBC_MODE_OFF = 0;
+    FSC_IHBC_MODE_UNAVAILABLE_STATE = 1;
+    FSC_IHBC_MODE_STANDBY = 2;
+    FSC_IHBC_MODE_ACTIVE = 3;
+    FSC_IHBC_MODE_ERROR = 4;
+    FSC_IHBC_MODE_RESERVED = 5;
+  }
+  // description 左转向灯请求信号 [-] [0.0|2.0] [initial_value:0]
+  optional double addc_turn_left_light_req = 1;
+  // description 右转向灯请求信号 [-] [0.0|2.0] [initial_value:0]
+  optional double addc_turn_right_light_req = 2;
+  // description 双闪灯请求信号 [-] [0.0|3.0] [initial_value:0]
+  optional ADDCemergencyLightReqType addc_emergency_light_req = 3;
+  // description 刹车灯请求信号 [-] [0.0|2.0] [initial_value:0]
+  optional double addc_brakelightrequest = 4;
+  // description 远光灯/近光灯请求信号 [-] [0.0|2.0] [initial_value:0]
+  optional double addc_headlightrequest = 5;
+  // description 后视镜折叠请求信号 [-] [0.0|2.0] [initial_value:0]
+  optional double addc_mirrorrequest = 6;
+  // description 安全带预紧请求信号 [-] [0.0|4.0] [initial_value:0]
+  optional double addc_seatbeltrequest = 7;
+  // description 左滚轮上滚状态 [-] [0.0|3.0] [initial_value:0]
+  optional SWBLRollerUpStsType swb_l_roller_up_sts = 8;
+  // description 左滚轮下滚状态 [-] [0.0|3.0] [initial_value:0]
+  optional SWBLRollerDownStsType swb_l_roller_down_sts = 9;
+  // description 功能按键切换状态 [-] [0.0|7.0] [initial_value:0]
+  optional SWBFunctionSwitchStsType swb_function_switch_sts = 10;
+  // description 左滚轮按下状态 [-] [0.0|7.0] [initial_value:0]
+  optional SWBLRollerPressStsType swb_l_roller_press_sts = 11;
+  // description 换挡挡位开关信号 [-] [0.0|7.0] [initial_value:0]
+  optional TCMGearLevelSwitchStsType tcm_gear_level_switch_sts = 12;
+  // description IHBC工作状态 [-] [0.0|7.0] [initial_value:0]
+  optional FSCIHBCModeType fsc_ihbc_mode = 13;
+  // description 鸣笛请求 [-] [0.0|3.0] [initial_value:0]
+  optional uint32 addc_hornreq = 14;
+}
+
+message IVI_24_B_24B {
+// Report Message
+  // description 哨兵模式可用状态信号 [-] [0.0|4.0] [initial_value:0]
+  optional double ivi_sentine_mode_available = 1;
+  // description 哨兵模式开启信号 [-] [0.0|1.0] [initial_value:0]
+  optional double ivi_sentinel_mode_sts = 2;
+  // description 灯光自动控制开关 [-] [0.0|1.0] [initial_value:0]
+  optional bool ivi_lamp_auto_ctrl_new = 3;
+}
+
+message ADDCSOC_2_F5_2F5 {
+// Control Message
+  enum AutoDriveLATFuncTypeType {
+    AUTODRIVE_LAT_FUNCTYPE_NONE = 0;
+    AUTODRIVE_LAT_FUNCTYPE_LKA = 1;
+    AUTODRIVE_LAT_FUNCTYPE_LCC = 2;
+    AUTODRIVE_LAT_FUNCTYPE_ALC = 3;
+    AUTODRIVE_LAT_FUNCTYPE_ALC_NAP = 4;
+    AUTODRIVE_LAT_FUNCTYPE_NAP = 5;
+    AUTODRIVE_LAT_FUNCTYPE_HPA = 6;
+    AUTODRIVE_LAT_FUNCTYPE_ELKA = 7;
+    AUTODRIVE_LAT_FUNCTYPE_CNAP = 8;
+    AUTODRIVE_LAT_FUNCTYPE_AES = 9;
+    AUTODRIVE_LAT_FUNCTYPE_NAP_DCLC = 10;
+  }
+  enum AutoDriveLONFuncTypeType {
+    AUTODRIVE_LON_FUNCTYPE_NONE = 0;
+    AUTODRIVE_LON_FUNCTYPE_NAP = 1;
+    AUTODRIVE_LON_FUNCTYPE_ACC = 2;
+    AUTODRIVE_LON_FUNCTYPE_NAC = 3;
+    AUTODRIVE_LON_FUNCTYPE_RESERVED = 4;
+    AUTODRIVE_LON_FUNCTYPE_RESERVED_5 = 5;
+    AUTODRIVE_LON_FUNCTYPE_CNAP = 6;
+    AUTODRIVE_LON_FUNCTYPE_AES = 7;
+    AUTODRIVE_LON_FUNCTYPE_ELKA = 8;
+  }
+  enum AutoParkModeType {
+    AUTOPARK_MODE_IN_VERTICAL = 0;
+    AUTOPARK_MODE_IN_PARALLEL = 1;
+    AUTOPARK_MODE_IN_OBLIQUE = 2;
+    AUTOPARK_MODE_OUT_VERTICAL = 3;
+    AUTOPARK_MODE_OUT_PARALLEL = 4;
+    AUTOPARK_MODE_OUT_OBLIQUE = 5;
+    AUTOPARK_MODE_CLARION_CALL = 6;
+    AUTOPARK_MODE_RESERVED = 7;
+  }
+  enum AutoParkStopLevelType {
+    AUTOPARK_STOP_LEVEL_STOP_LEVEL_0 = 0;
+    AUTOPARK_STOP_LEVEL_STOP_LEVEL_1 = 1;
+    AUTOPARK_STOP_LEVEL_STOP_LEVEL_2 = 2;
+    AUTOPARK_STOP_LEVEL_STOP_LEVEL_3 = 3;
+  }
+  enum AutoDriveEscapeLevelType {
+    AUTODRIVE_ESCAPE_LEVEL_NO_WARNING = 0;
+    AUTODRIVE_ESCAPE_LEVEL_ESCAPE_WARN1 = 1;
+    AUTODRIVE_ESCAPE_LEVEL_ESCAPE_WARN2 = 2;
+    AUTODRIVE_ESCAPE_LEVEL_SAFETYQUIT = 3;
+  }
+  enum WarnSpeedLIMTypeType {
+    WARN_SPEEDLIM_TYPE_NONE = 0;
+    WARN_SPEEDLIM_TYPE_MAX = 1;
+    WARN_SPEEDLIM_TYPE_MIN = 2;
+    WARN_SPEEDLIM_TYPE_CANCEL = 3;
+  }
+  enum WarnSpeedLIMStateType {
+    WARN_SPEEDLIM_STATE_OFF = 0;
+    WARN_SPEEDLIM_STATE_VISION = 1;
+    WARN_SPEEDLIM_STATE_NAVIGATION = 2;
+    WARN_SPEEDLIM_STATE_FUSION = 3;
+    WARN_SPEEDLIM_STATE_FAILURE = 4;
+  }
+  enum WarnSpeedWarnTypeN0Type {
+    WARN_SPEEDWARN_TYPE_N0_OFF = 0;
+    WARN_SPEEDWARN_TYPE_N0_OVER_TRIGGER = 1;
+    WARN_SPEEDWARN_TYPE_N0_LOWER_TRIGGER = 2;
+  }
+  enum WarningStateN0Type {
+    WARNING_STATE_N0_OFF = 0;
+    WARNING_STATE_N0_STANDBY = 1;
+    WARNING_STATE_N0_TRIGGER = 2;
+    WARNING_STATE_N0_ERROR = 3;
+  }
+  enum WarningTypeN0Type {
+    WARNING_TYPE_N0_UNKNOWN = 0;
+    WARNING_TYPE_N0_FCW = 1;
+    WARNING_TYPE_N0_LDW = 2;
+    WARNING_TYPE_N0_BSD = 3;
+    WARNING_TYPE_N0_SDIS = 4;
+    WARNING_TYPE_N0_PDC = 5;
+    WARNING_TYPE_N0_RCW = 6;
+    WARNING_TYPE_N0_FVSA = 7;
+    WARNING_TYPE_N0_IHBC = 8;
+    WARNING_TYPE_N0_FDW = 9;
+    WARNING_TYPE_N0_LCA = 10;
+    WARNING_TYPE_N0_DOW = 11;
+    WARNING_TYPE_N0_RCTA = 12;
+  }
+  enum WarnTriggerModeN0Type {
+    WARNTRIGGER_MODE_N0_NONE = 0;
+    WARNTRIGGER_MODE_N0_LEFT = 1;
+    WARNTRIGGER_MODE_N0_RIGHT = 2;
+    WARNTRIGGER_MODE_N0_FRONT = 3;
+    WARNTRIGGER_MODE_N0_REAR = 4;
+  }
+  enum WarnTriggerLevelN0Type {
+    WARNTRIGGER_LEVEL_N0_NONE_LEVEL_0 = 0;
+    WARNTRIGGER_LEVEL_N0_LEVEL_1 = 1;
+    WARNTRIGGER_LEVEL_N0_LEVEL_2 = 2;
+    WARNTRIGGER_LEVEL_N0_LEVEL_3 = 3;
+    WARNTRIGGER_LEVEL_N0_LEVEL_4 = 4;
+    WARNTRIGGER_LEVEL_N0_LEVEL_5 = 5;
+  }
+  enum WarningStateN1Type {
+    WARNING_STATE_N1_OFF = 0;
+    WARNING_STATE_N1_STANDBY = 1;
+    WARNING_STATE_N1_TRIGGER = 2;
+    WARNING_STATE_N1_ERROR = 3;
+  }
+  enum WarningTypeN1Type {
+    WARNING_TYPE_N1_UNKNOWN = 0;
+    WARNING_TYPE_N1_FCW = 1;
+    WARNING_TYPE_N1_LDW = 2;
+    WARNING_TYPE_N1_BSD = 3;
+    WARNING_TYPE_N1_SDIS = 4;
+    WARNING_TYPE_N1_PDC = 5;
+    WARNING_TYPE_N1_RCW = 6;
+    WARNING_TYPE_N1_FVSA = 7;
+    WARNING_TYPE_N1_IHBC = 8;
+    WARNING_TYPE_N1_FDW = 9;
+    WARNING_TYPE_N1_LCA = 10;
+    WARNING_TYPE_N1_DOW = 11;
+    WARNING_TYPE_N1_RCTA = 12;
+  }
+  enum WarnTriggerModeN1Type {
+    WARNTRIGGER_MODE_N1_NONE = 0;
+    WARNTRIGGER_MODE_N1_LEFT = 1;
+    WARNTRIGGER_MODE_N1_RIGHT = 2;
+    WARNTRIGGER_MODE_N1_FRONT = 3;
+    WARNTRIGGER_MODE_N1_REAR = 4;
+  }
+  enum WarnTriggerLevelN1N1Type {
+    WARNTRIGGER_LEVEL_N1_N1_NONE_LEVEL_0 = 0;
+    WARNTRIGGER_LEVEL_N1_N1_LEVEL_1 = 1;
+    WARNTRIGGER_LEVEL_N1_N1_LEVEL_2 = 2;
+    WARNTRIGGER_LEVEL_N1_N1_LEVEL_3 = 3;
+    WARNTRIGGER_LEVEL_N1_N1_LEVEL_4 = 4;
+    WARNTRIGGER_LEVEL_N1_N1_LEVEL_5 = 5;
+  }
+  enum WarningStateN2Type {
+    WARNING_STATE_N2_OFF = 0;
+    WARNING_STATE_N2_STANDBY = 1;
+    WARNING_STATE_N2_TRIGGER = 2;
+    WARNING_STATE_N2_ERROR = 3;
+  }
+  enum WarningTypeN2Type {
+    WARNING_TYPE_N2_UNKNOWN = 0;
+    WARNING_TYPE_N2_FCW = 1;
+    WARNING_TYPE_N2_LDW = 2;
+    WARNING_TYPE_N2_BSD = 3;
+    WARNING_TYPE_N2_SDIS = 4;
+    WARNING_TYPE_N2_PDC = 5;
+    WARNING_TYPE_N2_RCW = 6;
+    WARNING_TYPE_N2_FVSA = 7;
+    WARNING_TYPE_N2_IHBC = 8;
+    WARNING_TYPE_N2_FDW = 9;
+    WARNING_TYPE_N2_LCA = 10;
+    WARNING_TYPE_N2_DOW = 11;
+    WARNING_TYPE_N2_RCTA = 12;
+  }
+  enum WarnTriggerModeN2Type {
+    WARNTRIGGER_MODE_N2_NONE = 0;
+    WARNTRIGGER_MODE_N2_LEFT = 1;
+    WARNTRIGGER_MODE_N2_RIGHT = 2;
+    WARNTRIGGER_MODE_N2_FRONT = 3;
+    WARNTRIGGER_MODE_N2_REAR = 4;
+  }
+  enum WarnTriggerLevelN2Type {
+    WARNTRIGGER_LEVEL_N2_NONE_LEVEL_0 = 0;
+    WARNTRIGGER_LEVEL_N2_LEVEL_1 = 1;
+    WARNTRIGGER_LEVEL_N2_LEVEL_2 = 2;
+    WARNTRIGGER_LEVEL_N2_LEVEL_3 = 3;
+    WARNTRIGGER_LEVEL_N2_LEVEL_4 = 4;
+    WARNTRIGGER_LEVEL_N2_LEVEL_5 = 5;
+  }
+  enum WarningStateN3Type {
+    WARNING_STATE_N3_OFF = 0;
+    WARNING_STATE_N3_STANDBY = 1;
+    WARNING_STATE_N3_TRIGGER = 2;
+    WARNING_STATE_N3_ERROR = 3;
+  }
+  enum WarningTypeN3Type {
+    WARNING_TYPE_N3_UNKNOWN = 0;
+    WARNING_TYPE_N3_FCW = 1;
+    WARNING_TYPE_N3_LDW = 2;
+    WARNING_TYPE_N3_BSD = 3;
+    WARNING_TYPE_N3_SDIS = 4;
+    WARNING_TYPE_N3_PDC = 5;
+    WARNING_TYPE_N3_RCW = 6;
+    WARNING_TYPE_N3_FVSA = 7;
+    WARNING_TYPE_N3_IHBC = 8;
+    WARNING_TYPE_N3_FDW = 9;
+    WARNING_TYPE_N3_LCA = 10;
+    WARNING_TYPE_N3_DOW = 11;
+    WARNING_TYPE_N3_RCTA = 12;
+  }
+  enum WarnTriggerModeN3Type {
+    WARNTRIGGER_MODE_N3_NONE = 0;
+    WARNTRIGGER_MODE_N3_LEFT = 1;
+    WARNTRIGGER_MODE_N3_RIGHT = 2;
+    WARNTRIGGER_MODE_N3_FRONT = 3;
+    WARNTRIGGER_MODE_N3_REAR = 4;
+  }
+  enum WarnTriggerLevelN3Type {
+    WARNTRIGGER_LEVEL_N3_NONE_LEVEL_0 = 0;
+    WARNTRIGGER_LEVEL_N3_LEVEL_1 = 1;
+    WARNTRIGGER_LEVEL_N3_LEVEL_2 = 2;
+    WARNTRIGGER_LEVEL_N3_LEVEL_3 = 3;
+    WARNTRIGGER_LEVEL_N3_LEVEL_4 = 4;
+    WARNTRIGGER_LEVEL_N3_LEVEL_5 = 5;
+  }
+  enum WarningStateN4Type {
+    WARNING_STATE_N4_OFF = 0;
+    WARNING_STATE_N4_STANDBY = 1;
+    WARNING_STATE_N4_TRIGGER = 2;
+    WARNING_STATE_N4_ERROR = 3;
+  }
+  enum WarningTypeN4Type {
+    WARNING_TYPE_N4_UNKNOWN = 0;
+    WARNING_TYPE_N4_FCW = 1;
+    WARNING_TYPE_N4_LDW = 2;
+    WARNING_TYPE_N4_BSD = 3;
+    WARNING_TYPE_N4_SDIS = 4;
+    WARNING_TYPE_N4_PDC = 5;
+    WARNING_TYPE_N4_RCW = 6;
+    WARNING_TYPE_N4_FVSA = 7;
+    WARNING_TYPE_N4_IHBC = 8;
+    WARNING_TYPE_N4_FDW = 9;
+    WARNING_TYPE_N4_LCA = 10;
+    WARNING_TYPE_N4_DOW = 11;
+    WARNING_TYPE_N4_RCTA = 12;
+  }
+  enum WarnTriggerModeN4Type {
+    WARNTRIGGER_MODE_N4_NONE = 0;
+    WARNTRIGGER_MODE_N4_LEFT = 1;
+    WARNTRIGGER_MODE_N4_RIGHT = 2;
+    WARNTRIGGER_MODE_N4_FRONT = 3;
+    WARNTRIGGER_MODE_N4_REAR = 4;
+  }
+  enum WarnTriggerLevelN4Type {
+    WARNTRIGGER_LEVEL_N4_NONE_LEVEL_0 = 0;
+    WARNTRIGGER_LEVEL_N4_LEVEL_1 = 1;
+    WARNTRIGGER_LEVEL_N4_LEVEL_2 = 2;
+    WARNTRIGGER_LEVEL_N4_LEVEL_3 = 3;
+    WARNTRIGGER_LEVEL_N4_LEVEL_4 = 4;
+    WARNTRIGGER_LEVEL_N4_LEVEL_5 = 5;
+  }
+  enum WarningStateN5Type {
+    WARNING_STATE_N5_OFF = 0;
+    WARNING_STATE_N5_STANDBY = 1;
+    WARNING_STATE_N5_TRIGGER = 2;
+    WARNING_STATE_N5_ERROR = 3;
+  }
+  enum WarningTypeN5Type {
+    WARNING_TYPE_N5_UNKNOWN = 0;
+    WARNING_TYPE_N5_FCW = 1;
+    WARNING_TYPE_N5_LDW = 2;
+    WARNING_TYPE_N5_BSD = 3;
+    WARNING_TYPE_N5_SDIS = 4;
+    WARNING_TYPE_N5_PDC = 5;
+    WARNING_TYPE_N5_RCW = 6;
+    WARNING_TYPE_N5_FVSA = 7;
+    WARNING_TYPE_N5_IHBC = 8;
+    WARNING_TYPE_N5_FDW = 9;
+    WARNING_TYPE_N5_LCA = 10;
+    WARNING_TYPE_N5_DOW = 11;
+    WARNING_TYPE_N5_RCTA = 12;
+  }
+  enum WarnTriggerModeN5Type {
+    WARNTRIGGER_MODE_N5_NONE = 0;
+    WARNTRIGGER_MODE_N5_LEFT = 1;
+    WARNTRIGGER_MODE_N5_RIGHT = 2;
+    WARNTRIGGER_MODE_N5_FRONT = 3;
+    WARNTRIGGER_MODE_N5_REAR = 4;
+  }
+  enum WarnTriggerLevelN5Type {
+    WARNTRIGGER_LEVEL_N5_NONE_LEVEL_0 = 0;
+    WARNTRIGGER_LEVEL_N5_LEVEL_1 = 1;
+    WARNTRIGGER_LEVEL_N5_LEVEL_2 = 2;
+    WARNTRIGGER_LEVEL_N5_LEVEL_3 = 3;
+    WARNTRIGGER_LEVEL_N5_LEVEL_4 = 4;
+    WARNTRIGGER_LEVEL_N5_LEVEL_5 = 5;
+  }
+  enum WarningStateN6Type {
+    WARNING_STATE_N6_OFF = 0;
+    WARNING_STATE_N6_STANDBY = 1;
+    WARNING_STATE_N6_TRIGGER = 2;
+    WARNING_STATE_N6_ERROR = 3;
+  }
+  enum WarningTypeN6Type {
+    WARNING_TYPE_N6_UNKNOWN = 0;
+    WARNING_TYPE_N6_FCW = 1;
+    WARNING_TYPE_N6_LDW = 2;
+    WARNING_TYPE_N6_BSD = 3;
+    WARNING_TYPE_N6_SDIS = 4;
+    WARNING_TYPE_N6_PDC = 5;
+    WARNING_TYPE_N6_RCW = 6;
+    WARNING_TYPE_N6_FVSA = 7;
+    WARNING_TYPE_N6_IHBC = 8;
+    WARNING_TYPE_N6_FDW = 9;
+    WARNING_TYPE_N6_LCA = 10;
+    WARNING_TYPE_N6_DOW = 11;
+    WARNING_TYPE_N6_RCTA = 12;
+  }
+  enum WarnTriggerModeN6Type {
+    WARNTRIGGER_MODE_N6_NONE = 0;
+    WARNTRIGGER_MODE_N6_LEFT = 1;
+    WARNTRIGGER_MODE_N6_RIGHT = 2;
+    WARNTRIGGER_MODE_N6_FRONT = 3;
+    WARNTRIGGER_MODE_N6_REAR = 4;
+  }
+  enum WarnTriggerLevelN6Type {
+    WARNTRIGGER_LEVEL_N6_NONE_LEVEL_0 = 0;
+    WARNTRIGGER_LEVEL_N6_LEVEL_1 = 1;
+    WARNTRIGGER_LEVEL_N6_LEVEL_2 = 2;
+    WARNTRIGGER_LEVEL_N6_LEVEL_3 = 3;
+    WARNTRIGGER_LEVEL_N6_LEVEL_4 = 4;
+    WARNTRIGGER_LEVEL_N6_LEVEL_5 = 5;
+  }
+  enum WarningStateN7Type {
+    WARNING_STATE_N7_OFF = 0;
+    WARNING_STATE_N7_STANDBY = 1;
+    WARNING_STATE_N7_TRIGGER = 2;
+    WARNING_STATE_N7_ERROR = 3;
+  }
+  enum WarningTypeN7Type {
+    WARNING_TYPE_N7_UNKNOWN = 0;
+    WARNING_TYPE_N7_FCW = 1;
+    WARNING_TYPE_N7_LDW = 2;
+    WARNING_TYPE_N7_BSD = 3;
+    WARNING_TYPE_N7_SDIS = 4;
+    WARNING_TYPE_N7_PDC = 5;
+    WARNING_TYPE_N7_RCW = 6;
+    WARNING_TYPE_N7_FVSA = 7;
+    WARNING_TYPE_N7_IHBC = 8;
+    WARNING_TYPE_N7_FDW = 9;
+    WARNING_TYPE_N7_LCA = 10;
+    WARNING_TYPE_N7_DOW = 11;
+    WARNING_TYPE_N7_RCTA = 12;
+  }
+  enum WarnTriggerModeN7Type {
+    WARNTRIGGER_MODE_N7_NONE = 0;
+    WARNTRIGGER_MODE_N7_LEFT = 1;
+    WARNTRIGGER_MODE_N7_RIGHT = 2;
+    WARNTRIGGER_MODE_N7_FRONT = 3;
+    WARNTRIGGER_MODE_N7_REAR = 4;
+  }
+  enum WarnTriggerLevelN7Type {
+    WARNTRIGGER_LEVEL_N7_NONE_LEVEL_0 = 0;
+    WARNTRIGGER_LEVEL_N7_LEVEL_1 = 1;
+    WARNTRIGGER_LEVEL_N7_LEVEL_2 = 2;
+    WARNTRIGGER_LEVEL_N7_LEVEL_3 = 3;
+    WARNTRIGGER_LEVEL_N7_LEVEL_4 = 4;
+    WARNTRIGGER_LEVEL_N7_LEVEL_5 = 5;
+  }
+  enum WarningStateN8Type {
+    WARNING_STATE_N8_OFF = 0;
+    WARNING_STATE_N8_STANDBY = 1;
+    WARNING_STATE_N8_TRIGGER = 2;
+    WARNING_STATE_N8_ERROR = 3;
+  }
+  enum WarningTypeN8Type {
+    WARNING_TYPE_N8_UNKNOWN = 0;
+    WARNING_TYPE_N8_FCW = 1;
+    WARNING_TYPE_N8_LDW = 2;
+    WARNING_TYPE_N8_BSD = 3;
+    WARNING_TYPE_N8_SDIS = 4;
+    WARNING_TYPE_N8_PDC = 5;
+    WARNING_TYPE_N8_RCW = 6;
+    WARNING_TYPE_N8_FVSA = 7;
+    WARNING_TYPE_N8_IHBC = 8;
+    WARNING_TYPE_N8_FDW = 9;
+    WARNING_TYPE_N8_LCA = 10;
+    WARNING_TYPE_N8_DOW = 11;
+    WARNING_TYPE_N8_RCTA = 12;
+  }
+  enum WarnTriggerModeN8Type {
+    WARNTRIGGER_MODE_N8_NONE = 0;
+    WARNTRIGGER_MODE_N8_LEFT = 1;
+    WARNTRIGGER_MODE_N8_RIGHT = 2;
+    WARNTRIGGER_MODE_N8_FRONT = 3;
+    WARNTRIGGER_MODE_N8_REAR = 4;
+  }
+  enum WarnTriggerLevelN8Type {
+    WARNTRIGGER_LEVEL_N8_NONE_LEVEL_0 = 0;
+    WARNTRIGGER_LEVEL_N8_LEVEL_1 = 1;
+    WARNTRIGGER_LEVEL_N8_LEVEL_2 = 2;
+    WARNTRIGGER_LEVEL_N8_LEVEL_3 = 3;
+    WARNTRIGGER_LEVEL_N8_LEVEL_4 = 4;
+    WARNTRIGGER_LEVEL_N8_LEVEL_5 = 5;
+  }
+  enum WarningStateN9Type {
+    WARNING_STATE_N9_OFF = 0;
+    WARNING_STATE_N9_STANDBY = 1;
+    WARNING_STATE_N9_TRIGGER = 2;
+    WARNING_STATE_N9_ERROR = 3;
+  }
+  enum WarningTypeN9Type {
+    WARNING_TYPE_N9_UNKNOWN = 0;
+    WARNING_TYPE_N9_FCW = 1;
+    WARNING_TYPE_N9_LDW = 2;
+    WARNING_TYPE_N9_BSD = 3;
+    WARNING_TYPE_N9_SDIS = 4;
+    WARNING_TYPE_N9_PDC = 5;
+    WARNING_TYPE_N9_RCW = 6;
+    WARNING_TYPE_N9_FVSA = 7;
+    WARNING_TYPE_N9_IHBC = 8;
+    WARNING_TYPE_N9_FDW = 9;
+    WARNING_TYPE_N9_LCA = 10;
+    WARNING_TYPE_N9_DOW = 11;
+    WARNING_TYPE_N9_RCTA = 12;
+  }
+  enum WarnTriggerModeN9Type {
+    WARNTRIGGER_MODE_N9_NONE = 0;
+    WARNTRIGGER_MODE_N9_LEFT = 1;
+    WARNTRIGGER_MODE_N9_RIGHT = 2;
+    WARNTRIGGER_MODE_N9_FRONT = 3;
+    WARNTRIGGER_MODE_N9_REAR = 4;
+  }
+  enum WarnTriggerLevelN9Type {
+    WARNTRIGGER_LEVEL_N9_NONE_LEVEL_0 = 0;
+    WARNTRIGGER_LEVEL_N9_LEVEL_1 = 1;
+    WARNTRIGGER_LEVEL_N9_LEVEL_2 = 2;
+    WARNTRIGGER_LEVEL_N9_LEVEL_3 = 3;
+    WARNTRIGGER_LEVEL_N9_LEVEL_4 = 4;
+    WARNTRIGGER_LEVEL_N9_LEVEL_5 = 5;
+  }
+  enum WarningStateN10Type {
+    WARNING_STATE_N10_OFF = 0;
+    WARNING_STATE_N10_STANDBY = 1;
+    WARNING_STATE_N10_TRIGGER = 2;
+    WARNING_STATE_N10_ERROR = 3;
+  }
+  enum WarningTypeN10Type {
+    WARNING_TYPE_N10_UNKNOWN = 0;
+    WARNING_TYPE_N10_FCW = 1;
+    WARNING_TYPE_N10_LDW = 2;
+    WARNING_TYPE_N10_BSD = 3;
+    WARNING_TYPE_N10_SDIS = 4;
+    WARNING_TYPE_N10_PDC = 5;
+    WARNING_TYPE_N10_RCW = 6;
+    WARNING_TYPE_N10_FVSA = 7;
+    WARNING_TYPE_N10_IHBC = 8;
+    WARNING_TYPE_N10_FDW = 9;
+    WARNING_TYPE_N10_LCA = 10;
+    WARNING_TYPE_N10_DOW = 11;
+    WARNING_TYPE_N10_RCTA = 12;
+  }
+  enum WarnTriggerModeN10Type {
+    WARNTRIGGER_MODE_N10_NONE = 0;
+    WARNTRIGGER_MODE_N10_LEFT = 1;
+    WARNTRIGGER_MODE_N10_RIGHT = 2;
+    WARNTRIGGER_MODE_N10_FRONT = 3;
+    WARNTRIGGER_MODE_N10_REAR = 4;
+  }
+  enum WarnTriggerLevelN10Type {
+    WARNTRIGGER_LEVEL_N10_NONE_LEVEL_0 = 0;
+    WARNTRIGGER_LEVEL_N10_LEVEL_1 = 1;
+    WARNTRIGGER_LEVEL_N10_LEVEL_2 = 2;
+    WARNTRIGGER_LEVEL_N10_LEVEL_3 = 3;
+    WARNTRIGGER_LEVEL_N10_LEVEL_4 = 4;
+    WARNTRIGGER_LEVEL_N10_LEVEL_5 = 5;
+  }
+  enum WarningStateN11Type {
+    WARNING_STATE_N11_OFF = 0;
+    WARNING_STATE_N11_STANDBY = 1;
+    WARNING_STATE_N11_TRIGGER = 2;
+    WARNING_STATE_N11_ERROR = 3;
+  }
+  enum WarningTypeN11Type {
+    WARNING_TYPE_N11_UNKNOWN = 0;
+    WARNING_TYPE_N11_FCW = 1;
+    WARNING_TYPE_N11_LDW = 2;
+    WARNING_TYPE_N11_BSD = 3;
+    WARNING_TYPE_N11_SDIS = 4;
+    WARNING_TYPE_N11_PDC = 5;
+    WARNING_TYPE_N11_RCW = 6;
+    WARNING_TYPE_N11_FVSA = 7;
+    WARNING_TYPE_N11_IHBC = 8;
+    WARNING_TYPE_N11_FDW = 9;
+    WARNING_TYPE_N11_LCA = 10;
+    WARNING_TYPE_N11_DOW = 11;
+    WARNING_TYPE_N11_RCTA = 12;
+  }
+  enum WarnTriggerModeN11Type {
+    WARNTRIGGER_MODE_N11_NONE = 0;
+    WARNTRIGGER_MODE_N11_LEFT = 1;
+    WARNTRIGGER_MODE_N11_RIGHT = 2;
+    WARNTRIGGER_MODE_N11_FRONT = 3;
+    WARNTRIGGER_MODE_N11_REAR = 4;
+  }
+  enum WarnTriggerLevelN11Type {
+    WARNTRIGGER_LEVEL_N11_NONE_LEVEL_0 = 0;
+    WARNTRIGGER_LEVEL_N11_LEVEL_1 = 1;
+    WARNTRIGGER_LEVEL_N11_LEVEL_2 = 2;
+    WARNTRIGGER_LEVEL_N11_LEVEL_3 = 3;
+    WARNTRIGGER_LEVEL_N11_LEVEL_4 = 4;
+    WARNTRIGGER_LEVEL_N11_LEVEL_5 = 5;
+  }
+  enum FCWSensitivityType {
+    FCW_SENSITIVITY_NORMAL = 0;
+    FCW_SENSITIVITY_LOW = 1;
+    FCW_SENSITIVITY_HIGH = 2;
+  }
+  enum ACCTimegapType {
+    ACC_TIMEGAP_NORMAL = 0;
+    ACC_TIMEGAP_NEAR = 1;
+    ACC_TIMEGAP_FAR = 2;
+    ACC_TIMEGAP_FURTHER = 3;
+  }
+  enum ADASFuncActiveType {
+    ADAS_FUNCACTIVE_NO_ACTIVE = 0;
+    ADAS_FUNCACTIVE_LON_ACTIV = 1;
+    ADAS_FUNCACTIVE_LAT_ACTIVE = 2;
+    ADAS_FUNCACTIVE_LON_LAT_ACTIVE = 3;
+  }
+  enum APAOutDirectionType {
+    APA_OUTDIRECTION_NONE = 0;
+    APA_OUTDIRECTION_LEFT = 1;
+    APA_OUTDIRECTION_RIGHT = 2;
+    APA_OUTDIRECTION_FRONT = 3;
+    APA_OUTDIRECTION_REAR = 4;
+  }
+  enum APAOutTypeType {
+    APA_OUT_TYPE_VERTICAL_SLOT = 0;
+    APA_OUT_TYPE_PARALLEL_SLOT = 1;
+    APA_OUT_TYPE_OBLIQUE_SLOT = 2;
+    APA_OUT_TYPE_MECHANICAL_SLOT = 3;
+    APA_OUT_TYPE_NONE_SLOT_TYPE = 4;
+  }
+  enum APAChangeType {
+    APA_CHANGE_NONE = 0;
+    APA_CHANGE_PARKING_IN = 1;
+    APA_CHANGE_PARKING_OUT = 2;
+  }
+  enum RPAClassType {
+    RPA_CLASS_VERTICAL_SLOT = 0;
+    RPA_CLASS_PARALLEL_SLOT = 1;
+    RPA_CLASS_OBLIQUE_SLOT = 2;
+    RPA_CLASS_MECHANICAL_SLOT = 3;
+    RPA_CLASS_NONE_SLOT_TYPE = 4;
+  }
+  enum RPAOutDirectionType {
+    RPA_OUTDIRECTION_NONE = 0;
+    RPA_OUTDIRECTION_LEFT = 1;
+    RPA_OUTDIRECTION_RIGHT = 2;
+    RPA_OUTDIRECTION_FRONT = 3;
+    RPA_OUTDIRECTION_REAR = 4;
+  }
+  enum RmteCtlReqType {
+    RMTECTL_REQ_NONE = 0;
+    RMTECTL_REQ_START = 1;
+    RMTECTL_REQ_SUSPEND = 2;
+  }
+  enum RmteCtlDirectionType {
+    RMTECTL_DIRECTION_STAND_STILL = 0;
+    RMTECTL_DIRECTION_FORWARD = 1;
+    RMTECTL_DIRECTION_BACKWARD = 2;
+  }
+  enum NAPEffectModeType {
+    NAP_EFFECTMODE_NORMAL = 0;
+    NAP_EFFECTMODE_OFF = 1;
+    NAP_EFFECTMODE_LEVEL_DOWN = 2;
+    NAP_EFFECTMODE_UNSTATISFY_ODD = 3;
+  }
+  enum NAPPreferLaneType {
+    NAP_PREFERLANE_NO_PREFERENCE_LANE = 0;
+    NAP_PREFERLANE_LEFT_FIRST_LANE_OR_FAST_LANE = 1;
+    NAP_PREFERLANE_LEFT_SECOND_LANE_OR_CENTRAL_LANE = 2;
+    NAP_PREFERLANE_RIGHT_LANE_OR_SLOW_LANE = 3;
+  }
+  enum NAPLaneChgStyleType {
+    NAP_LANECHG_STYLE_VIOLENT = 0;
+    NAP_LANECHG_STYLE_NORMAL = 1;
+    NAP_LANECHG_STYLE_SOFT = 2;
+  }
+  enum NAPDrvStyleType {
+    NAP_DRVSTYLE_VIOLENT = 0;
+    NAP_DRVSTYLE_NORMAL = 1;
+    NAP_DRVSTYLE_SOFT = 2;
+  }
+  enum HPARoadmapBuildReqType {
+    HPA_ROADMAPBUILD_REQ_NONE = 0;
+    HPA_ROADMAPBUILD_REQ_START = 1;
+    HPA_ROADMAPBUILD_REQ_ABORT = 2;
+    HPA_ROADMAPBUILD_REQ_FINISH = 3;
+  }
+  enum HPAValetParkingReqType {
+    HPA_VALETPARKING_REQ_NONE = 0;
+    HPA_VALETPARKING_REQ_INITIALIZE = 1;
+    HPA_VALETPARKING_REQ_START = 2;
+    HPA_VALETPARKING_REQ_PAUSE = 3;
+    HPA_VALETPARKING_REQ_CONTINUE = 4;
+    HPA_VALETPARKING_REQ_ABORT = 5;
+    HPA_VALETPARKING_REQ_OFF = 6;
+    HPA_VALETPARKING_REQ_COMPLETE = 7;
+  }
+  enum SDMapRoadClassType {
+    SDMAP_ROAD_CLASS_UNKNOWN = 0;
+    SDMAP_ROAD_CLASS_HIGHWAY = 1;
+    SDMAP_ROAD_CLASS_URBAN_EXPRESS = 2;
+    SDMAP_ROAD_CLASS_NATIONAL = 3;
+    SDMAP_ROAD_CLASS_PROVINCECOUNTY = 4;
+    SDMAP_ROAD_CLASS_URBANMAIN = 5;
+    SDMAP_ROAD_CLASS_LOWCLASS = 6;
+  }
+  enum SDMapFormofWayType {
+    SDMAP_FORM_OF_WAY_UNKNOWN = 0;
+    SDMAP_FORM_OF_WAY_CLOSEDROAD = 1;
+    SDMAP_FORM_OF_WAY_MULTIPLECARRIAGEWAY = 2;
+    SDMAP_FORM_OF_WAY_SINGLECARRIAGEWAY = 3;
+    SDMAP_FORM_OF_WAY_ROUNDABOUTCIRCLE = 4;
+    SDMAP_FORM_OF_WAY_TRAFFIC_SQUARE_SPECIAL_TRAFFIC_FIGURE = 5;
+    SDMAP_FORM_OF_WAY_EXITENTRANCELINK = 6;
+    SDMAP_FORM_OF_WAY_RESERVED = 7;
+    SDMAP_FORM_OF_WAY_PARALLELROAD = 8;
+    SDMAP_FORM_OF_WAY_LIPROADFREEWAYACCESS = 9;
+    SDMAP_FORM_OF_WAY_SLIPROADNOTFREEWAYACCESS = 10;
+    SDMAP_FORM_OF_WAY_SERVICEROAD = 11;
+    SDMAP_FORM_OF_WAY_EXITENTRANCEOFCARPARK = 12;
+    SDMAP_FORM_OF_WAY_EXITENTRANCEOFSERVICE = 13;
+    SDMAP_FORM_OF_WAY_PEDESTRIANZONE = 14;
+  }
+  enum HPAMAPPINGInfoType {
+    HPA_MAPPING_INFO_HPA_OFF = 0;
+    HPA_MAPPING_INFO_HPA_MAPPING_BUILDING = 1;
+    HPA_MAPPING_INFO_HPA_MAPPING_FAILED = 2;
+    HPA_MAPPING_INFO_HPA_MAPPING_IN_SLOT = 3;
+    HPA_MAPPING_INFO_HPA_MAPPING_SAVING = 4;
+    HPA_MAPPING_INFO_HPA_MAPPING_SUCCESSFUL = 5;
+    HPA_MAPPING_INFO_HPA_LOCALIZATION_MAP_LOADING = 6;
+    HPA_MAPPING_INFO_HPA_LOCALIZATION_MAP_LOAD_FAILED = 7;
+    HPA_MAPPING_INFO_HPA_LOCALIZATION_LINE_NOT_FOUND = 8;
+    HPA_MAPPING_INFO_HPA_LOCALIZATION_INITIALIZING = 9;
+    HPA_MAPPING_INFO_HPA_LOCALIZATION_ERROR = 10;
+    HPA_MAPPING_INFO_HPA_LOCALIZATION_OK = 11;
+    HPA_MAPPING_INFO_HPA_MAPPING_CANCEL = 12;
+  }
+  // description 横向工作模式 [-] [0.0|15.0] [initial_value:0]
+  optional AutoDriveLATFuncTypeType auto_drive_lat_func_type = 1;
+  // description 纵向工作模式 [-] [0.0|15.0] [initial_value:0]
+  optional AutoDriveLONFuncTypeType auto_drive_lon_func_type = 2;
+  // description AutoDrive功能状态机 [-] [0.0|127.0] [initial_value:0]
+  optional uint32 auto_drive_func_mode = 3;
+  // description AutoDrive变道功能状态机 [-] [0.0|127.0] [initial_value:0]
+  optional uint32 auto_drive_lane_chg_mode = 4;
+  // description 泊车状态机 [-] [0.0|127.0] [initial_value:0]
+  optional uint32 auto_park_func_mode = 5;
+  // description 自动泊车轨迹长度 [m] [0.0|20.5] [initial_value:0]
+  optional double auto_park_path_length = 6;
+  // description 自动泊车方式 [-] [0.0|7.0] [initial_value:0]
+  optional AutoParkModeType auto_park_mode = 7;
+  // description 自动泊车停车模式 [-] [0.0|3.0] [initial_value:0]
+  optional AutoParkStopLevelType auto_park_stop_level = 8;
+  // description 自动泊车方向 [-] [0.0|1.0] [initial_value:0]
+  optional bool auto_park_func_default = 9;
+  // description 自动泊车交互文本索引 [-] [0.0|127.0] [initial_value:0]
+  optional uint32 auto_park_text_info_index = 10;
+  // description LKA脱手提示等级 [-] [0.0|3.0] [initial_value:0]
+  optional AutoDriveEscapeLevelType auto_drive_escape_level = 11;
+  // description 有效报警数量 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 warn_valid_num = 12;
+  // description 报警提示语 [-] [0.0|127.0] [initial_value:0]
+  optional uint32 warn_text_info_index = 13;
+  // description 限速类型 [-] [0.0|7.0] [initial_value:0]
+  optional WarnSpeedLIMTypeType warn_speed_lim_type = 14;
+  // description 限速值来源 [-] [0.0|7.0] [initial_value:0]
+  optional WarnSpeedLIMStateType warn_speed_lim_state = 15;
+  // description 限速值 [KPH] [0.0|255.0] [initial_value:0]
+  optional uint32 warn_speed_lim_value = 16;
+  // description 限速报警状态_N0 [-] [0.0|7.0] [initial_value:0]
+  optional WarnSpeedWarnTypeN0Type warn_speed_warn_type_n0 = 17;
+  // description 报警功能工作状态_N0 [-] [0.0|7.0] [initial_value:0]
+  optional WarningStateN0Type warning_state_n0 = 18;
+  // description 报警功能类型_N0 [-] [0.0|15.0] [initial_value:0]
+  optional WarningTypeN0Type warning_type_n0 = 19;
+  // description 报警功能触发位置模式_N0 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerModeN0Type warn_trigger_mode_n0 = 20;
+  // description 报警功能触发等级_N0 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerLevelN0Type warn_trigger_level_n0 = 21;
+  // description 报警功能工作状态_N1 [-] [0.0|7.0] [initial_value:0]
+  optional WarningStateN1Type warning_state_n1 = 22;
+  // description 报警功能类型_N1 [-] [0.0|15.0] [initial_value:0]
+  optional WarningTypeN1Type warning_type_n1 = 23;
+  // description 报警功能触发位置模式_N1 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerModeN1Type warn_trigger_mode_n1 = 24;
+  // description 报警功能触发等级_N1 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerLevelN1N1Type warn_trigger_level_n1_n1 = 25;
+  // description 报警功能工作状态_N2 [-] [0.0|7.0] [initial_value:0]
+  optional WarningStateN2Type warning_state_n2 = 26;
+  // description 报警功能类型_N2 [-] [0.0|15.0] [initial_value:0]
+  optional WarningTypeN2Type warning_type_n2 = 27;
+  // description 报警功能触发位置模式_N2 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerModeN2Type warn_trigger_mode_n2 = 28;
+  // description 报警功能触发等级_N2 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerLevelN2Type warn_trigger_level_n2 = 29;
+  // description 报警功能工作状态_N3 [-] [0.0|7.0] [initial_value:0]
+  optional WarningStateN3Type warning_state_n3 = 30;
+  // description 报警功能类型_N3 [-] [0.0|15.0] [initial_value:0]
+  optional WarningTypeN3Type warning_type_n3 = 31;
+  // description 报警功能触发位置模式_N3 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerModeN3Type warn_trigger_mode_n3 = 32;
+  // description 报警功能触发等级_N3 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerLevelN3Type warn_trigger_level_n3 = 33;
+  // description 报警功能工作状态_N4 [-] [0.0|7.0] [initial_value:0]
+  optional WarningStateN4Type warning_state_n4 = 34;
+  // description 报警功能类型_N4 [] [0.0|15.0] [initial_value:0]
+  optional WarningTypeN4Type warning_type_n4 = 35;
+  // description 报警功能触发位置模式_N4 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerModeN4Type warn_trigger_mode_n4 = 36;
+  // description 报警功能触发等级_N4 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerLevelN4Type warn_trigger_level_n4 = 37;
+  // description 报警功能工作状态_N5 [-] [0.0|7.0] [initial_value:0]
+  optional WarningStateN5Type warning_state_n5 = 38;
+  // description 报警功能类型_N5 [-] [0.0|15.0] [initial_value:0]
+  optional WarningTypeN5Type warning_type_n5 = 39;
+  // description 报警功能触发位置模式_N5 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerModeN5Type warn_trigger_mode_n5 = 40;
+  // description 报警功能触发等级_N5 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerLevelN5Type warn_trigger_level_n5 = 41;
+  // description 报警功能工作状态_N6 [-] [0.0|7.0] [initial_value:0]
+  optional WarningStateN6Type warning_state_n6 = 42;
+  // description 报警功能类型_N6 [-] [0.0|15.0] [initial_value:0]
+  optional WarningTypeN6Type warning_type_n6 = 43;
+  // description 报警功能触发位置模式_N6 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerModeN6Type warn_trigger_mode_n6 = 44;
+  // description 报警功能触发等级_N6 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerLevelN6Type warn_trigger_level_n6 = 45;
+  // description 报警功能工作状态_N7 [-] [0.0|7.0] [initial_value:0]
+  optional WarningStateN7Type warning_state_n7 = 46;
+  // description 报警功能类型_N7 [-] [0.0|15.0] [initial_value:0]
+  optional WarningTypeN7Type warning_type_n7 = 47;
+  // description 报警功能触发位置模式_N7 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerModeN7Type warn_trigger_mode_n7 = 48;
+  // description 报警功能触发等级_N7 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerLevelN7Type warn_trigger_level_n7 = 49;
+  // description 报警功能工作状态_N8 [-] [0.0|7.0] [initial_value:0]
+  optional WarningStateN8Type warning_state_n8 = 50;
+  // description 报警功能类型_N8 [-] [0.0|15.0] [initial_value:0]
+  optional WarningTypeN8Type warning_type_n8 = 51;
+  // description 报警功能触发位置模式_N8 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerModeN8Type warn_trigger_mode_n8 = 52;
+  // description 报警功能触发等级_N8 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerLevelN8Type warn_trigger_level_n8 = 53;
+  // description 报警功能工作状态_N9 [-] [0.0|7.0] [initial_value:0]
+  optional WarningStateN9Type warning_state_n9 = 54;
+  // description 报警功能类型_N9 [-] [0.0|15.0] [initial_value:0]
+  optional WarningTypeN9Type warning_type_n9 = 55;
+  // description 报警功能触发位置模式_N9 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerModeN9Type warn_trigger_mode_n9 = 56;
+  // description 报警功能触发等级_N9 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerLevelN9Type warn_trigger_level_n9 = 57;
+  // description 报警功能工作状态_N10 [-] [0.0|7.0] [initial_value:0]
+  optional WarningStateN10Type warning_state_n10 = 58;
+  // description 报警功能类型_N10 [-] [0.0|15.0] [initial_value:0]
+  optional WarningTypeN10Type warning_type_n10 = 59;
+  // description 报警功能触发位置模式_N10 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerModeN10Type warn_trigger_mode_n10 = 60;
+  // description 报警功能触发等级_N10 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerLevelN10Type warn_trigger_level_n10 = 61;
+  // description 报警功能工作状态_N11 [-] [0.0|7.0] [initial_value:0]
+  optional WarningStateN11Type warning_state_n11 = 62;
+  // description 报警功能类型_N11 [-] [0.0|15.0] [initial_value:0]
+  optional WarningTypeN11Type warning_type_n11 = 63;
+  // description 报警功能触发位置模式_N11 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerModeN11Type warn_trigger_mode_n11 = 64;
+  // description 报警功能触发等级_N11 [-] [0.0|7.0] [initial_value:0]
+  optional WarnTriggerLevelN11Type warn_trigger_level_n11 = 65;
+  // description FCW功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool fcw_sw = 66;
+  // description FCW灵敏度 [-] [0.0|3.0] [initial_value:0]
+  optional FCWSensitivityType fcw_sensitivity = 67;
+  // description LDW功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool ldw_sw = 68;
+  // description 前向测距检测功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool fdw_sw = 69;
+  // description AEB功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool aeb_sw = 70;
+  // description AES功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool aes_sw = 71;
+  // description LKA功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool lka_sw = 72;
+  // description ELKA功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool elka_sw = 73;
+  // description LCC功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool lcc_sw = 74;
+  // description ALC功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool alc_sw = 75;
+  // description LCA功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool lca_sw = 76;
+  // description ACC功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool acc_sw = 77;
+  // description ACC车间时距 [-] [0.0|3.0] [initial_value:0]
+  optional ACCTimegapType acc_timegap = 78;
+  // description ACC巡航车速 [KPH] [0.0|255.0] [initial_value:0]
+  optional uint32 acc_target_speed = 79;
+  // description 用户拨杆输入 [-] [0.0|3.0] [initial_value:0]
+  optional ADASFuncActiveType adas_func_active = 80;
+  // description BSD功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool bsd_sw = 81;
+  // description DOW功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool dow_sw = 82;
+  // description RCW功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool rcw_sw = 83;
+  // description RCTA功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool rcta_sw = 84;
+  // description SLWF功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool slwf_sw = 85;
+  // description SLIF功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool slif_sw = 86;
+  // description SLWF超速告警偏移量 [KPH] [-10.0|21.0] [initial_value:0]
+  optional double slwf_offset = 87;
+  // description 前车起步提醒开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool fvsa_sw = 88;
+  // description IHBC功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool ihbc_active = 89;
+  // description SDIS功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool sdis_active = 90;
+  // description 哨兵模式功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool sentry_mode_active = 91;
+  // description 哨兵模式灵敏度 [-] [0.0|1.0] [initial_value:0]
+  optional bool sentry_mode_level = 92;
+  // description APA功能是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool apa_sw = 93;
+  // description APA功能是否开启 [-] [0.0|1.0] [initial_value:0]
+  optional bool apa_start_sw = 94;
+  // description 泊出开始 [-] [0.0|1.0] [initial_value:0]
+  optional bool apa_out_sw = 95;
+  // description 泊出功能方向选择 [-] [0.0|7.0] [initial_value:0]
+  optional APAOutDirectionType apa_out_direction = 96;
+  // description 继续泊车 [-] [0.0|1.0] [initial_value:0]
+  optional bool apa_contiue = 97;
+  // description 暂停泊车 [-] [0.0|1.0] [initial_value:0]
+  optional bool apa_pause = 98;
+  // description 取消泊车 [-] [0.0|1.0] [initial_value:0]
+  optional bool apa_cancel = 99;
+  // description 开始泊入 [-] [0.0|1.0] [initial_value:0]
+  optional bool apa_started = 100;
+  // description 泊车本地遥控模式 [-] [0.0|1.0] [initial_value:0]
+  optional bool apa_mode = 101;
+  // description 泊出方式 [-] [0.0|7.0] [initial_value:0]
+  optional APAOutTypeType apa_out_type = 102;
+  // description 泊车泊入泊出模式 [-] [0.0|3.0] [initial_value:0]
+  optional APAChangeType apa_change = 103;
+  // description RPA功能车位类型 [-] [0.0|7.0] [initial_value:0]
+  optional RPAClassType rpa_class = 104;
+  // description RPA泊出方向选择 [-] [0.0|7.0] [initial_value:0]
+  optional RPAOutDirectionType rpa_out_direction = 105;
+  // description RPA功能是否激活 [-] [0.0|1.0] [initial_value:0]
+  optional bool rpa_start_sw = 106;
+  // description RPA功能是否开启 [-] [0.0|1.0] [initial_value:0]
+  optional bool rpa_out_sw = 107;
+  // description RPA暂停泊车 [-] [0.0|1.0] [initial_value:0]
+  optional bool rpa_pause = 108;
+  // description RPA继续泊车 [-] [0.0|1.0] [initial_value:None]
+  optional bool rpa_continue = 109;
+  // description RPA取消泊车 [-] [0.0|1.0] [initial_value:0]
+  optional bool rpa_cancel = 110;
+  // description 直线召唤功能状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool rmte_ctl_status = 111;
+  // description 直线召唤功能请求 [-] [0.0|3.0] [initial_value:0]
+  optional RmteCtlReqType rmte_ctl_req = 112;
+  // description 直线召唤方向 [-] [0.0|3.0] [initial_value:0]
+  optional RmteCtlDirectionType rmte_ctl_direction = 113;
+  // description 直线召唤继续泊车 [-] [0.0|1.0] [initial_value:0]
+  optional bool rmte_ctl_continue = 114;
+  // description 直线召唤蓝牙连接异常状态 [-] [0.0|3.0] [initial_value:0]
+  optional uint32 rmte_ctl_ble_error = 115;
+  // description NAP功能模式 [-] [0.0|7.0] [initial_value:0]
+  optional NAPEffectModeType nap_effect_mode = 116;
+  // description NAP功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool nap_sw = 117;
+  // description NAP功能是否开启 [-] [0.0|1.0] [initial_value:0]
+  optional bool nap_start_sw = 118;
+  // description NAP避让大型车辆开关设置 [-] [0.0|1.0] [initial_value:0]
+  optional bool nap_avoid_truck_sw = 119;
+  // description 夜间超车灯光提醒开关设置 [-] [0.0|1.0] [initial_value:0]
+  optional bool nap_light_warn_sw = 120;
+  // description NAP变道确认开关设置 [-] [0.0|1.0] [initial_value:0]
+  optional bool nap_lane_chg_conf_sw = 121;
+  // description 自定义驾驶员偏好车道设置 [-] [0.0|3.0] [initial_value:0]
+  optional NAPPreferLaneType nap_prefer_lane = 122;
+  // description 主动变道风格 [-] [0.0|3.0] [initial_value:0]
+  optional NAPLaneChgStyleType nap_lane_chg_style = 123;
+  // description 速度驾驶风格 [-] [0.0|3.0] [initial_value:0]
+  optional NAPDrvStyleType nap_drv_style = 124;
+  // description 是否障碍物触发变道设置 [-] [0.0|1.0] [initial_value:0]
+  optional bool nap_pasv_lane_chg_sw = 125;
+  // description HPA功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool hpa_sw = 126;
+  // description 删除路线开关 [-] [0.0|1.0] [initial_value:0]
+  optional bool hpa_delete_route = 127;
+  // description 加载路线开关 [-] [0.0|1.0] [initial_value:0]
+  optional bool hpa_load_route = 128;
+  // description 建图操作请求 [-] [0.0|3.0] [initial_value:0]
+  optional HPARoadmapBuildReqType hpa_roadmap_build_req = 129;
+  // description 泊车请求 [-] [0.0|15.0] [initial_value:0]
+  optional HPAValetParkingReqType hpa_valet_parking_req = 130;
+  // description 自动泊入沿途车位 [-] [0.0|1.0] [initial_value:0]
+  optional bool hpa_auto_park_all_sw = 131;
+  // description 自动泊入目标附近车位 [-] [0.0|1.0] [initial_value:0]
+  optional bool hpa_auto_park_near_tgt_sw = 132;
+  // description 路线起点提醒 [-] [0.0|1.0] [initial_value:0]
+  optional bool hpa_route_avl_info_sw = 133;
+  // description 自动建图 [-] [0.0|1.0] [initial_value:0]
+  optional bool hpa_auto_build_map_sw = 134;
+  // description 最大允许车速 [km/h] [0.0|31.0] [initial_value:0]
+  optional uint32 hpa_max_speed = 135;
+  // description NAC功能开关配置 [-] [0.0|1.0] [initial_value:0]
+  optional bool nac_sw = 136;
+  // description NAC功能开始信号 [-] [0.0|1.0] [initial_value:0]
+  optional bool nac_start = 137;
+  // description 记忆泊车路线数量 [-] [0.0|127.0] [initial_value:0]
+  optional uint32 hpa_route_num = 138;
+  // description 道路级别 [-] [0.0|7.0] [initial_value:0]
+  optional SDMapRoadClassType sd_map_road_class = 139;
+  // description 道路类型 [-] [0.0|15.0] [initial_value:0]
+  optional SDMapFormofWayType sd_map_form_of_way = 140;
+  // description V2定位有效性 [-] [0.0|1.0] [initial_value:0]
+  optional bool glb_loc_valid_v2 = 141;
+  // description HPA建图状态 [-] [0.0|15.0] [initial_value:0]
+  optional HPAMAPPINGInfoType hpa_mapping_info = 142;
+  // description 记忆泊车功能状态 [-] [0.0|127.0] [initial_value:0]
+  optional uint32 hpa_func_mode = 143;
+  // description 记忆泊车功能激活状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool hpa_active_mode = 144;
+  // description 记忆泊车行驶长度 [m] [0.0|131071.0] [initial_value:0]
+  optional uint32 hpa_length = 145;
+  // description ACC功能状态 [-] [0.0|127.0] [initial_value:0]
+  optional uint32 acc_func_mode = 146;
+  // description AEB功能状态 [-] [0.0|127.0] [initial_value:0]
+  optional uint32 aeb_func_mode = 147;
+  // description LKA功能状态 [-] [0.0|127.0] [initial_value:0]
+  optional uint32 lka_func_mode = 148;
+}
+
+message ADDCSOC_2_F6_2F6 {
+// Control Message
+  enum RmteCtlfunmodeType {
+    RMTECTL_FUN_MODE_OFF = 0;
+    RMTECTL_FUN_MODE_STANDBY = 1;
+    RMTECTL_FUN_MODE_ACTIVE = 2;
+    RMTECTL_FUN_MODE_HANDSHAKED = 3;
+    RMTECTL_FUN_MODE_SUSPEND = 4;
+    RMTECTL_FUN_MODE_FAILURE = 5;
+  }
+  enum clarioncallNotAvailableReasonType {
+    CLARION_CALL_NOTAVAILABLEREASON_NO_REQUEST = 0;
+    CLARION_CALL_NOTAVAILABLEREASON_BRAKE_PEDAL_PRESSED = 1;
+    CLARION_CALL_NOTAVAILABLEREASON_THROTTLE_PEDAL_PRESSED = 2;
+    CLARION_CALL_NOTAVAILABLEREASON_VEHICLE_NOT_IN_P_GEAR = 3;
+    CLARION_CALL_NOTAVAILABLEREASON_DOOR_NOT_CLOSED = 4;
+    CLARION_CALL_NOTAVAILABLEREASON_REAR_DOOR_NOT_CLOSED = 5;
+    CLARION_CALL_NOTAVAILABLEREASON_ENGINE_HOOD_NOT_CLOSED = 6;
+    CLARION_CALL_NOTAVAILABLEREASON_VEHICLE_NOT_STATIONARY = 7;
+    CLARION_CALL_NOTAVAILABLEREASON_SLOPE_EXCEEDED = 8;
+    CLARION_CALL_NOTAVAILABLEREASON_HANDSHAKE_FAILED = 9;
+    CLARION_CALL_NOTAVAILABLEREASON_EPB_ABNORMAL = 10;
+    CLARION_CALL_NOTAVAILABLEREASON_OPERATION_TIMEOUT = 11;
+  }
+  enum clarioncallsuspendReasonType {
+    CLARION_CALL_SUSPENDREASON_NO_REQUEST = 0;
+    CLARION_CALL_SUSPENDREASON_REACHED_MAX_TRAVEL_DISTANCE_5M = 1;
+    CLARION_CALL_SUSPENDREASON_OBSTACLE_DETECTED = 2;
+    CLARION_CALL_SUSPENDREASON_BLUETOOTH_TRANSCEIVER_ABNORMAL = 3;
+  }
+  enum clarioncallquitReasonType {
+    CLARION_CALL_QUITREASON_NO_REQUEST = 0;
+    CLARION_CALL_QUITREASON_GEAR_OVERRIDE = 1;
+    CLARION_CALL_QUITREASON_STEERING_WHEEL_OVERRIDE = 2;
+    CLARION_CALL_QUITREASON_ACTIVE_LOCK_VEHICLE = 3;
+    CLARION_CALL_QUITREASON_SPEED_TOO_HIGH = 4;
+    CLARION_CALL_QUITREASON_EPB_OVERRIDE = 5;
+    CLARION_CALL_QUITREASON_START_TIMEOUT = 6;
+    CLARION_CALL_QUITREASON_PAUSE_TIMEOUT = 7;
+    CLARION_CALL_QUITREASON_PAUSE_TIMES_EXCEEDED = 8;
+    CLARION_CALL_QUITREASON_TORQUE_TOO_LARGE = 9;
+    CLARION_CALL_QUITREASON_REACHED_MAX_DISTANCE_15M = 10;
+    CLARION_CALL_QUITREASON_USER_ACTIVE_EXIT = 11;
+    CLARION_CALL_QUITREASON_NOT_AVAILABLE_NOT_RECOVERED_OVER_30S = 12;
+    CLARION_CALL_QUITREASON_BRAKE_PEDAL_PRESSED = 13;
+    CLARION_CALL_QUITREASON_THROTTLE_PEDAL_PRESSED = 14;
+    CLARION_CALL_QUITREASON_DOOR_NOT_CLOSED = 15;
+    CLARION_CALL_QUITREASON_REAR_DOOR_NOT_CLOSED = 16;
+    CLARION_CALL_QUITREASON_ENGINE_HOOD_NOT_CLOSED = 17;
+    CLARION_CALL_QUITREASON_SLOPE_EXCEEDED = 18;
+    CLARION_CALL_QUITREASON_HANDSHAKE_FAILED = 19;
+    CLARION_CALL_QUITREASON_EPB_ABNORMAL = 20;
+    CLARION_CALL_QUITREASON_NO_OPERATION_TIMEOUT_EXIT = 21;
+  }
+  enum CNAPStatusType {
+    CNAP_STATUS_CNAP_IDLE = 0;
+    CNAP_STATUS_CNAP_MAPPING_INIT = 1;
+    CNAP_STATUS_CNAP_MAPPING_BUILDING = 2;
+    CNAP_STATUS_CNAP_MAPPING_CHECKING = 3;
+    CNAP_STATUS_CNAP_MAPPING_SAVING = 4;
+    CNAP_STATUS_CNAP_MAPPING_SUCCESSFUL = 5;
+    CNAP_STATUS_CNAP_MAPPING_FAILED = 6;
+    CNAP_STATUS_CNAP_LOCALIZATION_MAP_LOADING = 31;
+    CNAP_STATUS_CNAP_LOCALIZATION_INITIALIZING = 32;
+    CNAP_STATUS_CNAP_LOCALIZATION_SUCCESSFUL = 33;
+    CNAP_STATUS_CNAP_LOCALIZATION_FAILED = 34;
+  }
+  enum CNAPRouteBuildRequestType {
+    CNAP_ROUTE_BUILD_REQUEST_ROAD_MAP_BUILD_NONE = 0;
+    CNAP_ROUTE_BUILD_REQUEST_ROAD_MAP_BUILD_START = 1;
+    CNAP_ROUTE_BUILD_REQUEST_ROAD_MAP_BUILD_ABORT = 2;
+    CNAP_ROUTE_BUILD_REQUEST_ROAD_MAP_BUILD_FINISH = 3;
+  }
+  enum AutoDriveFuncAvailableType {
+    AUTODRIVE_FUNC_AVAILABLE_AVAILABLE = 0;
+    AUTODRIVE_FUNC_AVAILABLE_NOT_AVAILABLE = 1;
+    AUTODRIVE_FUNC_AVAILABLE_NAP_AVAILABLE = 2;
+    AUTODRIVE_FUNC_AVAILABLE_CNAP_AVAILABLE = 3;
+    AUTODRIVE_FUNC_AVAILABLE_HPA_AVAILABLE = 4;
+    AUTODRIVE_FUNC_AVAILABLE_NAC_AVAILABLE = 5;
+  }
+  enum AutoDriveLATFuncTypeType {
+    AUTODRIVE_LAT_FUNCTYPE_LAT_CMD_NONE = 0;
+    AUTODRIVE_LAT_FUNCTYPE_LAT_CMD_NAP = 1;
+    AUTODRIVE_LAT_FUNCTYPE_LAT_CMD_ALC = 2;
+    AUTODRIVE_LAT_FUNCTYPE_LAT_CMD_LCC = 3;
+    AUTODRIVE_LAT_FUNCTYPE_LAT_CMD_LCC_LIMITED = 4;
+    AUTODRIVE_LAT_FUNCTYPE_LAT_CMD_PARKING = 5;
+    AUTODRIVE_LAT_FUNCTYPE_LAT_CMD_PARKING_APA = 6;
+    AUTODRIVE_LAT_FUNCTYPE_LAT_CMD_CNAP = 7;
+    AUTODRIVE_LAT_FUNCTYPE_LAT_CMD_AES = 8;
+    AUTODRIVE_LAT_FUNCTYPE_LAT_CMD_ELKA = 9;
+    AUTODRIVE_LAT_FUNCTYPE_LAT_CMD_DRIVING = 10;
+    AUTODRIVE_LAT_FUNCTYPE_LAT_CMD_SAFETY = 11;
+  }
+  enum CNAPOperationTypeType {
+    CNAP_OPERATION_TYPE_CROSS_INTERSECTION = 0;
+    CNAP_OPERATION_TYPE_AVOIDANCE = 1;
+    CNAP_OPERATION_TYPE_LANE_CHANGE = 2;
+    CNAP_OPERATION_TYPE_MERGE = 3;
+    CNAP_OPERATION_TYPE_SPLIT = 4;
+    CNAP_OPERATION_TYPE_STOP_AT_SIGN = 5;
+    CNAP_OPERATION_TYPE_YIELD = 6;
+    CNAP_OPERATION_TYPE_EMERGENCY_STOP = 7;
+    CNAP_OPERATION_TYPE_FOLLOWING = 8;
+    CNAP_OPERATION_TYPE_OVERTAKE = 9;
+    CNAP_OPERATION_TYPE_PARKING = 10;
+    CNAP_OPERATION_TYPE_UNPARKING = 11;
+  }
+  enum CNAPOperationDirectionType {
+    CNAP_OPERATION_DIRECTION_TURNTYPE_UNKNOWN = 0;
+    CNAP_OPERATION_DIRECTION_TURNTYPE_LTRUN = 1;
+    CNAP_OPERATION_DIRECTION_TURNTYPE_RTURN = 2;
+    CNAP_OPERATION_DIRECTION_TURNTYPE_UTURN = 3;
+    CNAP_OPERATION_DIRECTION_TURNTYPE_NTURN = 4;
+  }
+  enum CNAPOperationstatusType {
+    CNAP_OPERATION_STATUS_NORMAL_DRVING = 0;
+    CNAP_OPERATION_STATUS_PREPARING = 1;
+    CNAP_OPERATION_STATUS_ADJUSTING = 2;
+    CNAP_OPERATION_STATUS_RECOVRING = 3;
+    CNAP_OPERATION_STATUS_COMPLET = 4;
+    CNAP_OPERATION_STATUS_FAILED = 5;
+    CNAP_OPERATION_STATUS_ABORT = 6;
+  }
+  // description AutoDrive交互文本索引 [-] [0.0|511.0] [initial_value:0]
+  optional uint32 auto_drive_text_info_index = 1;
+  // description HPA交互文本索引 [-] [0.0|127.0] [initial_value:0]
+  optional uint32 hpa_text_info_index = 2;
+  // description LKA交互文本索引 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 steer_only_text_info_index = 3;
+  // description AEB交互文本索引 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 emergency_stop_text_info_index = 4;
+  // description ACC交互文本索引 [-] [0.0|127.0] [initial_value:0]
+  optional uint32 speed_only_text_info_index = 5;
+  // description 直线召唤功能状态 [-] [0.0|7.0] [initial_value:0]
+  optional RmteCtlfunmodeType rmte_ctl_fun_mode = 6;
+  // description 直线召唤不激活原因 [-] [0.0|15.0] [initial_value:0]
+  optional clarioncallNotAvailableReasonType clarion_call_not_available_reason = 7;
+  // description 直线召唤中断原因 [-] [0.0|3.0] [initial_value:0]
+  optional clarioncallsuspendReasonType clarion_call_suspend_reason = 8;
+  // description 直线召唤退出原因 [-] [0.0|31.0] [initial_value:0]
+  optional clarioncallquitReasonType clarion_call_quit_reason = 9;
+  // description CNAP学习路线长度 [-] [0.0|65535.0] [initial_value:0]
+  optional uint32 cnap_distance_to_start = 10;
+  // description CNAP状态 [-] [0.0|63.0] [initial_value:0]
+  optional CNAPStatusType cnap_status = 11;
+  // description CNAP路线记忆学习请求 [-] [0.0|3.0] [initial_value:0]
+  optional CNAPRouteBuildRequestType cnap_route_build_request = 12;
+  // description CNAP激活状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool cnap_active = 13;
+  // description AutoDrive功能是否可用 [-] [0.0|7.0] [initial_value:0]
+  optional AutoDriveFuncAvailableType auto_drive_func_available = 14;
+  // description AutoDrive横向工作模式 [-] [0.0|15.0] [initial_value:0]
+  optional AutoDriveLATFuncTypeType auto_drive_lat_func_type = 15;
+  // description CNAP动作类型 [-] [0.0|15.0] [initial_value:0]
+  optional CNAPOperationTypeType cnap_operation_type = 16;
+  // description CNAP行车方向 [-] [0.0|15.0] [initial_value:0]
+  optional CNAPOperationDirectionType cnap_operation_direction = 17;
+  // description CNAP动作执行状态 [-] [0.0|15.0] [initial_value:0]
+  optional CNAPOperationstatusType cnap_operation_status = 18;
+  // description 自动驳运状态 [-] [0.0|1.0] [initial_value:0]
+  optional double addc_lpa_work_sts = 19;
+  // description 驳运路线 [-] [0.0|1.0] [initial_value:0]
+  optional double addc_lpa_road_id = 20;
+}
+
+message BMS_1_A1_1A1 {
+// Report Message
+  enum BMSBattChargerStsType {
+    BMS_BATTCHARGERSTS_NOT_CHARGE = 0;
+    BMS_BATTCHARGERSTS_PRAKING_CHARGING = 1;
+    BMS_BATTCHARGERSTS_CHARGE_FINISHED = 2;
+    BMS_BATTCHARGERSTS_CHARGE_ERROR = 3;
+    BMS_BATTCHARGERSTS_CHARGE_HOLD = 4;
+    BMS_BATTCHARGERSTS_DRIVING_CHARGING = 5;
+    BMS_BATTCHARGERSTS_CHARGE_PAUSE = 6;
+    BMS_BATTCHARGERSTS_RESERVED = 7;
+  }
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 bms_crc_1_a1 = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 bms_rolling_counter_1_a1 = 2;
+  // description 电池充电状态 [-] [0.0|7.0] [initial_value:0]
+  optional BMSBattChargerStsType bms_batt_charger_sts = 3;
+}
+
+
+message LpV35ChassisDetail {
+  optional HPCBCM_1_F3_1F3 hpcbcm_1_f3_1f3 = 1; // report message
+  optional ZCUR_22_F_22F zcur_22_f_22f = 2; // report message
+  optional ZCUL_231_231 zcul_231_231 = 3; // report message
+  optional ZCUL_234_234 zcul_234_234 = 4; // report message
+  optional HPCBCM_527_527 hpcbcm_527_527 = 5; // report message
+  optional IBC_182_182 ibc_182_182 = 6; // report message
+  optional IBC_183_183 ibc_183_183 = 7; // report message
+  optional IBC_184_184 ibc_184_184 = 8; // report message
+  optional IBC_185_185 ibc_185_185 = 9; // report message
+  optional IBC_18_C_18C ibc_18_c_18c = 10; // report message
+  optional EPS_18_D_18D eps_18_d_18d = 11; // report message
+  optional IBC_227_227 ibc_227_227 = 12; // report message
+  optional ACU_233_233 acu_233_233 = 13; // report message
+  optional ADDC_23_E_23E addc_23_e_23e = 14; // control message
+  optional ADDC_23_F_23F addc_23_f_23f = 15; // control message
+  optional HPCBCM_241_241 hpcbcm_241_241 = 16; // report message
+  optional ICU_24_D_24D icu_24_d_24d = 17; // report message
+  optional LMC_25_A_25A lmc_25_a_25a = 18; // report message
+  optional HPCBCM_290_290 hpcbcm_290_290 = 19; // report message
+  optional ACU_2_A3_2A3 acu_2_a3_2a3 = 20; // report message
+  optional IVI_331_331 ivi_331_331 = 21; // report message
+  optional HPCGW_3_B0_3B0 hpcgw_3_b0_3b0 = 22; // report message
+  optional IBC_3_CE_3CE ibc_3_ce_3ce = 23; // report message
+  optional IVI_5_CE_5CE ivi_5_ce_5ce = 24; // report message
+  optional ADDC_83_83 addc_83_83 = 25; // control message
+  optional ADDC_84_84 addc_84_84 = 26; // control message
+  optional VCU_B6_B6 vcu_b6_b6 = 27; // report message
+  optional VCU_B7_B7 vcu_b7_b7 = 28; // report message
+  optional HPCGW_CB_CB hpcgw_cb_cb = 29; // report message
+  optional LMC_FD_FD lmc_fd_fd = 30; // report message
+  optional SWB_305_305 swb_305_305 = 31; // report message
+  optional TCM_30_B_30B tcm_30_b_30b = 32; // report message
+  optional TCM_30_C_30C tcm_30_c_30c = 33; // report message
+  optional ADDC_23_A_23A addc_23_a_23a = 34; // control message
+  optional ADDC_23_B_23B addc_23_b_23b = 35; // control message
+  optional ADDC_23_C_23C addc_23_c_23c = 36; // control message
+  optional IVI_24_B_24B ivi_24_b_24b = 37; // report message
+  optional ADDCSOC_2_F5_2F5 addcsoc_2_f5_2f5 = 38; // control message
+  optional ADDCSOC_2_F6_2F6 addcsoc_2_f6_2f6 = 39; // control message
+  optional BMS_1_A1_1A1 bms_1_a1_1a1 = 40; // report message
+}

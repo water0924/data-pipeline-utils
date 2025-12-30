@@ -1,0 +1,29 @@
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+
+proto_library(
+    name = "live_reload_proto",
+    srcs = ["live_reload.proto"],
+    strip_import_prefix = "/proto/",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//proto/common:module_event_proto",
+    ],
+)
+
+cc_proto_library(
+    name = "live_reload_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":live_reload_proto",
+    ],
+)
+
+python_proto_library(
+    name = "live_reload_proto_py",
+    protos = [
+        ":live_reload_proto",
+    ],
+    visibility = ["//visibility:public"],
+)

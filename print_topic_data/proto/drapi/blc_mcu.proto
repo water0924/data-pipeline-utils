@@ -80,6 +80,8 @@ message SOCRPABusiness {
   optional bool soc_rpa_ready = 2;  // 后续可能需要支持SOC 上电走SOC 的直线召唤，先预留
   optional bool other_function_actived = 3;  // 其他功能激活
   optional bool vfc_request = 4;
+  optional bool is_vpa_or_driving_actived = 5; // 6215757505 如果VPA或行车激活，RSPA发文言
+  optional bool is_apa_rads_rpa_actived = 6; // 其他泊车功能激活
 }
 
 // topic: /blc/to_mcu_business
@@ -87,6 +89,7 @@ message SOCBusiness {
    // common 1~10
    optional uint64 timestamp = 1;  // ms
    optional uint64 sequence_number = 2; // soc 心跳检测
+   optional bool hil_mode = 3;
    // status 11
    optional int32 acc_status = 11;
    optional int32 ica_status = 12;
@@ -127,6 +130,9 @@ message SOCBusiness {
    optional int32 aeb_status = 57;
    optional int32 aes_status = 58;
 
+
+   optional int64 magic_number = 200;  // 用于校验SOC 和 MCU 协议是否匹配, 新增字段需要放到这个前面
+
 }
 
 
@@ -135,6 +141,7 @@ message MCURPAHandShakeInfo {
     HANDSHAKE_UNKNOWN = 0;
     HANDSHAKE_OUTPARKING = 1;
     HANDSHAKE_STRAIGHT_IN_OUT = 2; // 后续可能需要支持SOC 上电走SOC 的直线召唤，先预留
+    HANDSHAKE_MAX_VALUE = 2147483647; // 最大枚举占位4字节
   }
   optional int64 transtion_number = 1;
   optional RPAHandShakeType handshake_type = 2;
@@ -151,4 +158,9 @@ message MCUBusiness {
   optional int32 rpa_status = 2;
   optional MCURPAHandShakeInfo handshake_info = 3;
   optional MCURPASafetyInfo safety_info = 4;
+
+
+
+  optional int64 magic_number = 200;  // 用于校验SOC 和 MCU 协议是否匹配， 新增字段需要放到这个前面
+
 }

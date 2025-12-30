@@ -101,6 +101,14 @@ message NavigationInfoForVisualize {
     AMAP_EXPRESS_SPEED_LIMIT = 21;
     // NCA切换VPA限速
     NCA_VPA_SPEED_LIMIT = 22;
+    // amap speed limit in city 高德城市限速
+    AMAP_CITY_SPEED_LIMIT = 23;
+    // 施工场景限速
+    CONSTRUCTION_SPEED_LIMIT = 24;
+    // 元戎自营限速
+    DEEPROUTE_SPEED_LIMIT = 25;
+    // 记忆限速
+    MEMORY_SPEED_LIMIT = 26;
   }
   // 限速类型
   optional SpeedLimitType speed_limit_type = 7;
@@ -155,6 +163,7 @@ message NavigationInfoForVisualize {
     STATIC_TENCENT_THEORY = 2;  // 腾讯理论限速
     STATIC_GAODE = 3;           // 高德限速
     STATIC_EXACT = 4;           // 确认限速
+    STATIC_DEEPROUTE = 5;       // 元戎自营限速
 
     // 以下为静态限速修正专用
     STATIC_EXPERIENCE = 20;   // 经验限速
@@ -163,6 +172,7 @@ message NavigationInfoForVisualize {
     STATIC_AVP = 23;          // 泊车限速
     STATIC_ONEWAY_SLOW = 24;  // 单向单车道减速策略限速
     STATIC_NARROW_ROAD = 25;  // 窄路策略限速
+    STATIC_MEMORY = 26;       // 记忆限速
   }
   // 场景策略类型
   enum SceneStrategyType {
@@ -193,13 +203,56 @@ message NavigationInfoForVisualize {
     SCENE_BLIND_MERGING = 70;                // 盲区汇入
     SCENE_BLIND_CURVE = 80;                  // 弯道盲区
     SCENE_BLIND_UTURN = 90;                  // 盲区掉头
+    SCENE_BLIND_UPHILL = 95;                 // 上坡盲区
     SCENE_NARROW_ROAD = 100;                 // 窄路
+    SCENE_CONSTRUCTION = 101;                // 施工场景
+    SCENE_NON_LARGE_CURVATURE_TO_LARGE_CURVATURE = 102; // 非大曲率汇入大曲率
   }
   optional StaticStrategyType map_speed_limit_source = 19;
   optional StaticStrategyType static_strategy_type = 20;
   optional SceneStrategyType scene_strategy_type = 21;
   optional StaticStrategyType next_static_strategy_type = 22;
   optional SceneStrategyType next_scene_strategy_type = 23;
+}
+
+// 简化版NavigationInfoForVisualize，目前仅保留限速相关字段
+message NavigationInfoForVisualizeSimple {
+  // 当前道路等级
+  optional deeproute.map.RoadClass current_road_class = 1 [default = RC_UNKNOWN];
+
+  // 当前地图限速
+  optional double map_speed_limit = 11;
+
+  // 当前地图策略限速
+  optional double strategy_speed_limit = 12;
+  // 限速类型
+  optional NavigationInfoForVisualize.SpeedLimitType speed_limit_type = 13;
+
+  // 下一组地图策略限速
+  optional double next_strategy_speed_limit = 14;
+  optional double next_strategy_speed_limit_remaining_s = 15;
+
+  optional NavigationInfoForVisualize.JunctionSplInfo junction_spl_info = 16;
+
+  // 经验限速是否生效，debug用
+  optional bool exp_spl_enable = 31;
+
+  // 静态限速修正策略与场景类型，debug用
+  optional NavigationInfoForVisualize.StaticStrategyType map_speed_limit_source = 32;
+  optional NavigationInfoForVisualize.StaticStrategyType static_strategy_type = 33;
+  optional NavigationInfoForVisualize.SceneStrategyType scene_strategy_type = 34;
+  optional NavigationInfoForVisualize.StaticStrategyType next_static_strategy_type = 35;
+  optional NavigationInfoForVisualize.SceneStrategyType next_scene_strategy_type = 36;
+}
+
+// routing.LocalRouting 的简化子集，只包含限速相关信息。
+message LocalRoutingSimple {
+  // request id for blc distinguish different nca order
+  optional string request_id = 1;
+
+  optional int64 timestamp = 2 [default = 0];  // micro sec = 1e-6s
+
+  optional NavigationInfoForVisualizeSimple navigation_info_for_visualize = 11;
 }
 
 message LocalRouting {

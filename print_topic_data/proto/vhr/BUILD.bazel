@@ -10,6 +10,7 @@ proto_library(
     visibility = ["//visibility:public"],
     srcs = ["event_extra_info.proto"],
     deps = [
+        "//proto/common:module_event_proto",
     ],
     strip_import_prefix = "/proto/",
 )

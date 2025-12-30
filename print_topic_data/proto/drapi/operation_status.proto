@@ -2,7 +2,7 @@ syntax = "proto3";
 package dr.operationstatus;
 
 /************************业务相关的实时状态定义********************************/
-message OperationStatus {  // topic: /blc/operation_status
+message OperationStatus {  // topicBL/operation_status
   // common 1~10
   uint64 timestamp = 1;  // ms
   // status 11
@@ -36,6 +36,7 @@ message OperationStatus {  // topic: /blc/operation_status
   LCStatusInfo manual_lc_status = 38;   // 拨杆变道(GL)
   LCStatusInfo auto_lc_status = 39;     // 主动变道(GL)
   TrafficLightAttentionInfo traffic_light_attention_status = 40; //红绿灯提示功能状态
+  NavigationStatusInfo navigation_status = 41; //导航状态
   
   End2EndInfo end2end_status = 45;
 
@@ -50,6 +51,7 @@ message OperationStatus {  // topic: /blc/operation_status
   AEBStatusInfo aeb_status = 57;
   MAIStatusInfo mai_status = 58;
   AESStatusInfo aes_status = 59;
+  RAEBStatusInfo raeb_status = 60;
 
   // internal use
   ActivedFeatures actived_features = 100;
@@ -176,6 +178,8 @@ enum AVMStatus {
   STATUS_CALIBRATION = 16;
   STATUS_CALIBRATION_FINISHED = 17;
   STATUS_CALIBRATION_FAILED = 18;
+  STATUS_SLOPE_MODE = 19;
+  STATUS_SOMEIP_CALIBRATION = 20;
 }
 
 enum RPAStatus {
@@ -363,9 +367,22 @@ message DeviceCheckInfo {
     DRIVER_SEATBELT_ERROR = 170;           // 安全带故障
     REAR_ELD_LCK_LOCKED = 171;  // 后差速锁锁止
     BRAKE_NOT_APPLIED_IN_P_GEAR = 172; //p档位刹车未踩下
+    WIPER_ACTIVE = 173;  // 雨刮器打开
+
+    AIR_SUSPENSION_ADJUST_DOWN = 174; // 空气悬架调整下降
+    VELET_PARK_MODE_ON = 175;     // 门童模式开启
+    SUSPENSION_ABNORMAL = 176; // 悬架异常
+    LOW_POWER_MODE_ON = 177;  // 低功耗模式开启
 
     BCM3_LOST_ERROR = 180;      //  BCM3节点丢失故障
     RPA_APP_KILL_EXIT = 181; // RPA APP Kill
+    GEAR_NOT_IN_N = 182; // 档位不在N档
+
+    // RSPA
+    RPA_LOCK_CAR_INTER = 183; // 主动锁车干预
+
+    GEAR_P_CLOSE_TO_STOP_LINE = 184; // P档位接近停止线
+    GEAR_P_IN_HIGHWAY_ROADCLASS = 185; // 高速道路P档位
   }
   repeated DeviceInfo device_info = 1;
 }
@@ -508,6 +525,23 @@ message BusinessCheckInfo {
     ACC_NOT_TRAINING = 132;                // 未完成ACC学习和考试
     ICA_NOT_TRAINING = 133;                // 未完成ICA学习和考试
     NCA_NOT_TRAINING = 134;                // 未完成NCA学习和考试
+    BSC_ACTIVED = 135;                      // BSC激活
+    TAKEOVER_WHEN_MULTI_UTURN_WAIT = 136;  // 多把掉头等待用户确认期间用户接管
+    MULTI_UTURN_WAIT_TIMEOUT = 137;        // 多把掉头等待用户确认超时
+    PLANNING_CONSTRUCTION_COLLISION = 138;  // planning上报施工区域碰撞风险
+    END_PARKING_EPB_TIMEOUT = 139;          // 泊车结束EPB 超时
+
+    ESC_UNSUPPORTED = 140;                    // ESC不支持
+    EDC_ACTIVED =141;                       // EDC激活
+    THROTTLE_OVER_POSITION = 142;          // 油门踏板位置过高
+    YAW_RATE_OVER_POSITION = 143;          // 横摆角速度过高
+    LONGITUDINAL_ACCELERATION_TO_HIGH = 144; // 纵向加速度过高
+
+    LSFC_ACTIVED = 145;                      // LSFC激活
+    COMPASS_TURN_ACTIVED=146;                // 圆规掉头激活
+    HSPC_ACTIVED=147;                        // HSPC激活
+    FTSC_ACTIVED=148;                        // FTSC激活
+    EPS_LATERAL_UNAVAILABLE=149;             //EPS横向不可用
 
     // las from 4000+
     TOO_SLOW_SPEED = 4000;                   //车速过高
@@ -540,6 +574,12 @@ message BusinessCheckInfo {
     LSS_EXCESSIVE_REVERSE_DIR_RIGHT_TORQUE = 4027; // 反向扭矩过大，右侧
     RDP_EXCEED_TIME = 4028; // RDP 纠偏超时
     ELK_EXCEED_TIME = 4029; // ELK 纠偏超时
+    LANE_CHANGE_SUPPRESSED = 4030; // 变道抑制
+    LANE_CHANGE_INTERRUPT_CONTINUE_SUPPRESSED = 4031; // 变道中断继续抑制
+    LEFT_BOUNDARY_FAR = 4032; // 距离右侧车道线过远
+    RIGHT_BOUNDARY_FAR = 4033; // 距离右侧车道线过远
+    MISSING_BOTH_SIDE_LANE_LINE = 4034; // 左右车道线均丢失
+    TOO_FAST_SPEED_NOT_ACTIVE_VPA_ROUTING = 4035; // 速度太快，不能激活巡航
 
     // ICA from 4300
     ANGLE_DEVIATION_OVER_THRESHOLD =
@@ -557,6 +597,13 @@ message BusinessCheckInfo {
     NARROW_ROAD_IMPASSIBLE = 4310;               // 窄路无法通行
     TO_CENTERLINE_LATERAL_DISTANCE_OVER_THRESHOLD = 4311; //距离车道中线距离过远
     HAS_CURB_TO_LANE = 4312; //自车和目标车道区域范围内存在 curb
+    HANDOFF_LEVEL_4_2 = 4313; //脱手4_2
+    BOM_DISAPPEARED = 4314; //bom条件消失
+    BOM_TIMEOUT = 4315; //bom超时
+    MRM_STANDSTILL_TIMEOUT = 4316; //mrm刹停超时
+    GRACEFUL_EXIT_TIMEOUT = 4317; //3s退出超时
+    MRM_UNLOCK_TIME_OUT = 4318; //mrm解锁车门超时
+    HANDS_ON = 4319;  //脱手恢复
 
     // ILC from 4400
     LANE_CHANGE_SWITCH_OFF = 4400;               //拨杆变道开关关闭
@@ -580,7 +627,7 @@ message BusinessCheckInfo {
     ILC_NCA_SWITCH_OFF = 4418;                   // 领航驾驶辅助开关关闭
     TURN_SIGNAL_REVERSE_LEFT_WHEN_REQUEST = 4419;     // 请求变道前反向转向灯开启（左侧）
     TURN_SIGNAL_REVERSE_RIGHT_WHEN_REQUEST = 4420;     // 请求变道前反向转向灯开启（右侧）
-    
+    PLANNING_MODEL_REF_LINE = 4421;                    // 对应侧车道参考线是虚拟参考线
     PLANNING_LANE_CHANGE_FAILED = 4430;                     // planning变道失败
     PLANNING_LANE_CHANGE_FAILED_NONCROSSABLE = 4431;
     PLANNING_LANE_CHANGE_FAILED_UNSAFE_LANE_CHANGE = 4432;
@@ -640,7 +687,9 @@ message BusinessCheckInfo {
     NCA_SOFT_SWITCH_OFF = 4535;         //NOA软开关关闭
     VPA_LEARNING_NEED_REENTER_PARKING_ODD = 4536; // 新建地图需要驶出停车场重新进入
     E2E_SWITCH_TO_MNCA = 4550; //e2e自动切换为记忆NCA
+    NOT_IN_CROSSING_DEBOUNCE = 4551; // 非路口要求持续一定时间后才能解除抑制
 
+    NARROW_ROAD_IMPASSIBLE_APPEARED = 4552; // 窄路无法通行出现
     // TJP from 4600
     NO_FRONT_VEHICLE_DETECTED = 4600;  // 前车时距不满足要求
     CAMERA_SMEAR = 4601;               // 传感器被遮挡
@@ -650,6 +699,9 @@ message BusinessCheckInfo {
         4604;  // 车身外沿与车道内沿边线横向距离不满足要求
     LANE_LINE_MISSING = 4605;   // 双侧车道线丢失
     INVALID_LANE_WIDTH = 4606;  // 车道宽度不满足要求
+
+    //VLA from 4700
+    PLANNING_PULL_OVER_DONE = 4700; //planning靠边停车完成
 
     // HMA from 5000
     DRIVER_REQUEST = 5000;
@@ -744,6 +796,7 @@ message BusinessCheckInfo {
     APA_DPA_WHEEL_ERROR = 7568;           // dpa 轮故障
     APA_PRK_LAT_LGT_FAILR = 7569;         // 底盘 lat lgt 故障
     APA_ROUTE_PLANNING_FAILED_NOT_START = 7570;   // 未起步时规划失败
+    APA_PNC_NOT_AVALIABLE = 7571;          // APA由于pnc握手断开导致canbus断握手
 
     // VPA from 8000+
     VPA_APP_ACTIVE_ROUTING = 8001;
@@ -838,6 +891,41 @@ message BusinessCheckInfo {
     VPA_DHU_LOST_HEARTBEAT = 8097;  // DHU信号通讯丢失
     VPA_ROUTING_ACCELERATE_THROUGH_TARGET_PARKING_SPACE = 8098;  // 加速冲过终点车位
     VPA_START_ROUTING_NEED_DOWN_SPEED = 8099;  // 需要减速(GL：车速大于10kph时激活巡航)
+    VPA_ROUTING_NARROW_ROAD_EXIT = 8100;  // 巡航窄路退出
+    VPA_PNC_NOT_AVALIABLE = 8101;          // 巡航由于pnc断开握手导致canbus断开握手
+    VPA_ROUTING_DETOUR_TIMEOUT_EXIT = 8102;  // detour超时退出
+    VPA_OUTPARKING_TO_ROUTING_DRIVING_MODE_TIMEOUT = 8103;  // 泊出到巡航 驾驶模式超时退出
+    VPA_ROUTING_PASSIVE_AWAY_FROM_ROAD = 8104;  // 巡航抑制，远离路线
+    VPA_ROUTING_PASSIVE_BY_D2D_NAVI = 8105;  // 巡航抑制，由于D2D导航目标
+
+    // 静默建图 8500-8599
+    VPA_NO_SENSE_LEARNING_OTHER_ACTIVED = 8500;  // 静默建图抑制，其他功能激活
+    VPA_NO_SENSE_LEARNING_DEVICE_NOT_OK = 8501;  // 静默建图抑制，设备条件不满足
+    VPA_NO_SENSE_LEARNING_SWITCH_OFF = 8502;  // 静默建图抑制，功能开关未打开
+    VPA_NO_SENSE_LEARNING_LOCALIZATION_NOT_READY = 8503;  // 静默建图抑制，定位未准备好
+    VPA_NO_SENSE_LEARNING_MAP_NUMBER_REACH_MAX = 8504;  // 静默建图抑制，地图数量达到上限
+    
+    // 泊出静默建图特有
+    VPA_OUT_LEARNING_NO_SENSE_NOT_MATCHED_MAP = 8510;  // 泊出静默建图抑制，未匹配地图
+    VPA_OUT_LEARNING_NO_SENSE_HAS_OUT_MAP = 8511;  // 泊出静默建图抑制，已有泊出地图
+    VPA_OUT_LEARNING_NO_SENSE_NOT_NEAR_DEFAULT_SLOT = 8512;  // 泊出静默建图抑制，不在默认车位附近
+    VPA_OUT_LEARNING_NO_SENSE_VEHICLE_NOT_MOVE = 8513;  // 泊出静默建图抑制，车辆未开始移动
+    VPA_OUT_LEARNING_NO_SENSE_DISTANCE_TOO_LONG = 8514;  // 泊出静默建图失败，距离过长
+    VPA_OUT_LEARNING_NO_SENSE_IN_MAP_DELETED = 8515;  // 泊出静默建图失败，泊入地图被删除
+    
+    // 泊入静默建图特有
+    VPA_IN_LEARNING_NO_SENSE_GNSS_NOT_GOOD = 8520;  // 泊入静默建图抑制，GNSS信号不好
+    VPA_IN_LEARNING_NO_SENSE_ODD_UNAVLIABLE = 8521;  // 泊入静默建图抑制，ODD不可用
+    VPA_IN_LEARNING_NO_SENSE_NEED_REENTER_PARKING = 8522;  // 泊入静默建图抑制，需要重新进入停车场
+    VPA_IN_LEARNING_NO_SENSE_NOT_PRE_MAPPING = 8523;  // 泊入静默建图抑制，定位状态不是PRE_MAPPING
+    VPA_IN_LEARNING_NO_SENSE_HAS_MAP_NEARBY = 8524;  // 泊入静默建图抑制，附近有地图
+    VPA_IN_LEARNING_NO_SENSE_MATCHED_OTHER_MAP = 8525;  // 泊入静默建图失败，匹配到其他地图
+    
+    // 通用失败原因
+    VPA_NO_SENSE_LEARNING_CONFIRM_SAVE_TIMEOUT = 8530;  // 静默建图失败，确认保存超时
+    VPA_NO_SENSE_LEARNING_TIMEOUT = 8531;  // 静默建图失败，建图超时
+    VPA_NO_SENSE_LEARNING_MAP_DISTRIBUTION_FAILED = 8532;  // 静默建图失败，地图ID校验失败
+    VPA_NO_SENSE_LEARNING_MAP_DISTRIBUTION_TIMEOUT = 8533;  // 静默建图失败，地图ID校验超时
 
     // RPA 9000-9499
     RPA_WAIT_TIMEOUT = 9001;          // RPA 等待超时
@@ -871,6 +959,20 @@ message BusinessCheckInfo {
     RPA_SYNC_MCU_STS_FOLLOW_TO_STANDBY = 9029; // 监控MCU状态，替代Start 0x01
     RPA_MCU_STANDBY_TO_OFF = 9030; // 检测到MCU RSPA 直接从Standby 跳OFF
     RPA_DRV_SEAT_NOT_EMPYT = 9031; // 关门泊入起步不满足，主驾座椅非空
+    RPA_SWITCH_APA = 9032;
+    RPA_SEARCH_RESUME_TO_PARKIN = 9033; 
+    RPA_STRAIGHT_IN_OUT_BLOCK_FRONT = 9034; // RSPA 前向障碍物
+    RPA_STRAIGHT_IN_OUT_BLOCK_BACK  = 9035; // RSPA 后向障碍物
+    RPA_BLOCK_BY_DYNAMIC_PEDESTRIAN = 9036;
+    RPA_BLOCK_BY_DYNAMIC_BICYCLE = 9037;
+    RPA_BLOCK_BY_DYNAMIC_CAR = 9038;
+    RPA_START_MOVE_TIMEOUT = 9039; // RSPA握手后起步超时
+    RPA_SUSPEND_RESUME_TIMEOUT = 9040; // RSPA中断恢复超时
+    RPA_SUSPEND_INTERRUPPTED_TOO_MUCH = 9041; // RSPA中断次数过多
+    RPA_TORQUE_OVERRIDE = 9042; // RSPA扭矩过大
+    RPA_REACH_MAX_MOVE_DISTANCE = 9043; // RSPA达到15m移动距离超限
+    RPA_USER_EXIT = 9044;
+    RPA_DISABLE_RESUME_TIMEOUT = 9045; // RSPA不可用恢复超过30s
 
     // RADS 9500-9999
     RADS_SUSPEND_TIMEOUT = 9500;         //暂停时间超过60s
@@ -883,6 +985,7 @@ message BusinessCheckInfo {
     RADS_PLANNING_ABORT = 9507;
     RADS_PARKING_FINISHED = 9508;
     RADS_SWITCH_APA = 9509;
+    RADS_USER_PAUSE = 9510; 
 
     // SENTRY MODE 10000-10099
     SENTRY_MODE_VEHICLE_CRASH = 10001;   // 哨兵碰撞
@@ -966,6 +1069,9 @@ message BusinessCheckInfo {
     RAIN_TOO_LARGE = 10443; // 雨量过大
     VEHICLE_ARBITER_INHIBITION = 10444; // 车辆原因抑制
     D2D_HPA_ACTIVE = 10445;  // D2D HPA激活控车
+    AEB_SHADOW_HIGH_ACTUAL_PEDAL = 10446; // AEB影子模式 - 高油门踏板
+    AEB_SHADOW_EXCESSIVE_STEERING_ANGLE = 10447; // AEB影子模式 - 过大方向盘角度
+    PASSENGER_SEAT_TAKEN_AND_BELT_NOT_FASTENED = 10448; // 乘客座椅占用且安全带未系
 
     // D2D 11000-11500
     VPA_FUNCTION_OFF = 11000;
@@ -983,6 +1089,8 @@ message BusinessCheckInfo {
     D2D_IN_MNPA_STANDBY = 11012;
     D2D_NCA_NAVIGATION_NO_MAP_ID = 11013;
     D2D_NCA_NAVIGATION_TARGET_MAP_ID_NOT_EQUAL_LOR_MAP_ID = 11014;
+    D2D_PASSIVE_BY_USER_SELECTED_HPA_TARGET = 11015;
+    D2D_PASSIVE_BY_OUT_PARKING_NAVIGATION_EXCEPTION = 11016;
 
   }
   repeated Status status = 1;
@@ -1503,6 +1611,9 @@ enum VPAStatus {
   VPA_MAP_LEARNING_SUSPEND = 30;  // 学习中断暂停（GL）
   VPA_MAP_IN_LEARNING_NO_SENSE = 31; // 无感泊入建图状态
   VPA_MAP_OUT_LEARNING_NO_SENSE = 32; // 无感泊出建图状态
+  VPA_MAP_LEARNING_NO_SENSE_SAVING_MAP = 33; // 无感建图存图状态
+  VPA_MAP_LEARNING_NO_SENSE_COMPLETE = 34; // 无感建图完成
+  VPA_MAP_LEARNING_NO_SENSE_FAILURE = 35; // 无感建图失败
 
   // 40-60 VPA ROUTING
   VPA_ROUTING_PARKING_ACTIVE = 41;
@@ -1531,6 +1642,12 @@ message RPAStatusInfo {
   uint32 mcu_rpa_status = 3;
 }
 
+enum LDWScenario {
+  UNKNOWN_LDW_SCENARIO = 0;
+  LDW_LEFT = 1;
+  LDW_RIGHT = 2;
+}
+
 enum LDWStatus {
   LDW_OFF = 0;
   LDW_PASSIVE = 1;
@@ -1556,6 +1673,16 @@ message LDWStatusInfo {
   LDWPassiveReason left_reason = 7;
   LDWStatus right_status = 8;
   LDWPassiveReason right_reason = 9;
+  repeated LDWScenario enabled_scenarios = 10;
+  ReasonInfo reason_info = 11;
+}
+
+enum LKAScenario {
+  UNKNOWN_LKA_SCENARIO = 0;
+  LKA_LEFT = 1;
+  LKA_LEFT_RE = 2;
+  LKA_RIGHT = 3;
+  LKA_RIGHT_RE = 4;
 }
 
 enum RDPStatus {
@@ -1583,6 +1710,8 @@ message RDPStatusInfo {
   RDPPassiveReason left_reason = 7;
   RDPStatus right_status = 8;
   RDPPassiveReason right_reason = 9;
+  repeated LKAScenario enabled_scenarios = 10;
+  ReasonInfo reason_info = 11;
 }
 
 message PDCStatusInfo {
@@ -1806,15 +1935,36 @@ enum Feature {
   DW = 31;
   SENTINEL = 32;
   AES = 33;
+  RAEB = 34;
+  E2E = 35;
   VPA_APA = 100;  // VPA 的APA阶段
   VPA_MAP_SAVING = 101;  // VPA 的存图阶段
   HUT = 1001;
   VIZ = 1002;
   MAI = 1003;
+  R_MAI = 1004;
 }
 
 message ActivedFeatures {
   repeated Feature features = 1;
+}
+
+enum ELKScenario {
+  UNKNOWN_ELK_SCENARIO = 0;
+  ELK_LEFT = 1;
+  ELK_LEFT_S = 2;
+  ELK_LEFT_RE = 3;
+  ELK_LEFT_O = 4;
+  ELK_LEFT_ICS = 5;
+  ELK_LEFT_GO = 6;
+  ELK_LEFT_VRU = 7;
+  ELK_RIGHT = 8;
+  ELK_RIGHT_S = 9;
+  ELK_RIGHT_RE = 10;
+  ELK_RIGHT_O = 11;
+  ELK_RIGHT_ICS = 12;
+  ELK_RIGHT_GO = 13;
+  ELK_RIGHT_VRU = 14;
 }
 
 enum ELKStatus {
@@ -1844,6 +1994,8 @@ message ELKStatusInfo {
   ELKPassiveReason left_reason = 7;
   ELKStatus right_status = 8;
   ELKPassiveReason right_reason = 9;
+  repeated ELKScenario enabled_scenarios = 10;
+  ReasonInfo reason_info = 11;
 }
 
 // TSR
@@ -1975,6 +2127,21 @@ message MEBStatusInfo {
   ReasonInfo reason = 2;
 }
 
+enum RAEBStatus {
+  RAEB_OFF = 0;
+  RAEB_FAILURE = 1;
+  RAEB_PASSIVE = 2;
+  RAEB_STANDBY = 3;
+  RAEB_ACTIVE = 4;
+  RAEB_STAND_STILL = 5;
+  REBA_ACTIVE = 6;
+}
+
+message RAEBStatusInfo {
+  RAEBStatus status = 1;
+  ReasonInfo reason = 2;
+}
+
 enum FCWStatus {
   FCW_OFF = 0;
   FCW_FAILURE = 1;
@@ -2072,12 +2239,23 @@ enum PerceptionMode {
   LOW_SPEED = 2;
 }
 
+enum NavigationStatus {
+  NAVIGATION_UNKNOWN = 0;
+  NAVIGATION_IN_NAVIGATING = 1;
+  NAVIGATION_NOT_IN_NAVIGATING = 2;
+}
+
+message NavigationStatusInfo {
+  NavigationStatus status = 1;
+}
+
 message LaneChangeSwitchStatus {
   enum UnFrocedLaneChangeCloseReason {
     DEFAULT = 0;
     IN_DISTRACT_MODE = 1;         // 分心模式
     LANE_UNCERTAIN = 2;           // 车道不清晰
     IN_SNOW_MODE = 3;             // 雪天模式
+    SAFETY_FAILURE_POLICY = 4;    // 功能安全策略
   }
   bool is_unforced_lane_change_close = 1;
   repeated UnFrocedLaneChangeCloseReason unforced_lane_change_close_reason = 2; 

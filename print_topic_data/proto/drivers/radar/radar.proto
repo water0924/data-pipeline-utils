@@ -309,6 +309,9 @@ message RadarObs {
     OBSTACLE_CLASS_TRUCK = 4;
     OBSTACLE_CLASS_UNKNOWN = 5;
     OBSTACLE_CLASS_INVAILD = 6;
+    OBSTACLE_CLASS_GUIDEBOARD = 7;
+    OBSTACLE_CLASS_MANHOLE_COVER = 8;
+    OBSTACLE_CLASS_STATIC = 9;
   }
 
   optional deeproute.common.Header header = 1;

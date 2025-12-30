@@ -39,6 +39,7 @@ message MapMatchingStatusEvent {
   bool is_near_default_parking_space = 11; // 当前位置是否在默认车位附近
   OddRange odd_range = 12; // 当前 matched 状态对应的子图 odd 属性
   bool is_reach_max_expansion_distance = 13; // 匹配的地图是否已经超过最大扩展距离
+  int32 default_parking_space_id = 14;
 }
 
 message NavigationStatusEvent {
@@ -73,6 +74,7 @@ message NavigationStatusEvent {
   float next_speed_limit_remaining_s = 11;
   double min_distance_to_map = 12;
   double left_routing_time = 13;
+  double lateral_dist_to_path = 14;
 }
 
 enum MappingStatus {
@@ -129,6 +131,17 @@ message EnvironmentStatusEvent {
 
     VEHICLE_INDOOR = 10;
     VEHICLE_OUTDOOR = 11;
+
+    // Current Environment Status Based on Routing Info
+    VEHICLE_AT_STRAIGHT = 15;
+    VEHICLE_AT_LEFT_CURVE = 16;
+    VEHICLE_AT_RIGHT_CURVE = 17;
+    
+    VEHICLE_AT_SPIRAL_UPHILL = 25;
+    VEHICLE_AT_SPIRAL_DOWNHILL = 26;
+    VEHICLE_AT_STRAIGHT_UPHILL = 27;
+    VEHICLE_AT_STRAIGHT_DOWNHILL = 28;
+    // End
 
     // Environment Status Ahead
     FLAT_AHEAD = 50;

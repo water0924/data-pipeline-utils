@@ -2,6 +2,8 @@ syntax = "proto2";
 
 package dr.vhr;
 
+import "common/module_event.proto";
+
 //事件额外扩展信息
 message EventExtraInfo{
   optional uint64 ad_code = 1;  // 区域编码,由6位数字组成,唯一标识一个区划, // 如广东省深圳市南山区为440305
@@ -9,4 +11,7 @@ message EventExtraInfo{
   optional int32 road_type = 3;   // 当前道路类型, 巡航也需要， RoadType枚举值 drapi/gwm_navigation.proto
   optional int32 dsm_sub_state = 4; // dsm模式子状态，不同State有不同的SubState，例如全功能，产线标定等枚举 SubState dsm/dsm.proto
   optional int32 dr_road_class = 5; // 当前道路等级。新字段，会用于 drplatform 平台展示。取值范围：map/common_type.proto 中的 deeproute.map.RoadClass
+  optional dr.common.EventLocation location = 6; // 当前位置
+  optional uint32 dr_road_priority = 7;  // 路段等级，取自 deeproute.sd_map.LinkData.priority
+  optional int32 dr_admin_code = 8;  // 行政区划代码，取自 deeproute.sd_map.LinkData.admin_code
 }

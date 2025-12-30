@@ -22,7 +22,6 @@ sys.path.append(current_dir)
 sys.path.append(os.path.join(current_dir, "proto"))
 sys.path.insert(0, os.path.join(current_dir, "proto")) # 跳过系统库的church 将common库的优先级调高
 
-
 from canbus import car_info_pb2,canbus_blc_state_pb2,dtu_canbus_interface_pb2,dtu_hmi_canbus_interface_pb2
 from routing import local_routing_pb2
 from drapi import command_pb2,notification_pb2,operation_status_pb2,vehicle_status_pb2,render_context_pb2

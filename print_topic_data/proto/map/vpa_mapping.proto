@@ -131,6 +131,9 @@ message Keyframe {
   optional uint64 keyframe_id = 21;
   // keyFrame所属楼层
   optional int32 floor_id = 22;
+
+  // 和 gnss_poses 一一对应用于关联两者的轨迹点
+  repeated deeproute.common.Transformation3 odometry_poses = 23;
 }
 
 message SlopeFloorInfo {

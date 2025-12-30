@@ -20,6 +20,8 @@ message SingleTripDriving {
   uint64 acc_time = 9;                    // acc时长
   PerformanceMetrics performance_metrics = 10; // 性能指标统计
   DrivingTrajectory driving_trajectory = 11;   // 行程轨迹
+  uint64 trip_start_time_ms = 12;              // 行程开始时间
+  uint64 trip_end_time_ms = 13;                // 行程结束时间
 }
 
 message PerformanceMetrics {

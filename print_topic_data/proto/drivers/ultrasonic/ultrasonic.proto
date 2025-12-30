@@ -30,6 +30,31 @@ message UltrasonicState {
     ACTIVE = 2;
     FAILED = 3;
   }
+  enum EcuFailure {
+    NORMAL = 0;
+    FRONT_FAILURE = 1;
+    REAR_FAILURE = 2;
+    FRONT_REAR_FAILURE = 3;
+    EXTERNAL_FAILURE = 4;
+    RESERVED = 5;
+  }
+  enum ObstclDetnFailSts {
+    INITIAL = 0;
+    ALL_NO_FAILURE = 1;
+    FRONT_DIRECTION_FAILURE = 2;
+    REAR_DIRECTION_FAILURE = 3;
+    ALL_FAILURE = 4;
+  }
+  enum SoundIndcn {
+    TONE_0_NO_WARNING = 0;
+    TONE_1_LONG_BEEP = 1;
+    TONE_2_15HZ = 2;
+    TONE_3_3HZ = 3;
+  }
+  enum AutoModSts {
+    NO_AVAILABLE = 0;
+    AVAILABLE = 1;
+  }
   repeated uint32 object_detect_area_list = 1;
   optional bool fpas_dispcmd = 2;
   optional WorkStsType apasys_workstatus = 3;
@@ -40,9 +65,45 @@ message UltrasonicState {
   optional uint32 re_min_dst = 8;
   optional uint32 re_stop_disp_req = 9;
   repeated uint32 object_area_distance_list = 10; // pdc 分区距离
+
+  // for GWM Project
+  optional EcuFailure ecu_failure = 11;
+  optional ObstclDetnFailSts obstcl_detn_fail_sts = 12;
+  optional SoundIndcn fpas_sound_indcn = 13;
+  optional SoundIndcn rpas_sound_indcn = 14;
+  optional AutoModSts fpas_auto_mod_sts = 15;
+  optional WorkStsType fpas_work_sts = 16;
+  optional WorkStsType rpas_work_sts = 17;
+  optional bool fpas_fl_cornr_snsr_fail_sts = 18;
+  optional bool fpas_fl_middl_snsr_fail_sts = 19;
+  optional bool fpas_fr_middl_snsr_fail_sts = 20;
+  optional bool fpas_fr_cornr_snsr_fail_sts = 21;
+  optional bool rpas_rl_cornr_snsr_fail_sts = 22;
+  optional bool rpas_rl_middl_snsr_fail_sts = 23;
+  optional bool rpas_rr_middl_snsr_fail_sts = 24;
+  optional bool rpas_rr_cornr_snsr_fail_sts = 25;
+}
+
+message MultiEcho {
+  enum EchoType {
+    DIRECT = 0;
+    LEFT = 1;
+    RIGHT = 2;
+  }
+  optional double timestamp_sec = 1;
+  optional double distance = 2;
+  optional double echo_peak = 3;
+  optional double echo_width = 4;
+  optional double confidence = 5;
+  optional EchoType echo_type = 6;
 }
 
 message UltrasonicObject {
+  enum FrequencyMode {
+    STD = 0;
+    ADVUP = 1;
+    ADVDOWN = 2;
+  }
   optional deeproute.common.Header header = 1;
   optional double distance = 2 [default = -1.0];
   optional double cross_distance_left = 3 [default = -1.0];
@@ -63,6 +124,8 @@ message UltrasonicObject {
   optional uint32 echo_tof = 18;
   optional uint32 echo_width = 19;
   optional uint32 echo_peak = 20;
+  optional FrequencyMode frequency_mode = 21 [default = STD];
+  repeated MultiEcho multi_echo = 22;
 }
 
 message UltrasonicObstacle {
@@ -178,6 +241,16 @@ message UltrasonicDebugData {
   optional uint32 lock_flag = 5;
 }
 
+message PersistentStorage {
+  optional uint32 aud_warn_of_snsr_park_assi_re = 1; 
+  optional uint32 aud_warn_of_snsr_park_assi_frnt = 2;  
+}
+
+message UltrasonicRaw {
+  optional bytes raw_objects = 1;
+  optional bytes raw_obstacles = 2;
+}
+
 message Ultrasonic {
   optional deeproute.common.Header header = 1;
   //@C_Mark@12@;
@@ -191,4 +264,6 @@ message Ultrasonic {
 
   optional UltrasonicState state = 7;
   repeated UltrasonicDebugData debug_data = 8;
+  optional PersistentStorage persistent_storage = 9;
+  optional UltrasonicRaw raw_data = 10;
 }

@@ -133,6 +133,30 @@ python_proto_library(
 )
 
 proto_library(
+    name = "gwm_oneclick_noa_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gwm_oneclick_noa.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gwm_oneclick_noa_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gwm_oneclick_noa_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gwm_oneclick_noa_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gwm_oneclick_noa_proto",
+    ],
+)
+proto_library(
     name = "gwm_vla_info_proto",
     visibility = ["//visibility:public"],
     srcs = ["gwm_vla_info.proto"],

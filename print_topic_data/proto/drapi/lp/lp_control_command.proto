@@ -1,0 +1,98 @@
+syntax = "proto3";
+package lp.hmi;
+
+import "drapi/lp/lp_common.proto";
+import "drapi/lp/basic_common.proto";
+
+message BcmCmd {
+    lp.common.LightCtrlEnum        	turn_left_light_request		= 1;    // 左转向灯请求 
+    lp.common.LightCtrlEnum        	turn_right_light_request	= 2;  	// 右转向灯请求
+    lp.common.LightCtrlEnum        	emergency_light_request		= 3;    // 危险报警灯请求
+    lp.common.LightCtrlEnum        	brake_light_request			= 4;    // 刹车灯请求
+    lp.common.HeadlightEnum        	headlight_status			= 5;    // 前灯光请求
+    lp.common.MirrorStatusEnum     	mirror_request				= 6;    // 后视镜控制请求
+    lp.common.SeatBeltStrengthEnum 	seat_belt_request			= 7;    // 安全带收紧等级
+    uint32                  left_blind_light_request	= 8;  	// 左盲区指示灯请求；0:关闭，1：常亮，2：闪烁，3：无效；
+    uint32                  right_blind_light_request	= 9; 	// 右盲区指示灯请求；0:关闭，1：常亮，2：闪烁，3：无效；
+    uint32                  ihbc_mode					= 10;   // ihbc功能状态；0：OFF，1：Standby，2：Trigger，3：error；uint32                  bcm_request_reserved		= 11;   // reserve
+    uint32                  bcm_request_reserved		= 11;   // reserve
+}
+
+message ActuatorCmd {
+    bool      		lon_control_valid			= 1;    	// 纵向控制有效性。0:无效，1:有效
+    uint32          lon_control_mode			= 2;    	// 纵向控制模式：0：不控制，1：速度控制模式，2：整车加速度控制模式; 3:执行器加速度分配控制模式；4：扭矩控制
+    bool            accel_request_valid			= 3;    	// 加速扭矩请求有效性，0：无效，1：有效                                                                                  
+    bool            dec_request_valid			= 4;    	// 减速扭矩请求有效性，0：无效，1：有效
+    float           accel_torque_request		= 5;    	// 加速扭矩控制请求, n.m
+    float           dec_torque_request			= 6;    	// 减速扭矩控制请求, n.m
+    uint32          vcu_control_mode			= 7;    	// vcu控制模式：0：不控制，1：速度控制模式，2：加速度控制模式;3：扭矩控制模式; 4:电流控制模式                                                                                 
+    bool            adas_hold_states			= 8;    	// 保压状态
+    uint32          auto_hold_request			= 9;    	// 驻车请求，0:无请求，1：请求释放，2：请求驻车
+    uint32          gear_pos_request			= 10;   	// 档位请求，0:N挡，1：D挡，2：R挡；3：P档；
+    uint32          epb_request					= 11;   	// 电子手刹请求，0:none，1：realease，2：hold；
+    bool            aps_vehicle_hold_req		= 12;  		// APS请求IBC保压：0x0:No request，0x1:0x1:Request
+    bool            aps_vehicle_hold_req_vd		= 13; 		// APS请求IBC保压有效性：0:无效，1:有效
+    bool            esc_accel_request_valid		= 14;   	// 对esc加速度请求有效性，0：无效，1：有效
+    uint32          esc_control_mode			= 15;   	// esc控制模式：0：不控制，1：速度控制模式，2：加速度控制模式; 3：扭矩控制模式; 4:电流控制模式                                                                   
+    float           esc_accel_request			= 16;  		// 对esc加速度请求值
+    bool            lat_control_valid			= 17;  		// 横向控制有效性。0:无效，1:有效
+    uint32          lat_control_mode			= 18;   	// 横向控制模式：0：不控制，1：转角控制模式;2：扭矩控制模式; 3:电流控制模式                                                                              
+    float           steering_target				= 19;   	// 方向盘控制。转角控制：单位：deg。扭矩控制模式：+: 逆时针，-：顺时针。单位：N.m                                                                                 
+    float           steering_rate				= 20;   	// 方向盘控制斜率。转角控制模式:单位: deg/s
+    bool            max_torque_limit_valid		= 21;   	// 最大扭矩限制有效性，0：无效，1：有效
+    float           max_torque_limit			= 22;   	// 最大扭矩限制
+    bool            min_torque_limit_valid		= 23;   	// 最小扭矩限制有效性，0：无效，1：有效
+    float           min_torque_limit			= 24;   	// 最小扭矩限制
+    uint32          ldw_request					= 25;   	// 方向盘震动请求(reserve)，0:无请求，1：level 1，2：level 2, 3:level 3                                                                                 
+    uint32          handoff_status				= 26;   	// 脱手检测状态，0：不报警，1：一级报警，2：二级报警，3：三级报警
+    bool            dil_mode					= 27;   	// 进入人机共驾请求，0：无请求，1：请求进入人机共驾
+}
+
+//topic:/leap/state_machine/command 结构体
+message ControlCommand {
+    lp.basiccommon.Header       	header				= 1;       		// 帧头，包含时间戳、序列号、模块	
+    //行车			
+    lp.common.FuncModeEnum   							acc_mode			= 2;      		// ACC，对应状态机枚举
+    lp.common.FuncModeEnum   							lcc_mode			= 3;      		// LCC，对应状态机枚举
+    lp.common.FuncModeEnum   							alc_mode			= 4;      		// alc，对应状态机枚举
+    lp.common.FuncModeEnum   							nap_mode			= 5;      		// nap，对应状态机枚举
+    //主动安全								
+    lp.common.FuncModeEnum   							lka_mode			= 6;      		// lka，对应状态机枚举
+    lp.common.FuncModeEnum   							elk_mode			= 7;     		// elk，对应状态机枚举
+    lp.common.FuncModeEnum   							lcop_mode			= 8;     		// lcop，对应状态机枚举
+    lp.common.FuncModeEnum   							aes_mode			= 9;      		// aes，对应状态机枚举
+    lp.common.FuncModeEnum   							esa_mode			= 10;      		// esa，对应状态机枚举
+    lp.common.FuncModeEnum   							aeb_mode			= 11;      		// aeb，对应状态机枚举
+    lp.common.FuncModeEnum   							fctb_mode			= 12;     		// fctb，对应状态机枚举
+    lp.common.FuncModeEnum   							rctb_mode			= 13;     		// rctb，对应状态机枚举
+    lp.common.FuncModeEnum   							laeb_mode			= 14;     		// laeb，对应状态机枚举
+    lp.common.FuncModeEnum   							raeb_mode			= 15;     		// raeb，对应状态机枚举
+    lp.common.FuncModeEnum   							fdw_mode			= 16;      		// fdw，对应状态机枚举
+    lp.common.FuncModeEnum   							fcw_mode			= 17;      		// fcw，对应状态机枚举
+    lp.common.FuncModeEnum   							ldw_mode			= 18;      		// ldw，对应状态机枚举
+    lp.common.FuncModeEnum   							dow_mode			= 19;      		// dow，对应状态机枚举
+    lp.common.FuncModeEnum   							bsd_mode			= 20;      		// bsd，对应状态机枚举
+    lp.common.FuncModeEnum   							lca_mode			= 21;      		// lca，对应状态机枚举
+    lp.common.FuncModeEnum   							tsr_mode			= 22;      		// tsr，对应状态机枚举
+    lp.common.FuncModeEnum   							rcta_mode			= 23;     		// rcta，对应状态机枚举
+    lp.common.FuncModeEnum   							fcta_mode			= 24;     		// fcta，对应状态机枚举
+    lp.common.FuncModeEnum   							rcw_mode			= 25;      		// rcw，对应状态机枚举
+    lp.common.FuncModeEnum                           	fvsa_mode	        = 26;           // fvsa，对应状态机枚举
+    lp.common.FuncModeEnum   							ihbc_mode			= 27;     		// ihbc，对应状态机枚举
+    lp.common.FuncModeEnum   							mai_mode			= 28;      		// mai，对应状态机枚举
+    //泊车									
+    lp.common.FuncModeEnum   							apa_mode			= 29;      		// APA/RPA，对应状态机枚举
+    lp.common.FuncModeEnum   							ra_mode				= 30;       	// 循迹倒车，对应状态机枚举
+    lp.common.FuncModeEnum   							clarion_call_mode	= 31;    		// 直线召唤，对应状态机枚举
+    BcmCmd                       			bcm_command			= 32;        	// 预留，bcm控制指令
+    ActuatorCmd                  			actuator_cmd	 	= 33;       	// 预留，底盘执行器控制指令	
+    uint32                     				edr_trigger_id		= 34;     		//触发录制的EDR Trigger ID信息
+    bool                         			edr_record			= 35;         	//对应触发源是否录制
+    uint32                                	edr_level           = 36;           // EDR等级
+    uint32                                	front_time          = 37;           // 录制触发前--秒数据
+    uint32                                	last_time           = 38;           // 录制触发后--秒数据
+    bytes                         			version				= 39;       	// 版本信息
+    lp.basiccommon.LatencyStatus  	latency_status		= 40;     		// 统计耗时，具体在common中定义
+    lp.basiccommon.ModuleStatus   	module_status		= 41;      		// 统计错误状态、错误代码、错误原因等，具体在common模块的ModuleStatus定义
+}
+ 

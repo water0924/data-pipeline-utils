@@ -120,6 +120,9 @@ proto_library(
         "//proto/drapi:base_proto",
         "//proto/safety:safety_analysis_proto",
         "//proto/planning:planning_proto",
+        "//proto/drapi/gwm:gwm_vla_info_proto",
+        "//proto/vla:vla_output_proto",
+        "//proto/drapi:blc_mcu_report_event_proto",
     ],
     strip_import_prefix = "/proto/",
 )
@@ -273,3 +276,27 @@ python_proto_library(
     ],
 )
 
+proto_library(
+    name = "blc_speed_limit_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["blc_speed_limit.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "blc_speed_limit_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":blc_speed_limit_proto",
+    ],
+)
+
+python_proto_library(
+    name = "blc_speed_limit_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":blc_speed_limit_proto",
+    ],
+)

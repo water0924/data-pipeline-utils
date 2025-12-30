@@ -177,6 +177,116 @@ message SpeedSource {
   optional SpeedSourceType speed_source_type = 1;
 }
 
+// 车道数量变化点
+message LaneNumChangePoint {
+  enum LaneNumChangePosType {
+    LANE_NUM_CHANGE_POS_TYPE_UNKNOWN = 0;      // 未知
+    LANE_NUM_CHANGE_POS_TYPE_LINK_START = 1;   // 初始点
+    LANE_NUM_CHANGE_POS_TYPE_LINK_MIDDLE = 2;  // 路中段
+    LANE_NUM_CHANGE_POS_TYPE_LINK_START_WITH_CHANGE =
+        3;  // 初始点（含车道数变化）
+    LANE_NUM_CHANGE_POS_TYPE_LINK_MIDDLE_EXCHANGE = 4;  // 路中段（交换区）
+  }
+  enum LaneMergeType {
+    LANE_MERGE_TYPE_UNKNOWN = 0;         // 未知
+    LANE_MERGE_TYPE_NONE = 1;            // 无汇入
+    LANE_MERGE_TYPE_MERGE_TO_LEFT = 2;   // 向左汇入
+    LANE_MERGE_TYPE_MERGE_TO_RIGHT = 3;  // 向右汇入
+    LANE_MERGE_TYPE_BOTH_MERGE = 4;      // 双向汇入（车道合并）
+    LANE_MERGE_TYPE_LANE_END = 5;        // 车道结束
+  }
+  enum LaneExtensionType {
+    LANE_EXTENSION_TYPE_UNKNOWN = 0;          // 未知
+    LANE_EXTENSION_TYPE_NONE = 1;             // 无扩展
+    LANE_EXTENSION_TYPE_EXTEND_TO_LEFT = 2;   // 向左扩展
+    LANE_EXTENSION_TYPE_EXTEND_TO_RIGHT = 3;  // 向右扩展
+    LANE_EXTENSION_TYPE_EXTEND_TO_BOTH = 4;   // 双向扩展
+    LANE_EXTENSION_TYPE_LANE_START = 5;       // 车道开始
+  }
+  enum LaneMarkingChangeType {
+    LANE_MARKING_CHANGE_TYPE_UNKNOWN = 0;              // 未知
+    LANE_MARKING_CHANGE_TYPE_SPLIT_OR_MERGE = 1;       // 分离或合并
+    LANE_MARKING_CHANGE_TYPE_APPEAR_OR_DISAPPEAR = 2;  // 出现或消失
+  }
+  optional bool is_from_start_to_end = 1;          // 是否从起点到终点
+  optional uint32 total_lane_number = 2;           // 总车道数
+  optional uint32 previous_lane_number = 3;        // 变化点前车道数量
+  optional uint32 current_lane_number = 4;         // 变化点后车道数量
+  optional common.PointLLH position = 5;           // 变化点坐标
+  optional LaneNumChangePosType pos_type = 6;      // 位置类型
+  repeated LaneMergeType merge_types = 7;          // 汇入方式类型
+  repeated LaneExtensionType extension_types = 8;  // 扩展方式类型
+  optional LaneMarkingChangeType marking_change_type = 9;  // 变化类型
+}
+
+// 点限速信息
+message SDPointSpeed {
+  // 点限速类型
+  enum PointSpeedType {
+    POINT_SPEED_TYPE_NONE = 0;       // 无
+    POINT_SPEED_TYPE_HIGHEST = 1;    // 最高限速
+    POINT_SPEED_TYPE_LOWEST = 2;     // 最低限速
+    POINT_SPEED_TYPE_RELEASE = 3;    // 解除限速
+    POINT_SPEED_TYPE_CONDITION = 4;  // 条件限速
+    POINT_SPEED_TYPE_SUGGEST = 5;    // 建议限速
+    POINT_SPEED_TYPE_VARIABLE = 6;   // 可变限速
+  }
+  // 点限速场景
+  enum PointSpeedScene {
+    POINT_SPEED_SCENE_NONE = 0;           // 无
+    POINT_SPEED_SCENE_TUNNEL = 1;         // 隧道
+    POINT_SPEED_SCENE_ZAMP = 2;           // 匝道
+    POINT_SPEED_SCENE_BRIDGE = 3;         // 桥梁
+    POINT_SPEED_SCENE_WORKING = 4;        // 施工
+    POINT_SPEED_SCENE_ACC_DEC_LANE = 5;   // 加减速车道
+    POINT_SPEED_SCENE_U_TURN = 6;         // 掉头口
+    POINT_SPEED_SCENE_HIGHWAY_END = 7;    // 高速终止
+    POINT_SPEED_SCENE_UNDER_BRIDGE = 8;   // 桥下
+    POINT_SPEED_SCENE_TURN_VEHICLE = 9;   // 转弯车辆
+    POINT_SPEED_SCENE_SA = 10;            // 服务区
+    POINT_SPEED_SCENE_CHECKPOINT = 11;    // 检查站
+    POINT_SPEED_SCENE_TOLL_STATION = 12;  // 收费站
+    POINT_SPEED_SCENE_AHEAD_RIGHT = 13;   // 提右
+    POINT_SPEED_SCENE_AHEAD_LEFT = 14;    // 提左
+    POINT_SPEED_SCENE_SCHOOL = 15;        // 学校
+    POINT_SPEED_SCENE_FACTORY = 16;       // 工厂
+    POINT_SPEED_SCENE_COUNTRY = 17;       // 村庄
+    POINT_SPEED_SCENE_SHARP_TURN = 18;    // 急转弯
+    POINT_SPEED_SCENE_CROSS = 19;         // 路口
+    POINT_SPEED_SCENE_DANGER = 20;        // 危险路段
+    POINT_SPEED_SCENE_TEST_SPEED = 21;    // 测速
+    POINT_SPEED_SCENE_AREA = 22;          // 区域
+    POINT_SPEED_SCENE_GELISOLS = 23;      // 冻土
+    POINT_SPEED_SCENE_WHOLE = 24;         // 整条路段
+  }
+
+  // 点限速相对位置
+  enum PointSpeedLocation {
+    POINT_SPEED_LOCATION_NONE = 0;    // 未知
+    POINT_SPEED_LOCATION_LEFT = 1;    // 左侧
+    POINT_SPEED_LOCATION_RIGHT = 2;   // 右侧
+    POINT_SPEED_LOCATION_UP = 3;      // 上侧
+    POINT_SPEED_LOCATION_DOWN = 4;    // 下侧
+    POINT_SPEED_LOCATION_MIDDLE = 5;  // 中间
+  }
+  optional PointSpeedType type = 1;              // 限速牌类型
+  optional int32 speed_limit = 2;                // 限速值（km/h）
+  optional uint32 pre_dist = 3;                  // 提前预告距离（m）
+  optional common.PointLLH coordinate = 4;       // 标牌坐标
+  optional uint64 affect_link_id = 5;            // 作用道路（基础ID）
+  repeated PointSpeedScene speed_scenes = 7;     // 场景
+  optional string date = 8;                      // 时间段
+  repeated SpecialTimeType special_times = 9;    // 特殊时间
+  optional common.PointLLH nav_coordinate = 10;  // 引导坐标
+  optional PointSpeedLocation location = 11;     // 相对位置
+  repeated VehicleType vehicles = 12;            // 作用车辆类型
+}
+
+// 点限速
+message PointSpeedInfos {
+  repeated SDPointSpeed point_speed = 1;
+}
+
 // 单向link
 message LinkData {
   enum FormWay {
@@ -244,6 +354,12 @@ message LinkData {
 
     ROAD_KIND_ENTER_SINGLE_CROSS = 27;  // 进入复合路口道路
     ROAD_KIND_ENTER_MULTI_CROSS = 28;   // 进入单一路口道路
+
+    ROAD_KIND_PARKING_SLOPE = 63;               // 跨层连接路, 停车场link属性
+    ROAD_KIND_PARKING_ENTRANCE = 64;    // 停车场入口, 停车场link属性
+    ROAD_KIND_PARKING_EXIT = 65;         // 停车场出口, 停车场link属性
+    ROAD_KIND_PARKING_LOT = 66;          // 停车场道路, 停车场link属性
+    ROAD_KIND_PARKING_CONNECT = 67;      // 公共道路连接路, 停车场link属性
   }
 
   optional string shape_points = 3;
@@ -293,6 +409,8 @@ message LinkData {
   repeated SpeedLimitInfo speed_limit_infos = 35;     // 限速信息
   repeated LongSolidLine long_solid_line_infos = 36;  // 长实线信息
   optional SpeedSource speed_source = 39;             // 限速来源
+  repeated LaneNumChangePoint lane_num_change_points = 40;  // 车道数量变化点
+  optional PointSpeedInfos point_speed_infos = 41;              // 点限速信息
 
   repeated common.PointLLH points = 101;   // 形状点, 使用编码02经纬度
   repeated common.Point2D points2d = 102;  // 形状点, 使用地图坐标系
@@ -476,7 +594,7 @@ message SDMapVersionOnboard {
   }
   message GuidanceDiffReportConfig {
     optional bool enable_report_vhr = 1;
-  
+
     optional uint32 min_report_version = 2;
     optional uint32 max_cached_num = 3 [default = 10];
     optional uint32 half_context_size = 4 [default = 20];
@@ -540,6 +658,11 @@ message SDMapVersionOnboard {
   message SdRoutingConfig {
     optional bool enable_amap_bind_split = 1 [default = true];
   }
+  message VLACommandConfig {
+    optional bool able_poi_pull_over = 1 [default = true];
+    optional bool able_non_poi_pull_over = 2 [default = true];
+    optional bool able_destination_pull_over = 3 [default = true];
+  }
 
   optional string sd_map_plus_version = 1;
   optional TencentSDVersion tencent_sd_version = 2;
@@ -570,6 +693,8 @@ message SDMapVersionOnboard {
   optional FusionMapConfig fusion_map_config = 13;
   // Sd routing config
   optional SdRoutingConfig sd_routing_config = 15;
+
+  optional VLACommandConfig vla_command_config = 17;
 
   optional string tencent_sdk_version = 14;
 

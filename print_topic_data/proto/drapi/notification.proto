@@ -48,6 +48,11 @@ message EventInfo {
     VlaStatusChange vla_status_change = 124; //Vla任务状态变化
     PoiPosDisplay poi_pos = 125;//poi位置显示
     SceneStrategyTypeNotify scene_strategy_notify = 126; //限速场景提示
+    SeatBeltNotify seat_belt_notify = 127; //安全带报警
+    LeaveBusLaneRequestResult leave_bus_lane_result = 128; //远离公交车道请求结果
+    LeaveBusLaneNotify leave_bus_lane_notify = 129; //远离公交车道提示
+    MemorySpeedLimitResult memory_speed_limit_result = 130;
+    SelectLaneResult select_lane_result = 131; 
 
     // ACC 1000~1499
     ACCStatusChange acc_status_change = 1000;
@@ -408,6 +413,10 @@ message DecelerationInfo {
     LARGE_VEHICLE_DEFENSIVE = 10; //大车防御性降速
     SIDE_VEHICLE_DECELERATING = 11; //旁车减速
     ROADSIDE_PARKING_BLIND_SPOTS = 12; //路边停车盲区
+    CROSS_DEFENSIVE = 13;   //横穿目标防御性降速
+    CONSTRUCTION_ZONE = 14; //感知施工区域减速
+    VISIBLE_MASK_BLIND_SPOTS = 15; //基于VISIBLE_MASK盲区减速   
+    INTERSECTION_DEFENSIVE = 16; //交叉路口防御性降速 
   }
   Reason reason = 1;
 }
@@ -554,13 +563,52 @@ message PullOverStatusChange {
   dr.routeplanning.VLAAction vla_action = 5;
 }
 
+message LeaveBusLaneRequestResult {
+  enum Result {
+    RESULT_UNKNOWN = 0;
+    NOT_ON_BUS_LANE = 1;
+    ONLY_BUS_LANE_PASSABLE = 2;
+    LEAVING_BUS_LANE = 3;  
+  }
+  Result result = 1;
+}
+
+message LeaveBusLaneNotify {
+  dr.routeplanning.VLAStatus from = 1;
+  dr.routeplanning.VLAStatus to = 2;
+  dr.routeplanning.BehaviorReason reason = 3;  
+}
+
+message MemorySpeedLimitResult {
+  bool is_memory = 1;//true 记忆限速， false 取消记忆限速
+  int32 error_code = 2; //错误码
+  int32 speed_limit = 3; //记忆限速值
+}
+
+message SelectLaneResult {
+  dr.business_info.SelectLaneAction action = 1;//选道，取消选道，记忆选道，取消记忆选道
+  int32 error_code = 2;  //错误码
+  dr.business_info.TargetLane lane = 3; //第几个车道
+}
+
 message PoiPosDisplay {
   bool dispaly = 1;
   dr.base.PointLLH pos = 2;
+  dr.base.Point3D pos_odom = 3;
 }
 
 message SceneStrategyTypeNotify {
   dr.business_info.BlcSceneStrategyType strategy = 1;
+  int32 speed_limit = 2; //生效的限速
+}
+
+message SeatBeltNotify {
+  enum Reason {
+    UNKNOWN = 0;
+    DRIVER_SEATBELT_NOT_BUCKLED = 1; //主驾未系安全带报警
+  }
+  Reason reason = 1;
+  int32 countdown = 2; //倒计时，单位秒
 }
 
 message OverTake {
@@ -678,6 +726,8 @@ message TurnArround {
     STATE_UNKNOWN = 0;
     READY = 1;  // 准备掉头
     FAILED = 2; // 掉头失败
+    WAIT_FOR_REVERSE = 3; // 多把掉头等待用户确认
+    REVERSE_TURNING = 4;  // 开始多把掉头倒车
   }
   State state = 1;
 }

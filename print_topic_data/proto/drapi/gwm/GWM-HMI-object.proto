@@ -12,6 +12,7 @@ message EgoVeh{
   Guide_Line decelerate_line = 6;
   ACCEgoStatusType acc_ego_status_type = 7;
   repeated Guide_Line vla_guide_line = 8; //vla path线
+  bool is_VLA_active = 9; //vla active状态
 
   enum ACCEgoStatusType { 
     ACC_EGOSTATUS_NO_DISPLAY = 0; 

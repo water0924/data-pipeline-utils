@@ -5,6 +5,8 @@ package deeproute.canbus;
 import "common/configs/vehicle_config.proto";
 import "canbus/gwm_chassis_detail.proto";
 import "canbus/hy11_chassis_detail.proto";
+import "canbus/lp_v35_chassis_detail.proto";
+import "canbus/lp_v35x_chassis_detail.proto";
 @_IMPORT_CHASSIS_DETAIL_PROTO_@
 
 // topic: /dtu/dtu_hmi_to_canbus_request
@@ -20,6 +22,8 @@ message HmiChassisDetails {
   oneof detail {
     GwmHmi gwm = 6;
     Hy11Hmi hy11 = 8;
+    LpV35Hmi lp_v35 = 10;
+    LpV35xHmi lp_v35x = 11;
     @_CHASSIS_DETAIL_MESSAGE_TYPE_@
   }
   reserved 7;
@@ -61,7 +65,29 @@ message Hy11Hmi {
   optional HomePrkgSysSts veh_home_prkg_sys_sts_home_prkg_sys_sts = 1;
 }
 
+message LpV35Hmi {
+  optional deeproute.canbus.lp.v35.ADDC_23_E_23E addc_23_e_23e = 1;
+  optional deeproute.canbus.lp.v35.ADDC_23_F_23F addc_23_f_23f = 2;
+  optional deeproute.canbus.lp.v35.ADDC_83_83 addc_83_83 = 3;
+  optional deeproute.canbus.lp.v35.ADDC_84_84 addc_84_84 = 4;
+  optional deeproute.canbus.lp.v35.ADDC_23_A_23A addc_23_a_23a = 5;
+  optional deeproute.canbus.lp.v35.ADDC_23_B_23B addc_23_b_23b = 6;
+  optional deeproute.canbus.lp.v35.ADDC_23_C_23C addc_23_c_23c = 7;
+  optional deeproute.canbus.lp.v35.ADDCSOC_2_F5_2F5 addcsoc_2_f5_2f5 = 8;
+  optional deeproute.canbus.lp.v35.ADDCSOC_2_F6_2F6 addcsoc_2_f6_2f6 = 9;
+}
 
+message LpV35xHmi {
+  optional deeproute.canbus.lp.v35x.ADDC_23_E_23E addc_23_e_23e = 1;
+  optional deeproute.canbus.lp.v35x.ADDC_23_F_23F addc_23_f_23f = 2;
+  optional deeproute.canbus.lp.v35x.ADDC_83_83 addc_83_83 = 3;
+  optional deeproute.canbus.lp.v35x.ADDC_84_84 addc_84_84 = 4;
+  optional deeproute.canbus.lp.v35x.ADDC_23_A_23A addc_23_a_23a = 5;
+  optional deeproute.canbus.lp.v35x.ADDC_23_B_23B addc_23_b_23b = 6;
+  optional deeproute.canbus.lp.v35x.ADDC_23_C_23C addc_23_c_23c = 7;
+  optional deeproute.canbus.lp.v35x.ADDCSOC_2_F5_2F5 addcsoc_2_f5_2f5 = 8;
+  optional deeproute.canbus.lp.v35x.ADDCSOC_2_F6_2F6 addcsoc_2_f6_2f6 = 9;
+}
 
 @_CHASSIS_HMI_TYPE_@
 

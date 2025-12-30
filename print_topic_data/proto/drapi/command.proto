@@ -4,11 +4,14 @@ syntax = "proto3";
 import "drapi/business_info.proto";
 import "drapi/base.proto";
 import "drapi/local_config.proto";
+import "drapi/lp/lp_hmi_config.proto";
+import "drapi/lp/basic_common.proto";
 import "drapi/operation_status.proto";
 import "dsm/dsm.proto";
 import "google/protobuf/any.proto";
 import "drapi/gwm_hut_notification.proto";
 import "localization/havp_map.proto";
+import "drapi/road_object.proto";
 
 package dr.command;
 
@@ -32,6 +35,9 @@ message Command {  // topic: (to blc)/blc/command (to dsm)/dsm/command
     PullOver pull_over = 1007;
     YieldObstacle  yield_obstacle = 1008;
     OverTake over_take = 1009;
+    LeaveBusLane leave_bus_lane = 1010;
+    MemorySpeedLimit memory_speed_limit = 1011;
+    
     
     // acc internal
     SetACCTTC set_ttc = 1100;
@@ -40,6 +46,7 @@ message Command {  // topic: (to blc)/blc/command (to dsm)/dsm/command
     EnableICA enable_ica = 2000;
     ChangeLane change_lane = 2005;
     ChangeAutoUpgrade change_auto_upgrade = 2006;  //升级到NCA,降级到ICA指令
+    SelectLane select_lane = 2007; //选道
 
     // nca 3000~3999
     EnableNCA enable_nca = 3000;
@@ -55,6 +62,8 @@ message Command {  // topic: (to blc)/blc/command (to dsm)/dsm/command
     // las 4000~4999
     EnableLDW enable_ldw = 4000;
     EnableRDP enable_rdp = 4500;
+    ActiveSafetyControlStatus lka_control_status = 4501;
+    ActiveSafetyControlStatus elk_control_status = 4502;
 
     // apa 5000~5999
     ActiveAPA active_apa = 5000;                       // 界面进入APA
@@ -85,6 +94,8 @@ message Command {  // topic: (to blc)/blc/command (to dsm)/dsm/command
     SmartLPCommand smart_lp_command = 5102; // SMART VPA
     GLParkingCommand gl_parking_command = 5103; // GL Command
     GLHPACommand gl_hpa_command = 5104; // GL HPA Command
+    VizLeapCommand leap_command = 5105;    // LP Command
+
     // vpa 6000~6999
     VPARouting vpa_routing = 6001;
     VPALearning vpa_learning = 6002;
@@ -167,6 +178,7 @@ message Command {  // topic: (to blc)/blc/command (to dsm)/dsm/command
     // GWM 8500~8599
     SelPrkgFctnCmd select_parking_function = 8500;
     ContnPrkgReq continue_parking_request = 8501;
+    ConfirmReverseReq confirm_reverse_request = 8502;
 
     // tsr 8600~8699
     EnableTSR enable_tsr = 8600;
@@ -300,6 +312,7 @@ message CommandRP {  // topic: /blc/command_response  topic: /dsm/command_respon
   }
   string module_err_msg =
       9103;  // module(only map engine for now)'s response error message
+  uint32 module_error_code = 9104;      
 }
 
 // common
@@ -337,6 +350,10 @@ message YieldObstacle {//避让障碍物--车辆行人等
 }
 
 message OverTake {//超车  
+  dr.roadobject.TargetType type = 1;
+}
+
+message LeaveBusLane {//远离公交车道
 }
 
 message SetACCTTC {
@@ -347,6 +364,12 @@ message ChangeSpeedLimit {
   dr.business_info.ChangeValueAction action = 1;
   int32 speed_limit = 2; //when  action=SET
   int32 step = 3; //when action=INCREASE,or DECREASE
+}
+
+message MemorySpeedLimit {
+  bool memory = 1;//true,记忆限速, false, 取消记忆限速
+  dr.business_info.ChangeValueAction action = 2;
+  int32 speed_limit = 3; //when  action=SET      
 }
 
 message GetACCSpeedLimit {
@@ -369,6 +392,11 @@ message ChangeLane {
     TURN = 3; //非指定方向变道
   }
   Action action = 1;
+}
+
+message SelectLane {
+  dr.business_info.SelectLaneAction action = 1;
+  dr.business_info.TargetLane lane = 2;
 }
 
 message ChangeAutoUpgrade {
@@ -783,6 +811,7 @@ message StartCalibration {
   dr.business_info.CalibrationMode calib_mode = 2;
   repeated dr.business_info.CalibrationBoardInfo calibration_info = 3;
   bool is_rear_axle_positioning = 4;
+  optional dr.business_info.CalibrationStationCode station_code = 5;
 }
 
 message StartCalibrationRP {
@@ -1135,6 +1164,17 @@ message GLParkingCommand {
   }
 }
 
+message LeapCommand {
+  oneof Command {
+    lp.hmi.ApaHmiConfig        	apa_hmi_config           = 1;  // APA交互配置
+    lp.hmi.HpaHmiConfig        	hpa_hmi_config           = 2;  // HPA交互配置
+    lp.hmi.RpaHmiConfig        	rpa_hmi_config           = 3;  // RPA交互配置
+    lp.hmi.RAHmiConfig					ra_hmi_config			  	   = 4;  // 循迹倒车交互配置
+    lp.hmi.ClarionCallHmiConfig	clarion_call_hmi_config  = 5;  // 直线召唤交互配置
+    lp.basiccommon.FunctionSwitchEnum  	ble_app_rpa_connect = 6; // 激活RPA泊出信号
+  }
+}
+
 message GLHPACommand {
   enum AutValtPrkgSwtType {
     ONOFFNOREQ_NOREQ = 0;
@@ -1327,3 +1367,70 @@ enum ActiveSafetyControlStatus {
   OPEN = 1;  // 控车
   CLOSED = 2;  // 不控车
 }; 
+
+message ConfirmReverseReq {
+}
+
+message VizLeapCommand {
+  enum LeapCmdType {
+    UnKnown = 0;
+    // apa
+    apa_sw = 1;
+    parking_out_started = 2;
+    parking_out_direction = 3;
+    parking_continue = 4;
+    parking_pause = 5;
+    parking_cancel = 6;
+    parking_slot_id = 7;
+    parking_started = 8;
+    parking_mode = 9;
+    parkingout_type = 10;
+    
+    parking_change = 12;
+    parking_in_direction = 13;
+    parking_in_offset = 14;
+    parking_speed = 15;
+
+    // rpa
+    remote_parking_started = 100;
+    remote_parkingout_started = 101;
+    remote_door_sw = 102;
+    remote_parking_out_class = 103;
+    remote_parking_out_direction = 104;
+    remote_parking_pause = 105;
+    remote_parking_continue = 106;
+    remote_parking_cancel = 107;
+    // parkingout_type = 108;
+    ble_app_rpa_connect = 109;
+
+    // rspa
+    ble_clarion_call_sts = 150;
+    ble_clarion_call_workrequest = 111;
+    ble_clarion_call_directctl = 112;
+    ble_clarion_call_continue = 113;
+    ble_error_code = 114;
+
+    // rads
+    ra_sw = 200;
+    ra_start = 201;
+    ra_parking_request = 202;
+
+    // vpa
+    p2p_sw = 300;
+    hpa_sw = 301;
+    background_mapping_sw = 302;
+    route_id = 303;
+    delete_map_request = 304;
+    roadmap_build_request = 305;
+    valet_parking_request = 306;
+    cruising_slot_id = 307;
+    select_exit_poi_id = 308;
+    map_id_check_result = 309;
+    get_map_list = 310;
+    get_target_map_info = 311;
+    nav_request = 312;                 
+
+  }
+  LeapCommand leap_command = 1;     // LP Command
+  LeapCmdType leap_cmd_type = 2;    // Leap Command Type
+}

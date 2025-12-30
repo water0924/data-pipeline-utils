@@ -1,0 +1,16 @@
+syntax = "proto2";
+
+package deeproute.live_reload;
+
+import "common/module_event.proto";
+
+// topic: /live_reload/hot_update_strategy
+message HotUpdateStrategy {
+  optional int32 task_id = 1;
+  repeated RestartModuleStrategy restart_module_strategys = 2;
+}
+
+message RestartModuleStrategy {
+  required dr.common.Module module = 1;  // 模块
+  required bool restart_effective = 2;   // 是否需要重启
+}

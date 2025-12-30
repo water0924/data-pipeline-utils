@@ -145,8 +145,10 @@ install(
   FILES_MATCHING
   PATTERN "*.h*")
 
+# Resolve symlink to real path. When CMAKE_CURRENT_SOURCE_DIR is a symlink.
+get_filename_component(PROTO_SOURCE_REAL_PATH ${CMAKE_CURRENT_SOURCE_DIR} REALPATH)
 install(
-  DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
+  DIRECTORY ${PROTO_SOURCE_REAL_PATH}/
   DESTINATION include/proto
   FILES_MATCHING
   PATTERN "*.proto")

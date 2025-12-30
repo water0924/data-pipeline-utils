@@ -137,6 +137,7 @@ proto_library(
         "//proto/drdtu:dtu_command_proto",
         "//proto/canbus:chassis_proto",
         "//proto/planning:planning_proto",
+        "//proto/perception:deeproute_perception_ras_map_proto",
     ],
     strip_import_prefix = "/proto/",
 )

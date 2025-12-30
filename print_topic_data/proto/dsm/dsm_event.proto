@@ -44,6 +44,7 @@ message Recovery {
 // topic: /dsm/reset_event
 message DSMResetEvent {
   bool total_reset = 1;
+  string reset_log = 2;
 }
 
 message EntityAbnormalNotify {

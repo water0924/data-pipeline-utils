@@ -16,7 +16,7 @@ from proto.map import sd_map_pb2 as map_dot_sd__map__pb2
 from proto.routing import navinfo_routing_pb2 as routing_dot_navinfo__routing__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16map/sd_map_debug.proto\x12\rdeeproute.map\x1a\x10map/sd_map.proto\x1a\x1drouting/navinfo_routing.proto\"4\n\x15\x43rowdSourceReportData\x12\x1b\n\x13sd_event_info_jsons\x18\x01 \x03(\t\"h\n\x1d\x43rowdSourceBenchmarkDebugInfo\x12G\n\x19\x63rowd_source_report_datas\x18\x01 \x03(\x0b\x32$.deeproute.map.CrowdSourceReportData\">\n\x0fOnboardMpConfig\x12\x14\n\x0cmp_namespace\x18\x01 \x01(\t\x12\x15\n\rroi_namespace\x18\x02 \x01(\t\"\xa1\x02\n\x0eSdMapDebugInfo\x12\x46\n\x18\x63rowd_source_report_data\x18\x01 \x01(\x0b\x32$.deeproute.map.CrowdSourceReportData\x12\x16\n\x0esd_map_version\x18\x02 \x01(\t\x12\x31\n\tmp_config\x18\x03 \x01(\x0b\x32\x1e.deeproute.map.OnboardMpConfig\x12<\n\x11\x66usion_map_config\x18\x04 \x01(\x0b\x32!.deeproute.sd_map.FusionMapConfig\x12\"\n\x1alocal_routing_cloud_config\x18\x0b \x01(\t\x12\x1a\n\x12speed_limit_config\x18\x0c \x01(\t')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16map/sd_map_debug.proto\x12\rdeeproute.map\x1a\x10map/sd_map.proto\x1a\x1drouting/navinfo_routing.proto\"4\n\x15\x43rowdSourceReportData\x12\x1b\n\x13sd_event_info_jsons\x18\x01 \x03(\t\"h\n\x1d\x43rowdSourceBenchmarkDebugInfo\x12G\n\x19\x63rowd_source_report_datas\x18\x01 \x03(\x0b\x32$.deeproute.map.CrowdSourceReportData\">\n\x0fOnboardMpConfig\x12\x14\n\x0cmp_namespace\x18\x01 \x01(\t\x12\x15\n\rroi_namespace\x18\x02 \x01(\t\"\xdd\x02\n\x0eSdMapDebugInfo\x12\x46\n\x18\x63rowd_source_report_data\x18\x01 \x01(\x0b\x32$.deeproute.map.CrowdSourceReportData\x12\x16\n\x0esd_map_version\x18\x02 \x01(\t\x12\x31\n\tmp_config\x18\x03 \x01(\x0b\x32\x1e.deeproute.map.OnboardMpConfig\x12<\n\x11\x66usion_map_config\x18\x04 \x01(\x0b\x32!.deeproute.sd_map.FusionMapConfig\x12\"\n\x1alocal_routing_cloud_config\x18\x0b \x01(\t\x12\x1a\n\x12speed_limit_config\x18\x0c \x01(\t\x12:\n\x0frouting_version\x18\r \x01(\x0b\x32!.deeproute.navinfo.RoutingVersion')
 
 
 
@@ -62,5 +62,5 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _ONBOARDMPCONFIG._serialized_start=250
   _ONBOARDMPCONFIG._serialized_end=312
   _SDMAPDEBUGINFO._serialized_start=315
-  _SDMAPDEBUGINFO._serialized_end=604
+  _SDMAPDEBUGINFO._serialized_end=664
 # @@protoc_insertion_point(module_scope)

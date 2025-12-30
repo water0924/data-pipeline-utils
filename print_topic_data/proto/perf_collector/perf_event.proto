@@ -172,6 +172,7 @@ message SysTrace {
   optional uint32 mem_anon = 40;
   optional uint32 mem_file = 41;
   optional uint32 mem_used = 42;
+  optional uint32 arena_max_alloc = 43;
 }
 
 // 对应于Event id PERF_TRACE_TASK
@@ -385,4 +386,19 @@ message ModuleSchedConfig {
   optional string msg_index = 2; // 消息索引
   optional string total_count = 3; // 消息总数
   repeated ModuleProcessSchedConfig process_sched_config = 4; // 进程调度配置
+}
+
+message ProcessHwMemInfo{
+  optional string name = 1;
+  optional uint32 mem = 2;
+}
+
+message SystemHwMemInfo{
+  optional string time = 1;
+  optional uint32 total = 2;
+  optional uint32 used = 3;
+  optional uint32 pool_avail = 4;
+  optional uint32 pool_avail_big = 5;
+  optional uint32 zero = 6;
+  repeated ProcessHwMemInfo process_info = 7;
 }

@@ -16,11 +16,12 @@ from proto.common import geometry_pb2 as common_dot_geometry__pb2
 from proto.semantic_map import map_overlap_pb2 as semantic__map_dot_map__overlap__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n&semantic_map/map_connection_line.proto\x12\x0f\x64\x65\x65proute.hdmap\x1a\x15\x63ommon/geometry.proto\x1a\x1esemantic_map/map_overlap.proto\"\xb1\x01\n\x0e\x43onnectionLine\x12\n\n\x02id\x18\x01 \x01(\x05\x12,\n\x08polyline\x18\x02 \x01(\x0b\x32\x1a.deeproute.common.Polyline\x12\x14\n\x0cnext_lane_id\x18\x03 \x01(\x05\x12\x14\n\x0clast_lane_id\x18\x04 \x01(\x05\x12\r\n\x05layer\x18\x05 \x01(\x05\x12*\n\x08overlaps\x18\x06 \x03(\x0b\x32\x18.deeproute.hdmap.Overlap')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n&semantic_map/map_connection_line.proto\x12\x0f\x64\x65\x65proute.hdmap\x1a\x15\x63ommon/geometry.proto\x1a\x1esemantic_map/map_overlap.proto\"\xf0\x02\n\x0e\x43onnectionLine\x12\n\n\x02id\x18\x01 \x01(\x05\x12,\n\x08polyline\x18\x02 \x01(\x0b\x32\x1a.deeproute.common.Polyline\x12\x14\n\x0cnext_lane_id\x18\x03 \x01(\x05\x12\x14\n\x0clast_lane_id\x18\x04 \x01(\x05\x12\r\n\x05layer\x18\x05 \x01(\x05\x12*\n\x08overlaps\x18\x06 \x03(\x0b\x32\x18.deeproute.hdmap.Overlap\x12\x34\n\x05usage\x18\x07 \x03(\x0e\x32%.deeproute.hdmap.ConnectionLine.Usage\x12/\n\x0bmp_polyline\x18\x08 \x01(\x0b\x32\x1a.deeproute.common.Polyline\"V\n\x05Usage\x12\x12\n\x0e\x45TC_CENTERLINE\x10\x00\x12\x11\n\rPASSABLE_LINE\x10\x01\x12\x11\n\rPLANNING_LINE\x10\x02\x12\x13\n\x0fPREDICTION_LINE\x10\x03')
 
 
 
 _CONNECTIONLINE = DESCRIPTOR.message_types_by_name['ConnectionLine']
+_CONNECTIONLINE_USAGE = _CONNECTIONLINE.enum_types_by_name['Usage']
 ConnectionLine = _reflection.GeneratedProtocolMessageType('ConnectionLine', (_message.Message,), {
   'DESCRIPTOR' : _CONNECTIONLINE,
   '__module__' : 'semantic_map.map_connection_line_pb2'
@@ -32,5 +33,7 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _CONNECTIONLINE._serialized_start=115
-  _CONNECTIONLINE._serialized_end=292
+  _CONNECTIONLINE._serialized_end=483
+  _CONNECTIONLINE_USAGE._serialized_start=397
+  _CONNECTIONLINE_USAGE._serialized_end=483
 # @@protoc_insertion_point(module_scope)

@@ -261,3 +261,15 @@ message RASMapPlus {
   // cruise routing info
   optional routing.LocalRouting cruise_routing = 6;
 }
+
+// 简化版本的rasmap plus。目前只包含限速类信息
+message RASMapPlusSimple {
+  // This id is used to match this message with other data. It has nothing to do
+  // with ids of elements in map.
+  optional int32 id = 1;
+
+  // 基于路线给出的简化routing信息
+  optional routing.LocalRoutingSimple local_routing = 2;
+  // 巡航状态下的简化routing信息
+  optional routing.LocalRoutingSimple cruise_routing = 3;
+}

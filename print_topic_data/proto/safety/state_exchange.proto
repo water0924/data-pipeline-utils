@@ -30,6 +30,7 @@ message SafetyState { // topic: "/safety/soc_status"
   repeated TriggeredEvent triggered_events = 2;
   optional SysTrace sys_trace = 3;
   optional uint64 soc_timeout_intervel = 4;
+  optional bool enable_mcu_policy = 5;
 }
 
 // TODO 温度、电源状态
@@ -119,6 +120,9 @@ message SocSafetyState {
   optional uint32 soc_timeout_ms = 2; // required. SOC timeout value in milliseconds
   optional SocFailureInfo soc_failure_info = 3; // required. current SOC failure info, failures should be reported continuously until recovery
   optional bool full_detect_enabled = 4; // required. current SOC full_detect status
+
+  // required. enable/disable MCU safety policies
+  optional bool enable_mcu_policy = 5;
 }
 
 enum McuMode {

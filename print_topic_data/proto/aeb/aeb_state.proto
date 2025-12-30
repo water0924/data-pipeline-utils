@@ -68,6 +68,7 @@ enum RAEBState {
   RAEB_ACTIVE = 3;
   RAEB_STAND_STILL = 4;
   RAEB_STANDBY = 5;
+  REBA_ACTIVE = 6;
 }
 
 enum ABPState {
@@ -93,17 +94,18 @@ enum ClosestReason {
   AWB = 3;
   AEB = 4;
   EBA = 5;
-  RAEB = 6;
+  RAEB = 6; // raeb
   RCTB = 7;
   FCTB = 8;
   MEB = 9;
+  REBA = 10;
 }
 
 message StateInfo {
   optional FCWState fcw_state = 1;
   optional AEBState aeb_state = 2;
   optional FCTAState fcta_state = 3;
-  optional RAEBState raeb_state = 4;
+  optional RAEBState raeb_state = 4; // raeb
   optional RCTBState rctb_state = 5;
   optional FCTBState fctb_state = 6;
   optional MEBState meb_state = 7;
@@ -111,6 +113,11 @@ message StateInfo {
   optional AWBState awb_state = 9;
   optional deeproute.esa.ESAState esa_state = 10;
   optional deeproute.esa.AESState aes_state = 11;
+  optional deeproute.esa.State elk_state = 12;
+  optional deeproute.esa.State lka_state = 13;
+  optional deeproute.esa.State ldw_state = 14;
+  optional deeproute.esa.State lcp_state = 15;
+  optional deeproute.esa.State nas_state = 16;
 }
 
 message ObjectInfo{
@@ -188,6 +195,47 @@ message Object {
   optional int32 detection_id = 15;
 }
 
+message UsedTrajectory{
+  enum UsedTrajectoryType {
+    UNKNOWN = 0;
+    DEFAULT = 1;
+    MODEL_BASED = 2;
+    CENTER_LINE = 3;
+    NUDGE = 4;
+    ACCEL = 5;
+    STEER = 6;
+    CROSSWALK = 7;
+    RAW_MODEL_BASED = 8;
+    FULLY = 9;
+    FUSED = 10;
+    PLANNING = 11;
+    MAI = 12;
+    MAI_CENTERING = 13;
+    CPNCO = 14;
+    WARNING = 15;
+    DECEL = 16;
+  }
+  optional UsedTrajectoryType type = 1 [default = UNKNOWN];
+  repeated deeproute.prediction.LocusPoint trajectory_points = 2;
+}
+
+message ElkFeatureInfo {
+  optional double dist_to_left_boundary = 1;
+  optional double dist_to_right_boundary = 2;
+  optional double ttl = 3;
+  optional double ttc_o = 4;
+  optional double ttc_ics = 5;
+  optional double ttc = 6;
+  optional double lon_dist_to_obj = 7;
+  optional double lat_dist_to_obj = 8;
+  optional double obj_lon_v = 9;
+  optional double obj_lat_v = 10;
+  optional int32 obj_type = 11;
+  optional int32 sensor_type = 12;
+  optional double obj_confidence_score = 13;
+  optional int32 obj_id = 14;
+}
+
 message FeatureInfo {
   enum FeatureType {
     UNKNOWN = 0;
@@ -199,6 +247,21 @@ message FeatureInfo {
     MEB = 6;
     ESA = 7;
     AES = 8;
+    FCTB = 9;
+    FCTA = 10;
+    RAEB = 11;
+    ELK = 12;
+    LKA = 13;
+    LDW = 14;
+    LCP = 15;
+    NAS = 16;    
+    LLW = 17;
+  }
+  enum ResultType{
+    UNKNOWN_RESULT_TYPE = 0;
+    RULE_BASED = 1;
+    MODEL = 2;
+    NOA_SAFETY = 3;
   }
   optional string name = 1 [default = ""];
   optional double ttc = 2 [default = 100.0];
@@ -217,6 +280,15 @@ message FeatureInfo {
   optional string closest_obj_data_source = 14;
   optional Object collide_adc = 15;
   optional Object collide_obj = 16;
+  // for data collection(5 seconds)
+  repeated UsedTrajectory adc_trajectory = 17;
+  repeated UsedTrajectory closest_obj_trajectory = 18;
+  optional double request_decel = 19;
+  // different from  "AEB", "AEB_MODEL", "NOA_SAFETY_MODEL"
+  optional ResultType result_type = 20; 
+  optional int32 laneline_id = 21;
+  optional int32 roadedge_id = 22;
+  optional ElkFeatureInfo elk_feature_info = 23;
 }
 enum ThreatLevel {
   THREAT_NONE = 0;
@@ -264,8 +336,8 @@ message StateWrapper {
   optional double ttc_display = 23;
   optional string closest_aeb_type = 24;
   optional double closest_obj_accel = 25 [default = 0.0];
-  optional string raeb_off_reason = 26;
-  optional string raeb_inhibit_reason = 27;
+  optional string raeb_off_reason = 26; // raeb
+  optional string raeb_inhibit_reason = 27; // raeb
   optional string rctb_inhibit_reason = 28;
   optional string rctb_off_reason = 29;
   optional CrossingWarningStatus crossing_warning_status = 30 [default = NONE];
@@ -284,6 +356,8 @@ message StateWrapper {
   optional string shadow_reasons = 42;
   repeated FeatureInfo features_info = 43;
   optional MAITriggerLevel mai_trigger_level = 44;
+  optional bool in_field = 45 [default = false];
+  optional bool enable_field_mode = 46 [default = false];
   optional string display_reason = 100;
   optional bool enable_cruise_speed_mode = 101 [default = false];
   optional double cruise_speed_cmd = 102 [default = 5.56];

@@ -59,6 +59,15 @@ enum CalibrationStep {
   CALIBRATION_STEP_ONLINE_INERTIAL_NAVIGATION = 0x50;
 }
 
+// Calibration station code enumeration
+enum CalibrationStationCode {
+  CALIB_STATION_DEFAULT = 0x00;            // code station defined in adas_online_calibrator
+  CALIB_STATION_GEELY_QIANTANG = 0x01;     // Geely Qiantang station P177
+  CALIB_STATION_GEELY_WUHAN = 0x02;        // Geely Wuhan station 
+  CALIB_STATION_GEELY_CHUNXIAO = 0x03;     // Geely Chunxiao station
+  CALIB_STATION_GEELY_QIANTANG_LOW = 0x04;  // Geely Qiantang station P171
+}
+
 // https://rqk9rsooi4.feishu.cn/sheets/NNzpsukt1hiJfitLdY2cO1tjn3f
 enum CalibrationErrorCode {
   CALIB_ERR_CODE_STATIC_CAMERA_ROLL_CALIB_RUNNING = 0X06;
@@ -185,6 +194,7 @@ message CalibrationCommand {
   optional CalibrationSetting calib_setting = 4;
   repeated CalibrationBoardInfo board_list = 5;
   optional bool is_rear_axle_positioning = 6 [default = false];
+  optional CalibrationStationCode station_code = 7;
 }
 
 message CalibrationSingleSensorState {

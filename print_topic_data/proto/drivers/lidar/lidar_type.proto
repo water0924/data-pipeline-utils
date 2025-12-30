@@ -49,6 +49,12 @@ enum Model {
   HS_ATX_SOLID = 32;
   RS_MX_SOLID = 33;
   PANDAR_QT_128 = 34;
+
+  RS_EMX_SOLID = 35;
+  SEYOND_E1X_SOLID = 36;
+
+  RS_AIRY = 37;
+  RS_FAIRY = 38;
 }
 
 enum Mode {

@@ -15,6 +15,7 @@ enum CurrentMode {
 
 message CurrentModeEvent {
   CurrentMode current_mode = 1;
+  bool is_in_routing = 2;
 }
 
 // blc modules send 'BlcToLocalizationEvent' 

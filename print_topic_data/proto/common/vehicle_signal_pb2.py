@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1b\x63ommon/vehicle_signal.proto\x12\x10\x64\x65\x65proute.common\"\x8f\x04\n\rVehicleSignal\x12?\n\x0bturn_signal\x18\x01 \x01(\x0e\x32*.deeproute.common.VehicleSignal.TurnSignal\x12\x11\n\thigh_beam\x18\x02 \x01(\x08\x12\x10\n\x08low_beam\x18\x03 \x01(\x08\x12\x0c\n\x04horn\x18\x04 \x01(\x08\x12\x17\n\x0f\x65mergency_light\x18\x05 \x01(\x08\x12\x10\n\x08position\x18\x06 \x01(\x08\x12;\n\tauto_beam\x18\x07 \x01(\x0e\x32(.deeproute.common.VehicleSignal.AutoBeam\x12\x36\n\x06reason\x18\x08 \x03(\x0e\x32&.deeproute.common.VehicleSignal.Reason\":\n\nTurnSignal\x12\r\n\tTURN_NONE\x10\x00\x12\r\n\tTURN_LEFT\x10\x01\x12\x0e\n\nTURN_RIGHT\x10\x02\"N\n\x08\x41utoBeam\x12\x18\n\x14\x41UTO_BEAM_NO_REQUEST\x10\x00\x12\x14\n\x10\x41UTO_BEAM_CLOSED\x10\x01\x12\x12\n\x0e\x41UTO_BEAM_OPEN\x10\x02\"^\n\x06Reason\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x08\n\x04TURN\x10\x01\x12\x0f\n\x0bLANE_CHANGE\x10\x02\x12\t\n\x05NUDGE\x10\x03\x12\t\n\x05MERGE\x10\x04\x12\t\n\x05SPLIT\x10\x05\x12\x0b\n\x07PARKING\x10\x06')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1b\x63ommon/vehicle_signal.proto\x12\x10\x64\x65\x65proute.common\"\xba\x04\n\rVehicleSignal\x12?\n\x0bturn_signal\x18\x01 \x01(\x0e\x32*.deeproute.common.VehicleSignal.TurnSignal\x12\x11\n\thigh_beam\x18\x02 \x01(\x08\x12\x10\n\x08low_beam\x18\x03 \x01(\x08\x12\x0c\n\x04horn\x18\x04 \x01(\x08\x12\x17\n\x0f\x65mergency_light\x18\x05 \x01(\x08\x12\x10\n\x08position\x18\x06 \x01(\x08\x12;\n\tauto_beam\x18\x07 \x01(\x0e\x32(.deeproute.common.VehicleSignal.AutoBeam\x12\x36\n\x06reason\x18\x08 \x03(\x0e\x32&.deeproute.common.VehicleSignal.Reason\":\n\nTurnSignal\x12\r\n\tTURN_NONE\x10\x00\x12\r\n\tTURN_LEFT\x10\x01\x12\x0e\n\nTURN_RIGHT\x10\x02\"N\n\x08\x41utoBeam\x12\x18\n\x14\x41UTO_BEAM_NO_REQUEST\x10\x00\x12\x14\n\x10\x41UTO_BEAM_CLOSED\x10\x01\x12\x12\n\x0e\x41UTO_BEAM_OPEN\x10\x02\"\x88\x01\n\x06Reason\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x08\n\x04TURN\x10\x01\x12\x0f\n\x0bLANE_CHANGE\x10\x02\x12\t\n\x05NUDGE\x10\x03\x12\t\n\x05MERGE\x10\x04\x12\t\n\x05SPLIT\x10\x05\x12\x0b\n\x07PARKING\x10\x06\x12\x12\n\x0eMODEL_BEHAVIOR\x10\x07\x12\x14\n\x10\x45XIT_SPEED_LIMIT\x10\x08')
 
 
 
@@ -33,11 +33,11 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _VEHICLESIGNAL._serialized_start=50
-  _VEHICLESIGNAL._serialized_end=577
+  _VEHICLESIGNAL._serialized_end=620
   _VEHICLESIGNAL_TURNSIGNAL._serialized_start=343
   _VEHICLESIGNAL_TURNSIGNAL._serialized_end=401
   _VEHICLESIGNAL_AUTOBEAM._serialized_start=403
   _VEHICLESIGNAL_AUTOBEAM._serialized_end=481
-  _VEHICLESIGNAL_REASON._serialized_start=483
-  _VEHICLESIGNAL_REASON._serialized_end=577
+  _VEHICLESIGNAL_REASON._serialized_start=484
+  _VEHICLESIGNAL_REASON._serialized_end=620
 # @@protoc_insertion_point(module_scope)

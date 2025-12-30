@@ -86,12 +86,22 @@ message DrRoutingOption {
   optional DrRoutePlanningMetric.HighwayMetric high_way_metric = 3;
 }
 
+enum SwitchOption {
+  SWITCH_OPTION_UNKNOWN = 0;
+  CONTROL_BY_SERVER = 1;
+  FORCE_TURN_ON = 2;
+  FORCE_TURN_OFF = 3;
+}
+
 message AmapRoutingOption {
   optional bool use_temporary_odd = 1;
 
   // v2
   optional bool dynamic_static_odd_switch = 2;
   optional bool roi_odd_switch = 3;
+
+  optional SwitchOption experience_spl_switch = 4;
+  optional SwitchOption static_defensive_strategy = 5;
 }
 
 message RequestInfo {
@@ -155,6 +165,10 @@ enum RoutingCode {
 
   // 新路线与原路线距离过近
   ACTION_POSITION_IS_TOO_CLOSE = 12;
+
+  // 高德重算与当前正在执行的vla路线不一致，忽略重算结果
+  AMAP_RECALCULATE_IGNORE = 13;
+
   // from server
   // 路网查不到Link
   ROUTING_SERVER_NOT_FOUND_LINK = 1003;

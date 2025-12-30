@@ -16,7 +16,7 @@ _sym_db = _symbol_database.Default()
 from proto.common import header_pb2 as common_dot_header__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n#drivers/ultrasonic/ultrasonic.proto\x12\x1c\x64\x65\x65proute.drivers.ultrasonic\x1a\x13\x63ommon/header.proto\"\x97\x03\n\x0fUltrasonicState\x12\x1f\n\x17object_detect_area_list\x18\x01 \x03(\r\x12\x14\n\x0c\x66pas_dispcmd\x18\x02 \x01(\x08\x12T\n\x11\x61pasys_workstatus\x18\x03 \x01(\x0e\x32\x39.deeproute.drivers.ultrasonic.UltrasonicState.WorkStsType\x12\x1a\n\x12probe_fault_status\x18\x04 \x03(\r\x12\x18\n\x10pdc_mute_btn_sts\x18\x05 \x01(\r\x12\x14\n\x0c\x66rnt_min_dst\x18\x06 \x01(\r\x12\x1a\n\x12\x66rnt_stop_disp_req\x18\x07 \x01(\r\x12\x12\n\nre_min_dst\x18\x08 \x01(\r\x12\x18\n\x10re_stop_disp_req\x18\t \x01(\r\x12!\n\x19object_area_distance_list\x18\n \x03(\r\">\n\x0bWorkStsType\x12\x0b\n\x07\x44ISABLE\x10\x00\x12\n\n\x06\x45NABLE\x10\x01\x12\n\n\x06\x41\x43TIVE\x10\x02\x12\n\n\x06\x46\x41ILED\x10\x03\"\xa3\x04\n\x10UltrasonicObject\x12(\n\x06header\x18\x01 \x01(\x0b\x32\x18.deeproute.common.Header\x12\x14\n\x08\x64istance\x18\x02 \x01(\x01:\x02-1\x12\x1f\n\x13\x63ross_distance_left\x18\x03 \x01(\x01:\x02-1\x12 \n\x14\x63ross_distance_right\x18\x04 \x01(\x01:\x02-1\x12%\n\x1d\x63ross_distance_left_timestmap\x18\x05 \x01(\r\x12&\n\x1e\x63ross_distance_right_timestmap\x18\x06 \x01(\r\x12\x12\n\nconfidence\x18\x07 \x01(\x01\x12\x11\n\tblind_pot\x18\x08 \x01(\r\x12\x12\n\necho_tof_1\x18\t \x01(\r\x12\x14\n\x0c\x65\x63ho_width_1\x18\n \x01(\r\x12\x13\n\x0b\x65\x63ho_peak_1\x18\x0b \x01(\r\x12\x12\n\necho_tof_2\x18\x0c \x01(\r\x12\x14\n\x0c\x65\x63ho_width_2\x18\r \x01(\r\x12\x13\n\x0b\x65\x63ho_peak_2\x18\x0e \x01(\r\x12\x14\n\x0cringing_time\x18\x0f \x01(\r\x12=\n\x0b\x65mit_status\x18\x10 \x01(\x0e\x32(.deeproute.drivers.ultrasonic.EmitStatus\x12\n\n\x02id\x18\x11 \x01(\r\x12\x10\n\x08\x65\x63ho_tof\x18\x12 \x01(\r\x12\x12\n\necho_width\x18\x13 \x01(\r\x12\x11\n\techo_peak\x18\x14 \x01(\r\"\xdb\x05\n\x12UltrasonicObstacle\x12(\n\x06header\x18\x01 \x01(\x0b\x32\x18.deeproute.common.Header\x12T\n\x0fobstacle_height\x18\x02 \x01(\x0e\x32;.deeproute.drivers.ultrasonic.UltrasonicObstacle.HeightType\x12\x1c\n\x14obstacle_height_prob\x18\x03 \x01(\x01\x12\x10\n\x08point1_x\x18\x04 \x01(\x01\x12\x10\n\x08point1_y\x18\x05 \x01(\x01\x12\x10\n\x08point2_x\x18\x06 \x01(\x01\x12\x10\n\x08point2_y\x18\x07 \x01(\x01\x12T\n\robstacle_type\x18\x08 \x01(\x0e\x32=.deeproute.drivers.ultrasonic.UltrasonicObstacle.ObstacleType\x12\x12\n\nconfidence\x18\t \x01(\x01\x12\n\n\x02id\x18\n \x01(\r\x12\x14\n\x0cis_memorized\x18\x0b \x01(\r\"\x88\x01\n\nHeightType\x12\x13\n\x0fHEIGHT_TYPE_LOW\x10\x00\x12\x15\n\x11HEIGHT_TYPE_HIGHT\x10\x01\x12\x1b\n\x17HEIGHT_TYPE_TRAVERSIBLE\x10\x02\x12\x17\n\x13HEIGHT_TYPE_UNKNOWN\x10\x03\x12\x18\n\x14HEIGHT_TYPE_SPECIAL1\x10\x04\"\xc7\x01\n\x0cObstacleType\x12\x16\n\x12OBSTACLE_TYPE_NONE\x10\x00\x12\x17\n\x13OBSTACLE_TYPE_POINT\x10\x01\x12\"\n\x1eOBSTACLE_TYPE_STRAIGHT0_CORNER\x10\x02\x12\"\n\x1eOBSTACLE_TYPE_STRAIGHT1_CORNER\x10\x03\x12\"\n\x1eOBSTACLE_TYPE_STRAIGHT2_CORNER\x10\x04\x12\x1a\n\x16OBSTACLE_TYPE_RESERVED\x10\x05\"\x8b\x11\n\x15UltrasonicParkingSlot\x12(\n\x06header\x18\x01 \x01(\x0b\x32\x18.deeproute.common.Header\x12\n\n\x02id\x18\x02 \x01(\r\x12[\n\x0f\x64\x65pth_reference\x18\x03 \x01(\x0e\x32\x42.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.DepthReference\x12O\n\tslot_type\x18\x04 \x01(\x0e\x32<.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.SlotType\x12S\n\x0bslot_status\x18\x05 \x01(\x0e\x32>.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.SlotStatus\x12\x11\n\tobject1_x\x18\x06 \x01(\x01\x12\x11\n\tobject1_y\x18\x07 \x01(\x01\x12\x15\n\robject1_alpha\x18\x08 \x01(\x01\x12T\n\x0cobject1_type\x18\t \x01(\x0e\x32>.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.ObjectType\x12\x11\n\tobject2_x\x18\n \x01(\x01\x12\x11\n\tobject2_y\x18\x0b \x01(\x01\x12\x15\n\robject2_alpha\x18\x0c \x01(\x01\x12T\n\x0cobject2_type\x18\r \x01(\x0e\x32>.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.ObjectType\x12\x0e\n\x06length\x18\x0e \x01(\x01\x12\r\n\x05\x64\x65pth\x18\x0f \x01(\x01\x12\x17\n\x0fobj1_start_pt_x\x18\x10 \x01(\x01\x12\x17\n\x0fobj1_start_pt_y\x18\x11 \x01(\x01\x12\\\n\x14obj1_start_pt_status\x18\x12 \x01(\x0e\x32>.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.ObjectType\x12\x15\n\robj1_end_pt_x\x18\x13 \x01(\x01\x12\x15\n\robj1_end_pt_y\x18\x14 \x01(\x01\x12Z\n\x12obj1_end_pt_status\x18\x15 \x01(\x0e\x32>.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.ObjectType\x12\x17\n\x0fobj2_start_pt_x\x18\x16 \x01(\x01\x12\x17\n\x0fobj2_start_pt_y\x18\x17 \x01(\x01\x12\\\n\x14obj2_start_pt_status\x18\x18 \x01(\x0e\x32>.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.ObjectType\x12\x15\n\robj2_end_pt_x\x18\x19 \x01(\x01\x12\x15\n\robj2_end_pt_y\x18\x1a \x01(\x01\x12Z\n\x12obj2_end_pt_status\x18\x1b \x01(\x0e\x32>.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.ObjectType\x12\x1b\n\x13slot_obj_start_pt_x\x18\x1c \x01(\x01\x12\x1b\n\x13slot_obj_start_pt_y\x18\x1d \x01(\x01\x12`\n\x18slot_obj_start_pt_status\x18\x1e \x01(\x0e\x32>.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.ObjectType\x12\x19\n\x11slot_obj_end_pt_x\x18\x1f \x01(\x01\x12\x19\n\x11slot_obj_end_pt_y\x18  \x01(\x01\x12^\n\x16slot_obj_end_pt_status\x18! \x01(\x0e\x32>.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.ObjectType\"\xe9\x01\n\x0e\x44\x65pthReference\x12\x18\n\x14\x44\x45PTH_REFERENCE_NONE\x10\x00\x12\x18\n\x14\x44\x45PTH_REFERENCE_CURB\x10\x01\x12\x18\n\x14\x44\x45PTH_REFERENCE_WALL\x10\x02\x12\x1b\n\x17\x44\x45PTH_REFERENCE_VIRTUAL\x10\x03\x12\x17\n\x13\x44\x45PTH_REFERENCE_LOW\x10\x04\x12\x18\n\x14\x44\x45PTH_REFERENCE_HIGH\x10\x05\x12\x1b\n\x17\x44\x45PTH_REFERENCE_UNKNOWN\x10\x06\x12\x1c\n\x18\x44\x45PTH_REFERENCE_RESERVED\x10\x07\"\xdc\x01\n\x08SlotType\x12\x1b\n\x17SLOT_TYPE_LEFT_PARALLEL\x10\x00\x12\x1c\n\x18SLOT_TYPE_RIGHT_PARALLEL\x10\x01\x12\x18\n\x14SLOT_TYPE_LEFT_CROSS\x10\x02\x12\x19\n\x15SLOT_TYPE_RIGHT_CROSS\x10\x03\x12\x17\n\x13SLOT_TYPE_RESERVED1\x10\x04\x12\x17\n\x13SLOT_TYPE_RESERVED2\x10\x05\x12\x17\n\x13SLOT_TYPE_RESERVED3\x10\x06\x12\x15\n\x11SLOT_TYPE_INVALID\x10\x07\"V\n\nSlotStatus\x12\x17\n\x13SLOT_STATUS_PS_NONE\x10\x00\x12\x15\n\x11SLOT_STATUS_PS_OK\x10\x01\x12\x18\n\x14SLOT_STATUS_RESERVED\x10\x02\"k\n\nObjectType\x12\x14\n\x10OBJECT_TYPE_NONE\x10\x00\x12\x17\n\x13OBJECT_TYPE_VIRTUAL\x10\x01\x12\x14\n\x10OBJECT_TYPE_REAL\x10\x02\x12\x18\n\x14OBJECT_TYPE_RESERVED\x10\x03\"s\n\x13UltrasonicDebugData\x12\x11\n\ttimestamp\x18\x01 \x01(\x01\x12\x12\n\nmsg_data64\x18\x02 \x01(\x0c\x12\x0e\n\x06msg_id\x18\x03 \x01(\r\x12\x12\n\nupdate_cnt\x18\x04 \x01(\r\x12\x11\n\tlock_flag\x18\x05 \x01(\r\"\x82\x04\n\nUltrasonic\x12(\n\x06header\x18\x01 \x01(\x0b\x32\x18.deeproute.common.Header\x12?\n\x07objects\x18\x02 \x03(\x0b\x32..deeproute.drivers.ultrasonic.UltrasonicObject\x12\x37\n\x08msg_type\x18\x03 \x01(\x0e\x32%.deeproute.drivers.ultrasonic.MsgType\x12\x43\n\tobstacles\x18\x04 \x03(\x0b\x32\x30.deeproute.drivers.ultrasonic.UltrasonicObstacle\x12J\n\rparking_slots\x18\x05 \x03(\x0b\x32\x33.deeproute.drivers.ultrasonic.UltrasonicParkingSlot\x12:\n\x04type\x18\x06 \x01(\x0e\x32,.deeproute.drivers.ultrasonic.UltrasonicType\x12<\n\x05state\x18\x07 \x01(\x0b\x32-.deeproute.drivers.ultrasonic.UltrasonicState\x12\x45\n\ndebug_data\x18\x08 \x03(\x0b\x32\x31.deeproute.drivers.ultrasonic.UltrasonicDebugData*7\n\nEmitStatus\x12\x07\n\x03OFF\x10\x00\x12\r\n\tRECV_ONLY\x10\x01\x12\x11\n\rEMIT_AND_RECV\x10\x02*5\n\x07MsgType\x12\n\n\x06OBJECT\x10\x00\x12\x0c\n\x08OBSTACLE\x10\x01\x12\x10\n\x0cPARKING_SLOT\x10\x02*y\n\x0eUltrasonicType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0c\n\x08M5_ULTRA\x10\x01\x12\x0c\n\x08M7_ULTRA\x10\x02\x12\r\n\tLONG_HORN\x10\x03\x12\x0c\n\x08M7_BOSCH\x10\x04\x12\x0b\n\x07GWM_C01\x10\x05\x12\x14\n\x10SMART_HY11_BOSCH\x10\x06')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n#drivers/ultrasonic/ultrasonic.proto\x12\x1c\x64\x65\x65proute.drivers.ultrasonic\x1a\x13\x63ommon/header.proto\"\x94\r\n\x0fUltrasonicState\x12\x1f\n\x17object_detect_area_list\x18\x01 \x03(\r\x12\x14\n\x0c\x66pas_dispcmd\x18\x02 \x01(\x08\x12T\n\x11\x61pasys_workstatus\x18\x03 \x01(\x0e\x32\x39.deeproute.drivers.ultrasonic.UltrasonicState.WorkStsType\x12\x1a\n\x12probe_fault_status\x18\x04 \x03(\r\x12\x18\n\x10pdc_mute_btn_sts\x18\x05 \x01(\r\x12\x14\n\x0c\x66rnt_min_dst\x18\x06 \x01(\r\x12\x1a\n\x12\x66rnt_stop_disp_req\x18\x07 \x01(\r\x12\x12\n\nre_min_dst\x18\x08 \x01(\r\x12\x18\n\x10re_stop_disp_req\x18\t \x01(\r\x12!\n\x19object_area_distance_list\x18\n \x03(\r\x12M\n\x0b\x65\x63u_failure\x18\x0b \x01(\x0e\x32\x38.deeproute.drivers.ultrasonic.UltrasonicState.EcuFailure\x12]\n\x14obstcl_detn_fail_sts\x18\x0c \x01(\x0e\x32?.deeproute.drivers.ultrasonic.UltrasonicState.ObstclDetnFailSts\x12R\n\x10\x66pas_sound_indcn\x18\r \x01(\x0e\x32\x38.deeproute.drivers.ultrasonic.UltrasonicState.SoundIndcn\x12R\n\x10rpas_sound_indcn\x18\x0e \x01(\x0e\x32\x38.deeproute.drivers.ultrasonic.UltrasonicState.SoundIndcn\x12S\n\x11\x66pas_auto_mod_sts\x18\x0f \x01(\x0e\x32\x38.deeproute.drivers.ultrasonic.UltrasonicState.AutoModSts\x12P\n\rfpas_work_sts\x18\x10 \x01(\x0e\x32\x39.deeproute.drivers.ultrasonic.UltrasonicState.WorkStsType\x12P\n\rrpas_work_sts\x18\x11 \x01(\x0e\x32\x39.deeproute.drivers.ultrasonic.UltrasonicState.WorkStsType\x12#\n\x1b\x66pas_fl_cornr_snsr_fail_sts\x18\x12 \x01(\x08\x12#\n\x1b\x66pas_fl_middl_snsr_fail_sts\x18\x13 \x01(\x08\x12#\n\x1b\x66pas_fr_middl_snsr_fail_sts\x18\x14 \x01(\x08\x12#\n\x1b\x66pas_fr_cornr_snsr_fail_sts\x18\x15 \x01(\x08\x12#\n\x1brpas_rl_cornr_snsr_fail_sts\x18\x16 \x01(\x08\x12#\n\x1brpas_rl_middl_snsr_fail_sts\x18\x17 \x01(\x08\x12#\n\x1brpas_rr_middl_snsr_fail_sts\x18\x18 \x01(\x08\x12#\n\x1brpas_rr_cornr_snsr_fail_sts\x18\x19 \x01(\x08\">\n\x0bWorkStsType\x12\x0b\n\x07\x44ISABLE\x10\x00\x12\n\n\x06\x45NABLE\x10\x01\x12\n\n\x06\x41\x43TIVE\x10\x02\x12\n\n\x06\x46\x41ILED\x10\x03\"y\n\nEcuFailure\x12\n\n\x06NORMAL\x10\x00\x12\x11\n\rFRONT_FAILURE\x10\x01\x12\x10\n\x0cREAR_FAILURE\x10\x02\x12\x16\n\x12\x46RONT_REAR_FAILURE\x10\x03\x12\x14\n\x10\x45XTERNAL_FAILURE\x10\x04\x12\x0c\n\x08RESERVED\x10\x05\"~\n\x11ObstclDetnFailSts\x12\x0b\n\x07INITIAL\x10\x00\x12\x12\n\x0e\x41LL_NO_FAILURE\x10\x01\x12\x1b\n\x17\x46RONT_DIRECTION_FAILURE\x10\x02\x12\x1a\n\x16REAR_DIRECTION_FAILURE\x10\x03\x12\x0f\n\x0b\x41LL_FAILURE\x10\x04\"Z\n\nSoundIndcn\x12\x15\n\x11TONE_0_NO_WARNING\x10\x00\x12\x14\n\x10TONE_1_LONG_BEEP\x10\x01\x12\x0f\n\x0bTONE_2_15HZ\x10\x02\x12\x0e\n\nTONE_3_3HZ\x10\x03\"-\n\nAutoModSts\x12\x10\n\x0cNO_AVAILABLE\x10\x00\x12\r\n\tAVAILABLE\x10\x01\"\xe1\x01\n\tMultiEcho\x12\x15\n\rtimestamp_sec\x18\x01 \x01(\x01\x12\x10\n\x08\x64istance\x18\x02 \x01(\x01\x12\x11\n\techo_peak\x18\x03 \x01(\x01\x12\x12\n\necho_width\x18\x04 \x01(\x01\x12\x12\n\nconfidence\x18\x05 \x01(\x01\x12\x43\n\techo_type\x18\x06 \x01(\x0e\x32\x30.deeproute.drivers.ultrasonic.MultiEcho.EchoType\"+\n\x08\x45\x63hoType\x12\n\n\x06\x44IRECT\x10\x00\x12\x08\n\x04LEFT\x10\x01\x12\t\n\x05RIGHT\x10\x02\"\xed\x05\n\x10UltrasonicObject\x12(\n\x06header\x18\x01 \x01(\x0b\x32\x18.deeproute.common.Header\x12\x14\n\x08\x64istance\x18\x02 \x01(\x01:\x02-1\x12\x1f\n\x13\x63ross_distance_left\x18\x03 \x01(\x01:\x02-1\x12 \n\x14\x63ross_distance_right\x18\x04 \x01(\x01:\x02-1\x12%\n\x1d\x63ross_distance_left_timestmap\x18\x05 \x01(\r\x12&\n\x1e\x63ross_distance_right_timestmap\x18\x06 \x01(\r\x12\x12\n\nconfidence\x18\x07 \x01(\x01\x12\x11\n\tblind_pot\x18\x08 \x01(\r\x12\x12\n\necho_tof_1\x18\t \x01(\r\x12\x14\n\x0c\x65\x63ho_width_1\x18\n \x01(\r\x12\x13\n\x0b\x65\x63ho_peak_1\x18\x0b \x01(\r\x12\x12\n\necho_tof_2\x18\x0c \x01(\r\x12\x14\n\x0c\x65\x63ho_width_2\x18\r \x01(\r\x12\x13\n\x0b\x65\x63ho_peak_2\x18\x0e \x01(\r\x12\x14\n\x0cringing_time\x18\x0f \x01(\r\x12=\n\x0b\x65mit_status\x18\x10 \x01(\x0e\x32(.deeproute.drivers.ultrasonic.EmitStatus\x12\n\n\x02id\x18\x11 \x01(\r\x12\x10\n\x08\x65\x63ho_tof\x18\x12 \x01(\r\x12\x12\n\necho_width\x18\x13 \x01(\r\x12\x11\n\techo_peak\x18\x14 \x01(\r\x12Y\n\x0e\x66requency_mode\x18\x15 \x01(\x0e\x32<.deeproute.drivers.ultrasonic.UltrasonicObject.FrequencyMode:\x03STD\x12;\n\nmulti_echo\x18\x16 \x03(\x0b\x32\'.deeproute.drivers.ultrasonic.MultiEcho\"0\n\rFrequencyMode\x12\x07\n\x03STD\x10\x00\x12\t\n\x05\x41\x44VUP\x10\x01\x12\x0b\n\x07\x41\x44VDOWN\x10\x02\"\xdb\x05\n\x12UltrasonicObstacle\x12(\n\x06header\x18\x01 \x01(\x0b\x32\x18.deeproute.common.Header\x12T\n\x0fobstacle_height\x18\x02 \x01(\x0e\x32;.deeproute.drivers.ultrasonic.UltrasonicObstacle.HeightType\x12\x1c\n\x14obstacle_height_prob\x18\x03 \x01(\x01\x12\x10\n\x08point1_x\x18\x04 \x01(\x01\x12\x10\n\x08point1_y\x18\x05 \x01(\x01\x12\x10\n\x08point2_x\x18\x06 \x01(\x01\x12\x10\n\x08point2_y\x18\x07 \x01(\x01\x12T\n\robstacle_type\x18\x08 \x01(\x0e\x32=.deeproute.drivers.ultrasonic.UltrasonicObstacle.ObstacleType\x12\x12\n\nconfidence\x18\t \x01(\x01\x12\n\n\x02id\x18\n \x01(\r\x12\x14\n\x0cis_memorized\x18\x0b \x01(\r\"\x88\x01\n\nHeightType\x12\x13\n\x0fHEIGHT_TYPE_LOW\x10\x00\x12\x15\n\x11HEIGHT_TYPE_HIGHT\x10\x01\x12\x1b\n\x17HEIGHT_TYPE_TRAVERSIBLE\x10\x02\x12\x17\n\x13HEIGHT_TYPE_UNKNOWN\x10\x03\x12\x18\n\x14HEIGHT_TYPE_SPECIAL1\x10\x04\"\xc7\x01\n\x0cObstacleType\x12\x16\n\x12OBSTACLE_TYPE_NONE\x10\x00\x12\x17\n\x13OBSTACLE_TYPE_POINT\x10\x01\x12\"\n\x1eOBSTACLE_TYPE_STRAIGHT0_CORNER\x10\x02\x12\"\n\x1eOBSTACLE_TYPE_STRAIGHT1_CORNER\x10\x03\x12\"\n\x1eOBSTACLE_TYPE_STRAIGHT2_CORNER\x10\x04\x12\x1a\n\x16OBSTACLE_TYPE_RESERVED\x10\x05\"\x8b\x11\n\x15UltrasonicParkingSlot\x12(\n\x06header\x18\x01 \x01(\x0b\x32\x18.deeproute.common.Header\x12\n\n\x02id\x18\x02 \x01(\r\x12[\n\x0f\x64\x65pth_reference\x18\x03 \x01(\x0e\x32\x42.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.DepthReference\x12O\n\tslot_type\x18\x04 \x01(\x0e\x32<.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.SlotType\x12S\n\x0bslot_status\x18\x05 \x01(\x0e\x32>.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.SlotStatus\x12\x11\n\tobject1_x\x18\x06 \x01(\x01\x12\x11\n\tobject1_y\x18\x07 \x01(\x01\x12\x15\n\robject1_alpha\x18\x08 \x01(\x01\x12T\n\x0cobject1_type\x18\t \x01(\x0e\x32>.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.ObjectType\x12\x11\n\tobject2_x\x18\n \x01(\x01\x12\x11\n\tobject2_y\x18\x0b \x01(\x01\x12\x15\n\robject2_alpha\x18\x0c \x01(\x01\x12T\n\x0cobject2_type\x18\r \x01(\x0e\x32>.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.ObjectType\x12\x0e\n\x06length\x18\x0e \x01(\x01\x12\r\n\x05\x64\x65pth\x18\x0f \x01(\x01\x12\x17\n\x0fobj1_start_pt_x\x18\x10 \x01(\x01\x12\x17\n\x0fobj1_start_pt_y\x18\x11 \x01(\x01\x12\\\n\x14obj1_start_pt_status\x18\x12 \x01(\x0e\x32>.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.ObjectType\x12\x15\n\robj1_end_pt_x\x18\x13 \x01(\x01\x12\x15\n\robj1_end_pt_y\x18\x14 \x01(\x01\x12Z\n\x12obj1_end_pt_status\x18\x15 \x01(\x0e\x32>.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.ObjectType\x12\x17\n\x0fobj2_start_pt_x\x18\x16 \x01(\x01\x12\x17\n\x0fobj2_start_pt_y\x18\x17 \x01(\x01\x12\\\n\x14obj2_start_pt_status\x18\x18 \x01(\x0e\x32>.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.ObjectType\x12\x15\n\robj2_end_pt_x\x18\x19 \x01(\x01\x12\x15\n\robj2_end_pt_y\x18\x1a \x01(\x01\x12Z\n\x12obj2_end_pt_status\x18\x1b \x01(\x0e\x32>.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.ObjectType\x12\x1b\n\x13slot_obj_start_pt_x\x18\x1c \x01(\x01\x12\x1b\n\x13slot_obj_start_pt_y\x18\x1d \x01(\x01\x12`\n\x18slot_obj_start_pt_status\x18\x1e \x01(\x0e\x32>.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.ObjectType\x12\x19\n\x11slot_obj_end_pt_x\x18\x1f \x01(\x01\x12\x19\n\x11slot_obj_end_pt_y\x18  \x01(\x01\x12^\n\x16slot_obj_end_pt_status\x18! \x01(\x0e\x32>.deeproute.drivers.ultrasonic.UltrasonicParkingSlot.ObjectType\"\xe9\x01\n\x0e\x44\x65pthReference\x12\x18\n\x14\x44\x45PTH_REFERENCE_NONE\x10\x00\x12\x18\n\x14\x44\x45PTH_REFERENCE_CURB\x10\x01\x12\x18\n\x14\x44\x45PTH_REFERENCE_WALL\x10\x02\x12\x1b\n\x17\x44\x45PTH_REFERENCE_VIRTUAL\x10\x03\x12\x17\n\x13\x44\x45PTH_REFERENCE_LOW\x10\x04\x12\x18\n\x14\x44\x45PTH_REFERENCE_HIGH\x10\x05\x12\x1b\n\x17\x44\x45PTH_REFERENCE_UNKNOWN\x10\x06\x12\x1c\n\x18\x44\x45PTH_REFERENCE_RESERVED\x10\x07\"\xdc\x01\n\x08SlotType\x12\x1b\n\x17SLOT_TYPE_LEFT_PARALLEL\x10\x00\x12\x1c\n\x18SLOT_TYPE_RIGHT_PARALLEL\x10\x01\x12\x18\n\x14SLOT_TYPE_LEFT_CROSS\x10\x02\x12\x19\n\x15SLOT_TYPE_RIGHT_CROSS\x10\x03\x12\x17\n\x13SLOT_TYPE_RESERVED1\x10\x04\x12\x17\n\x13SLOT_TYPE_RESERVED2\x10\x05\x12\x17\n\x13SLOT_TYPE_RESERVED3\x10\x06\x12\x15\n\x11SLOT_TYPE_INVALID\x10\x07\"V\n\nSlotStatus\x12\x17\n\x13SLOT_STATUS_PS_NONE\x10\x00\x12\x15\n\x11SLOT_STATUS_PS_OK\x10\x01\x12\x18\n\x14SLOT_STATUS_RESERVED\x10\x02\"k\n\nObjectType\x12\x14\n\x10OBJECT_TYPE_NONE\x10\x00\x12\x17\n\x13OBJECT_TYPE_VIRTUAL\x10\x01\x12\x14\n\x10OBJECT_TYPE_REAL\x10\x02\x12\x18\n\x14OBJECT_TYPE_RESERVED\x10\x03\"s\n\x13UltrasonicDebugData\x12\x11\n\ttimestamp\x18\x01 \x01(\x01\x12\x12\n\nmsg_data64\x18\x02 \x01(\x0c\x12\x0e\n\x06msg_id\x18\x03 \x01(\r\x12\x12\n\nupdate_cnt\x18\x04 \x01(\r\x12\x11\n\tlock_flag\x18\x05 \x01(\r\"c\n\x11PersistentStorage\x12%\n\x1d\x61ud_warn_of_snsr_park_assi_re\x18\x01 \x01(\r\x12\'\n\x1f\x61ud_warn_of_snsr_park_assi_frnt\x18\x02 \x01(\r\";\n\rUltrasonicRaw\x12\x13\n\x0braw_objects\x18\x01 \x01(\x0c\x12\x15\n\rraw_obstacles\x18\x02 \x01(\x0c\"\x8e\x05\n\nUltrasonic\x12(\n\x06header\x18\x01 \x01(\x0b\x32\x18.deeproute.common.Header\x12?\n\x07objects\x18\x02 \x03(\x0b\x32..deeproute.drivers.ultrasonic.UltrasonicObject\x12\x37\n\x08msg_type\x18\x03 \x01(\x0e\x32%.deeproute.drivers.ultrasonic.MsgType\x12\x43\n\tobstacles\x18\x04 \x03(\x0b\x32\x30.deeproute.drivers.ultrasonic.UltrasonicObstacle\x12J\n\rparking_slots\x18\x05 \x03(\x0b\x32\x33.deeproute.drivers.ultrasonic.UltrasonicParkingSlot\x12:\n\x04type\x18\x06 \x01(\x0e\x32,.deeproute.drivers.ultrasonic.UltrasonicType\x12<\n\x05state\x18\x07 \x01(\x0b\x32-.deeproute.drivers.ultrasonic.UltrasonicState\x12\x45\n\ndebug_data\x18\x08 \x03(\x0b\x32\x31.deeproute.drivers.ultrasonic.UltrasonicDebugData\x12K\n\x12persistent_storage\x18\t \x01(\x0b\x32/.deeproute.drivers.ultrasonic.PersistentStorage\x12=\n\x08raw_data\x18\n \x01(\x0b\x32+.deeproute.drivers.ultrasonic.UltrasonicRaw*7\n\nEmitStatus\x12\x07\n\x03OFF\x10\x00\x12\r\n\tRECV_ONLY\x10\x01\x12\x11\n\rEMIT_AND_RECV\x10\x02*5\n\x07MsgType\x12\n\n\x06OBJECT\x10\x00\x12\x0c\n\x08OBSTACLE\x10\x01\x12\x10\n\x0cPARKING_SLOT\x10\x02*y\n\x0eUltrasonicType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0c\n\x08M5_ULTRA\x10\x01\x12\x0c\n\x08M7_ULTRA\x10\x02\x12\r\n\tLONG_HORN\x10\x03\x12\x0c\n\x08M7_BOSCH\x10\x04\x12\x0b\n\x07GWM_C01\x10\x05\x12\x14\n\x10SMART_HY11_BOSCH\x10\x06')
 
 _EMITSTATUS = DESCRIPTOR.enum_types_by_name['EmitStatus']
 EmitStatus = enum_type_wrapper.EnumTypeWrapper(_EMITSTATUS)
@@ -40,12 +40,21 @@ SMART_HY11_BOSCH = 6
 
 
 _ULTRASONICSTATE = DESCRIPTOR.message_types_by_name['UltrasonicState']
+_MULTIECHO = DESCRIPTOR.message_types_by_name['MultiEcho']
 _ULTRASONICOBJECT = DESCRIPTOR.message_types_by_name['UltrasonicObject']
 _ULTRASONICOBSTACLE = DESCRIPTOR.message_types_by_name['UltrasonicObstacle']
 _ULTRASONICPARKINGSLOT = DESCRIPTOR.message_types_by_name['UltrasonicParkingSlot']
 _ULTRASONICDEBUGDATA = DESCRIPTOR.message_types_by_name['UltrasonicDebugData']
+_PERSISTENTSTORAGE = DESCRIPTOR.message_types_by_name['PersistentStorage']
+_ULTRASONICRAW = DESCRIPTOR.message_types_by_name['UltrasonicRaw']
 _ULTRASONIC = DESCRIPTOR.message_types_by_name['Ultrasonic']
 _ULTRASONICSTATE_WORKSTSTYPE = _ULTRASONICSTATE.enum_types_by_name['WorkStsType']
+_ULTRASONICSTATE_ECUFAILURE = _ULTRASONICSTATE.enum_types_by_name['EcuFailure']
+_ULTRASONICSTATE_OBSTCLDETNFAILSTS = _ULTRASONICSTATE.enum_types_by_name['ObstclDetnFailSts']
+_ULTRASONICSTATE_SOUNDINDCN = _ULTRASONICSTATE.enum_types_by_name['SoundIndcn']
+_ULTRASONICSTATE_AUTOMODSTS = _ULTRASONICSTATE.enum_types_by_name['AutoModSts']
+_MULTIECHO_ECHOTYPE = _MULTIECHO.enum_types_by_name['EchoType']
+_ULTRASONICOBJECT_FREQUENCYMODE = _ULTRASONICOBJECT.enum_types_by_name['FrequencyMode']
 _ULTRASONICOBSTACLE_HEIGHTTYPE = _ULTRASONICOBSTACLE.enum_types_by_name['HeightType']
 _ULTRASONICOBSTACLE_OBSTACLETYPE = _ULTRASONICOBSTACLE.enum_types_by_name['ObstacleType']
 _ULTRASONICPARKINGSLOT_DEPTHREFERENCE = _ULTRASONICPARKINGSLOT.enum_types_by_name['DepthReference']
@@ -58,6 +67,13 @@ UltrasonicState = _reflection.GeneratedProtocolMessageType('UltrasonicState', (_
   # @@protoc_insertion_point(class_scope:deeproute.drivers.ultrasonic.UltrasonicState)
   })
 _sym_db.RegisterMessage(UltrasonicState)
+
+MultiEcho = _reflection.GeneratedProtocolMessageType('MultiEcho', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIECHO,
+  '__module__' : 'drivers.ultrasonic.ultrasonic_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.drivers.ultrasonic.MultiEcho)
+  })
+_sym_db.RegisterMessage(MultiEcho)
 
 UltrasonicObject = _reflection.GeneratedProtocolMessageType('UltrasonicObject', (_message.Message,), {
   'DESCRIPTOR' : _ULTRASONICOBJECT,
@@ -87,6 +103,20 @@ UltrasonicDebugData = _reflection.GeneratedProtocolMessageType('UltrasonicDebugD
   })
 _sym_db.RegisterMessage(UltrasonicDebugData)
 
+PersistentStorage = _reflection.GeneratedProtocolMessageType('PersistentStorage', (_message.Message,), {
+  'DESCRIPTOR' : _PERSISTENTSTORAGE,
+  '__module__' : 'drivers.ultrasonic.ultrasonic_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.drivers.ultrasonic.PersistentStorage)
+  })
+_sym_db.RegisterMessage(PersistentStorage)
+
+UltrasonicRaw = _reflection.GeneratedProtocolMessageType('UltrasonicRaw', (_message.Message,), {
+  'DESCRIPTOR' : _ULTRASONICRAW,
+  '__module__' : 'drivers.ultrasonic.ultrasonic_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.drivers.ultrasonic.UltrasonicRaw)
+  })
+_sym_db.RegisterMessage(UltrasonicRaw)
+
 Ultrasonic = _reflection.GeneratedProtocolMessageType('Ultrasonic', (_message.Message,), {
   'DESCRIPTOR' : _ULTRASONIC,
   '__module__' : 'drivers.ultrasonic.ultrasonic_pb2'
@@ -97,36 +127,54 @@ _sym_db.RegisterMessage(Ultrasonic)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _EMITSTATUS._serialized_start=4608
-  _EMITSTATUS._serialized_end=4663
-  _MSGTYPE._serialized_start=4665
-  _MSGTYPE._serialized_end=4718
-  _ULTRASONICTYPE._serialized_start=4720
-  _ULTRASONICTYPE._serialized_end=4841
+  _EMITSTATUS._serialized_start=6617
+  _EMITSTATUS._serialized_end=6672
+  _MSGTYPE._serialized_start=6674
+  _MSGTYPE._serialized_end=6727
+  _ULTRASONICTYPE._serialized_start=6729
+  _ULTRASONICTYPE._serialized_end=6850
   _ULTRASONICSTATE._serialized_start=91
-  _ULTRASONICSTATE._serialized_end=498
-  _ULTRASONICSTATE_WORKSTSTYPE._serialized_start=436
-  _ULTRASONICSTATE_WORKSTSTYPE._serialized_end=498
-  _ULTRASONICOBJECT._serialized_start=501
-  _ULTRASONICOBJECT._serialized_end=1048
-  _ULTRASONICOBSTACLE._serialized_start=1051
-  _ULTRASONICOBSTACLE._serialized_end=1782
-  _ULTRASONICOBSTACLE_HEIGHTTYPE._serialized_start=1444
-  _ULTRASONICOBSTACLE_HEIGHTTYPE._serialized_end=1580
-  _ULTRASONICOBSTACLE_OBSTACLETYPE._serialized_start=1583
-  _ULTRASONICOBSTACLE_OBSTACLETYPE._serialized_end=1782
-  _ULTRASONICPARKINGSLOT._serialized_start=1785
-  _ULTRASONICPARKINGSLOT._serialized_end=3972
-  _ULTRASONICPARKINGSLOT_DEPTHREFERENCE._serialized_start=3319
-  _ULTRASONICPARKINGSLOT_DEPTHREFERENCE._serialized_end=3552
-  _ULTRASONICPARKINGSLOT_SLOTTYPE._serialized_start=3555
-  _ULTRASONICPARKINGSLOT_SLOTTYPE._serialized_end=3775
-  _ULTRASONICPARKINGSLOT_SLOTSTATUS._serialized_start=3777
-  _ULTRASONICPARKINGSLOT_SLOTSTATUS._serialized_end=3863
-  _ULTRASONICPARKINGSLOT_OBJECTTYPE._serialized_start=3865
-  _ULTRASONICPARKINGSLOT_OBJECTTYPE._serialized_end=3972
-  _ULTRASONICDEBUGDATA._serialized_start=3974
-  _ULTRASONICDEBUGDATA._serialized_end=4089
-  _ULTRASONIC._serialized_start=4092
-  _ULTRASONIC._serialized_end=4606
+  _ULTRASONICSTATE._serialized_end=1775
+  _ULTRASONICSTATE_WORKSTSTYPE._serialized_start=1323
+  _ULTRASONICSTATE_WORKSTSTYPE._serialized_end=1385
+  _ULTRASONICSTATE_ECUFAILURE._serialized_start=1387
+  _ULTRASONICSTATE_ECUFAILURE._serialized_end=1508
+  _ULTRASONICSTATE_OBSTCLDETNFAILSTS._serialized_start=1510
+  _ULTRASONICSTATE_OBSTCLDETNFAILSTS._serialized_end=1636
+  _ULTRASONICSTATE_SOUNDINDCN._serialized_start=1638
+  _ULTRASONICSTATE_SOUNDINDCN._serialized_end=1728
+  _ULTRASONICSTATE_AUTOMODSTS._serialized_start=1730
+  _ULTRASONICSTATE_AUTOMODSTS._serialized_end=1775
+  _MULTIECHO._serialized_start=1778
+  _MULTIECHO._serialized_end=2003
+  _MULTIECHO_ECHOTYPE._serialized_start=1960
+  _MULTIECHO_ECHOTYPE._serialized_end=2003
+  _ULTRASONICOBJECT._serialized_start=2006
+  _ULTRASONICOBJECT._serialized_end=2755
+  _ULTRASONICOBJECT_FREQUENCYMODE._serialized_start=2707
+  _ULTRASONICOBJECT_FREQUENCYMODE._serialized_end=2755
+  _ULTRASONICOBSTACLE._serialized_start=2758
+  _ULTRASONICOBSTACLE._serialized_end=3489
+  _ULTRASONICOBSTACLE_HEIGHTTYPE._serialized_start=3151
+  _ULTRASONICOBSTACLE_HEIGHTTYPE._serialized_end=3287
+  _ULTRASONICOBSTACLE_OBSTACLETYPE._serialized_start=3290
+  _ULTRASONICOBSTACLE_OBSTACLETYPE._serialized_end=3489
+  _ULTRASONICPARKINGSLOT._serialized_start=3492
+  _ULTRASONICPARKINGSLOT._serialized_end=5679
+  _ULTRASONICPARKINGSLOT_DEPTHREFERENCE._serialized_start=5026
+  _ULTRASONICPARKINGSLOT_DEPTHREFERENCE._serialized_end=5259
+  _ULTRASONICPARKINGSLOT_SLOTTYPE._serialized_start=5262
+  _ULTRASONICPARKINGSLOT_SLOTTYPE._serialized_end=5482
+  _ULTRASONICPARKINGSLOT_SLOTSTATUS._serialized_start=5484
+  _ULTRASONICPARKINGSLOT_SLOTSTATUS._serialized_end=5570
+  _ULTRASONICPARKINGSLOT_OBJECTTYPE._serialized_start=5572
+  _ULTRASONICPARKINGSLOT_OBJECTTYPE._serialized_end=5679
+  _ULTRASONICDEBUGDATA._serialized_start=5681
+  _ULTRASONICDEBUGDATA._serialized_end=5796
+  _PERSISTENTSTORAGE._serialized_start=5798
+  _PERSISTENTSTORAGE._serialized_end=5897
+  _ULTRASONICRAW._serialized_start=5899
+  _ULTRASONICRAW._serialized_end=5958
+  _ULTRASONIC._serialized_start=5961
+  _ULTRASONIC._serialized_end=6615
 # @@protoc_insertion_point(module_scope)

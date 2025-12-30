@@ -1,0 +1,59 @@
+syntax = "proto3";
+package dr.gwm.oneclicknoa;
+
+/**
+ * HUT → ADC：用户点击“一键智驾”按钮，单次触发
+ * topic : /gwm/blc/onec_click_noa_req
+ */
+message OneclickNOAReq {
+  enum OneclickNOAReqEnum {
+    ONECLICK_NOA_ON = 0;
+  }
+  OneclickNOAReqEnum request = 1;
+}
+
+/**
+ * HADC → HUT：ADC发给座舱的“一键智驾”功能状态及抑制原因
+ * topic: /gwm/blc/onec_click_noa_sts
+ */
+message OneclickNOASts {
+  enum NOABtnStsEnum {
+    STANDBY = 0;
+    TO_BE_ACTIVATED = 1;
+    NO_DISPLAY = 2;
+    E2E_BTN_STS_STANDBY = 3;
+    E2E_BTN_STS_TO_BE_ACTIVATED = 4;
+    HAVP_BTN_STS_STANDBY_DESTINATION = 5;
+    HAVP_BTN_STS_TO_BE_ACTIVATED_DESTINATION = 6;
+    HAVP_BTN_STS_STANDBY_STALL = 7;
+    HAVP_BTN_STS_TO_BE_ACTIVATED_STALL = 8;
+  }
+  enum NOABtnInhbReasEnum {
+    INHB_NORMAL = 0;
+    FRADAR_OCCLUSION = 1;
+    FCAMERA_OBSTRUCTION = 2;
+    LIDAR_OBSTRUCTION = 3;
+    ENGINE_ROOM_COVER_NOT_CLOSED = 4;
+    TRUNK_NOT_CLOSED = 5;
+    OPEN_ESP_SWITCH = 6;
+    CLOSE_HAZARD_WARNING_LIGHT = 7;
+    CLOSE_TRAILER_MODE = 8;
+    CLOSE_SNOW_PATTERN = 9;
+    CLOSE_MUD_MODEL = 10;
+    CLOSE_SANDY_LAND_MODEL = 11;
+    OPEN_NOA_SWITCH = 12;
+    OPEN_NAVIGATION = 13;
+    WEAR_SAFETY_BELT = 14;
+    CLOSE_DOOR = 15;
+    BTN_INHB_REAS_BRAKING = 16;
+    BTN_INHB_REAS_HOLD_WHEEL = 17;
+    BTN_INHB_REAS_NO_CURB = 18;
+    BTN_INHB_REAS_BEAR_OFF = 19;
+    BTN_INHB_REAS_C_CAMERA_OBSTRUCTION = 20;
+    BTN_INHB_REAS_OPEN_REARVIEW_MIRROR = 21;
+    BTN_INHB_REAS_BEAR_OFF_RAMP = 22;
+  }
+
+  NOABtnStsEnum btn_status = 1;               // 当前按钮状态
+  NOABtnInhbReasEnum inhb_reasons = 2; // 多个抑制原因（可选项）
+}

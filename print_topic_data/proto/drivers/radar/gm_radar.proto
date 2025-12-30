@@ -43,6 +43,7 @@ message RadarState {
   optional uint32 guardrailc3 = 13;
   optional float obj_aziangle_calib = 14;
   optional BlindStatus blind_status = 15;
+  optional uint32 hdr_timestamp_status = 16;
 }
 
 message RadarObs {

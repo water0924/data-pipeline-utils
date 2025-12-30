@@ -16,23 +16,50 @@ _sym_db = _symbol_database.Default()
 from proto.common import geometry_pb2 as common_dot_geometry__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15map/vla_command.proto\x12\rdeeproute.map\x1a\x15\x63ommon/geometry.proto\"\xb2\x06\n\x10VLARoutingOption\x12?\n\x0bvla_command\x18\x01 \x01(\x0e\x32*.deeproute.map.VLARoutingOption.VLACommand\x12S\n\x16vla_position_of_action\x18\x02 \x01(\x0b\x32\x33.deeproute.map.VLARoutingOption.VLAPositionOfAction\x1a\xd8\x03\n\x13VLAPositionOfAction\x12\\\n\x10vla_command_type\x18\x64 \x01(\x0e\x32\x42.deeproute.map.VLARoutingOption.VLAPositionOfAction.VLACommandType\x12\x1e\n\x16intersection_ahead_num\x18\x01 \x01(\x05\x12\x14\n\x0cmeters_ahead\x18\x02 \x01(\x05\x12\x10\n\x08poi_name\x18\x03 \x01(\t\x12\x16\n\x0eon_destination\x18\x04 \x01(\x08\x12\x1b\n\x13no_designated_point\x18\x05 \x01(\x08\"\xe5\x01\n\x0eVLACommandType\x12\x1c\n\x18VLA_COMMAND_TYPE_UNKNOWN\x10\x00\x12\'\n#VLA_COMMAND_TYPE_INTERSECTION_AHEAD\x10\x01\x12 \n\x1cVLA_COMMAND_TYPE_METER_AHEAD\x10\x02\x12\x1e\n\x1aVLA_COMMAND_TYPE_POI_AHEAD\x10\x03\x12 \n\x1cVLA_COMMAND_TYPE_DESTINATION\x10\x04\x12(\n$VLA_COMMAND_TYPE_NO_DESIGNATED_POINT\x10\x05\"\xac\x01\n\nVLACommand\x12\x17\n\x13VLA_COMMAND_UNKNOWN\x10\x00\x12\x19\n\x15VLA_COMMAND_TURN_LEFT\x10\x01\x12\x1a\n\x16VLA_COMMAND_TURN_RIGHT\x10\x02\x12\x1b\n\x17VLA_COMMAND_GO_STRAIGHT\x10\x03\x12\x16\n\x12VLA_COMMAND_U_TURN\x10\x04\x12\x19\n\x15VLA_COMMAND_PULL_OVER\x10\x05\"k\n\x11VLACommandRequest\x12\x12\n\nrequest_id\x18\x01 \x01(\t\x12\x37\n\x0crequest_info\x18\x02 \x01(\x0b\x32\x1f.deeproute.map.VLARoutingOptionH\x00\x42\t\n\x07request\"\xd8\x01\n\x12VLACommandResponse\x12\x38\n\x06status\x18\x01 \x01(\x0b\x32(.deeproute.map.VLACommandResponse.Status\x12\x12\n\nrequest_id\x18\x02 \x01(\t\x12,\n\x08position\x18\x03 \x01(\x0b\x32\x1a.deeproute.common.PointLLH\x1a\x46\n\x06Status\x12+\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x1d.deeproute.map.VLACommandCode\x12\x0f\n\x07\x65rr_msg\x18\x02 \x01(\t*F\n\x0eVLACommandCode\x12\x0f\n\x0bVLA_SUCCESS\x10\x00\x12\x10\n\x0cVLA_INTERNAL\x10\x01\x12\x11\n\rVLA_NOT_FOUND\x10\x02')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15map/vla_command.proto\x12\rdeeproute.map\x1a\x15\x63ommon/geometry.proto\"\xd7\x0c\n\x10VLARoutingOption\x12?\n\x0bvla_command\x18\x01 \x01(\x0e\x32*.deeproute.map.VLARoutingOption.VLACommand\x12S\n\x16vla_position_of_action\x18\x02 \x01(\x0b\x32\x33.deeproute.map.VLARoutingOption.VLAPositionOfAction\x12Q\n\x15vla_user_setting_info\x18\x03 \x01(\x0b\x32\x32.deeproute.map.VLARoutingOption.VLAUserSettingInfo\x1a\x46\n\x12VLAUserSettingInfo\x12\x17\n\x0fspeed_value_kph\x18\x01 \x01(\x05\x12\x17\n\x0ftarget_lane_num\x18\x02 \x01(\x05\x1a\xb2\x06\n\x13VLAPositionOfAction\x12\\\n\x10vla_command_type\x18\x64 \x01(\x0e\x32\x42.deeproute.map.VLARoutingOption.VLAPositionOfAction.VLACommandType\x12]\n\x11vla_command_types\x18\x65 \x03(\x0e\x32\x42.deeproute.map.VLARoutingOption.VLAPositionOfAction.VLACommandType\x12\x1e\n\x16intersection_ahead_num\x18\x01 \x01(\x05\x12\x14\n\x0cmeters_ahead\x18\x02 \x01(\x05\x12\x10\n\x08poi_name\x18\x03 \x01(\t\x12\x16\n\x0eon_destination\x18\x04 \x01(\x08\x12\x1b\n\x13no_designated_point\x18\x05 \x01(\x08\x12\r\n\x05\x66loor\x18\x06 \x01(\x05\"\xd1\x03\n\x0eVLACommandType\x12\x1c\n\x18VLA_COMMAND_TYPE_UNKNOWN\x10\x00\x12\'\n#VLA_COMMAND_TYPE_INTERSECTION_AHEAD\x10\x01\x12 \n\x1cVLA_COMMAND_TYPE_METER_AHEAD\x10\x02\x12\x1e\n\x1aVLA_COMMAND_TYPE_POI_AHEAD\x10\x03\x12 \n\x1cVLA_COMMAND_TYPE_DESTINATION\x10\x04\x12(\n$VLA_COMMAND_TYPE_NO_DESIGNATED_POINT\x10\x05\x12!\n\x1dVLA_COMMAND_TYPE_CURRENT_ROAD\x10\x06\x12%\n!VLA_COMMAND_TYPE_CURRENT_POSITION\x10\x07\x12\x1a\n\x16VLA_COMMAND_TYPE_FLOOR\x10\x08\x12*\n&VLA_COMMAND_TYPE_NEAREST_PARKING_SPACE\x10\t\x12\x31\n-VLA_COMMAND_TYPE_NEAREST_CHARGE_PARKING_SPACE\x10\n\x12%\n!VLA_COMMAND_TYPE_PARKING_LOT_EXIT\x10\x0b\"\xdc\x03\n\nVLACommand\x12\x17\n\x13VLA_COMMAND_UNKNOWN\x10\x00\x12\x19\n\x15VLA_COMMAND_TURN_LEFT\x10\x01\x12\x1a\n\x16VLA_COMMAND_TURN_RIGHT\x10\x02\x12\x1b\n\x17VLA_COMMAND_GO_STRAIGHT\x10\x03\x12\x16\n\x12VLA_COMMAND_U_TURN\x10\x04\x12\x19\n\x15VLA_COMMAND_PULL_OVER\x10\x05\x12 \n\x1cVLA_COMMAND_PULL_OVER_CANCEL\x10\r\x12%\n!VLA_COMMAND_LANE_CHANGE_FROM_LEFT\x10\x06\x12&\n\"VLA_COMMAND_LANE_CHANGE_FROM_RIGHT\x10\x07\x12%\n!VLA_COMMAND_LANE_CHANGE_TO_CENTER\x10\x08\x12\"\n\x1eVLA_COMMAND_LANE_CHANGE_CANCEL\x10\t\x12%\n!VLA_COMMAND_SPEED_CHANGE_TO_VALUE\x10\n\x12#\n\x1fVLA_COMMAND_SPEED_CHANGE_CANCEL\x10\x0b\x12&\n\"VLA_COMMAND_PARKING_TO_DESTINATION\x10\x0c\"k\n\x11VLACommandRequest\x12\x12\n\nrequest_id\x18\x01 \x01(\t\x12\x37\n\x0crequest_info\x18\x02 \x01(\x0b\x32\x1f.deeproute.map.VLARoutingOptionH\x00\x42\t\n\x07request\"\xeb\x03\n\x12VLACommandResponse\x12\x38\n\x06status\x18\x01 \x01(\x0b\x32(.deeproute.map.VLACommandResponse.Status\x12\x12\n\nrequest_id\x18\x02 \x01(\t\x12,\n\x08position\x18\x03 \x01(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x30\n\rposition_odom\x18\x04 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12N\n\x12vla_command_result\x18\x05 \x01(\x0b\x32\x32.deeproute.map.VLACommandResponse.VLACommandResult\x1a\x61\n\x06Status\x12+\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x1d.deeproute.map.VLACommandCode\x12\x0f\n\x07\x65rr_msg\x18\x02 \x01(\t\x12\x19\n\x11\x64istance_of_scene\x18\x04 \x01(\x05\x1at\n\x10VLACommandResult\x12?\n\x0bvla_command\x18\x01 \x01(\x0e\x32*.deeproute.map.VLARoutingOption.VLACommand\x12\x1f\n\x17speed_changed_road_name\x18\x02 \x01(\t*\xd1\x06\n\x0eVLACommandCode\x12\x0f\n\x0bVLA_SUCCESS\x10\x00\x12\x10\n\x0cVLA_INTERNAL\x10\x01\x12\x11\n\rVLA_NOT_FOUND\x10\x02\x12\x1a\n\x16VLA_IN_NO_PARKING_AREA\x10\x03\x12\x16\n\x12VLA_SCENE_CROSSING\x10\x04\x12%\n!VLA_SCENE_MAIN_SECONDARY_ENTRANCE\x10\x05\x12\x13\n\x0fVLA_SCENE_FIELD\x10\x06\x12*\n&VLA_SCENE_SPEED_LIMIT_NOT_SUPPORT_RAMP\x10\x07\x12\x39\n5VLA_SCENE_SPEED_LIMIT_NOT_SUPPORT_MAIN_SECONDARY_ROAD\x10\x08\x12\x33\n/VLA_SCENE_SPEED_LIMIT_NOT_SUPPORT_JUNCTION_ROAD\x10\t\x12$\n VLA_SCENE_SPEED_LIMIT_EXCEED_MAX\x10\n\x12$\n VLA_SCENE_SPEED_LIMIT_EXCEED_MIN\x10\x0b\x12+\n\'VLA_SCENE_SPEED_LIMIT_DECREASE_TOO_MUCH\x10\x0c\x12+\n\'VLA_SCENE_SPEED_LIMIT_INCREASE_TOO_MUCH\x10\r\x12/\n+VLA_SCENE_LANE_CHANGE_TOO_CLOSE_TO_JUNCTION\x10\x0e\x12/\n+VLA_SCENE_LANE_CHANGE_NOT_FOUND_TARGET_LANE\x10\x0f\x12\x31\n-VLA_SCENE_LANE_CHANGE_NOT_SUPPORT_SINGLE_LANE\x10\x10\x12*\n&VLA_SCENE_LANE_CHANGE_NOT_SUPPORT_RAMP\x10\x11\x12\x39\n5VLA_SCENE_LANE_CHANGE_NOT_SUPPORT_MAIN_SECONDARY_ROAD\x10\x12\x12,\n(VLA_SCENE_LANE_CHANGE_NOT_SUPPORT_TUNNEL\x10\x13\x12-\n)VLA_SCENE_LANE_CHANGE_NOT_SUPPORT_NO_LANE\x10\x14')
 
 _VLACOMMANDCODE = DESCRIPTOR.enum_types_by_name['VLACommandCode']
 VLACommandCode = enum_type_wrapper.EnumTypeWrapper(_VLACOMMANDCODE)
 VLA_SUCCESS = 0
 VLA_INTERNAL = 1
 VLA_NOT_FOUND = 2
+VLA_IN_NO_PARKING_AREA = 3
+VLA_SCENE_CROSSING = 4
+VLA_SCENE_MAIN_SECONDARY_ENTRANCE = 5
+VLA_SCENE_FIELD = 6
+VLA_SCENE_SPEED_LIMIT_NOT_SUPPORT_RAMP = 7
+VLA_SCENE_SPEED_LIMIT_NOT_SUPPORT_MAIN_SECONDARY_ROAD = 8
+VLA_SCENE_SPEED_LIMIT_NOT_SUPPORT_JUNCTION_ROAD = 9
+VLA_SCENE_SPEED_LIMIT_EXCEED_MAX = 10
+VLA_SCENE_SPEED_LIMIT_EXCEED_MIN = 11
+VLA_SCENE_SPEED_LIMIT_DECREASE_TOO_MUCH = 12
+VLA_SCENE_SPEED_LIMIT_INCREASE_TOO_MUCH = 13
+VLA_SCENE_LANE_CHANGE_TOO_CLOSE_TO_JUNCTION = 14
+VLA_SCENE_LANE_CHANGE_NOT_FOUND_TARGET_LANE = 15
+VLA_SCENE_LANE_CHANGE_NOT_SUPPORT_SINGLE_LANE = 16
+VLA_SCENE_LANE_CHANGE_NOT_SUPPORT_RAMP = 17
+VLA_SCENE_LANE_CHANGE_NOT_SUPPORT_MAIN_SECONDARY_ROAD = 18
+VLA_SCENE_LANE_CHANGE_NOT_SUPPORT_TUNNEL = 19
+VLA_SCENE_LANE_CHANGE_NOT_SUPPORT_NO_LANE = 20
 
 
 _VLAROUTINGOPTION = DESCRIPTOR.message_types_by_name['VLARoutingOption']
+_VLAROUTINGOPTION_VLAUSERSETTINGINFO = _VLAROUTINGOPTION.nested_types_by_name['VLAUserSettingInfo']
 _VLAROUTINGOPTION_VLAPOSITIONOFACTION = _VLAROUTINGOPTION.nested_types_by_name['VLAPositionOfAction']
 _VLACOMMANDREQUEST = DESCRIPTOR.message_types_by_name['VLACommandRequest']
 _VLACOMMANDRESPONSE = DESCRIPTOR.message_types_by_name['VLACommandResponse']
 _VLACOMMANDRESPONSE_STATUS = _VLACOMMANDRESPONSE.nested_types_by_name['Status']
+_VLACOMMANDRESPONSE_VLACOMMANDRESULT = _VLACOMMANDRESPONSE.nested_types_by_name['VLACommandResult']
 _VLAROUTINGOPTION_VLAPOSITIONOFACTION_VLACOMMANDTYPE = _VLAROUTINGOPTION_VLAPOSITIONOFACTION.enum_types_by_name['VLACommandType']
 _VLAROUTINGOPTION_VLACOMMAND = _VLAROUTINGOPTION.enum_types_by_name['VLACommand']
 VLARoutingOption = _reflection.GeneratedProtocolMessageType('VLARoutingOption', (_message.Message,), {
+
+  'VLAUserSettingInfo' : _reflection.GeneratedProtocolMessageType('VLAUserSettingInfo', (_message.Message,), {
+    'DESCRIPTOR' : _VLAROUTINGOPTION_VLAUSERSETTINGINFO,
+    '__module__' : 'map.vla_command_pb2'
+    # @@protoc_insertion_point(class_scope:deeproute.map.VLARoutingOption.VLAUserSettingInfo)
+    })
+  ,
 
   'VLAPositionOfAction' : _reflection.GeneratedProtocolMessageType('VLAPositionOfAction', (_message.Message,), {
     'DESCRIPTOR' : _VLAROUTINGOPTION_VLAPOSITIONOFACTION,
@@ -45,6 +72,7 @@ VLARoutingOption = _reflection.GeneratedProtocolMessageType('VLARoutingOption', 
   # @@protoc_insertion_point(class_scope:deeproute.map.VLARoutingOption)
   })
 _sym_db.RegisterMessage(VLARoutingOption)
+_sym_db.RegisterMessage(VLARoutingOption.VLAUserSettingInfo)
 _sym_db.RegisterMessage(VLARoutingOption.VLAPositionOfAction)
 
 VLACommandRequest = _reflection.GeneratedProtocolMessageType('VLACommandRequest', (_message.Message,), {
@@ -62,30 +90,42 @@ VLACommandResponse = _reflection.GeneratedProtocolMessageType('VLACommandRespons
     # @@protoc_insertion_point(class_scope:deeproute.map.VLACommandResponse.Status)
     })
   ,
+
+  'VLACommandResult' : _reflection.GeneratedProtocolMessageType('VLACommandResult', (_message.Message,), {
+    'DESCRIPTOR' : _VLACOMMANDRESPONSE_VLACOMMANDRESULT,
+    '__module__' : 'map.vla_command_pb2'
+    # @@protoc_insertion_point(class_scope:deeproute.map.VLACommandResponse.VLACommandResult)
+    })
+  ,
   'DESCRIPTOR' : _VLACOMMANDRESPONSE,
   '__module__' : 'map.vla_command_pb2'
   # @@protoc_insertion_point(class_scope:deeproute.map.VLACommandResponse)
   })
 _sym_db.RegisterMessage(VLACommandResponse)
 _sym_db.RegisterMessage(VLACommandResponse.Status)
+_sym_db.RegisterMessage(VLACommandResponse.VLACommandResult)
 
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _VLACOMMANDCODE._serialized_start=1212
-  _VLACOMMANDCODE._serialized_end=1282
+  _VLACOMMANDCODE._serialized_start=2293
+  _VLACOMMANDCODE._serialized_end=3142
   _VLAROUTINGOPTION._serialized_start=64
-  _VLAROUTINGOPTION._serialized_end=882
-  _VLAROUTINGOPTION_VLAPOSITIONOFACTION._serialized_start=235
-  _VLAROUTINGOPTION_VLAPOSITIONOFACTION._serialized_end=707
-  _VLAROUTINGOPTION_VLAPOSITIONOFACTION_VLACOMMANDTYPE._serialized_start=478
-  _VLAROUTINGOPTION_VLAPOSITIONOFACTION_VLACOMMANDTYPE._serialized_end=707
-  _VLAROUTINGOPTION_VLACOMMAND._serialized_start=710
-  _VLAROUTINGOPTION_VLACOMMAND._serialized_end=882
-  _VLACOMMANDREQUEST._serialized_start=884
-  _VLACOMMANDREQUEST._serialized_end=991
-  _VLACOMMANDRESPONSE._serialized_start=994
-  _VLACOMMANDRESPONSE._serialized_end=1210
-  _VLACOMMANDRESPONSE_STATUS._serialized_start=1140
-  _VLACOMMANDRESPONSE_STATUS._serialized_end=1210
+  _VLAROUTINGOPTION._serialized_end=1687
+  _VLAROUTINGOPTION_VLAUSERSETTINGINFO._serialized_start=317
+  _VLAROUTINGOPTION_VLAUSERSETTINGINFO._serialized_end=387
+  _VLAROUTINGOPTION_VLAPOSITIONOFACTION._serialized_start=390
+  _VLAROUTINGOPTION_VLAPOSITIONOFACTION._serialized_end=1208
+  _VLAROUTINGOPTION_VLAPOSITIONOFACTION_VLACOMMANDTYPE._serialized_start=743
+  _VLAROUTINGOPTION_VLAPOSITIONOFACTION_VLACOMMANDTYPE._serialized_end=1208
+  _VLAROUTINGOPTION_VLACOMMAND._serialized_start=1211
+  _VLAROUTINGOPTION_VLACOMMAND._serialized_end=1687
+  _VLACOMMANDREQUEST._serialized_start=1689
+  _VLACOMMANDREQUEST._serialized_end=1796
+  _VLACOMMANDRESPONSE._serialized_start=1799
+  _VLACOMMANDRESPONSE._serialized_end=2290
+  _VLACOMMANDRESPONSE_STATUS._serialized_start=2075
+  _VLACOMMANDRESPONSE_STATUS._serialized_end=2172
+  _VLACOMMANDRESPONSE_VLACOMMANDRESULT._serialized_start=2174
+  _VLACOMMANDRESPONSE_VLACOMMANDRESULT._serialized_end=2290
 # @@protoc_insertion_point(module_scope)

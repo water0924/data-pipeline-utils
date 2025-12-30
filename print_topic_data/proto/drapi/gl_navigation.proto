@@ -2145,3 +2145,16 @@ message GLNavigationInfo {
   NavigationStsGeelyPeriod navigation_sts_geely_period = 17;
   NavigationStsGeelyEvent navigation_sts_geely_event = 18;
 }
+
+// topic: /gl/someip/navi_info_request
+message NavPathInfoRequest {
+  enum RouteInfoRequest {
+      NO_RESPONSE = 0;
+      RESPONSE = 1;
+  }
+  RouteInfoRequest request = 1;
+}
+
+message NavPathInfoResponse {
+  uint32 result_code = 1;  // 0： success, other: error code
+}

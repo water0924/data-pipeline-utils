@@ -20,8 +20,9 @@ from safety import safety_analysis_pb2,state_exchange_pb2
 from drapi.gwm.havp import havp_vehicle_pb2,havp_map_pb2
 from smart import smart_business_pb2,smart_command_pb2
 from smart.parking import smart_parking_frame_data_pb2,smart_lp_parking_map_pb2
-from drapi import gl_p177_downstream_chassis_pb2,gwm_tank_downstream_chassis_pb2
+from drapi import gl_p177_downstream_chassis_pb2,blc_gwm_chassis_pb2
 from drapi.gl import gl_hpa_map_pb2
+from drapi.lp import lp_hmi_config_pb2,lp_hmi_display_pb2
 
 
 
@@ -93,9 +94,17 @@ topic_proto_map = {
     "/gwm/someip_adapter/slot_id_report":avp_pb2.SlotIDReport(),
     "/gwm/someip_adapter/havp_map_management_set":havp_map_pb2.AVPMapManage(),
     "/mcu_blc/chassis_detail":gl_p177_downstream_chassis_pb2.UpstreamChassis(),
-    "/mcu_blc/chassis_detail_tank":gwm_tank_downstream_chassis_pb2.UpstreamChassisTank(),
-    "/blc/downstream_chassis_tank":gwm_tank_downstream_chassis_pb2.DownstreamChassisTank(),
     "/blc/downstream_chassis":gl_p177_downstream_chassis_pb2.DownstreamChassis(),
     "/gl/hpa_map":gl_hpa_map_pb2.HpaMap(),
     "/gl/hpa_map_vis":gl_hpa_map_pb2.HpaMap(),
+    "/mcu_blc/chassis_detail_gwm":blc_gwm_chassis_pb2.UpstreamChassisGWM(),
+    "/blc/downstream_chassis_gwm":blc_gwm_chassis_pb2.DownstreamChassisGWM(),
+    "/gwm/apa_customize_req":avp_pb2.APACustomizeReq(),
+    "/gwm/someip/prkg_posn_sts_request":avp_pb2.PrkgPosnStsReq(),
+    "/gwm/someip/prkg_posn_sts_resp":avp_pb2.PrkgPosnSts(),
+    "/gwm/someip/prkg_posn_request":avp_pb2.PrkgPosnSet(),
+    "/gwm/someip/prkg_posn_resp":avp_pb2.PrkgPosnSet(),
+    "/leap/adas/hmi_config":lp_hmi_config_pb2.HmiConfig(),
+    "/leap/hmi/parking_motion":lp_hmi_display_pb2.ParkingMotion(),
+    "/leap/hmi/auto_drive_info":lp_hmi_display_pb2.AutoDriveInfo()
 }

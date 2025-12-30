@@ -242,7 +242,7 @@ message BlcCommand {
   optional bool control_by_blc = 1;  // 泊车快速握手请求
   optional deeproute.canbus.Chassis.GearPosition blc_gear_request = 2;  // 档位请求
   optional bool blc_gear_request_valid = 3;  // 档位请求是否有效
-  optional double blc_longitudinal_cmd = 4;  // 行车加速度(m/s^2)/泊车速度请求(kph)
+  optional double blc_longitudinal_cmd = 4;  // 加速度请求(m/s^2)
   optional bool blc_longitudinal_cmd_valid = 5;  // 加速度请求是否有效
   optional deeproute.common.VehicleSignal.TurnSignal blc_turn_signal = 6;  // 转向灯请求
   optional bool blc_turn_signal_valid = 7;  // 转向灯请求是否有效
@@ -273,4 +273,6 @@ message BlcCommand {
   }
   optional DoorLockRequest door_lock_req = 22;  // 车门锁请求
   optional bool door_lock_req_valid = 23;  // 车门锁请求是否有效
+  optional double speed_cmd = 24;  // 速度请求(km/h)
+  optional bool speed_cmd_valid = 25;  // 速度请求是否有效
 }

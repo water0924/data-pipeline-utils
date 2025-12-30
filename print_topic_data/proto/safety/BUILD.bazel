@@ -86,6 +86,7 @@ proto_library(
     name = "safety_interface_proto",
     visibility = ["//visibility:public"],
     srcs = ["safety_interface.proto"],
+    features = ["proto3_optional"],
     deps = [
         "//proto/safety:safety_event_proto",
     ],
@@ -242,3 +243,52 @@ python_proto_library(
     ],
 )
 
+proto_library(
+    name = "lp_dtc_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["lp_dtc.proto"],
+    deps = [
+        ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "lp_dtc_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":lp_dtc_proto",
+    ],
+)
+
+python_proto_library(
+    name = "lp_dtc_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":lp_dtc_proto",
+    ],
+)
+
+proto_library(
+    name = "lp_system_safety_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["lp_system_safety.proto"],
+    deps = [
+        ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "lp_system_safety_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":lp_system_safety_proto",
+    ],
+)
+
+python_proto_library(
+    name = "lp_system_safety_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":lp_system_safety_proto",
+    ],
+)

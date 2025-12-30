@@ -4,6 +4,7 @@ package deeproute.localization;
 
 import "common/geometry.proto";
 import "drivers/gnss/ins.proto";
+import "map/sd_map.proto";
 
 message LockOnRoadResult {
   optional int64 time_us = 1;                      // time of pose
@@ -128,6 +129,20 @@ message LockOnRoadResult {
 
   optional int32 sd_link_index_raw = 28;    // 没有 reindex 的 link idx ，没有匹配上为-1，其他情况下为原始idx
 
+  message CandidateTopoInfo {
+    optional deeproute.sd_map.LinkData link_data = 1;
+    optional double distance = 2;
+  }
+  repeated CandidateTopoInfo candidate_topo_infos = 29;
+
+  optional uint64 amap_path_id_64 = 30;
+
+  message OverlapInfo {
+    optional int64 map_id = 1;
+    optional double dis_to_end = 2; // 导航终点到avp终点的距离
+    optional double len = 3;
+  }
+  repeated OverlapInfo overlap_infos = 31;
 }
 
 message LaneIndexEstimationResult{

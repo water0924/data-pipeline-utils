@@ -76,9 +76,11 @@ message Image {
   optional PixelFormat pixel_format = 8;
 
   // Time it takes for image exposure, in nano-second.
-  optional uint64 exposure_duration_ns = 9; 
+  optional uint64 exposure_duration_ns = 9;
   // Sequence number of message in shm block.
   optional uint64 shm_msg_seq = 10;
+  // is filter
+  optional bool is_filtered = 11;
 }
 
 message CompressedImage {

@@ -15,4 +15,5 @@ message VehicleCustomConfig {
     optional double throttle_cmd_max = 11 [default = 1];
     optional double brake_cmd_min = 12 [default = -5];
     optional double brake_cmd_max = 13 [default = 5];
+    optional double epb_release_brake_torque = 14 [default = 800];
 }

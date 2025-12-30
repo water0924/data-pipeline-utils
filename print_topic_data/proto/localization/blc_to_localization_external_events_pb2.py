@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n6localization/blc_to_localization_external_events.proto\x12 deeproute.localization.blc_event\"W\n\x10\x43urrentModeEvent\x12\x43\n\x0c\x63urrent_mode\x18\x01 \x01(\x0e\x32-.deeproute.localization.blc_event.CurrentMode\"\x90\x01\n\x16\x42lcToLocalizationEvent\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\t\x12\x14\n\x0ctimestamp_ms\x18\x02 \x01(\x01\x12N\n\x12\x63urrent_mode_event\x18\x03 \x01(\x0b\x32\x32.deeproute.localization.blc_event.CurrentModeEvent*Y\n\x0b\x43urrentMode\x12\x07\n\x03NCA\x10\x00\x12\x07\n\x03\x45\x32\x45\x10\x01\x12\x07\n\x03\x41\x43\x43\x10\x02\x12\x07\n\x03LCC\x10\x03\x12\x07\n\x03\x41PA\x10\x04\x12\x08\n\x04RADS\x10\x05\x12\x07\n\x03VPA\x10\x06\x12\n\n\x06MANUAL\x10\x07\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n6localization/blc_to_localization_external_events.proto\x12 deeproute.localization.blc_event\"n\n\x10\x43urrentModeEvent\x12\x43\n\x0c\x63urrent_mode\x18\x01 \x01(\x0e\x32-.deeproute.localization.blc_event.CurrentMode\x12\x15\n\ris_in_routing\x18\x02 \x01(\x08\"\x90\x01\n\x16\x42lcToLocalizationEvent\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\t\x12\x14\n\x0ctimestamp_ms\x18\x02 \x01(\x01\x12N\n\x12\x63urrent_mode_event\x18\x03 \x01(\x0b\x32\x32.deeproute.localization.blc_event.CurrentModeEvent*Y\n\x0b\x43urrentMode\x12\x07\n\x03NCA\x10\x00\x12\x07\n\x03\x45\x32\x45\x10\x01\x12\x07\n\x03\x41\x43\x43\x10\x02\x12\x07\n\x03LCC\x10\x03\x12\x07\n\x03\x41PA\x10\x04\x12\x08\n\x04RADS\x10\x05\x12\x07\n\x03VPA\x10\x06\x12\n\n\x06MANUAL\x10\x07\x62\x06proto3')
 
 _CURRENTMODE = DESCRIPTOR.enum_types_by_name['CurrentMode']
 CurrentMode = enum_type_wrapper.EnumTypeWrapper(_CURRENTMODE)
@@ -48,10 +48,10 @@ _sym_db.RegisterMessage(BlcToLocalizationEvent)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _CURRENTMODE._serialized_start=328
-  _CURRENTMODE._serialized_end=417
+  _CURRENTMODE._serialized_start=351
+  _CURRENTMODE._serialized_end=440
   _CURRENTMODEEVENT._serialized_start=92
-  _CURRENTMODEEVENT._serialized_end=179
-  _BLCTOLOCALIZATIONEVENT._serialized_start=182
-  _BLCTOLOCALIZATIONEVENT._serialized_end=326
+  _CURRENTMODEEVENT._serialized_end=202
+  _BLCTOLOCALIZATIONEVENT._serialized_start=205
+  _BLCTOLOCALIZATIONEVENT._serialized_end=349
 # @@protoc_insertion_point(module_scope)

@@ -43,6 +43,7 @@ message VehicleState {
         NONE_TURN = 0;
         LEFT = 1;
         RIGHT = 2;
+        UNDEFINED = 3;//only for metric use
     }
     optional TurnSignal turn_signal = 23;                  // in used
     optional bool warning_blinker_on = 24;                 // in used, indicating if the blinker is on
@@ -214,5 +215,52 @@ message VehicleState {
         EPB_REQUEST_APPLY = 2;
     }
     optional EpbRequest epb_req = 81;  // canbus下发的epb请求
-    
+
+    optional double steering_wheel_torque = 82 [default = 0.0];  // 方向盘扭矩，单位Nm
+
+    optional bool acc_incre_speed = 83 [default = false];  // acc increment set speed
+    optional bool acc_decre_speed = 84 [default = false];  // acc decrement set speed
+    optional bool acc_incre_gap = 85 [default = false];    // acc increment following gap
+    optional bool acc_decre_gap = 86 [default = false];    // acc decrement following gap
+
+    optional bool veh_shift_allowed = 87 [default = false];  // 是否允许换挡，true:允许 false:不允许
+    optional bool veh_start_allowed = 88 [default = false];  // 是否允许起步，true:允许 false:不允许
+
+    // 用户体验程序授权状态
+    enum UsrExperiProgAuthorSts {
+        USR_EXPERI_PROG_AUTHOR_STS_INITIAL = 0;      // 初始值
+        USR_EXPERI_PROG_AUTHOR_STS_UNAUTHORIZE = 1;  // 未授权
+        USR_EXPERI_PROG_AUTHOR_STS_AUTHORIZED = 2;   // 已授权
+    }
+    optional UsrExperiProgAuthorSts usr_experi_prog_author_sts = 89;
+    optional bool standstill = 90; // vehicle chassis standstill state, 0: not standstill, 1: standstill
+
+    // 车辆系统电源状态
+    enum VehSysPowerModeType {
+        VEH_SYS_POWER_MODE_INVALID = 0;  // 无效状态
+        VEH_SYS_POWER_MODE_OFF = 1;      // 断电状态
+        VEH_SYS_POWER_MODE_ACC = 2;      // ACC档
+        VEH_SYS_POWER_MODE_ON = 3;       // ON档
+        VEH_SYS_POWER_MODE_CRANK = 4;    // Crank档
+    }
+    optional VehSysPowerModeType veh_sys_power_mode = 91 [default = VEH_SYS_POWER_MODE_INVALID];
+    enum VehicleDrivingMode {
+       NORMAL_MODE = 0;
+       EV_MODE = 1; //纯电模式
+       SAVE_MODE_STARTED = 2; //强制保电模式
+       SPORT_MODE = 3; //运动模式
+       ECO_MODE = 4; //经济模式
+       LADY_MODE = 5; //女神模式
+       COMFORT_MODE = 6; //舒适模式
+       RACE_MODE = 7; //竞赛模式
+       HYBRID_MODE = 8; //混动模式
+       SNOW_MODE = 9; //雪地模式
+       SAND_MODE = 10; //沙地模式
+       ROCK_MODE = 11; //岩石模式
+
+       ELSE_VALID_MODE = 99; //其他有效模式
+       INVALID_MODE = 100; //无效模式
+    }
+    optional VehicleDrivingMode vehicle_driving_mode = 92 [default = INVALID_MODE];
+    optional bool is_lat_co_driving = 93 [default = false];   //横向人机共驾状态，true:是 false:否
 }

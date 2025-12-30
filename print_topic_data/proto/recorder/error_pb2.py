@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14recorder/error.proto\x12\x12\x64\x65\x65proute.recorder\"Q\n\x0b\x45rrorStatus\x12\x35\n\nerror_code\x18\x01 \x01(\x0e\x32\x1d.deeproute.recorder.ErrorCode:\x02OK\x12\x0b\n\x03msg\x18\x02 \x01(\t*\x89\x01\n\tErrorCode\x12\x06\n\x02OK\x10\x00\x12 \n\x1bRECORDER_ERROR_OUT_OF_RANGE\x10\x98u\x12\x16\n\x11RECORDER_ERROR_IO\x10\x99u\x12\x1d\n\x18RECORDER_ERROR_DISK_FULL\x10\x9au\x12\x1b\n\x16RECORDER_ERROR_INVALID\x10\x9bu')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14recorder/error.proto\x12\x12\x64\x65\x65proute.recorder\"Q\n\x0b\x45rrorStatus\x12\x35\n\nerror_code\x18\x01 \x01(\x0e\x32\x1d.deeproute.recorder.ErrorCode:\x02OK\x12\x0b\n\x03msg\x18\x02 \x01(\t*\xab\x01\n\tErrorCode\x12\x06\n\x02OK\x10\x00\x12 \n\x1bRECORDER_ERROR_OUT_OF_RANGE\x10\x98u\x12\x16\n\x11RECORDER_ERROR_IO\x10\x99u\x12\x1d\n\x18RECORDER_ERROR_DISK_FULL\x10\x9au\x12\x1b\n\x16RECORDER_ERROR_INVALID\x10\x9bu\x12 \n\x1bRECORDER_ERROR_CLOCK_RESYNC\x10\x9cu')
 
 _ERRORCODE = DESCRIPTOR.enum_types_by_name['ErrorCode']
 ErrorCode = enum_type_wrapper.EnumTypeWrapper(_ERRORCODE)
@@ -24,6 +24,7 @@ RECORDER_ERROR_OUT_OF_RANGE = 15000
 RECORDER_ERROR_IO = 15001
 RECORDER_ERROR_DISK_FULL = 15002
 RECORDER_ERROR_INVALID = 15003
+RECORDER_ERROR_CLOCK_RESYNC = 15004
 
 
 _ERRORSTATUS = DESCRIPTOR.message_types_by_name['ErrorStatus']
@@ -38,7 +39,7 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _ERRORCODE._serialized_start=128
-  _ERRORCODE._serialized_end=265
+  _ERRORCODE._serialized_end=299
   _ERRORSTATUS._serialized_start=44
   _ERRORSTATUS._serialized_end=125
 # @@protoc_insertion_point(module_scope)

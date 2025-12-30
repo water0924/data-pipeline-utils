@@ -31,4 +31,7 @@ message GwmAllDownstreamChassis {
   optional deeproute.canbus.gwm.all.ADAS_AD1_470 adas_ad1_470 = 21;
   optional deeproute.canbus.gwm.all.RSDS_FD1_16F rsds_fd1_16f = 22;
   optional deeproute.canbus.gwm.all.RSDS_FD2_30A rsds_fd2_30a = 23;
+
+  optional deeproute.canbus.gwm.all.IFC_FD11_375 ifc_fd11_375 = 24;
+  optional deeproute.canbus.gwm.all.IFC_FD10_266 ifc_fd10_266 = 25;
 }

@@ -16,11 +16,17 @@ message Events {
 }
 
 enum EventLevel {
+  //埋点定义类型
   DEBUG = 0;
   INFO = 1;
+  //研发定义类型
   WARN = 2;
   ERROR = 3;
   FATAL = 4;
+  //安全策略类型，优先级比研发定义类型高
+  SAFETY_WARN = 10;
+  SAFETY_ERROR = 11;
+  SAFETY_FATAL = 12;
 }
 
 enum EventType {

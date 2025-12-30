@@ -12,6 +12,7 @@ proto_library(
     deps = [
         "//proto/common:geometry_proto",
         "//proto/drivers/gnss:ins_proto",
+        "//proto/map:sd_map_proto",
     ],
     strip_import_prefix = "/proto/",
 )

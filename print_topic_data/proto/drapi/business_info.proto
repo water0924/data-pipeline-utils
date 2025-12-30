@@ -63,6 +63,29 @@ enum ChangeRoutingAction {
   U_TURN = 4;
 }
 
+enum SelectLaneAction {
+  SELECT_LANE_ACTION_UNKNOWN = 0;
+  SELECT = 1;  //去指定车道行驶
+  CANCEL_SELECT = 2; //取消指定车道行驶
+  MEMORY = 3;  //记忆车道
+  CANCEL_MEMORY = 4; //取消记忆车道    
+}
+
+enum TargetLane {
+  TARGET_LANE_UNKNOWN = 0;
+  LEFT1 = 1;
+  LEFT2 = 2;
+  LEFT3 = 3;
+  LEFT4 = 4;
+
+  RIGHT1 = 10;
+  RIGHT2 = 11;
+  RIGHT3 = 12;    
+  RIGHT4 = 13;
+
+  MIDDLE = 20;
+}
+
 message PositionOfAction {
   enum PositionType {
     PositionType_unknown = 0;
@@ -91,6 +114,8 @@ enum BlcSceneStrategyType {
   SCENE_BLIND_MERGING = 70;                // 盲区汇入
   SCENE_BLIND_CURVE = 80;                  // 弯道盲区
   SCENE_BLIND_UTURN = 90;                  // 盲区掉头
+  SCENE_CONSTRUCTION = 101;                // 施工场景
+  SCENE_MEMORY_SPEED_LIMIT = 150;          // 记忆限速场景
 }
 
 
@@ -262,6 +287,8 @@ message AVMSettingInfo {
     STATUS_CALIBRATION = 16;
     STATUS_CALIBRATION_FINISHED = 17;
     STATUS_CALIBRATION_FAILED = 18;
+    STATUS_SLOPE_MODE = 19;
+    STATUS_SOMEIP_CALIBRATION = 20;
   }
 
   AVMStatus status = 1;
@@ -518,6 +545,17 @@ enum CalibrationStep {
 
   CALIBRATION_STEP_ONLINE_AVM = 0x40;
   CALIBRATION_STEP_ONLINE_INERTIAL_NAVIGATION = 0x50;
+}
+
+enum CalibrationStationCode {
+  CALIB_STATION_DEFAULT = 0x00;            // code station defined in adas_online_calibrator
+  CALIB_STATION_GEELY_QIANTANG = 0x01;     // Geely Qiantang station P177/P171-A
+  CALIB_STATION_GEELY_WUHAN = 0x02;        // Geely Wuhan station 
+  CALIB_STATION_GEELY_CHUNXIAO = 0x03;     // Geely Chunxiao station
+  CALIB_STATION_GEELY_QIANTANG_LOW = 0x04;  // Geely Qiantang station P171
+  CALIB_STATION_GEELY_CHANGXING = 0x05;    // Geely changxing station
+  CALIB_STATION_GEELY_SHENYANG = 0x06;    // Geely shenyang station
+  CALIB_STATION_GEELY_YIWU = 0x07;    // Geely yiwu station
 }
 
 enum APSText {

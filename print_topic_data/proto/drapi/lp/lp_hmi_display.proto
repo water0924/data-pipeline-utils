@@ -1,0 +1,558 @@
+syntax = "proto3";
+
+package lp.hmi;
+
+import "drapi/lp/lp_common.proto";
+import "drapi/lp/basic_common.proto";
+
+/****************************** vehicle dynamic info *****************/
+message PlannerPath {
+  repeated lp.basiccommon.Point3DList polylines = 1;
+  TypeEnum type = 2;
+  
+  enum TypeEnum {
+    NONE = 0;
+    DRIVING = 1;        // NOA&&LCC-PATH
+    APA = 2;            // APA泊车轨迹线
+    RADS = 3;           // 巡迹倒车轨迹
+    ROUTING_GUIDE = 4;  // 记忆泊车巡航引导线
+    PRE_APA = 5;        // 预规划轨迹线
+    P2P_GUIDE = 6;      // 停车场全览导航路线
+  }
+}
+
+message BrakePoint {
+  lp.basiccommon.Point3D center_point = 1;
+  float angle = 2;
+}
+
+message HandsOffInfo {
+  uint32 hands_off_level = 1;           // 脱手警告等级，0：默认，1:1级，2:2级，3:3级
+  uint32 hands_off_count_down = 2;      // 倒计时状态位，0：无效，1：一级脱手报警倒计时，   2：二级脱手报警倒计时，3：三级脱手报警倒计时，
+  uint32 hands_off_count_down_time = 3; // 提示接管倒计时，单位秒
+}
+
+message HpaButtonInfos {
+  ButtonStateEnum cruise_button = 1;         // 巡航按钮
+  ButtonStateEnum resume_button = 2;         // 恢复按钮
+  ButtonStateEnum nearby_parking_button = 3; // 就近泊入按钮
+}
+
+message HpaRouteInfo {
+  uint32 current_map_id = 1;        // 当前匹配的地图ID
+  double remaining_distance_m = 2;  // 剩余距离(米)
+  double cruising_distance_m = 3;   // 总巡航距离(米)
+  double cruising_time_s = 4;       // 总巡航时间(秒)
+}
+
+message HpaBusiness {
+  HpaMappingStateEnum hpa_mapping_state = 1;                      // 静默建图状态
+  lp.common.HpaInterfaceDisplayEnum hpa_interface_display = 2;    // 界面显示
+  HpaButtonInfos button_status = 3;                               // 按钮状态
+  uint32 card_status = 4;                                         // 卡片文言
+  HpaRouteInfo route_info = 5;                                    // 路线和导航数据
+  PlannerPath navi_path = 6;                                      // 全局规划路径 --预留
+}
+
+enum ButtonStateEnum {
+  BUTTON_STATE_HIDDEN = 0;       // 按钮隐藏
+  BUTTON_STATE_DISABLED = 1;     // 按钮置灰
+  BUTTON_STATE_ENABLED = 2;      // 按钮可点击
+  BUTTON_STATE_HIGHLIGHTED = 3;  // 按钮高亮
+}
+
+// 地图元数据信息
+message MapMetaInfo {
+  uint32 map_id = 1;             // 唯一地图标识符
+  uint64 map_creation_time = 2;  // 地图创建时间戳
+  double latitude = 3;           // POI纬度
+  double longitude = 4;          // POI经度
+}
+
+// 删除地图响应
+message OperationResponse {
+  lp.common.ResponseStatus status = 1;        // 操作结果
+  string error_message = 2;                   // 错误描述 (可选)
+}
+
+// HPA静默建图状态
+enum HpaMappingStateEnum {
+  HPA_MAPPING_STATE_UNSPECIFIED = 0;       // 未指定/初始状态
+  HPA_MAPPING_STATE_MAPPING = 1;           // 建图中
+  HPA_MAPPING_STATE_MAPPING_FAILED = 2;    // 建图失败
+  HPA_MAPPING_STATE_MAPPING_SUCCESS = 3;   // 建图成功
+}
+
+// ADCU所有地图列表
+message StartupMapList {
+  repeated MapMetaInfo map_infos = 1; // 可用地图列表
+}
+
+// 地图变更通知
+message MapChangeNotification {
+  uint32 added_map_id = 1;              // 新增加的地图ID
+  repeated uint32 removed_map_ids = 2;  // 删除的地图ID列表
+}
+ 
+message WarningInfo {
+  uint32 left_warning_level = 1;      // 报警等级; 0: 无效， 1：1级， 2：2级，3：3级，4：4级
+  uint32 left_warning_location = 2;   // 报警状态，0: 无效， 1：前方，2：后方 ，3：相邻
+  uint32 right_warning_level = 3;     // 报警等级; 0: 无效， 1：1级， 2：2级，3：3级，4：4级
+  uint32 right_warning_location = 4;  // 报警状态，0: 无效， 1：前方，2：后方 ，3：相邻
+}
+
+enum ParkingModeEnum {
+  PARKING_MODE_NONE = 0;
+  PARKING_IN_VERTICAL = 1;
+  PARKING_IN_PARALLEL = 2;
+  PARKING_IN_OBLIQUE = 3;
+  PARKING_OUT_VERTICAL = 4;
+  PARKING_OUT_PARALLEL = 5;
+  PARKING_OUT_OBLIQUE = 6;
+  PARKING_CLARION_CALL = 7;
+}
+
+enum ParkingFuncEnum {
+  PARKING_FUNC_NONE = 0;
+  PARKING_FUNC_IN = 1;   // 泊入
+  PARKING_FUNC_OUT = 2;  // 泊出
+}
+
+message FunModeInfo {
+  WarningInfo warning_info = 1;   // 报警信息; 
+  uint32 warning_state = 2;       // 0：关闭，1：未激活，2：激活，3：故障
+}
+
+message SpeedLimitWarn {
+  bool is_limit_cancel = 1;                    // 是否解除限速 0 否，1 是
+  bool is_speed_camera = 2;                    // 是否有电子眼限速 0 否，1 是
+  lp.common.FuncModeEnum func_mode = 3;        // 限速状态  
+  uint32 high_speed_limit_value = 4;           // 限速值，单位km/h
+  uint32 low_speed_limit_value = 5;            // 限速值，单位km/h
+  uint32 warning_type = 6;                     // 0 none， 1 超速预警high， 2 低速预警 low
+  float speed_camera_distance = 7;             // 距离电子眼剩余距离，单位m
+}
+
+/******************************* obstacles ***************************/
+message PerceptionObstacle {
+  uint32 id = 1;
+  TypeEnum type = 2;                          // 障碍物类型
+  lp.basiccommon.Point3D position = 3;        // 坐标系下的xyz
+  double angle = 4;                           // 航向角(弧度)
+  lp.basiccommon.Point3D speed = 5;           // 车速(m/s)
+  LightStatus light_status = 6;               // 车灯状态
+  ColorEnum color = 7;
+  Size size = 8;
+  
+  enum TypeEnum {
+    NO_DISPLAY = 0;
+    CAR = 1;                  // 四轮轿车
+    SUV = 2;                  // SUV
+    VAN = 3;                  // 面包车;MPV
+    POLICE_CAR = 4;           // 警车
+    BOX_TRUCK = 5;            // 箱式卡车
+    FLAT_TRUCK = 6;           // 板式货车
+    BIGBUS = 7;               // 大巴
+    ADULT = 8;                // 成人
+    CYCLIST = 9;              // 人骑自行车
+    MOTORCYCLIST = 10;        // 人骑摩托车
+    TRICYCLE_BOX_RIDER = 11;  // 人骑带箱三轮车
+    NORMAL_CONE = 12;         // 锥桶
+    PILLAR_CONE = 13;         // 防撞柱
+    BUCKET = 14;              // 圆桩桶
+    WATER_BARRIER = 15;       // 水马
+    CONSTRUCTION_SIGN = 16;   // 施工牌
+    TRICONE = 17;             // 三角牌
+    BARRIER_GATE_OPEN = 18;   // 打开的收费杆
+    BARRIER_GATE_CLOSE = 19;  // 关闭的收费杆
+    SQUARE_PILLAR = 20;       // 方柱（方柱圆柱）
+    SPEEDBUMP = 21;           // 减速带
+    FIRE_HYDRANT = 22;        // 消防箱
+    LOCK_ON = 23;             // 地锁开
+    LOCK_OFF = 24;            // 地锁关
+    CHOCK = 25;               // 轮档
+  }
+  
+  message LightStatus {
+    bool brake_switch_on = 1;             // 制动灯状态
+    bool left_turn_switch_on = 2;         // 左转灯状态
+    bool right_turn_switch_on = 3;        // 右转灯状态
+    bool left_right_turn_switch_on = 4;   // 双闪灯状态
+  }
+  
+  enum ColorEnum {
+    DEFAULT = 0;  // 默认
+    BLUE = 1;     // 蓝
+    YELLOW = 2;   // 黄
+    RED = 3;      // 红
+  }
+  
+  message Size {
+    float width = 1;
+    float length = 2;
+    float height = 3;
+  }
+}
+
+// 自车信息
+message EgoInfo {
+  lp.basiccommon.Point3D position = 1;  // 坐标系下的xyz
+  float angle = 2;                      // 航向角(弧度)
+  uint32 floor = 3;                     // 所在楼层（偏移量+100;坡道输出100，1层输出101）
+}
+
+// 感知物体
+message PerceptionObstacles {
+  repeated PerceptionObstacle obstacles = 1;
+}
+
+// 动效
+message VehicleDynamicInfo {
+  PlannerPath planner_path = 1;  // 规划轨迹线
+  BrakePoint brake_point = 2;    // 刹停点
+}
+
+message Lane {
+  uint32 id = 1;
+  uint32 left_boundary_id = 2;                 //左侧laneboundary-id
+  uint32 right_boundary_id = 3;                //右侧laneboundary-id
+  lp.basiccommon.Point3DList centerline = 4;   //车道中心线点集
+  bool is_ego_lane = 5;                        //是否是自车所在的车道
+}
+
+/******************************** map dynamic info *******************/
+message LaneChangeStatus {
+  uint32 target_lane_id = 1;
+  lp.basiccommon.Point3D position = 2;   // 落位区的位置
+  float angle = 3;                       // 落位区的朝向(弧度)
+  DirEnum dir = 4;                       // 变道方位
+  StatusEnum status = 5;                 // 变道状态
+  
+  enum DirEnum {
+    MIDDLE = 0;
+    LEFT = 1;
+    RIGHT = 2;
+  }
+  
+  enum StatusEnum {
+    NOLANECHANGE = 0;  // 无变道
+    CHANGING = 1;      // 变道中（蓝色）
+    WAIT = 2;          // 等待（红色）
+  }
+}
+
+message EgoTrafficLight {
+  ColorEnum color = 1;     // 红绿灯颜色
+  uint32 countdown = 2;    // 倒计时
+  enum ColorEnum {
+    UNKNOWN = 0;
+    RED = 1;
+    YELLOW = 2;
+    GREEN = 3;
+    BLACK = 4;
+  }
+}
+
+/******************************** rasmap *****************************/
+message DrivingArea {
+  uint32 id = 1;
+  lp.basiccommon.Point3DList polygon = 2;
+  bool can_driving = 3;  // 是否可行驶
+}
+
+message LaneEdge {
+  uint32 id = 1;
+  lp.basiccommon.Point3DList polyline = 2;
+}
+
+message LaneBoundary {
+  uint32 id = 1;
+  TypeEnum type = 2;
+  ColorEnum color = 3;
+  repeated BoundarySubLine sub_lines = 4;  // 按照类型和颜色划分的子线段
+
+  enum TypeEnum {
+    INVALID = 0;      // 无效
+    SOLID = 1;        // 实线
+    DASH = 2;         // 虚线
+    SOLID_DASH = 3;   // 实-虚
+    DASH_SOLID = 4;   // 虚-实
+    SOLID_SOLID = 5;  // 双实
+    DASH_DASH = 6;    // 双虚
+  }
+  
+  enum ColorEnum {
+    DEFAULT = 0;  // 默认
+    WHITE = 1;    // 白
+    YELLOW = 2;   // 黄
+  }
+  
+  message BoundarySubLine {
+    uint32 inner_id = 1;                  // 从1开始累加，单个LaneBoundary内局部唯一ID
+    lp.basiccommon.Point3DList point = 2; // 点集
+    TypeEnum type = 3;                    // 类型
+    ColorEnum color = 4;                  // 颜色
+  }
+}
+
+message LaneMark {
+  uint32 id = 1;
+  TypeEnum arrow_type = 2;
+  lp.basiccommon.Point3D position = 3;
+  float angle = 4;  // 朝向(弧度)
+  
+  enum TypeEnum {
+    NONE = 0;               // 未知
+    LEFT_FORWARD = 1;       // 左前方
+    LEFT_RIGHT = 2;         // 左右
+    RIGHT_FORWARD = 3;      // 右前方
+    LEFT_RIGHT_FORWARD = 4; // 左右前方
+    LEFT = 5;               // 左转
+    RIGHT = 6;              // 右转
+    FORWARD = 7;            // 直行
+    U_TURN = 8;             // 掉头
+    U_TURN_FORWARD = 9;     // 掉头并直行
+    LEFT_U_TURN = 10;       // 左转掉头
+  }
+}
+
+message Stopline {
+  uint32 id = 1;
+  lp.basiccommon.Point3D start_point = 2;
+  lp.basiccommon.Point3D end_point = 3;
+}
+
+message ParkingSpace {
+  uint32 id = 1;                                   // 车位id
+  uint32 number = 2;                               // 车位编号（用于选择车位）
+  lp.basiccommon.Point3DList bounding_box = 3;     // 车位轮廓描述(4个角;顺时针，1和2代表开口)
+  TypeEnum type = 4;                               // 车位类型
+  StatusEnum status = 5;                           // 车位状态
+  bool is_default = 6;                             // 是否为默认车位
+  bool is_crusing_target = 7;                      // 是否为本次巡航的目标车位(非最终目标车位)
+  
+  enum TypeEnum {
+    NONE = 0;         // 无
+    VERTICAL = 1;     // 垂直车位
+    LATERAL = 2;      // 水平车位
+    OBLIQUE = 3;      // 倾斜车位
+    MECHANICAL = 4;   // 机械车位
+    USERDEFINED = 5;  // 自定义车位
+  }
+  
+  enum StatusEnum {
+    DEFAULT = 0;           // 状态未知
+    EMPTY = 1;             // 车位状态为空且不可选
+    UNUSABLE = 2;          // 车位状态为被占用
+    TARGET = 3;            // 目标车位; APA泊车选中状态
+    RECOMMENDED = 4;       // 车位状态为空且可选
+    NOTAPPLY_HEADIN = 5;   // 目标车位; APA泊车选中状态（不支持车头泊入）
+  }
+}
+
+message Crosswalk {
+  uint32 id = 1;
+  lp.basiccommon.Point3DList polygon = 2;  // 顺时针，第一和第二个点代表斑马线延伸的方向
+}
+
+//可行驶区域  像素点数据协议
+message HmiFreeSpace {
+  lp.basiccommon.Point2D grid_size_min = 1;  // freespace边界
+  lp.basiccommon.Point2D grid_size_max = 2;  // freespace边界
+  uint32 row_count = 3;                      // 行数(默认324)
+  uint32 column_count = 4;                   // 列数（默认272)
+  repeated uint32 drivable_grid = 5;         // bit0~bit31由低到高
+}
+
+// 实时感知地图
+message PerceptionRasmap {
+  repeated Lane lanes = 1;                    // 车道中心线
+  repeated LaneBoundary lane_boundaries = 2;  // 车道线
+  repeated Stopline stop_lines = 3;           // 停止线
+  repeated HmiFreeSpace hmi_free_spaces = 4;  // 可行驶区域
+  repeated LaneMark lane_marks = 5;           // 道路箭头
+  repeated LaneEdge lane_edges = 6;           // 道路边缘线
+  repeated Crosswalk crosswalks = 7;          // 斑马线
+  repeated ParkingSpace parking_spaces = 8;   // 车位
+}
+
+message MapParkingSpace {
+  uint32 id = 1;                                    // 车位ID
+  uint32 floor = 2;                                 // 所在楼层（偏移量+100;坡道输出100，1层输出101）
+  lp.basiccommon.Point3DList bounding_points = 3;   // 车位角点
+  bool is_default = 4;                              // 是否为默认车位
+  bool is_target = 5;                               // 是否为本次巡航目标车位
+}
+
+message MapRoad {
+  uint32 id = 1;                                // 道路ID
+  uint32 floor = 2;                             // 所在楼层（偏移量+100;坡道输出100，1层输出101，负一层输出99）
+  lp.basiccommon.Point3DList polyline = 3;      // 道路点序列
+}
+
+message MapMetaData {
+  uint32 map_id = 1;        // 地图ID
+  uint64 create_time = 2;   // 地图创建时间戳(毫秒)
+  double latitude = 3;      // 纬度
+  double longitude = 4;     // 经度
+}
+
+message MapPoint {
+  uint32 id = 1;                        // 点ID
+  lp.basiccommon.Point3D position = 2;  // 点位置 
+  TypeEnum type = 3;                    // 点类型
+  enum TypeEnum {
+    UNKNOWN = 0;   // 未知
+    ENTRANCE = 1;  // 入口
+    EXIT = 2;      // 出口
+  }
+}
+
+// 地图动效
+message MapDynamicInfo {
+  LaneChangeStatus lane_change_status = 1;  // 变道特效
+  EgoTrafficLight ego_traffic_light = 2;    // 2D红绿灯
+}
+
+enum NotificationTypeEnum {
+  NOTIFICATION_NONE = 0;          // 无
+  NOTIFICATION_DELETE_MAP = 1;    // 删除地图操作响应
+  NOTIFICATION_MAP_LIST = 2;      // 地图列表通知
+  NOTIFICATION_MAP_CHANGE = 3;    // 地图变更通知
+  NOTIFICATION_MAP_NAV = 4;       // hpa临时车位/出入口路径规划结果通知
+}
+
+message PointLLH {
+  enum PosTypeOfGnss {
+    NONE = 0;      // 无解
+    SINGLE = 1;    // 单点定位
+    PSRDIFF = 2;   // 伪距差分定位
+    FIX = 3;       // 固定解
+    FLOAT = 4;     // 浮点解
+  }
+  lp.basiccommon.Point3D position = 1;  // 经纬高
+  float angle = 2;                      // 航向角(弧度)
+  PosTypeOfGnss pos_type_gnss = 3;      // GNSS定位解状态
+}
+
+// topic: /lp/sr_map(SrVehicle+SrMap): 地图动效 + 感知地图  + 动效 + 自车位置 + 障碍物  100ms-150ms   proto
+message SrMap {
+  lp.basiccommon.Header header = 1;                      // 帧头，包含时间戳、序列号、模块名
+  EgoInfo ego_info = 2;                                  // 自车信息
+  PerceptionObstacles perception_obstacles = 3;          // 感知障碍物
+  VehicleDynamicInfo vehicle_dynamic_info = 4;           // 动效
+  PerceptionRasmap perception_rasmap = 5;                // Road And Semantic Map，感知在线地图
+  MapDynamicInfo map_dynamic_info = 6;                   // 地图相关动效
+  PointLLH origin = 7;                                   // 高精度定位数据
+  lp.basiccommon.LatencyStatus latency_status = 8;       // 统计耗时，具体在common中定义
+  lp.basiccommon.ModuleStatus module_status = 9;         // 统计错误状态、错误代码、错误原因等，具体在common模块的leap.basiccommon.proto.ModuleStatus定义
+}
+
+//topic: /lp/hpa_map  事件型  proto
+// HPA完整地图数据
+message HpaMap {
+  lp.basiccommon.Header header = 1;                     // 帧头，包含时间戳、序列号、模块名
+  MapMetaData meta_data = 2;                            // 地图元信息  
+  repeated MapParkingSpace map_parking_space = 3;       // 地图车位信息
+  repeated MapRoad map_road = 4;                        // 地图道路信息
+  repeated MapPoint map_point = 5;                      // 地图特殊点信息
+  lp.basiccommon.LatencyStatus latency_status = 6;      // 统计耗时，具体在common中定义
+  lp.basiccommon.ModuleStatus module_status = 7;        // 统计错误状态、错误代码、错误原因等，具体在common模块的leap.basiccommon.proto.ModuleStatus定义
+}
+
+//topic: /leap/hmi/hpa_notification  事件型  proto
+//HPA 地图更新删除校验
+message HpaNotification {
+  lp.basiccommon.Header header = 1;                      // 帧头，包含时间戳、序列号、模块名
+  NotificationTypeEnum notification_type = 2;            // 通知数据有效类型 0:默认值 1:删除地图操作通知 2:地图列表变化通知 3:地图变更通知 4:路径规划是否成功
+  OperationResponse delete_map_response = 3;             // 删除地图操作响应
+  StartupMapList startup_map_list = 4;                   // 地图列表 (初始化时发送)
+  MapChangeNotification map_change_notification = 5;     // 地图变更通知 (建图过程中更新)
+  OperationResponse nav_response = 6;                    // hpa临时车位/出入口
+  lp.basiccommon.LatencyStatus latency_status = 7;       // 统计耗时，具体在common中定义
+  lp.basiccommon.ModuleStatus module_status = 8;         // 统计错误状态、错误代码、错误原因等，具体在common模块的leap.basiccommon.proto.ModuleStatus定义
+}
+
+//topic: /leap/hmi/auto_drive_info  100ms  proto
+//行车 todo:定义topic
+message AutoDriveInfo {
+  lp.basiccommon.Header header = 1;                      // 帧头，包含时间戳、序列号、模块名
+  lp.common.AdasStatusEnum adas_status = 2;              // 高阶智驾指示灯状态
+  lp.common.AccStatusEnum acc_status = 3;                // ACC指示灯状态
+  uint32 fault_adas = 4;                                 // ADAS算法故障，0：默认，1：故障 --预留
+  HandsOffInfo hands_off_info = 5;                       // 脱手告警信息
+  float adas_target_speed_set = 6;                       // 设置的车速，单位km/h;仪表显示使用，HPA默认发20km/h
+  float speed_set_limit = 7;                             // 可设置车速上限，单位km/h--预留，文言待鹏发确认
+  uint32 text_info_index = 8;                            // 交互文本索引，具体取值对应HMI显示交互
+  HpaBusiness hpa_business = 9;                          // HPA页面状态、按钮显示信息
+  uint32 scene = 10;                                     //  0：默认，1：行车和人驾低速场景（迟滞5km/h），2：收费站/检查站，3：行车和人驾高速场景（迟滞10km/h），4：HPA巡航，5：APA泊出选方向，6：APA泊入选车位，7：APA控车（暂停、控车、退出、完成），8：RA 
+  uint32 nap_to_lcc_display = 11;                        //nap和lcc切换按钮显示，0：默认（不显示按键），1：to LCC（显示降级），2：to CNAP（显示升级）	
+  lp.basiccommon.LatencyStatus latency_status = 12;      // 统计耗时，具体在common中定义
+  lp.basiccommon.ModuleStatus module_status = 13;        // 统计错误状态、错误代码、错误原因等，具体在common模块的leap.basiccommon.proto.ModuleStatus定义
+}
+
+//topic: /leap/hmi/active_safety_info  100ms  struct
+message ActiveSafetyInfo {
+  lp.basiccommon.Header header = 1;                       // 帧头，包含时间戳、序列号、模块名
+  uint32 aeb_warning = 2;                                 // 0：关闭，1：未激活，2：激活，3：故障
+  uint32 meb_warning = 3;                                 // 0：关闭，1：未激活，2：激活，3：故障
+  uint32 mai_warning = 4;                                 // 0：关闭，1：未激活，2：激活，3：故障
+  uint32 aes_warning = 5;                                 // 0：关闭，1：未激活，2：激活，3：故障
+  uint32 esa_warning = 6;                                 // 0：关闭，1：未激活，2：激活，3：故障
+  uint32 raeb_warning = 7;                                // 0：关闭，1：未激活， 2：激活，3：故障
+  FunModeInfo rctb_warning = 8;                           // rctb报警信息
+  FunModeInfo lcop_warning = 9;                           // lcop报警信息
+  FunModeInfo lka_warning = 10;                           // lka报警信息
+  FunModeInfo elk_warning = 11;                           // elk报警信息
+  FunModeInfo fdw_warning = 12;                           // fdw报警信息
+  FunModeInfo fcw_warning = 13;                           // fcw报警信息
+  FunModeInfo ldw_warning = 14;                           // ldw报警信息
+  FunModeInfo dow_warning = 15;                           // dow报警信息
+  FunModeInfo bsd_warning = 16;                           // bsd报警信息
+  FunModeInfo lca_warning = 17;                           // lca报警信息
+  FunModeInfo rcta_warning = 18;                          // rcta报警信息
+  FunModeInfo fctb_warning = 19;                          // fctb报警信息
+  FunModeInfo fcta_warning = 20;                          // fcta报警信息
+  FunModeInfo rcw_warning = 21;                           // rcw报警信息
+  FunModeInfo fvsa_warning = 22;                          // fvsa报警信息
+  FunModeInfo ihbc_warning = 23;                          // ihbc报警信息
+  FunModeInfo tsr_warning = 24;                           // tsr报警信息
+  FunModeInfo warning_info = 25;                          // 报警信息
+  SpeedLimitWarn speed_warning = 26;                      // 限速告警
+  lp.common.TSREnum tsr_sign = 27;                        // TSR 类型      
+  uint32 textinfo_index = 28;                             // 交互文本索引，具体取值对应HMI显示
+  lp.basiccommon.LatencyStatus latency_status = 29;       // 统计耗时，具体在common中定义
+  lp.basiccommon.ModuleStatus module_status = 30;         // 统计错误状态、错误代码、错误原因等，具体在common模块的leap.basiccommon.proto.ModuleStatus定义
+}
+
+//topic: /leap/hmi/parking_motion  100ms   struct
+message ParkingMotion {
+  lp.basiccommon.Header header = 1;                                 // 帧头，包含时间戳、序列号、模块名
+  bool apa_interface = 2;                                           // 0:无请求 1：请求
+  uint32 apa_offset_enable = 3;                                     // 是否满足智慧偏移条件     0：只满足居中  1：左中满足  2：右中满足  3：左中右都满足
+  float path_length = 4;                                            // 剩余轨迹长度，单位 m
+  ParkingModeEnum parking_mode = 5;                                 // 泊车模式：
+  ParkingFuncEnum func_default = 6;                                 // 默认泊车功能，0：泊入，1：泊出
+  lp.common.FuncModeEnum func_mode = 7;                             // APA、RPA功能控制模式
+  uint32 textinfo_index = 8;                                        //* 交互文本索引，具体取值对应HMI显示交互                                                        
+  uint32 custom_info = 9;
+  uint32 custom_prompt = 10;
+  uint32 custom_process = 11;                                       // 0:默认 1：成功 2：失败 3.处理中 
+  bool safety_valid = 12;                                           // 碰撞风险有效性 ，取值如下：0: 无效 1：有效
+  uint32 left_safety_level = 13;                                    // 左侧碰撞等级，取值如下 0：无碰撞风险 1：碰撞等级等级0 2：碰撞等级1 3：碰撞等级2 4：碰撞等级3
+  uint32 right_safety_level = 14;                                   // 右侧碰撞等级，取值如下 0：无碰撞风险 1：碰撞等级等级0 2：碰撞等级1 3：碰撞等级2 4：碰撞等级3
+  uint32 front_safety_level = 15;                                   // 前侧碰撞等级，取值如下 0：无碰撞风险 1：碰撞等级等级0 2：碰撞等级1 3：碰撞等级2 4：碰撞等级3
+  uint32 rear_safety_level = 16;                                    // 后侧碰撞等级，取值如下 0：无碰撞风险 1：碰撞等级等级0 2：碰撞等级1 3：碰撞等级2 4：碰撞等级3
+  lp.common.FuncModeEnum clarion_call_func_mode = 17;               // 直线召唤(RSPA)功能控制模式
+  uint32 clarion_call_not_available_reason = 18;
+  uint32 clarion_call_suspend_reason = 19;                          /* 0：无请求 1：已达到最大行驶距离5m 2：检测到障碍物 3：蓝牙收发异常*/
+  uint32 clarion_call_quit_reason = 20;
+  uint32 clarion_reserved = 21;                                     // 预留
+  lp.basiccommon.SlotSideEnum rpa_parking_out_direction = 22;       // 自动泊出方向，0：无， 1：左，2：右，3：前，4：后
+  lp.basiccommon.SlotTypeEnum rpa_parking_type = 23;                // 泊车类型，0：无，1：垂直，2：水平，3：斜车位，4：机械车位，5：自定义车位，6：常用车位
+  uint32 continue_parking = 24;                                     // 是否满足继续泊车条件    0:默认 1：满足 2：不满足
+  lp.common.FuncModeEnum ra_func_mode = 25;                         // 寻迹倒车(RADS)功能控制模式
+  uint32 ra_textinfo_index = 26;
+  lp.basiccommon.LatencyStatus latency_status = 27;                 // 统计耗时，具体在common中定义
+  lp.basiccommon.ModuleStatus module_status = 28;                   // 统计错误状态、错误代码、错误原因等，具体在common模块的leap.basiccommon.proto.ModuleStatus定义               
+}

@@ -4,6 +4,7 @@ package deeproute.perception;
 
 import "perception/deeproute_perception_obstacle.proto";
 import "common/geometry.proto";
+import "semantic_map/map.proto";
 
 message LaneBoundary {
   optional bool virtual = 1;
@@ -147,6 +148,18 @@ message Lane {
   repeated float right_width_list = 35;
   repeated float sigma_list = 36;
   repeated int32 association_cnt_list = 37;
+
+  enum Tollgate {
+    UNKNOWN = 0;
+    ETC = 1;
+    MANUAL = 2;
+    OTHER = 3;
+    ETC_MANUAL = 4;
+  };
+  optional Tollgate lane_tollgate_type = 38;
+
+  optional bool is_from_semantic_map = 39;
+  optional bool is_construction = 40;
 }
 
 message RoadEdge {
@@ -181,6 +194,7 @@ message StopLine {
   optional Type type = 4;
   optional bool is_from_semantic_map = 5;
   optional int32 semantic_map_id = 6;
+  optional bool is_from_instance_only = 7;
 }
 
 message PerceptionInfo {
@@ -311,6 +325,7 @@ message ParkingSpace {
   optional int32 request_id = 18;  // for user define parkspace, other parkspace don't have this field
   optional OpenDirection open_direction = 19;
   optional AttributeType attribute_type = 20;
+  optional bool parking_scene_dead_end = 21 [default = false];
 }
 
 message Road {
@@ -421,6 +436,10 @@ message RASMap {
     PASSAGE_TYPE_NOT_NARROW = 2;    
   }
   optional PassageType passage_type = 24;
+  optional bool parking_scene_output_finish = 25 [default = false];
+  optional hdmap.Map semantic_map = 26;
+  optional bool enable_construction_passable_switch = 27 [default = true];
+  optional bool enable_highway_passable_switch = 28 [default = true];
 }
 
 message Extrinsic {

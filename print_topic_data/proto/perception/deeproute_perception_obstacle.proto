@@ -186,8 +186,7 @@ message PerceptionObstacle {
     WARNING_SIGN = 50;   // 警示牌 placed on the ground
     DUSTBIN = 51;        // 垃圾箱
     WATER_BARRIER = 52;  // 水马
-    RAILING = 53;        // 道路栅栏 deprecated, we will just output
-                         // CONSTRUCTION_RAILING
+    RAILING = 53;        // 道路栅栏
     VEGETATION = 54;     // 路边植被
     TREE = 55;           // 行道树  deprecated, combined to VEGETATION
     BUILDING = 56;       // 路边建筑
@@ -204,6 +203,9 @@ message PerceptionObstacle {
     // update 250423
     FLAT_TRICYCLE = 64;  // 平板三轮车
     BOX_TRICYCLE = 65;   // 箱式三轮车
+    U_TUBE = 66;   // u型管
+    CHOCK = 67;   // 轮档
+    CONSTRUCTION_OBJECT = 68;   // 施工物体
   };
 
   optional Type type = 12;  // obstacle type
@@ -283,6 +285,7 @@ message PerceptionObstacle {
     // reai_mirror open or fold
     REAR_MIRROR_ON = 20; // 后视镜打开
     REAR_MIRROR_OFF = 21; // 后视镜折叠
+    VIRTUAL_REAR_MIRROR = 22; // 虚拟后视镜
   }
 
   // agent attribute (eg. open_doors)
@@ -323,6 +326,8 @@ message PerceptionObstacle {
     FS_PILLAR = 15;
     FS_BUSH = 16;
     FS_TREE = 17;
+    FS_U_TUBE = 18;
+    FS_DEPTH = 19;
   };
   optional FreespaceType freespace_type = 31 [default = FS_OTHERS_STATIC];
   enum FreespaceBranch {
@@ -376,12 +381,17 @@ message PerceptionObstacle {
     FILTERED_BY_NO_HEIGHT_OVERLAP = 23;
     FILTERED_BY_AVP_MERGING = 24;
     KEPT_BY_EXTRA_ROI = 25;
+    FILTERED_BY_HEADING_UNCERTAINTY = 26;
   };
 
   optional StatusCode status_code = 42 [default = NOT_FILTERED];
   optional bool radar_fusion_flag = 45 [default = false];
   optional bool is_fake = 46 [default = false];  // obstacle is fake or 
   optional RadarInfo radar_info = 47;
+  optional int32 box_filter_count = 49 [default = 0];
+  optional bool velocity_conflict_flag = 50 [default = false];
+  // subtype for each cell
+  repeated SubType cells_subtype = 48;  
 }
 
 message PointSemantics {
@@ -452,11 +462,16 @@ message CriticalObstacle{
   optional float prob = 2; // Critical Obstacle prob.
 }
 
+message SafetySeqDecision{
+  optional bool aeb_seq_triggered = 1;
+  optional float aeb_seq_triggered_prob = 2;
+}
+
 message SafetyModelBasedResult {
-    // aeb_decision part
+    // aeb_decision part (by frame)
     optional bool aeb_triggered = 1;
     optional float aeb_triggered_prob = 2;
-    optional float aeb_triggered_offset = 3;
+    optional float aeb_triggered_offset = 3 [deprecated = true];
     // ttc predict part
     optional bool critical_scene = 4;
     optional float critical_scene_prob = 5;
@@ -464,6 +479,23 @@ message SafetyModelBasedResult {
     optional float ttc_value = 7;
     // traj predict part
     repeated SafetyTrajecoty safety_trajectory = 8;
+
+    // aeb seq decision part (by seq, len = 5)
+    repeated SafetySeqDecision safety_seq_decision = 9;
+    repeated float safety_seq_decision_thresh = 10;
+    
+}
+
+enum CommandType {
+  NONE = 0;
+  NAVIGATION = 1;
+  LANE_KEEP = 2;
+  LEFT_LANE_CHANGE = 3;
+  RIGHT_LANE_CHANGE = 4;
+}
+
+message MultiCommandType {
+  repeated CommandType command_type = 1;
 }
 
 // For extending more model-based decision message;
@@ -498,6 +530,24 @@ message ModelBasedDecision {
 
     //  collision score and ttc from speed model
     repeated deeproute.prediction.SpeedScorer multi_modal_speed_scorenet = 18;
+
+    // model joint planning 
+    repeated common.Polyline model_joint_planning = 30;
+    // trajectory scores for multi-modal planning evaluation
+    // shape: [num_traj(15*13), 1] for each score type
+    repeated double routing_score = 19;
+    repeated double efficiency_score = 20;
+    repeated double safety_score = 21;
+    repeated double validity_score = 22;
+    repeated double total_score = 23;
+    
+    // new trajectory data from model output "trajectories" [num_traj, 50, 2]
+    repeated common.Polyline model_trajectories = 24;
+    
+    // command of each model refline, each refline can have multiple commands
+    repeated MultiCommandType followed_cmds = 40;
+    repeated common.Polyline cmd_waypoints = 41;
+    repeated CommandType waypoints_cmd_types = 42;
 }
 
 // Model-based lane change efficiency, independently making decision for 'left'

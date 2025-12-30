@@ -1,0 +1,26 @@
+  syntax = "proto2";
+
+  package dr.blc;
+
+  //topic: /blc/local_routing_info 
+  //blc输出限速topic保持不变，message和LocalRouting保持二进制兼容，避免vis和其他诊断工具解析不了blc的限速信息
+  message BlcSpeedLimitInfo {
+    // 当前路段限速 m/s
+    optional double current_speed_limit = 10;
+    // 下一路段限速 m/s
+    optional double next_speed_limit = 11;
+    // 到下一段限速的距离
+    optional double next_speed_limit_remaining_s = 12;
+
+    optional SpeedLimitInfoForVisualize navigation_info_for_visualize = 13;
+    // 当前目标限速km/h
+    optional int32 target_speed_limit_kmph = 100;
+  }
+
+  message SpeedLimitInfoForVisualize {
+    // 当前地图策略限速
+    optional double strategy_speed_limit = 6;
+    // 下一组地图策略限速
+    optional double next_strategy_speed_limit = 8;
+    optional double next_strategy_speed_limit_remaining_s = 9;
+  }

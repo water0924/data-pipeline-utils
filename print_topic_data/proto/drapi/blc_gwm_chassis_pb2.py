@@ -17,13 +17,11 @@ from proto.canbus import gwm_de09_chassis_detail_pb2 as canbus_dot_gwm__de09__ch
 from proto.drapi import gwm_de09_downstream_chassis_pb2 as drapi_dot_gwm__de09__downstream__chassis__pb2
 from proto.canbus import gwm_chassis_detail_pb2 as canbus_dot_gwm__chassis__detail__pb2
 from proto.drapi import gwm_c01_downstream_chassis_pb2 as drapi_dot_gwm__c01__downstream__chassis__pb2
-from proto.canbus import gwm_tank_chassis_detail_pb2 as canbus_dot_gwm__tank__chassis__detail__pb2
-from proto.drapi import gwm_tank_downstream_chassis_pb2 as drapi_dot_gwm__tank__downstream__chassis__pb2
 from proto.canbus import gwm_all_chassis_detail_pb2 as canbus_dot_gwm__all__chassis__detail__pb2
 from proto.drapi import gwm_all_downstream_chassis_pb2 as drapi_dot_gwm__all__downstream__chassis__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1b\x64rapi/blc_gwm_chassis.proto\x12\ndr.blc.mcu\x1a#common/configs/vehicle_config.proto\x1a$canbus/gwm_de09_chassis_detail.proto\x1a\'drapi/gwm_de09_downstream_chassis.proto\x1a\x1f\x63\x61nbus/gwm_chassis_detail.proto\x1a&drapi/gwm_c01_downstream_chassis.proto\x1a$canbus/gwm_tank_chassis_detail.proto\x1a\'drapi/gwm_tank_downstream_chassis.proto\x1a#canbus/gwm_all_chassis_detail.proto\x1a&drapi/gwm_all_downstream_chassis.proto\"\xc2\x02\n\x14\x44ownstreamChassisGWM\x12\x11\n\ttimestamp\x18\x01 \x01(\x03\x12-\n\x05\x62rand\x18\x02 \x01(\x0e\x32\x1e.deeproute.common.VehicleBrand\x12\x32\n\x03gwm\x18\x03 \x01(\x0b\x32#.dr.blc.mcu.GwmC01DownstreamChassisH\x00\x12\x38\n\x08gwm_tank\x18\x04 \x01(\x0b\x32$.dr.blc.mcu.GwmTankDownstreamChassisH\x00\x12\x38\n\x08gwm_de09\x18\x05 \x01(\x0b\x32$.dr.blc.mcu.GwmDe09DownstreamChassisH\x00\x12\x36\n\x07gwm_all\x18\x07 \x01(\x0b\x32#.dr.blc.mcu.GwmAllDownstreamChassisH\x00\x42\x08\n\x06\x64\x65tail\"\xdf\x02\n\x12UpstreamChassisGWM\x12\x11\n\ttimestamp\x18\x01 \x01(\x03\x12-\n\x05\x62rand\x18\x02 \x01(\x0e\x32\x1e.deeproute.common.VehicleBrand\x12\x31\n\x03gwm\x18\x03 \x01(\x0b\x32\".deeproute.canbus.GwmChassisDetailH\x00\x12\x43\n\x08gwm_tank\x18\x04 \x01(\x0b\x32/.deeproute.canbus.gwm.tank.GwmTankChassisDetailH\x00\x12\x43\n\x08gwm_de09\x18\x05 \x01(\x0b\x32/.deeproute.canbus.gwm.de09.GwmDe09ChassisDetailH\x00\x12@\n\x07gwm_all\x18\x07 \x01(\x0b\x32-.deeproute.canbus.gwm.all.GwmAllChassisDetailH\x00\x42\x08\n\x06\x64\x65tail')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1b\x64rapi/blc_gwm_chassis.proto\x12\ndr.blc.mcu\x1a#common/configs/vehicle_config.proto\x1a$canbus/gwm_de09_chassis_detail.proto\x1a\'drapi/gwm_de09_downstream_chassis.proto\x1a\x1f\x63\x61nbus/gwm_chassis_detail.proto\x1a&drapi/gwm_c01_downstream_chassis.proto\x1a#canbus/gwm_all_chassis_detail.proto\x1a&drapi/gwm_all_downstream_chassis.proto\"\x88\x02\n\x14\x44ownstreamChassisGWM\x12\x11\n\ttimestamp\x18\x01 \x01(\x03\x12-\n\x05\x62rand\x18\x02 \x01(\x0e\x32\x1e.deeproute.common.VehicleBrand\x12\x32\n\x03gwm\x18\x03 \x01(\x0b\x32#.dr.blc.mcu.GwmC01DownstreamChassisH\x00\x12\x38\n\x08gwm_de09\x18\x05 \x01(\x0b\x32$.dr.blc.mcu.GwmDe09DownstreamChassisH\x00\x12\x36\n\x07gwm_all\x18\x07 \x01(\x0b\x32#.dr.blc.mcu.GwmAllDownstreamChassisH\x00\x42\x08\n\x06\x64\x65tail\"\x9a\x02\n\x12UpstreamChassisGWM\x12\x11\n\ttimestamp\x18\x01 \x01(\x03\x12-\n\x05\x62rand\x18\x02 \x01(\x0e\x32\x1e.deeproute.common.VehicleBrand\x12\x31\n\x03gwm\x18\x03 \x01(\x0b\x32\".deeproute.canbus.GwmChassisDetailH\x00\x12\x43\n\x08gwm_de09\x18\x05 \x01(\x0b\x32/.deeproute.canbus.gwm.de09.GwmDe09ChassisDetailH\x00\x12@\n\x07gwm_all\x18\x07 \x01(\x0b\x32-.deeproute.canbus.gwm.all.GwmAllChassisDetailH\x00\x42\x08\n\x06\x64\x65tail')
 
 
 
@@ -46,8 +44,8 @@ _sym_db.RegisterMessage(UpstreamChassisGWM)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _DOWNSTREAMCHASSISGWM._serialized_start=389
-  _DOWNSTREAMCHASSISGWM._serialized_end=711
-  _UPSTREAMCHASSISGWM._serialized_start=714
-  _UPSTREAMCHASSISGWM._serialized_end=1065
+  _DOWNSTREAMCHASSISGWM._serialized_start=310
+  _DOWNSTREAMCHASSISGWM._serialized_end=574
+  _UPSTREAMCHASSISGWM._serialized_start=577
+  _UPSTREAMCHASSISGWM._serialized_end=859
 # @@protoc_insertion_point(module_scope)

@@ -22,4 +22,10 @@ message GradingTriggerRequest {
   optional uint32 delay_time = 5; // in seconds, this is the delay time before the trigger is sent
   optional int32 trigger_limit_times = 6; // -1 is unlimit
   optional bool skip_compliance = 7;
+  optional string event_uuid = 8;
+}
+
+// topic: /common/cancel_trigger_request
+message CancelTriggerRequest {
+  optional string event = 1; // event name to cancel
 }

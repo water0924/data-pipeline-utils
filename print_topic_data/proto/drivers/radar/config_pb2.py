@@ -16,7 +16,7 @@ _sym_db = _symbol_database.Default()
 from proto.common import geometry_pb2 as common_dot_geometry__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1a\x64rivers/radar/config.proto\x12\x17\x64\x65\x65proute.drivers.radar\x1a\x15\x63ommon/geometry.proto\"\x91\x01\n\x06\x43onfig\x12\x10\n\x08\x66rame_id\x18\x01 \x01(\t\x12:\n\x0fsensor_to_radar\x18\x02 \x01(\x0b\x32!.deeproute.common.Transformation3\x12\x39\n\x04type\x18\x03 \x01(\x0e\x32\".deeproute.drivers.radar.RadarType:\x07UNKNOWN\"\x9e\x01\n\x0bRadarConfig\x12/\n\x06\x63onfig\x18\x01 \x03(\x0b\x32\x1f.deeproute.drivers.radar.Config\x12\x37\n\x04type\x18\x02 \x01(\x0e\x32).deeproute.drivers.radar.RadarConfig.Type\"%\n\x04Type\x12\x0f\n\x0b\x43ONTI_RADAR\x10\x00\x12\x0c\n\x08HW_RADAR\x10\x01*\x94\x03\n\tRadarType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\r\n\tCONTI_408\x10\x01\x12\x0e\n\nHW_MRR_631\x10\x02\x12\x0e\n\nHW_SRR_621\x10\x03\x12\x0b\n\x07\x44SV_SRR\x10\x04\x12\x0b\n\x07\x44SV_MRR\x10\x05\x12\r\n\tCONTI_308\x10\x06\x12\r\n\tCONTI_430\x10\x07\x12\r\n\tGM_BS_MRR\x10\x08\x12\r\n\tGM_BS_SRR\x10\t\x12\x15\n\x11\x42YD_SENSETECH_MRR\x10\n\x12\x15\n\x11\x42YD_SENSETECH_SRR\x10\x0b\x12\x11\n\rBOSCH_GEN5_FR\x10\x14\x12\x11\n\rBOSCH_GEN5_CR\x10\x15\x12\x11\n\rBOSCH_GEN6_FR\x10\x16\x12\x11\n\rBOSCH_GEN6_CR\x10\x17\x12\x0e\n\nRABO_6F_FR\x10\x18\x12\x0e\n\nRABO_6C_CR\x10\x19\x12\x14\n\x10WHST_STA77_5S_FR\x10\x1a\x12\x16\n\x12WHST_STA79_2PRO_CR\x10\x1b\x12\x15\n\x11\x46REETECH_CVR30_CR\x10\x1c\x12\x16\n\x12WHST_STA77_6_4D_FR\x10\x1d')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1a\x64rivers/radar/config.proto\x12\x17\x64\x65\x65proute.drivers.radar\x1a\x15\x63ommon/geometry.proto\"\x91\x01\n\x06\x43onfig\x12\x10\n\x08\x66rame_id\x18\x01 \x01(\t\x12:\n\x0fsensor_to_radar\x18\x02 \x01(\x0b\x32!.deeproute.common.Transformation3\x12\x39\n\x04type\x18\x03 \x01(\x0e\x32\".deeproute.drivers.radar.RadarType:\x07UNKNOWN\"\x9e\x01\n\x0bRadarConfig\x12/\n\x06\x63onfig\x18\x01 \x03(\x0b\x32\x1f.deeproute.drivers.radar.Config\x12\x37\n\x04type\x18\x02 \x01(\x0e\x32).deeproute.drivers.radar.RadarConfig.Type\"%\n\x04Type\x12\x0f\n\x0b\x43ONTI_RADAR\x10\x00\x12\x0c\n\x08HW_RADAR\x10\x01*\xad\x03\n\tRadarType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\r\n\tCONTI_408\x10\x01\x12\x0e\n\nHW_MRR_631\x10\x02\x12\x0e\n\nHW_SRR_621\x10\x03\x12\x0b\n\x07\x44SV_SRR\x10\x04\x12\x0b\n\x07\x44SV_MRR\x10\x05\x12\r\n\tCONTI_308\x10\x06\x12\r\n\tCONTI_430\x10\x07\x12\r\n\tGM_BS_MRR\x10\x08\x12\r\n\tGM_BS_SRR\x10\t\x12\x15\n\x11\x42YD_SENSETECH_MRR\x10\n\x12\x15\n\x11\x42YD_SENSETECH_SRR\x10\x0b\x12\x11\n\rBOSCH_GEN5_FR\x10\x14\x12\x11\n\rBOSCH_GEN5_CR\x10\x15\x12\x11\n\rBOSCH_GEN6_FR\x10\x16\x12\x11\n\rBOSCH_GEN6_CR\x10\x17\x12\x0e\n\nRABO_6F_FR\x10\x18\x12\x0e\n\nRABO_6C_CR\x10\x19\x12\x14\n\x10WHST_STA77_5S_FR\x10\x1a\x12\x16\n\x12WHST_STA79_2PRO_CR\x10\x1b\x12\x15\n\x11\x46REETECH_CVR30_CR\x10\x1c\x12\x16\n\x12WHST_STA77_6_4D_FR\x10\x1d\x12\x17\n\x13WHST_STA77_7S_4D_FR\x10\x1e')
 
 _RADARTYPE = DESCRIPTOR.enum_types_by_name['RadarType']
 RadarType = enum_type_wrapper.EnumTypeWrapper(_RADARTYPE)
@@ -42,6 +42,7 @@ WHST_STA77_5S_FR = 26
 WHST_STA79_2PRO_CR = 27
 FREETECH_CVR30_CR = 28
 WHST_STA77_6_4D_FR = 29
+WHST_STA77_7S_4D_FR = 30
 
 
 _CONFIG = DESCRIPTOR.message_types_by_name['Config']
@@ -65,7 +66,7 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _RADARTYPE._serialized_start=388
-  _RADARTYPE._serialized_end=792
+  _RADARTYPE._serialized_end=817
   _CONFIG._serialized_start=79
   _CONFIG._serialized_end=224
   _RADARCONFIG._serialized_start=227

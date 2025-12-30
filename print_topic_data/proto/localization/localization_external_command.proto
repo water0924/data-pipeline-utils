@@ -52,7 +52,14 @@ enum ErrorCode {
   VPA_END_MAPPING_NO_DESTINATION_CANDIDATES = 123;                      // neither have given parking space, nor have destination candidates like reverse_time_pose or apa_start_time_pose
   VPA_END_MAPPING_NO_VALID_DESTINATION_IN_CANDIDATES = 124;             // all destination candidates are invalid after check
   VPA_END_MAPPING_OUT_OF_PARKING_ODD = 125[deprecated=true];
-  VPA_END_MAPPING_UNCONFIRM_OUTDOOR_TO_OUT_OF_PARKING = 126;
+  VPA_END_MAPPING_UNCONFIRM_OUTDOOR_TO_OUT_OF_PARKING = 126[deprecated=true];
+  VPA_END_MAPPING_NO_PARKING_SPACE_IN_MAP = 127;
+  VPA_END_MAPPING_NO_START_ODD_POI = 128;
+  VPA_END_MAPPING_FlOOR_POST_PROCESS_FAILED = 129;
+  VPA_END_MAPPING_GET_MAP_ENTRY_FAILED = 130;
+  VPA_END_MAPPING_MERGE_MAP_FAILED = 131;
+  VPA_END_MAPPING_SWAP_FLOOR_FAILED = 132;
+  VPA_END_MAPPING_FAKE_INDOOR_ODD = 133;
 
   VPA_END_MAPPING_UNKNOWN_REASON_FAILURE = 199;
 
@@ -273,6 +280,7 @@ message SetNavigationTargetParkingSpaceCMD {
 message SetNavigationTargetParkingSpaceCMDRP {}
 
 message GetMapCMD {
+  int32 map_id = 1;
 }
 message GetMapCMDRP {
   perception.RASMap semantic_map = 1;  // in map frame                      // GWM SOP+3 deprecated

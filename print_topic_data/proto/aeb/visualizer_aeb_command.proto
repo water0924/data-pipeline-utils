@@ -15,7 +15,7 @@ message VisualizerCommand {
     ENABLE = 1;
     DISABLE = 2;
   }
-  enum CruiseSpeedType{
+  enum CruiseSpeedType {
     TYPE_UNKNOWN = 0;
     TURN_ON = 1;
     TURN_OFF = 2;
@@ -27,6 +27,13 @@ message VisualizerCommand {
     LATE = 3;
     CUSTOM = 4;
     DEFAULT = 5;
+    NOA_SAFETY = 6;
+    MODEL = 7;
+  }
+  enum FieldModeType {
+    UNUSE_FIELD_MODE = 0;
+    FORCE_IN_FIELD = 1;
+    FORCE_OUT_FIELD = 2;
   }
   message PoseCheckerCmd {
     optional double dist_step_thres = 1 [default = 0.5];
@@ -44,7 +51,8 @@ message VisualizerCommand {
   optional AebEnableType meb_enable_type = 9;
   optional AebEnableType fctb_enable_type = 10;
   optional AebEnableType rctb_enable_type = 11;
-  optional PoseCheckerCmd pose_checker_cmd = 87; 
+  optional FieldModeType field_mode_type = 12 [default = UNUSE_FIELD_MODE];
+  optional PoseCheckerCmd pose_checker_cmd = 87;
   optional double lat_accel_max_nudge_fcw_cmd = 88;
   optional double lat_accel_max_nudge_point_cmd = 89;
   optional double lat_accel_max_nudge_cmd = 90;

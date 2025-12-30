@@ -34,10 +34,10 @@ message AEBCommand {
     optional double request_value = 3;
   }
   optional AEBMode fcw = 1;
-  optional AEBMode aeb = 2;
+  optional AEBMode aeb = 2; // aeb/raeb 都通过该字段下发
   optional AEBMode abp = 3;
   optional AEBMode awb = 4;
-  optional AEBMode eba = 5;
+  optional AEBMode eba = 5; // eba/reba 都通过该字段下发
   optional AEBMode aba = 6;
   optional AEBMode rctb = 8;
   optional AEBMode meb = 9;
@@ -78,7 +78,7 @@ message ControlCommand {
   // parking brake engage. true: engaged
   optional bool parking_brake = 8;
 
-  // target speed, in m/s
+  // target speed, in km/h
   optional double speed = 9;
 
   // target acceleration in m`s^-2
@@ -170,6 +170,25 @@ message ControlCommand {
   optional bool rws_ang_req_enable = 67 [default = false];
   optional double rws_ang_req_value = 68 [default = 0];  //弧度   最大角度6.5deg
   optional double strg_trq_coeff = 69 [default = 0];
+  optional int32 algo_scene_type = 70;
+}
+
+
+enum LssRequestType {
+  REQUEST_UNKNOWN = 0;
+  ELK_REQUEST_S = 1;
+  ELK_REQUEST_RE = 2;
+  ELK_REQUEST_O = 3;
+  ELK_REQUEST_ICS = 4;
+  ELK_REQUEST_GO = 5;
+  ELK_REQUEST_VRU = 6;
+  LKA_REQUEST_S = 7;
+  LKA_REQUEST_RE = 8;
+}
+
+message LssReqCommand {
+  optional bool enable = 1;
+  optional LssRequestType lss_request_type = 2; 
 }
 
 // topic:esa/command
@@ -194,6 +213,7 @@ message ESACommand {
   optional deeproute.canbus.Chassis.GearPosition gear_location = 7;
   // publish time (us)
   optional int64 time_measurement = 8; 
+  optional LssReqCommand lss_request_command = 9;
 
   // TMP: for low-level control
   optional double throttle = 101;

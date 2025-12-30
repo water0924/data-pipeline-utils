@@ -75,12 +75,12 @@ enum SubState {
   INU_DYNAMIC_CALIBRATION = 101 [deprecated = true];
   EOL_PRE_PROCESS = 102 [deprecated = true];
   EOL_CALIBRATION = 103;
-  EOL_TEST_MODE = 104;
+  EOL_TEST_MODE = 104 [deprecated = true];
   /* 200~299 for DEBUG */
-  AEB = 200;
-  DRIVING = 201;
-  PARKING = 202;
-  ADAS = 203;
+  AEB = 200 [deprecated = true];
+  DRIVING = 201 [deprecated = true];
+  PARKING = 202 [deprecated = true];
+  ADAS = 203 [deprecated = true];
   CONTROL_CALIB = 204;
   /* 300~399 for OTA */
   OTA_MODE = 300;
@@ -94,8 +94,9 @@ enum SubState {
   DATA_COLLECTOR_PARKING = 600;      // 泊车采集
   DATA_COLLECTOR_FACTORY_CALIB = 601 [deprecated = true];  // 生产标定采集
   DATA_COLLECTOR_DRIVING = 602;  // 行车数采
-  /* 650 ~ 699 for IMU */
-  IMU_CALIBRATION_MODE = 650; // 惯性导航动态标定
+  /* 650 ~ 699 for Temporary States */
+  IMU_CALIBRATION_MODE = 650 [deprecated = true]; // 惯性导航动态标定
+  LP_LOW_POWER = 651; // LP低功耗模式
 }
 
 enum AdapterState {

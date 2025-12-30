@@ -1,0 +1,39 @@
+syntax = "proto3";
+package lp.hmi;
+
+import "drapi/lp/basic_common.proto";
+
+enum WarningTypeEnum {  
+	DISPLAY_ONLY 		= 0;	// 仅显示（默认值）
+	ALERT_ONLY 			= 1; //仅提醒
+	DISPLAY_AND_ALERT 	= 2; // 显示与提醒
+}
+
+
+message VLAVoice {
+	uint32        		id              	= 1;  //指智驾对座舱的哪条指令做出的回复，与Vla_req:id对应，默认赋值为0 
+	string        		title           	= 2;  //预留，默认赋值"无"  
+	string        		content         	= 3;  //智驾针对驾驶员语音的回复，默认赋值"无"
+	uint64        		millseconds     	= 4;  //智驾反馈Voice_Command_Resp时刻的系统时间戳，默认赋值1720181322923
+	WarningTypeEnum    	warning_type     	= 5;  //智驾回复内容的提示类型，0：仅显示；1：仅提醒；2：显示与提醒，默认赋值0
+	uint32        		voice_resp_status 	= 6;  //VLA反馈指令响应状态 0：默认值；1：成功;2:失败 
+	uint32				reserve				= 7;  //预留
+}	
+
+message VLAText {
+  uint32              id            = 1;  //指智驾对座舱的哪条指令做出的回复，与Vla_req:id对应，默认赋值为0 
+  string              title         = 2;  //预留，默认赋值"无"  智驾针对驾驶员语音的回复，默认赋值"无"
+  string              content       = 3;  //预留
+  uint64              millseconds   = 4;  //智驾反馈Voice_Command_Resp时刻的系统时间戳，默认赋值1720181322923
+  repeated string     action        = 5;  //预留
+  bytes               image         = 6;  //jpeg，YUV422，640*360
+}
+
+//topic:/dr/元戎进程名/voiceCommandResp  事件型 proto
+message VoiceCommandResp {
+	lp.basiccommon.Header         	header                  	= 1; // 帧头，包含时间戳、序列号、模块名
+	VLAVoice      					vla_voice_resp				= 2; //算法响应语义——语音提示信息
+	VLAText		 					vla_text_resp				= 3; //算法响应语义——文言提示信息
+	lp.basiccommon.LatencyStatus  	latency_status          	= 4; // 统计耗时，具体在common中定义
+	lp.basiccommon.ModuleStatus   	module_status           	= 5; // 统计错误状态、错误代码、错误原因等，具体在common模块的lp.basiccommon.ModuleStatus定义
+}
