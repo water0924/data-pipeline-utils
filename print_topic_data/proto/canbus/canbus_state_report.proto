@@ -150,6 +150,14 @@ message CtrlValue {
   optional int32 lss_functon_type = 64;
 }
 
+// 远程控车状态
+enum RemoteControlState {
+  REMOTE_CONTROL_DISABLE = 0;  // 远控关闭状态
+  REMOTE_CONTROL_ENTER = 1;    // 处于进入远控阶段，需要刹停车辆
+  REMOTE_CONTROL = 2;          // 处于远控阶段
+  REMOTE_CONTROL_EXIT = 3;     // 处于退出远控阶段，需要刹停车辆
+}
+
 message DebugInfo {
   optional bool is_ctrl_timeout = 1;
   optional bool is_blc_timeout = 2;
@@ -175,4 +183,8 @@ message DebugInfo {
   optional int32 prk_lat_child_state = 22;
   optional int32 lss_child_state = 23;
   optional double anti_silp_brake_torque = 24;
+  optional double hand_torque_filtered = 25;
+  optional bool is_in_fast_handshake = 26 [default = false];
+  optional double hand_torque_filtered_rate = 27;
+  optional RemoteControlState remote_control_state = 28;
 }

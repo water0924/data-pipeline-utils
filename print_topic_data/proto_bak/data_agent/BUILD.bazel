@@ -1,0 +1,20 @@
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+package(
+    default_visibility = ["//visibility:public"],
+    features = ["-hidden_visibility_feature"],
+)
+
+proto_library(
+    name = "desensitization_boxes_proto",
+    srcs = ["desensitization_boxes.proto"],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "desensitization_boxes_proto_cc",
+    deps = [
+        ":desensitization_boxes_proto",
+    ],
+)

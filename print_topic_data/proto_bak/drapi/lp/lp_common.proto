@@ -1,0 +1,203 @@
+syntax = "proto3";
+
+package lp.common;
+
+enum AdasStatusEnum {
+  STATUS_NONE		= 0;  //默认值
+  UNAVAILABLE_ALL   = 1;  //LCC/CNAP/HPA不可用
+  AVAILABLE_LCC     = 2;  //仅LCC可用
+  AVAILABLE_CNAP    = 3;  //CNAP或HPA可用
+  START_LCC         = 4;  //仅LCC激活
+  START_CNAP        = 5;  //CNAP或HPA激活
+  PAUSE_LCC         = 6;  //LCC暂停
+  PAUSE_CNAP        = 7;  //CNAP或HPA暂停
+  ROAM_CNAP         = 8;  //漫游
+} //文档配图说明
+
+enum AccStatusEnum {
+  STATUS_NONE_ACC	= 0;  //默认值
+  UNAVAILABLE_ACC   = 1;  //ACC不可用
+  AVAILABLE_ACC     = 2;  //ACC可用
+  START_ACC         = 3;  //ACC激活
+} 
+
+enum ParkingRequestEnum {
+  PARKING_REQUEST_NONE                = 0;  //默认值
+  PARKING_REQUEST_INITIALIZE          = 1;  //当前预留
+  PARKING_REQUEST_START               = 2;	// 开始
+  PARKING_REQUEST_PAUSE               = 3;  //当前预留
+  PARKING_REQUEST_CONTINUE            = 4;	// 继续
+  PARKING_REQUEST_ABORT               = 5;	// 取消
+  PARKING_REQUEST_OFF                 = 6;  //当前预留
+  PARKING_REQUEST_COMPLETE            = 7;	// 完成
+  PARKING_REQUEST_START_PARKING_IN    = 8;  //当前预留
+  PARKING_REQUEST_START_PARKING_OUT   = 9;  //当前预留
+  PARKING_REQUEST_NEARLY_PARKING      = 10; // 就近泊入 当前仅元戎用
+}
+
+enum ParkingChangeEnum {
+  PARKING_NONE = 0;   // 无
+  PARKING_IN   = 1;   // 切换泊入
+  PARKING_OUT  = 2;   // 切换泊出
+}
+
+enum RoadMapBuildRequestEnum {
+  ROAD_MAP_BUILD_NONE     = 0;
+  ROAD_MAP_BUILD_START    = 1;
+  ROAD_MAP_BUILD_ABORT    = 2;
+  ROAD_MAP_BUILD_FINISH   = 3;
+}
+
+enum LaneChangeStyleEnum {
+  LANE_CHANGE_RADICAL  = 0;  // 激进
+  LANE_CHANGE_STANDARD = 1;  // 正常
+  LANE_CHANGE_GENTLE   = 2;  // 柔和
+}
+
+enum DrivingStyleEnum {
+  DRIVING_RADICAL   = 0;  // 激进
+  DRIVING_STANDARD  = 1;  // 正常
+  DRIVING_GENTLE    = 2;  // 柔和
+}
+
+enum PreferLaneEnum {
+  PREFER_LANE_NONE   = 0;  // 无偏好车道
+  PREFER_LEFT_FIRST  = 1;  // 左侧第一车道或快车道
+  PREFER_LEFT_SECOND = 2;  // 左侧第二车道或中央车道
+  PREFER_RIGHT       = 3;  // 右侧车道或慢车道
+}
+
+enum ResponseStatus {
+	RESPONSE_STATUS_UNSPECIFIED = 0;  // 未指定状态
+	RESPONSE_STATUS_SUCCESS 	= 1;  // 操作成功
+	RESPONSE_STATUS_FAILURE 	= 2;  // 操作失败
+}
+
+enum RaParkingRequestEnum { 
+  NONE 		= 0;
+  START  	= 1;
+  CONTINUE  = 2;
+  CANCEL    = 3;
+  PAUSE 	= 4;
+}
+
+// HPA界面显示状态
+enum HpaInterfaceDisplayEnum {
+  HPA_INTERFACE_DISPLAY_UNSPECIFIED 	= 0; // 默认状态
+  HPA_INTERFACE_DISPLAY_AVAILABLE 		= 1; // HPA可激活
+  HPA_INTERFACE_DISPLAY_ACTIVE_CRUISE 	= 2; // 激活巡航状态
+  HPA_INTERFACE_DISPLAY_ACTIVE_ROAM 	= 3; // 激活漫游状态 
+  HPA_INTERFACE_DISPLAY_ACTIVE_ESCAPE 	= 4; // 激活脱困状态
+  HPA_INTERFACE_DISPLAY_ACTIVE_PARKING 	= 5; // 激活泊车状态
+  HPA_INTERFACE_DISPLAY_PAUSED_PARKING 	= 6; // 泊车暂停
+  HPA_INTERFACE_DISPLAY_EXITING_PARKING = 7; // 泊车退出
+  HPA_INTERFACE_DISPLAY_PAUSED 			= 8; // 暂停状态
+  HPA_INTERFACE_DISPLAY_EXCEPTION 		= 9; // 异常状态
+  HPA_INTERFACE_DISPLAY_EXITING 		= 10; // 退出状态
+  HPA_INTERFACE_DISPLAY_COMPLETED 		= 11; // 完成状态
+  P2P_INTERFACE_DISPLAY_AVAILABLE 		= 12; // P2D可激活
+}
+
+enum TSREnum { 
+  TSR_CATALOG_NONE              = 0;
+  TSR_WARNING                   = 1; // '警告标志';
+  TSR_PROHIBITION               = 2; // '禁令标志';
+  TSR_INDICATION                = 3; // '指示标志';
+  TSR_GUIDE                     = 4; // '指路标志';
+  TSR_TOURIST                   = 5; // '旅游标志';
+  TSR_CONMESSAGEION             = 6; // '道路施工标志';
+  TSR_AUXILIARY                 = 7; // '辅助标志';
+  TSR_NO_ENTRY                  = 8; // '禁止驶入';
+  TSR_NO_PARKING                = 9; // '禁止停车';
+  TSR_NO_STOPPING               = 10; // '禁止停留';
+  TSR_NO_LEFT_TURN              = 11; // '禁止左转';
+  TSR_NO_RIGHT_TURN             = 12; // '禁止右转';
+  TSR_NO_U_TURN                 = 13; // '禁止掉头';
+  TSR_SPEED_LIMIT               = 14; // '限速标志';
+  TSR_NO_OVERTAKING             = 15; // '禁止超车';
+  TSR_END_NO_OVERTAKING    		= 16; // '解除禁止超车';
+  TSR_CROSSWALK                 = 17; // '人行横道';
+  TSR_SCHOOL_ZONE               = 18; // '学校区域';
+  TSR_INTERSECTION              = 19; // '交叉路口';
+  TSR_RAILWAY_CROSSING        	= 20; // '铁路道口';
+  TSR_SHARP_LEFT_TURN          	= 21; // '左急弯';
+  TSR_SHARP_RIGHT_TURN        	= 22; // '右急弯';
+  TSR_SUCCESSIVE_SHARP_TURNS    = 23; // '连续急弯';
+  TSR_ONE_WAY                   = 24; // '单行路';
+  TSR_TURN_LEFT                 = 25; // '左转弯';
+  TSR_TURN_RIGHT                = 26; // '右转弯';
+  TSR_GO_STRAIGHT               = 27; // '直行';
+  TSR_PARKING                   = 28; // '停车场' 
+  TSR_NO_ADAS                   = 29; // '禁止辅助驾驶标识'
+  TSR_UNKNOW                    = 30; // '未知标识'
+}
+
+enum FuncModeEnum { 
+  FUNC_MODE_OFF               =  0;
+  FUNC_MODE_STANDBY           =  1;
+  FUNC_MODE_STAND_WAIT        =  2;
+  FUNC_MODE_STAND_ACTIVE      =  3;
+  FUNC_MODE_STAND_PASSIVE     =  4;
+  FUNC_MODE_ACTIVE            =  5;
+  FUNC_MODE_DEACTIVE          =  6;
+  FUNC_MODE_SPEED_CONTROL     =  7;
+  FUNC_MODE_FOLLOWING_CONTROL =  8;
+  FUNC_MODE_OVERRIDE          =  9;
+  FUNC_MODE_LONG_OVERRIDE     = 10;
+  FUNC_MODE_BRAKE_ONLY        = 11;
+  FUNC_MODE_INHABIT           = 12;
+  FUNC_MODE_POST              = 13;
+  FUNC_MODE_WARNING           = 14;
+  FUNC_MODE_PARTICAL_BRAKE    = 15;
+  FUNC_MODE_FULL_BRAKE        = 16;
+  FUNC_MODE_INVENTION         = 17;
+  FUNC_MODE_CHECKSELF         = 18;
+  FUNC_MODE_SEARCHING         = 19;
+  FUNC_MODE_SEARCHED          = 20;
+  FUNC_MODE_SHAKEHANDS        = 21;
+  FUNC_MODE_WAITRELEASEBRAKE  = 22;
+  FUNC_MODE_READY             = 23;
+  FUNC_MODE_ABORT             = 24;
+  FUNC_MODE_SUSPEND           = 25;
+  FUNC_MODE_QUIT              = 26;
+  FUNC_MODE_COMPLETED         = 27;
+  FUNC_MODE_REQUEST           = 28;
+  FUNC_MODE_CRUSING           = 51;
+  FUNC_MODE_PARKING           = 52;
+  FUNC_MODE_PAUSED            = 53;
+  FUNC_MODE_TAKING_OVER       = 54;
+  FUNC_MODE_HOLD              = 55;
+  FUNC_MODE_RESUME            = 56;
+  FUNC_MODE_FAILURE           = 99;
+}
+
+enum LightCtrlEnum {
+  LIGHT_CTRL_NONE  = 0;
+  LIGHT_CTRL_OFF   = 1;
+  LIGHT_CTRL_ON    = 2;
+  LIGHT_CTRL_FAST  = 3;
+}
+
+enum HeadlightEnum {
+  HEAD_LIGHT_NONE         = 0;     // 关闭
+  HEAD_LIGHT_LOW_BEAM_ON  = 1;     // 近光灯
+  HEAD_LIGHT_HIGH_BEAM_ON = 2;     // 远光灯
+  HEAD_LIGHT_UNKNOWN      = 3;     // 未知
+}
+
+enum MirrorStatusEnum {
+  MIRROR_UNKNOWN   = 0; //未知
+  MIRROR_UNFOLD    = 1; //展开
+  MIRROR_FOLD      = 2; //折叠
+}
+
+enum SeatBeltStrengthEnum {
+  SEAT_BELT_STRENGTH_UNKNOWN    = 0;     // 未知
+  SEAT_BELT_STRENGTH_LEVEL_0    = 1;     // 安全带未收紧
+  SEAT_BELT_STRENGTH_LEVEL_1    = 2;     // 安全带收紧等级1
+  SEAT_BELT_STRENGTH_LEVEL_2    = 3;     // 安全带收紧等级2
+  SEAT_BELT_STRENGTH_LEVEL_3    = 4;     // 安全带收紧等级3
+  SEAT_BELT_ERROR               = 5;     // 安全带故障
+}
+
+

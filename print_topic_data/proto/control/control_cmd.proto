@@ -44,6 +44,8 @@ message AEBCommand {
   optional bool aeb_interface_enable = 7;
   // publish time (us)
   optional int64 time_measurement = 10;
+  optional deeproute.canbus.WheelSpeed.WheelSpeedType direction = 11; // 自车运动方向
+  optional AEBMode noa_safety = 12;
 }
 
 message DPACommand {
@@ -169,7 +171,7 @@ message ControlCommand {
   optional DPACommand dpa_command = 66;
   optional bool rws_ang_req_enable = 67 [default = false];
   optional double rws_ang_req_value = 68 [default = 0];  //弧度   最大角度6.5deg
-  optional double strg_trq_coeff = 69 [default = 0];
+  optional double preview_point_curvature = 69;
   optional int32 algo_scene_type = 70;
 }
 
@@ -186,9 +188,16 @@ enum LssRequestType {
   LKA_REQUEST_RE = 8;
 }
 
+enum LssActiveSide {
+  UNKOWN_SIDE = 0;
+  LEFT_SIDE = 1;
+  RIGHT_SIDE = 2;
+}
+
 message LssReqCommand {
   optional bool enable = 1;
-  optional LssRequestType lss_request_type = 2; 
+  optional LssRequestType lss_request_type = 2;
+  optional LssActiveSide lss_active_side = 3;
 }
 
 // topic:esa/command
@@ -214,6 +223,12 @@ message ESACommand {
   // publish time (us)
   optional int64 time_measurement = 8; 
   optional LssReqCommand lss_request_command = 9;
+
+  // 纵向控制使能
+  optional bool longitudinal_enable = 10 [default = false];
+
+  // kappa in control_point with delay
+  optional double kappa_with_delay = 11;
 
   // TMP: for low-level control
   optional double throttle = 101;

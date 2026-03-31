@@ -76,6 +76,10 @@ message CollectionArg {
   optional CollectionType collection_type = 9; // collection type
 }
 
+message PreviewDataArg {
+  optional bool need_preview = 1;
+}
+
 // begin--endtime gap
 message TimePoint {
   optional uint32 hour = 1;
@@ -126,6 +130,7 @@ message Trigger {
   optional uint32 cooldown_seconds = 8; //冷却时间, 默认5s
   optional int32 trigger_limit_times = 9; //触发次数限制, -1表示不限制
   optional bool skip_compliance = 10; //是否跳过合规检查
+  optional PreviewDataArg preview_data_arg = 11; //预览参数
 
   optional bool upload_only_when_lock_on_road_valid = 21;
 }
@@ -149,3 +154,5 @@ message TriggerList {
   repeated deeproute.collection_trigger_rule.MapSceneInfo map_scene_info = 3; // static map scene type
   optional bool is_lock_on_road_valid = 4;
 }
+
+

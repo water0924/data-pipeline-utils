@@ -1,0 +1,14 @@
+syntax = "proto3";
+package gwm;
+
+/**
+ * NOA多把掉头请求R挡时的主动更改分屏布局+360后视拼接切换的信号
+ * Topic: /gwm/gwm_noascrn_layout
+ */
+message NOAScrnLayout {
+  enum NOAScrnLayoutEnum {
+    Normal_Screen = 0;
+    Split_Screen = 1;
+  }
+  NOAScrnLayoutEnum noascrn_layout = 1;
+}

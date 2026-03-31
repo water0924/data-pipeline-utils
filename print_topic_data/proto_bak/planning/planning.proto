@@ -1,0 +1,1259 @@
+syntax = "proto2";
+
+package deeproute.planning;
+
+import "canbus/chassis.proto";
+import "common/drive_state.proto";
+import "common/geometry.proto";
+import "common/header.proto";
+import "common/pnc_point.proto";
+import "semantic_map/map_id.proto";
+import "planning/decision.proto";
+import "common/vehicle_state/vehicle_state.proto";
+import "perception/deeproute_perception_obstacle.proto";
+import "perception/deeproute_perception_ras_map.proto";
+import "common/vehicle_signal.proto";
+import "planning/human_planning_interface.proto";
+import "map/common_type.proto";
+import "perception/traffic_light_detection.proto";
+
+message ADCSignals {
+  enum SignalType {
+    LEFT_TURN = 1;
+    RIGHT_TURN = 2;
+    LOW_BEAM_LIGHT = 3;
+    HIGH_BEAM_LIGHT = 4;
+    FOG_LIGHT = 5;
+    EMERGENCY_LIGHT = 6;
+  }
+  repeated SignalType signal = 1;
+}
+
+message EStop {
+  enum EStopType {
+    DEFAULT = 0;
+    APA_FAST_EMERGENCY_BRAKE = 1;
+  };
+  // is_estop == true when emergency stop is required
+  optional bool is_estop = 1;
+  optional string reason = 2;
+  // when is_estop = true, acc value is valid
+  optional double acc = 3 [default = nan];
+  optional EStopType estop_type = 4;
+}
+
+message TaskStats {
+  optional string name = 1;
+  optional double time_ms = 2;
+}
+
+message LatencyStats {
+  optional double total_time_ms = 1;
+  repeated TaskStats task_stats = 2;
+  optional double init_frame_time_ms = 3;
+}
+
+message RSSInfo {
+  optional bool is_rss_safe = 1;
+  optional double cur_dist_lon = 2;
+  optional double rss_safe_dist_lon = 3;
+  optional double acc_lon_range_minimum = 4;
+  optional double acc_lon_range_maximum = 5;
+  optional double acc_lat_left_range_minimum = 6;
+  optional double acc_lat_left_range_maximum = 7;
+  optional double acc_lat_right_range_minimum = 8;
+  optional double acc_lat_right_range_maximum = 9;
+}
+
+message Stop {
+  optional deeproute.common.PointENU point = 1;
+
+  optional double heading = 2 [default = nan];
+
+  optional double route_s = 3;
+
+  enum Reason {
+    UNKNOWN = 0;
+    DESTINATION = 1;
+    VEHICLE = 2;
+    PEDESTRIAN = 3;
+    OBSTACLE = 4;
+    PARKING = 5;
+    TRAFFIC_LIGHT = 6;
+    STOP_SIGN = 7;
+    YIELD_SIGN = 8;
+    CLEAR_ZONE = 9;
+    CROSS_WALK = 10;
+    TEST = 11;
+  }
+  optional Reason reason = 4;
+}
+
+message CheckerResult {
+  optional bool checker_failed = 1;
+  optional double brake_acc = 2;
+}
+
+message DecelTrajVisualInfo {
+  repeated deeproute.common.PointENU decel_guide_line_path_point = 1;
+  optional double lon_deceleration = 2;  // 0-5 m/s^2
+}
+
+message ApaDriftingParkingCommand {
+  message DriftingParkingTargetPosition {
+    optional double x = 1;
+    optional double y = 2;
+    optional double heading = 3;
+  }
+  optional deeproute.canbus.Chassis.DriftingParkingMode drifting_parking_mode =
+      1;
+  optional bool is_executing_drifting_parking = 2 [default = false];
+  optional deeproute.canbus.Chassis.DriftingParkingFixedWheel
+      drifting_parking_fixed_wheel = 3;
+  optional deeproute.canbus.Chassis.DriftingParkingDirection
+      drifting_parking_direction = 4;
+  optional DriftingParkingTargetPosition drifting_parking_target_position = 5;
+}
+
+// next id: 23
+message ADCTrajectory {
+  reserved 8;
+  optional deeproute.common.Header header = 1;
+
+  optional double total_path_length = 2;  // in meters
+  optional double total_path_time = 3;    // in seconds
+
+  // path data + speed data
+  repeated deeproute.common.TrajectoryPoint trajectory_point = 12;
+
+  optional EStop estop = 6;
+
+  // path point without speed info
+  repeated deeproute.common.PathPoint path_point = 13;
+
+  // is_replan == true mean replan triggered
+  optional bool is_replan = 9 [default = false];
+  optional string replan_reason = 22;
+
+  // Specify trajectory gear
+  optional deeproute.canbus.Chassis.GearPosition gear = 10;
+
+  optional deeproute.taskconfig.DecisionResult decision = 14;
+
+  optional LatencyStats latency_stats = 15;
+
+  // the routing used for current planning result
+  optional deeproute.common.Header routing_header = 16;
+  // optional deeproute.planning_internal.Debug debug = 8;
+
+  enum RightOfWayStatus {
+    UNPROTECTED = 0;
+    PROTECTED = 1;
+  }
+  optional RightOfWayStatus right_of_way_status = 17;
+
+  // lane id along trajectory
+  repeated deeproute.hdmap.Id lane_id = 18;
+
+  // set the engage advice for based on current planning result.
+  optional deeproute.common.EngageAdvice engage_advice = 19;
+
+  // the region where planning cares most
+  message CriticalRegion {
+    repeated deeproute.common.Polygon region = 1;
+  }
+
+  // critical region will be empty when planning is NOT sure which region is
+  // critical
+  // critical regions may or may not overlap
+  optional CriticalRegion critical_region = 20;
+
+  enum TrajectoryType {
+    UNKNOWN = 0;
+    NORMAL = 1;
+    PATH_FALLBACK = 2;
+    SPEED_FALLBACK = 3;
+    COMBINE_PATH_SPEED_FAILED = 4;
+  }
+
+  optional TrajectoryType trajectory_type = 21 [default = UNKNOWN];
+
+  enum CheckerStopType {
+    NONE = 0;
+    SOFT = 1;
+    HARD = 2;
+  }
+
+  optional CheckerStopType checker_stop_type = 37
+      [default = NONE, deprecated = true];
+
+  optional CheckerResult checker_result = 38;
+
+  optional deeproute.common.VehicleState.TurnSignal turn_signal = 30
+      [deprecated = true];
+
+  optional Stop stop = 31;
+
+  optional deeproute.perception.PerceptionObstacle follow_vehicle = 4;
+
+  optional bool selected_ref_line_changed = 23;
+
+  optional deeproute.common.VehicleSignal vehicle_signal = 33;
+
+  // output related to RSS
+  optional RSSInfo rss_info = 100;
+  optional int64 perception_header_timestamp = 5;
+  optional bool flag_close_to_stop = 32;
+
+  // output related to init curvature adjustment
+  optional bool flag_init_curvature_adjustment_mode = 34 [default = false];
+  optional double desired_curvature = 35 [default = 0.0];
+
+  optional double rs_to_destination = 36 [default = 0.0];
+  optional PlanningSemanticInfo planning_semantic_info = 39 [deprecated = true];
+  optional PlannerType planner_type = 40;
+
+  optional double planning_curvature = 41 [default = 0.0];
+  optional double planning_steer_rate_radian = 42 [default = 0.0];
+
+  enum TrajectoryBehavior {
+    LANE_KEEP = 0;
+    RIGHT_LANE_CHANGE = 1;
+    LEFT_LANE_CHANGE = 2;
+    MIDDLE_LEFT_NUDGE = 3;
+    MIDDLE_RIGHT_NUDGE = 4;
+    UNDEFINED = 5;
+  }
+  optional TrajectoryBehavior trajectory_behavior = 43;
+  optional deeproute.canbus.Chassis.DrivingMode control_mode = 44;
+  optional double speed_bump_s = 45 [default = 500.0];
+  optional bool is_adc_in_parking_space = 46 [default = false];
+  optional bool prepare_to_disengage = 47 [default = false];
+  optional int64 timestamp = 48;  // trajectory publish time(us)
+
+  optional DecelTrajVisualInfo decel_traj_visual_info = 49;
+
+  enum PlannerTaskType {
+    DEFAULT = 0;
+    HAVP = 1;
+    LSS = 2;
+    HAVP_DETOUR = 3;
+    NCA_DETOUR = 4;
+  }
+  optional PlannerTaskType planner_task_type = 50;
+
+  optional double init_curvature_adjustment_start_time = 51 [default = 0.0];
+  optional double init_curvature_adjustment_end_time = 52 [default = 5.0];
+  optional bool start_open_space_replan = 53 [default = false];
+  optional int64 trajectory_start_point_time =
+      54;  // trajectory start point time(us)
+  optional bool current_stage_is_early_gear_change = 55 [default = false];
+  optional bool vs_need_stop_at_path_beginning = 56 [default = false];
+  optional bool vs_start_at_path_beginning = 57 [default = false];
+  optional bool should_stop_in_vpa = 58 [default = false];
+  optional ApaDriftingParkingCommand apa_drifting_parking_command = 59;
+  optional bool enable_rear_wheel_steering = 60 [default = false];
+
+  enum LongitudinalIntentionInfo {
+    INTENTION_NONE = 0;
+    INTENTION_START = 1;
+    INTENTION_CREEP = 2;
+    INTENTION_NORMAL = 3;
+  }
+  optional LongitudinalIntentionInfo longitudinal_intention_info = 66;
+
+  repeated SimplifiedRefLineSummary simplified_ref_line_summary = 61;
+  optional int64 ori_adc_lane_id = 62;
+  optional deeproute.common.Polyline original_path = 63;
+  optional bool not_allow_overshoot = 64 [default = false];
+  repeated ModelMatchedLaneInfo model_matched_lane_info = 65;
+}
+
+message ModelMatchedLaneInfo {
+  optional int32 index = 1;
+  optional int32 lane_id =
+      2;  // perception lane id if found, curve id otherwise
+  optional int32 curve_id = 3;                      // virtual curve id
+  map<int64, int32> unchosen_curve_id_idx_map = 4;  // k: curve_id, v: raw idx
+  map<int32, double> lateral_diff_map = 5;          // k: raw idx, v: lateral diff to last selected
+}
+
+message SimplifiedRefLineSummary {
+  optional bool is_selected = 1;
+  optional uint32 position = 2;
+  repeated int32 lane_id = 3;
+  optional int32 ref_line_id = 4;
+}
+
+// geometry center
+message Position {
+  optional double center_x = 1;
+  optional double center_y = 2;
+  optional double heading = 3;
+}
+
+message LaneProperty {
+  optional bool is_curb = 1;
+  optional double lane_width = 2;
+  optional bool is_reverse_lane = 3;
+  optional bool is_virtual_boundary = 4;
+  optional deeproute.perception.Lane.Attribute attribute = 5;
+  optional deeproute.perception.LaneBoundary.Shape lane_boundary_type = 6;
+  optional bool is_reverse_lane_change_eop = 7;
+  optional bool is_model_ref_line = 8 [default = false];
+}
+
+message SideLaneInfos {
+  optional LaneProperty left_lane_property = 1;
+  optional LaneProperty right_lane_property = 2;
+}
+
+message NavigationSuppressionReason {
+  enum Reason {
+    UNKNOWN_REASON = 0;
+    NAVIGATION_FREE = 1;
+    NAVIGATION_SUPPRESSION = 2;
+  }
+  optional int32 lane_id = 1;
+  optional Reason reason = 2;
+  optional string description = 3;  // 详细描述,用于展示
+}
+
+message LaneChangeMode {
+  enum DrivingMode {
+    UNKNOWN = 0;
+    CASUAL_MODE = 1;
+    STANDARD_MODE = 2;
+    SPORT_MODE = 3;
+  }
+
+  optional DrivingMode routing_driving_mode = 1;
+  optional DrivingMode efficiency_driving_mode = 2;
+}
+
+message VLARelated {
+  enum VLARequestType {
+    NONE = 0;
+    OVERTAKE_SLOW_VEHICLE = 1;
+    GIVE_WAY = 2;
+    PULL_OVER = 3;
+    PARKING_DESIGNATED_SPOT = 4;
+    LEAVE_BUS_LANE = 5;
+  }
+  optional VLARequestType vla_request_type = 1;
+  enum VLAStatus {
+    STANDBY = 0;
+    DURING = 1;
+    SUCCEEDED = 2;
+    FAILED = 3;
+    END = 4;
+    PENDING = 5;
+  }
+  optional VLAStatus vla_status = 2;
+  enum VLAFailureReason {
+    UNKNOWN = 0;
+    TASK_TIMEOUT = 1;
+    USER_CANCEL = 2;
+    NO_OVERTAKE_TARGET = 3;
+    OVERTAKE_TARGET_NULL = 4;
+    NO_MIDDLE_REFLINE = 5;
+    TOO_CLOSE_TO_ROUTING_END = 6;
+    FAILED_TO_SECOND_RIGHT = 7;
+    FAILED_TO_MOST_RIGHT = 8;
+    FAILED_TO_POI_RANGE = 9;
+    OBS_CONFLICTION = 10;
+    RIGHT_CONSTRUCTION_ZONE = 11;
+    NO_PARKING_ZONE = 12;
+    ONLY_BUS_LANE_PASSABLE = 13;
+    NO_OVERTAKE_VEHICLE_TYPE = 14;
+    FUSION_MAP_ERROR = 15;
+    RIGHT_ABN_LANE = 16;
+  }
+  optional VLAFailureReason vla_failure_reason = 3;
+  enum VLAAction {
+    NO_ACTION = 0;
+    CURRENT_LANE_ACCELERATE = 1;
+    RIGHT_GIVE_WAY = 2;
+    LANE_CHANGE_TO_SECOND_RIGHT = 3;
+    LANE_CHANGE_TO_MOST_RIGHT = 4;
+    LEAVING_BUS_LANE = 5;
+    NOT_ENTER_BUS_LANE = 6;
+    LANE_KEEP_PARKING = 7;
+  }
+  optional VLAAction vla_action = 4;
+  enum VLAOvertakeVehicleType {
+    NO_TYPE = 0;
+    TRUCK = 1;
+    CAR = 2;
+    BICYCLE = 3;
+  }
+  optional VLAOvertakeVehicleType vla_overtake_vehicle_type = 5;
+  optional bool is_rightmost_lane = 6;
+}
+
+message LaneChangeRelated {
+  enum TargetLane {
+    MIDDLE = 0;
+    LEFT = 1;
+    RIGHT = 2;
+  }
+  optional int32 cur_lane_id = 13;
+  optional TargetLane target_lane = 1;
+  repeated int32 target_lane_id = 2;
+  optional Position target_position = 3;
+  optional bool target_position_occupied = 9;
+  optional bool is_lane_change_hold = 14;
+
+  optional SideLaneInfos side_lane_infos = 15;
+
+  enum LaneChangeReason {
+    UNKNOWN_REASON = 0;
+    ROUTING = 1;
+    MERGE = 2;
+    SLOW_OBJECT = 3;
+    FASTER_LANE = 4;
+    // static objects below
+    PARKED_CARS = 5;
+    BREAK_DOWN_CARS = 6;
+    CONSTRUCTION_ZONE = 7;
+    UNMOVABLE_OBSTACLE = 8;
+    // user instruction
+    HUMAN_INPUT = 9;
+    WRONG_LANE = 10;
+    HIGHWAY_LANE = 11;
+    MERGE_IN_LANE = 12;
+    MERGE_OUT_LANE = 13;
+    PARALLEL_TRUCK = 14;
+    // model reference line
+    MODEL_REFLINE_INTENTION = 15;
+    AVOID_MERGE_LANE = 16;
+    OFF_RAMP = 17;
+    TRUCK_CUTIN = 18;
+    MERGE_IN_LANE_IN_URBAN = 19;
+  }
+  optional LaneChangeReason lane_change_reason = 4;
+
+  enum LaneChangeStatus {
+    NO_LANE_CHANGE = 0;
+    DURING = 1;
+    SUCCESS = 2;
+    FAIL = 3;
+    WAIT = 4;
+    BOX_ON_BOUNDARY = 5;
+    BOX_IN_LANE = 6;
+    LANE_CHANGE_BUFFER = 7;
+    RECOVERING = 8;
+    FRONT_CENTER_CROSSED = 9;
+    LANE_CHANGE_HOLD = 10;
+    ASKING_FOR_CONFIRMATION = 11;
+    UNKNOWN_STATUS = 12;
+  }
+  optional LaneChangeStatus lane_change_status = 5;
+  optional LaneChangeStatus lane_change_status_action = 17;
+
+  enum LaneChangeFailureReason {
+    UNKNOWN = 0;
+    REAR_CAR_TOO_CLOSE = 1;
+    SURROUNDING_CAR_TOO_CLOSE = 2;
+    NO_LANE_CHANGE_TRAJECTORY = 3;
+    EXCESSIVE_BRAKING = 4;
+    ILC_HUMAN_CANCELLED = 5;  // cancelled by human
+    NO_ROOM = 6;              // no lane
+    NONCROSSABLE = 7;         // solid lane boundary
+    ILC_TIMEOUT = 8;          // at the end of 10 seconds
+    HEAVY_TRAFFIC = 9;
+    BLIND_SPOT_OCCUPIED = 10;
+    BAD_LANE_CHANGE_POS = 11;
+    ROUTING_TOO_LARGE = 12;
+    UNSAFE_LANE_CHANGE = 13;
+    STATIC_OBSTACLE = 14;
+    FRONT_LEFT_CAR_TOO_CLOSE = 15;
+    LEFT_SIDE_CAR_TOO_CLOSE = 16;
+    REAR_LEFT_CAR_TOO_CLOSE = 17;
+    FRONT_RIGHT_CAR_TOO_CLOSE = 18;
+    RIGHT_SIDE_CAR_TOO_CLOSE = 19;
+    REAR_RIGHT_CAR_TOO_CLOSE = 20;
+    ILC_INTERSECTION = 21;
+  }
+  enum LaneChangeDetailReason {
+    DETAIL_UNKNOWN = 0;
+    VRU_SIDEMOST = 1;
+  }
+  optional LaneChangeFailureReason lane_change_failure_reason = 6;
+
+  optional bool is_ilc_lane_change = 16;
+  enum ILCStatus {
+    ILC_STATUS_UNKNOWN = 0;
+    IN_PROGRESS = 1;
+    SUCCEEDED = 2;
+    FAILED = 3;         // lane change cancelled
+    WAITING = 4;        // within 15 seconds, no actions yet
+    LANE_CHANGING = 5;  // during lane change
+  }
+  optional ILCStatus ilc_status = 7 [deprecated = true];
+
+  enum ILCFailureReason {
+    FAILED_UNKNOWN = 0;
+    FAILED_HUMAN_CANCELLED = 1;  // cancelled by human
+    FAILED_NO_ROOM = 2;          // immediate failure
+    FAILED_NONCROSSABLE = 3;     // shared by waiting and failure
+    FAILED_TIMEOUT = 4;          // at the end of 15 seconds
+    FAILED_HEAVY_TRAFFIC = 5;    // shared by waiting and failure
+    FAILED_BLIND_SPOT_OCCUPIED = 6;
+    FAILED_WRONG_LANE = 7;
+  }
+  optional ILCFailureReason ilc_failure_reason = 8 [deprecated = true];
+  optional int32 noncrossable_lane_id = 10;
+  optional int32 ilc_critical_object_id = 11;
+  optional double ilc_execution_time = 12;
+  optional double front_center_crossed_time_ms = 18;
+  repeated int32 abn_static_ids = 19;
+
+  message ConfirmationInfo {
+    optional LaneChangeReason reason = 1;
+    optional TargetLane direction = 2;
+    // ToDo: target lane ids?
+  }
+  optional ConfirmationInfo confirmation_info = 20;
+  repeated NavigationSuppressionReason navigation_suppression_reason = 21;
+  optional LaneChangeMode lane_change_mode = 22;
+  optional LaneChangeDetailReason lane_change_detail_reason = 23;
+}
+
+message LaneWidth {
+  optional double distance_to_cur = 1;
+  optional double width = 2;
+}
+
+message VehiclePose {
+  optional double ref_angle = 1;
+  optional double dist_to_left_boundary = 2;
+  optional double dist_to_right_boundary = 3;
+  optional bool is_left_boundary_real = 4;
+  optional bool is_right_boundary_real = 5;
+  optional double left_lane_boundary_rl = 6;
+  optional double right_lane_boundary_rl = 7;
+  optional double dist_to_next_lane = 8;
+  optional bool is_on_virtual_lane = 9;
+  repeated LaneWidth lane_widths = 10;
+  optional bool is_on_rightmost_lane = 11;
+  optional bool is_first_after_stopline = 12;
+  optional double dist_to_left_curb = 13;
+  optional double dist_to_right_curb = 14;
+  optional double dist_to_centerline = 15;
+  optional bool is_curb_to_lane = 16;
+}
+
+message DisengagementWarning {
+  enum SafetyRelatedWarning {
+    NO_SAFETY_WARNING = 0;
+    PLANNING_FAILED = 1;
+    INVALID_TRAJECTORY = 2;
+    PLANNING_BLOCKED = 3;
+    PERCEPTION_FAILED = 4;
+    WIBBLE_TRAJECTORY = 5;
+    EMPTY_REFLINE = 6;
+    CONSTRUCTION_COLLISION = 7;
+  }
+  optional SafetyRelatedWarning safety_related_warning = 1;
+  enum EfficiencyRelatedWarning {
+    NO_EFFICIENCY_WARNING = 0;
+    COMPLEX_INTERSECTION_CONDITION = 1;
+    LCC_MODE_USE_LCC_HEAD = 2;
+  }
+  optional EfficiencyRelatedWarning efficiency_related_warning = 2;
+  enum HumanInterferenceRelatedWarning {
+    NO_INTERFERENCE_WARNING = 0;
+    LONGITUDINAL = 1;
+    LATERAL = 2;
+    BOTH = 3;
+  }
+  enum WrongWayRelatedWarning {
+    NO_WRONG_WAY_WARNING = 0;
+    EXTRICATION = 1;
+    WRONG_WAY = 2;
+    EOP_NO_GAP = 3;
+    NARROW_ROAD_IMPASSIBLE = 4;  //狭窄道路无法通过
+  }
+  optional HumanInterferenceRelatedWarning human_interference_related_warning =
+      3;  // This may not be output of planning.
+  optional string disengagement_description = 4;
+  optional string disengagement_warning_level = 5;
+  optional WrongWayRelatedWarning wrong_way_related_warning = 6;
+
+  enum NarrowRoadRelatedWarning {
+    NO_NARROW_ROAD = 0;
+    NEAR_NARROW_ROAD = 1;
+    IN_NARROW_ROAD = 2;
+    NARROW_ROAD_PASSED = 3;
+  }
+  optional NarrowRoadRelatedWarning narrow_road_related_warning = 7;
+  repeated deeproute.common.Point2D narrow_road_boundary = 8;
+  optional double narrow_road_boundary_width = 9;  // in meters
+
+  enum NarrowRoadPassability {
+    NARROW_ROAD_NONE = 0;
+    NARROW_ROAD_PASSABLE = 1;
+    NARROW_ROAD_IMPASSABLE = 2;
+  }
+  optional NarrowRoadPassability narrow_road_passability = 10
+      [default = NARROW_ROAD_NONE];
+}
+
+message CriticalObject {
+  optional int32 id = 1;
+  enum ObjectType {
+    UNKNOWN_OBJ = 0;
+    PERCEPTION_OBJECT = 1;
+    LANE_EDGE = 2;   // TBD
+    HARD_BRAKE = 3;  // caused ADC to hard brake
+    FOLLOW = 4;
+    VRU = 5;
+    VLA_OVERTAKE_TARGET = 6;
+  }
+  optional ObjectType object_type = 2;
+}
+
+message RenderObject {
+  optional int32 id = 1;
+  optional double dis_to_adc = 3;
+  optional double ttc = 4;
+};
+
+message RenderObjectsGroup {
+  repeated RenderObject reverse_render_objects = 1;
+  repeated RenderObject overlap_render_objects = 2;
+  repeated RenderObject ttc_render_objects = 3;
+};
+
+message BroadcastInfo {
+  enum BroadcastReason {
+    UNKNOWN = 0;
+    DANGER_FRONT_OBJECT = 1;
+    CROSSWALK = 2;
+  }
+  optional BroadcastReason broadcast_reason = 1 [default = UNKNOWN];
+  optional int32 critical_object_id = 2 [default = -1];
+  optional Stop.Reason stopline_reason = 3 [default = UNKNOWN];
+}
+
+message SelectableLaneCollection {
+  enum LanePosition {
+    MIDDLE = 0;
+    LEFT = 1;
+    RIGHT = 2;
+    SPLIT_POINT = 3;
+  }
+
+  optional LanePosition lane_position = 1;
+  optional deeproute.common.Polyline centerline = 2;
+}
+
+message OpenSpaceGearPoint {
+  optional deeproute.common.PointENU point = 1;
+  optional double heading = 2;
+}
+
+message FrontVehicleInfo {
+  optional double distance_to_adc = 1;
+}
+
+message ForwardLaneInfo {
+  optional bool inside_lane = 1;
+  optional double lane_width = 2;
+
+  // deviation angle with lane center
+  optional double vehicle_heading_deviation_angle = 3;
+
+  // lateral dist of adc polygon to lane boundary
+  optional double lateral_remaining_distance = 4;
+
+  // longitudinal projection dist from adc to forward lane
+  optional double longitudinal_projection_distance = 5;
+}
+
+message TjpInfo {
+  optional ForwardLaneInfo forward_lane_info = 1;
+}
+
+message LasInfo {
+  enum Direction {
+    DIRECTION_NONE = 0;
+    LEFT = 1;
+    RIGHT = 2;
+  }
+
+  enum LasStatus {
+    LAS_STATUS_NONE = 0;
+    LDW = 1;          // red
+    RDP_EXECUTE = 2;  // blue
+    // reserved for future indications
+    RDP_SUCCEEDED = 3;
+    RDP_FAILED = 4;
+    ELK_EXECUTE = 5;
+    ELK_SUCCEEDED = 6;
+    ELK_FAILED = 7;
+  }
+
+  optional Direction direction = 1;
+  optional LasStatus status = 2;
+  repeated int32 lane_id = 3;
+  optional double dist_to_left_boundary = 4;
+  optional double dist_to_right_boundary = 5;
+  optional double ttl = 6;
+}
+
+message ElkInfo {
+  enum Direction {
+    NONE = 0;
+    LEFT = 1;
+    RIGHT = 2;
+  }
+
+  enum ElkStatus {
+    ELK_STATUS_NONE = 0;
+    ELK_EXECUTE = 1;
+    ELK_SUCCEEDED = 2;
+    ELK_FAILED = 3;
+  }
+
+  optional Direction direction = 1;
+  optional ElkStatus status = 2;
+  optional double dist_to_left_boundary = 3;
+  optional double dist_to_right_boundary = 4;
+  optional double ttl = 5;
+  optional double ttc_o = 6;
+  optional double ttc_ics = 7;
+  optional double ttc = 8;
+  optional double lon_dist_to_obj = 9;
+  optional double lat_dist_to_obj = 10;
+  optional double obj_lon_v = 11;
+  optional double obj_lat_v = 12;
+  optional deeproute.perception.PerceptionObstacle.Type obj_type = 13;
+  optional deeproute.perception.PerceptionObstacle.SensorType sensor_type = 14;
+  optional double obj_confidence_score = 15;
+}
+
+message VehicleStateInfo {
+  optional double lon_v = 1;
+  optional double lat_v = 2;  // 定位给的侧滑
+  optional double lon_a = 3;
+  optional double lat_a = 4;
+  optional double lon_jerk = 5;
+  optional double lat_jerk = 6;
+  optional double planning_calculated_lat_v = 7;  // 垂直于车道方向的横向速度
+}
+
+message FollowObjectInfo {
+  optional int32 id = 1;
+  optional double object_dist = 2;
+  optional double follow_time = 3;
+}
+
+message PlanningIntentionInfo {
+  enum IntentionType {
+    UNKOWN = 0;
+    PASSING_SPEED_BUMP = 1;
+
+    // reserved for passing type
+    NUDGE_OBSTACLE = 10;
+    NUDGE_PEDESTRIAN = 11;
+    NUDGE_BICYCLE = 12;
+    NUDGE_VEHICLE = 13;
+
+    // reserved for following type
+    FOLLOWING_PEDESTRIAN = 20;
+    FOLLOWING_BICYCLE = 21;
+    FOLLOWING_VEHICLE = 22;
+  }
+  optional IntentionType intention_type = 1;
+  optional int32 object_id = 2;
+}
+
+message VisualTrajectoryPoint {
+  optional deeproute.common.PointENU point = 1;
+  optional double heading = 2;
+}
+
+message VisualTrajectory {
+  repeated VisualTrajectoryPoint trajectory_points = 1;
+  repeated VisualTrajectoryPoint original_trajectory_points = 2;
+}
+
+message BlindArea {
+  optional bool has_obs = 1;
+  repeated int32 obs_ids = 2;
+}
+
+message ScenarioSemanticInfo {
+  enum Type {
+    UNKNOWN = 0;
+    CONSTRUCTION_ZONE = 1;
+  }
+  repeated Type type = 1;
+}
+
+message IlcSplitSelectionInfo {
+  enum UserSelection {
+    DEFAULT = 0;
+    LEFT = 1;
+    RIGHT = 2;
+  }
+  optional UserSelection user_selection = 1;
+  repeated int32 selected_lane_ids = 2;
+
+  enum SelectionStatus {
+    READY_FOR_SELECTION = 0;
+    NO_SPLITS_AHEAD = 1;
+  }
+  optional SelectionStatus selection_status = 3;
+
+  enum ScenarioType {
+    SPLIT = 0;
+    EXIT = 1;
+  }
+  optional ScenarioType scenario_type = 4;
+}
+
+message ConstructionZoneInfo {
+  enum ConstructionZoneExplanability {
+    CONSTRUCTION_ZONE_EXPLANABILITY_UNKNOWN = 0;
+    CONSTRUCTION_ZONE_EXPLANABILITY_LANECLOSED = 1;
+  };
+  optional ConstructionZoneExplanability construction_zone_explanability = 1;
+  repeated deeproute.common.Polyline guideline = 2;
+  repeated deeproute.common.Polygon construction_zone_area = 3;
+}
+
+message TrafficLightWarning {
+  enum WarningMessage {
+    NONE = 0;
+    ABNORMAL_TRAFFIC_LIGHT = 1;
+    ATTENTION_TRAFFIC_LIGHT = 2;
+    RED_LIGHT_STOP = 3;
+    CROSS_LINE_STOP = 4;
+    YELLOW_LIGHT_DECELERATION = 5;
+    GREEN_LIGHT_START = 6;
+    FOLLOW_START = 7;
+    TAKE_OVER = 8;
+  }
+  repeated WarningMessage warning_messages = 1;
+}
+
+message OpenSpaceInfo {
+  optional double current_stage_remain_path_length = 1;
+  optional double current_stage_total_path_length = 2;
+  optional int32 remaining_stage_num = 3;
+  optional double remain_path_length = 4;
+  optional double total_path_length = 5;
+  enum SpotWidthType {
+    NORMAL_SPOT = 0;
+    SHORT_SPOT = 1;
+    EXTREME_SHORT_SPOT = 2;
+  }
+  optional SpotWidthType spot_width_type = 6;
+}
+
+message ModelSpeedLimitInfo {
+  optional bool enable = 1;
+}
+
+message CollisionTriggerInfo {
+  optional bool has_collision = 1 [default = false];
+  optional int32 collision_obs_percep_id = 2;
+}
+
+message ObjInteractionCount {
+  optional int32 vru_count = 1;
+  optional int32 cutin_count = 2;
+  optional int32 vehicle_count = 3;
+}
+
+enum AStarSearchNoResultReason {
+  HAS_RESULT = 0;  // has result
+  INIT_COLLISION = 1;
+  TARGET_COLLISION = 2;
+  COMPLEX_SCENE = 3;
+};
+
+enum SCENE_TYPE {
+  NORMAL_SCENE = 0;
+  SHORT_PASSAGE_SCENE = 1;
+  DEAD_END_SCENE = 2;
+}
+
+enum ParkingSpotShape {
+  NONE_SHAPE = 0;
+  VERTICAL_SHAPE = 1;
+  PARALLEL_SHAPE = 2;
+  DIAGONAL_SHAPE = 3;
+}
+
+enum ParkingSpotBoundedType {
+  ZERO_BOUNDED = 0;
+  SINGLE_BOUNDED = 1;
+  DOUBLE_BOUNDED = 2;
+}
+
+message VpaSemanticInfo {
+  enum ObjAlarmLevel {
+    OBJ_ALARM_LEVEL_NONE = 0;
+    OBJ_ALARM_LEVEL_GREEN = 1;
+    OBJ_ALARM_LEVEL_YELLOW = 2;
+    OBJ_ALARM_LEVEL_RED = 3;
+  }
+  message VpaObjAlarmInfo {
+    optional int32 obj_id = 1;
+    optional ObjAlarmLevel alarm_level = 2;
+  }
+
+  repeated VpaObjAlarmInfo vpa_obj_alarm_info = 1;
+};
+
+message AStarSearchResultAnalysisInfo {
+  optional ParkingSpotShape spot_type = 1;
+  optional bool search_has_result = 2;
+  optional SCENE_TYPE scene_type = 3;
+  optional int64 gear_num = 4;
+  optional bool is_replan_with_same_gear = 5;
+  optional AStarSearchNoResultReason no_result_reason = 6;
+  //[ms]
+  optional double search_time = 7;
+  optional ParkingSpotBoundedType parking_spot_bounded_type = 8;
+};
+
+message DriveCautiouslyInfo {
+  optional bool caution_traffic_cone =
+      1;  //在自车道  或  左右有虚线且有相邻车道  或者压线的
+          //锥桶水龙（感知类型和子类型） 大于5个/2个
+  repeated int32 caution_parallel_vehicle_ids =
+      2;  //高速上左右相邻车道有overlap超过50%的 车辆
+  optional bool the_right_most_lane =
+      3;  //高快场景是否在当前道路最右车道上（不包括应急车道的最右车道）（自车在最右车道小心右侧汇入路口）
+  optional bool caution_front_block =
+      4;  //前方有阻塞障碍物（静止障碍物、锥桶、有abnd的车辆等） 且无绕行空间
+  optional bool caution_lane_close_level1 =
+      5;  //一级报警：自车车速<20kph且当前道路有lane
+          // close，剩余可通行距离<5V或10m
+  optional bool caution_lane_close_level2 =
+      6;  //二级报警：自车车速<5kph且距离road merge，剩余距离<2V或5m
+  optional bool caution_y_crossing_solid_line_exemption =
+      7;  //即将豁免实线：实线豁免条件满足时的提醒
+};
+
+message AdcFrontWheelTrajectoryInfo {
+  optional bool is_left_front_wheel = 1;
+  // only coordinates and velocity data are valid
+  repeated deeproute.common.TrajectoryPoint trajectory_point = 2;
+  repeated deeproute.common.TrajectoryPoint scale_point = 3;
+};
+
+message PlanningSemanticInfo {
+  enum TrafficCondition {
+    UNKNOWN = 0;
+    LIGHT = 1;
+    MEDIUM = 2;
+    HEAVY = 3;
+    SLOW = 4;
+    JAM = 5;
+  }
+
+  enum DrivingStyle {
+    NOT_SET = 0;
+    STANDARD = 1;
+    CONSERVATIVE = 2;
+    AGGRESSIVE = 3;
+  }
+
+  optional LaneChangeRelated lane_change_related = 1;
+  optional DisengagementWarning disengagement_warning = 2;
+  repeated CriticalObject critical_object = 3;
+  optional Stop nearest_stop = 4;
+  optional BroadcastInfo broadcast_info = 5;
+  optional TrafficCondition traffic_condition = 6;
+  optional OpenSpaceGearPoint openspace_gear_point = 7;
+  repeated SelectableLaneCollection selectable_lane_collection = 8;
+  optional LasInfo las_info = 9;
+  optional FollowObjectInfo follow_object_info = 10;
+  optional VehicleStateInfo vehicle_state_info = 11;
+  repeated PlanningIntentionInfo planning_intention_infos = 12;
+  optional deeproute.map.LaneTurn lane_turn = 13;
+  optional VisualTrajectory visual_trajectory = 14;
+  optional ElkInfo elk_info = 15;
+  optional FrontVehicleInfo front_vehicle_info = 16;
+  optional TjpInfo tjp_info = 17;
+  optional LaneTopoInfo lane_topo_info = 18;
+  optional BlindArea blind_area = 19;
+  optional VehiclePose vehicle_pose = 20;
+  optional ScenarioSemanticInfo scenario_semantic_info = 21;
+  optional TrafficLightInfo traffic_light_info = 22;
+  optional int64 perception_header_timestamp = 23;
+  optional TrafficLightWarning traffic_light_warning = 24 [deprecated = true];
+  optional SingleLaneBehavior single_lane_behavior = 25;
+  optional FrontObjectInfo front_object_info = 26;
+  optional IlcSplitSelectionInfo ilc_split_selection_info = 27;
+  optional ConstructionZoneInfo construction_zone_info = 28;
+  optional OpenSpaceInfo open_space_info = 29;
+  optional DynamicFollowInfo dynamic_follow_info = 30;
+  optional ModelSpeedLimitInfo model_speed_limit_info = 31;
+  optional CollisionTriggerInfo collision_trigger_info = 32;
+  optional bool is_close_to_junction = 33 [deprecated = false];
+  optional ObjInteractionCount obj_interaction_count = 34;
+  optional AStarSearchResultAnalysisInfo a_star_result_analysis_info = 35;
+  optional VpaSemanticInfo vpa_semantic_info = 36;
+  optional double near_barrier_gate_dist = 37;
+  optional DrivingStyle driving_style = 38;
+  optional DriveCautiouslyInfo drive_caution_info = 39;
+  optional int32 same_dir_vehicles = 40;
+  optional bool is_rads_record_driving_mode = 41;
+  optional bool during_defensive_deceleration = 42;
+  optional VLARelated vla_related = 43;
+  optional bool is_defensive_driving = 44;
+  repeated AdcFrontWheelTrajectoryInfo adc_front_wheel_trajectory_info = 45;
+  optional RenderObjectsGroup render_objects_group = 46;
+  optional ModelRefLineBroadcastInfo model_ref_line_info = 47;
+  optional bool during_cross_defensive_deceleration = 48;
+  optional int32 during_cross_defensive_deceleration_id = 49;
+  optional bool during_visible_speed_limit_deceleration = 50;
+  optional LaneChangeBehaviorInfo lane_change_behavior_info = 51;
+  optional BypassInfo bypass_info = 52;
+  optional bool has_cutin_object = 53;
+  optional int32 cutin_object_id = 54;
+
+  optional bool during_intersection_truck_behavior_defensive = 55;
+  repeated int32 during_intersection_truck_behavior_defensive_id = 56;
+}
+
+message ModelRefLineBroadcastInfo {
+  optional bool is_model_ref_line_enabled = 1;
+}
+
+message DynamicFollowInfo {
+  optional double follow_time_buffer = 1;
+}
+
+message TrafficLightInfo {
+  enum TrafficLightState {
+    UNKNOWN = 0;
+    NONE = 1;
+    NORMAL = 2;
+    BLOCKED = 3;
+    UNABLE_TO_LINK_LANE = 4;
+  }
+  enum TrafficLightStopReason {
+    NO_STOP_LINE = 0;
+    RED = 1;
+    YELLOW = 2;
+    GREEN_BLINK = 3;
+    GREEN_TO_YELLOW = 4;
+    COUNTDOWNS = 5;
+    FOLLOW_START = 6;
+    DISABLE_IN_TOLL_AREA = 7;
+    DISABLE_BY_TRAFFIC_LIGHT_MP = 8;
+    OUT_WAITING_AREA_STOP = 9;
+  };
+  optional int32 stop_line_id = 1;
+  optional deeproute.perception.TrafficLight.Color color = 2;
+  optional double adc_to_stop_line_distance = 3;
+  optional deeproute.map.LaneTurn turn_type = 4;
+  optional bool tl_result_is_trustworthy = 5;
+  optional int32 countdowns = 6;
+  optional TrafficLightState tl_state = 7;
+  optional deeproute.perception.TrafficLight.Shape shape = 8;
+  optional deeproute.common.PointENU stop_line_center_point = 9;
+  optional bool failed_to_stop_at_red_light = 10;  // 闯红灯
+  optional TrafficLightStopReason stop_reason = 11;
+  optional bool build_stop_decision = 12;
+  optional bool arrived_waiting_area_ignore_tl = 13;
+  optional bool enable_waiting_area = 14;
+  optional int32 lcc_mode_stop_line_id = 15;
+  optional double lcc_mode_adc_to_stop_line_distance = 16;
+  optional deeproute.common.PointENU lcc_mode_stop_line_center_point = 17;
+}
+
+message SingleLaneBehavior {
+  enum BehaviorState {
+    UNKNOWN = 0;
+    ACCELERATION = 1;
+    DECELERATION = 2;
+  }
+  enum LateralBehaviorState {
+    INVALID = 0;
+    KEEP = 1;
+    NUDGE = 2;
+  }
+  optional BehaviorState behavior_state = 1;
+  optional AccelerationInfo acceleration_info = 2;
+  optional DecelerationInfo deceleration_info = 3;
+  optional LateralBehaviorState lateral_behavior_state = 4;
+  optional NudgeInfo nudge_info = 5;
+}
+
+message AccelerationInfo {
+  enum AccelerationReason {
+    UNKNOWN = 0;
+    FOLLOW_CAR_TO_START = 1;
+    GREEN_LIGHT_TO_START = 2;
+  }
+  repeated AccelerationReason reason = 1;
+}
+
+message DecelerationInfo {
+  enum DecelerationReason {
+    UNKNOWN = 0;
+    FOLLOW_CAR = 1;
+    RED_TRAFFIC_LIGHT = 2;
+    YELLOW_TRAFFIC_LIGHT = 3;
+    PEDESTRIAN = 4;
+    COMPLEX_ROAD_CONDITION = 5;
+    SPEED_LIMIT = 6;
+    OTHER_OBSTACLES = 7;
+    CROSS_LINE = 8;
+    OBSTACLE_COLLISION = 9;
+    NEXT_LANE_SPEED_LIMIT = 10;
+    SIDE_VEHICLE_DECELERATING = 11;
+    ROADSIDE_PARKING_BLIND_SPOTS = 12;
+    LARGE_VEHICLE_DEFENSIVE_DRIVING = 13;
+    YELLOW_PASS = 14;
+    NEAR_YELLOW = 15;
+    CONSTRUCTION_ZONE = 16;
+  }
+  repeated DecelerationReason reason = 1;
+  optional bool has_stop_line = 2;
+  optional deeproute.common.PointENU stop_line_point = 3;
+  optional double stop_line_heading = 4;
+}
+
+message NudgeInfo {
+  enum NudgeReason {
+    UNKNOWN = 0;
+    STATIC_OBJECT = 1;
+    SLOW_OBJECT = 2;
+    LARGE_VEHICLE = 3;
+    TRAFFIC_CONE = 4;
+  }
+  enum NudgeDirection {
+    UNSET = 0;
+    LEFT = 1;
+    RIGHT = 2;
+  }
+  enum NudgeType {
+    INVALID = 0;
+    IN_LANE = 1;
+    OUT_OF_LANE = 2;
+  }
+  repeated NudgeReason nudge_reason = 1;
+  repeated int32 nudge_object_ids = 2;
+  optional NudgeDirection nudge_direction = 3;
+  optional NudgeType nudge_type = 4;
+  optional int32 out_of_lane_nudge_count = 5;
+}
+
+message FrontObjectInfo {
+  optional bool has_obs_in_the_front = 1;
+  optional int32 object_id = 2;
+  optional double object_dis = 3;
+  optional deeproute.perception.PerceptionObstacle.Type
+      perception_obstacle_type = 4;
+  optional bool is_followable = 5;
+  optional double relative_speed = 6;
+  optional double lon_accel = 7;
+}
+
+message WaitingAreaInfo {
+  enum WaitingAreaType {
+    UNKNOWN = 0;
+    TURN_LEFT_WAITING_AREA = 1;
+    TURN_RIGHT_WAITING_AREA = 2;
+    STRAIGHT_WAITING_AREA = 3;
+  }
+  enum WaitingAreaStatus {
+    NO_WAITING_AREA = 0;
+    WAITING_AREA_ARRIVED = 1;
+    WAITING_AREA_APPROACHING = 2;
+    FAIL = 3;
+  }
+  enum WaitingAreaFailureReason { FAILED_UNKNOWN = 0; }
+  optional bool has_waiting_area_info = 1;
+  optional WaitingAreaType waiting_area_type = 2;
+  optional WaitingAreaStatus waiting_area_status = 3;
+  optional double waiting_area_remaining_s = 4;
+  optional WaitingAreaFailureReason waiting_area_failure_reason = 5;
+}
+
+message TurnInfo {
+  enum TurnStatus {
+    NO_TURN = 0;
+    TURNING = 1;
+    WAIT = 2;
+    SUCCESS = 3;
+    FAIL = 4;
+    WAIT_FOR_REVERSE = 5;
+    REVERSE_TURNING = 6;
+  }
+  enum TurnFailureReason { FAILED_UNKNOWN = 0; }
+  optional bool has_turn_info = 1;
+  optional deeproute.map.LaneTurn turn_type = 2;
+  optional TurnStatus turn_status = 3;
+  optional double turn_remaining_s = 4;
+  optional TurnFailureReason turn_failure_reason = 5;
+}
+
+message SpecialLaneInfo {
+  optional deeproute.map.LaneType path_end_lane_type = 1;
+}
+
+message LaneTopoInfo {
+  enum LaneMergeInfo {
+    NON_MERGE = 0;
+    MERGE_LEFT = 1;
+    MERGE_RIGHT = 2;
+  }
+  enum IntersectionTurnInfo {
+    NON_TURN = 0;
+    TURN_LEFT = 1;
+    TURN_RIGHT = 2;
+  }
+  optional LaneMergeInfo lane_merge_info = 1;
+  // ica T-junction turning
+  optional IntersectionTurnInfo intersection_turn_info = 2;
+  optional TurnInfo turn_info = 3;
+  optional WaitingAreaInfo waiting_area_info = 4;
+  optional SpecialLaneInfo special_lane_info = 5;
+}
+
+// communication safety policy with canbus modules, the topic name is
+// /planner/security_policy
+message PlanningSecurityPolicy {
+  // perform deceleration in canbus modules
+  optional double dec = 1;
+  // lost time of remote controller
+  optional double lost_time = 2;
+}
+
+message LaneChangeBehaviorInfo  //轨迹变道意图的行为解释
+{
+  enum LaneChangeBehaviorState {
+    LANE_KEEP = 0;          //无变道意图
+    LEFT_LANE_CHANGE = 1;   //向左变道意图
+    RIGHT_LANE_CHANGE = 2;  //向右变道意图
+  }
+  optional LaneChangeBehaviorState lane_change_behavior_state = 1;
+}
+
+message BypassInfo {
+  enum LateralBehaviorState {
+    NORMAL = 0;  // 正常行驶
+    BYPASS = 1;  // 绕行状态
+  }
+
+  enum BypassDirection {
+    NO_BYPASS = 0;     // 无绕行
+    LEFT_BYPASS = 1;   // 向左绕行
+    RIGHT_BYPASS = 2;  // 向右绕行
+  }
+
+  optional LateralBehaviorState lateral_behavior_state = 1;
+  optional BypassDirection bypass_direction = 2;
+  optional int32 bypass_object_id = 3;  // 被绕行的目标ID
+}

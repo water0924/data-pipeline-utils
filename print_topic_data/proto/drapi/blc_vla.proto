@@ -1,0 +1,68 @@
+syntax = "proto3";
+package dr.blc.vlainfo;
+
+enum RoamTargetSceneVla {
+  UNKNOWN = 0; // 行车专用
+
+  // -------------------------- 基础漫游场景 --------------------------
+  ROAM_NO_DESTINATION = 1;  // 无终点漫游（无指定目标）
+  ROAM_FIND_EXIT = 2;       // 漫游找出口（目标为出口）
+
+  // -------------------------- 仅指定楼层漫游 --------------------------
+  ROAM_FIND_SPECIFIED_FLOOR_B1 = 3;  // 漫游找指定楼层：B1 层
+  ROAM_FIND_SPECIFIED_FLOOR_B2 = 4;  // 漫游找指定楼层：B2 层
+  ROAM_FIND_SPECIFIED_FLOOR_B3 = 5;  // 漫游找指定楼层：B3 层
+  ROAM_FIND_SPECIFIED_FLOOR_B4 = 6;  // 漫游找指定楼层：B4 层
+  ROAM_FIND_SPECIFIED_FLOOR_B5 = 7;  // 漫游找指定楼层：B5 层
+
+  ROAM_FIND_SPECIFIED_FLOOR_L1 = 50;  // 漫游找指定楼层：L1 层
+  ROAM_FIND_SPECIFIED_FLOOR_L2 = 51;  // 漫游找指定楼层：L2 层
+  ROAM_FIND_SPECIFIED_FLOOR_L3 = 52;  // 漫游找指定楼层：L3 层
+  ROAM_FIND_SPECIFIED_FLOOR_L4 = 53;  // 漫游找指定楼层：L4 层
+  ROAM_FIND_SPECIFIED_FLOOR_L5 = 54;  // 漫游找指定楼层：L5 层
+  ROAM_FIND_SPECIFIED_FLOOR_L6 = 55;  // 漫游找指定楼层：L6 层
+  ROAM_FIND_SPECIFIED_FLOOR_L7 = 56;  // 漫游找指定楼层：L7 层
+
+  // -------------------------- 仅指定区域漫游 --------------------------
+  ROAM_FIND_SPECIFIED_AREA_A = 108;   // 漫游找指定区域：A 区
+  ROAM_FIND_SPECIFIED_AREA_B = 109;   // 漫游找指定区域：B 区
+  ROAM_FIND_SPECIFIED_AREA_C = 110;   // 漫游找指定区域：C 区
+  ROAM_FIND_SPECIFIED_AREA_D = 111;   // 漫游找指定区域：D 区
+  ROAM_FIND_SPECIFIED_AREA_E = 112;   // 漫游找指定区域：E 区
+  ROAM_FIND_SPECIFIED_AREA_F = 113;   // 漫游找指定区域：F 区
+  ROAM_FIND_SPECIFIED_AREA_G = 114;   // 漫游找指定区域：G 区
+  ROAM_FIND_SPECIFIED_AREA_H = 115;   // 漫游找指定区域：H 区
+  ROAM_FIND_SPECIFIED_AREA_I = 116;   // 漫游找指定区域：I 区
+  ROAM_FIND_SPECIFIED_AREA_J = 117;   // 漫游找指定区域：J 区
+
+  // --------------------------- 特定场景 ---------------------------
+  ROAM_REVERSING = 500;
+}
+
+enum RoamTargetParkingType {
+  ROAM_PARKING_NO_SPOT = 0;              // 不找车位
+  ROAM_PARKING_FIND_SPOT = 1;            // 找车位
+  ROAM_PARKING_FIND_CHARGING_SPOT = 2;   // 找充电桩车位
+}
+
+message VlaContext {
+  enum ParkType {
+    General = 0;
+    Charge = 1;
+  }
+  bool need_park = 1;
+  string vla_send_type = 2;
+  string vla_active_mode = 3;
+  ParkType park_type = 4;
+  int32 prkg_func_sts_lmp = 5; // PrkgFuncStsLmp
+  int32 vla_spd_set_val = 6;   // VLAPSpdSetVal
+  int32 alongtoutprkgbtnsts = 7; // AlongToutPrkgBtnSts
+}
+
+// topic: /blc/vla_info
+message VlaStatusInfo {
+  RoamTargetSceneVla roam_target_scene = 1;
+  VlaContext vla_context = 2;
+  RoamTargetParkingType roam_target_parking_type = 3;  // cot显示用于寻找的车位类型
+  bool in_odd = 4; // 当前是否在odd内 若激活了漫游任务 该字段必定为true
+}

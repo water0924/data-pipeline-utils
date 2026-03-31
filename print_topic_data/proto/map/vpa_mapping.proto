@@ -7,14 +7,9 @@ import "drivers/pointcloud2.proto";
 import "localization/havp_map.proto";
 import "drivers/gnss/ins.proto";
 import "perception/deeproute_perception_ras_map.proto";
+import "map/parking_map_common.proto";
 
 package deeproute.map.vpa;
-
-enum ParkingMapSource {
-    INVAILD = 0;
-    USER = 1;
-    CLOUD = 2;
-}
 
 message MapOutEndPoseInfo {
   optional int32 floor = 1;
@@ -53,11 +48,16 @@ message OnboardMapEntry {
   optional int32 num_parking_spaces = 29;
   optional int32 num_speedbumps = 30;
   repeated int32 viz_floor_set = 31;
-  repeated int32 floor_set = 32;
+  repeated int32 floor_set = 32[deprecated = true]; // unused field
 
   // d2d relatives
   repeated common.PointLLH e2e_in_trajectory_to_parking_space = 50;       // for gleey
   repeated common.PointLLH e2e_out_trajectory_from_parking_space = 51;    // for gleey
+
+  // id from server, one parkinglot one id
+  // optional uint64 dr_pl_id = 52;
+  optional deeproute.map.vpa.ParkingMapSource source = 53 [default = INVALID];
+  reserved 52;
 }
 
 enum ParkingLotType {
@@ -77,6 +77,11 @@ message TrackPoses {
   repeated deeproute.drivers.gnss.SensorsIns track_gnss_pose = 2;
 };
 
+message AlignedBox2d {
+  optional deeproute.common.Point2D min = 1;
+  optional deeproute.common.Point2D max = 2;
+}
+
 message AlignedBox3d {
   optional deeproute.common.Point3D min = 1;
   optional deeproute.common.Point3D max = 2;
@@ -92,6 +97,7 @@ message ParkingMapMetaData {
   optional uint32 map_id = 1;
   optional string map_name = 2;
   optional string city = 3;
+  optional uint64 dr_pl_id = 4;
   optional uint64 create_time = 10;
   optional uint64 last_use_time = 11;
   optional uint64 last_update_time = 12;
@@ -113,7 +119,7 @@ message Keyframe {
   // 本keyFrame内包含的车位
   repeated localization.havp_map.HAVPParkingSpace parking_space = 3;
   repeated localization.havp_map.HAVPObstacle obstacle = 4;
-  
+
   repeated deeproute.common.Transformation3 track_pose = 5;
   optional deeproute.drivers.PointCloud2 point_cloud = 6;
   optional AlignedBox3d sensing_pose_bound_box = 7;
@@ -173,6 +179,19 @@ message LinkData {
   optional LinkSlopeType slope_type = 11; // 平楼，上坡，下坡
   optional int32 floor_id = 12;    // 所属楼层
   optional LinkCurveType curve_type = 13; // 弯道属性
+
+  optional uint64 start_junction_id = 14; // 起点junction id
+  optional uint64 end_junction_id = 15; // 终点junction id
+
+  optional int32 from_floor = 16; // 起点楼层  // only for slope floor link
+  optional int32 to_floor = 17; // 终点楼层  // only for slope floor link
+}
+
+// Link Junction (Link 端点)
+message LinkJunction {
+  optional uint64 id = 1;
+  optional common.Point3D points3d = 2; // 形状点，使用xyz坐标系, 只是link生成算法内部使用，所以可以不存经纬度
+  optional bool is_stable = 3;
 }
 
 message MapPoiInfoInMap {
@@ -186,7 +205,7 @@ message GlobalMap {
   optional float map_resolution = 2;
   repeated FloorMap floor_map = 3;  // 核心结构，每层的停车场地图
   // 车位
-  repeated localization.havp_map.HAVPParkingSpace parking_space = 4; 
+  repeated localization.havp_map.HAVPParkingSpace parking_space = 4;
   // 静态障碍物
   repeated localization.havp_map.HAVPObstacle obstacle = 5;
   repeated KeyframeEdge keyframe_edges = 6;  // 切keyFrame 用的
@@ -203,11 +222,17 @@ message GlobalMap {
   repeated localization.havp_map.HAVPTrajectory map_semantic_lane = 15;
 
 
-    // link列表
+  // will be converted to deeproute.sd_map.ParkingData, 2025.08
   repeated LinkData link_datas = 20;
+  repeated LinkJunction link_junctions = 21;
+
+  // active map data
+  repeated TrajectoryProto trajectories = 22;
+  reserved 23;  // deprecated: constraints moved to TrajectoryProto
+  repeated FloorParkingSpaceMapProto parking_space_global_map = 24;
 }
 
-// topic 
+// topic
 message EntryList {
   // 终点坐标llh
   optional common.PointLLH destination = 1;
@@ -228,4 +253,223 @@ enum LinkCurveType {
   STRAIGHT = 0;
   CURVED = 1;
   SPIRAL = 2;
+}
+
+message AvpMatchInfo {
+  optional uint32 start_link_index = 1;
+  optional uint32 end_link_index = 2;
+  optional double start_offset = 3;
+  optional double end_offset = 4;
+}
+
+message AvpRoutingMatchResult {
+  optional bool is_match_success = 1;
+  optional AvpMatchInfo avp_route_match_info = 2;
+  optional AvpMatchInfo global_route_match_info = 3;
+  optional uint32 avp_idx = 4;
+  optional AvpMatchInfo avp_switch_match_info = 5;
+  optional AvpMatchInfo global_switch_match_info = 6;
+}
+
+// ============================================================================
+// Keyframe Element Types
+// ============================================================================
+
+message KeyframeParkingSpaceProto {
+  repeated deeproute.common.Point3D vertices = 1;
+  optional deeproute.common.Point3D center = 2;
+  optional int32 open_direction = 3;  // perception::ParkingSpace::OpenDirection
+  optional localization.havp_map.ParkingSpaceUsrInfo user_info = 4;
+  optional bool is_default = 5;
+}
+
+message KeyframeSpeedBumpProto {
+  repeated deeproute.common.Point3D points = 1;
+  optional deeproute.common.Point3D center = 2;
+}
+
+message KeyframeRoadJunctionProto {
+  optional int32 id = 1;
+  repeated deeproute.common.Point3D vertexes = 2;
+  optional deeproute.common.Point3D center = 3;
+}
+
+message KeyframeLandMarkProto {
+  optional int32 id = 1;
+  optional deeproute.common.Transformation3 pose = 2;
+  optional int32 type = 3;  // perception::MapElement::Type
+  optional float score = 4;
+}
+
+message SemanticStraightLaneProto {
+  optional int32 id = 1;
+  optional int32 floor_id = 2;
+  repeated deeproute.common.Point3D points = 3;
+  optional deeproute.common.Point2D centroid = 4;
+  optional deeproute.common.Point2D direction = 5;
+  optional bool is_ego_lane = 6;
+}
+
+// ============================================================================
+// Submap Types
+// ============================================================================
+
+message SubmapBaseProto {
+  optional uint64 anchor_id = 1;
+  optional deeproute.common.Transformation3 delta_pose = 2;
+  optional uint64 submap_id = 3;  // 全局唯一的子图 ID，用于稳定引用
+}
+
+// GNSS record for map_range calculation
+message GnssRecordProto {
+  optional double lat = 1;
+  optional double lon = 2;
+  optional double height = 3;
+  optional bool is_outdoor = 4;
+}
+
+message PointCloudSubmapProto {
+  optional SubmapBaseProto base = 1;
+  optional deeproute.drivers.PointCloud2 point_cloud = 2;
+  optional AlignedBox3d sensing_pose_bound_box = 3;
+  optional AlignedBox2d point_cloud_bound_box = 4;
+  optional OddRange keyframe_odd_type = 5;
+  optional int32 floor_id = 6;
+  optional bool is_on_slope = 7;
+  repeated GnssRecordProto gnss_records = 8;  // For map_range calculation
+}
+
+message ParkingSpaceSubmapProto {
+  optional SubmapBaseProto base = 1;
+  repeated localization.havp_map.HAVPParkingSpace parking_spaces = 2;
+  optional int32 floor_id = 3;
+  optional bool is_on_slope = 4;
+}
+
+message SpeedBumpSubmapProto {
+  optional SubmapBaseProto base = 1;
+  repeated KeyframeSpeedBumpProto speed_bumps = 2;
+}
+
+message RoadJunctionSubmapProto {
+  optional SubmapBaseProto base = 1;
+  repeated KeyframeRoadJunctionProto road_junctions = 2;
+}
+
+message GateSubmapProto {
+  optional SubmapBaseProto base = 1;
+  repeated deeproute.common.Point3D gates = 2;
+}
+
+message SemanticLaneSubmapProto {
+  optional SubmapBaseProto base = 1;
+  repeated SemanticStraightLaneProto straight_lanes = 2;
+}
+
+message SemanticBoundaryProto {
+  optional deeproute.drivers.PointCloud2 lane_boundary_pointcloud = 1;
+  optional deeproute.drivers.PointCloud2 parking_space_boundary_pointcloud = 2;
+  optional deeproute.drivers.PointCloud2 obstacle_boundary_pointcloud = 3;
+}
+
+message SemanticPointCloudSubmapProto {
+  optional SubmapBaseProto base = 1;
+  optional SemanticBoundaryProto semantic_boundary = 2;
+  optional double semantic_area = 3;
+  optional double perception_area = 4;
+  repeated deeproute.common.Transformation3 track_poses = 5;
+}
+
+message TrackPoseSubmapProto {
+  optional SubmapBaseProto base = 1;
+  repeated deeproute.common.Transformation3 track_poses = 2;
+  optional AlignedBox3d sensing_pose_bound_box = 3;
+}
+
+message LandMarkSubmapProto {
+  optional SubmapBaseProto base = 1;
+  repeated KeyframeLandMarkProto land_marks = 2;
+}
+
+message LinkJunctionSubmapProto {
+  optional SubmapBaseProto base = 1;
+  optional uint64 junction_id = 2;  // Associated Link Junction id
+}
+
+// ============================================================================
+// Constraints
+// ============================================================================
+
+message AnchorIdProto {
+  optional uint64 trajectory = 1;
+  optional uint64 anchor = 2;
+}
+
+message AnchorConstraintProto {
+  optional AnchorIdProto anchor_i = 1;
+  optional AnchorIdProto anchor_j = 2;
+  optional deeproute.common.Transformation3 delta_pose = 3;
+}
+
+// ============================================================================
+// Trajectory
+// ============================================================================
+
+message AnchorProto {
+  optional int32 floor_id = 1;
+  optional OddRange odd_type = 2;
+  optional deeproute.common.Transformation3 pose = 3;
+}
+
+message TrajectoryProto {
+  optional uint64 trajectory_id = 1;
+  repeated AnchorProto anchors = 2;
+  repeated AnchorConstraintProto constraints = 3;
+  repeated PointCloudSubmapProto pointcloud_submaps = 4;
+  repeated ParkingSpaceSubmapProto parking_space_submaps = 5;
+  repeated SpeedBumpSubmapProto speed_bump_submaps = 6;
+  repeated RoadJunctionSubmapProto road_junction_submaps = 7;
+  repeated GateSubmapProto gate_submaps = 8;
+  repeated SemanticLaneSubmapProto semantic_lane_submaps = 9;
+  repeated SemanticPointCloudSubmapProto semantic_pointcloud_submaps = 10;
+  repeated TrackPoseSubmapProto track_pose_submaps = 11;
+  repeated LandMarkSubmapProto land_mark_submaps = 12;
+  repeated LinkJunctionSubmapProto link_junction_submaps = 13;
+}
+
+// ============================================================================
+// Global Parking Space Info
+// ============================================================================
+
+message KeyframeParkingSpaceIndexInfoProto {
+  optional int32 keyframe_id = 1;  // 保留：向后兼容旧地图
+  optional localization.havp_map.HAVPParkingSpace parking_space = 2;
+  optional uint64 submap_id = 3;   // 稳定的子图 ID，优先使用
+}
+
+message GlobalMapParkingSpaceInfoProto {
+  optional int32 parking_space_id = 1;
+  optional localization.havp_map.HAVPParkingSpace parking_space = 2;
+  repeated KeyframeParkingSpaceIndexInfoProto all_parking_space_observations = 3;
+}
+
+message FloorParkingSpaceMapProto {
+  optional int32 floor_id = 1;
+  repeated GlobalMapParkingSpaceInfoProto parking_space_infos = 2;
+}
+
+
+// ============================================================================
+// ActiveMap
+// ============================================================================
+
+message ActiveMapProto {
+  optional uint64 map_id = 1;
+  optional float map_resolution = 2;
+  optional deeproute.map.ProjectionPoint origin = 3;
+  repeated TrajectoryProto trajectories = 4;
+  reserved 5;  // deprecated: constraints moved to TrajectoryProto
+  repeated FloorParkingSpaceMapProto parking_space_global_map = 6;
+  repeated LinkJunction link_junctions = 7;
+  repeated LinkData link_datas = 8;
 }

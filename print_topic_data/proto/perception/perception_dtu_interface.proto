@@ -45,6 +45,15 @@ message StartUserDefineParkingRequest {
 
 message StopUserDefineParkingRequest {}
 
+message SetEtcSwitchRequest {
+  enum ETCSwitchConfig {
+    UNKNOWN = 0;
+    ETC = 1;
+    MANUAL = 2;
+  }
+  optional ETCSwitchConfig etc_switch_config = 1;
+}
+
 // topic: /perception/dtu_request
 message PerceptionRequest {
   optional string id = 1;
@@ -64,6 +73,7 @@ message PerceptionRequest {
     StopRADSRequest stop_rads_request = 14; // stop rads, only send once
     StartUserDefineParkingRequest start_user_define_parking_request = 15;
     StopUserDefineParkingRequest stop_user_define_parking_request = 16;
+    SetEtcSwitchRequest set_etc_switch_request = 17;
   }
 }
 

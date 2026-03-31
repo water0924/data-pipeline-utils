@@ -1,0 +1,13 @@
+syntax = "proto2";
+
+package deeproute.mcu_log_adapter;
+
+message McuLog {
+  optional uint64 timestamp = 1;
+  optional string module_name = 2;
+  optional bytes data = 3;
+}
+
+message McuLogArray {
+  repeated McuLog mcu_logs = 1;
+}

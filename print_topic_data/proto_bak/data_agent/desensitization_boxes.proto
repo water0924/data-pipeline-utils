@@ -1,0 +1,24 @@
+syntax = "proto2";
+
+package deeproute.data_agent;
+
+message ImageDesensitizationBox {
+  optional int32 x_begin = 1;
+  optional int32 x_end = 2;
+  optional int32 y_begin = 3;
+  optional int32 y_end = 4;
+}
+
+message ImageDesensitizationBoxes {
+  optional string topic = 1;
+  optional uint64 sequence_num = 2;
+  optional uint64 source_timestamp =
+      3;  // Comes from church OnboardHeader. In nanoseconds.
+  repeated ImageDesensitizationBox boxes = 4;
+  optional int32 img_w = 5;
+  optional int32 img_h = 6;
+}
+
+message DesensitizationBoxes {
+  repeated ImageDesensitizationBoxes image_boxes = 1;
+}

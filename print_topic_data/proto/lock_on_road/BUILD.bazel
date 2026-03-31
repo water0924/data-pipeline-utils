@@ -13,6 +13,7 @@ proto_library(
         "//proto/common:geometry_proto",
         "//proto/drivers/gnss:ins_proto",
         "//proto/map:sd_map_proto",
+        "//proto/map:parking_map_common_proto",
     ],
     strip_import_prefix = "/proto/",
 )

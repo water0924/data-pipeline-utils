@@ -1,0 +1,621 @@
+syntax = "proto3";
+
+package dr.blc;
+
+import "drapi/operation_status.proto";
+import "lock_on_road/lock_on_road.proto";
+import "drapi/gwm_hut_notification.proto";
+import "drapi/business_info.proto";
+
+/**
+请注意:
+1. proto3 不能直接引用proto2的枚举,内部枚举类型直接用string打印enum名称
+*/
+
+// blc debug相关的信息
+// topic : /blc/debug_info
+message BlcDebugInfo {
+  NavigationNotify navigation = 1;      //导航相关信息
+  SpeedLimitInfo speed_limit_info = 2;  //限速相关信息
+  Lanechange lane_change = 3; //变道相关信息  
+  SnowyDayModeInfo snow_day= 4; //雪天模式
+  ParkingDebugInfo parking_info = 5; // 泊车相关信息
+  HAVPEndToEndDebugInfo havp_e2e_info = 6;
+  HandsOffInfo hands_off_info = 7;
+  LSSDebugInfo lss_debug_info = 8;
+}
+
+message SpeedLimitInfo {
+  bool use_model_speed = 1;  //是否使用模型限速  
+  repeated dr.business_info.BlcSpeedLimitStrategy strategy = 2; //当前blc限速策略
+  int32 static_strategy_type = 20; //deeproute.routing.NavigationInfoForVisualize.StaticStrategyType
+  int32 scene_strategy_type = 21; //deeproute.routing.NavigationInfoForVisualize.SceneStrategyType    
+}
+
+message Lanechange {
+  bool force_lane_change = 1;  //是否允许非强制变道，true, 允许非强制变道，false 不允许非强制变道
+}
+
+message SnowyDayModeInfo {
+  bool is_active = 1; //雪天模式是否生效，true, 雪天模式生效中，false, 不处于雪天模式
+  bool is_snow = 2; //是否道路积雪
+}
+
+// blc接收map/hut导航相关信息的所有业务逻辑处理的关联数据
+message NavigationNotify {
+  uint64 timestamp_ms = 1;  // 时间戳
+  dr.operationstatus.NCAPassiveReason nca_passive_reason =
+      2;                               // nca抑制/失效状态时赋值
+  PreviewCommandInfo preview_cmd = 3;  // 预览接口(get path)
+  ExecuteCommandInfo execute_cmd = 4;  // 开始导航接口(start navigation)
+  RealTimeNavigationStatus realtime_navi = 5;  // hut实时导航状态接口
+  LockOnRoadStatus lor_status = 6;             // lock on road相关信息
+  OddInfo odd_info = 7;  // odd信息,受限于vis显示篇幅,暂不提供
+}
+
+// 预览接口相关信息
+message PreviewCommandInfo {
+  map<string, string> attrs = 1;
+  /* attrs信息记录如下:
+    CommandRequestId: request id
+    PreviewErrCode: 接口错误码
+    PreviewErrMsg: 接口错误信息
+    StartPreviewTime: 预览开始时间
+    EndPreviewTime: 预览结束时间
+    HasPreview: 是否预览过,仅用于判断是否发起过预览请求
+    IsAmapNavigation: 是否是高德(异端图)导航
+    PathCount: 预览路径的数量
+    PathIds:  预览路径的id
+    StartPoint: 下导航起点位置
+    EndPoint: 下导航终点位置
+    DynamicStaticOdd: dynamic odd开关
+    RoiOdd: roi odd开关
+    NeedRetry: 是否需要重试
+    IsHut: 是否是hut导航
+  */
+}
+
+// 开始导航接口相关信息
+message ExecuteCommandInfo {
+  map<string, string> attrs = 1;
+  /* attrs信息记录如下:
+    CommandRequestId : request id
+    ExecuteErrCode : 接口错误码
+    ExecuteErrMsg : 接口错误信息
+    StartExecuteTime : 开始导航开始时间
+    EndExecuteTime : 开始导航结束时间
+    HasExecute : 是否开始导航,仅用于判断是否发起过开始导航请求
+    PathId : 开始导航的路径id
+    StartPoint : 开始导航起点位置
+    EndPoint : 开始导航终点位置
+    ExecuteRequestSource: 请求导航的触发源VLA...其他
+  */
+}
+
+message RealTimeNavigationStatus {
+  map<string, string> attrs = 1;
+  /*attrs信息记录如下:
+    UpdateTime :
+      实时导航状态时间戳(Gwm协议中并未提供,此时间为收到实时导航状态信息时的canbus时间戳,可用于判断是否丢失消息)
+    PathId : 导航路径ID
+    NavigationStatus : hut 导航状态
+    IsInited : 是否收到了第一帧消息
+    IsLost : 是否丢失实时导航消息
+  */
+}
+
+message LockOnRoadStatus {
+  map<string, string> attrs = 1;
+  /*attrs信息记录如下:
+    Status : lock on road导航状态
+    RequestId : lor 当前路线对应的request id
+    GnssType : gnss状态
+  */
+}
+
+message OddInfo {
+  map<string, string> attrs = 1;
+  /*attrs信息记录如下:
+    DestinationRemainM : 到分段终点的距离
+    OddType : odd数组中的第0个odd类型
+    DisToOddStart : 到odd起点的距离
+    DisToOddEnd : 到odd终点的距离
+    AreaType : AreaType : area数组中的第0个area类型
+    DisToAreaStart : 到area起点的距离
+    DisToAreaEnd : 到area终点的距离
+    CurRoadClass : 当前roadclass
+    NextRoadClass : 下一个roadclass
+    NextRoadClassRemainM : 到下一个roadclass的距离
+  */
+}
+
+enum ParkingBLCMRMStatus {
+  STATE_INITIAL  = 0;
+  STATE_DECELERATE = 1;
+  STATE_HOLD = 2;
+  STATE_P_GEAR_AFTER_HOLD = 3;
+  STATE_P_GEAR = 4;
+  STATE_FINISH = 5;
+  STATE_MRM_FAILED = 6;
+  STATE_MRM_ACTIVE = 7;
+  STATE_LAST_EPB = 8;
+}
+
+
+// GLAPAStateContext 对应的proto消息
+message GLAPAStateContextInfo {
+  uint64 last_mirror_open_time = 1;
+  string wisdom_type = 2;  // WisdomParkType enum
+  bool is_park_out = 3;
+  int32 park_id_first = 4;   // std::pair<int, int> park_ids_ 的第一个值
+  int32 park_id_second = 5;  // std::pair<int, int> park_ids_ 的第二个值
+  int32 avm_recommend_park_id = 6;
+  repeated int32 once_voice = 7;  // std::unordered_set<int> once_voice
+  bool is_park_out_quit = 8;
+  dr.operationstatus.APAStatus before_search_suspend_apa_status = 9;
+}
+
+message HUTOutParkingDirectionLogicInfo {
+  repeated string out_dir = 1;  // deeproute.planning.interface.APAOutParkingDirection enum
+  string user_selected_outparking_direction = 2;  // deeproute.planning.interface.APAOutParkingDirection enum
+  string last_selected_outparking_direction = 3;  // deeproute.planning.interface.APAOutParkingDirection enum
+  string last_valid_selected_direction = 4;  // deeproute.planning.interface.APAOutParkingDirection enum
+  int64 outparking_direction_disappear_timepoint_ms = 5;
+  // OutParkingHUTSignalInfo hut_info = 2;
+}
+
+// GWMAPAContext 对应的proto消息
+message GWMAPAContextInfo {
+  HUTOutParkingDirectionLogicInfo hut_out_parking_direction_logic = 1;
+}
+
+// APAStateContext 对应的proto消息
+message APAStateContextInfo {
+  string park_type = 1;
+  double speed = 2;
+  int32 hut_avm_slot_id = 3;
+  uint64 avm_select_slot_id_time = 4;
+  dr.operationstatus.APAStatusReason search_exit_reason = 5;
+  dr.operationstatus.APAStatusReason search_suspend_reason = 6;
+  dr.operationstatus.APAStatusReason active_suspend_reason = 7;
+  string parking_space_info = 8;
+  string parking_info = 9;
+  string search_sts_info = 10;
+  string realtime_parking_space = 11;
+  string search_parkspace_mode = 12;
+  string apa_active_reason = 13;
+  bool need_wait_move_cmd = 14;
+  bool ignore_fault_test = 15;
+  bool planning_p_gear_received = 16;
+  bool planning_cancel_parking_response_received = 17;
+  int64 parking_request_send_time = 18;
+  int64 preplan_request_send_time = 19;
+  int64 cancel_parking_request_send_time = 20;
+  int64 assist_screen_exit_time = 21;
+  int64 brake_override_standstill_time = 22;
+  int64 planning_collision_warning_time = 23;
+  bool is_planning_parking_blocked = 24;
+  string planing_block_type = 25;
+  bool is_app_paused = 26;
+  string suggest_out_parking_info = 27;
+  string last_fault_remind = 28;
+  bool in_parking_space = 29;
+  string suggest_out_id = 30;
+  string head_tail_parkin_mode = 31;
+  bool routing_auto_active_apa = 32;
+  bool in_cancel_parking_progress = 33;
+  int32 hut_select_parkingspace_number = 34;
+  int32 hut_select_parkingspace_id = 35;
+  uint64 pnc_start_lat_handshake_time_ms = 36;
+  bool is_auto_outparking_opened = 37;
+  bool is_rpa_epb_error_st = 38;
+  bool system_failure_detected_by_blc = 39;
+  bool is_directly_quit = 40;
+  bool parking_failed_by_paused_timeout = 41;
+  bool parking_failed_by_system_failure = 42;
+  dr.operationstatus.APAStatusReason failed_reason = 43;
+  bool canbus_apa_active_timeout_quit = 44;
+  bool is_app_active_outparking = 45;
+  bool is_used_first_exit_p_gear = 46;
+  bool planning_request_to_fold_mirror = 47;
+  bool is_in_preparking_active = 48;
+  bool vpa_learning_apa_failed_by_user_override = 49;
+  bool is_lateral_handshake_successed = 50;
+  bool is_planning_lateral_send = 51;
+  bool is_exit_parkout_when_car_slip = 52;
+  string user_select_parking_preference_mod = 53;
+  string apa_parking_speed = 54;
+  bool has_quit_epb_intention = 55;
+  bool is_car_enter_auto = 56;
+  bool is_sent_parkout_takeover_warning = 57;
+  uint64 is_sent_parkout_takeover_warning_time = 58;
+  bool is_parkout_takeover_hold = 59;
+  bool is_user_parkout_takeover = 60;
+  string gear_override_gear_position = 61;
+  bool ut_ignore_delay_quit = 62;
+  uint64 quit_p_gear_time = 63;
+  bool is_suspend_processing = 64;
+  bool suspend_emstop_ok = 65;
+  bool mrm_by_blc = 66;
+  string user_intend_gear_position = 67;
+  bool is_user_quit = 68;
+  bool is_custom_parking = 69;
+  bool is_enter_custom_parking_from_outparking = 70;
+  bool is_park_in_trigger_by_rpa_door_close = 71;
+  bool is_park_in_trigger_by_rpa_phone = 72;
+  bool is_rpa_full_posture_parking = 73;
+  bool is_apa_resume_by_rpa = 74;
+  bool is_cold_start_rem_prk_out = 75;
+  bool is_avm_active_apa = 76;
+  int32 mod_dev_sts_info = 77;
+  bool is_rpa_full_post_refresh_resume_timer = 78;
+  int32 rpa_human_min_dis = 79;
+  bool is_custom_parking_space_ok = 80;
+  string custom_adsorption_result = 81;
+  bool is_air_suspension_adjust_down_after_pause = 82;
+  bool have_planning_request_to_fold_mirror = 83;
+  int32 emergency_times = 84;
+}
+
+// RPAStateContext 对应的proto消息
+message RPAStateContextInfo {    
+  message RPATimeoutInfo {
+    int32 key = 1;
+    int32 value = 2;
+  }
+  
+  int64 last_heartbeat_time = 1;
+  bool is_block_by_side_obstacle = 2;
+  string direction = 3;  // dr::command::RPAStraightInOut::Direction enum
+  bool is_gwm_park_choke = 4;
+  string park_type = 5;  // ParkType enum
+  uint64 planning_block_time = 6;
+  bool sys_failed_planning_cancel_response = 7;
+  bool suspended_by_planning_straight_in_out_done = 8;
+  bool suspended_by_straight_obstacle = 9;
+  string park_out_type = 10;  // deeproute::canbus::BLE1_25C::PrkOutModSelRmtType enum
+  string vertical_park_out_type = 11;  // deeproute::canbus::BLE1_25C::PrkOutModSelRmt1Type enum
+  bool rpa_is_in_select_out_parking_mode_page = 12;
+  string direct_inout_available_info = 13;
+  bool init_straight_inout_recevied = 14;
+  bool direct_inout_available_valid = 15;
+  string block_type = 16;
+  bool is_user_suspend = 17;
+  bool is_key_suspend = 18;
+  bool system_failure_detected_by_blc = 19;
+  bool is_directly_quit = 20;
+  bool rpa_slid_sync_received = 21;
+  bool rpa_p_gear_wip = 22;
+  bool rpa_pre_p_gear = 23;
+  int32 vehicle_tail_direction_first = 24;   // std::pair<int, int> vehicle_tail_direction_ 的第一个值
+  int32 vehicle_tail_direction_second = 25;  // std::pair<int, int> vehicle_tail_direction_ 的第二个值
+  bool mirror_opened_enter_select_mode = 26;
+  bool planning_p_gear_received = 27;
+  bool in_cancel_parking_progress = 28;
+  dr.operationstatus.RPAStatusReason rpa_search_exit_reason = 29;
+  dr.operationstatus.RPAStatusReason rpa_parkin_recover_interrupt_reason = 30;
+  bool is_mrm_by_blc = 31;
+  string user_intend_gear_position = 32;  // deeproute.canbus.Chassis.GearPosition enum
+  string current_unmanned_parking_type = 33;  // UnmannedParkingType enum
+  int64 unmanned_parking_suspend_only_by_dynamic_block_time = 34;
+  bool unmanned_parking_suspend_by_key = 35;
+  bool unmanned_parking_resume_by_key_handle = 36;
+  bool unmanned_parking_exit_by_key = 37;
+  int64 last_handle_active_time = 38;
+  int64 last_key_posi_signal_time = 39;
+  repeated RPATimeoutInfo rpa_timeout_time = 40;  // std::map<int, int> rpa_timeout_time_
+  bool quit_by_app = 41;
+  bool planning_rpa_request_send = 42;
+  bool planning_rpa_moving_req_send = 43;
+}
+
+// GLRPAStateContext 对应的proto消息
+message GLRPAStateContextInfo {
+  bool is_quit_from_abort = 1;
+  bool rpa_parkin_app_received = 2;
+  uint64 rpa_app_connect_time = 3;
+  bool need_apply_app = 4;
+  bool select_mode_is_parkin = 5;
+  bool rpa_phone_prkg_in_received = 6;
+  bool rpa_cls_door_prkg_in_received = 7;
+  bool rpa_driver_door_open_to_cls = 8;
+  bool rpa_cls_door_prkg_in_condition_all_satisfied = 9;
+  bool need_stop_request_handshake = 10;
+  bool phone_intervened = 11;
+  bool key_intervened = 12;
+  uint64 rpa_bringup_time = 13;
+  string full_posture_parking_type = 14; // GLRPAStateContext::RPAFullPostureParkingType enum
+}
+
+// RADSStateContext 对应的proto消息
+message RADSStateContextInfo {
+  bool sys_failed_planning_cancel_response = 1;
+  bool into_exit_rads_trans = 2;
+  bool is_directly_quit = 3;
+  bool is_obstacle_blocked = 4;
+  bool is_lsda_blocked = 5;
+  uint64 rads_active_time = 6;
+  bool planning_p_gear_received = 7;
+  bool planning_cancel_parking_response_received = 8;
+  bool localization_rads_mode_notify_enabled = 9;
+  bool system_failure_detected_by_blc = 10;
+  int64 cancel_request_send_time = 11;
+  int64 rads_screen_exit_time = 12;
+  bool is_enter_auto_handshake_timeout = 13;
+  bool is_lsda = 14;
+  bool is_suspend_processing = 15;
+  bool suspend_emstop_ok = 16;
+  bool mrm_by_blc = 17;
+  bool is_user_quit = 18;
+  int64 push_time = 19;
+  int64 last_send_lsda_request_time = 20;
+  int64 last_tba_quit_time = 21;
+  bool tba_available = 22;
+  bool tba_no_path = 23;
+  bool viz_ignore_lsda_available = 24;
+  bool is_tba_no_path_quit = 25;
+  string user_intend_gear_position = 26;  // deeproute.canbus.Chassis.GearPosition enum
+}
+
+// VPAStateContext 对应的proto消息
+message VPAStateContextInfo {
+  
+  message TimeMapInfo {
+    int32 key = 1;
+    int64 value = 2;
+  }
+  
+  bool is_out_learning = 1;
+  bool is_out_routing = 2;
+  string routing_map_info = 3;
+  bool endlearning_to_failure_satisfy = 4;
+  string routing_standby_area = 5;
+  int32 learning_parking_space_id = 6;
+  string semantic_map_path = 7;
+  int64 vpa_suspend_during_time = 8;
+  int64 send_ica_req_time = 9;
+  string routing_exit_info = 10;
+  bool is_parking_failed = 11;
+  bool is_parking_paused = 12;
+  repeated TimeMapInfo time_map = 13;
+  bool is_planning_routing_arrived = 14;
+  string block_type = 15;
+  int64 block_start_time = 16;
+  string vpa_vehicle_signal = 17;
+  string local_error_code = 18;
+  bool function_enable_sts = 19;
+  bool apa_in_activing = 20;
+  bool apa_out_activing = 21;
+  bool is_first_learning = 22;
+  bool is_routing_quit_active_mm = 23;
+  string routing_exit_type = 24;
+  bool is_learning_quit_active_mm = 25;
+  bool satisfied_parking_by_driver = 26;
+  bool vpa_learning_apa_quit_by_user = 27;
+  bool vpa_learning_apa_failed_by_user_override = 28;
+  bool in_exit_pre_mapbuild = 29;
+  bool is_planning_ica_req_sent = 30;
+  bool is_planning_vpa_driving_req_sent = 31;
+  bool vpa_routing_end_target_parkingspace_occupied = 32;
+  string suggest_out_parking_info = 33;
+  bool is_update_map = 34;
+  bool is_planning_in_detour = 35;
+  string select_slot_navigation_result_info = 36;
+  bool in_out_odd_auto_saving_map_proc = 37;
+  bool is_mrm_by_blc = 38;
+  bool is_vpa_map_saving_end = 39;
+  bool is_pre_learning_page = 40;
+  bool is_cancel_cmd = 41;
+  bool is_use_poi_cruise = 42;
+  bool quit_text_send = 43;
+  bool saving_map_received_cancel = 44;
+  bool is_first_send_all_map_pin_info_to_hut = 45;
+  bool is_enter_vpa_apa_out_parking = 46;
+  bool is_navigation_arrived_exiting_premapbuild = 47;
+  uint64 matched_gl_map_id = 48;
+  string learning_map_saving_stage = 49;
+  bool is_vpa_end_to_end_out_park_learning = 50;
+  bool out_learning_satisfied_finished = 51;
+  string learning_info = 52;
+  string routing_info = 53;
+  string navi_info = 54;
+  bool is_enter_end_learning_by_gear_p = 55;
+  bool is_vpa_end_to_end_routing = 56;
+  bool is_vpa_end_to_end_enter_park_routing = 57;
+  bool is_active_out_parking_by_e2e = 58;
+  bool routing_exit_by_nca_active = 59;
+  string vpa_to_nca_matched_map_id = 60;
+  string nca_to_vpa_matched_map_id = 61;
+  double vpa_to_mnca_remain_s = 62;
+  double mnca_to_vpa_remain_s = 63;
+  bool is_nca_active = 64;
+  string e2e_learning_stage = 65;
+  int32 lp_selected_slot_id = 66;
+  bool learning_back_to_standby = 67;
+  bool routing_back_to_standby = 68;
+  bool learning_complete_then_try = 69;
+  bool learning_complete_by_map_deleted = 70;
+  int32 learning_completed_deleted_map_id = 71;
+  uint64 learning_completed_deleted_gl_map_id = 72;
+  int32 routing_suspend_time = 73;
+  bool routing_suspend_processing = 74;
+  bool out_routing_finish_processing = 75;
+  bool is_planning_pre_routing = 76;
+  bool routing_suspend_emstop_ok = 77;
+  bool navigation_rerouting_arrived = 78;
+  string pop_dwm_id_stage = 79;
+  bool is_vpa_routing_parking_user_exit = 80;
+  bool system_failure_quit_to_passive = 81;
+  string saving_type = 82;
+  bool map_card_close_by_user = 83;
+  bool local_view = 84;
+  int32 gl_learning_new_map_id = 85;
+  bool roaming_update_end_point = 86;
+  bool in_start_roam_processing = 87;
+  string sync_stage = 88;
+  int64 start_sync_stage_time = 89;
+  int64 last_end_sync_stage_time = 90;
+  int64 send_remind_text_before_active_time = 91;
+  int64 user_select_target_time = 92;
+  repeated uint64 dhu_sync_map_ids = 93;
+  bool no_sence_learning_satisfied_finished = 94;
+  int64 no_sence_learning_start_time = 95;
+  bool no_sence_learning_need_reenter_parking = 96;
+  bool driver_distraction = 97;
+  bool rain_fall_detect = 98;
+  dr.operationstatus.APAStatusReason apa_active_failed_reason = 99;
+  bool d2d_active_hpa = 100;
+  bool ready_interrupt_by_reach_max_map_number = 101;
+  string gl_vpa_learning_stage = 102;
+  int64 start_map_id_distribution_time = 103;
+  string gl_vpa_learning_cover_map_stage = 104;
+  int64 covered_map_id_confirm_time = 105;
+  int32 learning_in_nosence_parking_failure_slot_id = 106;
+  string pre_map_build_info = 107;
+  string system_failure_policy_after_enter_routing = 108;
+  int64 learning_auto_push_time = 109;
+  int64 routing_auto_push_time = 110;
+  string learning_completed_map_meta_info = 111;
+  string learning_completed_deleted_map_meta_info = 112;
+  string matched_map_meta_info = 113;
+  string routing_active_record = 114;
+  string vpa_report_manager = 115;
+}
+
+// AVMStateContext 对应的proto消息
+message AVMStateContextInfo {
+  bool is_gwm_avm_style_two = 1;
+  bool is_gwm_avm_3d_mode = 2;
+  bool is_gwm_avm_view_soft_swt = 3;
+
+  bool is_slip_with_pdc = 4;
+  bool is_avm_normal_turn_angle = 5;
+  bool timeout_received = 6;
+  bool to_off_received = 7;
+  bool pas_work_cmd = 8;
+  string door_view_type = 9; // DoorViewType
+  bool is_wheel_view = 10;
+  double last_steering_angle = 11;
+  bool in_open_process = 12;
+  bool side_bsd_disp_sts = 13;
+  string avm_coord_matrix_info = 14; // deeproute::avm::AvmCoordMatrixInfo serialized
+  bool pass_side_bsd_disp_sts = 15;
+}
+
+message VPAHUTSignalLogocInfo {
+  int32 index_changed_singal_id = 1;
+  int32 apa_state_changed_singal_id = 2;
+  int32 havp_interfacedisp_signal_id = 3;
+  bool exiting_by_car_not_ready = 4;
+  int32 func_work_sts_setter = 5;
+  int32 interface_dis_setter = 6;
+}
+
+message GWMVPAStateContextInfo {
+  VPAHUTSignalLogocInfo logic_info = 1;
+}
+
+// ParkContext 对应的proto消息
+message ParkContextInfo {
+  string park_switch = 1;  // ParkSwitch enum
+}
+
+message ParkingDebugInfo {
+  ParkingBLCMRMStatus mrm_status = 1; // MRM 状态
+  bool is_need_recom_park_out_dir = 2; // 是否需要推荐泊出方向
+  uint32 rpa_min_human_distance = 3; // 关门泊入最小行人距离
+
+  // apa context
+  GLAPAStateContextInfo gl_apa_state_context = 4;
+  GWMAPAContextInfo gwm_apa_context = 5;
+  APAStateContextInfo apa_state_context = 6;
+
+  // rpa context
+  RPAStateContextInfo rpa_state_context = 7;
+  GLRPAStateContextInfo gl_rpa_state_context = 8;
+
+  // rads context
+  RADSStateContextInfo rads_state_context = 9;
+
+  // vpa context
+  VPAStateContextInfo vpa_state_context = 10;
+  GWMVPAStateContextInfo gwm_vpa_state_context = 11;
+  
+  // avm context
+  AVMStateContextInfo avm_state_context = 12;
+  
+  // park context
+  ParkContextInfo park_context = 13;
+}
+
+message HAVPEndToEndDebugInfo {
+  enum LockOnRoadStrictStatus{
+    NAVI_UNKNOWN = 0;
+    NAVI_NORMAL = 1;
+    NAVI_ABNORMAL = 2;
+  }
+  enum LocalizationEnd2EndStatus {
+    STATUS_UNKNOWN = 0;
+    STATUS_READY = 1;
+    STATUS_NOT_READY = 2;
+  }
+  enum LocalizationMatchingStatus {
+    SEARCHING = 0;
+    MATCHING = 1;
+    MATCHED = 2;
+    NO_MAP = 3;
+    ROUTING_NOT_READY = 4;  // GWM SOP+3 deprecated
+    NEAR_DESTINATION = 5;   // GWM SOP+3 deprecated
+  }
+  enum LockOnRoadStatus {
+    NO_ROUTING = 0;                                // no routing response has received
+    NORMAL = 1;                                    // matching succeeded
+    YAWED = 2;                                     // if trajectory yawed from planned path.
+    PASSOVER = 3;                                  // when vehicle takes a short path, skipping many links
+    GNSS_POSE_INVALID = 4;                         // when gnss pose is invalid, such as all zeros
+  }
+  enum VehicleState {
+    VEHICLE_UNKNOWN = 0;
+    VEHICLE_INDOOR = 1;
+    VEHICLE_OUTDOOR = 2;
+  }
+  enum VPALearningStatusType {
+    STATUS_TYPE_NORMAL = 0;
+    STATUS_TYPE_E2E_IN = 1;
+    STATUS_TYPE_E2E_OUT = 2;
+  }
+  enum VPAE2ELearningStage {
+    VPA_STAGE_NONE = 0;
+    VPA_STAGE_1 = 1;
+    VPA_STAGE_2 = 2;
+    VPA_STAGE_3 = 3;
+  }
+  LockOnRoadStrictStatus lock_on_road_strict_status = 1;
+  LocalizationMatchingStatus localization_matching_status = 2;
+  LocalizationEnd2EndStatus localization_end2end_status = 3;
+  LockOnRoadStatus lock_on_road_status = 4;
+  dr.notification.gwmhut.PopupDisp e2e_popup = 5;
+  VehicleState vehilce_state = 6;
+  VPALearningStatusType learning_status_type = 7;
+  VPAE2ELearningStage learning_stage = 8;
+  double pre_mapping_distance = 9; 
+}
+
+
+message HandsOffInfo {
+  enum HandsOffStatus {
+    HANDS_OFF_UNKNOWN = 0;
+    HANDS_ON = 1;
+    HANDS_OFF = 2;
+  }
+  HandsOffStatus hands_off_status = 1; 
+}
+
+message LSSDebugInfo {
+  // lane info
+  bool is_left_boundary_real = 1;
+  bool is_right_boundary_real = 2;
+  double left_boundary_distance = 3;
+  double right_boundary_distance = 4;
+
+}

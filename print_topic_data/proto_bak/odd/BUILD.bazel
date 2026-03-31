@@ -1,0 +1,58 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "odd_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["odd.proto"],
+    deps = [
+        "//proto/graph_match:graph_matching_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "odd_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":odd_proto",
+    ],
+)
+
+python_proto_library(
+    name = "odd_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":odd_proto",
+    ],
+)
+
+proto_library(
+    name = "gwm_odd_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["gwm_odd.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "gwm_odd_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":gwm_odd_proto",
+    ],
+)
+
+python_proto_library(
+    name = "gwm_odd_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":gwm_odd_proto",
+    ],
+)
+

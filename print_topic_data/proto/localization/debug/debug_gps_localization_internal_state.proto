@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package deeproute.proto;
+
+message GpsLocalizationInternalState {
+  sfixed64 internal_state_time = 1;
+  // Filter internal state
+  repeated double filter_state = 2;      // 29
+  repeated double filter_state_cov = 3;  // 29 x 29
+  // SINS internal state
+  repeated double inertial_position = 4;  // BLH
+  repeated double inertial_velocity = 5;
+  repeated double inertial_attitude = 6;
+  repeated double gyro_bias = 7;
+  repeated double acc_bias = 8;
+
+  sfixed64 last_gnss_position_time = 9;
+  sfixed64 last_gnss_velocity_time = 10;
+  bool need_reconvergence = 11;
+}
+
+
+
+

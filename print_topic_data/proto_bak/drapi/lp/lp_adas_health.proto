@@ -1,0 +1,8 @@
+syntax = "proto3";
+package lp.hmi;
+
+
+// /dr/state_machine/sensor_error
+message AdasHealthData {
+    bytes adas_health_data = 1;
+}

@@ -1,0 +1,86 @@
+syntax = "proto2";
+package smart.mcu;
+message SmartOperationStatus {
+  required AccStateType acc_state = 1;
+  required LccStateType lcc_state = 2;
+  required NzpStateType nzp_state = 3;
+  required LpStateType lp_state = 4;
+}
+
+enum LpStateType {
+  Initial = 0;
+  Off = 1;
+  //地图管理
+  LpMapMangement = 2;
+  //LP预泊车(执行器握手)
+  LpParkingInPreactive = 3;
+  //巡航后的泊车（R档后泊车）
+  LpParkingInProcess = 4;
+  //记忆泊车结束
+  LpFunctionCompleted = 5;
+  //Abort
+  LpAbort = 6;
+  //Suspend
+  LpSuspend = 7;
+  //本地没有学习路径信号
+  LpStandbyNoPath = 8;
+  //本地有学习路径，但该停车场没有学习路径（满足ODD）
+  LpStandbyNoPresentPath = 9;
+  //本地有学习路径，但不满足ODD
+  LpStandbyPathNoODD = 10;
+  //本地有学习路径，满足ODD
+  LpStandbyPathODD = 11;
+  //学习完成界面
+  LpStandbyCompleteLearning = 12;
+  //路线学习界面
+  LpMapLearning = 13;
+  //进入APA界面
+  LpMapLearningAPAParking = 14;
+  //建图界面（learing）
+  LpMapBuilding = 15;
+  //巡航界面
+  LpCruising = 16;
+  //LP中泊车界面（车位被占，与4互斥）
+  LpCruisingPark = 17;
+  //学习apa中断界面
+  LpMapLearningAPAPSuspend = 18;
+  //学习apa终止界面
+  LpMapLearningAPAAbort = 19;
+  //巡航中apa复用上面状态？
+}
+
+enum AccStateType {
+  AccStateInitial = 0;
+  AccStateOff = 1;
+  AccStateStandby = 2;
+  AccStateActive = 3;
+  AccStateOverrideLon = 4;
+  AccStateOverrideLat = 5;
+  AccStateStandWait = 6;
+  AccStatePending = 7;
+  AccStateFailure = 8;
+}
+
+enum LccStateType {
+  LccStateInitial = 0;
+  LccStateOff = 1;
+  LccStateStandby = 2;
+  LccStateActive = 3;
+  LccStateOverrideLon = 4;
+  LccStateOverrideLat = 5;
+  LccStateStandWait = 6;
+  LccStatePending = 7;
+  LccStateFailure = 8;
+}
+
+enum NzpStateType {
+  NzpStateInitial = 0;
+  NzpStateOff = 1;
+  NzpStateStandby = 2;
+  NzpStateActive = 3;
+  NzpStateOverrideLon = 4;
+  NzpStateOverrideLat = 5;
+  NzpStateStandWait = 6;
+  NzpStatePending = 7;
+  NzpStateFailure = 8;
+}

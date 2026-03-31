@@ -22,6 +22,15 @@ enum UltrasonicType {
   M7_BOSCH = 4;
   GWM_C01 = 5;
   SMART_HY11_BOSCH = 6;
+
+  // Format: <vehicle_vendor>_<uss_vendor>
+  GWM_BOSCH = 7;    // PDC dbc version < 4.3
+  GWM_BOSCH_2 = 8;  // PDC dbc version >= 4.3
+  GWM_TUNGTHIH = 9;
+  SMART_BOSCH = 10;
+  LP_TUNGTHIH = 11;
+  LP_FORVISION = 12;
+  GL_LONGHORN = 13;
 }
 message UltrasonicState {
   enum WorkStsType {
@@ -126,6 +135,11 @@ message UltrasonicObject {
   optional uint32 echo_peak = 20;
   optional FrequencyMode frequency_mode = 21 [default = STD];
   repeated MultiEcho multi_echo = 22;
+
+  // When using 'multi_echo', an empty place can also cause 'multi_echo' to be
+  // empty, so use 'multi_echo_enable' to determine whether 'multi_echo' is
+  // enabled.
+  optional bool multi_echo_enable = 23 [default = false];
 }
 
 message UltrasonicObstacle {

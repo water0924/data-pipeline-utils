@@ -150,6 +150,18 @@ message UltrasonicState {
     EXT_GENERAL_ERROR = 7;
   }
 
+  enum SoundIndcn {
+    TONE_0_NO_WARNING = 0;
+    TONE_1_LONG_BEEP = 1;
+    TONE_2_15HZ = 2;
+    TONE_3_3HZ = 3;
+  }
+
+  enum AutoModSts {
+    NO_AVAILABLE = 0;
+    AVAILABLE = 1;
+  }
+
   optional FPASWorkSts fpas_worksts = 1;
   optional RPASWorkSts rpas_worksts = 2;
   optional APASysWorkSts apasys_worksts = 3;
@@ -165,6 +177,9 @@ message UltrasonicState {
   optional bool RPAS_RLMiddlSnsrFailSts = 12;
   optional bool RPAS_RRMiddlSnsrFailSts = 13;
   optional bool RPAS_RRCornrSnsrFailSts = 14;
+  optional AutoModSts fpas_auto_mod_sts = 15;
+  optional SoundIndcn fpas_sound_indcn = 16;
+  optional SoundIndcn rpas_sound_indcn = 17;
 }
 
 message UltrasonicObjectArray {

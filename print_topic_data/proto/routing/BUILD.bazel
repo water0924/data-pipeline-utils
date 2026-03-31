@@ -19,7 +19,7 @@ proto_library(
         "//proto/odd:odd_proto",
         "//proto/map:map_common_proto",
         "//proto/map:common_type_proto",
-        "//proto/routing:collection_trigger_rule_proto",
+        "//proto/map:vpa_mapping_proto",
     ],
     strip_import_prefix = "/proto/",
 )

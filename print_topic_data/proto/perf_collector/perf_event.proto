@@ -173,6 +173,22 @@ message SysTrace {
   optional uint32 mem_file = 41;
   optional uint32 mem_used = 42;
   optional uint32 arena_max_alloc = 43;
+  // qnx 专用字段
+  optional uint32 qnx_gpu_read_bw = 44;
+  optional uint32 qnx_gpu_write_bw = 45;
+  optional uint32 qnx_cdsp0_load = 46;
+  optional uint32 qnx_cdsp0_read_bw = 47;
+  optional uint32 qnx_cdsp0_write_bw = 48;
+  optional uint32 qnx_cdsp0_hvx_load = 49;
+  optional uint32 qnx_cdsp0_hmx_load = 50;
+  optional uint32 qnx_cdsp1_load = 51;
+  optional uint32 qnx_cdsp1_read_bw = 52;
+  optional uint32 qnx_cdsp1_write_bw = 53;
+  optional uint32 qnx_cdsp1_hvx_load = 54;
+  optional uint32 qnx_cdsp1_hmx_load = 55;
+  optional uint32 qnx_ddr_total_bw = 56;
+  optional uint32 qnx_ddr_read_bw = 57;
+  optional uint32 qnx_ddr_write_bw = 58;
 }
 
 // 对应于Event id PERF_TRACE_TASK
@@ -326,18 +342,20 @@ message CpuCoreTrace {
 message DiskStat {
   optional string device_name = 1;  // block device name in /dev/,such as vblkdev0
   optional uint32 rps = 2;          // read requests per second of the block device
-  optional uint32 read_kb = 3;      // read bytes per second of the block device
+  optional uint32 read_kb = 3;      // read KB per second of the block device
   optional uint32 rrqm = 4;         // read requests merged or combined per second of the block device
-  optional uint32 r_await = 5;      // read average wait time for I/O operations
+  optional float r_await = 5;       // read average wait time for I/O operations (ms)
   optional uint32 wps = 6;          // write requests per second of the block device 
-  optional uint32 write_kb = 7;     // write bytes per second of the block device
+  optional uint32 write_kb = 7;     // write KB per second of the block device
   optional uint32 wrqm = 8;         // write requests merged or combined per second of the block device
-  optional uint32 w_await = 9;      // write average wait time for I/O operations
-  optional uint32 avgrq = 10;       // the average size of each I/O request in sectors.
-  optional uint32 avgqu = 11;       // the average number of requests waiting in the queue for processing.
-  optional uint32 await = 12;       // average wait time for I/O operations
-  optional float svctm = 13;        // service time for one I/O operation
-  optional float util = 14;         // the percentage of time that a block device (like a disk) is busy processing I/O requests.
+  optional float w_await = 9;       // write average wait time for I/O operations (ms)
+  optional uint32 avgrq = 10;       // the average size of each I/O request in KB
+  optional float avgqu = 11;        // the average queue length (aqu-sz)
+  optional float await = 12;        // average wait time for I/O operations (ms)
+  optional float svctm = 13;        // service time for one I/O operation (ms)
+  optional float util = 14;         // the percentage of time that a block device (like a disk) is busy processing I/O requests
+  optional float wrqm_p = 15;       // percentage of write requests merged (%wrqm)
+  optional uint32 rw_kb = 16;       // total read+write KB per second
 }
 
 // 对应于Event id PERF_TRACE_CPUCORES,用来上报每个core的资源占用信息

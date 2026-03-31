@@ -1,0 +1,102 @@
+syntax = "proto2";
+
+package deeproute.esa;
+
+import "common/header.proto";
+
+enum ESAState {
+  ESA_OFF = 0;
+  ESA_FAILURE = 1;
+  ESA_PASSIVE = 2;
+  ESA_STANDBY = 3;
+  ESA_ACTIVE = 4;
+}
+
+enum AESState {
+  AES_OFF = 0;
+  AES_FAILURE = 1;
+  AES_PASSIVE = 2;
+  AES_STANDBY = 3;
+  AES_ACTIVE = 4;
+}
+
+enum State {
+  OFF = 0;
+  FAILURE = 1;
+  PASSIVE = 2;
+  STANDBY = 3;
+  ACTIVE = 4;
+}
+
+enum ESAAvoidanceSide {
+  UNKOWN_SIDE = 0;
+  LEFT_SIDE = 1;
+  RIGHT_SIDE = 2;
+}
+
+enum LkaRequestClassify {
+  LKA_REQUEST_UNKNOWN = 0;
+  LKA_REQUEST_S = 1;
+  LKA_REQUEST_RE = 2;
+}
+
+enum LkaFinishState {
+  LKA_FINISH_UNKNOWN = 0;
+  LKA_FINISH_SUCCEEDED = 1;
+  LKA_FINISH_FAILED = 2;
+  LKA_FINISH_BEYOND_LATE_INTERVENTION_LINE = 3;
+}
+
+enum ElkRequestClassify {
+  ELK_REQUEST_UNKNOWN = 0;
+  ELK_REQUEST_S = 1;
+  ELK_REQUEST_RE = 2;
+  ELK_REQUEST_O = 3;
+  ELK_REQUEST_ICS = 4;
+  ELK_REQUEST_GO = 5;
+  ELK_REQUEST_VRU = 6;
+}
+
+enum ElkFinishState {
+  ELK_FINISH_UNKNOWN = 0;
+  ELK_FINISH_SUCCEEDED = 1;
+  ELK_FINISH_FAILED = 2;
+}
+
+enum LssDrivingOnLine {
+  UNKNOWN_DRIVING_ON_LINE = 0;
+  LDW_DRIVING_ON_LINE = 1;
+  LKA_DRIVING_ON_LINE = 2;
+  ELK_DRIVING_ON_LINE = 3;
+}
+
+message StateInfo {
+  optional ESAState esa_state = 1;
+  optional ESAAvoidanceSide esa_avoidance_side = 2;
+  optional AESState aes_state = 3;
+  optional ESAAvoidanceSide aes_avoidance_side = 4;
+  optional State elk_state = 5;
+  optional ESAAvoidanceSide elk_avoidance_side = 6;
+  optional ElkRequestClassify elk_request_classify = 7;
+  optional ElkFinishState elk_finish_state = 8;
+  optional State lka_state = 9;
+  optional ESAAvoidanceSide lka_avoidance_side = 10;
+  optional LkaRequestClassify lka_request_classify = 11;
+  optional LkaFinishState lka_finish_state = 12;
+  optional State ldw_state = 13;
+  optional ESAAvoidanceSide ldw_avoidance_side = 14;
+  optional State lcp_state = 15;
+  optional ESAAvoidanceSide lcp_avoidance_side = 16;
+  optional State nas_state = 17;
+  optional ESAAvoidanceSide nas_avoidance_side = 18;
+  repeated LssDrivingOnLine lss_driving_on_lines = 19;
+}
+
+// topic: /esa/esa_state
+message StateWrapper {
+  optional deeproute.common.Header header = 1;
+  optional StateInfo state_info = 2;
+  optional int32 blc_msg_id = 3;  // for safety policy
+  // publish time (us)
+  optional int64 time_measurement = 4; 
+}

@@ -404,14 +404,6 @@ import "canbus/gwm_chassis_detail.proto";  // keep
     GwmChassisDetail gwm = 6;  // keep
 """,
         },
-        ("@deeproute_build_tools//:TANK-ALL_setting") : {
-            "@_IMPORT_CHASSIS_DETAIL_PROTO_@" : """
-import "canbus/gwm_all_chassis_detail.proto";
-""",
-            "@_CHASSIS_DETAIL_MESSAGE_TYPE_@" : """
-        deeproute.canbus.gwm.all.GwmAllChassisDetail gwm_all = 13;
-""",
-        },
         ("@deeproute_build_tools//:GWM-ORINY-SHARE_setting") : {
             "@_IMPORT_CHASSIS_DETAIL_PROTO_@" : """
 import "canbus/gwm_all_chassis_detail.proto";
@@ -454,6 +446,16 @@ import "canbus/lp_v35x_chassis_detail.proto";
         deeproute.canbus.lp.v35x.LpV35xChassisDetail lp_v35x = 15;
 """,
         },
+        ("@deeproute_build_tools//:LP8650-OS-SHARE_setting") : {
+            "@_IMPORT_CHASSIS_DETAIL_PROTO_@" : """
+import "canbus/lp_v35_chassis_detail.proto";
+import "canbus/lp_v35x_chassis_detail.proto";
+""",
+            "@_CHASSIS_DETAIL_MESSAGE_TYPE_@" : """
+        deeproute.canbus.lp.v35.LpV35ChassisDetail lp_v35 = 14;
+        deeproute.canbus.lp.v35x.LpV35xChassisDetail lp_v35x = 15;
+""",
+        },
     })
 )
 
@@ -476,9 +478,6 @@ proto_library(
         ) : [
             "//proto/canbus:gwm_chassis_detail_proto",  # keep
         ],
-        ("@deeproute_build_tools//:TANK-ALL_setting") : [
-            "//proto/canbus:gwm_all_chassis_detail_proto",
-        ],
         ("@deeproute_build_tools//:GWM-ORINY-SHARE_setting") : [
             "//proto/canbus:gwm_all_chassis_detail_proto",
         ],
@@ -492,6 +491,10 @@ proto_library(
             "//proto/canbus:hy11_chassis_detail_proto", # keep
         ],
         ("@deeproute_build_tools//:LP8650-V1-SHARE_setting", "@deeproute_build_tools//:LP8797-V1-SHARE_setting") : [
+            "//proto/canbus:lp_v35_chassis_detail_proto", # keep
+            "//proto/canbus:lp_v35x_chassis_detail_proto", # keep            
+        ],
+        ("@deeproute_build_tools//:LP8650-OS-SHARE_setting") : [
             "//proto/canbus:lp_v35_chassis_detail_proto", # keep
             "//proto/canbus:lp_v35x_chassis_detail_proto", # keep            
         ],

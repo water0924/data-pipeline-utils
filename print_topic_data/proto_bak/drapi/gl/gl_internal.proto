@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package gl.internal;
+
+message BasePoint {
+  double x = 1;
+  double y = 2;
+  double z = 3;
+}
+
+message BaseSize {
+  double height = 1;
+  double width = 2;
+  double length = 3;
+}
+
+message Parkingspace {
+  repeated BasePoint origin_points = 1; // 原始坐标点
+  repeated BasePoint coord_points = 2; // 坐标转换后的点
+  bool is_lateral_reverse = 3; // 水平车位是否修改感知原始点序
+  int32 routing_perception_id = 4; // 巡航感知原始车位id
+  bool is_custom_vertical_reverse = 5;   // 自定义垂直车位是否需反向开口
+}
+
+message Obstacle {
+  BasePoint origin_position = 1;
+  BaseSize size = 2;
+  double origin_angle = 3;  // 原始弧度值
+  double coord_angle = 4;   // 转换后的弧度值
+  BasePoint coord_position = 5;
+  enum ColorReason {
+    DEFAULT_COLOR = 0;
+    ONE_BAR_RULE = 1;
+    TWO_BAR_RULE = 2;
+    THREE_BAR_RULE = 3;
+    ACTIVE_SAFETY = 4;
+    PNC_LAT_OFFSET = 5; // pnc横向避让的障碍物
+    PNC_LANECHANGE_WAIT = 6; // pnc变道等待的障碍物
+  }
+  ColorReason color_reason = 6;
+}
+

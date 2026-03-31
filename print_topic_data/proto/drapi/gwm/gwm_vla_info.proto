@@ -29,11 +29,12 @@ message VLAReq {
     VLA_steering_setting = 4;     //转向设置
     VLA_line_change_setting = 5;  //变道设置
     VLA_stop_driving = 6;         //停车操作
+    VLA_longctrl_setting  =  7; //纵向控制设置
     //201~400 泊车
-    VLA_INTENT_SEARCH_PARKING_SPACE = 201;     //寻找车位
-    VLA_INTENT_PARK_INTO_PARKING_SPACE = 202;  //泊入车位
-    VLA_INTENT_PARK_OUT_PARKING_SPACE = 203;   //泊出车位
-    VLA_intent_no_display = 10000;             //无效值，默认值
+    VLA_INTENT_PARK_SEARCH = 201; //寻找车位
+    VLA_INTENT_PARK_IN =     202; //泊入
+    VLA_INTENT_PARK_OUT =    203; //泊出
+    VLA_intent_no_display =  10000; //无效值，默认值
   }
 }
 
@@ -72,11 +73,22 @@ message VLASlots {  //信息槽
     DteeringType_left = 1;            //左转
     DteeringType_straight = 2;        //直行
     DteeringType_u_turn = 3;          //掉头
+    DteeringType_cancel=4;            //取消
     DteeringType_no_display = 10000;  //无效值，默认值
   }
   SteeringPosition steering_position = 8;  //前方/当前所在路型
   enum SteeringPosition {
-    SteeringPosition_position = 0;        //路口
+    SteeringPosition_position=0;//前方路口
+    Intersection_ID_1=1;//路口1
+    Intersection_ID_2=2;//路口2
+    Intersection_ID_3=3;//路口3
+    Intersection_ID_4=4;//路口4
+    Intersection_ID_5=5;//路口5
+    Intersection_ID_6=6;//路口6
+    Intersection_ID_7=7;//路口7
+    Intersection_ID_8=8;//路口8
+    Intersection_ID_9=9;//路口9
+    Intersection_ID_10=10;//路口10
     SteeringPosition_no_display = 10000;  //无效值，默认值
   }
   LineChangeType line_change_type = 9;  //变道类型
@@ -87,6 +99,8 @@ message VLASlots {  //信息槽
     LineChangeType_avoid = 3;                   //避让，绕障
     LineChangeType_stay_away = 4;               //远离
     LineChangeType_drive_out_from_buslane = 5;  //公交车道驶出
+    LineChangeType_overtake=6;                  //超车
+    LineChangeType_target_lane=7;               //具体要去的目标车道
     LineChangeType_no_display = 10000;          //无效值，默认值
   }
   string avoid_object =
@@ -94,6 +108,8 @@ message VLASlots {  //信息槽
   StopDrivingType stop_driving_type = 11;  //停车操作动作
   enum StopDrivingType {
     StopDrivingType_PullOver = 0;        //靠边
+    StopDrivingType_PullOverCancel=1;//取消靠边停车
+    StopDrivingType_Behind=2;//去xx的后面停车
     StopDrivingType_no_display = 10000;  //无效值，默认值
   }
   string stop_driving_position = 12;           //把车停到xxx地方。座舱默认值发NA
@@ -103,34 +119,42 @@ message VLASlots {  //信息槽
     NarrowRoadMeeting_no_display = 10000;  //无效值，默认值
   }
   ContinueAndStop continue_and_stop = 14;  //继续行驶
-  enum ContinueAndStop {
-    continue_driving = 0;                //继续行驶
-    ContinueAndStop_no_display = 10000;  //无效值，默认值
+  enum ContinueAndStop{
+    continue_driving=0;//继续行驶
+    ContinueAndStop_no_display = 10000; //无效值，默认值
   }
   int32 forward_driving_distance = 15;  //往前开xx米（语音侧只识别整数米，最大1000米）。座舱默认值-10000
   string overtake_object =
       16;  //针对前方的大车、锥桶、车辆、行人、自行车、两轮车、三轮车等进行超车。超车的障碍物类型座舱直接发文字不需要枚举每个类型.座舱默认值发NA
-  TargetLaneChange target_lane_change = 17;  //指定的目标变道车道，去/取消/记忆
-  message TargetLaneChange {
-    TargetLaneChangeID target_lane_change_ID = 1;  //具体的目标变道车道
-    enum TargetLaneChangeID {
-      target_lane_change_ID_left1 = 0; target_lane_change_ID_left2 = 1; target_lane_change_ID_left3 = 2;
-      target_lane_change_ID_left4 = 3;
-      target_lane_change_ID_right1 = 4;
-      target_lane_change_ID_right2 = 5;
-      target_lane_change_ID_right3 = 6;
-      target_lane_change_ID_right4 = 7;
-      target_lane_change_ID_middle = 8;          //中间的车道
-      target_lane_change_ID_no_display = 10000;  //无效值，默认值
+  TargetLaneChange target_lane_change=17;//指定的目标变道车道，去/取消/记忆
+  message TargetLaneChange{
+    TargetLaneChangeID target_lane_change_ID=1;//具体的目标变道车道
+    enum TargetLaneChangeID{
+      target_lane_change_ID_left1=0;
+      target_lane_change_ID_left2=1;
+      target_lane_change_ID_left3=2;
+      target_lane_change_ID_left4=3;
+      target_lane_change_ID_right1=4;
+      target_lane_change_ID_right2=5;
+      target_lane_change_ID_right3=6;
+      target_lane_change_ID_right4=7;
+      target_lane_change_ID_middle=8;//中间的车道
+      target_lane_change_artificial_passage=9;//人工通道
+      target_lane_change_ETC=10;//ETC通道
+      target_lane_change_tide_lane=11;//潮汐车道
+      target_lane_change_reversible_lane=12;//可变车道
+      target_lane_change_main_road=13;//主路
+      target_lane_change_side_road=14;//辅路
+      target_lane_change_ID_no_display = 10000; //无效值，默认值
     }
-    TargetLaneChangeAction target_lane_change_action = 2;  //针对具体的目标车道要执行的动作
+    TargetLaneChangeAction target_lane_change_action=2;//针对具体的目标车道要执行的动作
   }
-  enum TargetLaneChangeAction {
-    target_lane_change_action_forward = 0;  //去指定车道行驶
-    target_lane_change_action_cancel = 1;   //取消指定车道行驶
-    target_lane_change_action_memory = 2;  //记忆车道（比如：以后这个路段就在左一行驶，智驾后端处理记忆）
-    target_lane_change_action_memorycancel = 3;       //取消记忆车道
-    target_lane_change_action_ID_no_display = 10000;  //无效值，默认值
+  enum TargetLaneChangeAction{
+    target_lane_change_action_forward=0;//去指定车道行驶
+    target_lane_change_action_cancel=1;//取消指定车道行驶
+    target_lane_change_action_memory=2;//记忆车道（比如：以后这个路段就在左一行驶，智驾后端处理记忆）
+    target_lane_change_action_memorycancel=3;//取消记忆车道
+    target_lane_change_action_ID_no_display = 10000; //无效值，默认值
   }
   AccelerationTypeMemory acceleration_type_memory = 18;  //该路段加速减速并记忆
   enum AccelerationTypeMemory {
@@ -144,38 +168,60 @@ message VLASlots {  //信息槽
     cuising_speed_value_memory_cancel = 1;          //该poi点取消原本的记忆车速值
     cuising_speed_value_memory_no_display = 10000;  //无效值，默认值
   }
-
+  int32 backward_driving_distance=20; //后退xx米（语音侧只识别整数米，最大1000米）。座舱默认值-10000
+  ADASStatus adas_status=21;//模糊的辅助驾驶开启指令
+  enum ADASStatus{
+    ADASStatus_no_display=0;//默认值
+    ADASStatus_open=1;//打开辅助驾驶
+  }
+  MemorySpeedMode memory_speed_mode=22;//记忆车速模式
+  enum MemorySpeedMode{
+    MemorySpeedMode_nodisplay=0;//默认值
+    MemorySpeedMode_detailed=1;//精细化车速记忆
+  }
+  string drive_off_from=23;//从公交车道|环岛|潮汐车道|可变车道|主路|辅路 驶出（具体需要驶出的环岛路口ID结合路口信息字段一起发送），默认值" "
   // 201~400 泊车
-  string parking_area = 201;  // 举例：如"A区"~"Z区","T1"~"T10"。座舱默认值发NA
-  int32 parking_floor =
-      202;  // 范围-10~10， 举例：语音识别用户B1/负1层/地下1层等后转成数值-1。座舱默认值发-10000
-  ParkingSpace parking_space = 203;
-  enum ParkingSpace {
+  VAVPStatus vavp_status=201;//漫游泊车功能的开启/关闭意图
+  enum VAVPStatus{
+    VAVPSTATUS_OPEN = 0;
+    VAVPSTATUS_CLOSE = 2;
+    VAVPSTATUS_no_display = 10000; //无效值，默认值
+  }
+  string parking_area = 202; // 举例：如"A区"~"Z区","T1"~"T10"。座舱默认值发NA
+  int32 parking_floor = 203; // 范围-10~10， 举例：语音识别用户B1/负1层/地下1层等后转成数值-1。座舱默认值发-10000
+  ParkingPosition parking_position = 204;
+  enum ParkingPosition {
     // 0~19 车位类型
-    PARKING_SPACE_GENERAL = 0;  //普通车位
-    PARKING_SPACE_CHARGE = 1;   //充电车位
+    PARKING_POSITION_UNKNOW = 0;
+    PARKING_POSITION_GENERAL = 1;  //普通车位
+    PARKING_POSITION_DEFAULT = 2;  //默认车位
+    PARKING_POSITION_CHARGE = 3;  //充电车位
+    PARKING_POSITION_LIFT = 4;  //电梯车位
+    PARKING_POSITION_STAIR = 5;  //楼梯车位
+    PARKING_POSITION_MARKET = 6;  //超市车位
+    PARKING_POSITION_ROAM= 7;  //漫游车位
 
     // 20~39 车位编号
-    PARKING_SPACE_NUM_1 = 20;          //1号车位
-    PARKING_SPACE_NUM_2 = 21;          //2号车位
-    PARKING_SPACE_NUM_3 = 22;          //3号车位
-    PARKING_SPACE_NUM_4 = 23;          //4号车位
-    PARKING_SPACE_NUM_5 = 24;          //5号车位
-    PARKING_SPACE_NUM_6 = 25;          //6号车位
-    PARKING_SPACE_NUM_7 = 26;          //7号车位
-    PARKING_SPACE_NUM_8 = 27;          //8号车位
-    PARKING_SPACE_NUM_9 = 28;          //9号车位
-    PARKING_SPACE_NUM_10 = 29;         //10号车位
-    PARKING_SPACE_NUM_11 = 30;         //11号车位
-    PARKING_SPACE_NUM_12 = 31;         //12号车位
-    PARKING_SPACE_NUM_13 = 32;         //13号车位
-    PARKING_SPACE_NUM_14 = 33;         //14号车位
-    PARKING_SPACE_no_display = 10000;  //无效值，默认值
+    PARKING_POSITION_NUM_1 = 20;  //1号车位
+    PARKING_POSITION_NUM_2 = 21;  //2号车位
+    PARKING_POSITION_NUM_3 = 22;  //3号车位
+    PARKING_POSITION_NUM_4 = 23;  //4号车位
+    PARKING_POSITION_NUM_5 = 24;  //5号车位
+    PARKING_POSITION_NUM_6 = 25;  //6号车位
+    PARKING_POSITION_NUM_7 = 26;  //7号车位
+    PARKING_POSITION_NUM_8 = 27;  //8号车位
+    PARKING_POSITION_NUM_9 = 28;  //9号车位
+    PARKING_POSITION_NUM_10 = 29;  //10号车位
+    PARKING_POSITION_NUM_11 = 30;  //11号车位
+    PARKING_POSITION_NUM_12 = 31;  //12号车位
+    PARKING_POSITION_NUM_13 = 32;  //13号车位
+    PARKING_POSITION_NUM_14 = 33;  //14号车位
+
+    // 40~49 指定位置
+    PARKING_POSITION_EXIT = 40;  //出口
+
+    PARKING_POSITION_no_display = 10000; //无效值，默认值
   }
-  int32 pull_out_direction =
-      204;  // 0:无方向（用户未明确说泊出方向）  1：向前  2：向后 3：左侧  4：右侧。座舱默认值-10000
-  int32 pull_out_position =
-      205;  // 0:车位（只泊出到车位）   1：停车场/出口（泊出车位并驶出停车场）。座舱默认值-10000
 }
 
 /*

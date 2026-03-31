@@ -320,10 +320,20 @@ proto_library(
 )
 
 proto_library(
+    name = "parking_map_common_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["parking_map_common.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+proto_library(
     name = "vpa_mapping_proto",
     visibility = ["//visibility:public"],
     srcs = ["vpa_mapping.proto"],
     deps = [
+        ":parking_map_common_proto",
         "//proto/map:sd_map_proto",
         "//proto/map:projection_proto",
         "//proto/common:geometry_proto",
@@ -378,6 +388,22 @@ python_proto_library(
 )
 
 cc_proto_library(
+    name = "parking_map_common_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":parking_map_common_proto",
+    ],
+)
+
+python_proto_library(
+    name = "parking_map_common_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":parking_map_common_proto",
+    ],
+)
+
+cc_proto_library(
     name = "vpa_mapping_proto_cc",
     visibility = ["//visibility:public"],
     deps = [
@@ -416,5 +442,56 @@ python_proto_library(
     visibility = ["//visibility:public"],
     protos = [
         ":vla_command_proto",
+    ],
+)
+
+proto_library(
+    name = "map_engine_setting_cmd_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["map_engine_setting_cmd.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+proto_library(
+    name = "vpa_navigation_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["vpa_navigation.proto"],
+    deps = [
+        "//proto/map:vla_command_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "map_engine_setting_cmd_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":map_engine_setting_cmd_proto",
+    ],
+)
+
+cc_proto_library(
+    name = "vpa_navigation_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":vpa_navigation_proto",
+    ],
+)
+
+python_proto_library(
+    name = "map_engine_setting_cmd_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":map_engine_setting_cmd_proto",
+    ],
+)
+
+python_proto_library(
+    name = "vpa_navigation_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":vpa_navigation_proto",
     ],
 )

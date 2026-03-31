@@ -49,6 +49,7 @@ message DSMResetEvent {
 
 message EntityAbnormalNotify {
   repeated EntityAbnormalInfo abnormal_infos = 1;
+  string alert_info = 2; // HMI 显示
 }
 
 message EntityAbnormalInfo {

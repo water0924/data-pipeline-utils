@@ -1005,6 +1005,10 @@ message SlotInfo {
   SubObjInfo slot_obj_left = 13;      // 车位左侧障碍物信息
   SubObjInfo slot_obj_right = 14;     // 车位右侧障碍物信息
   SubObjInfo slot_obj_behind = 15;    // 车位后方障碍物信息
+  float ego_centre_x = 16; // 车位中心x坐标
+  float ego_centre_y = 17; // 车位中心y坐标
+  float ego_slot_angle = 18; // 自车后轴法线与“自车与车位中心连线”的夹角
+  float slot_slope = 19; // 车辆坡度%
 }
 
 // 车辆位置信息
@@ -1270,6 +1274,18 @@ message SearchStatus {
   int32 selectable_space_num = 4;   // 搜索到可泊车位数量
 }
 
+// 暂停信息
+message SuspendInfo {
+  string pause_time = 1;      // 暂停时间点
+  string pause_counter = 2;   // 暂停次数
+}
+
+// 恢复信息
+message ResumeInfo {
+  string restore_time = 1;   // 暂停恢复时间点
+  string resume_time = 2;     // 恢复泊车时间点
+}
+
 // 功能运行时元数据
 message ParkingStatus {
   enum ParkOutInterv {
@@ -1283,7 +1299,6 @@ message ParkingStatus {
     UNFOLD = 1;
     AUTOFOLD = 2;
   }
-  FailOrSuspendReason suspend_info = 1;    // 暂停信息
   int32 round_num = 2;             // 揉库次数
   int32 working_time_used = 3;     // 泊车时长（单位：秒）
   int32 working_time_excluding_suspend = 4; // 泊车时长（扣除暂停时间）
@@ -1481,6 +1496,7 @@ message NewAPAReport {
     APA_INTERVENTION = 9; // 泊车用户干预
     APA_AFTER_INTER = 10; // 泊车用户干预后行为
     APA_SPECIAL_SCENARIO = 11; // 特殊场景埋点
+    SUSPEND_RESUME = 12; // 暂停恢复(from SUSPEND)
   }
   enum AfterIntervAction {
     AFTER_INTERV_ACTION_UNKNOW = 0;
@@ -1510,6 +1526,8 @@ message NewAPAReport {
   ReportStatus report_status = 13;      // 事件上报状态
   AfterIntervAction after_interv = 14;  // 用户干预后行为
   SpecialType special_type = 15;        // 特殊场景类型
+  SuspendInfo suspend_info = 16;        // 暂停信息（暂停触发时使用）
+  ResumeInfo resume_info = 17;          // 恢复信息（暂停恢复时使用）
 }
 
 message RSPASuspendReason {

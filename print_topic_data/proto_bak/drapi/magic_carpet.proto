@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package dr.blc;
+
+message MagicCarpetObject {
+    enum MagicCarpetObjectType {
+      UNKNOWN = 0;       // 未知类型
+      WELL_TOP = 1;      // 井盖
+      SPEED_BUMP = 2;    // 减速带
+      RESERVED_3 = 3;    // 预留
+      RESERVED_4 = 4;    // 预留
+      RESERVED_5 = 5;    // 预留
+      RESERVED_6 = 6;    // 预留
+      RESERVED_7 = 7;    // 预留
+      RESERVED_8 = 8;    // 预留
+      RESERVED_9 = 9;    // 预留
+      RESERVED_10 = 10;  // 预留
+    }
+
+    MagicCarpetObjectType type = 1;         // 目标物类型
+    float elevation_cm = 2;                 // 目标物高程，单位cm
+    float longitude_distance_m = 3;         // 目标物最近距离，单位m  
+  }
+
+// topic : /blc/magic_carpet
+message BlcMagicCarpet {
+    double sensor_timestamp = 1;                      // 传感器时间戳
+    uint32 road_scene = 2;                            // 道路场景编号
+    uint32 system_status = 3;                         // 系统状态
+
+    repeated float left_front_elevation_points_cm = 4;     // 左轮高程曲线，单位cm
+    repeated float right_front_elevation_points_cm = 5;    // 右轮高程曲线，单位cm
+    repeated MagicCarpetObject left_front_objects = 6;     // 左轮轨迹相交目标物,由近及远
+    repeated MagicCarpetObject right_front_objects = 7;    // 右轮轨迹相交目标物,由近及远
+    repeated float left_front_shock_elevation_cm = 8;      // 左轮shock点高程，单位cm
+    repeated float left_front_distance_m = 9;              // 左轮shock点距离，单位m
+    repeated float right_front_shock_elevation_cm = 10;    // 右轮shock点高程，单位cm
+    repeated float right_front_distance_m = 11;            // 右轮shock点距离，单位m
+}

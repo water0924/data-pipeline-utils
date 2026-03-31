@@ -1,0 +1,108 @@
+syntax = "proto2";
+package deeproute.drivers;
+
+// IMURAW
+message M20ImuRaw {
+  optional uint64 timeStampUs = 1;
+  optional uint32 start_flag1 = 2;
+  optional uint32 start_flag2 = 3;
+  optional uint32 protocol_type = 4;
+  optional uint32 message_length = 5;
+  optional uint32 message_id = 6;
+  optional uint32 gps_week1 = 7;
+  optional uint32 gps_millisecs = 8;
+  optional uint32 imu_info = 9;
+  optional uint32 imu_type = 10;
+  optional uint32 gps_week2 = 11;
+  optional double gps_seconds = 12;
+  optional uint32 imu_status = 13;
+  optional int32 z_acce = 14;
+  optional int32 y_acce = 15;
+  optional int32 x_acce = 16;
+  optional int32 z_gyro = 17;
+  optional int32 y_gyro = 18;
+  optional int32 x_gyro = 19;
+  optional uint32 crc = 20;
+}
+
+message M20ImuRawArray {
+  //@C_Mark@3@;
+  repeated M20ImuRaw data = 1;
+}
+
+
+// GNSS_POSE
+message M20BestGnssPos {
+  optional uint64 timeStampUs = 1;
+  optional uint32 start_flag1 = 2;
+  optional uint32 start_flag2 = 3;
+  optional uint32 protocol_type = 4;
+  optional uint32 header_length = 5;
+  optional uint32 message_id = 6;
+  optional uint32 message_type = 7;
+  optional uint32 port_address = 8;
+  optional uint32 message_length = 9;
+  optional uint32 sequence = 10;
+  optional uint32 idle_time = 11;
+  optional uint32 time_status = 12;
+  optional uint32 gps_week = 13;
+  optional uint32 gps_millisecs = 14;
+  optional uint32 receiver_status = 15;
+  optional uint32 reserved1 = 16;
+  optional uint32 receiver_software_version = 17;
+  optional uint32 solution_status = 18;
+  optional uint32 position_type = 19;
+  optional double latitude = 20;
+  optional double longitude = 21;
+  optional double height = 22;
+  optional float undulation = 23;
+  optional uint32 datum_id = 24;
+  optional float std_latitude = 25;
+  optional float std_longitude = 26;
+  optional float std_height = 27;
+  //@C_Mark@4@;
+  optional bytes base_station_id = 28;
+  optional float differential_age = 29;
+  optional float solution_age = 30;
+  optional uint32 number_satellites = 31;
+  optional uint32 number_solution_used_satellites = 32;
+  optional uint32 number_solution_used_satellites_on_L1_B1_E1_signals = 33;
+  optional uint32 number_solution_used_satellites_on_multi_freq_signals = 34;
+  optional uint32 reserved2 = 35;
+  optional uint32 extended_solution_status = 36;
+  optional uint32 signals_mask_Galileo_and_BeiDou = 37;
+  optional uint32 signals_mask_Gps_and_Glonass = 38;
+  optional uint32 crc = 39;
+}
+
+// GNSS_VELO
+message M20BestGnssVel {
+  optional uint64 timeStampUs = 1;
+  optional uint32 start_flag1 = 2;
+  optional uint32 start_flag2 = 3;
+  optional uint32 protocol_type = 4;
+  optional uint32 header_length = 5;
+  optional uint32 message_id = 6;
+  optional uint32 message_type = 7;
+  optional uint32 port_address = 8;
+  optional uint32 message_length = 9;
+  optional uint32 sequence = 10;
+  optional uint32 idle_time = 11;
+  optional uint32 time_status = 12;
+  optional uint32 gps_week = 13;
+  optional uint32 gps_millisecs = 14;
+
+  optional uint32 receiver_status = 15;
+  optional uint32 reserved1 = 16;
+  optional uint32 receiver_software_version = 17;
+
+  optional uint32 solution_status = 18;
+  optional uint32 velocity_type = 19;
+  optional float measure_latency = 20;
+  optional float differential_age = 21;
+  optional double horizontal_speed = 22;  
+  optional double track_over_ground = 23;
+  optional double vertical_speed = 24;
+  optional float reserved2 = 25;
+  optional uint32 crc = 26;
+}

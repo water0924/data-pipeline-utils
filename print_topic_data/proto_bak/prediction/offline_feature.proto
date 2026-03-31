@@ -1,0 +1,34 @@
+syntax = "proto2";
+
+import "common/module_event.proto";
+import "common/geometry.proto";
+
+package deeproute.prediction;
+
+message LaneFeatureInfo {
+    optional int64 lane_id = 1;
+    optional double lane_s = 2;
+    optional double lane_l = 3;
+    optional double angle_diff = 4;
+    optional double dist_to_left_boundary = 5;
+    optional double dist_to_right_boundary = 6;
+    optional double lane_heading = 7;
+}
+
+message ObstacleOffLineFeature {
+    optional int64 id = 1; // obstacle ID
+    optional LaneFeatureInfo current_lane_feature = 2; // farseer lane feature
+    repeated dr.common.Event event_tags = 3;
+}
+
+message OfflineFeature {
+    repeated ObstacleOffLineFeature obstacle_offline_feature = 1; // obstacle offline feature
+
+    // feature map info
+    optional int64 feature_map_timestamp = 2;
+    // camera pos global
+    // translation: x y z
+    optional common.Point3D feature_map_pos = 3;
+    // Roll Pitch Yaw
+    optional common.Point3D feature_map_roll_pitch_yaw = 4;
+}

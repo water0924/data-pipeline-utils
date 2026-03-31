@@ -4,24 +4,39 @@ package lp.adas;
 
 // 电源信号状态
 message AdasPowerStatus {
-  bool on1b_active = 1;  // true: ON1B ON  false: ON1B OFF
-  bool on2a_active = 2;  // true: ON2A ON  false: ON2A OFF
-  bool on3_active = 3;   // true: ON3 ON   false: ON3 OFF
+  bool on1b_active = 1; // true: ON1B ON  false: ON1B OFF
+  bool on2a_active = 2; // true: ON2A ON  false: ON2A OFF
+  bool on3_active = 3;  // true: ON3 ON   false: ON3 OFF
 }
 
 // ADAS状态机枚举
 enum AdasSystemState {
   ADAS_SYS_UNKNOWN = 0;
-  ADAS_SYS_NORMAL = 1;       // 正常运行状态
-  ADAS_SYS_LOW_POWER = 2;    // 低功耗模式
-  ADAS_SYS_CALIBRATION = 3;  // 标定模式
-  ADAS_SYS_OTA = 4;          // 升级状态
-  ADAS_SYS_POWER_OFF = 5;    // 系统关机
+  ADAS_SYS_NORMAL = 1;      // 正常运行状态
+  ADAS_SYS_LOW_POWER = 2;   // 低功耗模式
+  ADAS_SYS_CALIBRATION = 3; // 标定模式
+  ADAS_SYS_OTA = 4;         // 升级状态
+  ADAS_SYS_POWER_OFF = 5;   // 系统关机
 }
 
 // ADAS 系统状态MSG
-// topic: /leap/state_machine/adas_system_msg
+// topic: leap->dr, /leap/state_machine/adas_system_msg
 message AdasSystemMsg {
   AdasSystemState current_state = 1;
   AdasPowerStatus power_status = 2;
+}
+
+enum AdasSystemStateAck {
+  ADAS_SYS_ACK_UNKNOWN = 0;
+  ADAS_SYS_ACK_RECEIVED = 1;    // 已收到状态切换请求（立即应答）
+  ADAS_SYS_ACK_IN_PROGRESS = 2; // 正在执行中（可选，用于中间状态）
+  ADAS_SYS_ACK_COMPLETED = 3; // 下电/状态切换完成（完成应答）
+  ADAS_SYS_ACK_FAILED = 4;    // 执行失败（可选，用于错误处理）
+}
+
+// ADAS 系统状态请求响应
+// topic: dr->leap, /leap/state_machine/adas_system_rsp
+message AdasSystemMsgRsp {
+  AdasSystemState current_state = 1;
+  AdasSystemStateAck ack = 2;
 }

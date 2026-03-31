@@ -208,3 +208,23 @@ python_proto_library(
   protos = [":lp_perception_light_proto"],
   visibility = ["//visibility:public"],
 )
+
+proto_library(
+  name = "lp_edr_status_proto",
+  srcs = ["lp_edr_status.proto"],
+  deps = [":basic_common_proto"],
+  strip_import_prefix = "/proto/",
+  visibility = ["//visibility:public"],
+)
+
+cc_proto_library(
+  name = "lp_edr_status_proto_cc",
+  deps = [":lp_edr_status_proto"],
+  visibility = ["//visibility:public"],
+)
+
+python_proto_library(
+  name = "lp_edr_status_proto_py",
+  protos = [":lp_edr_status_proto"],
+  visibility = ["//visibility:public"],
+)

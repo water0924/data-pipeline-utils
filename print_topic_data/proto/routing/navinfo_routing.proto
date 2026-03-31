@@ -5,13 +5,31 @@ package deeproute.navinfo;
 import "common/geometry.proto";
 import "map/routing.proto";
 import "map/sd_map.proto";
+import "map/vpa_mapping.proto";
 import "graph_match/graph_matching.proto";
 import "routing/local_routing.proto";
 import "routing/cloud_task.proto";
 import "odd/odd.proto";
 import "map/map_common.proto";
 import "map/common_type.proto";
-import "routing/collection_trigger_rule.proto";
+
+enum LinkType {
+  LINK_TYPE_NORMAL = 0;
+  LINK_TYPE_PARKING = 1;
+}
+
+enum RoutingResponseType {
+  ROUTING_RESPONSE_TYPE_NORMAL = 0;
+  ROUTING_RESPONSE_TYPE_PARKING_IN = 1;
+  ROUTING_RESPONSE_TYPE_PARKING_OUT = 2;
+  ROUTING_RESPONSE_TYPE_PARKING_INNER = 3;
+}
+
+message ParkingOverlapInfo {
+  optional bool is_parking_overlap = 1;
+  optional double start_offset = 2;
+  optional double end_offset = 3;
+}
 
 message FeatureInfo {
   optional string feature_id = 1;
@@ -39,6 +57,19 @@ enum ShapePointType {
   SHPOS_FIVE_DIGIT_AND_SHAPE_POINT = 2;
 }
 
+message ParkingSpaceInfo {
+  optional int32 start_parking_space_id = 1;
+  repeated common.PointLLH start_parking_space_geom = 5;
+  optional sd_map.ParkingSpace.ParkingSpaceDirection start_parking_space_direction = 7;
+
+  optional int32 end_parking_space_id = 2;
+  repeated common.PointLLH end_parking_space_geom = 6;
+  optional sd_map.ParkingSpace.ParkingSpaceDirection end_parking_space_direction = 8;
+
+  optional int32 start_parking_lot_id = 3;
+  optional int32 end_parking_lot_id = 4;
+}
+
 message SDRoutingResponse {
   optional deeproute.map.RoutePlanningType route_planning_type = 1000;
 
@@ -48,6 +79,7 @@ message SDRoutingResponse {
 
   // One request may correspond to multiple responses
   optional int32 response_id = 8;
+
   optional deeproute.map.RoutingRequest request = 4;
   optional int32 segmented_route_num = 5;
 
@@ -58,10 +90,17 @@ message SDRoutingResponse {
   // local parking map id near trip end
   // source: RoutingRequest.local_map_id
   optional string local_map_id = 10;
+  optional string cloud_map_id = 17;
 
   optional RoutingVersion routing_version = 11;
 
   optional ShapePointType shape_point_type = 12;
+
+  optional string begin_parking_request_id = 13;
+  optional string end_parking_request_id = 14;
+
+  optional RoutingResponseType routing_response_type = 15;
+  optional ParkingSpaceInfo parking_space_info = 16;
 }
 
 message NaviHead {
@@ -224,6 +263,17 @@ message TrafficLightSceneInfo {
   optional uint32 out_link_offset = 2;
 }
 
+// 经验限速未生效原因枚举
+enum ExperienceSpeedLimitDisabledReason {
+  EXP_SPD_DISABLED_UNKNOWN = 0;           // 未知原因
+  EXP_SPD_DISABLED_INSUFFICIENT_COVERAGE = 1;  // 覆盖度不足
+  EXP_SPD_DISABLED_ROAD_PRIORITY = 2;        // 道路等级不满足
+  EXP_SPD_DISABLED_ROAD_FORMWAY = 3;    // 道路属性不满足
+  EXP_SPD_DISABLED_NIGHT_SCENE = 4;       // 夜间场景
+  EXP_SPD_DISABLED_LARGE_CURVE_NO_SPEED_UP = 5;  // 大曲率场景不允许提速
+  EXP_SPD_DISABLED_NO_SLOW_DOWN = 6;   // 不允许降速
+}
+
 message SpeedLimitInfo {
   repeated int32 spd_limit_dis = 1;
   repeated int32 spd_limit_spl = 2;
@@ -240,6 +290,14 @@ message SpeedLimitInfo {
       spd_scene_strategy_type = 10;
   optional int32 turn_radius = 11;
   optional bool is_large_curvature = 12;
+  // 经验限速生效时的调试信息
+  // 分组索引值
+  optional uint64 exp_spd_group_index = 13;
+  // 经验限速平均值 (km/h)
+  optional float exp_spd_average = 14;
+
+  // 经验限速未生效原因
+  optional ExperienceSpeedLimitDisabledReason exp_spd_disabled_reason = 15;
 }
 
 message StaticRoutingInfo {
@@ -486,6 +544,15 @@ message Segment {
 
   // SD道路场景
   repeated deeproute.map.LinkSdScene sd_scene_list = 59;
+
+  optional deeproute.sd_map.ParkingLinkAttr parking_attr = 60;
+
+  optional LinkType link_type = 61;
+
+  optional ParkingOverlapInfo parking_overlap_info = 62;
+
+  // 路段名称
+  optional string name = 63;
 }
 
 message SpeedLimitConfig {
@@ -541,4 +608,18 @@ message Route {
 
 message Result {
   optional Route route = 1;
+}
+
+message ParkingLinkMatchInfo {
+  enum ParkingType {
+    PARKING_TYPE_UNKNOWN = 0;
+    PARKING_TYPE_IN = 1;
+    PARKING_TYPE_OUT = 2;
+    PARKING_TYPE_INNER = 3;
+  }
+  optional ParkingType parking_type = 4;
+
+  optional string global_routing_request_id = 1;
+  optional deeproute.map.vpa.AvpRoutingMatchResult parking_routing_match_result = 2;
+  optional SDRoutingResponse parking_routing_response = 3;
 }

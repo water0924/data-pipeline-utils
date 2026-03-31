@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package deeproute.localization.message;
+import "drivers/gnss/ins.proto";
+import "map/parking_map_common.proto";
+import "localization/localization_external_events.proto";
+
+enum MatchStatus {
+  MATCHED_IN_PARKINGLOT = 0;
+  NOT_MATCHED_IN_PARKINGLOT = 1;
+  OUTOF_PARKINGLOT = 2;
+}
+
+message LocalizationStatus {
+  MatchStatus match_status = 1;
+  string map_id = 2;
+  int32 floor_id = 3;
+  deeproute.drivers.gnss.SensorsIns sensor_ins = 4;
+  deeproute.map.vpa.ParkingMapSource map_source = 5;
+  deeproute.localization.event.EnvironmentStatusEvent environment_status = 6;
+}

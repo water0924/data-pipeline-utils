@@ -18,6 +18,29 @@ message CameraDebugInfo {
   optional int32 is_traffic_light = 8 [default = 0];
 }
 
+message TrafficSignLaneInfo {
+  enum LaneDirection {
+    LEFT = 0;
+    RIGHT = 1;
+    STRA = 2;
+    U_TURN = 3;
+    LEFT_AND_STRA = 4;
+    RIGHT_AND_STRA = 5;
+    LEFT_AND_U_TURN = 6;
+    RIGHT_AND_U_TURN = 7;
+    STRA_AND_U_TURN = 8;
+    LEFT_AND_RIGHT = 9;
+    LEFT_AND_RIGHT_AND_STRA = 10;
+    UNKNOWN = 11;
+    UNPASSABLE = 12;
+    BROKEN = 13;
+  };
+  optional LaneDirection lane_direction = 1; // 车道行驶方向. 
+  optional bool is_mutable_lane = 2; // 是否可变车道.
+  optional int32 matched_lane_id = 3; // rasmap匹配车道对应的lane id.
+  optional int32 obs_id = 4; // lane来源的障碍物id.
+}
+
 message TrafficSignInfo {
   enum SignType {
     SIGN_BAN_CAR = 0;
@@ -139,6 +162,20 @@ message TrafficSignInfo {
     SIGN_TB_LIGHT_ON = 116;
     SIGN_TB_MANUAL = 117;
     SIGN_TB_TRUCK_LANE = 118;
+    SIGN_INS_TEXT_MUTABLE = 119;         // 可变车道文字类标注
+    SIGN_INS_UNKNOWN_LANE = 120;         // 未知车道方向标志
+    SIGN_MUTABLE_LANE_STRA = 121;        // 可变车道直行标志
+    SIGN_MUTABLE_LANE_RIGHT = 122;       // 可变车道右转标志
+    SIGN_MUTABLE_LANE_LEFT = 123;        // 可变车道左转标志
+    SIGN_MUTABLE_LANE_STRA_LEFT = 124;   // 可变车道直行或左转标志
+    SIGN_MUTABLE_LANE_STRA_RIGHT = 125;  // 可变车道直行或右转标志
+    SIGN_MUTABLE_LANE_U_TURN = 126;      // 可变车道掉头标志
+    SIGN_MUTABLE_LANE_LEFT_U_TURN = 127; // 可变车道掉头或左转标志
+    SIGN_MUTABLE_LANE_BROKEN = 128;      // 可变车道熄灭或故障标志
+    SIGN_MUTABLE_LANE_UNPASSABLE = 129;  // 可变车道禁止通行
+    SIGN_MUTABLE_LANE_RIGHT_U_TURN = 130;// 可变车道掉头或右转标志
+    SIGN_MUTABLE_LANE_STRA_RIGHT_LEFT = 131; //可变车道直行左转右转标志
+    SIGN_MUTABLE_LANE_RIGHT_LEFT = 132;  // 可变车道左转右转标志
   };
   optional SignType sign_type = 1;
   optional float limit_value = 2;
@@ -271,12 +308,31 @@ message CameraSpeedObstacles {
   optional CameraObstacle road_non_speed_sign = 3;
 }
 
+message CameraObstacleSceneInfo {
+  enum MutableSignGroupType {
+    SEPARATED_MUTABLE_GROUP = 0; // 分离的可变车道标牌
+    ADJACENT_MUTABLE_GROUP = 1;  // 在同一个大牌子上的可变车道标牌
+    SINGLE_MUTABLE_GROUP = 2;    // 独立的只有一个的可变车道标牌
+    UNKNOWN_TYPE_GROUP = 3;
+  };
+  enum RampSceneType {
+    NO_RAMP = 0;
+    BEFORE_RAMP = 1;
+    AFTER_RAMP_IN_RAMP = 2;
+    AFTER_RAMP_NOT_IN_RAMP = 3;
+  };
+  optional MutableSignGroupType mutable_sign_group_type = 1 [default = UNKNOWN_TYPE_GROUP];
+  optional RampSceneType ramp_scene_type = 2 [default = NO_RAMP];
+}
+
 message CameraObstacles {
   optional int64 time_measurement = 1;
   repeated CameraObstacle camera_obstacle = 2;   // An array of obstacles
   repeated CameraLaneLine camera_lane_line = 3;  // An array of lane lines
   optional CameraSpeedObstacles camera_speed_obstacles = 4;
   repeated TollBoothVisObstacle toll_booth_vis_obstacle = 5;
+  repeated TrafficSignLaneInfo traffic_sign_lane_info = 6;
+  optional CameraObstacleSceneInfo camera_obstacle_scene_info = 7;
 }
 
 message CameraQualityInfo {
@@ -321,7 +377,8 @@ message CameraScheme {
     HEAVY_HAZY = 7;  // 浓雾天
     SMUDGE = 8;      // deprecate future
     SAND_STORM = 9;  // 沙尘暴
-    UNKNOWN = 10;     // 未知
+    FOG = 10;
+    UNKNOWN = 100;     // 未知
   };
   optional CameraSchemeType camera_scheme = 1;
   optional float camera_scheme_prob = 2;

@@ -5,6 +5,9 @@ package deeproute.localization.event;
 import "semantic_map/map_standby_area.proto";
 import "common/geometry.proto";
 import "localization/havp_map.proto";
+import "map/parking_map_common.proto";
+import "map/sd_map.proto";
+import "map/projection.proto";
 
 /***  Begin of VPA Testing ****/
 enum MatchingStatus {
@@ -14,6 +17,7 @@ enum MatchingStatus {
   NO_MAP = 3;
   ROUTING_NOT_READY = 4;  // GWM SOP+3 deprecated
   NEAR_DESTINATION = 5;   // GWM SOP+3 deprecated
+  MATCHED_IN_EXPANSION = 6;
 }
 
 enum OddRange {
@@ -40,6 +44,8 @@ message MapMatchingStatusEvent {
   OddRange odd_range = 12; // 当前 matched 状态对应的子图 odd 属性
   bool is_reach_max_expansion_distance = 13; // 匹配的地图是否已经超过最大扩展距离
   int32 default_parking_space_id = 14;
+  deeproute.map.vpa.ParkingMapSource map_source = 15;
+  int32 possible_odd_end_id = 16;
 }
 
 message NavigationStatusEvent {
@@ -114,6 +120,7 @@ message MappingStatusEvent {
 
   repeated int32 matched_map_ids = 7;
   int32 passed_slope_count = 8;                      // for Geely
+  double total_link_length = 9;
 }
 
 // report current nearby environment status event
@@ -158,6 +165,8 @@ message EnvironmentStatusEvent {
 message InTrajectoryInfo {
   uint32 map_id = 1;
   repeated common.PointLLH public_to_odd_trajectory = 2;
+  deeproute.map.vpa.ParkingMapSource map_source = 3;
+  string map_name = 4;
 }
 
 message EndToEndParkingEvent {
@@ -192,4 +201,27 @@ message LocalizationEvent {  // localization modules send 'LocalizationEvent'
   NavigationStatusEvent navigation_status_event = 6;
   EndToEndParkingEvent end_to_end_parking_event = 7;
   ParkingOddStatusEvent parking_odd_status_event = 8;
+}
+
+message MapVpaEvent {
+  EnvironmentStatusEvent environment_status_event = 1;
+  NavigationStatusEvent navigation_status_event = 2;
+  MapMatchingStatusEvent map_matching_status_event = 3;
+}
+
+message MapLinkUpdateEvent {
+  uint64 map_id = 1;
+  deeproute.map.vpa.ParkingMapSource map_source = 2;
+  deeproute.map.ProjectionPoint projection_origin = 3;
+  repeated deeproute.sd_map.LinkData parking_links = 4;  // 实际的link数据
+  repeated deeproute.sd_map.LinkData virtual_parking_links = 5; // 参考线生成的虚拟link
+  repeated uint64 delete_parking_link_ids = 6; // 弃用
+  uint64 timestamp_ms = 7;
+  bool need_update_virtual_links = 8;  // 用给下游是否需要更新虚拟link(有时候实际link更新但虚拟link不需要更新)
+}
+
+message MapLinkUpdateForVizEvent {
+  repeated havp_map.HAVPTrajectory parking_links = 1;
+  repeated havp_map.HAVPTrajectory virtual_parking_links = 2;
+  uint64 timestamp_ms = 3;
 }

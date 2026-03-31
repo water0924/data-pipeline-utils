@@ -1,0 +1,27 @@
+syntax = "proto3";
+package gwm;
+
+/**
+ * ADC → HUT: 二次起步弹窗
+ * topic : /gwm/second_start_popup
+ */
+message SecondStartPopup {
+  enum SecondStartPopupEnum {
+    SECOND_START_POPUP_NO_DISPLAY = 0;
+    SECOND_START_POPUP_SECOND_START = 1;
+    SECOND_START_POPUP_CLOSE = 2;
+  }
+  SecondStartPopupEnum second_start_popup = 1;
+}
+
+/**
+ * HUT → ADC: 用户点击确认二次起步/取消
+ * topic : /gwm/second_start_req
+ */
+message SecondStartReq {
+  enum SecondStartReqEnum {
+    SECOND_START_REQ_START = 0;
+    SECOND_START_REQ_CLOSE = 1;
+  }
+  SecondStartReqEnum second_start_req = 1;
+}

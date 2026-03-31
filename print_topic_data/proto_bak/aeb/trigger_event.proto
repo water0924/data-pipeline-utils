@@ -1,0 +1,16 @@
+syntax = "proto2";
+
+package deeproute.aeb;
+
+message TriggerEventInfo {
+    enum EventType{
+        UNKNOWN = 0;
+        // note(kxj): STM=STATE MACHINE; FS=FALLBACK STRATEGY MS=MODE SWITCH
+        FS = 1;
+        STM = 2;
+        MS = 3;
+    }
+    optional EventType type = 1;
+    repeated string reasons = 2;
+    repeated string data = 3;
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+package dr.gwm.navigation;
+
+// topic: /gwm/blc/nav_corrn_req
+message NavCorrnReq {
+  enum CorrnType {
+    SWITCH_UNKNOWN = 0;          // 未知偏航（可选，不发送时可省略）
+    SWITCH_MAIN_AUXILIARY = 1;   // 主辅路偏航
+    SWITCH_ON_OFF_BRIDGE = 2;    // 高架上线偏航
+    NONE = 3;                    // 未偏航（可选，不发送时可省略）
+  }
+  CorrnType type = 1;
+  uint64 timestamp_ms = 2;
+}

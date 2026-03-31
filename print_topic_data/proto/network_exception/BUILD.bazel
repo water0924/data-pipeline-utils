@@ -1,0 +1,31 @@
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+
+package(features = ["-hidden_visibility_feature"])
+
+proto_library(
+    name = "network_exception_event_proto",
+    srcs = ["network_exception_event.proto"],
+    strip_import_prefix = "/proto/",
+    visibility = ["//visibility:public"],
+    deps = [
+    ],
+)
+
+cc_proto_library(
+    name = "network_exception_event_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":network_exception_event_proto",
+    ],
+)
+
+python_proto_library(
+    name = "network_exception_event_proto_py",
+    protos = [
+        ":network_exception_event_proto",
+    ],
+    visibility = ["//visibility:public"],
+)

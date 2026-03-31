@@ -1,0 +1,7 @@
+syntax = "proto3";
+package deeproute.someip_adapter.gwm;
+
+// topic: /gwm/someip/hut_tag_notify
+message PopupNotifyInfo {
+  uint64 timestamp_ms = 1;
+}

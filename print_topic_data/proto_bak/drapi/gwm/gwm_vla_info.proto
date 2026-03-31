@@ -1,0 +1,200 @@
+syntax = "proto3";
+package gwm;
+
+// VLA推理文本
+// Topic: /gwm/vla_text
+message VLAText {   
+  int32 id = 1;
+  string title = 2;
+  string content = 3;
+  repeated string action = 4;
+  bytes image = 5;                    //（jpeg，YUV422，640*360）
+  uint64 milliseconds = 6;
+}
+
+// Topic: /gwm/vla_req
+message VLAReq {
+  int32 id = 1;
+  int64 timestamp = 2;   //1720181322923  //解析为语义的时间
+  string domain = 3;     //"intelligent_adas域"
+  string asr = 4;        //用户说的内容 "泊入A区域的1号车位",
+  VLAIntent intent = 5;  //意图。其内容中默认值int32填充-10000、enum填充10000、string填充NA
+  VLASlots slots = 6;  //信息槽.其内容中默认值int32填充-10000、enum填充10000、string填充NA
+  enum VLAIntent {
+    VLA_INTENT_NONE = 0;  //无意图
+    //1~200  行车
+    VLA_driving_setting = 1;      //驾驶设置
+    VLA_speed_setting = 2;        //速度设置
+    VLA_distance_setting = 3;     //车距设置
+    VLA_steering_setting = 4;     //转向设置
+    VLA_line_change_setting = 5;  //变道设置
+    VLA_stop_driving = 6;         //停车操作
+    //201~400 泊车
+    VLA_INTENT_SEARCH_PARKING_SPACE = 201;     //寻找车位
+    VLA_INTENT_PARK_INTO_PARKING_SPACE = 202;  //泊入车位
+    VLA_INTENT_PARK_OUT_PARKING_SPACE = 203;   //泊出车位
+    VLA_intent_no_display = 10000;             //无效值，默认值
+  }
+}
+
+message VLASlots {  //信息槽
+  // 1~200 行车
+  NOAStatus noa_status = 1;  //NOA功能的开启/关闭意图
+  enum NOAStatus {
+    NOAStatus_open = 0;            //NOA打开
+    NOAStatus_no_display = 10000;  //无效值，默认值
+  }
+  E2EStatus e2e_status = 2;  //E2E功能的开启/关闭意图
+  enum E2EStatus {
+    E2EStatus_open = 0;            //E2E打开
+    E2EStatus_no_display = 10000;  //无效值，默认值
+  }
+  AccelerationType acceleration_type = 3;  //智驾控车速度设置
+  enum AccelerationType {
+    AccelerationType_up = 0;              //加速
+    AccelerationType_down = 1;            //减速
+    AccelerationType_no_display = 10000;  //无效值，默认值
+  }
+  int32 cruising_speed_value =
+      4;  //目标巡航速度调整 目前不需要语音前端对语义中的数字做限制与拦截。座舱默认值发-10000
+  DistanceType distance_type = 5;  //车距调大/小
+  enum DistanceType {
+    DistanceType_up = 0;              //车距调大
+    DistanceType_down = 1;            //车距调小
+    DistanceType_min = 2;             //车距最小
+    DistanceType_max = 3;             //车距最大
+    DistanceType_no_display = 10000;  //无效值，默认值
+  }
+  int32 distance_value = 6;        //车距调整挡位值。座舱默认值发-10000
+  DteeringType steering_type = 7;  //方向类型
+  enum DteeringType {
+    DteeringType_right = 0;           //右转
+    DteeringType_left = 1;            //左转
+    DteeringType_straight = 2;        //直行
+    DteeringType_u_turn = 3;          //掉头
+    DteeringType_no_display = 10000;  //无效值，默认值
+  }
+  SteeringPosition steering_position = 8;  //前方/当前所在路型
+  enum SteeringPosition {
+    SteeringPosition_position = 0;        //路口
+    SteeringPosition_no_display = 10000;  //无效值，默认值
+  }
+  LineChangeType line_change_type = 9;  //变道类型
+  enum LineChangeType {
+    LineChangeType_right = 0;                   //右变道
+    LineChangeType_left = 1;                    //左变道
+    LineChangeType_cancel = 2;                  //取消变道
+    LineChangeType_avoid = 3;                   //避让，绕障
+    LineChangeType_stay_away = 4;               //远离
+    LineChangeType_drive_out_from_buslane = 5;  //公交车道驶出
+    LineChangeType_no_display = 10000;          //无效值，默认值
+  }
+  string avoid_object =
+      10;  //避让/绕障/远离 大车、锥桶、车辆、行人、自行车、两轮车、三轮车。避让的障碍物类型座舱直接发文字不需要枚举每个类型。座舱默认值发NA
+  StopDrivingType stop_driving_type = 11;  //停车操作动作
+  enum StopDrivingType {
+    StopDrivingType_PullOver = 0;        //靠边
+    StopDrivingType_no_display = 10000;  //无效值，默认值
+  }
+  string stop_driving_position = 12;           //把车停到xxx地方。座舱默认值发NA
+  NarrowRoadMeeting narrow_road_meeting = 13;  //窄路会车模式开启或关闭
+  enum NarrowRoadMeeting {
+    NarrowRoadMeeting_open = 0;            //窄路会车模式开启
+    NarrowRoadMeeting_no_display = 10000;  //无效值，默认值
+  }
+  ContinueAndStop continue_and_stop = 14;  //继续行驶
+  enum ContinueAndStop {
+    continue_driving = 0;                //继续行驶
+    ContinueAndStop_no_display = 10000;  //无效值，默认值
+  }
+  int32 forward_driving_distance = 15;  //往前开xx米（语音侧只识别整数米，最大1000米）。座舱默认值-10000
+  string overtake_object =
+      16;  //针对前方的大车、锥桶、车辆、行人、自行车、两轮车、三轮车等进行超车。超车的障碍物类型座舱直接发文字不需要枚举每个类型.座舱默认值发NA
+  TargetLaneChange target_lane_change = 17;  //指定的目标变道车道，去/取消/记忆
+  message TargetLaneChange {
+    TargetLaneChangeID target_lane_change_ID = 1;  //具体的目标变道车道
+    enum TargetLaneChangeID {
+      target_lane_change_ID_left1 = 0; target_lane_change_ID_left2 = 1; target_lane_change_ID_left3 = 2;
+      target_lane_change_ID_left4 = 3;
+      target_lane_change_ID_right1 = 4;
+      target_lane_change_ID_right2 = 5;
+      target_lane_change_ID_right3 = 6;
+      target_lane_change_ID_right4 = 7;
+      target_lane_change_ID_middle = 8;          //中间的车道
+      target_lane_change_ID_no_display = 10000;  //无效值，默认值
+    }
+    TargetLaneChangeAction target_lane_change_action = 2;  //针对具体的目标车道要执行的动作
+  }
+  enum TargetLaneChangeAction {
+    target_lane_change_action_forward = 0;  //去指定车道行驶
+    target_lane_change_action_cancel = 1;   //取消指定车道行驶
+    target_lane_change_action_memory = 2;  //记忆车道（比如：以后这个路段就在左一行驶，智驾后端处理记忆）
+    target_lane_change_action_memorycancel = 3;       //取消记忆车道
+    target_lane_change_action_ID_no_display = 10000;  //无效值，默认值
+  }
+  AccelerationTypeMemory acceleration_type_memory = 18;  //该路段加速减速并记忆
+  enum AccelerationTypeMemory {
+    acceleration_type_memory_up = 0; acceleration_type_memory_down = 1;
+    acceleration_type_memory_no_display = 10000;  //无效值，默认值
+  }
+  CruisingSpeedValueMemory cruising_speed_value_memory =
+      19;  //设置的具体车速值是否需要记忆（语音座舱侧会和4一起发送）
+  enum CruisingSpeedValueMemory {
+    cruising_speed_value_memory_yes = 0;  //该车速需要记忆，不需要记忆的车速，该字段座舱不发
+    cuising_speed_value_memory_cancel = 1;          //该poi点取消原本的记忆车速值
+    cuising_speed_value_memory_no_display = 10000;  //无效值，默认值
+  }
+
+  // 201~400 泊车
+  string parking_area = 201;  // 举例：如"A区"~"Z区","T1"~"T10"。座舱默认值发NA
+  int32 parking_floor =
+      202;  // 范围-10~10， 举例：语音识别用户B1/负1层/地下1层等后转成数值-1。座舱默认值发-10000
+  ParkingSpace parking_space = 203;
+  enum ParkingSpace {
+    // 0~19 车位类型
+    PARKING_SPACE_GENERAL = 0;  //普通车位
+    PARKING_SPACE_CHARGE = 1;   //充电车位
+
+    // 20~39 车位编号
+    PARKING_SPACE_NUM_1 = 20;          //1号车位
+    PARKING_SPACE_NUM_2 = 21;          //2号车位
+    PARKING_SPACE_NUM_3 = 22;          //3号车位
+    PARKING_SPACE_NUM_4 = 23;          //4号车位
+    PARKING_SPACE_NUM_5 = 24;          //5号车位
+    PARKING_SPACE_NUM_6 = 25;          //6号车位
+    PARKING_SPACE_NUM_7 = 26;          //7号车位
+    PARKING_SPACE_NUM_8 = 27;          //8号车位
+    PARKING_SPACE_NUM_9 = 28;          //9号车位
+    PARKING_SPACE_NUM_10 = 29;         //10号车位
+    PARKING_SPACE_NUM_11 = 30;         //11号车位
+    PARKING_SPACE_NUM_12 = 31;         //12号车位
+    PARKING_SPACE_NUM_13 = 32;         //13号车位
+    PARKING_SPACE_NUM_14 = 33;         //14号车位
+    PARKING_SPACE_no_display = 10000;  //无效值，默认值
+  }
+  int32 pull_out_direction =
+      204;  // 0:无方向（用户未明确说泊出方向）  1：向前  2：向后 3：左侧  4：右侧。座舱默认值-10000
+  int32 pull_out_position =
+      205;  // 0:车位（只泊出到车位）   1：停车场/出口（泊出车位并驶出停车场）。座舱默认值-10000
+}
+
+/*
+SOME/IP
+  Server:ADC
+  ServiceInterfaceName:VLAADASCtrlSrv
+  ElementName:CtrlCmdResultReport
+  DatatypeReferencea:'CtrlCmdResultReport_Array
+*/
+// Topic: /gwm/voice_command_resp
+message VoiceCommandResp {
+  int32 id = 1;                       //针对哪条语音指令ID做的回复
+  string title = 2;                   //回复内容总结
+  string content = 3;                 //回复内容详情
+  uint64 milliseconds = 4;            //时间戳
+  WarningType warning_type = 5;  //回复内容的提示类型
+  enum WarningType {
+    WarningType_JustToast = 0;    //仅显示
+    WarningType_JustTTS = 1;      //仅提醒
+    WarningType_ToastAndTTS = 2;  //显示与提醒
+  }
+}

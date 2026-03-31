@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+package deeproute.drivers;
+
+enum Level {
+    INFO = 0;
+    WARN = 1;
+    ERROR = 2;
+}
+
+message McuLog {
+    optional uint64 timestamp = 1;  // us
+    optional Level level = 2;
+    optional uint32 length = 3;
+    //@C_Mark@1003@;
+    optional bytes content = 4;
+}

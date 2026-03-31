@@ -12,6 +12,8 @@ message UserConfig {
                                  //nca, 开关关闭，不产生快捷激活信号
 
   // common internal use
+  SwitchStatus highway_vehicle_defensive_deceleration = 9; //高速车辆防御性降速开关，开关开，planning会对高速车辆防御性降速，开关关闭，不降速，默认关
+  SwitchStatus variable_lane_integrated = 10; //可变车道融合开关，开关开，地图引导会融合地图和感知信息，开关关闭不会融合
   SwitchStatus visible_mask_defensive_deceleration = 11; //基于visible_mask盲区防御性降速，开关开，planning会对盲区防御性降速，开关关闭，不降速，默认开    
   SwitchStatus enable_rule_construction_zone = 12; //施工区域是否使用rule逻辑， 
                                                    //开关开，默认的rule+模型综合判断和避让
@@ -71,6 +73,8 @@ message UserConfig {
       46;  //掉头-环岛是否降级开关,默认关(不降级)
   SwitchStatus force_lane_change_check = 47; //黑夜，车道线不清晰时，只允许强制变道，开关开：检测黑夜条件，开关关，不检测，默认关闭
   SwitchStatus snowy_day_check = 48; //雪天检测开关，开关开：检测雪天条件，执行雪天相关的变道抑制逻辑等，开关关，不检测雪天条件，雪天不影响变道
+  SwitchStatus follow_car_defensive_deceleration = 49; //跟前车防御性降速防御性开关，开关开，planning会对跟前车防御性降速，开关关闭，不降速，默认关
+  SwitchStatus hazy_day_check = 50; //雾天检测开关，开-检测雾天条件，执行雾天相关的变道抑制逻辑等，关-不检测雾天条件，雾天不影响变道
 
   ACCConfig acc_config = 51;
   ICAConfig ica_config = 52;
@@ -83,6 +87,7 @@ message UserConfig {
   HUTConfig hut_config = 59;
   E2EConfig e2e_config = 60;
   IntellgntAsscLmpConfig lmp_config = 61;
+  ETCSwitchConfig etc_switch_config = 62;
 
   SwitchStatus brake_light_fault_check =
       100;  // 刹车灯故障时，开关打开，退出行车，开关关闭，不影响行车
@@ -336,4 +341,11 @@ enum IntellgntAsscLmpEna {
 // 智能辅助灯配置
 message IntellgntAsscLmpConfig {
   IntellgntAsscLmpEna intellgnt_assc_lmp_ena = 1;
+}
+
+enum ETCSwitchConfig {
+  UNKNOWN = 0;
+  OFF = 1;
+  ETC = 2;
+  MANUAL = 3;
 }

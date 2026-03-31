@@ -81,6 +81,9 @@ message RealTimeData {
   int32 curr_ownership = 45;                          // NEW 当前道路所有权，巡航也需要   导航、巡航按照统一输出，只关注0和其他，透出高德结果即可
   repeated MixForkInfo mix_fork_list = 46;            // NEW 混淆路口信息列表，导航时支持 巡航不支持
   ServiceAreaInfo service_area_info = 47;             // NEW 前方2km(TBD)内服务区信息，巡航也需要  导航时支持 巡航不支持 
+
+  bool is_gps = 48;                       // 25.11.10: 新增当前是否有GPS状态信息
+  GpsPoint3D curr_navi_position = 49;     // 25.11.10: 当前图标位置实时定位信息,非推理坐标
 }
 
 // NEW 混淆路口信息

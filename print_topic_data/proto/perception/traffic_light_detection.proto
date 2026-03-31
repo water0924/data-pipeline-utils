@@ -4,6 +4,7 @@ package deeproute.perception;
 
 import "common/geometry.proto";
 import "semantic_map/map.proto";
+import "vla/vla_output.proto";
 
 enum TrafficLightType {
   UNKNOWN = 0;
@@ -175,6 +176,13 @@ message TrafficLightMpStopline {
   optional int32 id = 4;
 }
 
+
+message VlaScenarioSpeedlimit {
+  optional float model_speed_limit = 1; // unit km/h
+  repeated deeproute.vla.vla_output.VlaOutput.RiskScenario scene_flags = 2;
+  optional bool risk = 3;
+}
+
 message TrafficLightResponse {
   // Traffic light mapping result for PNC
   // Note that:
@@ -202,4 +210,5 @@ message TrafficLightResponse {
   repeated TrafficLightMpStopline traffic_light_mp_stopline = 7; 
 
   optional TrafficLightE2ETags e2e_tags = 8;
+  optional VlaScenarioSpeedlimit vla_scenario_speedlimit = 9;
 }

@@ -76,6 +76,9 @@ message StopLine {
 
   repeated TurnType turn_type = 15;
   optional bool is_waiting_area = 16 [default = false];
+  // represents the stop line that are related to a waiting area lane
+  // waiting area lane type: LEFTTURNWAITINGAREA STRAIGHT_TURN_WAITING_AREA RIGHT_TURN_WAITING_AREA
+  repeated int32 related_waiting_area_lane_id = 17;
 }
 
 message JunctionEndLine {

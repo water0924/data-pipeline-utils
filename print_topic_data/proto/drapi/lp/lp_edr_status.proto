@@ -1,0 +1,22 @@
+//@F_Mark@ignore@;
+syntax = "proto3";
+
+package dr.edr;
+
+message EdrSdStatus {
+    enum EdrSdMountStatus {
+        EDR_SD_MOUNT_STATUS_UNDEFINED = 0;  // proto3 default, not serialized; use UNMOUNT/MOUNT for real status
+        EDR_SD_MOUNT_STATUS_UNMOUNT = 1;
+        EDR_SD_MOUNT_STATUS_MOUNT = 2;
+    }
+
+    enum EdrRecordError {
+        EDR_RECORD_ERROR_UNDEFINED = 0;
+        EDR_RECORD_ERROR_RECORD_ERROR = 1;
+        EDR_RECORD_ERROR_WRITE_ERROR = 2;
+        EDR_RECORD_ERROR_RECORD_PATH_EXCEPTION = 3;
+    }
+
+    EdrSdMountStatus edr_sd = 1; // cycle 1hz, read from DR_DATA_DIR_IS_EXTERNAL env
+    optional EdrRecordError edr_record_error = 2;  // trigger, from church topic /safety/events
+}

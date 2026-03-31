@@ -1,0 +1,25 @@
+syntax = "proto3";
+package gwm;
+
+message Pnt2D {
+  float x = 1;
+  float y = 2;
+}
+
+message Pnt3D {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+
+message Polygon {
+  repeated Pnt3D pnt = 1;
+}
+
+message Polyline{
+  repeated Pnt3D pnt = 1;
+}
+
+message Timestamp{
+  uint32 milliseconds = 1;
+}

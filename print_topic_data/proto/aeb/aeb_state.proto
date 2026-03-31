@@ -87,6 +87,15 @@ enum AWBState {
   AWB_STANDBY = 4;
 }
 
+enum NOASAFETYState {
+  NOASAFETY_OFF = 0;
+  NOASAFETY_FAILURE = 1;
+  NOASAFETY_PASSIVE = 2;
+  NOASAFETY_ACTIVE = 3;
+  NOASAFETY_STAND_STILL = 4;
+  NOASAFETY_STANDBY = 5;
+}
+
 enum ClosestReason {
   UNKNOWN = 0;
   FCW = 1;
@@ -99,6 +108,7 @@ enum ClosestReason {
   FCTB = 8;
   MEB = 9;
   REBA = 10;
+  NOA_SAFETY = 11;
 }
 
 message StateInfo {
@@ -118,6 +128,7 @@ message StateInfo {
   optional deeproute.esa.State ldw_state = 14;
   optional deeproute.esa.State lcp_state = 15;
   optional deeproute.esa.State nas_state = 16;
+  optional NOASAFETYState noasafety_state = 17;
 }
 
 message ObjectInfo{
@@ -256,6 +267,7 @@ message FeatureInfo {
     LCP = 15;
     NAS = 16;    
     LLW = 17;
+    NOASAFETY = 18;
   }
   enum ResultType{
     UNKNOWN_RESULT_TYPE = 0;

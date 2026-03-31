@@ -74,7 +74,6 @@ message VLARoutingOption {
     VLA_COMMAND_U_TURN = 4;
 
     VLA_COMMAND_PULL_OVER = 5;
-    VLA_COMMAND_PULL_OVER_CANCEL = 13;
 
     VLA_COMMAND_LANE_CHANGE_FROM_LEFT = 6;
     VLA_COMMAND_LANE_CHANGE_FROM_RIGHT = 7;
@@ -85,6 +84,10 @@ message VLARoutingOption {
     VLA_COMMAND_SPEED_CHANGE_CANCEL = 11;
 
     VLA_COMMAND_PARKING_TO_DESTINATION = 12;
+    VLA_COMMAND_PARKING_CHOOSE_GLOBAL_PATH = 13;
+    VLA_COMMAND_PARKING_STOP = 14;
+    VLA_COMMAND_PULL_OVER_CANCEL = 15;
+    VLA_COMMAND_PULL_OVER_MRM = 16;
   }
 
   // 用户设置的控车信息, 涉及数据的指令信息拓展
@@ -95,6 +98,9 @@ message VLARoutingOption {
     // vla_command_type表示方向，这个字段表示目标车道编号，
     // 例如左一为1，右二为2，以此类推
     optional int32 target_lane_num = 2;
+
+    // 选择第几条泊车路径
+    optional int32 parking_global_path_index = 3;
   }
 
   // 位置信息，用于确定VLA指令的执行位置。
@@ -116,6 +122,10 @@ message VLARoutingOption {
       VLA_COMMAND_TYPE_NEAREST_CHARGE_PARKING_SPACE = 10;
 
       VLA_COMMAND_TYPE_PARKING_LOT_EXIT = 11;
+      VLA_COMMAND_TYPE_POI_POSITION = 12;
+      VLA_COMMAND_TYPE_ROAM_PARKING_OUT_FROM_SPACE = 13;
+
+      VLA_COMMAND_TYPE_PARKING_AREA = 14;
     }
 
     optional VLACommandType vla_command_type = 100;
@@ -140,6 +150,12 @@ message VLARoutingOption {
 
     // 楼层
     optional int32 floor = 6;
+
+    // poi 位置
+    optional common.PointLLH poi_position = 7;
+
+    // 区域名
+    optional string area_name = 8;
   }
 
   optional VLACommand vla_command = 1;
@@ -174,4 +190,57 @@ message VLACommandResponse {
   optional common.Point3D position_odom = 4;
 
   optional VLACommandResult vla_command_result = 5;
+}
+
+message VLAChangeLaneStatus {
+  enum ChangeLaneStatusType {
+    // 无状态
+    VLA_STATUS_TYPE_NONE = 0;
+    // 变道到目标车道
+    VLA_STATUS_TYPE_CHANGE_LANE_TO_TARGET_LANE = 1;
+    // 在目标车道
+    VLA_STATUS_TYPE_IN_TARGET_LANE = 2;
+    // 变道到导航车道
+    VLA_STATUS_TYPE_CHANGE_LANE_TO_NAVIGATION_LANE = 3;
+    // 在导航车道
+    VLA_STATUS_TYPE_IN_NAVIGATION_LANE = 4;
+  }
+  enum VLAStatusChangeReason {
+    VLA_STATUS_CHANGE_REASON_UNKNOWN = 0;
+    // blc触发
+    VLA_STATUS_CHANGE_REASON_BLC_TRIGGER = 1;
+    // blc取消
+    VLA_STATUS_CHANGE_REASON_BLC_CANCEL = 2;
+    // 到达距离限制，例如已经达到变道阈值
+    VLA_STATUS_CHANGE_REASON_DISTANCE_LIMIT = 3;
+    // 完成了VLA指令
+    VLA_STATUS_CHANGE_REASON_FINISH = 4;
+  }
+  optional ChangeLaneStatusType change_lane_status_type = 1;
+  optional VLAStatusChangeReason change_lane_status_change_reason = 2;
+}
+
+message VLATurnStatus {
+  optional int32 next_turn_distance = 1;
+}
+
+// topic /map/vla/status
+message VLAStatus {
+  message VlaRoamParkingStatus {
+    enum VlaRoamParkingStatusType {
+      // 无状态
+      VLA_ROAM_PARKING_STATUS_TYPE_NONE = 0;
+      // 当前处于无图漫游状态
+      VLA_ROAM_PARKING_STATUS_TYPE_IN_NO_MAP_ROAM = 1;
+      // 当前处于有图漫游状态
+      VLA_ROAM_PARKING_STATUS_TYPE_IN_MAP_ROAM = 2;
+    }
+    optional VlaRoamParkingStatusType vla_roam_parking_status_type = 1;
+    optional int32 floor = 2;
+    optional string area_name = 3;
+    optional bool is_reversing = 4;
+  }
+  optional VlaRoamParkingStatus vla_roam_parking_status = 1;
+  optional VLAChangeLaneStatus change_lane_status = 2;
+  optional VLATurnStatus turn_status = 3;
 }

@@ -52,6 +52,8 @@ message UltrasonicInfo {
       obstacle_type = 6;
   optional double confidence = 7;
   optional deeproute.drivers.ultrasonic.UltrasonicType ultrasonic_type = 8;
+  optional common.Polygon orin_points = 9;  // original points.
+  optional int32 id = 10;
 }
 
 message RadarInfo {
@@ -122,6 +124,11 @@ message PerceptionObstacle {
     LOCK = 14;
     SPEEDBUMP = 15;
     FAKED2D = 16;  // estimated fake 2d object for hma
+    OCCUPANCY_VIS_POLYGONS = 17; // occupancy polygons for vis
+    ANIMAL_ALL = 18;
+    STATIC_OBSTACLE = 19;  // static obstacle
+    
+    PLANNING_STOP_OBSTACLE = 50; 
   };
 
   // detection subtype, e.g., tri-cone,
@@ -206,6 +213,20 @@ message PerceptionObstacle {
     U_TUBE = 66;   // u型管
     CHOCK = 67;   // 轮档
     CONSTRUCTION_OBJECT = 68;   // 施工物体
+    CAT = 69;   // 
+    DOG = 70;   // 
+    CATTLE = 71;   // 牛
+    SHEEP = 72;   // 
+    HORSE = 73;   // 
+    OTHER_ANIMAL = 74;   //
+    WALL = 75; //墙
+    // STATIC_OBSTACLE subtype
+    CARTON = 76;  // 纸箱
+    ELECTRIC_TRICYCLE = 77;  // 电动三轮车
+    COLUMN = 78; // 柱子
+    CURB = 79; // 路沿
+    CONSTRUCTION_CURB = 80; // 施工路沿
+    AVM = 81; // 盲区OCC
   };
 
   optional Type type = 12;  // obstacle type
@@ -327,7 +348,8 @@ message PerceptionObstacle {
     FS_BUSH = 16;
     FS_TREE = 17;
     FS_U_TUBE = 18;
-    FS_DEPTH = 19;
+    FS_ELECTRIC_WIRE = 19;
+    FS_DEPTH = 20;
   };
   optional FreespaceType freespace_type = 31 [default = FS_OTHERS_STATIC];
   enum FreespaceBranch {
@@ -382,6 +404,8 @@ message PerceptionObstacle {
     FILTERED_BY_AVP_MERGING = 24;
     KEPT_BY_EXTRA_ROI = 25;
     FILTERED_BY_HEADING_UNCERTAINTY = 26;
+    FILTERED_BY_CROSS_VRU_GHOST = 27;
+    FILTER_BY_SUSTAINED_LOW_CONFIDENCE_OBJ =28;
   };
 
   optional StatusCode status_code = 42 [default = NOT_FILTERED];
@@ -390,8 +414,12 @@ message PerceptionObstacle {
   optional RadarInfo radar_info = 47;
   optional int32 box_filter_count = 49 [default = 0];
   optional bool velocity_conflict_flag = 50 [default = false];
+  optional bool occluded_ghost_vru = 51 [default = false];
+  optional bool sustained_low_confidence_obj = 52 [default = false];
   // subtype for each cell
   repeated SubType cells_subtype = 48;  
+
+  optional string visualizer_extra_info = 299;  // use string for agile storage, only for GT Visualizer
 }
 
 message PointSemantics {
@@ -483,7 +511,54 @@ message SafetyModelBasedResult {
     // aeb seq decision part (by seq, len = 5)
     repeated SafetySeqDecision safety_seq_decision = 9;
     repeated float safety_seq_decision_thresh = 10;
+
+    // NoaSafety part
+    optional NoaSafetyModelBasedResult noa_safety_model_based_result = 18; 
     
+}
+
+// 动作决策类型
+enum NoaSafetyActionType {
+    ACTION_DECELERATE = 0;   // 减速
+    ACTION_NUDGE_LEFT = 1; // 左避让
+    ACTION_NUDGE_RIGHT = 2; // 右避让
+    ACTION_LANE_CHANGE_LEFT = 3;  // 左变道
+    ACTION_LANE_CHANGE_RIGHT = 4; // 右变道
+}
+
+message NoaCriticalObstacle{
+  optional int32 id = 1;  // Critical Obstacle ID.
+  optional float prob = 2; // Critical Obstacle prob.
+}
+
+// 轨迹点
+message NoaSafetyTrajectoryPoint {
+    required float x = 1;
+    required float y = 2;
+    required float heading = 3;   // 你需要 yaw 也可以改成 yaw
+    required float v = 4;
+}
+
+message NoaSafetyTrajectory {
+    repeated NoaSafetyTrajectoryPoint noa_trajectory = 1; //轨迹点
+    optional float traj_prob = 2; //轨迹概率
+}
+
+// 总体结果结构
+message NoaSafetyModelBasedResult {
+
+    // 1. 触发概率
+    optional bool noa_triggered = 1;
+    optional float noa_trigger_prob = 2;
+
+    // 2. 风险 Agent
+    optional NoaCriticalObstacle noa_risk_agent = 3;
+
+    // 3. 动作决策
+    optional NoaSafetyActionType noa_action_decision = 4;
+
+    // 4. 决策避让轨迹 
+    repeated NoaSafetyTrajectory noa_trajectories = 5;
 }
 
 enum CommandType {
@@ -496,6 +571,29 @@ enum CommandType {
 
 message MultiCommandType {
   repeated CommandType command_type = 1;
+}
+
+message TrajPointAttr {
+  optional int64 timestamp_us = 1;
+  optional double x = 2;  // in global.
+  optional double y = 3;  // in global.
+  optional double z = 4;  // in global.
+  optional double heading = 5;  // in global.
+  optional double speed = 6;  // m/s.
+  optional double front_wheel = 7;  // radian.
+}
+
+message VPATraj {
+  optional float prob = 1;
+  repeated TrajPointAttr points = 2;
+}
+
+message VPALCCReline {
+  optional float prob = 1;
+  optional common.Polyline points = 2;
+  optional bool has_collision = 3;
+  optional int64 collision_point_idx = 4;
+  optional bool is_global_routing = 5;
 }
 
 // For extending more model-based decision message;
@@ -548,6 +646,17 @@ message ModelBasedDecision {
     repeated MultiCommandType followed_cmds = 40;
     repeated common.Polyline cmd_waypoints = 41;
     repeated CommandType waypoints_cmd_types = 42;
+
+    // vpa planning trajectory waypoints
+    repeated VPATraj vpa_planning_trajectory = 43;
+
+    // vpa lcc refline
+    repeated common.Polyline vpa_lcc_reference_line = 44;
+    repeated VPALCCReline vpa_lcc_refline_with_attr = 45;
+
+    // show all traj for debug
+    repeated common.Polyline model_joint_planning_raw = 51;
+    repeated float multi_modal_probs_raw = 52;
 }
 
 // Model-based lane change efficiency, independently making decision for 'left'

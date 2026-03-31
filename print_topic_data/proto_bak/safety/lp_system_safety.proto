@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package dr.safety;
+
+/**
+ * LP -> DR： LP lpAdasHealth 发送给 Safety 的系统安全状态
+ * church topic: /safety/lp_system_safety
+ */
+message SystemSafety {
+  uint32 sensor_error_num = 1;                          // 传感器故障数量
+  repeated SensorError sensor_error = 2;                 // 传感器故障（最多30个）
+
+  uint32 can_msg_error_num = 3;                          // can报文故障数量
+  repeated MessageStatus can_msg_error = 4;              // can报文故障，只传输发生故障的信号（最多50个）
+}
+
+// 传感器故障
+message SensorError {
+  uint32 sensor_id = 1;                      // 传感器id
+  SensorTypeEnum sensor_type = 2;           // 传感器类型
+  uint32 error_code = 3;                    // 传感器故障码，见故障码表
+}
+
+// 传感器类型枚举
+enum SensorTypeEnum {
+  SENSOR_TYPE_NONE = 0;              // 无
+  SENSOR_TYPE_CAMERA = 1;            // 摄像头
+  SENSOR_TYPE_FISHEYE_CAMERA = 2;    // 鱼眼摄像头
+  SENSOR_TYPE_LIDAR = 3;             // 激光雷达
+  SENSOR_TYPE_RADAR = 4;             // 毫米波雷达
+  SENSOR_TYPE_USS = 5;               // 超声波雷达
+  SENSOR_TYPE_PBOX = 6;              // 组合导航
+  SENSOR_TYPE_IMU = 7;               // 惯导
+  SENSOR_TYPE_GNSS = 8;              // 卫星导航
+  SENSOR_TYPE_TOHER = 19;            // 其他
+}
+
+// CAN 报文状态
+message MessageStatus {
+  uint32 message_id = 1;                    // 报文id
+  MessageStatusEnum message_status = 2;     // 报文状态（错误包括：超时、counter错误、checksum错误）
+}
+
+// CAN 报文状态枚举
+enum MessageStatusEnum {
+  MESSAGE_STATUS_NORMAL = 0;                                  // 正常
+  MESSAGE_STATUS_ERROR = 1;                                   // 异常
+  MESSAGE_STATUS_ROLLINGCOUNTER_FAIL = 2;                     // rollingcounter 异常
+  MESSAGE_STATUS_CHECKSUM_FAIL = 4;                           // checksum 异常
+  MESSAGE_STATUS_CHECKSUM_ROLLINGCOUNTER_FAIL = 6;            // checksum + rollingcounter 异常
+  MESSAGE_STATUS_PERIOD_FAIL = 8;                             // 周期 异常
+  MESSAGE_STATUS_PERIOD_ROLLINGCOUNTER_FAIL = 10;             // 周期 + rollingcounter 异常
+  MESSAGE_STATUS_PERIOD_CHECKSUM_FAIL = 12;                   // 周期 + checksum 异常
+  MESSAGE_STATUS_PERIOD_CHECKSUM_ROLLINGCOUNTER_FAIL = 14;    // 周期 + checksum + rollingcounter 异常
+}

@@ -1,0 +1,129 @@
+syntax = "proto3";
+
+package deeproute.proto_ads;
+
+// Odometry mode for multi-sensor fusion
+enum OdometryMode {
+  Odometry = 0;        // Pure odometry mode using wheel speed
+  LIO = 1;             // LiDAR-Inertial Odometry mode
+  MapRegistration = 2; // Map registration mode for global localization
+}
+
+// Measurement types used in multi-sensor fusion
+enum MeasurementType {
+  RAW_IMU = 0;        // Raw IMU measurements (gyroscope and accelerometer)
+  GNSS_POS = 1;       // GNSS position measurements
+  GNSS_VEL = 2;       // GNSS velocity measurements
+  GNSS_HEADING = 3;   // GNSS heading measurements
+  INS_POSE = 4;       // INS (Inertial Navigation System) pose
+  WHEEL_SPEED = 5;    // Wheel speed measurements from vehicle CAN bus
+  LIDAR_MATCHING = 6; // LiDAR point cloud matching results
+}
+
+// Internal state of multi-sensor fusion for localization debugging
+// This message contains the complete internal state of the Kalman filter
+// and related odometry information for offline analysis and debugging
+message InternalMultiSensorFusionState {
+  // Timestamp of the internal state in microseconds since epoch
+  sfixed64 internal_state_time = 1;
+
+  // ============================================================================
+  // Kalman Filter Internal State (29-dimensional state vector)
+  // ============================================================================
+
+  // Kalman filter state vector (29 elements)
+  // State vector composition:
+  //   [0-2]:   Position error in local ENU frame (East, North, Up) [meters]
+  //   [3-5]:   Velocity error in local ENU frame (East, North, Up) [m/s]
+  //   [6-8]:   Attitude error in local frame (Roll, Pitch, Yaw) [radians]
+  //   [9-11]:  Gyroscope bias (x, y, z) [rad/s]
+  //   [12-14]: Accelerometer bias (x, y, z) [m/s²]
+  //   [15-17]: GNSS position bias in ENU frame [meters]
+  //   [18-20]: GNSS velocity bias in ENU frame [m/s]
+  //   [21]:    GNSS heading bias [radians]
+  //   [22-24]: Odometry scale factor and misalignment (scale, pitch, yaw)
+  //   [25-28]: Map registration error (x, y, z, yaw) [meters, radians]
+  //@C_Mark@29@
+  repeated double filter_state = 2;
+
+  // Kalman filter state covariance matrix (29x29 = 841 elements, row-major)
+  // Represents the uncertainty of the state estimate
+  // Units: squared units of corresponding state elements
+  //@C_Mark@841@
+  repeated double filter_state_cov = 3;
+
+  // ============================================================================
+  // Multi-Sensor Fusion Reference State
+  // ============================================================================
+
+  // Reference timestamp for coordinate transformation (microseconds since
+  // epoch)
+  sfixed64 reference_time = 4;
+
+  // Reference inertial position in geodetic coordinates (3 elements: lat, lon,
+  // alt) [0]: Latitude [degrees], [1]: Longitude [degrees], [2]: Altitude
+  // [meters]
+  repeated double reference_inertial_position = 5;
+
+  // Reference inertial attitude (3 elements: roll, pitch, yaw)
+  // Euler angles in radians relative to local ENU frame
+  repeated double reference_inertial_attitude = 6;
+
+  // Current odometry mode (Odometry/LIO/MapRegistration)
+  OdometryMode odometry_mode = 7;
+
+  // ============================================================================
+  // SINS (Strapdown Inertial Navigation System) Internal State
+  // ============================================================================
+
+  // SINS integrated position in geodetic coordinates (3 elements: lat, lon,
+  // alt) B: Latitude [degrees], L: Longitude [degrees], H: Height/Altitude
+  // [meters]
+  repeated double inertial_position = 8;
+
+  // SINS integrated velocity in local ENU frame (3 elements: vE, vN, vU)
+  // [m/s] in East, North, Up directions
+  repeated double inertial_velocity = 9;
+
+  // SINS integrated attitude (3 elements: roll, pitch, yaw)
+  // Euler angles in radians
+  repeated double inertial_attitude = 10;
+
+  // Estimated gyroscope bias (3 elements: bias_x, bias_y, bias_z)
+  // [rad/s] for x, y, z axes in IMU body frame
+  repeated double gyro_bias = 11;
+
+  // Estimated accelerometer bias (3 elements: bias_x, bias_y, bias_z)
+  // [m/s²] for x, y, z axes in IMU body frame
+  repeated double acc_bias = 12;
+
+  // ============================================================================
+  // Odometry Internal State
+  // ============================================================================
+
+  // Odometry-based position in local ENU frame (3 elements: x, y, z)
+  // [meters] relative to reference position
+  repeated double odometry_position = 13;
+
+  // Odometry-based velocity in local ENU frame (3 elements: vx, vy, vz)
+  // [m/s] in East, North, Up directions
+  repeated double odometry_velocity = 14;
+
+  // Odometry-based attitude (3 elements: roll, pitch, yaw)
+  // Euler angles in radians
+  repeated double odometry_attitude = 15;
+
+  // ============================================================================
+  // Additional Debug Information
+  // ============================================================================
+
+  // Time range of buffered measurements for state estimation
+  // [seconds] - indicates how far back in time the filter maintains measurement
+  // history
+  double buffer_time_range = 16;
+
+  // Extrapolated pose error for map registration (4 elements: x, y, z, yaw)
+  // [meters, meters, meters, radians]
+  // Error between extrapolated pose and map-registered pose
+  repeated double extrapolated_pose_error_for_map_registration = 17;
+}

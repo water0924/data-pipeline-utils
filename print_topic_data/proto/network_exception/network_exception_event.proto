@@ -1,0 +1,24 @@
+syntax = "proto2";
+
+package deeproute.network_exception;
+
+message NetworkExceptionEvent {
+  optional string uri = 1;         // like /api/v1/data
+  optional string server_port = 2; // like map.draicloud.com:8080
+
+  optional string what = 3; // contains any reason here
+
+  optional int64 request_payload_size = 4;  // in bytes
+  optional int64 response_payload_size = 5; // in bytes
+
+  // like 200, 404, 500, etc.
+  // 0 -> network not available
+  optional int32 http_code = 6 [ default = 0 ];
+
+  optional int64 time_cost = 7; // in milliseconds
+
+  optional string x_b3_traceid = 10; // track server log
+  optional string x_b3_spanid = 11;  // track server log
+}
+
+

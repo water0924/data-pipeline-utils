@@ -1,0 +1,95 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@deeproute_build_tools//rules/proto:proto2struct_rule.bzl", 
+     "proto2struct_codegen_cc_library", "proto2struct_codegen_library")
+
+# ============================================================================
+# 1. debug_gps_localization_internal_state
+# ============================================================================
+proto_library(
+    name = "debug_gps_localization_internal_state_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["debug_gps_localization_internal_state.proto"],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "debug_gps_localization_internal_state_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [":debug_gps_localization_internal_state_proto"],
+)
+
+python_proto_library(
+    name = "debug_gps_localization_internal_state_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [":debug_gps_localization_internal_state_proto"],
+)
+
+# ============================================================================
+# 2. debug_ins_online_internal_state
+# ============================================================================
+proto_library(
+    name = "debug_ins_online_internal_state_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["debug_ins_online_internal_state.proto"],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "debug_ins_online_internal_state_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [":debug_ins_online_internal_state_proto"],
+)
+
+python_proto_library(
+    name = "debug_ins_online_internal_state_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [":debug_ins_online_internal_state_proto"],
+)
+
+# proto2struct support (for localization-mcu)
+proto2struct_codegen_library(
+    name = "debug_ins_online_internal_state_proto2struct",
+    visibility = ["//visibility:public"],
+    deps = [":debug_ins_online_internal_state_proto"],
+)
+
+proto2struct_codegen_cc_library(
+    name = "debug_ins_online_internal_state_c_proto",
+    includes = [".", "debug_ins_online_internal_state_proto2struct_out"],
+    visibility = ["//visibility:public"],
+    deps = [":debug_ins_online_internal_state_proto2struct"],
+)
+
+# ============================================================================
+# 3. debug_lidar_matching_module_internal_state
+# ============================================================================
+proto_library(
+    name = "debug_lidar_matching_module_internal_state_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["debug_lidar_matching_module_internal_state.proto"],
+    deps = [
+        "//proto/common:geometry_proto",
+        "//proto/drivers:pointcloud2_proto",
+        "//proto/localization:localization_internal_messages_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "debug_lidar_matching_module_internal_state_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [":debug_lidar_matching_module_internal_state_proto"],
+)
+
+python_proto_library(
+    name = "debug_lidar_matching_module_internal_state_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [":debug_lidar_matching_module_internal_state_proto"],
+)
+
+
+
+

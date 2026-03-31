@@ -1,0 +1,22 @@
+//@F_Mark@ignore@;
+syntax = "proto2";
+package deeproute.dta;
+import "canbus/lp_v35_chassis_detail.proto";
+import "canbus/lp_v35x_chassis_detail.proto";
+
+
+// topic: /dta/dta_to_cbw
+message DtaToCbwData {
+  optional int64 timestamp = 1;
+  oneof dbc_data {
+    LpV35ChassisDetail lp_v35 = 2;
+    LpV35xChassisDetail lp_v35x = 3;
+  }
+}
+
+message LpV35ChassisDetail {
+  optional deeproute.canbus.lp.v35.ADDC_23_F_23F addc_23_f_23f = 1; // 魔毯_车道线
+}
+message LpV35xChassisDetail {
+  optional deeproute.canbus.lp.v35x.ADDC_23_F_23F addc_23_f_23f = 1; // 魔毯_车道线
+}

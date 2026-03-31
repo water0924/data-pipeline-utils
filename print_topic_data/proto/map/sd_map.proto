@@ -219,6 +219,20 @@ message LaneNumChangePoint {
   optional LaneMarkingChangeType marking_change_type = 9;  // 变化类型
 }
 
+message ParkingLinkAttr {
+  enum LinkSlopeType {
+    FLAT = 0;
+    DOWNHILL = 1;
+    UPHILL = 2;
+  }
+  optional uint32 dr_pl_id = 1;
+  optional int32 floor = 2;
+  optional LinkSlopeType slope = 3;
+  optional int32 from_floor = 4;
+  optional int32 to_floor = 5;
+  repeated uint64 attach_link_ids = 6;
+}
+
 // 点限速信息
 message SDPointSpeed {
   // 点限速类型
@@ -317,6 +331,8 @@ message LinkData {
     ROAD_KIND_WIDE_LANE = 24;                  // 宽车道道路
     ROAD_KIND_BIKE_LANE = 25;                  // 自行车道路
     ROAD_KIND_SHOULDER = 26;                   // 应急车道道路
+    ROAD_KIND_ENTER_SINGLE_CROSS = 27;         // 进入复合路口道路
+    ROAD_KIND_ENTER_MULTI_CROSS = 28;          // 进入单一路口道路
     ROAD_KIND_CROSS_LINE_OVERPASS = 29;        // 跨线天桥
     ROAD_KIND_SUNKEN_ROAD = 30;                // 下沉道路
     ROAD_KIND_BRIDGE = 31;                     // 固定桥
@@ -351,15 +367,14 @@ message LinkData {
     ROAD_KIND_MAIN_ROAD_EXTEND = 60;           // 主路延长路
     ROAD_KIND_AHEAD_TURN_LEFT = 61;            // 提前左转(高精)
     ROAD_KIND_CHECKPOINT = 62;                 // 检查站
+    ROAD_KIND_CHECKPOINT_DR = 63;              // 检查站-元戎
 
-    ROAD_KIND_ENTER_SINGLE_CROSS = 27;  // 进入复合路口道路
-    ROAD_KIND_ENTER_MULTI_CROSS = 28;   // 进入单一路口道路
-
-    ROAD_KIND_PARKING_SLOPE = 63;               // 跨层连接路, 停车场link属性
-    ROAD_KIND_PARKING_ENTRANCE = 64;    // 停车场入口, 停车场link属性
-    ROAD_KIND_PARKING_EXIT = 65;         // 停车场出口, 停车场link属性
-    ROAD_KIND_PARKING_LOT = 66;          // 停车场道路, 停车场link属性
-    ROAD_KIND_PARKING_CONNECT = 67;      // 公共道路连接路, 停车场link属性
+    ROAD_KIND_PARKING_SLOPE = 64;        // 跨层连接路, 停车场link属性
+    ROAD_KIND_PARKING_ENTRANCE = 65;     // 停车场入口, 停车场link属性
+    ROAD_KIND_PARKING_EXIT = 66;         // 停车场出口, 停车场link属性
+    ROAD_KIND_PARKING_LOT = 67;          // 停车场道路, 停车场link属性
+    ROAD_KIND_PARKING_CONNECT = 68;      // 公共道路连接路, 停车场link属性
+    ROAD_KINK_PARKING_DEAD_END = 69;     // 停车场断头路, 停车场link属性
   }
 
   optional string shape_points = 3;
@@ -414,6 +429,45 @@ message LinkData {
 
   repeated common.PointLLH points = 101;   // 形状点, 使用编码02经纬度
   repeated common.Point2D points2d = 102;  // 形状点, 使用地图坐标系
+  optional ParkingLinkAttr parking_attr = 103; // 泊车link属性
+}
+
+message ParkingSpace {
+  enum ParkingSpaceType {
+    PARKING_SPACE_TYPE_UNKNOW = 0;
+    PARKING_SPACE_TYPE_DEFAULT = 1;
+    PARKING_SPACE_TYPE_FAVORITE = 2;
+    PARKING_SPACE_TYPE_RESERVED = 3;
+    PARKING_SPACE_TYPE_PRIVATE = 4;
+    PARKING_SPACE_TYPE_GUEST = 5;
+    PARKING_SPACE_TYPE_TEMPORARY = 6;
+    PARKING_SPACE_TYPE_EV_CHARGING = 7;
+    PARKING_SPACE_TYPE_WOMEN = 8;
+    PARKING_SPACE_TYPE_TRUCK = 9;
+    PARKING_SPACE_TYPE_TAXI= 10;
+    PARKING_SPACE_TYPE_BICYCLE = 11;
+  }
+  optional uint64 dr_space_id = 1;
+  optional uint32 dr_pl_id = 2;
+  optional common.PolygonLLH geom = 3;
+  optional ParkingSpaceType type = 4;
+  optional int32 floor = 5;
+  repeated uint64 related_links = 6;
+  optional string zone = 7;
+  enum ParkingSpaceDirection {
+    PARKING_SPACE_DIRECTION_UNKNOWN = 0;
+    PARKING_SPACE_DIRECTION_0_1 = 1;
+    PARKING_SPACE_DIRECTION_1_2 = 2;
+    PARKING_SPACE_DIRECTION_2_3 = 3;
+    PARKING_SPACE_DIRECTION_3_0 = 4;
+  }
+  optional ParkingSpaceDirection direction = 8;
+}
+
+message ParkingData {
+  optional uint32 dr_pl_id = 1;
+  repeated LinkData parking_links = 2;
+  repeated ParkingSpace parking_spaces = 3;
 }
 
 message SdLinks {
@@ -438,6 +492,8 @@ message SDMap {
   optional Header header = 1;
   repeated LinkData links = 2;
   repeated uint64 not_found_dr_link_ids = 3;
+
+  repeated ParkingData parking_datas = 4;
 }
 
 message SDMapOnboard {
@@ -586,6 +642,17 @@ message SDMapVersionOnboard {
   message ManualSpeedRegulationReportConfig {
     optional bool enable_report_vhr = 1;
   }
+  message SpeedJumpReportConfig {
+    optional bool enable_report = 1 [default = true];
+    // 城区道路配置
+    optional int32 max_window_length_city = 2 [default = 1000];      // 城区最大窗口长度（米）
+    optional int32 min_jump_distance_city = 3 [default = 0];        // 城区最小跳变距离（米）
+    optional int32 max_jump_distance_city = 4 [default = 500];      // 城区最大跳变距离（米）
+    // 高快道路配置
+    optional int32 max_window_length_highway = 5 [default = 1500];  // 高快最大窗口长度（米）
+    optional int32 min_jump_distance_highway = 6 [default = 0];     // 高快最小跳变距离（米）
+    optional int32 max_jump_distance_highway = 7 [default = 1000];   // 高快最大跳变距离（米）
+  }
   message BoundaryReportConfig {
     optional bool enable_report_vhr = 1;
     optional bool is_only_tunnel = 2 [default = true];
@@ -620,6 +687,7 @@ message SDMapVersionOnboard {
     optional TunnelTSRReportConfig tunnel_tsr_config = 16;
     optional AmapLaneActionReportConfig amap_lane_action_config = 17;
     optional GuidanceDiffReportConfig guid_diff_config = 18;
+    optional SpeedJumpReportConfig speed_jump_config = 19;
   }
 
   message TopoInfoConfig {

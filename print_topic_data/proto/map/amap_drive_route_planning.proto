@@ -109,6 +109,9 @@ message AmapPath {
   optional string distance = 1;
   optional string restriction = 2;
   repeated AmapStep steps = 3;
+  
+  // 用户需要停车的点
+  repeated common.PointLLH pullover_points = 4;
 }
 
 message AmapRoute {

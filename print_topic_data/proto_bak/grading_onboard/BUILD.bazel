@@ -1,0 +1,33 @@
+package(features=['-hidden_visibility_feature'])
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "grading_onboard_output_info_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["grading_onboard_output_info.proto"],
+    deps = [
+        "//proto/common:module_event_proto",
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "grading_onboard_output_info_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":grading_onboard_output_info_proto",
+    ],
+)
+
+python_proto_library(
+    name = "grading_onboard_output_info_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":grading_onboard_output_info_proto",
+    ],
+)
+

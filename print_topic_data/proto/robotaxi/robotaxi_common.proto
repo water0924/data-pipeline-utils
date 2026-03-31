@@ -1,0 +1,130 @@
+syntax = "proto3";
+package dr.robotaxi;
+
+enum ErrorCode {
+  SUCCESS = 0;
+  FAILED = 1;
+  // NOT_READY = 2;
+  // PARAMETER_ERROR = 3;
+  // REQUEST_TIMEOUT = 4;
+}
+
+enum CoorSys {
+  COORSYS_UNKNOWN = 0;
+  COORSYS_GCJ02 = 1;
+  COORSYS_WGS84 = 3;
+  COORSYS_HD = 4;
+}
+
+message Position {
+  double lon = 1;
+  double lat = 2;
+  double height = 3;
+}
+
+message AddressPoint {
+  Position point = 1;
+  string name = 2;
+  string name_en = 3;
+  // string id = 4;
+  // int32 max_wait_time = 4;  // unit s,  -1: wait until next task, 0: not wait
+  // , other: wait max_wait_time
+  // double heading = 5;
+
+  // CoorSys point_sys = 7;
+}
+
+message LoginInfo {
+  string url = 1;
+  int32 port = 2;
+  string account = 3;
+  string passwd = 4;
+  // string vin = 5;
+  // string license_number = 3;
+  // Scenario scenario = 7;
+  // bool force_login = 8;
+}
+
+enum OnlineType {
+  UNKNOWN = 0;
+  ONLINE = 1;
+  OFFLINE = 2;
+}
+
+message OrderInfo {
+  string start_name = 1;
+  string end_name = 2;
+  string start_name_en = 3;
+  string end_name_en = 4;
+  double expected_distance = 5;
+  double expected_time = 6;
+  string phone_number = 7;
+  string license_number = 8;
+  string task_id = 9;
+  int32 guest_num = 10;
+  repeated AddressPoint points = 11;
+  // string verifier = 11;
+  // repeated CommentTagInfo positive_tags = 12;
+  // repeated CommentTagInfo negative_tags = 13;
+  // int32 positive_comment_num = 14;
+  // int32 negative_comment_num = 15;
+  // repeated PassengerTagType passenger_type = 16;
+  // TaskType type = 18;
+  // RouteInfo route_info = 19;
+}
+
+message NavigationAction {
+  enum LaneTurn {
+    INVALID = 0;
+    STRAIGHT = 1;
+    LEFT = 2;
+    RIGHT = 4;
+    U_TURN_LEFT = 8;
+    U_TURN_RIGHT = 16;
+  };
+  enum LaneType {
+    UNKNOWN = 0;
+    HIGHWAY = 1;  // Controlled access. Expects no pedestrians or bicycles.
+    STREET = 2;   // No access control. Expects pedestrians and bicycles.
+    BIDIRECTIONAL = 3;  // Continuous two-way left-turn lane.
+    SHOULDER = 4;       // Emergency stopping lane
+    BIKING = 5;
+    SIDEWALK = 6;
+    RESTRICTED = 7;
+    PARKING = 8;
+    ROADWORK = 9;
+    OFFRAMP = 10;
+    ONRAMP = 11;
+    BUSLANE = 12;
+  };
+  /**
+   * 基本导航动作
+   */
+  enum MainAction {
+    MAIN_ACTION_NULL = 0;             // 无基本导航动作
+    MAIN_ACTION_TURN_LEFT = 1;        // 左转
+    MAIN_ACTION_TURN_RIGHT = 2;       // 右转
+    MAIN_ACTION_SLIGHT_LEFT = 3;      // 向左前方行驶
+    MAIN_ACTION_SLIGHT_RIGHT = 4;     // 向右前方行驶
+    MAIN_ACTION_TURN_HARD_LEFT = 5;   // 向左后方行驶
+    MAIN_ACTION_TURN_HARD_RIGHT = 6;  // 向右后方行驶
+    MAIN_ACTION_UTURN = 7;            // 左转调头
+    MAIN_ACTION_CONTINUE = 8;         // 直行
+    MAIN_ACTION_MERGE_LEFT = 9;       // 靠左
+    MAIN_ACTION_MERGE_RIGHT = 10;     // 靠右
+    MAIN_ACTION_ENTRY_RING = 11;      // 进入环岛
+    MAIN_ACTION_LEAVE_RING = 12;      // 离开环岛
+    MAIN_ACTION_SLOW = 13;            // 减速行驶
+    MAIN_ACTION_PLUG_CONTINUE = 14;   // 插入直行（泛亚特有）
+    MAIN_ACTION_ENTER_BUILDING = 65;  // 进入建筑物
+    MAIN_ACTION_LEAVE_BUILDING = 66;  // 离开建筑物
+    MAIN_ACTION_BY_ELEVATOR = 67;     // 电梯换层
+    MAIN_ACTION_BY_STAIR = 68;        // 楼梯换层
+    MAIN_ACTION_BY_ESCALATOR = 69;    // 扶梯换层
+    MAIN_ACTION_COUNT = 70;  // 导航主动作最大个数 无特殊意义
+  }
+  LaneTurn turn = 1;
+  double distance = 2;
+  string road_name = 3;
+  MainAction main_action = 4;
+}

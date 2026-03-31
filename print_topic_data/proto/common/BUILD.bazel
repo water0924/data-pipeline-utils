@@ -2,8 +2,13 @@ package(features=['-hidden_visibility_feature'])
 load("@rules_cc//cc:defs.bzl", "cc_proto_library")
 load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@deeproute_build_tools//rules/proto:proto2struct_rule.bzl",
+     "proto2struct_codegen_cc_library", "proto2struct_codegen_library")
 
 load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+# ============================================================================
+# Proto Options (for proto2struct extensions)
+# ============================================================================
 
 proto_library(
     name = "module_status_proto",
@@ -284,6 +289,20 @@ python_proto_library(
     ],
 )
 
+# proto2struct support for localization-mcu
+proto2struct_codegen_library(
+    name = "module_event_proto2struct",
+    visibility = ["//visibility:public"],
+    deps = [":module_event_proto"],
+)
+
+proto2struct_codegen_cc_library(
+    name = "module_event_c_proto",
+    includes = ["."],
+    visibility = ["//visibility:public"],
+    deps = [":module_event_proto2struct"],
+)
+
 proto_library(
     name = "header_proto",
     visibility = ["//visibility:public"],
@@ -333,5 +352,19 @@ python_proto_library(
     protos = [
         ":geometry_proto",
     ],
+)
+
+# proto2struct support for localization-mcu
+proto2struct_codegen_library(
+    name = "geometry_proto2struct",
+    visibility = ["//visibility:public"],
+    deps = [":geometry_proto"],
+)
+
+proto2struct_codegen_cc_library(
+    name = "geometry_c_proto",
+    includes = ["."],
+    visibility = ["//visibility:public"],
+    deps = [":geometry_proto2struct"],
 )
 

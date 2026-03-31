@@ -14,6 +14,16 @@ message HPCBCM_1_F3_1F3 {
   optional bool bcm_front_fog_ctrl = 4;
 }
 
+message HPCBCM_22_B_22B {
+// Report Message
+  // description 校验位 [-] [0.0|255.0] [initial_value:0]
+  optional uint32 bcm_crc_22_b = 1;
+  // description 生命信号 [-] [0.0|15.0] [initial_value:0]
+  optional uint32 bcm_rolling_counter_22_b = 2;
+  // description 整车解闭锁状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool bcm_veh_lock_sts = 3;
+}
+  
 message ZCUR_22_F_22F {
 // Report Message
   // description CRC [-] [0.0|255.0] [initial_value:0]
@@ -898,12 +908,12 @@ message ADDC_23_F_23F {
   optional double addc_confidence_nxt_ri_lane = 26;
 }
 
-message HPCBCM_241_241 {
+message HPCBCM_243_243 {
 // Report Message
   // description 校验位 [-] [0.0|255.0] [initial_value:0]
-  optional uint32 bcm_crc_241 = 1;
+  optional uint32 bcm_crc_243 = 1;
   // description 生命信号 [-] [0.0|15.0] [initial_value:0]
-  optional uint32 bcm_rolling_counter_241 = 2;
+  optional uint32 bcm_rolling_counter_243 = 2;
   // description 功能安全监测到转向灯故障 [-] [0.0|1.0] [initial_value:0]
   optional bool bcm_turn_indicator_fault_fu_sa = 3;
 }
@@ -916,6 +926,10 @@ message ICU_24_D_24D {
   optional uint32 icu_rolling_counter_24_d = 2;
   // description 总里程 [km] [0.0|999999.0] [initial_value:0]
   optional double icu_total_odometerkm = 3;
+  // description 仪表显示车速 [-] [0.0|450.0] [initial_value:0]
+  optional double icu_vehicle_screen_speed = 4;
+  // description 仪表车速单位 [-] [0.0|1.0] [initial_value:0]
+  optional bool icu_vehicle_speed_unit = 5;
 }
 
 message LMC_25_A_25A {
@@ -1349,6 +1363,12 @@ message IVI_331_331 {
 
 message HPCGW_3_B0_3B0 {
 // Report Message
+  enum GWOBCCCConnectStsType {
+    GW_OBC_CCCONNECTSTS_DISCONNECT = 0;
+    GW_OBC_CCCONNECTSTS_CHARGER_CONNECT = 1;
+    GW_OBC_CCCONNECTSTS_INVERTER_CONNECT = 2;
+    GW_OBC_CCCONNECTSTS_PARITAL_CONNECT = 3;
+  }
   // description 校验位 [-] [0.0|255.0] [initial_value:0]
   optional uint32 gw_crc_3_b0 = 1;
   // description 生命信号 [-] [0.0|15.0] [initial_value:0]
@@ -1357,8 +1377,12 @@ message HPCGW_3_B0_3B0 {
   optional bool gw_tms_outside_temp_vd = 3;
   // description 室外温度校正值 [℃] [-40.0|80.0] [initial_value:130]
   optional double gw_tms_outside_temp_corrected = 4;
+  // description 直流输入状态 [-] [0.0|1.0] [initial_value:0]
+  optional bool gw_bms_charger_dc_input = 5;
+  // description CC连接状态 [-] [0.0|3.0] [initial_value:0]
+  optional GWOBCCCConnectStsType gw_obc_cc_connect_sts = 6;
   // description 拖车连接状态 [-] [0.0|1.0] [initial_value:0]
-  optional bool gw_trm_connect_status = 5;
+  optional bool gw_trm_connect_status = 7;
 }
 
 message IBC_3_CE_3CE {
@@ -1509,6 +1533,46 @@ message ADDC_83_83 {
     ADDC_LKA_FUNCTYPE_ESA = 3;
     ADDC_LKA_FUNCTYPE_AES = 4;
     ADDC_LKA_FUNCTYPE_LKA_WITHOUT_HUMAN_MACHINE_CO_DRIVING = 5;
+  }
+  enum ADDCLDPmodeType {
+    ADDC_LDP_MODE_OFF = 0;
+    ADDC_LDP_MODE_PASSIVE = 1;
+    ADDC_LDP_MODE_STANDBY = 2;
+    ADDC_LDP_MODE_ACTIVE = 3;
+    ADDC_LDP_MODE_RESERVE = 4;
+    ADDC_LDP_MODE_RESERVE_5 = 5;
+    ADDC_LDP_MODE_RESERVE_6 = 6;
+    ADDC_LDP_MODE_FAILURE = 7;
+  }
+  enum ADDCELKmodeType {
+    ADDC_ELK_MODE_OFF = 0;
+    ADDC_ELK_MODE_PASSIVE = 1;
+    ADDC_ELK_MODE_STANDBY = 2;
+    ADDC_ELK_MODE_ACTIVE = 3;
+    ADDC_ELK_MODE_RESERVE = 4;
+    ADDC_ELK_MODE_RESERVE_5 = 5;
+    ADDC_ELK_MODE_RESERVE_6 = 6;
+    ADDC_ELK_MODE_FAILURE = 7;
+  }
+  enum ADDCCNAPmodeType {
+    ADDC_CNAP_MODE_OFF = 0;
+    ADDC_CNAP_MODE_PASSIVE = 1;
+    ADDC_CNAP_MODE_STANDBY = 2;
+    ADDC_CNAP_MODE_ACTIVE = 3;
+    ADDC_CNAP_MODE_OVERRIDE = 4;
+    ADDC_CNAP_MODE_INHIBIT = 5;
+    ADDC_CNAP_MODE_FAILURE = 6;
+    ADDC_CNAP_MODE_RESERVE = 7;
+  }
+  enum ADDCAESmodeType {
+    ADDC_AES_MODE_OFF = 0;
+    ADDC_AES_MODE_PASSIVE = 1;
+    ADDC_AES_MODE_STANDBY = 2;
+    ADDC_AES_MODE_ACTIVE = 3;
+    ADDC_AES_MODE_RESERVE = 4;
+    ADDC_AES_MODE_RESERVE_5 = 5;
+    ADDC_AES_MODE_RESERVE_6 = 6;
+    ADDC_AES_MODE_FAILURE = 7;
   }
   enum ADDCLAEBModeType {
     ADDC_LAEBMODE_OFF = 0;
@@ -1687,62 +1751,66 @@ message ADDC_83_83 {
   optional ADDCLKAFuncTypeType addc_lka_func_type = 40;
   // description 人机共驾激活状态 [-] [0.0|1.0] [initial_value:0]
   optional bool addc_lka_dil_mode = 41;
-  // description ESS扭矩控制请求 [-] [0.0|1.0] [initial_value:0]
-  optional bool addc_ess_tq_req = 42;
-  // description ESS扭矩请求值 [N·m ] [-8.0|8.0] [initial_value:1000]
-  optional double addc_ess_tq = 43;
+  // description LDP工作状态 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCLDPmodeType addc_ldp_mode = 42;
+  // description ELK工作状态 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCELKmodeType addc_elk_mode = 43;
+  // description CNAP工作状态 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCCNAPmodeType addc_cnap_mode = 44;
+  // description AES工作状态 [-] [0.0|7.0] [initial_value:0]
+  optional ADDCAESmodeType addc_aes_mode = 45;
   // description FSC_LKA工作模式 [-] [0.0|1.0] [initial_value:0]
-  optional bool fsc_lka_func_type = 44;
+  optional bool fsc_lka_func_type = 46;
   // description LAEB工作状态 [-] [0.0|7.0] [initial_value:0]
-  optional ADDCLAEBModeType addc_laeb_mode = 45;
+  optional ADDCLAEBModeType addc_laeb_mode = 47;
   // description RAEB工作状态 [-] [0.0|7.0] [initial_value:0]
-  optional ADDCRAEBModeType addc_raeb_mode = 46;
+  optional ADDCRAEBModeType addc_raeb_mode = 48;
   // description FCTB工作状态 [-] [0.0|7.0] [initial_value:0]
-  optional ADDCFCTBModeType addc_fctb_mode = 47;
+  optional ADDCFCTBModeType addc_fctb_mode = 49;
   // description RCTB工作状态 [-] [0.0|7.0] [initial_value:0]
-  optional ADDCRCTBModeType addc_rctb_mode = 48;
+  optional ADDCRCTBModeType addc_rctb_mode = 50;
   // description AEB工作模式 [-] [0.0|3.0] [initial_value:0]
-  optional ADDCAEBDeModeType addc_aeb_de_mode = 49;
+  optional ADDCAEBDeModeType addc_aeb_de_mode = 51;
   // description 方向盘震动请求 [-] [0.0|3.0] [initial_value:0]
-  optional ADDCLDWReqType addc_ldw_req = 50;
+  optional ADDCLDWReqType addc_ldw_req = 52;
   // description ACC纵向控制请求 [-] [0.0|1.0] [initial_value:0]
-  optional bool addc_acc_vlc_ctl_req = 51;
+  optional bool addc_acc_vlc_ctl_req = 53;
   // description Override状态 [-] [0.0|1.0] [initial_value:0]
-  optional bool addc_acc_ovrd_sts = 52;
+  optional bool addc_acc_ovrd_sts = 54;
   // description RCTB可用状态 [-] [0.0|1.0] [initial_value:0]
-  optional bool addc_rctb_available = 53;
+  optional bool addc_rctb_available = 55;
   // description RCTB减速请求 [-] [0.0|1.0] [initial_value:0]
-  optional bool addc_rctb_dec_req = 54;
+  optional bool addc_rctb_dec_req = 56;
   // description 紧急制动目标减速度值 [m/s2] [-16.0|16.0] [initial_value:0]
-  optional double addc_target_decel = 55;
+  optional double addc_target_decel = 57;
   // description RAEB可用状态 [-] [0.0|1.0] [initial_value:0]
-  optional bool addc_raeb_available = 56;
+  optional bool addc_raeb_available = 58;
   // description RAEB减速请求 [-] [0.0|1.0] [initial_value:0]
-  optional bool addc_raeb_dec_req = 57;
+  optional bool addc_raeb_dec_req = 59;
   // description MEB可用状态 [-] [0.0|1.0] [initial_value:0]
-  optional bool addc_meb_available = 58;
+  optional bool addc_meb_available = 60;
   // description MEB减速请求 [-] [0.0|1.0] [initial_value:0]
-  optional bool addc_meb_dec_req = 59;
+  optional bool addc_meb_dec_req = 61;
   // description ALC控制车辆变道 [-] [0.0|15.0] [initial_value:0]
-  optional FSCALClatdirectionType fsc_alc_lat_direction = 60;
+  optional FSCALClatdirectionType fsc_alc_lat_direction = 62;
   // description ALC功能状态 [-] [0.0|15.0] [initial_value:0]
-  optional FSCALCmodeType fsc_alc_mode = 61;
+  optional FSCALCmodeType fsc_alc_mode = 63;
   // description ALC不可用原因 [-] [0.0|15.0] [initial_value:0]
-  optional FSCALCNotAvaliableReasonType fsc_alc_not_avaliable_reason = 62;
+  optional FSCALCNotAvaliableReasonType fsc_alc_not_avaliable_reason = 64;
   // description ALC落位框横向距离 [m] [-15.0|15.0] [initial_value:0]
-  optional double fsc_alc_box_distance = 63;
+  optional double fsc_alc_box_distance = 65;
   // description ACL声音报警 [-] [0.0|3.0] [initial_value:0]
-  optional uint32 fsc_alc_warming_req = 64;
+  optional uint32 fsc_alc_warming_req = 66;
   // description MAI功能请求报警、限扭、断扭标志位 [-] [0.0|7.0] [initial_value:0]
-  optional ADDCMAIWarnTrqCtrlFlgType addc_mai_warn_trq_ctrl_flg = 65;
+  optional ADDCMAIWarnTrqCtrlFlgType addc_mai_warn_trq_ctrl_flg = 67;
   // description ACC请求目标制动扭矩值 [N·m] [-8000.0|0.0] [initial_value:None]
-  optional double addc_acc_target_trq_brk = 66;
+  optional double addc_acc_target_trq_brk = 68;
   // description ACC请求目标制动扭矩有效性 [-] [0.0|1.0] [initial_value:0]
-  optional bool addc_acc_target_trq_brk_vd = 67;
+  optional bool addc_acc_target_trq_brk_vd = 69;
   // description ACC请求目标扭矩有效性 [-] [0.0|1.0] [initial_value:0]
-  optional bool addc_acc_target_trq_vd = 68;
+  optional bool addc_acc_target_trq_vd = 70;
   // description ACC请求目标扭矩值 [N·m] [-8000.0|8000.0] [initial_value:8000]
-  optional double addc_acc_target_trq = 69;
+  optional double addc_acc_target_trq = 71;
 }
 
 message ADDC_84_84 {
@@ -3669,43 +3737,44 @@ message BMS_1_A1_1A1 {
 
 message LpV35ChassisDetail {
   optional HPCBCM_1_F3_1F3 hpcbcm_1_f3_1f3 = 1; // report message
-  optional ZCUR_22_F_22F zcur_22_f_22f = 2; // report message
-  optional ZCUL_231_231 zcul_231_231 = 3; // report message
-  optional ZCUL_234_234 zcul_234_234 = 4; // report message
-  optional HPCBCM_527_527 hpcbcm_527_527 = 5; // report message
-  optional IBC_182_182 ibc_182_182 = 6; // report message
-  optional IBC_183_183 ibc_183_183 = 7; // report message
-  optional IBC_184_184 ibc_184_184 = 8; // report message
-  optional IBC_185_185 ibc_185_185 = 9; // report message
-  optional IBC_18_C_18C ibc_18_c_18c = 10; // report message
-  optional EPS_18_D_18D eps_18_d_18d = 11; // report message
-  optional IBC_227_227 ibc_227_227 = 12; // report message
-  optional ACU_233_233 acu_233_233 = 13; // report message
-  optional ADDC_23_E_23E addc_23_e_23e = 14; // control message
-  optional ADDC_23_F_23F addc_23_f_23f = 15; // control message
-  optional HPCBCM_241_241 hpcbcm_241_241 = 16; // report message
-  optional ICU_24_D_24D icu_24_d_24d = 17; // report message
-  optional LMC_25_A_25A lmc_25_a_25a = 18; // report message
-  optional HPCBCM_290_290 hpcbcm_290_290 = 19; // report message
-  optional ACU_2_A3_2A3 acu_2_a3_2a3 = 20; // report message
-  optional IVI_331_331 ivi_331_331 = 21; // report message
-  optional HPCGW_3_B0_3B0 hpcgw_3_b0_3b0 = 22; // report message
-  optional IBC_3_CE_3CE ibc_3_ce_3ce = 23; // report message
-  optional IVI_5_CE_5CE ivi_5_ce_5ce = 24; // report message
-  optional ADDC_83_83 addc_83_83 = 25; // control message
-  optional ADDC_84_84 addc_84_84 = 26; // control message
-  optional VCU_B6_B6 vcu_b6_b6 = 27; // report message
-  optional VCU_B7_B7 vcu_b7_b7 = 28; // report message
-  optional HPCGW_CB_CB hpcgw_cb_cb = 29; // report message
-  optional LMC_FD_FD lmc_fd_fd = 30; // report message
-  optional SWB_305_305 swb_305_305 = 31; // report message
-  optional TCM_30_B_30B tcm_30_b_30b = 32; // report message
-  optional TCM_30_C_30C tcm_30_c_30c = 33; // report message
-  optional ADDC_23_A_23A addc_23_a_23a = 34; // control message
-  optional ADDC_23_B_23B addc_23_b_23b = 35; // control message
-  optional ADDC_23_C_23C addc_23_c_23c = 36; // control message
-  optional IVI_24_B_24B ivi_24_b_24b = 37; // report message
-  optional ADDCSOC_2_F5_2F5 addcsoc_2_f5_2f5 = 38; // control message
-  optional ADDCSOC_2_F6_2F6 addcsoc_2_f6_2f6 = 39; // control message
-  optional BMS_1_A1_1A1 bms_1_a1_1a1 = 40; // report message
+  optional HPCBCM_22_B_22B hpcbcm_22_b_22b = 2; // report message
+  optional ZCUR_22_F_22F zcur_22_f_22f = 3; // report message
+  optional ZCUL_231_231 zcul_231_231 = 4; // report message
+  optional ZCUL_234_234 zcul_234_234 = 5; // report message
+  optional HPCBCM_527_527 hpcbcm_527_527 = 6; // report message
+  optional IBC_182_182 ibc_182_182 = 7; // report message
+  optional IBC_183_183 ibc_183_183 = 8; // report message
+  optional IBC_184_184 ibc_184_184 = 9; // report message
+  optional IBC_185_185 ibc_185_185 = 10; // report message
+  optional IBC_18_C_18C ibc_18_c_18c = 11; // report message
+  optional EPS_18_D_18D eps_18_d_18d = 12; // report message
+  optional IBC_227_227 ibc_227_227 = 13; // report message
+  optional ACU_233_233 acu_233_233 = 14; // report message
+  optional ADDC_23_E_23E addc_23_e_23e = 15; // control message
+  optional ADDC_23_F_23F addc_23_f_23f = 16; // control message
+  optional HPCBCM_243_243 hpcbcm_243_243 = 17; // report message
+  optional ICU_24_D_24D icu_24_d_24d = 18; // report message
+  optional LMC_25_A_25A lmc_25_a_25a = 19; // report message
+  optional HPCBCM_290_290 hpcbcm_290_290 = 20; // report message
+  optional ACU_2_A3_2A3 acu_2_a3_2a3 = 21; // report message
+  optional IVI_331_331 ivi_331_331 = 22; // report message
+  optional HPCGW_3_B0_3B0 hpcgw_3_b0_3b0 = 23; // report message
+  optional IBC_3_CE_3CE ibc_3_ce_3ce = 24; // report message
+  optional IVI_5_CE_5CE ivi_5_ce_5ce = 25; // report message
+  optional ADDC_83_83 addc_83_83 = 26; // control message
+  optional ADDC_84_84 addc_84_84 = 27; // control message
+  optional VCU_B6_B6 vcu_b6_b6 = 28; // report message
+  optional VCU_B7_B7 vcu_b7_b7 = 29; // report message
+  optional HPCGW_CB_CB hpcgw_cb_cb = 30; // report message
+  optional LMC_FD_FD lmc_fd_fd = 31; // report message
+  optional SWB_305_305 swb_305_305 = 32; // report message
+  optional TCM_30_B_30B tcm_30_b_30b = 33; // report message
+  optional TCM_30_C_30C tcm_30_c_30c = 34; // report message
+  optional ADDC_23_A_23A addc_23_a_23a = 35; // control message
+  optional ADDC_23_B_23B addc_23_b_23b = 36; // control message
+  optional ADDC_23_C_23C addc_23_c_23c = 37; // control message
+  optional IVI_24_B_24B ivi_24_b_24b = 38; // report message
+  optional ADDCSOC_2_F5_2F5 addcsoc_2_f5_2f5 = 39; // control message
+  optional ADDCSOC_2_F6_2F6 addcsoc_2_f6_2f6 = 40; // control message
+  optional BMS_1_A1_1A1 bms_1_a1_1a1 = 41; // report message
 }

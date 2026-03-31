@@ -51,6 +51,50 @@ message SdHorizonMap {
   optional bool is_complete = 11 [default = true];
 }
 
+// 引导车道信息
+message GuidanceLaneInfo {
+  enum LaneArrow {
+    UNKNOWN = 0;
+    EMPTY = 1;
+    LEFT = 2;
+    RIGHT = 3;
+    STRA = 4;
+    U_TURN = 5;
+    LEFT_AND_STRA = 6;
+    RIGHT_AND_STRA = 7;
+    LEFT_AND_U_TURN = 8;
+    RIGHT_AND_U_TURN = 9;
+    STRA_AND_U_TURN = 10;
+    LEFT_AND_RIGHT = 11;
+    LEFT_AND_RIGHT_AND_STRA = 12;
+  };
+  enum LaneType {
+    NORMAL = 0;         // 常规车道
+    BUS = 1;            // 公交车道
+    TIDE = 2;           // 潮汐车道
+    TURNALTERABLE = 3;  // 可变车道
+  }
+
+  optional LaneArrow lane_arrow = 1;  // 车道箭头
+  optional LaneType lane_type = 2;    // 车道类型
+}
+
+// 引导融合信息
+message GuidanceIntegrationInfo {
+  enum MutableSignGroupType {
+    SEPARATED_MUTABLE_GROUP = 0; // 分离的可变车道标牌
+    ADJACENT_MUTABLE_GROUP = 1;  // 在同一个大牌子上的可变车道标牌
+    SINGLE_MUTABLE_GROUP = 2;    // 独立的只有一个的可变车道标牌
+    UNKNOWN_TYPE_GROUP = 3;
+  };
+  optional bool is_integrated = 1;                      // 引导是否融合
+  optional LaneActions raw_lane_actions = 2;            // 融合前的前背景车道
+  repeated GuidanceLaneInfo raw_lane_infos = 3;         // 融合前的车道信息
+  repeated GuidanceLaneInfo perception_lane_infos = 4;  // 感知给的车道信息
+  repeated GuidanceLaneInfo integrated_lane_infos = 5;  // 融合后的车道信息
+  optional MutableSignGroupType mutable_sign_group_type = 6;  // 可变车道标牌类型
+}
+
 /**
  * 红绿灯
  */
@@ -83,6 +127,11 @@ message RealTimeGuidance {
   repeated ActionApproach actions_approaching =
       15;  // 上一个,当前,下一个,下下一个车道动作
 
+  // 引导融合信息
+  optional GuidanceIntegrationInfo guidance_integration_info = 16;
+  // 可变车道开关
+  optional bool variable_lane_switch = 17;
+
   optional TrafficStatus traffic_status = 21;  // 交通拥堵状态
 
   // 下个红绿灯位置
@@ -94,6 +143,7 @@ message RealTimeGuidance {
 
 message SdRoadScene {
   repeated LinkSdScene scene_list = 1;  // 自车向前一段距离内的所有SD道路场景
+  optional bool is_in_crossing = 2;  // 当前是否在路口内
 }
 
 message FusionSdMap {

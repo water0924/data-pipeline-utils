@@ -1,0 +1,40 @@
+syntax = "proto3";
+package smart;
+
+message Pnt2D {
+  float x = 1;
+  float y = 2;
+}
+
+message Pnt3D {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+
+message Polygon {
+  repeated Pnt3D pnt = 1;
+}
+
+message Polyline{
+  repeated Pnt3D pnt = 1;
+}
+
+message Timestamp{
+  uint32 milliseconds = 1;
+}
+
+enum SwitchStatus {
+  SwitchStatusInvalid = 0;
+  SwitchStatusClose = 1;
+  SwitchStatusOpen = 2;
+  SwitchStatusDisable = 3;
+  SwitchStatusReserve1 = 4;
+  SwitchStatusReserve2 = 5;
+}
+
+enum ButtonState {
+  ButtonStateInitial = 0;
+  ButtonStateGrey = 1;  // 按键置灰
+  ButtonStateNotGrey = 2;     // 按键高亮
+}

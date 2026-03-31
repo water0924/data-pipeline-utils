@@ -1,0 +1,170 @@
+syntax = "proto2";
+
+package deeproute.localization;
+
+import "common/geometry.proto";
+import "drivers/gnss/ins.proto";
+import "map/sd_map.proto";
+
+message LockOnRoadResult {
+  optional int64 time_us = 1;                      // time of pose
+  optional string sd_link_id = 2;                  // corresponding link id of returned SD map
+  optional uint64 dr_link_id = 15;                 // corresponding link id of returned DR map
+  optional int32 sd_link_index = 9;               // link index ranging from [0, link_size]
+  optional double sd_distance_to_link_start = 3;   // geo referenced point distance along the link from link start
+  optional double sd_distance_to_link_end = 4;     // geo referenced point distance along the link to link end
+
+  enum Status{
+    NO_ROUTING = 0;                                // no routing response has received
+    NORMAL = 1;                                    // matching succeeded
+    YAWED = 2;                                     // if trajectory yawed from planned path.
+    PASSOVER = 3;                                  // when vehicle takes a short path, skipping many links
+    GNSS_POSE_INVALID = 4;                         // when gnss pose is invalid, such as all zeros
+  }
+
+  optional Status status = 5;                      // whether or not the vehicle is deviated from the previous planned route
+  optional string request_id = 6;                  // acquired from routing response
+  optional int32 response_id = 27;
+  optional common.Point3D matched_position_wgs84 = 7;      // matched position in wgs84, note this field will be deprecated in the future.
+  optional common.Point3D matched_position_gcj02 = 12;     // matched position in gcj02
+  optional double matched_heading = 8;             // matched point heading
+
+  message ShadowMode {
+    enum Status {
+      MATCH = 0;
+      MISMATCH = 1;
+    }
+    optional Status status = 1;
+    optional string lock_on_road_link_id = 2;
+    optional uint64 lock_on_road_dr_link_id = 4;
+    optional string ddmm_link_id = 3;
+    optional uint64 ddmm_dr_link_id = 5;
+  }
+
+  optional ShadowMode shadow_mode_result = 10;
+
+  optional deeproute.drivers.gnss.SensorsIns.Type gnss_type = 11;         // gnss type
+
+  message LinkProperties{
+    optional uint32 priority = 1;                  // 路段等级
+    optional bool tunnel = 2;                      // 是否在隧道
+    optional bool elevated = 3;                    // 是否为高架
+    optional string sdmap_version = 4;
+    optional string sdmap_id = 5;
+    optional uint64 dr_link_id = 6;
+
+    enum SdMapSourceType {
+      TENCENT = 0;
+      BAIDU = 1;
+      TENCENT_PLUS = 2;
+    }
+    optional SdMapSourceType sdmap_source_type = 7;
+  }
+  optional LinkProperties link_properties = 13;
+
+  optional uint32 route_seg_idx = 14;              // segment idx of a route
+
+  message NaviStatus{
+    optional Status status = 1;
+    
+    enum Source{
+      LOCK_ON_ROAD = 0;
+      LOCAL_ROUTING = 1;
+    }
+    
+    optional Source source = 2;
+  }
+
+  // 弃用状态
+  repeated NaviStatus navi_status_internal = 16;
+
+  message SdLocalizationStatus {
+    enum ConfidenceStatus {
+      LOW = 0;
+      HIGH = 1;
+    }
+
+    message Confidence {
+      optional double confidence_value = 1;
+      optional ConfidenceStatus confidence_status = 2;
+    }
+
+    optional ConfidenceStatus confidence = 1;
+    optional Confidence lateral_position_confidence = 2;
+    optional Confidence longitudinal_position_confidence = 3;
+  }
+
+  // 弃用状态
+  optional SdLocalizationStatus sd_localization_status = 17;
+
+  enum YawSceneType {
+    UNKNOWN = 0;                                  // 偏航, 但是场景未知
+    ROUTING_MAIN_ROAD_VEHICLE_SECONDARY_ROAD = 1; // 导航为主路，自车在辅路
+    ROUTING_SECONDARY_ROAD_VEHICLE_MAIN_ROAD = 2; // 导航为辅路，自车在主路
+  }
+  optional YawSceneType yaw_scene_type = 18;
+
+  // a more confident status focus on precision for lock on road navigation status
+  // 是否在外部道路。用来判断是否可以从泊车切行车，会比较严格。
+  enum StrictStatus{
+    NAVI_NORMAL = 1;  // 车一定在外部道路上
+    NAVI_ABNORMAL = 2;// 不确定在外部道路上
+  }
+  optional StrictStatus strict_status = 19;
+
+  optional uint32 route_seg_size = 20;  // total size of route segments
+
+  // distance to intersection pt along sdroute between sdrote and mapping traj.
+  // 到avp终点的距离
+  optional double avp_remaining_s = 21;
+  optional bool passed_avp_overlap_start_point = 22; // check if the vehicle has passed the start point of the overlap 
+                                                     //segment between navigation route and avp trajectory.
+  // 到限速切换点的距离
+  optional double avp_turn_point_remaining_s = 23; // distance that ego to avp traj turn point
+  optional double avp_turn_point_spl = 24; // speed limit at avp traj turn point
+  // 选中的终点地图id
+  optional int64 map_id = 25; // avp target map id
+  
+  optional double avp_road_point_remaining_s = 26; // distance that ego to road change point
+
+  optional int32 sd_link_index_raw = 28;    // 没有 reindex 的 link idx ，没有匹配上为-1，其他情况下为原始idx
+
+  message CandidateTopoInfo {
+    optional deeproute.sd_map.LinkData link_data = 1;
+    optional double distance = 2;
+  }
+  repeated CandidateTopoInfo candidate_topo_infos = 29;
+
+  optional uint64 amap_path_id_64 = 30;
+
+  message OverlapInfo {
+    optional int64 map_id = 1;
+    optional double dis_to_end = 2; // 导航终点到avp终点的距离
+    optional double len = 3;
+  }
+  repeated OverlapInfo overlap_infos = 31;
+}
+
+message LaneIndexEstimationResult{
+  optional int64 ras_map_time = 1;                 // time of ras map measurement
+  optional int32 sd_lane_index = 2;                // estimation result, from left to right, of same direction
+  optional int32 sd_lane_sum = 3;                  // number of same direction lanes, directly read from routing response
+  
+  enum Type{
+    INVALID = 0;                                   // no observations are given
+    INITIALIZING = 1;                              // waiting for enough obervations
+    UNRELIABLE = 2;                                // when observations are not reliable, eg jittered perception etc.
+    GOOD = 3;                                      // safe to use, lane estimtion has fully locked
+  }
+  optional Type type = 4;
+
+  optional int32 ego_lane_id = 5;                  // infered from ras map
+
+  enum ClosestCurb{
+    LEFT = 0;
+    RIGHT = 1;
+    NO_CURB = 2;
+  }
+
+  optional ClosestCurb closest_curb = 6;           // closest curb of current ras map
+}

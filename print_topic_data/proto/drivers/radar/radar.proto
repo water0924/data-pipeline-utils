@@ -362,6 +362,10 @@ message RadarObs {
   optional double longitude_absolute_vel = 33 [default = 0.0];
   optional double lateral_absolute_vel = 34 [default = 0.0];
   optional bool has_absolute_velocity = 35 [default = false]; 
+  // probability of an object[0-100] For LP
+  optional int32 mirror_prob = 36;
+  optional int32 exist_prob = 37;
+  optional int32 dyn_conf = 38;
 }
 
 message GMState {

@@ -1,0 +1,190 @@
+syntax = "proto3";
+
+package lp.hmi;
+
+import "drapi/lp/lp_common.proto";
+import "drapi/lp/basic_common.proto";
+
+message ApaHmiConfig {
+  lp.basiccommon.FunctionSwitchEnum           apa_sw              	= 1;  // APA开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum           apa_start           	= 2;  // APA功能是否开启，0：无；1：开始---预留
+  bool                                        parking_out_started  	= 3;  // 泊出开始，
+  lp.basiccommon.SlotSideEnum                 parking_out_direction	= 4;  // 泊出功能方向选择，0：无，1：左:2：右，3：前，4：后
+  bool                                        parking_continue    	= 5;  // 继续泊车，0：无；1：继续
+  bool                                        parking_pause       	= 6;  // 暂停泊车，0：无；1：暂停
+  bool                                        parking_cancel      	= 7;  // 取消泊车，0：无；1：取消
+  uint32                                      parking_slot_id     	= 8;  // 车位编号
+  lp.basiccommon.FunctionSwitchEnum           parking_started     	= 9;  // 开始泊入，0：未激活；1：激活
+  bool                                        parking_mode        	= 10; // 泊车模式：0：本地模式；1：遥控模式
+  lp.common.ParkingChangeEnum                 parking_change      	= 11; // 泊车模式--预留
+  lp.basiccommon.SlotTypeEnum                 parkingout_type     	= 12; // 泊出方式
+  lp.basiccommon.SlotSideEnum                 parking_in_direction 	= 13; // 泊入功能方向选择，0：无，1：左:2：右，3：前（车头），4：后（车尾）；
+  lp.basiccommon.SlotSideEnum                 parking_in_offset    	= 14; // 泊入偏移选择，0：无，1：左:2：右，3：前，4：后；
+  uint32                                      parking_speed	     	  = 15; // 泊车车速选择，0：正常 1：适中 2：快速；
+}
+
+message CpaHmiConfig{
+  lp.basiccommon.FunctionSwitchEnum  	        cpa_sw                  	= 1;  // CPA开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	        cpa_start               	= 2;  // CPA功能是否开启，0：无；1：开始//预留
+  lp.basiccommon.FunctionSwitchEnum  	        custom_parking_started  	= 3;  // DISABLE = 0，未激活；ENABLE = 1，激活//预留
+  bool                	                      adsorption_sw           	= 4;  // 自定义泊车吸附开关，0：FALSE；1：TRUE//预留
+  bool                	                      custom_parking_continue  	= 5;  // 自定义泊车是否继续，0：FALSE；1：TRUE//预留
+  bool                	                      custom_parking_cancel    	= 6;  // 自定义泊车是否取消，0：FALSE；1：TRUE//预留
+  uint32              	                      custom_slot_id           	= 7;  // 自定义车位编号
+  repeated lp.basiccommon.Point2D    	        slot_cpa_glb             	= 8;  // 自定义车位角点坐标
+}  
+
+message DeleteMapRequest {
+  repeated uint32 	map_ids  		  = 1;  	// 待删除的地图ID列表
+  uint32			      map_ids_count	= 2;	  // 实际使用的地图ID数量
+  bytes   			    reason 			  = 3;   	// 删除原因 (可选)
+}
+
+message HpaHmiConfig {
+  lp.basiccommon.FunctionSwitchEnum   	p2p_sw                      = 1;   // p2p功能是否开启，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum   	hpa_sw                      = 2;   // HPA功能是否开启，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum   	background_mapping_sw       = 3;   // 静默建图开关，0：关闭；1：打开
+  uint32                                route_id                    = 4;   // 路线id，0为无效值--预留，确认p2p是否会使用
+  DeleteMapRequest                      delete_map_request          = 5;   // 删除路线，0：激活， 1：未激活--事件型，收到反馈复位
+  lp.common.RoadMapBuildRequestEnum     roadmap_build_request       = 6;   // 建图操作请求--预留
+  lp.common.ParkingRequestEnum          valet_parking_request       = 7;   // CNAP功能打开按钮信号--事件型，5帧
+  uint32                                cruising_slot_id            = 8;   // 选择车位地图id--事件型，5帧
+  uint32                                select_exit_poi_id          = 9;   // 选择出口POI--事件型，5帧
+  lp.basiccommon.CheckResult          	map_id_check_result         = 10;  // 校验算法发送的maplist与座舱本地是否一致--事件型，5帧
+  bool                            		  get_map_list                = 11;  // 请求算法发送地图列表--事件型，5帧
+  uint32                          		  get_target_map_info         = 12;  // 请求算法发送单张地图渲染数据，以地图id形式，默认值为0--事件型，5帧
+  bool                            		  nav_request                 = 13;  // 请求停车场导航--预留
+} 
+
+message RpaHmiConfig{
+  lp.basiccommon.FunctionSwitchEnum  	remote_parking_started       	= 1; // 遥控泊入开始 DISABLE = 0，未激活；ENABLE = 1，激活
+  lp.basiccommon.FunctionSwitchEnum  	remote_parkingout_started    	= 2; // 遥控泊出开始
+  lp.basiccommon.FunctionSwitchEnum  	remote_door_sw               	= 3; // 关门泊入开关
+  lp.basiccommon.SlotTypeEnum        	remote_parking_out_class     	= 4; // VERTICALSLOT = 0, PARALLELSLOT = 1, OBLIQUESLOT = 2 //斜车位
+  lp.basiccommon.SlotSideEnum        	remote_parking_out_direction 	= 5; // 泊出方向
+  bool                							  remote_parking_pause          = 6; // 遥控泊车是否暂停，0：FALSE；1：TRUE
+  bool                							  remote_parking_continue       = 7; // 遥控泊车是否继续，0：FALSE；1：TRUE
+  bool                							  remote_parking_cancel         = 8; // 遥控泊车是否取消，0：FALSE；1：TRUE
+}  
+
+message ClarionCallHmiConfig{
+  lp.basiccommon.FunctionSwitchEnum  	ble_clarion_call_sts          	= 1; // 召唤是否打开，DISABLE = 0, // 关闭，关闭 ENABLE = 1, // 打开, 打开
+  uint32              							  ble_clarion_call_workrequest  	= 2; // 行驶请求，0：no action，1：start，2：suspend
+  uint32              							  ble_clarion_call_directctl    	= 3; // 行驶方向，0：Stand Still，1：Forward，2：Backward
+  bool                							  ble_clarion_call_continue     	= 4; // 召唤是否继续，0：FALSE；1：TRUE
+  uint32              							  ble_error_code                	= 5; // 蓝牙连接异常状态，0：正常 1：异常
+} 
+
+message RAHmiConfig{
+  lp.basiccommon.FunctionSwitchEnum  	ra_sw              	= 1; // 召唤是否打开，DISABLE = 0, // 关闭，关闭 ENABLE = 1, // 打开, 打开
+  uint32              							  ra_start  		 	    = 2; // 行驶请求，0：no action，1：start，
+  lp.common.RaParkingRequestEnum      ra_parking_request  = 3; // 寻迹倒车请求
+}
+
+
+//行车
+message NapHmiConfig {
+  lp.basiccommon.FunctionSwitchEnum  	nap_sw                      	= 1; // NAP开关状态，0：关闭；1：打开
+  bool                							  nap_to_lcc                   	= 2; // NAP和lcc互切信号，0：lcc；1：nap，上电默认发1
+  uint32              							  toll_station_sw              	= 3; // 收费站中控开关; 0: 关闭；1：ETC；2：人工
+  lp.basiccommon.FunctionSwitchEnum  	nap_avoid_truck_sw           	= 4; // 避让大型车辆开关设置--预留
+  lp.basiccommon.FunctionSwitchEnum  	nap_light_warn_sw             = 5; // 夜间超车灯光提醒开关设置--预留
+  lp.common.PreferLaneEnum      			nap_prefer_lane              	= 6; // 自定义驾驶员偏好车道设置开关--预留
+  lp.common.LaneChangeStyleEnum 			lane_change_style            	= 7; // 超车风格，0：保守；1：正常；2：激进
+  lp.common.DrivingStyleEnum    			driving_style               	= 8; // 速度驾驶风格--预留
+  bool                							  enable_passively_lane_change  = 9; // 是否开启障碍物触发变道。0:不开启，1:开启 --预留
+}
+
+
+
+message DmsHmiConfig {
+  uint32            dms_status             = 1; // DMS触发的事件类型，0：正常 1:分神（包括左顾右盼/打电话/低头）；2疲劳驾驶（包括闭眼/打哈欠）；3：抽烟
+  uint32            eyesonroad_status      = 2; // 驾驶员视线状态，0：驾驶员视线回正；1：驾驶员视线偏离
+  uint32            dmsvalidity_status     = 3; // DMS数据有效性状态，0：数据正常；1：数据异常   
+}
+
+message LPAHmiConfig {
+  lp.basiccommon.FunctionSwitchEnum lpa_hmi_mode_req    = 1; // LPA无人驳运模式状态，0：未激活；1：激活
+  lp.basiccommon.FunctionSwitchEnum lpa_unpiloted       = 2; // LPA云端模拟人员下车，0：有人驾驶；1：无人驾驶
+  uint32                            lpa_hmi_status_req  = 3; // LPA无人驳运巡航激活；0：默认值；1：开始；2：暂停；3：继续；4：退出
+  uint32                            lpa_hmi_routeid_req = 4; // 路线id；0：默认值（未选择路线）；1：选择id_1路线
+  uint32                            lpa_wifi_status     = 5; // LPA车云链接状态；0：未链接；1：链接正常；2：网络异常
+  uint32                            lpa_factory_id      = 6; // LPA工厂编号；0：无工厂信息；1：金华一厂
+  uint32                            lpa_parkingslot_id  = 7; // LPA云端下发驳运车位id；0：默认值（无车位）；10001：1号路线左侧1号车位
+}
+
+//topic:/leap/aiip/HmiConfig  200ms  struct
+message HmiConfig {
+  lp.basiccommon.Header              	header                  	= 1;   // 帧头，包含时间戳、序列号、模块名 
+  uint32              							  total_odometer           	= 2;   // 总里程数，单位km 
+  float               							  vehicle_speed            	= 3;   // 仪表车速，单位km/h
+  lp.basiccommon.FunctionSwitchEnum  	fcw_sw                   	= 4;   // FCW开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	vla_sw                   	= 5;   // VLA开关状态，0：关闭；1：打开--预留
+  lp.basiccommon.FunctionSwitchEnum  	vc_sw                    	= 6;   // Voice-control语音控车开关状态，0：关闭；1：打开--预留
+  lp.basiccommon.FunctionSwitchEnum  	rove_sw                  	= 7;   // CNAP漫游开关状态，0：关闭；1：打开--预留
+  uint32              							  fcw_sensitivity          	= 8;   // FCW灵敏度，0: 正常 1：低， 2：高
+  lp.basiccommon.FunctionSwitchEnum  	ldw_sw                   	= 9;   // LDW开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	aeb_sw                   	= 10;  // AEB开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	aes_sw                   	= 11;  // AES开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	lka_sw                   	= 12;  // LKA开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	elka_sw                  	= 13;  // ELKA开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	cc_sw                    	= 14;  // CC开关状态，0：关闭；1：打开--预留
+  float               							cc_target_speed           	= 15;  // CC巡航车速，单位km/h--预留
+  lp.basiccommon.FunctionSwitchEnum  	acc_sw                   	= 16;  // ACC开关状态，0：关闭；1：打开
+  uint32              							acc_time_gap              	= 17;  // ACC车间时距，分四档，0: 正常 1：近， 2：较远 3:远
+  float               							acc_target_speed          	= 18;  // ACC巡航车速，单位km/h                                               --待确认
+  lp.basiccommon.FunctionSwitchEnum  	lcc_sw                   	= 19;  // LCC开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	alc_sw                   	= 20;  // ALC开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	lca_sw                   	= 21;  // LCA开关状态，0：关闭；1：打开
+  uint32              							func_active_signal        	= 22;  // ADAS拨杆打开信号，按位置位取值如下：0：默认值；1：向下拨杆一次，2：向下拨杆两次，3：向上拨杆，目前为拨杆输入。        --信号延迟，需要讨论  
+  lp.basiccommon.FunctionSwitchEnum  	bsd_sw                    = 23;  // BSD开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	dow_sw                    = 24;  // DOW开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	rcw_sw                    = 25;  // RCW开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	rcta_sw                   = 26;  // RCTA开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	rctb_sw                   = 27;  // RCTB开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	fcta_sw                   = 28;  // FCTA开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	lcop_sw                   = 29;  // LCOP开关状态，0：关闭；1：打开--预留
+  lp.basiccommon.FunctionSwitchEnum  	esa_sw                    = 30;  // ESA开关状态，0：关闭；1：打开--预留
+  lp.basiccommon.FunctionSwitchEnum  	mai_sw                    = 31;  // MAI开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	laeb_sw                   = 32;  // LAEB开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	raeb_sw                   = 33;  // RAEB开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	fctb_sw                   = 34;  // FCTB开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	tsc_sw                    = 35;  // LCC模式下红绿灯启停，0：关闭；1：打开--预留
+  lp.basiccommon.FunctionSwitchEnum  	slwf_sw                   = 36;  // SLWF限速告警开关状态，0：关闭；1：打开
+  uint32              							  slwf_offset               = 37;  // SLWF超速告警偏移量，km/h， 取值范围 [-10,10]
+  lp.basiccommon.FunctionSwitchEnum  	slif_sw                   = 38;  // SLIF限速信息提示开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	isa_sw                    = 39;  // ISA巡航车速限制开关状态，0：关闭；1：打开--预留
+  lp.basiccommon.FunctionSwitchEnum  	tsr_sw                    = 40;  // TSR交通标志识别开关状态，0：关闭；1：打开--预留
+  lp.basiccommon.FunctionSwitchEnum  	fvsa_sw                   = 41;  // 前车起步提醒开关配置，0：关闭；1：打开                              --更新规范
+  lp.basiccommon.FunctionSwitchEnum  	pdc_sw                    = 42;  // PDC开关配置，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	isa_active                = 43;  // ISA智能限速控制开关状态，0：关闭；1：打开--预留
+  lp.basiccommon.FunctionSwitchEnum  	ihbc_active               = 44;  // IHBC开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	sdis_active               = 45;  // 窄道辅助开关状态，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	sentinel_active           = 46;  // 哨兵模式是否打开，0：关闭；1：打开
+  bool                							sentinel_sensitive_level   	= 47;  // 哨兵模式灵敏度，0：Low；1：High
+  lp.basiccommon.FunctionSwitchEnum  	lowpower_sw               = 48;  // 低功耗开关是否打开，0：关闭；1：打开
+  lp.basiccommon.FunctionSwitchEnum  	ble_app_rpa_connect       = 49;  // BLE与APP连接状态，表示BLE是否支持RPA功能，DISABLE= 0；ENABLE = 1
+  uint32              							ble_app_connect_sts       	= 50;  // BLE与APP连接状态， 0：unconnectted；1：connectted
+  ApaHmiConfig        							apa_hmi_config            	= 51;  // APA交互配置
+  HpaHmiConfig        							hpa_hmi_config            	= 52;  // HPA交互配置
+  NapHmiConfig        							nap_hmi_config            	= 53;  // NAP领航辅助交互配置（CNAP+NAP）
+  RpaHmiConfig        							rpa_hmi_config            	= 54;  // RPA交互配置
+  ClarionCallHmiConfig							clarion_call_hmi_config    	= 55;  // 直线召唤交互配置
+  RAHmiConfig									      ra_hmi_config			  	      = 56;  // 循迹倒车交互配置
+  uint32                						handsoff_alarm            	= 57;  // 脱手报警挡位选择，0：标准；1：舒适
+  lp.basiccommon.FunctionSwitchEnum  	disarm_alarm_sw           = 58;  // 解除脱手报警，0：未解除；1：解除
+  DmsHmiConfig          						dms_status                	= 59;  // DMS交互配置
+  CpaHmiConfig          						cpa_hmi_config             	= 60;  // CPA交互配置
+  uint32                						bsd_sel                   	= 61;  // BSD报警方式，0灯光，1 灯光+声音
+  uint32                						ldp_sw                    	= 62;  // 0 关闭，1 打开
+  uint32                						aeb_spd_set_sw              = 63;  // 0:正常 1:低 2:高 3:较高 4:特高--预留   
+  uint32                						aeb_car_set_sw              = 64;  // 0:正常 1:低 2:高 3:较高 4:特高--预留   
+  uint32                						aeb_bike_set_sw             = 65;  // 0:正常 1:低 2:高 3:较高 4:特高--预留   
+  uint32                						aeb_ped_set_sw              = 66;  // 0:正常 1:低 2:高 3:较高 4:特高--预留   
+  uint32                						acc_target_speed_source   	= 67;  // 仪表设定车速来源。0：默认值；1：驾驶员调速；2：规控自动调速；
+  uint32                						swbl_roller_up_sts          = 68;  // 0:no action 1:UP;滚轮上拨信号
+  uint32                						swbl_roller_dsts           	= 69;  // 0:no action 1:DOWN;滚轮下拨信号
+  LPAHmiConfig									    lpa_hmi_config				      = 70;  // 驳运交互配置
+  lp.basiccommon.LatencyStatus      latency_status            	= 71;  // 统计耗时，具体在common中定义
+  lp.basiccommon.ModuleStatus       module_status             	= 72;  // 统计错误状态、错误代码、错误原因等，具体在common模块的ModuleStatus定义
+}

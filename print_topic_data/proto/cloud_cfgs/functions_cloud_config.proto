@@ -36,6 +36,12 @@ enum ActiveFieldMode {
   ActiveFieldMode_OUTSIDE = 3;
 }
 
+enum ActiveSnowMode {
+  ActiveSnowMode_OFF = 0;
+  ActiveSnowMode_ON = 1;
+  ActiveSnowMode_AUTO = 2;
+}
+
 message ActiveSafetyCloudConfig {
   optional ActiveSafetyGear aeb_gear = 1 [ default = ActiveSafety_MIDDLE ];
   optional ActiveSafetyGear front_meb_gear = 2
@@ -47,6 +53,8 @@ message ActiveSafetyCloudConfig {
   optional ActiveFieldMode field_mode = 7 [ default = ActiveFieldMode_DEFAULT ];
   optional ActiveSafetyGear raeb_gear = 8 [ default = ActiveSafety_MIDDLE ];
   optional RAEBCloudConfig raeb_cloud_config = 9;
+  optional ActiveSnowMode snow_mode = 10 [ default = ActiveSnowMode_OFF ];
+  optional ActiveSafetyESACloudConfigDetail active_safety_esa_cloud_config_detail = 11;
 }
 
 message ActiveSafetyCloudConfigDetail {
@@ -152,8 +160,24 @@ message ActiveSafetyCloudConfigDetail {
   // 是否用radar校验低速二轮车
   optional bool check_low_speed_bicycle_by_radar = 53 [ default = true ];
   // 是否用radar校验低速小车
-  optional bool check_low_speed_vehicle_by_radar = 54 [ default = true ];  
+  optional bool check_low_speed_vehicle_by_radar = 54 [ default = true ];
+  // 各类物体的配置参数
+  optional ObjectConfig vehicle = 55;
+  optional ObjectConfig truck = 56;
+  optional ObjectConfig pedestrian = 57;
+  optional ObjectConfig bicycle = 58;
+  optional ObjectConfig traffic_cone = 59;
+  // 云端增加主动安全抑制场地，抑制码为加密后的位置信息
+  repeated string inhibit_code = 60;
+  optional bool enable_model_decision_override_aeb_decision = 61;
 }
+
+message SpeedTable1D {
+  repeated double speed = 1;
+  repeated double value = 2;
+}
+
+message ObjectConfig { repeated SpeedTable1D tracking_time_table = 1; }
 
 message MAICloudConfig {
   optional double window_duration = 1;
@@ -191,6 +215,7 @@ message HAVPCloudConfig {
   optional bool enable_detour = 6 [ default = false ];
   optional bool enable_reverse_slope_search = 7 [ default = true ];
   optional bool enable_vin_user = 8 [ default = false ];
+  optional bool zero_gnss_pose_height = 9 [ default = false ];
 }
 
 message RADSCloudConfig {
@@ -224,21 +249,53 @@ message DrivingCloudConfig {
   optional bool exam_mode = 1;
   optional bool enable_waiting_area = 2 [ default = false ];
   optional bool driving_poa = 3 [ default = true ];
-  optional bool enable_buslane_hmi_switch = 4 [ default = true ]; //分时公交车道文言使能开关，默认为true，2025/8/XX C01T首发新加@ao chen
-  optional bool enable_hwconspdlmt_switch = 5 [ default = false ]; //高速施工限速使能开关，默认为false，2025/8/XX C01T首发新加@siqin lin
-  optional bool enable_hwconspdlmtper_switch = 6 [ default = true ]; //基于感知的高速施工限速使能开关，默认为true，2025/8/29 @siqin lin
-  optional bool enable_construction_passable_switch = 7 [ default = true ];//施工passable模型使能开关，默认true, 2025/11/3 @ao chen
-  optional bool enable_highway_passable_switch = 8 [ default = true ];//高速全开passable模型使能开关，默认true, 2025/11/3 @ao chen
-  
+  optional bool enable_buslane_hmi_switch = 4 [
+    default = true
+  ]; //分时公交车道文言使能开关，默认为true，2025/8/XX C01T首发新加@ao chen
+  optional bool enable_hwconspdlmt_switch = 5 [
+    default = false
+  ]; //高速施工限速使能开关，默认为false，2025/8/XX C01T首发新加@siqin lin
+  optional bool enable_hwconspdlmtper_switch = 6 [
+    default = true
+  ]; //基于感知的高速施工限速使能开关，默认为true，2025/8/29 @siqin lin
+  optional bool enable_construction_passable_switch = 7
+      [ default =
+            true ]; //施工passable模型使能开关，默认true, 2025/11/3 @ao chen
+  optional bool enable_highway_passable_switch = 8
+      [ default =
+            true ]; //高速全开passable模型使能开关，默认true, 2025/11/3 @ao chen
+
   // vla 分场景开关，默认true, 2025/12/1 @haoyu li
-  optional bool enable_vla_speed_limit_switch = 9 [ default = true ];//启用vla限速使能开关，默认true, 2025/12/1 @haoyu li
-  repeated deeproute.vla.vla_output.VlaOutput.RiskScenario enable_vla_scenes = 10;//启用vla场景开关
+  optional bool enable_vla_speed_limit_switch = 9
+      [ default = true ]; //启用vla限速使能开关，默认true, 2025/12/1 @haoyu li
+  repeated deeproute.vla.vla_output.VlaOutput.RiskScenario enable_vla_scenes =
+      10; //启用vla场景开关
+  optional bool enable_highway_merge_stop_switch = 11
+      [ default =
+            true ]; //高速全开汇入刹停使能开关，默认true, 2025/11/26 @ao chen
+  optional bool enable_follow_car_defensive_switch = 12 [
+    default = true
+  ]; //前车急减速防御性驾驶使能开关，默认true, 2025/11/26 @ao chen
+
+  optional bool demo_sys_info_switch = 13 [ default = false ]; //Demo时对退功能提示的显示开关
+  optional bool demo_downgrade_info_switch = 14 [ default = false ]; //Demo时对降级提示的显示开关
+  optional bool demo_horizontal_override_info_switch = 15 [ default = false ]; //Demo时对横向接管提示的显示开关
+  optional bool demo_longitudinal_override_info_switch = 16 [ default = false ]; //Demo时对纵向接管提示的显示开关
+  optional bool demo_active_info_switch = 17 [ default = false ]; //Demo时对激活功能提示的显示开关
+
+  optional bool enable_variable_lane_guidance_switch = 18 [
+    default = false
+  ];                // 可变车道引导云端开关，默认false 2026/01/21 @peiyao ke
+  optional bool hazy_mode_info_switch = 20 [ default = true ];  // 雾天模式云端开关
+  optional bool enable_single_lane_defensive = 21 [ default = true ];  //限速异常场景单车道防御性降速开关@Tingzhuang Liu
+  optional bool nca_mrm_pullover = 22 [ default = true ];  //nca高快靠边停车开关@haitao huang
 }
 
 enum UltrasonicMode {
   ULTRASONIC_ONLY_MODE_1 = 0;       // only uss 1.0
   ULTRASONIC_MODE_1_AND_MODE_3 = 1; // uss 1.0 + uss 3.0
   ULTRASONIC_ONLY_MODE_3 = 2;       // only uss 3.0
+  ULTRASONIC_UNKNOWN = 3;           // default mode
 }
 
 message UltrasonicCloudConfig { optional UltrasonicMode uss_mode = 1; }
@@ -259,4 +316,19 @@ message ComponentCloudConfig {
 message ChurchCloudConfig {
   repeated ComponentCloudConfig components =
       1; // List of component configurations
+}
+
+message ActiveSafetyESACloudConfigDetail{
+  // 是否启用详细配置
+  optional bool enable = 1 [ default = false ];
+  // 前、后方轨迹检查时间
+  optional SpeedTable1D traj_collision_init_frame = 2;
+  // 前方目标检测范围
+  optional double clearance_normal_forward_t = 3 [default = 1.5];
+  // 后方纵向检测范围
+  optional SpeedTable1D clearance_rear_obj_speed_to_s_threshold = 4;
+  // 边刹边让的减速度
+  optional double const_acceleration = 5 [default = -3.0];
+  // 边刹边让的jerk
+  optional double const_jerk_abs = 6 [default = 3.0];
 }

@@ -53,6 +53,7 @@ message EventInfo {
     LeaveBusLaneNotify leave_bus_lane_notify = 129; //远离公交车道提示
     MemorySpeedLimitResult memory_speed_limit_result = 130;
     SelectLaneResult select_lane_result = 131; 
+    MrmPullOverStatusChange mrm_pull_over_status_change = 132; //mrm靠边停车状态变化
 
     // ACC 1000~1499
     ACCStatusChange acc_status_change = 1000;
@@ -103,6 +104,9 @@ message EventInfo {
     VPALearingCompletedInfo vpa_learning_completed_info =
         3008;  // 地图保存完成后上报信息
     VPAMapMatchStatusChange vpa_map_match_status_change = 3009; // 地图匹配状态变化
+    VpaRoamRequestResult vpa_roam_request_result = 3010; // 漫游指令响应
+    VPABackroundExpandMapStatusChange vpa_background_expand_map_status_change = 3011; // 后台扩建地图状态变化
+
     // AVM 3500 ~ 3600
     AVMStatusChange avm_status_change = 3500;
     AVMSettings avm_settings = 3501;
@@ -223,6 +227,7 @@ enum RemindInfo {
   WATCH_PARALLEL_VEHICLES = 37;              //请注意并行车辆
   WATCH_MERGING_VEHICLES = 38;               //请注意汇入车辆
   NO_DRIVABLE_PATH_AHEAD = 39;               //前方无可通行道路，请接管
+  WATCH_CUT_IN_VEHICLE = 40;                 //请注意前方车辆并线
 
   // acc 100~400
   CAN_NOT_ACTIVE_ACC = 100;
@@ -329,6 +334,11 @@ enum RemindInfo {
   TJP_ACTIVED_FAILED = 1602;
   TJP_TAKEOVER_REMIND = 1603;  // TJP介入请求
   TJP_READY_TO_ACTIVE = 1604;  // 提示可激活TJP功能
+
+  // robotaxi
+  ROBOTAXI_CHANGE_DESTINATION_SUCCESS = 2001;   // 更换目的地成功
+  ROBOTAXI_PULL_OVER_FAILED = 2002;             // 靠边停车失败
+
 }
 
 // common
@@ -417,6 +427,8 @@ message DecelerationInfo {
     CONSTRUCTION_ZONE = 14; //感知施工区域减速
     VISIBLE_MASK_BLIND_SPOTS = 15; //基于VISIBLE_MASK盲区减速   
     INTERSECTION_DEFENSIVE = 16; //交叉路口防御性降速 
+    FOLLOW_CAR_DEFENSIVE = 17; //跟前车防御性降速    
+    HIGHWAY_VEHICLE_DEFENSIVE = 19; //高速车辆防御性降速
   }
   Reason reason = 1;
 }
@@ -517,6 +529,33 @@ message ChangeRoutingRequestResult {
   int32 map_engine_code = 4; //-1时，表示无效值
 }
 
+message VpaRoamRequestResult {
+  enum ResponseType {
+    ResponseType_DEFAULT = 0;
+    ResponseType_POSITION_GENERAL = 1;      // x楼找车位
+    ResponseType_POSITION_CHARGE = 2;       // x楼找充电车位
+    ResponseType_POSITION_EXIT = 3;         // 找出口
+    ResponseType_POSITION_FLOOR = 4;        // 找x楼
+    ResponseType_POSITION_AREA = 5;         // 找区域
+    ResponseType_POSITION_AREA_PARK = 6;    // 找区域车位
+    ResponseType_POSITION_AREA_CHARGE = 7;  // 找区域充电桩车位
+
+    ResponseType_COMMAND_ROAM_FIND = 100;       // 漫游就近泊入
+    ResponseType_COMMAND_START_ROAM_FIND = 101; // 开始漫游泊车并就近泊入
+    ResponseType_COMMAND_START_ROAM = 102;      // 开始漫游泊车
+    ResponseType_COMMAND_CONTINUE_ROAM = 103;   // 继续漫游泊车
+    ResponseType_COMMAND_CLOSE_ROAM = 104;      // 退出漫游泊车
+    ResponseType_COMMAND_ACTIVE_ROUTING = 105;  // 巡航到默认车位
+  }
+  ResponseType type = 1;
+  bool is_success = 2;
+  int32 floor = 3;
+  bool in_park = 4;
+  bool have_empty_park = 5;
+  int32 failed_code = 6;
+  string failed_reason = 7;
+  string response_tts = 8;
+}
 
 message NavigationAction {
   enum LaneTurn {
@@ -526,9 +565,14 @@ message NavigationAction {
     RIGHT = 3;
     U_TURN = 4;
     U_TURN_LEFT = 5;
-    U_TURN_RIGHT = 6;
+    U_TURN_RIGHT = 6;    
+  };
+  enum RestrictedLaneType {
+    RESTRICTED_LANETYPE_UNKNOWN = 0;
+    VARIABLE_LANE = 1;  //可变车道
   };
   LaneTurn turn = 1;
+  RestrictedLaneType restricted_lane_type = 2;
 }
 
 message VlaStatusChange {
@@ -561,6 +605,12 @@ message PullOverStatusChange {
   dr.routeplanning.VLAStatus to = 3;
   dr.routeplanning.BehaviorReason reason = 4;
   dr.routeplanning.VLAAction vla_action = 5;
+}
+
+message MrmPullOverStatusChange {
+  dr.routeplanning.MRMLaneChangeStatus from = 1;
+  dr.routeplanning.MRMLaneChangeStatus to = 2;
+  dr.routeplanning.BehaviorReason reason = 3;  
 }
 
 message LeaveBusLaneRequestResult {
@@ -744,6 +794,7 @@ message NCAOutODD {
     ARRIVING_FINAL_DESTINATION = 1;  //即将到达终点
     UNABLE_TURN_ARROUND = 2;         //前方无法掉头
     ETC_PASS = 3;                    //ETC通行
+    ODD_NOTIFICATION = 4;            //ODD提示
   }
   enum RoadClass {
     HIGHWAY = 0;  // 高速
@@ -886,6 +937,18 @@ message VPAMapMatchStatusChange {
   MapMatchStatus status = 1;  // 只在select_slot状态下发送（for GL），vis收到后只在select_slot状态下处理
   bytes semantic_map = 2;     //语义地图 deeproute.localization.havp_map.HAVPMap
   deeproute.localization.havp_map.HAVPMapMetaData map_info = 3;
+}
+
+// Only Send when learning status is VPA_MAP_LEARNING_NO_SENSE_EXPAND_MAP
+message VPABackroundExpandMapStatusChange {
+  enum Status {
+    STATUS_NONE = 0;
+    STATUS_EXPAND_MAP_BUILDING = 1; // 实时扩建中
+    STATUS_EXPAND_MAP_SAVING_SUCCESS = 2; // 挂P档存图完成（vis请求最新地图）
+    STATUS_EXPAND_MAP_EXIT = 3; // 退出扩建状态（vis请求最新地图）
+    STATUS_EXPAND_MAP_SAVING_FAILED = 4; // 定位存图失败
+  }
+  Status status = 1;
 }
 
 // 被动触发AVM, AVM 向CDC\VIS 发送通知

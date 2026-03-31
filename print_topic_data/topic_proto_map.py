@@ -106,5 +106,6 @@ topic_proto_map = {
     "/gwm/someip/prkg_posn_resp":avp_pb2.PrkgPosnSet(),
     "/leap/adas/hmi_config":lp_hmi_config_pb2.HmiConfig(),
     "/leap/hmi/parking_motion":lp_hmi_display_pb2.ParkingMotion(),
-    "/leap/hmi/auto_drive_info":lp_hmi_display_pb2.AutoDriveInfo()
+    "/leap/hmi/auto_drive_info":lp_hmi_display_pb2.AutoDriveInfo(),
+    
 }

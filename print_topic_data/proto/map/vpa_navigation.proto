@@ -1,0 +1,21 @@
+syntax = "proto2";
+
+import "map/vla_command.proto";
+
+package deeproute.map.vpa;
+
+message ParkingModeRequest {
+  optional string request_id = 1;
+  optional deeproute.map.VLARoutingOption.VLAPositionOfAction vla_position_of_action = 2;
+}
+
+message ParkingModeResponse {
+  enum ParkingModeStatus {
+    PARKING_MODE_STATUS_UNKNOWN = 0;
+    PARKING_MODE_STATUS_MAP = 1;
+    PARKING_MODE_STATUS_ROAM = 2;
+  }
+  optional string request_id = 1;
+  optional ParkingModeStatus parking_mode_status = 2;
+  optional int32 target_parking_space_id = 3;
+}

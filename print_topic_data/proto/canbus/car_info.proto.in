@@ -157,6 +157,7 @@ message SteerReport {
   optional bool hand_off_monitor_cap = 16;// Capacitance
   optional HandOnWheel hand_on_wheel = 17;
   optional bool torque_override = 18;
+  optional double eps_motor_torque = 19; //EPS输出助力电机扭矩
 }
 
 message HandOnWheel {

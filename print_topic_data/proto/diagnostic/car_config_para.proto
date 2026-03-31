@@ -196,6 +196,10 @@ message LPCarConfigPara {
   uint64 esa_emergency_steering_assist = 29;
   uint64 mai_misapplied_accelerator_mitigation = 30;
   uint64 locp_lateral_obstacle_collision_prevention = 31;
+  uint64 driver_monitor = 32; 
+  uint64 suspension_type = 33;
+  uint64 motor_drive_type = 34;
+  uint64 varImuSupplier = 35;
 }
 
 message GWMCarConfigPara {
@@ -207,7 +211,7 @@ message GWMCarConfigPara {
     B01 = 9;
     P01 = 10;
     B16_1 = 11;
-    B26_1 = 12;
+    B26 = 12;
     ES14 = 13;
     EC15 = 14;
     B12 = 15;
@@ -233,6 +237,16 @@ message GWMCarConfigPara {
     P01_4 = 36;
     DE06E = 39;
     DE09E = 40;
+
+    B26E = 41;
+    M81H = 42;
+    B07E = 43;
+    B07 = 44;
+    M81T = 45;
+    M82T = 46;
+    M83T = 47;
+
+    
   }
 
   // - 交通标志信息
@@ -642,7 +656,14 @@ message GWMCarConfigPara {
     BAB40 = 2;  // - 六人座
     BAB50 = 3;  // - 七人座
   }
-
+   // - 安全带提示
+   enum SEAT_BELT_UNFASTENED_WARNING {
+    QAF00 = 0;
+    QAF10 = 1;
+    QAF20 = 2;
+    QAF30 = 3;
+    QAF40 = 4;
+  }
   // - 项目代码
   PROJECT_CODE project_code = 1;
   // - 交通标志信息
@@ -762,6 +783,8 @@ message GWMCarConfigPara {
   BLOWOUT_STABILITY_CONTROL_FUNCTION blowout_stability_control_function = 54;
   // - 乘人
   PASSENGER passenger = 55;
+  // - 安全带提示
+  SEAT_BELT_UNFASTENED_WARNING seat_belt_unfastened_warning = 56;
 }
 enum VehicleType {
   /* gwm 1-99 */
@@ -787,6 +810,7 @@ enum VehicleType {
   GWM_C06A1 = 23;
   GWM_C06A2 = 24;
   GWM_C06A3 = 25;
+
   GWM_D037 = 26;
   GWM_B26A1 = 27;
   GWM_B26A2 = 28;
@@ -802,7 +826,16 @@ enum VehicleType {
   GWM_P01Z = 38;
   GWM_DE06 = 39;
 
+  GWM_M81T = 40;
+  GWM_M82T = 41;
+  GWM_M83T = 42;
 
+  GWM_B26 = 43;
+  GWM_B26E = 44;
+  GWM_B07 = 45;
+  GWM_B07E = 46;
+
+  GWM_M81H = 47;
 
   /* geely 100-199 */
   GL_P177 = 100;
@@ -827,8 +860,9 @@ enum VehicleType {
   LP_D11 = 259;
   LP_D19A = 260;
   LP_D19B = 261;
-  LP_D21 = 262;
+  LP_D21A = 262;
   LP_D19OS = 263;
+  LP_D21B = 264;
 }
 
 message CarConfigPara {  // topic :  /diagnostic/car_config_para 1HZ

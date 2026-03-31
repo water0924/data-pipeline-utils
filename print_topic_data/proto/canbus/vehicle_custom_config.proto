@@ -16,4 +16,45 @@ message VehicleCustomConfig {
     optional double brake_cmd_min = 12 [default = -5];
     optional double brake_cmd_max = 13 [default = 5];
     optional double epb_release_brake_torque = 14 [default = 800];
+    optional double brake_torque_compensation = 15 [default = 0];
+    optional double throttle_override_torque_coefficient = 16 [default = 0];
+
+    // ESA/AES hand torque override calibration parameters
+    optional bool esa_override_cali_enable = 101 [default = false];
+    optional bool aes_override_cali_enable = 102 [default = false];
+    optional double same_torque_threshold = 103 [default = 4.0];
+    optional double same_time_threshold_ms = 104 [default = 60.0];
+    optional double diff_torque_threshold = 105 [default = 1.5];
+    optional double diff_time_threshold_ms = 106 [default = 400.0];
+    optional double same_torque_threshold_step_two = 107 [default = 2.0];
+    optional double same_time_threshold_ms_step_two = 108 [default = 200.0];
+    optional double diff_time_threshold_ms_step_one = 109 [default = 600.0];
+
+    // Driving/Parking steer_override calibration enable
+    optional bool steer_overide_cali_enable = 110 [default = false];
+    // steering calibration enable
+    optional bool steering_cali_enable = 111 [default = false];
+    // longitudinal command calibration enable
+    optional bool lon_cmd_cail_enable = 112 [default = false];
+
+    // reserve calibration parameters
+    optional bool reserve_cail_enable = 113 [default = false];
+    // uint8 reserve (range: 0..255)
+    optional uint32 uint8_reserve1 = 114 [default = 0];
+    optional uint32 uint8_reserve2 = 115 [default = 0];
+    optional uint32 uint8_reserve3 = 116 [default = 0];
+    optional uint32 uint8_reserve4 = 117 [default = 0];
+    // int16 reserve (range: -32768..32767)
+    optional int32 int16_reserve1 = 118 [default = 0];
+    optional int32 int16_reserve2 = 119 [default = 0];
+    // float16_0p1 reserve (range: -3276.75..3276.75)
+    optional float float16_0p1_reserve1 = 120 [default = 0.0];
+    optional float float16_0p1_reserve2 = 121 [default = 0.0];
+    optional float float16_0p1_reserve3 = 122 [default = 0.0];
+    optional float float16_0p1_reserve4 = 123 [default = 0.0];
+    // float16_0p01 reserve (range: -327.675..327.675)
+    optional float float16_0p01_reserve1 = 124 [default = 0.0];
+    optional float float16_0p01_reserve2 = 125 [default = 0.0];
+    optional float float16_0p01_reserve3 = 126 [default = 0.0];
+    optional float float16_0p01_reserve4 = 127 [default = 0.0];
 }

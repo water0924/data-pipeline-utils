@@ -1,0 +1,104 @@
+syntax = "proto3";
+package lp.hmi;
+
+import "drapi/lp/basic_common.proto";
+
+enum FunctionStatusEnum {
+	INVALID   = 0;     // 默认值
+	DISABLE   = 1;     // 关闭
+	ENABLE    = 2;     // 打开
+}
+
+enum AccelerationTypeEnum {
+	TYPE_INVALID    = 0; // 默认值
+	ACCELERATE 		= 1; // 加速
+    DECELERATE		= 2; // 减速
+}
+
+enum DistanceTypeEnum {
+	DISTANCE_TYPE_INVALID   = 0; // 默认值
+	DISTANCE_TYPE_INCREASE	= 1; // 车距调大
+    DISTANCE_TYPE_DECREASE  = 2; // 车距调小
+    DISTANCE_TYPE_MINIMUM   = 3; // 车距最小
+    DISTANCE_TYPE_MAXIMUM   = 4; // 车距最大
+}
+
+enum SteeringTypeEnum {
+	STEERING_INVALID    = 0;  // 默认值
+	STEERING_RIGHT 		= 1;  // 右转
+	STEERING_LEFT 		= 2;  // 左转
+	STEERING_STRAIGHT 	= 3;  // 直行
+	STEERING_U_TURN		= 4;  // 掉头
+}
+
+enum SteeringPositionEnum {
+	STEERING_POSITION_NONE = 0; //默认
+}
+
+enum LineChangeTypeEnum {
+	CHANGE_INVALID  = 0;   // 默认值
+	CHANGE_RIGHT 	= 1;   // 向右变道
+	CHANGE_LEFT 	= 2;   // 向左变道
+	CHANGE_CANCEL 	= 3;   // 取消变道
+	CHANGE_AVOID    = 4;   // 避让变道
+	CHANGE_NONE     = 5;   // 未指定车道变道
+}
+
+enum StopDrivingTypeEnum {
+	STOP_DRIVING_INVALID    	= 0;   // 默认值
+	STOP_DRIVING_NO_OPERATION 	= 1;   // 无操作
+	STOP_DRIVING_PULL_OVER 		= 2;   // 靠边
+}
+
+enum DirectionTypeEnum {
+	DIRECTION_INVALID       = 0;   // 默认值
+	DIRECTION_ADVANCE 	    = 1;   // 前进
+	DIRECTION_RETREAT 		= 2;   // 后退
+}
+
+enum VLAIntentEnum{
+    VLA_INTENT_NONE 					= 0;   //⽆意图
+    //1~200 ⾏⻋
+    VLA_DRIVING_SETTING 				= 1;   //驾驶设置
+    VLA_SPEED_SETTING 					= 2;   //速度设置
+    VLA_DISTANCE_SETTING 				= 3;   //⻋距设置
+    VLA_STEERING_SETTING 				= 4;   //转向设置
+    VLA_LINE_CHANGE_SETTING 			= 5;   //变道设置
+    VLA_STOP_DRIVING 					= 6;   //停⻋操作
+	VLA_DIRECTION_SETTING				= 7;   //方向设置
+    //201~400 泊⻋
+    VLA_INTENT_SEARCH_PARKING_SPACE 	=201;  //寻找⻋位
+    VLA_INTENT_PARK_INTO_PARKING_SPACE 	=202;  //泊⼊⻋位
+    VLA_INTENT_PARK_OUT_PARKING_SPACE 	=203;  //泊出⻋位
+}
+
+message VLASlots {
+  FunctionStatusEnum        noa_status              = 1;   //NOA功能的开启/关闭意图，0：默认值；1：关闭；2：开启，默认赋0 
+  FunctionStatusEnum        e2e_status              = 2;   //E2E功能的开启/关闭意图，0：默认值；1：关闭；2：开启，默认赋0	  
+  AccelerationTypeEnum    	acceleration_type       = 3;   //智驾控车速度设置，0：默认值；1：加速；2：减速，默认赋0
+  uint32               	  	cruising_speed_value    = 4;   //驾驶员明确的目标巡航速度设置值，默认值赋0
+  DistanceTypeEnum        	distance_type           = 5;   //智驾控车车距设置，0：默认值；1：车距调大；2：车距调小；3：车距最小；4：车距最大；，默认赋0
+  uint32               	  	distance_value          = 6;   //驾驶员明确的车距档位设置值，默认值赋0
+  SteeringTypeEnum        	steering_type           = 7;   //智驾转向设置，0：默认值；1：右转；2：左转；3：直行；4：掉头，默认赋值0
+  SteeringPositionEnum    	steering_position       = 8;   //预留
+  LineChangeTypeEnum      	line_change_type        = 9;   //智驾变道设置，0：默认值；1：向右变道；2：向左变道；3：取消变道；4：避让变道；5：未指定车道变道，默认值赋0
+  string              		avoid_objec             = 10;  //智驾需避让的目标，座舱智驾发送文字信息，默认赋"无"
+  StopDrivingTypeEnum       stop_driving_type       = 11;  //智驾停车操作，0：默认值；1：无操作；:2：靠边，默认赋0
+  string              		stop_driving_position   = 12;  //驾驶员输入把车停到XX地方，默认赋值"无"
+  FunctionStatusEnum     	narrow_road_meeting     = 13;  //智驾窄路会车模式开启/关闭意图，0：默认值；1：关闭；2：开启，默认赋0
+  DirectionTypeEnum			direction_type			= 14;  //智驾方向设置，0：默认值；1：前进；2：后退，默认赋0
+  uint32					direction_value			= 15;  //驾驶员明确的距离设置值，默认值赋0
+}
+
+//topic:/leap/aiip/vla_req  事件型 proto
+message VLAReq {
+  lp.basiccommon.Header  		header        	= 1;  // 帧头，包含时间戳、序列号、模块名
+  uint32            					id           	= 2;   //座舱接收语音信息标签，每一个智驾相关语音赋单独的值，值不应重复，如无语音信息输入，赋值为0 
+  uint64            					timestamp    	= 3;   //语音模块发给中转模块的时间戳
+  uint32            					reserve    		= 4;   //预留
+  string            					asr          	= 5;   //⽤⼾说的内容 如"泊⼊A区域的1号⻋位",座舱默认赋值"无"
+  VLAIntentEnum     					vla_intent   	= 6;   //驾驶员行驶意图，座舱默认赋值0
+  VLASlots          					vla_slots    	= 7;   //信息槽：针对行驶意图的细化
+  lp.basiccommon.LatencyStatus  latency_status 	= 8;   // 统计耗时，具体在common中定义
+  lp.basiccommon.ModuleStatus   module_status  	= 9;   // 统计错误状态、错误代码、错误原因等，具体在common模块的leap.basiccommon.proto.ModuleStatus定义
+}

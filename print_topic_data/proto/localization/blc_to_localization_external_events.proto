@@ -25,4 +25,6 @@ message BlcToLocalizationEvent {
   double timestamp_ms = 2;
 
   CurrentModeEvent current_mode_event = 3;
+
+  bool suspend_module = 4;
 }

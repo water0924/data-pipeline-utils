@@ -38,6 +38,7 @@ message Config {
   optional string serial_number = 30;
   optional deeproute.common.Vector3 install_angle_error = 31;
   optional CalibrationType calib_type = 32;
+  optional bool is_original = 33 [default = false];
 }
 
 message LidarConfig {

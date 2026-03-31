@@ -1,0 +1,145 @@
+syntax = "proto2";
+
+// 长城对外交付的协议，暂未用到
+
+package deeproute.control.gwm;
+
+message Point3D {
+  optional double x = 1 [default = nan];
+  optional double y = 2 [default = nan];
+  optional double z = 3 [default = nan];
+}
+
+// 驾驶模式
+enum DrivingMode {
+  MANUAL = 0;             // 手动模式
+  LONGITUDINAL_AUTO = 1;  // 纵向控车
+  LATERAL_AUTO = 2;       // 横向控车
+  AUTO = 3;               // 横纵向控车
+}
+
+// 档位
+enum GearPosition {
+  INVALID  = 0; // 无效
+  PARK     = 1; // P
+  REVERSE  = 2; // R
+  NEUTRAL  = 3; // N
+  DRIVE    = 4; // D
+  LOW      = 5; // L
+}
+
+// 灯光请求
+message VehicleSignal {
+  enum TurnSignal {
+    TURN_NONE = 0;    // 无请求
+    TURN_LEFT = 1;    // 左转向
+    TURN_RIGHT = 2;   // 右转向
+  }
+  optional TurnSignal turn_signal = 1;      // 转向灯
+  optional bool high_beam = 2;              // 远光灯
+  optional bool low_beam = 3;               // 近光灯
+  optional bool emergency_light = 4;        // 双闪
+}
+
+// topic: /control/control_command
+message ControlCommand {
+  optional int64 timestamp = 1;                // publish time (us)
+  optional double throttle = 2;                // 驱动扭矩，单位：Nm
+  optional double brake = 3;                   // 制动扭矩，单位：Nm
+  optional double acceleration = 4;            // 加速度，单位：m/s^2
+  optional double steering_target = 5;         // 前轮转角请求，单位：rad
+  optional DrivingMode driving_mode = 6;       // 请求的驾驶模式
+  optional GearPosition gear_location = 7;     // 档位请求
+  optional VehicleSignal signal = 8;           // 灯光请求
+  optional bool use_apa = 9;                   // 是否APA激活
+}
+
+// topic: /aeb/aeb_command
+message AEBCommand {
+  optional int64 timestamp = 1; // publish time (us)
+  message AEBMode {
+    enum Level {
+      NONE = 0;
+      LEVEL_1 = 1;
+      LEVEL_2 = 2;
+      LEVEL_3 = 3;
+      LEVEL_4 = 4;
+    }
+    optional bool enable = 1;           // 是否激活
+    optional Level level = 2;           // 激活等级
+    optional double request_value = 3;  // 请求值
+  }
+  optional AEBMode fcw = 2;
+  optional AEBMode aeb = 3;
+  optional AEBMode abp = 4;
+  optional AEBMode awb = 5;
+  optional AEBMode eba = 6;
+  optional AEBMode aba = 7;
+  optional AEBMode rctb = 8;
+  optional AEBMode meb = 9;
+}
+
+// topic: /esa/esa_command
+message ESACommand {
+  optional int64 timestamp = 1;         // publish time (us)
+  optional bool enable = 2;             // 是否激活
+  optional double steering_target = 3;  // 前轮转角请求，单位：rad
+}
+
+// topic: /canbus/car_state
+message VehicleState {
+  optional int64 timestamp = 1;           // publish time (us)
+  optional GearPosition gear = 2;         // 档位
+  optional DrivingMode driving_mode = 3;  // 驾驶模式
+  optional float front_wheel_angle = 4;   // 前轮转角，单位：radian
+  enum TurnSignal {
+      NONE_TURN = 0;
+      LEFT = 1;
+      RIGHT = 2;
+  }
+  optional TurnSignal turn_signal = 5;                      // 转向灯
+  optional bool warning_blinker_on = 6;                     // 双闪
+  optional float speed = 7;                                 // 车速，单位：m/s
+  optional double front_wheel_angle_rate = 8;               // 前轮转速，单位：radian
+  optional int64 localization_timestamp = 9 [default = 0];
+  optional double act_driving_torque = 10;                  // 轮端驱动扭矩，单位：Nm
+  optional double act_brake_torque = 11;                    // 轮端制动扭矩，单位：Nm
+  enum EpbStatus {
+      DEFAULT = 0;
+      PARKED = 1;
+      RELEASED = 2;
+      PARKING = 3;
+      RELEASING = 4;
+  }
+  optional EpbStatus epb_sts = 12;  // EPB状态
+  enum AvhSts {
+      OFF = 0;
+      STANDBY = 1;
+      ACTIVE = 2;
+      INVALID = 3;
+  }
+  optional AvhSts avh_sts = 13;                                   // AVH状态
+  optional double master_cylinder_pressure = 14 [default = 0.0];  // 主缸压力，单位bar
+  optional double throttle_actual_pedal = 15 [default = 0.0];     // 油门踏板开度 0-1
+  optional double brake_actual_pedal = 16 [default = 0.0];        // 刹车踏板开度 0-1
+  optional double steering_wheel_angle_rad = 17 [default = 0.0];  // 方向盘转角，单位rad
+  optional double steering_wheel_speed = 18 [default = 0.0];      // 方向盘转速，单位rad/s
+  optional bool steer_override = 19 [default = false];            // 方向盘接管
+  optional bool brake_override = 20 [default = false];            // 刹车接管
+  optional bool throttle_override = 21 [default = false];         // 油门接管
+  enum ShiftOverrideType {
+      NO_OVERRIDE = 0;
+      VALID_OVERRIDE = 1;
+      INVALID_OVERRIDE= 2;
+  }
+  optional ShiftOverrideType shift_override = 22;              // 挡位接管
+  optional double steering_wheel_torque = 23 [default = 0.0];  // 方向盘扭矩，单位Nm
+
+  // 车辆定位信息
+  optional Point3D position = 24;
+  optional Point3D velocity_enu = 25;
+  optional Point3D velocity_flu = 26;
+  optional Point3D roll_pitch_yaw = 27;
+  optional Point3D angular_velocity_flu = 28;
+  optional Point3D acceleration_flu = 29;
+}

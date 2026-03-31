@@ -1,0 +1,138 @@
+//@F_Mark@ignore@;
+syntax = "proto3";
+
+package dr.safety;
+
+import "safety/safety_event.proto";
+
+message BoolValue {
+  bool value = 1;
+}
+
+enum ErrorCode {
+  SUCCESS = 0;
+  // common
+  INTERNEL_ERROR = 1 [ deprecated=true ];
+  METHOD_NOT_FOUND_ERROR = 2; // 功能未支持
+  PARAMETER_ERROR = 3;
+  // GetEvents method
+  EVENTS_NOT_EXIST_ERROR = 4;
+  INTERNAL_ERROR = 5;
+}
+
+message GetEvents {
+  int32 start_tm_sec = 1;
+  int32 end_tm_sec = 2;
+  // type
+  BoolValue dtc = 3; // empty: include dtc; true:only dtc; false: ignore dtc
+  BoolValue trace_log = 4; // empty: include trace_log
+  // modules
+  Modules choosed_modules = 5; // wrapper for 'dr.common.Module'
+  Events choosed_events = 6; // wrapper for 'dr.common.Event'
+}
+
+message GetEventsRp {
+  uint32 total_nums = 1;
+  uint32 start_index = 2;
+  repeated SafetyEvent event_infos = 3;
+}
+
+message SetSafetyPolicy {
+  bool enable_policy = 1; // enable/disable general safety policies
+  // about `enable_critical_policy`:
+  // if true, enable CRITICAL safety policies even if enable_policy is false;
+  // if false, follow enable_policy.
+  // CRITICAL safety policies are defined by config file.
+  bool enable_critical_policy = 2;
+  bool enable_mcu_policy = 3;
+}
+
+message SetSafetyPolicyRp {
+  bool policy_enabled = 1; // is general safety policy enabled
+  bool critical_policy_enabled = 2; // is critical safety policy enabled. when policy_enabled is true, critical_policy_enabled will also be set to true.
+  bool mcu_policy_enabled = 3;      // is MCU safety policy enabled.
+}
+
+message GetSafetyPolicyStatusRq {}
+
+message GetSafetyPolicyStatusRp {
+  bool policy_enabled = 1;  // is general safety policy enabled
+  bool critical_policy_enabled =
+      2;  // is critical safety policy enabled. when policy_enabled is true,
+          // critical_policy_enabled will also be set to true.
+  bool mcu_policy_enabled = 3;  // is MCU safety policy enabled.
+}
+
+message ManageSafetyEventRequest {
+  bool enable_safety_event = 1;
+}
+
+message ManageSafetyEventResponse {
+  bool safety_event_status = 1;
+}
+
+enum TopicCheckAction {
+  TCA_UNSPECIFIED = 0;
+  TCA_ENABLE = 1;           // 打开检测，可选覆盖阈值
+  TCA_DISABLE = 2;          // 关闭检测（直到 TTL 到期或 RESET）
+  TCA_RESET_TO_CONFIG = 3;  // 移除覆盖，恢复静态配置状态
+}
+
+message TopicCheckOverride {
+  string topic_name = 1;          // 必填，必须存在于 DetectionConfig
+  TopicCheckAction action = 2;    // 必填
+  optional double threshold_override = 3; // 可选，action=ENABLE 时生效
+  uint32 ttl_sec = 4;             // 可选，0 表示永久，>0 表示从 request.timestamp 起算
+  string operator = 5;            // 可选，便于审计
+}
+
+message TopicCheckControlRq {
+  repeated TopicCheckOverride overrides = 1;  // 支持批量开关
+}
+
+message TopicCheckControlResult {
+  string topic_name = 1;           // 必填，必须存在于 DetectionConfig
+  ErrorCode code = 2;              // 成功/参数错误/未配置等
+  string message = 3;              // 失败原因或提示
+  bool check_enabled = 4;          // 生效后的开关状态
+  double effective_threshold = 5;  // 实际使用的阈值（来自覆盖或配置）
+  uint64 expire_at_sec = 6;        // 生效截止的 epoch 秒（0 表示长期）
+}
+
+message TopicCheckControlRp {
+  repeated TopicCheckControlResult results = 1;
+}
+
+message Request {  // topic: /safety/request
+  string id = 1; // required
+  int64 timestamp = 2; // ms
+  oneof rq {
+    GetEvents get_events = 3;
+    SetSafetyPolicy set_safety_policy = 4;
+    ManageSafetyEventRequest manage_safety_event_request = 5;
+    GetSafetyPolicyStatusRq get_safety_policy_status_rq = 6;
+    TopicCheckControlRq topic_check_control_rq = 7;
+  }
+}
+
+message Response {  // topic: /safety/Response
+  string id = 1;
+  ErrorCode code = 2;
+  oneof rp {
+    GetEventsRp get_events_rp = 3;
+    SetSafetyPolicyRp set_safety_policy_rp = 4;
+    ManageSafetyEventResponse manage_safety_event_response = 5;
+    GetSafetyPolicyStatusRp get_safety_policy_status_rp = 6;
+    TopicCheckControlRp topic_check_control_rp = 7;
+  }
+}
+
+message TrackingChain {
+  repeated int32 event_index = 1;
+}
+
+message EventStatus {// topic: /safety/events
+  int64 timestamp = 1;
+  repeated SafetyEvent event_infos = 2;
+  repeated TrackingChain event_chains = 3;
+}

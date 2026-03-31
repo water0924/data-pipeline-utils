@@ -4,6 +4,7 @@ syntax = "proto3";
 import "perception/deeproute_perception_ras_map.proto";
 import "drapi/business_info.proto";
 import "drapi/notification.proto";
+import "drapi/gwm/havp/havp_common.proto";
 
 package dr.hmi;
 
@@ -133,10 +134,16 @@ message ParkingRenderContext {
   ParkingPosType setting_pos = 23;  // 当前设置的泊入姿态（泊入偏移、停靠偏好）
   ParkingSpaceStatus apa_customize_parkingspace_status = 24; // 自选车位框状态
   int32 customize_parking_frame_id = 25;  // 自选车位框ID
-  int32 gl_map_id = 26;
+  int32 gl_map_id = 26;  // GL新建地图ID
   bool custom_park_reversed = 27;
   bool saving_map_when_learning_not_sence = 28;  // 学习无感知时是否保存地图
-  SlotTypeEnum parking_space_type = 29; // LP泊入目标车位类型
+  int32 apa_parking_time = 29;  // APA泊车用时
+  int32 apa_round_num = 30;  // APA泊车换挡次数
+  int32 vpa_pass_gate_times_in_cruising = 31;  // VPA巡航经过闸机次数
+  string matched_map_name = 32;  // 匹配到的地图名称
+  havp.ParkingPoi select_poi_info = 33;
+  SlotTypeEnum parking_space_type = 34; // LP泊入目标车位类型
+  bool is_roaming = 35;       // gwm漫游
 }
 
 enum ParkingSpaceStatus{

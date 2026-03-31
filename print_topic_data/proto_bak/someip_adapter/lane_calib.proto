@@ -1,0 +1,119 @@
+syntax = "proto3";
+package deeproute.someip_adapter.gwm;
+
+// clang-format off
+
+enum EnumLaneCalType {
+    AROUNDCAM_IN_CALIBRATION_PROCESS = 0;
+    LIDAR_IN_CALIBRATION_PROCESS = 1;
+    INMU_IN_CALIBRATION_PROCESS = 2;
+}
+
+enum EnumLaneCalResult {
+    USE_FACTORY_CALIBRATION_RESULT = 0;
+    USE_LANE_CALIBRATION_RESULT = 1;
+}
+
+enum EnumLaneCalModReq {
+    LANE_CAL_CANCEL_CALIBRATION = 0;
+    LANE_CAL_AROUND_CAM_ON = 1;
+    LANE_CAL_LIDAR_ON = 2;
+    LANE_CAL_INMU_ON = 3;
+}
+
+enum EnumLaneCalModResp {
+    LANE_CAL_SUCCESS = 0;
+    LANE_CAL_FAILED = 1;
+}
+enum EnumLaneCalErrorCode {
+    CAL_CODE_SUCCESS = 0;
+    CAL_CODE_CORNER_DETECTION_ERROR = 1;
+    CAL_CODE_INTRINSIC_ERROR = 2;
+    CAL_CODE_CONFIG_FILE_ERROR = 3;
+    CAL_CODE_IMAGE_SIZE_MATCH_ERROR = 4;
+    CAL_CODE_VEHICLE_TYPE_ERROR = 5;
+    CAL_CODE_VEHICLE_STATUS_ERROR = 6;
+    CAL_CODE_FILE_OPEN_ERROR = 7;
+    CAL_CODE_TIME_OUT = 8;
+    CAL_CODE_TARGET_NOT_FOUND = 9;
+    CAL_CODE_TARGET_NUM_WRONG = 10;
+    CAL_CODE_REPROJECTION_ERR_OUT_OF_RANGE = 11;
+    CAL_CODE_IMU_DATA_ERROR = 12;
+    CAL_CODE_LIDAR_DATA_ERROR = 13;
+    CAL_CODE_INSTALL_ERR_OUT_OF_RANGE = 14;
+}
+
+// 进入/取消标定模式请求
+// topic: /someip/adapter/lane_cal_mod_req
+// input/output: output
+message LaneCalModReq {
+  EnumLaneCalModReq request = 1;
+}
+
+// 恢复出厂设置
+// topic: /someip/adapter/factory_mod_rst_req
+// input/output: output
+message FactoryModRstReq {
+  EnumLaneCalType cal_type = 1;
+}
+
+// 获取当前应用的标定参数类型
+// topic: /someip/adapter/curr_cal_type_get_req
+// input/output: output
+message CurrCalTypeGetReq {
+  repeated EnumLaneCalType cal_type = 1;
+}
+
+message CurrCalPrmTyp {
+  EnumLaneCalType cal_type = 1;
+  EnumLaneCalResult cal_prm_type = 2;
+}
+
+// 回复当前应用的标定参数类型
+// topic: /someip/adapter/curr_cal_type_get_resp
+// input/output: input
+message CurrCalTypeGetResp {
+  repeated CurrCalPrmTyp cal_prm_type = 1;
+}
+
+// 标定模式进入/取消标定成功与否响应
+// topic: /someip/adapter/lan_cal_mod_resp 
+// input/output: input
+message LaneCalModResp {
+  EnumLaneCalModResp response = 1;
+}
+
+// 标定模式状态及标定进度
+// topic: /someip/adapter/lane_cal_mod_sts
+// input/output: input
+message LaneCalModSts {
+  EnumLaneCalType cal_type = 1;
+  // progress value from 0 to 100
+  uint32 cal_progress = 2;
+}
+
+// 当前标定使用结果
+// topic: /someip/adapter/curr_cal_result_sts
+// input/output: input
+message CurrCalResultSts {
+  repeated CurrCalPrmTyp use_result = 1;
+}
+
+// 标定成功/失败的原因
+// topic: /someip/adapter/lane_cal_error_sts
+// input/output: input
+message LaneCalErrorSts {
+  EnumLaneCalErrorCode error_code = 1;
+}
+
+// 相机标定结果
+// topic: /someip/adapter/avm_cam_cal_result_report
+// input/output: input
+enum EnumAVMCamCalResult {
+  CAM_CAL_RES_SUCCESS = 0;
+}
+message AVMCamCalResultReport {
+  EnumAVMCamCalResult result = 1;
+}
+
+// clang-format on

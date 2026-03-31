@@ -53,17 +53,28 @@ message ObjectStop {
   repeated string wait_for_obstacle = 5;
 }
 
-// not used
 message ObjectNudge {
   enum Type {
+    UNKNOWN = 0;
     LEFT_NUDGE = 1;  // drive from the left side of the obstacle
     RIGHT_NUDGE = 2; // drive from the right side of the obstacle
     NO_NUDGE = 3;    // No nudge is set.
   };
-  optional Type type = 1;
+  optional Type type = 1 [default = UNKNOWN];
   // minimum lateral distance in meters. positive if type = LEFT_NUDGE
   // negative if type = RIGHT_NUDGE
   optional double distance_l = 2;
+}
+
+message ObjectLonDec {
+  enum Type {
+    UNKNOWN = 0;
+    OVERTAKE = 1;
+    YIELD = 2;
+    IGNORE = 3;
+    CUTIN_YIELD = 4;
+  };
+  optional Type type = 1 [default = UNKNOWN];
 }
 
 // dodge the obstacle in lateral direction when driving

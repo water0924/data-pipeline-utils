@@ -42,6 +42,8 @@ message SSMEvent {
   optional int32 sequence_num = 4;
   reserved 5 to 6;
   optional dr.safety.EventLevel level = 7;
+  //@C_Mark@3@;
+  repeated uint64 error_id = 8;  // error id list from MCU
 }
 
 //其它信息由safety从配置补全
@@ -139,10 +141,12 @@ message McuSafetyState {
 message McuEventInfo {
   optional dr.common.Event event = 1; // required. event id
   optional dr.common.Module module = 2; // required. event source module
+  //@C_Mark@3@;
+  repeated uint64 error_id = 3;
 }
 
 // MCU->SOC, adapter receive McuEventInfo and call `deeproute::common::ReportEvent`
-// topic="/common/serialized_module_events", max_serialized_size=512 bytes
+// topic="/common/serialized_module_events", max_serialized_size=2048 bytes
 message McuEventsInfo {
   //@C_Mark@55@;
   repeated McuEventInfo mcu_event_info = 1; // required. event info from MCU

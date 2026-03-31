@@ -112,7 +112,7 @@ message RequestInfo {
   // Pass in multiple latitude and longitude in sequence. Supports up to 13
   // waypoints.
   repeated deeproute.common.PointLLH end_points = 2;
-
+  
   // for navi route planning
   optional RoutingOption option = 3;
   // for dr route planning
@@ -129,6 +129,11 @@ message RequestInfo {
     VLA_REQUEST = 2;
   }
   optional RequestType request_type = 4;
+  enum RequestSource {
+    VIZ_PAD = 0;
+    HUT = 1;
+  }
+  optional RequestSource request_source = 12;
 
   optional bool retry_on_net_error = 10;
 
@@ -169,6 +174,24 @@ enum RoutingCode {
   // 高德重算与当前正在执行的vla路线不一致，忽略重算结果
   AMAP_RECALCULATE_IGNORE = 13;
 
+  // ======记忆限速相关错误======
+
+  // 匝道不支持记忆限速
+  SPEED_LIMIT_NOT_SUPPORT_RAMP = 14;
+  // 主辅路不支持记忆限速
+  SPEED_LIMIT_NOT_SUPPORT_MAIN_SECONDARY_ROAD = 15;
+  // 路口内道路不支持记忆限速
+  SPEED_LIMIT_NOT_SUPPORT_JUNCTION_ROAD = 16;
+  // 已经超出了最大限速，请重试
+  SPEED_LIMIT_EXCEED_MAX = 17;
+  // 已经超出了最低限速，请重试
+  SPEED_LIMIT_EXCEED_MIN = 18;
+  // 限速降低太多了，请重试
+  SPEED_LIMIT_DECREASE_TOO_MUCH = 19;
+  // 限速增加太多了，请重试
+  SPEED_LIMIT_INCREASE_TOO_MUCH = 20;
+
+
   // from server
   // 路网查不到Link
   ROUTING_SERVER_NOT_FOUND_LINK = 1003;
@@ -202,6 +225,8 @@ message RoutingResponse {
   optional Status status = 1;
   optional string request_id = 2;
   repeated Route routes = 3;
+  
+  optional VLACommandResponse.VLACommandResult vla_command_result = 4;
 }
 
 message SegmentInfo {

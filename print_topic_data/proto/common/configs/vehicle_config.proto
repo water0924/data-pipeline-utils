@@ -239,11 +239,16 @@ message PncVehicleParam {
   repeated Pair vx_max_lon_jerk_pts = 37;
   optional SpeedometerMapParam speedometer_map_param = 38;
   repeated Pair vx_max_stwl_deg_pts = 39;
+  repeated Pair vx_min_lon_acc_apa_pts = 40;
+  repeated Pair vx_max_lon_acc_apa_pts = 41;
+  repeated Pair vx_min_lon_jerk_apa_pts = 42;
+  repeated Pair vx_max_lon_jerk_apa_pts = 43;
 
   // active-safety pnc vehicle param from 100-150
   optional double ess_lat_iter_delay = 100 [default = 14.0];
   optional double ess_max_lateral_acceleration = 101 [default = 5.0];
   optional double ess_max_steer_angle_rate = 102 [default = 450.0];
+  optional double max_slope_deg = 103 [default = 18.0];
 
   message ModelParam {
     optional double distance_center_to_front_alxe = 1;  // [m]

@@ -1,19 +1,20 @@
-package(features=['-hidden_visibility_feature'])
-load("@rules_cc//cc:defs.bzl", "cc_proto_library")
-load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
-load("@rules_proto//proto:defs.bzl", "proto_library")
-
 load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+
+package(features = ["-hidden_visibility_feature"])
 
 proto_library(
     name = "vla_output_proto",
-    visibility = ["//visibility:public"],
     srcs = ["vla_output.proto"],
+    strip_import_prefix = "/proto/",
+    visibility = ["//visibility:public"],
     deps = [
         "//proto/common:geometry_proto",
         "//proto/drivers:sensor_image_proto",
+        "//proto/prediction:trajectory_proto",
     ],
-    strip_import_prefix = "/proto/",
 )
 
 cc_proto_library(
@@ -26,8 +27,8 @@ cc_proto_library(
 
 python_proto_library(
     name = "vla_output_proto_py",
-    visibility = ["//visibility:public"],
     protos = [
         ":vla_output_proto",
     ],
+    visibility = ["//visibility:public"],
 )

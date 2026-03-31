@@ -15,20 +15,28 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1d\x64rapi/lp/lp_adas_states.proto\x12\x07lp.adas\"O\n\x0f\x41\x64\x61sPowerStatus\x12\x13\n\x0bon1b_active\x18\x01 \x01(\x08\x12\x13\n\x0bon2a_active\x18\x02 \x01(\x08\x12\x12\n\non3_active\x18\x03 \x01(\x08\"p\n\rAdasSystemMsg\x12/\n\rcurrent_state\x18\x01 \x01(\x0e\x32\x18.lp.adas.AdasSystemState\x12.\n\x0cpower_status\x18\x02 \x01(\x0b\x32\x18.lp.adas.AdasPowerStatus*\x98\x01\n\x0f\x41\x64\x61sSystemState\x12\x14\n\x10\x41\x44\x41S_SYS_UNKNOWN\x10\x00\x12\x13\n\x0f\x41\x44\x41S_SYS_NORMAL\x10\x01\x12\x16\n\x12\x41\x44\x41S_SYS_LOW_POWER\x10\x02\x12\x18\n\x14\x41\x44\x41S_SYS_CALIBRATION\x10\x03\x12\x10\n\x0c\x41\x44\x41S_SYS_OTA\x10\x04\x12\x16\n\x12\x41\x44\x41S_SYS_POWER_OFF\x10\x05\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1d\x64rapi/lp/lp_adas_states.proto\x12\x07lp.adas\"O\n\x0f\x41\x64\x61sPowerStatus\x12\x13\n\x0bon1b_active\x18\x01 \x01(\x08\x12\x13\n\x0bon2a_active\x18\x02 \x01(\x08\x12\x12\n\non3_active\x18\x03 \x01(\x08\"p\n\rAdasSystemMsg\x12/\n\rcurrent_state\x18\x01 \x01(\x0e\x32\x18.lp.adas.AdasSystemState\x12.\n\x0cpower_status\x18\x02 \x01(\x0b\x32\x18.lp.adas.AdasPowerStatus\"m\n\x10\x41\x64\x61sSystemMsgRsp\x12/\n\rcurrent_state\x18\x01 \x01(\x0e\x32\x18.lp.adas.AdasSystemState\x12(\n\x03\x61\x63k\x18\x02 \x01(\x0e\x32\x1b.lp.adas.AdasSystemStateAck*\x98\x01\n\x0f\x41\x64\x61sSystemState\x12\x14\n\x10\x41\x44\x41S_SYS_UNKNOWN\x10\x00\x12\x13\n\x0f\x41\x44\x41S_SYS_NORMAL\x10\x01\x12\x16\n\x12\x41\x44\x41S_SYS_LOW_POWER\x10\x02\x12\x18\n\x14\x41\x44\x41S_SYS_CALIBRATION\x10\x03\x12\x10\n\x0c\x41\x44\x41S_SYS_OTA\x10\x04\x12\x16\n\x12\x41\x44\x41S_SYS_POWER_OFF\x10\x05*\x9c\x01\n\x12\x41\x64\x61sSystemStateAck\x12\x18\n\x14\x41\x44\x41S_SYS_ACK_UNKNOWN\x10\x00\x12\x19\n\x15\x41\x44\x41S_SYS_ACK_RECEIVED\x10\x01\x12\x1c\n\x18\x41\x44\x41S_SYS_ACK_IN_PROGRESS\x10\x02\x12\x1a\n\x16\x41\x44\x41S_SYS_ACK_COMPLETED\x10\x03\x12\x17\n\x13\x41\x44\x41S_SYS_ACK_FAILED\x10\x04\x62\x06proto3')
 
 _ADASSYSTEMSTATE = DESCRIPTOR.enum_types_by_name['AdasSystemState']
 AdasSystemState = enum_type_wrapper.EnumTypeWrapper(_ADASSYSTEMSTATE)
+_ADASSYSTEMSTATEACK = DESCRIPTOR.enum_types_by_name['AdasSystemStateAck']
+AdasSystemStateAck = enum_type_wrapper.EnumTypeWrapper(_ADASSYSTEMSTATEACK)
 ADAS_SYS_UNKNOWN = 0
 ADAS_SYS_NORMAL = 1
 ADAS_SYS_LOW_POWER = 2
 ADAS_SYS_CALIBRATION = 3
 ADAS_SYS_OTA = 4
 ADAS_SYS_POWER_OFF = 5
+ADAS_SYS_ACK_UNKNOWN = 0
+ADAS_SYS_ACK_RECEIVED = 1
+ADAS_SYS_ACK_IN_PROGRESS = 2
+ADAS_SYS_ACK_COMPLETED = 3
+ADAS_SYS_ACK_FAILED = 4
 
 
 _ADASPOWERSTATUS = DESCRIPTOR.message_types_by_name['AdasPowerStatus']
 _ADASSYSTEMMSG = DESCRIPTOR.message_types_by_name['AdasSystemMsg']
+_ADASSYSTEMMSGRSP = DESCRIPTOR.message_types_by_name['AdasSystemMsgRsp']
 AdasPowerStatus = _reflection.GeneratedProtocolMessageType('AdasPowerStatus', (_message.Message,), {
   'DESCRIPTOR' : _ADASPOWERSTATUS,
   '__module__' : 'drapi.lp.lp_adas_states_pb2'
@@ -43,13 +51,24 @@ AdasSystemMsg = _reflection.GeneratedProtocolMessageType('AdasSystemMsg', (_mess
   })
 _sym_db.RegisterMessage(AdasSystemMsg)
 
+AdasSystemMsgRsp = _reflection.GeneratedProtocolMessageType('AdasSystemMsgRsp', (_message.Message,), {
+  'DESCRIPTOR' : _ADASSYSTEMMSGRSP,
+  '__module__' : 'drapi.lp.lp_adas_states_pb2'
+  # @@protoc_insertion_point(class_scope:lp.adas.AdasSystemMsgRsp)
+  })
+_sym_db.RegisterMessage(AdasSystemMsgRsp)
+
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _ADASSYSTEMSTATE._serialized_start=238
-  _ADASSYSTEMSTATE._serialized_end=390
+  _ADASSYSTEMSTATE._serialized_start=349
+  _ADASSYSTEMSTATE._serialized_end=501
+  _ADASSYSTEMSTATEACK._serialized_start=504
+  _ADASSYSTEMSTATEACK._serialized_end=660
   _ADASPOWERSTATUS._serialized_start=42
   _ADASPOWERSTATUS._serialized_end=121
   _ADASSYSTEMMSG._serialized_start=123
   _ADASSYSTEMMSG._serialized_end=235
+  _ADASSYSTEMMSGRSP._serialized_start=237
+  _ADASSYSTEMMSGRSP._serialized_end=346
 # @@protoc_insertion_point(module_scope)

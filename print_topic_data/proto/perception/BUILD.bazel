@@ -38,6 +38,7 @@ proto_library(
     deps = [
         "//proto/common:geometry_proto",
         "//proto/semantic_map:map_proto",
+        "//proto/vla:vla_output_proto",
     ],
     strip_import_prefix = "/proto/",
 )

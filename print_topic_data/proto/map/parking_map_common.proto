@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package deeproute.map.vpa;
+
+enum ParkingMapSource {
+    INVALID = 0;
+    LOCAL = 1;
+    CLOUD = 2;
+}
+
+message ParkingMapId {
+    uint32 map_id = 1;
+    ParkingMapSource source = 2;
+}

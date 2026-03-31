@@ -79,5 +79,10 @@ message VehicleInfo {
 
   // in used,Yaw = 0 when the car heads to east, pi/2 when the car heads to north.
   optional deeproute.common.Point3D roll_pitch_yaw = 50;
-  optional bool privacy_sts = 51;
+  optional bool privacy_sts = 51; // 是否开启隐私保护
+  optional bool is_in_sensitive_area = 52; // 是否在敏感区域
+  optional bool is_user_experience_permitted = 53; // 是否允许用户体验
+  optional bool is_high_voltage_on = 54; // 是否开启高压
+  optional bool upload_gps_enabled = 55; // 是否开启上传GPS
+  optional bool is_full_detect = 56; // 是否全量检测
 }

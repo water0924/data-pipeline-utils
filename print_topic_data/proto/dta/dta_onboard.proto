@@ -47,6 +47,7 @@ message GradingInfo {
     PASS_ROUNDABOUT_FAIL = 14;                // 环岛失败
     PASS_U_TURN_SUCCESS = 15;                 // 掉头成功
     PASS_U_TURN_FAIL = 16;                    // 掉头失败
+    VLA_RESOLVE_RISK = 17;                    // VLA解决复杂场景次数
   };
   GradingEvent grading_event = 1;    // Grading性能指标事件
   uint32 times = 2;                  // 次数

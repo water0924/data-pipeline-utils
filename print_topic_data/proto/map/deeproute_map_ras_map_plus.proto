@@ -67,8 +67,26 @@ message NavigationInfo {
   optional string request_id = 1;
   optional int32 response_id = 2;
   optional uint64 amap_path_id = 3;
-  
+
   optional double distance_to_destination_meters = 4;
+
+  // distance to next pullover point
+  // if no pullover point, this field is -1
+  optional double distance_to_next_pullover_point_meters = 5 [default = -1];
+
+  enum SceneType {
+    UNKNOWN = 0;
+    DIRECT_TOLL_STATION = 1;
+    DIRECT_RAMP = 2;
+    DIRECT_TUNNEL = 3;
+    DIRECT_FORK = 4;
+    HIGHWAY_MAIN_ROAD = 5;
+  }
+  message SceneTypeInfo {
+    optional SceneType scene_type = 1;
+    optional double distance = 2;
+  }
+  repeated SceneTypeInfo scene_type_info = 6;
 }
 
 message SDLevelMapInfo {

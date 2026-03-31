@@ -1,0 +1,480 @@
+syntax = "proto2";
+package dr.common.navigation;
+
+// version 0.1.2
+// 0.1.2说明： 去除绿波车速、合并引导和车道信息、去除IconType
+// 0.1.3说明： 
+//   1. GuidanceInfo增加distance_to_action字段，到转向动作的距离
+//   2. TrafficEventInfo增加distance字段，到拥堵点的距离，0表示在拥堵区间
+//   3. GlobalRoute增加p2p_mapId字段，P2P自建图id，没有就发0
+//   4. GlobalRoute中的Link点链由GpsPoint3D改为Point2D
+// 导航信号 - 接口协议
+// ============================================================================
+// 实时导航信息 NavigationRealTimeData
+// ============================================================================
+
+// Topic: /drapi/navigation_info 期望是事件型,下列的每一个二级message数据在发生更改时发送即可,不期望在每个消息中全量发送所有二级message数据
+message NavigationRealTimeData {
+  optional NavigationStatusInfo navigation_status_info = 1; // 导航状态
+  optional ElectronicEyeInfo electronic_eye_info = 2; // 电子眼信息
+  optional GuidanceInfo guidance_info = 3; // 引导信息
+  optional TrafficStatusInfo traffic_status_info = 4; // 交通拥堵状况
+  optional TrafficLightInfo traffic_light_info = 5; // 红绿灯信息
+  optional CurrentRoadInfo current_road_info = 6; // 当前道路信息
+  optional TrafficEventInfo traffic_event_info = 7; // 交通事件信息
+}
+
+// ----------------------------------------------------------------------------
+// 1. 导航状态信息
+// ----------------------------------------------------------------------------
+
+// 实时导航状态 期望至少1hz发送
+message NavigationStatusInfo {
+  optional uint64 path_id = 1; // 导航路径ID
+  optional NavigationStatus status = 2; // 导航状态
+}
+
+enum NavigationStatus {
+  STATUS_NONE = 0;        // 未导航
+  STATUS_GPS = 1;         // GPS导航
+  STATUS_SIMULATION = 2;  // 模拟导航
+  STATUS_REPLANNING = 3;  // 重新规划
+  STATUS_CRUISING = 4;    // 巡航
+  STATUS_DEVIATED = 5;    // 偏航
+  STATUS_PLANNING = 6;    // 规划中，还未点确认开始导航
+  STATUS_ENDED = 7;       // 导航结束
+}
+
+// ----------------------------------------------------------------------------
+// 2. 电子眼信息
+// ----------------------------------------------------------------------------
+
+message ElectronicEyeInfo {
+  repeated CameraInfo camera_infos = 1; // 摄像头信息
+}
+
+// 摄像头信息(电子眼)
+message CameraInfo {
+  optional uint32 camera_id = 1; // 电子眼ID
+  optional int32 speed_limit = 2; // 电子眼限速
+  optional double distance = 3; // 电子眼距离
+  optional GpsPoint3D gps_point = 4; // 电子眼坐标3D
+}
+
+// ----------------------------------------------------------------------------
+// 3. 引导信息
+// ----------------------------------------------------------------------------
+
+// 车道动作
+message LaneActionsInfo {
+  optional double distance_to_lane_actions = 1;  // 到前背景车道的距离
+  repeated LaneAction foreground_lanes = 2;      // 前景车道
+  repeated LaneAction background_lanes = 3;      // 背景车道
+  repeated LaneAction recommended_lanes = 4;     // 推荐车道
+}
+
+// 引导信息
+message GuidanceInfo {
+  optional MainAction main_action = 1;            // 主动作
+  optional AssistantAction assistant_action = 2;  // 辅助动作
+  optional LaneActionsInfo lane_action = 3;       // 车道动作
+  optional double distance_to_action = 4;         // 到转向动作的距离
+}
+
+// ----------------------------------------------------------------------------
+// 4. 交通拥堵状况
+// ----------------------------------------------------------------------------
+
+message TrafficStatusInfo {
+  enum TrafficStatus {
+    TRAFFIC_STATUS_NULL = 0;            // 无效值
+    TRAFFIC_STATUS_OPEN = 1;            // 畅通
+    TRAFFIC_STATUS_SLOW = 2;            // 缓行
+    TRAFFIC_STATUS_JAM = 3;             // 拥堵
+    TRAFFIC_STATUS_CONGESTED = 4;       // 严重拥堵
+    TRAFFIC_STATUS_EXTREMELY_OPEN = 5;  // 极度畅通
+  }
+  optional TrafficStatus traffic_status = 1; // 交通拥堵状况
+  optional double distance = 2;              // 到拥堵点的距离，0表示在拥堵区间
+}
+
+// ----------------------------------------------------------------------------
+// 5. 红绿灯信息
+// ----------------------------------------------------------------------------
+
+// 红绿灯信息
+message TrafficLightInfo {
+  optional double distance = 1;              // 到达红绿灯的距离
+  optional int32 wait_num = 2;              // 等红绿灯轮数
+  repeated LightState states = 3;  // 实时状态和倒计时
+  optional GpsPoint3D gps_point = 4;        // 红绿灯位置坐标
+}
+
+// 红绿灯状态
+message LightState {
+  optional LightStateType type = 1;  // 红绿灯状态类型
+  optional TrafficLightDir dir = 2;         // 红绿灯控制方向
+  optional int32 count_down = 3;    // 倒计时，单位秒 常亮灯为最大值
+}
+
+// 红绿灯状态类型
+enum LightStateType {
+  LIGHT_STATE_TYPE_NULL = 0;           // 无效值
+  LIGHT_STATE_TYPE_RED = 1;            // 红灯倒计时
+  LIGHT_STATE_TYPE_GREEN = 2;          // 绿灯可通行
+  LIGHT_STATE_TYPE_SOON_TURN_RED = 3;  // 即将变红灯
+}
+
+enum TrafficLightDir {
+  TRAFFIC_LIGHT_DIR_NULL = 0;   // 无效值
+  TRAFFIC_LIGHT_DIR_AHEAD = 1;  // 直行
+  TRAFFIC_LIGHT_DIR_LEFT = 2;   // 左转
+  TRAFFIC_LIGHT_DIR_RIGHT = 3;  // 右转
+  TRAFFIC_LIGHT_DIR_UTURN = 4;  // 掉头
+}
+
+// ----------------------------------------------------------------------------
+// 6. 当前道路信息
+// ----------------------------------------------------------------------------
+
+// 当前道路信息
+message CurrentRoadInfo {
+  optional uint64 ad_code = 1;  // 区域编码,由6位数字组成,唯一标识一个区划,
+  optional int32 curr_link_id = 2;         // 当前小路段Link Id
+  optional int32 curr_step_id = 3;         // 当前导航段Step Id
+  optional int32 curr_speed_limit = 4;     // 当前道路限速[km/h], 巡航也需要
+  optional RoadClass curr_road_class = 5;  // 当前道路等级, 巡航也需要
+  optional RoadType curr_road_type = 6;   // 当前道路类型, 巡航也需要
+  optional LinkType curr_link_type = 7;   // 当前Link类型, 巡航也需要
+  optional string curr_road_name = 8;     // 当前道路名称, 巡航也需要
+  optional int32 curr_lane_num = 9;  // 当前车道数量,行驶方向的车道数量, 巡航也需要
+  optional int32 curr_is_two_way_road = 10;  // 当前是否是双向通行道路, 0无效值，1是，2否，巡航也需要
+  optional int32 distance_to_next_link = 11;  // 到下个Link的距离[m]
+  optional int32 distance_to_next_step = 12;  // 到下个Step的距离[m]
+  optional int32 path_retain_distance = 13;   // 路线剩余距离[m]
+  optional int32 path_retain_time = 14;       // 路线剩余时间[s]
+  optional GpsPoint3D curr_position = 15;     // 当前位置Gps, 巡航也需要
+  optional string navigation_voice_command = 16;  // 导航语音指令，根据实际获取数据发送即可
+}
+
+// ----------------------------------------------------------------------------
+// 7. 交通事件信息
+// ----------------------------------------------------------------------------
+message TrafficEventInfo {
+  optional int32 is_valid = 1;  // 0:该信息无效，1：该信息有效
+  optional int32 distance = 2;  // 到达事件的距离，处于事件范围中时持续填0
+  optional TrafficEventType event_types = 3;    // 事件类型
+  optional OccupiedLaneType occupied_lane = 4;  // 占用车道类型，占哪边车道
+  optional GpsPoint3D gps_point = 5;            // 位置坐标
+}
+
+// 交通事件类型
+enum TrafficEventType {
+  TRAFFIC_EVENT_TYPE_NULL = 0;                       // 无效值
+  TRAFFIC_EVENT_TYPE_FLOW = 1;                       // 流量
+  TRAFFIC_EVENT_TYPE_ACCIDENT = 2;                   // 事故
+  TRAFFIC_EVENT_TYPE_CONSTRUCTION = 3;               // 施工
+  TRAFFIC_EVENT_TYPE_CONTROL = 4;                    // 管制
+  TRAFFIC_EVENT_TYPE_WEATHER = 5;                    // 天气
+  TRAFFIC_EVENT_TYPE_ROAD = 6;                       // 路面
+  TRAFFIC_EVENT_TYPE_ACTIVITY = 7;                   // 活动
+  TRAFFIC_EVENT_TYPE_DISASTER = 8;                   // 活动
+  TRAFFIC_EVENT_TYPE_OHTER = 9;                      // 其他
+  TRAFFIC_EVENT_TYPE_ACCIDENT_AND_CONTROL = 10;      // 事故&管制
+  TRAFFIC_EVENT_TYPE_CONSTRUCTION_AND_CONTROL = 11;  // 施工&管制
+  TRAFFIC_EVENT_TYPE_WEATHER_AND_CONTROL = 12;       // 天气&管制
+  TRAFFIC_EVENT_TYPE_ROAD_AND_CONTROL = 13;          // 路面&管制
+}
+
+// 占用车道类型
+enum OccupiedLaneType {
+  OCCUPIED_LANE_TYPE_NULL = 0;        // 无效值
+  OCCUPIED_LANE_TYPE_LEFT_SIDE = 1;   // 占用左侧车道
+  OCCUPIED_LANE_TYPE_RIGHT_SIDE = 2;  // 占用右侧车道
+  OCCUPIED_LANE_TYPE_BOTH_SIDE = 3;   // 占用两侧车道
+  OCCUPIED_LANE_TYPE_MIDDLE = 4;      // 占用中间车道
+  OCCUPIED_LANE_TYPE_ALL = 5;         // 占用全部车道
+}
+
+// ============================================================================
+// 导航全局路径信息 MapRoute
+// ============================================================================
+// Topic: /drapi/ivi_info
+message MapRoute {
+  optional int32 id = 1;
+  repeated GlobalRoute global_route = 2;
+}
+
+message GlobalRoute {
+  optional uint64 proto_id = 1;  // 按本协议发送时请填70030300, 用于区分proto协议
+  optional uint64 path_id = 2;      // 导航路径Id
+  optional int32 all_length = 3;    // 导航全程长度[m], v3.3 add
+  optional int32 step_num_all = 4;  // 当前路径导航段总数
+  optional int32 step_num_sended = 5;  // 已经发送导航段数量(含本次)，重叠step不重复计算
+  optional int32 redundant_count = 6;  // 完全相同内容冗余发送次数，第一次发送时填0，后续+1
+  repeated Step steps = 7;  // 路径包含的导航段，如果是一次性发送则是该路径全部导航段
+  repeated int32 reserves_int = 8;      // 全局路径预留变量,整数
+  repeated double reserves_double = 9;  // 实时信息预留变量,浮点数
+  optional uint64 check_code = 10;  // 按本协议发送时请填1234, 用于校验proto内容
+  optional uint32 p2p_mapId = 11; //新增，P2P自建图id，没有就发0
+}
+
+// 导航段定义
+message Step {
+  optional int32 id = 1;                          // 导航段Id
+  optional int32 length = 2;                      // 导航段长度
+  optional MainAction main_action = 3;            // 基本导航动作
+  optional AssistantAction assistant_action = 4;  // 辅助导航动作
+  optional int32 link_num_all = 5;                // 该导航段中link总数
+  optional int32 link_num_sended = 6;             // 该导航段已经发送link数量(含本次)，重叠link不重复计算
+  repeated Link links = 7;                        // 导航段包含的Link
+  repeated int32 reserves = 8;                    // 导航段预留变量
+}
+
+// link路段定义
+message Link {
+  optional int32 id = 1;              // 道路Id
+  optional int32 length = 2;          // 道路长度
+  optional RoadClass road_class = 3;  // 道路等级
+  optional RoadType road_type = 4;    // 道路类型
+  optional LinkType link_type = 5;    // Link类型
+  optional string link_name = 6;      // 道路名称
+  optional int32 speed_limit = 7;     // 道路限速
+  optional int32 lane_num = 8;        // 车道数量,行驶方向的车道数量
+  optional int32 is_two_way_road = 9;  // 是否是双向通行道路，0无效值，1是，2否
+  optional MainAction main_action = 10;            // 基本导航动作
+  optional AssistantAction assistant_action = 11;  // 辅助导航动作
+  optional int32 has_multi_out = 12;  // 是否有岔路，0无效值，1是，2否
+  optional int32 has_mix_fork = 13;   // 是否有混淆路口, 0无效值，1是，2否
+  optional int32 has_traffic_light = 14;  // 是否有红绿灯，0无效值，1是，2否
+  repeated Point2D gps_points = 15;  // GPS点链
+  repeated CameraInfo camera_info = 16;  // 摄像头信息,距离填相对link起点的距离
+  repeated int32 reserves = 17;  // link预留变量
+}
+
+// ============================================================================
+// 公共枚举和数据类型
+// ============================================================================
+
+// 基本导航动作
+enum MainAction {
+  MAIN_ACTION_NULL = 0;             // 无基本导航动作
+  MAIN_ACTION_TURN_LEFT = 1;        // 左转
+  MAIN_ACTION_TURN_RIGHT = 2;       // 右转
+  MAIN_ACTION_SLIGHT_LEFT = 3;      // 向左前方行驶
+  MAIN_ACTION_SLIGHT_RIGHT = 4;     // 向右前方行驶
+  MAIN_ACTION_TURN_HARD_LEFT = 5;   // 向左后方行驶
+  MAIN_ACTION_TURN_HARD_RIGHT = 6;  // 向右后方行驶
+  MAIN_ACTION_UTURN = 7;            // 左转调头
+  MAIN_ACTION_CONTINUE = 8;         // 直行
+  MAIN_ACTION_MERGE_LEFT = 9;       // 靠左
+  MAIN_ACTION_MERGE_RIGHT = 10;     // 靠右
+  MAIN_ACTION_ENTRY_RING = 11;      // 进入环岛
+  MAIN_ACTION_LEAVE_RING = 12;      // 离开环岛
+  MAIN_ACTION_SLOW = 13;            // 减速行驶
+  MAIN_ACTION_PLUG_CONTINUE = 14;   // 插入直行（泛亚特有）
+  MAIN_ACTION_ENTER_BUILDING = 65;  // 进入建筑物
+  MAIN_ACTION_LEAVE_BUILDING = 66;  // 离开建筑物
+  MAIN_ACTION_BY_ELEVATOR = 67;     // 电梯换层
+  MAIN_ACTION_BY_STAIR = 68;        // 楼梯换层
+  MAIN_ACTION_BY_ESCALATOR = 69;    // 扶梯换层
+  MAIN_ACTION_COUNT = 70;  // 导航主动作最大个数 无特殊意义
+}
+
+// 辅助导航动作
+enum AssistantAction {
+  ASSI_ACTION_NULL = 0;                      // 无辅助导航动作
+  ASSI_ACTION_ENTRY_MAIN = 1;                // 进入主路
+  ASSI_ACTION_ENTRY_SIDE_ROAD = 2;           // 进入辅路
+  ASSI_ACTION_ENTRY_FREEWAY = 3;             // 进入高速
+  ASSI_ACTION_ENTRY_SLIP = 4;                // 进入匝道
+  ASSI_ACTION_ENTRY_TUNNEL = 5;              // 进入隧道
+  ASSI_ACTION_ENTRY_CENTER_BRANCH = 6;       // 进入中间岔道
+  ASSI_ACTION_ENTRY_RIGHT_BRANCH = 7;        // 进入右岔路
+  ASSI_ACTION_ENTRY_LEFT_BRANCH = 8;         // 进入左岔路
+  ASSI_ACTION_ENTRY_RIGHT_ROAD = 9;          // 进入右转专用道
+  ASSI_ACTION_ENTRY_LEFT_ROAD = 10;          // 进入左转专用道
+  ASSI_ACTION_ENTRY_MERGE_CENTER = 11;       // 进入中间道路
+  ASSI_ACTION_ENTRY_MERGE_RIGHT = 12;        // 进入右侧道路
+  ASSI_ACTION_ENTRY_MERGE_LEFT = 13;         // 进入左侧道路
+  ASSI_ACTION_ENTRY_MERGE_RIGHT_Sild = 14;   // 靠右行驶进入辅路
+  ASSI_ACTION_ENTRY_MERGE_LEFT_Sild = 15;    // 靠左行驶进入辅路
+  ASSI_ACTION_ENTRY_MERGE_RIGHT_MAIN = 16;   // 靠右行驶进入主路
+  ASSI_ACTION_ENTRY_MERGE_LEFT_MAIN = 17;    // 靠左行驶进入主路
+  ASSI_ACTION_ENTRY_MERGE_RIGHT_RIGHT = 18;  // 靠右行驶进入右转专用道
+  ASSI_ACTION_ENTRY_FERRY = 19;              // 到达航道
+  ASSI_ACTION_LEFT_FERRY = 20;               // 驶离轮渡
+  ASSI_ACTION_ALONG_ROAD = 23;               // 沿当前道路行驶
+  ASSI_ACTION_ALONG_SILD = 24;               // 沿辅路行驶
+  ASSI_ACTION_ALONG_MAIN = 25;               // 沿主路行驶
+  ASSI_ACTION_ARRIVE_EXIT = 32;              // 到达出口
+  ASSI_ACTION_ARRIVE_SERVICE_AREA = 33;      // 到达服务区
+  ASSI_ACTION_ARRIVE_TOLL_GATE = 34;         // 到达收费站
+  ASSI_ACTION_ARRIVE_WAY = 35;               // 到达途经地
+  ASSI_ACTION_ARRIVE_DESTINATION = 36;       // 到达目的地的
+  ASSI_ACTION_ARRIVE_CHARGING_STATION = 37;  // 到达充电站,新能源汽车专用
+  ASSI_ACTION_ENTRY_RING_LEFT_ = 48;         // 绕环岛左转
+  ASSI_ACTION_ENTRY_RING_RIGHT = 49;         // 绕环岛右转
+  ASSI_ACTION_ENTRY_RING_CONTINUE = 50;   // 绕环岛直行
+  ASSI_ACTION_ENTRY_RING_UTURN = 51;      // 绕环岛右转
+  ASSI_ACTION_SMALL_RING_NOT_COUNT = 52;  // 小环岛不数出口
+  ASSI_ACTION_RIGHT_BRANCH_1 = 64;  // 到达复杂路口，走右边第一出口
+  ASSI_ACTION_RIGHT_BRANCH_2 = 65;  // 到达复杂路口，走右边第二出口
+  ASSI_ACTION_RIGHT_BRANCH_3 = 66;  // 到达复杂路口，走右边第三出口
+  ASSI_ACTION_RIGHT_BRANCH_4 = 67;  // 到达复杂路口，走右边第四出口
+  ASSI_ACTION_RIGHT_BRANCH_5 = 68;  // 到达复杂路口，走右边第五出口
+  ASSI_ACTION_LEFT_BRANCH_1 = 69;  // 到达复杂路口，走左边第一出口
+  ASSI_ACTION_LEFT_BRANCH_2 = 70;  // 到达复杂路口，走左边第二出口
+  ASSI_ACTION_LEFT_BRANCH_3 = 71;  // 到达复杂路口，走左边第三出口
+  ASSI_ACTION_LEFT_BRANCH_4 = 72;  // 到达复杂路口，走左边第四出口
+  ASSI_ACTION_LEFT_BRANCH_5 = 73;  // 到达复杂路口，走左边第五出口
+  ASSI_ACTION_ENTER_ULINE = 80;    // 进入调头专用路
+  ASSI_ACTION_PASS_CROSSWalk = 90;           // 通过人行横道
+  ASSI_ACTION_PASS_OVERPASS = 91;            // 通过过街天桥
+  ASSI_ACTION_PASS_UNDERGROUND = 92;         // 通过地下通道
+  ASSI_ACTION_PASS_SQUARE = 93;              // 通过广场
+  ASSI_ACTION_PASS_PARK = 94;                // 通过公园
+  ASSI_ACTION_PASS_STAIRCASE = 95;           // 通过扶梯
+  ASSI_ACTION_PASS_LIFT = 96;                // 通过直梯
+  ASSI_ACTION_PASS_CABLEWAY = 97;            // 通过索道
+  ASSI_ACTION_PASS_SKY_CHANNEL = 98;         // 通过空中通道
+  ASSI_ACTION_PASS_CHANNEL = 99;             // 通过建筑物穿越通道
+  ASSI_ACTION_PASS_WALKROAD = 100;           // 通过行人道路
+  ASSI_ACTION_PASS_BOAT_LINE = 101;          // 通过游船路线
+  ASSI_ACTION_PASS_SIGHT_SEEING_LINE = 102;  // 通过观光车路线
+  ASSI_ACTION_PASS_SKIDWAY = 103;            // 通过滑道
+  ASSI_ACTION_PASS_LADDER = 105;             // 通过阶梯
+  ASSI_ACTION_PASS_SLOPE = 106;              // 通过斜坡
+  ASSI_ACTION_PASS_BRIDGE = 107;             // 通过桥
+  ASSI_ACTION_PASS_FERRY = 108;              // 通过轮渡
+  ASSI_ACTION_PASS_SUBWAY = 109;             // 通过地铁通道
+  ASSI_ACTION_SOON_ENTER_Building = 112;  // 即将进入建筑(当前未下发)
+  ASSI_ACTION_SOON_LEAVE_Building = 113;  // 即将离开建筑(当前未下发)
+  ASSI_ACTION_ENTER_ROUNDABOUT = 114;     // 进入环岛(骑步特有)
+  ASSI_ACTION_LEAVE_ROUNDABOUT = 115;     // 离开环岛(骑步特有)
+  ASSI_ACTION_ENTER_PATH = 116;           // 进入小路
+  ASSI_ACTION_ENTER_INNER = 117;          // 进入内部路
+  ASSI_ACTION_ENTER_LEFT_BRANCH_TWO = 118;         // 进入左侧第二岔路
+  ASSI_ACTION_ENTER_LEFT_BRANCH_THREE = 119;       // 进入左侧第三岔路
+  ASSI_ACTION_ENTER_RIGHT_BRANCH_TWO = 120;        // 进入右侧第二岔路
+  ASSI_ACTION_ENTER_RIGHT_BRANCH_THREE = 121;      // 进入右侧第三岔路
+  ASSI_ACTION_ENTER_GAS_STATION = 122;             // 进入加油站道路
+  ASSI_ACTION_ENTER_HOUSING_ESTATE = 123;          // 进入小区道路
+  ASSI_ACTION_ENTER_PARK_ROAD = 124;               // 进入园区道路
+  ASSI_ACTION_ENTER_OVERHEAD = 125;                // 上高架
+  ASSI_ACTION_ENTER_CENTER_BRANCH_OVERHEAD = 126;  // 走中间岔路上高架
+  ASSI_ACTION_ENTER_RIGHT_BRANCH_OVERHEAD = 127;  // 走最右侧岔路上高架
+  ASSI_ACTION_ENTER_LEFT_BRANCH_OVERHEAD = 128;   // 走最左侧岔路上高架
+  ASSI_ACTION_ALONG_STRAIGHT = 129;               // 沿当前道路直行
+  ASSI_ACTION_DOWN_OVERHEAD = 130;                // 下高架
+  ASSI_ACTION_ENTER_LEFT_OVERHEAD = 131;          // 走左侧道路上高架
+  ASSI_ACTION_ENTER_RIGHT_OVERHEAD = 132;         // 走右侧道路上高架
+  ASSI_ACTION_UP_TO_BRIDGE = 133;                 // 上桥
+  ASSI_ACTION_ENTER_PARKING = 134;                // 进停车场
+  ASSI_ACTION_ENTER_OVERPASS = 135;               // 进入立交桥
+  ASSI_ACTION_ENTER_BRIDGE = 136;                 // 进入桥梁
+  ASSI_ACTION_ENTER_UNDERPASS = 137;              // 进入地下通道
+}
+
+// 道路等级
+enum RoadClass {
+  ROAD_CLASS_HIGHWAY = 0;              // 高速公路
+  ROAD_CLASS_NATIONAL_WAY = 1;         // 国道
+  ROAD_CLASS_PROVINCIAL_WAY = 2;       // 省道
+  ROAD_CLASS_COUNTRY_WAY = 3;          // 县道
+  ROAD_CLASS_TOWN_WAY = 4;             // 乡公路
+  ROAD_CLASS_COUNTY_AND_TOWN_WAY = 5;  // 县乡村内部道路
+  ROAD_CLASS_EXPRESSWAY = 6;           // 主要大街、城市快速道
+  ROAD_CLASS_MAIN_WAY = 7;             // 主要道路
+  ROAD_CLASS_MINOR_WAY = 8;            // 次要道路
+  ROAD_CLASS_COMMON_WAY = 9;           // 普通道路
+  ROAD_CLASS_NON_NAVI_WAY = 10;        // 非导航道路
+  ROAD_CLASS_NULL = 255;               // 无效值
+}
+
+// 道路类型
+enum RoadType {
+  ROAD_TYPE_MAIN_ROAD = 0;              // 主路，上下线分离
+  ROAD_TYPE_COMPLEX_INTERNAL_ROAD = 1;  // 路口内部道路，复杂节点内部道路
+  ROAD_TYPE_OVER_HEAD = 2;              // 高架，JCT
+  ROAD_TYPE_ROUNDABOUT = 3;             // 环岛
+  ROAD_TYPE_SERVICE_AREA = 4;           // 服务区
+  ROAD_TYPE_RAMP = 5;                   // 匝道，引路
+  ROAD_TYPE_SIDE_ROAD = 6;              // 辅路
+  ROAD_TYPE_RAMP_AND_OVER_HEAD = 7;           // 匝道与高架，引路+JCT
+  ROAD_TYPE_EXIT = 8;                         // 出口
+  ROAD_TYPE_ENTRANCE = 9;                     // 入口
+  ROAD_TYPE_TURN_RIGHT_LINE_A = 10;           // A类右转专用道
+  ROAD_TYPE_TURN_RIGHT_LINE_B = 11;           // B类右转专用道
+  ROAD_TYPE_TURN_LEFT_LINE_A = 12;            // A类左转专用道
+  ROAD_TYPE_TURN_LEFT_LINE_B = 13;            // B类左转专用道
+  ROAD_TYPE_COMMON = 14;                      // 普通道路
+  ROAD_TYPE_TURN_LEFT_AND_RIGHT = 15;         // 左右转专用道
+  ROAD_TYPE_SERVICE_AREA_AND_RAMP = 16;       // 服务区与匝道
+  ROAD_TYPE_SERVICE_AREA_AND_OVER_HEAD = 17;  // 服务区与高架
+  ROAD_TYPE_SERVICE_AREA_AND_RAMP_AND_OVER_HEAD = 18;  // 服务区与匝道与高架
+  ROAD_TYPE_NULL = 255;                                // 无效值
+}
+
+// link类型
+enum LinkType {
+  LINK_TYPE_ORDINARY_TYPE = 0;       // 普通道路
+  LINK_TYPE_CHANNEL_TYPE = 1;        // 航道
+  LINK_TYPE_TUNNEL_TYPE = 2;         // 隧道
+  LINK_TYPE_BRIDGE_TYPE = 3;         // 桥梁
+  LINK_TYPE_VIADUCT_TYPE = 4;        // 高架桥
+  LINK_TYPE_PARKING_TYPE = 5;        // 停车场内部道路
+  LINK_TYPE_PARKING_ENTRY_TYPE = 6;  // 停车场入口连接路
+  LINK_TYPE_PARKING_EXIT_TYPE = 7;   // 停车场出口连接路
+  LINK_TYPE_PARKING_PORT_TYPE = 8;   // 停车场出入口连接路
+  LINK_TYPE_TURNING_PORT_TYPE = 9;   // 掉头口连接路
+  LINK_TYPE_MAIN_SIDE_TYPE = 10;     // 主辅路连接路
+  LINK_TYPE_TOLLGATE_TYPE = 11;      // 收费站区域内道路
+  LINK_TYPE_INTERCHANGE_TYPE = 12;   // 立交桥域内道路
+  LINK_TYPE_INNER_TYPE = 13;  // 其他内部路，小区，园区等内部道路
+  LINK_TYPE_NULL = 255;       // 无效值
+}
+
+// 车道动作
+enum LaneAction {
+  LANE_ACTION_AHEAD = 0;                  // 直行
+  LANE_ACTION_LEFT = 1;                   // 左转
+  LANE_ACTION_AHEAD_LEFT = 2;             // 直行｜左转
+  LANE_ACTION_RIGHT = 3;                  // 右转
+  LANE_ACTION_AHEAD_RIGHT = 4;            // 直行｜右转
+  LANE_ACTION_LU_TURN = 5;                // 左掉头
+  LANE_ACTION_LEFT_RIGHT = 6;             // 左转｜右转
+  LANE_ACTION_AHEAD_LEFT_RIGHT = 7;       // 直行｜左转｜右转
+  LANE_ACTION_RU_TURN = 8;                // 右掉头
+  LANE_ACTION_AHEAD_LU_TURN = 9;          // 直行｜左掉头
+  LANE_ACTION_AHEAD_RU_TURN = 10;         // 直行｜右掉头
+  LANE_ACTION_LEFT_LU_TURN = 11;          // 左转｜左掉头
+  LANE_ACTION_RIGHT_RU_TURN = 12;         // 右转｜右掉头
+  LANE_ACTION_LEFT_IN_AHEAD = 13;         // 直行｜拓展
+  LANE_ACTION_LEFT_IN_LEFT_LU_TURN = 14;  // 左转｜左掉头｜拓展
+  LANE_ACTION_RESERVED = 15;              // 保留
+  LANE_ACTION_AHEAD_LEFT_LU_TURN = 16;    // 直行｜左转｜左掉头
+  LANE_ACTION_RIGHT_RU_TURN_EX = 17;      // 右转｜左掉头
+  LANE_ACTION_LEFT_RU_TURN = 18;          // 左转｜左掉头
+  LANE_ACTION_AHEAD_RIGHT_RU_TURN = 19;   // 直行｜右转｜右掉头
+  LANE_ACTION_LEFT_LU_TURN_EX = 20;       // 左转｜右掉头
+  LANE_ACTION_BUS = 21;                   // 公交车道
+  LANE_ACTION_EMPTY = 22;                 // 空车道
+  LANE_ACTION_VARIABLE = 23;              // 可变车道
+  LANE_ACTION_DEDICATED = 24;             // 专用车道
+  LANE_ACTION_TIDAL = 25;                 // 潮汐车道
+  LANE_ACTION_NONE = 255;                 // 无对应车道
+}
+
+// GPS坐标点
+message GpsPoint3D {
+  optional double latitude = 1;   // 纬度[度] (GCJ-02)
+  optional double longitude = 2;  // 经度[度] (GCJ-02)
+  optional double altitude = 3;   // 高度[度] (GCJ-02)
+}
+
+// link坐标点
+message Point2D {
+  optional int32 latitude = 1;   // 纬度[度] (GCJ-02) x * 1E6
+  optional int32 longitude = 2;  // 经度[度] (GCJ-02) y * 1E6
+}

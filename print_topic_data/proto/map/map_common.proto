@@ -245,14 +245,17 @@ enum SdSceneType {
   SD_SCENE_UNKNOWN = 0;             // 未知
   SD_SCENE_COMMUNITY_JUNCTION = 1;  // 小区路豁口
   SD_SCENE_CROSSROAD = 2;           // 十字路口
+  SD_SCENE_TOLL_CURVE = 3;          // 收费站弯道
 }
 
 enum SdSceneLabelType {
-  SD_SCENE_LABEL_UNKNOWN = 0;            // 未知
-  SD_SCENE_LABEL_JUNCTION_ON_LEFT = 1;   // 左侧豁口
-  SD_SCENE_LABEL_JUNCTION_ON_RIGHT = 2;  // 右侧豁口
-  SD_SCENE_LABEL_NO_TRAFFIC_LIGHT = 3;   // 无红绿灯
-  SD_SCENE_LABEL_SINGLE_LANE = 4;        // 单车道
+  SD_SCENE_LABEL_UNKNOWN = 0;                     // 未知
+  SD_SCENE_LABEL_JUNCTION_ON_LEFT = 1;            // 左侧豁口
+  SD_SCENE_LABEL_JUNCTION_ON_RIGHT = 2;           // 右侧豁口
+  SD_SCENE_LABEL_NO_TRAFFIC_LIGHT = 3;            // 无红绿灯
+  SD_SCENE_LABEL_SINGLE_LANE = 4;                 // 单车道
+  SD_SCENE_LABEL_TOLL_WITH_LEFT_CURVE  = 5;       // 收费站前左弯道
+  SD_SCENE_LABEL_TOLL_WITH_RIGHT_CURVE = 6;       // 收费站前右弯道
 }
 
 message LinkSdScene {

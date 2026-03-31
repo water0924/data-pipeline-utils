@@ -17,11 +17,37 @@ message CrossData {
   repeated ParkingSpace parking_space = 12;
   OperationStatus operation_status = 13;
   float turn_distance = 14;
+
+  repeated TrafficSignLaneInfo traffic_sign_lanes = 200;
+
   // for debug
   uint64 init_time_stamp = 100;
   uint64 update_time_stamp = 101;
   uint64 processed_time_stamp = 102;
   bool is_framefilling = 103;
+}
+
+message TrafficSignLaneInfo {
+  enum LaneDirection {
+    UNKNOWN = 0;
+    LEFT = 1;
+    RIGHT = 2;
+    STRA = 3;
+    U_TURN = 4;
+    LEFT_AND_STRA = 5;
+    RIGHT_AND_STRA = 6;
+    LEFT_AND_U_TURN = 7;
+    RIGHT_AND_U_TURN = 8;
+    STRA_AND_U_TURN = 9;
+    LEFT_AND_RIGHT = 10;
+    LEFT_AND_RIGHT_AND_STRA = 11;
+    UNPASSABLE = 12;
+    BROKEN = 13;
+  }
+
+  LaneDirection direction = 1;
+  Pnt3D position = 2;
+  double heading = 3;
 }
 
 message BoundaryLine {

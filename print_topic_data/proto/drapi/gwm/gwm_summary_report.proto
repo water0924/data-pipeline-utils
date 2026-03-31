@@ -13,4 +13,5 @@ message JourneySummary {
   string cutin = 9;  // 应对加塞
   uint64 milliseconds = 10;  // 时间戳
   string vla_action = 11; // vla解决复杂场景次数
+  string voice_control_times = 16; // BLC语音控车成功次数
 }

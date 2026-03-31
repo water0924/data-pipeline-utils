@@ -1,0 +1,265 @@
+package(features = ["-hidden_visibility_feature"])
+
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+proto_library(
+    name = "trigger_proto",
+    srcs = ["trigger.proto"],
+    strip_import_prefix = "/proto/",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//proto/routing:collection_trigger_rule_proto",
+    ],
+)
+
+cc_proto_library(
+    name = "trigger_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":trigger_proto",
+    ],
+)
+
+python_proto_library(
+    name = "trigger_proto_py",
+    protos = [
+        ":trigger_proto",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+proto_library(
+    name = "record_buffer_stats_proto",
+    srcs = ["record_buffer_stats.proto"],
+    strip_import_prefix = "/proto/",
+    visibility = ["//visibility:public"],
+    deps = [
+    ],
+)
+
+cc_proto_library(
+    name = "record_buffer_stats_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":record_buffer_stats_proto",
+    ],
+)
+
+python_proto_library(
+    name = "record_buffer_stats_proto_py",
+    protos = [
+        ":record_buffer_stats_proto",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+proto_library(
+    name = "record_stats_proto",
+    srcs = ["record_stats.proto"],
+    strip_import_prefix = "/proto/",
+    visibility = ["//visibility:public"],
+    deps = [
+    ],
+)
+
+cc_proto_library(
+    name = "record_stats_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":record_stats_proto",
+    ],
+)
+
+python_proto_library(
+    name = "record_stats_proto_py",
+    protos = [
+        ":record_stats_proto",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+proto_library(
+    name = "topic_group_proto",
+    srcs = ["topic_group.proto"],
+    strip_import_prefix = "/proto/",
+    visibility = ["//visibility:public"],
+    deps = [
+    ],
+)
+
+cc_proto_library(
+    name = "topic_group_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":topic_group_proto",
+    ],
+)
+
+python_proto_library(
+    name = "topic_group_proto_py",
+    protos = [
+        ":topic_group_proto",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+proto_library(
+    name = "grouped_recorder_proto",
+    srcs = ["grouped_recorder.proto"],
+    strip_import_prefix = "/proto/",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//proto/recorder:record_config_proto",
+        "//proto/recorder:record_stats_proto",
+        "//proto/recorder:topic_group_proto",
+    ],
+)
+
+cc_proto_library(
+    name = "grouped_recorder_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":grouped_recorder_proto",
+    ],
+)
+
+python_proto_library(
+    name = "grouped_recorder_proto_py",
+    protos = [
+        ":grouped_recorder_proto",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+proto_library(
+    name = "error_proto",
+    srcs = ["error.proto"],
+    strip_import_prefix = "/proto/",
+    visibility = ["//visibility:public"],
+    deps = [
+    ],
+)
+
+cc_proto_library(
+    name = "error_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":error_proto",
+    ],
+)
+
+python_proto_library(
+    name = "error_proto_py",
+    protos = [
+        ":error_proto",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+proto_library(
+    name = "online_recorder_proto",
+    srcs = ["online_recorder.proto"],
+    strip_import_prefix = "/proto/",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//proto/recorder:record_buffer_stats_proto",
+        "//proto/recorder:record_stats_proto",
+    ],
+)
+
+cc_proto_library(
+    name = "online_recorder_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":online_recorder_proto",
+    ],
+)
+
+python_proto_library(
+    name = "online_recorder_proto_py",
+    protos = [
+        ":online_recorder_proto",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+proto_library(
+    name = "record_config_proto",
+    srcs = ["record_config.proto"],
+    strip_import_prefix = "/proto/",
+    visibility = ["//visibility:public"],
+    deps = [
+    ],
+)
+
+cc_proto_library(
+    name = "record_config_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":record_config_proto",
+    ],
+)
+
+python_proto_library(
+    name = "record_config_proto_py",
+    protos = [
+        ":record_config_proto",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+proto_library(
+    name = "trigger_config_proto",
+    srcs = ["trigger_config.proto"],
+    strip_import_prefix = "/proto/",
+    visibility = ["//visibility:public"],
+    deps = [
+    ],
+)
+
+cc_proto_library(
+    name = "trigger_config_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":trigger_config_proto",
+    ],
+)
+
+python_proto_library(
+    name = "trigger_config_proto_py",
+    protos = [
+        ":trigger_config_proto",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+proto_library(
+    name = "blackbox_recorder_proto",
+    srcs = ["blackbox_recorder.proto"],
+    strip_import_prefix = "/proto/",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//proto/recorder:record_config_proto",
+        "//proto/recorder:record_stats_proto",
+        "//proto/recorder:topic_group_proto",
+    ],
+)
+
+cc_proto_library(
+    name = "blackbox_recorder_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":blackbox_recorder_proto",
+    ],
+)
+
+python_proto_library(
+    name = "blackbox_recorder_proto_py",
+    protos = [
+        ":blackbox_recorder_proto",
+    ],
+    visibility = ["//visibility:public"],
+)

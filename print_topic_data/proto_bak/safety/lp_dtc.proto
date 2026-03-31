@@ -1,0 +1,33 @@
+syntax = "proto2";
+
+package dr.safety.dtc;
+
+enum ECUID {
+    ECU_UNKNOWN = 0x000; // 未知ECU
+    ECU_ICHS = 0x777;   // 智能座舱系统
+    ECU_SVV_L = 0x762;  // 左环视摄像头
+    ECU_SVV_RI = 0x763; // 右环视摄像头
+    ECU_SVV_F = 0x7D3;  // 前环视摄像头
+    ECU_SVV_RE = 0x7D4; // 后环视摄像头
+    ECU_DMS = 0x7D5;    // DMS摄像头
+    ECU_USS = 0x754;    // 超声波雷达
+    ECU_ADAS = 0x755;   // AdasSoc
+    ECU_WR = 0x757;     // 后视摄像头
+    ECU_LF = 0x764;     // 左前盲区摄像头
+    ECU_RF = 0x765;     // 右前盲区摄像头
+    ECU_LB = 0x766;     // 左后盲区摄像头
+    ECU_RR = 0x767;     // 右后盲区摄像头
+    ECU_FW = 0x7D1;     // 前视广角摄像头
+    ECU_FN = 0x7D2;     // 前视窄角摄像头
+    ECU_TBOX = 0x796;   // TboxSoc
+}
+
+message LPDTCInfo {
+    optional ECUID ecu_id = 1; 
+    optional uint32 dtc_index = 2;
+    optional uint32 dtc_status = 3;
+}
+
+message LPReportDTCInfo {
+    repeated LPDTCInfo  dtc_infos = 1;
+}

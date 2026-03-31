@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+package deeproute.drivers.camera;
+
+enum VideoType {
+  VIDEO_TYPE_UNKNOWN = 0;
+  CMS_OFF = 1;
+  CMS_LEFT = 2;
+  CMS_RIGHT = 3;
+}
+
+message CameraCommand {
+  optional string id = 1;
+  oneof cmd {
+    VideoType video_type = 2;
+  }
+}

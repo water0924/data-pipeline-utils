@@ -8,6 +8,7 @@ import "localization/localization_external_events.proto";
 import "perception/deeproute_perception_ras_map.proto";
 import "map/deeproute_map_ras_map_plus.proto";
 import "localization/havp_map.proto";
+import "map/parking_map_common.proto";
 
 /*** Begin of VPA Test ***/
 
@@ -136,6 +137,7 @@ message ChangedMapStatus {
   int32 map_id = 1;
   OperatingType operation_type = 2;
   havp_map.HAVPMapMetaData meta_data = 3;
+  deeproute.map.vpa.ParkingMapSource map_source = 4;
 }
 
 message ChangedMapStatusList {
@@ -147,7 +149,9 @@ message EndMappingCMD {
   string map_name = 2;
   string target_parking_space_name = 3;
   int32 map_id = 4;         // for Geely
-  bool not_directly_cover_map = 5;       // if is true, covering map uses logic 
+  bool not_directly_cover_map = 5;       // if is true, covering map uses logic
+  bool backend_mapping = 6;
+  string map_address = 7;
 }
 message EndMappingCMDRP {
   bool success = 1;
@@ -169,6 +173,8 @@ message CoverMapCMD {
   bool cover_map = 1;
   repeated uint32 old_map_ids = 2;
   uint32 new_map_id = 3;
+  repeated deeproute.map.vpa.ParkingMapSource old_map_sources = 4;
+  deeproute.map.vpa.ParkingMapSource new_map_source = 5;
 }
 
 message CoverMapCMDRP {
@@ -179,6 +185,7 @@ message CoverMapCMDRP {
 message SetRegionalParkingSpaceCMD {
   int32 map_id = 1;
   bool is_regional_parking_space = 2;
+  deeproute.map.vpa.ParkingMapSource map_source = 3;
 }
 
 message SetRegionalParkingSpaceCMDRP {
@@ -206,6 +213,7 @@ message ParkingSpaceInfoUpdateCMD {
   OperatingType operation_type = 2; //修改方式
   havp_map.ParkingSpaceUsrInfo parking_spaces_info = 3;
   bool is_default_parking_space = 4;
+  deeproute.map.vpa.ParkingMapSource map_source = 5;
 }
 message ParkingSpaceInfoUpdateCMDRP {
   havp_map.ParkingSpaceUsrInfo parking_spaces_info = 1;
@@ -223,6 +231,7 @@ message MapInfoUpdateCMDRP {
 
 message BatchMapsDeleteCMD {
   repeated int32 delete_map_ids = 1;
+  deeproute.map.vpa.ParkingMapSource map_source = 2;
 }
 message BatchMapsDeleteCMDRP {
   bool success = 1;
@@ -232,6 +241,7 @@ message MapPoiInfoUpdateCMD {
   int32 map_id = 1;
   havp_map.MapPoiInfo map_poi_info = 2;
   bool is_default = 3;
+  deeproute.map.vpa.ParkingMapSource map_source = 4;
 }
 
 message MapPoiInfoUpdateCMDRP {
@@ -242,6 +252,7 @@ message MapPoiInfoUpdateCMDRP {
 
 message GetTargetHavpMapMetaDataCMD {
   int32 target_map_id = 1;
+  deeproute.map.vpa.ParkingMapSource map_source = 2;
 }
 message GetTargetHavpMapMetaDataCMDRP {
   havp_map.HAVPMapMetaData havp_map_meta_data = 1; // only get light-weighted usr data, not include map structure information
@@ -281,6 +292,7 @@ message SetNavigationTargetParkingSpaceCMDRP {}
 
 message GetMapCMD {
   int32 map_id = 1;
+  deeproute.map.vpa.ParkingMapSource map_source = 2;
 }
 message GetMapCMDRP {
   perception.RASMap semantic_map = 1;  // in map frame                      // GWM SOP+3 deprecated
@@ -297,6 +309,7 @@ enum StartNavigationRequestReason {
   REASON_VPA_ROUTING = 2;  // 进巡航
   REASON_E2E_PARKING_OUT = 3; // 点到点泊出规划
   REASON_E2E_PARKING_IN = 4; // 点到点泊入规划
+  REASON_E2E_PARKING_IN_FIND_NEXT_SPACE = 5; // 点到点泊入规划，触发寻找下一个车位
 }
 
 enum PoiType {
@@ -365,6 +378,7 @@ message ParkingSpaceNameDuplicationCheckCMD {
     int32 map_id = 1;
     int32 target_parking_space_id = 2;
     string name = 3;
+    deeproute.map.vpa.ParkingMapSource map_source = 4;
 }
 message ParkingSpaceNameDuplicationCheckCMDRP {
     bool name_repeated = 1;     // return true if repeated
@@ -373,6 +387,7 @@ message ParkingSpaceNameDuplicationCheckCMDRP {
 message MapNameDuplicationCheckCMD {
     int32 map_id = 1;
     string name = 2;
+    deeproute.map.vpa.ParkingMapSource map_source = 3;
 }
 message MapNameNameDuplicationCheckCMDRP {
     bool name_repeated = 1;     // return true if repeated
@@ -418,6 +433,28 @@ message RoamCandidatesCheckCMDRP {
   repeated RoamInfo roam_info = 1;
 }
 
+// GWM CUX3.5
+message UserPoiValidationCheckCMD {
+  havp_map.MapPoiInfo poi_info = 1;
+  bool only_name_validation_check = 2;  // if true, only check name duplication, 
+                                        // if false, check navigation validation at same time
+  uint32 map_id = 3;
+  bool check_position_duplication = 4; // flag to trigger position duplication check
+  bool check_name_duplication = 5;     // flag to trigger name duplication check
+  bool check_position_validity = 6;    // flag to trigger position validity check
+}
+
+message UserPoiValidationCheckCMDRP {
+  enum ErrorReason {
+    ERROR_REASON_NONE = 0;
+    ERROR_REASON_NAME_DUPLICATED = 1;
+    ERROR_REASON_POSITION_DUPLICATED = 2;
+    ERROR_REASON_POSITION_INVALID = 3;
+  }
+  bool is_valid = 1;
+  ErrorReason error_reason = 2;
+}
+
 message LocalizationCommand {  // external users send commands in
                                // '/localization/command' topic to
                                // localization modules
@@ -455,6 +492,7 @@ message LocalizationCommand {  // external users send commands in
     CoverMapCMD cover_map_cmd = 30;
     MapOverlapCheckCMD map_overlap_check_cmd = 31;
     RoamCandidatesCheckCMD roam_candidates_check_cmd = 32;
+    UserPoiValidationCheckCMD user_poi_validation_check_cmd = 33;
   }
 }
 
@@ -495,5 +533,6 @@ message LocalizationResponse {  // external users receive 'LocalizationResponse'
     CoverMapCMDRP cover_map = 31;
     MapOverlapCheckCMDRP map_overlap_check = 32;
     RoamCandidatesCheckCMDRP roam_candidates_check = 33;
+    UserPoiValidationCheckCMDRP user_poi_validation_check = 34;
   }
 }

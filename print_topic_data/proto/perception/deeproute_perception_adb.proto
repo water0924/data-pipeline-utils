@@ -11,7 +11,7 @@ message AdbOutput {
   repeated AdbTrafficSign adb_traffic_sign = 4;
   repeated AdbLight2D adb_object_2d = 5;
   optional bool ahb_has_car_ahead = 6;
-  optional AdbLighting adb_lighting = 7;
+  optional AdbLighting adb_lighting = 7 [deprecated = true];
 }
 
 message CarObject {
@@ -76,6 +76,7 @@ message AdbTrafficSign {
     HIGH = 2;
   };
   optional Conf adb_conf = 7 [default = HIGH];
+  optional int32 adb_obj_id = 8;
 } 
 
 message AdbLight2D {
@@ -86,6 +87,6 @@ message AdbLight2D {
 }
 
 message AdbLighting {
-  optional bool amb_light = 1;
-  optional bool road_illum_detd = 2;
+  optional bool amb_light = 1 [deprecated = true];
+  optional bool road_illum_detd = 2 [deprecated = true];
 }

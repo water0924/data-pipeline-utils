@@ -20,12 +20,11 @@ from proto.drivers import pointcloud2_pb2 as drivers_dot_pointcloud2__pb2
 from proto.localization import havp_map_pb2 as localization_dot_havp__map__pb2
 from proto.drivers.gnss import ins_pb2 as drivers_dot_gnss_dot_ins__pb2
 from proto.perception import deeproute_perception_ras_map_pb2 as perception_dot_deeproute__perception__ras__map__pb2
+from proto.map import parking_map_common_pb2 as map_dot_parking__map__common__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15map/vpa_mapping.proto\x12\x11\x64\x65\x65proute.map.vpa\x1a\x10map/sd_map.proto\x1a\x14map/projection.proto\x1a\x15\x63ommon/geometry.proto\x1a\x19\x64rivers/pointcloud2.proto\x1a\x1blocalization/havp_map.proto\x1a\x16\x64rivers/gnss/ins.proto\x1a-perception/deeproute_perception_ras_map.proto\"S\n\x11MapOutEndPoseInfo\x12\r\n\x05\x66loor\x18\x01 \x01(\x05\x12/\n\x04pose\x18\x02 \x01(\x0b\x32!.deeproute.common.Transformation3\"\xff\x0b\n\x0fOnboardMapEntry\x12\x0e\n\x06map_id\x18\x01 \x01(\r\x12\x10\n\x08map_name\x18\x02 \x01(\t\x12\x18\n\x10mapping_distance\x18\x03 \x01(\x01\x12 \n\x18\x64\x65\x66\x61ult_parking_space_id\x18\x04 \x01(\r\x12Z\n\x1c\x66\x61vorite_parking_space_infos\x18\x05 \x03(\x0b\x32\x34.deeproute.localization.havp_map.ParkingSpaceUsrInfo\x12\x1d\n\x15localization_map_path\x18\x06 \x01(\t\x12\x19\n\x11semantic_map_path\x18\x07 \x01(\t\x12\x35\n\x11mapping_start_llh\x18\x08 \x01(\x0b\x32\x1a.deeproute.common.PointLLH\x12;\n\x10parking_lot_type\x18\t \x01(\x0e\x32!.deeproute.map.vpa.ParkingLotType\x12.\n\tmap_range\x18\n \x01(\x0b\x32\x1b.deeproute.map.vpa.MapRange\x12\x1c\n\x14vanishing_point_time\x18\x0b \x01(\x04\x12\x1a\n\x12start_mapping_time\x18\x0c \x01(\x04\x12\x18\n\x10\x65nd_mapping_time\x18\r \x01(\x04\x12\x13\n\x0bmap_version\x18\x0e \x01(\t\x12\x13\n\x0bis_uploaded\x18\x0f \x01(\x08\x12\x17\n\x0fhas_e2e_out_map\x18\x10 \x01(\x08\x12\x35\n\x11\x65\x32\x65_in_trajectory\x18\x11 \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x36\n\x12\x65\x32\x65_out_trajectory\x18\x12 \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12G\n\x15map_out_end_pose_info\x18\x13 \x01(\x0b\x32$.deeproute.map.vpa.MapOutEndPoseInfoB\x02\x18\x01\x12\x39\n\x15parking_odd_start_llh\x18\x14 \x01(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x42\n\rodd_start_poi\x18\x15 \x01(\x0b\x32+.deeproute.localization.havp_map.MapPoiInfo\x12@\n\x0bodd_end_poi\x18\x16 \x01(\x0b\x32+.deeproute.localization.havp_map.MapPoiInfo\x12H\n\x13parking_out_end_poi\x18\x17 \x01(\x0b\x32+.deeproute.localization.havp_map.MapPoiInfo\x12\x44\n\x0fmapping_end_poi\x18\x18 \x01(\x0b\x32+.deeproute.localization.havp_map.MapPoiInfo\x12J\n\x15\x66\x61vorite_map_poi_list\x18\x19 \x03(\x0b\x32+.deeproute.localization.havp_map.MapPoiInfo\x12\x1a\n\x12\x64\x65\x66\x61ult_map_poi_id\x18\x1a \x01(\t\x12\x14\n\x0cgiven_map_id\x18\x1b \x01(\x05\x12\x45\n\x19parking_out_end_gnss_pose\x18\x1c \x01(\x0b\x32\".deeproute.drivers.gnss.SensorsIns\x12\x1a\n\x12num_parking_spaces\x18\x1d \x01(\x05\x12\x16\n\x0enum_speedbumps\x18\x1e \x01(\x05\x12\x15\n\rviz_floor_set\x18\x1f \x03(\x05\x12\x11\n\tfloor_set\x18  \x03(\x05\x12\x46\n\"e2e_in_trajectory_to_parking_space\x18\x32 \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12I\n%e2e_out_trajectory_from_parking_space\x18\x33 \x03(\x0b\x32\x1a.deeproute.common.PointLLH\"n\n\x08MapRange\x12\x17\n\x0flower_bound_lat\x18\x01 \x01(\x01\x12\x17\n\x0flower_bound_lon\x18\x02 \x01(\x01\x12\x17\n\x0fupper_bound_lat\x18\x03 \x01(\x01\x12\x17\n\x0fupper_bound_lon\x18\x04 \x01(\x01\"\x80\x01\n\nTrackPoses\x12\x35\n\ntrack_pose\x18\x01 \x03(\x0b\x32!.deeproute.common.Transformation3\x12;\n\x0ftrack_gnss_pose\x18\x02 \x03(\x0b\x32\".deeproute.drivers.gnss.SensorsIns\"^\n\x0c\x41lignedBox3d\x12&\n\x03min\x18\x01 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12&\n\x03max\x18\x02 \x01(\x0b\x32\x19.deeproute.common.Point3D\"\xe5\x01\n\x10SemanticBoundary\x12@\n\x18lane_boundary_pointcloud\x18\x01 \x01(\x0b\x32\x1e.deeproute.drivers.PointCloud2\x12I\n!parking_space_boundary_pointcloud\x18\x02 \x01(\x0b\x32\x1e.deeproute.drivers.PointCloud2\x12\x44\n\x1cobstacle_boundary_pointcloud\x18\x03 \x01(\x0b\x32\x1e.deeproute.drivers.PointCloud2\"\xf2\x01\n\x12ParkingMapMetaData\x12\x0e\n\x06map_id\x18\x01 \x01(\r\x12\x10\n\x08map_name\x18\x02 \x01(\t\x12\x0c\n\x04\x63ity\x18\x03 \x01(\t\x12\x13\n\x0b\x63reate_time\x18\n \x01(\x04\x12\x15\n\rlast_use_time\x18\x0b \x01(\x04\x12\x18\n\x10last_update_time\x18\x0c \x01(\x04\x12\x33\n\x06source\x18\x14 \x01(\x0e\x32#.deeproute.map.vpa.ParkingMapSource\x12\x31\n\x05\x65ntry\x18\x15 \x01(\x0b\x32\".deeproute.map.vpa.OnboardMapEntry\"\xdb\x06\n\x08Keyframe\x12\x11\n\ttimestamp\x18\x01 \x01(\x03\x12\x33\n\x08map_pose\x18\x02 \x01(\x0b\x32!.deeproute.common.Transformation3\x12H\n\rparking_space\x18\x03 \x03(\x0b\x32\x31.deeproute.localization.havp_map.HAVPParkingSpace\x12?\n\x08obstacle\x18\x04 \x03(\x0b\x32-.deeproute.localization.havp_map.HAVPObstacle\x12\x35\n\ntrack_pose\x18\x05 \x03(\x0b\x32!.deeproute.common.Transformation3\x12\x33\n\x0bpoint_cloud\x18\x06 \x01(\x0b\x32\x1e.deeproute.drivers.PointCloud2\x12?\n\x16sensing_pose_bound_box\x18\x07 \x01(\x0b\x32\x1f.deeproute.map.vpa.AlignedBox3d\x12\x15\n\ris_premapping\x18\x08 \x01(\x08\x12\x13\n\x0bis_on_slope\x18\t \x01(\x08\x12>\n\x11semantic_boundary\x18\n \x01(\x0b\x32#.deeproute.map.vpa.SemanticBoundary\x12\x38\n\rroad_polygons\x18\x0b \x03(\x0b\x32!.deeproute.perception.RoadPolygon\x12.\n\todd_range\x18\x0c \x01(\x0e\x32\x1b.deeproute.map.vpa.OddRange\x12J\n\x11map_semantic_lane\x18\r \x03(\x0b\x32/.deeproute.localization.havp_map.HAVPTrajectory\x12\x36\n\ngnss_poses\x18\x0e \x03(\x0b\x32\".deeproute.drivers.gnss.SensorsIns\x12\x13\n\x0b\x64r_link_ids\x18\x14 \x03(\x04\x12\x13\n\x0bkeyframe_id\x18\x15 \x01(\x04\x12\x10\n\x08\x66loor_id\x18\x16 \x01(\x05\x12\x39\n\x0eodometry_poses\x18\x17 \x03(\x0b\x32!.deeproute.common.Transformation3\"\xa2\x01\n\x0eSlopeFloorInfo\x12\x12\n\nfrom_floor\x18\x01 \x01(\x05\x12\x10\n\x08to_floor\x18\x02 \x01(\x05\x12\x35\n\nstart_pose\x18\x03 \x01(\x0b\x32!.deeproute.common.Transformation3\x12\x33\n\x08\x65nd_pose\x18\x04 \x01(\x0b\x32!.deeproute.common.Transformation3\"\xd3\x01\n\x08\x46loorMap\x12\x10\n\x08\x66loor_id\x18\x01 \x01(\x05\x12H\n\x0ftrajectory_type\x18\x02 \x01(\x0e\x32/.deeproute.localization.havp_map.TrajectoryType\x12.\n\tkey_frame\x18\x03 \x03(\x0b\x32\x1b.deeproute.map.vpa.Keyframe\x12;\n\x10slope_floor_info\x18\x04 \x01(\x0b\x32!.deeproute.map.vpa.SlopeFloorInfo\"m\n\x0cKeyframeEdge\x12\x12\n\nkeyframe_i\x18\x01 \x02(\x04\x12\x12\n\nkeyframe_j\x18\x02 \x02(\x04\x12\x35\n\ndelta_pose\x18\x03 \x02(\x0b\x32!.deeproute.common.Transformation3\"\xea\x02\n\x08LinkData\x12\x12\n\ndr_link_id\x18\x01 \x01(\x04\x12*\n\x06points\x18\x02 \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12+\n\x08points3d\x18\n \x03(\x0b\x32\x19.deeproute.common.Point3D\x12\x13\n\x0bin_link_ids\x18\x06 \x03(\x04\x12\x14\n\x0cout_link_ids\x18\x07 \x03(\x04\x12\x38\n\x0clink_formway\x18\x08 \x03(\x0e\x32\".deeproute.sd_map.LinkData.FormWay\x12\x0e\n\x06length\x18\t \x01(\r\x12\x34\n\nslope_type\x18\x0b \x01(\x0e\x32 .deeproute.map.vpa.LinkSlopeType\x12\x10\n\x08\x66loor_id\x18\x0c \x01(\x05\x12\x34\n\ncurve_type\x18\r \x01(\x0e\x32 .deeproute.map.vpa.LinkCurveType\"`\n\x0fMapPoiInfoInMap\x12\x13\n\x0bkeyframe_id\x18\x01 \x01(\x05\x12\x38\n\rrelative_pose\x18\x02 \x01(\x0b\x32!.deeproute.common.Transformation3\"\xf2\x06\n\tGlobalMap\x12\x39\n\x11projection_origin\x18\x01 \x01(\x0b\x32\x1e.deeproute.map.ProjectionPoint\x12\x16\n\x0emap_resolution\x18\x02 \x01(\x02\x12.\n\tfloor_map\x18\x03 \x03(\x0b\x32\x1b.deeproute.map.vpa.FloorMap\x12H\n\rparking_space\x18\x04 \x03(\x0b\x32\x31.deeproute.localization.havp_map.HAVPParkingSpace\x12?\n\x08obstacle\x18\x05 \x03(\x0b\x32-.deeproute.localization.havp_map.HAVPObstacle\x12\x37\n\x0ekeyframe_edges\x18\x06 \x03(\x0b\x32\x1f.deeproute.map.vpa.KeyframeEdge\x12\x15\n\rfloor_heights\x18\x07 \x03(\x01\x12\x15\n\rviz_floor_ids\x18\x08 \x03(\x05\x12G\n\x0emap_trajectory\x18\t \x03(\x0b\x32/.deeproute.localization.havp_map.HAVPTrajectory\x12\x38\n\rroad_polygons\x18\n \x03(\x0b\x32!.deeproute.perception.RoadPolygon\x12\x39\n\rodd_start_poi\x18\x0b \x01(\x0b\x32\".deeproute.map.vpa.MapPoiInfoInMap\x12\x37\n\x0bodd_end_poi\x18\x0c \x01(\x0b\x32\".deeproute.map.vpa.MapPoiInfoInMap\x12?\n\x13parking_out_end_poi\x18\r \x01(\x0b\x32\".deeproute.map.vpa.MapPoiInfoInMap\x12;\n\x0fmapping_end_poi\x18\x0e \x01(\x0b\x32\".deeproute.map.vpa.MapPoiInfoInMap\x12J\n\x11map_semantic_lane\x18\x0f \x03(\x0b\x32/.deeproute.localization.havp_map.HAVPTrajectory\x12/\n\nlink_datas\x18\x14 \x03(\x0b\x32\x1b.deeproute.map.vpa.LinkData\"\x8d\x01\n\tEntryList\x12/\n\x0b\x64\x65stination\x18\x01 \x01(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x13\n\x0b\x64r_link_ids\x18\x02 \x03(\x04\x12:\n\x0enearby_entries\x18\x03 \x03(\x0b\x32\".deeproute.map.vpa.OnboardMapEntry*4\n\x10ParkingMapSource\x12\x0b\n\x07INVAILD\x10\x00\x12\x08\n\x04USER\x10\x01\x12\t\n\x05\x43LOUD\x10\x02*)\n\x0eParkingLotType\x12\n\n\x06INDOOR\x10\x00\x12\x0b\n\x07OUTDOOR\x10\x01*P\n\x08OddRange\x12\x1c\n\x18PUBLIC_ROAD_TO_ODD_START\x10\x00\x12\n\n\x06IN_ODD\x10\x01\x12\x1a\n\x16ODD_END_TO_PUBLIC_ROAD\x10\x02*3\n\rLinkSlopeType\x12\x08\n\x04\x46LAT\x10\x00\x12\x0c\n\x08\x44OWNHILL\x10\x01\x12\n\n\x06UPHILL\x10\x02*5\n\rLinkCurveType\x12\x0c\n\x08STRAIGHT\x10\x00\x12\n\n\x06\x43URVED\x10\x01\x12\n\n\x06SPIRAL\x10\x02')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15map/vpa_mapping.proto\x12\x11\x64\x65\x65proute.map.vpa\x1a\x10map/sd_map.proto\x1a\x14map/projection.proto\x1a\x15\x63ommon/geometry.proto\x1a\x19\x64rivers/pointcloud2.proto\x1a\x1blocalization/havp_map.proto\x1a\x16\x64rivers/gnss/ins.proto\x1a-perception/deeproute_perception_ras_map.proto\x1a\x1cmap/parking_map_common.proto\"S\n\x11MapOutEndPoseInfo\x12\r\n\x05\x66loor\x18\x01 \x01(\x05\x12/\n\x04pose\x18\x02 \x01(\x0b\x32!.deeproute.common.Transformation3\"\xc7\x0c\n\x0fOnboardMapEntry\x12\x0e\n\x06map_id\x18\x01 \x01(\r\x12\x10\n\x08map_name\x18\x02 \x01(\t\x12\x18\n\x10mapping_distance\x18\x03 \x01(\x01\x12 \n\x18\x64\x65\x66\x61ult_parking_space_id\x18\x04 \x01(\r\x12Z\n\x1c\x66\x61vorite_parking_space_infos\x18\x05 \x03(\x0b\x32\x34.deeproute.localization.havp_map.ParkingSpaceUsrInfo\x12\x1d\n\x15localization_map_path\x18\x06 \x01(\t\x12\x19\n\x11semantic_map_path\x18\x07 \x01(\t\x12\x35\n\x11mapping_start_llh\x18\x08 \x01(\x0b\x32\x1a.deeproute.common.PointLLH\x12;\n\x10parking_lot_type\x18\t \x01(\x0e\x32!.deeproute.map.vpa.ParkingLotType\x12.\n\tmap_range\x18\n \x01(\x0b\x32\x1b.deeproute.map.vpa.MapRange\x12\x1c\n\x14vanishing_point_time\x18\x0b \x01(\x04\x12\x1a\n\x12start_mapping_time\x18\x0c \x01(\x04\x12\x18\n\x10\x65nd_mapping_time\x18\r \x01(\x04\x12\x13\n\x0bmap_version\x18\x0e \x01(\t\x12\x13\n\x0bis_uploaded\x18\x0f \x01(\x08\x12\x17\n\x0fhas_e2e_out_map\x18\x10 \x01(\x08\x12\x35\n\x11\x65\x32\x65_in_trajectory\x18\x11 \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x36\n\x12\x65\x32\x65_out_trajectory\x18\x12 \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12G\n\x15map_out_end_pose_info\x18\x13 \x01(\x0b\x32$.deeproute.map.vpa.MapOutEndPoseInfoB\x02\x18\x01\x12\x39\n\x15parking_odd_start_llh\x18\x14 \x01(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x42\n\rodd_start_poi\x18\x15 \x01(\x0b\x32+.deeproute.localization.havp_map.MapPoiInfo\x12@\n\x0bodd_end_poi\x18\x16 \x01(\x0b\x32+.deeproute.localization.havp_map.MapPoiInfo\x12H\n\x13parking_out_end_poi\x18\x17 \x01(\x0b\x32+.deeproute.localization.havp_map.MapPoiInfo\x12\x44\n\x0fmapping_end_poi\x18\x18 \x01(\x0b\x32+.deeproute.localization.havp_map.MapPoiInfo\x12J\n\x15\x66\x61vorite_map_poi_list\x18\x19 \x03(\x0b\x32+.deeproute.localization.havp_map.MapPoiInfo\x12\x1a\n\x12\x64\x65\x66\x61ult_map_poi_id\x18\x1a \x01(\t\x12\x14\n\x0cgiven_map_id\x18\x1b \x01(\x05\x12\x45\n\x19parking_out_end_gnss_pose\x18\x1c \x01(\x0b\x32\".deeproute.drivers.gnss.SensorsIns\x12\x1a\n\x12num_parking_spaces\x18\x1d \x01(\x05\x12\x16\n\x0enum_speedbumps\x18\x1e \x01(\x05\x12\x15\n\rviz_floor_set\x18\x1f \x03(\x05\x12\x15\n\tfloor_set\x18  \x03(\x05\x42\x02\x18\x01\x12\x46\n\"e2e_in_trajectory_to_parking_space\x18\x32 \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12I\n%e2e_out_trajectory_from_parking_space\x18\x33 \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12<\n\x06source\x18\x35 \x01(\x0e\x32#.deeproute.map.vpa.ParkingMapSource:\x07INVALIDJ\x04\x08\x34\x10\x35\"n\n\x08MapRange\x12\x17\n\x0flower_bound_lat\x18\x01 \x01(\x01\x12\x17\n\x0flower_bound_lon\x18\x02 \x01(\x01\x12\x17\n\x0fupper_bound_lat\x18\x03 \x01(\x01\x12\x17\n\x0fupper_bound_lon\x18\x04 \x01(\x01\"\x80\x01\n\nTrackPoses\x12\x35\n\ntrack_pose\x18\x01 \x03(\x0b\x32!.deeproute.common.Transformation3\x12;\n\x0ftrack_gnss_pose\x18\x02 \x03(\x0b\x32\".deeproute.drivers.gnss.SensorsIns\"^\n\x0c\x41lignedBox2d\x12&\n\x03min\x18\x01 \x01(\x0b\x32\x19.deeproute.common.Point2D\x12&\n\x03max\x18\x02 \x01(\x0b\x32\x19.deeproute.common.Point2D\"^\n\x0c\x41lignedBox3d\x12&\n\x03min\x18\x01 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12&\n\x03max\x18\x02 \x01(\x0b\x32\x19.deeproute.common.Point3D\"\xe5\x01\n\x10SemanticBoundary\x12@\n\x18lane_boundary_pointcloud\x18\x01 \x01(\x0b\x32\x1e.deeproute.drivers.PointCloud2\x12I\n!parking_space_boundary_pointcloud\x18\x02 \x01(\x0b\x32\x1e.deeproute.drivers.PointCloud2\x12\x44\n\x1cobstacle_boundary_pointcloud\x18\x03 \x01(\x0b\x32\x1e.deeproute.drivers.PointCloud2\"\x84\x02\n\x12ParkingMapMetaData\x12\x0e\n\x06map_id\x18\x01 \x01(\r\x12\x10\n\x08map_name\x18\x02 \x01(\t\x12\x0c\n\x04\x63ity\x18\x03 \x01(\t\x12\x10\n\x08\x64r_pl_id\x18\x04 \x01(\x04\x12\x13\n\x0b\x63reate_time\x18\n \x01(\x04\x12\x15\n\rlast_use_time\x18\x0b \x01(\x04\x12\x18\n\x10last_update_time\x18\x0c \x01(\x04\x12\x33\n\x06source\x18\x14 \x01(\x0e\x32#.deeproute.map.vpa.ParkingMapSource\x12\x31\n\x05\x65ntry\x18\x15 \x01(\x0b\x32\".deeproute.map.vpa.OnboardMapEntry\"\xdb\x06\n\x08Keyframe\x12\x11\n\ttimestamp\x18\x01 \x01(\x03\x12\x33\n\x08map_pose\x18\x02 \x01(\x0b\x32!.deeproute.common.Transformation3\x12H\n\rparking_space\x18\x03 \x03(\x0b\x32\x31.deeproute.localization.havp_map.HAVPParkingSpace\x12?\n\x08obstacle\x18\x04 \x03(\x0b\x32-.deeproute.localization.havp_map.HAVPObstacle\x12\x35\n\ntrack_pose\x18\x05 \x03(\x0b\x32!.deeproute.common.Transformation3\x12\x33\n\x0bpoint_cloud\x18\x06 \x01(\x0b\x32\x1e.deeproute.drivers.PointCloud2\x12?\n\x16sensing_pose_bound_box\x18\x07 \x01(\x0b\x32\x1f.deeproute.map.vpa.AlignedBox3d\x12\x15\n\ris_premapping\x18\x08 \x01(\x08\x12\x13\n\x0bis_on_slope\x18\t \x01(\x08\x12>\n\x11semantic_boundary\x18\n \x01(\x0b\x32#.deeproute.map.vpa.SemanticBoundary\x12\x38\n\rroad_polygons\x18\x0b \x03(\x0b\x32!.deeproute.perception.RoadPolygon\x12.\n\todd_range\x18\x0c \x01(\x0e\x32\x1b.deeproute.map.vpa.OddRange\x12J\n\x11map_semantic_lane\x18\r \x03(\x0b\x32/.deeproute.localization.havp_map.HAVPTrajectory\x12\x36\n\ngnss_poses\x18\x0e \x03(\x0b\x32\".deeproute.drivers.gnss.SensorsIns\x12\x13\n\x0b\x64r_link_ids\x18\x14 \x03(\x04\x12\x13\n\x0bkeyframe_id\x18\x15 \x01(\x04\x12\x10\n\x08\x66loor_id\x18\x16 \x01(\x05\x12\x39\n\x0eodometry_poses\x18\x17 \x03(\x0b\x32!.deeproute.common.Transformation3\"\xa2\x01\n\x0eSlopeFloorInfo\x12\x12\n\nfrom_floor\x18\x01 \x01(\x05\x12\x10\n\x08to_floor\x18\x02 \x01(\x05\x12\x35\n\nstart_pose\x18\x03 \x01(\x0b\x32!.deeproute.common.Transformation3\x12\x33\n\x08\x65nd_pose\x18\x04 \x01(\x0b\x32!.deeproute.common.Transformation3\"\xd3\x01\n\x08\x46loorMap\x12\x10\n\x08\x66loor_id\x18\x01 \x01(\x05\x12H\n\x0ftrajectory_type\x18\x02 \x01(\x0e\x32/.deeproute.localization.havp_map.TrajectoryType\x12.\n\tkey_frame\x18\x03 \x03(\x0b\x32\x1b.deeproute.map.vpa.Keyframe\x12;\n\x10slope_floor_info\x18\x04 \x01(\x0b\x32!.deeproute.map.vpa.SlopeFloorInfo\"m\n\x0cKeyframeEdge\x12\x12\n\nkeyframe_i\x18\x01 \x02(\x04\x12\x12\n\nkeyframe_j\x18\x02 \x02(\x04\x12\x35\n\ndelta_pose\x18\x03 \x02(\x0b\x32!.deeproute.common.Transformation3\"\xc4\x03\n\x08LinkData\x12\x12\n\ndr_link_id\x18\x01 \x01(\x04\x12*\n\x06points\x18\x02 \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12+\n\x08points3d\x18\n \x03(\x0b\x32\x19.deeproute.common.Point3D\x12\x13\n\x0bin_link_ids\x18\x06 \x03(\x04\x12\x14\n\x0cout_link_ids\x18\x07 \x03(\x04\x12\x38\n\x0clink_formway\x18\x08 \x03(\x0e\x32\".deeproute.sd_map.LinkData.FormWay\x12\x0e\n\x06length\x18\t \x01(\r\x12\x34\n\nslope_type\x18\x0b \x01(\x0e\x32 .deeproute.map.vpa.LinkSlopeType\x12\x10\n\x08\x66loor_id\x18\x0c \x01(\x05\x12\x34\n\ncurve_type\x18\r \x01(\x0e\x32 .deeproute.map.vpa.LinkCurveType\x12\x19\n\x11start_junction_id\x18\x0e \x01(\x04\x12\x17\n\x0f\x65nd_junction_id\x18\x0f \x01(\x04\x12\x12\n\nfrom_floor\x18\x10 \x01(\x05\x12\x10\n\x08to_floor\x18\x11 \x01(\x05\"Z\n\x0cLinkJunction\x12\n\n\x02id\x18\x01 \x01(\x04\x12+\n\x08points3d\x18\x02 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x11\n\tis_stable\x18\x03 \x01(\x08\"`\n\x0fMapPoiInfoInMap\x12\x13\n\x0bkeyframe_id\x18\x01 \x01(\x05\x12\x38\n\rrelative_pose\x18\x02 \x01(\x0b\x32!.deeproute.common.Transformation3\"\xbb\x08\n\tGlobalMap\x12\x39\n\x11projection_origin\x18\x01 \x01(\x0b\x32\x1e.deeproute.map.ProjectionPoint\x12\x16\n\x0emap_resolution\x18\x02 \x01(\x02\x12.\n\tfloor_map\x18\x03 \x03(\x0b\x32\x1b.deeproute.map.vpa.FloorMap\x12H\n\rparking_space\x18\x04 \x03(\x0b\x32\x31.deeproute.localization.havp_map.HAVPParkingSpace\x12?\n\x08obstacle\x18\x05 \x03(\x0b\x32-.deeproute.localization.havp_map.HAVPObstacle\x12\x37\n\x0ekeyframe_edges\x18\x06 \x03(\x0b\x32\x1f.deeproute.map.vpa.KeyframeEdge\x12\x15\n\rfloor_heights\x18\x07 \x03(\x01\x12\x15\n\rviz_floor_ids\x18\x08 \x03(\x05\x12G\n\x0emap_trajectory\x18\t \x03(\x0b\x32/.deeproute.localization.havp_map.HAVPTrajectory\x12\x38\n\rroad_polygons\x18\n \x03(\x0b\x32!.deeproute.perception.RoadPolygon\x12\x39\n\rodd_start_poi\x18\x0b \x01(\x0b\x32\".deeproute.map.vpa.MapPoiInfoInMap\x12\x37\n\x0bodd_end_poi\x18\x0c \x01(\x0b\x32\".deeproute.map.vpa.MapPoiInfoInMap\x12?\n\x13parking_out_end_poi\x18\r \x01(\x0b\x32\".deeproute.map.vpa.MapPoiInfoInMap\x12;\n\x0fmapping_end_poi\x18\x0e \x01(\x0b\x32\".deeproute.map.vpa.MapPoiInfoInMap\x12J\n\x11map_semantic_lane\x18\x0f \x03(\x0b\x32/.deeproute.localization.havp_map.HAVPTrajectory\x12/\n\nlink_datas\x18\x14 \x03(\x0b\x32\x1b.deeproute.map.vpa.LinkData\x12\x37\n\x0elink_junctions\x18\x15 \x03(\x0b\x32\x1f.deeproute.map.vpa.LinkJunction\x12\x38\n\x0ctrajectories\x18\x16 \x03(\x0b\x32\".deeproute.map.vpa.TrajectoryProto\x12N\n\x18parking_space_global_map\x18\x18 \x03(\x0b\x32,.deeproute.map.vpa.FloorParkingSpaceMapProtoJ\x04\x08\x17\x10\x18\"\x8d\x01\n\tEntryList\x12/\n\x0b\x64\x65stination\x18\x01 \x01(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x13\n\x0b\x64r_link_ids\x18\x02 \x03(\x04\x12:\n\x0enearby_entries\x18\x03 \x03(\x0b\x32\".deeproute.map.vpa.OnboardMapEntry\"j\n\x0c\x41vpMatchInfo\x12\x18\n\x10start_link_index\x18\x01 \x01(\r\x12\x16\n\x0e\x65nd_link_index\x18\x02 \x01(\r\x12\x14\n\x0cstart_offset\x18\x03 \x01(\x01\x12\x12\n\nend_offset\x18\x04 \x01(\x01\"\xc6\x02\n\x15\x41vpRoutingMatchResult\x12\x18\n\x10is_match_success\x18\x01 \x01(\x08\x12=\n\x14\x61vp_route_match_info\x18\x02 \x01(\x0b\x32\x1f.deeproute.map.vpa.AvpMatchInfo\x12@\n\x17global_route_match_info\x18\x03 \x01(\x0b\x32\x1f.deeproute.map.vpa.AvpMatchInfo\x12\x0f\n\x07\x61vp_idx\x18\x04 \x01(\r\x12>\n\x15\x61vp_switch_match_info\x18\x05 \x01(\x0b\x32\x1f.deeproute.map.vpa.AvpMatchInfo\x12\x41\n\x18global_switch_match_info\x18\x06 \x01(\x0b\x32\x1f.deeproute.map.vpa.AvpMatchInfo\"\xe8\x01\n\x19KeyframeParkingSpaceProto\x12+\n\x08vertices\x18\x01 \x03(\x0b\x32\x19.deeproute.common.Point3D\x12)\n\x06\x63\x65nter\x18\x02 \x01(\x0b\x32\x19.deeproute.common.Point3D\x12\x16\n\x0eopen_direction\x18\x03 \x01(\x05\x12G\n\tuser_info\x18\x04 \x01(\x0b\x32\x34.deeproute.localization.havp_map.ParkingSpaceUsrInfo\x12\x12\n\nis_default\x18\x05 \x01(\x08\"n\n\x16KeyframeSpeedBumpProto\x12)\n\x06points\x18\x01 \x03(\x0b\x32\x19.deeproute.common.Point3D\x12)\n\x06\x63\x65nter\x18\x02 \x01(\x0b\x32\x19.deeproute.common.Point3D\"\x7f\n\x19KeyframeRoadJunctionProto\x12\n\n\x02id\x18\x01 \x01(\x05\x12+\n\x08vertexes\x18\x02 \x03(\x0b\x32\x19.deeproute.common.Point3D\x12)\n\x06\x63\x65nter\x18\x03 \x01(\x0b\x32\x19.deeproute.common.Point3D\"q\n\x15KeyframeLandMarkProto\x12\n\n\x02id\x18\x01 \x01(\x05\x12/\n\x04pose\x18\x02 \x01(\x0b\x32!.deeproute.common.Transformation3\x12\x0c\n\x04type\x18\x03 \x01(\x05\x12\r\n\x05score\x18\x04 \x01(\x02\"\xd4\x01\n\x19SemanticStraightLaneProto\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x10\n\x08\x66loor_id\x18\x02 \x01(\x05\x12)\n\x06points\x18\x03 \x03(\x0b\x32\x19.deeproute.common.Point3D\x12+\n\x08\x63\x65ntroid\x18\x04 \x01(\x0b\x32\x19.deeproute.common.Point2D\x12,\n\tdirection\x18\x05 \x01(\x0b\x32\x19.deeproute.common.Point2D\x12\x13\n\x0bis_ego_lane\x18\x06 \x01(\x08\"n\n\x0fSubmapBaseProto\x12\x11\n\tanchor_id\x18\x01 \x01(\x04\x12\x35\n\ndelta_pose\x18\x02 \x01(\x0b\x32!.deeproute.common.Transformation3\x12\x11\n\tsubmap_id\x18\x03 \x01(\x04\"O\n\x0fGnssRecordProto\x12\x0b\n\x03lat\x18\x01 \x01(\x01\x12\x0b\n\x03lon\x18\x02 \x01(\x01\x12\x0e\n\x06height\x18\x03 \x01(\x01\x12\x12\n\nis_outdoor\x18\x04 \x01(\x08\"\x98\x03\n\x15PointCloudSubmapProto\x12\x30\n\x04\x62\x61se\x18\x01 \x01(\x0b\x32\".deeproute.map.vpa.SubmapBaseProto\x12\x33\n\x0bpoint_cloud\x18\x02 \x01(\x0b\x32\x1e.deeproute.drivers.PointCloud2\x12?\n\x16sensing_pose_bound_box\x18\x03 \x01(\x0b\x32\x1f.deeproute.map.vpa.AlignedBox3d\x12>\n\x15point_cloud_bound_box\x18\x04 \x01(\x0b\x32\x1f.deeproute.map.vpa.AlignedBox2d\x12\x36\n\x11keyframe_odd_type\x18\x05 \x01(\x0e\x32\x1b.deeproute.map.vpa.OddRange\x12\x10\n\x08\x66loor_id\x18\x06 \x01(\x05\x12\x13\n\x0bis_on_slope\x18\x07 \x01(\x08\x12\x38\n\x0cgnss_records\x18\x08 \x03(\x0b\x32\".deeproute.map.vpa.GnssRecordProto\"\xbd\x01\n\x17ParkingSpaceSubmapProto\x12\x30\n\x04\x62\x61se\x18\x01 \x01(\x0b\x32\".deeproute.map.vpa.SubmapBaseProto\x12I\n\x0eparking_spaces\x18\x02 \x03(\x0b\x32\x31.deeproute.localization.havp_map.HAVPParkingSpace\x12\x10\n\x08\x66loor_id\x18\x03 \x01(\x05\x12\x13\n\x0bis_on_slope\x18\x04 \x01(\x08\"\x88\x01\n\x14SpeedBumpSubmapProto\x12\x30\n\x04\x62\x61se\x18\x01 \x01(\x0b\x32\".deeproute.map.vpa.SubmapBaseProto\x12>\n\x0bspeed_bumps\x18\x02 \x03(\x0b\x32).deeproute.map.vpa.KeyframeSpeedBumpProto\"\x91\x01\n\x17RoadJunctionSubmapProto\x12\x30\n\x04\x62\x61se\x18\x01 \x01(\x0b\x32\".deeproute.map.vpa.SubmapBaseProto\x12\x44\n\x0eroad_junctions\x18\x02 \x03(\x0b\x32,.deeproute.map.vpa.KeyframeRoadJunctionProto\"m\n\x0fGateSubmapProto\x12\x30\n\x04\x62\x61se\x18\x01 \x01(\x0b\x32\".deeproute.map.vpa.SubmapBaseProto\x12(\n\x05gates\x18\x02 \x03(\x0b\x32\x19.deeproute.common.Point3D\"\x91\x01\n\x17SemanticLaneSubmapProto\x12\x30\n\x04\x62\x61se\x18\x01 \x01(\x0b\x32\".deeproute.map.vpa.SubmapBaseProto\x12\x44\n\x0estraight_lanes\x18\x02 \x03(\x0b\x32,.deeproute.map.vpa.SemanticStraightLaneProto\"\xea\x01\n\x15SemanticBoundaryProto\x12@\n\x18lane_boundary_pointcloud\x18\x01 \x01(\x0b\x32\x1e.deeproute.drivers.PointCloud2\x12I\n!parking_space_boundary_pointcloud\x18\x02 \x01(\x0b\x32\x1e.deeproute.drivers.PointCloud2\x12\x44\n\x1cobstacle_boundary_pointcloud\x18\x03 \x01(\x0b\x32\x1e.deeproute.drivers.PointCloud2\"\xfe\x01\n\x1dSemanticPointCloudSubmapProto\x12\x30\n\x04\x62\x61se\x18\x01 \x01(\x0b\x32\".deeproute.map.vpa.SubmapBaseProto\x12\x43\n\x11semantic_boundary\x18\x02 \x01(\x0b\x32(.deeproute.map.vpa.SemanticBoundaryProto\x12\x15\n\rsemantic_area\x18\x03 \x01(\x01\x12\x17\n\x0fperception_area\x18\x04 \x01(\x01\x12\x36\n\x0btrack_poses\x18\x05 \x03(\x0b\x32!.deeproute.common.Transformation3\"\xc1\x01\n\x14TrackPoseSubmapProto\x12\x30\n\x04\x62\x61se\x18\x01 \x01(\x0b\x32\".deeproute.map.vpa.SubmapBaseProto\x12\x36\n\x0btrack_poses\x18\x02 \x03(\x0b\x32!.deeproute.common.Transformation3\x12?\n\x16sensing_pose_bound_box\x18\x03 \x01(\x0b\x32\x1f.deeproute.map.vpa.AlignedBox3d\"\x85\x01\n\x13LandMarkSubmapProto\x12\x30\n\x04\x62\x61se\x18\x01 \x01(\x0b\x32\".deeproute.map.vpa.SubmapBaseProto\x12<\n\nland_marks\x18\x02 \x03(\x0b\x32(.deeproute.map.vpa.KeyframeLandMarkProto\"`\n\x17LinkJunctionSubmapProto\x12\x30\n\x04\x62\x61se\x18\x01 \x01(\x0b\x32\".deeproute.map.vpa.SubmapBaseProto\x12\x13\n\x0bjunction_id\x18\x02 \x01(\x04\"3\n\rAnchorIdProto\x12\x12\n\ntrajectory\x18\x01 \x01(\x04\x12\x0e\n\x06\x61nchor\x18\x02 \x01(\x04\"\xb6\x01\n\x15\x41nchorConstraintProto\x12\x32\n\x08\x61nchor_i\x18\x01 \x01(\x0b\x32 .deeproute.map.vpa.AnchorIdProto\x12\x32\n\x08\x61nchor_j\x18\x02 \x01(\x0b\x32 .deeproute.map.vpa.AnchorIdProto\x12\x35\n\ndelta_pose\x18\x03 \x01(\x0b\x32!.deeproute.common.Transformation3\"\x7f\n\x0b\x41nchorProto\x12\x10\n\x08\x66loor_id\x18\x01 \x01(\x05\x12-\n\x08odd_type\x18\x02 \x01(\x0e\x32\x1b.deeproute.map.vpa.OddRange\x12/\n\x04pose\x18\x03 \x01(\x0b\x32!.deeproute.common.Transformation3\"\xe8\x06\n\x0fTrajectoryProto\x12\x15\n\rtrajectory_id\x18\x01 \x01(\x04\x12/\n\x07\x61nchors\x18\x02 \x03(\x0b\x32\x1e.deeproute.map.vpa.AnchorProto\x12=\n\x0b\x63onstraints\x18\x03 \x03(\x0b\x32(.deeproute.map.vpa.AnchorConstraintProto\x12\x44\n\x12pointcloud_submaps\x18\x04 \x03(\x0b\x32(.deeproute.map.vpa.PointCloudSubmapProto\x12I\n\x15parking_space_submaps\x18\x05 \x03(\x0b\x32*.deeproute.map.vpa.ParkingSpaceSubmapProto\x12\x43\n\x12speed_bump_submaps\x18\x06 \x03(\x0b\x32\'.deeproute.map.vpa.SpeedBumpSubmapProto\x12I\n\x15road_junction_submaps\x18\x07 \x03(\x0b\x32*.deeproute.map.vpa.RoadJunctionSubmapProto\x12\x38\n\x0cgate_submaps\x18\x08 \x03(\x0b\x32\".deeproute.map.vpa.GateSubmapProto\x12I\n\x15semantic_lane_submaps\x18\t \x03(\x0b\x32*.deeproute.map.vpa.SemanticLaneSubmapProto\x12U\n\x1bsemantic_pointcloud_submaps\x18\n \x03(\x0b\x32\x30.deeproute.map.vpa.SemanticPointCloudSubmapProto\x12\x43\n\x12track_pose_submaps\x18\x0b \x03(\x0b\x32\'.deeproute.map.vpa.TrackPoseSubmapProto\x12\x41\n\x11land_mark_submaps\x18\x0c \x03(\x0b\x32&.deeproute.map.vpa.LandMarkSubmapProto\x12I\n\x15link_junction_submaps\x18\r \x03(\x0b\x32*.deeproute.map.vpa.LinkJunctionSubmapProto\"\x96\x01\n\"KeyframeParkingSpaceIndexInfoProto\x12\x13\n\x0bkeyframe_id\x18\x01 \x01(\x05\x12H\n\rparking_space\x18\x02 \x01(\x0b\x32\x31.deeproute.localization.havp_map.HAVPParkingSpace\x12\x11\n\tsubmap_id\x18\x03 \x01(\x04\"\xe3\x01\n\x1eGlobalMapParkingSpaceInfoProto\x12\x18\n\x10parking_space_id\x18\x01 \x01(\x05\x12H\n\rparking_space\x18\x02 \x01(\x0b\x32\x31.deeproute.localization.havp_map.HAVPParkingSpace\x12]\n\x1e\x61ll_parking_space_observations\x18\x03 \x03(\x0b\x32\x35.deeproute.map.vpa.KeyframeParkingSpaceIndexInfoProto\"}\n\x19\x46loorParkingSpaceMapProto\x12\x10\n\x08\x66loor_id\x18\x01 \x01(\x05\x12N\n\x13parking_space_infos\x18\x02 \x03(\x0b\x32\x31.deeproute.map.vpa.GlobalMapParkingSpaceInfoProto\"\xe2\x02\n\x0e\x41\x63tiveMapProto\x12\x0e\n\x06map_id\x18\x01 \x01(\x04\x12\x16\n\x0emap_resolution\x18\x02 \x01(\x02\x12.\n\x06origin\x18\x03 \x01(\x0b\x32\x1e.deeproute.map.ProjectionPoint\x12\x38\n\x0ctrajectories\x18\x04 \x03(\x0b\x32\".deeproute.map.vpa.TrajectoryProto\x12N\n\x18parking_space_global_map\x18\x06 \x03(\x0b\x32,.deeproute.map.vpa.FloorParkingSpaceMapProto\x12\x37\n\x0elink_junctions\x18\x07 \x03(\x0b\x32\x1f.deeproute.map.vpa.LinkJunction\x12/\n\nlink_datas\x18\x08 \x03(\x0b\x32\x1b.deeproute.map.vpa.LinkDataJ\x04\x08\x05\x10\x06*)\n\x0eParkingLotType\x12\n\n\x06INDOOR\x10\x00\x12\x0b\n\x07OUTDOOR\x10\x01*P\n\x08OddRange\x12\x1c\n\x18PUBLIC_ROAD_TO_ODD_START\x10\x00\x12\n\n\x06IN_ODD\x10\x01\x12\x1a\n\x16ODD_END_TO_PUBLIC_ROAD\x10\x02*3\n\rLinkSlopeType\x12\x08\n\x04\x46LAT\x10\x00\x12\x0c\n\x08\x44OWNHILL\x10\x01\x12\n\n\x06UPHILL\x10\x02*5\n\rLinkCurveType\x12\x0c\n\x08STRAIGHT\x10\x00\x12\n\n\x06\x43URVED\x10\x01\x12\n\n\x06SPIRAL\x10\x02')
 
-_PARKINGMAPSOURCE = DESCRIPTOR.enum_types_by_name['ParkingMapSource']
-ParkingMapSource = enum_type_wrapper.EnumTypeWrapper(_PARKINGMAPSOURCE)
 _PARKINGLOTTYPE = DESCRIPTOR.enum_types_by_name['ParkingLotType']
 ParkingLotType = enum_type_wrapper.EnumTypeWrapper(_PARKINGLOTTYPE)
 _ODDRANGE = DESCRIPTOR.enum_types_by_name['OddRange']
@@ -34,9 +33,6 @@ _LINKSLOPETYPE = DESCRIPTOR.enum_types_by_name['LinkSlopeType']
 LinkSlopeType = enum_type_wrapper.EnumTypeWrapper(_LINKSLOPETYPE)
 _LINKCURVETYPE = DESCRIPTOR.enum_types_by_name['LinkCurveType']
 LinkCurveType = enum_type_wrapper.EnumTypeWrapper(_LINKCURVETYPE)
-INVAILD = 0
-USER = 1
-CLOUD = 2
 INDOOR = 0
 OUTDOOR = 1
 PUBLIC_ROAD_TO_ODD_START = 0
@@ -54,6 +50,7 @@ _MAPOUTENDPOSEINFO = DESCRIPTOR.message_types_by_name['MapOutEndPoseInfo']
 _ONBOARDMAPENTRY = DESCRIPTOR.message_types_by_name['OnboardMapEntry']
 _MAPRANGE = DESCRIPTOR.message_types_by_name['MapRange']
 _TRACKPOSES = DESCRIPTOR.message_types_by_name['TrackPoses']
+_ALIGNEDBOX2D = DESCRIPTOR.message_types_by_name['AlignedBox2d']
 _ALIGNEDBOX3D = DESCRIPTOR.message_types_by_name['AlignedBox3d']
 _SEMANTICBOUNDARY = DESCRIPTOR.message_types_by_name['SemanticBoundary']
 _PARKINGMAPMETADATA = DESCRIPTOR.message_types_by_name['ParkingMapMetaData']
@@ -62,9 +59,38 @@ _SLOPEFLOORINFO = DESCRIPTOR.message_types_by_name['SlopeFloorInfo']
 _FLOORMAP = DESCRIPTOR.message_types_by_name['FloorMap']
 _KEYFRAMEEDGE = DESCRIPTOR.message_types_by_name['KeyframeEdge']
 _LINKDATA = DESCRIPTOR.message_types_by_name['LinkData']
+_LINKJUNCTION = DESCRIPTOR.message_types_by_name['LinkJunction']
 _MAPPOIINFOINMAP = DESCRIPTOR.message_types_by_name['MapPoiInfoInMap']
 _GLOBALMAP = DESCRIPTOR.message_types_by_name['GlobalMap']
 _ENTRYLIST = DESCRIPTOR.message_types_by_name['EntryList']
+_AVPMATCHINFO = DESCRIPTOR.message_types_by_name['AvpMatchInfo']
+_AVPROUTINGMATCHRESULT = DESCRIPTOR.message_types_by_name['AvpRoutingMatchResult']
+_KEYFRAMEPARKINGSPACEPROTO = DESCRIPTOR.message_types_by_name['KeyframeParkingSpaceProto']
+_KEYFRAMESPEEDBUMPPROTO = DESCRIPTOR.message_types_by_name['KeyframeSpeedBumpProto']
+_KEYFRAMEROADJUNCTIONPROTO = DESCRIPTOR.message_types_by_name['KeyframeRoadJunctionProto']
+_KEYFRAMELANDMARKPROTO = DESCRIPTOR.message_types_by_name['KeyframeLandMarkProto']
+_SEMANTICSTRAIGHTLANEPROTO = DESCRIPTOR.message_types_by_name['SemanticStraightLaneProto']
+_SUBMAPBASEPROTO = DESCRIPTOR.message_types_by_name['SubmapBaseProto']
+_GNSSRECORDPROTO = DESCRIPTOR.message_types_by_name['GnssRecordProto']
+_POINTCLOUDSUBMAPPROTO = DESCRIPTOR.message_types_by_name['PointCloudSubmapProto']
+_PARKINGSPACESUBMAPPROTO = DESCRIPTOR.message_types_by_name['ParkingSpaceSubmapProto']
+_SPEEDBUMPSUBMAPPROTO = DESCRIPTOR.message_types_by_name['SpeedBumpSubmapProto']
+_ROADJUNCTIONSUBMAPPROTO = DESCRIPTOR.message_types_by_name['RoadJunctionSubmapProto']
+_GATESUBMAPPROTO = DESCRIPTOR.message_types_by_name['GateSubmapProto']
+_SEMANTICLANESUBMAPPROTO = DESCRIPTOR.message_types_by_name['SemanticLaneSubmapProto']
+_SEMANTICBOUNDARYPROTO = DESCRIPTOR.message_types_by_name['SemanticBoundaryProto']
+_SEMANTICPOINTCLOUDSUBMAPPROTO = DESCRIPTOR.message_types_by_name['SemanticPointCloudSubmapProto']
+_TRACKPOSESUBMAPPROTO = DESCRIPTOR.message_types_by_name['TrackPoseSubmapProto']
+_LANDMARKSUBMAPPROTO = DESCRIPTOR.message_types_by_name['LandMarkSubmapProto']
+_LINKJUNCTIONSUBMAPPROTO = DESCRIPTOR.message_types_by_name['LinkJunctionSubmapProto']
+_ANCHORIDPROTO = DESCRIPTOR.message_types_by_name['AnchorIdProto']
+_ANCHORCONSTRAINTPROTO = DESCRIPTOR.message_types_by_name['AnchorConstraintProto']
+_ANCHORPROTO = DESCRIPTOR.message_types_by_name['AnchorProto']
+_TRAJECTORYPROTO = DESCRIPTOR.message_types_by_name['TrajectoryProto']
+_KEYFRAMEPARKINGSPACEINDEXINFOPROTO = DESCRIPTOR.message_types_by_name['KeyframeParkingSpaceIndexInfoProto']
+_GLOBALMAPPARKINGSPACEINFOPROTO = DESCRIPTOR.message_types_by_name['GlobalMapParkingSpaceInfoProto']
+_FLOORPARKINGSPACEMAPPROTO = DESCRIPTOR.message_types_by_name['FloorParkingSpaceMapProto']
+_ACTIVEMAPPROTO = DESCRIPTOR.message_types_by_name['ActiveMapProto']
 MapOutEndPoseInfo = _reflection.GeneratedProtocolMessageType('MapOutEndPoseInfo', (_message.Message,), {
   'DESCRIPTOR' : _MAPOUTENDPOSEINFO,
   '__module__' : 'map.vpa_mapping_pb2'
@@ -92,6 +118,13 @@ TrackPoses = _reflection.GeneratedProtocolMessageType('TrackPoses', (_message.Me
   # @@protoc_insertion_point(class_scope:deeproute.map.vpa.TrackPoses)
   })
 _sym_db.RegisterMessage(TrackPoses)
+
+AlignedBox2d = _reflection.GeneratedProtocolMessageType('AlignedBox2d', (_message.Message,), {
+  'DESCRIPTOR' : _ALIGNEDBOX2D,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.AlignedBox2d)
+  })
+_sym_db.RegisterMessage(AlignedBox2d)
 
 AlignedBox3d = _reflection.GeneratedProtocolMessageType('AlignedBox3d', (_message.Message,), {
   'DESCRIPTOR' : _ALIGNEDBOX3D,
@@ -149,6 +182,13 @@ LinkData = _reflection.GeneratedProtocolMessageType('LinkData', (_message.Messag
   })
 _sym_db.RegisterMessage(LinkData)
 
+LinkJunction = _reflection.GeneratedProtocolMessageType('LinkJunction', (_message.Message,), {
+  'DESCRIPTOR' : _LINKJUNCTION,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.LinkJunction)
+  })
+_sym_db.RegisterMessage(LinkJunction)
+
 MapPoiInfoInMap = _reflection.GeneratedProtocolMessageType('MapPoiInfoInMap', (_message.Message,), {
   'DESCRIPTOR' : _MAPPOIINFOINMAP,
   '__module__' : 'map.vpa_mapping_pb2'
@@ -170,49 +210,305 @@ EntryList = _reflection.GeneratedProtocolMessageType('EntryList', (_message.Mess
   })
 _sym_db.RegisterMessage(EntryList)
 
+AvpMatchInfo = _reflection.GeneratedProtocolMessageType('AvpMatchInfo', (_message.Message,), {
+  'DESCRIPTOR' : _AVPMATCHINFO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.AvpMatchInfo)
+  })
+_sym_db.RegisterMessage(AvpMatchInfo)
+
+AvpRoutingMatchResult = _reflection.GeneratedProtocolMessageType('AvpRoutingMatchResult', (_message.Message,), {
+  'DESCRIPTOR' : _AVPROUTINGMATCHRESULT,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.AvpRoutingMatchResult)
+  })
+_sym_db.RegisterMessage(AvpRoutingMatchResult)
+
+KeyframeParkingSpaceProto = _reflection.GeneratedProtocolMessageType('KeyframeParkingSpaceProto', (_message.Message,), {
+  'DESCRIPTOR' : _KEYFRAMEPARKINGSPACEPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.KeyframeParkingSpaceProto)
+  })
+_sym_db.RegisterMessage(KeyframeParkingSpaceProto)
+
+KeyframeSpeedBumpProto = _reflection.GeneratedProtocolMessageType('KeyframeSpeedBumpProto', (_message.Message,), {
+  'DESCRIPTOR' : _KEYFRAMESPEEDBUMPPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.KeyframeSpeedBumpProto)
+  })
+_sym_db.RegisterMessage(KeyframeSpeedBumpProto)
+
+KeyframeRoadJunctionProto = _reflection.GeneratedProtocolMessageType('KeyframeRoadJunctionProto', (_message.Message,), {
+  'DESCRIPTOR' : _KEYFRAMEROADJUNCTIONPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.KeyframeRoadJunctionProto)
+  })
+_sym_db.RegisterMessage(KeyframeRoadJunctionProto)
+
+KeyframeLandMarkProto = _reflection.GeneratedProtocolMessageType('KeyframeLandMarkProto', (_message.Message,), {
+  'DESCRIPTOR' : _KEYFRAMELANDMARKPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.KeyframeLandMarkProto)
+  })
+_sym_db.RegisterMessage(KeyframeLandMarkProto)
+
+SemanticStraightLaneProto = _reflection.GeneratedProtocolMessageType('SemanticStraightLaneProto', (_message.Message,), {
+  'DESCRIPTOR' : _SEMANTICSTRAIGHTLANEPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.SemanticStraightLaneProto)
+  })
+_sym_db.RegisterMessage(SemanticStraightLaneProto)
+
+SubmapBaseProto = _reflection.GeneratedProtocolMessageType('SubmapBaseProto', (_message.Message,), {
+  'DESCRIPTOR' : _SUBMAPBASEPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.SubmapBaseProto)
+  })
+_sym_db.RegisterMessage(SubmapBaseProto)
+
+GnssRecordProto = _reflection.GeneratedProtocolMessageType('GnssRecordProto', (_message.Message,), {
+  'DESCRIPTOR' : _GNSSRECORDPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.GnssRecordProto)
+  })
+_sym_db.RegisterMessage(GnssRecordProto)
+
+PointCloudSubmapProto = _reflection.GeneratedProtocolMessageType('PointCloudSubmapProto', (_message.Message,), {
+  'DESCRIPTOR' : _POINTCLOUDSUBMAPPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.PointCloudSubmapProto)
+  })
+_sym_db.RegisterMessage(PointCloudSubmapProto)
+
+ParkingSpaceSubmapProto = _reflection.GeneratedProtocolMessageType('ParkingSpaceSubmapProto', (_message.Message,), {
+  'DESCRIPTOR' : _PARKINGSPACESUBMAPPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.ParkingSpaceSubmapProto)
+  })
+_sym_db.RegisterMessage(ParkingSpaceSubmapProto)
+
+SpeedBumpSubmapProto = _reflection.GeneratedProtocolMessageType('SpeedBumpSubmapProto', (_message.Message,), {
+  'DESCRIPTOR' : _SPEEDBUMPSUBMAPPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.SpeedBumpSubmapProto)
+  })
+_sym_db.RegisterMessage(SpeedBumpSubmapProto)
+
+RoadJunctionSubmapProto = _reflection.GeneratedProtocolMessageType('RoadJunctionSubmapProto', (_message.Message,), {
+  'DESCRIPTOR' : _ROADJUNCTIONSUBMAPPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.RoadJunctionSubmapProto)
+  })
+_sym_db.RegisterMessage(RoadJunctionSubmapProto)
+
+GateSubmapProto = _reflection.GeneratedProtocolMessageType('GateSubmapProto', (_message.Message,), {
+  'DESCRIPTOR' : _GATESUBMAPPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.GateSubmapProto)
+  })
+_sym_db.RegisterMessage(GateSubmapProto)
+
+SemanticLaneSubmapProto = _reflection.GeneratedProtocolMessageType('SemanticLaneSubmapProto', (_message.Message,), {
+  'DESCRIPTOR' : _SEMANTICLANESUBMAPPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.SemanticLaneSubmapProto)
+  })
+_sym_db.RegisterMessage(SemanticLaneSubmapProto)
+
+SemanticBoundaryProto = _reflection.GeneratedProtocolMessageType('SemanticBoundaryProto', (_message.Message,), {
+  'DESCRIPTOR' : _SEMANTICBOUNDARYPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.SemanticBoundaryProto)
+  })
+_sym_db.RegisterMessage(SemanticBoundaryProto)
+
+SemanticPointCloudSubmapProto = _reflection.GeneratedProtocolMessageType('SemanticPointCloudSubmapProto', (_message.Message,), {
+  'DESCRIPTOR' : _SEMANTICPOINTCLOUDSUBMAPPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.SemanticPointCloudSubmapProto)
+  })
+_sym_db.RegisterMessage(SemanticPointCloudSubmapProto)
+
+TrackPoseSubmapProto = _reflection.GeneratedProtocolMessageType('TrackPoseSubmapProto', (_message.Message,), {
+  'DESCRIPTOR' : _TRACKPOSESUBMAPPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.TrackPoseSubmapProto)
+  })
+_sym_db.RegisterMessage(TrackPoseSubmapProto)
+
+LandMarkSubmapProto = _reflection.GeneratedProtocolMessageType('LandMarkSubmapProto', (_message.Message,), {
+  'DESCRIPTOR' : _LANDMARKSUBMAPPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.LandMarkSubmapProto)
+  })
+_sym_db.RegisterMessage(LandMarkSubmapProto)
+
+LinkJunctionSubmapProto = _reflection.GeneratedProtocolMessageType('LinkJunctionSubmapProto', (_message.Message,), {
+  'DESCRIPTOR' : _LINKJUNCTIONSUBMAPPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.LinkJunctionSubmapProto)
+  })
+_sym_db.RegisterMessage(LinkJunctionSubmapProto)
+
+AnchorIdProto = _reflection.GeneratedProtocolMessageType('AnchorIdProto', (_message.Message,), {
+  'DESCRIPTOR' : _ANCHORIDPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.AnchorIdProto)
+  })
+_sym_db.RegisterMessage(AnchorIdProto)
+
+AnchorConstraintProto = _reflection.GeneratedProtocolMessageType('AnchorConstraintProto', (_message.Message,), {
+  'DESCRIPTOR' : _ANCHORCONSTRAINTPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.AnchorConstraintProto)
+  })
+_sym_db.RegisterMessage(AnchorConstraintProto)
+
+AnchorProto = _reflection.GeneratedProtocolMessageType('AnchorProto', (_message.Message,), {
+  'DESCRIPTOR' : _ANCHORPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.AnchorProto)
+  })
+_sym_db.RegisterMessage(AnchorProto)
+
+TrajectoryProto = _reflection.GeneratedProtocolMessageType('TrajectoryProto', (_message.Message,), {
+  'DESCRIPTOR' : _TRAJECTORYPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.TrajectoryProto)
+  })
+_sym_db.RegisterMessage(TrajectoryProto)
+
+KeyframeParkingSpaceIndexInfoProto = _reflection.GeneratedProtocolMessageType('KeyframeParkingSpaceIndexInfoProto', (_message.Message,), {
+  'DESCRIPTOR' : _KEYFRAMEPARKINGSPACEINDEXINFOPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.KeyframeParkingSpaceIndexInfoProto)
+  })
+_sym_db.RegisterMessage(KeyframeParkingSpaceIndexInfoProto)
+
+GlobalMapParkingSpaceInfoProto = _reflection.GeneratedProtocolMessageType('GlobalMapParkingSpaceInfoProto', (_message.Message,), {
+  'DESCRIPTOR' : _GLOBALMAPPARKINGSPACEINFOPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.GlobalMapParkingSpaceInfoProto)
+  })
+_sym_db.RegisterMessage(GlobalMapParkingSpaceInfoProto)
+
+FloorParkingSpaceMapProto = _reflection.GeneratedProtocolMessageType('FloorParkingSpaceMapProto', (_message.Message,), {
+  'DESCRIPTOR' : _FLOORPARKINGSPACEMAPPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.FloorParkingSpaceMapProto)
+  })
+_sym_db.RegisterMessage(FloorParkingSpaceMapProto)
+
+ActiveMapProto = _reflection.GeneratedProtocolMessageType('ActiveMapProto', (_message.Message,), {
+  'DESCRIPTOR' : _ACTIVEMAPPROTO,
+  '__module__' : 'map.vpa_mapping_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.map.vpa.ActiveMapProto)
+  })
+_sym_db.RegisterMessage(ActiveMapProto)
+
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _ONBOARDMAPENTRY.fields_by_name['map_out_end_pose_info']._options = None
   _ONBOARDMAPENTRY.fields_by_name['map_out_end_pose_info']._serialized_options = b'\030\001'
-  _PARKINGMAPSOURCE._serialized_start=5517
-  _PARKINGMAPSOURCE._serialized_end=5569
-  _PARKINGLOTTYPE._serialized_start=5571
-  _PARKINGLOTTYPE._serialized_end=5612
-  _ODDRANGE._serialized_start=5614
-  _ODDRANGE._serialized_end=5694
-  _LINKSLOPETYPE._serialized_start=5696
-  _LINKSLOPETYPE._serialized_end=5747
-  _LINKCURVETYPE._serialized_start=5749
-  _LINKCURVETYPE._serialized_end=5802
-  _MAPOUTENDPOSEINFO._serialized_start=234
-  _MAPOUTENDPOSEINFO._serialized_end=317
-  _ONBOARDMAPENTRY._serialized_start=320
-  _ONBOARDMAPENTRY._serialized_end=1855
-  _MAPRANGE._serialized_start=1857
-  _MAPRANGE._serialized_end=1967
-  _TRACKPOSES._serialized_start=1970
-  _TRACKPOSES._serialized_end=2098
-  _ALIGNEDBOX3D._serialized_start=2100
-  _ALIGNEDBOX3D._serialized_end=2194
-  _SEMANTICBOUNDARY._serialized_start=2197
-  _SEMANTICBOUNDARY._serialized_end=2426
-  _PARKINGMAPMETADATA._serialized_start=2429
-  _PARKINGMAPMETADATA._serialized_end=2671
-  _KEYFRAME._serialized_start=2674
-  _KEYFRAME._serialized_end=3533
-  _SLOPEFLOORINFO._serialized_start=3536
-  _SLOPEFLOORINFO._serialized_end=3698
-  _FLOORMAP._serialized_start=3701
-  _FLOORMAP._serialized_end=3912
-  _KEYFRAMEEDGE._serialized_start=3914
-  _KEYFRAMEEDGE._serialized_end=4023
-  _LINKDATA._serialized_start=4026
-  _LINKDATA._serialized_end=4388
-  _MAPPOIINFOINMAP._serialized_start=4390
-  _MAPPOIINFOINMAP._serialized_end=4486
-  _GLOBALMAP._serialized_start=4489
-  _GLOBALMAP._serialized_end=5371
-  _ENTRYLIST._serialized_start=5374
-  _ENTRYLIST._serialized_end=5515
+  _ONBOARDMAPENTRY.fields_by_name['floor_set']._options = None
+  _ONBOARDMAPENTRY.fields_by_name['floor_set']._serialized_options = b'\030\001'
+  _PARKINGLOTTYPE._serialized_start=11734
+  _PARKINGLOTTYPE._serialized_end=11775
+  _ODDRANGE._serialized_start=11777
+  _ODDRANGE._serialized_end=11857
+  _LINKSLOPETYPE._serialized_start=11859
+  _LINKSLOPETYPE._serialized_end=11910
+  _LINKCURVETYPE._serialized_start=11912
+  _LINKCURVETYPE._serialized_end=11965
+  _MAPOUTENDPOSEINFO._serialized_start=264
+  _MAPOUTENDPOSEINFO._serialized_end=347
+  _ONBOARDMAPENTRY._serialized_start=350
+  _ONBOARDMAPENTRY._serialized_end=1957
+  _MAPRANGE._serialized_start=1959
+  _MAPRANGE._serialized_end=2069
+  _TRACKPOSES._serialized_start=2072
+  _TRACKPOSES._serialized_end=2200
+  _ALIGNEDBOX2D._serialized_start=2202
+  _ALIGNEDBOX2D._serialized_end=2296
+  _ALIGNEDBOX3D._serialized_start=2298
+  _ALIGNEDBOX3D._serialized_end=2392
+  _SEMANTICBOUNDARY._serialized_start=2395
+  _SEMANTICBOUNDARY._serialized_end=2624
+  _PARKINGMAPMETADATA._serialized_start=2627
+  _PARKINGMAPMETADATA._serialized_end=2887
+  _KEYFRAME._serialized_start=2890
+  _KEYFRAME._serialized_end=3749
+  _SLOPEFLOORINFO._serialized_start=3752
+  _SLOPEFLOORINFO._serialized_end=3914
+  _FLOORMAP._serialized_start=3917
+  _FLOORMAP._serialized_end=4128
+  _KEYFRAMEEDGE._serialized_start=4130
+  _KEYFRAMEEDGE._serialized_end=4239
+  _LINKDATA._serialized_start=4242
+  _LINKDATA._serialized_end=4694
+  _LINKJUNCTION._serialized_start=4696
+  _LINKJUNCTION._serialized_end=4786
+  _MAPPOIINFOINMAP._serialized_start=4788
+  _MAPPOIINFOINMAP._serialized_end=4884
+  _GLOBALMAP._serialized_start=4887
+  _GLOBALMAP._serialized_end=5970
+  _ENTRYLIST._serialized_start=5973
+  _ENTRYLIST._serialized_end=6114
+  _AVPMATCHINFO._serialized_start=6116
+  _AVPMATCHINFO._serialized_end=6222
+  _AVPROUTINGMATCHRESULT._serialized_start=6225
+  _AVPROUTINGMATCHRESULT._serialized_end=6551
+  _KEYFRAMEPARKINGSPACEPROTO._serialized_start=6554
+  _KEYFRAMEPARKINGSPACEPROTO._serialized_end=6786
+  _KEYFRAMESPEEDBUMPPROTO._serialized_start=6788
+  _KEYFRAMESPEEDBUMPPROTO._serialized_end=6898
+  _KEYFRAMEROADJUNCTIONPROTO._serialized_start=6900
+  _KEYFRAMEROADJUNCTIONPROTO._serialized_end=7027
+  _KEYFRAMELANDMARKPROTO._serialized_start=7029
+  _KEYFRAMELANDMARKPROTO._serialized_end=7142
+  _SEMANTICSTRAIGHTLANEPROTO._serialized_start=7145
+  _SEMANTICSTRAIGHTLANEPROTO._serialized_end=7357
+  _SUBMAPBASEPROTO._serialized_start=7359
+  _SUBMAPBASEPROTO._serialized_end=7469
+  _GNSSRECORDPROTO._serialized_start=7471
+  _GNSSRECORDPROTO._serialized_end=7550
+  _POINTCLOUDSUBMAPPROTO._serialized_start=7553
+  _POINTCLOUDSUBMAPPROTO._serialized_end=7961
+  _PARKINGSPACESUBMAPPROTO._serialized_start=7964
+  _PARKINGSPACESUBMAPPROTO._serialized_end=8153
+  _SPEEDBUMPSUBMAPPROTO._serialized_start=8156
+  _SPEEDBUMPSUBMAPPROTO._serialized_end=8292
+  _ROADJUNCTIONSUBMAPPROTO._serialized_start=8295
+  _ROADJUNCTIONSUBMAPPROTO._serialized_end=8440
+  _GATESUBMAPPROTO._serialized_start=8442
+  _GATESUBMAPPROTO._serialized_end=8551
+  _SEMANTICLANESUBMAPPROTO._serialized_start=8554
+  _SEMANTICLANESUBMAPPROTO._serialized_end=8699
+  _SEMANTICBOUNDARYPROTO._serialized_start=8702
+  _SEMANTICBOUNDARYPROTO._serialized_end=8936
+  _SEMANTICPOINTCLOUDSUBMAPPROTO._serialized_start=8939
+  _SEMANTICPOINTCLOUDSUBMAPPROTO._serialized_end=9193
+  _TRACKPOSESUBMAPPROTO._serialized_start=9196
+  _TRACKPOSESUBMAPPROTO._serialized_end=9389
+  _LANDMARKSUBMAPPROTO._serialized_start=9392
+  _LANDMARKSUBMAPPROTO._serialized_end=9525
+  _LINKJUNCTIONSUBMAPPROTO._serialized_start=9527
+  _LINKJUNCTIONSUBMAPPROTO._serialized_end=9623
+  _ANCHORIDPROTO._serialized_start=9625
+  _ANCHORIDPROTO._serialized_end=9676
+  _ANCHORCONSTRAINTPROTO._serialized_start=9679
+  _ANCHORCONSTRAINTPROTO._serialized_end=9861
+  _ANCHORPROTO._serialized_start=9863
+  _ANCHORPROTO._serialized_end=9990
+  _TRAJECTORYPROTO._serialized_start=9993
+  _TRAJECTORYPROTO._serialized_end=10865
+  _KEYFRAMEPARKINGSPACEINDEXINFOPROTO._serialized_start=10868
+  _KEYFRAMEPARKINGSPACEINDEXINFOPROTO._serialized_end=11018
+  _GLOBALMAPPARKINGSPACEINFOPROTO._serialized_start=11021
+  _GLOBALMAPPARKINGSPACEINFOPROTO._serialized_end=11248
+  _FLOORPARKINGSPACEMAPPROTO._serialized_start=11250
+  _FLOORPARKINGSPACEMAPPROTO._serialized_end=11375
+  _ACTIVEMAPPROTO._serialized_start=11378
+  _ACTIVEMAPPROTO._serialized_end=11732
 # @@protoc_insertion_point(module_scope)

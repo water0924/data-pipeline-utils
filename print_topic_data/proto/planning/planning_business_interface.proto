@@ -16,7 +16,7 @@ message EmergencyStopRequest {
     DOUBLE_FLASH_ON = 2;
     VPA_STOP_FORCE = 3;
     VPA_STOP_COMFORTABLE = 4;
-    VPA_STOP_HOLD = 5; // deprecated
+    VPA_STOP_HOLD = 5;  // deprecated
     MRM_WITHOUT_P = 6;
   }
   enum EmergencyStopScope {
@@ -27,7 +27,7 @@ message EmergencyStopRequest {
   optional EmergencyStopType estop_type = 1;
   optional EmergencyStopScope estop_scope = 2;
   optional deeproute.canbus.Chassis.GearPosition target_gear = 3
-      [ default = PARK ];
+      [default = PARK];
 }
 
 message CountdownRequest {
@@ -49,7 +49,9 @@ message DrivingModeRequest {
   optional deeproute.dtu.command.DrivingMode efficiency_driving_mode = 3;
 }
 
-message DynamicSpeedLimitRequest { optional double value = 1; }
+message DynamicSpeedLimitRequest {
+  optional double value = 1;
+}
 
 message DetourRequest {
   enum DetourDirection {
@@ -60,33 +62,35 @@ message DetourRequest {
   optional DetourDirection detour_direction = 1;
 }
 
-message TracingRequest { repeated deeproute.common.Waypoint waypoints = 1; }
+message TracingRequest {
+  repeated deeproute.common.Waypoint waypoints = 1;
+}
 
 message APADrivingModeRequest {
   optional deeproute.canbus.Chassis.DrivingMode driving_mode = 1;
 }
 
 message ReverseTrackingRequest {
-  optional int64 timestamp = 1 [ default = 0 ];
-  repeated deeproute.common.VehicleState vehicle_state = 2; // deprecated
-  optional bool cancel_tracking = 3 [ default = false ];
-  optional bool directly_quit = 4 [ default = false ];
-  optional bool stop_comfortable = 5 [ default = false ]; // deprecated
+  optional int64 timestamp = 1 [default = 0];
+  repeated deeproute.common.VehicleState vehicle_state = 2;  // deprecated
+  optional bool cancel_tracking = 3 [default = false];
+  optional bool directly_quit = 4 [default = false];
+  optional bool stop_comfortable = 5 [default = false];  // deprecated
   // directly_quit has higher priority
-  optional bool directly_quit_lateral = 6 [ default = false ];
-  optional bool directly_quit_longitudinal = 7 [ default = false ];
+  optional bool directly_quit_lateral = 6 [default = false];
+  optional bool directly_quit_longitudinal = 7 [default = false];
   optional CancelParkingType cancel_parking_type = 8;
   optional deeproute.canbus.Chassis.DrivingMode driving_mode = 9;
   optional deeproute.canbus.Chassis.GearPosition target_gear = 10
-      [ default = PARK ];
+      [default = PARK];
   optional bool allow_rear_wheel_steering_parking = 11;
 }
 
 // report to dtu with planner/event when reverse tracking active
 message ReverseTrackingInfo {
-  optional double current_record_distance = 1; // set to 0 when active
+  optional double current_record_distance = 1;  // set to 0 when active
   optional double remaning_distance_to_start_point =
-      2; // has value only when active
+      2;  // has value only when active
   optional deeproute.common.Point3D start_point = 3;
   optional bool is_using_lsda_path = 4;
   optional double explored_dist = 5;
@@ -161,18 +165,19 @@ enum OutParkingDirection {
 enum OutParkingScenario {
   APA_PARKOUT = 0;
   VPA_PARKOUT = 1;
+  ROAM_PARKOUT = 2;
 }
 
 enum APAOutParkingDirection {
   DIRECTION_UNKNOWN = 0;
-  PARELLEL_LEFT = 1;  // 水平车位左
-  PARELLEL_RIGHT = 2; // 水平车位右
-  FRONT_LEFT = 3;     // 垂直、斜列左前
-  FRONT_RIGHT = 4;    // 垂直、斜列右前
-  BACK_LEFT = 5;      // 垂直、斜列后左
-  BACK_RIGHT = 6;     // 垂直、斜列后右
-  STRAIGHT_FRONT = 7; // 垂直、斜列前
-  STRAIGHT_BACK = 8;  // 垂直、斜列后
+  PARELLEL_LEFT = 1;   // 水平车位左
+  PARELLEL_RIGHT = 2;  // 水平车位右
+  FRONT_LEFT = 3;      // 垂直、斜列左前
+  FRONT_RIGHT = 4;     // 垂直、斜列右前
+  BACK_LEFT = 5;       // 垂直、斜列后左
+  BACK_RIGHT = 6;      // 垂直、斜列后右
+  STRAIGHT_FRONT = 7;  // 垂直、斜列前
+  STRAIGHT_BACK = 8;   // 垂直、斜列后
 }
 
 message ParkingOutSuggestPose {
@@ -183,7 +188,7 @@ message ParkingOutSuggestPose {
 
 message OutParkingRequest {
   optional deeproute.dtu.command.Point out_parking_direct_point = 1;
-  optional OutParkingDirection direction = 2; // deprecated
+  optional OutParkingDirection direction = 2;  // deprecated
   optional APAOutParkingDirection apa_out_parking_direction = 3;
   optional ParkingRequestReason request_reason = 4;
   optional deeproute.canbus.Chassis.DrivingMode driving_mode = 5;
@@ -195,8 +200,8 @@ message OutParkingRequest {
 message DirectInOutParkingRequest {
   enum DirectInOutParkingDirection {
     INVALID = 0;
-    DIRECT_IN = 1;  // 车尾方向往后入库
-    DIRECT_OUT = 2; // 车头方向往前出库
+    DIRECT_IN = 1;   // 车尾方向往后入库
+    DIRECT_OUT = 2;  // 车头方向往前出库
   }
   optional DirectInOutParkingDirection direct_in_out_direction = 1;
   optional bool ignore_side_obstacle = 2;
@@ -220,9 +225,9 @@ message TrafficRuleRequest {
 message SuggestOutParkingInfo {
   enum ParkingSpaceType {
     UNKNOWN = 0;
-    VERTICAL = 1; // rectangle
-    PARALLEL = 2; // rectangle
-    SLANTED = 3;  // parallelogram, the angle is not 90 degree
+    VERTICAL = 1;  // rectangle
+    PARALLEL = 2;  // rectangle
+    SLANTED = 3;   // parallelogram, the angle is not 90 degree
   }
 
   enum FailedReason {
@@ -234,25 +239,35 @@ message SuggestOutParkingInfo {
   repeated APAOutParkingDirection available_out_directions = 2;
   optional APAOutParkingDirection recommend_out_direction = 3;
   repeated ParkingOutSuggestPose suggest_poses = 4;
-  optional FailedReason failed_reason = 5; // when no any suggest
+  optional FailedReason failed_reason = 5;  // when no any suggest
   repeated APAOutParkingDirection unavailable_out_directions = 6;
   repeated ParkingOutSuggestPose unavailable_suggest_poses = 7;
   optional int32 planning_request_id = 8;
   optional int32 target_parking_space_id = 9;
   optional ParkingMod current_head_tail_mode =
       10;  // 当前姿态，planning 记忆泊入时赋值, 人驾泊入发unknown
-  optional bool allow_drifting_parking = 11; 
-  repeated APAOutParkingDirection vpa_available_out_directions = 12; // vpa-out has only one dir but for less change
+  optional bool allow_drifting_parking = 11;
+  repeated APAOutParkingDirection vpa_available_out_directions =
+      12;  // vpa-out has only one dir but for less change
   optional APAOutParkingDirection vpa_recommend_out_direction = 13;
   repeated ParkingOutSuggestPose vpa_suggest_poses = 14;
   repeated APAOutParkingDirection vpa_unavailable_out_directions = 15;
   repeated ParkingOutSuggestPose vpa_unavailable_suggest_poses = 16;
+  optional int32 parking_global_path_index = 17;
 }
 
 message VpaDrivingInfo {
   optional int32 human_reaction_times = 1 [ default = 0 ];
   optional int32 pass_speed_bump_times = 2 [ default = 0 ];
   optional int32 nudge_vehicle_times = 3 [ default = 0 ];
+
+  enum TurnAroundStatus {
+    NONE = 0;
+    REVERSE_TRACKING = 1;
+    TURNING_AROUND = 2;
+  }
+
+  optional TurnAroundStatus turn_around_status = 4;
 }
 
 message SingleStagePath {
@@ -261,14 +276,14 @@ message SingleStagePath {
     DRIFTING_PATH = 2;
   }
   repeated deeproute.common.Point3D trajectory_points = 1;
-  optional bool gear = 2; // true mean D, false mean R
+  optional bool gear = 2;  // true mean D, false mean R
   optional PathType path_type = 3;
 }
 
 message PrePlanParkingResult {
   optional int32 parking_space_id = 1;
   repeated deeproute.common.Point3D trajectory_points =
-      2; // 后轴中心为起始点的轨迹线
+      2;  // 后轴中心为起始点的轨迹线
   optional int32 planning_request_id = 3;
   repeated SingleStagePath all_stage_path = 4;
 }
@@ -292,9 +307,16 @@ message DirecetInOutAvailableDirectionInfo {
   optional double current_path_remaining_dist = 5;
   optional bool is_narrow = 6;
   optional bool is_init_collision = 7;
+  // 左右侧block信息
+  optional bool front_block_by_left_side = 8;
+  optional bool front_block_by_right_side = 9;
+  optional bool rear_block_by_left_side = 10;
+  optional bool rear_block_by_right_side = 11;
 }
 
-message DestChangeRequest { optional deeproute.common.Point3D dest_pose = 1; }
+message DestChangeRequest {
+  optional deeproute.common.Point3D dest_pose = 1;
+}
 
 message DynamicFollowDistanceRequest {
   enum DynamicFollowLevel {
@@ -306,14 +328,14 @@ message DynamicFollowDistanceRequest {
     LEVEL_4 = 4;
     LEVEL_5 = 5;
   }
-  optional double dynamic_follow_time = 1 [ default = -1.0 ];
+  optional double dynamic_follow_time = 1 [default = -1.0];
   optional double dynamic_follow_min_distance = 2;
-  optional DynamicFollowLevel dynamic_follow_level = 3 [ default = LEVEL_2 ];
+  optional DynamicFollowLevel dynamic_follow_level = 3 [default = LEVEL_2];
 }
 
 message ILCRequest {
   optional deeproute.dtu.command.ILCCMD.Behavior behavior = 1;
-  optional bool is_lane_change_request = 2 [ default = true ];
+  optional bool is_lane_change_request = 2 [default = true];
 }
 
 message AutoLevelRequest {
@@ -322,7 +344,7 @@ message AutoLevelRequest {
 
 message ResetRequest {}
 
-message VpaParkingRequest { // deprecated
+message VpaParkingRequest {  // deprecated
   optional ParkingRequest parking_request = 1;
 }
 
@@ -331,11 +353,11 @@ message AutoFeatureRequest {
   enum Item {
     UNKNOWN_ITEM = 0;
     ACC = 1;
-    LAS = 2; // do NOT use!! deprecated
+    LAS = 2;  // do NOT use!! deprecated
     ICA = 3;
     NCA = 4;
-    LDW = 5; // LDW mode
-    RDP = 6; // LDW + RDP mode
+    LDW = 5;  // LDW mode
+    RDP = 6;  // LDW + RDP mode
     HD_NCA = 7;
     APA = 8;
     ELK = 9;
@@ -357,20 +379,24 @@ message AutoFeatureRequest {
   optional Mode mode = 3;
 }
 
-message AutoFeatureRequests { repeated AutoFeatureRequest requests = 1; }
-
-message CancelParkingRequest {
-  optional bool directly_quit = 1 [ default = false ];
-  optional bool stop_comfortable = 2 [ default = false ]; // deprecated
-  // directly_quit has higher priority
-  optional bool directly_quit_lateral = 3 [ default = false ];
-  optional bool directly_quit_longitudinal = 4 [ default = false ];
-  optional CancelParkingType cancel_parking_type = 5;
-  optional deeproute.canbus.Chassis.GearPosition target_gear = 6
-      [ default = PARK ];
+message AutoFeatureRequests {
+  repeated AutoFeatureRequest requests = 1;
 }
 
-message VpaDrivingRequest {}
+message CancelParkingRequest {
+  optional bool directly_quit = 1 [default = false];
+  optional bool stop_comfortable = 2 [default = false];  // deprecated
+  // directly_quit has higher priority
+  optional bool directly_quit_lateral = 3 [default = false];
+  optional bool directly_quit_longitudinal = 4 [default = false];
+  optional CancelParkingType cancel_parking_type = 5;
+  optional deeproute.canbus.Chassis.GearPosition target_gear = 6
+      [default = PARK];
+}
+
+message VpaDrivingRequest {
+  optional bool allow_rear_wheel_steering_parking = 1 [default = false];
+}
 
 message GearRequest {
   required deeproute.canbus.Chassis.GearPosition gear = 1;
@@ -386,26 +412,28 @@ enum SwitchStatus {
 message LaneChangeFeatureSwitch {
   optional SwitchStatus enable_lane_change = 1;
   optional SwitchStatus enable_efficiency_lane_change = 2;
-  optional SwitchStatus enable_empirical_lane_change = 3; // highway lane
-  optional SwitchStatus enable_road_type_lane_change = 4; // merge lane
+  optional SwitchStatus enable_empirical_lane_change = 3;  // highway lane
+  optional SwitchStatus enable_road_type_lane_change = 4;  // merge lane
   optional SwitchStatus enable_low_risk_avoidance_lane_change =
-      5; // parallel truck
+      5;  // parallel truck
   optional SwitchStatus enable_confirmation_lane_change = 6;
-  optional SwitchStatus enable_avoid_merge_lane = 7;       // avoid merge lane
+  optional SwitchStatus enable_avoid_merge_lane = 7;  // avoid merge lane
 }
 
 message SingleLaneFeatureSwitch {
   optional SwitchStatus out_of_lane_nudge = 1;
   optional SwitchStatus enable_model_speed_limit = 2;
-  optional SwitchStatus disable_ilqr_lon_safety_cost = 3 [ default = NOT_SET ];
-  optional SwitchStatus disable_ilqr_lat_safety_cost = 4 [ default = NOT_SET ];
+  optional SwitchStatus disable_ilqr_lon_safety_cost = 3 [default = NOT_SET];
+  optional SwitchStatus disable_ilqr_lat_safety_cost = 4 [default = NOT_SET];
   optional SwitchStatus ica_enable_local_routing_speed_limit = 5
-      [ default = OFF ];
-  optional SwitchStatus enable_defensive_deceleration = 6 [ default = NOT_SET ];
+      [default = OFF];
+  optional SwitchStatus enable_defensive_deceleration = 6 [default = NOT_SET];
   optional SwitchStatus enable_vla_speed_limit = 7;
   optional SwitchStatus enable_cross_defensive_deceleration = 8 [default = NOT_SET];
   optional SwitchStatus enable_construction_zone_deceleration = 9 [default = NOT_SET];
   optional SwitchStatus enable_visible_mask_defensive_deceleration = 10 [default = NOT_SET];
+  optional SwitchStatus enable_follow_car_defensive_deceleration = 11 [default = NOT_SET];
+  optional SwitchStatus enable_single_lane_defensive_deceleration = 12 [default = NOT_SET];
 }
 
 message PureModelFeatureSwitch {
@@ -441,7 +469,9 @@ message AuxiliaryModeRequest {
   optional MultiPointUTurnFeatureSwitch multi_point_u_turn_feature_switch = 6;
 }
 
-message LSSSwitchRequest { optional SwitchStatus enable_control = 1; }
+message LSSSwitchRequest {
+  optional SwitchStatus enable_control = 1;
+}
 
 message ControlModeRequest {
   optional bool lon_override = 1;
@@ -458,7 +488,7 @@ message MinStopFollowDistanceRequest {
   enum MinStopFollowLevel {
     LEVEL_INVALID = -1;
     LEVEL_NONE = 0;
-    LEVEL_0 = 1; // level for jam mode
+    LEVEL_0 = 1;  // level for jam mode
     LEVEL_1 = 2;
   }
   optional MinStopFollowLevel min_stop_follow_level = 1;
@@ -473,10 +503,10 @@ message VpaStartRoamRequest {}
 
 message SetParkingSpaceAsVpaDestinationRequest {
   optional perception.ParkingSpace parking_space = 1;
+  optional bool is_no_dest_roaming = 2;
 }
 
-message StartMultiPointUTurnRequest {
-}
+message StartMultiPointUTurnRequest {}
 
 // topic: /planner/request
 message PlanningRequest {
@@ -484,8 +514,8 @@ message PlanningRequest {
   oneof Task {
     EmergencyStopRequest emergency_stop_request = 2;
     PullOverRequest pull_over_request = 3;
-    StopRemoveRequest stop_remove_request = 4;   // to be checked
-    DrivingModeRequest driving_mode_request = 5; // to be checked
+    StopRemoveRequest stop_remove_request = 4;    // to be checked
+    DrivingModeRequest driving_mode_request = 5;  // to be checked
     DynamicSpeedLimitRequest dynamic_speed_limit_request = 6;
     DetourRequest detour_request = 7;
     TracingRequest tracing_request = 8;
@@ -496,7 +526,7 @@ message PlanningRequest {
     OutParkingRequest out_parking_request = 13;
     ILCRequest ilc_request = 14;
     AutoLevelRequest auto_level_request = 15;
-    VpaParkingRequest vpa_parking_request = 16; // deprecated
+    VpaParkingRequest vpa_parking_request = 16;  // deprecated
     AutoFeatureRequests auto_feature_requests = 17;
     ReverseTrackingRequest reverse_tracking_request = 18;
     CancelParkingRequest cancel_parking_request = 19;
@@ -526,10 +556,13 @@ message VLARequest {
   optional bool task_end = 2;
   optional deeproute.planning.VLARelated.VLAOvertakeVehicleType
       vla_overtake_vehicle_type = 3;
+  optional bool pull_over_without_p = 4;
 }
 
 // topic: /planner/multi_requests
-message PlanningRequests { repeated PlanningRequest planning_requests = 1; }
+message PlanningRequests {
+  repeated PlanningRequest planning_requests = 1;
+}
 
 message TaskResponse {
   enum TaskType {
@@ -568,10 +601,10 @@ message TaskResponse {
     VPA_START_ROAM = 32;
     SET_PARKING_SPACE_AS_VPA_DESTINATION = 33;
   }
-  optional bool succeeded = 1 [ default = false ];
+  optional bool succeeded = 1 [default = false];
   optional TaskType task_type = 2;
-  optional OutParkingDirection suggest_out_parking_direction = 3; // deprecated
-  optional SuggestOutParkingInfo suggest_out_parking_info = 4;    // deprecated
+  optional OutParkingDirection suggest_out_parking_direction = 3;  // deprecated
+  optional SuggestOutParkingInfo suggest_out_parking_info = 4;     // deprecated
 }
 
 // topic: /planner/response
@@ -581,7 +614,9 @@ message PlanningResponse {
 }
 
 // topic: /planner/multi_responses
-message PlanningResponses { repeated PlanningResponse planning_responses = 1; }
+message PlanningResponses {
+  repeated PlanningResponse planning_responses = 1;
+}
 
 message ApaDriftingParkingInfo {
   message DriftingParkingTargetPosition {
@@ -591,7 +626,7 @@ message ApaDriftingParkingInfo {
   }
   optional deeproute.canbus.Chassis.DriftingParkingMode drifting_parking_mode =
       1;
-  optional bool is_executing_drifting_parking = 2 [ default = false ];
+  optional bool is_executing_drifting_parking = 2 [default = false];
   optional deeproute.canbus.Chassis.DriftingParkingFixedWheel
       drifting_parking_fixed_wheel = 3;
   optional deeproute.canbus.Chassis.DriftingParkingDirection
@@ -607,7 +642,7 @@ message PlanningEvent {
     BLOCK_ALL_ROAD = 1;
     BLOCK_SINGLE_ROAD = 2;
     BLOCK_NONE = 3;
-    DESTINATION_REACHED = 4; // report ego car whether arrived destination
+    DESTINATION_REACHED = 4;  // report ego car whether arrived destination
     EMERGENCY_STOP_DONE = 5;
     PULL_OVER_DONE = 6;
     DETOUR_DONE = 7;
@@ -620,10 +655,10 @@ message PlanningEvent {
 
     // event reported by openspace
     OPENSPACE_BLOCK_BY_OBSTACLE = 14;
-    OPENSPACE_BLOCK_BY_CONTROL = 15; // deprecated
+    OPENSPACE_BLOCK_BY_CONTROL = 15;  // deprecated
 
-    OPENSPACE_REPLAN_SUCCESS = 16; // deprecated
-    OPENSPACE_REPLAN_FAILED = 17;  // deprecated
+    OPENSPACE_REPLAN_SUCCESS = 16;  // deprecated
+    OPENSPACE_REPLAN_FAILED = 17;   // deprecated
 
     START_PARKING = 18;
     START_OUT_PARKING = 19;
@@ -632,8 +667,8 @@ message PlanningEvent {
     // for LAS state machine only
     MISSING_LEFT_LANE_BOUNDARY = 20;
     MISSING_RIGHT_LANE_BOUNDARY = 21;
-    WIDE_LANE_EXCEEDS_UB = 22;     // suppression condition upper limit
-    WIDE_LANE_BETWEEN_BOUNDS = 23; // between UB and LB, do not enable yet
+    WIDE_LANE_EXCEEDS_UB = 22;      // suppression condition upper limit
+    WIDE_LANE_BETWEEN_BOUNDS = 23;  // between UB and LB, do not enable yet
     NARROW_LANE_EXCEEDS_UB = 24;
     NARROW_LANE_BETWEEN_BOUNDS = 25;
     CURVED_LANE_EXCEEDS_UB = 26;
@@ -647,14 +682,14 @@ message PlanningEvent {
     LDW_NONE = 34;
 
     // RDP request
-    RDP_REQUEST = 30; // deprecated
+    RDP_REQUEST = 30;  // deprecated
     RDP_SUCCEEDED = 31;
     RDP_FAILED = 32;
     RDP_ADC_BEYOND_LATE_INTERVENTION_LINE = 33;
     RDP_LEFT = 35;
     RDP_RIGHT = 36;
-    RDP_REQUEST_LEFT = 37;  // request an RDP cmd
-    RDP_REQUEST_RIGHT = 38; // request an RDP cmd
+    RDP_REQUEST_LEFT = 37;   // request an RDP cmd
+    RDP_REQUEST_RIGHT = 38;  // request an RDP cmd
     RDP_REQUEST_LEFT_RE = 124;
     RDP_REQUEST_RIGHT_RE = 125;
 
@@ -729,6 +764,8 @@ message PlanningEvent {
     DIRECT_IN_OUT_BLOCK_BY_SIDE_OBSTACLE = 95;
     DIRECT_IN_OUT_DONE = 96;
     DIRECT_IN_OUT_BLOCK = 97;
+    DIRECT_IN_OUT_BLOCK_BY_RIGHT_SIDE_OBSTACLE = 98;
+    DIRECT_IN_OUT_BLOCK_BY_LEFT_SIDE_OBSTACLE = 99;
 
     // 101~120 reserved for middle path
     START_BROADCAST_NUDGE_TRUCK = 101;

@@ -32,6 +32,7 @@ enum BlcSpeedLimitStrategy {
   MANUAL_SPEED_LIMIT = 13; //用户调节限速
   UPPER_LIMIT = 14; //限速上限
   LOWER_LIMIT = 15; //限速下限 
+  HAZY_MODE = 16; // 雾天模式限速
 }
 
 enum BlcTriggerType {

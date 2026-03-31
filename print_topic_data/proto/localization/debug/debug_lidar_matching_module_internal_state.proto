@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package deeproute.proto;
+
+import "drivers/pointcloud2.proto";
+import "common/geometry.proto";
+import "localization/localization_internal_messages.proto";
+
+enum DeltaMotionOutputMode {
+  INS_FORWARD = 0; LIDAR_ODOMETRY = 1; LIDAR_MAP_REGISTRATION = 2;
+}
+
+message LidarOdometryInternalState {
+  sfixed64 reference_time = 1;
+  deeproute.drivers.PointCloud2 keyframe_pointcloud = 2;
+  repeated double odometry_pose_xyz = 3;
+  repeated double odometry_pose_roll_pitch_yaw = 4;
+  repeated double lo_pose_xyz = 5;
+  repeated double lo_pose_roll_pitch_yaw = 6;
+}
+
+message MapRegistrationInternalState {
+  string map_path = 1;
+  sfixed64 initial_match_time = 2;
+  repeated double initial_map_to_sensing = 3;
+  repeated double transformation_map_to_local = 4;
+}
+
+message LocalizationMatchingInternalState {
+  sfixed64 reference_time = 1;
+  DeltaMotionOutputMode output_mode = 2;
+  deeproute.drivers.PointCloud2 local_map = 3;
+  deeproute.common.Transformation3 reference_map_pose = 4;
+  deeproute.common.Transformation3 transformation_map_to_sensing = 5;
+  bool fixed_leaf_size = 6;
+  float leaf_size = 7;
+  deeproute.common.Transformation3 transformation_local_to_sensing = 8;
+
+  // Reserved field numbers for backward compatibility
+  reserved 9, 10, 11;
+
+  int64 lidar_mapping_init_time = 12;
+  deeproute.localization.message
+      .LidarMatchingMessage latest_lidar_matching_msg = 13;
+
+  // 卡尔曼滤波状态
+  // (add state and covariance init)
+  bool kalman_filter_initialized = 14; // KF 是否已初始化
+  repeated double kalman_state = 15; // 6维状态向量 [x, y, z, roll, pitch, yaw]
+  repeated double kalman_covariance = 16; // 6x6 协方差矩阵（行优先存储）
+}
+
+message LidarMatchingModuleInternalState {
+  sfixed64 reference_time = 1;
+  DeltaMotionOutputMode output_mode = 2;
+  oneof output_mode_state {
+    bool ins_forward = 3;
+    LidarOdometryInternalState lo_state = 4;
+    MapRegistrationInternalState mr_state = 5;
+  }
+  int32 map_matching_counter = 6;
+}

@@ -23,6 +23,7 @@ message BlcDebugInfo {
   HAVPEndToEndDebugInfo havp_e2e_info = 6;
   HandsOffInfo hands_off_info = 7;
   LSSDebugInfo lss_debug_info = 8;
+  HazyDayModeInfo hazy_day = 9; // 雾天模式
 }
 
 message SpeedLimitInfo {
@@ -39,6 +40,11 @@ message Lanechange {
 message SnowyDayModeInfo {
   bool is_active = 1; //雪天模式是否生效，true, 雪天模式生效中，false, 不处于雪天模式
   bool is_snow = 2; //是否道路积雪
+}
+
+message HazyDayModeInfo {
+  bool is_active = 1; //雾天模式是否生效，true-雾天模式生效中，false-不处于雾天模式
+  bool is_hazy = 2; //道路是否有雾
 }
 
 // blc接收map/hut导航相关信息的所有业务逻辑处理的关联数据

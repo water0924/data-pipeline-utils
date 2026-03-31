@@ -10,6 +10,7 @@ import "drapi/operation_status.proto";
 import "dsm/dsm.proto";
 import "google/protobuf/any.proto";
 import "drapi/gwm_hut_notification.proto";
+import "drapi/gwm/gwm_vla_info.proto";
 import "localization/havp_map.proto";
 import "drapi/road_object.proto";
 
@@ -89,6 +90,8 @@ message Command {  // topic: (to blc)/blc/command (to dsm)/dsm/command
     APALeaveCustomParking apa_leave_custom_parking = 5018;  //退出自选车位
     APASelectCustomParkingSpace apa_select_custom_parking_space =
         5019;  //选择自选车位
+    SetParkingPreference set_parking_preference = 5020; // 设置泊入偏好（场景：1. APA搜车位设置偏好；2.VPA巡航中设置目标车位偏好）
+    RoutingTargetParkingSpace routing_target_parking_space = 5021; // D2D-NOA中设置目标车位id+偏好
 
     GWParkingCommand gw_parking_command = 5101;  // GWM APA
     SmartLPCommand smart_lp_command = 5102; // SMART VPA
@@ -101,9 +104,9 @@ message Command {  // topic: (to blc)/blc/command (to dsm)/dsm/command
     VPALearning vpa_learning = 6002;
     VPARoutingSwitchMode vpa_routing_switch_mode = 6003;
     VPAGetInfoRQ vpa_get_info = 6004;
-    VPARoutingGetMap vpa_routing_get_map =
-        6005;  //巡航地图匹配成功后获取语义地图+统计信息
+    VPARoutingGetMap vpa_routing_get_map = 6005;  //获取当前/指定地图的全数据
     BtnEnaReq btn_ena_req = 6006;  // GWM VPA
+    gwm.VLAReq gwm_vla_req = 6007; // gwm vla 漫游指令
 
     // hma 7000~7099
     EnableHMA enable_hma = 7000;
@@ -258,10 +261,8 @@ message CommandRP {  // topic: /blc/command_response  topic: /dsm/command_respon
     // vpa 6000~6999
     VPARoutingRP vpa_routing_rp = 6002;
     VPAGetInfoRP vpa_info = 6003;
-    VPARoutingGetMapRP vpa_routing_get_map_info =
-        6004;  //巡航地图匹配成功后输出语义地图+统计信息
-    VPALearningRP vpa_learning_rp =
-        6005;  //结束学习成功时返回语义地图信息给到vis
+    VPARoutingGetMapRP vpa_routing_get_map_info = 6004;  //获取当前/指定地图的全数据
+    VPALearningRP vpa_learning_rp = 6005;  //结束学习成功时返回语义地图信息给到vis
     BtnEnaReqRP btn_ena_req_rp = 6006;  // GWM VPA
     // hma 7000-7099
     // GetHMAStateMachineStatusRP hma_status = 7000;
@@ -446,6 +447,12 @@ message GetCurPathIdRP {
   uint64 path_id_64 = 2;  // recomand using this to replace path_id
 }
 
+enum ParkingMapSource {
+  PARKING_MAP_SOURCE_UNKNOWN = 0;
+  PARKING_MAP_SOURCE_CLOUD = 1;
+  PARKING_MAP_SOURCE_LOCAL = 2;
+}
+
 message StartNavigation {
   repeated dr.base.PointLLH points = 1;
   // ready to deprecate
@@ -453,7 +460,9 @@ message StartNavigation {
   repeated dr.base.PointLLH route_points = 3;
   // recomand using this to replace path_id
   uint64 path_id_64 = 4;
-  string map_id = 5; // map_id from cloud
+  string map_id = 5; // map_id
+  ParkingMapSource map_source = 6;
+  RoutingTargetParkingSpace target_parking_space = 7; // parking space id from target map_id
 }
 
 message CancelNavigation {
@@ -491,6 +500,21 @@ message APAParkingSwitchMode {
     PARK_OUT = 1;
   }
   Mode type = 1;
+}
+
+enum ParkingPreferenceMod {
+  APA_TO_CENTER = 0;
+  APA_TO_LEFT = 1;
+  APA_TO_RIGHT = 2;
+}
+
+message SetParkingPreference {
+  ParkingPreferenceMod preference = 1;
+}
+
+message RoutingTargetParkingSpace {
+  int32 parking_space_id = 1;
+  ParkingPreferenceMod preference = 2;
 }
 
 message ActiveVPA {
@@ -588,19 +612,20 @@ message VPAGetInfoRP {
 }
 
 message VPARoutingGetMap {
+  int32 target_map_id = 1;  // 非0：指定地图，0：当前地图
 }
 
 message VPARoutingGetMapRP {
   uint32 vpa_estimated_distance = 1;  //预计距离
   uint32 vpa_estimated_time = 2;      //预计耗时
-  bytes semantic_map = 3;             //语义地图 deeproute.map.RASMapPlus
+  bytes semantic_map = 3;             //语义地图，非轻图：deeproute.map.RASMapPlus；轻图：deeproute.localization.havp_map.HAVPMap
   deeproute.localization.havp_map.HAVPMapMetaData map_info = 4;
 }
 
 message VPALearningRP {
   uint32 vpa_learning_distance = 1;  //学习距离
   uint32 vpa_speed_bumps = 2;        //减速带数量
-  bytes semantic_map = 3;            //语义地图 deeproute.map.RASMapPlus
+  bytes semantic_map = 3;            //语义地图，非轻图：deeproute.map.RASMapPlus；轻图：deeproute.localization.havp_map.HAVPMap
 }
 
 // CDC\VIS 进入 AVM
@@ -884,6 +909,8 @@ message BtnEnaReq {
     START_SVP_VR = 12;            //主动推送后激活SVP
     CREAT_MOORINGOUT_MAP = 13;   //建图完成界面泊出建图按钮
     START_E2E = 14;
+    CONTINUE_VLAP = 15;
+    VLAP_PARKING_NEARBY = 16;
     CANCEL_PRE_MAPPING = 0xa1;    //取消预建图
     CONTINUE_PRE_MAPPING = 0xa2;  //继续预建图
   }
@@ -913,9 +940,9 @@ message BtnEnaReq {
     EnterRoutingReq enter_routing_req = 2;  // 进入巡航选车位界面
     SelectTargetSlotReq select_target_slot_req = 3; // 选车位界面选择目标车位
     GoToHereReq go_to_here_req = 4;  // 点击去这里
-    UpdateSlotInfoReq update_slot_info_req = 5; // 更新车位信息（学习完成界面修改；巡航选车位界面修改）
-    UpdateMapInfoReq update_map_info_req = 6; // 更新地图信息
-    GetMapInfoReq get_map_info_req = 7; // 获取地图信息
+    UpdateSlotInfoReq update_slot_info_req = 5; // 更新车位信息（学习完成界面修改；巡航选车位界面修改），全平台通用
+    UpdateMapInfoReq update_map_info_req = 6; // 更新地图信息，全平台通用
+    GetMapInfoReq get_map_info_req = 7; // 获取地图元信息（不含渲染数据），全平台通用
   }
 }
 
@@ -1171,7 +1198,8 @@ message LeapCommand {
     lp.hmi.RpaHmiConfig        	rpa_hmi_config           = 3;  // RPA交互配置
     lp.hmi.RAHmiConfig					ra_hmi_config			  	   = 4;  // 循迹倒车交互配置
     lp.hmi.ClarionCallHmiConfig	clarion_call_hmi_config  = 5;  // 直线召唤交互配置
-    lp.basiccommon.FunctionSwitchEnum  	ble_app_rpa_connect = 6; // 激活RPA泊出信号
+    lp.basiccommon.FunctionSwitchEnum  	ble_app_rpa_connect = 6; // RPA 蓝牙连接状态
+    uint32  	ble_app_connect_sts = 7;                           // RSPA 蓝牙连接状态
   }
 }
 
@@ -1385,6 +1413,7 @@ message VizLeapCommand {
     parking_started = 8;
     parking_mode = 9;
     parkingout_type = 10;
+    apa_start = 11;
     
     parking_change = 12;
     parking_in_direction = 13;
@@ -1409,6 +1438,7 @@ message VizLeapCommand {
     ble_clarion_call_directctl = 112;
     ble_clarion_call_continue = 113;
     ble_error_code = 114;
+    ble_app_connect_sts = 115;
 
     // rads
     ra_sw = 200;

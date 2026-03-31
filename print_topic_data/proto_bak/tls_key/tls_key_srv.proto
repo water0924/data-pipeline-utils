@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package deeproute.tlskey;
+
+// topic: "/tlskey/key_learning_req"
+message KeyLearningRequest {
+  string uds_id = 1;
+  int64 timestamp = 2;
+}
+
+enum TlsKeyStatus {
+  TLS_UNKNOWN = 0;
+  TLS_KEY_SUCCESS = 1;
+  TLS_PASSWORD_UPDATE_FAILURE = 2;
+  TLS_KEY_STORAGE_READ_FAILURE = 3;
+  TLS_KEY_GSOMEIP_PRF_HASH = 4;
+  TLS_KEY_MK_SIZE_ERROR = 5;
+  TLS_KEY_GENER_RANDOM_ERROR = 6;
+  TLS_KEY_COMPUTER_CMAC_ERROR = 7;
+}
+
+// topic: "/tlskey/key_learning_rsp"
+message KeyLearningResponse {
+  string uds_id = 1;
+  int64 timestamp = 2;
+  TlsKeyStatus status = 3;
+}

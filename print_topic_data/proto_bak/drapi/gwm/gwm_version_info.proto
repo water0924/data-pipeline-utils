@@ -1,0 +1,15 @@
+syntax = "proto3";
+package gwm;
+
+
+// topic: /gwm/version_info
+message VersionInformation {
+  string system = 1;
+  string soc = 2;
+  string mcu = 3;
+  string gwm_switch = 4;
+  string driver = 5;
+  string package = 6;
+  string note = 7;
+  uint64 milliseconds = 8; 
+}

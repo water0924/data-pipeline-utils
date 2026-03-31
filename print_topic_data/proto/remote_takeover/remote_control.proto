@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package deeproute.remote_control;
+
+// topic: /remote_control/control_request
+message ControlRequest {
+  string request_id = 1;  // 请求ID
+  uint64 timestamp = 2;   // 请求时间戳(ms)
+  oneof payload {
+    StartTakeOverRequest start_takeover = 10;
+    ControlCommand control_command = 11;
+    StopTakeOverRequest stop_takeover = 12;
+  }
+}
+
+// topic: /remote_control/control_response
+message ControlResponse {
+  string request_id = 1;  // 回传请求ID
+  Status status = 2;      // 统一状态
+  uint64 timestamp = 3;   // 应答时间戳(ms)
+  string trace_id = 4;    // 链路/服务端标识(可选)
+  oneof payload {
+    StartTakeOverResponse start_takeover = 10;
+    ControlCommandAck control_command_ack = 11;
+    StopTakeOverResponse stop_takeover = 12;
+  }
+}
+
+enum StatusCode {
+  STATUS_OK = 0;
+  STATUS_INVALID_ARGUMENT = 1;
+  STATUS_UNAVAILABLE = 2;
+  STATUS_FORBIDDEN = 3;
+  STATUS_INTERNAL = 4;
+}
+
+message Status {
+  StatusCode code = 1;
+  string details = 2;
+}
+
+message StartTakeOverRequest {
+}
+
+message StartTakeOverResponse {
+  bool accepted = 1; // 是否接受接管
+}
+
+message StopTakeOverRequest {
+}
+
+message StopTakeOverResponse {
+  bool accepted = 1; // 是否接受退出
+}
+
+message ControlCommand {
+  enum TurnLight {
+    TURN_LIGHT_OFF = 0;
+    TURN_LIGHT_LEFT = 1;
+    TURN_LIGHT_RIGHT = 2;
+  }
+  enum Gear {
+    GEAR_UNKNOWN = 0;
+    GEAR_PARK = 1;
+    GEAR_REVERSE = 2;
+    GEAR_NEUTRAL = 3;
+    GEAR_DRIVE = 4;
+    GEAR_LOW = 5;
+  }
+
+  uint32 throttle_pct = 1;        // 0..100
+  uint32 brake_pct = 2;           // 0..100
+  int32 steering_wheel_angle = 3; // -100..100
+  TurnLight turn_light = 4;
+  Gear gear = 5;
+
+  bool enable = 10;               // 控制使能
+}
+
+message ControlCommandAck {
+  Status status = 1;
+}

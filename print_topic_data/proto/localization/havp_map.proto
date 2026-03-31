@@ -5,6 +5,7 @@ package deeproute.localization.havp_map;
 import "perception/deeproute_perception_ras_map.proto";
 import "perception/deeproute_perception_obstacle.proto";
 import "common/geometry.proto";
+import "map/parking_map_common.proto";
 
 enum ParkingSpaceTag {
   PARK_SPACE_TAG_UNKNOWN = 0;                   // 未知
@@ -130,6 +131,11 @@ message HAVPMapMetaData {
   optional common.Point3D map_origin = 2; // in LLH?
   optional sfixed64 create_timestamp = 3;
   optional int32 given_map_id = 4;        // for Geely
+  optional deeproute.map.vpa.ParkingMapSource map_source = 5;
+  optional sfixed64 renewal_timestamp = 6;     // updated map time like update parking_space, map info, etc.
+  optional bool parking_in = 7;           // support parking in routing
+  optional bool parking_out = 8;          // support parking out routing
+  optional bool is_backend_mapping = 9;   // whether map is mapping at backend
 
   // user-define information
   optional string map_name = 11;
@@ -137,6 +143,8 @@ message HAVPMapMetaData {
   optional int32 default_parking_space_id = 13;
   optional string default_map_poi_id = 14;
   repeated MapPoiInfo favorite_map_poi = 15;
+  optional string map_address = 16;
+  optional bool is_favorite_map = 17;
 
   // statistics information
   optional float map_length = 21;

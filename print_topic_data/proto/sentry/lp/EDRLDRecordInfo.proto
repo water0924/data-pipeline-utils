@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+message EDRLDRecordInfo {
+  bool edr_state = 1;     // EDR总状态  0:无需求 1：有需求
+  uint32 edr_level = 2;   // EDR等级
+  bool edr_light = 3;     // EDR录制数据类型:轻包
+  bool edr_medium = 4;    // EDR录制数据类型:中包
+  bool edr_heavy = 5;     // EDR录制数据类型:重包
+  uint32 edr_id = 6;      // EDR触发源详情，编号直接赋值
+  uint32 front_time = 7;  // 录制触发前--秒数据
+  uint32 last_time = 8;   // 录制触发后--秒数据
+  bool all_record = 9;  // 是否全量录制0-否，1-是（元戎暂时不做适配）
+}

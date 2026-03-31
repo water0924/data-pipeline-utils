@@ -46,11 +46,11 @@ message KeyframeUpdateStatus {
 
 message MapMatchingStatus {
   optional int64 measurement_time = 1;
-  optional deeproute.common.Transformation3 map_to_odometry_transformation = 2
-      [deprecated = true];
+  optional deeproute.common.Transformation3 map_to_odometry_transformation = 2;
   optional deeproute.common.Transformation3 map_to_vehicle_transformation = 3;
   optional int64 ego_lane_id = 4;
   optional int64 ego_floor_id = 5;
+  optional bool parking_lot_matched = 6;
 }
 
 message LidarMappingInfo {
@@ -61,8 +61,16 @@ message LidarMappingInfo {
 }
 
 message GlobalRoutingInfo {
+  message GlobalRoutingPath {
+    repeated deeproute.common.Point3D path = 1;
+  }
+
   optional int64 measurement_time = 1;
   repeated deeproute.common.Point3D global_path = 2;
+
+  // Use to roam parking
+  repeated GlobalRoutingPath global_routing_paths = 10;
+
   optional double speed_limit_current = 3;
   optional double route_remaining_length = 4;
   optional deeproute.common.Point3D destination_point = 5;
@@ -70,4 +78,12 @@ message GlobalRoutingInfo {
   repeated localization.havp_map.HAVPTrajectory map_trajectories = 7;
   optional deeproute.common.Transformation3 localization_pose = 8;
   optional double next_gate_remaining_s = 9;
+
+  // for reversing navigation
+  optional deeproute.common.Point3D crossing_point = 11;
+  optional double crossing_remaining_s = 12;
+  optional bool is_in_reversing_navigation = 13;
+
+  // for forward navigation
+  optional double forward_crossing_remaining_s = 14;
 }

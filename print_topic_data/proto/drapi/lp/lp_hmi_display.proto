@@ -362,6 +362,8 @@ message HmiFreeSpace {
   uint32 row_count = 3;                      // 行数(默认324)
   uint32 column_count = 4;                   // 列数（默认272)
   repeated uint32 drivable_grid = 5;         // bit0~bit31由低到高
+  lp.basiccommon.Point2D position = 6;       // 自车坐标系下的位置偏移
+  float heading = 7;                         // 自车坐标系下的角度偏移(弧度)
 }
 
 // 实时感知地图

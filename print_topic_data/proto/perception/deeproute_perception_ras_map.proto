@@ -297,6 +297,12 @@ message ParkingSpace {
     FIRE_HYDRANT = 24;
     CHARGING_STATION = 25;
     BARRIER_GATE = 26;
+    MODEL_OVERLAP = 27;
+    MODEL_NARROW = 28;
+    MODEL_NARROW_ROAD = 29;
+    MODEL_CHOCK = 30;
+    USER_DEFINED_REVERSE_NARROW_ROAD = 31;
+    U_TUBE = 32;
   }
   enum OpenDirection {
     K_0_1 = 0;
@@ -309,6 +315,19 @@ message ParkingSpace {
     MECHANICAL_PARKSPACE = 1;
     BEND_LINE_PARKSPACE = 2;
     SPACE_PARKSPACE = 3;
+  }
+  enum SemanticType {
+    DEFAULT = 0; // 默认，无特殊语义
+    DISABLED_PARKING_SPACE = 1; // 残疾人车位、无障碍车位
+    RESERVED_PARKING_SPACE = 2; // 专用车位
+    PRIVATE_PARKING_SPACE = 3; // 私家车位
+    GUEST_PARKING_SPACE = 4; // 访客车位
+    TEMPORARY_PARKING_SPACE = 5; // 临时车位
+    EV_CHARGING_PARKING_SPACE = 6; // 电动车充电车位
+    WOMEN_PARKING_SPACE = 7; // 女性车位
+    TRUCK_PARKING_SPACE = 8; // 大型车辆车位
+    TAXI_PARKING_SPACE = 9; // 出租车车位
+    BICYCLE_PARKING_SPACE = 10; // 自行车车位
   }
   optional ShapeType shape_type = 7;
   optional BoundaryType boundary_type = 14;
@@ -326,6 +345,7 @@ message ParkingSpace {
   optional OpenDirection open_direction = 19;
   optional AttributeType attribute_type = 20;
   optional bool parking_scene_dead_end = 21 [default = false];
+  optional SemanticType semantic_type = 22;
 }
 
 message Road {
@@ -440,6 +460,14 @@ message RASMap {
   optional hdmap.Map semantic_map = 26;
   optional bool enable_construction_passable_switch = 27 [default = true];
   optional bool enable_highway_passable_switch = 28 [default = true];
+
+  // ETC switch configuration from user preference
+  enum ETCSwitchConfig {
+    ETC_SWITCH_UNKNOWN = 0;
+    ETC_SWITCH_ETC = 1;
+    ETC_SWITCH_MANUAL = 2;
+  }
+  optional ETCSwitchConfig etc_switch_config = 29;
 }
 
 message Extrinsic {

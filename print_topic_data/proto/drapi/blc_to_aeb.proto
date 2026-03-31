@@ -155,12 +155,24 @@ message RAEBStateCondition {
 
     dr.operationstatus.ReasonInfo reason_info = 20; // passive或者退出或者failure都会有对应reason，便于debug
 }
+
+message LCPStateCondition {
+    bool  is_off = 1;
+    bool  is_failure = 2;
+    bool  is_passive = 3;
+    bool  is_active_exit = 4;
+    bool  is_not_pre_active = 5;
+
+    dr.operationstatus.ReasonInfo reason_info = 20;
+}
+
 message ELKStateCondition {
     bool is_off = 1;                
     bool is_failure = 2;
     bool is_passive = 3;
     bool is_active_exit = 4;
     repeated dr.operationstatus.ELKScenario enabled_scenarios = 5;
+    bool is_override = 6;
     AebState source_state = 15;
     dr.operationstatus.ReasonInfo reason_info = 20;
 }
@@ -179,6 +191,7 @@ message LKAStateCondition {
     bool is_passive = 3;
     bool is_active_exit = 4;
     repeated dr.operationstatus.LKAScenario enabled_scenarios = 5;
+    bool is_override = 6;
     AebState source_state = 15;
     dr.operationstatus.ReasonInfo reason_info = 20;
 }
@@ -231,6 +244,8 @@ message ODDFlags {
     bool is_snow_mode = 1;
     bool is_nca_in_control = 2;
     CMSFType cmsf_type = 3;
+    bool is_inhibit_aeb_due_to_low_frame_rate = 4;
+    double perception_aeb_frame_ratio = 5;
 }
 
 message ControlStatus {
@@ -244,6 +259,7 @@ message ControlStatus {
     ControlStatusType aes_control_status = 3;
     ControlStatusType elk_control_status = 4;
     ControlStatusType lka_control_status = 5;
+    ControlStatusType lcp_control_status = 6;
 }
 
 // topic : /blc/aeb_state_conditions
@@ -263,6 +279,7 @@ message StateConditions {
     ELKStateCondition elk_condition = 13;
     LKAStateCondition lka_condition = 14;
     LDWStateCondition ldw_condition = 15;
+    LCPStateCondition lcp_condition = 16;
 
     ODDFlags odd_flags = 20;
     SensitivityLevelSet sensitivity_level_set = 21;

@@ -1,0 +1,144 @@
+syntax = "proto3";
+package dr.blc.mcu.report_event;
+
+/******************** RPA直线召唤数据埋点 ********************/
+
+// RSPA失败或暂停原因枚举（统一枚举，按类别分段编号）
+enum RSPAFailOrSuspendReason {
+  RSPA_FAIL_OR_SUSPEND_UNKNOWN = 0;               // 未知原因
+
+  // 开启失败原因（1-100）
+  RSPA_FAIL_GEAR_NOT_P_EPB = 1;                   // 挡位为非P+EPB状态
+  RSPA_FAIL_PARKING_SYSTEM_FAULT = 2;             // 泊车系统故障
+  RSPA_FAIL_RELATED_SYSTEM_ABNORMAL = 3;          // 关联系统异常
+  RSPA_FAIL_DRIVE_MODE_NOT_SATISFIED = 4;         // 驾驶模式不满足
+  RSPA_FAIL_SLOPE_OVER_15_PERCENT = 5;            // 坡度超过15%
+  RSPA_FAIL_RWS_CRAB_MODE_ACTIVE = 6;             // 后轮转向螃蟹模式激活
+  RSPA_FAIL_CHARGER_PLUGGED = 7;                  // 充电枪已插入
+  RSPA_FAIL_ADAS_OTHER_FUNCTION_ACTIVE = 8;       // 其他辅助驾驶功能激活
+  RSPA_FAIL_LOW_POWER_MODE_ON = 9;                // 低功耗模式已开启
+  RSPA_FAIL_VALET_MODE_ON = 10;                   // 代客模式已开启
+  RSPA_FAIL_BLUETOOTH_ABNORMAL = 11;              // 蓝牙连接异常
+  RSPA_FAIL_VEHICLE_START_FAILED = 12;            // 车辆启动失败
+
+  // 功能退出原因（101-200）
+  RSPA_EXIT_GEAR_OR_EPB_CHANGED = 101;            // 用户切换档位或EPB为非P+EPB状态或拨动档杆
+  RSPA_EXIT_DIRECTION_OR_SPACE_INSUFFICIENT = 102; // 车辆方向或空间不足
+  RSPA_EXIT_CLOSE_AVM = 103;                      // 关闭AVM
+  RSPA_EXIT_DRIVE_MODE_NOT_SATISFIED = 104;       // 驾驶模式不满足
+  RSPA_EXIT_CHASSIS_LONGITUDINAL_HANDSHAKE_TIMEOUT = 105; // 与底盘纵向握手超时
+  RSPA_EXIT_POWER_MODE_NOT_READY = 106;           // 车辆动力模式未ready
+  RSPA_EXIT_PARKING_SYSTEM_FAULT = 107;           // 泊车系统故障
+  RSPA_EXIT_RELATED_SYSTEM_ABNORMAL = 108;        // 关联系统异常
+  RSPA_EXIT_END_PARKING_FROM_APP = 109;           // 手机APP选择结束泊车
+  RSPA_EXIT_NO_LONG_PRESS_IN_1_MIN = 110;         // 进入直线召唤界面1分钟未长按方向键
+  RSPA_EXIT_PARKING_TIME_OVER_4_MIN = 111;        // 泊车时间超过4分钟
+  RSPA_EXIT_SINGLE_PAUSE_PROMPT_OVER_65S = 112;   // 单次暂停文言提示超过65秒
+  RSPA_EXIT_CONFIRM_TIMEOUT_OVER_30S = 113;    // 恢复后超过继续泊车确认时间30秒
+  RSPA_EXIT_DRIVE_MODE_SWITCH_UNSUPPORTED = 114; // 驾驶模式切换为不支持
+  RSPA_EXIT_SPEED_OVER_5_KMH = 115;            // 车速大于5km/h
+  RSPA_EXIT_SLOPE_OVER_15_PERCENT = 116;       // 坡道超15%
+  RSPA_EXIT_STEERING_INTERVENTION = 117;       // 干预方向盘
+  RSPA_EXIT_EPB_INTERVENTION = 118;            // 干预EPB
+  RSPA_EXIT_SAFETY_ACTIVE = 119;               // 主被动安全激活
+  RSPA_EXIT_APP_START_STEERING_HELD_OVER_10S = 120; // 开始泊车时方向盘未松开超过10秒
+  RSPA_EXIT_BLE_LOST_OR_INVALID = 121;         // BLE丢失通信或信号无效
+  RSPA_EXIT_CHARGER_PLUGGED = 122;             // 插上充电枪
+  RSPA_EXIT_UNEXPECTED_GEAR_OR_EPB = 123;      // 非预期挡位和EPB
+  RSPA_EXIT_UNEXPECTED_HANDSHAKE_DISCONNECT = 124; // 非预期断开握手
+
+  // 控车暂停原因（201-300）
+  RSPA_SUSPEND_ANY_DOOR_OPEN = 201;               // 任一车门打开
+  RSPA_SUSPEND_TAILGATE_OPEN = 202;               // 后背门打开
+  RSPA_SUSPEND_HOOD_OPEN = 203;                   // 前机盖打开
+  RSPA_SUSPEND_BRAKE_PRESSED = 204;               // 刹车踏板踩下
+  RSPA_SUSPEND_THROTTLE_PRESSED = 205;            // 油门踏板踩下
+  RSPA_SUSPEND_RELEASE_DIRECTION_BUTTON = 206;    // 用户主动松开方向键
+  RSPA_SUSPEND_OBSTACLE_DETECTED = 207;           // 检测到障碍物
+
+}
+
+// RSPA事件类型枚举
+enum RSPAEventType {
+  RSPA_EVENT_UNKNOWN = 0;                          // 未知事件
+  RPA_STRAIGHT_OPEN_SUCCEED = 1;                   // RPA直进召唤开启成功
+  RPA_STRAIGHT_OPEN_FAILED = 2;                    // RPA直进召唤开启失败
+  RPA_STRAIGHT_OPEN_EXIT = 3;                      // RPA直线召唤退出（未控车）
+  RPA_STRAIGHT_OBSTACLE_IGNORE_OPEN = 4;           // 开启忽略障碍物
+  RPA_STRAIGHT_OBSTACLE_IGNORE_CLOSE = 5;          // 关闭忽略障碍物
+  RPA_STRAIGHT_OBSTACLE_IGNORE_EXIT = 6;           // 未忽略障碍物退出
+  RPA_STRAIGHT_SUSPEND = 7;                        // RPA直线召唤暂停（控车）
+  RPA_STRAIGHT_EXIT = 8;                          // RPA直线召唤退出（控车）
+}
+
+// 功能状态枚举
+enum FuncState {
+  FUNC_STATE_INVALID = 0;      // 无效值
+  FUNC_STATE_NOT_CONTROL = 1;  // 未控车
+  FUNC_STATE_CONTROL = 2;      // 控车
+}
+
+// 唤醒类型枚举
+enum AwakenType {
+  AWAKEN_TYPE_INVALID = 0;     // 无效值
+  AWAKEN_TYPE_HOT = 1;         // 热启动
+  AWAKEN_TYPE_COLD = 2;        // 冷启动
+}
+
+/******************** 数据结构定义 ********************/
+
+// 障碍物信息
+message ObjInfo {
+  int32 id = 1;                  // 障碍物ID
+  float nearest_distance = 2;    // 最近距离
+}
+
+// 直线召唤过程数据
+message StraightSummonStatus {
+  uint32 forward_num = 1;        // 点击前进次数
+  float forward_mileage = 2;     // 前进距离
+  uint32 backward_num = 3;       // 点击后退次数
+  float backward_mileage = 4;    // 后退距离
+  uint32 release_forward_num = 5; // 送开前进次数
+  uint32 release_backward_num = 6; // 松开后退次数
+}
+
+// 唤醒信息
+message AwakenInfo {
+  uint32 period = 1;             // 唤醒时长
+  AwakenType type = 2;           // 唤醒类型
+}
+
+enum ParkingDir {
+  PARKINGDIR_UNKNOWN = 0;
+  REAR_IN = 1;          // 车尾泊入
+  FRONT_IN = 2;         // 车头泊入
+  FRONT_OUT = 11;       // 正前泊出
+  LEFT_FRONT_OUT = 12;  // 左前泊出
+  RIGHT_FRONT_OUT = 13; // 右前泊出
+  REAR_OUT = 14;        // 正后泊出
+  LEFT_REAR_OUT = 15;   // 左后泊出
+  RIGHT_REAR_OUT = 16;  // 右后泊出
+  FORWARD = 21;         // 前进（直线召唤）
+  BACKWARD = 22;        // 后退（直线召唤）
+}
+
+// MCU RSPA事件
+message MCURSPAEvent {
+  RSPAEventType event_type = 1;
+  FuncState func_state = 2;
+  uint32 func_open_id = 3;
+  ParkingDir parking_dir = 4;
+  ObjInfo obstacle_info = 5;
+  RSPAFailOrSuspendReason fail_reason = 6;
+  StraightSummonStatus straight_status = 7;
+  AwakenInfo awaken_info = 8;
+  RSPAFailOrSuspendReason suspend_info = 9;
+}
+
+// MCU RSPA数据埋点
+// topic: /mcu_blc/event_report
+message MCURSPAEventReport {
+  //@C_Mark@10@;
+  repeated MCURSPAEvent events = 1;
+}

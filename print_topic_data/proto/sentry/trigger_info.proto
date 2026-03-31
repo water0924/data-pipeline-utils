@@ -1,0 +1,14 @@
+syntax = "proto2";
+
+package deeproute.trip;
+
+// topic: /sentry/trigger_info
+message TriggerInfo {
+  optional string event = 1;
+  optional uint32 backward_time_sec = 2;  // second
+  optional uint32 forward_time_sec = 3;   // second
+  optional uint32 priority = 4;
+  optional uint64 system_timestamp_ns = 5;  // ns
+  repeated string bags_name = 6;
+  optional uint32 event_id = 7;
+}

@@ -1,12 +1,34 @@
 syntax = "proto3";
+
 import "drivers/sensor_image.proto";
 import "common/geometry.proto";
+import "prediction/trajectory.proto";
 
 package deeproute.vla.vla_output;
 
 message Action {
   repeated common.Polyline junction_reference_line = 1;    // refline
   float model_speed_limit = 2; // 限速值，m/s
+  repeated float multi_modal_probs = 3;
+  repeated deeproute.prediction.SpeedSeq multi_modal_speed = 4;
+  repeated float multi_modal_speed_scores = 5;
+  repeated common.Polyline trajectory = 6;
+}
+
+message ParkingAction {
+  // 泊车意图枚举
+  enum ParkingIntent {
+    PARKING_INTENT_UNKNOWN = 0;
+    PARKING_INTENT_STRAIGHT = 1;   // 直行
+    PARKING_INTENT_LEFT = 2;       // 左转
+    PARKING_INTENT_RIGHT = 3;      // 右转
+    PARKING_INTENT_UTURN = 4;      // 掉头
+    PARKING_INTENT_STOP = 5;       // 停车
+  }
+  ParkingIntent parking_intent = 1;       // 泊车决策意图
+  common.Point3D parking_goal_point = 2;  // 泊车目标点
+  repeated common.Point3D parking_pass_point = 3;
+  repeated common.Polyline parking_reference_line = 4;
 }
 
 message VlaDebugInfo {
@@ -17,13 +39,39 @@ message VlaDebugInfo {
   repeated common.Point3D raw_defensive_target_points = 5; // 原始防御目标点
   common.Point3D ego_position = 6;  // z is not set 
   common.Quaternion ego_orientation = 7;
+  string task_name = 8;
+  common.Point3D raw_parking_goal_point = 9;  // 原始泊车目标点
 }
 
 message SemanticInfo {
-  // DTS
-  repeated common.Point3D defensive_target_points = 1;     // world coordinate
+  // DTS in world coordinate
+  repeated common.Point3D defensive_target_points = 1;
+  
+  enum TargetLaneReason {
+    UNKNOWN = 0;
+    EFFICIENCY = 1;
+    ROUTING = 2;
+  };
+  int32 target_lane_id = 2;
+  common.Polyline target_lane = 3;
+  TargetLaneReason target_lane_reason = 4;
+  uint64 rasmap_time_measurement = 5;
+  repeated common.Point3D defensive_target_points_direction = 6;
+  repeated float defensive_target_points_speed_limit = 7;
 }
 
+message ParkingSemanticInfo {
+  // 泊车标识 world coordinate
+  repeated common.Point3D parking_sign_points = 1;
+
+  // 泊车区域楼层信息
+  string parking_current_floor = 2;      // 当前楼层
+  string parking_current_area = 3;       // 当前区域
+  string parking_target_floor = 4;       // 目标楼层
+  string parking_target_area = 5;        // 目标区域
+}
+
+// topic = /vla/vla_output
 message VlaOutput {
   enum DataType {
     SUCCESS = 0;  // 成功
@@ -83,15 +131,18 @@ message VlaOutput {
     RISK_WEATHER_SNOW = 45;                        // 雪天 | 积雪 | 结冰
 
     // 20251031新增风险场景FLAGS
-    RISK_BLINDSPOT_ADJACENT_LANE_WITH_SLOW_QUEUING = 46; // 排队车流
+    RISK_BLINDSPOT_ADJACENT_LANE_WITH_SLOW_QUEUING = 46;    // 排队车流
     RISK_BLINDSPOT_ADJACENT_LANE_WITH_EGO_GREEN_LIGHT = 47; // 绿灯 & 车道前车视野盲区
     RISK_BLINDSPOT_ADJACENT_LANE_WITH_EGO_NO_LIGHT = 48;    // 无灯 & 车道前车视野盲区
 
     // 20251121新增风险场景FLAGS
-    RISK_BUS_ARRIVING = 49;                        // 公交车进站
+    RISK_BUS_ARRIVING = 49;                        // 公交车进站 deprecated - 重定向到53
     RISK_FRONT_QUEUEING = 50;                      // 前方排队
     RISK_ABN_SLOWSPEED_VRU = 51;                   // 低速非机动车
-    RISK_ABN_SLOWSPEED_VEHICLE = 52;               // 低速车辆  
+    RISK_ABN_SLOWSPEED_VEHICLE = 52;               // 低速车辆 
+
+    // 20251205新增风险场景FLAGS
+    RISK_BUS_AT_STATION = 53;                      // 公交车进出站
 
     // 新增非风险场景
     NO_RISK_BUS_LANE = 101;               // 公交车道
@@ -143,6 +194,100 @@ message VlaOutput {
     NO_RISK_SPRINKLER_TRUCK = 145;        // 洒水车
     NO_RISK_ROAD_SWEEPER = 146;           // 环卫扫地车
   };
+
+  // 泊车场景枚举
+  // 每个分类预留20个值
+  enum ParkingScenario {
+    // Unknown: 0
+    SCENE_UNKNOWN = 0;
+
+    // 普通停车场路段: 1-19 (reserved 20 values)
+    SCENE_ROAD_STRAIGHT = 1;        // 停车场直道
+    SCENE_ROAD_CURVE = 2;           // 停车场弯道
+    SCENE_ROAD_INTERSECTION = 3;    // 停车场路口
+    SCENE_ROAD_DEAD_END = 4;        // 断头路
+    SCENE_ROAD_UPHILL = 5;          // 上坡 deprecated - 合并到7
+    SCENE_ROAD_DOWNHILL = 6;        // 下坡 deprecated - 合并到7
+    SCENE_ROAD_HILL = 7;            // 坡道
+    reserved 8 to 19;               // Reserved for future road section types
+
+    // 场景推理: 20-39 (reserved 20 values)
+    TASK_GUIDE_EXIT = 20;           // 前方有 & 出口
+    TASK_ARRIVED_EXIT = 21;         // 到达出口 deprecated
+    TASK_GUIDE_FLOOR = 22;          // 前方有 & 层
+    TASK_ARRIVED_TARGET_FLOOR = 23; // 到达目标楼层 not matched but analyzed
+    TASK_GUIDE_AREA = 24;           // 前方有 & 区
+    TASK_ARRIVED_TARGET_AREA = 25;  // 到达目标区域 not matched but analyzed
+    SCENE_INFO_CURRENT_FLOOR = 26;  // 当前楼层 deprecated
+    SCENE_INFO_CURRENT_AREA = 27;   // 当前区域 deprecated
+    SCENE_WRONG_DIRECTION = 28;     // 逆行
+    reserved 29 to 39;              // Reserved for future scene inference types
+
+    // 禁止通行: 40-59 (reserved 20 values)
+    SCENE_BAN_LEFT = 40;            // 禁止左转
+    SCENE_BAN_RIGHT = 41;           // 禁止右转
+    SCENE_BAN_STRAIGHT = 42;        // 禁止直行
+    SCENE_BAN_UTURN = 43;           // 禁止掉头
+    SCENE_BAN_ENTRY = 44;           // 禁止驶入
+    reserved 45 to 59;              // Reserved for future prohibition types
+    
+    // 障碍物场景: 60-79 (reserved 20 values)
+    SCENE_STATIC_SPEED_BUMP = 60;   // 减速带
+    SCENE_STATIC_OBSTACLE = 61;     // 障碍物占道
+    reserved 62 to 79;              // Reserved for future obstacle types
+
+    // 设施: 80-99 (reserved 20 values)
+    SCENE_FACILITY_SPEED_BUMP = 80;    // 减速带
+    SCENE_FACILITY_GATE_CLOSED = 81;   // 闸机关闭
+    SCENE_FACILITY_GATE_OPEN = 82;     // 闸机开启
+    reserved 83 to 99;                 // Reserved for future facility types
+
+    // 环境与天气: 100-119 (reserved 20 values)
+    SCENE_NARROW_ROAD = 100;          // 窄路
+    SCENE_POTHOLE = 101;              // 坑洼
+    SCENE_POOLED_WATER = 102;         // 积水
+    SCENE_MUDDY = 103;                // 泥泞
+    SCENE_HEAVY_RAIN = 104;           // 大雨
+    SCENE_DENSE_FOG = 105;            // 大雾
+    SCENE_SANDSTORM = 106;            // 沙尘暴
+    SCENE_SNOW_ICE = 107;             // 雪/冰
+    SCENE_ENV_GOOD = 108;             // 路况良好
+    reserved 109 to 119;              // Reserved for future environment types
+
+    // 动态场景 (非一期): 120-139 (reserved 20 values)
+    SCENE_DYNAMIC_PEDESTRIAN_CROSSING = 120; // 行人横穿
+    SCENE_DYNAMIC_MEETING_CAR = 121;         // 会车
+    SCENE_DYNAMIC_CAR_FOLLOWING = 122;       // 跟车
+    reserved 123 to 139;                     // Reserved for future dynamic scene types
+
+    // 楼层: 140-159 (reserved 20 values)
+    SCENE_FLOOR_B1 = 140;  // B1 层
+    SCENE_FLOOR_B2 = 141;  // B2 层
+    SCENE_FLOOR_B3 = 142;  // B3 层
+    SCENE_FLOOR_B4 = 143;  // B4 层
+    SCENE_FLOOR_B5 = 144;  // B5 层
+    SCENE_FLOOR_L1 = 145;  // L1 层
+    SCENE_FLOOR_L2 = 146;  // L2 层
+    SCENE_FLOOR_L3 = 147;  // L3 层
+    SCENE_FLOOR_L4 = 148;  // L4 层
+    SCENE_FLOOR_L5 = 149;  // L5 层
+    SCENE_FLOOR_L6 = 150;  // L6 层
+    SCENE_FLOOR_L7 = 151;  // L7 层
+    reserved 152 to 159;  // Reserved for future floor types
+
+    // 区域: 160-179 (reserved 20 values)
+    SCENE_AREA_A = 160;  // A 区
+    SCENE_AREA_B = 161;  // B 区
+    SCENE_AREA_C = 162;  // C 区
+    SCENE_AREA_D = 163;  // D 区
+    SCENE_AREA_E = 164;  // E 区
+    SCENE_AREA_F = 165;  // F 区
+    SCENE_AREA_G = 166;  // G 区
+    SCENE_AREA_H = 167;  // H 区
+    SCENE_AREA_I = 168;  // I 区
+    SCENE_AREA_J = 169;  // J 区
+    reserved 170 to 179;  // Reserved for future area types
+  }
   
   DataType data_type = 1;                         // 数据类型
   uint64 timestamp_us = 2;                        // 时间戳
@@ -151,8 +296,12 @@ message VlaOutput {
   RiskScenario risk_flag = 5;                     // 单一风险标签（兼容字段）
 
   Action adc_action = 6;                          // ego action
-  VlaDebugInfo vla_debug_info = 7;               // for debug
+  VlaDebugInfo vla_debug_info = 7;                // for debug
   
   repeated RiskScenario scene_flags = 8;         // 多个风险或场景标签（推荐使用）
   SemanticInfo semantic_info = 9;                // 辅助决策语义信息
+
+  repeated ParkingScenario parking_scene_flags = 10; // 泊车场景标签
+  ParkingSemanticInfo parking_semantic_info = 11;    // 泊车语义信息
+  ParkingAction parking_action = 12;                 // 泊车决策动作
 }

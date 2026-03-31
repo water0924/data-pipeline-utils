@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package geely.y11v;
+
+// topic: /data_close/cpmon_info  1hz
+message CpmOnInfo {
+  uint64 timestamp = 1; // 源时间，us
+  bool cpmon1 = 2;      // cpmonoff
+}

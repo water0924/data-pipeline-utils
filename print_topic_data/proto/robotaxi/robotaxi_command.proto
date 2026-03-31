@@ -1,0 +1,76 @@
+syntax = "proto3";
+package dr.robotaxi;
+import "robotaxi/robotaxi_common.proto";
+
+// topic:/blc/robotaxi_command
+message Command {
+  string id = 1;
+  oneof cmd {
+    // 0~99 reserved
+    StartRunningCMD start_running = 100;
+    StopTaskCMD stop_task = 101;
+    LoginCMD login = 102;
+    OnlineCMD online = 103;
+    GetPassingPointsCMD get_passing_points = 104;
+    PassengerConfirmCMD passenger_confirm = 105;
+    LogoutCMD logout = 106;
+    
+    ArrivePickupCMD arrive_pickup = 107;            // (debug)到达上车点
+    ArriveDestinationCMD arrive_destination = 108;  // (debug)到达下车点
+    PullOverCMD pull_over = 109;                    // 靠边停车
+  }
+}
+
+message CommandRP {  // topic: /blc/robotaxi_command_response
+  string id = 1;
+  ErrorCode error_code = 2;
+  oneof cmdrp {
+    GetPassingPointsCMDRP get_passing_points = 100;
+  }
+}
+
+message ArrivePickupCMD {
+}
+
+message ArriveDestinationCMD {
+}
+
+message PullOverCMD {
+}
+
+// start or continue runing
+message StartRunningCMD {
+  string task_id = 1;
+}
+// pull over and end the journey
+message StopTaskCMD {
+  string task_id = 1;
+}
+
+message OnlineCMD {
+  OnlineType online_type = 1;
+  // WorkType work_type = 2;
+  // OnlineFlag online_flag = 3;
+}
+
+message PassengerConfirmCMD {
+  string tail_number = 1;
+}
+
+message LoginCMD {
+  LoginInfo login_info = 1;
+}
+
+message GetPassingPointsCMD {
+  string task_id = 1;
+  // CoorSys coor_sys = 2;
+}
+
+message GetPassingPointsCMDRP {
+  repeated Position pos = 1;
+  uint64 path_id = 2;
+}
+
+message LogoutCMD {
+  //
+}

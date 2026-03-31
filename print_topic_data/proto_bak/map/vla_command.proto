@@ -1,0 +1,177 @@
+syntax = "proto2";
+
+package deeproute.map;
+
+import "common/geometry.proto";
+
+enum VLACommandCode {
+  VLA_SUCCESS = 0;
+  // routing 服务内部错误
+  VLA_INTERNAL = 1;
+  // 位置未找到
+  VLA_NOT_FOUND = 2;
+
+  // 请求位置在禁停区域(即将弃用，分解为下面的不同的错误类型)
+  VLA_IN_NO_PARKING_AREA = 3;
+
+
+  // ======靠边停车相关错误======
+
+  // 请求位置在交叉口
+  VLA_SCENE_CROSSING = 4;
+  // 请求位置在主次入口
+  VLA_SCENE_MAIN_SECONDARY_ENTRANCE = 5;
+  // 请求位置属性不支持
+  VLA_SCENE_FIELD = 6;
+
+  // ======记忆限速相关错误======
+
+  // 匝道不支持记忆限速
+  VLA_SCENE_SPEED_LIMIT_NOT_SUPPORT_RAMP = 7;
+  // 主辅路不支持记忆限速
+  VLA_SCENE_SPEED_LIMIT_NOT_SUPPORT_MAIN_SECONDARY_ROAD = 8;
+  // 路口内道路不支持记忆限速
+  VLA_SCENE_SPEED_LIMIT_NOT_SUPPORT_JUNCTION_ROAD = 9;
+  // 已经超出了最大限速，请重试
+  VLA_SCENE_SPEED_LIMIT_EXCEED_MAX = 10;
+  // 已经超出了最低限速，请重试
+  VLA_SCENE_SPEED_LIMIT_EXCEED_MIN = 11;
+  // 限速降低太多了，请重试
+  VLA_SCENE_SPEED_LIMIT_DECREASE_TOO_MUCH = 12;
+  // 限速增加太多了，请重试
+  VLA_SCENE_SPEED_LIMIT_INCREASE_TOO_MUCH = 13;
+
+
+  // ======语音变道相关错误======
+  
+  // 前方即将导航变道，过了路口之后再试试吧
+  VLA_SCENE_LANE_CHANGE_TOO_CLOSE_TO_JUNCTION = 14;
+  // 找不到目标车道，请换个说法吧
+  VLA_SCENE_LANE_CHANGE_NOT_FOUND_TARGET_LANE = 15;
+  // 单车道不支持指定车道
+  VLA_SCENE_LANE_CHANGE_NOT_SUPPORT_SINGLE_LANE = 16;
+  // 匝道不支持指定车道
+  VLA_SCENE_LANE_CHANGE_NOT_SUPPORT_RAMP = 17;
+  // 主辅路不支持指定车道
+  VLA_SCENE_LANE_CHANGE_NOT_SUPPORT_MAIN_SECONDARY_ROAD = 18;
+  // 隧道不支持指定车道
+  VLA_SCENE_LANE_CHANGE_NOT_SUPPORT_TUNNEL = 19;
+  // 无车道场景，找不到指定车道
+  VLA_SCENE_LANE_CHANGE_NOT_SUPPORT_NO_LANE = 20;
+}
+
+// VLA指令：
+// 在VLAPositionOfAction这个位置上，执行VLACommand指令，指令内容是VLAUserSetting
+message VLARoutingOption {
+  // VLA command, used to request VLA route planning.
+
+  // VLA指令类型
+  enum VLACommand {
+    VLA_COMMAND_UNKNOWN = 0;
+    VLA_COMMAND_TURN_LEFT = 1;
+    VLA_COMMAND_TURN_RIGHT = 2;
+    VLA_COMMAND_GO_STRAIGHT = 3;
+    VLA_COMMAND_U_TURN = 4;
+
+    VLA_COMMAND_PULL_OVER = 5;
+    VLA_COMMAND_PULL_OVER_CANCEL = 13;
+
+    VLA_COMMAND_LANE_CHANGE_FROM_LEFT = 6;
+    VLA_COMMAND_LANE_CHANGE_FROM_RIGHT = 7;
+    VLA_COMMAND_LANE_CHANGE_TO_CENTER = 8;
+    VLA_COMMAND_LANE_CHANGE_CANCEL = 9; 
+
+    VLA_COMMAND_SPEED_CHANGE_TO_VALUE = 10;
+    VLA_COMMAND_SPEED_CHANGE_CANCEL = 11;
+
+    VLA_COMMAND_PARKING_TO_DESTINATION = 12;
+  }
+
+  // 用户设置的控车信息, 涉及数据的指令信息拓展
+  message VLAUserSettingInfo {
+    // 速度值, 例如100表示100公里/小时
+    optional int32 speed_value_kph = 1;
+
+    // vla_command_type表示方向，这个字段表示目标车道编号，
+    // 例如左一为1，右二为2，以此类推
+    optional int32 target_lane_num = 2;
+  }
+
+  // 位置信息，用于确定VLA指令的执行位置。
+  message VLAPositionOfAction {
+    enum VLACommandType {
+      // 在unkown时，会使用has判断使用哪一种type
+      VLA_COMMAND_TYPE_UNKNOWN = 0;
+      VLA_COMMAND_TYPE_INTERSECTION_AHEAD = 1;
+      VLA_COMMAND_TYPE_METER_AHEAD = 2;
+      VLA_COMMAND_TYPE_POI_AHEAD = 3;
+      VLA_COMMAND_TYPE_DESTINATION = 4;
+      VLA_COMMAND_TYPE_NO_DESIGNATED_POINT = 5;
+
+      VLA_COMMAND_TYPE_CURRENT_ROAD = 6;
+      VLA_COMMAND_TYPE_CURRENT_POSITION = 7;
+
+      VLA_COMMAND_TYPE_FLOOR = 8;
+      VLA_COMMAND_TYPE_NEAREST_PARKING_SPACE = 9;
+      VLA_COMMAND_TYPE_NEAREST_CHARGE_PARKING_SPACE = 10;
+
+      VLA_COMMAND_TYPE_PARKING_LOT_EXIT = 11;
+    }
+
+    optional VLACommandType vla_command_type = 100;
+
+    // 后续需使用vla_command_types来描述复合场景
+    repeated VLACommandType vla_command_types = 101;
+
+    // 前方第几个路口
+    optional int32 intersection_ahead_num = 1;
+
+    // 前方多少米
+    optional int32 meters_ahead = 2;
+
+    // poi 名，例如星巴克
+    optional string poi_name = 3;
+
+    // 作用在路线终点
+    optional bool on_destination = 4;
+
+    // 无指定点
+    optional bool no_designated_point = 5;
+
+    // 楼层
+    optional int32 floor = 6;
+  }
+
+  optional VLACommand vla_command = 1;
+  optional VLAPositionOfAction vla_position_of_action = 2;
+  optional VLAUserSettingInfo vla_user_setting_info = 3;
+}
+
+// topic /map/vla/request
+message VLACommandRequest {
+  optional string request_id = 1;
+  oneof request {
+    VLARoutingOption request_info = 2;
+  }
+}
+
+// topic /map/vla/response
+message VLACommandResponse {
+  message Status {
+    optional VLACommandCode code = 1;
+    optional string err_msg = 2;
+    optional int32 distance_of_scene = 4; // in meters
+  }
+  message VLACommandResult {
+    optional VLARoutingOption.VLACommand vla_command = 1;
+    // 速度变更的道路名称
+    optional string speed_changed_road_name = 2;
+  }
+
+  optional Status status = 1;
+  optional string request_id = 2;
+  optional common.PointLLH position = 3;
+  optional common.Point3D position_odom = 4;
+
+  optional VLACommandResult vla_command_result = 5;
+}

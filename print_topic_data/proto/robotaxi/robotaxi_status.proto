@@ -1,0 +1,96 @@
+syntax = "proto3";
+package dr.robotaxi;
+import "robotaxi/robotaxi_common.proto";
+
+// topic:/blc/robotaxi_status
+message RobotaxiStatus {
+  OrderStatus order_status = 1;
+  AccountStatus account_status = 2;
+  RunTimeStatus run_time_status = 3;
+}
+
+message OrderStatus {
+  enum ArrivedPointType {
+    UNKNOWN = 0;
+    START = 1;
+    PASSING = 2;
+    END = 3;
+  }
+  message OffStatus {}
+  message CancelStatus {
+    ArrivedPointType type = 1;
+    int32 index = 2;
+  }
+  message ArrivedStatus {
+    ArrivedPointType type = 1;
+    int32 index = 2;
+  }
+  message RunningStatus {
+    ArrivedPointType type = 1;
+    int32 index = 2;
+  }
+  message PreArrivedStatus {
+    ArrivedPointType type = 1;
+    int32 index = 2;
+  }
+  message WaitGoStatus {}
+  message OrderProcessingStatus {}
+
+  OrderInfo order_info = 1;
+  oneof status {
+    OffStatus off = 100;
+    CancelStatus cancel = 101;
+    ArrivedStatus arrived = 102;
+    RunningStatus running = 103;
+    PreArrivedStatus pre_arrived = 104;
+    WaitGoStatus wait_go = 105;
+    OrderProcessingStatus order_processing = 106;
+  }
+}
+
+message AccountStatus {
+  enum LoginStatus {
+    UNKNOWN = 0;
+    LOGGED = 1;
+    LOGOUT = 2;
+    LOGGING_IN = 3;
+    LOGGING_OUT = 4;
+  }
+  LoginStatus login_status = 1;
+  OnlineType online = 2;
+  string access_jwt = 3;
+  string vehicle_id = 4;
+  string car_id = 5;
+  // LoginInfo login_info = 1;
+  // WorkType work_type = 3;
+  
+  // string refresh_jwt = 6;
+}
+
+message RunTimeStatus {
+  message VehicleDoorStatus {
+    bool driver_door = 1;
+    bool passen_door = 2;
+    bool rear_l_door = 3;
+    bool rear_r_door = 4;
+  }
+  message SeatBeltStatus {
+    bool driver = 1;
+    bool passenger = 2;
+  }
+
+  Position pos = 1;
+  double vehicle_heading = 2;  // 0-360°
+  double remaining_distance = 3;
+  double remaining_time = 4;  // s
+  double accumulated_distance = 5;
+  double accumulated_time = 6;  // s
+  int32 next_navi_point_index = 7;
+  uint64 path_id = 8;
+  NavigationAction navi_action = 9;
+  // repeated NavigationAction specified_lane_info = 7;
+
+  // from DeviceStatus
+  VehicleDoorStatus vehicle_door_status = 10;
+  SeatBeltStatus seat_belt_status = 11;
+}

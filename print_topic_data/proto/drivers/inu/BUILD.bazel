@@ -2,6 +2,8 @@ package(features=['-hidden_visibility_feature'])
 load("@rules_cc//cc:defs.bzl", "cc_proto_library")
 load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@deeproute_build_tools//rules/proto:proto2struct_rule.bzl",
+     "proto2struct_codegen_cc_library", "proto2struct_codegen_library")
 
 load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
 
@@ -29,6 +31,20 @@ python_proto_library(
     protos = [
         ":config_navigation_device_proto",
     ],
+)
+
+# proto2struct support for localization-mcu
+proto2struct_codegen_library(
+    name = "config_navigation_device_proto2struct",
+    visibility = ["//visibility:public"],
+    deps = [":config_navigation_device_proto"],
+)
+
+proto2struct_codegen_cc_library(
+    name = "config_navigation_device_c_proto",
+    includes = ["."],
+    visibility = ["//visibility:public"],
+    deps = [":config_navigation_device_proto2struct"],
 )
 
 proto_library(

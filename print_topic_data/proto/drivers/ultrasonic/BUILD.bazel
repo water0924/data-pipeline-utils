@@ -62,6 +62,7 @@ proto_library(
     srcs = ["config.proto"],
     deps = [
         "//proto/common:geometry_proto",
+        ":ultrasonic_proto",
     ],
     strip_import_prefix = "/proto/",
 )

@@ -260,13 +260,21 @@ message ADCTrajectory {
     INTENTION_CREEP = 2;
     INTENTION_NORMAL = 3;
   }
-  optional LongitudinalIntentionInfo longitudinal_intention_info = 66;
+  optional LongitudinalIntentionInfo longitudinal_intention_info = 67;
 
   repeated SimplifiedRefLineSummary simplified_ref_line_summary = 61;
   optional int64 ori_adc_lane_id = 62;
   optional deeproute.common.Polyline original_path = 63;
   optional bool not_allow_overshoot = 64 [default = false];
   repeated ModelMatchedLaneInfo model_matched_lane_info = 65;
+  optional bool during_follow_car_defensive_deceleration = 66 [default = false];
+  optional OpenSpaceObstacleInfo open_space_obstacle_info = 68;
+  optional bool is_co_driving_quit_allowed = 69 [default = true];
+}
+
+message OpenSpaceObstacleInfo {
+  optional bool apa_front_has_obs = 1;
+  optional bool apa_rear_has_obs = 2;
 }
 
 message ModelMatchedLaneInfo {
@@ -275,7 +283,8 @@ message ModelMatchedLaneInfo {
       2;  // perception lane id if found, curve id otherwise
   optional int32 curve_id = 3;                      // virtual curve id
   map<int64, int32> unchosen_curve_id_idx_map = 4;  // k: curve_id, v: raw idx
-  map<int32, double> lateral_diff_map = 5;          // k: raw idx, v: lateral diff to last selected
+  map<int32, double> lateral_diff_map =
+      5;  // k: raw idx, v: lateral diff to last selected
 }
 
 message SimplifiedRefLineSummary {
@@ -339,6 +348,7 @@ message VLARelated {
     PULL_OVER = 3;
     PARKING_DESIGNATED_SPOT = 4;
     LEAVE_BUS_LANE = 5;
+    MRM_PARKING = 6;
   }
   optional VLARequestType vla_request_type = 1;
   enum VLAStatus {
@@ -348,6 +358,7 @@ message VLARelated {
     FAILED = 3;
     END = 4;
     PENDING = 5;
+    OVERSHOT = 6;
   }
   optional VLAStatus vla_status = 2;
   enum VLAFailureReason {
@@ -389,6 +400,31 @@ message VLARelated {
   }
   optional VLAOvertakeVehicleType vla_overtake_vehicle_type = 5;
   optional bool is_rightmost_lane = 6;
+  enum MRMLaneChangeStatus {
+    MRM_LANE_CHANGE_UNKNOWN = 0;
+    MRM_LANE_CHANGE_WAITING = 1;
+    MRM_LANE_CHANGE_DURING = 2;
+    MRM_LANE_CHANGE_HOLD = 3;
+    MRM_SINGLE_LANE = 4;
+  }
+  optional MRMLaneChangeStatus mrm_lane_change_status = 7;
+  enum MRMFailureReason {
+    MRM_FAILURE_UNKNOWN = 0;
+    MRM_TASK_TIMEOUT = 1;
+    MRM_USER_CANCEL = 2;
+    MRM_SLOW_SPEED_LANE = 3;
+    MRM_LANE_CHANGE_TIMEOUT = 4;
+    MRM_TOLL_OR_RAMP_CANNOT_STOP = 5;
+    MRM_TUNNEL_OR_FORK_CANNOT_STOP = 6;
+    MRM_CURRENT_LANE_CLOSE = 7;
+    MRM_RIGHT_LANE_CLOSE = 8;
+    MRM_RIGHT_LANE_OBSTACLE = 9;
+    MRM_EMERGENCY_LANE_OBSTACLE = 10;
+    MRM_RIGHT_CONSTRUCTION_ZONE = 11;
+    MRM_SPECIAL_ROAD_AND_CANNOT_STOP = 12;
+    MRM_RIGHT_LANE_CLOSE_OR_OBSTACLE = 13;
+  }
+  optional MRMFailureReason mrm_failure_reason = 8;
 }
 
 message LaneChangeRelated {
@@ -575,6 +611,12 @@ message DisengagementWarning {
     EOP_NO_GAP = 3;
     NARROW_ROAD_IMPASSIBLE = 4;  //狭窄道路无法通过
   }
+
+  enum SceneTypeRelatedWarning {
+    NO_SCENE_TYPE_WARNING = 0;
+    U_TURN_LANE_BORROWING = 1;
+  }
+
   optional HumanInterferenceRelatedWarning human_interference_related_warning =
       3;  // This may not be output of planning.
   optional string disengagement_description = 4;
@@ -598,6 +640,10 @@ message DisengagementWarning {
   }
   optional NarrowRoadPassability narrow_road_passability = 10
       [default = NARROW_ROAD_NONE];
+  optional SceneTypeRelatedWarning scene_type_related_warning = 11;
+
+  optional double narrow_road_min_lon_distance = 12; // 窄路EOP最近距离
+  optional double narrow_road_min_lat_distance = 13; // 窄路EOP最近宽度
 }
 
 message CriticalObject {
@@ -858,6 +904,10 @@ message ModelSpeedLimitInfo {
   optional bool enable = 1;
 }
 
+message IlqrSpeedLimitInfo {
+  optional bool enable = 1;
+}
+
 message CollisionTriggerInfo {
   optional bool has_collision = 1 [default = false];
   optional int32 collision_obs_percep_id = 2;
@@ -867,6 +917,16 @@ message ObjInteractionCount {
   optional int32 vru_count = 1;
   optional int32 cutin_count = 2;
   optional int32 vehicle_count = 3;
+}
+
+message IlqrSafetyCostTriggeredCount {
+  optional int32 total_count = 1;
+  optional int32 static_lon_safety_cost_count = 2;
+  optional int32 dynamic_lon_safety_cost_count = 3;
+  optional int32 static_lat_safety_cost_count = 4;
+  optional int32 dynamic_lat_safety_cost_count = 5;
+  optional bool enable_lat_safety = 6 [default = false];
+  optional bool enable_lon_safety = 7 [default = false];
 }
 
 enum AStarSearchNoResultReason {
@@ -938,7 +998,9 @@ message DriveCautiouslyInfo {
   optional bool caution_lane_close_level2 =
       6;  //二级报警：自车车速<5kph且距离road merge，剩余距离<2V或5m
   optional bool caution_y_crossing_solid_line_exemption =
-      7;  //即将豁免实线：实线豁免条件满足时的提醒
+      7; //即将豁免实线：实线豁免条件满足时的提醒
+  optional bool lane_close_lc_caution =
+      8; 
 };
 
 message AdcFrontWheelTrajectoryInfo {
@@ -947,6 +1009,23 @@ message AdcFrontWheelTrajectoryInfo {
   repeated deeproute.common.TrajectoryPoint trajectory_point = 2;
   repeated deeproute.common.TrajectoryPoint scale_point = 3;
 };
+
+message WideLaneInfo {
+  optional bool is_wide_lane = 1;
+  optional bool is_curved = 2;
+  optional bool is_stable = 3;
+};
+
+message ModelUsageModeStatus{
+  enum ModelUsageMode {
+    UNKNOWN = 0;
+    DISABLED = 1;                  
+    PURE_MODEL = 2;             
+    MODAL_SELECTION = 3; 
+  };
+  optional ModelUsageMode model_usage_mode = 1;
+}
+
 
 message PlanningSemanticInfo {
   enum TrafficCondition {
@@ -964,6 +1043,13 @@ message PlanningSemanticInfo {
     CONSERVATIVE = 2;
     AGGRESSIVE = 3;
   }
+
+  enum CutinSeverity {
+  CUTIN_UNKNOWN = 0;
+  CUTIN_NORMAL = 1;  // 正常
+  CUTIN_URGENT = 2;  // 紧急
+  CUTIN_SEVERE = 3;  // 严重
+}
 
   optional LaneChangeRelated lane_change_related = 1;
   optional DisengagementWarning disengagement_warning = 2;
@@ -1022,6 +1108,13 @@ message PlanningSemanticInfo {
 
   optional bool during_intersection_truck_behavior_defensive = 55;
   repeated int32 during_intersection_truck_behavior_defensive_id = 56;
+  optional WideLaneInfo wide_lane_info = 57;
+  optional ModelUsageModeStatus model_usage_mode_status = 58;
+  optional IlqrSpeedLimitInfo ilqr_speed_limit_info = 59;
+  optional bool fast_passby_truck = 60;
+  optional CutinSeverity cutin_severity = 61; 
+  optional double cutin_object_ttc = 62;
+  optional IlqrSafetyCostTriggeredCount ilqr_safety_cost_triggered_count = 63;
 }
 
 message ModelRefLineBroadcastInfo {
@@ -1117,6 +1210,7 @@ message DecelerationInfo {
     YELLOW_PASS = 14;
     NEAR_YELLOW = 15;
     CONSTRUCTION_ZONE = 16;
+    PULL_OVER = 17;
   }
   repeated DecelerationReason reason = 1;
   optional bool has_stop_line = 2;

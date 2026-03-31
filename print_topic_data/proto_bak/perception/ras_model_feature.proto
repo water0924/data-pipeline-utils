@@ -1,0 +1,12 @@
+
+syntax = "proto2";
+
+package deeproute.perception;
+
+import "semantic_map/map.proto";
+
+message RasModelFeature {
+  optional bytes data = 1;
+  optional bool for_parking = 2 [default = false];
+  optional hdmap.Map semantic_map = 3;
+}

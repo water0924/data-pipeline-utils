@@ -16,25 +16,37 @@ _sym_db = _symbol_database.Default()
 from proto.common import geometry_pb2 as common_dot_geometry__pb2
 from proto.map import routing_pb2 as map_dot_routing__pb2
 from proto.map import sd_map_pb2 as map_dot_sd__map__pb2
+from proto.map import vpa_mapping_pb2 as map_dot_vpa__mapping__pb2
 from proto.graph_match import graph_matching_pb2 as graph__match_dot_graph__matching__pb2
 from proto.routing import local_routing_pb2 as routing_dot_local__routing__pb2
 from proto.routing import cloud_task_pb2 as routing_dot_cloud__task__pb2
 from proto.odd import odd_pb2 as odd_dot_odd__pb2
 from proto.map import map_common_pb2 as map_dot_map__common__pb2
 from proto.map import common_type_pb2 as map_dot_common__type__pb2
-from proto.routing import collection_trigger_rule_pb2 as routing_dot_collection__trigger__rule__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1drouting/navinfo_routing.proto\x12\x11\x64\x65\x65proute.navinfo\x1a\x15\x63ommon/geometry.proto\x1a\x11map/routing.proto\x1a\x10map/sd_map.proto\x1a graph_match/graph_matching.proto\x1a\x1brouting/local_routing.proto\x1a\x18routing/cloud_task.proto\x1a\rodd/odd.proto\x1a\x14map/map_common.proto\x1a\x15map/common_type.proto\x1a%routing/collection_trigger_rule.proto\"|\n\x0b\x46\x65\x61tureInfo\x12\x12\n\nfeature_id\x18\x01 \x01(\t\x12\x15\n\rfeature_stage\x18\x02 \x01(\t\x12\x14\n\x0c\x66\x65\x61ture_name\x18\x03 \x01(\t\x12\x15\n\rfeature_image\x18\x04 \x01(\t\x12\x15\n\rfeature_email\x18\x05 \x01(\t\"B\n\x07PodInfo\x12\x10\n\x08pod_name\x18\x01 \x01(\t\x12\x15\n\rpod_namespace\x18\x02 \x01(\t\x12\x0e\n\x06pod_ip\x18\x03 \x01(\t\"\x87\x01\n\x0eRoutingVersion\x12\x34\n\x0c\x66\x65\x61ture_info\x18\x01 \x01(\x0b\x32\x1e.deeproute.navinfo.FeatureInfo\x12,\n\x08pod_info\x18\x02 \x01(\x0b\x32\x1a.deeproute.navinfo.PodInfo\x12\x11\n\tnode_name\x18\x03 \x01(\t\"\xe9\x03\n\x11SDRoutingResponse\x12>\n\x13route_planning_type\x18\xe8\x07 \x01(\x0e\x32 .deeproute.map.RoutePlanningType\x12(\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x1a.deeproute.map.RoutingCode\x12)\n\x06result\x18\x02 \x03(\x0b\x32\x19.deeproute.navinfo.Result\x12\x12\n\nrequest_id\x18\x03 \x01(\t\x12\x13\n\x0bresponse_id\x18\x08 \x01(\x05\x12.\n\x07request\x18\x04 \x01(\x0b\x32\x1d.deeproute.map.RoutingRequest\x12\x1b\n\x13segmented_route_num\x18\x05 \x01(\x05\x12\x16\n\x0esd_map_version\x18\x06 \x01(\t\x12\x10\n\x08route_id\x18\x07 \x01(\x04\x12\x10\n\x08trace_id\x18\t \x01(\t\x12\x14\n\x0clocal_map_id\x18\n \x01(\t\x12:\n\x0frouting_version\x18\x0b \x01(\x0b\x32!.deeproute.navinfo.RoutingVersion\x12;\n\x10shape_point_type\x18\x0c \x01(\x0e\x32!.deeproute.navinfo.ShapePointType\"%\n\x08NaviHead\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0b\n\x03ver\x18\x02 \x01(\t\"\x9d\x01\n\x08LaneInfo\x12\x0b\n\x03\x61rr\x18\x01 \x01(\x05\x12\n\n\x02la\x18\x02 \x01(\x05\x12\n\n\x02ra\x18\x03 \x01(\x05\x12\n\n\x02\x62m\x18\x04 \x01(\x05\x12\x0e\n\x06\x62us_bm\x18\x05 \x01(\x05\x12\n\n\x02ln\x18\x06 \x01(\x05\x12\x14\n\x0cout_link_ids\x18\x07 \x03(\x04\x12.\n\nlane_conds\x18\x08 \x03(\x0b\x32\x1a.deeproute.sd_map.LaneCond\"\xa1\x04\n\x08LinkAttr\x12\x12\n\ndr_link_id\x18\x13 \x01(\x04\x12\r\n\x05ni_id\x18\x06 \x01(\t\x12\x0b\n\x03\x64is\x18\x07 \x01(\x05\x12\x15\n\rtraffic_light\x18\x08 \x01(\x05\x12\x0b\n\x03spl\x18\t \x01(\x05\x12\x0e\n\x06tunnel\x18\n \x01(\x05\x12\x10\n\x08lane_num\x18\x0b \x01(\x05\x12*\n\x05lanes\x18\x0c \x03(\x0b\x32\x1b.deeproute.navinfo.LaneInfo\x12\x10\n\x08\x65levated\x18\r \x01(\x08\x12\x0e\n\x06sh_pos\x18\x01 \x01(\t\x12\x12\n\nf_lane_num\x18\x02 \x01(\x05\x12\n\n\x02pr\x18\x03 \x01(\x05\x12\r\n\x05usage\x18\x04 \x01(\x05\x12\x30\n\x0cshape_points\x18\x05 \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x32\n\x0fshape_points_2d\x18\x0e \x03(\x0b\x32\x19.deeproute.common.Point2D\x12\x34\n\x08\x66ormways\x18\x0f \x03(\x0e\x32\".deeproute.sd_map.LinkData.FormWay\x12.\n\nlane_attrs\x18\x10 \x03(\x0b\x32\x1a.deeproute.sd_map.LaneAttr\x12\x36\n\x0elane_info_data\x18\x12 \x03(\x0b\x32\x1e.deeproute.sd_map.LaneInfoData\x12\x1e\n\x16\x65xperience_speed_limit\x18\x11 \x01(\r\"r\n\x04Link\x12.\n\tlink_attr\x18\x01 \x01(\x0b\x32\x1b.deeproute.navinfo.LinkAttr\x12\x0b\n\x03psn\x18\x02 \x01(\x05\x12-\n\x08ps_infos\x18\x03 \x03(\x0b\x32\x1b.deeproute.navinfo.LinkAttr\"\x83\x02\n\rRoadSceneInfo\x12\x36\n\x11static_scene_type\x18\x01 \x01(\x0e\x32\x1b.deeproute.map.CrossingType\x12.\n\rcrossing_turn\x18\x02 \x01(\x0e\x32\x17.deeproute.map.LaneTurn\x12\x39\n\x0froad_scene_type\x18\x03 \x01(\x0e\x32 .deeproute.navinfo.RoadSceneType\x12\x14\n\x0cis_way_point\x18\x04 \x01(\x08\x12\x39\n\x18traffic_lights_turn_type\x18\x05 \x01(\x0e\x32\x17.deeproute.map.LaneTurn\"]\n\x15TrafficLightSceneInfo\x12+\n\nscene_turn\x18\x01 \x01(\x0e\x32\x17.deeproute.map.LaneTurn\x12\x17\n\x0fout_link_offset\x18\x02 \x01(\r\"\x92\x04\n\x0eSpeedLimitInfo\x12\x15\n\rspd_limit_dis\x18\x01 \x03(\x05\x12\x15\n\rspd_limit_spl\x18\x02 \x03(\x05\x12T\n\x0espd_limit_type\x18\x03 \x03(\x0e\x32<.deeproute.routing.NavigationInfoForVisualize.SpeedLimitType\x12\x11\n\tspl_ratio\x18\x04 \x01(\x02\x12\x0f\n\x07min_spl\x18\x05 \x01(\x05\x12\x30\n\nscene_type\x18\x06 \x01(\x0e\x32\x1c.deeproute.navinfo.SceneType\x12\x18\n\x10is_map_spl_limit\x18\x07 \x01(\x08\x12\x15\n\rexp_spd_limit\x18\x08 \x01(\x05\x12\x62\n\x18spd_static_strategy_type\x18\t \x03(\x0e\x32@.deeproute.routing.NavigationInfoForVisualize.StaticStrategyType\x12`\n\x17spd_scene_strategy_type\x18\n \x03(\x0e\x32?.deeproute.routing.NavigationInfoForVisualize.SceneStrategyType\x12\x13\n\x0bturn_radius\x18\x0b \x01(\x05\x12\x1a\n\x12is_large_curvature\x18\x0c \x01(\x08\"\xce\x01\n\x11StaticRoutingInfo\x12\x1b\n\x13priority_lane_index\x18\x01 \x01(\x05\x12\x0b\n\x03\x63rs\x18\x02 \x03(\x05\x12\x43\n\x19local_routing_scene_infos\x18\x03 \x03(\x0b\x32 .deeproute.navinfo.RoadSceneInfo\x12J\n\x18traffic_light_scene_info\x18\x04 \x01(\x0b\x32(.deeproute.navinfo.TrafficLightSceneInfo\"\xa0\x02\n\x15\x44\x61taCollectSingleTask\x12\x0f\n\x07task_id\x18\x01 \x01(\x03\x12\x46\n\x13image_collect_event\x18\n \x01(\x0b\x32\'.deeproute.cloud_task.ImageCollectEventH\x00\x12N\n\x17nnfeature_collect_event\x18\x0b \x01(\x0b\x32+.deeproute.cloud_task.NNFeatureCollectEventH\x00\x12N\n\x12\x64\x61ta_trigger_event\x18\x0c \x01(\x0b\x32\x30.deeproute.cloud_task.DataCollectionTriggerEventH\x00\x42\x0e\n\x0c\x43ollectEvent\"J\n\x0f\x44\x61taCollectTask\x12\x37\n\x05tasks\x18\x01 \x03(\x0b\x32(.deeproute.navinfo.DataCollectSingleTask\"\xd4\x02\n\nSegmAction\x12.\n\x0bmain_action\x18\x01 \x01(\x0e\x32\x19.deeproute.map.MainAction\x12\x38\n\x10\x61ssistant_action\x18\x02 \x01(\x0e\x32\x1e.deeproute.map.AssistantAction\x12\x30\n\x0clane_actions\x18\x03 \x01(\x0b\x32\x1a.deeproute.map.LaneActions\x12\x33\n\x10step_main_action\x18\x04 \x01(\x0e\x32\x19.deeproute.map.MainAction\x12=\n\x15step_assistant_action\x18\x05 \x01(\x0e\x32\x1e.deeproute.map.AssistantAction\x12\x36\n\x12multi_lane_actions\x18\x06 \x03(\x0b\x32\x1a.deeproute.map.LaneActions\"\xb6\x01\n\x10\x44\x65\x66\x65nceSceneInfo\x12?\n\x12\x64\x65\x66\x65nce_scene_type\x18\x01 \x01(\x0e\x32#.deeproute.navinfo.DefenceSceneType\x12\"\n\x1astart_offset_to_link_start\x18\x02 \x01(\x05\x12 \n\x18\x65nd_offset_to_link_start\x18\x03 \x01(\x05\x12\x1b\n\x13suggest_speed_limit\x18\x04 \x01(\x05\"\xec\x0e\n\x07Segment\x12=\n\x11\x64\x61ta_collect_task\x18\x65 \x01(\x0b\x32\".deeproute.navinfo.DataCollectTask\x12\x14\n\x0cvirtual_link\x18\x64 \x01(\x08\x12\x14\n\x0cis_odd_limit\x18! \x01(\x08\x12\x34\n\x0fodd_limit_types\x18( \x03(\x0e\x32\x1b.deeproute.odd.OddLimitType\x12\x32\n\x0eodd_type_infos\x18) \x03(\x0b\x32\x1a.deeproute.odd.OddTypeInfo\x12\x12\n\ndr_link_id\x18% \x01(\x04\x12\x0b\n\x03\x64is\x18\x01 \x01(\x05\x12\x0f\n\x07\x61\x62s_dis\x18\x02 \x01(\x05\x12\r\n\x05ni_id\x18\x03 \x01(\t\x12\x0e\n\x06sh_pos\x18\x04 \x01(\t\x12\x15\n\rtraffic_light\x18\x05 \x01(\x05\x12\x0b\n\x03spl\x18\x06 \x01(\x05\x12\x12\n\nf_lane_num\x18\x07 \x01(\x05\x12\x14\n\x0clane_num_sum\x18\x34 \x01(\r\x12\x10\n\x08\x63rossing\x18\x08 \x01(\x05\x12\n\n\x02\x62m\x18\t \x01(\x05\x12\x0b\n\x03\x61rr\x18\n \x01(\x05\x12\x30\n\x0cshape_points\x18\x0b \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x32\n\x0fshape_points_2d\x18\x1b \x03(\x0b\x32\x19.deeproute.common.Point2D\x12\n\n\x02pr\x18\x0c \x01(\x05\x12\x0e\n\x06tunnel\x18\r \x01(\x05\x12\x10\n\x08lane_num\x18\x0e \x01(\x05\x12*\n\x05lanes\x18\x0f \x03(\x0b\x32\x1b.deeproute.navinfo.LaneInfo\x12\r\n\x05usage\x18\x10 \x01(\x05\x12\x34\n\x08\x66ormways\x18\x1d \x03(\x0e\x32\".deeproute.sd_map.LinkData.FormWay\x12.\n\nlane_attrs\x18\x1e \x03(\x0b\x32\x1a.deeproute.sd_map.LaneAttr\x12\x0e\n\x06tmc_lv\x18\x14 \x01(\x05\x12\x0c\n\x04r_bm\x18\x15 \x01(\x05\x12\x0c\n\x04v_bm\x18\x16 \x01(\x05\x12\x0e\n\x06\x63_b_bm\x18\x17 \x01(\x05\x12.\n\rin_link_infos\x18\x11 \x03(\x0b\x32\x17.deeproute.navinfo.Link\x12/\n\x0eout_link_infos\x18\x12 \x03(\x0b\x32\x17.deeproute.navinfo.Link\x12\x10\n\x08\x65levated\x18\x13 \x01(\x08\x12\x14\n\x0ctoll_station\x18\x1a \x01(\x05\x12\x45\n\x0f\x61map_link_range\x18\x1c \x03(\x0b\x32(.deeproute.graph_match.AmapLinkMatchInfoB\x02\x18\x01\x12<\n\namap_range\x18\x1f \x01(\x0b\x32(.deeproute.graph_match.AmapLinkMatchInfo\x12\x1e\n\x16\x65xperience_speed_limit\x18  \x01(\r\x12\x36\n\x0elane_info_data\x18# \x03(\x0b\x32\x1e.deeproute.sd_map.LaneInfoData\x12\x12\n\nadmin_code\x18\" \x01(\x05\x12\x19\n\x11\x65xact_speed_limit\x18$ \x01(\r\x12)\n\x07\x63\x61meras\x18& \x03(\x0b\x32\x18.deeproute.sd_map.Camera\x12\x39\n\x0espd_limit_info\x18\' \x01(\x0b\x32!.deeproute.navinfo.SpeedLimitInfo\x12\x41\n\x13static_routing_info\x18* \x01(\x0b\x32$.deeproute.navinfo.StaticRoutingInfo\x12\x32\n\x0bsegm_action\x18\x32 \x01(\x0b\x32\x1d.deeproute.navinfo.SegmAction\x12\x43\n\x19local_routing_scene_infos\x18\x33 \x03(\x0b\x32 .deeproute.navinfo.RoadSceneInfo\x12>\n\x15long_solid_line_infos\x18+ \x03(\x0b\x32\x1f.deeproute.sd_map.LongSolidLine\x12<\n\x11toll_station_info\x18\x35 \x01(\x0b\x32!.deeproute.sd_map.TollStationInfo\x12\x33\n\x0cspeed_source\x18\x36 \x01(\x0b\x32\x1d.deeproute.sd_map.SpeedSource\x12\x12\n\nis_overlap\x18\x37 \x01(\x08\x12\x19\n\x11is_extend_overlap\x18\x38 \x01(\x08\x12\x44\n\x16lane_num_change_points\x18\x39 \x03(\x0b\x32$.deeproute.sd_map.LaneNumChangePoint\x12?\n\x12\x64\x65\x66\x65nce_scene_info\x18: \x01(\x0b\x32#.deeproute.navinfo.DefenceSceneInfo\x12\x31\n\rsd_scene_list\x18; \x03(\x0b\x32\x1a.deeproute.map.LinkSdScene\"\xb6\x02\n\x10SpeedLimitConfig\x12\x19\n\x11\x65nable_server_spl\x18\x01 \x01(\x08\x12\x1f\n\x17\x65nable_highway_amap_spl\x18\x02 \x01(\x08\x12\x1f\n\x17\x65nable_express_amap_spl\x18\x03 \x01(\x08\x12&\n\x1e\x65nable_highway_amap_camera_spl\x18\x04 \x01(\x08\x12&\n\x1e\x65nable_express_amap_camera_spl\x18\x05 \x01(\x08\x12#\n\x1b\x65nable_city_amap_camera_spl\x18\x06 \x01(\x08\x12\x1c\n\x14\x65nable_city_amap_spl\x18\x07 \x01(\x08\x12\x32\n$enable_highway_amap_construction_spl\x18\x08 \x01(\x08:\x04true\"\xae\x05\n\x05Route\x12\x14\n\x0c\x61map_path_id\x18\x64 \x01(\x05\x12\x17\n\x0f\x61map_path_id_64\x18\x65 \x01(\x04\x12.\n\tnavi_head\x18\x01 \x01(\x0b\x32\x1b.deeproute.navinfo.NaviHead\x12\x0b\n\x03\x64is\x18\x02 \x01(\x05\x12\x1a\n\x12remaining_distance\x18\x1d \x01(\x05\x12\x0b\n\x03\x64ur\x18\x03 \x01(\x05\x12(\n\x04segm\x18\x04 \x03(\x0b\x32\x1a.deeproute.navinfo.Segment\x12<\n\x0bnid_to_segm\x18\x05 \x03(\x0b\x32\'.deeproute.navinfo.Route.NidToSegmEntry\x12+\n\x08sd_links\x18\x06 \x01(\x0b\x32\x19.deeproute.sd_map.SdLinks\x12\x42\n\x10mismatch_indexes\x18\x07 \x03(\x0b\x32(.deeproute.graph_match.MismatchSegmIndex\x12?\n\x12speed_limit_config\x18\n \x01(\x0b\x32#.deeproute.navinfo.SpeedLimitConfig\x12\\\n\x1alocal_routing_cloud_config\x18\x0b \x01(\x0b\x32\x38.deeproute.sd_map.SDMapVersionOnboard.LocalRoutingConfig\x12J\n\x18mismatch_amap_link_range\x18\x1c \x03(\x0b\x32(.deeproute.graph_match.AmapLinkMatchInfo\x1aL\n\x0eNidToSegmEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12)\n\x05value\x18\x02 \x01(\x0b\x32\x1a.deeproute.navinfo.Segment:\x02\x38\x01\"1\n\x06Result\x12\'\n\x05route\x18\x01 \x01(\x0b\x32\x18.deeproute.navinfo.Route*Y\n\x0eShapePointType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x14\n\x10SHPOS_FIVE_DIGIT\x10\x01\x12$\n SHPOS_FIVE_DIGIT_AND_SHAPE_POINT\x10\x02*\x83\x02\n\tSceneType\x12\x0b\n\x07INVALID\x10\x00\x12\x17\n\x13RAMP_EXIT_SPD_LIMIT\x10\x01\x12\x13\n\x0fMERGE_SPD_LIMIT\x10\x02\x12\x1a\n\x16HIGHWAY_EXIT_SPD_LIMIT\x10\x03\x12\x1a\n\x16\x45XPRESS_EXIT_SPD_LIMIT\x10\x04\x12\x12\n\x0eJUNC_SPD_LIMIT\x10\x05\x12!\n\x1dMAIN_AUXILIARY_ROAD_SPD_LIMIT\x10\x06\x12\x12\n\x0eTOLL_SPD_LIMIT\x10\x07\x12\x1a\n\x16\x45NTER_TUNNEL_SPD_LIMIT\x10\x08\x12\x1c\n\x18TRAFFIC_CAMERA_SPD_LIMIT\x10\t*F\n\rRoadSceneType\x12\x16\n\x12ROAD_SCENE_UNKNOWN\x10\x00\x12\x1d\n\x19ROAD_SCENE_NON_Y_CROSSING\x10\x01*\xcf\x01\n\x10\x44\x65\x66\x65nceSceneType\x12\x17\n\x13\x44\x45\x46\x45NCE_NARROW_ROAD\x10\x00\x12 \n\x1c\x44\x45\x46\x45NCE_BLIND_NARROW_TO_WIDE\x10\x01\x12\x19\n\x15\x44\x45\x46\x45NCE_BLIND_OPENING\x10\x02\x12\x19\n\x15\x44\x45\x46\x45NCE_BLIND_MERGING\x10\x03\x12\x17\n\x13\x44\x45\x46\x45NCE_BLIND_CURVE\x10\x04\x12\x17\n\x13\x44\x45\x46\x45NCE_BLIND_UTURN\x10\x05\x12\x18\n\x14\x44\x45\x46\x45NCE_BLIND_UPHILL\x10\x06')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1drouting/navinfo_routing.proto\x12\x11\x64\x65\x65proute.navinfo\x1a\x15\x63ommon/geometry.proto\x1a\x11map/routing.proto\x1a\x10map/sd_map.proto\x1a\x15map/vpa_mapping.proto\x1a graph_match/graph_matching.proto\x1a\x1brouting/local_routing.proto\x1a\x18routing/cloud_task.proto\x1a\rodd/odd.proto\x1a\x14map/map_common.proto\x1a\x15map/common_type.proto\"Z\n\x12ParkingOverlapInfo\x12\x1a\n\x12is_parking_overlap\x18\x01 \x01(\x08\x12\x14\n\x0cstart_offset\x18\x02 \x01(\x01\x12\x12\n\nend_offset\x18\x03 \x01(\x01\"|\n\x0b\x46\x65\x61tureInfo\x12\x12\n\nfeature_id\x18\x01 \x01(\t\x12\x15\n\rfeature_stage\x18\x02 \x01(\t\x12\x14\n\x0c\x66\x65\x61ture_name\x18\x03 \x01(\t\x12\x15\n\rfeature_image\x18\x04 \x01(\t\x12\x15\n\rfeature_email\x18\x05 \x01(\t\"B\n\x07PodInfo\x12\x10\n\x08pod_name\x18\x01 \x01(\t\x12\x15\n\rpod_namespace\x18\x02 \x01(\t\x12\x0e\n\x06pod_ip\x18\x03 \x01(\t\"\x87\x01\n\x0eRoutingVersion\x12\x34\n\x0c\x66\x65\x61ture_info\x18\x01 \x01(\x0b\x32\x1e.deeproute.navinfo.FeatureInfo\x12,\n\x08pod_info\x18\x02 \x01(\x0b\x32\x1a.deeproute.navinfo.PodInfo\x12\x11\n\tnode_name\x18\x03 \x01(\t\"\xbc\x03\n\x10ParkingSpaceInfo\x12\x1e\n\x16start_parking_space_id\x18\x01 \x01(\x05\x12<\n\x18start_parking_space_geom\x18\x05 \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12[\n\x1dstart_parking_space_direction\x18\x07 \x01(\x0e\x32\x34.deeproute.sd_map.ParkingSpace.ParkingSpaceDirection\x12\x1c\n\x14\x65nd_parking_space_id\x18\x02 \x01(\x05\x12:\n\x16\x65nd_parking_space_geom\x18\x06 \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12Y\n\x1b\x65nd_parking_space_direction\x18\x08 \x01(\x0e\x32\x34.deeproute.sd_map.ParkingSpace.ParkingSpaceDirection\x12\x1c\n\x14start_parking_lot_id\x18\x03 \x01(\x05\x12\x1a\n\x12\x65nd_parking_lot_id\x18\x04 \x01(\x05\"\xc9\x05\n\x11SDRoutingResponse\x12>\n\x13route_planning_type\x18\xe8\x07 \x01(\x0e\x32 .deeproute.map.RoutePlanningType\x12(\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x1a.deeproute.map.RoutingCode\x12)\n\x06result\x18\x02 \x03(\x0b\x32\x19.deeproute.navinfo.Result\x12\x12\n\nrequest_id\x18\x03 \x01(\t\x12\x13\n\x0bresponse_id\x18\x08 \x01(\x05\x12.\n\x07request\x18\x04 \x01(\x0b\x32\x1d.deeproute.map.RoutingRequest\x12\x1b\n\x13segmented_route_num\x18\x05 \x01(\x05\x12\x16\n\x0esd_map_version\x18\x06 \x01(\t\x12\x10\n\x08route_id\x18\x07 \x01(\x04\x12\x10\n\x08trace_id\x18\t \x01(\t\x12\x14\n\x0clocal_map_id\x18\n \x01(\t\x12\x14\n\x0c\x63loud_map_id\x18\x11 \x01(\t\x12:\n\x0frouting_version\x18\x0b \x01(\x0b\x32!.deeproute.navinfo.RoutingVersion\x12;\n\x10shape_point_type\x18\x0c \x01(\x0e\x32!.deeproute.navinfo.ShapePointType\x12 \n\x18\x62\x65gin_parking_request_id\x18\r \x01(\t\x12\x1e\n\x16\x65nd_parking_request_id\x18\x0e \x01(\t\x12\x45\n\x15routing_response_type\x18\x0f \x01(\x0e\x32&.deeproute.navinfo.RoutingResponseType\x12?\n\x12parking_space_info\x18\x10 \x01(\x0b\x32#.deeproute.navinfo.ParkingSpaceInfo\"%\n\x08NaviHead\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0b\n\x03ver\x18\x02 \x01(\t\"\x9d\x01\n\x08LaneInfo\x12\x0b\n\x03\x61rr\x18\x01 \x01(\x05\x12\n\n\x02la\x18\x02 \x01(\x05\x12\n\n\x02ra\x18\x03 \x01(\x05\x12\n\n\x02\x62m\x18\x04 \x01(\x05\x12\x0e\n\x06\x62us_bm\x18\x05 \x01(\x05\x12\n\n\x02ln\x18\x06 \x01(\x05\x12\x14\n\x0cout_link_ids\x18\x07 \x03(\x04\x12.\n\nlane_conds\x18\x08 \x03(\x0b\x32\x1a.deeproute.sd_map.LaneCond\"\xa1\x04\n\x08LinkAttr\x12\x12\n\ndr_link_id\x18\x13 \x01(\x04\x12\r\n\x05ni_id\x18\x06 \x01(\t\x12\x0b\n\x03\x64is\x18\x07 \x01(\x05\x12\x15\n\rtraffic_light\x18\x08 \x01(\x05\x12\x0b\n\x03spl\x18\t \x01(\x05\x12\x0e\n\x06tunnel\x18\n \x01(\x05\x12\x10\n\x08lane_num\x18\x0b \x01(\x05\x12*\n\x05lanes\x18\x0c \x03(\x0b\x32\x1b.deeproute.navinfo.LaneInfo\x12\x10\n\x08\x65levated\x18\r \x01(\x08\x12\x0e\n\x06sh_pos\x18\x01 \x01(\t\x12\x12\n\nf_lane_num\x18\x02 \x01(\x05\x12\n\n\x02pr\x18\x03 \x01(\x05\x12\r\n\x05usage\x18\x04 \x01(\x05\x12\x30\n\x0cshape_points\x18\x05 \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x32\n\x0fshape_points_2d\x18\x0e \x03(\x0b\x32\x19.deeproute.common.Point2D\x12\x34\n\x08\x66ormways\x18\x0f \x03(\x0e\x32\".deeproute.sd_map.LinkData.FormWay\x12.\n\nlane_attrs\x18\x10 \x03(\x0b\x32\x1a.deeproute.sd_map.LaneAttr\x12\x36\n\x0elane_info_data\x18\x12 \x03(\x0b\x32\x1e.deeproute.sd_map.LaneInfoData\x12\x1e\n\x16\x65xperience_speed_limit\x18\x11 \x01(\r\"r\n\x04Link\x12.\n\tlink_attr\x18\x01 \x01(\x0b\x32\x1b.deeproute.navinfo.LinkAttr\x12\x0b\n\x03psn\x18\x02 \x01(\x05\x12-\n\x08ps_infos\x18\x03 \x03(\x0b\x32\x1b.deeproute.navinfo.LinkAttr\"\x83\x02\n\rRoadSceneInfo\x12\x36\n\x11static_scene_type\x18\x01 \x01(\x0e\x32\x1b.deeproute.map.CrossingType\x12.\n\rcrossing_turn\x18\x02 \x01(\x0e\x32\x17.deeproute.map.LaneTurn\x12\x39\n\x0froad_scene_type\x18\x03 \x01(\x0e\x32 .deeproute.navinfo.RoadSceneType\x12\x14\n\x0cis_way_point\x18\x04 \x01(\x08\x12\x39\n\x18traffic_lights_turn_type\x18\x05 \x01(\x0e\x32\x17.deeproute.map.LaneTurn\"]\n\x15TrafficLightSceneInfo\x12+\n\nscene_turn\x18\x01 \x01(\x0e\x32\x17.deeproute.map.LaneTurn\x12\x17\n\x0fout_link_offset\x18\x02 \x01(\r\"\xa0\x05\n\x0eSpeedLimitInfo\x12\x15\n\rspd_limit_dis\x18\x01 \x03(\x05\x12\x15\n\rspd_limit_spl\x18\x02 \x03(\x05\x12T\n\x0espd_limit_type\x18\x03 \x03(\x0e\x32<.deeproute.routing.NavigationInfoForVisualize.SpeedLimitType\x12\x11\n\tspl_ratio\x18\x04 \x01(\x02\x12\x0f\n\x07min_spl\x18\x05 \x01(\x05\x12\x30\n\nscene_type\x18\x06 \x01(\x0e\x32\x1c.deeproute.navinfo.SceneType\x12\x18\n\x10is_map_spl_limit\x18\x07 \x01(\x08\x12\x15\n\rexp_spd_limit\x18\x08 \x01(\x05\x12\x62\n\x18spd_static_strategy_type\x18\t \x03(\x0e\x32@.deeproute.routing.NavigationInfoForVisualize.StaticStrategyType\x12`\n\x17spd_scene_strategy_type\x18\n \x03(\x0e\x32?.deeproute.routing.NavigationInfoForVisualize.SceneStrategyType\x12\x13\n\x0bturn_radius\x18\x0b \x01(\x05\x12\x1a\n\x12is_large_curvature\x18\x0c \x01(\x08\x12\x1b\n\x13\x65xp_spd_group_index\x18\r \x01(\x04\x12\x17\n\x0f\x65xp_spd_average\x18\x0e \x01(\x02\x12V\n\x17\x65xp_spd_disabled_reason\x18\x0f \x01(\x0e\x32\x35.deeproute.navinfo.ExperienceSpeedLimitDisabledReason\"\xce\x01\n\x11StaticRoutingInfo\x12\x1b\n\x13priority_lane_index\x18\x01 \x01(\x05\x12\x0b\n\x03\x63rs\x18\x02 \x03(\x05\x12\x43\n\x19local_routing_scene_infos\x18\x03 \x03(\x0b\x32 .deeproute.navinfo.RoadSceneInfo\x12J\n\x18traffic_light_scene_info\x18\x04 \x01(\x0b\x32(.deeproute.navinfo.TrafficLightSceneInfo\"\xa0\x02\n\x15\x44\x61taCollectSingleTask\x12\x0f\n\x07task_id\x18\x01 \x01(\x03\x12\x46\n\x13image_collect_event\x18\n \x01(\x0b\x32\'.deeproute.cloud_task.ImageCollectEventH\x00\x12N\n\x17nnfeature_collect_event\x18\x0b \x01(\x0b\x32+.deeproute.cloud_task.NNFeatureCollectEventH\x00\x12N\n\x12\x64\x61ta_trigger_event\x18\x0c \x01(\x0b\x32\x30.deeproute.cloud_task.DataCollectionTriggerEventH\x00\x42\x0e\n\x0c\x43ollectEvent\"J\n\x0f\x44\x61taCollectTask\x12\x37\n\x05tasks\x18\x01 \x03(\x0b\x32(.deeproute.navinfo.DataCollectSingleTask\"\xd4\x02\n\nSegmAction\x12.\n\x0bmain_action\x18\x01 \x01(\x0e\x32\x19.deeproute.map.MainAction\x12\x38\n\x10\x61ssistant_action\x18\x02 \x01(\x0e\x32\x1e.deeproute.map.AssistantAction\x12\x30\n\x0clane_actions\x18\x03 \x01(\x0b\x32\x1a.deeproute.map.LaneActions\x12\x33\n\x10step_main_action\x18\x04 \x01(\x0e\x32\x19.deeproute.map.MainAction\x12=\n\x15step_assistant_action\x18\x05 \x01(\x0e\x32\x1e.deeproute.map.AssistantAction\x12\x36\n\x12multi_lane_actions\x18\x06 \x03(\x0b\x32\x1a.deeproute.map.LaneActions\"\xb6\x01\n\x10\x44\x65\x66\x65nceSceneInfo\x12?\n\x12\x64\x65\x66\x65nce_scene_type\x18\x01 \x01(\x0e\x32#.deeproute.navinfo.DefenceSceneType\x12\"\n\x1astart_offset_to_link_start\x18\x02 \x01(\x05\x12 \n\x18\x65nd_offset_to_link_start\x18\x03 \x01(\x05\x12\x1b\n\x13suggest_speed_limit\x18\x04 \x01(\x05\"\xa8\x10\n\x07Segment\x12=\n\x11\x64\x61ta_collect_task\x18\x65 \x01(\x0b\x32\".deeproute.navinfo.DataCollectTask\x12\x14\n\x0cvirtual_link\x18\x64 \x01(\x08\x12\x14\n\x0cis_odd_limit\x18! \x01(\x08\x12\x34\n\x0fodd_limit_types\x18( \x03(\x0e\x32\x1b.deeproute.odd.OddLimitType\x12\x32\n\x0eodd_type_infos\x18) \x03(\x0b\x32\x1a.deeproute.odd.OddTypeInfo\x12\x12\n\ndr_link_id\x18% \x01(\x04\x12\x0b\n\x03\x64is\x18\x01 \x01(\x05\x12\x0f\n\x07\x61\x62s_dis\x18\x02 \x01(\x05\x12\r\n\x05ni_id\x18\x03 \x01(\t\x12\x0e\n\x06sh_pos\x18\x04 \x01(\t\x12\x15\n\rtraffic_light\x18\x05 \x01(\x05\x12\x0b\n\x03spl\x18\x06 \x01(\x05\x12\x12\n\nf_lane_num\x18\x07 \x01(\x05\x12\x14\n\x0clane_num_sum\x18\x34 \x01(\r\x12\x10\n\x08\x63rossing\x18\x08 \x01(\x05\x12\n\n\x02\x62m\x18\t \x01(\x05\x12\x0b\n\x03\x61rr\x18\n \x01(\x05\x12\x30\n\x0cshape_points\x18\x0b \x03(\x0b\x32\x1a.deeproute.common.PointLLH\x12\x32\n\x0fshape_points_2d\x18\x1b \x03(\x0b\x32\x19.deeproute.common.Point2D\x12\n\n\x02pr\x18\x0c \x01(\x05\x12\x0e\n\x06tunnel\x18\r \x01(\x05\x12\x10\n\x08lane_num\x18\x0e \x01(\x05\x12*\n\x05lanes\x18\x0f \x03(\x0b\x32\x1b.deeproute.navinfo.LaneInfo\x12\r\n\x05usage\x18\x10 \x01(\x05\x12\x34\n\x08\x66ormways\x18\x1d \x03(\x0e\x32\".deeproute.sd_map.LinkData.FormWay\x12.\n\nlane_attrs\x18\x1e \x03(\x0b\x32\x1a.deeproute.sd_map.LaneAttr\x12\x0e\n\x06tmc_lv\x18\x14 \x01(\x05\x12\x0c\n\x04r_bm\x18\x15 \x01(\x05\x12\x0c\n\x04v_bm\x18\x16 \x01(\x05\x12\x0e\n\x06\x63_b_bm\x18\x17 \x01(\x05\x12.\n\rin_link_infos\x18\x11 \x03(\x0b\x32\x17.deeproute.navinfo.Link\x12/\n\x0eout_link_infos\x18\x12 \x03(\x0b\x32\x17.deeproute.navinfo.Link\x12\x10\n\x08\x65levated\x18\x13 \x01(\x08\x12\x14\n\x0ctoll_station\x18\x1a \x01(\x05\x12\x45\n\x0f\x61map_link_range\x18\x1c \x03(\x0b\x32(.deeproute.graph_match.AmapLinkMatchInfoB\x02\x18\x01\x12<\n\namap_range\x18\x1f \x01(\x0b\x32(.deeproute.graph_match.AmapLinkMatchInfo\x12\x1e\n\x16\x65xperience_speed_limit\x18  \x01(\r\x12\x36\n\x0elane_info_data\x18# \x03(\x0b\x32\x1e.deeproute.sd_map.LaneInfoData\x12\x12\n\nadmin_code\x18\" \x01(\x05\x12\x19\n\x11\x65xact_speed_limit\x18$ \x01(\r\x12)\n\x07\x63\x61meras\x18& \x03(\x0b\x32\x18.deeproute.sd_map.Camera\x12\x39\n\x0espd_limit_info\x18\' \x01(\x0b\x32!.deeproute.navinfo.SpeedLimitInfo\x12\x41\n\x13static_routing_info\x18* \x01(\x0b\x32$.deeproute.navinfo.StaticRoutingInfo\x12\x32\n\x0bsegm_action\x18\x32 \x01(\x0b\x32\x1d.deeproute.navinfo.SegmAction\x12\x43\n\x19local_routing_scene_infos\x18\x33 \x03(\x0b\x32 .deeproute.navinfo.RoadSceneInfo\x12>\n\x15long_solid_line_infos\x18+ \x03(\x0b\x32\x1f.deeproute.sd_map.LongSolidLine\x12<\n\x11toll_station_info\x18\x35 \x01(\x0b\x32!.deeproute.sd_map.TollStationInfo\x12\x33\n\x0cspeed_source\x18\x36 \x01(\x0b\x32\x1d.deeproute.sd_map.SpeedSource\x12\x12\n\nis_overlap\x18\x37 \x01(\x08\x12\x19\n\x11is_extend_overlap\x18\x38 \x01(\x08\x12\x44\n\x16lane_num_change_points\x18\x39 \x03(\x0b\x32$.deeproute.sd_map.LaneNumChangePoint\x12?\n\x12\x64\x65\x66\x65nce_scene_info\x18: \x01(\x0b\x32#.deeproute.navinfo.DefenceSceneInfo\x12\x31\n\rsd_scene_list\x18; \x03(\x0b\x32\x1a.deeproute.map.LinkSdScene\x12\x37\n\x0cparking_attr\x18< \x01(\x0b\x32!.deeproute.sd_map.ParkingLinkAttr\x12.\n\tlink_type\x18= \x01(\x0e\x32\x1b.deeproute.navinfo.LinkType\x12\x43\n\x14parking_overlap_info\x18> \x01(\x0b\x32%.deeproute.navinfo.ParkingOverlapInfo\x12\x0c\n\x04name\x18? \x01(\t\"\xb6\x02\n\x10SpeedLimitConfig\x12\x19\n\x11\x65nable_server_spl\x18\x01 \x01(\x08\x12\x1f\n\x17\x65nable_highway_amap_spl\x18\x02 \x01(\x08\x12\x1f\n\x17\x65nable_express_amap_spl\x18\x03 \x01(\x08\x12&\n\x1e\x65nable_highway_amap_camera_spl\x18\x04 \x01(\x08\x12&\n\x1e\x65nable_express_amap_camera_spl\x18\x05 \x01(\x08\x12#\n\x1b\x65nable_city_amap_camera_spl\x18\x06 \x01(\x08\x12\x1c\n\x14\x65nable_city_amap_spl\x18\x07 \x01(\x08\x12\x32\n$enable_highway_amap_construction_spl\x18\x08 \x01(\x08:\x04true\"\xae\x05\n\x05Route\x12\x14\n\x0c\x61map_path_id\x18\x64 \x01(\x05\x12\x17\n\x0f\x61map_path_id_64\x18\x65 \x01(\x04\x12.\n\tnavi_head\x18\x01 \x01(\x0b\x32\x1b.deeproute.navinfo.NaviHead\x12\x0b\n\x03\x64is\x18\x02 \x01(\x05\x12\x1a\n\x12remaining_distance\x18\x1d \x01(\x05\x12\x0b\n\x03\x64ur\x18\x03 \x01(\x05\x12(\n\x04segm\x18\x04 \x03(\x0b\x32\x1a.deeproute.navinfo.Segment\x12<\n\x0bnid_to_segm\x18\x05 \x03(\x0b\x32\'.deeproute.navinfo.Route.NidToSegmEntry\x12+\n\x08sd_links\x18\x06 \x01(\x0b\x32\x19.deeproute.sd_map.SdLinks\x12\x42\n\x10mismatch_indexes\x18\x07 \x03(\x0b\x32(.deeproute.graph_match.MismatchSegmIndex\x12?\n\x12speed_limit_config\x18\n \x01(\x0b\x32#.deeproute.navinfo.SpeedLimitConfig\x12\\\n\x1alocal_routing_cloud_config\x18\x0b \x01(\x0b\x32\x38.deeproute.sd_map.SDMapVersionOnboard.LocalRoutingConfig\x12J\n\x18mismatch_amap_link_range\x18\x1c \x03(\x0b\x32(.deeproute.graph_match.AmapLinkMatchInfo\x1aL\n\x0eNidToSegmEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12)\n\x05value\x18\x02 \x01(\x0b\x32\x1a.deeproute.navinfo.Segment:\x02\x38\x01\"1\n\x06Result\x12\'\n\x05route\x18\x01 \x01(\x0b\x32\x18.deeproute.navinfo.Route\"\x88\x03\n\x14ParkingLinkMatchInfo\x12I\n\x0cparking_type\x18\x04 \x01(\x0e\x32\x33.deeproute.navinfo.ParkingLinkMatchInfo.ParkingType\x12!\n\x19global_routing_request_id\x18\x01 \x01(\t\x12N\n\x1cparking_routing_match_result\x18\x02 \x01(\x0b\x32(.deeproute.map.vpa.AvpRoutingMatchResult\x12\x46\n\x18parking_routing_response\x18\x03 \x01(\x0b\x32$.deeproute.navinfo.SDRoutingResponse\"j\n\x0bParkingType\x12\x18\n\x14PARKING_TYPE_UNKNOWN\x10\x00\x12\x13\n\x0fPARKING_TYPE_IN\x10\x01\x12\x14\n\x10PARKING_TYPE_OUT\x10\x02\x12\x16\n\x12PARKING_TYPE_INNER\x10\x03*7\n\x08LinkType\x12\x14\n\x10LINK_TYPE_NORMAL\x10\x00\x12\x15\n\x11LINK_TYPE_PARKING\x10\x01*\xad\x01\n\x13RoutingResponseType\x12 \n\x1cROUTING_RESPONSE_TYPE_NORMAL\x10\x00\x12$\n ROUTING_RESPONSE_TYPE_PARKING_IN\x10\x01\x12%\n!ROUTING_RESPONSE_TYPE_PARKING_OUT\x10\x02\x12\'\n#ROUTING_RESPONSE_TYPE_PARKING_INNER\x10\x03*Y\n\x0eShapePointType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x14\n\x10SHPOS_FIVE_DIGIT\x10\x01\x12$\n SHPOS_FIVE_DIGIT_AND_SHAPE_POINT\x10\x02*\x83\x02\n\tSceneType\x12\x0b\n\x07INVALID\x10\x00\x12\x17\n\x13RAMP_EXIT_SPD_LIMIT\x10\x01\x12\x13\n\x0fMERGE_SPD_LIMIT\x10\x02\x12\x1a\n\x16HIGHWAY_EXIT_SPD_LIMIT\x10\x03\x12\x1a\n\x16\x45XPRESS_EXIT_SPD_LIMIT\x10\x04\x12\x12\n\x0eJUNC_SPD_LIMIT\x10\x05\x12!\n\x1dMAIN_AUXILIARY_ROAD_SPD_LIMIT\x10\x06\x12\x12\n\x0eTOLL_SPD_LIMIT\x10\x07\x12\x1a\n\x16\x45NTER_TUNNEL_SPD_LIMIT\x10\x08\x12\x1c\n\x18TRAFFIC_CAMERA_SPD_LIMIT\x10\t*F\n\rRoadSceneType\x12\x16\n\x12ROAD_SCENE_UNKNOWN\x10\x00\x12\x1d\n\x19ROAD_SCENE_NON_Y_CROSSING\x10\x01*\xa8\x02\n\"ExperienceSpeedLimitDisabledReason\x12\x1c\n\x18\x45XP_SPD_DISABLED_UNKNOWN\x10\x00\x12*\n&EXP_SPD_DISABLED_INSUFFICIENT_COVERAGE\x10\x01\x12\"\n\x1e\x45XP_SPD_DISABLED_ROAD_PRIORITY\x10\x02\x12!\n\x1d\x45XP_SPD_DISABLED_ROAD_FORMWAY\x10\x03\x12 \n\x1c\x45XP_SPD_DISABLED_NIGHT_SCENE\x10\x04\x12,\n(EXP_SPD_DISABLED_LARGE_CURVE_NO_SPEED_UP\x10\x05\x12!\n\x1d\x45XP_SPD_DISABLED_NO_SLOW_DOWN\x10\x06*\xcf\x01\n\x10\x44\x65\x66\x65nceSceneType\x12\x17\n\x13\x44\x45\x46\x45NCE_NARROW_ROAD\x10\x00\x12 \n\x1c\x44\x45\x46\x45NCE_BLIND_NARROW_TO_WIDE\x10\x01\x12\x19\n\x15\x44\x45\x46\x45NCE_BLIND_OPENING\x10\x02\x12\x19\n\x15\x44\x45\x46\x45NCE_BLIND_MERGING\x10\x03\x12\x17\n\x13\x44\x45\x46\x45NCE_BLIND_CURVE\x10\x04\x12\x17\n\x13\x44\x45\x46\x45NCE_BLIND_UTURN\x10\x05\x12\x18\n\x14\x44\x45\x46\x45NCE_BLIND_UPHILL\x10\x06')
 
+_LINKTYPE = DESCRIPTOR.enum_types_by_name['LinkType']
+LinkType = enum_type_wrapper.EnumTypeWrapper(_LINKTYPE)
+_ROUTINGRESPONSETYPE = DESCRIPTOR.enum_types_by_name['RoutingResponseType']
+RoutingResponseType = enum_type_wrapper.EnumTypeWrapper(_ROUTINGRESPONSETYPE)
 _SHAPEPOINTTYPE = DESCRIPTOR.enum_types_by_name['ShapePointType']
 ShapePointType = enum_type_wrapper.EnumTypeWrapper(_SHAPEPOINTTYPE)
 _SCENETYPE = DESCRIPTOR.enum_types_by_name['SceneType']
 SceneType = enum_type_wrapper.EnumTypeWrapper(_SCENETYPE)
 _ROADSCENETYPE = DESCRIPTOR.enum_types_by_name['RoadSceneType']
 RoadSceneType = enum_type_wrapper.EnumTypeWrapper(_ROADSCENETYPE)
+_EXPERIENCESPEEDLIMITDISABLEDREASON = DESCRIPTOR.enum_types_by_name['ExperienceSpeedLimitDisabledReason']
+ExperienceSpeedLimitDisabledReason = enum_type_wrapper.EnumTypeWrapper(_EXPERIENCESPEEDLIMITDISABLEDREASON)
 _DEFENCESCENETYPE = DESCRIPTOR.enum_types_by_name['DefenceSceneType']
 DefenceSceneType = enum_type_wrapper.EnumTypeWrapper(_DEFENCESCENETYPE)
+LINK_TYPE_NORMAL = 0
+LINK_TYPE_PARKING = 1
+ROUTING_RESPONSE_TYPE_NORMAL = 0
+ROUTING_RESPONSE_TYPE_PARKING_IN = 1
+ROUTING_RESPONSE_TYPE_PARKING_OUT = 2
+ROUTING_RESPONSE_TYPE_PARKING_INNER = 3
 UNKNOWN = 0
 SHPOS_FIVE_DIGIT = 1
 SHPOS_FIVE_DIGIT_AND_SHAPE_POINT = 2
@@ -50,6 +62,13 @@ ENTER_TUNNEL_SPD_LIMIT = 8
 TRAFFIC_CAMERA_SPD_LIMIT = 9
 ROAD_SCENE_UNKNOWN = 0
 ROAD_SCENE_NON_Y_CROSSING = 1
+EXP_SPD_DISABLED_UNKNOWN = 0
+EXP_SPD_DISABLED_INSUFFICIENT_COVERAGE = 1
+EXP_SPD_DISABLED_ROAD_PRIORITY = 2
+EXP_SPD_DISABLED_ROAD_FORMWAY = 3
+EXP_SPD_DISABLED_NIGHT_SCENE = 4
+EXP_SPD_DISABLED_LARGE_CURVE_NO_SPEED_UP = 5
+EXP_SPD_DISABLED_NO_SLOW_DOWN = 6
 DEFENCE_NARROW_ROAD = 0
 DEFENCE_BLIND_NARROW_TO_WIDE = 1
 DEFENCE_BLIND_OPENING = 2
@@ -59,9 +78,11 @@ DEFENCE_BLIND_UTURN = 5
 DEFENCE_BLIND_UPHILL = 6
 
 
+_PARKINGOVERLAPINFO = DESCRIPTOR.message_types_by_name['ParkingOverlapInfo']
 _FEATUREINFO = DESCRIPTOR.message_types_by_name['FeatureInfo']
 _PODINFO = DESCRIPTOR.message_types_by_name['PodInfo']
 _ROUTINGVERSION = DESCRIPTOR.message_types_by_name['RoutingVersion']
+_PARKINGSPACEINFO = DESCRIPTOR.message_types_by_name['ParkingSpaceInfo']
 _SDROUTINGRESPONSE = DESCRIPTOR.message_types_by_name['SDRoutingResponse']
 _NAVIHEAD = DESCRIPTOR.message_types_by_name['NaviHead']
 _LANEINFO = DESCRIPTOR.message_types_by_name['LaneInfo']
@@ -80,6 +101,15 @@ _SPEEDLIMITCONFIG = DESCRIPTOR.message_types_by_name['SpeedLimitConfig']
 _ROUTE = DESCRIPTOR.message_types_by_name['Route']
 _ROUTE_NIDTOSEGMENTRY = _ROUTE.nested_types_by_name['NidToSegmEntry']
 _RESULT = DESCRIPTOR.message_types_by_name['Result']
+_PARKINGLINKMATCHINFO = DESCRIPTOR.message_types_by_name['ParkingLinkMatchInfo']
+_PARKINGLINKMATCHINFO_PARKINGTYPE = _PARKINGLINKMATCHINFO.enum_types_by_name['ParkingType']
+ParkingOverlapInfo = _reflection.GeneratedProtocolMessageType('ParkingOverlapInfo', (_message.Message,), {
+  'DESCRIPTOR' : _PARKINGOVERLAPINFO,
+  '__module__' : 'routing.navinfo_routing_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.navinfo.ParkingOverlapInfo)
+  })
+_sym_db.RegisterMessage(ParkingOverlapInfo)
+
 FeatureInfo = _reflection.GeneratedProtocolMessageType('FeatureInfo', (_message.Message,), {
   'DESCRIPTOR' : _FEATUREINFO,
   '__module__' : 'routing.navinfo_routing_pb2'
@@ -100,6 +130,13 @@ RoutingVersion = _reflection.GeneratedProtocolMessageType('RoutingVersion', (_me
   # @@protoc_insertion_point(class_scope:deeproute.navinfo.RoutingVersion)
   })
 _sym_db.RegisterMessage(RoutingVersion)
+
+ParkingSpaceInfo = _reflection.GeneratedProtocolMessageType('ParkingSpaceInfo', (_message.Message,), {
+  'DESCRIPTOR' : _PARKINGSPACEINFO,
+  '__module__' : 'routing.navinfo_routing_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.navinfo.ParkingSpaceInfo)
+  })
+_sym_db.RegisterMessage(ParkingSpaceInfo)
 
 SDRoutingResponse = _reflection.GeneratedProtocolMessageType('SDRoutingResponse', (_message.Message,), {
   'DESCRIPTOR' : _SDROUTINGRESPONSE,
@@ -228,6 +265,13 @@ Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,),
   })
 _sym_db.RegisterMessage(Result)
 
+ParkingLinkMatchInfo = _reflection.GeneratedProtocolMessageType('ParkingLinkMatchInfo', (_message.Message,), {
+  'DESCRIPTOR' : _PARKINGLINKMATCHINFO,
+  '__module__' : 'routing.navinfo_routing_pb2'
+  # @@protoc_insertion_point(class_scope:deeproute.navinfo.ParkingLinkMatchInfo)
+  })
+_sym_db.RegisterMessage(ParkingLinkMatchInfo)
+
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
@@ -235,54 +279,68 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _SEGMENT.fields_by_name['amap_link_range']._serialized_options = b'\030\001'
   _ROUTE_NIDTOSEGMENTRY._options = None
   _ROUTE_NIDTOSEGMENTRY._serialized_options = b'8\001'
-  _SHAPEPOINTTYPE._serialized_start=6937
-  _SHAPEPOINTTYPE._serialized_end=7026
-  _SCENETYPE._serialized_start=7029
-  _SCENETYPE._serialized_end=7288
-  _ROADSCENETYPE._serialized_start=7290
-  _ROADSCENETYPE._serialized_end=7360
-  _DEFENCESCENETYPE._serialized_start=7363
-  _DEFENCESCENETYPE._serialized_end=7570
-  _FEATUREINFO._serialized_start=300
-  _FEATUREINFO._serialized_end=424
-  _PODINFO._serialized_start=426
-  _PODINFO._serialized_end=492
-  _ROUTINGVERSION._serialized_start=495
-  _ROUTINGVERSION._serialized_end=630
-  _SDROUTINGRESPONSE._serialized_start=633
-  _SDROUTINGRESPONSE._serialized_end=1122
-  _NAVIHEAD._serialized_start=1124
-  _NAVIHEAD._serialized_end=1161
-  _LANEINFO._serialized_start=1164
-  _LANEINFO._serialized_end=1321
-  _LINKATTR._serialized_start=1324
-  _LINKATTR._serialized_end=1869
-  _LINK._serialized_start=1871
-  _LINK._serialized_end=1985
-  _ROADSCENEINFO._serialized_start=1988
-  _ROADSCENEINFO._serialized_end=2247
-  _TRAFFICLIGHTSCENEINFO._serialized_start=2249
-  _TRAFFICLIGHTSCENEINFO._serialized_end=2342
-  _SPEEDLIMITINFO._serialized_start=2345
-  _SPEEDLIMITINFO._serialized_end=2875
-  _STATICROUTINGINFO._serialized_start=2878
-  _STATICROUTINGINFO._serialized_end=3084
-  _DATACOLLECTSINGLETASK._serialized_start=3087
-  _DATACOLLECTSINGLETASK._serialized_end=3375
-  _DATACOLLECTTASK._serialized_start=3377
-  _DATACOLLECTTASK._serialized_end=3451
-  _SEGMACTION._serialized_start=3454
-  _SEGMACTION._serialized_end=3794
-  _DEFENCESCENEINFO._serialized_start=3797
-  _DEFENCESCENEINFO._serialized_end=3979
-  _SEGMENT._serialized_start=3982
-  _SEGMENT._serialized_end=5882
-  _SPEEDLIMITCONFIG._serialized_start=5885
-  _SPEEDLIMITCONFIG._serialized_end=6195
-  _ROUTE._serialized_start=6198
-  _ROUTE._serialized_end=6884
-  _ROUTE_NIDTOSEGMENTRY._serialized_start=6808
-  _ROUTE_NIDTOSEGMENTRY._serialized_end=6884
-  _RESULT._serialized_start=6886
-  _RESULT._serialized_end=6935
+  _LINKTYPE._serialized_start=8409
+  _LINKTYPE._serialized_end=8464
+  _ROUTINGRESPONSETYPE._serialized_start=8467
+  _ROUTINGRESPONSETYPE._serialized_end=8640
+  _SHAPEPOINTTYPE._serialized_start=8642
+  _SHAPEPOINTTYPE._serialized_end=8731
+  _SCENETYPE._serialized_start=8734
+  _SCENETYPE._serialized_end=8993
+  _ROADSCENETYPE._serialized_start=8995
+  _ROADSCENETYPE._serialized_end=9065
+  _EXPERIENCESPEEDLIMITDISABLEDREASON._serialized_start=9068
+  _EXPERIENCESPEEDLIMITDISABLEDREASON._serialized_end=9364
+  _DEFENCESCENETYPE._serialized_start=9367
+  _DEFENCESCENETYPE._serialized_end=9574
+  _PARKINGOVERLAPINFO._serialized_start=284
+  _PARKINGOVERLAPINFO._serialized_end=374
+  _FEATUREINFO._serialized_start=376
+  _FEATUREINFO._serialized_end=500
+  _PODINFO._serialized_start=502
+  _PODINFO._serialized_end=568
+  _ROUTINGVERSION._serialized_start=571
+  _ROUTINGVERSION._serialized_end=706
+  _PARKINGSPACEINFO._serialized_start=709
+  _PARKINGSPACEINFO._serialized_end=1153
+  _SDROUTINGRESPONSE._serialized_start=1156
+  _SDROUTINGRESPONSE._serialized_end=1869
+  _NAVIHEAD._serialized_start=1871
+  _NAVIHEAD._serialized_end=1908
+  _LANEINFO._serialized_start=1911
+  _LANEINFO._serialized_end=2068
+  _LINKATTR._serialized_start=2071
+  _LINKATTR._serialized_end=2616
+  _LINK._serialized_start=2618
+  _LINK._serialized_end=2732
+  _ROADSCENEINFO._serialized_start=2735
+  _ROADSCENEINFO._serialized_end=2994
+  _TRAFFICLIGHTSCENEINFO._serialized_start=2996
+  _TRAFFICLIGHTSCENEINFO._serialized_end=3089
+  _SPEEDLIMITINFO._serialized_start=3092
+  _SPEEDLIMITINFO._serialized_end=3764
+  _STATICROUTINGINFO._serialized_start=3767
+  _STATICROUTINGINFO._serialized_end=3973
+  _DATACOLLECTSINGLETASK._serialized_start=3976
+  _DATACOLLECTSINGLETASK._serialized_end=4264
+  _DATACOLLECTTASK._serialized_start=4266
+  _DATACOLLECTTASK._serialized_end=4340
+  _SEGMACTION._serialized_start=4343
+  _SEGMACTION._serialized_end=4683
+  _DEFENCESCENEINFO._serialized_start=4686
+  _DEFENCESCENEINFO._serialized_end=4868
+  _SEGMENT._serialized_start=4871
+  _SEGMENT._serialized_end=6959
+  _SPEEDLIMITCONFIG._serialized_start=6962
+  _SPEEDLIMITCONFIG._serialized_end=7272
+  _ROUTE._serialized_start=7275
+  _ROUTE._serialized_end=7961
+  _ROUTE_NIDTOSEGMENTRY._serialized_start=7885
+  _ROUTE_NIDTOSEGMENTRY._serialized_end=7961
+  _RESULT._serialized_start=7963
+  _RESULT._serialized_end=8012
+  _PARKINGLINKMATCHINFO._serialized_start=8015
+  _PARKINGLINKMATCHINFO._serialized_end=8407
+  _PARKINGLINKMATCHINFO_PARKINGTYPE._serialized_start=8301
+  _PARKINGLINKMATCHINFO_PARKINGTYPE._serialized_end=8407
 # @@protoc_insertion_point(module_scope)

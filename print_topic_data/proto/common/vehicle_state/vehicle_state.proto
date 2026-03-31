@@ -263,4 +263,17 @@ message VehicleState {
     }
     optional VehicleDrivingMode vehicle_driving_mode = 92 [default = INVALID_MODE];
     optional bool is_lat_co_driving = 93 [default = false];   //横向人机共驾状态，true:是 false:否
+
+    optional bool hcu_idle_torque_flag  = 94 [default = false];   // 发动机怠速扭矩标志位
+    optional bool fmcu_idle_torque_flag  = 95 [default = false];  // 电机怠速扭矩标志位
+
+    optional bool aes_override = 96 [default = false];  // AES手力矩接管
+    optional double steer_trq_coeff = 97 [default = 0];     //横向人机共驾K系数(0~1)
+    optional bool turn_left_light_pulse = 98 [default = false];  // 左转灯脉冲
+    optional bool turn_right_light_pulse  = 99 [default = false];  // 右转灯脉冲
+    optional double total_four_wheel_brake_torque = 100 [default = 0.0]; //总制动扭矩，电制动扭矩+液压制动扭矩
+    optional double eps_motor_torque = 101 [default = 0.0]; //EPS输出助力电机扭矩
+    optional double outside_temp = 102 [default = 0];   //室外温度
+    optional bool frt_wiper_status = 103 [default = false]; //前挡风玻璃雨刮开启状态
+    optional bool rws_supported = 104 [default = false]; // 是否支持后轮转向功能，true:是 false:否
 }

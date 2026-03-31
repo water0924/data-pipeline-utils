@@ -1,0 +1,32 @@
+syntax = "proto2";
+
+package deeproute.map;
+
+enum MapEngineSwitch {
+  MAP_ENGINE_SWITCH_NOT_SET = 0;
+  MAP_ENGINE_SWITCH_DEFAULT = 1;
+  MAP_ENGINE_SWITCH_ON = 2;
+  MAP_ENGINE_SWITCH_OFF = 3;
+}
+
+enum MapEngineSwitchCode {
+  MAP_ENGINE_SWITCH_SUCCESS = 0;
+  MAP_ENGINE_SWITCH_INTERNAL = 1;
+}
+
+// topic /map/setting/request
+message MapEngineSettingCommandRequest {
+  optional string request_id = 1;
+  optional MapEngineSwitch variable_lane_switch = 2;
+}
+
+// topic /map/setting/response
+message MapEngineSettingCommandResponse {
+  message Status {
+    optional MapEngineSwitchCode code = 1;
+    optional string err_msg = 2;
+  }
+
+  optional string request_id = 1;
+  optional Status status = 2;
+}

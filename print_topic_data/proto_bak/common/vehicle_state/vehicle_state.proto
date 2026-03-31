@@ -1,0 +1,266 @@
+syntax = "proto2";
+
+package deeproute.common;
+
+// import "localization/pose.proto";
+import "canbus/chassis.proto";
+import "common/geometry.proto";
+
+message VehicleState {
+    reserved 1 to 3, 5 to 12, 15;
+    // ------------------------------ deprecated fields -----------------------------------------------
+    // optional double x = 1 [deprecated = true];
+    // optional double y = 2 [deprecated = true];
+    // optional double z = 3 [deprecated = true];    
+    // optional double roll = 5 [deprecated = true];
+    // optional double pitch = 6 [deprecated = true];
+    // optional double yaw = 7 [deprecated = true];
+    // optional double heading = 8 [deprecated = true];
+    // optional double kappa = 9 [deprecated = true];
+    // optional double linear_velocity = 10 [deprecated = true];
+    // optional double angular_velocity = 11 [deprecated = true];
+    // optional double linear_acceleration = 12 [deprecated = true];
+    // optional deeproute.localization.Pose pose = 15 [deprecated = true];
+
+    // ---------------------------------- in use fields -----------------------------------------------
+    optional int64 timestamp = 4 [default = 0];               // in use, micro sec = 1e-6s
+
+    optional deeproute.canbus.Chassis.GearPosition gear = 13;        // in used, gear position status
+    optional deeproute.canbus.Chassis.DrivingMode driving_mode = 14; // in used, auto driving mode    
+
+    optional Point3D position = 16;     // in used
+    optional Point3D velocity_enu = 17; // in used
+    optional Point3D velocity_flu = 18; // in used
+
+    // in used,Yaw = 0 when the car heads to east, pi/2 when the car heads to north.
+    optional Point3D roll_pitch_yaw = 19;
+
+    optional Point3D angular_velocity_flu = 20; // in used
+    optional Point3D acceleration_flu = 21;     // in used, in m/s^2
+    optional float front_wheel_angle = 22;      // in used, in rad
+
+    enum TurnSignal {
+        NONE_TURN = 0;
+        LEFT = 1;
+        RIGHT = 2;
+        UNDEFINED = 3;//only for metric use
+    }
+    optional TurnSignal turn_signal = 23;                  // in used
+    optional bool warning_blinker_on = 24;                 // in used, indicating if the blinker is on
+    optional float acceleration_over_ground = 25;          // in used
+    optional deeproute.canbus.WheelSpeed wheel_speed = 26; // in used, for localization
+    optional float longitudinal = 27;                      // in used, longitudinal command in [-1, 1], or acceleration if it's torque throttle
+    optional float speed = 28;                             // in used, Vehicle speed from CAN bus, in m/s.
+    optional double front_wheel_angle_rate = 29;            // in used, in rad/s
+    optional bool has_physical_pedal_input = 30;
+    optional float rear_wheel_angle = 31 [default = 0.0];       // [rad]
+    optional float rear_wheel_angle_rate = 32 [default = 0.0];  // [rad/s]
+
+    message VehicleModeRequest {
+        // true: request for entering auto driving mode, false: no request
+        optional bool vehicle_auto_request = 1;
+        // true: request for entering manual driving mode, false: no request
+        optional bool vehicle_manual_request = 2;
+    }
+    optional VehicleModeRequest vehicle_mode_request = 33;
+
+    enum ControlSource {
+        MANUAL = 0;         // none
+        AUTO = 1;           // auto drive
+        RC = 2;             // 2.4G remote controller
+        RC_EMERGENCY = 3;   // 2.4G remote controller emergency stop
+        REMOTE = 4;         // 4G/5G remote takeover
+        REMOTE_EMERGENCY = 5;   // 4G/5G remote emergency
+    }
+    optional ControlSource control_source = 34;
+    optional int64 localization_timestamp = 35 [default = 0];
+    optional double revised_front_wheel_angle = 36;      // in used, in rad
+    optional double front_wheel_angle_offset = 37;      // in used, in rad
+    optional bool enable_offset_observer = 38;
+    optional double observer_yaw_rate = 39;
+    optional double act_driving_torque = 40;   //Driving Torque，Uint Nm， 0 to 16380
+    optional double act_brake_torque = 41;   //Brake Torque uint Nm, -32768 to 32764
+    enum EpbStatus {
+        DEFAULT = 0;
+        PARKED = 1;
+        RELEASED = 2;
+        PARKING = 3;
+        RELEASING = 4;
+    }
+    optional EpbStatus epb_sts = 43;
+    enum VehSapaMtnStatus {
+        NONE = 0;
+        STANDSTILL = 1;
+        FORWARD = 2;
+        BACKWARD = 3;
+    }
+    optional VehSapaMtnStatus sapa_veh_mtn_sts = 44; // Direction of vehicle movement
+    enum AvhSts {
+        OFF = 0;
+        STANDBY = 1;
+        ACTIVE = 2;
+        INVALID = 3;
+    }
+    optional AvhSts avh_sts = 45;
+
+    message AirSuspReport{
+        enum AirSuspLvl {
+          NORMAL = 0;
+          LOW_LEVEL1 = 1;
+          LOW_LEVEL2 = 2;
+          HIGH_LEVEL1 = 3;
+          HIGH_LEVEL2 = 4;
+          HIGH_LEVEL3 = 5;
+        }
+        optional AirSuspLvl air_susp_lvl = 1;
+        optional double susp_posn_vert_lf = 2;   //left front
+        optional double susp_posn_vert_lr = 3;   //left rear
+        optional double susp_posn_vert_rf = 4;   //right front
+        optional double susp_posn_vert_rr = 5;   //right rear
+        optional double target_height = 6 ;         
+        optional double height_adjust_sts = 7 ;   
+      }
+    optional AirSuspReport air_susp_report = 46;
+    optional double possible_driving_torque_min = 47 [default = 0.0];
+    optional double possible_driving_torque_max = 48 [default = 0.0];
+    message RWSReport{  //后轮转向
+        enum RwsMod {
+          MANUAL_MOD = 0;
+          ADSA_MOD = 1;
+          BRAKE_MOD = 2;
+          OTHER_MOD = 3;
+        }
+        optional RwsMod rws_mod = 1;         // 后轮转向模式
+        optional double rws_angle_act = 2 ;  // 后轮转向角度--弧度  
+      }
+    optional RWSReport rws_report = 49;
+
+    optional bool dpa_lock_wheel_status = 50;
+
+    optional bool driver_door = 51 [default = false];  // 主驾车门状态，true:打开，false:关闭
+    optional bool passen_door = 52 [default = false];  // 副驾车门状态，true:打开，false:关闭
+    optional bool rear_l_door = 53 [default = false];  // 左后车门状态，true:打开，false:关闭
+    optional bool rear_r_door = 54 [default = false];  // 右后车门状态，true:打开，false:关闭
+    optional bool hood = 55 [default = false];         // 引擎盖状态，true:打开，false:关闭
+    optional bool trunk = 56 [default = false];        // 后备箱状态，true:打开，false:关闭
+
+    repeated bool rear_view_mirror = 57;  // 后视镜状态，true:展开 false:折叠 [0]:左后视镜 [1]右后视镜
+    // 后视镜状态，目前只有吉利使用，后续考虑将全部车型后视镜切换到该信号
+    enum RearViewMirrorSts {
+        MIRROR_INVALID = 0;
+        MIRROR_FOLDED = 1;
+        MIRROR_UNFOLDED = 2;
+        MIRROR_FOLDING = 3;
+        MIRROR_UNFOLDING = 4;
+    }
+    optional RearViewMirrorSts left_rear_view_mirror = 58;
+    optional RearViewMirrorSts right_rear_view_mirror = 59;
+
+    enum BeamSts {
+        BEAM_OFF = 0;
+        BEAM_ON = 1;
+        BEAM_FLASH_TO_PASS = 2;
+        BEAM_FAULT = 3;
+    }
+    optional BeamSts low_light = 60;   // 远光灯
+    optional BeamSts high_light = 61;  // 近光灯
+
+    enum LccLaneRequest {
+        LCC_LANE_REQUEST_NONE = 0;
+        LCC_LANE_REQUEST_LEFT = 1;   // 向左拨杆
+        LCC_LANE_REQUEST_RIGHT = 2;  // 向右拨杆
+    }
+    optional LccLaneRequest lcc_lane_request = 62;  // 转向灯拨杆信号
+
+    optional double ic_vehicle_speed = 63 [default = 0.0];          // 仪表车速，单位km/h
+    optional double master_cylinder_pressure = 64 [default = 0.0];  // 主缸压力，单位bar
+    optional double  drvr_decel_req = 65 [default = 0.0];           // 驾驶员减速度请求
+    optional double throttle_actual_pedal = 66 [default = 0.0];     // 油门踏板开度 0-1
+    optional double brake_actual_pedal = 67 [default = 0.0];        // 刹车踏板开度 0-1
+    optional double steering_wheel_angle_rad = 68 [default = 0.0];  // 方向盘转角，单位rad
+    optional double steering_wheel_speed = 69 [default = 0.0];      // 方向盘转速，单位rad/s
+
+    optional bool steer_override = 70 [default = false];            // 方向盘接管
+    optional bool torque_override = 71 [default = false] ;          // 方向盘扭矩接管，目前仅用于ESA
+    optional bool brake_override = 72 [default = false];            // 刹车接管
+    optional bool throttle_override = 73 [default = false];         // 油门接管
+    enum ShiftOverrideType {
+        NO_OVERRIDE = 0;
+        VALID_OVERRIDE = 1;
+        INVALID_OVERRIDE= 2;
+    }
+    optional ShiftOverrideType shift_override = 74;  // 挡位接管
+    optional float steer_wheel_angle_max = 75 [default = 0.0];  // [rad]
+
+    optional double total_odometer = 76 [default = 0.0];  // 总里程，单位km
+    optional bool privacy_sts = 77 [default = false];     // 是否处于隐私模式，true:是 false:否
+
+    enum LightSts {
+        LIGHT_STS_OFF = 0;
+        LIGHT_STS_ON = 1;
+    }
+    optional LightSts brake_light = 78;     // 刹车灯
+    optional LightSts position_light = 79;  // 位置灯
+
+    enum HutSentinelModeSwitch {
+        HUT_SENTINEL_MODE_NO_ACTION = 0;
+        HUT_SENTINEL_MODE_OFF = 1;
+        HUT_SENTINEL_MODE_ON = 2;
+    }
+    optional HutSentinelModeSwitch hut_sentinel_mode_switch = 80;  // HUT端哨兵模式开关
+    
+    enum EpbRequest {
+        EPB_REQUEST_NO_REQ = 0;
+        EPB_REQUEST_RELEASE = 1;
+        EPB_REQUEST_APPLY = 2;
+    }
+    optional EpbRequest epb_req = 81;  // canbus下发的epb请求
+
+    optional double steering_wheel_torque = 82 [default = 0.0];  // 方向盘扭矩，单位Nm
+
+    optional bool acc_incre_speed = 83 [default = false];  // acc increment set speed
+    optional bool acc_decre_speed = 84 [default = false];  // acc decrement set speed
+    optional bool acc_incre_gap = 85 [default = false];    // acc increment following gap
+    optional bool acc_decre_gap = 86 [default = false];    // acc decrement following gap
+
+    optional bool veh_shift_allowed = 87 [default = false];  // 是否允许换挡，true:允许 false:不允许
+    optional bool veh_start_allowed = 88 [default = false];  // 是否允许起步，true:允许 false:不允许
+
+    // 用户体验程序授权状态
+    enum UsrExperiProgAuthorSts {
+        USR_EXPERI_PROG_AUTHOR_STS_INITIAL = 0;      // 初始值
+        USR_EXPERI_PROG_AUTHOR_STS_UNAUTHORIZE = 1;  // 未授权
+        USR_EXPERI_PROG_AUTHOR_STS_AUTHORIZED = 2;   // 已授权
+    }
+    optional UsrExperiProgAuthorSts usr_experi_prog_author_sts = 89;
+    optional bool standstill = 90; // vehicle chassis standstill state, 0: not standstill, 1: standstill
+
+    // 车辆系统电源状态
+    enum VehSysPowerModeType {
+        VEH_SYS_POWER_MODE_INVALID = 0;  // 无效状态
+        VEH_SYS_POWER_MODE_OFF = 1;      // 断电状态
+        VEH_SYS_POWER_MODE_ACC = 2;      // ACC档
+        VEH_SYS_POWER_MODE_ON = 3;       // ON档
+        VEH_SYS_POWER_MODE_CRANK = 4;    // Crank档
+    }
+    optional VehSysPowerModeType veh_sys_power_mode = 91 [default = VEH_SYS_POWER_MODE_INVALID];
+    enum VehicleDrivingMode {
+       NORMAL_MODE = 0;
+       EV_MODE = 1; //纯电模式
+       SAVE_MODE_STARTED = 2; //强制保电模式
+       SPORT_MODE = 3; //运动模式
+       ECO_MODE = 4; //经济模式
+       LADY_MODE = 5; //女神模式
+       COMFORT_MODE = 6; //舒适模式
+       RACE_MODE = 7; //竞赛模式
+       HYBRID_MODE = 8; //混动模式
+       SNOW_MODE = 9; //雪地模式
+       SAND_MODE = 10; //沙地模式
+       ROCK_MODE = 11; //岩石模式
+
+       ELSE_VALID_MODE = 99; //其他有效模式
+       INVALID_MODE = 100; //无效模式
+    }
+    optional VehicleDrivingMode vehicle_driving_mode = 92 [default = INVALID_MODE];
+    optional bool is_lat_co_driving = 93 [default = false];   //横向人机共驾状态，true:是 false:否
+}

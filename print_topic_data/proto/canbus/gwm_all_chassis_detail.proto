@@ -14,12 +14,41 @@ message ECM_FD2_103 {
     ENGSTATE_PHEV_AUTOSTOPPING = 6;
     ENGSTATE_PHEV_RESERVED = 7;
   }
+  enum AccelPedalPosnVldtyType {
+    ACCELPEDALPOSNVLDTY_INVALID = 0;
+    ACCELPEDALPOSNVLDTY_VALID = 1;
+    ACCELPEDALPOSNVLDTY_INIT_VALUE = 2;
+    ACCELPEDALPOSNVLDTY_RESERVED = 3;
+  }
+  enum EngStateType {
+    ENGSTATE_STOPPED = 0;
+    ENGSTATE_CRANKING = 1;
+    ENGSTATE_RUNNING = 2;
+    ENGSTATE_STALLING = 3;
+  }
   // [] [0|7] [initial_value:0]
   optional EngStatePHEVType eng_state_phev = 1;
   // [] [0|65535] [initial_value:0]
   optional int32 freshness_value_ecm_fd2 = 2 [deprecated = true];
   // [rpm] [0|2550] [initial_value:0]
   optional double eng_tgt_idle_spd = 3;
+  // description / [NoUnit] [0|255] [initial_value:0]
+  optional int32 checksum_ecm9 = 4;
+  // description / [Perc] [0|100.3935] [initial_value:0]
+  optional double accel_pedl_posn_diagc = 5;
+  // description / [NoUnit] [0|15] [initial_value:0]
+  optional int32 rolling_counter_ecm9 = 6;
+  // description / [NoUnit] [0|255] [initial_value:0]
+  optional int32 checksum_ecm2 = 7;
+  // description / [Perc] [0|100.3935] [initial_value:0]
+  optional double accel_pedal_posn = 8;
+  // description / [NoUnit] [0|3] [initial_value:2]
+  optional AccelPedalPosnVldtyType accel_pedal_posn_vldty = 9;
+  // description / [NoUnit] [0|15] [initial_value:0]
+  optional int32 rolling_counter_ecm2 = 10;
+  // description / [NoUnit] [0|3] [initial_value:0]
+  optional EngStateType eng_state = 11;
+
 }
 message HUT29_35C {
 // Report Message
@@ -72,6 +101,7 @@ message VCU_FD2_11B {
     DRVMOD_TRACK_MODE = 16;
     DRVMOD_HYBRID_MODE = 17;
     DRVMOD_TRAILER_MODE = 18;
+    DRVMOD_Z_MODE = 19;
   }
   enum PTDrvModType {
     PTDRVMOD_DEFAULT_VALUE = 0;
@@ -348,6 +378,8 @@ message HUT44_127 {
   optional bool low_beam_swt_sts_hut = 1;
   // [NoUnit] [0|1] [initial_value:0]
   optional bool rear_fog_lmp_swt_sts_hut = 2;
+  // [NoUnit] [0|1] [initial_value:0]
+  optional bool auto_lmp_swt_sts_hut = 3;
 }
 
 message IFC_FD1_12B {
@@ -738,6 +770,16 @@ message ESP_FD2_137 {
     RWSANGLIMNSTS_LIMITING_REAR_STEERING_ANGLE = 1;
     RWSANGLIMNSTS_RESERVED = 2;
   }
+  enum LgtCtrlrStsType {
+    LGTCTRLRSTS_OFF = 0;
+    LGTCTRLRSTS_STANDBY = 1;
+    LGTCTRLRSTS_RESERVED = 2;
+    LGTCTRLRSTS_RESERVED_3 = 3;
+    LGTCTRLRSTS_ACTIVE_AUTOMATICPARK = 4;
+    LGTCTRLRSTS_RESERVED_5 = 5;
+    LGTCTRLRSTS_RESERVED_6 = 6;
+    LGTCTRLRSTS_INVALID_VALUE = 7;
+  }
   // [] [0|255] [initial_value:0]
   optional int32 checksum_esp2 = 1;
   // [] [0|1] [initial_value:0]
@@ -861,9 +903,19 @@ message ESP_FD2_137 {
   // [Deg] [-10|0] [initial_value:1023]
   optional double rws_ang_min_limn = 61;
   // [NoUnit] [0|255] [initial_value:0]
-  optional int32 checksum_esp_fd2_1 = 62 [deprecated = true];
+  optional int32 checksum_esp_fd2_1_dep = 62 [deprecated = true];
   // [NoUnit] [0|15] [initial_value:0]
   optional int32 rolling_counter_esp_fd2_1 = 63;
+  // [NoUnit] [0|255] [initial_value:0]
+  optional int32 checksum_esp4 = 64;
+  // [NoUnit] [0|15] [initial_value:0]
+  optional int32 rolling_counter_esp4 = 65;
+  // [NoUnit] [0|1] [initial_value:0]
+  optional bool esp_meb_brk_avail = 66;
+  // [NoUnit] [0|7] [initial_value:0]
+  optional LgtCtrlrStsType lgt_ctrlr_sts = 67;
+  // [NoUnit] [0|255] [initial_value:0]
+  optional int32 checksum_esp_fd2_1 = 68;
 }
 
 message ESP_FD3_13B {
@@ -1081,6 +1133,17 @@ message ACC_FD1_143 {
     IDC_L2_HADFUNCCMDREQFLAG_FAILURE = 6;
     IDC_L2_HADFUNCCMDREQFLAG_RESERVED_7 = 7;
   }
+  enum HWPMotTypeReqModeL2Type {
+    HWP_MOTTYPEREQMODE_L2_NONE = 0;
+    HWP_MOTTYPEREQMODE_L2_DRV_L12 = 1;
+    HWP_MOTTYPEREQMODE_L2_DRV_L3 = 2;
+    HWP_MOTTYPEREQMODE_L2_RESERVED = 3;
+  }
+  enum AEBFrwdObstclDetnFailStsType {
+    AEBFRWDOBSTCLDETNFAILSTS_INITIAL_VALUE = 0;
+    AEBFRWDOBSTCLDETNFAILSTS_NO_FAILURE = 1;
+    AEBFRWDOBSTCLDETNFAILSTS_FAILURE = 2;
+  }
   // [] [0|255] [initial_value:0]
   optional int32 checksum_acc1 = 1;
   // [] [0|1] [initial_value:0]
@@ -1165,6 +1228,12 @@ message ACC_FD1_143 {
   optional InrlMeasUnitFailrStsType inrl_meas_unit_failr_sts = 41;
   // [DegPerSec] [-300|300] [initial_value:0]
   optional double veh_pitch_rate = 42;
+  // description / [NoUnit] [0|3] [initial_value:0]
+  optional AEBFrwdObstclDetnFailStsType aeb_frwd_obstcl_detn_fail_sts = 43;
+  // [NoUnit] [0|3] [initial_value:0]
+  optional HWPMotTypeReqModeL2Type hwp_mot_type_req_mode_l2 = 44;
+  // description / [s] [0|6.1] [initial_value:0]
+  optional double aeb_mst_rsk_obstcl_pre_cllsn_tim = 45;
 }
 
 message VDC_FD1_146 {
@@ -1615,7 +1684,12 @@ message HAP_FD1_15B {
     APS_TEXTDISP_THE_MAXIMUN_PATH_LENGTH_IS_ABOUT_TO_BE_EXCEEDED = 103;
     APS_TEXTDISP_AUTO_PARKING_BE_READY_TO_BREAK = 104;
     APS_TEXTDISP_MAP_DATA_ABNORMAL_SYSTEM_EXIT = 105;
-    APS_TEXTDISP_RESERVED = 106;
+    APS_TEXTDISP_TRAILER_HITCH_OPEN_SYS_UNAVAILABLE = 106;
+    APS_TEXTDISP_DIFFERENTIAL_LOCK_OPEN_SYS_UNAVAILABLE = 107;
+    APS_TEXTDISP_TRAILER_HITCH_OPEN_SYS_EXIT = 108;
+    APS_TEXTDISP_DIFFERENTIAL_LOCK_OPEN_SYS_EXIT = 109;
+    APS_TEXTDISP_SWITCHED_TO_HEAD_IN_PARKING = 110;
+    APS_TEXTDISP_SWITCHED_TO_REVERSE_PARKING = 111;
     APS_TEXTDISP_NO_SAVE_DISTANCE_RADS_SYS_ESITS = 112;
     APS_TEXTDISP_RADS_RUNNING_BE_READY_TO_BRAKE = 113;
     APS_TEXTDISP_NEAR_THE_BOURN = 114;
@@ -1960,9 +2034,9 @@ message HAP_FD1_15B {
   enum HAVPWorkStsType {
     HAVP_WORKSTS_OFF = 0;
     HAVP_WORKSTS_STANDBY = 1;
-    HAVP_WORKSTS_POSITION = 2;
-    HAVP_WORKSTS_PREACTIVE = 3;
-    HAVP_WORKSTS_RESTORE_CRUISING = 4;
+    HAVP_WORKSTS_VLAP_ROAMING = 2;
+    HAVP_WORKSTS_VLAP_PARKING = 3;
+    HAVP_WORKSTS_VLAP_PAUSE = 4;
     HAVP_WORKSTS_SUMMON_CRUSING = 5;
     HAVP_WORKSTS_PARKING = 6;
     HAVP_WORKSTS_OUTING = 7;
@@ -2293,6 +2367,18 @@ message HAP_FD1_15B {
   optional APAModFlagType apa_mod_flag = 107;
   // [NoUnit] [0|7] [initial_value:0]
   optional int32 rws_mod_req = 108;
+  // [NoUnit] [0|1] [initial_value:0]
+  optional bool apa_fx_req_vld = 109;
+  // [NM] [0|8191] [initial_value:0]
+  optional int32 apa_fx_req = 110;
+  // [NoUnit] [0|15] [initial_value:0]
+  optional int32 rolling_counter_apa7 = 111;
+  // [NoUnit] [0|255] [initial_value:0]
+  optional int32 checksum_apa7 = 112;
+  // [bar] [0|204.7] [initial_value:0]
+  optional double apa_px_req = 113;
+  // [NoUnit] [0|1] [initial_value:0]
+  optional bool apa_px_req_vld = 114;
 }
 
 message CR_FD1_15E {
@@ -2492,6 +2578,48 @@ message CSA1_165 {
   optional bool r_turn_lmp_swt_sts = 4;
   // [] [0|1] [initial_value:0]
   optional bool hi_beam_swt_sts = 5;
+  // [NoUnit] [0|1] [initial_value:0]
+  optional bool over_veh_beam_swt_sts = 6;
+  // [NoUnit] [0|1] [initial_value:0]
+  optional bool turn_lmp_swt_err_sts = 7;
+  // [NoUnit] [0|1] [initial_value:0]
+  optional bool frnt_fog_lmp_swt_sts = 8;
+  // [NoUnit] [0|1] [initial_value:0]
+  optional bool low_beam_swt_sts = 9;
+  // [NoUnit] [0|1] [initial_value:0]
+  optional bool auto_lmp_swt_sts = 10;
+}
+
+
+message VCU_FD28_184 {
+// Report Message
+  enum EstimrResutReliabtType {
+    ESTIMRRESUTRELIABT_INITIAL_VALID = 0;
+    ESTIMRRESUTRELIABT_TRUSTED = 1;
+    ESTIMRRESUTRELIABT_UNTRUSTED = 2;
+  }
+  // description / [NoUnit] [0|255] [initial_value:0]
+  optional int32 checksum_vcu_fd28_1 = 1;
+  // [mps] [-25|138] [initial_value:0]
+  optional double intgrtd_veh_spd = 2;
+  // [mps] [-25|138] [initial_value:0]
+  optional double fl_intgrtd_wheel_spd = 3;
+  // [mps] [-25|138] [initial_value:0]
+  optional double fr_intgrtd_wheel_spd = 4;
+  // [NoUnit] [0|1] [initial_value:0]
+  optional double estimd_road_fric_coeff = 5;
+  // [NoUnit] [0|3] [initial_value:0]
+  optional EstimrResutReliabtType estimr_resut_reliabt = 6;
+  // description / [NoUnit] [0|14] [initial_value:0]
+  optional int32 rolling_counter_vcu_fd28_1 = 7;
+  // description / [NoUnit] [0|255] [initial_value:0]
+  optional int32 checksum_vcu_fd28_2 = 8;
+  // [mps] [-25|138] [initial_value:0]
+  optional double rl_intgrtd_wheel_spd = 9;
+  // [mps] [-25|138] [initial_value:0]
+  optional double rr_intgrtd_wheel_spd = 10;
+  // description / [NoUnit] [0|14] [initial_value:0]
+  optional int32 rolling_counter_vcu_fd28_2 = 11;
 }
 
 message AEB_FD1_18B {
@@ -2643,6 +2771,19 @@ message AEB_FD1_18B {
     RAEB_STATE_HOLD = 6;
     RAEB_STATE_EBA_ACTIVE = 7;
   }
+  enum IntellgntAsscRoadTypType {
+    INTELLGNTASSCROADTYP_INITIAL_VALUE = 0;
+    INTELLGNTASSCROADTYP_NORMAL = 1;
+    INTELLGNTASSCROADTYP_SNOW_COVERED_ROAD = 2;
+    INTELLGNTASSCROADTYP_ICE_COVERED_ROAD = 3;
+    INTELLGNTASSCROADTYP_MUDDY_COVERED_ROAD = 4;
+    INTELLGNTASSCROADTYP_SAND_COVERED_ROAD = 5;
+    INTELLGNTASSCROADTYP_DIRT_COVERED_ROAD = 6;
+    INTELLGNTASSCROADTYP_ASPHALT_COVERED_ROAD = 7;
+    INTELLGNTASSCROADTYP_CEMENT_COVERED_ROAD = 8;
+    INTELLGNTASSCROADTYP_PITTED_COVERED_ROAD = 9;
+    INTELLGNTASSCROADTYP_INVALID_VALUE = 15;
+  }
   // [s] [0|1] [initial_value:250]
   optional double time_to_cllsn = 1;
   // [mps] [0|42] [initial_value:0]
@@ -2719,6 +2860,10 @@ message AEB_FD1_18B {
   optional RAEBStateType raeb_state = 37;
   // [NoUnit] [0|7] [initial_value:0]
   optional RAEBWarnType raeb_warn = 38;
+  // [NoUnit] [0|1] [initial_value:None]
+  optional double intellgnt_assc_road_typ_confid = 39;
+  // [NoUnit] [0|15] [initial_value:None]
+  optional IntellgntAsscRoadTypType intellgnt_assc_road_typ = 40;
 }
 
 message F_PBOX1_19B {
@@ -3000,6 +3145,11 @@ message HUT_FD4_1DA {
     STEERWHEELSILENTREQ_OFF = 1;
     STEERWHEELSILENTREQ_ON = 2;
   }
+  enum OneclickClsIntellgntDrvgReqType {
+    ONECLICKCLSINTELLGNTDRVGREQ_INITIAL_VALUE = 0;
+    ONECLICKCLSINTELLGNTDRVGREQ_OFF = 1;
+    ONECLICKCLSINTELLGNTDRVGREQ_ON = 2;
+  }
   // [] [0|15] [initial_value:0]
   optional int32 slot_num_vr = 1;
   // description  [] [0|1] [initial_value:0]
@@ -3034,6 +3184,8 @@ message HUT_FD4_1DA {
   optional HAVPUseModType havp_use_mod = 16;
   // [NoUnit] [0|3] [initial_value:0]
   optional SteerWheelsilentReqType steer_wheelsilent_req = 17;
+  // [NoUnit] [0|3] [initial_value:0]
+  optional OneclickClsIntellgntDrvgReqType oneclick_cls_intellgnt_drvg_req = 18;
 }
 
 message HUT30_1E9 {
@@ -3191,11 +3343,11 @@ message HUT_FD2_203 {
     HUT_OD_OBJ6_TYPE_INVALID_VALUES = 5;
   }
   // [] [0|9] [initial_value:0]
-  optional int32 hut_od_obj0_id = 1;
+  optional int32 hut_od_obj0_id = 1 [deprecated = true];
   // [] [0|7] [initial_value:0]
   optional HUTODObj0typeType hut_od_obj0_type = 2;
   // [] [0|1] [initial_value:0]
-  optional double hut_od_obj0_confidence = 3;
+  optional double hut_od_obj0_confidence = 3 [deprecated = true];
   // [m] [0|12.6] [initial_value:0]
   optional double hut_od_obj0_width = 4;
   // [m] [0|40] [initial_value:0]
@@ -3213,11 +3365,11 @@ message HUT_FD2_203 {
   // [m] [-20|20] [initial_value:0]
   optional double hut_od_obj1_ground_pos_y = 11;
   // [] [0|9] [initial_value:0]
-  optional int32 hut_od_obj2_id = 12;
+  optional int32 hut_od_obj2_id = 12 [deprecated = true];
   // [] [0|7] [initial_value:0]
   optional HUTODObj2typeType hut_od_obj2_type = 13;
   // [] [0|1] [initial_value:0]
-  optional double hut_od_obj2_confidence = 14;
+  optional double hut_od_obj2_confidence = 14 [deprecated = true];
   // [m] [0|12.6] [initial_value:0]
   optional double hut_od_obj2_width = 15;
   // [m] [0|40] [initial_value:0]
@@ -3225,11 +3377,11 @@ message HUT_FD2_203 {
   // [m] [-20|20] [initial_value:0]
   optional double hut_od_obj2_ground_pos_y = 17;
   // [] [0|9] [initial_value:0]
-  optional int32 hut_od_obj3_id = 18;
+  optional int32 hut_od_obj3_id = 18 [deprecated = true];
   // [] [0|7] [initial_value:0]
   optional HUTODObj3typeType hut_od_obj3_type = 19;
   // [] [0|1] [initial_value:0]
-  optional double hut_od_obj3_confidence = 20;
+  optional double hut_od_obj3_confidence = 20 [deprecated = true];
   // [m] [0|12.6] [initial_value:0]
   optional double hut_od_obj3_width = 21;
   // [m] [0|40] [initial_value:0]
@@ -3237,11 +3389,11 @@ message HUT_FD2_203 {
   // [m] [-20|20] [initial_value:0]
   optional double hut_od_obj3_ground_pos_y = 23;
   // [] [0|9] [initial_value:0]
-  optional int32 hut_od_obj4_id = 24;
+  optional int32 hut_od_obj4_id = 24 [deprecated = true];
   // [] [0|7] [initial_value:0]
   optional HUTODObj4typeType hut_od_obj4_type = 25;
   // [] [0|1] [initial_value:0]
-  optional double hut_od_obj4_confidence = 26;
+  optional double hut_od_obj4_confidence = 26 [deprecated = true];
   // [m] [0|12.6] [initial_value:0]
   optional double hut_od_obj4_width = 27;
   // [m] [0|40] [initial_value:0]
@@ -3249,11 +3401,11 @@ message HUT_FD2_203 {
   // [m] [-20|20] [initial_value:0]
   optional double hut_od_obj4_ground_pos_y = 29;
   // [] [0|9] [initial_value:0]
-  optional int32 hut_od_obj5_id = 30;
+  optional int32 hut_od_obj5_id = 30 [deprecated = true];
   // [] [0|7] [initial_value:0]
   optional HUTODObj5typeType hut_od_obj5_type = 31;
   // [] [0|1] [initial_value:0]
-  optional double hut_od_obj5_confidence = 32;
+  optional double hut_od_obj5_confidence = 32 [deprecated = true];
   // [m] [0|12.6] [initial_value:0]
   optional double hut_od_obj5_width = 33;
   // [m] [0|40] [initial_value:0]
@@ -3261,7 +3413,7 @@ message HUT_FD2_203 {
   // [m] [-20|20] [initial_value:0]
   optional double hut_od_obj5_ground_pos_y = 35;
   // [] [0|9] [initial_value:0]
-  optional int32 hut_od_obj6_id = 36;
+  optional int32 hut_od_obj6_id = 36 [deprecated = true];
   // [] [0|7] [initial_value:0]
   optional HUTODObj6typeType hut_od_obj6_type = 37;
   // [] [0|1] [initial_value:0]
@@ -3272,6 +3424,8 @@ message HUT_FD2_203 {
   optional double hut_od_obj6_ground_pos_x = 40;
   // [m] [-20|20] [initial_value:0]
   optional double hut_od_obj6_ground_pos_y = 41;
+  // [NoUnit] [0|9] [initial_value:0]
+  optional int32 htu_od_obj1_id = 42;
 }
 
 message DCT5_221 {
@@ -3577,6 +3731,82 @@ message AEB_FD2_227 {
     ADAS_ERRSTSACTVSAFETY_MISALIGNMENT = 4;
     ADAS_ERRSTSACTVSAFETY_FAILURE = 5;
   }
+  enum MODSwtRespType {
+    MOD_SWTRESP_INITIAL_VALUE = 0;
+    MOD_SWTRESP_OFF = 1;
+    MOD_SWTRESP_ON = 2;
+    MOD_SWTRESP_RESVERED = 3;
+  }
+  enum MODTextLibType {
+    MOD_TEXT_LIB_NO_DISPLAY = 0;
+    MOD_TEXT_LIB_DRAWING_FAIL_DUE_BAD_WEATHER = 1;
+    MOD_TEXT_LIB_DRAWING_FAIL_DUE_PATH_MANY = 2;
+    MOD_TEXT_LIB_DRAWING_FAIL_DUE_SYSTEM_FAIL = 3;
+    MOD_TEXT_LIB_START_TO_LEARN_DRAWING = 4;
+    MOD_TEXT_LIB_SPEED_QUICK = 5;
+    MOD_TEXT_LIB_DRAWING_STOP_DUE_PATH_SHORT = 6;
+    MOD_TEXT_LIB_PLEASE_FINISH_DUE_TOO_LONG_PATH = 7;
+    MOD_TEXT_LIB_AUTOSAVE_DUE_TO_TOO_LONG_PATH = 8;
+    MOD_TEXT_LIB_DRAWING_STOP = 9;
+    MOD_TEXT_LIB_DRAWING_QUIT = 10;
+    MOD_TEXT_LIB_DRAWING_FAIL = 11;
+    MOD_TEXT_LIB_DRAWING_FAIL_DUE_PATH_REPETITION = 12;
+    MOD_TEXT_LIB_DRAWING_SUCCEED = 13;
+    MOD_TEXT_LIB_DRAWING_FAIL_DUE_TOO_FAST = 14;
+    MOD_TEXT_LIB_DRAWING_FAIL_DUE_GPS_FAIL = 15;
+    MOD_TEXT_LIB_DRAWING_FAIL_DUE_FRONT_CAMERA_OCCLUSION = 16;
+    MOD_TEXT_LIB_DRAWING_FAIL_DUE_SURROUND_CAMERA_OCCLUSION = 17;
+    MOD_TEXT_LIB_DRAWING_FAIL_DUE_REAR_CAMERA_OCCLUSION = 18;
+    MOD_TEXT_LIB_DRAWING_FAIL_DUE_DOOR_OPEN = 19;
+    MOD_TEXT_LIB_DRAWING_FAIL_DUE_ENGINE_ROOMCOVER = 20;
+    MOD_TEXT_LIB_DRAWING_FAIL_DUE_TRUNK = 21;
+    MOD_TEXT_LIB_DRAWING_FAIL_DUE_ASSOCIATED_SYSTEM_FAIL = 22;
+    MOD_TEXT_LIB_AUTOSAVE = 23;
+    MOD_TEXT_LIB_AUTOSAVE_DUE_TOO_FAST = 24;
+    MOD_TEXT_LIB_AUTOSAVE_DUE_GPS_FAIL = 25;
+    MOD_TEXT_LIB_AUTOSAVE_DUE_FRONT_CAMERA_OCCLUSION = 26;
+    MOD_TEXT_LIB_AUTOSAVE_DUE_SURROUND_CAMERA_OCCLUSION = 27;
+    MOD_TEXT_LIB_AUTOSAVE_DUE_REAR_CAMERA_OCCLUSION = 28;
+    MOD_TEXT_LIB_AUTOSAVE_DUE_DOOR_OPEN = 29;
+    MOD_TEXT_LIB_AUTOSAVE_DUE_ENGINE_ROOMCOVER = 30;
+    MOD_TEXT_LIB_AUTOSAVE_DUE_TRUNK_OPEN = 31;
+  }
+  enum MODInterSysInfoDispType {
+    MOD_INTERSYSINFODISP_NO_DISPLAY = 0;
+    MOD_INTERSYSINFODISP_MOD_APP_NO_START = 1;
+    MOD_INTERSYSINFODISP_NOACTIVA_MOD_DUE_TO_INHIBITION = 2;
+    MOD_INTERSYSINFODISP_LOCATION_FAIL = 3;
+    MOD_INTERSYSINFODISP_POSITIONING = 4;
+    MOD_INTERSYSINFODISP_MOD_ACTIVE_CONTROL_IS_CANCELLED = 5;
+    MOD_INTERSYSINFODISP_MOD_IS_ACTIVE = 6;
+    MOD_INTERSYSINFODISP_PLEASE_NOTE_THE_DIRECTIONS = 7;
+    MOD_INTERSYSINFODISP_MOD_IS_AVAILABLE = 8;
+    MOD_INTERSYSINFODISP_PLEASE_HELP_ME = 9;
+    MOD_INTERSYSINFODISP_MOD_TO_BE_DEACTIVATED = 10;
+    MOD_INTERSYSINFODISP_MOD_RESUMED = 11;
+    MOD_INTERSYSINFODISP_OFF_ROUTE = 12;
+    MOD_INTERSYSINFODISP_AUTOSAVE_DUE_SYSTEM_FAIL = 13;
+    MOD_INTERSYSINFODISP_AUTOSAVE_DUE_ASSOCIATED_SYSTEM_FAIL = 14;
+    MOD_INTERSYSINFODISP_DRAWING_FAIL_DUE_AMAP_LOSE = 15;
+    MOD_INTERSYSINFODISP_AUTOSAVE_DUE_AMAP_LOSE = 16;
+    MOD_INTERSYSINFODISP_DRAWING_FAIL_DUE_MIRROR_FOLD = 17;
+    MOD_INTERSYSINFODISP_DRAWING_FAIL_DUE_SEATBELT_OPEN = 18;
+    MOD_INTERSYSINFODISP_AUTOSAVE_DUE_MIRROR_FOLD = 19;
+    MOD_INTERSYSINFODISP_AUTOSAVE_DUE_SEATBELT_OPEN = 20;
+  }
+  enum MODDispStsType {
+    MOD_DISPSTS_INITIAL_VALUE = 0;
+    MOD_DISPSTS_OFF = 1;
+    MOD_DISPSTS_PASSIVE = 2;
+    MOD_DISPSTS_STANDBY = 3;
+    MOD_DISPSTS_ACTIVE = 4;
+    MOD_DISPSTS_OVERRIDE = 5;
+    MOD_DISPSTS_SLOW_RETREAT = 6;
+    MOD_DISPSTS_STANDSTILL = 7;
+    MOD_DISPSTS_INHIBIT = 8;
+    MOD_DISPSTS_RESERVED = 9;
+    MOD_DISPSTS_FAIL = 15;
+  }
   // [] [0|1] [initial_value:1]
   optional bool aeb_ped_resp = 1;
   // [] [0|1] [initial_value:1]
@@ -3685,6 +3915,14 @@ message AEB_FD2_227 {
   optional double aeb_obj_dy_actv_safety = 53;
   // description QM [NoUnit] [0|14] [initial_value:0]
   optional int32 rolling_counter_aeb5 = 54;
+  // [NoUnit] [0|3] [initial_value:0]
+  optional MODSwtRespType mod_swt_resp = 55;
+  // [NoUnit] [0|31] [initial_value:0]
+  optional MODTextLibType mod_text_lib = 56;
+  // [NoUnit] [0|31] [initial_value:0]
+  optional MODInterSysInfoDispType mod_inter_sys_info_disp = 57;
+  // [NoUnit] [0|15] [initial_value:0]
+  optional MODDispStsType mod_disp_sts = 58;
 }
 
 message CSA4_22B {
@@ -3742,9 +3980,9 @@ message DCT7_235 {
   // [NoUnit] [0|15] [initial_value:0]
   optional DrvFaiMsgType drv_fai_msg = 1;
   // [NoUnit] [0|255] [initial_value:0]
-  optional int32 checksum_dct7 = 2;
+  optional int32 checksum_dct7 = 2 [deprecated = true];
   // [NoUnit] [0|15] [initial_value:0]
-  optional int32 rolling_counter_dct7 = 3;
+  optional int32 rolling_counter_dct7 = 3 [deprecated = true];
 }
 
 message BCM12_238 {
@@ -4688,6 +4926,12 @@ message HUT_FD3_243 {
     INTELLGNTASSCLMPENAREQ_FULL_BRIGHT = 2;
     INTELLGNTASSCLMPENAREQ_OLNY_PARKING_ON = 3;
   }
+  enum HUTODWorkStsType {
+    HUT_OD_WORKSTS_OFF = 0;
+    HUT_OD_WORKSTS_FOD_ACTIVE = 1;
+    HUT_OD_WORKSTS_ROD_ACTIVE = 2;
+    HUT_OD_WORKSTS_RESERVED = 3;
+  }
   // [NoUnit] [0|3] [initial_value:None]
   optional UsrExperiProgAuthorStsType usr_experi_prog_author_sts = 1;
   // [] [0|9] [initial_value:0]
@@ -4784,6 +5028,10 @@ message HUT_FD3_243 {
   optional IntellgntAsscLmpEnaReqType intellgnt_assc_lmp_ena_req = 47;
   // [NoUnit] [0|3] [initial_value:0]
   optional SidePrkgReqType side_prkg_req = 48;
+  // [m] [-20|20] [initial_value:0]
+  optional double hut_od_obj7_ground_pos_y = 49;
+  // [NoUnit] [0|3] [initial_value:0]
+  optional HUTODWorkStsType hut_od_work_sts = 50;
 }
 
 message CSA3_244 {
@@ -4846,6 +5094,16 @@ message DMS_FD1_24D {
     DRVBEHVSTS_RESERVED = 4;
     DRVBEHVSTS_INVALID = 7;
   }
+  enum ExprsnStsType {
+    EXPRSNSTS_NO_EXPRESSION = 0;
+    EXPRSNSTS_SMILE = 1;
+    EXPRSNSTS_ANGRY = 2;
+    EXPRSNSTS_SURPRISE = 3;
+    EXPRSNSTS_SAD = 4;
+    EXPRSNSTS_CALM = 5;
+    EXPRSNSTS_RESERVED = 6;
+    EXPRSNSTS_INVALID = 7;
+  }
   // [] [0|7] [initial_value:7]
   optional DistrctnLvlACCType distrctn_lvl_acc = 1;
   // [] [0|7] [initial_value:7]
@@ -4856,6 +5114,8 @@ message DMS_FD1_24D {
   optional bool head_detn = 4;
   // [] [0|7] [initial_value:7]
   optional DrvBehvStsType drv_behv_sts = 5;
+  // [NoUnit] [0|7] [initial_value:7]
+  optional ExprsnStsType exprsn_sts = 6;
 }
 
 message CSA6_254 {
@@ -5079,6 +5339,8 @@ message HUT32_26F {
   optional ContnPrkgReqType contn_prkg_req = 9;
   // [] [0|15] [initial_value:0]
   optional int32 rolling_counter_hut32 = 10;
+  // [ ] [0|1] [initial_value:0]
+  optional bool nav_dec_swt_req = 11;
 }
 
 message TRAILER1_273 {
@@ -5969,6 +6231,42 @@ message HAP_FD3_298 {
     AVPWORKSTS_SUSPEND = 9;
     AVPWORKSTS_FAULT = 10;
   }
+  enum OneclickClsIntellgntDrvgStsType {
+    ONECLICKCLSINTELLGNTDRVGSTS_INITIAL_VALUE = 0;
+    ONECLICKCLSINTELLGNTDRVGSTS_OFF = 1;
+    ONECLICKCLSINTELLGNTDRVGSTS_ON = 2;
+  }
+  enum OneclickClsIntellgntDrvgTextDispType {
+    ONECLICKCLSINTELLGNTDRVGTEXTDISP_INITIAL_VALUE = 0;
+    ONECLICKCLSINTELLGNTDRVGTEXTDISP_ADAS_FORBIDDEN = 1;
+    ONECLICKCLSINTELLGNTDRVGTEXTDISP_PARKING_FORBIDDEN = 2;
+  }
+  enum ModifInquiPopReqType {
+    MODIFINQUIPOPREQ_INITIAL_VALUE = 0;
+    MODIFINQUIPOPREQ_NO_DISPLAY = 1;
+    MODIFINQUIPOPREQ_MODIFICATION_INQUIRY = 2;
+  }
+  enum UssEPSLrngStsType {
+    USSEPSLRNGSTS_INITIAL_VALUE = 0;
+    USSEPSLRNGSTS_NO_DISPLAY = 1;
+    USSEPSLRNGSTS_EPS_LEARNING = 2;
+  }
+  enum PrkgFuncStsLmpType {
+    PRKGFUNCSTSLMP_INITIAL_VALUE = 0;
+    PRKGFUNCSTSLMP_VLAP_PASSIVE = 1;
+    PRKGFUNCSTSLMP_VLAP_ROAMING_STANDBY = 2;
+    PRKGFUNCSTSLMP_VLAP_CRUSING_STANDBY = 3;
+    PRKGFUNCSTSLMP_VLAP_ROAMING_ACTIVE = 4;
+    PRKGFUNCSTSLMP_VLAP_CRUSING_ACTIVE = 5;
+    PRKGFUNCSTSLMP_VLAP_CRUSING_OVERRIDE = 6;
+    PRKGFUNCSTSLMP_HAVP_STANDBY = 7;
+    PRKGFUNCSTSLMP_HAVP_ACTIVE = 8;
+    PRKGFUNCSTSLMP_HAVP_OVERRIDE = 9;
+    PRKGFUNCSTSLMP_APA_STANDBY = 10;
+    PRKGFUNCSTSLMP_APA_ACTIVE = 11;
+    PRKGFUNCSTSLMP_RADS_STANDBY = 12;
+    PRKGFUNCSTSLMP_RADS_ACTIVE = 13;
+  }
   // [] [0|150] [initial_value:255]
   optional int32 rpas_near_brrdstn = 1;
   // [] [0|127] [initial_value:127]
@@ -6088,7 +6386,7 @@ message HAP_FD3_298 {
   // [] [0|3] [initial_value:0]
   optional APAFuncStsType apa_func_sts = 59;
   // [] [0|3] [initial_value:0]
-  optional P2PFuncStsType p2_p_func_sts = 60;
+  optional P2PFuncStsType p2_p_func_sts = 60[deprecated = true];
   // [] [0|3] [initial_value:0]
   optional RADSFuncStsType rads_func_sts = 61;
   // [] [0|3] [initial_value:0]
@@ -6133,6 +6431,18 @@ message HAP_FD3_298 {
   optional SteerWheelsilentStsType steer_wheelsilent_sts = 81;
   // [NoUnit] [0|15] [initial_value:0]
   optional AVPworkStsType av_pwork_sts = 82;
+  // [NoUnit] [0|30] [initial_value:0]
+  optional int32 vlap_spd_set_val = 83;
+  // [NoUnit] [0|3] [initial_value:0]
+  optional OneclickClsIntellgntDrvgStsType oneclick_cls_intellgnt_drvg_sts = 84;
+  // [NoUnit] [0|3] [initial_value:0]
+  optional OneclickClsIntellgntDrvgTextDispType oneclick_cls_intellgnt_drvg_text_disp = 85;
+  // [NoUnit] [0|3] [initial_value:0]
+  optional ModifInquiPopReqType modif_inqui_pop_req = 86;
+  // [NoUnit] [0|3] [initial_value:0]
+  optional UssEPSLrngStsType uss_eps_lrng_sts = 87;
+  // [NoUnit] [0|31] [initial_value:0]
+  optional PrkgFuncStsLmpType prkg_func_sts_lmp = 88;
 }
 
 message HAP_FD7_29B {
@@ -6178,6 +6488,7 @@ message HAP_FD7_29B {
     UNPRKGSPAREASONS_UNKNOWN = 17;
     UNPRKGSPAREASONS_VEHICLES_CAN_BE_TAKEN_OVER_IN_ADVANCE = 18;
     UNPRKGSPAREASONS_YOU_HAVE_TAKEN_OVER_THE_VEHICLE = 19;
+    UNPRKGSPAREASONS_OBSTACLES_NEAR_THE_VEHICLE_PLEASE_STEP_BACK_AND_TRY_AGAIN = 20;
   }
   // [m] [0|1023] [initial_value:1023]
   optional int32 havp_lrng_dst = 1;
@@ -6235,6 +6546,10 @@ message BCM8_29F {
   optional bool rsds_lled_sts = 8;
   // [NoUnit] [0|1] [initial_value:0]
   optional bool rsds_rled_sts = 9;
+  // [NoUnit] [0|1] [initial_value:0]
+  optional bool pas_swt_req = 10;
+  // [NoUnit] [0|1] [initial_value:0]
+  optional bool pas_swt_err_sts = 11;
 }
 
 message IFC_FD7_2A2 {
@@ -6344,6 +6659,8 @@ message ACC_FD2_2AB {
     TEXTSCENEBROCAST_UNAVAILABLE_LIDAR_OBSTRUCTED = 55;
     TEXTSCENEBROCAST_UNAVAILABLE_CAMERA_OBSTRUCTED = 56;
     TEXTSCENEBROCAST_UNAVAILABLE_SENSOR_OBSTRUCTED = 57;
+    TEXTSCENEBROCAST_HAZY_DAY_QUIT = 58;
+    TEXTSCENEBROCAST_HAZY_DAY_ACTIVE = 59;  
   }
   enum ACCLeTgt02TypType {
     ACC_LETGT_02_TYP_UNKOWN = 0;
@@ -6908,6 +7225,8 @@ message ACC_FD2_2AB {
   optional VertHeiRmdType vert_hei_rmd = 91;
   // description / [s] [0|60] [initial_value:0]
   optional int32 noa_exit_tim = 92;
+  // [NoUnit] [0|7] [initial_value:0]
+  optional int32 scene_mod_cfm_pop = 93;
 }
 
 message DRDCM1_2B0 {
@@ -7662,6 +7981,12 @@ message HUT_FD1_2C3 {
     ADAS_POSN_CURLANE_RESERVED = 6;
     ADAS_POSN_CURLANE_INVALID_DATA = 7;
   }
+  enum MODSwtReqType {
+    MOD_SWTREQ_INITIAL_VALUE = 0;
+    MOD_SWTREQ_OFF = 1;
+    MOD_SWTREQ_ON = 2;
+    MOD_SWTREQ_RESVERED = 3;
+  }
   // description / [] [0|1] [initial_value:0]
   optional bool intellgntcurve_req = 1;
   // [] [0|1] [initial_value:0]
@@ -7763,9 +8088,11 @@ message HUT_FD1_2C3 {
   // [m/s] [-12.8|89.2] [initial_value:511]
   optional double adas_posn_spd = 50;
   // [] [0|358.583] [initial_value:0]
-  optional double adas_posn_rehead = 51;
+  optional double adas_posn_rehead = 51 [deprecated = true];
   // [] [0|65535] [initial_value:0]
   optional int32 freshness_value_hut_fd1 = 52;
+  // [NoUnit] [0|3] [initial_value:0]
+  optional MODSwtReqType mod_swt_req = 53;
 }
 
 message DDCM1_2CA {
@@ -8449,6 +8776,11 @@ message IFC_FD3_2CF {
     ATTENTIONDIVSALARMTIMGRAD_WARNING_LEVEL_2 = 2;
     ATTENTIONDIVSALARMTIMGRAD_WARNING_LEVEL_3 = 3;
   }
+  enum ILCInterSysInfoDispType {
+    ILC_INTERSYSINFODISP_NO_DISPLAY = 0;
+    ILC_INTERSYSINFODISP_LOW_SPEED_DON_T_SUPPORT_LANE_CHANGE = 1;
+    ILC_INTERSYSINFODISP_RESVERED = 2;
+  }
   // [] [0|255] [initial_value:0]
   optional int32 checksum_ifc7 = 1;
   // [] [0|1] [initial_value:0]
@@ -8607,6 +8939,12 @@ message IFC_FD3_2CF {
   optional TraLightCtrlStsType tra_light_ctrl_sts = 78;
   // [NoUnit] [0|3] [initial_value:0]
   optional AttentionDivsAlarmTimGradType attention_divs_alarm_tim_grad = 79;
+  // description / [NoUnit] [0|7] [initial_value:0]
+  optional ILCInterSysInfoDispType ilc_inter_sys_info_disp = 80;
+  // [NoUnit] [0|1] [initial_value:0]
+  optional bool nav_dec_swt_resp = 81;
+  // [NoUnit] [0|15] [initial_value:0]
+  optional int32 nav_dec_active = 82;
 }
 
 message PRDCM1_2D5 {
@@ -8770,7 +9108,7 @@ message HUT23_2D8 {
   // [] [0|1] [initial_value:0]
   optional bool adas_stub_update = 7;
   // [] [0|100] [initial_value:0]
-  optional double adas_stub_rel_probb = 8;
+  optional double adas_stub_rel_probb = 8 [deprecated = true];
   // [] [0|7] [initial_value:0]
   optional ADASStubFuncRoadClassType adas_stub_func_road_class = 9;
   // [] [0|3] [initial_value:0]
@@ -8780,7 +9118,7 @@ message HUT23_2D8 {
   // [] [0|15] [initial_value:0]
   optional ADASStubFormOfWayType adas_stub_form_of_way = 12;
   // [] [0|358.583] [initial_value:0]
-  optional double adas_stub_turn_angl = 13;
+  optional double adas_stub_turn_angl = 13 [deprecated = true];
   // [] [0|1] [initial_value:0]
   optional bool adas_stub_last_stub = 14;
   // [] [0|3] [initial_value:0]
@@ -8935,7 +9273,7 @@ message HUT22_2DA {
   // [] [0|1] [initial_value:0]
   optional bool adas_seg_update = 9;
   // [] [0|100] [initial_value:0]
-  optional double adas_seg_rel_probb = 10;
+  optional double adas_seg_rel_probb = 10 [deprecated = true];
   // [] [0|7] [initial_value:0]
   optional ADASSegFuncRoadClassType adas_seg_func_road_class = 11;
   // [] [0|3] [initial_value:0]
@@ -9107,10 +9445,23 @@ message VCU20_300 {
     RWSMODFAILSTS_ADAS_SYS_FAILURE = 7;
     RWSMODFAILSTS_BTC_MOD_STS = 8;
   }
+  enum ASLCtrlStsType {
+    ASLCTRLSTS_OFF = 0;
+    ASLCTRLSTS_STANDBY = 1;
+    ASLCTRLSTS_OVERSPEED = 2;
+    ASLCTRLSTS_LIMIT = 3;
+    ASLCTRLSTS_RESERVED = 4;
+    ASLCTRLSTS_KICKDOWN = 5;
+    ASLCTRLSTS_RESERVED_6 = 6;
+  }
   // [NoUnit] [0|7] [initial_value:0]
   optional RWSModStsType rws_mod_sts = 1;
   // [NoUnit] [0|15] [initial_value:0]
   optional RWSModFailStsType rws_mod_fail_sts = 2;
+  // [NoUnit] [0|7] [initial_value:0]
+  optional ASLCtrlStsType asl_ctrl_sts = 3;
+  // [NoUnit] [0|255] [initial_value:255]
+  optional int32 tgt_asl_veh_spd = 4;
 }
 
 message PEPS4_302 {
@@ -9198,6 +9549,12 @@ message MDC_FD1_312 {
 }
 
 message BCM1_319 {
+  enum ReversGearStsType {
+    REVERSGEARSTS_OFF = 0;
+    REVERSGEARSTS_ON = 1;
+    REVERSGEARSTS_RESERVED = 2;
+    REVERSGEARSTS_NOT_AVAILABLE = 3;
+  }
 // Report Message
   // [NoUnit] [0|255] [initial_value:0]
   optional int32 checksum_bcm1 = 1;
@@ -9225,6 +9582,12 @@ message BCM1_319 {
   optional int32 freshness_value_bcm1 = 12 [deprecated = true];
   // [NoUnit] [0|1] [initial_value:0]
   optional bool hood_sts = 13;
+  // [NoUnit] [0|1] [initial_value:0]
+  optional bool brk_pedal_sts_bcm = 14;
+  // [NoUnit] [0|3] [initial_value:0]
+  optional ReversGearStsType revers_gear_sts = 15;
+  // [NoUnit] [0|1] [initial_value:0]
+  optional bool posn_light_req = 16;
 }
 
 message VCU5_31B {
@@ -9431,6 +9794,12 @@ message BCM3_345 {
     HILOWBEAMSTS_ERROR = 2;
     HILOWBEAMSTS_RESERVED = 3;
   }
+  enum DoorLockStsType {
+    DOORLOCKSTS_NA = 0;
+    DOORLOCKSTS_ALL_DOORS_LOCKED = 1;
+    DOORLOCKSTS_DRIVER_DOOR_UNLOCKED = 2;
+    DOORLOCKSTS_ALL_DOORS_UNLOCKED = 3;
+  }
   // [] [0|1] [initial_value:0]
   optional bool hazard_lmp_swt_sts = 1;
   // [] [0|1] [initial_value:0]
@@ -9441,6 +9810,8 @@ message BCM3_345 {
   optional HiLowBeamStsType hi_low_beam_sts = 4;
   // [] [0|65535] [initial_value:0]
   optional int32 freshness_value_bcm3 = 5 [deprecated = true];
+  // [NoUnit] [0|3] [initial_value:0]
+  optional DoorLockStsType door_lock_sts = 6;
 }
 
 message HUT16_348 {
@@ -9532,6 +9903,10 @@ message ABM1_351 {
   optional int32 rolling_counter_abm1 = 15;
   // [] [0|65535] [initial_value:0]
   optional int32 freshness_value_abm1 = 16 [deprecated = true]; 
+  // [NoUnit] [0|1] [initial_value:0]
+  optional bool crash_sev_2 = 18;
+  // [NoUnit] [0|1] [initial_value:0]
+  optional bool crash_sev_1 = 19;
 }
 
 message HUT34_370 {
@@ -9932,6 +10307,8 @@ message CSA2_A1 {
   optional ManualShiftReqType manual_shift_req = 15;
   // [] [0|15] [initial_value:0]
   optional int32 rolling_counter_csa2 = 16;
+  // [NoUnit] [0|1] [initial_value:0]
+  optional bool acc_time_gap_set_swt = 17;
 }
 
 message PEPS1_A5 {
@@ -18178,7 +18555,18 @@ message VCU_FD15_36F {
     // description / [NoUnit] [0|3] [initial_value:0]
     optional WtrPmpStsType wtr_pmp_sts = 2;
 }
-  
+message ACU1_F0 {
+// Report Message
+  enum ACUShiftInProgressType {
+    ACU_SHIFTINPROGRESS_NOT_IN_PROGRESS = 0;
+    ACU_SHIFTINPROGRESS_IN_PROGRESS = 1;
+    ACU_SHIFTINPROGRESS_RESERVED = 2;
+    ACU_SHIFTINPROGRESS_INVALID = 3;
+  }
+  // [NoUnit] [0|3] [initial_value:0]
+  optional ACUShiftInProgressType acu_shift_in_progress = 1;
+}
+
 message GwmAllChassisDetail {
   optional RSDS_FD1_16F rsds_fd1_16f = 1; // report message
   optional IFC_FD10_266 ifc_fd10_266 = 2; // report message
@@ -18318,7 +18706,7 @@ message GwmAllChassisDetail {
   optional HUT16_348 hut16_348 = 136; // report message
   optional ABM1_351 abm1_351 = 137; // report message
   optional HUT34_370 hut34_370 = 138; // report message
-  optional IFC_FD11_375 ifc_fd11_375 = 139; // report message
+  optional IFC_FD11_375 ifc_fd11_375 = 139[deprecated = true]; // report message
   optional AC2_385 ac2_385 = 140; // report message
   optional PTCC1_38B ptcc1_38b = 141; // report message
   optional TPMS2_395 tpms2_395 = 142; // report message
@@ -18345,6 +18733,8 @@ message GwmAllChassisDetail {
   optional FMCU5_D2 fmcu5_d2 = 163; // report message
   optional HUT29_35C hut29_35c = 164;
   optional DCDC6_218 dcdc6_218 = 165; // report message
+  optional ACU1_F0 acu1_f0 = 166; // report message
+  optional VCU_FD28_184 vcu_fd28_184 = 167;
   
   optional EVENT_MESSAGE_VALIDITY event_message_validity = 200; // report messages
 }

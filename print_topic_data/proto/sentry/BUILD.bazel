@@ -1,0 +1,30 @@
+package(features = ["-hidden_visibility_feature"])
+
+load("@rules_cc//cc:defs.bzl", "cc_proto_library")
+load("@rules_proto_grpc//python:defs.bzl", "python_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "trigger_info_proto",
+    srcs = ["trigger_info.proto"],
+    strip_import_prefix = "/proto/",
+    visibility = ["//visibility:public"],
+    deps = [
+    ],
+)
+
+cc_proto_library(
+    name = "trigger_info_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":trigger_info_proto",
+    ],
+)
+
+python_proto_library(
+    name = "trigger_info_proto_py",
+    protos = [
+        ":trigger_info_proto",
+    ],
+    visibility = ["//visibility:public"],
+)

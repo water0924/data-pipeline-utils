@@ -5,6 +5,7 @@ package deeproute.localization;
 import "common/geometry.proto";
 import "drivers/gnss/ins.proto";
 import "map/sd_map.proto";
+import "map/parking_map_common.proto";
 
 message LockOnRoadResult {
   optional int64 time_us = 1;                      // time of pose
@@ -20,6 +21,7 @@ message LockOnRoadResult {
     YAWED = 2;                                     // if trajectory yawed from planned path.
     PASSOVER = 3;                                  // when vehicle takes a short path, skipping many links
     GNSS_POSE_INVALID = 4;                         // when gnss pose is invalid, such as all zeros
+    PARALLEL_YAWED = 5;                            // when vehicle is yawed on parallel road
   }
 
   optional Status status = 5;                      // whether or not the vehicle is deviated from the previous planned route
@@ -59,6 +61,7 @@ message LockOnRoadResult {
       TENCENT_PLUS = 2;
     }
     optional SdMapSourceType sdmap_source_type = 7;
+    optional bool exp_spl_enable = 8;               // 是否生效了经验限速策略
   }
   optional LinkProperties link_properties = 13;
 
@@ -143,6 +146,34 @@ message LockOnRoadResult {
     optional double len = 3;
   }
   repeated OverlapInfo overlap_infos = 31;
+
+  message MatchInfo {
+    optional double vert_dist = 1;     // 纵向距离,车辆在投影点前方为正
+    optional double horiz_dist = 2;    // 横向距离,车辆在投影点左边为正（以link朝向）
+    optional double heading_diff = 3;  // 航向角差, 从link到车辆 朝向，顺时针为正，deg, 361代表完全匹配错误
+  }
+  optional MatchInfo match_info = 32;
+
+  optional deeproute.map.vpa.ParkingMapSource map_source = 33; // avp target map source(correspond to map_id)
+  
+  // 在主副路切换段，设定为next link的主辅属性 （存在多条切换段的情况）
+  enum MlnNavType {
+    NAV_UNKNOWN = 0;
+    NAV_MAIN = 1;  // 导航为主路
+    NAV_SECONDARY = 2; // 导航为辅路
+  }
+  
+  message MLN {
+    optional int64 time_us = 1;
+    optional bool is_on_yaw_link = 2;
+    optional uint64 nearest_link_id = 3; 
+    optional common.Point3D position_gcj02 = 4;   // matched position in gcj02 
+    repeated double confidence = 5;               // debug for mln result    
+    optional MlnNavType nav_type = 6;
+  }
+  optional MLN mln = 34;
+  
+  optional StrictStatus strict_status_lom = 35;
 }
 
 message LaneIndexEstimationResult{
@@ -167,4 +198,13 @@ message LaneIndexEstimationResult{
   }
 
   optional ClosestCurb closest_curb = 6;           // closest curb of current ras map
+}
+
+message ChangeLockOnRoadMode {
+  enum Mode {
+    UNKOWN = 0;
+    DRIVING = 1;
+    PARKING = 2;
+  }
+  optional Mode mode = 1;
 }

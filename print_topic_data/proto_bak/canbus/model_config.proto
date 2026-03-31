@@ -1,0 +1,24 @@
+syntax = "proto2";
+package deeproute.canbus;
+
+message ModelConfig {
+    optional bool flag_enable_steer_offset_observer = 1 [default = false];
+    optional double steer_offset_observer_max = 2 [default = 0.005];
+    optional double steer_offset_observer_b0 = 3 [default = 10.0];
+    optional double steer_offset_observer_b1 = 4 [default = 10.0];
+    optional double steer_offset_observer_b2 = 5 [default = 0.5];
+    optional double cf = 6;
+    optional double cr = 7;  // N/rad
+    optional double mass = 8;
+    optional double lf = 9;
+    optional double lr = 10;
+    optional double iz = 11;
+    optional double ts = 12;
+    optional double minimum_speed_protection = 13;
+    optional double enable_observer_min_speed = 14 [default = 1.0];
+    optional double cutoff_steer_wheel_rate_cmd_filter= 15;
+    optional double observer_lat_acc_thre = 16;
+    optional double observer_vy_thre = 17;
+    optional double observer_steer_thre = 18;
+    optional double observer_steer_rate_thre = 19;
+}

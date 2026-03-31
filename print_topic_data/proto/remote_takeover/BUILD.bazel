@@ -110,3 +110,27 @@ python_proto_library(
     ],
 )
 
+proto_library(
+    name = "remote_control_proto",
+    visibility = ["//visibility:public"],
+    srcs = ["remote_control.proto"],
+    deps = [
+    ],
+    strip_import_prefix = "/proto/",
+)
+
+cc_proto_library(
+    name = "remote_control_proto_cc",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":remote_control_proto",
+    ],
+)
+
+python_proto_library(
+    name = "remote_control_proto_py",
+    visibility = ["//visibility:public"],
+    protos = [
+        ":remote_control_proto",
+    ],
+)

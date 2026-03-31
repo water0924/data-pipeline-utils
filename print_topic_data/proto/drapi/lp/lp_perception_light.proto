@@ -39,8 +39,8 @@ enum ObstacleTypeEnum {
 message AdbObstacle {
   uint32 id = 1;                              // id号
   uint64 timestamp_ns = 2;                    // 时间, 以纳秒为单位
-  MotionStatusEnum type = 3;                              // 障碍物类型 需要定义
-  ObstacleTypeEnum motion_status = 4;                     // 物体运动状态 需要定义
+  ObstacleTypeEnum type = 3;                              // 障碍物类型 需要定义
+  MotionStatusEnum motion_status = 4;                     // 物体运动状态 需要定义
   uint32 turn_light_status = 5;               // 预留，不发 -- 转向灯状态, 0:none, 1:left; 2:right; 3:warning; 4:unknown
   uint32 brake_light_status = 6;              // 预留，不发 -- 刹车灯状态, 0:none, 1:brake; 2:reserve; 3:unknown
   uint32 confidence = 7;                      // 置信度, 取值0-100
@@ -70,4 +70,5 @@ message HmiPerceptionLight {
   repeated AdbObstacle obstacles = 5;         // 融合后的障碍物信息
   repeated AdbTrafficSign traffic_signs = 7;  // 交通标识牌信息
   uint32 status = 8;                          // 0:Normal, 1:Error, 2:遮挡, 3:Reserve
+  uint32 lumin_intens = 9;                    // 环境光判断，0:不需要开远光灯, 1:需要开远光灯
 }

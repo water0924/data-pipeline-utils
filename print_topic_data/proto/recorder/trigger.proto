@@ -23,9 +23,15 @@ message GradingTriggerRequest {
   optional int32 trigger_limit_times = 6; // -1 is unlimit
   optional bool skip_compliance = 7;
   optional string event_uuid = 8;
+  optional deeproute.collection_trigger_rule.PreviewDataArg preview_data_arg = 9;
 }
 
 // topic: /common/cancel_trigger_request
 message CancelTriggerRequest {
   optional string event = 1; // event name to cancel
+}
+
+// topic: /map_engine/preview_triggers
+message PreviewTriggers {
+  repeated string trigger_names = 1;
 }

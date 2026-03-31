@@ -55,6 +55,10 @@ enum Model {
 
   RS_AIRY = 37;
   RS_FAIRY = 38;
+
+  RS_EMXGEN2_SOLID = 39;
+  RS_E1P_SOLID = 40;
+  RS_EM4_SOLID = 41;
 }
 
 enum Mode {

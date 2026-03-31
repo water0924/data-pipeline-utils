@@ -1,0 +1,39 @@
+syntax = "proto3";
+package smart.parking;
+
+import "smart/parking/smart_parking_common.proto";
+
+message LPMapData {
+  int32 id = 1; // ID 唯一标识符，可不可修改
+  string name = 2;
+  double longitude = 3;    // 地图的经度
+  double latitude = 4;    // 地图的纬度
+  //LpPathInfoInf. PathStartPointSeN
+  //LpPathInfoInf. PathTerminalPointSeN
+  repeated Point route = 5; // 总路径, 一系列坐标点。一般是0.1米一个。直线道路会进行抽稀。
+  repeated ParkingSpace parking_spaces = 6; // 地图中存储的停车位，全局坐标系。
+  //只有减速带
+  repeated MapObstacle map_obstacles = 7; // 地图中存储的障碍物，全局坐标系
+  int32 creation_time = 8; // 地图的创建时间
+  //LpPathInfoInf. PathTotalDistanceSeN
+  float total_distance = 9;
+};
+
+message MapInfo {
+  int32 map_id = 1;
+  OperatingType operation_type = 2;
+  LPMapData map_data = 3;
+}
+
+message MapInfoList {
+  repeated MapInfo map_info = 1;
+}
+
+enum OperatingType {
+  NONE = 0;
+  CRUISE = 1;
+  DELETE = 2;
+  MODIFY = 3;
+  ADD = 4;
+}
+
