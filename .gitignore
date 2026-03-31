@@ -4,3 +4,5 @@ not_carstate_crash
 SR
 test
 ss.txt
+print_topic_data/proto
+print_topic_data/proto_bak
